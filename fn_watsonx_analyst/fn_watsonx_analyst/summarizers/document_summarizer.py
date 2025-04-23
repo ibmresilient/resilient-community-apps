@@ -1,13 +1,8 @@
-from asyncio import Queue
-import json
-from typing import List
-from fn_watsonx_analyst.types.ai_response import AIResponse
-from fn_watsonx_analyst.types.incident import Incident
-from fn_watsonx_analyst.util.ContextHelper import ContextHelper, Templates
-from fn_watsonx_analyst.util.QueryHelper import QueryHelper
-from .generic_summarizer import GenericSummarizer
-
 from resilient import SimpleClient
+
+from fn_watsonx_analyst.summarizers.generic_summarizer import GenericSummarizer
+from fn_watsonx_analyst.util.ContextHelper import ContextHelper, Templates
+from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose
 
 
 class DocumentSummarizer(GenericSummarizer):
@@ -26,4 +21,4 @@ class DocumentSummarizer(GenericSummarizer):
             Templates.SUMM_DOCUMENT, data=data, content_type=content_type
         )
         self.MAX_NEW_TOKENS = 200
-        super().__init__(self.name, self.instruction, model_id, res_client, opts)
+        super().__init__(self.name, self.instruction, model_id, res_client, opts, AiResponsePurpose.ARTIFACT_SUMMARY)

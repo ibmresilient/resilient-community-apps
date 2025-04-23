@@ -1,4 +1,4 @@
-from typing import TypedDict
+from typing import TypedDict, Optional
 
 from fn_watsonx_analyst.types.ai_metadata import AIMetadata
 
@@ -9,4 +9,4 @@ class AIResponse(TypedDict):
     generated_text: str
     raw_output: str
     tag: str
-    metadata: AIMetadata
+    metadata: Optional[AIMetadata]

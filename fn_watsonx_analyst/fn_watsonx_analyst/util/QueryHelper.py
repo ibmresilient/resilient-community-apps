@@ -1,5 +1,6 @@
 import json
 import re
+import time
 from typing import List
 
 import requests
@@ -19,7 +20,7 @@ from fn_watsonx_analyst.util.errors import (
     WatsonxTokenLimitExceededException,
     WatsonxUnauthorizedException,
     WatsonxUnreachableException,
-    WatsonxUnparseableResponseException,
+    WatsonxUnparseableResponseException, WatsonxApiException, WatsonxTooManyRequestsException,
 )
 from fn_watsonx_analyst.util.persistent_org_cache import PersistentCache
 from fn_watsonx_analyst.util.retry import retry_with_backoff
@@ -39,6 +40,8 @@ class QueryHelper:
     model_id: str
     res_client: SimpleClient
     opts: dict
+
+    headers: dict
 
     filtered_elements = [
         "h1",
@@ -60,7 +63,12 @@ class QueryHelper:
         self.res_client = res_client
         self.model_id = model_id
         self.opts = opts
-
+        if self.opts:
+            self.headers = {
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {self.get_api_key(self.res_client)}",
+            }
+    
     def build_message(self, role: MessageRole, content: str) -> MessagePayload:
         """Builds a MessagePayload from a role and text content"""
         return {"content": content, "role": role}
@@ -162,18 +170,24 @@ class QueryHelper:
             },
         }
         try:
-            with requests.post(
+            with (requests.post(
                 self._get_api_endpoint(),
                 json.dumps(body),
                 headers=headers,
                 timeout=(timeout + 1000) / 1000,
-            ) as response:
+            ) as response):
                 match response.status_code:
                     case 200:
                         body = response.json()
                         result = body["results"][0]
+                        generated_text: str
 
-                        generated_text = defang_text(RichTextHelper.toHTML(result["generated_text"]))
+                        # flag to render markdown to HTML
+                        if self._get_config().get("render_markdown", "true") in ["true", "True", True]:
+                            generated_text = defang_text(RichTextHelper.toHTML(result["generated_text"]))
+                        else:
+                            generated_text = defang_text(result["generated_text"])
+
                         model_tag = ModelTag(self.model_id, purpose)
 
                         output: AIResponse = {
@@ -193,23 +207,20 @@ class QueryHelper:
                         log.debug(
                             "[Input]:\n%s\n[Output]:\n%s\nInput tokens: %d\tOutput tokens: %d",
                             prompt,
-                            output["generated_text"],
+                            output["raw_output"],
                             result["input_token_count"],
                             result["generated_token_count"],
                         )
 
                         return output
                     case WatsonxBadRequestException.status_code:
-                        try:
-                            body = response.json()
+                        body = response.json()
 
-                            match body["errors"][0]["code"]:
-                                case WatsonxTokenLimitExceededException.code:
-                                    raise WatsonxTokenLimitExceededException()
-                                case _:
-                                    raise WatsonxBadRequestException(json.dumps(body))
-                        finally:
-                            raise WatsonxBadRequestException()
+                        match body["errors"][0]["code"]:
+                            case WatsonxTokenLimitExceededException.code:
+                                raise WatsonxTokenLimitExceededException()
+                            case _:
+                                raise WatsonxBadRequestException(json.dumps(body))
                     case WatsonxUnauthorizedException.status_code:
                         body = response.json()
                         raise WatsonxUnauthorizedException(json.dumps(body["errors"]))
@@ -263,10 +274,43 @@ class QueryHelper:
                         models.append(resource["model_id"])
                     return models
 
-                case WatsonxBadRequestException.code:
+                case WatsonxBadRequestException.status_code:
                     raise WatsonxBadRequestException()
-                case (WatsonxUnauthorizedException.code | WatsonxForbiddenException.code):
+                case (WatsonxUnauthorizedException.status_code | WatsonxForbiddenException.status_code):
                     raise WatsonxUnauthorizedException()
+                case _:
+                    raise WatsonxApiException(f"Status code: {response.status_code}")
+
+        except (RequestsConnectionError, ConnectionError, RequestException) as e:
+            raise WatsonxUnreachableException() from e
+
+    @retry_with_backoff()
+    def generate_embeddings(self, data: List[str])->List[list]:
+        url = (
+            self._get_base_endpoint()
+            + "/ml/v1/text/embeddings?version=2023-10-25"
+        )
+        try:
+            body = {
+                "inputs": data,
+                "model_id": "ibm/slate-125m-english-rtrvr",
+                "project_id": self._get_project_id()
+            }
+            response = requests.post(url, json.dumps(body), headers=self.headers, timeout=30)
+            match response.status_code:
+                case (200 | 201):
+                    results = response.json().get("results")
+                    # Extracting the 'embedding' values
+                    formatted_results = [item['embedding'] for item in results]
+                    return formatted_results
+                case (WatsonxBadRequestException.status_code):
+                    raise WatsonxBadRequestException()
+                case (WatsonxUnauthorizedException.status_code | WatsonxForbiddenException.status_code):
+                    raise WatsonxUnauthorizedException()
+                case (WatsonxTooManyRequestsException.status_code):
+                    raise WatsonxTooManyRequestsException()
+                case _:
+                    raise WatsonxApiException(f"Status code: {response.status_code}")
 
         except (RequestsConnectionError, ConnectionError, RequestException) as e:
             raise WatsonxUnreachableException() from e

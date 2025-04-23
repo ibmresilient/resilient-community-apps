@@ -1,17 +1,23 @@
 from typing import List
 import concurrent
+import traceback
+
 
 from fn_watsonx_analyst.types.ai_response import AIResponse
-from fn_watsonx_analyst.util.util import create_logger
+from fn_watsonx_analyst.util.util import create_logger, get_request_id, set_request_id
 
 log = create_logger(__name__)
 
 class ParallelRunnable:
     name: str = "unkown"
 
+    @staticmethod
     def run(**kwargs):
         raise NotImplementedError("not implemented")
 
+def context_wrapper(runnable: ParallelRunnable, req_id: str):
+    set_request_id(req_id)
+    return runnable.run()
 
 class ParallelRunnableRunner:
     runnables: List[ParallelRunnable]
@@ -32,29 +38,29 @@ class ParallelRunnableRunner:
         ]
 
         for i, group in enumerate(groups):
-            log.debug(f"Iteration {i+1} of {len(groups)}")
-            results += self._run_impl(group)
+            log.debug("Iteration %d of %d", i+1, len(groups))
+            results += self._run_impl(group, get_request_id())
 
         return results
 
-    def _run_impl(self, runnables: List[ParallelRunnable]) -> AIResponse:
+    def _run_impl(self, runnables: List[ParallelRunnable], req_id: str) -> AIResponse:
         """
         Runs the provided runnables in parallel
         """
         results: List[AIResponse] = []
         with concurrent.futures.ThreadPoolExecutor() as executor:
             future_to_runnale = {
-                executor.submit(runnable.run): runnable for runnable in runnables
+                executor.submit(context_wrapper, runnable, req_id): runnable for runnable in runnables
             }
             for future in concurrent.futures.as_completed(future_to_runnale):
                 r = future_to_runnale[future]
+                inner_log = create_logger(__name__)
+                set_request_id(req_id)
                 try:
                     result = future.result()
                     results.append(result)
-                except Exception as e:
-                    import traceback
-
-                    log.error(traceback.format_exc())
-                    log.error(f"Failed to run runnable '{r.name}'")
+                except:
+                    inner_log.error(traceback.format_exc())
+                    inner_log.error("Failed to run runnable %s", r.name)
                     continue
         return results

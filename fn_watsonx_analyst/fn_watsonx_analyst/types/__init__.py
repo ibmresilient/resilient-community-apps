@@ -7,3 +7,4 @@ from .pbx_detail import *
 from .attachment import *
 from .incident import *
 from .message_payload import *
+from .attachment import *

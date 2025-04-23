@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # Generated with resilient-sdk v51.0.2.0.974
 
 """AppFunction implementation"""
-
+import html
 import re
-from typing import List, Optional
+from typing import List, Optional, Union
 
+from bs4 import BeautifulSoup
 from resilient_circuits import (
     AppFunctionComponent,
     app_function,
@@ -18,7 +19,9 @@ from resilient import SimpleClient
 from fn_watsonx_analyst.types import Note, MessagePayload
 from fn_watsonx_analyst.types.ai_response import AIResponse
 from fn_watsonx_analyst.types.artifact import Artifact
+from fn_watsonx_analyst.types.attachment import Attachment
 from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose
+from fn_watsonx_analyst.util.ModelTag import ModelTag
 from fn_watsonx_analyst.util.ContextHelper import ContextHelper
 from fn_watsonx_analyst.util.QueryHelper import QueryHelper
 from fn_watsonx_analyst.util.chunking.chunking import Chunking
@@ -26,7 +29,6 @@ from fn_watsonx_analyst.util.errors import (
     WatsonxApiException,
     WatsonxTokenLimitExceededException,
 )
-from fn_watsonx_analyst.util.rich_text import RichTextHelper
 from fn_watsonx_analyst.util.util import create_logger, generate_request_id
 from fn_watsonx_analyst.util.prompting import Prompting
 from fn_watsonx_analyst.util.rest import RestHelper, RestUrls
@@ -98,6 +100,11 @@ class FunctionComponent(AppFunctionComponent):
                     break
 
         messages: List[MessagePayload] = []
+
+        # unescape HTML escaped strings (like &, <, >, %, etc.)
+        target_note["raw_text"] = target_note["text"]
+        target_note["text"] = html.unescape(target_note["text"])
+
         if not note_ancestors or len(note_ancestors) < 1:
             messages.append(QueryHelper().build_message("user", target_note["text"]))
         else:
@@ -107,45 +114,79 @@ class FunctionComponent(AppFunctionComponent):
                     role = "user"
                 messages.append({"content": note["text"], "role": role})
 
-        chunker = Chunking()
+        chunker = Chunking(res_client, self.opts)
 
-        # find all strings surrounded by square brackets, try and search for each
-        # artifact. If between square brackets starts with opening HTML tag, then
-        # do a regex search for first match inside the brackets for a "greater than"
-        # text, and a "less than"
-        matches = self.ART_BRACKETS.finditer(target_note["text"])
+        # search for artifact/attachment names between square brackets
+        # use the original text, to separate HTML (from the rich text)
+        # and HTML-escaped user text. This allows us to handle names
+        # with weird characters like angle brackets.
+        matches = self.ART_BRACKETS.finditer(target_note["raw_text"])
         for match in matches:
-            art_name = match.group(1)
+            obj_name = match.group(1)
 
-            if art_name.startswith("<"):
-                art_name_matches = self.ART_HTML.search(art_name)
-                if art_name_matches:
-                    art_name = art_name_matches.group(1)
-            log.debug("Found %s", art_name)
-            results: List[Artifact] = RestHelper().do_request(
-                res_client, RestUrls.ARTIFACT_BY_NAME, art_name=art_name, inc_id=inc_id
+            # take out non-HTML text
+            obj_name = BeautifulSoup.get_text(
+                BeautifulSoup(obj_name, "html.parser"))
+            obj_name = html.unescape(obj_name) # re-escape
+
+            log.debug("Found %s", obj_name)
+            artifact_results: List[Artifact] = RestHelper().do_request(
+                res_client, RestUrls.ARTIFACT_BY_NAME, obj_name=obj_name, inc_id=inc_id
             )
-            if len(results) == 0:
-                log.warning("No artifact found for %s", art_name)
-                continue  # skip this artifact tag
 
-            artifact: Artifact = results[0]
-            if artifact["value"] == art_name and artifact["attachment"]:
-                contents = RestHelper().do_request(
-                    res_client,
-                    RestUrls.ARTIFACT_CONTENTS,
-                    inc_id=inc_id,
-                    art_id=artifact["id"],
-                )
+            attachment_results: List[Attachment] = RestHelper().do_request(
+                res_client, RestUrls.ATTACHMENT_BY_NAME, obj_name=obj_name, inc_id=inc_id
+            )
 
+            if len(artifact_results) + len(attachment_results) == 0:
+                log.warning("No artifact or attachment found for %s", obj_name)
+                continue  # skip this artifact tag, try another
+
+            contents: Union[str, dict] = None
+            for art in artifact_results:
+                if art["value"] == obj_name and art["attachment"]:
+                    contents = RestHelper().do_request(
+                        res_client,
+                        RestUrls.ARTIFACT_CONTENTS,
+                        inc_id=inc_id,
+                        art_id=art["id"],
+                    )
+
+            # instead check attachments
+            if not contents:
+                for attach in attachment_results:
+                    if attach["name"] == obj_name:
+                        if attach["task_id"]:
+                            contents = RestHelper().do_request(
+                                res_client,
+                                RestUrls.TASK_ATTACHMENT_CONTENTS,
+                                task_id=attach["task_id"],
+                                attach_id=attach["id"]
+                            )
+                        else:
+                            contents = RestHelper().do_request(
+                                res_client,
+                                RestUrls.ATTACHMENT_CONTENTS,
+                                inc_id=inc_id,
+                                attach_id=attach["id"]
+                            )
+                        break
+            try:
+                parser_instance = ContextHelper()
+                contents = parser_instance.multi_format_parser(data=contents)
                 chunks = chunker.split_data_into_token_chunks(contents)
                 purpose = AiResponsePurpose.ARTIFACT_CONVERSATION
-                break
 
-            log.warning(
-                "Invalid artifact returned from API, or artifact does not have an attachment"
-            )
-            continue
+            except ValueError:
+                contents: AIResponse = AIResponse()
+                tag = ModelTag(model_id=model_id, purpose=AiResponsePurpose.ARTIFACT_CONVERSATION)
+                contents = {
+                    "generated_text": "Parsed content is empty or could not be extracted.",
+                    "tag": str(tag)
+                }
+                success = True
+                yield FunctionResult(contents)
+                return contents
 
         if not chunks or not purpose:
             purpose = AiResponsePurpose.NOTE_CONVERSATION
@@ -220,17 +261,18 @@ def get_chat_response(
     etc.
     """
 
-    relevant_chunks = chunker.retrieve_top_chunks_tfidf(
+    relevant_chunks = chunker.retrieve_relevant_chunks_watsonx(
         query, chunks, model_id, **kwargs
     )
     data = " ".join(relevant_chunks)
     query = query.replace("@watsonx", "")
     try:
-        prompt = Prompting().build_prompt(
+        prompt = Prompting(opts).build_prompt(
             purpose,
             model_id,
             query,
             data,
+            chunker,
             messages,
             get_relevant_prompts=purpose == AiResponsePurpose.NOTE_CONVERSATION,
         )

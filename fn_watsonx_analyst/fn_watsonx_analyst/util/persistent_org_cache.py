@@ -12,6 +12,7 @@ CacheObj = Literal["org", "watsonx_key"]
 
 log = create_logger(__name__)
 
+ACCESS_TOKEN_ENDPOINT = "https://iam.cloud.ibm.com/identity/token"
 class PersistentCache:
     def __init__(self, cache_obj: CacheObj = "org"):
         if cache_obj == "org":
@@ -44,7 +45,7 @@ class PersistentCache:
         else:
             headers = {"Content-Type": "application/x-www-form-urlencoded"}
             try:
-                url = "https://iam.cloud.ibm.com/identity/token"
+                url = ACCESS_TOKEN_ENDPOINT
                 headers = {"Content-Type": "application/x-www-form-urlencoded"}
                 data = {
                     "grant_type": "urn:ibm:params:oauth:grant-type:apikey",
@@ -80,7 +81,7 @@ class PersistentCache:
                         if cache.get("data"):
                             return cache.get("data")
                 except:
-                    pass  # cache miss
+                    log.debug("Invalid cache for %s", cache_obj)
 
         data = self.fetch_data(res_client, cache_obj, watsonx_api_key)
         self._save_to_cache(data, cache_obj)

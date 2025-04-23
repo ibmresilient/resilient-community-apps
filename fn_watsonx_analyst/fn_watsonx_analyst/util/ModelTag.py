@@ -11,6 +11,9 @@ class AiResponsePurpose(Enum):
     NOTE_CONVERSATION = "Note Conversation"
     ARTIFACT_CONVERSATION = "Artifact Conversation"
 
+    def __eq__(self, other):
+        return self.value == other.value
+
 
 class ModelTag:
     model_id: str

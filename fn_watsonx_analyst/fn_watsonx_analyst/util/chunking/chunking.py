@@ -1,8 +1,12 @@
 """Chunking class to generate segmented data, which can be used in the RAG system."""
 
 import json
+import numpy as np
+import faiss
 import random
-from typing import List
+from typing import List, Optional
+from resilient import SimpleClient
+
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -11,16 +15,20 @@ import tiktoken
 from fn_watsonx_analyst.types.incident_full_data import IncidentFullData
 from fn_watsonx_analyst.util.util import create_logger
 from fn_watsonx_analyst.util.util import get_model_config
+from fn_watsonx_analyst.util.QueryHelper import QueryHelper
 
 logger = create_logger(__name__)
 
 class Chunking:
     """Class for Chunking and picking most relevant chunk for GenAI use cases"""
 
-    def __init__(self) -> None:
-        pass
+    query_helper: QueryHelper
 
-    def split_json_to_chunks(self, data: IncidentFullData, max_tokens_per_chunk = 500) -> List[str]:
+    def __init__(self, res_client: Optional[SimpleClient]=None, opts: Optional[dict]=None) -> None:
+        if opts is not None:
+            self.query_helper = QueryHelper(res_client, opts=opts)
+
+    def split_json_to_chunks(self, data: IncidentFullData, max_tokens_per_chunk = 400) -> List[str]:
         """This is a custom chunking method of JSON payload for Case QnA via Notes
 
         Args:
@@ -56,7 +64,8 @@ class Chunking:
                 "members": data['incident'].get('members', []),
                 "negative_pr_likely": data['incident'].get('negative_pr_likely', None),
                 "inc_last_modified_date": data['incident'].get('inc_last_modified_date', None),
-                "incident_disposition": data['incident'].get('incident_disposition', None)
+                "incident_disposition": data['incident'].get('incident_disposition', None),
+                "incident_types": data['incident'].get('incident_type_ids', None)
             })
 
             description = data['incident'].get('description', None)
@@ -112,11 +121,23 @@ class Chunking:
                         "description": artifact.get('description', None),
                         "type": artifact.get('type', None),
                         "inc_name": artifact.get('inc_name', None),
+                        "created": artifact.get("created", None),
                         "related_incident_count": artifact.get('related_incident_count', None),
                         "summary": artifact.get('summary', None)
                     })
                 }
                 chunks.append(json.dumps(artifact_chunk))
+
+            # Chunk attachments
+            for attachment in data['incident'].get('attachments', []):
+                attachment_chunk = {
+                    "attachment": filter_null_fields({
+                        "name": attachment.get('name', None),
+                        "content_type": attachment.get('content_type', None),
+                        "created": attachment.get('created', None)
+                    })
+                }
+                chunks.append(json.dumps(attachment_chunk))
 
             # Chunk playbook executions
             for execution in data['incident'].get('playbook_executions', []):
@@ -193,7 +214,7 @@ class Chunking:
             )
             raise
 
-    def split_data_into_token_chunks(self, text: str, max_tokens=500) -> List[str]:
+    def split_data_into_token_chunks(self, text: str, max_tokens=400) -> List[str]:
         """
         Return a list of chunks of data, with each chunk not exceeding max_tokens
         """
@@ -312,6 +333,121 @@ class Chunking:
                 e,
             )
             raise
+    
+    def create_faiss_index(self, embeddings: List[list])->faiss.IndexFlatL2:
+        """Create a Faiss index which stores the embedded chunks for retrieval
+
+        Args:
+            embeddings (List[list]): List of embeddings
+
+        Returns:
+            _type_: _description_
+        """
+        try:
+            # Convert embeddings to numpy array
+            embeddings_array = np.array(embeddings)
+            
+            # Initialize FAISS index
+            index = faiss.IndexFlatL2(embeddings_array.shape[1])
+            
+            # Add the embeddings to the FAISS index
+            index.add(embeddings_array)
+            
+            return index
+        except Exception as e:
+            logger.exception(
+                "An error occurred while creating Faiss Index: %s",
+                e,
+            )
+            raise
+    
+    def normalize_l2_distances(self, distances:np.array)-> np.array:
+        """ normalizes the L2 scores that we generate in Faiss index search
+            Args:
+                distances(array)
+            returns:
+                normalized_scores(array)
+
+        """
+        try:
+            min_val = np.min(distances)
+            max_val = np.max(distances)
+
+            # Avoid division by zero
+            if max_val == min_val:
+                return np.ones_like(distances)
+
+            normalized_scores = 1 - (distances - min_val) / (max_val - min_val)
+            return normalized_scores
+        except Exception as e:
+            logger.exception(
+                "An error occurred while normalizing distance scores in index search: %s",
+                e,
+            )
+            raise
+
+    def retrieve_relevant_chunks_watsonx(self, query: str, chunks:List[str], model_id:str, total_tokens=None, threshold=0.7)->List[str]:
+        """Retrieve relevant chunks from Faiss Index semantically using emedding models from WatsonX API
+
+        Args:
+            query (str): Query by the user
+            chunks (List[str]): Chunks Generated by split_json_to_chunks method
+            total_tokens (_type_): total context length for the model
+            threshold (_type_): Fraction of tokens to delegate for chunk data
+
+        Returns:
+            _type_: _description_
+        """
+        try:
+            #get total tokens
+            total_tokens = total_tokens or self.max_tokens_for_model(model_id)
+            logger.debug("Total tokens: %d for model_id: %s", total_tokens, model_id)
+
+            #Create embeddings of Chunks
+            payload_chunk_embeddings = self.query_helper.generate_embeddings(data=chunks)
+
+            #Create Faiss Index
+            payload_index = self.create_faiss_index(payload_chunk_embeddings)
+            
+            #Calculate token limit
+            token_limit = round(total_tokens*threshold)
+            
+            # Create embedding for the query
+            query_embedding = self.query_helper.generate_embeddings(data=[query])
+
+            # Search the index for top K most relevant chunks (set a high enough top_k initially)
+            top_k = len(chunks)  # Search all chunks to evaluate token limit
+            distances, indices = payload_index.search(np.array(query_embedding), top_k)
+
+            # Select the indexes that have the distance greater than .2
+            distances = self.normalize_l2_distances(distances)
+            selected_indices = [idx for score, idx in zip(distances[0], indices[0]) if score >= 0.2]
+
+            selected_chunks = []
+            current_tokens = 0
+            
+            # Iterate over the retrieved chunks
+            for idx in selected_indices:
+                chunk = chunks[idx]
+                
+                # Estimate the token count for the current chunk
+                chunk_text = json.dumps(chunk)
+                chunk_tokens = self.estimate_tokens(chunk_text)
+                
+                # Check if adding this chunk exceeds the token limit
+                if current_tokens + chunk_tokens <= token_limit:
+                    selected_chunks.append(chunk)  # Add the chunk to the result set
+                    current_tokens += chunk_tokens  # Update the current token count
+                else:
+                    break  # Stop adding more chunks if token limit is reached
+            
+            return selected_chunks
+        except Exception as e:
+            logger.exception(
+                "An error occurred while retrieving relevant chunks: %s",
+                e,
+            )
+            raise
 
     def random_chunks(self, chunks: List[str], k=3) -> List[str]:
         """
@@ -323,75 +459,6 @@ class Chunking:
         except Exception as e:
             logger.exception(
                 "An error occurred while retieving random chunks: %s", e
-            )
-            raise
-
-    def retrieve_top_chunks_tfidf(
-        self,
-        query: str,
-        chunks: List[str],
-        model_id: str,
-        total_tokens=None,
-        threshold=0.6,
-    ) -> List[str]:
-        """
-        Using cosine similarity, retrieve the most similar chunks to the provided query, such that
-        N ~<= total_tokens * threshold
-
-        Args:
-            query (str): "chunk" to use cosine similarity with data
-            chunks (List[str]): Chunks of string data
-            total_tokens (int): Maximum input *and* output chunks
-            threshold (float): Fraction of tokens to delegate for chunk data
-        """
-        try:
-            total_tokens = total_tokens or self.max_tokens_for_model(model_id)
-            logger.debug("Total tokens: %d for model_id: %s", total_tokens, model_id)
-
-            token_limit = total_tokens * threshold
-
-            # Convert chunks to a list of strings for TF-IDF processing
-            chunk_strings = [json.dumps(chunk, ensure_ascii=False) for chunk in chunks]
-
-            # Create a TF-IDF Vectorizer and fit it on the chunks and query combined
-            vectorizer = TfidfVectorizer(
-                stop_words="english"
-            )  # Use the stopwords filter from TF-IDF
-            tfidf_matrix = vectorizer.fit_transform(chunk_strings + [query])
-
-            # Compute cosine similarity between the query (last entry in matrix) and all chunks
-            query_vector = tfidf_matrix[-1]
-            chunk_vectors = tfidf_matrix[:-1]
-            similarity_scores = cosine_similarity(query_vector, chunk_vectors).flatten()
-
-            # Combine chunks and their similarity scores
-            chunk_scores = [
-                (chunks[i], similarity_scores[i]) for i in range(len(chunks))
-            ]
-
-            # Sort chunks based on similarity score (descending order)
-            sorted_chunks = sorted(chunk_scores, key=lambda x: x[1], reverse=True)
-
-            # Select chunks within the token limit
-            selected_chunks = []
-            token_count = 0
-
-            for chunk, _ in sorted_chunks:
-                chunk_str = json.dumps(chunk, ensure_ascii=False)
-                chunk_token_count = self.estimate_tokens(chunk_str)
-
-                # If adding this chunk exceeds the token limit, stop
-                if token_count + chunk_token_count <= token_limit:
-                    selected_chunks.append(chunk)
-                    token_count += chunk_token_count
-                else:
-                    break  # Stop if we reach the token limit
-
-            return selected_chunks
-        except Exception as e:
-            logger.exception(
-                "An error occurred while retrieving top chunks using TF-IDF: %s",
-                e,
             )
             raise
 

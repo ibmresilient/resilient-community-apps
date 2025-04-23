@@ -33,6 +33,12 @@ def create_logger(name: str) -> logging.Logger:
 
     return logger
 
+def get_request_id() -> str:
+    return request_id_var.get()
+
+def set_request_id(req_id: str):
+    request_id_var.set(req_id)
+
 def generate_request_id() -> str:
     # Generate a random 12-character alphanumeric string
     req_id = "".join(random.choices(string.ascii_letters + string.digits, k=6))

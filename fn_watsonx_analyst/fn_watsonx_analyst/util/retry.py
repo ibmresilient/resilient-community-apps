@@ -1,3 +1,4 @@
+import random
 from functools import wraps
 import time
 
@@ -7,7 +8,7 @@ from fn_watsonx_analyst.util.util import create_logger
 log = create_logger(__name__)
 
 
-def retry_with_backoff(retries=3, delay=1.5, backoff=2):
+def retry_with_backoff(retries=3, delay=3, backoff=2):
     def retry_decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -19,6 +20,7 @@ def retry_with_backoff(retries=3, delay=1.5, backoff=2):
                 except WatsonxTooManyRequestsException as e:
                     exc = e
                     retries -= 1
+                    delay = random.uniform(delay, delay * 1.5)
                     log.warning("Retrying request in %d seconds...", delay)
                     time.sleep(delay)
                     delay *= backoff

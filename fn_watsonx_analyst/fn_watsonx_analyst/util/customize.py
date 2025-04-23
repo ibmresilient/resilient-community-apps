@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
-# Generated with resilient-sdk v51.0.2.2.1096
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.4.0.1351
 
 """Generate the SOAR customizations required for fn_watsonx_analyst"""
 
 import base64
 import os
 import io
-
 try:
     from resilient import ImportDefinition
 except ImportError:
@@ -22,12 +21,15 @@ def codegen_reload_data():
     Parameters required reload codegen for the fn_watsonx_analyst package
     """
     return {
-        "package": "fn_watsonx_analyst",
-        "message_destinations": ["fn_watsonx_analyst"],
+        "package": u"fn_watsonx_analyst",
+        "message_destinations": [
+            u"fn_watsonx_analyst"
+        ],
         "functions": [
-            "fn_watsonx_analyst_converse_via_notes",
-            "fn_watsonx_analyst_scan_artifact",
-            "fn_watsonx_analyst_text_generation",
+            u"fn_watsonx_analyst_converse_via_notes",
+            u"fn_watsonx_analyst_scan_artifact",
+            u"fn_watsonx_analyst_scan_attachment",
+            u"fn_watsonx_analyst_text_generation"
         ],
         "workflows": [],
         "actions": [],
@@ -37,14 +39,15 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [
-            "watsonx.ai Add Artifact Report to Notes",
-            "watsonx.ai Respond to note",
+            u"watsonx.ai Add Artifact Report to Notes",
+            u"watsonx.ai Respond to note"
         ],
         "playbooks": [
-            "fn_watsonx_analyst_note_conversation",
-            "fn_watsonx_analyst_retry_note_conversation",
-            "fn_watsonx_analyst_scan_artifact",
-        ],
+            u"fn_watsonx_analyst_note_conversation",
+            u"fn_watsonx_analyst_retry_note_conversation",
+            u"fn_watsonx_analyst_scan_artifact",
+            u"fn_watsonx_analyst_scan_attachment"
+        ]
     }
 
 
@@ -61,11 +64,13 @@ def customization_data(client=None):
     - Functions:
         - fn_watsonx_analyst_converse_via_notes
         - fn_watsonx_analyst_scan_artifact
+        - fn_watsonx_analyst_scan_attachment
         - fn_watsonx_analyst_text_generation
     - Playbooks:
         - fn_watsonx_analyst_note_conversation
         - fn_watsonx_analyst_retry_note_conversation
         - fn_watsonx_analyst_scan_artifact
+        - fn_watsonx_analyst_scan_attachment
     - Scripts:
         - watsonx.ai Add Artifact Report to Notes
         - watsonx.ai Respond to note
@@ -75,6 +80,6 @@ def customization_data(client=None):
     if not os.path.isfile(res_file):
         raise FileNotFoundError("{} not found".format(RES_FILE))
 
-    with io.open(res_file, mode="rt") as f:
-        b64_data = base64.b64encode(f.read().encode("utf-8"))
+    with io.open(res_file, mode='rt') as f:
+        b64_data = base64.b64encode(f.read().encode('utf-8'))
         yield ImportDefinition(b64_data)

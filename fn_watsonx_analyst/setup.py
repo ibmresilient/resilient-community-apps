@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # Generated with resilient-sdk v51.0.2.0.974
 
 import glob
@@ -26,13 +26,13 @@ def snake_to_camel(word):
 setup(
     name="fn_watsonx_analyst",
     display_name="watsonx.ai for SOAR Analysts",
-    version="1.0.2",
-    license="© Copyright IBM Corporation 2024.",
+    version="1.1.0",
+    license="© Copyright IBM Corporation 2025.",
     author="IBM™ Security",
     url="https://ibm.com/security",
     description="Leverage generative AI with watsonx.ai",
     long_description="""Leverage generative AI with watsonx.ai for artifact scanning, incident summarization and Q&A (Questions & Answers), and generic watsonx.ai text generation.""",
-    install_requires=["resilient-circuits>=51.0.2.0.0", "scikit-learn==1.5.2", "tiktoken==0.8.0", "Markdown==3.7", "nh3==0.2.19"],
+    install_requires=["resilient-circuits>=51.0.2.0.0", "scikit-learn==1.5.2", "tiktoken==0.8.0", "py3langid==0.3.0", "nh3==0.2.19", "jsonpath-ng==1.7.0", "faiss-cpu==1.9.0", "numpy==2.2.0", "tika==2.6.0","beautifulsoup4==4.12.3", "markdown2==2.5.3", "pydantic==2.10.6"],
     python_requires=">=3.11",
     packages=find_packages(),
     include_package_data=True,

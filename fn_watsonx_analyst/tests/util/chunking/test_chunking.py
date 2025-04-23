@@ -1,7 +1,11 @@
 import pytest
 from fn_watsonx_analyst.util.chunking.chunking import Chunking
+from fn_watsonx_analyst.util.QueryHelper import QueryHelper
 import random
 import json
+import faiss
+
+from unittest.mock import Mock
 
 
 class TestChunking:
@@ -9,12 +13,12 @@ class TestChunking:
 
     text: str
     max_tokens: int
-    chunking: Chunking
 
     def setup_method(self):
         self.text = "This is a sample text to test the split_data_into_token_chunks function."
         self.max_tokens = 10
         self.chunking = Chunking()
+        self.query_helper = QueryHelper()
 
     def test_empty_text(self):
         # Test if empty chunks are created.
@@ -63,19 +67,35 @@ class TestChunking:
     def test_tokens_for_model(self):
         model_name = "ibm/granite-guardian-3-8b"
         length = Chunking.max_tokens_for_model(model_name)
-        assert length==4096
+        assert length==128000
 
-    def test_retrieve_top_chunks_tfidf(self):
-        # Test to retrive top chunks throught TF-IDF.
+    def test_relevant_chunks_watsonx(self):
+        # Mock the query_helper
+        mock_query_helper = Mock()
+        
+        # Define the mock behavior for generate_embeddings
+        mock_query_helper.generate_embeddings.side_effect = lambda data: [
+            [0.1, 0.2, 0.3] if d == "example query" else [0.3, 0.2, 0.1] for d in data
+        ]
+        
+        # Create a Chunking instance
+        chunking = Chunking()  # No query_helper passed here
+        
+        # Inject the mock query_helper
+        chunking.query_helper = mock_query_helper
+        
+        # Define the test inputs
         query = "example query"
         chunks = ["chunk 1", "chunk 2", "chunk 3"]
         total_tokens = 1000
         threshold = 0.6
-
-        selected_chunks = Chunking.retrieve_top_chunks_tfidf(
-            self.chunking, query, chunks, "mistralai/mistral-large", total_tokens, threshold
+        
+        # Call the method under test
+        selected_chunks = chunking.retrieve_relevant_chunks_watsonx(
+            query, chunks, "mistralai/mistral-large", total_tokens, threshold
         )
-
+        
+        # Assert conditions
         assert len(selected_chunks) <= len(chunks)
         assert len(selected_chunks) >= 1
 
@@ -84,7 +104,7 @@ class TestChunking:
 
         total_tokens_selected = sum(
             [
-                Chunking.estimate_tokens(self.chunking, json.dumps(chunk, ensure_ascii=False))
+                Chunking.estimate_tokens(chunking, json.dumps(chunk, ensure_ascii=False))
                 for chunk in selected_chunks
             ]
         )
@@ -141,6 +161,7 @@ class TestChunking:
                         "value": "artifact1",
                         "type": "file",
                         "inc_name": "artifact1",
+                        "created": "2023-01-01",
                         "related_incident_count": 1,
                         "summary": "This is artifact 1",
                     }
@@ -182,10 +203,8 @@ class TestChunking:
                 ],
             }
         }
-        expected_chunks = [
-            "incident: {'name': 'Test Incident', 'description': 'This is a test incident', 'start_date': '2023-01-01', 'inc_start': '2023-01-01', 'discovered_date': '2023-01-01', 'creator_principal': {'id': '12345', 'type': 'user', 'name': 'John Doe', 'display_name': 'John Doe'}, 'reporter': 'john.doe@example.com', 'state': 'open', 'country': 'US', 'zip': '12345', 'workspace': 'test_workspace', 'members': ['user1', 'user2'], 'negative_pr_likely': True, 'assessment': 'low', 'properties': {'severity': 'low'}, 'inc_last_modified_date': '2023-01-01', 'incident_disposition': 'resolved', 'artifacts': [{'value': 'artifact1', 'type': 'file', 'inc_name': 'artifact1', 'related_incident_count': 1, 'summary': 'This is artifact 1'}], 'playbook_executions': [{'status': 'success', 'object': {'parent': {'parent': {'parent': None, 'object_id': '12345', 'object_name': 'Parent Object', 'type_id': '12345', 'type_name': 'Parent Type'}, 'object_id': '67890', 'object_name': 'Child Object', 'type_id': '67890', 'type_name': 'Child Type'}, 'object_id': '98765', 'object_name': 'Grandchild Object', 'type_id': '98765', 'type_name': 'Grandchild Type'}, 'elapsed_time': 60, 'playbook': {'display_name': 'Playbook 1', 'description': 'This is playbook 1'}}], 'tasktree': [{'phase_name': 'phase1', 'tasks': [{'name': 'task1', 'active': True, 'required': True, 'complete': True}, {'name': 'task2', 'active': False, 'required': False, 'complete': False}]}]}" # pylint: disable=line-too-long
-        ]
-        actual_chunks = Chunking.split_json_to_chunks_prompts(self.chunking, data)
+        expected_chunks = ['{"properties": {"index": 0, "properties": "\'severity\': \'low\'"}}', '{"incident": {"name": "Test Incident", "start_date": "2023-01-01", "inc_start": "2023-01-01", "discovered_date": "2023-01-01", "creator_principal": {"type": "user", "display_name": "John Doe"}, "reporter": "john.doe@example.com", "state": "open", "country": "US", "zip": "12345", "workspace": "test_workspace", "members": ["user1", "user2"], "negative_pr_likely": true, "inc_last_modified_date": "2023-01-01", "incident_disposition": "resolved", "description": "This is a test incident"}}', '{"artifact": {"value": "artifact1", "type": "file", "inc_name": "artifact1", "created": "2023-01-01", "related_incident_count": 1, "summary": "This is artifact 1"}}', '{"playbook_execution": {"status": "success", "object": {"parent": {"object_name": "Child Object", "type_name": "Child Type"}, "object_name": "Grandchild Object", "type_name": "Grandchild Type"}, "elapsed_time": 60, "playbook": {"display_name": "Playbook 1", "description": "This is playbook 1"}}}', '{"task": {"phase": "phase1", "name": "task1", "active": true, "required": true, "complete": "complete"}}', '{"task": {"phase": "phase1", "name": "task2", "active": false, "required": false, "complete": "incomplete"}}']
+        actual_chunks = Chunking.split_json_to_chunks(self.chunking, data)
         assert actual_chunks == expected_chunks
 
 
@@ -259,7 +278,6 @@ class TestChunking:
     }
         expected_chunks = ['{"properties": {"index": 0, "properties": "\'internal_customizations_field\': None"}}', '{"properties": {"index": 1, "properties": "\'blah1\': \'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis venenatis mauris. Etiam id mi vel lectus malesuada placerat quis sed nisl. Nullam blandit, non magna in ultrices. Pellentesque sodales ultricies risus eget ornare. Nulla facilisi. Proin ultricies vestibulum auctor. Suspendisse eget nisl quam. Duis blandit viverra feugiat. Nunc sit amet imperdiet nibh, eget\'"}}', '{"properties": {"index": 2, "properties": "\'blah1\': \' mollis sapien. Maecenas congue odio eu nulla iaculis, non rutrum quam ullamcorper.Ut ac egestas urna, id porta justo. Nunc nec magna dignissim, blandit libero in, ultrices nunc. Aliquam dapibus quis dolor sed scelerisque. Quisque condimentum tellus non magna ornare, ac maximus lacus varius. Curabitur vestibulum.\'"}}', '{"incident": {"name": "Test Incident", "start_date": "2023-01-01", "inc_start": "2023-01-01", "discovered_date": "2023-01-01", "creator_principal": {"type": "user", "display_name": "John Doe"}, "reporter": "john.doe@example.com", "state": "open", "country": "US", "zip": "12345", "workspace": "test_workspace", "members": ["user1", "user2"], "negative_pr_likely": true, "inc_last_modified_date": "2023-01-01", "incident_disposition": "resolved", "description": "During a routine audit of logs, the HSE Ireland\'s security information and event management (SIEM) system detected unusual network activity. The incident was identified at 14:45 IST, but the cause and nature of the activity are currently unknown."}}', '{"artifact": {"value": "artifact1", "type": "file", "inc_name": "artifact1", "related_incident_count": 1, "summary": "This is artifact 1"}}', '{"playbook_execution": {"status": "success", "object": {"parent": {"object_name": "Child Object", "type_name": "Child Type"}, "object_name": "Grandchild Object", "type_name": "Grandchild Type"}, "elapsed_time": 60, "playbook": {"display_name": "Playbook 1", "description": "This is playbook 1"}}}', '{"task": {"phase": "phase1", "name": "task1", "active": true, "required": true, "complete": "complete"}}', '{"task": {"phase": "phase1", "name": "task2", "active": false, "required": false, "complete": "incomplete"}}']
         actual_chunks = Chunking.split_json_to_chunks(self.chunking, data, 100)
-        print(actual_chunks)
         assert actual_chunks == expected_chunks
     def test_flatten_dict_single_level(self):
         d = {'a': 1, 'b': 2, 'c': 3}
@@ -279,3 +297,11 @@ class TestChunking:
         actual = Chunking.flatten_dict(self.chunking, d, sep=':')
         assert actual==expected
    
+    def test_create_faiss_index(self):
+        embeddings = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+        index = Chunking.create_faiss_index(self.chunking, embeddings)
+        assert isinstance(index, faiss.IndexFlatL2), f"Expected index to be instance of faiss.IndexFlatL2, got {type(index)}"
+        
+        # Replace self.assertEqual with plain assert
+        assert index.ntotal == 3, f"Expected index.ntotal to be 3, got {index.ntotal}"
+        assert index.d == 3, f"Expected index.d to be 3, got {index.d}"

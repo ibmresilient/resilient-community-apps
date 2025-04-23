@@ -7,6 +7,7 @@ from fn_watsonx_analyst.util.util import create_logger
 
 log = create_logger(__name__)
 
+
 class RestUrls(Enum):
     """Enum to determine which URL and method to use for each request"""
 
@@ -36,15 +37,46 @@ class RestUrls(Enum):
         "POST",
         "/playbooks/execution/workspace/{workspace_id}/query_paged?include_activity_error_msg=false",
     ]
-    PLAYBOOK_EXECUTIONS_1 = ["POST", "/playbooks/execution/workspace{workspace_id}/{inc_id}/query_paged"] # From SOAR v51.0.4.1
-    PLAYBOOK_EXECUTIONS_2 = ["POST", "/playbooks/execution/incident/{inc_id}/query_paged?include_activity_error_msg=false"] # Up to & including SOAR v51.0.2.1
+    PLAYBOOK_EXECUTIONS_1 = [
+        "POST",
+        "/playbooks/execution/workspace/{workspace_id}/{inc_id}/query_paged",
+    ]  # From SOAR v51.0.4.1
+    PLAYBOOK_EXECUTIONS_2 = [
+        "POST",
+        "/playbooks/execution/incident/{inc_id}/query_paged?include_activity_error_msg=false",
+    ]  # Up to & including SOAR v51.0.2.1
+
+    ATTACHMENT_BY_NAME = [
+        "POST",
+        "/incidents/{inc_id}/attachments/query?exclude_mismatch=false&include_tasks=true",
+    ]
+
+    ATTACHMENT_DETAILS = ["GET", "/incidents/{inc_id}/attachments/{attach_id}"]
+    ATTACHMENT_CONTENTS = [
+        "GET",
+        "/incidents/{inc_id}/attachments/{attach_id}/contents",
+    ]
+
+    TASK_ATTACHMENT_DETAILS = ["GET", "/tasks/{task_id}/attachments/{attach_id}"]
+    TASK_ATTACHMENT_CONTENTS = [
+        "GET",
+        "/tasks/{task_id}/attachments/{attach_id}/contents",
+    ]
+
+    GET_ATTACHMENTS = ["GET", "/incidents/{inc_id}/attachments?exclude_mismatch=true"]
 
 
 class RestHelper:
     """Helper class to perform REST requests to SOAR"""
 
+    playbook_exec_group = [
+        RestUrls.PLAYBOOK_EXECUTIONS,
+        RestUrls.PLAYBOOK_EXECUTIONS_1,
+        RestUrls.PLAYBOOK_EXECUTIONS_2,
+    ]
+
     def __get_paged_query(
-        self, url: RestUrls, inc_id: int = None, length: int = 100, art_name: str = None
+        self, url: RestUrls, inc_id: int = None, length: int = 100, obj_name: str = None
     ):
         match url:
             case RestUrls.GET_ARTIFACTS:
@@ -71,9 +103,9 @@ class RestHelper:
                         {
                             "conditions": [
                                 {
-                                    "method": "contains",
+                                    "method": "equals",
                                     "field_name": "value",
-                                    "value": art_name,
+                                    "value": obj_name,
                                 }
                             ]
                         }
@@ -111,18 +143,37 @@ class RestHelper:
                     "length": length,
                 }
 
+            case RestUrls.ATTACHMENT_BY_NAME:
+                return {
+                    "conditions": [
+                        {"field_name": "name", "method": "equals", "value": obj_name}
+                    ]
+                }
+
+            case RestUrls.GET_ATTACHMENTS:
+                return {
+                    "sorts": [{"field_name": "last_modified_time", "type": "desc"}],
+                    "start": 0,
+                    "length": length,
+                    "filters": [{"conditions": []}],
+                }
+
     def do_request(self, res_client: SimpleClient, url: RestUrls, **kwargs) -> dict:
         """
         Given the RestUrl enum value, perform the operation, using kwargs as query params.
         Kwargs should generally have at least the incident ID.
         """
 
-        log.info("Making %s request for %s", url.value[0], url.name )
+        log.info("Making %s request for %s", url.value[0], url.name)
 
         match url.value[0]:
             case "GET":
                 match url:
-                    case RestUrls.ARTIFACT_CONTENTS:
+                    case (
+                        RestUrls.ARTIFACT_CONTENTS
+                        | RestUrls.ATTACHMENT_CONTENTS
+                        | RestUrls.TASK_ATTACHMENT_CONTENTS
+                    ):
                         res_client.headers["Accept"] = "text/html"
                         data = res_client.get_content(url.value[1].format(**kwargs))
                         res_client.headers["Accept"] = (
@@ -131,7 +182,9 @@ class RestHelper:
                         try:
                             return data.decode("utf-8")
                         except:
-                            log.warning("Unknown encoding for artifact contents.")
+                            log.warning(
+                                "Unknown encoding for artifact/attachment contents."
+                            )
                             return data
                 return res_client.get(url.value[1].format(**kwargs))
 
@@ -139,26 +192,46 @@ class RestHelper:
                 length = kwargs.get("length", 100)
 
                 match url:
-                    case RestUrls.PLAYBOOK_EXECUTIONS | RestUrls.PLAYBOOK_EXECUTIONS_1 | RestUrls.PLAYBOOK_EXECUTIONS_2:
-                        options = [RestUrls.PLAYBOOK_EXECUTIONS, RestUrls.PLAYBOOK_EXECUTIONS_1, RestUrls.PLAYBOOK_EXECUTIONS_2]
-                        for option in options:
+                    case (
+                        RestUrls.PLAYBOOK_EXECUTIONS
+                        | RestUrls.PLAYBOOK_EXECUTIONS_1
+                        | RestUrls.PLAYBOOK_EXECUTIONS_2
+                    ):
+                        for i, option in enumerate(self.playbook_exec_group):
+                            args = {}
+                            if kwargs.get("happy_path"):
+                                args = kwargs
                             try:
-                                return res_client.post(
+                                result = res_client.post(
                                     option.value[1].format(**kwargs),
                                     self.__get_paged_query(
-                                        option, kwargs.get("inc_id", None), length, kwargs.get("art_name", None)
-                                    ), **kwargs
+                                        option,
+                                        kwargs.get("inc_id", None),
+                                        length,
+                                        kwargs.get("art_name", None),
+                                    ),
+                                    skip_retry=[500],
+                                    **args,
                                 )["data"]
-
-                            except Exception:
+                                return result
+                            except:
+                                log.warning(
+                                    "Failed to get playbook executions using API %s.%s",
+                                    option.value[1],
+                                    (
+                                        " Trying next API..." if i < 2 else ""
+                                    ),  # so long as we've not exhausted each API option, say trying next
+                                )
                                 # ignore and try next
                                 pass
+                        log.warning("Failed to get playbook executions.")
                         return []
 
                     case (
                         RestUrls.ARTIFACT_BY_NAME
                         | RestUrls.GET_ARTIFACTS
                         | RestUrls.INC_ART_ID
+                        | RestUrls.ATTACHMENT_BY_NAME
                     ):
                         try:
                             res = res_client.post(
@@ -167,12 +240,20 @@ class RestHelper:
                                     url,
                                     kwargs.get("inc_id", None),
                                     length,
-                                    kwargs.get("art_name", None),
+                                    kwargs.get("obj_name", None),
                                 ),
-                            )["data"]
+                            )
+
+                            if url == RestUrls.ATTACHMENT_BY_NAME:
+                                return res.get("attachments", [])
+                            else:
+                                return res.get("data", [])
+
                             return res
                         except Exception as e:
-                            log.exception("Error fetching %s data from SOAR." % url.name, )
+                            log.exception(
+                                "Error fetching %s data from SOAR." % url.name,
+                            )
                             # raise Exception("Error fetching %s data from SOAR.", url.name) from e
 
                 return res_client.post(url.value[1].format(**kwargs))

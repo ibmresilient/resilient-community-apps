@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from resilient import SimpleClient
 
@@ -7,7 +7,9 @@ from fn_watsonx_analyst.summarizers.document_summarizer import DocumentSummarize
 from fn_watsonx_analyst.types.ai_response import AIResponse
 from fn_watsonx_analyst.types.artifact import Artifact
 
+from fn_watsonx_analyst.types.attachment import Attachment
 from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose, ModelTag
+from fn_watsonx_analyst.util.ContextHelper import ContextHelper
 from fn_watsonx_analyst.util.chunking.chunking import Chunking
 from fn_watsonx_analyst.util.parallel.parallel import ParallelRunnableRunner
 from fn_watsonx_analyst.util.rest import RestHelper, RestUrls
@@ -25,7 +27,7 @@ class ArtifactSummaryGenerator:
     inc_id: int
     artifact: Artifact
     content_type: str
-    artifact_contents: bytes
+    contents: bytes
 
     model_id: str
     model_tag: ModelTag
@@ -36,7 +38,8 @@ class ArtifactSummaryGenerator:
         self,
         res_client: SimpleClient,
         inc_id: int,
-        artifact: Artifact,
+        artifact: Optional[Artifact],
+        attachment: Optional[Attachment],
         model_id: str,
         opts: dict,
     ):
@@ -44,7 +47,12 @@ class ArtifactSummaryGenerator:
 
         self.inc_id = inc_id
         self.artifact = artifact
-        self.content_type = artifact["attachment"]["content_type"]
+        self.attachment = attachment
+        
+        if self.artifact:
+            self.content_type = artifact.get("attachment", {}).get("content_type", "")
+        else:
+            self.content_type = attachment.get("content_type", "")
 
         self.model_id = model_id
         self.opts = opts
@@ -60,7 +68,7 @@ class ArtifactSummaryGenerator:
             data = data[:MAX_THRESHOLD]
 
         chunker = Chunking()
-        chunks = chunker.split_data_into_token_chunks(data, max_tokens=1500)
+        chunks = chunker.split_data_into_token_chunks(data, max_tokens=2500)
         chunks = chunker.random_chunks(chunks, 12)
 
         contents_summarizers: List[ContentsSummarizer] = []
@@ -69,7 +77,7 @@ class ArtifactSummaryGenerator:
                 contents_summarizers.append(
                     ContentsSummarizer(
                         chunk,
-                        self.artifact["attachment"]["content_type"],
+                        self.content_type,
                         self.model_id,
                         self.res_client,
                         self.opts,
@@ -127,9 +135,33 @@ class ArtifactSummaryGenerator:
         return summaries
 
     def __get_contents(self):
-        return RestHelper().do_request(
-            self.res_client,
-            RestUrls.ARTIFACT_CONTENTS,
-            inc_id=self.inc_id,
-            art_id=self.artifact["id"],
-        )
+        contents: str = None
+        if self.artifact:
+            contents = RestHelper().do_request(
+                self.res_client,
+                RestUrls.ARTIFACT_CONTENTS,
+                inc_id=self.inc_id,
+                art_id=self.artifact["id"],
+            )
+        elif self.attachment:
+            if not self.attachment["task_id"]:
+                contents = RestHelper().do_request(
+                    self.res_client,
+                    RestUrls.ATTACHMENT_CONTENTS,
+                    inc_id=self.inc_id,
+                    attach_id=self.attachment["id"],
+                )
+            else:
+                contents = RestHelper().do_request(
+                    self.res_client,
+                    RestUrls.TASK_ATTACHMENT_CONTENTS,
+                    task_id=self.attachment["task_id"],
+                    attach_id=self.attachment["id"],
+                )
+
+        else:
+            raise ValueError("Please provide a valid artifact or attachment")
+
+        parser_instance = ContextHelper()
+        contents = parser_instance.multi_format_parser(data=contents)
+        return contents

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # Generated with resilient-sdk v51.0.2.0.974
 
 """Generate a default configuration-file section for fn_watsonx_analyst"""
@@ -15,6 +15,12 @@ def config_section_data():
 watsonx_api_key=$WATSONX_API_KEY
 watsonx_project_id=$WATSONX_PROJECT_ID
 watsonx_endpoint=$WATSONX_ENDPOINT
+
+# options: en, fr, de, pt, es
+default_language=en
+
+# options: true, false
+render_markdown=true
 
 [watsonx_property_labels]
 # Note: don't use quotes around values.
