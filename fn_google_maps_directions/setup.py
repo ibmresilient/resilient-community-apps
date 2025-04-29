@@ -5,15 +5,17 @@
 from setuptools import setup, find_packages
 
 setup(
+    display_name='Google Maps Directions',
     name='fn_google_maps_directions',
-    version='1.0.0',
+    version='1.0.1',
+    url='https://ibm.biz/soarcommunity',
     license='MIT',
-    author='Resilient Labs',
+    author='IBM QRadar SOAR',
     author_email='resil.labs@gmail.com',
-    description="Resilient Circuits Components for Google Maps Directions Function",
+    description="IBM SOAR Components for Google Maps Directions Function",
     long_description="This package contains one function that generates a link to Google Maps which shows directions from the given origin to the destination",
     install_requires=[
-        'resilient_circuits>=30.0.0'
+        'resilient_circuits>=51.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -26,6 +28,7 @@ setup(
             "FnGoogleMapsDirectionsFunctionComponent = fn_google_maps_directions.components.fn_google_maps_directions:FunctionComponent"
         ],
         "resilient.circuits.configsection": ["gen_config = fn_google_maps_directions.util.config:config_section_data"],
-        "resilient.circuits.customize": ["customize = fn_google_maps_directions.util.customize:customization_data"]
+        "resilient.circuits.customize": ["customize = fn_google_maps_directions.util.customize:customization_data"],
+        "resilient.circuits.selftest": ["selftest = fn_google_maps_directions.util.selftest:selftest_function"]
     }
 )

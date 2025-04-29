@@ -4,10 +4,26 @@
  ![screenshot](./screenshots/1.png)
 
 
-## app.config settings:
-```python
-None
-```
+## Table of Contents
+- [Release Notes](#release-notes)
+- [App Configuration](#app-configuration)
+- [Function Inputs](#function-inputs)
+- [Function Output](#function-output)
+- [Pre-processing Script](#pre-process-script)
+- [Post-processing Script](#post-process-script)
+- [Rules](#rules)
+
+
+## Release Notes
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 1.0.1 | 04/2025 | Converted example workflows to python3 |
+| 1.0.0 | 11/2018 | Initial Release |
+
+
+## App Configuration:
+Not required
+
 
 ## Function Inputs:
 | Function Name | Type | Required | Example |
