@@ -259,6 +259,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_github/README.html">GitHub</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_dlp/README.html">Google Cloud DLP</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_google_cloud_scc/README.html">Google Cloud Security Command Center</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_google_maps_directions/README.html">Google Maps</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_googlesafebrowsing/README.html">Google Safe Browsing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_greynoise/README.html">GreyNoise</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_grpc_interface/README.html">gRPC Interface</a></li>
@@ -266,7 +267,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_guardium_integration/README.html">Guardium Integration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_hibp/README.html">Have I Been Pwned</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_html2pdf/README.html">HTML to PDF</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_icdx/README.html">Symantec ICDx</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_incident_utils/README.html">Incident Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_ioc_parser_v2/README.html">IOC Parser</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_ipinfo/README.html">IPInfo</a></li>
@@ -460,8 +460,20 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.0.0</p></td>
-<td><p>07/22022</p></td>
+<tr class="row-even"><td><p>Version</p></td>
+<td><p>Date</p></td>
+<td><p>Notes</p></td>
+</tr>
+<tr class="row-odd"><td><p>——-</p></td>
+<td><p>—-</p></td>
+<td><p>—–</p></td>
+</tr>
+<tr class="row-even"><td><p>1.0.1</p></td>
+<td><p>04/2025</p></td>
+<td><p>Converted example workflows to python3</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.0</p></td>
+<td><p>07/2022</p></td>
 <td><p>Initial Release</p></td>
 </tr>
 </tbody>
@@ -507,14 +519,14 @@ Given that many apps are not distributed with example rules/workflows or playboo
 <p>The SOAR platform supports two app deployment mechanisms, App Host and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient-circuits&gt;=44.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient-circuits&gt;=51.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -570,10 +582,10 @@ Given that many apps are not distributed with example rules/workflows or playboo
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
-<p>Python 3.6 is supported. Python 3.9 is suggested.
+<p>Python 3.9 is supported. Python 3.11 is suggested.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
-<li><p>resilient-circuits&gt;=44.0.0</p></li>
+<li><p>resilient-circuits&gt;=51.0.0</p></li>
 <li><p>retry2</p></li>
 </ul>
 <section id="configuration">
@@ -737,7 +749,6 @@ Additional package dependencies may exist for each of these packages:</p>
     <span class="k">if</span> <span class="n">pbk</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
       <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> &lt;a target=&#39;blank&#39; href=&#39;#playbooks/designer/</span><span class="si">{}</span><span class="s2">&#39;&gt;Playbook link&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">pbk</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">))</span>
     <span class="n">msg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="s2">&quot;Playbook Maker results:&lt;br&gt;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">msg_list</span><span class="p">))))</span>
 </pre></div>
 </div>

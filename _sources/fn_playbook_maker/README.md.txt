@@ -42,7 +42,10 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.0.0 | 07/22022 | Initial Release |
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 1.0.1 | 04/2025 | Converted example workflows to python3 |
+| 1.0.0 | 07/2022 | Initial Release |
 
 ---
 
@@ -84,13 +87,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `45.0`.
+* SOAR platform >= `51.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0`.
+* SOAR platform >= `51.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient-circuits>=44.0.0`.
+* Integration server is running `resilient-circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -122,9 +125,9 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does not require proxy support.
 
 ### Python Environment
-Python 3.6 is supported. Python 3.9 is suggested.
+Python 3.9 is supported. Python 3.11 is suggested.
 Additional package dependencies may exist for each of these packages:
-* resilient-circuits>=44.0.0
+* resilient-circuits>=51.0.0
 * retry2
 
 #### Configuration
@@ -240,7 +243,6 @@ else:
     if pbk.get('success', False):
       msg = "{} <a target='blank' href='#playbooks/designer/{}'>Playbook link</a>".format(msg, pbk.get('id'))
     msg_list.append(msg)
-
   incident.addNote(helper.createRichText("Playbook Maker results:<br>{}".format("<br>".join(msg_list))))
 ```
 
