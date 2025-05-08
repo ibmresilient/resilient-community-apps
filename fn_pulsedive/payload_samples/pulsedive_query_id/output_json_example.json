@@ -1,0 +1,191 @@
+{
+  "resp_json": {
+    "version": "1.0",
+    "success": true,
+    "reason": null,
+    "content": {
+      "qid": null,
+      "iid": 1,
+      "indicator": "afobal.cl",
+      "type": "domain",
+      "risk": "none",
+      "risk_recommended": "none",
+      "manualrisk": 0,
+      "retired": null,
+      "stamp_added": "2017-09-27 18:11:38",
+      "stamp_updated": "2025-03-20 05:09:25",
+      "stamp_seen": "2025-03-20 05:09:25",
+      "stamp_probed": "2024-08-23 23:35:09",
+      "stamp_retired": null,
+      "recent": 0,
+      "submissions": 10,
+      "umbrella_rank": null,
+      "umbrella_domain": null,
+      "riskfactors": [
+        {
+          "rfid": 60,
+          "description": "found in threat feeds",
+          "risk": "medium"
+        },
+        {
+          "rfid": 70,
+          "description": "Linked IPs return PTR records",
+          "risk": "none"
+        },
+        {
+          "rfid": 74,
+          "description": "SPF record present",
+          "risk": "none"
+        }
+      ],
+      "redirects": {
+        "from": [],
+        "to": [
+          {
+            "iid": 64276585,
+            "indicator": "https://afobal.cl/"
+          }
+        ]
+      },
+      "threats": [],
+      "feeds": [
+        {
+          "fid": 1,
+          "name": "Zeus Bad Domains",
+          "category": "malware",
+          "organization": "abuse.ch",
+          "pricing": "free",
+          "stamp_linked": "2018-05-08 14:55:46"
+        }
+      ],
+      "comments": [],
+      "attributes": {
+        "hosttype": [
+          "Mail Server"
+        ],
+        "port": [
+          "143",
+          "21",
+          "25",
+          "3306",
+          "443",
+          "465",
+          "53",
+          "80",
+          "993"
+        ],
+        "protocol": [
+          "DNS",
+          "FTP",
+          "HTTP",
+          "HTTPS",
+          "IMAP",
+          "IMAPS",
+          "MySQL",
+          "SMTP",
+          "SMTPS"
+        ],
+        "technology": [
+          "Apache",
+          "Apache HTTP Server",
+          "Let's Encrypt",
+          "MySQL",
+          "PHP",
+          "WordPress"
+        ]
+      },
+      "properties": {
+        "http": {
+          "server": "Apache",
+          "content-type": "text/html;charset=ISO-8859-1",
+          "content-length": "1178",
+          "++code": "200",
+          "++content-type": "text/html",
+          "++redirect": "https://afobal.cl/",
+          "++target": "http://afobal.cl/",
+          "date": "Tue, 18 Mar 2025 01:02:40 GMT"
+        },
+        "ssl": {
+          "domain": [
+            "afobal.cl",
+            "*.afobal.cl"
+          ],
+          "version": "v3",
+          "issuer": "/C=US/O=Let's Encrypt/CN=R10",
+          "org": "R10",
+          "expires": "2025-06-01 02:42:06",
+          "valid": "2025-03-03 02:42:07",
+          "subject": "/CN=*.afobal.cl",
+          "fingerprint": "e3b9b0b962851ca9dde22569c2984a24db668402708fb5a244b84e26457c2e7a"
+        },
+        "whois": {
+          "registrar url": "https://www.nic.cl",
+          "registrar name": "NIC Chile",
+          "++registrant": "Pablo Rivera Duclos",
+          "domain name": "afobal.cl",
+          "creation date": "2007-05-01 23:07:58 CLST",
+          "registrant name": "Pablo Rivera Duclos",
+          "name server": [
+            "ns1.dns-principal-23.com",
+            "ns2.dns-principal-23.com"
+          ],
+          "expiration date": "2025-05-29 18:07:58 CLST"
+        },
+        "dns": {
+          "mx": "afobal.cl",
+          "rname": "info@grupohost.com.ar",
+          "a": "138.128.182.130",
+          "ns": [
+            "dns30921.dizinc.com",
+            "dns30920.dizinc.com"
+          ],
+          "txt": "v=spf1 ip4:138.128.182.130 ip4:66.7.198.165 +a +mx ~all",
+          "mname": "dns30920.dizinc.com",
+          "soa": "dns30920.dizinc.com. info.grupohost.com.ar. 2025030301 3600 1800 1209600 86400"
+        },
+        "meta": {
+          "++title": "Index of /"
+        },
+        "banners": {
+          "143": "* OK [CAPABILITY IMAP4rev1 SASL-IR LOGIN-REFERRALS ID ENABLE IDLE NAMESPACE LITERAL+ STARTTLS AUTH=PLAIN AUTH=LOGIN] Dovecot ready.\n",
+          "21": "220---------- Welcome to Pure-FTPd [privsep] [TLS] ----------\n220-You are user number 1 of 50 allowed.\n220-Local time is now 11:58. Server port: 21.\n220-This is a private system - No anonymous login\n220-IPv6 connections are also welcome on this server.\n220 You will be disconnected after 15 minutes of inactivity.\n",
+          "993": "\u0005\u0004\u0000\u0000",
+          "465": "\u0005\u0004\u0000\u0000",
+          "53": "\u0005\u0004\u0000\u0000",
+          "25": "\u0005\u0004\u0000\u0000",
+          "3306": "Y\u0000\u0000\u0000\n5.5.5-10.6.19-MariaDB\u0000-0\u000e\u0000iF^'Gp!O\u0000\ufffd\ufffd\b\u0002\u0000\ufffd\ufffd\u0015\u0000\u0000\u0000\u0000\u0000\u0000\u001d\u0000\u0000\u0000Ib1kIiXY:RmM\u0000mysql_native_password\u0000"
+        },
+        "dom": {
+          "screenshot": "https://sandbox.pulsedive.com/screenshots/4ca4238b813ab1cdcb486a1570ab8cd4.jpeg"
+        }
+      }
+    },
+    "raw": "",
+    "inputs": {
+      "incident_id": 3102,
+      "pulsedive_id": 1,
+      "pulsedive_query_type": {
+        "id": 3625,
+        "name": "Indicator"
+      },
+      "attachment_name": null,
+      "pulsedive_id_report_type": {
+        "id": 3669,
+        "name": "By ID"
+      },
+      "pulsedive_pretty": {
+        "id": 3640,
+        "name": "Yes"
+      }
+    },
+    "metrics": {
+      "version": "1.0",
+      "package": "fn-pulsedive",
+      "package_version": "1.0.1",
+      "host": "li-b6f3814c-2cf7-11b2-a85c-95da948e58bf.ibm.com",
+      "execution_time_ms": 1886,
+      "timestamp": "2025-04-04 15:02:58"
+    }
+  },
+  "att_name": "pulsedive_Indicator_id1_By ID.txt"
+}

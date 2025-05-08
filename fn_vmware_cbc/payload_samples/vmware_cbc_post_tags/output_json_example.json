@@ -1,0 +1,25 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "tags": [
+      "tag1",
+      "tag2",
+      "tag3"
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "vmware_cbc_threat_id": "88f5fb3b*******fbb4c8fa1c4ff4",
+    "vmware_cbc_tags": "tag1, tag2, tag3"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-vmware-cbc",
+    "package_version": "1.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 1784,
+    "timestamp": "2024-05-09 16:42:24"
+  }
+}
