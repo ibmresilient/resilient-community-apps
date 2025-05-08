@@ -22,7 +22,7 @@
 - [Overview](#overview)
   - [Key Features](#key-features)
 - [Requirements](#requirements)
-  - [Resilient platform](#resilient-platform)
+  - [SOAR platform](#SOAR-platform)
   - [Cloud Pak for Security](#cloud-pak-for-security)
   - [Proxy Server](#proxy-server)
 - [Installation](#installation)
@@ -49,7 +49,8 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 1/2021 | Added Feature: Get, Set Reputation |
+| 1.1.1 | 04/2025 | Converted example workflows to python3 |
+| 1.1.0 | 01/2021 | Added Feature: Get, Set Reputation |
 | 1.0.2 | 09/2020 | Bug fixes |
 | 1.0.1 | 05/2020 | App Host support |
 | 1.0.0 | 05/2018 | Initial Release |
@@ -61,11 +62,11 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Resilient Circuits Components for McAfee TIE Functions**
+**SOAR Components for McAfee TIE Functions**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
-The  McAfee TIE Functions for IBM Resilient provides the ability to search and set file reputation within McAfee Threat Intelligence Exchange (TIE) server for information on a specific file hash.  This information can come from any of the providers:
+The  McAfee TIE Functions for IBM SOAR provides the ability to search and set file reputation within McAfee Threat Intelligence Exchange (TIE) server for information on a specific file hash. This information can come from any of the providers:
 
 *  Enterprise
 *  GTI
@@ -87,31 +88,31 @@ In addition, a system list is returned by the function.
 <!--
   List any Requirements
 -->
-This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.
+This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.
 
-### Resilient platform
-The Resilient platform supports two app deployment mechanisms, App Host and integration server.
+### SOAR platform
+The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
-If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `36.0.5634`.
+If deploying to a SOAR platform with an App Host, the requirements are:
+* SOAR platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `36.0.5634`.
+If deploying to a SOAR platform with an integration server, the requirements are:
+* SOAR platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=30.0.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
   | Function | Read |
 
-The following Resilient platform guides provide additional information:
+The following SOAR platform guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
-The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your Resilient platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Resilient Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Knowledge Center at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **SOAR Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
@@ -128,12 +129,20 @@ These guides are available on the IBM Knowledge Center at [ibm.biz/cp4s-docs](ht
 ### Proxy Server
 The app supports a proxy server. See the DXL Configuration file for settings.
 
+### Python Environment
+Python 3.9 and 3.11 are supported.
+Additional package dependencies may exist for each of these packages:
+* PySocks
+* resilient_circuits>=51.0.0
+* dxlclient
+* dxltieclient
+
 ---
 
 ## Installation
 
 ### Install
-* To install or uninstall an App or Integration on the _Resilient platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
+* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/resilient-docs](https://ibm.biz/resilient-docs).
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
 ### App Configuration
@@ -515,7 +524,7 @@ tie_results
 | McAfee TIE Set File Reputation | artifact | `mcafee_tie_set_file_reputation` |
 | McAfee TIE Set File Reputation - Datatable | tie_results | `mcafee_tie_set_reputation__datatable` |
 | McAfee TIE Get File Reputation | artifact | `mcafee_tie_get_file_reputation` |
-| McAfee TIE Get Latest Reputation | Datatable | `mcafee_tie_get_lastest_reputation` |
+| McAfee TIE Get Current File Reputation | Datatable | `mcafee_tie_get_latest_reputation` |
 
 ---
 

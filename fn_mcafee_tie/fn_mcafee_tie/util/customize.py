@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# Copyright IBM Corp. 2010, 2025
+# Generated with resilient-sdk v51.0.5.0.1475
 
-"""Generate the Resilient customizations required for fn_mcafee_tie"""
+"""Generate the SOAR customizations required for fn_mcafee_tie"""
 
 import base64
 import os
@@ -20,15 +22,36 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_mcafee_tie",
-        "message_destinations": [u"mcafee_tie_md"],
-        "functions": [u"mcafee_tie_set_file_reputation", u"mcafee_tie_search_hash"],
-        "workflows": [u"mcafee_tie_get_file_reputation", u"mcafee_tie_get_latest_reputation", u"mcafee_tie_set_reputation__datatable", u"mcafee_tie_set_file_reputation"],
-        "actions": [u"McAfee TIE Set File Reputation", u"McAfee TIE Get File Reputation", u"McAfee TIE Set File Reputation - Datatable", u"McAfee TIE Get Current File Reputation"],
+        "message_destinations": [
+            u"mcafee_tie_md"
+        ],
+        "functions": [
+            u"mcafee_tie_search_hash",
+            u"mcafee_tie_set_file_reputation"
+        ],
+        "workflows": [
+            u"mcafee_tie_get_file_reputation",
+            u"mcafee_tie_get_latest_reputation",
+            u"mcafee_tie_set_file_reputation",
+            u"mcafee_tie_set_reputation__datatable"
+        ],
+        "actions": [
+            u"McAfee TIE Get Current File Reputation",
+            u"McAfee TIE Get File Reputation",
+            u"McAfee TIE Set File Reputation",
+            u"McAfee TIE Set File Reputation - Datatable"
+        ],
         "incident_fields": [],
-        "incident_artifact_types": [u"certificate_sha1_hash"],
-        "datatables": [u"tie_results"],
+        "incident_artifact_types": [
+            u"certificate_sha1_hash"
+        ],
+        "incident_types": [],
+        "datatables": [
+            u"tie_results"
+        ],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": [],
     }
 
 
@@ -37,24 +60,24 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 36.0.5634
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:
         - mcafee_tie_md
     - Functions:
-        - mcafee_tie_set_file_reputation
         - mcafee_tie_search_hash
+        - mcafee_tie_set_file_reputation
     - Workflows:
         - mcafee_tie_get_file_reputation
         - mcafee_tie_get_latest_reputation
-        - mcafee_tie_set_reputation__datatable
         - mcafee_tie_set_file_reputation
+        - mcafee_tie_set_reputation__datatable
     - Rules:
-        - McAfee TIE Set File Reputation
-        - McAfee TIE Get File Reputation
-        - McAfee TIE Set File Reputation - Datatable
         - McAfee TIE Get Current File Reputation
+        - McAfee TIE Get File Reputation
+        - McAfee TIE Set File Reputation
+        - McAfee TIE Set File Reputation - Datatable
     - Custom Artifact Types:
         - certificate_sha1_hash
     - Data Tables:

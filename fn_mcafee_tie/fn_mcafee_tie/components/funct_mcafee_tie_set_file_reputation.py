@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
-# Copyright IBM Corp. 2010, 2021 - Confidential Information
+# Copyright IBM Corp. 2010, 2025 - Confidential Information
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
 import logging
 import time
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult
 from fn_mcafee_tie.lib.mcafee_tie_common import get_trust_level_value, get_mcafee_client, get_tie_client, \
                                                 get_mcafee_hash_type, PACKAGE_NAME, MyReputationChangeCallback
 from resilient_lib import ResultPayload, validate_fields
 
 LOG = logging.getLogger(__name__)
-
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'mcafee_tie_set_file_reputation''"""
@@ -35,12 +34,12 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("Starting")
 
             # Get the function parameters:
-            mcafee_tie_hash_type = kwargs.get("mcafee_tie_hash_type")  # text
-            mcafee_tie_comment = kwargs.get("mcafee_tie_comment")  # text
+            mcafee_tie_hash_type = kwargs.get("mcafee_tie_hash_type", None)  # text
+            mcafee_tie_comment = kwargs.get("mcafee_tie_comment", None)  # text
             mcafee_tie_reputation_type = self.get_select_param(kwargs.get("mcafee_tie_reputation_type"))  # select, values: "Enterprise", "External"
             mcafee_tie_trust_level = self.get_select_param(kwargs.get("mcafee_tie_trust_level"))  # select, values: "KNOWN_TRUSTED_INSTALLED", "KNOWN_TRUSTED", "MOST_LIKELY_TRUSTED", "MIGHT_BE_TRUSTED", "UNKNOWN", "MIGHT_BE_MALICIOUS", "MOST_LIKELY_MALICIOUS", "KNOWN_MALICIOUS", "NOT SET"
-            mcafee_tie_hash = kwargs.get("mcafee_tie_hash")  # text
-            mcafee_tie_filename = kwargs.get("mcafee_tie_filename")  # text
+            mcafee_tie_hash = kwargs.get("mcafee_tie_hash", None)  # text
+            mcafee_tie_filename = kwargs.get("mcafee_tie_filename", None)  # text
 
             log = logging.getLogger(__name__)
             log.info("mcafee_tie_reputation_type: %s", mcafee_tie_reputation_type)
@@ -66,7 +65,7 @@ class FunctionComponent(ResilientComponent):
 
             # set the call back routine to catch changes or errors
             result_callback = MyReputationChangeCallback()
-            tie_client.add_file_reputation_change_callback(result_callback)            
+            tie_client.add_file_reputation_change_callback(result_callback)
 
             if mcafee_tie_reputation_type == "Enterprise":
                 # Set the Enterprise reputation for notepad.exe to Known Trusted
@@ -90,7 +89,7 @@ class FunctionComponent(ResilientComponent):
             # wait for result or a timeout
             wait_iter = 4
             sleep_time = 5
-            # sleep while waiting for a call back. Sleep time progesses: 5, 10, 15, ...
+            # sleep while waiting for a call back. Sleep time processes: 5, 10, 15, ...
             while wait_iter > 0 and not result_callback.result:
                 time.sleep(sleep_time)
                 sleep_time += 5
@@ -101,5 +100,5 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=str(err))

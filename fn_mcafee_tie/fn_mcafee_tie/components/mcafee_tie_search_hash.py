@@ -1,22 +1,18 @@
 # -*- coding: utf-8 -*-
-# Copyright IBM Corp. 2010, 2021 - Confidential Information
+# Copyright IBM Corp. 2010, 2025 - Confidential Information
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 
-from dxlclient.client_config import DxlClientConfig
-from dxlclient.client import DxlClient
-from dxltieclient import TieClient
-from dxltieclient.constants import HashType, ReputationProp, FileProvider, FileEnterpriseAttrib, TrustLevel, \
+from dxltieclient.constants import ReputationProp, FileProvider, FileEnterpriseAttrib, TrustLevel, \
     FileGtiAttrib, AtdAttrib, AtdTrustLevel, EpochMixin
-from fn_mcafee_tie.lib.mcafee_tie_common import get_trust_level_value, get_mcafee_client, get_tie_client, \
+from fn_mcafee_tie.lib.mcafee_tie_common import get_mcafee_client, get_tie_client, \
     get_mcafee_hash_type, PACKAGE_NAME
 from resilient_lib import validate_fields
 
 LOG = logging.getLogger(__name__)
-
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'mcafee_tie_search_hash"""
@@ -42,8 +38,8 @@ class FunctionComponent(ResilientComponent):
             response_dict = {}
             validate_fields(["mcafee_tie_hash_type", "mcafee_tie_hash"], kwargs)
             # Get the function parameters:
-            mcafee_tie_hash_type = kwargs.get("mcafee_tie_hash_type")  # text
-            mcafee_tie_hash = kwargs.get("mcafee_tie_hash")  # text
+            mcafee_tie_hash_type = kwargs.get("mcafee_tie_hash_type", None)  # text
+            mcafee_tie_hash = kwargs.get("mcafee_tie_hash", None)  # text
 
             LOG.debug("_lookup_hash started for Artifact Type {0} - Artifact Value {1}"\
                       .format(mcafee_tie_hash_type, mcafee_tie_hash))
@@ -56,12 +52,11 @@ class FunctionComponent(ResilientComponent):
 
             # Make sure client is connected
             tie_client = get_tie_client(self.client)
+            # Get file reputation
             reputations_dict = tie_client.get_file_reputation(resilient_hash)
             LOG.debug(reputations_dict)
 
-            system_list = tie_client.get_file_first_references(
-                resilient_hash
-            )
+            system_list = tie_client.get_file_first_references(resilient_hash)
 
             response_dict["Enterprise"] = self._get_enterprise_info(reputations_dict)
             response_dict["GTI"] = self._get_gti_info(reputations_dict)
@@ -74,7 +69,7 @@ class FunctionComponent(ResilientComponent):
             # Produce a FunctionResult with the return value
             yield FunctionResult(response_dict)
         except Exception as err:
-            yield FunctionError(err)
+            yield FunctionResult({}, success=False, reason=str(err))
 
     def _get_enterprise_info(self, reputations_dict):
         ent_dict = {}

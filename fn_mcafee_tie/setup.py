@@ -19,22 +19,23 @@ def snake_to_camel(word):
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
+    display_name='McAfee Threat Intelligence Exchange',
     name='fn_mcafee_tie',
-    version="1.1.0",
+    version="1.1.1",
     license='MIT',
-    author='IBM Resilient',
+    author='IBM SOAR',
     author_email='',
     url='https://ibm.com/mysupport',
-    description="Resilient Circuits Components for McAfee TIE Functions",
-    long_description="Provides the ability to search McAfee Threat Intelligence Exchange (TIE) server for information on a specific file hash from Resilient",
+    description="SOAR Components for McAfee TIE Functions",
+    long_description="Provides the ability to search McAfee Threat Intelligence Exchange (TIE) server for information on a specific file hash from SOAR",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=51.0.0',
         'resilient-lib',
-        'PySocks<1.7', # required for dxclient even though resilient circuits allows ~= 1.6
+        'PySocks',
         'dxlclient',
         'dxltieclient'
     ],
-    python_requires='<3.11', # because dxlclient requires PySocks<1.7, PY311 requires PySocks >= 1.7
+    python_requires='>=3.9',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',
