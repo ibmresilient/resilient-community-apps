@@ -329,7 +329,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_sumo_logic/README.html">Sumo Logic Cloud SIEM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_task_utils/README.html">Task Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_teams/README.html">Microsoft Teams</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_threatminer/README.html">ThreatMiner</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_timer/README.html">Timer Function</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_trusteer_ppd/README.html">Trusteer Pinpoint Detect</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_twilio/README.html">Twilio SMS</a></li>
@@ -426,7 +425,7 @@
 </li>
 <li><p><a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a></p>
 <ul>
-<li><p><a class="reference internal" href="#resilient-platform"><span class="xref myst">Resilient platform</span></a></p></li>
+<li><p><a class="reference internal" href="#SOAR-platform"><span class="xref myst">SOAR platform</span></a></p></li>
 <li><p><a class="reference internal" href="#cloud-pak-for-security"><span class="xref myst">Cloud Pak for Security</span></a></p></li>
 <li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
 </ul>
@@ -482,19 +481,23 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.1.0</p></td>
-<td><p>1/2021</p></td>
+<tr class="row-even"><td><p>1.1.1</p></td>
+<td><p>04/2025</p></td>
+<td><p>Converted example workflows to python3</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.1.0</p></td>
+<td><p>01/2021</p></td>
 <td><p>Added Feature: Get, Set Reputation</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.2</p></td>
+<tr class="row-even"><td><p>1.0.2</p></td>
 <td><p>09/2020</p></td>
 <td><p>Bug fixes</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.1</p></td>
+<tr class="row-odd"><td><p>1.0.1</p></td>
 <td><p>05/2020</p></td>
 <td><p>App Host support</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.0</p></td>
+<tr class="row-even"><td><p>1.0.0</p></td>
 <td><p>05/2018</p></td>
 <td><p>Initial Release</p></td>
 </tr>
@@ -509,9 +512,9 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-<p><strong>Resilient Circuits Components for McAfee TIE Functions</strong></p>
+<p><strong>SOAR Components for McAfee TIE Functions</strong></p>
 <p><img alt="screenshot: main" src="../_images/main33.png" /></p>
-<p>The  McAfee TIE Functions for IBM Resilient provides the ability to search and set file reputation within McAfee Threat Intelligence Exchange (TIE) server for information on a specific file hash.  This information can come from any of the providers:</p>
+<p>The  McAfee TIE Functions for IBM SOAR provides the ability to search and set file reputation within McAfee Threat Intelligence Exchange (TIE) server for information on a specific file hash. This information can come from any of the providers:</p>
 <ul class="simple">
 <li><p>Enterprise</p></li>
 <li><p>GTI</p></li>
@@ -536,20 +539,20 @@
 <!--
   List any Requirements
 -->
-<p>This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Security.</p>
-<section id="resilient-platform">
-<h3>Resilient platform<a class="headerlink" href="#resilient-platform" title="Link to this heading">¶</a></h3>
-<p>The Resilient platform supports two app deployment mechanisms, App Host and integration server.</p>
-<p>If deploying to a Resilient platform with an App Host, the requirements are:</p>
+<p>This app supports the IBM SOAR Platform and the IBM Cloud Pak for Security.</p>
+<section id="soar-platform">
+<h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
+<p>The SOAR platform supports two app deployment mechanisms, App Host and integration server.</p>
+<p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">36.0.5634</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
-<p>If deploying to a Resilient platform with an integration server, the requirements are:</p>
+<p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>Resilient platform &gt;= <code class="docutils literal notranslate"><span class="pre">36.0.5634</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=30.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=51.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -570,13 +573,13 @@
 </div>
 </li>
 </ul>
-<p>The following Resilient platform guides provide additional information:</p>
+<p>The following SOAR platform guides provide additional information:</p>
 <ul class="simple">
 <li><p><em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
 <li><p><em>Integration Server Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
 <li><p><em>System Administrator Guide</em>: provides the procedure to install, configure and deploy apps.</p></li>
 </ul>
-<p>The above guides are available on the IBM Knowledge Center at <a class="reference external" href="https://ibm.biz/resilient-docs">ibm.biz/resilient-docs</a>. On this web page, select your Resilient platform version. On the follow-on page, you can find the <em>App Host Deployment Guide</em> or <em>Integration Server Guide</em> by expanding <strong>Resilient Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
+<p>The above guides are available on the IBM Knowledge Center at <a class="reference external" href="https://ibm.biz/resilient-docs">ibm.biz/resilient-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>App Host Deployment Guide</em> or <em>Integration Server Guide</em> by expanding <strong>SOAR Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
 </section>
 <section id="cloud-pak-for-security">
 <h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
@@ -597,6 +600,17 @@
 <h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">¶</a></h3>
 <p>The app supports a proxy server. See the DXL Configuration file for settings.</p>
 </section>
+<section id="python-environment">
+<h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
+<p>Python 3.9 and 3.11 are supported.
+Additional package dependencies may exist for each of these packages:</p>
+<ul class="simple">
+<li><p>PySocks</p></li>
+<li><p>resilient_circuits&gt;=51.0.0</p></li>
+<li><p>dxlclient</p></li>
+<li><p>dxltieclient</p></li>
+</ul>
+</section>
 </section>
 <hr class="docutils" />
 <section id="installation">
@@ -604,7 +618,7 @@
 <section id="install">
 <h3>Install<a class="headerlink" href="#install" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>To install or uninstall an App or Integration on the <em>Resilient platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/resilient-docs">ibm.biz/resilient-docs</a>.</p></li>
+<li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/resilient-docs">ibm.biz/resilient-docs</a>.</p></li>
 <li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
 </ul>
 </section>
@@ -1097,9 +1111,9 @@ mcafee_tie_hash: The value of the hash.</p>
 <td><p>artifact</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">mcafee_tie_get_file_reputation</span></code></p></td>
 </tr>
-<tr class="row-odd"><td><p>McAfee TIE Get Latest Reputation</p></td>
+<tr class="row-odd"><td><p>McAfee TIE Get Current File Reputation</p></td>
 <td><p>Datatable</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">mcafee_tie_get_lastest_reputation</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mcafee_tie_get_latest_reputation</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -1179,9 +1193,10 @@ mcafee_tie_hash: The value of the hash.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#requirements">Requirements</a><ul>
-<li><a class="reference internal" href="#resilient-platform">Resilient platform</a></li>
+<li><a class="reference internal" href="#soar-platform">SOAR platform</a></li>
 <li><a class="reference internal" href="#cloud-pak-for-security">Cloud Pak for Security</a></li>
 <li><a class="reference internal" href="#proxy-server">Proxy Server</a></li>
+<li><a class="reference internal" href="#python-environment">Python Environment</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#installation">Installation</a><ul>
