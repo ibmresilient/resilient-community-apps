@@ -10,7 +10,7 @@ from fn_log_capture.components.funct_fn_log_capture import get_log_by_date
 pytest --resilient_app_config=/<path>/<to>/app.config tests/test_get_log_by_date.py
 """
 
-BEFORE_RESULTS = u"""2019-10-21 14:08:42,990 DEBUG Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
+BEFORE_RESULTS = """2019-10-21 14:08:42,990 DEBUG Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
 2019-10-21 14:09:42,990 INFO Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
 2019-10-21 14:10:42,990 WARNING Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
 2019-10-21 14:11:42,990 ERROR Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
@@ -20,7 +20,7 @@ Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
 3
 """
 
-BEFORE_MAXLEN_RESULTS = u"""2019-10-21 14:11:42,990 ERROR Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
+BEFORE_MAXLEN_RESULTS = """2019-10-21 14:11:42,990 ERROR Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
 Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
 1
 2
@@ -73,12 +73,9 @@ class TestFnLogByDate:
                      log_min_level, expected_results):
         """ Test calling with sample values for the parameters """
 
-        num, result_list = get_log_by_date(get_sample_logfile_path(), log_capture_date, log_capture_date_option, log_capture_maxlen, log_min_level)
+        result_list = get_log_by_date(get_sample_logfile_path(), log_capture_date, log_capture_date_option, log_capture_maxlen, log_min_level)
 
-        if sys.version_info.major < 3:
-            assert expected_results == unicode(result_list, encoding='utf-8')
-        else:
-            assert expected_results == result_list
+        assert expected_results == result_list
 
 def get_sample_logfile_path():
     log_dir = os.path.dirname(os.path.realpath(__file__))

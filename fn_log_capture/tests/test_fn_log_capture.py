@@ -72,7 +72,7 @@ class TestFnLogCapture:
 
         with pytest.raises(Exception):
             results = call_fn_log_capture_function(circuits_app, function_params)
-
+        
 def setup_get_log_file(mock_function):
     log_dir = os.path.dirname(os.path.realpath(__file__))
     log_file = os.path.join(log_dir, "data", "sample.file")

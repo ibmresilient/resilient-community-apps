@@ -42,7 +42,7 @@ class TestFnLogCaptureFilter:
         assert multi_line_result == "1 2 3"
 
     def test_error_results(self):
-        ERROR_RESULTS = u"""2019-10-21 14:11:42,990 ERROR Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
+        ERROR_RESULTS = """2019-10-21 14:11:42,990 ERROR Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
 Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
 1
 2
@@ -56,13 +56,10 @@ Sample Message
 2019-10-22 16:11:42,990 ERROR Sample Message
 """
         results = get_filtered_results('Error')
-        if sys.version_info.major < 3:
-            assert ERROR_RESULTS == unicode(results, encoding='utf-8')
-        else:
-            assert ERROR_RESULTS == results
+        assert ERROR_RESULTS == results
 
     def test_warning_results(self):
-        WARNING_RESULTS = u"""2019-10-21 14:10:42,990 WARNING Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
+        WARNING_RESULTS = """2019-10-21 14:10:42,990 WARNING Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
 2019-10-21 14:11:42,990 ERROR Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
 Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
 1
@@ -80,10 +77,7 @@ Sample Message
 2019-10-22 16:11:42,990 ERROR Sample Message
 """
         results = get_filtered_results('Warning')
-        if sys.version_info.major < 3:
-            assert WARNING_RESULTS == unicode(results, encoding='utf-8')
-        else:
-            assert WARNING_RESULTS == results
+        assert WARNING_RESULTS == results
 
     def test_maxlen(self):
         MAXLEN_RESULTS = """2019-10-21 16:11:42,990 ERROR Sample Message
@@ -93,22 +87,15 @@ Sample Message
 2019-10-22 16:11:42,990 ERROR Sample Message
 """
         log_file = get_sample_logfile_path()
-        num, results = get_log_by_filter(log_file, "Debug", 5)
-
-        if sys.version_info.major < 3:
-            assert MAXLEN_RESULTS == unicode(results, encoding='utf-8')
-        else:
-            assert MAXLEN_RESULTS == results
+        results = get_log_by_filter(log_file, "Debug", 5)
+        assert MAXLEN_RESULTS == results
 
     def test_maxlen_none(self):
         log_file = get_sample_logfile_path()
         num, results = get_log_by_filter(log_file, "Debug", 0)
 
         NONE_RESULTS = get_log_file()
-        if sys.version_info.major < 3:
-            assert unicode(''.join(NONE_RESULTS), encoding='utf-8') == unicode(results, encoding='utf-8')
-        else:
-            assert ''.join(NONE_RESULTS) == results
+        assert ''.join(NONE_RESULTS) == results
 
 def get_log_file():
     log_file = get_sample_logfile_path()

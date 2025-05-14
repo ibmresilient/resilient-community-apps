@@ -18,17 +18,22 @@ def snake_to_camel(word):
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
+    display_name='Log Capture',
     name='fn_log_capture',
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     author='IBM Resilient',
     author_email='support@resilientsystems.com',
-    url='https://ibm.biz/resilientcommunity',
-    description="Resilient Circuits Components for 'fn_log_capture'. Capture log data within Resilient from an Integrations server.",
-    long_description="Resilient Circuits Components for 'fn_log_capture'",
+    url="""<ul><a target='blank' href='https://ibm.biz/soarcommunity'>Support</a></ul>""",
+    description="IBM QRadar SOAR Components for 'fn_log_capture'. Capture log data within Resilient from an Integrations server.",
+    long_description="""Perform actions on Github repositories, branches, files, releases, commits and repositories.
+    <br>
+    Links:
+    <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+    <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        'resilient_circuits>=30.0.0',
-        'resilient-lib>=34.0.195'
+        'resilient_circuits>=51.0.0',
+        'resilient-lib>=51.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,

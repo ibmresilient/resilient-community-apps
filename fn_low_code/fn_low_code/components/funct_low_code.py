@@ -58,8 +58,10 @@ class FunctionComponent(AppFunctionComponent):
             headers["Accept"] = low_code_request.get("response_content_type", "application/json")        # Accept (send) JSON as default
             headers["Content-Type"] = low_code_request.get("request_content_type", "application/json")    # Content-type (receive) JSON as default
 
+            rc = RequestsCommon(self.opts, self.options)
+
             # pull out security info
-            new_headers, new_query_params = set_security_data(low_code_request.get("security", {}))
+            new_headers, new_query_params = set_security_data(low_code_request.get("security", {}), rc)
             # merge new settings
             headers = headers | new_headers if new_headers else headers
             query_params = query_params | new_query_params if new_query_params else query_params
@@ -78,7 +80,6 @@ class FunctionComponent(AppFunctionComponent):
             else:
                 rest_properties["data"] = request_body
 
-            rc = RequestsCommon(self.opts, self.options)
             response: Response = rc.execute(method, url, callback=lowcode_callback, **rest_properties)
 
             if response:

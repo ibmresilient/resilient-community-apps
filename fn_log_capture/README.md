@@ -22,7 +22,7 @@ Key Features
 * filter by minimum log level: DEBUG, INFO, WARNING and ERROR
 * Retain log files as an attachment
 
-
+## Table of Contents
 - [Release Notes](#release-notes)
 - [Overview](#overview)
 - [Requirements](#requirements)
@@ -34,12 +34,10 @@ Key Features
 ---
 
 ## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release
-  notes of a previous release
--->
-### v1.0.0
-* Initial Release
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 1.0.1 | 05/2025 | Converted example workflows to python3 |
+| 1.0.0 | 11/2019 | Initial Release |
 
 ---
 
@@ -60,8 +58,8 @@ Resilient Circuits Components for fn_log_capture
 <!--
   List any Requirements
 -->
-* Resilient platform >= `v32.0.4502`
-* An Integration Server running `resilient_circuits>=30.0.0`
+* Resilient platform >= `51.0.0`
+* An Integration Server running `resilient_circuits>=51.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
 ---

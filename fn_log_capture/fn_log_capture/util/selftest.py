@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+
 """Function implementation
    test with: resilient-circuits selftest -l fn_log_capture
 """
@@ -25,7 +25,7 @@ def selftest_function(opts):
     if not log_dir:
         reason = "Log directory not found"
     elif not os.path.isfile(log_file):
-        reason = "Log file incorrect or missing: {}".format(log_file)
+        reason = "Log file incorrect or missing: {log_file}"
 
     return {
             "state": "success" if not reason else "failure",

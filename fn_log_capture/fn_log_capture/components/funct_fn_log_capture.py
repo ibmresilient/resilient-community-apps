@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+
 """Function implementation"""
 
 import logging
@@ -10,7 +10,9 @@ import sys
 from collections import deque
 from datetime import datetime
 from io import BytesIO
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+import requests
+from resilient_circuits import ResilientComponent, function, handler
+from resilient_circuits import StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload
 from resilient_lib.components.integration_errors import IntegrationError
 from resilient_lib import write_file_attachment, validate_fields
@@ -35,7 +37,7 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super().__init__(opts)
         self._init_function(opts)
 
     @handler("reload")
@@ -57,7 +59,7 @@ class FunctionComponent(ResilientComponent):
 
         self.log_file = os.path.join(log_dir, log_file)
         if not os.path.isfile(self.log_file):
-            raise IntegrationError("Log file incorrect: {}".format(self.log_file))
+            raise IntegrationError(f"Log file incorrect: {self.log_file}")
 
     @function("fn_log_capture")
     def _fn_log_capture_function(self, event, *args, **kwargs):
@@ -66,7 +68,7 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters:
             log_capture_maxlen = kwargs.get("log_capture_maxlen", 0)  # number
             log_capture_date = kwargs.get("log_capture_date")  # datetimepicker (epoch)
-            log_capture_date_option = self.get_select_param(kwargs.get("log_capture_date_option"))  # select
+            log_capture_date_option = self.get_select_param(kwargs.get("log_capture_date_option"))
             log_min_level = self.get_select_param(kwargs.get("log_min_level")) # select
             incident_id = kwargs.get("incident_id") # number
             task_id = kwargs.get("task_id") # number
@@ -78,7 +80,8 @@ class FunctionComponent(ResilientComponent):
                 dt = datetime.now()
                 fqdn = platform.node().split('.')
 
-                log_attachment_name = DEFAULT_ATTACHMENT_NAME.format(fqdn[0], dt.strftime("%Y%m%d_%H%M%S"))
+                log_attachment_name = DEFAULT_ATTACHMENT_NAME.format(fqdn[0],
+                                                                    dt.strftime("%Y%m%d_%H%M%S"))
 
             log = logging.getLogger(__name__)
             log.info("log_capture_maxlen: %s", log_capture_maxlen)
@@ -86,7 +89,7 @@ class FunctionComponent(ResilientComponent):
             log.info("log_capture_date_option: %s", log_capture_date_option)
             log.info("incident_id: %s", incident_id)
             log.info("task_id: %s", task_id)
-            log.info(u"log_attachment_name: %s", log_attachment_name)
+            log.info("log_attachment_name: %s", log_attachment_name)
             log.info("log_min_level: %s", log_min_level)
 
             log_capture_maxlen = log_capture_maxlen if log_capture_maxlen else 0
@@ -95,10 +98,13 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage("starting...")
 
             if not log_capture_date and not log_capture_date_option:
-                num_of_lines, captured_lines = get_log_by_filter(self.log_file, log_min_level, log_capture_maxlen)
+                num_of_lines, captured_lines = get_log_by_filter(self.log_file,
+                                                                log_min_level,
+                                                                log_capture_maxlen)
 
             elif log_capture_date and log_capture_date_option:
-                num_of_lines, captured_lines = get_log_by_date(self.log_file, log_capture_date, log_capture_date_option,
+                num_of_lines, captured_lines = get_log_by_date(self.log_file, log_capture_date,
+                                                               log_capture_date_option,
                                                                log_capture_maxlen, log_min_level)
             else:
                 raise ValueError("Specify date with date option")
@@ -115,14 +121,14 @@ class FunctionComponent(ResilientComponent):
                                   incident_id, task_id)
 
             # Produce a FunctionResult with the results
-            yield StatusMessage(u"attachment created '{}' with {} lines".format(log_attachment_name, num_of_lines))
+            yield StatusMessage(f"Created '{log_attachment_name}' with {num_of_lines} lines")
             yield StatusMessage("done...")
 
             result_data = {"attachment_name": log_attachment_name, "num_of_lines": num_of_lines}
             results = result_payload.done(True, result_data)
 
             yield FunctionResult(results)
-        except Exception:
+        except requests.exceptions.RequestException:
             yield FunctionError()
 
 def get_log_file_data(log_file):
@@ -131,12 +137,13 @@ def get_log_file_data(log_file):
     :param log_file:
     :return: all lines for the log file
     """
-    with open(log_file, "r") as f:
+    with open(log_file, "r", encoding="utf-8") as f:
         return f.readlines()
 
 def filter_log_level(filter_log_lvl, line, multi_line=False):
     """
-    filter data by log level. If a multi-line log statement, it will be returned based on multi_ine argument
+    filter data by log level. If a multi-line log statement, 
+    it will be returned based on multi_ine argument
     :param filter_log_lvl: Debug, Info, Warning, Error
     :param line: log line
     :param multi_line: True = return line of data detail part of a previous log level
@@ -192,7 +199,7 @@ def get_log_by_date(log_file, log_capture_date, log_capture_date_option, log_cap
     compare_date = datetime.fromtimestamp(time.mktime(time_struct))
     if log_capture_date_option == 'on':
         compare_date = compare_date.replace(hour=0, minute=0, second=0, microsecond=0)
-    log.debug("Looking for date: {}".format(time.strftime(DATE_TIME_FORMAT, time_struct)))
+    log.debug("Looking for date: %f",time.strftime(DATE_TIME_FORMAT, time_struct))
 
     captured_list = []
     result_line = None
@@ -206,7 +213,8 @@ def get_log_by_date(log_file, log_capture_date, log_capture_date_option, log_cap
             if log_capture_date_option == 'on':
                 log_file_date = datetime.strptime(line.split(' ', 1)[0], DATE_FORMAT)
             else:
-                log_file_date = datetime.strptime(' '.join(line.split(' ', 2)[:2]), DATE_TIME_MS_FORMAT)
+                log_file_date = datetime.strptime(' '.join(line.split(' ', 2)[:2]),
+                                                   DATE_TIME_MS_FORMAT)
 
         except (ValueError, TypeError):
             log_file_date = None

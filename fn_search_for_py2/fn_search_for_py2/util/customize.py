@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 # Generated with resilient-sdk v51.0.5.0.1475
 
-"""Generate the SOAR customizations required for fn_log_capture"""
+"""Generate the SOAR customizations required for fn_search_for_py2"""
 
 import base64
 import os
@@ -18,29 +18,32 @@ RES_FILE = "data/export.res"
 
 def codegen_reload_data():
     """
-    Parameters required reload codegen for the fn_log_capture package
+    Parameters required reload codegen for the fn_search_for_py2 package
     """
     return {
-        "package": u"fn_log_capture",
+        "package": u"fn_search_for_py2",
         "message_destinations": [
-            u"fn_log_capture"
+            u"fn_search_for_py2"
         ],
         "functions": [
-            u"fn_log_capture"
+            u"convert_to_python_3",
+            u"fn_search_for_py2"
         ],
-        "workflows": [
-            u"log_capture"
-        ],
-        "actions": [
-            u"Log Capture"
-        ],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [],
+        "datatables": [
+            u"search_for_py2_results"
+        ],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [],
+        "playbooks": [
+            u"convert_to_python_3",
+            u"search_for_py2",
+            u"search_for_python_2_datatable"
+        ]
     }
 
 
@@ -53,13 +56,16 @@ def customization_data(client=None):
 
     Contents:
     - Message Destinations:
-        - fn_log_capture
+        - fn_search_for_py2
     - Functions:
-        - fn_log_capture
-    - Workflows:
-        - log_capture
-    - Rules:
-        - Log Capture
+        - convert_to_python_3
+        - fn_search_for_py2
+    - Playbooks:
+        - convert_to_python_3
+        - search_for_py2
+        - search_for_python_2_datatable
+    - Data Tables:
+        - search_for_py2_results
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
