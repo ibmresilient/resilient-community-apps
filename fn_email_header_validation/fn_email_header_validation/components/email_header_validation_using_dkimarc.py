@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-
 # (c) Copyright IBM Corp. 2010, 2018. All Rights Reserved.
 
 """Function implementation"""
 
 import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+import requests
+from resilient_circuits import ResilientComponent, function
+from resilient_circuits import StatusMessage, FunctionResult, FunctionError
 import dkim
 
 
@@ -67,19 +67,21 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
+        except requests.exceptions.RequestException:
             yield FunctionError()
 
 def get_content(client, incident_id, attachment_id, artifact_id):
+    """Retrieve content from a specified incident based on attachment or artifact ID."""
+
     entity = {"incident_id": incident_id, "id": None, "type": "", "meta_data": None, "data": None}
 
     if attachment_id:
         return client.get_content(
-            "/incidents/{0}/attachments/{1}/contents".format(entity["incident_id"], attachment_id))
+            f"/incidents/{entity.get('incident_id')}/attachments/{attachment_id}/contents")
 
     elif artifact_id:
         entity["meta_data"] = client.get(
-            "/incidents/{0}/artifacts/{1}".format(entity["incident_id"], artifact_id))
+            f"/incidents/{entity.get('incident_id')}/artifacts/{artifact_id}")
 
         # handle if artifact has attachment
         if (entity["meta_data"].get("attachment")):
@@ -92,7 +94,8 @@ def get_content(client, incident_id, attachment_id, artifact_id):
         raise ValueError('attachment_id AND artifact_id both None')
 
 def to_bytes(content):
+    """ string to bytes """
     try:
-        return content.encode("utf-8")
-    except:
+        return bytes(content, 'utf-8')
+    except Exception:
         return content

@@ -18,15 +18,21 @@ def snake_to_camel(word):
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
+    display_name='Email Header Validation', 
     name='fn_email_header_validation',
-    version='1.0.1',
+    version='1.0.2',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
-    description="Resilient Circuits Components for 'fn_email_header_validation'",
-    long_description="Resilient Circuits Components for 'fn_email_header_validation'",
+    url="""<ul><a target='blank' href='https://ibm.biz/soarcommunity'>Support</a></ul>""",
+    description="IBM QRadar SOAR Components for 'fn_email_header_validation'",
+    long_description="""Perform actions on Github repositories, branches, files, releases, commits and repositories.
+    <br>
+    Links:
+    <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+    <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        'resilient_circuits>=30.0.0',
+        'resilient_circuits>=51.0.0',
         'dkimpy~=1.0.5'
     ],
     packages=find_packages(),
