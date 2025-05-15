@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-"""Generate the Resilient customizations required for fn_isitphishing"""
+# Generated with resilient-sdk v51.0.5.0.1475
+
+"""Generate the SOAR customizations required for fn_isitphishing"""
 
 import base64
 import os
@@ -20,15 +22,30 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_isitphishing",
-        "message_destinations": [u"fn_isitphishing"],
-        "functions": [u"isitphishing_html_document", u"isitphishing_url"],
-        "workflows": [u"example_isitphishing_analyze_html_document", u"example_isitphishing_analyze_html_document_artifact", u"example_isitphishing_analyze_url"],
-        "actions": [u"Example: IsItPhishing Analyze HTML Document: Attachment", u"Example: IsItPhishing Analyze HTML Document: Artifact", u"Example: IsItPhishing Analyze URL"],
+        "message_destinations": [
+            u"fn_isitphishing"
+        ],
+        "functions": [
+            u"isitphishing_html_document",
+            u"isitphishing_url"
+        ],
+        "workflows": [
+            u"example_isitphishing_analyze_html_document",
+            u"example_isitphishing_analyze_html_document_artifact",
+            u"example_isitphishing_analyze_url"
+        ],
+        "actions": [
+            u"Example: IsItPhishing Analyze HTML Document: Artifact",
+            u"Example: IsItPhishing Analyze HTML Document: Attachment",
+            u"Example: IsItPhishing Analyze URL"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
+        "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": [],
     }
 
 
@@ -37,7 +54,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 36.0.5634
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:
@@ -50,8 +67,8 @@ def customization_data(client=None):
         - example_isitphishing_analyze_html_document_artifact
         - example_isitphishing_analyze_url
     - Rules:
-        - Example: IsItPhishing Analyze HTML Document: Attachment
         - Example: IsItPhishing Analyze HTML Document: Artifact
+        - Example: IsItPhishing Analyze HTML Document: Attachment
         - Example: IsItPhishing Analyze URL
     """
 

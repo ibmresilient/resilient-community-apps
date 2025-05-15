@@ -4,16 +4,21 @@
 from setuptools import setup, find_packages
 
 setup(
+    display_name='IsIt Phishing',
     name='fn_isitphishing',
-    version='1.1.0',
+    version='1.2.0',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
-    url='https://github.com/ibmresilient/resilient-community-apps',
-    description="Resilient Circuits Function that queries isitPhishing.org API to analyze a URL or an HTML document",
-    long_description="Resilient Circuits Function that queries isitPhishing.org API to analyze a URL or an HTML document",
+    url="""<ul><a target='blank' href='https://ibm.biz/soarcommunity'>Support</a></ul>""",
+    description="IBM QRadar SOAR Function that queries isitPhishing.org API to analyze a URL or an HTML document",
+    long_description="""Perform actions on Github repositories, branches, files, releases, commits and repositories.
+    <br>
+    Links:
+    <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+    <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        'resilient_circuits>=31.0.0',
+        'resilient_circuits>=51.0.0',
         'resilient-lib'
     ],
     packages=find_packages(),

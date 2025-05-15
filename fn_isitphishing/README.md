@@ -5,11 +5,6 @@
   It is best edited using a Text Editor with a Markdown Previewer. VS Code
   is a good example. Checkout https://guides.github.com/features/mastering-markdown/
   for tips on writing with Markdown
-
-  If you make manual edits and run docgen again, a .bak file will be created
-
-  Store any screenshots in the "doc/screenshots" directory and reference them like:
-  ![screenshot: screenshot_1](./screenshots/screenshot_1.png)
 -->
 
 # IsItPhishing
@@ -29,21 +24,12 @@
 ---
 
 ## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release
-  notes of a previous release
--->
-### v1.1.0
-
-* App Host support.
-* Package name changed from fn_isitPhishing to fn_isitphishing.
-
-NOTE Prior Installs: Edit your app.config file to change ```[fn_isitPhishing]``` to
-```[fn_isitphishing]```
-
-### v1.0.0
-* Initial Release
-
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 1.2.0 | 05/2025 | API call had been modernized, now using tokens which are generated using client_id and client_secret (Steps in Config File),
+                    Customers moving from 1.1.0 can navigate to the HORNET SECURITY Vade account login page and there generate client_id and client_secret |
+| 1.1.0 | 12/2020 | Support for App Host |
+| 1.0.0 | 02/2019 | Initial Release |
 ---
 
 ## Overview
@@ -72,13 +58,13 @@ This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Secu
 The Resilient platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `37.1`.
+* Resilient platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `31.0.4035`.
+* Resilient platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=31.0.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -123,9 +109,10 @@ The following table describes the settings you need to configure in the app.conf
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **isitphishing_api_url** | Yes | `https://ws.isitphishing.org/api/v2` | *IsItPhishing endpoint* |
-| **isitphishing_name** | Yes | `name` | *username from Vade Secure* |
-| **isitphishing_license** | Yes | `license from Vade Secure` | *license from Vade Secure* |
+| **isitphishing_api_url** | Yes | `https://iip.eu.vadesecure.com/api/v2` | *Changed for v1.2. Either https://iip.eu.vadesecure.com/api/v2 or https://iip.us.vadesecure.com/api/v2 based on your region* |
+| **authentication_url** | Yes | `https://api.vadesecure.com/oauth2/v2/token` | *New for v1.2. URL required for session authentication* |
+| **isitphishing_id** | Yes | `name` | *New for v1.2. client-id from Vade Secure* |
+| **isitphishing_secret** | Yes | `license from Vade Secure` | *New for v1.2 client-secret from Vade Secure* |
 
 ---
 
@@ -152,17 +139,28 @@ Analyze an HTML document using the Vade Secure IsItPhishing Webservice API.
 <p>
 
 ```python
-results = {'version': '1.0',
-           'success': True,
-           'reason': None,
-           'content': {'result': 'unknown'},
-           'raw': '{"result": "unknown"}',
-           'inputs': {'incident_id': 2147,
-                      'attachment_id': 259,
-                      'filename': 'sample.html'},
-           'metrics': {'version': '1.0', 'package': 'fn-isitphishing',
-                       'package_version': '1.1.0', 'host': 'MacBook-Pro.local',
-                       'execution_time_ms': 2800, 'timestamp': '2020-11-04 16:29:44'}}
+results = {
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "result": "unknown"
+  },
+  "raw": "",
+  "inputs": {
+    "incident_id": 3102,
+    "attachment_id": 34,
+    "filename": "Test URL.txt"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-isitphishing",
+    "package_version": "1.2.0",
+    "host": "my.app.host",
+    "execution_time_ms": 3397,
+    "timestamp": "2025-05-15 11:03:49"
+  }
+}
 ```
 
 </p>
@@ -185,9 +183,9 @@ inputs.artifact_id = artifact.id
 
 ```python
 if results.success:
-  content = u"IsItPhishing analysis of artifact document {0} : {1}".format(results["inputs"]["filename"],results['content']['result'])
+  content = "IsItPhishing analysis of artifact document {0} : {1}".format(results.get('inputs', {}).get('filename'),results.get('content', {}).get('result'))
 else:
-  content = u"IsItPhishing analysis of artifact document {0} : ERROR".format(results["inputs"]["filename"])
+  content = "IsItPhishing analysis of artifact document {0} : ERROR".format(results.get('inputs', {}).get('filename'))
 
 # Create a note
 note = helper.createPlainText(content)
@@ -222,19 +220,25 @@ Analyze a URL using the Vade Secure IsItPhishing Webservice API.
 <p>
 
 ```python
-results = {'version': '1.0',
-           'success': True,
-           'reason': None,
-           'content': {'status': 'PHISHING'},
-           'raw': '{"status": "PHISHING"}',
-           'inputs': {'isitphishing_url': 'https://www.bill-netflix.com/index.php'},
-           'metrics': {'version': '1.0',
-                       'package': 'fn-isitphishing',
-                       'package_version': '1.1.0',
-                       'host': 'MacBook-Pro.local',
-                       'execution_time_ms': 5394,
-                       'timestamp': '2020-11-12 17:33:23'}}
-
+results = {
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "status": "TIMEOUT"
+  },
+  "raw": "",
+  "inputs": {
+    "isitphishing_url": "https://www.example.com/page.html"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-isitphishing",
+    "package_version": "1.2.0",
+    "host": "my.app.host",
+    "execution_time_ms": 2812,
+    "timestamp": "2025-05-15 10:48:04"
+  }
 }
 ```
 
@@ -258,9 +262,9 @@ inputs.isitphishing_url = artifact.value
 ```python
 # Get the results and post to an incident note.
 if results.success:
-  content = u'IsItPhishing analysis of URL {0} : {1}\n'.format(results['inputs']['isitphishing_url'], results['content']['status'])
+  content = 'IsItPhishing analysis of URL {0} : {1}\n'.format(results.get('inputs', {}).get('isitphishing_url'), results.get('content', {}).get('status'))
 else:
-  content = u'IsItPhishing analysis of URL {0} : ERROR\n'.format(results['inputs']['isitphishing_url'])
+  content = 'IsItPhishing analysis of URL {0} : ERROR\n'.format(results.get('inputs', {}).get('isitphishing_url'))
 note = helper.createPlainText(content)
 incident.addNote(note)
 ```

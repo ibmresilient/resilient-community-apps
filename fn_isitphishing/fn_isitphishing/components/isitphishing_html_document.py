@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2020. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+
 """Function implementation"""
 
 import base64
 import logging
+import requests
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import get_file_attachment, get_file_attachment_name, validate_fields, RequestsCommon, ResultPayload
-from fn_isitphishing.lib.isitphishing_util import get_license_key
+from fn_isitphishing.lib.isitphishing_helper import IsItPhishingHelper
 
 PACKAGE_NAME = 'fn_isitphishing'
 
@@ -16,7 +17,7 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super().__init__(opts)
 
         # Get app.config parameters.
         self.options = opts.get(PACKAGE_NAME, {})
@@ -24,7 +25,8 @@ class FunctionComponent(ResilientComponent):
 
     def _init_isitphishing(self):
         """ validate required fields for app.config """
-        validate_fields(('isitphishing_api_url', 'isitphishing_name', 'isitphishing_license'), self.options)
+        validate_fields(('isitphishing_api_url', 'isitphishing_id', 'isitphishing_secret'),
+                        self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -36,12 +38,11 @@ class FunctionComponent(ResilientComponent):
     @function("isitphishing_html_document")
     def _isitphishing_html_document_function(self, event, *args, **kwargs):
         """Function: isitphishing_html_document
+
         This function takes an incident id as a required parameter and
         task_id, attachment_id, and artifact_id as optional input which
         specifies an HTML document to be base64 encoded and sent to the
-        Vade Secure API endpoint:
-        https://ws.isitphishing.org/api/v2/document
-        for analysis to detemine if the document contains phishing.
+
         The "results" dictionary contains the result of the API query in
         "contents" and the "inputs" parameters to the function.
         """
@@ -60,15 +61,29 @@ class FunctionComponent(ResilientComponent):
             log.info("attachment_id: %s", attachment_id)
             log.info("artifact_id: %s", artifact_id)
 
+            client_id = self.options.get("isitphishing_id")
+            client_secret = self.options.get("isitphishing_secret")
+            api_endpoint_url = self.options.get("isitphishing_api_url")
+            auth_url = self.options.get("authentication_url")
+
             # Form the URL for API request.
-            API_URL = u"{0}/document".format(self.options["isitphishing_api_url"])
+            api_url = f"{api_endpoint_url}/document"
+
+            # Create IsItPhishingHelper class object
+            isitphishing_helper = IsItPhishingHelper(api_url, auth_url, client_id, client_secret)
+
+            # Get a session token
+            session_token = isitphishing_helper.authenticate(client_id, client_secret)
+
+            if isitphishing_helper and session_token:
+                log.info("Successfully authenticated with IsItPhishing.org")
 
             # Get the license key to access the API endpoint.
-            auth_token = get_license_key(self.options["isitphishing_name"], self.options["isitphishing_license"])
+            auth_token = session_token
 
             # Build the header and the data payload.
             headers = {
-                "Authorization": u'Bearer {}'.format(auth_token),
+                "Authorization": f"Bearer {auth_token}",
                 "Content-type": "application/json",
                 "Accept": "application/json"
             }
@@ -88,7 +103,7 @@ class FunctionComponent(ResilientComponent):
 
             # Make API URL request
             rc = RequestsCommon(self.opts, self.options)
-            response = rc.execute_call_v2("post", API_URL, json=payload, headers=headers, proxies=rc.get_proxies())
+            response = rc.execute_call_v2("post", api_url, json=payload, headers=headers, proxies=rc.get_proxies())
             if response.status_code == 200:
                 success = True
             else:
@@ -102,6 +117,5 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception as err:
-            yield FunctionError()
-
+        except requests.exceptions.RequestException as err:
+            yield FunctionError(err)
