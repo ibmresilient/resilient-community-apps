@@ -398,23 +398,66 @@
         <article role="main" id="furo-main-content">
           <section id="email-header-validation">
 <h1>Email Header Validation<a class="headerlink" href="#email-header-validation" title="Link to this heading">¶</a></h1>
-<p>This IBM Resilient Function package can be used to analyze DKIM and ARC headers on a RFC822 formatted email.
-This email can be provide via a <strong>Resilient Attachment</strong>, <strong>Resilient Artifact</strong>, or string.
-Once the analysis is complete, the user is informed if the headers authenticate or not through a <strong>Resilient Note</strong>.</p>
+<p>This IBM QRadar SOAR Function package can be used to analyze DKIM and ARC headers on a RFC822 formatted email.
+This email can be provide via a <strong>SOAR Attachment</strong>, <strong>SOAR Artifact</strong>, or string.
+Once the analysis is complete, the user is informed if the headers authenticate or not through a <strong>SOAR Note</strong>.</p>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#installation"><span class="xref myst">Installation</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#to-install-in-development-mode"><span class="xref myst">Install</span></a></p></li>
+<li><p><a class="reference internal" href="#to-uninstall"><span class="xref myst">Uninstall</span></a></p></li>
+<li><p><a class="reference internal" href="#to-package-for-distribution"><span class="xref myst">Distribution</span></a></p></li>
+<li><p><a class="reference internal" href="#how-to-use-the-function"><span class="xref myst">Functions</span></a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="release-notes">
+<h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Version</p></th>
+<th class="head"><p>Date</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1.0.2</p></td>
+<td><p>05/2025</p></td>
+<td><p>Converted example workflows to python3</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.1</p></td>
+<td><p>04/2020</p></td>
+<td><p>AppHost Support Added</p></td>
+</tr>
+<tr class="row-even"><td><p>1.0.0</p></td>
+<td><p>02/2019</p></td>
+<td><p>Initial Release</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <section id="to-install-in-development-mode">
-<h2>To install in <em>development mode</em>:<a class="headerlink" href="#to-install-in-development-mode" title="Link to this heading">¶</a></h2>
+<h3>To install in <em>development mode</em>:<a class="headerlink" href="#to-install-in-development-mode" title="Link to this heading">¶</a></h3>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip install -e ./fn_email_header_validation/
 </pre></div>
 </div>
 </section>
 <section id="to-uninstall">
-<h2>To uninstall:<a class="headerlink" href="#to-uninstall" title="Link to this heading">¶</a></h2>
+<h3>To uninstall:<a class="headerlink" href="#to-uninstall" title="Link to this heading">¶</a></h3>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>pip uninstall fn_email_header_validation
 </pre></div>
 </div>
 </section>
 <section id="to-package-for-distribution">
-<h2>To package for distribution:<a class="headerlink" href="#to-package-for-distribution" title="Link to this heading">¶</a></h2>
+<h3>To package for distribution:<a class="headerlink" href="#to-package-for-distribution" title="Link to this heading">¶</a></h3>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python ./fn_email_header_validation/setup.py sdist
 </pre></div>
 </div>
@@ -424,9 +467,9 @@ Once the analysis is complete, the user is informed if the headers authenticate 
 </div>
 </section>
 <section id="how-to-use-the-function">
-<h2>How to use the function<a class="headerlink" href="#how-to-use-the-function" title="Link to this heading">¶</a></h2>
+<h3>How to use the function<a class="headerlink" href="#how-to-use-the-function" title="Link to this heading">¶</a></h3>
 <ol class="arabic">
-<li><p>Import the necessary customization data into the Resilient platform:</p>
+<li><p>Import the necessary customization data into the SOAR platform:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span> resilient-circuits customize
 </pre></div>
 </div>
@@ -458,6 +501,7 @@ Once the analysis is complete, the user is informed if the headers authenticate 
 </li>
 <li><p>Trigger the rule.</p></li>
 </ol>
+</section>
 </section>
 </section>
 
@@ -517,10 +561,15 @@ Once the analysis is complete, the user is informed if the headers authenticate 
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Email Header Validation</a><ul>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
 <li><a class="reference internal" href="#to-install-in-development-mode">To install in <em>development mode</em>:</a></li>
 <li><a class="reference internal" href="#to-uninstall">To uninstall:</a></li>
 <li><a class="reference internal" href="#to-package-for-distribution">To package for distribution:</a></li>
 <li><a class="reference internal" href="#how-to-use-the-function">How to use the function</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
