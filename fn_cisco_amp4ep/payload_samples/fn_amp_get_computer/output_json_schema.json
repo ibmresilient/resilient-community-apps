@@ -1,0 +1,224 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "response": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "links": {
+              "type": "object",
+              "properties": {
+                "self": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "connector_guid": {
+              "type": "string"
+            },
+            "hostname": {
+              "type": "string"
+            },
+            "windows_processor_id": {
+              "type": "string"
+            },
+            "active": {
+              "type": "boolean"
+            },
+            "links": {
+              "type": "object",
+              "properties": {
+                "computer": {
+                  "type": "string"
+                },
+                "trajectory": {
+                  "type": "string"
+                },
+                "group": {
+                  "type": "string"
+                }
+              }
+            },
+            "operating_system": {
+              "type": "string"
+            },
+            "os_version": {
+              "type": "string"
+            },
+            "internal_ips": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "external_ip": {
+              "type": "string"
+            },
+            "flag": {
+              "type": "boolean"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "install_date": {
+              "type": "string"
+            },
+            "is_compromised": {
+              "type": "boolean"
+            },
+            "demo": {
+              "type": "boolean"
+            },
+            "os_type": {
+              "type": "string"
+            },
+            "supports": {
+              "type": "object",
+              "properties": {
+                "device_trajectory": {
+                  "type": "boolean"
+                },
+                "events": {
+                  "type": "boolean"
+                },
+                "move_to_group": {
+                  "type": "boolean"
+                },
+                "request_snapshot": {
+                  "type": "boolean"
+                },
+                "scan": {
+                  "type": "boolean"
+                },
+                "orbital": {
+                  "type": "object",
+                  "properties": {
+                    "is_supported": {
+                      "type": "boolean"
+                    },
+                    "agent_active": {
+                      "type": "boolean"
+                    },
+                    "agent_nil_state": {
+                      "type": "boolean"
+                    },
+                    "agent_supported": {
+                      "type": "boolean"
+                    },
+                    "min_supported_agent_version": {
+                      "type": "string"
+                    },
+                    "min_supported_os_version": {
+                      "type": "string"
+                    },
+                    "os_supported": {
+                      "type": "boolean"
+                    },
+                    "policy_supported": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "network_addresses": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "mac": {
+                    "type": "string"
+                  },
+                  "ip": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "connector_version": {
+              "type": "string"
+            },
+            "group_guid": {
+              "type": "string"
+            },
+            "policy": {
+              "type": "object",
+              "properties": {
+                "guid": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "groups": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "guid": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "last_seen": {
+              "type": "string"
+            },
+            "faults": {
+              "type": "array"
+            },
+            "isolation": {
+              "type": "object",
+              "properties": {
+                "available": {
+                  "type": "boolean"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            },
+            "orbital": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                }
+              }
+            },
+            "risk_score": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    },
+    "query_execution_time": {
+      "type": "string"
+    },
+    "input_params": {
+      "type": "object",
+      "properties": {
+        "conn_guid": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
