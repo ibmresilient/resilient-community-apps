@@ -1,0 +1,61 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "63": {
+      "summary": "successful",
+      "detail": "\u001b[1;35mthe implicit localhost does not match 'all'\u001b[0m"
+    },
+    "127.0.0.1": {
+      "summary": "successful",
+      "detail": {
+        "changed": true,
+        "stdout": "Hello",
+        "stderr": "",
+        "rc": 0,
+        "cmd": [
+          "echo",
+          "Hello"
+        ],
+        "start": "2024-03-19 14:31:34.876667",
+        "end": "2024-03-19 14:31:34.888730",
+        "delta": "0:00:00.012063",
+        "msg": "",
+        "invocation": {
+          "module_args": {
+            "_raw_params": "echo Hello",
+            "_uses_shell": false,
+            "expand_argument_vars": true,
+            "stdin_add_newline": true,
+            "strip_empty_ends": true,
+            "argv": null,
+            "chdir": null,
+            "executable": null,
+            "creates": null,
+            "removes": null,
+            "stdin": null
+          }
+        },
+        "stdout_lines": [
+          "Hello"
+        ],
+        "stderr_lines": [],
+        "_ansible_no_log": false
+      }
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "ansible_parameters": "command=echo Hello",
+    "ansible_playbook_name": "playbook2"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ansible",
+    "package_version": "1.3.0",
+    "host": "local",
+    "execution_time_ms": 11915,
+    "timestamp": "2024-03-19 14:31:35"
+  }
+}
