@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v48.0.4034
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.5.0.1475
 
-"""Generate the Resilient customizations required for fn_exchange"""
+"""Generate the SOAR customizations required for fn_exchange"""
 
 import base64
 import os
@@ -21,40 +22,39 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_exchange",
-
         "message_destinations": [
-            u"fn_exchange"],
-
+            u"fn_exchange"
+        ],
         "functions": [
             u"exchange_create_meeting",
             u"exchange_delete_emails",
             u"exchange_find_emails",
             u"exchange_get_mailbox_info",
             u"exchange_move_emails",
-            u"exchange_send_email"],
-
-        "playbooks": [
-            u"playbook_exchange_move_and_delete_folder_contents",
-            u"example_playbook_for_exchange_create_meetings",
-            u"playbooks_exchange_delete_email",
-            u"playbooks_exchange_find_email",
-            U"playbook_exchange_get_mailbox_info",
-            u"playbooks_exchange_move_email",
-            u"playbooks_exchange_send_email"],
-
-        "datatables": [
-            u"exchange_email_information_dt",
-            u"exchange_dt_meeting_information"],
-
-        "scripts": [
-            u"Push Emails to DataTables"],
-
+            u"exchange_send_email"
+        ],
         "workflows": [],
         "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
-        "automatic_tasks": []
+        "datatables": [
+            u"exchange_dt_meeting_information",
+            u"exchange_email_information_dt"
+        ],
+        "automatic_tasks": [],
+        "scripts": [
+            u"Push Emails to DataTables"
+        ],
+        "playbooks": [
+            u"example_playbook_for_exchange_create_meetings",
+            u"playbook_exchange_get_mailbox_info",
+            u"playbook_exchange_move_and_delete_folder_contents",
+            u"playbooks_exchange_delete_email",
+            u"playbooks_exchange_find_email",
+            u"playbooks_exchange_move_email",
+            u"playbooks_exchange_send_email"
+        ]
     }
 
 
@@ -63,7 +63,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 47.0.8304
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:

@@ -19,7 +19,7 @@ def snake_to_camel(word):
 setup(
     name='fn_exchange',
     display_name='Microsoft Exchange',
-    version='2.0.0',
+    version='2.0.1',
     license='MIT',
     author='IBM SOAR',
     url='https://ibm.com/mysupport',
@@ -32,9 +32,13 @@ Exchange email and meeting capabilities. The package provided has the following 
 - Get mailbox info for a sender<br>
 - Move the contents of one folder to another folder and deletes the original<br>
 - Move queried emails from one folder to another folder<br>
-- Send email to a list of recipients""",
+- Send email to a list of recipients<br>
+- Links:
+        <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>
+        <ul><a target='blank' href='https://ibmresilient.github.io/resilient-community-apps/fn_exchange/README.html'>App Documentation</a></ul>""",
     install_requires=[
-        "resilient_circuits>=45.0.0",
+        "resilient_circuits>=51.0.0",
         "backports-datetime-fromisoformat == 2.0.0;python_version=='3.6'",
         "exchangelib ~= 4.6.2;python_version=='3.6'",
         "exchangelib ~= 4.9.0;python_version>='3.9'"

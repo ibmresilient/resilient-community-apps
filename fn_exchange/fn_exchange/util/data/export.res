@@ -3,7 +3,8 @@
   "actions": [],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1682341471952,
+  "case_matching_profiles": [],
+  "export_date": 1747302240448,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -17,7 +18,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_meeting_end_time",
       "hide_notification": false,
-      "id": 725,
+      "id": 789,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -47,7 +48,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_delete_source_folder",
       "hide_notification": false,
-      "id": 726,
+      "id": 790,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -77,7 +78,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_get_email",
       "hide_notification": false,
-      "id": 727,
+      "id": 791,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -107,7 +108,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_search_subfolders",
       "hide_notification": false,
-      "id": 728,
+      "id": 792,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -136,7 +137,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_meeting_body",
       "hide_notification": false,
-      "id": 729,
+      "id": 793,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -165,7 +166,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_email",
       "hide_notification": false,
-      "id": 730,
+      "id": 794,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -195,7 +196,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_has_attachments",
       "hide_notification": false,
-      "id": 731,
+      "id": 795,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -224,7 +225,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_is_online_meeting",
       "hide_notification": false,
-      "id": 732,
+      "id": 796,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -253,7 +254,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_start_date",
       "hide_notification": false,
-      "id": 733,
+      "id": 797,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -282,7 +283,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_end_date",
       "hide_notification": false,
-      "id": 734,
+      "id": 798,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -311,7 +312,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_folder_path",
       "hide_notification": false,
-      "id": 735,
+      "id": 799,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -340,7 +341,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_order_by_recency",
       "hide_notification": false,
-      "id": 736,
+      "id": 800,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -369,7 +370,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_num_emails",
       "hide_notification": false,
-      "id": 737,
+      "id": 801,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -398,7 +399,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_meeting_subject",
       "hide_notification": false,
-      "id": 738,
+      "id": 802,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -427,7 +428,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_sender",
       "hide_notification": false,
-      "id": 739,
+      "id": 803,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -456,7 +457,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_hard_delete",
       "hide_notification": false,
-      "id": 740,
+      "id": 804,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -486,7 +487,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_email_recipients",
       "hide_notification": false,
-      "id": 741,
+      "id": 805,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -516,7 +517,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_email_ids",
       "hide_notification": false,
-      "id": 742,
+      "id": 806,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -545,7 +546,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_optional_attendees",
       "hide_notification": false,
-      "id": 743,
+      "id": 807,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -574,7 +575,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_meeting_location",
       "hide_notification": false,
-      "id": 744,
+      "id": 808,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -603,7 +604,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_message_subject",
       "hide_notification": false,
-      "id": 745,
+      "id": 809,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -632,7 +633,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_meeting_start_time",
       "hide_notification": false,
-      "id": 746,
+      "id": 810,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -662,7 +663,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_email_operation",
       "hide_notification": false,
-      "id": 747,
+      "id": 811,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -691,7 +692,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_message_body",
       "hide_notification": false,
-      "id": 748,
+      "id": 812,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -720,7 +721,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_required_attendees",
       "hide_notification": false,
-      "id": 749,
+      "id": 813,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -749,7 +750,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_destination_folder_path",
       "hide_notification": false,
-      "id": 750,
+      "id": 814,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -779,7 +780,7 @@
       "deprecated": false,
       "export_key": "__function/exchange_force_delete_subfolders",
       "hide_notification": false,
-      "id": 751,
+      "id": 815,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -813,7 +814,7 @@
   ],
   "functions": [
     {
-      "created_date": 1682341094716,
+      "created_date": 1747300245784,
       "description": {
         "content": "Creates a meeting and sends out invitation to required attendees and optional attendees.",
         "format": "text"
@@ -821,20 +822,24 @@
       "destination_handle": "fn_exchange",
       "display_name": "Exchange Create Meeting",
       "export_key": "exchange_create_meeting",
-      "id": 14,
+      "id": 20,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682341094752,
+      "last_modified_time": 1747300245784,
       "name": "exchange_create_meeting",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"required_attendees\": [\"scurtin@exchange2016.com\"], \"optional_attendees\": [\"johndoe.s.1@exchange2016.com\"], \"sender\": \"johndoe.n@exchange2016.com\", \"subject\": \"Security Weekly Meeting\", \"body\": \"Please be present\", \"start_time\": \"2023-03-24 12:00:37\", \"end_time\": \"2023-03-24 13:00:37\", \"timezone\": \"Etc/GMT\", \"location\": \"https://example.com\", \"online_meeting\": true}, \"raw\": \"{\\\"required_attendees\\\": [\\\"scurtin@exchange2016.com\\\"], \\\"optional_attendees\\\": [\\\"johndoe.s.1@exchange2016.com\\\"], \\\"sender\\\": \\\"johndoe.n@exchange2016.com\\\", \\\"subject\\\": \\\"Security Weekly Meeting\\\", \\\"body\\\": \\\"Please be present\\\", \\\"start_time\\\": \\\"2023-03-24 12:00:37\\\", \\\"end_time\\\": \\\"2023-03-24 13:00:37\\\", \\\"timezone\\\": \\\"Etc/GMT\\\", \\\"location\\\": \\\"https://example.com\\\", \\\"online_meeting\\\": true}\", \"inputs\": {\"inputs\": {\"exchange_optional_attendees\": \"johndoe.s.1@exchange2016.com\", \"exchange_is_online_meeting\": true, \"exchange_meeting_start_time\": 1679659237000, \"exchange_required_attendees\": \"scurtin@exchange2016.com\", \"exchange_meeting_subject\": \"Security Weekly Meeting\", \"exchange_meeting_end_time\": 1679662837000, \"exchange_meeting_location\": \"https://example.com\", \"exchange_meeting_body\": \"Please be present\", \"exchange_email\": \"johndoe.n@exchange2016.com\"}}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-exchange\", \"package_version\": \"1.1.0\", \"host\": \"exchange2016\", \"execution_time_ms\": 3233, \"timestamp\": \"2023-03-01 14:28:03\"}, \"required_attendees\": [\"scurtin@exchange2016.com\"], \"optional_attendees\": [\"johndoe.s.1@exchange2016.com\"], \"sender\": \"johndoe.n@exchange2016.com\", \"subject\": \"Security Weekly Meeting\", \"body\": \"Please be present\", \"start_time\": \"2023-03-24 12:00:37\", \"end_time\": \"2023-03-24 13:00:37\", \"timezone\": \"Etc/GMT\", \"location\": \"https://example.com\", \"online_meeting\": true}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"required_attendees\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"optional_attendees\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"sender\": {\"type\": \"string\"}, \"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}, \"start_time\": {\"type\": \"string\"}, \"end_time\": {\"type\": \"string\"}, \"timezone\": {\"type\": \"string\"}, \"location\": {\"type\": \"string\"}, \"online_meeting\": {\"type\": \"boolean\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"inputs\": {\"type\": \"object\", \"properties\": {\"exchange_optional_attendees\": {\"type\": \"string\"}, \"exchange_is_online_meeting\": {\"type\": \"boolean\"}, \"exchange_meeting_start_time\": {\"type\": \"integer\"}, \"exchange_required_attendees\": {\"type\": \"string\"}, \"exchange_meeting_subject\": {\"type\": \"string\"}, \"exchange_meeting_end_time\": {\"type\": \"integer\"}, \"exchange_meeting_location\": {\"type\": \"string\"}, \"exchange_meeting_body\": {\"type\": \"string\"}, \"exchange_email\": {\"type\": \"string\"}}}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}, \"required_attendees\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"optional_attendees\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"sender\": {\"type\": \"string\"}, \"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}, \"start_time\": {\"type\": \"string\"}, \"end_time\": {\"type\": \"string\"}, \"timezone\": {\"type\": \"string\"}, \"location\": {\"type\": \"string\"}, \"online_meeting\": {\"type\": \"boolean\"}}}",
       "tags": [],
       "uuid": "145aab42-f201-4d01-95ad-6181b64720b7",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "b34e0c16-3511-4708-9c83-338aff49a43e",
@@ -912,7 +917,7 @@
       "workflows": []
     },
     {
-      "created_date": 1682341094756,
+      "created_date": 1747300245885,
       "description": {
         "content": "Delete emails with the specified query parameters.",
         "format": "text"
@@ -920,20 +925,24 @@
       "destination_handle": "fn_exchange",
       "display_name": "Exchange Delete Emails",
       "export_key": "exchange_delete_emails",
-      "id": 15,
+      "id": 21,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682341094791,
+      "last_modified_time": 1747300245885,
       "name": "exchange_delete_emails",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": \"1.0\", \"success\": false, \"reason\": \"The SMTP address has no mailbox associated with it.\", \"content\": {}, \"raw\": \"{}\", \"inputs\": {\"inputs\": {\"exchange_sender\": null, \"exchange_email_ids\": null, \"exchange_message_subject\": \"Security Weekly Meeting\", \"exchange_search_subfolders\": null, \"exchange_end_date\": null, \"exchange_folder_path\": null, \"exchange_start_date\": null, \"exchange_num_emails\": 2, \"exchange_order_by_recency\": null, \"exchange_hard_delete\": false, \"exchange_email\": \"exampleuser1@outlook2016.com\", \"exchange_has_attachments\": null}}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-exchange\", \"package_version\": \"1.0.5\", \"host\": \"exchange2016\", \"execution_time_ms\": 1293, \"timestamp\": \"2023-02-28 20:21:08\"}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {\"type\": \"string\"}, \"content\": {\"type\": \"object\"}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"inputs\": {\"type\": \"object\", \"properties\": {\"exchange_sender\": {}, \"exchange_email_ids\": {}, \"exchange_message_subject\": {\"type\": \"string\"}, \"exchange_search_subfolders\": {}, \"exchange_end_date\": {}, \"exchange_folder_path\": {}, \"exchange_start_date\": {}, \"exchange_num_emails\": {\"type\": \"integer\"}, \"exchange_order_by_recency\": {}, \"exchange_hard_delete\": {\"type\": \"boolean\"}, \"exchange_email\": {\"type\": \"string\"}, \"exchange_has_attachments\": {}}}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "25dd829d-5480-465d-b865-9ed9bea2ff53",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "b34e0c16-3511-4708-9c83-338aff49a43e",
@@ -1051,7 +1060,7 @@
       "workflows": []
     },
     {
-      "created_date": 1682341094795,
+      "created_date": 1747300246001,
       "description": {
         "content": "Find emails with the specified parameters.",
         "format": "text"
@@ -1059,20 +1068,24 @@
       "destination_handle": "fn_exchange",
       "display_name": "Exchange Find Emails",
       "export_key": "exchange_find_emails",
-      "id": 16,
+      "id": 22,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682341094830,
+      "last_modified_time": 1747300246001,
       "name": "exchange_find_emails",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"email_ids\": [\"\u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e\", \"\u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e\"], \"emails\": {\"\u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e\": {\"subject\": \"send to shared mailbox\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003cstyle type=\\\"text/css\\\" style=\\\"display:none;\\\"\u003e\u003c!-- P {margin-top:0;margin-bottom:0;} --\u003e\u003c/style\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody dir=\\\"ltr\\\"\u003e\\r\\n\u003cdiv id=\\\"divtagdefaultwrapper\\\" style=\\\"font-size:12pt;color:#000000;font-family:Calibri,Helvetica,sans-serif;\\\" dir=\\\"ltr\\\"\u003e\\r\\n\u003cp\u003e\u003cspan\u003esend to shared mailbox\u003c/span\u003e\u003cbr\u003e\\r\\n\u003c/p\u003e\\r\\n\u003c/div\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Wed, 5 Oct 2022 19:02:10 +0100\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Wed, 5 Oct 2022 19:02:10 +0100\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Wed, 5 Oct 2022 19:02:09 +0100\\r\\nFrom: John Doe \u003cjohndoe@exchange2016.com\u003e\\r\\nTo: johndoe Shared 1 \u003cjohndoe.s.1@exchange2016.com\u003e\\r\\nCC: John Doe \u003cjohndoe@exchange2016.com\u003e\\r\\nSubject: send to shared mailbox\\r\\nThread-Topic: send to shared mailbox\\r\\nThread-Index: AQHY2OSWU84bk8I1/EaCiH2jYzkr5w==\\r\\nDate: Wed, 5 Oct 2022 19:02:09 +0100\\r\\nMessage-ID: \u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\t940a5821-4068-494b-ea8c-08daa6fbb91e\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"iso-8859-1\\\"\\r\\nContent-Transfer-Encoding: quoted-printable\\r\\n\\r\\nsend to shared mailbox\\r\\n\\r\\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\\r\\nContent-Type: text/html; charset=\\\"iso-8859-1\\\"\\r\\nContent-Transfer-Encoding: quoted-printable\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=3D\\\"Content-Type\\\" content=3D\\\"text/html; charset=3Diso-8859-=\\r\\n1\\\"\u003e\\r\\n\u003cstyle type=3D\\\"text/css\\\" style=3D\\\"display:none;\\\"\u003e\u003c!-- P {margin-top:0;margi=\\r\\nn-bottom:0;} --\u003e\u003c/style\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody dir=3D\\\"ltr\\\"\u003e\\r\\n\u003cdiv id=3D\\\"divtagdefaultwrapper\\\" style=3D\\\"font-size:12pt;color:#000000;font=\\r\\n-family:Calibri,Helvetica,sans-serif;\\\" dir=3D\\\"ltr\\\"\u003e\\r\\n\u003cp\u003e\u003cspan\u003esend to shared mailbox\u003c/span\u003e\u003cbr\u003e\\r\\n\u003c/p\u003e\\r\\n\u003c/div\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_--\\r\\n\", \"sender_name\": \"John Doe\", \"sender_email\": \"johndoe@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}, \"\u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e\": {\"subject\": \"test shared mailbox\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003cstyle type=\\\"text/css\\\" style=\\\"display:none;\\\"\u003e\u003c!-- P {margin-top:0;margin-bottom:0;} --\u003e\u003c/style\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody dir=\\\"ltr\\\"\u003e\\r\\n\u003cdiv id=\\\"divtagdefaultwrapper\\\" style=\\\"font-size:12pt;color:#000000;font-family:Calibri,Helvetica,sans-serif;\\\" dir=\\\"ltr\\\"\u003e\\r\\n\u003cp\u003esent from \u003cspan\u003ejohndoe.s.1@exchange2016.com\u003c/span\u003e\u003cbr\u003e\\r\\n\u003c/p\u003e\\r\\n\u003c/div\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Wed, 8 Feb 2023 13:33:52 +0000\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Wed, 8 Feb 2023 13:33:17 +0000\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Wed, 8 Feb 2023 13:33:07 +0000\\r\\nFrom: John Doe \u003cjohndoe@exchange2016.com\u003e\\r\\nTo: johndoe Shared 1 \u003cjohndoe.s.1@exchange2016.com\u003e\\r\\nSubject: test shared mailbox\\r\\nThread-Topic: test shared mailbox\\r\\nThread-Index: AQHZO8HaJ8uG95+s6EuNRn6s2lhHRQ==\\r\\nDate: Wed, 8 Feb 2023 13:32:59 +0000\\r\\nMessage-ID: \u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\t602573ae-2be8-4b87-7aee-08db09d903b1\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"iso-8859-1\\\"\\r\\nContent-Transfer-Encoding: quoted-printable\\r\\n\\r\\nsent from johndoe.s.1@exchange2016.com\\r\\n\\r\\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\\r\\nContent-Type: text/html; charset=\\\"iso-8859-1\\\"\\r\\nContent-Transfer-Encoding: quoted-printable\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=3D\\\"Content-Type\\\" content=3D\\\"text/html; charset=3Diso-8859-=\\r\\n1\\\"\u003e\\r\\n\u003cstyle type=3D\\\"text/css\\\" style=3D\\\"display:none;\\\"\u003e\u003c!-- P {margin-top:0;margi=\\r\\nn-bottom:0;} --\u003e\u003c/style\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody dir=3D\\\"ltr\\\"\u003e\\r\\n\u003cdiv id=3D\\\"divtagdefaultwrapper\\\" style=3D\\\"font-size:12pt;color:#000000;font=\\r\\n-family:Calibri,Helvetica,sans-serif;\\\" dir=3D\\\"ltr\\\"\u003e\\r\\n\u003cp\u003esent from \u003cspan\u003ejohndoe.s.1@exchange2016.com\u003c/span\u003e\u003cbr\u003e\\r\\n\u003c/p\u003e\\r\\n\u003c/div\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_--\\r\\n\", \"sender_name\": \"John Doe\", \"sender_email\": \"johndoe@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}}}, \"raw\": \"{\\\"email_ids\\\": [\\\"\u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e\\\", \\\"\u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e\\\"], \\\"emails\\\": {\\\"\u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e\\\": {\\\"subject\\\": \\\"send to shared mailbox\\\", \\\"body\\\": \\\"\u003chtml\u003e\\\\r\\\\n\u003chead\u003e\\\\r\\\\n\u003cmeta http-equiv=\\\\\\\"Content-Type\\\\\\\" content=\\\\\\\"text/html; charset=utf-8\\\\\\\"\u003e\\\\r\\\\n\u003cstyle type=\\\\\\\"text/css\\\\\\\" style=\\\\\\\"display:none;\\\\\\\"\u003e\u003c!-- P {margin-top:0;margin-bottom:0;} --\u003e\u003c/style\u003e\\\\r\\\\n\u003c/head\u003e\\\\r\\\\n\u003cbody dir=\\\\\\\"ltr\\\\\\\"\u003e\\\\r\\\\n\u003cdiv id=\\\\\\\"divtagdefaultwrapper\\\\\\\" style=\\\\\\\"font-size:12pt;color:#000000;font-family:Calibri,Helvetica,sans-serif;\\\\\\\" dir=\\\\\\\"ltr\\\\\\\"\u003e\\\\r\\\\n\u003cp\u003e\u003cspan\u003esend to shared mailbox\u003c/span\u003e\u003cbr\u003e\\\\r\\\\n\u003c/p\u003e\\\\r\\\\n\u003c/div\u003e\\\\r\\\\n\u003c/body\u003e\\\\r\\\\n\u003c/html\u003e\\\\r\\\\n\\\", \\\"mime_content\\\": \\\"Received: from host.exchange2016.com (9.37.29.13) by\\\\r\\\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\\\r\\\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\\\r\\\\n 15.1.2242.12 via Mailbox Transport; Wed, 5 Oct 2022 19:02:10 +0100\\\\r\\\\nReceived: from host.exchange2016.com (9.37.29.13) by\\\\r\\\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\\\r\\\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\\\r\\\\n 15.1.2242.12; Wed, 5 Oct 2022 19:02:10 +0100\\\\r\\\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\\\r\\\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\\\r\\\\n 15.01.2242.012; Wed, 5 Oct 2022 19:02:09 +0100\\\\r\\\\nFrom: John Doe \u003cjohndoe@exchange2016.com\u003e\\\\r\\\\nTo: johndoe Shared 1 \u003cjohndoe.s.1@exchange2016.com\u003e\\\\r\\\\nCC: John Doe \u003cjohndoe@exchange2016.com\u003e\\\\r\\\\nSubject: send to shared mailbox\\\\r\\\\nThread-Topic: send to shared mailbox\\\\r\\\\nThread-Index: AQHY2OSWU84bk8I1/EaCiH2jYzkr5w==\\\\r\\\\nDate: Wed, 5 Oct 2022 19:02:09 +0100\\\\r\\\\nMessage-ID: \u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e\\\\r\\\\nAccept-Language: en-US\\\\r\\\\nContent-Language: en-US\\\\r\\\\nX-MS-Exchange-Organization-AuthAs: Internal\\\\r\\\\nX-MS-Exchange-Organization-AuthMechanism: 04\\\\r\\\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\\\r\\\\nX-MS-Has-Attach:\\\\r\\\\nX-MS-Exchange-Organization-Network-Message-Id:\\\\r\\\\n\\\\t940a5821-4068-494b-ea8c-08daa6fbb91e\\\\r\\\\nX-MS-Exchange-Organization-SCL: -1\\\\r\\\\nX-MS-TNEF-Correlator:\\\\r\\\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\\\r\\\\nContent-Type: multipart/alternative;\\\\r\\\\n\\\\tboundary=\\\\\\\"_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\\\\\\\"\\\\r\\\\nMIME-Version: 1.0\\\\r\\\\n\\\\r\\\\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\\\\r\\\\nContent-Type: text/plain; charset=\\\\\\\"iso-8859-1\\\\\\\"\\\\r\\\\nContent-Transfer-Encoding: quoted-printable\\\\r\\\\n\\\\r\\\\nsend to shared mailbox\\\\r\\\\n\\\\r\\\\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\\\\r\\\\nContent-Type: text/html; charset=\\\\\\\"iso-8859-1\\\\\\\"\\\\r\\\\nContent-Transfer-Encoding: quoted-printable\\\\r\\\\n\\\\r\\\\n\u003chtml\u003e\\\\r\\\\n\u003chead\u003e\\\\r\\\\n\u003cmeta http-equiv=3D\\\\\\\"Content-Type\\\\\\\" content=3D\\\\\\\"text/html; charset=3Diso-8859-=\\\\r\\\\n1\\\\\\\"\u003e\\\\r\\\\n\u003cstyle type=3D\\\\\\\"text/css\\\\\\\" style=3D\\\\\\\"display:none;\\\\\\\"\u003e\u003c!-- P {margin-top:0;margi=\\\\r\\\\nn-bottom:0;} --\u003e\u003c/style\u003e\\\\r\\\\n\u003c/head\u003e\\\\r\\\\n\u003cbody dir=3D\\\\\\\"ltr\\\\\\\"\u003e\\\\r\\\\n\u003cdiv id=3D\\\\\\\"divtagdefaultwrapper\\\\\\\" style=3D\\\\\\\"font-size:12pt;color:#000000;font=\\\\r\\\\n-family:Calibri,Helvetica,sans-serif;\\\\\\\" dir=3D\\\\\\\"ltr\\\\\\\"\u003e\\\\r\\\\n\u003cp\u003e\u003cspan\u003esend to shared mailbox\u003c/span\u003e\u003cbr\u003e\\\\r\\\\n\u003c/p\u003e\\\\r\\\\n\u003c/div\u003e\\\\r\\\\n\u003c/body\u003e\\\\r\\\\n\u003c/html\u003e\\\\r\\\\n\\\\r\\\\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_--\\\\r\\\\n\\\", \\\"sender_name\\\": \\\"John Doe\\\", \\\"sender_email\\\": \\\"johndoe@exchange2016.com\\\", \\\"attachments\\\": {}, \\\"attachment_ids\\\": []}, \\\"\u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e\\\": {\\\"subject\\\": \\\"test shared mailbox\\\", \\\"body\\\": \\\"\u003chtml\u003e\\\\r\\\\n\u003chead\u003e\\\\r\\\\n\u003cmeta http-equiv=\\\\\\\"Content-Type\\\\\\\" content=\\\\\\\"text/html; charset=utf-8\\\\\\\"\u003e\\\\r\\\\n\u003cstyle type=\\\\\\\"text/css\\\\\\\" style=\\\\\\\"display:none;\\\\\\\"\u003e\u003c!-- P {margin-top:0;margin-bottom:0;} --\u003e\u003c/style\u003e\\\\r\\\\n\u003c/head\u003e\\\\r\\\\n\u003cbody dir=\\\\\\\"ltr\\\\\\\"\u003e\\\\r\\\\n\u003cdiv id=\\\\\\\"divtagdefaultwrapper\\\\\\\" style=\\\\\\\"font-size:12pt;color:#000000;font-family:Calibri,Helvetica,sans-serif;\\\\\\\" dir=\\\\\\\"ltr\\\\\\\"\u003e\\\\r\\\\n\u003cp\u003esent from \u003cspan\u003ejohndoe.s.1@exchange2016.com\u003c/span\u003e\u003cbr\u003e\\\\r\\\\n\u003c/p\u003e\\\\r\\\\n\u003c/div\u003e\\\\r\\\\n\u003c/body\u003e\\\\r\\\\n\u003c/html\u003e\\\\r\\\\n\\\", \\\"mime_content\\\": \\\"Received: from host.exchange2016.com (9.37.29.13) by\\\\r\\\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\\\r\\\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\\\r\\\\n 15.1.2242.12 via Mailbox Transport; Wed, 8 Feb 2023 13:33:52 +0000\\\\r\\\\nReceived: from host.exchange2016.com (9.37.29.13) by\\\\r\\\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\\\r\\\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\\\r\\\\n 15.1.2242.12; Wed, 8 Feb 2023 13:33:17 +0000\\\\r\\\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\\\r\\\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\\\r\\\\n 15.01.2242.012; Wed, 8 Feb 2023 13:33:07 +0000\\\\r\\\\nFrom: John Doe \u003cjohndoe@exchange2016.com\u003e\\\\r\\\\nTo: johndoe Shared 1 \u003cjohndoe.s.1@exchange2016.com\u003e\\\\r\\\\nSubject: test shared mailbox\\\\r\\\\nThread-Topic: test shared mailbox\\\\r\\\\nThread-Index: AQHZO8HaJ8uG95+s6EuNRn6s2lhHRQ==\\\\r\\\\nDate: Wed, 8 Feb 2023 13:32:59 +0000\\\\r\\\\nMessage-ID: \u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e\\\\r\\\\nAccept-Language: en-US\\\\r\\\\nContent-Language: en-US\\\\r\\\\nX-MS-Exchange-Organization-AuthAs: Internal\\\\r\\\\nX-MS-Exchange-Organization-AuthMechanism: 04\\\\r\\\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\\\r\\\\nX-MS-Has-Attach:\\\\r\\\\nX-MS-Exchange-Organization-Network-Message-Id:\\\\r\\\\n\\\\t602573ae-2be8-4b87-7aee-08db09d903b1\\\\r\\\\nX-MS-Exchange-Organization-SCL: -1\\\\r\\\\nX-MS-TNEF-Correlator:\\\\r\\\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\\\r\\\\nContent-Type: multipart/alternative;\\\\r\\\\n\\\\tboundary=\\\\\\\"_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\\\\\\\"\\\\r\\\\nMIME-Version: 1.0\\\\r\\\\n\\\\r\\\\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\\\\r\\\\nContent-Type: text/plain; charset=\\\\\\\"iso-8859-1\\\\\\\"\\\\r\\\\nContent-Transfer-Encoding: quoted-printable\\\\r\\\\n\\\\r\\\\nsent from johndoe.s.1@exchange2016.com\\\\r\\\\n\\\\r\\\\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\\\\r\\\\nContent-Type: text/html; charset=\\\\\\\"iso-8859-1\\\\\\\"\\\\r\\\\nContent-Transfer-Encoding: quoted-printable\\\\r\\\\n\\\\r\\\\n\u003chtml\u003e\\\\r\\\\n\u003chead\u003e\\\\r\\\\n\u003cmeta http-equiv=3D\\\\\\\"Content-Type\\\\\\\" content=3D\\\\\\\"text/html; charset=3Diso-8859-=\\\\r\\\\n1\\\\\\\"\u003e\\\\r\\\\n\u003cstyle type=3D\\\\\\\"text/css\\\\\\\" style=3D\\\\\\\"display:none;\\\\\\\"\u003e\u003c!-- P {margin-top:0;margi=\\\\r\\\\nn-bottom:0;} --\u003e\u003c/style\u003e\\\\r\\\\n\u003c/head\u003e\\\\r\\\\n\u003cbody dir=3D\\\\\\\"ltr\\\\\\\"\u003e\\\\r\\\\n\u003cdiv id=3D\\\\\\\"divtagdefaultwrapper\\\\\\\" style=3D\\\\\\\"font-size:12pt;color:#000000;font=\\\\r\\\\n-family:Calibri,Helvetica,sans-serif;\\\\\\\" dir=3D\\\\\\\"ltr\\\\\\\"\u003e\\\\r\\\\n\u003cp\u003esent from \u003cspan\u003ejohndoe.s.1@exchange2016.com\u003c/span\u003e\u003cbr\u003e\\\\r\\\\n\u003c/p\u003e\\\\r\\\\n\u003c/div\u003e\\\\r\\\\n\u003c/body\u003e\\\\r\\\\n\u003c/html\u003e\\\\r\\\\n\\\\r\\\\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_--\\\\r\\\\n\\\", \\\"sender_name\\\": \\\"John Doe\\\", \\\"sender_email\\\": \\\"johndoe@exchange2016.com\\\", \\\"attachments\\\": {}, \\\"attachment_ids\\\": []}}}\", \"inputs\": {\"inputs\": {\"exchange_sender\": null, \"exchange_email_ids\": null, \"exchange_message_subject\": null, \"exchange_search_subfolders\": null, \"exchange_end_date\": null, \"exchange_folder_path\": null, \"exchange_start_date\": null, \"exchange_num_emails\": 2, \"exchange_order_by_recency\": null, \"exchange_email\": \"johndoe.s.1@exchange2016.com\", \"exchange_has_attachments\": null}}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-exchange\", \"package_version\": \"1.0.5\", \"host\": \"exchange2016\", \"execution_time_ms\": 190199, \"timestamp\": \"2023-02-28 15:51:03\"}, \"email_ids\": [\"\u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e\", \"\u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e\"], \"emails\": {\"\u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e\": {\"subject\": \"send to shared mailbox\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003cstyle type=\\\"text/css\\\" style=\\\"display:none;\\\"\u003e\u003c!-- P {margin-top:0;margin-bottom:0;} --\u003e\u003c/style\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody dir=\\\"ltr\\\"\u003e\\r\\n\u003cdiv id=\\\"divtagdefaultwrapper\\\" style=\\\"font-size:12pt;color:#000000;font-family:Calibri,Helvetica,sans-serif;\\\" dir=\\\"ltr\\\"\u003e\\r\\n\u003cp\u003e\u003cspan\u003esend to shared mailbox\u003c/span\u003e\u003cbr\u003e\\r\\n\u003c/p\u003e\\r\\n\u003c/div\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Wed, 5 Oct 2022 19:02:10 +0100\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Wed, 5 Oct 2022 19:02:10 +0100\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Wed, 5 Oct 2022 19:02:09 +0100\\r\\nFrom: John Doe \u003cjohndoe@exchange2016.com\u003e\\r\\nTo: johndoe Shared 1 \u003cjohndoe.s.1@exchange2016.com\u003e\\r\\nCC: John Doe \u003cjohndoe@exchange2016.com\u003e\\r\\nSubject: send to shared mailbox\\r\\nThread-Topic: send to shared mailbox\\r\\nThread-Index: AQHY2OSWU84bk8I1/EaCiH2jYzkr5w==\\r\\nDate: Wed, 5 Oct 2022 19:02:09 +0100\\r\\nMessage-ID: \u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\t940a5821-4068-494b-ea8c-08daa6fbb91e\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"iso-8859-1\\\"\\r\\nContent-Transfer-Encoding: quoted-printable\\r\\n\\r\\nsend to shared mailbox\\r\\n\\r\\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_\\r\\nContent-Type: text/html; charset=\\\"iso-8859-1\\\"\\r\\nContent-Transfer-Encoding: quoted-printable\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=3D\\\"Content-Type\\\" content=3D\\\"text/html; charset=3Diso-8859-=\\r\\n1\\\"\u003e\\r\\n\u003cstyle type=3D\\\"text/css\\\" style=3D\\\"display:none;\\\"\u003e\u003c!-- P {margin-top:0;margi=\\r\\nn-bottom:0;} --\u003e\u003c/style\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody dir=3D\\\"ltr\\\"\u003e\\r\\n\u003cdiv id=3D\\\"divtagdefaultwrapper\\\" style=3D\\\"font-size:12pt;color:#000000;font=\\r\\n-family:Calibri,Helvetica,sans-serif;\\\" dir=3D\\\"ltr\\\"\u003e\\r\\n\u003cp\u003e\u003cspan\u003esend to shared mailbox\u003c/span\u003e\u003cbr\u003e\\r\\n\u003c/p\u003e\\r\\n\u003c/div\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_8a9cc4cff1414ae38fa9b3fa85674f04exchange2016com_--\\r\\n\", \"sender_name\": \"John Doe\", \"sender_email\": \"johndoe@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}, \"\u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e\": {\"subject\": \"test shared mailbox\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003cstyle type=\\\"text/css\\\" style=\\\"display:none;\\\"\u003e\u003c!-- P {margin-top:0;margin-bottom:0;} --\u003e\u003c/style\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody dir=\\\"ltr\\\"\u003e\\r\\n\u003cdiv id=\\\"divtagdefaultwrapper\\\" style=\\\"font-size:12pt;color:#000000;font-family:Calibri,Helvetica,sans-serif;\\\" dir=\\\"ltr\\\"\u003e\\r\\n\u003cp\u003esent from \u003cspan\u003ejohndoe.s.1@exchange2016.com\u003c/span\u003e\u003cbr\u003e\\r\\n\u003c/p\u003e\\r\\n\u003c/div\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Wed, 8 Feb 2023 13:33:52 +0000\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Wed, 8 Feb 2023 13:33:17 +0000\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Wed, 8 Feb 2023 13:33:07 +0000\\r\\nFrom: John Doe \u003cjohndoe@exchange2016.com\u003e\\r\\nTo: johndoe Shared 1 \u003cjohndoe.s.1@exchange2016.com\u003e\\r\\nSubject: test shared mailbox\\r\\nThread-Topic: test shared mailbox\\r\\nThread-Index: AQHZO8HaJ8uG95+s6EuNRn6s2lhHRQ==\\r\\nDate: Wed, 8 Feb 2023 13:32:59 +0000\\r\\nMessage-ID: \u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\t602573ae-2be8-4b87-7aee-08db09d903b1\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"iso-8859-1\\\"\\r\\nContent-Transfer-Encoding: quoted-printable\\r\\n\\r\\nsent from johndoe.s.1@exchange2016.com\\r\\n\\r\\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_\\r\\nContent-Type: text/html; charset=\\\"iso-8859-1\\\"\\r\\nContent-Transfer-Encoding: quoted-printable\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=3D\\\"Content-Type\\\" content=3D\\\"text/html; charset=3Diso-8859-=\\r\\n1\\\"\u003e\\r\\n\u003cstyle type=3D\\\"text/css\\\" style=3D\\\"display:none;\\\"\u003e\u003c!-- P {margin-top:0;margi=\\r\\nn-bottom:0;} --\u003e\u003c/style\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody dir=3D\\\"ltr\\\"\u003e\\r\\n\u003cdiv id=3D\\\"divtagdefaultwrapper\\\" style=3D\\\"font-size:12pt;color:#000000;font=\\r\\n-family:Calibri,Helvetica,sans-serif;\\\" dir=3D\\\"ltr\\\"\u003e\\r\\n\u003cp\u003esent from \u003cspan\u003ejohndoe.s.1@exchange2016.com\u003c/span\u003e\u003cbr\u003e\\r\\n\u003c/p\u003e\\r\\n\u003c/div\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_53fe9fb07c4b48218c611b835c1e9603exchange2016com_--\\r\\n\", \"sender_name\": \"John Doe\", \"sender_email\": \"johndoe@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}}}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"email_ids\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"emails\": {\"type\": \"object\", \"properties\": {\"\u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e\": {\"type\": \"object\", \"properties\": {\"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}, \"mime_content\": {\"type\": \"string\"}, \"sender_name\": {\"type\": \"string\"}, \"sender_email\": {\"type\": \"string\"}, \"attachments\": {\"type\": \"object\"}, \"attachment_ids\": {\"type\": \"array\"}}}, \"\u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e\": {\"type\": \"object\", \"properties\": {\"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}, \"mime_content\": {\"type\": \"string\"}, \"sender_name\": {\"type\": \"string\"}, \"sender_email\": {\"type\": \"string\"}, \"attachments\": {\"type\": \"object\"}, \"attachment_ids\": {\"type\": \"array\"}}}}}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"inputs\": {\"type\": \"object\", \"properties\": {\"exchange_sender\": {}, \"exchange_email_ids\": {}, \"exchange_message_subject\": {}, \"exchange_search_subfolders\": {}, \"exchange_end_date\": {}, \"exchange_folder_path\": {}, \"exchange_start_date\": {}, \"exchange_num_emails\": {\"type\": \"integer\"}, \"exchange_order_by_recency\": {}, \"exchange_email\": {\"type\": \"string\"}, \"exchange_has_attachments\": {}}}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}, \"email_ids\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"emails\": {\"type\": \"object\", \"properties\": {\"\u003c8a9cc4cff1414ae38fa9b3fa85674f04@exchange2016.com\u003e\": {\"type\": \"object\", \"properties\": {\"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}, \"mime_content\": {\"type\": \"string\"}, \"sender_name\": {\"type\": \"string\"}, \"sender_email\": {\"type\": \"string\"}, \"attachments\": {\"type\": \"object\"}, \"attachment_ids\": {\"type\": \"array\"}}}, \"\u003c53fe9fb07c4b48218c611b835c1e9603@exchange2016.com\u003e\": {\"type\": \"object\", \"properties\": {\"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}, \"mime_content\": {\"type\": \"string\"}, \"sender_name\": {\"type\": \"string\"}, \"sender_email\": {\"type\": \"string\"}, \"attachments\": {\"type\": \"object\"}, \"attachment_ids\": {\"type\": \"array\"}}}}}}}",
       "tags": [],
       "uuid": "e8d8dcd1-3c3e-4974-be3e-7aba129a01eb",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "b34e0c16-3511-4708-9c83-338aff49a43e",
@@ -1182,7 +1195,7 @@
       "workflows": []
     },
     {
-      "created_date": 1682341094835,
+      "created_date": 1747300246113,
       "description": {
         "content": "Get mailbox info for specified email.",
         "format": "text"
@@ -1190,20 +1203,24 @@
       "destination_handle": "fn_exchange",
       "display_name": "Exchange Get Mailbox Info",
       "export_key": "exchange_get_mailbox_info",
-      "id": 17,
+      "id": 23,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682341094867,
+      "last_modified_time": 1747300246113,
       "name": "exchange_get_mailbox_info",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"name\": \"John Doe\", \"email_address\": \"johndoe.n@exchange2016.com\", \"routing_type\": \"SMTP\", \"mailbox_type\": \"Mailbox\"}, \"raw\": \"{\\\"name\\\": \\\"John Doe\\\", \\\"email_address\\\": \\\"johndoe.n@exchange2016.com\\\", \\\"routing_type\\\": \\\"SMTP\\\", \\\"mailbox_type\\\": \\\"Mailbox\\\"}\", \"inputs\": {\"inputs\": {\"exchange_get_email\": \"johndoe.n@exchange2016.com\"}}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-exchange\", \"package_version\": \"1.1.0\", \"host\": \"exchange2016\", \"execution_time_ms\": 254, \"timestamp\": \"2023-03-02 12:21:02\"}, \"name\": \"John Doe\", \"email_address\": \"johndoe.n@exchange2016.com\", \"routing_type\": \"SMTP\", \"mailbox_type\": \"Mailbox\"}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"email_address\": {\"type\": \"string\"}, \"routing_type\": {\"type\": \"string\"}, \"mailbox_type\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"inputs\": {\"type\": \"object\", \"properties\": {\"exchange_get_email\": {\"type\": \"string\"}}}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}, \"name\": {\"type\": \"string\"}, \"email_address\": {\"type\": \"string\"}, \"routing_type\": {\"type\": \"string\"}, \"mailbox_type\": {\"type\": \"string\"}}}",
       "tags": [],
       "uuid": "b6813ac5-8dbd-40f2-8a32-dc0b92ea878f",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "9b76ef0e-a7c6-40d8-85d1-ef14ea0b2f9e",
@@ -1217,7 +1234,7 @@
       "workflows": []
     },
     {
-      "created_date": 1682341094871,
+      "created_date": 1747300246218,
       "description": {
         "content": "Move queried emails from a specified folder to another specified folder.",
         "format": "text"
@@ -1225,20 +1242,24 @@
       "destination_handle": "fn_exchange",
       "display_name": "Exchange Move Emails",
       "export_key": "exchange_move_emails",
-      "id": 18,
+      "id": 24,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682341094906,
+      "last_modified_time": 1747300246218,
       "name": "exchange_move_emails",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"email_ids\": [\"\u003cdacfdd29axxxxxxxxxxxxxxxx4d9@exchange2016.com\u003e\", \"\u003c3e563564exxxxxxxxxxxxxxxx570@exchange2016.com\u003e\", \"\u003cf2ff33ff9xxxxxxxxxxxxxxxxce8@exchange2016.com\u003e\", \"\u003c6c7f6d14axxxxxxxxxxxxxxxx9da@exchange2016.com\u003e\"], \"emails\": {\"\u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e\": {\"subject\": \"empty body\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nNone\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 14:04:42 +0000\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Thu, 23 Feb 2023 14:04:41 +0000\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Thu, 23 Feb 2023 14:04:41 +0000\\r\\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\\r\\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\\r\\nSubject: empty body\\r\\nThread-Topic: empty body\\r\\nThread-Index: AQHZR4/FK1OEqdG/gU6cEqwOk7zcsw==\\r\\nDate: Thu, 23 Feb 2023 14:04:41 +0000\\r\\nMessage-ID: \u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\t7d4ceba2-2741-4bc3-3fdf-08db15a6e886\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"us-ascii\\\"\\r\\n\\r\\nNone\\r\\n\\r\\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\\r\\nContent-Type: text/html; charset=\\\"us-ascii\\\"\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=us-ascii\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nNone\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_--\\r\\n\", \"sender_name\": \"John Doe Norcross\", \"sender_email\": \"johndoe.s.n@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}, \"\u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e\": {\"subject\": \"empty body\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nbody\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 14:29:17 +0000\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Thu, 23 Feb 2023 14:29:16 +0000\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Thu, 23 Feb 2023 14:29:16 +0000\\r\\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\\r\\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\\r\\nSubject: empty body\\r\\nThread-Topic: empty body\\r\\nThread-Index: AQHZR5M1Ggkaj9t1Ak+on2020HrGvQ==\\r\\nDate: Thu, 23 Feb 2023 14:29:16 +0000\\r\\nMessage-ID: \u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\tca8c256f-6f10-4873-9530-08db15aa57ed\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"us-ascii\\\"\\r\\n\\r\\nbody\\r\\n\\r\\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\\r\\nContent-Type: text/html; charset=\\\"us-ascii\\\"\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=us-ascii\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nbody\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_--\\r\\n\", \"sender_name\": \"John Doe Norcross\", \"sender_email\": \"johndoe.s.n@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}, \"\u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e\": {\"subject\": \"empty body\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 15:39:07 +0000\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Thu, 23 Feb 2023 15:39:07 +0000\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Thu, 23 Feb 2023 15:39:06 +0000\\r\\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\\r\\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\\r\\nSubject: empty body\\r\\nThread-Topic: empty body\\r\\nThread-Index: AQHZR5z2bkf3+maGpUGV+Apoem2N1g==\\r\\nDate: Thu, 23 Feb 2023 15:39:06 +0000\\r\\nMessage-ID: \u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\t0dc84cc5-f59d-4c53-f4af-08db15b41987\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"us-ascii\\\"\\r\\n\\r\\n\\r\\n\\r\\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\\r\\nContent-Type: text/html; charset=\\\"us-ascii\\\"\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=us-ascii\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_--\\r\\n\", \"sender_name\": \"John Doe Norcross\", \"sender_email\": \"johndoe.s.n@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}, \"\u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e\": {\"subject\": \"empty body\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nhello\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 15:39:53 +0000\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Thu, 23 Feb 2023 15:39:52 +0000\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Thu, 23 Feb 2023 15:39:51 +0000\\r\\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\\r\\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\\r\\nSubject: empty body\\r\\nThread-Topic: empty body\\r\\nThread-Index: AQHZR50Re6VSynXBbUukAjEsBzROJg==\\r\\nDate: Thu, 23 Feb 2023 15:39:51 +0000\\r\\nMessage-ID: \u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\t8a887daa-1c90-4bf7-d067-08db15b43417\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"us-ascii\\\"\\r\\n\\r\\nhello\\r\\n\\r\\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\\r\\nContent-Type: text/html; charset=\\\"us-ascii\\\"\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=us-ascii\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nhello\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_--\\r\\n\", \"sender_name\": \"John Doe Norcross\", \"sender_email\": \"johndoe.s.n@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}}, \"src_folder\": \"Top of Information Store/Inbox\", \"dst_folder\": \"Top of Information Store/Notes\"}, \"raw\": \"{\\\"email_ids\\\": [\\\"\u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e\\\", \\\"\u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e\\\", \\\"\u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e\\\", \\\"\u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e\\\"], \\\"emails\\\": {\\\"\u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e\\\": {\\\"subject\\\": \\\"empty body\\\", \\\"body\\\": \\\"\u003chtml\u003e\\\\r\\\\n\u003chead\u003e\\\\r\\\\n\u003cmeta http-equiv=\\\\\\\"Content-Type\\\\\\\" content=\\\\\\\"text/html; charset=utf-8\\\\\\\"\u003e\\\\r\\\\n\u003c/head\u003e\\\\r\\\\n\u003cbody\u003e\\\\r\\\\nNone\\\\r\\\\n\u003c/body\u003e\\\\r\\\\n\u003c/html\u003e\\\\r\\\\n\\\", \\\"mime_content\\\": \\\"Received: from host.exchange2016.com (9.37.29.13) by\\\\r\\\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\\\r\\\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\\\r\\\\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 14:04:42 +0000\\\\r\\\\nReceived: from host.exchange2016.com (9.37.29.13) by\\\\r\\\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\\\r\\\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\\\r\\\\n 15.1.2242.12; Thu, 23 Feb 2023 14:04:41 +0000\\\\r\\\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\\\r\\\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\\\r\\\\n 15.01.2242.012; Thu, 23 Feb 2023 14:04:41 +0000\\\\r\\\\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\\\\r\\\\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\\\\r\\\\nSubject: empty body\\\\r\\\\nThread-Topic: empty body\\\\r\\\\nThread-Index: AQHZR4/FK1OEqdG/gU6cEqwOk7zcsw==\\\\r\\\\nDate: Thu, 23 Feb 2023 14:04:41 +0000\\\\r\\\\nMessage-ID: \u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e\\\\r\\\\nAccept-Language: en-US\\\\r\\\\nContent-Language: en-US\\\\r\\\\nX-MS-Exchange-Organization-AuthAs: Internal\\\\r\\\\nX-MS-Exchange-Organization-AuthMechanism: 04\\\\r\\\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\\\r\\\\nX-MS-Has-Attach:\\\\r\\\\nX-MS-Exchange-Organization-Network-Message-Id:\\\\r\\\\n\\\\t7d4ceba2-2741-4bc3-3fdf-08db15a6e886\\\\r\\\\nX-MS-Exchange-Organization-SCL: -1\\\\r\\\\nX-MS-TNEF-Correlator:\\\\r\\\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\\\r\\\\nContent-Type: multipart/alternative;\\\\r\\\\n\\\\tboundary=\\\\\\\"_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\\\\\\\"\\\\r\\\\nMIME-Version: 1.0\\\\r\\\\n\\\\r\\\\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\\\\r\\\\nContent-Type: text/plain; charset=\\\\\\\"us-ascii\\\\\\\"\\\\r\\\\n\\\\r\\\\nNone\\\\r\\\\n\\\\r\\\\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\\\\r\\\\nContent-Type: text/html; charset=\\\\\\\"us-ascii\\\\\\\"\\\\r\\\\n\\\\r\\\\n\u003chtml\u003e\\\\r\\\\n\u003chead\u003e\\\\r\\\\n\u003cmeta http-equiv=\\\\\\\"Content-Type\\\\\\\" content=\\\\\\\"text/html; charset=us-ascii\\\\\\\"\u003e\\\\r\\\\n\u003c/head\u003e\\\\r\\\\n\u003cbody\u003e\\\\r\\\\nNone\\\\r\\\\n\u003c/body\u003e\\\\r\\\\n\u003c/html\u003e\\\\r\\\\n\\\\r\\\\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_--\\\\r\\\\n\\\", \\\"sender_name\\\": \\\"John Doe Norcross\\\", \\\"sender_email\\\": \\\"johndoe.s.n@exchange2016.com\\\", \\\"attachments\\\": {}, \\\"attachment_ids\\\": []}, \\\"\u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e\\\": {\\\"subject\\\": \\\"empty body\\\", \\\"body\\\": \\\"\u003chtml\u003e\\\\r\\\\n\u003chead\u003e\\\\r\\\\n\u003cmeta http-equiv=\\\\\\\"Content-Type\\\\\\\" content=\\\\\\\"text/html; charset=utf-8\\\\\\\"\u003e\\\\r\\\\n\u003c/head\u003e\\\\r\\\\n\u003cbody\u003e\\\\r\\\\nbody\\\\r\\\\n\u003c/body\u003e\\\\r\\\\n\u003c/html\u003e\\\\r\\\\n\\\", \\\"mime_content\\\": \\\"Received: from host.exchange2016.com (9.37.29.13) by\\\\r\\\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\\\r\\\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\\\r\\\\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 14:29:17 +0000\\\\r\\\\nReceived: from host.exchange2016.com (9.37.29.13) by\\\\r\\\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\\\r\\\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\\\r\\\\n 15.1.2242.12; Thu, 23 Feb 2023 14:29:16 +0000\\\\r\\\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\\\r\\\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\\\r\\\\n 15.01.2242.012; Thu, 23 Feb 2023 14:29:16 +0000\\\\r\\\\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\\\\r\\\\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\\\\r\\\\nSubject: empty body\\\\r\\\\nThread-Topic: empty body\\\\r\\\\nThread-Index: AQHZR5M1Ggkaj9t1Ak+on2020HrGvQ==\\\\r\\\\nDate: Thu, 23 Feb 2023 14:29:16 +0000\\\\r\\\\nMessage-ID: \u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e\\\\r\\\\nAccept-Language: en-US\\\\r\\\\nContent-Language: en-US\\\\r\\\\nX-MS-Exchange-Organization-AuthAs: Internal\\\\r\\\\nX-MS-Exchange-Organization-AuthMechanism: 04\\\\r\\\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\\\r\\\\nX-MS-Has-Attach:\\\\r\\\\nX-MS-Exchange-Organization-Network-Message-Id:\\\\r\\\\n\\\\tca8c256f-6f10-4873-9530-08db15aa57ed\\\\r\\\\nX-MS-Exchange-Organization-SCL: -1\\\\r\\\\nX-MS-TNEF-Correlator:\\\\r\\\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\\\r\\\\nContent-Type: multipart/alternative;\\\\r\\\\n\\\\tboundary=\\\\\\\"_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\\\\\\\"\\\\r\\\\nMIME-Version: 1.0\\\\r\\\\n\\\\r\\\\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\\\\r\\\\nContent-Type: text/plain; charset=\\\\\\\"us-ascii\\\\\\\"\\\\r\\\\n\\\\r\\\\nbody\\\\r\\\\n\\\\r\\\\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\\\\r\\\\nContent-Type: text/html; charset=\\\\\\\"us-ascii\\\\\\\"\\\\r\\\\n\\\\r\\\\n\u003chtml\u003e\\\\r\\\\n\u003chead\u003e\\\\r\\\\n\u003cmeta http-equiv=\\\\\\\"Content-Type\\\\\\\" content=\\\\\\\"text/html; charset=us-ascii\\\\\\\"\u003e\\\\r\\\\n\u003c/head\u003e\\\\r\\\\n\u003cbody\u003e\\\\r\\\\nbody\\\\r\\\\n\u003c/body\u003e\\\\r\\\\n\u003c/html\u003e\\\\r\\\\n\\\\r\\\\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_--\\\\r\\\\n\\\", \\\"sender_name\\\": \\\"John Doe Norcross\\\", \\\"sender_email\\\": \\\"johndoe.s.n@exchange2016.com\\\", \\\"attachments\\\": {}, \\\"attachment_ids\\\": []}, \\\"\u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e\\\": {\\\"subject\\\": \\\"empty body\\\", \\\"body\\\": \\\"\u003chtml\u003e\\\\r\\\\n\u003chead\u003e\\\\r\\\\n\u003cmeta http-equiv=\\\\\\\"Content-Type\\\\\\\" content=\\\\\\\"text/html; charset=utf-8\\\\\\\"\u003e\\\\r\\\\n\u003c/head\u003e\\\\r\\\\n\u003cbody\u003e\\\\r\\\\n\u003c/body\u003e\\\\r\\\\n\u003c/html\u003e\\\\r\\\\n\\\", \\\"mime_content\\\": \\\"Received: from host.exchange2016.com (9.37.29.13) by\\\\r\\\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\\\r\\\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\\\r\\\\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 15:39:07 +0000\\\\r\\\\nReceived: from host.exchange2016.com (9.37.29.13) by\\\\r\\\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\\\r\\\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\\\r\\\\n 15.1.2242.12; Thu, 23 Feb 2023 15:39:07 +0000\\\\r\\\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\\\r\\\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\\\r\\\\n 15.01.2242.012; Thu, 23 Feb 2023 15:39:06 +0000\\\\r\\\\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\\\\r\\\\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\\\\r\\\\nSubject: empty body\\\\r\\\\nThread-Topic: empty body\\\\r\\\\nThread-Index: AQHZR5z2bkf3+maGpUGV+Apoem2N1g==\\\\r\\\\nDate: Thu, 23 Feb 2023 15:39:06 +0000\\\\r\\\\nMessage-ID: \u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e\\\\r\\\\nAccept-Language: en-US\\\\r\\\\nContent-Language: en-US\\\\r\\\\nX-MS-Exchange-Organization-AuthAs: Internal\\\\r\\\\nX-MS-Exchange-Organization-AuthMechanism: 04\\\\r\\\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\\\r\\\\nX-MS-Has-Attach:\\\\r\\\\nX-MS-Exchange-Organization-Network-Message-Id:\\\\r\\\\n\\\\t0dc84cc5-f59d-4c53-f4af-08db15b41987\\\\r\\\\nX-MS-Exchange-Organization-SCL: -1\\\\r\\\\nX-MS-TNEF-Correlator:\\\\r\\\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\\\r\\\\nContent-Type: multipart/alternative;\\\\r\\\\n\\\\tboundary=\\\\\\\"_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\\\\\\\"\\\\r\\\\nMIME-Version: 1.0\\\\r\\\\n\\\\r\\\\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\\\\r\\\\nContent-Type: text/plain; charset=\\\\\\\"us-ascii\\\\\\\"\\\\r\\\\n\\\\r\\\\n\\\\r\\\\n\\\\r\\\\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\\\\r\\\\nContent-Type: text/html; charset=\\\\\\\"us-ascii\\\\\\\"\\\\r\\\\n\\\\r\\\\n\u003chtml\u003e\\\\r\\\\n\u003chead\u003e\\\\r\\\\n\u003cmeta http-equiv=\\\\\\\"Content-Type\\\\\\\" content=\\\\\\\"text/html; charset=us-ascii\\\\\\\"\u003e\\\\r\\\\n\u003c/head\u003e\\\\r\\\\n\u003cbody\u003e\\\\r\\\\n\u003c/body\u003e\\\\r\\\\n\u003c/html\u003e\\\\r\\\\n\\\\r\\\\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_--\\\\r\\\\n\\\", \\\"sender_name\\\": \\\"John Doe Norcross\\\", \\\"sender_email\\\": \\\"johndoe.s.n@exchange2016.com\\\", \\\"attachments\\\": {}, \\\"attachment_ids\\\": []}, \\\"\u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e\\\": {\\\"subject\\\": \\\"empty body\\\", \\\"body\\\": \\\"\u003chtml\u003e\\\\r\\\\n\u003chead\u003e\\\\r\\\\n\u003cmeta http-equiv=\\\\\\\"Content-Type\\\\\\\" content=\\\\\\\"text/html; charset=utf-8\\\\\\\"\u003e\\\\r\\\\n\u003c/head\u003e\\\\r\\\\n\u003cbody\u003e\\\\r\\\\nhello\\\\r\\\\n\u003c/body\u003e\\\\r\\\\n\u003c/html\u003e\\\\r\\\\n\\\", \\\"mime_content\\\": \\\"Received: from host.exchange2016.com (9.37.29.13) by\\\\r\\\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\\\r\\\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\\\r\\\\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 15:39:53 +0000\\\\r\\\\nReceived: from host.exchange2016.com (9.37.29.13) by\\\\r\\\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\\\r\\\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\\\r\\\\n 15.1.2242.12; Thu, 23 Feb 2023 15:39:52 +0000\\\\r\\\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\\\r\\\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\\\r\\\\n 15.01.2242.012; Thu, 23 Feb 2023 15:39:51 +0000\\\\r\\\\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\\\\r\\\\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\\\\r\\\\nSubject: empty body\\\\r\\\\nThread-Topic: empty body\\\\r\\\\nThread-Index: AQHZR50Re6VSynXBbUukAjEsBzROJg==\\\\r\\\\nDate: Thu, 23 Feb 2023 15:39:51 +0000\\\\r\\\\nMessage-ID: \u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e\\\\r\\\\nAccept-Language: en-US\\\\r\\\\nContent-Language: en-US\\\\r\\\\nX-MS-Exchange-Organization-AuthAs: Internal\\\\r\\\\nX-MS-Exchange-Organization-AuthMechanism: 04\\\\r\\\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\\\r\\\\nX-MS-Has-Attach:\\\\r\\\\nX-MS-Exchange-Organization-Network-Message-Id:\\\\r\\\\n\\\\t8a887daa-1c90-4bf7-d067-08db15b43417\\\\r\\\\nX-MS-Exchange-Organization-SCL: -1\\\\r\\\\nX-MS-TNEF-Correlator:\\\\r\\\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\\\r\\\\nContent-Type: multipart/alternative;\\\\r\\\\n\\\\tboundary=\\\\\\\"_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\\\\\\\"\\\\r\\\\nMIME-Version: 1.0\\\\r\\\\n\\\\r\\\\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\\\\r\\\\nContent-Type: text/plain; charset=\\\\\\\"us-ascii\\\\\\\"\\\\r\\\\n\\\\r\\\\nhello\\\\r\\\\n\\\\r\\\\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\\\\r\\\\nContent-Type: text/html; charset=\\\\\\\"us-ascii\\\\\\\"\\\\r\\\\n\\\\r\\\\n\u003chtml\u003e\\\\r\\\\n\u003chead\u003e\\\\r\\\\n\u003cmeta http-equiv=\\\\\\\"Content-Type\\\\\\\" content=\\\\\\\"text/html; charset=us-ascii\\\\\\\"\u003e\\\\r\\\\n\u003c/head\u003e\\\\r\\\\n\u003cbody\u003e\\\\r\\\\nhello\\\\r\\\\n\u003c/body\u003e\\\\r\\\\n\u003c/html\u003e\\\\r\\\\n\\\\r\\\\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_--\\\\r\\\\n\\\", \\\"sender_name\\\": \\\"John Doe Norcross\\\", \\\"sender_email\\\": \\\"johndoe.s.n@exchange2016.com\\\", \\\"attachments\\\": {}, \\\"attachment_ids\\\": []}}, \\\"src_folder\\\": \\\"Top of Information Store/Inbox\\\", \\\"dst_folder\\\": \\\"Top of Information Store/Notes\\\"}\", \"inputs\": {\"inputs\": {\"exchange_destination_folder_path\": \"Top of Information Store/Notes\", \"exchange_message_subject\": \"empty body\", \"exchange_end_date\": null, \"exchange_order_by_recency\": null, \"exchange_email\": \"johndoe.s@exchange2016.com\", \"exchange_has_attachments\": null, \"exchange_sender\": null, \"exchange_email_ids\": null, \"exchange_search_subfolders\": null, \"exchange_folder_path\": null, \"exchange_start_date\": null, \"exchange_num_emails\": null, \"exchange_delete_source_folder\": false, \"exchange_force_delete_subfolders\": false}}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-exchange\", \"package_version\": \"1.0.5\", \"host\": \"exchange2016\", \"execution_time_ms\": 10386, \"timestamp\": \"2023-02-28 19:55:32\"}, \"email_ids\": [\"\u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e\", \"\u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e\", \"\u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e\", \"\u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e\"], \"emails\": {\"\u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e\": {\"subject\": \"empty body\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nNone\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 14:04:42 +0000\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Thu, 23 Feb 2023 14:04:41 +0000\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Thu, 23 Feb 2023 14:04:41 +0000\\r\\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\\r\\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\\r\\nSubject: empty body\\r\\nThread-Topic: empty body\\r\\nThread-Index: AQHZR4/FK1OEqdG/gU6cEqwOk7zcsw==\\r\\nDate: Thu, 23 Feb 2023 14:04:41 +0000\\r\\nMessage-ID: \u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\t7d4ceba2-2741-4bc3-3fdf-08db15a6e886\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"us-ascii\\\"\\r\\n\\r\\nNone\\r\\n\\r\\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_\\r\\nContent-Type: text/html; charset=\\\"us-ascii\\\"\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=us-ascii\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nNone\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_dacfdd29ab69473b8c7dad28366ca4d9exchange2016com_--\\r\\n\", \"sender_name\": \"John Doe Norcross\", \"sender_email\": \"johndoe.s.n@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}, \"\u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e\": {\"subject\": \"empty body\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nbody\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 14:29:17 +0000\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Thu, 23 Feb 2023 14:29:16 +0000\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Thu, 23 Feb 2023 14:29:16 +0000\\r\\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\\r\\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\\r\\nSubject: empty body\\r\\nThread-Topic: empty body\\r\\nThread-Index: AQHZR5M1Ggkaj9t1Ak+on2020HrGvQ==\\r\\nDate: Thu, 23 Feb 2023 14:29:16 +0000\\r\\nMessage-ID: \u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\tca8c256f-6f10-4873-9530-08db15aa57ed\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"us-ascii\\\"\\r\\n\\r\\nbody\\r\\n\\r\\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_\\r\\nContent-Type: text/html; charset=\\\"us-ascii\\\"\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=us-ascii\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nbody\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_3e563564e5cc44a6aebb26f41da9d570exchange2016com_--\\r\\n\", \"sender_name\": \"John Doe Norcross\", \"sender_email\": \"johndoe.s.n@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}, \"\u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e\": {\"subject\": \"empty body\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 15:39:07 +0000\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Thu, 23 Feb 2023 15:39:07 +0000\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Thu, 23 Feb 2023 15:39:06 +0000\\r\\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\\r\\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\\r\\nSubject: empty body\\r\\nThread-Topic: empty body\\r\\nThread-Index: AQHZR5z2bkf3+maGpUGV+Apoem2N1g==\\r\\nDate: Thu, 23 Feb 2023 15:39:06 +0000\\r\\nMessage-ID: \u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\t0dc84cc5-f59d-4c53-f4af-08db15b41987\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"us-ascii\\\"\\r\\n\\r\\n\\r\\n\\r\\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_\\r\\nContent-Type: text/html; charset=\\\"us-ascii\\\"\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=us-ascii\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_f2ff33ff93104e74b33f0371b655ace8exchange2016com_--\\r\\n\", \"sender_name\": \"John Doe Norcross\", \"sender_email\": \"johndoe.s.n@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}, \"\u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e\": {\"subject\": \"empty body\", \"body\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nhello\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\", \"mime_content\": \"Received: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12 via Mailbox Transport; Thu, 23 Feb 2023 15:39:53 +0000\\r\\nReceived: from host.exchange2016.com (9.37.29.13) by\\r\\n host.exchange2016.com (9.37.29.13) with Microsoft SMTP Server\\r\\n (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id\\r\\n 15.1.2242.12; Thu, 23 Feb 2023 15:39:52 +0000\\r\\nReceived: from host.exchange2016.com ([fe80::533:6df6:eca:98d6]) by\\r\\n host.exchange2016.com ([fe80::533:6df6:eca:98d6%2]) with mapi id\\r\\n 15.01.2242.012; Thu, 23 Feb 2023 15:39:51 +0000\\r\\nFrom: John Doe Norcross \u003cjohndoe.s.n@exchange2016.com\u003e\\r\\nTo: johndoe.s Shared 1 \u003cjohndoe.s@exchange2016.com\u003e\\r\\nSubject: empty body\\r\\nThread-Topic: empty body\\r\\nThread-Index: AQHZR50Re6VSynXBbUukAjEsBzROJg==\\r\\nDate: Thu, 23 Feb 2023 15:39:51 +0000\\r\\nMessage-ID: \u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e\\r\\nAccept-Language: en-US\\r\\nContent-Language: en-US\\r\\nX-MS-Exchange-Organization-AuthAs: Internal\\r\\nX-MS-Exchange-Organization-AuthMechanism: 04\\r\\nX-MS-Exchange-Organization-AuthSource: host.exchange2016.com\\r\\nX-MS-Has-Attach:\\r\\nX-MS-Exchange-Organization-Network-Message-Id:\\r\\n\\t8a887daa-1c90-4bf7-d067-08db15b43417\\r\\nX-MS-Exchange-Organization-SCL: -1\\r\\nX-MS-TNEF-Correlator:\\r\\nX-MS-Exchange-Organization-RecordReviewCfmType: 0\\r\\nContent-Type: multipart/alternative;\\r\\n\\tboundary=\\\"_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\\\"\\r\\nMIME-Version: 1.0\\r\\n\\r\\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\\r\\nContent-Type: text/plain; charset=\\\"us-ascii\\\"\\r\\n\\r\\nhello\\r\\n\\r\\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_\\r\\nContent-Type: text/html; charset=\\\"us-ascii\\\"\\r\\n\\r\\n\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=us-ascii\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\nhello\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\\r\\n--_000_6c7f6d14acca4dc8ab34fd78de50e9daexchange2016com_--\\r\\n\", \"sender_name\": \"John Doe Norcross\", \"sender_email\": \"johndoe.s.n@exchange2016.com\", \"attachments\": {}, \"attachment_ids\": []}}, \"src_folder\": \"Top of Information Store/Inbox\", \"dst_folder\": \"Top of Information Store/Notes\"}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"email_ids\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"emails\": {\"type\": \"object\", \"properties\": {\"\u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e\": {\"type\": \"object\", \"properties\": {\"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}, \"mime_content\": {\"type\": \"string\"}, \"sender_name\": {\"type\": \"string\"}, \"sender_email\": {\"type\": \"string\"}, \"attachments\": {\"type\": \"object\"}, \"attachment_ids\": {\"type\": \"array\"}}}, \"\u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e\": {\"type\": \"object\", \"properties\": {\"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}, \"mime_content\": {\"type\": \"string\"}, \"sender_name\": {\"type\": \"string\"}, \"sender_email\": {\"type\": \"string\"}, \"attachments\": {\"type\": \"object\"}, \"attachment_ids\": {\"type\": \"array\"}}}, \"\u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e\": {\"type\": \"object\", \"properties\": {\"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}, \"mime_content\": {\"type\": \"string\"}, \"sender_name\": {\"type\": \"string\"}, \"sender_email\": {\"type\": \"string\"}, \"attachments\": {\"type\": \"object\"}, \"attachment_ids\": {\"type\": \"array\"}}}, \"\u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e\": {\"type\": \"object\", \"properties\": {\"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}, \"mime_content\": {\"type\": \"string\"}, \"sender_name\": {\"type\": \"string\"}, \"sender_email\": {\"type\": \"string\"}, \"attachments\": {\"type\": \"object\"}, \"attachment_ids\": {\"type\": \"array\"}}}}}, \"src_folder\": {\"type\": \"string\"}, \"dst_folder\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"inputs\": {\"type\": \"object\", \"properties\": {\"exchange_destination_folder_path\": {\"type\": \"string\"}, \"exchange_message_subject\": {\"type\": \"string\"}, \"exchange_end_date\": {}, \"exchange_order_by_recency\": {}, \"exchange_email\": {\"type\": \"string\"}, \"exchange_has_attachments\": {}, \"exchange_sender\": {}, \"exchange_email_ids\": {}, \"exchange_search_subfolders\": {}, \"exchange_folder_path\": {}, \"exchange_start_date\": {}, \"exchange_num_emails\": {}, \"exchange_delete_source_folder\": {\"type\": \"boolean\"}, \"exchange_force_delete_subfolders\": {\"type\": \"boolean\"}}}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}, \"email_ids\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"emails\": {\"type\": \"object\", \"properties\": {\"\u003cdacfdd29ab69473b8c7dad28366ca4d9@exchange2016.com\u003e\": {\"type\": \"object\", \"properties\": {\"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}, \"mime_content\": {\"type\": \"string\"}, \"sender_name\": {\"type\": \"string\"}, \"sender_email\": {\"type\": \"string\"}, \"attachments\": {\"type\": \"object\"}, \"attachment_ids\": {\"type\": \"array\"}}}, \"\u003c3e563564e5cc44a6aebb26f41da9d570@exchange2016.com\u003e\": {\"type\": \"object\", \"properties\": {\"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}, \"mime_content\": {\"type\": \"string\"}, \"sender_name\": {\"type\": \"string\"}, \"sender_email\": {\"type\": \"string\"}, \"attachments\": {\"type\": \"object\"}, \"attachment_ids\": {\"type\": \"array\"}}}, \"\u003cf2ff33ff93104e74b33f0371b655ace8@exchange2016.com\u003e\": {\"type\": \"object\", \"properties\": {\"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}, \"mime_content\": {\"type\": \"string\"}, \"sender_name\": {\"type\": \"string\"}, \"sender_email\": {\"type\": \"string\"}, \"attachments\": {\"type\": \"object\"}, \"attachment_ids\": {\"type\": \"array\"}}}, \"\u003c6c7f6d14acca4dc8ab34fd78de50e9da@exchange2016.com\u003e\": {\"type\": \"object\", \"properties\": {\"subject\": {\"type\": \"string\"}, \"body\": {\"type\": \"string\"}, \"mime_content\": {\"type\": \"string\"}, \"sender_name\": {\"type\": \"string\"}, \"sender_email\": {\"type\": \"string\"}, \"attachments\": {\"type\": \"object\"}, \"attachment_ids\": {\"type\": \"array\"}}}}}, \"src_folder\": {\"type\": \"string\"}, \"dst_folder\": {\"type\": \"string\"}}}",
       "tags": [],
       "uuid": "4caa6dc8-1ac6-4b54-bb97-6f8e041bf067",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "b34e0c16-3511-4708-9c83-338aff49a43e",
@@ -1372,7 +1393,7 @@
       "workflows": []
     },
     {
-      "created_date": 1682341094911,
+      "created_date": 1747300246328,
       "description": {
         "content": "Send an email to a list of recipients.",
         "format": "text"
@@ -1380,20 +1401,24 @@
       "destination_handle": "fn_exchange",
       "display_name": "Exchange Send Email",
       "export_key": "exchange_send_email",
-      "id": 19,
+      "id": 25,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682341094943,
+      "last_modified_time": 1747300246328,
       "name": "exchange_send_email",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
       "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"recipients\": \"johndoe.s@exchange2016.com\", \"sender\": \"johndoe.s.n@exchange2016.com\", \"msg_subject\": \"Cancellation request\", \"msg_body\": \"Happy to announce that we have successfully cancelled your insurance\"}, \"raw\": \"{\\\"recipients\\\": \\\"johndoe.s@exchange2016.com\\\", \\\"sender\\\": \\\"johndoe.s.n@exchange2016.com\\\", \\\"msg_subject\\\": \\\"Cancellation request\\\", \\\"msg_body\\\": \\\"Happy to announce that we have successfully cancelled your insurance\\\"}\", \"inputs\": {\"inputs\": {\"exchange_message_subject\": \"Cancellation request\", \"exchange_email_recipients\": \"johndoe.s@exchange2016.com\", \"exchange_message_body\": \"Happy to announce that we have successfully cancelled your insurance\", \"exchange_email\": \"johndoe.s.n@exchange2016.com\"}}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-exchange\", \"package_version\": \"1.0.5\", \"host\": \"exchange2016\", \"execution_time_ms\": 3496, \"timestamp\": \"2023-02-28 20:10:41\"}, \"recipients\": \"johndoe.s@exchange2016.com\", \"sender\": \"johndoe.s.n@exchange2016.com\", \"msg_subject\": \"Cancellation request\", \"msg_body\": \"Happy to announce that we have successfully cancelled your insurance\"}",
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"recipients\": {\"type\": \"string\"}, \"sender\": {\"type\": \"string\"}, \"msg_subject\": {\"type\": \"string\"}, \"msg_body\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"inputs\": {\"type\": \"object\", \"properties\": {\"exchange_message_subject\": {\"type\": \"string\"}, \"exchange_email_recipients\": {\"type\": \"string\"}, \"exchange_message_body\": {\"type\": \"string\"}, \"exchange_email\": {\"type\": \"string\"}}}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}, \"recipients\": {\"type\": \"string\"}, \"sender\": {\"type\": \"string\"}, \"msg_subject\": {\"type\": \"string\"}, \"msg_body\": {\"type\": \"string\"}}}",
       "tags": [],
       "uuid": "a17b4b6d-5d21-413e-8d90-b7d95ebb79c0",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "b34e0c16-3511-4708-9c83-338aff49a43e",
@@ -1433,13 +1458,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 23,
+  "id": 5,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1682341469740,
+      "create_date": 1747302238139,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1448,7 +1473,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1682341469740,
+      "update_date": 1747302238139,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1456,16 +1481,16 @@
   "locale": null,
   "message_destinations": [
     {
-      "api_keys": [
-        "74b30658-121e-452a-a198-eab276cae7e7"
-      ],
+      "api_keys": [],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "fn_exchange",
       "name": "fn_exchange",
       "programmatic_name": "fn_exchange",
       "tags": [],
-      "users": [],
+      "users": [
+        "admin@example.com"
+      ],
       "uuid": "a945a97f-ac2d-4de6-8860-089e492892c1"
     }
   ],
@@ -1476,13 +1501,13 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_f3349a04_5261_44c8_8417_a67c590da40d\" isExecutable=\"true\" name=\"playbook_f3349a04_5261_44c8_8417_a67c590da40d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1oxszau\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Create Meeting\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"145aab42-f201-4d01-95ad-6181b64720b7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exchange_email = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_meeting_start_time = getattr(playbook.inputs, \\\"exchange_meeting_start_time\\\", None)\\ninputs.exchange_meeting_end_time = getattr(playbook.inputs, \\\"exchange_meeting_end_time\\\", None)\\ninputs.exchange_meeting_subject = getattr(playbook.inputs, \\\"exchange_meeting_subject\\\", None)\\ninputs.exchange_required_attendees = getattr(playbook.inputs, \\\"exchange_required_attendees\\\", None)\\ninputs.exchange_optional_attendees = getattr(playbook.inputs, \\\"exchange_optional_attendees\\\", None)\\ninputs.exchange_meeting_location = getattr(playbook.inputs, \\\"exchange_meeting_location\\\", None)\\ninputs.exchange_is_online_meeting = getattr(playbook.inputs, \\\"exchange_is_online_meeting\\\", False)\\n\\nif playbook.inputs.exchange_meeting_body and playbook.inputs.exchange_meeting_body.content:\\n  inputs.exchange_meeting_body = playbook.inputs.exchange_meeting_body.content\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_create_meeting\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1oxszau\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xv63p6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1oxszau\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_176827y\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_5\" name=\"Push Meeting Invite to DataTable\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"498fc2b9-1d89-4497-8e58-5755f5e58f45\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xv63p6\u003c/incoming\u003e\u003coutgoing\u003eFlow_176827y\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_176827y\" sourceRef=\"ScriptTask_5\" targetRef=\"EndPoint_4\"/\u003e\u003csequenceFlow id=\"Flow_0xv63p6\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f3349a04_5261_44c8_8417_a67c590da40d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xv63p6\" id=\"Flow_0xv63p6_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"202\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_176827y\" id=\"Flow_176827y_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1oxszau\" id=\"Flow_1oxszau_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"16\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"118\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"656\" y=\"-36\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"652\" y=\"118\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"684\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_5\" id=\"ScriptTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"652\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f3349a04_5261_44c8_8417_a67c590da40d\" isExecutable=\"true\" name=\"playbook_f3349a04_5261_44c8_8417_a67c590da40d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1oxszau\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Create Meeting\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"145aab42-f201-4d01-95ad-6181b64720b7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exchange_email = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_meeting_start_time = getattr(playbook.inputs, \\\"exchange_meeting_start_time\\\", None)\\ninputs.exchange_meeting_end_time = getattr(playbook.inputs, \\\"exchange_meeting_end_time\\\", None)\\ninputs.exchange_meeting_subject = getattr(playbook.inputs, \\\"exchange_meeting_subject\\\", None)\\ninputs.exchange_required_attendees = getattr(playbook.inputs, \\\"exchange_required_attendees\\\", None)\\ninputs.exchange_optional_attendees = getattr(playbook.inputs, \\\"exchange_optional_attendees\\\", None)\\ninputs.exchange_meeting_location = getattr(playbook.inputs, \\\"exchange_meeting_location\\\", None)\\ninputs.exchange_is_online_meeting = getattr(playbook.inputs, \\\"exchange_is_online_meeting\\\", False)\\n\\nif playbook.inputs.exchange_meeting_body and playbook.inputs.exchange_meeting_body.content:\\n  inputs.exchange_meeting_body = playbook.inputs.exchange_meeting_body.content\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_create_meeting\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1oxszau\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xv63p6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1oxszau\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_176827y\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_5\" name=\"Push Meeting Invite to DataTable\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"498fc2b9-1d89-4497-8e58-5755f5e58f45\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xv63p6\u003c/incoming\u003e\u003coutgoing\u003eFlow_176827y\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_176827y\" sourceRef=\"ScriptTask_5\" targetRef=\"EndPoint_4\"/\u003e\u003csequenceFlow id=\"Flow_0xv63p6\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f3349a04_5261_44c8_8417_a67c590da40d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xv63p6\" id=\"Flow_0xv63p6_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"202\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_176827y\" id=\"Flow_176827y_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1oxszau\" id=\"Flow_1oxszau_di\"\u003e\u003comgdi:waypoint x=\"750\" y=\"16\"/\u003e\u003comgdi:waypoint x=\"750\" y=\"118\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"656\" y=\"-36\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"652\" y=\"118\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"684\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_5\" id=\"ScriptTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"652\" y=\"278\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682341095163,
+      "create_date": 1747300247218,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -1509,7 +1534,7 @@
             "deprecated": false,
             "export_key": "playbook_f3349a04_5261_44c8_8417_a67c590da40d/exchange_email",
             "hide_notification": false,
-            "id": 752,
+            "id": 816,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1524,7 +1549,7 @@
             "templates": [],
             "text": "Email address",
             "tooltip": "Email account that is used to perform this action.",
-            "type_id": 1036,
+            "type_id": 1011,
             "uuid": "21e2c689-e8c2-449d-9f77-7681e2c7ad97",
             "values": []
           },
@@ -1538,7 +1563,7 @@
             "deprecated": false,
             "export_key": "playbook_f3349a04_5261_44c8_8417_a67c590da40d/exchange_is_online_meeting",
             "hide_notification": false,
-            "id": 753,
+            "id": 817,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -1553,7 +1578,7 @@
             "templates": [],
             "text": "Online Meeting",
             "tooltip": "Yes, if the location provided above is a URL, else No",
-            "type_id": 1036,
+            "type_id": 1011,
             "uuid": "f5caf420-469a-4082-8996-78e793f9a2e2",
             "values": []
           },
@@ -1567,7 +1592,7 @@
             "deprecated": false,
             "export_key": "playbook_f3349a04_5261_44c8_8417_a67c590da40d/exchange_meeting_body",
             "hide_notification": false,
-            "id": 754,
+            "id": 818,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -1582,7 +1607,7 @@
             "templates": [],
             "text": "Invite Body",
             "tooltip": "Body of the meeting invite",
-            "type_id": 1036,
+            "type_id": 1011,
             "uuid": "dc0799f9-681b-4c91-89f6-a4426f9d5fbb",
             "values": []
           },
@@ -1596,7 +1621,7 @@
             "deprecated": false,
             "export_key": "playbook_f3349a04_5261_44c8_8417_a67c590da40d/exchange_meeting_end_time",
             "hide_notification": false,
-            "id": 755,
+            "id": 819,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -1611,7 +1636,7 @@
             "templates": [],
             "text": "End Time",
             "tooltip": "Meeting end time and date",
-            "type_id": 1036,
+            "type_id": 1011,
             "uuid": "67917eb6-c516-4d17-b1e8-28404817e9e4",
             "values": []
           },
@@ -1625,7 +1650,7 @@
             "deprecated": false,
             "export_key": "playbook_f3349a04_5261_44c8_8417_a67c590da40d/exchange_meeting_location",
             "hide_notification": false,
-            "id": 756,
+            "id": 820,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1640,7 +1665,7 @@
             "templates": [],
             "text": "Location",
             "tooltip": "If the meeting is conducted online, then the URL to the Room. Or the Name of the Physical location of the Meeting Room",
-            "type_id": 1036,
+            "type_id": 1011,
             "uuid": "3c7feabc-2791-4d61-8c6a-757afc518f68",
             "values": []
           },
@@ -1654,7 +1679,7 @@
             "deprecated": false,
             "export_key": "playbook_f3349a04_5261_44c8_8417_a67c590da40d/exchange_meeting_start_time",
             "hide_notification": false,
-            "id": 757,
+            "id": 821,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -1669,7 +1694,7 @@
             "templates": [],
             "text": "Start Time",
             "tooltip": "Date and time of the meeting",
-            "type_id": 1036,
+            "type_id": 1011,
             "uuid": "c0119774-0b48-47ba-9383-7e843b94b0f4",
             "values": []
           },
@@ -1683,7 +1708,7 @@
             "deprecated": false,
             "export_key": "playbook_f3349a04_5261_44c8_8417_a67c590da40d/exchange_meeting_subject",
             "hide_notification": false,
-            "id": 758,
+            "id": 822,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1698,7 +1723,7 @@
             "templates": [],
             "text": "Invite Subject",
             "tooltip": "Subject of the meeting",
-            "type_id": 1036,
+            "type_id": 1011,
             "uuid": "8e7058dc-ffd2-44d2-847c-160fadb9ffd0",
             "values": []
           },
@@ -1712,7 +1737,7 @@
             "deprecated": false,
             "export_key": "playbook_f3349a04_5261_44c8_8417_a67c590da40d/exchange_optional_attendees",
             "hide_notification": false,
-            "id": 759,
+            "id": 823,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1727,7 +1752,7 @@
             "templates": [],
             "text": "Optional Attendees",
             "tooltip": "Comma separated list of attendees that are mandatory for the meeting",
-            "type_id": 1036,
+            "type_id": 1011,
             "uuid": "ff428192-9eca-4897-a851-ee7fb7190414",
             "values": []
           },
@@ -1741,7 +1766,7 @@
             "deprecated": false,
             "export_key": "playbook_f3349a04_5261_44c8_8417_a67c590da40d/exchange_required_attendees",
             "hide_notification": false,
-            "id": 760,
+            "id": 824,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1756,7 +1781,7 @@
             "templates": [],
             "text": "Required Attendees",
             "tooltip": "Comma separated list of attendees that are mandatory for the meeting",
-            "type_id": 1036,
+            "type_id": 1011,
             "uuid": "9bd379f1-5594-403f-b8cc-9ee6afdc609c",
             "values": []
           }
@@ -1781,27 +1806,27 @@
         "uuid": "1c2906d6-75a6-48a3-af3c-3f5c6a859db8"
       },
       "has_logical_errors": false,
-      "id": 34,
+      "id": 8,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682341161683,
+      "last_modified_time": 1747300249034,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1682341095355,
+          "created_date": 1747300247981,
           "description": "A post-processing script that processes the meeting invite and creates a note or adds it as an entry to the Datatable",
           "enabled": false,
           "export_key": "Push Meeting Invite to DataTable",
-          "id": 32,
+          "id": 10,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682341095367,
+          "last_modified_time": 1747300247981,
           "name": "Push Meeting Invite to DataTable",
           "object_type": "incident",
           "playbook_handle": "example_playbook_for_exchange_create_meetings",
@@ -1920,7 +1945,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_f3349a04-5261-44c8-8417-a67c590da40d",
-        "id": 36,
+        "id": 8,
         "name": "playbook_f3349a04_5261_44c8_8417_a67c590da40d",
         "type": "playbook",
         "uuid": "b7bd4505-4d0b-4974-991d-46cf431549b8"
@@ -1928,18 +1953,18 @@
       "tags": [],
       "type": "default",
       "uuid": "f3349a04-5261-44c8-8417-a67c590da40d",
-      "version": 5
+      "version": 3
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca\" isExecutable=\"true\" name=\"playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1y00wfr\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Delete Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"25dd829d-5480-465d-b865-9ed9bea2ff53\"\u003e{\"inputs\":{\"b34e0c16-3511-4708-9c83-338aff49a43e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"annmarie.n@exchange2016.com\"}},\"2baccb0e-0f15-469b-9398-0ad4f62ae9bd\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fb62c41a-089a-4e9d-8120-a1881d488802\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"448eb40d-862e-4060-b9fb-533cad926d60\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"083a1b4e-a13d-4d4c-9b96-91a3be1358d4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"00cff531-cd95-4db4-b043-f8afbf05182c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"4defd9b6-dc74-45b4-a2e7-ca475684251f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"59ebdb1b-13d1-428f-9ee9-0b5f22716d15\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"f01a2772-3982-4775-add9-ddf5d186a676\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"f2f42571-196f-4de3-b974-44afe622b14e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d74ad5b7-34c0-40ab-9e67-78ddda58964f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fd95941a-4ce2-4c29-9ff5-7cbb478992b4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"a442703a-a3c4-405f-84c7-8d88c6798ce9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"# For information on input values, read tooltips\\n\\n\\ninputs.exchange_hard_delete     = getattr(playbook.inputs, \\\"exchange_hard_delete\\\", False)\\n\\nif inputs.exchange_hard_delete:\\n  inputs.exchange_email_operation = \\\"DELETED\\\"\\nelse:\\n  inputs.exchange_email_operation = \\\"TRASHED\\\"\\n\\ninputs.exchange_email           = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_email_ids       = getattr(playbook.inputs, \\\"exchange_email_ids\\\", None)\\ninputs.exchange_sender          = getattr(playbook.inputs, \\\"exchange_sender\\\", None)\\ninputs.exchange_message_subject = getattr(playbook.inputs, \\\"exchange_message_subject\\\", None)\\ninputs.exchange_start_date      = getattr(playbook.inputs, \\\"exchange_start_date\\\", None)\\ninputs.exchange_end_date        = getattr(playbook.inputs, \\\"exchange_end_date\\\", None)\\ninputs.exchange_num_emails      = getattr(playbook.inputs, \\\"exchange_num_emails\\\", None)\\ninputs.exchange_folder_path     = getattr(playbook.inputs, \\\"exchange_folder_path\\\", None)\\n\\ninputs.exchange_order_by_recency  = getattr(playbook.inputs, \\\"exchange_order_by_recency\\\", None)\\ninputs.exchange_search_subfolders = getattr(playbook.inputs, \\\"exchange_search_subfolders\\\", None)\\ninputs.exchange_has_attachments   = getattr(playbook.inputs, \\\"exchange_has_attachments\\\", None)\\n\\nif playbook.inputs.exchange_message_body and playbook.inputs.exchange_message_body.content:\\n  inputs.exchange_message_body = playbook.inputs.exchange_message_body.content\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_emails\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1y00wfr\u003c/incoming\u003e\u003coutgoing\u003eFlow_09zi17t\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1y00wfr\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Push Emails to DataTables\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d1f93d76-809d-425f-a9ec-02dcb2637a98\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_09zi17t\u003c/incoming\u003e\u003coutgoing\u003eFlow_1mop76s\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_09zi17t\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1mop76s\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1mop76s\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mop76s\" id=\"Flow_1mop76s_di\"\u003e\u003comgdi:waypoint x=\"690\" y=\"112\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"214\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09zi17t\" id=\"Flow_09zi17t_di\"\u003e\u003comgdi:waypoint x=\"690\" y=\"-68\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"28\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1y00wfr\" id=\"Flow_1y00wfr_di\"\u003e\u003comgdi:waypoint x=\"690\" y=\"-224\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"-152\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"596\" y=\"-276\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"592\" y=\"-152\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"592\" y=\"28\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"624\" y=\"214\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca\" isExecutable=\"true\" name=\"playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1y00wfr\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Delete Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"25dd829d-5480-465d-b865-9ed9bea2ff53\"\u003e{\"inputs\":{\"b34e0c16-3511-4708-9c83-338aff49a43e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"annmarie.n@exchange2016.com\"}},\"2baccb0e-0f15-469b-9398-0ad4f62ae9bd\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fb62c41a-089a-4e9d-8120-a1881d488802\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"448eb40d-862e-4060-b9fb-533cad926d60\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"083a1b4e-a13d-4d4c-9b96-91a3be1358d4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"00cff531-cd95-4db4-b043-f8afbf05182c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"4defd9b6-dc74-45b4-a2e7-ca475684251f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"59ebdb1b-13d1-428f-9ee9-0b5f22716d15\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"f01a2772-3982-4775-add9-ddf5d186a676\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"f2f42571-196f-4de3-b974-44afe622b14e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d74ad5b7-34c0-40ab-9e67-78ddda58964f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fd95941a-4ce2-4c29-9ff5-7cbb478992b4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"a442703a-a3c4-405f-84c7-8d88c6798ce9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"# For information on input values, read tooltips\\n\\n\\ninputs.exchange_hard_delete     = getattr(playbook.inputs, \\\"exchange_hard_delete\\\", False)\\n\\nif inputs.exchange_hard_delete:\\n  inputs.exchange_email_operation = \\\"DELETED\\\"\\nelse:\\n  inputs.exchange_email_operation = \\\"TRASHED\\\"\\n\\ninputs.exchange_email           = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_email_ids       = getattr(playbook.inputs, \\\"exchange_email_ids\\\", None)\\ninputs.exchange_sender          = getattr(playbook.inputs, \\\"exchange_sender\\\", None)\\ninputs.exchange_message_subject = getattr(playbook.inputs, \\\"exchange_message_subject\\\", None)\\ninputs.exchange_start_date      = getattr(playbook.inputs, \\\"exchange_start_date\\\", None)\\ninputs.exchange_end_date        = getattr(playbook.inputs, \\\"exchange_end_date\\\", None)\\ninputs.exchange_num_emails      = getattr(playbook.inputs, \\\"exchange_num_emails\\\", None)\\ninputs.exchange_folder_path     = getattr(playbook.inputs, \\\"exchange_folder_path\\\", None)\\n\\ninputs.exchange_order_by_recency  = getattr(playbook.inputs, \\\"exchange_order_by_recency\\\", None)\\ninputs.exchange_search_subfolders = getattr(playbook.inputs, \\\"exchange_search_subfolders\\\", None)\\ninputs.exchange_has_attachments   = getattr(playbook.inputs, \\\"exchange_has_attachments\\\", None)\\n\\nif playbook.inputs.exchange_message_body and playbook.inputs.exchange_message_body.content:\\n  inputs.exchange_message_body = playbook.inputs.exchange_message_body.content\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_emails\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1y00wfr\u003c/incoming\u003e\u003coutgoing\u003eFlow_09zi17t\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1y00wfr\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Push Emails to DataTables\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d1f93d76-809d-425f-a9ec-02dcb2637a98\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_09zi17t\u003c/incoming\u003e\u003coutgoing\u003eFlow_1mop76s\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_09zi17t\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1mop76s\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1mop76s\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mop76s\" id=\"Flow_1mop76s_di\"\u003e\u003comgdi:waypoint x=\"690\" y=\"112\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"214\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09zi17t\" id=\"Flow_09zi17t_di\"\u003e\u003comgdi:waypoint x=\"690\" y=\"-68\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"28\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1y00wfr\" id=\"Flow_1y00wfr_di\"\u003e\u003comgdi:waypoint x=\"690\" y=\"-224\"/\u003e\u003comgdi:waypoint x=\"690\" y=\"-152\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"596\" y=\"-276\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"592\" y=\"-152\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"592\" y=\"28\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"624\" y=\"214\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682341095633,
+      "create_date": 1747300249083,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -1966,7 +1991,7 @@
             "deprecated": false,
             "export_key": "playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca/exchange_email",
             "hide_notification": false,
-            "id": 761,
+            "id": 825,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1981,7 +2006,7 @@
             "templates": [],
             "text": "Email address",
             "tooltip": "Email account that is used to perform this operation",
-            "type_id": 1037,
+            "type_id": 1012,
             "uuid": "1b97e661-74de-4264-ae00-fe46976ff1d5",
             "values": []
           },
@@ -1995,7 +2020,7 @@
             "deprecated": false,
             "export_key": "playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca/exchange_email_ids",
             "hide_notification": false,
-            "id": 762,
+            "id": 826,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2010,7 +2035,7 @@
             "templates": [],
             "text": "Message ID",
             "tooltip": "Comma separated list of message Ids. Retrieve emails with specific unique Ids",
-            "type_id": 1037,
+            "type_id": 1012,
             "uuid": "ce97897d-1aae-470a-bd02-ef5c42817123",
             "values": []
           },
@@ -2024,7 +2049,7 @@
             "deprecated": false,
             "export_key": "playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca/exchange_end_date",
             "hide_notification": false,
-            "id": 763,
+            "id": 827,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -2039,7 +2064,7 @@
             "templates": [],
             "text": "End date",
             "tooltip": "Get emails until after this date, leave empty to not set an end date",
-            "type_id": 1037,
+            "type_id": 1012,
             "uuid": "1a21dad7-7367-456f-9095-33fdcdf95d70",
             "values": []
           },
@@ -2053,7 +2078,7 @@
             "deprecated": false,
             "export_key": "playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca/exchange_folder_path",
             "hide_notification": false,
-            "id": 764,
+            "id": 828,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2068,7 +2093,7 @@
             "templates": [],
             "text": "Source Location",
             "tooltip": "Comma separated list of folder paths to query from or the location from which mails are to be moved",
-            "type_id": 1037,
+            "type_id": 1012,
             "uuid": "479f9d1a-1690-4355-a838-ad64169826cc",
             "values": []
           },
@@ -2082,7 +2107,7 @@
             "deprecated": false,
             "export_key": "playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca/exchange_hard_delete",
             "hide_notification": false,
-            "id": 765,
+            "id": 829,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -2097,7 +2122,7 @@
             "templates": [],
             "text": "Delete Permanently",
             "tooltip": "Yes deletes the emails permanently. No moves the mails to the Trash folder",
-            "type_id": 1037,
+            "type_id": 1012,
             "uuid": "28b1c93a-74d0-40be-bf92-2fb757df4f75",
             "values": []
           },
@@ -2111,7 +2136,7 @@
             "deprecated": false,
             "export_key": "playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca/exchange_has_attachments",
             "hide_notification": false,
-            "id": 766,
+            "id": 830,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -2126,7 +2151,7 @@
             "templates": [],
             "text": "Has Attachments",
             "tooltip": "Yes to include attachments, No to exclude attachments, Unknown to get all",
-            "type_id": 1037,
+            "type_id": 1012,
             "uuid": "a4177084-7dc3-458a-a1ee-a8469bec3f45",
             "values": []
           },
@@ -2140,7 +2165,7 @@
             "deprecated": false,
             "export_key": "playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca/exchange_message_body",
             "hide_notification": false,
-            "id": 767,
+            "id": 831,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -2155,7 +2180,7 @@
             "templates": [],
             "text": "Email Body",
             "tooltip": "Text for the message body of an email to query or to send, depending on the function.",
-            "type_id": 1037,
+            "type_id": 1012,
             "uuid": "8438d19d-d1b9-40d4-b700-5579d412f84f",
             "values": []
           },
@@ -2169,7 +2194,7 @@
             "deprecated": false,
             "export_key": "playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca/exchange_message_subject",
             "hide_notification": false,
-            "id": 768,
+            "id": 832,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2184,7 +2209,7 @@
             "templates": [],
             "text": "Email Subject",
             "tooltip": "Text for the subject of an email to query or send depending on the function.",
-            "type_id": 1037,
+            "type_id": 1012,
             "uuid": "2ce3b557-5eaf-4ccd-bf47-6d819ccbe397",
             "values": []
           },
@@ -2198,7 +2223,7 @@
             "deprecated": false,
             "export_key": "playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca/exchange_num_emails",
             "hide_notification": false,
-            "id": 769,
+            "id": 833,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -2213,7 +2238,7 @@
             "templates": [],
             "text": "Limit Email",
             "tooltip": "Limits the retrieved emails to the specified number",
-            "type_id": 1037,
+            "type_id": 1012,
             "uuid": "d17b8301-6389-4a2a-a068-27a7edefd49c",
             "values": []
           },
@@ -2227,7 +2252,7 @@
             "deprecated": false,
             "export_key": "playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca/exchange_order_by_recency",
             "hide_notification": false,
-            "id": 770,
+            "id": 834,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -2242,7 +2267,7 @@
             "templates": [],
             "text": "Order-by recency",
             "tooltip": "Yes to get newest emails first, No to get oldest emails first, Unknown to ignore time sent",
-            "type_id": 1037,
+            "type_id": 1012,
             "uuid": "b4befeaa-e493-4067-be6a-71a00dcc2daa",
             "values": []
           },
@@ -2256,7 +2281,7 @@
             "deprecated": false,
             "export_key": "playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca/exchange_search_subfolders",
             "hide_notification": false,
-            "id": 771,
+            "id": 835,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -2271,7 +2296,7 @@
             "templates": [],
             "text": "Search sub-folders",
             "tooltip": "Yes to search subfolders, No or Unknown to not search subfoldersd",
-            "type_id": 1037,
+            "type_id": 1012,
             "uuid": "d8c49cde-8094-44c8-b173-b3ab33533548",
             "values": []
           },
@@ -2285,7 +2310,7 @@
             "deprecated": false,
             "export_key": "playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca/exchange_sender",
             "hide_notification": false,
-            "id": 772,
+            "id": 836,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2300,7 +2325,7 @@
             "templates": [],
             "text": "Sender Address",
             "tooltip": "Only get emails from this sender, leave blank to ignore sender attribute",
-            "type_id": 1037,
+            "type_id": 1012,
             "uuid": "ad818102-947b-43f3-b26d-0784e849334a",
             "values": []
           },
@@ -2314,7 +2339,7 @@
             "deprecated": false,
             "export_key": "playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca/exchange_start_date",
             "hide_notification": false,
-            "id": 773,
+            "id": 837,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -2329,7 +2354,7 @@
             "templates": [],
             "text": "Start date",
             "tooltip": "Get emails on or after this date, leave empty to not set a start date",
-            "type_id": 1037,
+            "type_id": 1012,
             "uuid": "57700e1b-398c-42aa-9e3a-88deb35c5341",
             "values": []
           }
@@ -2354,16 +2379,16 @@
         "uuid": "5b81d710-a643-4840-8fed-159670697ddd"
       },
       "has_logical_errors": false,
-      "id": 35,
+      "id": 9,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682341162013,
+      "last_modified_time": 1747300250755,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -2530,7 +2555,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_d5e1fb8b-09be-4584-8e73-431218fc92ca",
-        "id": 37,
+        "id": 9,
         "name": "playbook_d5e1fb8b_09be_4584_8e73_431218fc92ca",
         "type": "playbook",
         "uuid": "405dba35-bb57-4847-9495-707c0261760c"
@@ -2538,18 +2563,18 @@
       "tags": [],
       "type": "default",
       "uuid": "d5e1fb8b-09be-4584-8e73-431218fc92ca",
-      "version": 5
+      "version": 3
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_2ddc286b_4f2a_4173_9454_e87a4909b777\" isExecutable=\"true\" name=\"playbook_2ddc286b_4f2a_4173_9454_e87a4909b777\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0xc4fz7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1f6t08i\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"Push Emails to DataTables\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d1f93d76-809d-425f-a9ec-02dcb2637a98\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1c3r0q5\u003c/incoming\u003e\u003coutgoing\u003eFlow_1f6t08i\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cserviceTask id=\"ServiceTask_5\" name=\"Exchange Find Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e8d8dcd1-3c3e-4974-be3e-7aba129a01eb\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# For information on input values, read tooltips\\ninputs.exchange_email_operation = \\\"QUERIED\\\"\\n\\ninputs.exchange_email           = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_email_ids       = getattr(playbook.inputs, \\\"exchange_email_ids\\\", None)\\ninputs.exchange_sender          = getattr(playbook.inputs, \\\"exchange_sender\\\", None)\\ninputs.exchange_message_subject = getattr(playbook.inputs, \\\"exchange_message_subject\\\", None)\\ninputs.exchange_start_date      = getattr(playbook.inputs, \\\"exchange_start_date\\\", None)\\ninputs.exchange_end_date        = getattr(playbook.inputs, \\\"exchange_end_date\\\", None)\\ninputs.exchange_num_emails      = getattr(playbook.inputs, \\\"exchange_num_emails\\\", None)\\ninputs.exchange_folder_path     = getattr(playbook.inputs, \\\"exchange_folder_path\\\", None)\\n\\ninputs.exchange_order_by_recency  = getattr(playbook.inputs, \\\"exchange_order_by_recency\\\", None)\\ninputs.exchange_search_subfolders = getattr(playbook.inputs, \\\"exchange_search_subfolders\\\", None)\\ninputs.exchange_has_attachments   = getattr(playbook.inputs, \\\"exchange_has_attachments\\\", None)\\n\\nif playbook.inputs.exchange_message_body and playbook.inputs.exchange_message_body.content:\\n  inputs.exchange_message_body = playbook.inputs.exchange_message_body.content\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_emails\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xc4fz7\u003c/incoming\u003e\u003coutgoing\u003eFlow_1c3r0q5\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1f6t08i\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_4\"/\u003e\u003csequenceFlow id=\"Flow_1c3r0q5\" sourceRef=\"ServiceTask_5\" targetRef=\"ScriptTask_6\"/\u003e\u003csequenceFlow id=\"Flow_0xc4fz7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2ddc286b_4f2a_4173_9454_e87a4909b777\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xc4fz7\" id=\"Flow_0xc4fz7_di\"\u003e\u003comgdi:waypoint x=\"540\" y=\"-214\"/\u003e\u003comgdi:waypoint x=\"540\" y=\"-142\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1c3r0q5\" id=\"Flow_1c3r0q5_di\"\u003e\u003comgdi:waypoint x=\"540\" y=\"-58\"/\u003e\u003comgdi:waypoint x=\"540\" y=\"18\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1f6t08i\" id=\"Flow_1f6t08i_di\"\u003e\u003comgdi:waypoint x=\"540\" y=\"102\"/\u003e\u003comgdi:waypoint x=\"540\" y=\"184\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"446\" y=\"-266\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_5\" id=\"ServiceTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"442\" y=\"-142\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"442\" y=\"18\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"474\" y=\"184\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2ddc286b_4f2a_4173_9454_e87a4909b777\" isExecutable=\"true\" name=\"playbook_2ddc286b_4f2a_4173_9454_e87a4909b777\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0xc4fz7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1f6t08i\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"Push Emails to DataTables\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d1f93d76-809d-425f-a9ec-02dcb2637a98\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1c3r0q5\u003c/incoming\u003e\u003coutgoing\u003eFlow_1f6t08i\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cserviceTask id=\"ServiceTask_5\" name=\"Exchange Find Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e8d8dcd1-3c3e-4974-be3e-7aba129a01eb\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# For information on input values, read tooltips\\ninputs.exchange_email_operation = \\\"QUERIED\\\"\\n\\ninputs.exchange_email           = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_email_ids       = getattr(playbook.inputs, \\\"exchange_email_ids\\\", None)\\ninputs.exchange_sender          = getattr(playbook.inputs, \\\"exchange_sender\\\", None)\\ninputs.exchange_message_subject = getattr(playbook.inputs, \\\"exchange_message_subject\\\", None)\\ninputs.exchange_start_date      = getattr(playbook.inputs, \\\"exchange_start_date\\\", None)\\ninputs.exchange_end_date        = getattr(playbook.inputs, \\\"exchange_end_date\\\", None)\\ninputs.exchange_num_emails      = getattr(playbook.inputs, \\\"exchange_num_emails\\\", None)\\ninputs.exchange_folder_path     = getattr(playbook.inputs, \\\"exchange_folder_path\\\", None)\\n\\ninputs.exchange_order_by_recency  = getattr(playbook.inputs, \\\"exchange_order_by_recency\\\", None)\\ninputs.exchange_search_subfolders = getattr(playbook.inputs, \\\"exchange_search_subfolders\\\", None)\\ninputs.exchange_has_attachments   = getattr(playbook.inputs, \\\"exchange_has_attachments\\\", None)\\n\\nif playbook.inputs.exchange_message_body and playbook.inputs.exchange_message_body.content:\\n  inputs.exchange_message_body = playbook.inputs.exchange_message_body.content\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_emails\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xc4fz7\u003c/incoming\u003e\u003coutgoing\u003eFlow_1c3r0q5\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1f6t08i\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_4\"/\u003e\u003csequenceFlow id=\"Flow_1c3r0q5\" sourceRef=\"ServiceTask_5\" targetRef=\"ScriptTask_6\"/\u003e\u003csequenceFlow id=\"Flow_0xc4fz7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2ddc286b_4f2a_4173_9454_e87a4909b777\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xc4fz7\" id=\"Flow_0xc4fz7_di\"\u003e\u003comgdi:waypoint x=\"540\" y=\"-214\"/\u003e\u003comgdi:waypoint x=\"540\" y=\"-142\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1c3r0q5\" id=\"Flow_1c3r0q5_di\"\u003e\u003comgdi:waypoint x=\"540\" y=\"-58\"/\u003e\u003comgdi:waypoint x=\"540\" y=\"18\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1f6t08i\" id=\"Flow_1f6t08i_di\"\u003e\u003comgdi:waypoint x=\"540\" y=\"102\"/\u003e\u003comgdi:waypoint x=\"540\" y=\"184\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"446\" y=\"-266\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_5\" id=\"ServiceTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"442\" y=\"-142\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"442\" y=\"18\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"474\" y=\"184\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682341096087,
+      "create_date": 1747300250810,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -2576,7 +2601,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_email",
             "hide_notification": false,
-            "id": 774,
+            "id": 838,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2591,7 +2616,7 @@
             "templates": [],
             "text": "Email address",
             "tooltip": "Email account that is used to perform this action.",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "844d6d04-f749-492b-9ff9-82a2d0ad409a",
             "values": []
           },
@@ -2605,7 +2630,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_email_ids",
             "hide_notification": false,
-            "id": 775,
+            "id": 839,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2620,7 +2645,7 @@
             "templates": [],
             "text": "Message ID",
             "tooltip": "Comma separated list of message Ids. Retrieve emails with specific unique Ids",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "948b734d-646b-46b7-aada-88aef0ce6cd3",
             "values": []
           },
@@ -2634,7 +2659,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_end_date",
             "hide_notification": false,
-            "id": 776,
+            "id": 840,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -2649,7 +2674,7 @@
             "templates": [],
             "text": "End-date",
             "tooltip": "Get emails until after this date, leave empty to not set an end date",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "2de37d63-dc2b-4972-a015-7fb977b961a1",
             "values": []
           },
@@ -2663,7 +2688,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_folder_path",
             "hide_notification": false,
-            "id": 777,
+            "id": 841,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2678,7 +2703,7 @@
             "templates": [],
             "text": "Source Location",
             "tooltip": "Comma separated list of folder paths to query from or the location from which mails are to be moved",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "08dc8716-fcbc-4828-8c1d-21047ce7e7d7",
             "values": []
           },
@@ -2692,7 +2717,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_has_attachments",
             "hide_notification": false,
-            "id": 778,
+            "id": 842,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -2707,7 +2732,7 @@
             "templates": [],
             "text": "Has Attachments",
             "tooltip": "Yes to include attachments, No to exclude attachments, Unknown to get all",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "18423e77-2aa5-4e7e-bab5-6441bc43ffc3",
             "values": []
           },
@@ -2721,7 +2746,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_is_online_meeting",
             "hide_notification": false,
-            "id": 779,
+            "id": 843,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -2736,7 +2761,7 @@
             "templates": [],
             "text": "Online Meeting",
             "tooltip": "Yes, if the location provided above is a URL, else No",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "eafde17c-3880-4851-965a-931619dc3297",
             "values": []
           },
@@ -2750,7 +2775,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_meeting_body",
             "hide_notification": false,
-            "id": 780,
+            "id": 844,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -2765,7 +2790,7 @@
             "templates": [],
             "text": "Invite Body",
             "tooltip": "Body of the meeting invite",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "8b509564-5f09-4d74-aef3-6ed52716c031",
             "values": []
           },
@@ -2779,7 +2804,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_meeting_end_time",
             "hide_notification": false,
-            "id": 781,
+            "id": 845,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -2794,7 +2819,7 @@
             "templates": [],
             "text": "End Time",
             "tooltip": "",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "409cc704-80fb-4998-9ab3-68bf2f94a4bc",
             "values": []
           },
@@ -2808,7 +2833,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_meeting_location",
             "hide_notification": false,
-            "id": 782,
+            "id": 846,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2823,7 +2848,7 @@
             "templates": [],
             "text": "Location",
             "tooltip": "If the meeting is conducted online, then the URL to the Room. Or the Name of the Physical location of the Meeting Room",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "0b74f035-9d03-4124-aada-2b7e2fcb0c5e",
             "values": []
           },
@@ -2837,7 +2862,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_meeting_start_time",
             "hide_notification": false,
-            "id": 783,
+            "id": 847,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -2852,7 +2877,7 @@
             "templates": [],
             "text": "Start Time",
             "tooltip": "Date and time of the meeting",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "862383da-4011-455c-a07d-7696462d2fea",
             "values": []
           },
@@ -2866,7 +2891,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_meeting_subject",
             "hide_notification": false,
-            "id": 784,
+            "id": 848,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2881,7 +2906,7 @@
             "templates": [],
             "text": "Invite Subject",
             "tooltip": "Subject of the meeting",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "2d44c47f-339f-4df9-bff7-3630dc205e78",
             "values": []
           },
@@ -2895,7 +2920,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_message_body",
             "hide_notification": false,
-            "id": 785,
+            "id": 849,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -2910,7 +2935,7 @@
             "templates": [],
             "text": "Email Body",
             "tooltip": "Text for the message body of an email to query or to send, depending on the function.",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "f27e15f2-3c11-458f-bc5a-6609ad9e3efc",
             "values": []
           },
@@ -2924,7 +2949,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_message_subject",
             "hide_notification": false,
-            "id": 786,
+            "id": 850,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2939,7 +2964,7 @@
             "templates": [],
             "text": "Email Subject",
             "tooltip": "Text for the subject of an email to query or send depending on the function.",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "645e6928-d241-4e69-9b7c-117469544132",
             "values": []
           },
@@ -2953,7 +2978,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_num_emails",
             "hide_notification": false,
-            "id": 787,
+            "id": 851,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -2968,7 +2993,7 @@
             "templates": [],
             "text": "Limit Emails",
             "tooltip": "Limits the retrieved emails to the specified number",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "c32557d9-3c3d-488c-bf0d-ed4b189068c8",
             "values": []
           },
@@ -2982,7 +3007,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_optional_attendees",
             "hide_notification": false,
-            "id": 788,
+            "id": 852,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2997,7 +3022,7 @@
             "templates": [],
             "text": "Optional Attendees",
             "tooltip": "Comma separated list of attendees that are mandatory for the meeting",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "c41ed79d-e9c1-411f-b45f-8f34ed4c3746",
             "values": []
           },
@@ -3011,7 +3036,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_order_by_recency",
             "hide_notification": false,
-            "id": 789,
+            "id": 853,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -3026,7 +3051,7 @@
             "templates": [],
             "text": "Order-by recency",
             "tooltip": "Yes to get newest emails first, No to get oldest emails first, Unknown to ignore time sent",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "359d7236-3d7a-4403-abb7-421301a0301e",
             "values": []
           },
@@ -3040,7 +3065,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_required_attendees",
             "hide_notification": false,
-            "id": 790,
+            "id": 854,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3055,7 +3080,7 @@
             "templates": [],
             "text": "Required Attendees",
             "tooltip": "Comma separated list of attendees that are mandatory for the meeting",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "fa460a51-5932-440e-a312-ea4a67a776b4",
             "values": []
           },
@@ -3069,7 +3094,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_search_subfolders",
             "hide_notification": false,
-            "id": 791,
+            "id": 855,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -3084,7 +3109,7 @@
             "templates": [],
             "text": "Search sub-folders",
             "tooltip": "Yes to search subfolders, No or Unknown to not search subfolders",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "59fb05f1-6e19-447e-8049-c6c47c5536ec",
             "values": []
           },
@@ -3098,7 +3123,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_sender",
             "hide_notification": false,
-            "id": 792,
+            "id": 856,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3113,7 +3138,7 @@
             "templates": [],
             "text": "Sender Address",
             "tooltip": "Only get emails from this sender, leave blank to ignore sender attribute",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "31adb4c2-13ca-47d4-9100-42fcdd8c38ac",
             "values": []
           },
@@ -3127,7 +3152,7 @@
             "deprecated": false,
             "export_key": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777/exchange_start_date",
             "hide_notification": false,
-            "id": 793,
+            "id": 857,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -3142,7 +3167,7 @@
             "templates": [],
             "text": "Start Date",
             "tooltip": "Get emails on or after this date, leave empty to not set a start date",
-            "type_id": 1038,
+            "type_id": 1013,
             "uuid": "9669956f-f836-4733-8963-79eddcfab949",
             "values": []
           }
@@ -3167,27 +3192,27 @@
         "uuid": "973a552b-36c8-4323-ab68-ec96d19c6c91"
       },
       "has_logical_errors": false,
-      "id": 36,
+      "id": 10,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682341162350,
+      "last_modified_time": 1747300253168,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1682341096459,
+          "created_date": 1747300252246,
           "description": "A post-processing script that processes the meeting invite and creates a note or adds it as an entry to the Datatable",
           "enabled": false,
           "export_key": "Postprocess Meeting Invite",
-          "id": 33,
+          "id": 11,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682341096475,
+          "last_modified_time": 1747300252246,
           "name": "Postprocess Meeting Invite",
           "object_type": "incident",
           "playbook_handle": "playbooks_exchange_find_email",
@@ -3346,7 +3371,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_2ddc286b-4f2a-4173-9454-e87a4909b777",
-        "id": 38,
+        "id": 10,
         "name": "playbook_2ddc286b_4f2a_4173_9454_e87a4909b777",
         "type": "playbook",
         "uuid": "8de8a9cc-de71-4bf5-9128-b60b109c4597"
@@ -3354,18 +3379,18 @@
       "tags": [],
       "type": "default",
       "uuid": "2ddc286b-4f2a-4173-9454-e87a4909b777",
-      "version": 5
+      "version": 3
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_980f6632_175c_46c3_b32d_8b9098b79ca0\" isExecutable=\"true\" name=\"playbook_980f6632_175c_46c3_b32d_8b9098b79ca0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0msnc59\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Get Mailbox Info\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b6813ac5-8dbd-40f2-8a32-dc0b92ea878f\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exchange_get_email = getattr(playbook.inputs, \\\"exchange_get_email\\\", None)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_get_mailbox\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0msnc59\u003c/incoming\u003e\u003coutgoing\u003eFlow_0wnfili\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_14fq8fn\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0wnfili\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0msnc59\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Write Information to Notes\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"29ef4a16-3733-489a-86c9-a5ecb86c3105\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wnfili\u003c/incoming\u003e\u003coutgoing\u003eFlow_14fq8fn\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_14fq8fn\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_980f6632_175c_46c3_b32d_8b9098b79ca0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14fq8fn\" id=\"Flow_14fq8fn_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"472\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"544\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0msnc59\" id=\"Flow_0msnc59_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wnfili\" id=\"Flow_0wnfili_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"388\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"388\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"544\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_980f6632_175c_46c3_b32d_8b9098b79ca0\" isExecutable=\"true\" name=\"playbook_980f6632_175c_46c3_b32d_8b9098b79ca0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0msnc59\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Get Mailbox Info\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"b6813ac5-8dbd-40f2-8a32-dc0b92ea878f\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exchange_get_email = getattr(playbook.inputs, \\\"exchange_get_email\\\", None)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_get_mailbox\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0msnc59\u003c/incoming\u003e\u003coutgoing\u003eFlow_0wnfili\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_14fq8fn\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0wnfili\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0msnc59\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Write Information to Notes\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"29ef4a16-3733-489a-86c9-a5ecb86c3105\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wnfili\u003c/incoming\u003e\u003coutgoing\u003eFlow_14fq8fn\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_14fq8fn\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_980f6632_175c_46c3_b32d_8b9098b79ca0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14fq8fn\" id=\"Flow_14fq8fn_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"472\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"544\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0msnc59\" id=\"Flow_0msnc59_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wnfili\" id=\"Flow_0wnfili_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"388\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"388\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"544\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682341096690,
+      "create_date": 1747300253199,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -3392,7 +3417,7 @@
             "deprecated": false,
             "export_key": "playbook_980f6632_175c_46c3_b32d_8b9098b79ca0/exchange_get_email",
             "hide_notification": false,
-            "id": 794,
+            "id": 858,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3407,7 +3432,7 @@
             "templates": [],
             "text": "Mailbox ID",
             "tooltip": "Email address of the mailbox",
-            "type_id": 1039,
+            "type_id": 1014,
             "uuid": "5d2afa49-5694-4b96-8ca8-cf62bec69536",
             "values": []
           }
@@ -3432,27 +3457,27 @@
         "uuid": "f69112fa-b484-4216-bf90-319482650813"
       },
       "has_logical_errors": false,
-      "id": 37,
+      "id": 11,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682341162636,
+      "last_modified_time": 1747300254468,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1682341096764,
+          "created_date": 1747300253531,
           "description": "This script writes mailbox information to notes",
           "enabled": false,
           "export_key": "Write Information to Notes",
-          "id": 34,
+          "id": 12,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682341096778,
+          "last_modified_time": 1747300253531,
           "name": "Write Information to Notes",
           "object_type": "incident",
           "playbook_handle": "playbook_exchange_get_mailbox_info",
@@ -3491,7 +3516,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_980f6632-175c-46c3-b32d-8b9098b79ca0",
-        "id": 39,
+        "id": 11,
         "name": "playbook_980f6632_175c_46c3_b32d_8b9098b79ca0",
         "type": "playbook",
         "uuid": "4a4a3172-26cb-4734-8107-dd0b884adec7"
@@ -3499,18 +3524,18 @@
       "tags": [],
       "type": "default",
       "uuid": "980f6632-175c-46c3-b32d-8b9098b79ca0",
-      "version": 5
+      "version": 3
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963\" isExecutable=\"true\" name=\"playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1kyausf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Move Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4caa6dc8-1ac6-4b54-bb97-6f8e041bf067\"\u003e{\"inputs\":{\"b34e0c16-3511-4708-9c83-338aff49a43e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"annmarie.n@exchange2016.com\"}},\"68b57992-1013-4b8e-a346-ad2bf7bab85c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9b5b8a91-0a07-493b-9eaf-7d55e0bdcc1a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"6a692281-1bf5-425e-b80b-2552a1d974bf\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fb62c41a-089a-4e9d-8120-a1881d488802\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"448eb40d-862e-4060-b9fb-533cad926d60\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"083a1b4e-a13d-4d4c-9b96-91a3be1358d4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"4defd9b6-dc74-45b4-a2e7-ca475684251f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"59ebdb1b-13d1-428f-9ee9-0b5f22716d15\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"f01a2772-3982-4775-add9-ddf5d186a676\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"f2f42571-196f-4de3-b974-44afe622b14e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"00cff531-cd95-4db4-b043-f8afbf05182c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d74ad5b7-34c0-40ab-9e67-78ddda58964f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fd95941a-4ce2-4c29-9ff5-7cbb478992b4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"a442703a-a3c4-405f-84c7-8d88c6798ce9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"598dd034-5efb-49af-a8bd-10b40218515a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"# For information on input values, read tooltips\\ninputs.exchange_email_operation = \\\"MOVED\\\"\\ninputs.exchange_delete_source_folder = True\\n\\ninputs.exchange_email                   = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_folder_path             = getattr(playbook.inputs, \\\"exchange_folder_path\\\", None)\\ninputs.exchange_destination_folder_path = getattr(playbook.inputs, \\\"exchange_destination_folder_path\\\", None)\\ninputs.exchange_force_delete_subfolders = getattr(playbook.inputs, \\\"exchange_force_delete_subfolders\\\", False)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_emails\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1kyausf\u003c/incoming\u003e\u003coutgoing\u003eFlow_17jksda\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1kyausf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Push Emails to DataTables\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d1f93d76-809d-425f-a9ec-02dcb2637a98\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_17jksda\u003c/incoming\u003e\u003coutgoing\u003eFlow_04ykqx0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_17jksda\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_04ykqx0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_04ykqx0\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_04ykqx0\" id=\"Flow_04ykqx0_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"-468\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"-326\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17jksda\" id=\"Flow_17jksda_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"-658\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"-552\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kyausf\" id=\"Flow_1kyausf_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"-864\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"-742\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"646\" y=\"-916\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"641.5419999999999\" y=\"-742.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642\" y=\"-552.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"674\" y=\"-326.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963\" isExecutable=\"true\" name=\"playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1kyausf\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Move Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4caa6dc8-1ac6-4b54-bb97-6f8e041bf067\"\u003e{\"inputs\":{\"b34e0c16-3511-4708-9c83-338aff49a43e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"annmarie.n@exchange2016.com\"}},\"68b57992-1013-4b8e-a346-ad2bf7bab85c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9b5b8a91-0a07-493b-9eaf-7d55e0bdcc1a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"6a692281-1bf5-425e-b80b-2552a1d974bf\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fb62c41a-089a-4e9d-8120-a1881d488802\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"448eb40d-862e-4060-b9fb-533cad926d60\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"083a1b4e-a13d-4d4c-9b96-91a3be1358d4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"4defd9b6-dc74-45b4-a2e7-ca475684251f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"59ebdb1b-13d1-428f-9ee9-0b5f22716d15\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"f01a2772-3982-4775-add9-ddf5d186a676\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"f2f42571-196f-4de3-b974-44afe622b14e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"00cff531-cd95-4db4-b043-f8afbf05182c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d74ad5b7-34c0-40ab-9e67-78ddda58964f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fd95941a-4ce2-4c29-9ff5-7cbb478992b4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"a442703a-a3c4-405f-84c7-8d88c6798ce9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"598dd034-5efb-49af-a8bd-10b40218515a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"# For information on input values, read tooltips\\ninputs.exchange_email_operation = \\\"MOVED\\\"\\ninputs.exchange_delete_source_folder = True\\n\\ninputs.exchange_email                   = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_folder_path             = getattr(playbook.inputs, \\\"exchange_folder_path\\\", None)\\ninputs.exchange_destination_folder_path = getattr(playbook.inputs, \\\"exchange_destination_folder_path\\\", None)\\ninputs.exchange_force_delete_subfolders = getattr(playbook.inputs, \\\"exchange_force_delete_subfolders\\\", False)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_emails\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1kyausf\u003c/incoming\u003e\u003coutgoing\u003eFlow_17jksda\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1kyausf\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Push Emails to DataTables\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d1f93d76-809d-425f-a9ec-02dcb2637a98\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_17jksda\u003c/incoming\u003e\u003coutgoing\u003eFlow_04ykqx0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_17jksda\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_04ykqx0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_04ykqx0\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_04ykqx0\" id=\"Flow_04ykqx0_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"-468\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"-326\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17jksda\" id=\"Flow_17jksda_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"-658\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"-552\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kyausf\" id=\"Flow_1kyausf_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"-864\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"-742\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"646\" y=\"-916\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"641.5419999999999\" y=\"-742.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642\" y=\"-552.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"674\" y=\"-326.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682341096991,
+      "create_date": 1747300254520,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -3537,7 +3562,7 @@
             "deprecated": false,
             "export_key": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963/exchange_destination_folder_path",
             "hide_notification": false,
-            "id": 795,
+            "id": 859,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3552,7 +3577,7 @@
             "templates": [],
             "text": "Destination Folder",
             "tooltip": "Folder path of destination folder from root folder, leave empty for root folder",
-            "type_id": 1040,
+            "type_id": 1015,
             "uuid": "909b338d-a768-4e21-af2a-4ae2b135318e",
             "values": []
           },
@@ -3566,7 +3591,7 @@
             "deprecated": false,
             "export_key": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963/exchange_email",
             "hide_notification": false,
-            "id": 796,
+            "id": 860,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3581,7 +3606,7 @@
             "templates": [],
             "text": "Email address",
             "tooltip": "Email account that is used to perform this operation",
-            "type_id": 1040,
+            "type_id": 1015,
             "uuid": "4ac2cce1-2e11-4d42-87dd-415dc246c3d5",
             "values": []
           },
@@ -3595,7 +3620,7 @@
             "deprecated": false,
             "export_key": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963/exchange_folder_path",
             "hide_notification": false,
-            "id": 797,
+            "id": 861,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3610,7 +3635,7 @@
             "templates": [],
             "text": "Source Location",
             "tooltip": "Comma separated list of folder paths to query from or the location from which mails are to be moved",
-            "type_id": 1040,
+            "type_id": 1015,
             "uuid": "ea6083ee-ec49-42aa-908f-b9f4d66a0ae4",
             "values": []
           },
@@ -3624,7 +3649,7 @@
             "deprecated": false,
             "export_key": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963/exchange_force_delete_subfolders",
             "hide_notification": false,
-            "id": 798,
+            "id": 862,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -3639,7 +3664,7 @@
             "templates": [],
             "text": "Force delete subfolders",
             "tooltip": "Yes to delete even if the folder has subfolders else stops the deletion process",
-            "type_id": 1040,
+            "type_id": 1015,
             "uuid": "71ec2d5e-1d72-4801-a9b4-3c7ddb656303",
             "values": []
           }
@@ -3664,16 +3689,16 @@
         "uuid": "468546bc-846e-4106-a53a-21195f4957a1"
       },
       "has_logical_errors": false,
-      "id": 38,
+      "id": 12,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682341162975,
+      "last_modified_time": 1747300255986,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -3736,7 +3761,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_29a00aff-ee2d-4048-9bbc-90b4bd2b8963",
-        "id": 40,
+        "id": 12,
         "name": "playbook_29a00aff_ee2d_4048_9bbc_90b4bd2b8963",
         "type": "playbook",
         "uuid": "fad8648d-2f56-4fcd-8dd7-ff1d82a20617"
@@ -3744,18 +3769,18 @@
       "tags": [],
       "type": "default",
       "uuid": "29a00aff-ee2d-4048-9bbc-90b4bd2b8963",
-      "version": 5
+      "version": 3
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_f80a68a8_2f09_4e56_beac_0860d89092ca\" isExecutable=\"true\" name=\"playbook_f80a68a8_2f09_4e56_beac_0860d89092ca\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1kb1qbu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Move Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4caa6dc8-1ac6-4b54-bb97-6f8e041bf067\"\u003e{\"inputs\":{\"b34e0c16-3511-4708-9c83-338aff49a43e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"annmarie.n@exchange2016.com\"}},\"68b57992-1013-4b8e-a346-ad2bf7bab85c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9b5b8a91-0a07-493b-9eaf-7d55e0bdcc1a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"6a692281-1bf5-425e-b80b-2552a1d974bf\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fb62c41a-089a-4e9d-8120-a1881d488802\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"448eb40d-862e-4060-b9fb-533cad926d60\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"083a1b4e-a13d-4d4c-9b96-91a3be1358d4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"4defd9b6-dc74-45b4-a2e7-ca475684251f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"59ebdb1b-13d1-428f-9ee9-0b5f22716d15\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"f01a2772-3982-4775-add9-ddf5d186a676\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"f2f42571-196f-4de3-b974-44afe622b14e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"00cff531-cd95-4db4-b043-f8afbf05182c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d74ad5b7-34c0-40ab-9e67-78ddda58964f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fd95941a-4ce2-4c29-9ff5-7cbb478992b4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"a442703a-a3c4-405f-84c7-8d88c6798ce9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"# For information on input values, read tooltips\\ninputs.exchange_email_operation = \\\"MOVED\\\"\\ninputs.exchange_delete_source_folder = False\\n\\ninputs.exchange_folder_path = getattr(playbook.inputs, \\\"exchange_folder_path\\\", None)\\ninputs.exchange_destination_folder_path = getattr(playbook.inputs, \\\"exchange_destination_folder_path\\\", None)\\ninputs.exchange_force_delete_subfolders = getattr(playbook.inputs, \\\"exchange_force_delete_subfolders\\\", False)\\n\\ninputs.exchange_email           = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_email_ids       = getattr(playbook.inputs, \\\"exchange_email_ids\\\", None)\\ninputs.exchange_sender          = getattr(playbook.inputs, \\\"exchange_sender\\\", None)\\ninputs.exchange_message_subject = getattr(playbook.inputs, \\\"exchange_message_subject\\\", None)\\ninputs.exchange_start_date      = getattr(playbook.inputs, \\\"exchange_start_date\\\", None)\\ninputs.exchange_end_date        = getattr(playbook.inputs, \\\"exchange_end_date\\\", None)\\ninputs.exchange_num_emails      = getattr(playbook.inputs, \\\"exchange_num_emails\\\", None)\\n\\ninputs.exchange_order_by_recency  = getattr(playbook.inputs, \\\"exchange_order_by_recency\\\", None)\\ninputs.exchange_search_subfolders = getattr(playbook.inputs, \\\"exchange_search_subfolders\\\", None)\\ninputs.exchange_has_attachments   = getattr(playbook.inputs, \\\"exchange_has_attachments\\\", None)\\n\\nif playbook.inputs.exchange_message_body and playbook.inputs.exchange_message_body.content:\\n  inputs.exchange_message_body = playbook.inputs.exchange_message_body.content\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_emails\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1kb1qbu\u003c/incoming\u003e\u003coutgoing\u003eFlow_1pz417l\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1kb1qbu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Push Emails to DataTables\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d1f93d76-809d-425f-a9ec-02dcb2637a98\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1pz417l\u003c/incoming\u003e\u003coutgoing\u003eFlow_03fgfvg\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1pz417l\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_03fgfvg\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_03fgfvg\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f80a68a8_2f09_4e56_beac_0860d89092ca\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03fgfvg\" id=\"Flow_03fgfvg_di\"\u003e\u003comgdi:waypoint x=\"640\" y=\"-208\"/\u003e\u003comgdi:waypoint x=\"640\" y=\"-126\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1pz417l\" id=\"Flow_1pz417l_di\"\u003e\u003comgdi:waypoint x=\"640\" y=\"-378\"/\u003e\u003comgdi:waypoint x=\"640\" y=\"-292\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kb1qbu\" id=\"Flow_1kb1qbu_di\"\u003e\u003comgdi:waypoint x=\"640\" y=\"-574\"/\u003e\u003comgdi:waypoint x=\"640\" y=\"-462\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"546\" y=\"-626\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"542\" y=\"-462\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"542\" y=\"-292\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"574\" y=\"-126\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f80a68a8_2f09_4e56_beac_0860d89092ca\" isExecutable=\"true\" name=\"playbook_f80a68a8_2f09_4e56_beac_0860d89092ca\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1kb1qbu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Move Emails\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"4caa6dc8-1ac6-4b54-bb97-6f8e041bf067\"\u003e{\"inputs\":{\"b34e0c16-3511-4708-9c83-338aff49a43e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"annmarie.n@exchange2016.com\"}},\"68b57992-1013-4b8e-a346-ad2bf7bab85c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9b5b8a91-0a07-493b-9eaf-7d55e0bdcc1a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"6a692281-1bf5-425e-b80b-2552a1d974bf\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fb62c41a-089a-4e9d-8120-a1881d488802\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"448eb40d-862e-4060-b9fb-533cad926d60\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"083a1b4e-a13d-4d4c-9b96-91a3be1358d4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"4defd9b6-dc74-45b4-a2e7-ca475684251f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"59ebdb1b-13d1-428f-9ee9-0b5f22716d15\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"f01a2772-3982-4775-add9-ddf5d186a676\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"f2f42571-196f-4de3-b974-44afe622b14e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"00cff531-cd95-4db4-b043-f8afbf05182c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"d74ad5b7-34c0-40ab-9e67-78ddda58964f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"fd95941a-4ce2-4c29-9ff5-7cbb478992b4\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"a442703a-a3c4-405f-84c7-8d88c6798ce9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"# For information on input values, read tooltips\\ninputs.exchange_email_operation = \\\"MOVED\\\"\\ninputs.exchange_delete_source_folder = False\\n\\ninputs.exchange_folder_path = getattr(playbook.inputs, \\\"exchange_folder_path\\\", None)\\ninputs.exchange_destination_folder_path = getattr(playbook.inputs, \\\"exchange_destination_folder_path\\\", None)\\ninputs.exchange_force_delete_subfolders = getattr(playbook.inputs, \\\"exchange_force_delete_subfolders\\\", False)\\n\\ninputs.exchange_email           = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_email_ids       = getattr(playbook.inputs, \\\"exchange_email_ids\\\", None)\\ninputs.exchange_sender          = getattr(playbook.inputs, \\\"exchange_sender\\\", None)\\ninputs.exchange_message_subject = getattr(playbook.inputs, \\\"exchange_message_subject\\\", None)\\ninputs.exchange_start_date      = getattr(playbook.inputs, \\\"exchange_start_date\\\", None)\\ninputs.exchange_end_date        = getattr(playbook.inputs, \\\"exchange_end_date\\\", None)\\ninputs.exchange_num_emails      = getattr(playbook.inputs, \\\"exchange_num_emails\\\", None)\\n\\ninputs.exchange_order_by_recency  = getattr(playbook.inputs, \\\"exchange_order_by_recency\\\", None)\\ninputs.exchange_search_subfolders = getattr(playbook.inputs, \\\"exchange_search_subfolders\\\", None)\\ninputs.exchange_has_attachments   = getattr(playbook.inputs, \\\"exchange_has_attachments\\\", None)\\n\\nif playbook.inputs.exchange_message_body and playbook.inputs.exchange_message_body.content:\\n  inputs.exchange_message_body = playbook.inputs.exchange_message_body.content\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_emails\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1kb1qbu\u003c/incoming\u003e\u003coutgoing\u003eFlow_1pz417l\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1kb1qbu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Push Emails to DataTables\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d1f93d76-809d-425f-a9ec-02dcb2637a98\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1pz417l\u003c/incoming\u003e\u003coutgoing\u003eFlow_03fgfvg\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1pz417l\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_03fgfvg\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_03fgfvg\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f80a68a8_2f09_4e56_beac_0860d89092ca\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03fgfvg\" id=\"Flow_03fgfvg_di\"\u003e\u003comgdi:waypoint x=\"640\" y=\"-208\"/\u003e\u003comgdi:waypoint x=\"640\" y=\"-126\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1pz417l\" id=\"Flow_1pz417l_di\"\u003e\u003comgdi:waypoint x=\"640\" y=\"-378\"/\u003e\u003comgdi:waypoint x=\"640\" y=\"-292\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kb1qbu\" id=\"Flow_1kb1qbu_di\"\u003e\u003comgdi:waypoint x=\"640\" y=\"-574\"/\u003e\u003comgdi:waypoint x=\"640\" y=\"-462\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"546\" y=\"-626\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"542\" y=\"-462\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"542\" y=\"-292\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"574\" y=\"-126\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682341097303,
+      "create_date": 1747300256016,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -3782,7 +3807,7 @@
             "deprecated": false,
             "export_key": "playbook_f80a68a8_2f09_4e56_beac_0860d89092ca/exchange_destination_folder_path",
             "hide_notification": false,
-            "id": 799,
+            "id": 863,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3797,7 +3822,7 @@
             "templates": [],
             "text": "Destination Location",
             "tooltip": "Folder path of destination folder from root folder, leave empty for root folder",
-            "type_id": 1041,
+            "type_id": 1016,
             "uuid": "4a9bec0a-0295-4d0c-8283-bbaeb84ac208",
             "values": []
           },
@@ -3811,7 +3836,7 @@
             "deprecated": false,
             "export_key": "playbook_f80a68a8_2f09_4e56_beac_0860d89092ca/exchange_email",
             "hide_notification": false,
-            "id": 800,
+            "id": 864,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3826,7 +3851,7 @@
             "templates": [],
             "text": "Email address",
             "tooltip": "Email account that is used to perform this operation",
-            "type_id": 1041,
+            "type_id": 1016,
             "uuid": "bc8ca08e-686a-4676-9e6b-7a0af3d7aca3",
             "values": []
           },
@@ -3840,7 +3865,7 @@
             "deprecated": false,
             "export_key": "playbook_f80a68a8_2f09_4e56_beac_0860d89092ca/exchange_email_ids",
             "hide_notification": false,
-            "id": 801,
+            "id": 865,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3855,7 +3880,7 @@
             "templates": [],
             "text": "Message ID",
             "tooltip": "Comma separated list of message Ids. Retrieve emails with specific unique Ids",
-            "type_id": 1041,
+            "type_id": 1016,
             "uuid": "3b731bed-e049-4710-b481-e77ba2bcdc64",
             "values": []
           },
@@ -3869,7 +3894,7 @@
             "deprecated": false,
             "export_key": "playbook_f80a68a8_2f09_4e56_beac_0860d89092ca/exchange_end_date",
             "hide_notification": false,
-            "id": 802,
+            "id": 866,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -3884,7 +3909,7 @@
             "templates": [],
             "text": "End date",
             "tooltip": "Get emails until after this date, leave empty to not set an end date",
-            "type_id": 1041,
+            "type_id": 1016,
             "uuid": "008a4acc-b896-4e71-a80d-23b1bf904c2d",
             "values": []
           },
@@ -3898,7 +3923,7 @@
             "deprecated": false,
             "export_key": "playbook_f80a68a8_2f09_4e56_beac_0860d89092ca/exchange_folder_path",
             "hide_notification": false,
-            "id": 803,
+            "id": 867,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3913,7 +3938,7 @@
             "templates": [],
             "text": "Source Location",
             "tooltip": "Comma separated list of folder paths to query from or the location from which mails are to be moved",
-            "type_id": 1041,
+            "type_id": 1016,
             "uuid": "c9cbde63-2551-4f63-8896-ea24f681a7da",
             "values": []
           },
@@ -3927,7 +3952,7 @@
             "deprecated": false,
             "export_key": "playbook_f80a68a8_2f09_4e56_beac_0860d89092ca/exchange_has_attachments",
             "hide_notification": false,
-            "id": 804,
+            "id": 868,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -3942,7 +3967,7 @@
             "templates": [],
             "text": "Has Attachments",
             "tooltip": "Yes to include attachments, No to exclude attachments, Unknown to get all",
-            "type_id": 1041,
+            "type_id": 1016,
             "uuid": "f1577ff7-5e8d-40e4-97c5-f24ffeecd8e0",
             "values": []
           },
@@ -3956,7 +3981,7 @@
             "deprecated": false,
             "export_key": "playbook_f80a68a8_2f09_4e56_beac_0860d89092ca/exchange_message_body",
             "hide_notification": false,
-            "id": 805,
+            "id": 869,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -3971,7 +3996,7 @@
             "templates": [],
             "text": "Email Body",
             "tooltip": "Text for the message body of an email to query or to send, depending on the function.",
-            "type_id": 1041,
+            "type_id": 1016,
             "uuid": "61db2196-d98e-4988-894f-a4ac0f6fe3c2",
             "values": []
           },
@@ -3985,7 +4010,7 @@
             "deprecated": false,
             "export_key": "playbook_f80a68a8_2f09_4e56_beac_0860d89092ca/exchange_message_subject",
             "hide_notification": false,
-            "id": 806,
+            "id": 870,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4000,7 +4025,7 @@
             "templates": [],
             "text": "Email Subject",
             "tooltip": "Text for the subject of an email to query or send depending on the function.",
-            "type_id": 1041,
+            "type_id": 1016,
             "uuid": "c1b5b8f4-aa63-49b0-b401-0a9e38cff504",
             "values": []
           },
@@ -4014,7 +4039,7 @@
             "deprecated": false,
             "export_key": "playbook_f80a68a8_2f09_4e56_beac_0860d89092ca/exchange_num_emails",
             "hide_notification": false,
-            "id": 807,
+            "id": 871,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -4029,7 +4054,7 @@
             "templates": [],
             "text": "Limit Email",
             "tooltip": "Limits the retrieved emails to the specified number",
-            "type_id": 1041,
+            "type_id": 1016,
             "uuid": "de6b1a3c-cb55-4ac1-ab20-57d2fbdc97c9",
             "values": []
           },
@@ -4043,7 +4068,7 @@
             "deprecated": false,
             "export_key": "playbook_f80a68a8_2f09_4e56_beac_0860d89092ca/exchange_order_by_recency",
             "hide_notification": false,
-            "id": 808,
+            "id": 872,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -4058,7 +4083,7 @@
             "templates": [],
             "text": "Order-by recency",
             "tooltip": "Yes to get newest emails first, No to get oldest emails first, Unknown to ignore time sent",
-            "type_id": 1041,
+            "type_id": 1016,
             "uuid": "6ab42a1b-fed1-48f5-b718-1395c2df3810",
             "values": []
           },
@@ -4072,7 +4097,7 @@
             "deprecated": false,
             "export_key": "playbook_f80a68a8_2f09_4e56_beac_0860d89092ca/exchange_search_subfolders",
             "hide_notification": false,
-            "id": 809,
+            "id": 873,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -4087,7 +4112,7 @@
             "templates": [],
             "text": "Search sub-folders",
             "tooltip": "Yes to search subfolders, No or Unknown to not search subfoldersd",
-            "type_id": 1041,
+            "type_id": 1016,
             "uuid": "cc9f3b42-8034-4859-9902-f75c333068c1",
             "values": []
           },
@@ -4101,7 +4126,7 @@
             "deprecated": false,
             "export_key": "playbook_f80a68a8_2f09_4e56_beac_0860d89092ca/exchange_sender",
             "hide_notification": false,
-            "id": 810,
+            "id": 874,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4116,7 +4141,7 @@
             "templates": [],
             "text": "Sender Address",
             "tooltip": "Only get emails from this sender, leave blank to ignore sender attribute",
-            "type_id": 1041,
+            "type_id": 1016,
             "uuid": "a804dce0-abbc-40cd-9534-7c95efcf79ff",
             "values": []
           },
@@ -4130,7 +4155,7 @@
             "deprecated": false,
             "export_key": "playbook_f80a68a8_2f09_4e56_beac_0860d89092ca/exchange_start_date",
             "hide_notification": false,
-            "id": 811,
+            "id": 875,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -4145,7 +4170,7 @@
             "templates": [],
             "text": "Start date",
             "tooltip": "Get emails on or after this date, leave empty to not set a start date",
-            "type_id": 1041,
+            "type_id": 1016,
             "uuid": "7a0a06a4-fac1-4e11-a4a3-90eccfa4c63a",
             "values": []
           }
@@ -4170,16 +4195,16 @@
         "uuid": "495f666c-68b7-48a1-8307-c2bd1e393572"
       },
       "has_logical_errors": false,
-      "id": 39,
+      "id": 13,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682341163329,
+      "last_modified_time": 1747300258099,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -4338,7 +4363,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_f80a68a8-2f09-4e56-beac-0860d89092ca",
-        "id": 41,
+        "id": 13,
         "name": "playbook_f80a68a8_2f09_4e56_beac_0860d89092ca",
         "type": "playbook",
         "uuid": "cf0a9581-0d30-44e6-997a-88bc546ec5c7"
@@ -4346,18 +4371,18 @@
       "tags": [],
       "type": "default",
       "uuid": "f80a68a8-2f09-4e56-beac-0860d89092ca",
-      "version": 5
+      "version": 3
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" targetNamespace=\"http://www.camunda.org/test\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\u003e\u003cprocess id=\"playbook_3dd89838_239b_4a92_8715_89a1ce35ab20\" isExecutable=\"true\" name=\"playbook_3dd89838_239b_4a92_8715_89a1ce35ab20\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1oxszau\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_1oxszau\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_5\"/\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0fqifyn\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_5\" name=\"Exchange Send Email\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a17b4b6d-5d21-413e-8d90-b7d95ebb79c0\"\u003e{\"inputs\":{\"b34e0c16-3511-4708-9c83-338aff49a43e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"annmarie.n@exchange2016.com\"}},\"3c92533f-7241-4d0e-b031-2bb4aa510ca9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"4defd9b6-dc74-45b4-a2e7-ca475684251f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"59ebdb1b-13d1-428f-9ee9-0b5f22716d15\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"# Set inputs\\ninputs.exchange_email            = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_message_subject  = getattr(playbook.inputs, \\\"exchange_message_subject\\\", None)\\ninputs.exchange_email_recipients = getattr(playbook.inputs, \\\"exchange_email_recipients\\\", None)\\n\\nif playbook.inputs.exchange_message_body and playbook.inputs.exchange_message_body.content:\\n  inputs.exchange_message_body = playbook.inputs.exchange_message_body.content\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_send_email\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1oxszau\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xoo0eh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0xoo0eh\" sourceRef=\"ServiceTask_5\" targetRef=\"ScriptTask_6\"/\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"Post Processing Email\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"973377cc-9298-4e45-8a55-ba1d9877ba81\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xoo0eh\u003c/incoming\u003e\u003coutgoing\u003eFlow_0fqifyn\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0fqifyn\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_3dd89838_239b_4a92_8715_89a1ce35ab20\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fqifyn\" id=\"Flow_0fqifyn_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"524\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xoo0eh\" id=\"Flow_0xoo0eh_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1oxszau\" id=\"Flow_1oxszau_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"126\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"636\" y=\"74\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"524\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_5\" id=\"ServiceTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"631.5\" y=\"377.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_3dd89838_239b_4a92_8715_89a1ce35ab20\" isExecutable=\"true\" name=\"playbook_3dd89838_239b_4a92_8715_89a1ce35ab20\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1oxszau\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_1oxszau\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_5\"/\u003e\u003cendEvent id=\"EndPoint_4\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0fqifyn\u003c/incoming\u003e\u003c/endEvent\u003e\u003cserviceTask id=\"ServiceTask_5\" name=\"Exchange Send Email\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"a17b4b6d-5d21-413e-8d90-b7d95ebb79c0\"\u003e{\"inputs\":{\"b34e0c16-3511-4708-9c83-338aff49a43e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"annmarie.n@exchange2016.com\"}},\"3c92533f-7241-4d0e-b031-2bb4aa510ca9\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"4defd9b6-dc74-45b4-a2e7-ca475684251f\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"59ebdb1b-13d1-428f-9ee9-0b5f22716d15\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"# Set inputs\\ninputs.exchange_email            = getattr(playbook.inputs, \\\"exchange_email\\\", None)\\ninputs.exchange_message_subject  = getattr(playbook.inputs, \\\"exchange_message_subject\\\", None)\\ninputs.exchange_email_recipients = getattr(playbook.inputs, \\\"exchange_email_recipients\\\", None)\\n\\nif playbook.inputs.exchange_message_body and playbook.inputs.exchange_message_body.content:\\n  inputs.exchange_message_body = playbook.inputs.exchange_message_body.content\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"output_exchange_send_email\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1oxszau\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xoo0eh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0xoo0eh\" sourceRef=\"ServiceTask_5\" targetRef=\"ScriptTask_6\"/\u003e\u003cscriptTask id=\"ScriptTask_6\" name=\"Post Processing Email\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"973377cc-9298-4e45-8a55-ba1d9877ba81\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xoo0eh\u003c/incoming\u003e\u003coutgoing\u003eFlow_0fqifyn\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0fqifyn\" sourceRef=\"ScriptTask_6\" targetRef=\"EndPoint_4\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_3dd89838_239b_4a92_8715_89a1ce35ab20\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fqifyn\" id=\"Flow_0fqifyn_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"524\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xoo0eh\" id=\"Flow_0xoo0eh_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1oxszau\" id=\"Flow_1oxszau_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"126\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"636\" y=\"74\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_4\" id=\"EndPoint_4_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"524\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_5\" id=\"ServiceTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_6\" id=\"ScriptTask_6_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"631.5\" y=\"377.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1682341097760,
+      "create_date": 1747300258154,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -4384,7 +4409,7 @@
             "deprecated": false,
             "export_key": "playbook_3dd89838_239b_4a92_8715_89a1ce35ab20/exchange_email",
             "hide_notification": false,
-            "id": 812,
+            "id": 876,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4399,7 +4424,7 @@
             "templates": [],
             "text": "Email address",
             "tooltip": "Email account that is used to perform this action.",
-            "type_id": 1042,
+            "type_id": 1017,
             "uuid": "28111f94-d575-4215-93f3-ff00cf8d1581",
             "values": []
           },
@@ -4413,7 +4438,7 @@
             "deprecated": false,
             "export_key": "playbook_3dd89838_239b_4a92_8715_89a1ce35ab20/exchange_email_recipients",
             "hide_notification": false,
-            "id": 813,
+            "id": 877,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4428,7 +4453,7 @@
             "templates": [],
             "text": "Recipients",
             "tooltip": "Comma separated list of emails addresses",
-            "type_id": 1042,
+            "type_id": 1017,
             "uuid": "c1fc750f-eab2-4e58-a42b-b7945c662371",
             "values": []
           },
@@ -4442,7 +4467,7 @@
             "deprecated": false,
             "export_key": "playbook_3dd89838_239b_4a92_8715_89a1ce35ab20/exchange_message_body",
             "hide_notification": false,
-            "id": 814,
+            "id": 878,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -4457,7 +4482,7 @@
             "templates": [],
             "text": "Body",
             "tooltip": "Text for the message body of an email to query or to send, depending on the function.",
-            "type_id": 1042,
+            "type_id": 1017,
             "uuid": "f5e0735b-7c0b-4900-acad-935b0b8635e1",
             "values": []
           },
@@ -4471,7 +4496,7 @@
             "deprecated": false,
             "export_key": "playbook_3dd89838_239b_4a92_8715_89a1ce35ab20/exchange_message_subject",
             "hide_notification": false,
-            "id": 815,
+            "id": 879,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4486,7 +4511,7 @@
             "templates": [],
             "text": "Subject",
             "tooltip": "Text for the subject of an email to query or send depending on the function.",
-            "type_id": 1042,
+            "type_id": 1017,
             "uuid": "60f0bbd0-4ada-480b-9580-49c260014aeb",
             "values": []
           }
@@ -4511,27 +4536,27 @@
         "uuid": "dde794a4-eaab-48f7-91ff-0739328ee494"
       },
       "has_logical_errors": false,
-      "id": 40,
+      "id": 14,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
+        "display_name": "admin example",
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1682341163532,
+      "last_modified_time": 1747300259711,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1682341097886,
+          "created_date": 1747300258638,
           "description": "Post-processing script that processes the email and adds it to the datatable",
           "enabled": false,
           "export_key": "Post Processing Email",
-          "id": 35,
+          "id": 13,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682341097898,
+          "last_modified_time": 1747300258638,
           "name": "Post Processing Email",
           "object_type": "incident",
           "playbook_handle": "playbooks_exchange_send_email",
@@ -4542,14 +4567,14 @@
         },
         {
           "actions": [],
-          "created_date": 1682341097901,
+          "created_date": 1747300258698,
           "description": "A post-processing script that processes the meeting invite and creates a note or adds it as an entry to the Datatable",
           "enabled": false,
           "export_key": "Postprocess Meeting Invite",
-          "id": 36,
+          "id": 14,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1682341097915,
+          "last_modified_time": 1747300258698,
           "name": "Postprocess Meeting Invite",
           "object_type": "incident",
           "playbook_handle": "playbooks_exchange_send_email",
@@ -4620,7 +4645,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_3dd89838-239b-4a92-8715-89a1ce35ab20",
-        "id": 42,
+        "id": 14,
         "name": "playbook_3dd89838_239b_4a92_8715_89a1ce35ab20",
         "type": "playbook",
         "uuid": "05cbfd18-51ec-40d0-a256-4b40d7daff03"
@@ -4628,7 +4653,7 @@
       "tags": [],
       "type": "default",
       "uuid": "3dd89838-239b-4a92-8715-89a1ce35ab20",
-      "version": 5
+      "version": 3
     }
   ],
   "regulators": null,
@@ -4636,14 +4661,14 @@
   "scripts": [
     {
       "actions": [],
-      "created_date": 1682341093755,
+      "created_date": 1747300243603,
       "description": "Process all retrieved emails and load them into a data table in the Exchange On-Prem tab",
       "enabled": false,
       "export_key": "Push Emails to DataTables",
-      "id": 31,
+      "id": 9,
       "language": "python3",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1682341093772,
+      "last_modified_time": 1747300243603,
       "name": "Push Emails to DataTables",
       "object_type": "incident",
       "playbook_handle": null,
@@ -4654,10 +4679,14 @@
     }
   ],
   "server_version": {
-    "build_number": 8131,
-    "major": 46,
+    "build_number": 9339,
+    "f": 0,
+    "m": 0,
+    "major": 0,
     "minor": 0,
-    "version": "46.0.8131"
+    "r": 0,
+    "v": 51,
+    "version": "51.0.0.0.9339"
   },
   "tags": [],
   "task_order": [],
@@ -4678,7 +4707,7 @@
           "deprecated": false,
           "export_key": "exchange_dt_meeting_information/exchange_dt_created_time",
           "hide_notification": false,
-          "id": 299,
+          "id": 775,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4695,7 +4724,7 @@
           "templates": [],
           "text": "Created Time",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1009,
           "uuid": "f1840451-4556-436d-9c79-40c9c467fd08",
           "values": [],
           "width": 140
@@ -4710,7 +4739,7 @@
           "deprecated": false,
           "export_key": "exchange_dt_meeting_information/exchange_dt_end_time",
           "hide_notification": false,
-          "id": 300,
+          "id": 776,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4727,7 +4756,7 @@
           "templates": [],
           "text": "End Time",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1009,
           "uuid": "1611ec9e-9715-4001-894c-145d696b1ad1",
           "values": [],
           "width": 175
@@ -4742,7 +4771,7 @@
           "deprecated": false,
           "export_key": "exchange_dt_meeting_information/exchange_dt_mandatory_attendees",
           "hide_notification": false,
-          "id": 301,
+          "id": 777,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4759,7 +4788,7 @@
           "templates": [],
           "text": "Mandatory Attendees",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1009,
           "uuid": "4b71d288-df9c-4c2e-98f1-f3d0d6c36770",
           "values": [],
           "width": 245
@@ -4774,7 +4803,7 @@
           "deprecated": false,
           "export_key": "exchange_dt_meeting_information/exchange_dt_meeting_location",
           "hide_notification": false,
-          "id": 302,
+          "id": 778,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4791,7 +4820,7 @@
           "templates": [],
           "text": "Location",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1009,
           "uuid": "ce044181-ccf2-4461-834c-a26f59ae755d",
           "values": [],
           "width": 65
@@ -4806,7 +4835,7 @@
           "deprecated": false,
           "export_key": "exchange_dt_meeting_information/exchange_dt_meeting_subject",
           "hide_notification": false,
-          "id": 303,
+          "id": 779,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4823,7 +4852,7 @@
           "templates": [],
           "text": "Meeting Subject",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1009,
           "uuid": "550e005f-fe18-41f9-8ef4-8778067fc7f2",
           "values": [],
           "width": 233
@@ -4838,7 +4867,7 @@
           "deprecated": false,
           "export_key": "exchange_dt_meeting_information/exchange_dt_optional_attendees",
           "hide_notification": false,
-          "id": 304,
+          "id": 780,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4855,7 +4884,7 @@
           "templates": [],
           "text": "Optional Attendees",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1009,
           "uuid": "58d22ecf-f497-4e0b-bdfa-e410e580a7e7",
           "values": [],
           "width": 214
@@ -4870,7 +4899,7 @@
           "deprecated": false,
           "export_key": "exchange_dt_meeting_information/exchange_dt_start_time",
           "hide_notification": false,
-          "id": 305,
+          "id": 781,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4887,7 +4916,7 @@
           "templates": [],
           "text": "Start Time",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1009,
           "uuid": "8bcf0381-5583-4c09-82fe-6e627883f9b6",
           "values": [],
           "width": 178
@@ -4927,7 +4956,7 @@
           "deprecated": false,
           "export_key": "exchange_email_information_dt/exchange_date_of_retrieval",
           "hide_notification": false,
-          "id": 306,
+          "id": 782,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4944,7 +4973,7 @@
           "templates": [],
           "text": "Date of Retrieval",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1010,
           "uuid": "87213ec8-b12d-4ee3-9a44-1891010199d5",
           "values": [],
           "width": 132
@@ -4959,7 +4988,7 @@
           "deprecated": false,
           "export_key": "exchange_email_information_dt/exchange_dt_count_attachments",
           "hide_notification": false,
-          "id": 307,
+          "id": 783,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -4976,7 +5005,7 @@
           "templates": [],
           "text": "Attachments",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1010,
           "uuid": "97ee51f6-cb98-4645-9141-c2cafdb96daf",
           "values": [],
           "width": 98
@@ -4991,7 +5020,7 @@
           "deprecated": false,
           "export_key": "exchange_email_information_dt/exchange_dt_email_status",
           "hide_notification": false,
-          "id": 308,
+          "id": 784,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5008,7 +5037,7 @@
           "templates": [],
           "text": "Status",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1010,
           "uuid": "a32ccb29-15bd-4a68-8f9a-fa0719de7f36",
           "values": [],
           "width": 49
@@ -5023,7 +5052,7 @@
           "deprecated": false,
           "export_key": "exchange_email_information_dt/exchange_dt_message_id",
           "hide_notification": false,
-          "id": 309,
+          "id": 785,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5040,7 +5069,7 @@
           "templates": [],
           "text": "Message ID",
           "tooltip": "Unique ID of the message",
-          "type_id": 1001,
+          "type_id": 1010,
           "uuid": "f2cd7ab6-ceb6-4677-b266-b86b73ae1075",
           "values": [],
           "width": 441
@@ -5055,7 +5084,7 @@
           "deprecated": false,
           "export_key": "exchange_email_information_dt/exchange_dt_message_subject",
           "hide_notification": false,
-          "id": 310,
+          "id": 786,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5072,7 +5101,7 @@
           "templates": [],
           "text": "Message Subject",
           "tooltip": "Subject of the email",
-          "type_id": 1001,
+          "type_id": 1010,
           "uuid": "8a4d7301-aedf-4e8a-a479-2fc6929898bb",
           "values": [],
           "width": 205
@@ -5087,7 +5116,7 @@
           "deprecated": false,
           "export_key": "exchange_email_information_dt/exchange_dt_recipient_email",
           "hide_notification": false,
-          "id": 311,
+          "id": 787,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5104,7 +5133,7 @@
           "templates": [],
           "text": "Recipient Email Address",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1010,
           "uuid": "1867840e-a5e8-49a8-b4f8-52425dbbf889",
           "values": [],
           "width": 212
@@ -5119,7 +5148,7 @@
           "deprecated": false,
           "export_key": "exchange_email_information_dt/exchange_dt_sender_email",
           "hide_notification": false,
-          "id": 312,
+          "id": 788,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5136,7 +5165,7 @@
           "templates": [],
           "text": "Sender Email Address",
           "tooltip": "Email address of the sender",
-          "type_id": 1001,
+          "type_id": 1010,
           "uuid": "2fe4f22a-f094-4a32-a7e3-4bbf1e9c2e17",
           "values": [],
           "width": 223

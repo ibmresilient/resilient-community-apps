@@ -36,7 +36,7 @@ from fn_exchange.lib.exchange_helper import (
     ImpersonationError)
 
 
-class exchange_interface:
+class  exchange_interface:
 
     def __init__(self, rc, options:dict):
         self.rc = rc
