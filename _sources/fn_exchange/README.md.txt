@@ -42,6 +42,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| v2.0.1 | May 2024 | Bug fix for selftest failures |
 | v2.0.0 | February | UI update, Playbook Migration, Custom Layout, Data-tables, Timezone support and bug fixes |
 | v1.0.4 | September 2022 | Bugfix on Selftest |
 | v1.0.3 | June 2022 | Add support for Python 3.9. |
