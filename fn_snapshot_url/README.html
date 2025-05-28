@@ -463,6 +463,10 @@
 <td><p>01/2024</p></td>
 <td><p>Initial Release</p></td>
 </tr>
+<tr class="row-odd"><td><p>1.1.0</p></td>
+<td><p>05/2025</p></td>
+<td><p>Added function input snapshot_attachment_name</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -501,14 +505,14 @@
 <p>The SOAR platform supports two app deployment mechanisms, App Host and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">48.0.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">48.0.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient-circuits&gt;=48.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient-circuits&gt;=51.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -669,6 +673,12 @@ Additional package dependencies may exist for each of these packages:</p>
 <td><p>‘Yes’</p></td>
 <td><p>full page image or just initial page height image</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snapshot_attachment_name</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">my_attachment</span></code></p></td>
+<td><p>new for v1.1.0. name of attachment. If not used, the <code class="docutils literal notranslate"><span class="pre">snapshot_url</span></code> is used.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -693,7 +703,7 @@ Additional package dependencies may exist for each of these packages:</p>
     <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-snapshot-url&quot;</span><span class="p">,</span>
     <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
     <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-28 20:51:10&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.0&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
   <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -711,6 +721,8 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;snapshot_url_load_timeout&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">snapshot_timeout</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">snapshot_url_load_timeout</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">snapshot_fullpage</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">snapshot_full_screen_capture</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">snapshot_attachment_name</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">snapshot_attachment_name</span>
+
 </pre></div>
 </div>
 </p>
