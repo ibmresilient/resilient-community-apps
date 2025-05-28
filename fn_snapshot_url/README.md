@@ -43,6 +43,7 @@
 | Version | Date | Notes |
 | ------- | ---- | ----- |
 | 1.0.0 | 01/2024 | Initial Release | 
+| 1.1.0 | 05/2025 | Added function input snapshot_attachment_name | 
 
 ---
 
@@ -78,13 +79,13 @@ This implementation uses a FireFox or Chrome browser to perform the url lookup a
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `48.0.0`.
+* SOAR platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `48.0.0`.
+* SOAR platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient-circuits>=48.0.0`.
+* Integration server is running `resilient-circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -159,6 +160,7 @@ Snapshot URL as png image attachment.
 | `snapshot_url` | `text` | Yes | `-` | - |
 | `snapshot_timeout` | `number` | No | `30` | default is 30 seconds |
 | `snapshot_fullpage` | bool | No | 'Yes' | full page image or just initial page height image |
+| `snapshot_attachment_name` | `text` | No | `my_attachment` | new for v1.1.0. name of attachment. If not used, the `snapshot_url` is used. |
 
 </p>
 </details>
@@ -183,7 +185,7 @@ results = {
     "package": "fn-snapshot-url",
     "package_version": "1.0.0",
     "timestamp": "2023-12-28 20:51:10",
-    "version": "1.0"
+    "version": "1.1.0"
   },
   "raw": null,
   "reason": null,
@@ -204,6 +206,8 @@ inputs.snapshot_url = artifact.value
 if getattr(playbook.inputs, "snapshot_url_load_timeout", None):
   inputs.snapshot_timeout = playbook.inputs.snapshot_url_load_timeout
 inputs.snapshot_fullpage = playbook.inputs.snapshot_full_screen_capture
+inputs.snapshot_attachment_name = playbook.inputs.snapshot_attachment_name
+
 ```
 
 </p>

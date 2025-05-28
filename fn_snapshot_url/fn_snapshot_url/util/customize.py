@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v51.0.0.1.486
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# Generated with resilient-sdk v51.0.5.0.1475
 
 """Generate the SOAR customizations required for fn_snapshot_url"""
 
@@ -47,7 +47,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 48.2.45
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:

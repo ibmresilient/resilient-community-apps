@@ -57,6 +57,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.snapshot_incident_id
             -   fn_inputs.snapshot_timeout
             -   fn_inputs.snapshot_fullpage
+            -   fn_inputs.snapshot_attachment_name
         """
 
         yield self.status_message("Starting App Function: '{0}'".format(FN_NAME))
@@ -87,9 +88,11 @@ class FunctionComponent(AppFunctionComponent):
 
             bytes_io = BytesIO(png_bytes)
 
-            attachment_name = f"{fn_inputs.snapshot_url}.png"
+            attachment_name = fn_inputs.snapshot_attachment_name if getattr(fn_inputs, "snapshot_attachment_name", None) \
+                            else fn_inputs.snapshot_url
+
             write_file_attachment(self.rest_client(),
-                                  attachment_name,
+                                 f"{attachment_name}.png",
                                   bytes_io,
                                   fn_inputs.snapshot_incident_id,
                                   content_type="image/png")

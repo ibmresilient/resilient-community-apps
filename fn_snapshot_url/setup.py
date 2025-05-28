@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_snapshot_url",
     display_name="Snapshot URL",
-    version="1.0.0",
+    version="1.1.0",
     license="MIT",
     author="IBM QRadar SOAR",
     author_email="",
@@ -31,7 +31,7 @@ setup(
     description="Save snapshots of web pages as incident attachments",
     long_description="""Save snapshots of web pages as incident PNG image attachments""",
     install_requires=[
-        "resilient-circuits>=48.0.0",
+        "resilient-circuits>=51.0.0",
         "selenium~=4.15.2"
     ],
     python_requires='>=3.9',
