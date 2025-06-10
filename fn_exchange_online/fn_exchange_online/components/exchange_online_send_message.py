@@ -1,6 +1,6 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long, too-many-locals, too-many-function-args, too-many-function-args
 """Function implementation"""
 
 import logging
@@ -24,7 +24,7 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super().__init__(opts)
         self.load_options(opts)
 
     @handler("reload")
@@ -50,14 +50,14 @@ class FunctionComponent(ResilientComponent):
             incident_id = kwargs.get("incident_id") # number
 
             log = logging.getLogger(__name__)
-            log.info(u"exo_email_address: %s", email_address)
-            log.info(u"exo_recipients: %s", recipients)
-            log.info(u"exo_message_subject: %s", message_subject)
-            log.info(u"exo_message_body: %s", message_body)
-            log.info(u"exo_attachment_names: %s", attachment_names)
-            log.info(u"incident_id: %d", incident_id)
+            log.info("exo_email_address: %s", email_address)
+            log.info("exo_recipients: %s", recipients)
+            log.info("exo_message_subject: %s", message_subject)
+            log.info("exo_message_body: %s", message_body)
+            log.info("exo_attachment_names: %s", attachment_names)
+            log.info("incident_id: %d", incident_id)
 
-            yield StatusMessage(u"Starting send message from email address: {}".format(email_address))
+            yield StatusMessage("Starting send message from email address: {}".format(email_address))
 
             # Get the MS Graph helper class
             MS_graph_helper = MSGraphHelper(self.options.get("microsoft_graph_token_url"),
@@ -90,7 +90,7 @@ class FunctionComponent(ResilientComponent):
 
             results = rp.done(success, response_json)
 
-            yield StatusMessage(u"Returning send mail results by email address: {}".format(email_address))
+            yield StatusMessage("Returning send mail results by email address: {}".format(email_address))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

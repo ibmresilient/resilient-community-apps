@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1733417519000,
+  "export_date": 1749131206625,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -18,7 +18,7 @@
       "deprecated": false,
       "export_key": "__function/exo_email_address_sender",
       "hide_notification": false,
-      "id": 634,
+      "id": 5008,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -47,7 +47,7 @@
       "deprecated": false,
       "export_key": "__function/exo_meeting_email_address",
       "hide_notification": false,
-      "id": 635,
+      "id": 5009,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -77,7 +77,7 @@
       "deprecated": false,
       "export_key": "__function/exo_query_output_format",
       "hide_notification": false,
-      "id": 636,
+      "id": 5010,
       "input_type": "multiselect",
       "internal": false,
       "is_tracked": false,
@@ -103,7 +103,7 @@
           "label": "Exchange Online data table",
           "properties": null,
           "uuid": "68133b08-816e-4c03-a50d-c68af1b6b205",
-          "value": 802
+          "value": 5202
         },
         {
           "default": false,
@@ -112,7 +112,7 @@
           "label": "Incident attachment",
           "properties": null,
           "uuid": "29fa8b3f-4fe5-419c-bda7-223af2c259cb",
-          "value": 803
+          "value": 5203
         },
         {
           "default": true,
@@ -121,7 +121,7 @@
           "label": "Incident note",
           "properties": null,
           "uuid": "172c46ba-f424-42eb-b44d-9f66fb7190cd",
-          "value": 804
+          "value": 5204
         }
       ]
     },
@@ -135,7 +135,7 @@
       "deprecated": false,
       "export_key": "__function/exo_meeting_start_time",
       "hide_notification": false,
-      "id": 637,
+      "id": 5011,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -165,7 +165,7 @@
       "deprecated": false,
       "export_key": "__function/exo_destination_mailfolder_id",
       "hide_notification": false,
-      "id": 638,
+      "id": 5012,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -191,7 +191,7 @@
           "label": "archive",
           "properties": null,
           "uuid": "f95a7ba4-7026-47fe-ad12-fbcc7ae0bb48",
-          "value": 805
+          "value": 5205
         },
         {
           "default": false,
@@ -200,7 +200,7 @@
           "label": "clutter",
           "properties": null,
           "uuid": "50d01161-eeb1-4ecf-8461-2071ba2e91d9",
-          "value": 806
+          "value": 5206
         },
         {
           "default": false,
@@ -209,7 +209,7 @@
           "label": "conflicts",
           "properties": null,
           "uuid": "85acaa9c-c0c2-4905-bc97-dab8d16f5ff0",
-          "value": 807
+          "value": 5207
         },
         {
           "default": false,
@@ -218,7 +218,7 @@
           "label": "conversationhistory",
           "properties": null,
           "uuid": "d0bfcaa3-c096-4a18-86a2-3c72f53b830f",
-          "value": 808
+          "value": 5208
         },
         {
           "default": false,
@@ -227,7 +227,7 @@
           "label": "deleteditems",
           "properties": null,
           "uuid": "67303ab0-25b2-4f22-ac3b-c7527b01cec9",
-          "value": 809
+          "value": 5209
         },
         {
           "default": false,
@@ -236,7 +236,7 @@
           "label": "drafts",
           "properties": null,
           "uuid": "3b2eb160-f417-4de4-aca2-247e2f2649ac",
-          "value": 810
+          "value": 5210
         },
         {
           "default": false,
@@ -245,7 +245,7 @@
           "label": "inbox",
           "properties": null,
           "uuid": "90830c93-6889-47b4-a57b-c03c942f0064",
-          "value": 811
+          "value": 5211
         },
         {
           "default": true,
@@ -254,7 +254,7 @@
           "label": "junkemail",
           "properties": null,
           "uuid": "9c20f34a-363a-4e70-8d68-2f0a3cadfc44",
-          "value": 812
+          "value": 5212
         },
         {
           "default": false,
@@ -263,7 +263,7 @@
           "label": "localfailures",
           "properties": null,
           "uuid": "4518d80f-fe86-463f-b64f-7e52de04938b",
-          "value": 813
+          "value": 5213
         },
         {
           "default": false,
@@ -272,7 +272,7 @@
           "label": "msgfolderroot",
           "properties": null,
           "uuid": "3ca0f058-855d-49ef-b3c6-9d8f279ae0c2",
-          "value": 814
+          "value": 5214
         },
         {
           "default": false,
@@ -281,7 +281,7 @@
           "label": "outbox",
           "properties": null,
           "uuid": "eb14de74-882f-429b-bb28-bd21a476a1ad",
-          "value": 815
+          "value": 5215
         },
         {
           "default": false,
@@ -290,7 +290,7 @@
           "label": "recoverableitemsdeletions",
           "properties": null,
           "uuid": "20dee080-43d5-423c-85ea-8b2f7b73768a",
-          "value": 816
+          "value": 5216
         },
         {
           "default": false,
@@ -299,7 +299,7 @@
           "label": "scheduled",
           "properties": null,
           "uuid": "7382a392-4576-41b5-a09e-54f8c6d0fa4b",
-          "value": 817
+          "value": 5217
         },
         {
           "default": false,
@@ -308,7 +308,7 @@
           "label": "searchfolders",
           "properties": null,
           "uuid": "5a356a79-f091-4ca0-8b5b-e3084db013b4",
-          "value": 818
+          "value": 5218
         },
         {
           "default": false,
@@ -317,7 +317,7 @@
           "label": "sentitems",
           "properties": null,
           "uuid": "0d797e5c-03a2-4c63-91b7-d6d538171b68",
-          "value": 819
+          "value": 5219
         }
       ]
     },
@@ -331,7 +331,7 @@
       "deprecated": false,
       "export_key": "__function/exo_meeting_optional_attendees",
       "hide_notification": false,
-      "id": 639,
+      "id": 5013,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -360,7 +360,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 564,
+      "id": 2753,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -390,7 +390,7 @@
       "deprecated": false,
       "export_key": "__function/exo_query_messages_results",
       "hide_notification": false,
-      "id": 640,
+      "id": 5014,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -420,7 +420,7 @@
       "deprecated": false,
       "export_key": "__function/exo_has_attachments",
       "hide_notification": false,
-      "id": 641,
+      "id": 5015,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -449,7 +449,7 @@
       "deprecated": false,
       "export_key": "__function/task_id",
       "hide_notification": false,
-      "id": 642,
+      "id": 2748,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -478,7 +478,7 @@
       "deprecated": false,
       "export_key": "__function/exo_meeting_body",
       "hide_notification": false,
-      "id": 643,
+      "id": 5016,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -508,7 +508,7 @@
       "deprecated": false,
       "export_key": "__function/exo_messages_id",
       "hide_notification": false,
-      "id": 644,
+      "id": 5017,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -538,7 +538,7 @@
       "deprecated": false,
       "export_key": "__function/exo_message_body",
       "hide_notification": false,
-      "id": 645,
+      "id": 5018,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -567,7 +567,7 @@
       "deprecated": false,
       "export_key": "__function/exo_email_address",
       "hide_notification": false,
-      "id": 646,
+      "id": 5019,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -597,7 +597,7 @@
       "deprecated": false,
       "export_key": "__function/exo_start_date",
       "hide_notification": false,
-      "id": 647,
+      "id": 5020,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -626,7 +626,7 @@
       "deprecated": false,
       "export_key": "__function/exo_attachment_name",
       "hide_notification": false,
-      "id": 648,
+      "id": 5021,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -655,7 +655,7 @@
       "deprecated": false,
       "export_key": "__function/exo_recipients",
       "hide_notification": false,
-      "id": 649,
+      "id": 5022,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -685,7 +685,7 @@
       "deprecated": false,
       "export_key": "__function/exo_meeting_required_attendees",
       "hide_notification": false,
-      "id": 650,
+      "id": 5023,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -714,7 +714,7 @@
       "deprecated": false,
       "export_key": "__function/exo_meeting_end_time",
       "hide_notification": false,
-      "id": 651,
+      "id": 5024,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -744,7 +744,7 @@
       "deprecated": false,
       "export_key": "__function/exo_mail_folders",
       "hide_notification": false,
-      "id": 652,
+      "id": 5025,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -773,7 +773,7 @@
       "deprecated": false,
       "export_key": "__function/exo_message_subject",
       "hide_notification": false,
-      "id": 653,
+      "id": 5026,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -802,7 +802,7 @@
       "deprecated": false,
       "export_key": "__function/exo_attachment_names",
       "hide_notification": false,
-      "id": 654,
+      "id": 5027,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -831,7 +831,7 @@
       "deprecated": false,
       "export_key": "__function/exo_meeting_subject",
       "hide_notification": false,
-      "id": 655,
+      "id": 5028,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -861,7 +861,7 @@
       "deprecated": false,
       "export_key": "__function/exo_mailfolders_id",
       "hide_notification": false,
-      "id": 656,
+      "id": 5029,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -890,7 +890,7 @@
       "deprecated": false,
       "export_key": "__function/exo_meeting_location",
       "hide_notification": false,
-      "id": 657,
+      "id": 5030,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -919,7 +919,7 @@
       "deprecated": false,
       "export_key": "__function/exo_end_date",
       "hide_notification": false,
-      "id": 658,
+      "id": 5031,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -952,7 +952,7 @@
   ],
   "functions": [
     {
-      "created_date": 1733241204843,
+      "created_date": 1749044574529,
       "description": {
         "content": "This function creates a meeting event in the organizer\u0027s Outlook calendar and sends a calendar event mail message to the meeting participants inviting them to the meeting.",
         "format": "text"
@@ -960,19 +960,21 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Create Meeting",
       "export_key": "exchange_online_create_meeting",
-      "id": 41,
+      "id": 572,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241204843,
+      "last_modified_time": 1749044574529,
       "name": "exchange_online_create_meeting",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"@odata.context\": \"https://graph.microsoft.com/v1.0/$metadata#users(\u0027soartester%40mytenant.onmicrosoft.com\u0027)/calendar/events/$entity\", \"@odata.etag\": \"W/\\\"4uV5MvSh7kOPFHsGsb/3vAAANEMjtA==\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAENAADi5Xky9KHuQ48Uewaxv-e8AAA0UGB5AAA=\", \"createdDateTime\": \"2023-06-15T11:57:25.2936799Z\", \"lastModifiedDateTime\": \"2023-06-15T11:57:25.5084032Z\", \"changeKey\": \"4uV5MvSh7kOPFHsGsb/3vAAANEMjtA==\", \"categories\": [], \"transactionId\": null, \"originalStartTimeZone\": \"Eastern Standard Time\", \"originalEndTimeZone\": \"Eastern Standard Time\", \"iCalUId\": \"040000008200E00074C5B7101A82E008000000000C57E88C809FD90100000000000000001000000079E26061BC861948905C74B45C5736E5\", \"reminderMinutesBeforeStart\": 15, \"isReminderOn\": true, \"hasAttachments\": false, \"subject\": \"test\", \"bodyPreview\": \"test test\", \"importance\": \"normal\", \"sensitivity\": \"normal\", \"isAllDay\": false, \"isCancelled\": false, \"isOrganizer\": true, \"responseRequested\": true, \"seriesMasterId\": null, \"showAs\": \"busy\", \"type\": \"singleInstance\", \"webLink\": \"https://outlook.office365.com/owa/?itemid=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAENAADi5Xky9KHuQ48Uewaxv%2Fe8AAA0UGB5AAA%3D\u0026exvsurl=1\u0026path=/calendar/item\", \"onlineMeetingUrl\": null, \"isOnlineMeeting\": false, \"onlineMeetingProvider\": \"unknown\", \"allowNewTimeProposals\": true, \"occurrenceId\": null, \"isDraft\": false, \"hideAttendees\": false, \"responseStatus\": {\"response\": \"organizer\", \"time\": \"0001-01-01T00:00:00Z\"}, \"body\": {\"contentType\": \"html\", \"content\": \"\u003chtml\u003e\\r\\n\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\\r\\n\u003c/head\u003e\\r\\n\u003cbody\u003e\\r\\ntest test\\r\\n\u003c/body\u003e\\r\\n\u003c/html\u003e\\r\\n\"}, \"start\": {\"dateTime\": \"2023-06-27T12:00:00.0000000\", \"timeZone\": \"Eastern Standard Time\"}, \"end\": {\"dateTime\": \"2023-06-27T13:00:00.0000000\", \"timeZone\": \"Eastern Standard Time\"}, \"location\": {\"displayName\": \"\", \"locationType\": \"default\", \"uniqueIdType\": \"unknown\", \"address\": {}, \"coordinates\": {}}, \"locations\": [], \"recurrence\": null, \"attendees\": [{\"type\": \"required\", \"status\": {\"response\": \"none\", \"time\": \"0001-01-01T00:00:00Z\"}, \"emailAddress\": {}}], \"organizer\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}, \"onlineMeeting\": null}, \"raw\": \"{\\\"@odata.context\\\": \\\"https://graph.microsoft.com/v1.0/$metadata#users(\u0027soartester%40mytenant.onmicrosoft.com\u0027)/calendar/events/$entity\\\", \\\"@odata.etag\\\": \\\"W/\\\\\\\"4uV5MvSh7kOPFHsGsb/3vAAANEMjtA==\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAENAADi5Xky9KHuQ48Uewaxv-e8AAA0UGB5AAA=\\\", \\\"createdDateTime\\\": \\\"2023-06-15T11:57:25.2936799Z\\\", \\\"lastModifiedDateTime\\\": \\\"2023-06-15T11:57:25.5084032Z\\\", \\\"changeKey\\\": \\\"4uV5MvSh7kOPFHsGsb/3vAAANEMjtA==\\\", \\\"categories\\\": [], \\\"transactionId\\\": null, \\\"originalStartTimeZone\\\": \\\"Eastern Standard Time\\\", \\\"originalEndTimeZone\\\": \\\"Eastern Standard Time\\\", \\\"iCalUId\\\": \\\"040000008200E00074C5B7101A82E008000000000C57E88C809FD90100000000000000001000000079E26061BC861948905C74B45C5736E5\\\", \\\"reminderMinutesBeforeStart\\\": 15, \\\"isReminderOn\\\": true, \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"test\\\", \\\"bodyPreview\\\": \\\"test test\\\", \\\"importance\\\": \\\"normal\\\", \\\"sensitivity\\\": \\\"normal\\\", \\\"isAllDay\\\": false, \\\"isCancelled\\\": false, \\\"isOrganizer\\\": true, \\\"responseRequested\\\": true, \\\"seriesMasterId\\\": null, \\\"showAs\\\": \\\"busy\\\", \\\"type\\\": \\\"singleInstance\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?itemid=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAENAADi5Xky9KHuQ48Uewaxv%2Fe8AAA0UGB5AAA%3D\u0026exvsurl=1\u0026path=/calendar/item\\\", \\\"onlineMeetingUrl\\\": null, \\\"isOnlineMeeting\\\": false, \\\"onlineMeetingProvider\\\": \\\"unknown\\\", \\\"allowNewTimeProposals\\\": true, \\\"occurrenceId\\\": null, \\\"isDraft\\\": false, \\\"hideAttendees\\\": false, \\\"responseStatus\\\": {\\\"response\\\": \\\"organizer\\\", \\\"time\\\": \\\"0001-01-01T00:00:00Z\\\"}, \\\"body\\\": {\\\"contentType\\\": \\\"html\\\", \\\"content\\\": \\\"\u003chtml\u003e\\\\r\\\\n\u003chead\u003e\\\\r\\\\n\u003cmeta http-equiv=\\\\\\\"Content-Type\\\\\\\" content=\\\\\\\"text/html; charset=utf-8\\\\\\\"\u003e\\\\r\\\\n\u003c/head\u003e\\\\r\\\\n\u003cbody\u003e\\\\r\\\\ntest test\\\\r\\\\n\u003c/body\u003e\\\\r\\\\n\u003c/html\u003e\\\\r\\\\n\\\"}, \\\"start\\\": {\\\"dateTime\\\": \\\"2023-06-27T12:00:00.0000000\\\", \\\"timeZone\\\": \\\"Eastern Standard Time\\\"}, \\\"end\\\": {\\\"dateTime\\\": \\\"2023-06-27T13:00:00.0000000\\\", \\\"timeZone\\\": \\\"Eastern Standard Time\\\"}, \\\"location\\\": {\\\"displayName\\\": \\\"\\\", \\\"locationType\\\": \\\"default\\\", \\\"uniqueIdType\\\": \\\"unknown\\\", \\\"address\\\": {}, \\\"coordinates\\\": {}}, \\\"locations\\\": [], \\\"recurrence\\\": null, \\\"attendees\\\": [{\\\"type\\\": \\\"required\\\", \\\"status\\\": {\\\"response\\\": \\\"none\\\", \\\"time\\\": \\\"0001-01-01T00:00:00Z\\\"}, \\\"emailAddress\\\": {}}], \\\"organizer\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\"}}, \\\"onlineMeeting\\\": null}\", \"inputs\": {\"exo_meeting_end_time\": 1687885200000, \"exo_meeting_email_address\": \"soartester@mytenant.onmicrosoft.com\", \"exo_meeting_required_attendees\": null, \"exo_meeting_body\": \"test test\", \"exo_meeting_subject\": \"test\", \"exo_meeting_location\": null, \"exo_meeting_start_time\": 1687881600000, \"exo_meeting_optional_attendees\": null}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-exchange-online\", \"package_version\": \"1.4.0\", \"host\": \"myLaptop\", \"execution_time_ms\": 2094, \"timestamp\": \"2023-06-15 19:57:25\"}, \"pretty_string\": \"{\\n    \\\"@odata.context\\\": \\\"https://graph.microsoft.com/v1.0/$metadata#users(\u0027soartester%40mytenant.onmicrosoft.com\u0027)/calendar/events/$entity\\\",\\n    \\\"@odata.etag\\\": \\\"W/\\\\\\\"4uV5MvSh7kOPFHsGsb/3vAAANEMjtA==\\\\\\\"\\\",\\n    \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAENAADi5Xky9KHuQ48Uewaxv-e8AAA0UGB5AAA=\\\",\\n    \\\"createdDateTime\\\": \\\"2023-06-15T11:57:25.2936799Z\\\",\\n    \\\"lastModifiedDateTime\\\": \\\"2023-06-15T11:57:25.5084032Z\\\",\\n    \\\"changeKey\\\": \\\"4uV5MvSh7kOPFHsGsb/3vAAANEMjtA==\\\",\\n    \\\"categories\\\": [],\\n    \\\"transactionId\\\": null,\\n    \\\"originalStartTimeZone\\\": \\\"Eastern Standard Time\\\",\\n    \\\"originalEndTimeZone\\\": \\\"Eastern Standard Time\\\",\\n    \\\"iCalUId\\\": \\\"040000008200E00074C5B7101A82E008000000000C57E88C809FD90100000000000000001000000079E26061BC861948905C74B45C5736E5\\\",\\n    \\\"reminderMinutesBeforeStart\\\": 15,\\n    \\\"isReminderOn\\\": true,\\n    \\\"hasAttachments\\\": false,\\n    \\\"subject\\\": \\\"test\\\",\\n    \\\"bodyPreview\\\": \\\"test test\\\",\\n    \\\"importance\\\": \\\"normal\\\",\\n    \\\"sensitivity\\\": \\\"normal\\\",\\n    \\\"isAllDay\\\": false,\\n    \\\"isCancelled\\\": false,\\n    \\\"isOrganizer\\\": true,\\n    \\\"responseRequested\\\": true,\\n    \\\"seriesMasterId\\\": null,\\n    \\\"showAs\\\": \\\"busy\\\",\\n    \\\"type\\\": \\\"singleInstance\\\",\\n    \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?itemid=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAENAADi5Xky9KHuQ48Uewaxv%2Fe8AAA0UGB5AAA%3D\u0026exvsurl=1\u0026path=/calendar/item\\\",\\n    \\\"onlineMeetingUrl\\\": null,\\n    \\\"isOnlineMeeting\\\": false,\\n    \\\"onlineMeetingProvider\\\": \\\"unknown\\\",\\n    \\\"allowNewTimeProposals\\\": true,\\n    \\\"occurrenceId\\\": null,\\n    \\\"isDraft\\\": false,\\n    \\\"hideAttendees\\\": false,\\n    \\\"responseStatus\\\": {\\n        \\\"response\\\": \\\"organizer\\\",\\n        \\\"time\\\": \\\"0001-01-01T00:00:00Z\\\"\\n    },\\n    \\\"body\\\": {\\n        \\\"contentType\\\": \\\"html\\\",\\n        \\\"content\\\": \\\"\u003chtml\u003e\\\\r\\\\n\u003chead\u003e\\\\r\\\\n\u003cmeta http-equiv=\\\\\\\"Content-Type\\\\\\\" content=\\\\\\\"text/html; charset=utf-8\\\\\\\"\u003e\\\\r\\\\n\u003c/head\u003e\\\\r\\\\n\u003cbody\u003e\\\\r\\\\ntest test\\\\r\\\\n\u003c/body\u003e\\\\r\\\\n\u003c/html\u003e\\\\r\\\\n\\\"\\n    },\\n    \\\"start\\\": {\\n        \\\"dateTime\\\": \\\"2023-06-27T12:00:00.0000000\\\",\\n        \\\"timeZone\\\": \\\"Eastern Standard Time\\\"\\n    },\\n    \\\"end\\\": {\\n        \\\"dateTime\\\": \\\"2023-06-27T13:00:00.0000000\\\",\\n        \\\"timeZone\\\": \\\"Eastern Standard Time\\\"\\n    },\\n    \\\"location\\\": {\\n        \\\"displayName\\\": \\\"\\\",\\n        \\\"locationType\\\": \\\"default\\\",\\n        \\\"uniqueIdType\\\": \\\"unknown\\\",\\n        \\\"address\\\": {},\\n        \\\"coordinates\\\": {}\\n    },\\n    \\\"locations\\\": [],\\n    \\\"recurrence\\\": null,\\n    \\\"attendees\\\": [\\n        {\\n            \\\"type\\\": \\\"required\\\",\\n            \\\"status\\\": {\\n                \\\"response\\\": \\\"none\\\",\\n                \\\"time\\\": \\\"0001-01-01T00:00:00Z\\\"\\n            },\\n            \\\"emailAddress\\\": {}\\n        }\\n    ],\\n    \\\"organizer\\\": {\\n        \\\"emailAddress\\\": {\\n            \\\"name\\\": \\\"SOAR tester\\\",\\n            \\\"address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\"\\n        }\\n    },\\n    \\\"onlineMeeting\\\": null\\n}\"}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"@odata.context\": {\"type\": \"string\"}, \"@odata.etag\": {\"type\": \"string\"}, \"id\": {\"type\": \"string\"}, \"createdDateTime\": {\"type\": \"string\"}, \"lastModifiedDateTime\": {\"type\": \"string\"}, \"changeKey\": {\"type\": \"string\"}, \"categories\": {\"type\": \"array\"}, \"transactionId\": {}, \"originalStartTimeZone\": {\"type\": \"string\"}, \"originalEndTimeZone\": {\"type\": \"string\"}, \"iCalUId\": {\"type\": \"string\"}, \"reminderMinutesBeforeStart\": {\"type\": \"integer\"}, \"isReminderOn\": {\"type\": \"boolean\"}, \"hasAttachments\": {\"type\": \"boolean\"}, \"subject\": {\"type\": \"string\"}, \"bodyPreview\": {\"type\": \"string\"}, \"importance\": {\"type\": \"string\"}, \"sensitivity\": {\"type\": \"string\"}, \"isAllDay\": {\"type\": \"boolean\"}, \"isCancelled\": {\"type\": \"boolean\"}, \"isOrganizer\": {\"type\": \"boolean\"}, \"responseRequested\": {\"type\": \"boolean\"}, \"seriesMasterId\": {}, \"showAs\": {\"type\": \"string\"}, \"type\": {\"type\": \"string\"}, \"webLink\": {\"type\": \"string\"}, \"onlineMeetingUrl\": {}, \"isOnlineMeeting\": {\"type\": \"boolean\"}, \"onlineMeetingProvider\": {\"type\": \"string\"}, \"allowNewTimeProposals\": {\"type\": \"boolean\"}, \"occurrenceId\": {}, \"isDraft\": {\"type\": \"boolean\"}, \"hideAttendees\": {\"type\": \"boolean\"}, \"responseStatus\": {\"type\": \"object\", \"properties\": {\"response\": {\"type\": \"string\"}, \"time\": {\"type\": \"string\"}}}, \"body\": {\"type\": \"object\", \"properties\": {\"contentType\": {\"type\": \"string\"}, \"content\": {\"type\": \"string\"}}}, \"start\": {\"type\": \"object\", \"properties\": {\"dateTime\": {\"type\": \"string\"}, \"timeZone\": {\"type\": \"string\"}}}, \"end\": {\"type\": \"object\", \"properties\": {\"dateTime\": {\"type\": \"string\"}, \"timeZone\": {\"type\": \"string\"}}}, \"location\": {\"type\": \"object\", \"properties\": {\"displayName\": {\"type\": \"string\"}, \"locationType\": {\"type\": \"string\"}, \"uniqueIdType\": {\"type\": \"string\"}, \"address\": {\"type\": \"object\"}, \"coordinates\": {\"type\": \"object\"}}}, \"locations\": {\"type\": \"array\"}, \"recurrence\": {}, \"attendees\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"type\": {\"type\": \"string\"}, \"status\": {\"type\": \"object\", \"properties\": {\"response\": {\"type\": \"string\"}, \"time\": {\"type\": \"string\"}}}, \"emailAddress\": {\"type\": \"object\"}}}}, \"organizer\": {\"type\": \"object\", \"properties\": {\"emailAddress\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"address\": {\"type\": \"string\"}}}}}, \"onlineMeeting\": {}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"exo_meeting_end_time\": {\"type\": \"integer\"}, \"exo_meeting_email_address\": {\"type\": \"string\"}, \"exo_meeting_required_attendees\": {}, \"exo_meeting_body\": {\"type\": \"string\"}, \"exo_meeting_subject\": {\"type\": \"string\"}, \"exo_meeting_location\": {}, \"exo_meeting_start_time\": {\"type\": \"integer\"}, \"exo_meeting_optional_attendees\": {}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}, \"pretty_string\": {\"type\": \"string\"}}}",
       "tags": [],
       "uuid": "40e56303-027d-4e27-9865-10ca18d267b3",
       "version": 0,
@@ -1045,7 +1047,7 @@
       "workflows": []
     },
     {
-      "created_date": 1733241205065,
+      "created_date": 1749044574810,
       "description": {
         "content": "Delete a message in the specified user\u0027s email address mailbox.  The email address of the mailbox and the message id are required input parameters.  The mail folder is an optional parameter.",
         "format": "text"
@@ -1053,19 +1055,21 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Delete Message",
       "export_key": "exchange_online_delete_email",
-      "id": 42,
+      "id": 573,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241205065,
+      "last_modified_time": 1749044574810,
       "name": "exchange_online_delete_email",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"value\": true}, \"raw\": \"{\\\"value\\\": true}\", \"inputs\": {\"exo_mailfolders_id\": null, \"exo_email_address\": \"soartester@mytenant.onmicrosoft.com\", \"exo_messages_id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAA0UCmTAAA=\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-exchange-online\", \"package_version\": \"1.4.0\", \"host\": \"myLaptop\", \"execution_time_ms\": 1426, \"timestamp\": \"2023-06-15 19:53:56\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"value\": {\"type\": \"boolean\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"exo_mailfolders_id\": {}, \"exo_email_address\": {\"type\": \"string\"}, \"exo_messages_id\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "e4a2073e-46cf-48a6-b3be-f0f99b05c472",
       "version": 0,
@@ -1098,7 +1102,7 @@
       "workflows": []
     },
     {
-      "created_date": 1733241205203,
+      "created_date": 1749044574991,
       "description": {
         "content": "This Exchange Online function deletes a list of messages returned from the Query Message function.  The input to the function is a string containing the JSON results from the Query Messages function.",
         "format": "text"
@@ -1106,19 +1110,21 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Delete Messages From Query Results",
       "export_key": "exchange_online_delete_messages_from_query_results",
-      "id": 43,
+      "id": 574,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241205203,
+      "last_modified_time": 1749044574991,
       "name": "exchange_online_delete_messages_from_query_results",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"incident_id\": 2115, \"exo_query_output_format\": [\"Exchange Online data table\", \"Incident note\"], \"delete_results\": [{\"email_address\": \"soartester@mytenant.onmicrosoft.com\", \"deleted_list\": [{\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETzf\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAApGgUgAAA=\", \"receivedDateTime\": \"2023-05-30T07:49:26Z\", \"hasAttachments\": false, \"subject\": \"test pb\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGgUgAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}}], \"not_deleted_list\": []}]}, \"raw\": \"{\\\"incident_id\\\": 2115, \\\"exo_query_output_format\\\": [\\\"Exchange Online data table\\\", \\\"Incident note\\\"], \\\"delete_results\\\": [{\\\"email_address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\", \\\"deleted_list\\\": [{\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETzf\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAApGgUgAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-05-30T07:49:26Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"test pb\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGgUgAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\"}}}], \\\"not_deleted_list\\\": []}]}\", \"inputs\": {\"exo_query_messages_results\": \"{\\\"incident_id\\\": 2115, \\\"exo_query_output_format\\\": [\\\"Exchange Online data table\\\", \\\"Incident note\\\"], \\\"email_results\\\": [{\\\"email_address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\", \\\"status_code\\\": 200, \\\"email_list\\\": [{\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETzf\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAApGgUgAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-05-30T07:49:26Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"test pb\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGgUgAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\"}}}]}]}\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-exchange-online\", \"package_version\": \"1.4.0\", \"host\": \"myLaptop\", \"execution_time_ms\": 1423, \"timestamp\": \"2023-05-30 15:49:57\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"incident_id\": {\"type\": \"integer\"}, \"exo_query_output_format\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"delete_results\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"email_address\": {\"type\": \"string\"}, \"deleted_list\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"@odata.etag\": {\"type\": \"string\"}, \"id\": {\"type\": \"string\"}, \"receivedDateTime\": {\"type\": \"string\"}, \"hasAttachments\": {\"type\": \"boolean\"}, \"subject\": {\"type\": \"string\"}, \"webLink\": {\"type\": \"string\"}, \"sender\": {\"type\": \"object\", \"properties\": {\"emailAddress\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"address\": {\"type\": \"string\"}}}}}}}}, \"not_deleted_list\": {\"type\": \"array\"}}}}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"exo_query_messages_results\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "af142c3a-3c38-4352-9bca-fa82d53c61af",
       "version": 0,
@@ -1135,7 +1141,7 @@
       "workflows": []
     },
     {
-      "created_date": 1733241205324,
+      "created_date": 1749044575170,
       "description": {
         "content": "This function gets Exchange Online user profile for a given email address.",
         "format": "text"
@@ -1143,19 +1149,21 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Get User Profile",
       "export_key": "exchange_online_get_email_user_profile",
-      "id": 44,
+      "id": 575,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241205324,
+      "last_modified_time": 1749044575170,
       "name": "exchange_online_get_email_user_profile",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"error\": {\"code\": \"Request_ResourceNotFound\", \"message\": \"Resource \u0027user2\u0027 does not exist or one of its queried reference-property objects are not present.\", \"innerError\": {\"date\": \"2023-06-15T11:54:45\", \"request-id\": \"9ae9cd9c-5f59-4525-862a-8eb293471ee7\", \"client-request-id\": \"9ae9cd9c-5f59-4525-862a-8eb293471ee7\"}}}, \"raw\": \"{\\\"error\\\": {\\\"code\\\": \\\"Request_ResourceNotFound\\\", \\\"message\\\": \\\"Resource \u0027user2\u0027 does not exist or one of its queried reference-property objects are not present.\\\", \\\"innerError\\\": {\\\"date\\\": \\\"2023-06-15T11:54:45\\\", \\\"request-id\\\": \\\"9ae9cd9c-5f59-4525-862a-8eb293471ee7\\\", \\\"client-request-id\\\": \\\"9ae9cd9c-5f59-4525-862a-8eb293471ee7\\\"}}}\", \"inputs\": {\"exo_email_address\": \"user2\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-exchange-online\", \"package_version\": \"1.4.0\", \"host\": \"myLaptop\", \"execution_time_ms\": 1209, \"timestamp\": \"2023-06-15 19:54:45\"}, \"pretty_string\": \"{\\n    \\\"error\\\": {\\n        \\\"code\\\": \\\"Request_ResourceNotFound\\\",\\n        \\\"innerError\\\": {\\n            \\\"client-request-id\\\": \\\"9ae9cd9c-5f59-4525-862a-8eb293471ee7\\\",\\n            \\\"date\\\": \\\"2023-06-15T11:54:45\\\",\\n            \\\"request-id\\\": \\\"9ae9cd9c-5f59-4525-862a-8eb293471ee7\\\"\\n        },\\n        \\\"message\\\": \\\"Resource \u0027user2\u0027 does not exist or one of its queried reference-property objects are not present.\\\"\\n    }\\n}\"}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"error\": {\"type\": \"object\", \"properties\": {\"code\": {\"type\": \"string\"}, \"message\": {\"type\": \"string\"}, \"innerError\": {\"type\": \"object\", \"properties\": {\"date\": {\"type\": \"string\"}, \"request-id\": {\"type\": \"string\"}, \"client-request-id\": {\"type\": \"string\"}}}}}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"exo_email_address\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}, \"pretty_string\": {\"type\": \"string\"}}}",
       "tags": [],
       "uuid": "f7af9277-dea6-4825-9279-09594d8e0770",
       "version": 0,
@@ -1172,7 +1180,7 @@
       "workflows": []
     },
     {
-      "created_date": 1733241205444,
+      "created_date": 1749044575349,
       "description": {
         "content": "This function returns the contents of an Exchange Online message in JSON format.",
         "format": "text"
@@ -1180,19 +1188,21 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Get Message",
       "export_key": "exchange_online_get_message",
-      "id": 45,
+      "id": 576,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241205444,
+      "last_modified_time": 1749044575349,
       "name": "exchange_online_get_message",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"@odata.context\": \"https://graph.microsoft.com/v1.0/$metadata#users(\u0027soartester%40mytenant.onmicrosoft.com\u0027)/messages/$entity\", \"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApET0U\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAETAADi5Xky9KHuQ48Uewaxv-e8AAApGtroAAA=\", \"createdDateTime\": \"2023-05-30T07:53:58Z\", \"lastModifiedDateTime\": \"2023-05-30T07:55:21Z\", \"changeKey\": \"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApET0U\", \"categories\": [], \"receivedDateTime\": \"2023-05-30T07:53:58Z\", \"sentDateTime\": \"2023-05-30T07:53:57Z\", \"hasAttachments\": false, \"internetMessageId\": \"\u003cDM6PR08MB60609ABA5A1C0455AFF7C26C954B9@DM6PR08MB6060.namprd08.prod.outlook.com\u003e\", \"subject\": \"test pb\", \"bodyPreview\": \"test pb 123\", \"importance\": \"normal\", \"parentFolderId\": \"AQMkAGVhZGFlNDVhLTI0MDAALTRhNTYtOWY5Ny0wMTc5ZWIxYjQwM2MALgAAA8b3ZKoLzOlAnUZKTaxwfY0BAOLleTL0oe5DjxR7BrG-97wAAAIBEwAAAA==\", \"conversationId\": \"AAQkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwAQALxVooc96jZPnUrWrWacvYg=\", \"conversationIndex\": \"AQHZksvjvFWihz3qNk+dStatZpy9iA==\", \"isDeliveryReceiptRequested\": false, \"isReadReceiptRequested\": false, \"isRead\": true, \"isDraft\": false, \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAETAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGtroAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"inferenceClassification\": \"focused\", \"body\": {\"contentType\": \"html\", \"content\": \"\u003chtml\u003e\u003chead\u003e\\r\\n\u003cmeta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\"\u003e\u003c/head\u003e\u003cbody\u003etest pb 123 \u003c/body\u003e\u003c/html\u003e\"}, \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}, \"from\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}, \"toRecipients\": [{\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}], \"ccRecipients\": [], \"bccRecipients\": [], \"replyTo\": [], \"flag\": {\"flagStatus\": \"notFlagged\"}}, \"raw\": \"{\\\"@odata.context\\\": \\\"https://graph.microsoft.com/v1.0/$metadata#users(\u0027soartester%40mytenant.onmicrosoft.com\u0027)/messages/$entity\\\", \\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApET0U\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAETAADi5Xky9KHuQ48Uewaxv-e8AAApGtroAAA=\\\", \\\"createdDateTime\\\": \\\"2023-05-30T07:53:58Z\\\", \\\"lastModifiedDateTime\\\": \\\"2023-05-30T07:55:21Z\\\", \\\"changeKey\\\": \\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApET0U\\\", \\\"categories\\\": [], \\\"receivedDateTime\\\": \\\"2023-05-30T07:53:58Z\\\", \\\"sentDateTime\\\": \\\"2023-05-30T07:53:57Z\\\", \\\"hasAttachments\\\": false, \\\"internetMessageId\\\": \\\"\u003cDM6PR08MB60609ABA5A1C0455AFF7C26C954B9@DM6PR08MB6060.namprd08.prod.outlook.com\u003e\\\", \\\"subject\\\": \\\"test pb\\\", \\\"bodyPreview\\\": \\\"test pb 123\\\", \\\"importance\\\": \\\"normal\\\", \\\"parentFolderId\\\": \\\"AQMkAGVhZGFlNDVhLTI0MDAALTRhNTYtOWY5Ny0wMTc5ZWIxYjQwM2MALgAAA8b3ZKoLzOlAnUZKTaxwfY0BAOLleTL0oe5DjxR7BrG-97wAAAIBEwAAAA==\\\", \\\"conversationId\\\": \\\"AAQkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwAQALxVooc96jZPnUrWrWacvYg=\\\", \\\"conversationIndex\\\": \\\"AQHZksvjvFWihz3qNk+dStatZpy9iA==\\\", \\\"isDeliveryReceiptRequested\\\": false, \\\"isReadReceiptRequested\\\": false, \\\"isRead\\\": true, \\\"isDraft\\\": false, \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAETAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGtroAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"inferenceClassification\\\": \\\"focused\\\", \\\"body\\\": {\\\"contentType\\\": \\\"html\\\", \\\"content\\\": \\\"\u003chtml\u003e\u003chead\u003e\\\\r\\\\n\u003cmeta http-equiv=\\\\\\\"Content-Type\\\\\\\" content=\\\\\\\"text/html; charset=utf-8\\\\\\\"\u003e\u003c/head\u003e\u003cbody\u003etest pb 123 \u003c/body\u003e\u003c/html\u003e\\\"}, \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\"}}, \\\"from\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\"}}, \\\"toRecipients\\\": [{\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\"}}], \\\"ccRecipients\\\": [], \\\"bccRecipients\\\": [], \\\"replyTo\\\": [], \\\"flag\\\": {\\\"flagStatus\\\": \\\"notFlagged\\\"}}\", \"inputs\": {\"exo_email_address\": \"soartester@mytenant.onmicrosoft.com\", \"exo_messages_id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAETAADi5Xky9KHuQ48Uewaxv-e8AAApGtroAAA=\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-exchange-online\", \"package_version\": \"1.4.0\", \"host\": \"myLaptop\", \"execution_time_ms\": 1437, \"timestamp\": \"2023-05-30 16:30:46\"}, \"pretty_string\": \"{\\n    \\\"@odata.context\\\": \\\"https://graph.microsoft.com/v1.0/$metadata#users(\u0027soartester%40mytenant.onmicrosoft.com\u0027)/messages/$entity\\\",\\n    \\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApET0U\\\\\\\"\\\",\\n    \\\"bccRecipients\\\": [],\\n    \\\"body\\\": {\\n        \\\"content\\\": \\\"\u003chtml\u003e\u003chead\u003e\\\\r\\\\n\u003cmeta http-equiv=\\\\\\\"Content-Type\\\\\\\" content=\\\\\\\"text/html; charset=utf-8\\\\\\\"\u003e\u003c/head\u003e\u003cbody\u003etest pb 123 \u003c/body\u003e\u003c/html\u003e\\\",\\n        \\\"contentType\\\": \\\"html\\\"\\n    },\\n    \\\"bodyPreview\\\": \\\"test pb 123\\\",\\n    \\\"categories\\\": [],\\n    \\\"ccRecipients\\\": [],\\n    \\\"changeKey\\\": \\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApET0U\\\",\\n    \\\"conversationId\\\": \\\"AAQkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwAQALxVooc96jZPnUrWrWacvYg=\\\",\\n    \\\"conversationIndex\\\": \\\"AQHZksvjvFWihz3qNk+dStatZpy9iA==\\\",\\n    \\\"createdDateTime\\\": \\\"2023-05-30T07:53:58Z\\\",\\n    \\\"flag\\\": {\\n        \\\"flagStatus\\\": \\\"notFlagged\\\"\\n    },\\n    \\\"from\\\": {\\n        \\\"emailAddress\\\": {\\n            \\\"address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\",\\n            \\\"name\\\": \\\"SOAR tester\\\"\\n        }\\n    },\\n    \\\"hasAttachments\\\": false,\\n    \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAETAADi5Xky9KHuQ48Uewaxv-e8AAApGtroAAA=\\\",\\n    \\\"importance\\\": \\\"normal\\\",\\n    \\\"inferenceClassification\\\": \\\"focused\\\",\\n    \\\"internetMessageId\\\": \\\"\u003cDM6PR08MB60609ABA5A1C0455AFF7C26C954B9@DM6PR08MB6060.namprd08.prod.outlook.com\u003e\\\",\\n    \\\"isDeliveryReceiptRequested\\\": false,\\n    \\\"isDraft\\\": false,\\n    \\\"isRead\\\": true,\\n    \\\"isReadReceiptRequested\\\": false,\\n    \\\"lastModifiedDateTime\\\": \\\"2023-05-30T07:55:21Z\\\",\\n    \\\"parentFolderId\\\": \\\"AQMkAGVhZGFlNDVhLTI0MDAALTRhNTYtOWY5Ny0wMTc5ZWIxYjQwM2MALgAAA8b3ZKoLzOlAnUZKTaxwfY0BAOLleTL0oe5DjxR7BrG-97wAAAIBEwAAAA==\\\",\\n    \\\"receivedDateTime\\\": \\\"2023-05-30T07:53:58Z\\\",\\n    \\\"replyTo\\\": [],\\n    \\\"sender\\\": {\\n        \\\"emailAddress\\\": {\\n            \\\"address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\",\\n            \\\"name\\\": \\\"SOAR tester\\\"\\n        }\\n    },\\n    \\\"sentDateTime\\\": \\\"2023-05-30T07:53:57Z\\\",\\n    \\\"subject\\\": \\\"test pb\\\",\\n    \\\"toRecipients\\\": [\\n        {\\n            \\\"emailAddress\\\": {\\n                \\\"address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\",\\n                \\\"name\\\": \\\"SOAR tester\\\"\\n            }\\n        }\\n    ],\\n    \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAETAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGtroAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\"\\n}\"}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"@odata.context\": {\"type\": \"string\"}, \"@odata.etag\": {\"type\": \"string\"}, \"id\": {\"type\": \"string\"}, \"createdDateTime\": {\"type\": \"string\"}, \"lastModifiedDateTime\": {\"type\": \"string\"}, \"changeKey\": {\"type\": \"string\"}, \"categories\": {\"type\": \"array\"}, \"receivedDateTime\": {\"type\": \"string\"}, \"sentDateTime\": {\"type\": \"string\"}, \"hasAttachments\": {\"type\": \"boolean\"}, \"internetMessageId\": {\"type\": \"string\"}, \"subject\": {\"type\": \"string\"}, \"bodyPreview\": {\"type\": \"string\"}, \"importance\": {\"type\": \"string\"}, \"parentFolderId\": {\"type\": \"string\"}, \"conversationId\": {\"type\": \"string\"}, \"conversationIndex\": {\"type\": \"string\"}, \"isDeliveryReceiptRequested\": {\"type\": \"boolean\"}, \"isReadReceiptRequested\": {\"type\": \"boolean\"}, \"isRead\": {\"type\": \"boolean\"}, \"isDraft\": {\"type\": \"boolean\"}, \"webLink\": {\"type\": \"string\"}, \"inferenceClassification\": {\"type\": \"string\"}, \"body\": {\"type\": \"object\", \"properties\": {\"contentType\": {\"type\": \"string\"}, \"content\": {\"type\": \"string\"}}}, \"sender\": {\"type\": \"object\", \"properties\": {\"emailAddress\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"address\": {\"type\": \"string\"}}}}}, \"from\": {\"type\": \"object\", \"properties\": {\"emailAddress\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"address\": {\"type\": \"string\"}}}}}, \"toRecipients\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"emailAddress\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"address\": {\"type\": \"string\"}}}}}}, \"ccRecipients\": {\"type\": \"array\"}, \"bccRecipients\": {\"type\": \"array\"}, \"replyTo\": {\"type\": \"array\"}, \"flag\": {\"type\": \"object\", \"properties\": {\"flagStatus\": {\"type\": \"string\"}}}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"exo_email_address\": {\"type\": \"string\"}, \"exo_messages_id\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}, \"pretty_string\": {\"type\": \"string\"}}}",
       "tags": [],
       "uuid": "c4748898-439e-496a-bbba-93fbc51582c3",
       "version": 0,
@@ -1217,7 +1227,7 @@
       "workflows": []
     },
     {
-      "created_date": 1733241205567,
+      "created_date": 1749044575523,
       "description": {
         "content": "This function moves an Exchange Online message to the specified folder in the users mailbox.",
         "format": "text"
@@ -1225,19 +1235,21 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Move Message to Folder",
       "export_key": "exchange_online_move_message_to_folder",
-      "id": 46,
+      "id": 577,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241205567,
+      "last_modified_time": 1749044575523,
       "name": "exchange_online_move_message_to_folder",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"new_message_id\": \"AAMkAGJjNm********QzNS04MmI2LTgwZjg4MTQ2OTEzMwBGAAAAAABM_APU2eg7T4komrfmIHkhBwAZQHL8XTpvQ52trPtVkxJqAAAAAJpcAAAZQHL8XTpvQ52trPtVkxJqAATJxvSoAAA=\", \"new_web_link\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGJjNmZiMDVkLTY3OGMtNGQzNS04MmI2LTgwZjg4MTQ2OTEzMwBGAAAAAABM%2BAPU2eg7T4komrfmIHkhBwAZQHL8XTpvQ52trPtVkxJqAAAAAJpcAAAZQHL8XTpvQ52trPtVkxJqAATJxvSoAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\"}, \"raw\": \"{\\\"new_message_id\\\": \\\"AAMkA********LTY3OGMtNGQzNS04MmI2LTgwZjg4MTQ2OTEzMwBGAAAAAABM_APU2eg7T4komrfmIHkhBwAZQHL8XTpvQ52trPtVkxJqAAAAAJpcAAAZQHL8XTpvQ52trPtVkxJqAATJxvSoAAA=\\\", \\\"new_web_link\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGJjNmZiMDVkLTY3OGMtNGQzNS04MmI2LTgwZjg4MTQ2OTEzMwBGAAAAAABM%2BAPU2eg7T4komrfmIHkhBwAZQHL8XTpvQ52trPtVkxJqAAAAAJpcAAAZQHL8XTpvQ52trPtVkxJqAATJxvSoAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\"}\", \"inputs\": {\"exo_mailfolders_id\": null, \"exo_email_address\": \"tester@mytenant.onmicrosoft.com\", \"exo_messages_id\": \"AAMkAGJ********OGMtNGQzNS04MmI2LTgwZjg4MTQ2OTEzMwBGAAAAAABM_APU2eg7T4komrfmIHkhBwAZQHL8XTpvQ52trPtVkxJqAAAAAAEMAAAZQHL8XTpvQ52trPtVkxJqAATJxo7YAAA=\", \"exo_destination_mailfolder_id\": {\"id\": 805, \"name\": \"archive\"}}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-exchange-online\", \"package_version\": \"1.4.1\", \"host\": \"my.app.host\", \"execution_time_ms\": 3891, \"timestamp\": \"2024-12-03 11:11:15\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"new_message_id\": {\"type\": \"string\"}, \"new_web_link\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"exo_mailfolders_id\": {}, \"exo_email_address\": {\"type\": \"string\"}, \"exo_messages_id\": {\"type\": \"string\"}, \"exo_destination_mailfolder_id\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}}}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "ec89e514-34f6-4fe3-98ea-85398bb04dd9",
       "version": 0,
@@ -1278,7 +1290,7 @@
       "workflows": []
     },
     {
-      "created_date": 1733241205688,
+      "created_date": 1749044575685,
       "description": {
         "content": "This function queries Exchange Online to find messages matching the specified input parameters.  A list of messages is returned from the function.",
         "format": "text"
@@ -1286,19 +1298,21 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Query Messages",
       "export_key": "exchange_online_query_emails",
-      "id": 47,
+      "id": 578,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241205688,
+      "last_modified_time": 1749044575685,
       "name": "exchange_online_query_emails",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"incident_id\": 2102, \"exo_query_output_format\": [\"Exchange Online data table\"], \"email_results\": [{\"email_address\": \"soartester@mytenant.onmicrosoft.com\", \"status_code\": 200, \"email_list\": [{\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAb4l2O\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAb6QY8AAA=\", \"receivedDateTime\": \"2023-05-15T07:44:34Z\", \"hasAttachments\": false, \"subject\": \"test\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAb6QY8AAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETUm\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_OAAA=\", \"receivedDateTime\": \"2023-05-18T08:43:22Z\", \"hasAttachments\": false, \"subject\": \"test pb\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BOAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETUi\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_NAAA=\", \"receivedDateTime\": \"2023-05-18T08:55:41Z\", \"hasAttachments\": false, \"subject\": \"test pb\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BNAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETUe\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_MAAA=\", \"receivedDateTime\": \"2023-05-22T04:58:14Z\", \"hasAttachments\": false, \"subject\": \"test pb\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BMAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETUa\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_LAAA=\", \"receivedDateTime\": \"2023-05-26T03:58:50Z\", \"hasAttachments\": false, \"subject\": \"test pb 123\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BLAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETT8\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_KAAA=\", \"receivedDateTime\": \"2023-05-26T04:55:57Z\", \"hasAttachments\": false, \"subject\": \"test pb 456\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BKAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETT4\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_JAAA=\", \"receivedDateTime\": \"2023-05-26T04:56:00Z\", \"hasAttachments\": false, \"subject\": \"test pb 456\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BJAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETVN\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAApGmcOAAA=\", \"receivedDateTime\": \"2023-05-30T04:31:18Z\", \"hasAttachments\": false, \"subject\": \"test pb\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGmcOAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETyz\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAApGmcPAAA=\", \"receivedDateTime\": \"2023-05-30T07:41:39Z\", \"hasAttachments\": false, \"subject\": \"test pb \", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGmcPAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETzY\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAApGmcQAAA=\", \"receivedDateTime\": \"2023-05-30T07:49:23Z\", \"hasAttachments\": false, \"subject\": \"test pb\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGmcQAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApET0K\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAApGmcRAAA=\", \"receivedDateTime\": \"2023-05-30T07:53:57Z\", \"hasAttachments\": false, \"subject\": \"test pb\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGmcRAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuFf\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlOMAAA=\", \"receivedDateTime\": \"2023-06-08T07:04:23Z\", \"hasAttachments\": false, \"subject\": \"123\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlOMAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuFh\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld2AAA=\", \"receivedDateTime\": \"2023-06-08T07:04:26Z\", \"hasAttachments\": false, \"subject\": \"123\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld2AAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuGD\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlONAAA=\", \"receivedDateTime\": \"2023-06-08T07:04:31Z\", \"hasAttachments\": false, \"subject\": \"456\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlONAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuF9\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld3AAA=\", \"receivedDateTime\": \"2023-06-08T07:04:31Z\", \"hasAttachments\": false, \"subject\": \"456\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld3AAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuGd\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlOOAAA=\", \"receivedDateTime\": \"2023-06-08T07:04:57Z\", \"hasAttachments\": false, \"subject\": \"123\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlOOAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuGU\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld4AAA=\", \"receivedDateTime\": \"2023-06-08T07:04:57Z\", \"hasAttachments\": false, \"subject\": \"123\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld4AAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuHc\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlOPAAA=\", \"receivedDateTime\": \"2023-06-08T07:12:43Z\", \"hasAttachments\": false, \"subject\": \"123\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlOPAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuHn\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld5AAA=\", \"receivedDateTime\": \"2023-06-08T07:12:48Z\", \"hasAttachments\": false, \"subject\": \"123\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld5AAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuIA\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlOQAAA=\", \"receivedDateTime\": \"2023-06-08T07:13:06Z\", \"hasAttachments\": false, \"subject\": null, \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlOQAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuH7\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld6AAA=\", \"receivedDateTime\": \"2023-06-08T07:13:06Z\", \"hasAttachments\": false, \"subject\": \"\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld6AAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAA0Qx/Z\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAA0UCmSAAA=\", \"receivedDateTime\": \"2023-06-08T07:21:41Z\", \"hasAttachments\": false, \"subject\": null, \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAA0UCmSAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAA0Qx/6\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAA0UETzAAA=\", \"receivedDateTime\": \"2023-06-15T07:56:32Z\", \"hasAttachments\": false, \"subject\": \"test123456\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAA0UETzAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}]}]}, \"raw\": \"{\\\"incident_id\\\": 2102, \\\"exo_query_output_format\\\": [\\\"Exchange Online data table\\\"], \\\"email_results\\\": [{\\\"email_address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\", \\\"status_code\\\": 200, \\\"email_list\\\": [{\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAb4l2O\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAb6QY8AAA=\\\", \\\"receivedDateTime\\\": \\\"2023-05-15T07:44:34Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"test\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAb6QY8AAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETUm\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_OAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-05-18T08:43:22Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"test pb\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BOAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETUi\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_NAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-05-18T08:55:41Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"test pb\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BNAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETUe\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_MAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-05-22T04:58:14Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"test pb\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BMAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETUa\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_LAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-05-26T03:58:50Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"test pb 123\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BLAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETT8\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_KAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-05-26T04:55:57Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"test pb 456\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BKAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETT4\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_JAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-05-26T04:56:00Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"test pb 456\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BJAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETVN\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAApGmcOAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-05-30T04:31:18Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"test pb\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGmcOAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETyz\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAApGmcPAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-05-30T07:41:39Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"test pb \\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGmcPAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETzY\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAApGmcQAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-05-30T07:49:23Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"test pb\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGmcQAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApET0K\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAApGmcRAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-05-30T07:53:57Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"test pb\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGmcRAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuFf\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlOMAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-06-08T07:04:23Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"123\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlOMAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuFh\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld2AAA=\\\", \\\"receivedDateTime\\\": \\\"2023-06-08T07:04:26Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"123\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld2AAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuGD\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlONAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-06-08T07:04:31Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"456\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlONAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuF9\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld3AAA=\\\", \\\"receivedDateTime\\\": \\\"2023-06-08T07:04:31Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"456\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld3AAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuGd\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlOOAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-06-08T07:04:57Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"123\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlOOAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuGU\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld4AAA=\\\", \\\"receivedDateTime\\\": \\\"2023-06-08T07:04:57Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"123\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld4AAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuHc\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlOPAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-06-08T07:12:43Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"123\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlOPAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuHn\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld5AAA=\\\", \\\"receivedDateTime\\\": \\\"2023-06-08T07:12:48Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"123\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld5AAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuIA\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlOQAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-06-08T07:13:06Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": null, \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlOQAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuH7\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld6AAA=\\\", \\\"receivedDateTime\\\": \\\"2023-06-08T07:13:06Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld6AAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"soartester@mytenant.onmicrosoft.com\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAA0Qx/Z\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAA0UCmSAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-06-08T07:21:41Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": null, \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAA0UCmSAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\\\"}}}, {\\\"@odata.etag\\\": \\\"W/\\\\\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAA0Qx/6\\\\\\\"\\\", \\\"id\\\": \\\"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAA0UETzAAA=\\\", \\\"receivedDateTime\\\": \\\"2023-06-15T07:56:32Z\\\", \\\"hasAttachments\\\": false, \\\"subject\\\": \\\"test123456\\\", \\\"webLink\\\": \\\"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAA0UETzAAA%3D\u0026exvsurl=1\u0026viewmodel=ReadMessageItem\\\", \\\"sender\\\": {\\\"emailAddress\\\": {\\\"name\\\": \\\"SOAR tester\\\", \\\"address\\\": \\\"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\\\"}}}]}]}\", \"inputs\": {\"incident_id\": 2102, \"exo_has_attachments\": null, \"exo_message_subject\": null, \"exo_email_address\": \"soartester@mytenant.onmicrosoft.com\", \"exo_start_date\": null, \"exo_query_output_format\": [{\"id\": 206, \"name\": \"Exchange Online data table\"}], \"exo_email_address_sender\": \"soartester@mytenant.onmicrosoft.com\", \"exo_end_date\": null, \"exo_message_body\": null, \"exo_mail_folders\": null}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-exchange-online\", \"package_version\": \"1.4.0\", \"host\": \"myLaptop\", \"execution_time_ms\": 2118, \"timestamp\": \"2023-06-15 19:55:23\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"incident_id\": {\"type\": \"integer\"}, \"exo_query_output_format\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"email_results\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"email_address\": {\"type\": \"string\"}, \"status_code\": {\"type\": \"integer\"}, \"email_list\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"@odata.etag\": {\"type\": \"string\"}, \"id\": {\"type\": \"string\"}, \"receivedDateTime\": {\"type\": \"string\"}, \"hasAttachments\": {\"type\": \"boolean\"}, \"subject\": {\"type\": [\"null\", \"string\"]}, \"webLink\": {\"type\": \"string\"}, \"sender\": {\"type\": \"object\", \"properties\": {\"emailAddress\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"address\": {\"type\": \"string\"}}}}}}}}}}}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"incident_id\": {\"type\": \"integer\"}, \"exo_has_attachments\": {}, \"exo_message_subject\": {}, \"exo_email_address\": {\"type\": \"string\"}, \"exo_start_date\": {}, \"exo_query_output_format\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}}}}, \"exo_email_address_sender\": {\"type\": \"string\"}, \"exo_end_date\": {}, \"exo_message_body\": {}, \"exo_mail_folders\": {}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "6f09fab2-2176-4c27-ab39-cc19568e08e5",
       "version": 0,
@@ -1387,7 +1401,7 @@
       "workflows": []
     },
     {
-      "created_date": 1733241205807,
+      "created_date": 1749044575859,
       "description": {
         "content": "This function creates a message and sends it to the specified recipients.",
         "format": "text"
@@ -1395,19 +1409,21 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Send Message",
       "export_key": "exchange_online_send_message",
-      "id": 48,
+      "id": 579,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241205807,
+      "last_modified_time": 1749044575859,
       "name": "exchange_online_send_message",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"value\": true, \"failed_attachments\": null}, \"raw\": \"{\\\"value\\\": true, \\\"failed_attachments\\\": null}\", \"inputs\": {\"exo_recipients\": \"soartester@mytenant.onmicrosoft.com\", \"incident_id\": 2099, \"exo_message_subject\": \"test123456\", \"exo_email_address\": \"soartester@mytenant.onmicrosoft.com\", \"exo_attachment_names\": null, \"exo_message_body\": \"test123456\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-exchange-online\", \"package_version\": \"1.4.0\", \"host\": \"myLaptop\", \"execution_time_ms\": 2834, \"timestamp\": \"2023-06-15 15:56:30\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"value\": {\"type\": \"boolean\"}, \"failed_attachments\": {}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"exo_recipients\": {\"type\": \"string\"}, \"incident_id\": {\"type\": \"integer\"}, \"exo_message_subject\": {\"type\": \"string\"}, \"exo_email_address\": {\"type\": \"string\"}, \"exo_attachment_names\": {}, \"exo_message_body\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "6256b03b-03ae-4972-bba2-63fe629fbb65",
       "version": 0,
@@ -1464,7 +1480,7 @@
       "workflows": []
     },
     {
-      "created_date": 1733241205927,
+      "created_date": 1749044576044,
       "description": {
         "content": "This function gets the mime content of an Exchange Online message and writes it as an incident attachment.",
         "format": "text"
@@ -1472,19 +1488,21 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Write Message as Attachment",
       "export_key": "exchange_online_write_message_as_attachment",
-      "id": 49,
+      "id": 580,
       "last_modified_by": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241205927,
+      "last_modified_time": 1749044576044,
       "name": "exchange_online_write_message_as_attachment",
       "output_description": {
         "content": null,
         "format": "text"
       },
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"attachment_name\": \"test\"}, \"raw\": \"{\\\"attachment_name\\\": \\\"test\\\"}\", \"inputs\": {\"incident_id\": 2115, \"exo_attachment_name\": \"test\", \"exo_email_address\": \"soartester@mytenant.onmicrosoft.com\", \"exo_messages_id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAETAADi5Xky9KHuQ48Uewaxv-e8AAApGtroAAA=\"}, \"metrics\": {\"version\": \"1.0\", \"package\": \"fn-exchange-online\", \"package_version\": \"1.4.0\", \"host\": \"myLaptop\", \"execution_time_ms\": 3941, \"timestamp\": \"2023-05-30 16:30:35\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"attachment_name\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"incident_id\": {\"type\": \"integer\"}, \"exo_attachment_name\": {\"type\": \"string\"}, \"exo_email_address\": {\"type\": \"string\"}, \"exo_messages_id\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "dbb5e3de-0f43-4c7e-b09f-5d50f0ce426c",
       "version": 0,
@@ -1535,13 +1553,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 126,
+  "id": 240,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1733417517021,
+      "create_date": 1749131204323,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1550,7 +1568,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1733417517021,
+      "update_date": 1749131204323,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1558,16 +1576,16 @@
   "locale": null,
   "message_destinations": [
     {
-      "api_keys": [],
+      "api_keys": [
+        "4d951d72-0860-4609-a483-4564c9607a0e"
+      ],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "fn_exchange_online",
       "name": "fn_exchange_online",
       "programmatic_name": "fn_exchange_online",
       "tags": [],
-      "users": [
-        "admin@example.com"
-      ],
+      "users": [],
       "uuid": "ef11c871-6784-4101-b7a0-bbfbe5574aaf"
     }
   ],
@@ -1581,11 +1599,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_45f7d606_5f20_4a3b_8bdb_1b9dc501650f\" isExecutable=\"true\" name=\"playbook_45f7d606_5f20_4a3b_8bdb_1b9dc501650f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1dkenar\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0t7gnch\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1dkenar\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Exchange Online Create Artifacts from Message\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3fc6e3c9-fc1e-4561-9b7f-279f9cea06e4\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1dkenar\u003c/incoming\u003e\u003coutgoing\u003eFlow_0t7gnch\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0t7gnch\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_45f7d606_5f20_4a3b_8bdb_1b9dc501650f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1dkenar\" id=\"Flow_1dkenar_di\"\u003e\u003comgdi:waypoint x=\"580\" y=\"-84\"/\u003e\u003comgdi:waypoint x=\"580\" y=\"28\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0t7gnch\" id=\"Flow_0t7gnch_di\"\u003e\u003comgdi:waypoint x=\"580\" y=\"112\"/\u003e\u003comgdi:waypoint x=\"580\" y=\"194\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"480\" y=\"-136\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"513.9839999999999\" y=\"193.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"481.566\" y=\"28\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1733241206987,
+      "create_date": 1749044577387,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_45f7d606_5f20_4a3b_8bdb_1b9dc501650f",
@@ -1621,27 +1639,27 @@
         "uuid": "bf76644b-3596-4ce3-ad42-49b4ceba6d0b"
       },
       "has_logical_errors": false,
-      "id": 42,
+      "id": 341,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241208391,
+      "last_modified_time": 1749044579245,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1733241207304,
+          "created_date": 1749044577664,
           "description": "",
           "enabled": false,
           "export_key": "Exchange Online Create Artifacts from Message",
-          "id": 69,
+          "id": 332,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1733241207304,
+          "last_modified_by": "shresh@example.com",
+          "last_modified_time": 1749044577664,
           "name": "Exchange Online Create Artifacts from Message",
           "object_type": "exo_message_query_results_dt",
           "playbook_handle": "example_exchange_online_create_artifacts",
@@ -1663,7 +1681,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_45f7d606-5f20-4a3b-8bdb-1b9dc501650f",
-        "id": 44,
+        "id": 498,
         "name": "playbook_45f7d606_5f20_4a3b_8bdb_1b9dc501650f",
         "type": "playbook",
         "uuid": "e71db3a8-c729-4e0e-8108-f4743680918e"
@@ -1676,14 +1694,14 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be\" isExecutable=\"true\" name=\"playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0j3j0st\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Create Meeting\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"40e56303-027d-4e27-9865-10ca18d267b3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exo_meeting_email_address = playbook.inputs.exchange_online_meeting_organizer_email_address  \\ninputs.exo_meeting_start_time = playbook.inputs.exchange_online_meeting_start_time\\ninputs.exo_meeting_end_time = playbook.inputs.exchange_online_meeting_end_time\\ninputs.exo_meeting_subject = playbook.inputs.exchange_online_meeting_subject\\ninputs.exo_meeting_body = playbook.inputs.exchange_online_meeting_body.content\\ninputs.exo_meeting_required_attendees = playbook.inputs.exchange_online_required_attendees\\ninputs.exo_meeting_optional_attendees = playbook.inputs.exchange_online_meeting_optional_attendees\\ninputs.exo_meeting_location = playbook.inputs.exchange_online_meeting_location\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_onlne_creating_meeting_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0j3j0st\u003c/incoming\u003e\u003coutgoing\u003eFlow_0x66ova\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0snbvqy\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"exchange_online_create_meeting_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"c095e48f-c02b-4120-a29d-db6e3e221d78\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0x66ova\u003c/incoming\u003e\u003coutgoing\u003eFlow_0snbvqy\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0j3j0st\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0x66ova\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0snbvqy\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0snbvqy\" id=\"Flow_0snbvqy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0x66ova\" id=\"Flow_0x66ova_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0j3j0st\" id=\"Flow_0j3j0st_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1733241208335,
+      "create_date": 1749044579166,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be",
@@ -1709,7 +1727,7 @@
             "deprecated": false,
             "export_key": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be/exchange_online_meeting_body",
             "hide_notification": false,
-            "id": 659,
+            "id": 5032,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -1725,7 +1743,7 @@
             "templates": [],
             "text": "Meeting Body",
             "tooltip": "",
-            "type_id": 1051,
+            "type_id": 1426,
             "uuid": "f68171ec-6528-44bd-a0eb-5c8915ab713d",
             "values": []
           },
@@ -1739,7 +1757,7 @@
             "deprecated": false,
             "export_key": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be/exchange_online_meeting_end_time",
             "hide_notification": false,
-            "id": 660,
+            "id": 5033,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -1755,7 +1773,7 @@
             "templates": [],
             "text": "Meeting End Time",
             "tooltip": "",
-            "type_id": 1051,
+            "type_id": 1426,
             "uuid": "7ea76d16-d685-4a53-8d06-fd7414a0c1d5",
             "values": []
           },
@@ -1769,7 +1787,7 @@
             "deprecated": false,
             "export_key": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be/exchange_online_meeting_location",
             "hide_notification": false,
-            "id": 661,
+            "id": 5034,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1784,7 +1802,7 @@
             "templates": [],
             "text": "Meeting Location",
             "tooltip": "",
-            "type_id": 1051,
+            "type_id": 1426,
             "uuid": "ec6fc2d6-e320-4996-93b1-337a1fd371df",
             "values": []
           },
@@ -1798,7 +1816,7 @@
             "deprecated": false,
             "export_key": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be/exchange_online_meeting_optional_attendees",
             "hide_notification": false,
-            "id": 662,
+            "id": 5035,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1813,7 +1831,7 @@
             "templates": [],
             "text": "Optional Attendees",
             "tooltip": "",
-            "type_id": 1051,
+            "type_id": 1426,
             "uuid": "abf4608b-bf46-4aa4-864a-c03121dada72",
             "values": []
           },
@@ -1827,7 +1845,7 @@
             "deprecated": false,
             "export_key": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be/exchange_online_meeting_organizer_email_address",
             "hide_notification": false,
-            "id": 663,
+            "id": 5036,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1843,7 +1861,7 @@
             "templates": [],
             "text": "Meeting Organizer Email Address",
             "tooltip": "",
-            "type_id": 1051,
+            "type_id": 1426,
             "uuid": "35f9f3b8-7553-4e7b-b588-cb757bc93ea7",
             "values": []
           },
@@ -1857,7 +1875,7 @@
             "deprecated": false,
             "export_key": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be/exchange_online_meeting_start_time",
             "hide_notification": false,
-            "id": 664,
+            "id": 5037,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -1873,7 +1891,7 @@
             "templates": [],
             "text": "Meeting Start Time",
             "tooltip": "",
-            "type_id": 1051,
+            "type_id": 1426,
             "uuid": "98be31fa-a2b3-412c-9a4f-ed810d88f4d6",
             "values": []
           },
@@ -1887,7 +1905,7 @@
             "deprecated": false,
             "export_key": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be/exchange_online_meeting_subject",
             "hide_notification": false,
-            "id": 665,
+            "id": 5038,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1903,7 +1921,7 @@
             "templates": [],
             "text": "Meeting Subject",
             "tooltip": "",
-            "type_id": 1051,
+            "type_id": 1426,
             "uuid": "eec63000-98b1-4d47-90d2-3be19d560bdd",
             "values": []
           },
@@ -1917,7 +1935,7 @@
             "deprecated": false,
             "export_key": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be/exchange_online_required_attendees",
             "hide_notification": false,
-            "id": 666,
+            "id": 5039,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1932,7 +1950,7 @@
             "templates": [],
             "text": "Required Attendees",
             "tooltip": "",
-            "type_id": 1051,
+            "type_id": 1426,
             "uuid": "ef31795e-6a56-4bd3-a444-3bab8108de77",
             "values": []
           }
@@ -1957,32 +1975,32 @@
         "uuid": "9d00917c-096e-43a9-9bc3-b48cdd51d789"
       },
       "has_logical_errors": false,
-      "id": 43,
+      "id": 342,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241209865,
+      "last_modified_time": 1749130750453,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1733241209090,
+          "created_date": 1749044579998,
           "description": "",
           "enabled": false,
           "export_key": "exchange_online_create_meeting_post_process",
-          "id": 70,
+          "id": 333,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1733241209090,
+          "last_modified_by": "shresh@example.com",
+          "last_modified_time": 1749130746935,
           "name": "exchange_online_create_meeting_post_process",
           "object_type": "incident",
           "playbook_handle": "example_exchange_online_create_meeting",
           "programmatic_name": "example_exchange_online_create_meeting_exchange_online_create_meeting",
-          "script_text": "results=playbook.functions.results.exchange_onlne_creating_meeting_result\n\nif results.success:\n  noteText = u\"Exchange Online created meeting\\n   From: {0}\\n{1}\".format(results.inputs[\"exo_meeting_email_address\"],results.pretty_string)\nelse:\n  noteText = u\"Exchange Online meeting was NOT created\\n   From: {0}\\n{1}\".format(results.inputs[\"exo_meeting_email_address\"], results.pretty_string)\n\nincident.addNote(noteText)",
+          "script_text": "results=playbook.functions.results.exchange_onlne_creating_meeting_result\n\nif results.success:\n  noteText = \"Exchange Online created meeting\\n   From: {0}\\n{1}\".format(results.inputs[\"exo_meeting_email_address\"],results.pretty_string)\nelse:\n  noteText = \"Exchange Online meeting was NOT created\\n   From: {0}\\n{1}\".format(results.inputs[\"exo_meeting_email_address\"], results.pretty_string)\n\nincident.addNote(noteText)",
           "tags": [],
           "uuid": "c095e48f-c02b-4120-a29d-db6e3e221d78"
         }
@@ -2064,7 +2082,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_eefd2b32-40c0-4dfa-a9a7-6954d45a83be",
-        "id": 45,
+        "id": 499,
         "name": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be",
         "type": "playbook",
         "uuid": "01e22809-24f7-48c3-9420-0f3deb659fe1"
@@ -2072,19 +2090,19 @@
       "tags": [],
       "type": "default",
       "uuid": "eefd2b32-40c0-4dfa-a9a7-6954d45a83be",
-      "version": 3
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2dca7324_8232_49aa_8029_3cf955c689b0\" isExecutable=\"true\" name=\"playbook_2dca7324_8232_49aa_8029_3cf955c689b0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0y4m5em\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Delete Message\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e4a2073e-46cf-48a6-b3be-f0f99b05c472\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exo_email_address = row.exo_dt_email_address\\ninputs.exo_messages_id = row.exo_dt_message_id\\ninputs.exo_mailfolders_id = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_delete_message_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0y4m5em\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ridshg\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0fv3op6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0y4m5em\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1ridshg\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"exchange_online_delete_message_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"c79c7a1c-eb02-4737-bde1-0a2b9d07a152\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ridshg\u003c/incoming\u003e\u003coutgoing\u003eFlow_0fv3op6\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0fv3op6\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2dca7324_8232_49aa_8029_3cf955c689b0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fv3op6\" id=\"Flow_0fv3op6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"482\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"544\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ridshg\" id=\"Flow_1ridshg_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"398\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0y4m5em\" id=\"Flow_0y4m5em_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"544\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.25\" y=\"398\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1733241209901,
+      "create_date": 1749044581060,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_2dca7324_8232_49aa_8029_3cf955c689b0",
@@ -2120,32 +2138,32 @@
         "uuid": "ef23d709-cb17-4035-b009-bc1844129e9a"
       },
       "has_logical_errors": false,
-      "id": 44,
+      "id": 343,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241211112,
+      "last_modified_time": 1749130711924,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1733241210141,
+          "created_date": 1749044581332,
           "description": "",
           "enabled": false,
           "export_key": "exchange_online_delete_message_post_process",
-          "id": 71,
+          "id": 334,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1733241210141,
+          "last_modified_by": "shresh@example.com",
+          "last_modified_time": 1749130708015,
           "name": "exchange_online_delete_message_post_process",
           "object_type": "exo_message_query_results_dt",
           "playbook_handle": "example_exchange_online_delete_message",
           "programmatic_name": "example_exchange_online_delete_message_exchange_online_delete_message",
-          "script_text": "results=playbook.functions.results.exchange_online_delete_message_result\n\nif results.success:\n  # The message was deleted, so update \"status\" column in data table.\n  text = u\"\"\"\u003cp style= \"color:{color}\"\u003e{status} \u003c/p\u003e\"\"\".format(color=\"red\", status=\"Deleted\")\n  row[\u0027exo_dt_status\u0027] = helper.createRichText(text)\n  row[\u0027exo_dt_web_link\u0027] = \"\"\nelif results.content[\"error\"] is not None: \n  # There is an \"item not found\" error mostly likely here\n  row[\u0027exo_dt_status\u0027] = helper.createRichText(results.content[\"error\"][\"code\"])\n  row[\u0027exo_dt_web_link\u0027] = \"\"",
+          "script_text": "results=playbook.functions.results.exchange_online_delete_message_result\n\nif results.success:\n  # The message was deleted, so update \"status\" column in data table.\n  text = \"\"\"\u003cp style= \"color:{color}\"\u003e{status} \u003c/p\u003e\"\"\".format(color=\"red\", status=\"Deleted\")\n  row[\u0027exo_dt_status\u0027] = helper.createRichText(text)\n  row[\u0027exo_dt_web_link\u0027] = \"\"\nelif results.content[\"error\"]: \n  # There is an \"item not found\" error mostly likely here\n  row[\u0027exo_dt_status\u0027] = helper.createRichText(results.content[\"error\"][\"code\"])\n  row[\u0027exo_dt_web_link\u0027] = \"\"",
           "tags": [],
           "uuid": "c79c7a1c-eb02-4737-bde1-0a2b9d07a152"
         }
@@ -2170,7 +2188,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_2dca7324-8232-49aa-8029-3cf955c689b0",
-        "id": 46,
+        "id": 500,
         "name": "playbook_2dca7324_8232_49aa_8029_3cf955c689b0",
         "type": "playbook",
         "uuid": "447c02a7-a2a4-4dd1-9bb0-dd49584294c3"
@@ -2178,19 +2196,19 @@
       "tags": [],
       "type": "default",
       "uuid": "2dca7324-8232-49aa-8029-3cf955c689b0",
-      "version": 4
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89\" isExecutable=\"true\" name=\"playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0r6camt\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Query Messages\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6f09fab2-2176-4c27-ab39-cc19568e08e5\"\u003e{\"inputs\":{\"ead214c2-13fe-43f6-a3c7-676a88338dbb\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"092a752f-1297-46a4-bae6-e75d1a9b4804\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9e58d3a3-c54b-4a9b-9164-e6cc0832f644\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"68133b08-816e-4c03-a50d-c68af1b6b205\"]}},\"4ff86946-a8cf-4ae1-804b-87cab7d9dac1\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"8dd46926-b1dc-4d1e-ab6a-4239510b199d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"1c9b3b95-ca24-484c-ad72-f5d64be87402\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"7354f758-b9ea-4029-835d-66d293a22b5d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"51a9c433-07bc-4f04-9932-99211726b9b7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"06391a1a-0c2c-4bcd-832a-1f39a3ba77b8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ec20a9f0-1e29-490b-871b-57b05ffbac2e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"\\n\\ninputs.incident_id = incident.id\\n\\n# Get the email address of the user whose mailbox will be queried.\\ninputs.exo_email_address = playbook.inputs.exchange_online_email_address_list\\n\\n# Get the search criteria from the activity rules if available. \\n\\n\\ninputs.exo_mail_folders         = playbook.inputs.exchange_online_mail_folder_id\\ninputs.exo_email_address_sender = playbook.inputs.exchange_online_sender_email_address\\ninputs.exo_message_subject      = playbook.inputs.exchange_online_message_subject\\ninputs.exo_message_body         = playbook.inputs.exchange_online_message_body\\ninputs.exo_start_date           = playbook.inputs.exchange_online_start_datetime\\ninputs.exo_end_date             = playbook.inputs.exchange_online_end_datetime\\ninputs.exo_has_attachments      = playbook.inputs.exchange_online_has_attachments\\n\\n    \\nif hasattr(playbook.inputs, \\\"exchange_online_query_results_output\\\"):\\n    inputs.exo_query_output_format = [d for d in playbook.inputs.exchange_online_query_results_output]\\n\\n\\n\\n\\n\\n\\n\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_query_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0r6camt\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vnwyn3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Exchange Online: Delete Messages From Query Results\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"af142c3a-3c38-4352-9bca-fa82d53c61af\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exo_query_messages_results = playbook.functions.results.exchange_online_query_results[\u0027raw\u0027]\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_delete_messages_from_query_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1vnwyn3\u003c/incoming\u003e\u003coutgoing\u003eFlow_1turkjv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0t7a98f\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0r6camt\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1vnwyn3\" sourceRef=\"ServiceTask_1\" targetRef=\"ServiceTask_2\"/\u003e\u003csequenceFlow id=\"Flow_1turkjv\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_4\"/\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"exchange_online_delete_messages_from_query_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"af90b5de-2584-4359-b13f-fd9c5cfc2b85\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1turkjv\u003c/incoming\u003e\u003coutgoing\u003eFlow_0t7a98f\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0t7a98f\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0t7a98f\" id=\"Flow_0t7a98f_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"682\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"744\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1turkjv\" id=\"Flow_1turkjv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"522\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"598\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vnwyn3\" id=\"Flow_1vnwyn3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"332\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"438\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0r6camt\" id=\"Flow_0r6camt_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"248\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"248\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"438\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654.5\" y=\"743.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.25\" y=\"598.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1733241211055,
+      "create_date": 1749044582554,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89",
@@ -2216,7 +2234,7 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_email_address_list",
             "hide_notification": false,
-            "id": 667,
+            "id": 5040,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2232,7 +2250,7 @@
             "templates": [],
             "text": "Monitored Email Address",
             "tooltip": "Email addresses to search: a single email address, a comma separated list of email addresses, or \"ALL\" to search all users",
-            "type_id": 1053,
+            "type_id": 1428,
             "uuid": "8a722d51-a347-4868-af95-e386d5b1bf52",
             "values": []
           },
@@ -2246,7 +2264,7 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_end_datetime",
             "hide_notification": false,
-            "id": 668,
+            "id": 5041,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -2261,7 +2279,7 @@
             "templates": [],
             "text": "End date/time",
             "tooltip": "Query messages received ending at this date/time.",
-            "type_id": 1053,
+            "type_id": 1428,
             "uuid": "457787e1-29d1-44bd-bf56-1645a6bc77bd",
             "values": []
           },
@@ -2275,7 +2293,7 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_has_attachments",
             "hide_notification": false,
-            "id": 669,
+            "id": 5042,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -2290,7 +2308,7 @@
             "templates": [],
             "text": "Has attachments",
             "tooltip": "Return messages which have attachments (Yes) or do not have attachments (No)",
-            "type_id": 1053,
+            "type_id": 1428,
             "uuid": "7e5423cd-e7f8-4f99-973f-081eb3a293e0",
             "values": []
           },
@@ -2304,7 +2322,7 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_mail_folder_id",
             "hide_notification": false,
-            "id": 670,
+            "id": 5043,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -2319,7 +2337,7 @@
             "templates": [],
             "text": "Mail Folder",
             "tooltip": "The mailfolder to search. If none is selected, all mail folders are searched.",
-            "type_id": 1053,
+            "type_id": 1428,
             "uuid": "58bdadf6-00f9-46c6-a862-04f76509dfba",
             "values": [
               {
@@ -2329,7 +2347,7 @@
                 "label": "archive",
                 "properties": null,
                 "uuid": "ec02e1dd-8a43-48cc-94fe-7bee4ba9ba17",
-                "value": 820
+                "value": 5220
               },
               {
                 "default": false,
@@ -2338,7 +2356,7 @@
                 "label": "clutter",
                 "properties": null,
                 "uuid": "af082915-de65-48e5-8b1c-59cc515c376d",
-                "value": 821
+                "value": 5221
               },
               {
                 "default": false,
@@ -2347,7 +2365,7 @@
                 "label": "conflicts",
                 "properties": null,
                 "uuid": "302225ac-1225-4471-b4c7-70e2ec49687d",
-                "value": 822
+                "value": 5222
               },
               {
                 "default": false,
@@ -2356,7 +2374,7 @@
                 "label": "conversationhistory",
                 "properties": null,
                 "uuid": "f73606bb-aed0-4e72-afbe-00c14b1841aa",
-                "value": 823
+                "value": 5223
               },
               {
                 "default": false,
@@ -2365,7 +2383,7 @@
                 "label": "deleteditems",
                 "properties": null,
                 "uuid": "3ca37e3a-88d1-4139-ac12-d2441678dd29",
-                "value": 824
+                "value": 5224
               },
               {
                 "default": false,
@@ -2374,7 +2392,7 @@
                 "label": "drafts",
                 "properties": null,
                 "uuid": "715516c0-93f5-4bc4-bb91-0216adf6d2fb",
-                "value": 825
+                "value": 5225
               },
               {
                 "default": false,
@@ -2383,7 +2401,7 @@
                 "label": "inbox",
                 "properties": null,
                 "uuid": "ce6b8a26-7b2b-4753-83c4-7b5d76350f3f",
-                "value": 826
+                "value": 5226
               },
               {
                 "default": false,
@@ -2392,7 +2410,7 @@
                 "label": "junkemail",
                 "properties": null,
                 "uuid": "6be92169-1591-4b5d-b6e3-d8cd4a6e45ef",
-                "value": 827
+                "value": 5227
               },
               {
                 "default": false,
@@ -2401,7 +2419,7 @@
                 "label": "localfailures",
                 "properties": null,
                 "uuid": "4203298d-93fe-4128-9d5c-f667f86dc8e6",
-                "value": 828
+                "value": 5228
               },
               {
                 "default": false,
@@ -2410,7 +2428,7 @@
                 "label": "msgfolderroot",
                 "properties": null,
                 "uuid": "7f711031-84fe-4554-8d2a-9061e9e58401",
-                "value": 829
+                "value": 5229
               },
               {
                 "default": false,
@@ -2419,7 +2437,7 @@
                 "label": "outbox",
                 "properties": null,
                 "uuid": "0b877eaa-9307-4e13-9f0c-270723a0451a",
-                "value": 830
+                "value": 5230
               },
               {
                 "default": false,
@@ -2428,7 +2446,7 @@
                 "label": "recoverableitemsdeletions",
                 "properties": null,
                 "uuid": "1d0652a3-bd30-4330-8f7a-a5f71f2739a1",
-                "value": 831
+                "value": 5231
               },
               {
                 "default": false,
@@ -2437,7 +2455,7 @@
                 "label": "scheduled",
                 "properties": null,
                 "uuid": "3a87685a-60ba-49b1-a3d7-1d0b732120b1",
-                "value": 832
+                "value": 5232
               },
               {
                 "default": false,
@@ -2446,7 +2464,7 @@
                 "label": "searchfolders",
                 "properties": null,
                 "uuid": "d8a58b2b-3c74-4907-8942-2667f4d8e1cb",
-                "value": 833
+                "value": 5233
               },
               {
                 "default": false,
@@ -2455,7 +2473,7 @@
                 "label": "sentitems",
                 "properties": null,
                 "uuid": "22f2efab-5035-436d-9131-2610c95fcb11",
-                "value": 834
+                "value": 5234
               }
             ]
           },
@@ -2469,7 +2487,7 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_message_body",
             "hide_notification": false,
-            "id": 671,
+            "id": 5044,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2484,7 +2502,7 @@
             "templates": [],
             "text": "Message Body",
             "tooltip": "",
-            "type_id": 1053,
+            "type_id": 1428,
             "uuid": "828cef69-7e78-42c3-a277-c654ba55fc49",
             "values": []
           },
@@ -2498,7 +2516,7 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_message_subject",
             "hide_notification": false,
-            "id": 672,
+            "id": 5045,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2513,7 +2531,7 @@
             "templates": [],
             "text": "Message Subject",
             "tooltip": "Text for the message subject to query",
-            "type_id": 1053,
+            "type_id": 1428,
             "uuid": "72a4f565-eba2-400d-aad7-5ba137d438c7",
             "values": []
           },
@@ -2527,7 +2545,7 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_query_results_output",
             "hide_notification": false,
-            "id": 673,
+            "id": 5046,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
@@ -2543,7 +2561,7 @@
             "templates": [],
             "text": "Query results output",
             "tooltip": "",
-            "type_id": 1053,
+            "type_id": 1428,
             "uuid": "b9043432-0a06-44fc-9948-6c8b3d879bea",
             "values": [
               {
@@ -2553,7 +2571,7 @@
                 "label": "Exchange Online data table",
                 "properties": null,
                 "uuid": "b5773230-8a84-4105-93f0-3f654da156b7",
-                "value": 835
+                "value": 5235
               },
               {
                 "default": false,
@@ -2562,7 +2580,7 @@
                 "label": "Incident attachment",
                 "properties": null,
                 "uuid": "5b521459-c937-4c7e-9b1a-52b9799c42a3",
-                "value": 836
+                "value": 5236
               },
               {
                 "default": false,
@@ -2571,7 +2589,7 @@
                 "label": "Incident note",
                 "properties": null,
                 "uuid": "c860d303-4436-4f93-8ebb-18a726c2b40a",
-                "value": 837
+                "value": 5237
               }
             ]
           },
@@ -2585,7 +2603,7 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_sender_email_address",
             "hide_notification": false,
-            "id": 674,
+            "id": 5047,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2600,7 +2618,7 @@
             "templates": [],
             "text": "Sender Email Address",
             "tooltip": "Enter the email address of the sender",
-            "type_id": 1053,
+            "type_id": 1428,
             "uuid": "26132344-1763-4923-8aa6-d880240f57db",
             "values": []
           },
@@ -2614,7 +2632,7 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_start_datetime",
             "hide_notification": false,
-            "id": 675,
+            "id": 5048,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -2629,7 +2647,7 @@
             "templates": [],
             "text": "Start date/time",
             "tooltip": "Query messages received starting at this date/time.",
-            "type_id": 1053,
+            "type_id": 1428,
             "uuid": "424fcb0e-406e-475e-8271-b69ef21e30b1",
             "values": []
           }
@@ -2654,32 +2672,32 @@
         "uuid": "f73307cb-6e24-4ef1-a60f-ea0226d45b21"
       },
       "has_logical_errors": false,
-      "id": 45,
+      "id": 344,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241213014,
+      "last_modified_time": 1749130681318,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1733241211988,
+          "created_date": 1749044583448,
           "description": "",
           "enabled": false,
           "export_key": "exchange_online_delete_messages_from_query_post_process",
-          "id": 72,
+          "id": 335,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1733241211988,
+          "last_modified_by": "shresh@example.com",
+          "last_modified_time": 1749130677911,
           "name": "exchange_online_delete_messages_from_query_post_process",
           "object_type": "incident",
           "playbook_handle": "example_exchange_online_delete_messages_from_query_results",
           "programmatic_name": "example_exchange_online_delete_messages_from_query_results_exchange_online_delete_messages_from_query_results",
-          "script_text": "from datetime import datetime\nresults=playbook.functions.results.exchange_online_delete_messages_from_query_results\ncontent = results.get(\"content\")\noutput_format = content.get(\"exo_query_output_format\")\n\n\n# Write to the data table if the user requested it.\nif \"Exchange Online data table\" in output_format:\n  \n  user_list = content.get(\"delete_results\")\n  # Add each email as a row in the query results data table\n  for user in user_list:\n    \n    for email in user[\"deleted_list\"]:\n      message_row = incident.addRow(\"exo_message_query_results_dt\")\n      message_row.exo_dt_query_date = datetime.now()\n      message_row.exo_dt_message_id = email.get(\"id\", \"\")\n      message_row.exo_dt_received_date   = email.get(\"receivedDateTime\")\n      message_row.exo_dt_email_address = user.get(\"email_address\")\n      if email.get(\"sender\"):\n        message_row.exo_dt_sender_email = email[\"sender\"][\"emailAddress\"][\"address\"]\n      else:\n        message_row.exo_dt_sender_email = \"\"\n      message_row.exo_dt_message_subject = email.get(\"subject\")\n      message_row.exo_dt_has_attachments = email.get(\"hasAttachments\")\n      message_row.exo_dt_web_link = \"\"\n      \n      text = u\"\"\"\u003cp style= \"color:{color}\"\u003e{status} \u003c/p\u003e\"\"\".format(color=\"red\", status=\"Deleted\")\n      message_row.exo_dt_status = helper.createRichText(text)\n",
+          "script_text": "from datetime import datetime\nresults=playbook.functions.results.exchange_online_delete_messages_from_query_results\ncontent = results.get(\"content\")\noutput_format = content.get(\"exo_query_output_format\")\n\n\n# Write to the data table if the user requested it.\nif \"Exchange Online data table\" in output_format:\n  \n  user_list = content.get(\"delete_results\")\n  # Add each email as a row in the query results data table\n  for user in user_list:\n    \n    for email in user[\"deleted_list\"]:\n      message_row = incident.addRow(\"exo_message_query_results_dt\")\n      message_row.exo_dt_query_date = datetime.now()\n      message_row.exo_dt_message_id = email.get(\"id\", \"\")\n      message_row.exo_dt_received_date   = email.get(\"receivedDateTime\")\n      message_row.exo_dt_email_address = user.get(\"email_address\")\n      if email.get(\"sender\"):\n        message_row.exo_dt_sender_email = email[\"sender\"][\"emailAddress\"][\"address\"]\n      else:\n        message_row.exo_dt_sender_email = \"\"\n      message_row.exo_dt_message_subject = email.get(\"subject\")\n      message_row.exo_dt_has_attachments = email.get(\"hasAttachments\")\n      message_row.exo_dt_web_link = \"\"\n      \n      text = \"\"\"\u003cp style= \"color:{color}\"\u003e{status} \u003c/p\u003e\"\"\".format(color=\"red\", status=\"Deleted\")\n      message_row.exo_dt_status = helper.createRichText(text)\n",
           "tags": [],
           "uuid": "af90b5de-2584-4359-b13f-fd9c5cfc2b85"
         }
@@ -2785,7 +2803,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_85dc2249-0372-458b-87bd-8ac9efdf3c89",
-        "id": 47,
+        "id": 501,
         "name": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89",
         "type": "playbook",
         "uuid": "1a428b1b-4b15-4825-8e77-b1241587987c"
@@ -2793,19 +2811,19 @@
       "tags": [],
       "type": "default",
       "uuid": "85dc2249-0372-458b-87bd-8ac9efdf3c89",
-      "version": 3
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_e7448d95_4104_4ff2_9d78_a3923a20b30b\" isExecutable=\"true\" name=\"playbook_e7448d95_4104_4ff2_9d78_a3923a20b30b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1qjnvue\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Get User Profile\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f7af9277-dea6-4825-9279-09594d8e0770\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exo_email_address = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_get_user_profile_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1qjnvue\u003c/incoming\u003e\u003coutgoing\u003eFlow_0epbqgv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"exchange_online_get_user_profile_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"dc993933-d7b7-47df-be45-e0b42f06fefc\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0epbqgv\u003c/incoming\u003e\u003coutgoing\u003eFlow_131kgf8\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_131kgf8\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1qjnvue\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0epbqgv\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_131kgf8\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e7448d95_4104_4ff2_9d78_a3923a20b30b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_131kgf8\" id=\"Flow_131kgf8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"512\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"594\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0epbqgv\" id=\"Flow_0epbqgv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"322\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"428\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1qjnvue\" id=\"Flow_1qjnvue_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"238\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"238\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"428\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"594\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1733241213044,
+      "create_date": 1749044584403,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_e7448d95_4104_4ff2_9d78_a3923a20b30b",
@@ -2841,32 +2859,32 @@
         "uuid": "8cfb1717-086a-4230-bccd-1d88ec64eb0d"
       },
       "has_logical_errors": false,
-      "id": 46,
+      "id": 345,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241214468,
+      "last_modified_time": 1749130638895,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1733241213277,
+          "created_date": 1749044584689,
           "description": "",
           "enabled": false,
           "export_key": "exchange_online_get_user_profile_post_process",
-          "id": 73,
+          "id": 336,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1733241213277,
+          "last_modified_by": "shresh@example.com",
+          "last_modified_time": 1749130634048,
           "name": "exchange_online_get_user_profile_post_process",
           "object_type": "artifact",
           "playbook_handle": "example_exchange_online_get_user_profile",
           "programmatic_name": "example_exchange_online_get_user_profile_exchange_online_get_user_profile",
-          "script_text": "results=playbook.functions.results.exchange_online_get_user_profile_result\n\nif results.content[\"error\"] is not None:\n  noteText = u\"Exchange Online user profile NOT FOUND: {0}\\n{1}\".format(results.inputs[\"exo_email_address\"], results.pretty_string)\nelse:\n  noteText = u\"Exchange Online user profile: {0}\\n{1}\".format(results.inputs[\"exo_email_address\"], results.pretty_string)\n\nincident.addNote(noteText)",
+          "script_text": "results=playbook.functions.results.exchange_online_get_user_profile_result\n\nif results.content[\"error\"]:\n  noteText = \"Exchange Online user profile NOT FOUND: {0}\\n{1}\".format(results.inputs[\"exo_email_address\"], results.pretty_string)\nelse:\n  noteText = \"Exchange Online user profile: {0}\\n{1}\".format(results.inputs[\"exo_email_address\"], results.pretty_string)\n\nincident.addNote(noteText)",
           "tags": [],
           "uuid": "dc993933-d7b7-47df-be45-e0b42f06fefc"
         }
@@ -2912,7 +2930,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_e7448d95-4104-4ff2-9d78-a3923a20b30b",
-        "id": 48,
+        "id": 502,
         "name": "playbook_e7448d95_4104_4ff2_9d78_a3923a20b30b",
         "type": "playbook",
         "uuid": "06721b34-a504-4ff6-8f80-09ff6eebe616"
@@ -2920,19 +2938,19 @@
       "tags": [],
       "type": "default",
       "uuid": "e7448d95-4104-4ff2-9d78-a3923a20b30b",
-      "version": 4
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 15,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8685fa14_9e7f_4140_a974_886711daf91d\" isExecutable=\"true\" name=\"playbook_8685fa14_9e7f_4140_a974_886711daf91d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_156z2cs\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Move Message to Folder\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ec89e514-34f6-4fe3-98ea-85398bb04dd9\"\u003e{\"inputs\":{\"092a752f-1297-46a4-bae6-e75d1a9b4804\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"00ca7e22-f9fa-4477-a056-602139d0dbd0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"b9765902-10bb-4a92-819e-25d3e346c3b3\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9c20f34a-363a-4e70-8d68-2f0a3cadfc44\"}},\"669df159-68fd-419f-8678-ad3b93514f8c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"inputs.exo_email_address = row.exo_dt_email_address\\ninputs.exo_mailfolders_id = None\\ninputs.exo_messages_id = row.exo_dt_message_id\\ninputs.exo_destination_mailfolder_id = playbook.inputs.exchange_online_wellknown_folders\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_move_nessage_to_folder_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_156z2cs\u003c/incoming\u003e\u003coutgoing\u003eFlow_1v6kpfe\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1qo3lfe\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"exchange_online_move_message_to_folder_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"618f493c-5a10-471d-bc8a-877086ff6ddb\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1v6kpfe\u003c/incoming\u003e\u003coutgoing\u003eFlow_1qo3lfe\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_156z2cs\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1v6kpfe\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1qo3lfe\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8685fa14_9e7f_4140_a974_886711daf91d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1qo3lfe\" id=\"Flow_1qo3lfe_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"482\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1v6kpfe\" id=\"Flow_1v6kpfe_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"322\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"398\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_156z2cs\" id=\"Flow_156z2cs_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"238\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"238\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"554\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.75\" y=\"398\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1733241214414,
+      "create_date": 1749044586172,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_8685fa14_9e7f_4140_a974_886711daf91d",
@@ -2958,7 +2976,7 @@
             "deprecated": false,
             "export_key": "playbook_8685fa14_9e7f_4140_a974_886711daf91d/exchange_online_wellknown_folders",
             "hide_notification": false,
-            "id": 700,
+            "id": 5049,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -2974,7 +2992,7 @@
             "templates": [],
             "text": "Well-known Folders",
             "tooltip": "Destination folder to of moved message",
-            "type_id": 1055,
+            "type_id": 1430,
             "uuid": "426f07bf-96b9-4c22-99db-aa4c65ff2029",
             "values": [
               {
@@ -2984,7 +3002,7 @@
                 "label": "archive",
                 "properties": null,
                 "uuid": "4f32f289-e2b9-4f7c-9e1d-69c9a648d1f1",
-                "value": 889
+                "value": 5238
               },
               {
                 "default": false,
@@ -2993,7 +3011,7 @@
                 "label": "clutter",
                 "properties": null,
                 "uuid": "6a7663c7-aeac-45f2-8336-31488bf4e67f",
-                "value": 890
+                "value": 5239
               },
               {
                 "default": false,
@@ -3002,7 +3020,7 @@
                 "label": "conflicts",
                 "properties": null,
                 "uuid": "54bbac25-ff78-4874-bc6a-759522203839",
-                "value": 891
+                "value": 5240
               },
               {
                 "default": false,
@@ -3011,7 +3029,7 @@
                 "label": "conversationhistory",
                 "properties": null,
                 "uuid": "6ee6ba9b-0ede-4a83-86b8-67b61aefe0ed",
-                "value": 892
+                "value": 5241
               },
               {
                 "default": false,
@@ -3020,7 +3038,7 @@
                 "label": "deleteditems",
                 "properties": null,
                 "uuid": "164f4c4f-30e4-44eb-8899-167a36486ea4",
-                "value": 893
+                "value": 5242
               },
               {
                 "default": false,
@@ -3029,7 +3047,7 @@
                 "label": "drafts",
                 "properties": null,
                 "uuid": "86d8ef29-18cc-4cdd-b77f-8d9ea985d06c",
-                "value": 894
+                "value": 5243
               },
               {
                 "default": false,
@@ -3038,7 +3056,7 @@
                 "label": "inbox",
                 "properties": null,
                 "uuid": "d36bd394-4d27-4e9e-88e3-3d6bcfd81628",
-                "value": 895
+                "value": 5244
               },
               {
                 "default": false,
@@ -3047,7 +3065,7 @@
                 "label": "junkemail",
                 "properties": null,
                 "uuid": "7a7d8efd-60f4-4d18-b038-195b2edfd0fd",
-                "value": 896
+                "value": 5245
               },
               {
                 "default": false,
@@ -3056,7 +3074,7 @@
                 "label": "localfailures",
                 "properties": null,
                 "uuid": "500d076c-81ff-477f-99f0-143d3164a6a4",
-                "value": 897
+                "value": 5246
               },
               {
                 "default": false,
@@ -3065,7 +3083,7 @@
                 "label": "msgfolderroot",
                 "properties": null,
                 "uuid": "44c2e7b1-d92d-46b2-bba9-ae42e65e744b",
-                "value": 898
+                "value": 5247
               },
               {
                 "default": false,
@@ -3074,7 +3092,7 @@
                 "label": "outbox",
                 "properties": null,
                 "uuid": "0f934b2c-8f26-4b02-8593-f828a7387d53",
-                "value": 899
+                "value": 5248
               },
               {
                 "default": true,
@@ -3083,7 +3101,7 @@
                 "label": "recoverableitemsdeletions",
                 "properties": null,
                 "uuid": "fa424872-588e-434b-8db6-93b43439ab05",
-                "value": 900
+                "value": 5249
               },
               {
                 "default": false,
@@ -3092,7 +3110,7 @@
                 "label": "scheduled",
                 "properties": null,
                 "uuid": "b4b691bb-f78d-4204-be98-a12d798622f1",
-                "value": 901
+                "value": 5250
               },
               {
                 "default": false,
@@ -3101,7 +3119,7 @@
                 "label": "searchfolders",
                 "properties": null,
                 "uuid": "91c02ed2-349e-40c1-9073-0dbb32e8f06f",
-                "value": 902
+                "value": 5251
               },
               {
                 "default": false,
@@ -3110,7 +3128,7 @@
                 "label": "sentitems",
                 "properties": null,
                 "uuid": "969f6e7d-6e52-4091-a249-6054f123900a",
-                "value": 903
+                "value": 5252
               }
             ]
           }
@@ -3135,32 +3153,32 @@
         "uuid": "83df778a-4633-4dde-93e6-8112b1299818"
       },
       "has_logical_errors": false,
-      "id": 47,
+      "id": 346,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733344549605,
+      "last_modified_time": 1749130588869,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1733241214728,
+          "created_date": 1749044586581,
           "description": "Write results of move message function to a note and update the data table.",
           "enabled": false,
           "export_key": "exchange_online_move_message_to_folder_post_process",
-          "id": 74,
+          "id": 337,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1733344545969,
+          "last_modified_by": "shresh@example.com",
+          "last_modified_time": 1749130584694,
           "name": "exchange_online_move_message_to_folder_post_process",
           "object_type": "exo_message_query_results_dt",
           "playbook_handle": "example_exchange_online_move_message_to_folder",
           "programmatic_name": "example_exchange_online_move_message_to_folder_exchange_online_move_message_to_folder",
-          "script_text": "results = playbook.functions.results.exchange_online_move_nessage_to_folder_result\nemail_address = results.inputs[\"exo_email_address\"]\nmessage_id = results.inputs[\"exo_messages_id\"]\ndestination_folder = results.inputs[\"exo_destination_mailfolder_id\"][\"name\"]\nnote_text = f\"Exchange Online: Move Message to Folder:\\n email address: {email_address}\\n\"\n\nif results.success:\n  # When a message is moved it\u0027s ID changes, so update the new message ID into the data table\n  # The message status is still \"Active\" but the weblink is no longer valid, so make is empty string.\n  new_message_id = results.content[\"new_message_id\"]\n  noteText = f\"{note_text} Message has been moved to destination folder: \u003cb\u003e{destination_folder}\u003c/b\u003e\\n\\n  Old message ID: {message_id} \\n\\n  New message ID: {new_message_id}\"\n  row[\u0027exo_dt_message_id\u0027] = new_message_id\n  row[\u0027exo_dt_web_link\u0027] = ref_html = u\"\"\"\u003ca href=\u0027{0}\u0027\u003eLink\u003c/a\u003e\"\"\".format(results.content[\"new_web_link\"])\n  row[\u0027exo_dt_message_folder\u0027] = results.inputs[\"exo_destination_mailfolder_id\"][\"name\"]\nelse: \n  note_text = f\"{note_text} FAILED to move message to folder \u003cb\u003e{destination_folder}\u003c/b\u003e\\n\"\n  error_results = results.content.get(\"error\")\n\n  if error_results:\n    error_code = error_results.get(\"code\", None)\n    error_message = error_results.get(\"message\", None)\n    noteText = f\"{note_text} error code: {error_code}\\n error message: {error_message}\"\n\nincident.addNote(noteText)",
+          "script_text": "results = playbook.functions.results.exchange_online_move_nessage_to_folder_result\nemail_address = results.inputs[\"exo_email_address\"]\nmessage_id = results.inputs[\"exo_messages_id\"]\ndestination_folder = results.inputs[\"exo_destination_mailfolder_id\"][\"name\"]\nnote_text = f\"Exchange Online: Move Message to Folder:\\n email address: {email_address}\\n\"\n\nif results.success:\n  # When a message is moved it\u0027s ID changes, so update the new message ID into the data table\n  # The message status is still \"Active\" but the weblink is no longer valid, so make is empty string.\n  new_message_id = results.content[\"new_message_id\"]\n  noteText = f\"{note_text} Message has been moved to destination folder: \u003cb\u003e{destination_folder}\u003c/b\u003e\\n\\n  Old message ID: {message_id} \\n\\n  New message ID: {new_message_id}\"\n  row[\u0027exo_dt_message_id\u0027] = new_message_id\n  row[\u0027exo_dt_web_link\u0027] = ref_html = \"\"\"\u003ca href=\u0027{0}\u0027\u003eLink\u003c/a\u003e\"\"\".format(results.content[\"new_web_link\"])\n  row[\u0027exo_dt_message_folder\u0027] = results.inputs[\"exo_destination_mailfolder_id\"][\"name\"]\nelse: \n  note_text = f\"{note_text} FAILED to move message to folder \u003cb\u003e{destination_folder}\u003c/b\u003e\\n\"\n  error_results = results.content.get(\"error\")\n\n  if error_results:\n    error_code = error_results.get(\"code\", None)\n    error_message = error_results.get(\"message\", None)\n    noteText = f\"{note_text} error code: {error_code}\\n error message: {error_message}\"\n\nincident.addNote(noteText)",
           "tags": [],
           "uuid": "618f493c-5a10-471d-bc8a-877086ff6ddb"
         }
@@ -3194,7 +3212,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_8685fa14-9e7f-4140-a974-886711daf91d",
-        "id": 49,
+        "id": 503,
         "name": "playbook_8685fa14_9e7f_4140_a974_886711daf91d",
         "type": "playbook",
         "uuid": "f99853d6-2cf3-456a-8436-93c1bf4c1419"
@@ -3202,19 +3220,19 @@
       "tags": [],
       "type": "default",
       "uuid": "8685fa14-9e7f-4140-a974-886711daf91d",
-      "version": 19
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a\" isExecutable=\"true\" name=\"playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0tw5igv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Query Messages\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6f09fab2-2176-4c27-ab39-cc19568e08e5\"\u003e{\"inputs\":{\"ead214c2-13fe-43f6-a3c7-676a88338dbb\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"092a752f-1297-46a4-bae6-e75d1a9b4804\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9e58d3a3-c54b-4a9b-9164-e6cc0832f644\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"68133b08-816e-4c03-a50d-c68af1b6b205\"]}},\"4ff86946-a8cf-4ae1-804b-87cab7d9dac1\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"8dd46926-b1dc-4d1e-ab6a-4239510b199d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"1c9b3b95-ca24-484c-ad72-f5d64be87402\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"7354f758-b9ea-4029-835d-66d293a22b5d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"51a9c433-07bc-4f04-9932-99211726b9b7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"06391a1a-0c2c-4bcd-832a-1f39a3ba77b8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ec20a9f0-1e29-490b-871b-57b05ffbac2e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"\\n\\ninputs.incident_id = incident.id\\n\\n# Get the email address of the user whose mailbox will be queried.\\ninputs.exo_email_address = playbook.inputs.exchange_online_email_address_list\\n\\n# Get the search criteria from the activity rules if available. \\n\\n\\ninputs.exo_mail_folders         = playbook.inputs.exchange_online_mail_folder_id\\ninputs.exo_email_address_sender = playbook.inputs.exchange_online_sender_email_address\\ninputs.exo_message_subject      = playbook.inputs.exchange_online_message_subject\\ninputs.exo_message_body         = playbook.inputs.exchange_online_message_body\\ninputs.exo_start_date           = playbook.inputs.exchange_online_start_datetime\\ninputs.exo_end_date             = playbook.inputs.exchange_online_end_datetime\\ninputs.exo_has_attachments      = playbook.inputs.exchange_online_has_attachments\\n\\n    \\nif hasattr(playbook.inputs, \\\"exchange_online_query_results_output_format\\\"):\\n    inputs.exo_query_output_format = [d for d in playbook.inputs.exchange_online_query_results_output_format]\\n\\n\\n\\n\\n\\n\\n\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_query_messages_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0tw5igv\u003c/incoming\u003e\u003coutgoing\u003eFlow_1qox18v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_037maog\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0tw5igv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"exchange_online_query_message_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3c970c09-2637-46b8-af5b-24ecb129c984\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1qox18v\u003c/incoming\u003e\u003coutgoing\u003eFlow_037maog\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1qox18v\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_037maog\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_037maog\" id=\"Flow_037maog_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"492\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"584\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1qox18v\" id=\"Flow_1qox18v_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"322\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"408\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0tw5igv\" id=\"Flow_0tw5igv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"238\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"238\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"584\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"408\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1733241215683,
+      "create_date": 1749044587674,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a",
@@ -3240,7 +3258,7 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_email_address_list",
             "hide_notification": false,
-            "id": 677,
+            "id": 5050,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3256,7 +3274,7 @@
             "templates": [],
             "text": "Monitored Email Address",
             "tooltip": "Email addresses to search: a single email address, a comma separated list of email addresses, or \"ALL\" to search all users",
-            "type_id": 1056,
+            "type_id": 1431,
             "uuid": "9c6a335f-8b3b-4d90-809a-f7379b684cc1",
             "values": []
           },
@@ -3270,7 +3288,7 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_end_datetime",
             "hide_notification": false,
-            "id": 678,
+            "id": 5051,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -3285,7 +3303,7 @@
             "templates": [],
             "text": "End date/time",
             "tooltip": "Query messages received ending at this date/time.",
-            "type_id": 1056,
+            "type_id": 1431,
             "uuid": "d50b37e2-6112-4375-8026-92111c33f73a",
             "values": []
           },
@@ -3299,7 +3317,7 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_has_attachments",
             "hide_notification": false,
-            "id": 679,
+            "id": 5052,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -3314,7 +3332,7 @@
             "templates": [],
             "text": "Has attachments",
             "tooltip": "Return messages which have attachments (Yes) or do not have attachments (No)",
-            "type_id": 1056,
+            "type_id": 1431,
             "uuid": "6074334c-b1fd-456f-9720-8f773f21f533",
             "values": []
           },
@@ -3328,7 +3346,7 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_mail_folder_id",
             "hide_notification": false,
-            "id": 680,
+            "id": 5053,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -3343,7 +3361,7 @@
             "templates": [],
             "text": "Mail Folder",
             "tooltip": "The mailfolder to search. If none is selected, all mail folders are searched.",
-            "type_id": 1056,
+            "type_id": 1431,
             "uuid": "5d59d485-0829-4162-a6df-9447d125c363",
             "values": [
               {
@@ -3353,7 +3371,7 @@
                 "label": "archive",
                 "properties": null,
                 "uuid": "fbafa1dd-4c40-46e7-8687-2018d764affb",
-                "value": 853
+                "value": 5253
               },
               {
                 "default": false,
@@ -3362,7 +3380,7 @@
                 "label": "clutter",
                 "properties": null,
                 "uuid": "066437f9-b6ab-4b30-b190-801e7ccd5101",
-                "value": 854
+                "value": 5254
               },
               {
                 "default": false,
@@ -3371,7 +3389,7 @@
                 "label": "conflicts",
                 "properties": null,
                 "uuid": "c0c91bf1-4eb4-4de8-adae-25ee4c623c25",
-                "value": 855
+                "value": 5255
               },
               {
                 "default": false,
@@ -3380,7 +3398,7 @@
                 "label": "conversationhistory",
                 "properties": null,
                 "uuid": "735205bf-6766-420d-b9e4-2f07e802463c",
-                "value": 856
+                "value": 5256
               },
               {
                 "default": false,
@@ -3389,7 +3407,7 @@
                 "label": "deleteditems",
                 "properties": null,
                 "uuid": "f3b829a7-93b5-462a-a9f4-45ae91aa1743",
-                "value": 857
+                "value": 5257
               },
               {
                 "default": false,
@@ -3398,7 +3416,7 @@
                 "label": "drafts",
                 "properties": null,
                 "uuid": "424403b9-b7dd-415f-a62e-70a10d3ea05d",
-                "value": 858
+                "value": 5258
               },
               {
                 "default": false,
@@ -3407,7 +3425,7 @@
                 "label": "inbox",
                 "properties": null,
                 "uuid": "506c0766-bf70-4cc1-a45f-677c0d7d19a6",
-                "value": 859
+                "value": 5259
               },
               {
                 "default": false,
@@ -3416,7 +3434,7 @@
                 "label": "junkemail",
                 "properties": null,
                 "uuid": "2950c03f-a5e0-4b8c-be56-1b57cb7c86e8",
-                "value": 860
+                "value": 5260
               },
               {
                 "default": false,
@@ -3425,7 +3443,7 @@
                 "label": "localfailures",
                 "properties": null,
                 "uuid": "b5273a5c-3747-474b-bd4d-ef7e3dd68a7c",
-                "value": 861
+                "value": 5261
               },
               {
                 "default": false,
@@ -3434,7 +3452,7 @@
                 "label": "msgfolderroot",
                 "properties": null,
                 "uuid": "6c9a64a4-da2d-46aa-8d32-b9e792f5b10b",
-                "value": 862
+                "value": 5262
               },
               {
                 "default": false,
@@ -3443,7 +3461,7 @@
                 "label": "outbox",
                 "properties": null,
                 "uuid": "0452e428-6ada-4488-98c0-c6cd269a83cc",
-                "value": 863
+                "value": 5263
               },
               {
                 "default": false,
@@ -3452,7 +3470,7 @@
                 "label": "recoverableitemsdeletions",
                 "properties": null,
                 "uuid": "b286394f-e97c-41b2-9527-a79279c7e792",
-                "value": 864
+                "value": 5264
               },
               {
                 "default": false,
@@ -3461,7 +3479,7 @@
                 "label": "scheduled",
                 "properties": null,
                 "uuid": "be769b82-0aae-4270-93d2-39763625e1e0",
-                "value": 865
+                "value": 5265
               },
               {
                 "default": false,
@@ -3470,7 +3488,7 @@
                 "label": "searchfolders",
                 "properties": null,
                 "uuid": "3fe1f743-027a-4dfd-98f2-2981d4fdb04e",
-                "value": 866
+                "value": 5266
               },
               {
                 "default": false,
@@ -3479,7 +3497,7 @@
                 "label": "sentitems",
                 "properties": null,
                 "uuid": "07103b14-0a35-4f18-9c63-ff2898cae8f8",
-                "value": 867
+                "value": 5267
               }
             ]
           },
@@ -3493,7 +3511,7 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_message_body",
             "hide_notification": false,
-            "id": 681,
+            "id": 5054,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3508,7 +3526,7 @@
             "templates": [],
             "text": "Message Body",
             "tooltip": "",
-            "type_id": 1056,
+            "type_id": 1431,
             "uuid": "336bc4b7-d24f-440a-a8d7-dfbd6a9a27af",
             "values": []
           },
@@ -3522,7 +3540,7 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_message_subject",
             "hide_notification": false,
-            "id": 682,
+            "id": 5055,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3537,7 +3555,7 @@
             "templates": [],
             "text": "Message Subject",
             "tooltip": "Text for the message subject to query",
-            "type_id": 1056,
+            "type_id": 1431,
             "uuid": "07f1c611-e5aa-4915-9702-2e72b4ffc2db",
             "values": []
           },
@@ -3551,7 +3569,7 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_query_results_output_format",
             "hide_notification": false,
-            "id": 683,
+            "id": 5056,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
@@ -3567,7 +3585,7 @@
             "templates": [],
             "text": "Query results output",
             "tooltip": "",
-            "type_id": 1056,
+            "type_id": 1431,
             "uuid": "01b728d7-79c7-4549-a151-6810249c887f",
             "values": [
               {
@@ -3577,7 +3595,7 @@
                 "label": "Exchange Online data table",
                 "properties": null,
                 "uuid": "7807827f-e0cd-45e3-8252-b663525c3a9a",
-                "value": 868
+                "value": 5268
               },
               {
                 "default": false,
@@ -3586,7 +3604,7 @@
                 "label": "Incident attachment",
                 "properties": null,
                 "uuid": "476ac302-0ce4-428a-b8e6-ae84624bd14e",
-                "value": 869
+                "value": 5269
               },
               {
                 "default": false,
@@ -3595,7 +3613,7 @@
                 "label": "Incident note",
                 "properties": null,
                 "uuid": "bdc69783-df32-4541-9d9a-d375ed781449",
-                "value": 870
+                "value": 5270
               }
             ]
           },
@@ -3609,7 +3627,7 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_sender_email_address",
             "hide_notification": false,
-            "id": 684,
+            "id": 5057,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3624,7 +3642,7 @@
             "templates": [],
             "text": "Sender Email Address",
             "tooltip": "Enter the email address of the sender",
-            "type_id": 1056,
+            "type_id": 1431,
             "uuid": "8741e0d1-6079-4230-963c-2d7b827021b1",
             "values": []
           },
@@ -3638,7 +3656,7 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_start_datetime",
             "hide_notification": false,
-            "id": 685,
+            "id": 5058,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -3653,7 +3671,7 @@
             "templates": [],
             "text": "Start date/time",
             "tooltip": "Query messages received starting at this date/time.",
-            "type_id": 1056,
+            "type_id": 1431,
             "uuid": "4014d6e1-2506-4511-ba7a-2d53cefd6635",
             "values": []
           }
@@ -3678,32 +3696,32 @@
         "uuid": "9e0a0906-d9c2-454e-9dd8-3e183d817509"
       },
       "has_logical_errors": false,
-      "id": 48,
+      "id": 347,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241217232,
+      "last_modified_time": 1749130550528,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1733241216520,
+          "created_date": 1749044588713,
           "description": "",
           "enabled": false,
           "export_key": "exchange_online_query_message_post_process",
-          "id": 75,
+          "id": 338,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1733241216520,
+          "last_modified_by": "shresh@example.com",
+          "last_modified_time": 1749130546957,
           "name": "exchange_online_query_message_post_process",
           "object_type": "incident",
           "playbook_handle": "example_exchange_online_query_messages",
           "programmatic_name": "example_exchange_online_query_messages_exchange_online_query_message_post_process",
-          "script_text": "\nfrom datetime import datetime\nresults=playbook.functions.results.exchange_online_query_messages_result\ncontent = results.get(\"content\")\noutput_format = content.get(\"exo_query_output_format\")\n\n\n# Write to the data table if the user requested it.\nif \"Exchange Online data table\" in output_format:\n  user_list = content.get(\"email_results\")\n  \n  # Add each email as a row in the query results data table\n  for user in user_list:\n    \n    \n    for email in user.get(\"email_list\"):\n      message_row = incident.addRow(\"exo_message_query_results_dt\")\n      message_row.exo_dt_query_date = datetime.now()\n      message_row.exo_dt_message_id = email.get(\"id\")\n      message_row.exo_dt_received_date   = email.get(\"receivedDateTime\")\n      message_row.exo_dt_email_address = user.get(\"email_address\")\n      if email.get(\"sender\"):\n        message_row.exo_dt_sender_email = email[\"sender\"][\"emailAddress\"][\"address\"]\n      else:\n        message_row.exo_dt_sender_email = \"\"\n      message_row.exo_dt_message_subject = email.get(\"subject\")\n      message_row.exo_dt_message_folder = playbook.inputs.exchange_online_mail_folder_id\n      message_row.exo_dt_has_attachments = email.get(\"hasAttachments\")\n      if email.get(\"webLink\"):\n        ref_html = u\"\"\"\u003ca href=\u0027{0}\u0027\u003eLink\u003c/a\u003e\"\"\".format(email[\"webLink\"])\n        message_row.exo_dt_web_link = helper.createRichText(ref_html)\n      else:\n        message_row.exo_dt_web_link = \"\"\n \n      message_row.exo_dt_status = helper.createRichText(\"Active\")\n\n",
+          "script_text": "\nfrom datetime import datetime\nresults=playbook.functions.results.exchange_online_query_messages_result\ncontent = results.get(\"content\")\noutput_format = content.get(\"exo_query_output_format\")\n\n\n# Write to the data table if the user requested it.\nif \"Exchange Online data table\" in output_format:\n  user_list = content.get(\"email_results\")\n  \n  # Add each email as a row in the query results data table\n  for user in user_list:\n    \n    \n    for email in user.get(\"email_list\"):\n      message_row = incident.addRow(\"exo_message_query_results_dt\")\n      message_row.exo_dt_query_date = datetime.now()\n      message_row.exo_dt_message_id = email.get(\"id\")\n      message_row.exo_dt_received_date   = email.get(\"receivedDateTime\")\n      message_row.exo_dt_email_address = user.get(\"email_address\")\n      if email.get(\"sender\"):\n        message_row.exo_dt_sender_email = email[\"sender\"][\"emailAddress\"][\"address\"]\n      else:\n        message_row.exo_dt_sender_email = \"\"\n      message_row.exo_dt_message_subject = email.get(\"subject\")\n      message_row.exo_dt_message_folder = playbook.inputs.exchange_online_mail_folder_id\n      message_row.exo_dt_has_attachments = email.get(\"hasAttachments\")\n      if email.get(\"webLink\"):\n        ref_html = \"\"\"\u003ca href=\u0027{0}\u0027\u003eLink\u003c/a\u003e\"\"\".format(email[\"webLink\"])\n        message_row.exo_dt_web_link = helper.createRichText(ref_html)\n      else:\n        message_row.exo_dt_web_link = \"\"\n \n      message_row.exo_dt_status = helper.createRichText(\"Active\")\n\n",
           "tags": [],
           "uuid": "3c970c09-2637-46b8-af5b-24ecb129c984"
         }
@@ -3809,7 +3827,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_2cb0995b-534b-4bb3-a669-0e60e2db870a",
-        "id": 50,
+        "id": 504,
         "name": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a",
         "type": "playbook",
         "uuid": "ba94581f-7485-4f6e-9c21-3dbe38dfdb76"
@@ -3817,19 +3835,19 @@
       "tags": [],
       "type": "default",
       "uuid": "2cb0995b-534b-4bb3-a669-0e60e2db870a",
-      "version": 3
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_07e7c993_f998_4f42_a365_c76422425b61\" isExecutable=\"true\" name=\"playbook_07e7c993_f998_4f42_a365_c76422425b61\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0m3tyxe\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Query Messages\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6f09fab2-2176-4c27-ab39-cc19568e08e5\"\u003e{\"inputs\":{\"ead214c2-13fe-43f6-a3c7-676a88338dbb\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"092a752f-1297-46a4-bae6-e75d1a9b4804\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9e58d3a3-c54b-4a9b-9164-e6cc0832f644\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"68133b08-816e-4c03-a50d-c68af1b6b205\"]}},\"4ff86946-a8cf-4ae1-804b-87cab7d9dac1\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"8dd46926-b1dc-4d1e-ab6a-4239510b199d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"1c9b3b95-ca24-484c-ad72-f5d64be87402\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"7354f758-b9ea-4029-835d-66d293a22b5d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"51a9c433-07bc-4f04-9932-99211726b9b7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"06391a1a-0c2c-4bcd-832a-1f39a3ba77b8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ec20a9f0-1e29-490b-871b-57b05ffbac2e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"inputs.incident_id = incident.id\\n\\n# Get the email address of the user whose mailbox will be queried.\\ninputs.exo_email_address = artifact.value\\n\\n# Get the search criteria from the activity rules if available. \\ninputs.exo_email_address_sender = playbook.inputs.exchange_online_sender_email_address\\ninputs.exo_mail_folders         = playbook.inputs.exchange_online_mail_folder_id\\ninputs.exo_message_subject      = playbook.inputs.exchange_online_message_subject\\ninputs.exo_message_body         = playbook.inputs.exchange_online_message_body\\ninputs.exo_start_date           = playbook.inputs.exchange_online_start_datetime\\ninputs.exo_end_date             = playbook.inputs.exchange_online_end_datetime\\ninputs.exo_has_attachments      = playbook.inputs.exchange_online_has_attachments\\n\\nif hasattr(playbook.inputs, \\\"exchange_online_query_results_output_format\\\"):\\n    inputs.exo_query_output_format = [d for d in playbook.inputs.exchange_online_query_results_output_format]\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_query_message_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0m3tyxe\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ndpwum\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"exchange_online_query_message_on_artifact_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"2f4c3d79-5d9b-4ba7-9f2b-f17559bef84f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ndpwum\u003c/incoming\u003e\u003coutgoing\u003eFlow_0m9equj\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0m9equj\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0m3tyxe\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1ndpwum\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_0m9equj\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_07e7c993_f998_4f42_a365_c76422425b61\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0m9equj\" id=\"Flow_0m9equj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"564\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ndpwum\" id=\"Flow_1ndpwum_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0m3tyxe\" id=\"Flow_0m3tyxe_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.75\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654.75\" y=\"564\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1733241217255,
+      "create_date": 1749044589869,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_07e7c993_f998_4f42_a365_c76422425b61",
@@ -3855,7 +3873,7 @@
             "deprecated": false,
             "export_key": "playbook_07e7c993_f998_4f42_a365_c76422425b61/exchange_online_end_datetime",
             "hide_notification": false,
-            "id": 686,
+            "id": 5059,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -3870,7 +3888,7 @@
             "templates": [],
             "text": "End date/time",
             "tooltip": "Query messages received ending at this date/time.",
-            "type_id": 1057,
+            "type_id": 1432,
             "uuid": "c5f5e092-c171-4d3a-b6ff-d19fbaedff92",
             "values": []
           },
@@ -3884,7 +3902,7 @@
             "deprecated": false,
             "export_key": "playbook_07e7c993_f998_4f42_a365_c76422425b61/exchange_online_has_attachments",
             "hide_notification": false,
-            "id": 687,
+            "id": 5060,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -3899,7 +3917,7 @@
             "templates": [],
             "text": "Has attachments",
             "tooltip": "Return messages which have attachments (Yes) or do not have attachments (No)",
-            "type_id": 1057,
+            "type_id": 1432,
             "uuid": "fa426a48-d9ea-44cd-bdbe-cda05a850c45",
             "values": []
           },
@@ -3913,7 +3931,7 @@
             "deprecated": false,
             "export_key": "playbook_07e7c993_f998_4f42_a365_c76422425b61/exchange_online_mail_folder_id",
             "hide_notification": false,
-            "id": 688,
+            "id": 5061,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -3928,7 +3946,7 @@
             "templates": [],
             "text": "Mail Folder",
             "tooltip": "The mailfolder to search. If none is selected, all mail folders are searched.",
-            "type_id": 1057,
+            "type_id": 1432,
             "uuid": "b47e90e5-8da7-40b1-b342-1a8fa09e7ff7",
             "values": [
               {
@@ -3938,7 +3956,7 @@
                 "label": "archive",
                 "properties": null,
                 "uuid": "f3577867-3c42-44c8-8e8d-ff993bee15c2",
-                "value": 871
+                "value": 5271
               },
               {
                 "default": false,
@@ -3947,7 +3965,7 @@
                 "label": "clutter",
                 "properties": null,
                 "uuid": "8be3a42d-a253-41e9-b6f6-0988dac28370",
-                "value": 872
+                "value": 5272
               },
               {
                 "default": false,
@@ -3956,7 +3974,7 @@
                 "label": "conflicts",
                 "properties": null,
                 "uuid": "62c68053-6dc5-4740-896d-3c1132262b3e",
-                "value": 873
+                "value": 5273
               },
               {
                 "default": false,
@@ -3965,7 +3983,7 @@
                 "label": "conversationhistory",
                 "properties": null,
                 "uuid": "9e0b0029-cdae-40c7-9bf4-0b3804a73aa0",
-                "value": 874
+                "value": 5274
               },
               {
                 "default": false,
@@ -3974,7 +3992,7 @@
                 "label": "deleteditems",
                 "properties": null,
                 "uuid": "68c9609a-d9ea-4778-915d-1cdcbb8d8aba",
-                "value": 875
+                "value": 5275
               },
               {
                 "default": false,
@@ -3983,7 +4001,7 @@
                 "label": "drafts",
                 "properties": null,
                 "uuid": "98823fdb-91d7-4759-bb52-f6c3e24f060b",
-                "value": 876
+                "value": 5276
               },
               {
                 "default": false,
@@ -3992,7 +4010,7 @@
                 "label": "inbox",
                 "properties": null,
                 "uuid": "2e55dcc0-0306-47c0-9609-43ad8eb571b2",
-                "value": 877
+                "value": 5277
               },
               {
                 "default": false,
@@ -4001,7 +4019,7 @@
                 "label": "junkemail",
                 "properties": null,
                 "uuid": "989b33c5-8dff-456c-9ea3-d7c15e210f31",
-                "value": 878
+                "value": 5278
               },
               {
                 "default": false,
@@ -4010,7 +4028,7 @@
                 "label": "localfailures",
                 "properties": null,
                 "uuid": "771477f4-6b64-4ce3-867f-7f5583453e00",
-                "value": 879
+                "value": 5279
               },
               {
                 "default": false,
@@ -4019,7 +4037,7 @@
                 "label": "msgfolderroot",
                 "properties": null,
                 "uuid": "ee54514a-e1b0-426a-8f67-47d5483dc11f",
-                "value": 880
+                "value": 5280
               },
               {
                 "default": false,
@@ -4028,7 +4046,7 @@
                 "label": "outbox",
                 "properties": null,
                 "uuid": "25a45751-b3b7-41d1-a926-c851383badda",
-                "value": 881
+                "value": 5281
               },
               {
                 "default": false,
@@ -4037,7 +4055,7 @@
                 "label": "recoverableitemsdeletions",
                 "properties": null,
                 "uuid": "0463bf79-fe76-4d55-a7c2-79856bd960b2",
-                "value": 882
+                "value": 5282
               },
               {
                 "default": false,
@@ -4046,7 +4064,7 @@
                 "label": "scheduled",
                 "properties": null,
                 "uuid": "9c105a25-a333-43cb-8c7a-1eb185cc79b4",
-                "value": 883
+                "value": 5283
               },
               {
                 "default": false,
@@ -4055,7 +4073,7 @@
                 "label": "searchfolders",
                 "properties": null,
                 "uuid": "b2f12045-6673-436d-b4b0-1e772cd541dc",
-                "value": 884
+                "value": 5284
               },
               {
                 "default": false,
@@ -4064,7 +4082,7 @@
                 "label": "sentitems",
                 "properties": null,
                 "uuid": "09202160-066e-4301-a519-2a47e7a736e4",
-                "value": 885
+                "value": 5285
               }
             ]
           },
@@ -4078,7 +4096,7 @@
             "deprecated": false,
             "export_key": "playbook_07e7c993_f998_4f42_a365_c76422425b61/exchange_online_message_body",
             "hide_notification": false,
-            "id": 689,
+            "id": 5062,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4093,7 +4111,7 @@
             "templates": [],
             "text": "Message Body",
             "tooltip": "",
-            "type_id": 1057,
+            "type_id": 1432,
             "uuid": "6d82f344-d460-4c6a-9e42-8f5e6dd389a7",
             "values": []
           },
@@ -4107,7 +4125,7 @@
             "deprecated": false,
             "export_key": "playbook_07e7c993_f998_4f42_a365_c76422425b61/exchange_online_message_subject",
             "hide_notification": false,
-            "id": 690,
+            "id": 5063,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4122,7 +4140,7 @@
             "templates": [],
             "text": "Message Subject",
             "tooltip": "Text for the message subject to query",
-            "type_id": 1057,
+            "type_id": 1432,
             "uuid": "ff84b50a-5713-486a-829f-a9cbf45ef876",
             "values": []
           },
@@ -4136,7 +4154,7 @@
             "deprecated": false,
             "export_key": "playbook_07e7c993_f998_4f42_a365_c76422425b61/exchange_online_query_results_output_format",
             "hide_notification": false,
-            "id": 691,
+            "id": 5064,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
@@ -4152,7 +4170,7 @@
             "templates": [],
             "text": "Query results output",
             "tooltip": "",
-            "type_id": 1057,
+            "type_id": 1432,
             "uuid": "8fa48a8c-cd32-4d78-a73d-f3bb857e63c4",
             "values": [
               {
@@ -4162,7 +4180,7 @@
                 "label": "Exchange Online data table",
                 "properties": null,
                 "uuid": "a89e391b-2cc0-4058-88b3-282394b65a98",
-                "value": 886
+                "value": 5286
               },
               {
                 "default": false,
@@ -4171,7 +4189,7 @@
                 "label": "Incident attachment",
                 "properties": null,
                 "uuid": "72773670-9236-46ff-ac41-b5aa81bb3c56",
-                "value": 887
+                "value": 5287
               },
               {
                 "default": false,
@@ -4180,7 +4198,7 @@
                 "label": "Incident note",
                 "properties": null,
                 "uuid": "0e697ac5-1788-49ea-bfa7-03547914f8b8",
-                "value": 888
+                "value": 5288
               }
             ]
           },
@@ -4194,7 +4212,7 @@
             "deprecated": false,
             "export_key": "playbook_07e7c993_f998_4f42_a365_c76422425b61/exchange_online_sender_email_address",
             "hide_notification": false,
-            "id": 692,
+            "id": 5065,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4209,7 +4227,7 @@
             "templates": [],
             "text": "Sender Email Address",
             "tooltip": "Enter the email address of the sender",
-            "type_id": 1057,
+            "type_id": 1432,
             "uuid": "4a532220-5bed-4cdb-b9e0-5866ef139fb4",
             "values": []
           },
@@ -4223,7 +4241,7 @@
             "deprecated": false,
             "export_key": "playbook_07e7c993_f998_4f42_a365_c76422425b61/exchange_online_start_datetime",
             "hide_notification": false,
-            "id": 693,
+            "id": 5066,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -4238,7 +4256,7 @@
             "templates": [],
             "text": "Start date/time",
             "tooltip": "Query messages received starting at this date/time.",
-            "type_id": 1057,
+            "type_id": 1432,
             "uuid": "fcee825c-dc59-4838-9f31-58e48dba6a66",
             "values": []
           }
@@ -4263,32 +4281,32 @@
         "uuid": "650b9df6-98d5-4eae-bec6-aa66a2a0c2b7"
       },
       "has_logical_errors": false,
-      "id": 49,
+      "id": 348,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241219199,
+      "last_modified_time": 1749130525772,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1733241218027,
+          "created_date": 1749044590921,
           "description": "",
           "enabled": false,
           "export_key": "exchange_online_query_message_on_artifact_post_process",
-          "id": 76,
+          "id": 339,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1733241218027,
+          "last_modified_by": "shresh@example.com",
+          "last_modified_time": 1749130521050,
           "name": "exchange_online_query_message_on_artifact_post_process",
           "object_type": "artifact",
           "playbook_handle": "example_exchange_online_query_messages_on_artifact",
           "programmatic_name": "example_exchange_online_query_messages_on_artifact_exchange_online_query_message_on_artifact_post_process",
-          "script_text": "\nfrom datetime import datetime\nresults=playbook.functions.results.exchange_online_query_message_result\ncontent = results.get(\"content\")\noutput_format = content.get(\"exo_query_output_format\")\n\n\n# Write to the data table if the user requested it.\nif \"Exchange Online data table\" in output_format:\n  user_list = content.get(\"email_results\")\n  \n  # Add each email as a row in the query results data table\n  for user in user_list:\n    \n    \n    for email in user.get(\"email_list\"):\n      message_row = incident.addRow(\"exo_message_query_results_dt\")\n      message_row.exo_dt_query_date = datetime.now()\n      message_row.exo_dt_message_id = email.get(\"id\")\n      message_row.exo_dt_received_date   = email.get(\"receivedDateTime\")\n      message_row.exo_dt_email_address = user.get(\"email_address\")\n      if email.get(\"sender\"):\n        message_row.exo_dt_sender_email = email[\"sender\"][\"emailAddress\"][\"address\"]\n      else:\n        message_row.exo_dt_sender_email = \"\"\n      message_row.exo_dt_message_subject = email.get(\"subject\")\n      message_row.exo_dt_message_folder = playbook.inputs.exchange_online_mail_folder_id\n      message_row.exo_dt_has_attachments = email.get(\"hasAttachments\")\n      if email.get(\"webLink\"):\n        ref_html = u\"\"\"\u003ca href=\u0027{0}\u0027\u003eLink\u003c/a\u003e\"\"\".format(email[\"webLink\"])\n        message_row.exo_dt_web_link = helper.createRichText(ref_html)\n      else:\n        message_row.exo_dt_web_link = \"\"\n \n      message_row.exo_dt_status = helper.createRichText(\"Active\")\n\n",
+          "script_text": "\nfrom datetime import datetime\nresults=playbook.functions.results.exchange_online_query_message_result\ncontent = results.get(\"content\")\noutput_format = content.get(\"exo_query_output_format\")\n\n\n# Write to the data table if the user requested it.\nif \"Exchange Online data table\" in output_format:\n  user_list = content.get(\"email_results\")\n  \n  # Add each email as a row in the query results data table\n  for user in user_list:\n    \n    \n    for email in user.get(\"email_list\"):\n      message_row = incident.addRow(\"exo_message_query_results_dt\")\n      message_row.exo_dt_query_date = datetime.now()\n      message_row.exo_dt_message_id = email.get(\"id\")\n      message_row.exo_dt_received_date   = email.get(\"receivedDateTime\")\n      message_row.exo_dt_email_address = user.get(\"email_address\")\n      if email.get(\"sender\"):\n        message_row.exo_dt_sender_email = email[\"sender\"][\"emailAddress\"][\"address\"]\n      else:\n        message_row.exo_dt_sender_email = \"\"\n      message_row.exo_dt_message_subject = email.get(\"subject\")\n      message_row.exo_dt_message_folder = playbook.inputs.exchange_online_mail_folder_id\n      message_row.exo_dt_has_attachments = email.get(\"hasAttachments\")\n      if email.get(\"webLink\"):\n        ref_html = \"\"\"\u003ca href=\u0027{0}\u0027\u003eLink\u003c/a\u003e\"\"\".format(email[\"webLink\"])\n        message_row.exo_dt_web_link = helper.createRichText(ref_html)\n      else:\n        message_row.exo_dt_web_link = \"\"\n \n      message_row.exo_dt_status = helper.createRichText(\"Active\")\n\n",
           "tags": [],
           "uuid": "2f4c3d79-5d9b-4ba7-9f2b-f17559bef84f"
         }
@@ -4401,7 +4419,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_07e7c993-f998-4f42-a365-c76422425b61",
-        "id": 51,
+        "id": 505,
         "name": "playbook_07e7c993_f998_4f42_a365_c76422425b61",
         "type": "playbook",
         "uuid": "9355d5b2-caee-4699-97fc-208833051ea1"
@@ -4409,7 +4427,7 @@
       "tags": [],
       "type": "default",
       "uuid": "07e7c993-f998-4f42-a365-c76422425b61",
-      "version": 4
+      "version": 5
     },
     {
       "activation_type": "manual",
@@ -4417,11 +4435,11 @@
         "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a6e61054_fd2e_4ade_86fc_693442bd6688\" isExecutable=\"true\" name=\"playbook_a6e61054_fd2e_4ade_86fc_693442bd6688\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1px5lbw\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Send Message\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6256b03b-03ae-4972-bba2-63fe629fbb65\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exo_email_address   = playbook.inputs.exchange_online_sender_address\\ninputs.exo_recipients      = playbook.inputs.exchange_online_recipient_addresses\\ninputs.exo_message_subject = playbook.inputs.exchange_online_message_subject\\ninputs.exo_message_body    = playbook.inputs.exchange_online_message_body.get(\\\"content\\\")\\ninputs.exo_attachment_names = playbook.inputs.exchange_online_attachment_names\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_send_message_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1px5lbw\u003c/incoming\u003e\u003coutgoing\u003eFlow_05drtat\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0fbhro3\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"exchange_online_send_message_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"508b968d-cfd5-4a7c-9182-1220f7538dae\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05drtat\u003c/incoming\u003e\u003coutgoing\u003eFlow_0fbhro3\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1px5lbw\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_05drtat\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0fbhro3\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a6e61054_fd2e_4ade_86fc_693442bd6688\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fbhro3\" id=\"Flow_0fbhro3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"512\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"624\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05drtat\" id=\"Flow_05drtat_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"332\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"428\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1px5lbw\" id=\"Flow_1px5lbw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"248\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"248\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"624\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"428\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1733241219137,
+      "create_date": 1749044592380,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_a6e61054_fd2e_4ade_86fc_693442bd6688",
@@ -4447,7 +4465,7 @@
             "deprecated": false,
             "export_key": "playbook_a6e61054_fd2e_4ade_86fc_693442bd6688/exchange_online_attachment_names",
             "hide_notification": false,
-            "id": 694,
+            "id": 5067,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4462,7 +4480,7 @@
             "templates": [],
             "text": "Attachment Names",
             "tooltip": "comma separated attachment names to attach to the message",
-            "type_id": 1058,
+            "type_id": 1433,
             "uuid": "7bfa0bca-f886-4140-ab02-84d85b0fbfcb",
             "values": []
           },
@@ -4476,7 +4494,7 @@
             "deprecated": false,
             "export_key": "playbook_a6e61054_fd2e_4ade_86fc_693442bd6688/exchange_online_message_body",
             "hide_notification": false,
-            "id": 695,
+            "id": 5068,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
@@ -4492,7 +4510,7 @@
             "templates": [],
             "text": "Message Body",
             "tooltip": "",
-            "type_id": 1058,
+            "type_id": 1433,
             "uuid": "6c1707eb-8cd2-4030-ae75-5e2963ad5a5c",
             "values": []
           },
@@ -4506,7 +4524,7 @@
             "deprecated": false,
             "export_key": "playbook_a6e61054_fd2e_4ade_86fc_693442bd6688/exchange_online_message_subject",
             "hide_notification": false,
-            "id": 696,
+            "id": 5069,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4521,7 +4539,7 @@
             "templates": [],
             "text": "Message Subject",
             "tooltip": "Text for the message subject to query",
-            "type_id": 1058,
+            "type_id": 1433,
             "uuid": "a752b520-1380-42b0-8851-6fee284dc442",
             "values": []
           },
@@ -4535,7 +4553,7 @@
             "deprecated": false,
             "export_key": "playbook_a6e61054_fd2e_4ade_86fc_693442bd6688/exchange_online_recipient_addresses",
             "hide_notification": false,
-            "id": 697,
+            "id": 5070,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4551,7 +4569,7 @@
             "templates": [],
             "text": "Recipient Addresses",
             "tooltip": "Comma separated list of message recipients",
-            "type_id": 1058,
+            "type_id": 1433,
             "uuid": "b9b4a3be-cb80-40e4-8fa2-5f91a8b6e9d5",
             "values": []
           },
@@ -4565,7 +4583,7 @@
             "deprecated": false,
             "export_key": "playbook_a6e61054_fd2e_4ade_86fc_693442bd6688/exchange_online_sender_address",
             "hide_notification": false,
-            "id": 698,
+            "id": 5071,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4581,7 +4599,7 @@
             "templates": [],
             "text": "Sender Email Address",
             "tooltip": "",
-            "type_id": 1058,
+            "type_id": 1433,
             "uuid": "c3847b8d-a57a-4050-b5c8-004f6e595172",
             "values": []
           }
@@ -4606,32 +4624,32 @@
         "uuid": "4356c59c-ed36-42b9-9862-21bf8c6f65dd"
       },
       "has_logical_errors": false,
-      "id": 50,
+      "id": 349,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733417477188,
+      "last_modified_time": 1749130474939,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1733241219713,
+          "created_date": 1749044593072,
           "description": "",
           "enabled": false,
           "export_key": "exchange_online_send_message_post_process",
-          "id": 77,
+          "id": 340,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1733241219713,
+          "last_modified_by": "shresh@example.com",
+          "last_modified_time": 1749130468112,
           "name": "exchange_online_send_message_post_process",
           "object_type": "incident",
           "playbook_handle": "example_exchange_online_send_message",
           "programmatic_name": "example_exchange_online_send_message_exchange_online_send_message_post_process",
-          "script_text": "results=playbook.functions.results.exchange_online_send_message_result\n\nif results.success:\n  noteText = u\"Exchange Online message sent\\n   From: {0}\\n   To: {1}\\n   Subject: {2}\\n   Body: {3}\".format(results.inputs[\"exo_email_address\"], results.inputs[\"exo_recipients\"], results.inputs[\"exo_message_subject\"], results.inputs[\"exo_message_body\"])\nelse:\n  noteText = u\"Exchange Online message NOT sent\\n   From: {0}\\n  To: {1}\".format(results.inputs[\"exo_email_address\"], results.inputs[\"exo_recipients\"])\n  \nif results.content.get(\"failed_attachments\"):\n  noteText += u\"\"\"\\nWarning: Exchange Online send message - One or more attachments failed to attach to the message. \nUnable to find a matching attachment name on incident for the following names. Are they spelled correctly and was the extension included?\nFailed attachment names: {}\"\"\".format(\", \".join(results.content[\"failed_attachments\"]))\n\nincident.addNote(noteText)",
+          "script_text": "results=playbook.functions.results.exchange_online_send_message_result\n\nif results.success:\n  noteText = \"Exchange Online message sent\\n   From: {0}\\n   To: {1}\\n   Subject: {2}\\n   Body: {3}\".format(results.inputs[\"exo_email_address\"], results.inputs[\"exo_recipients\"], results.inputs[\"exo_message_subject\"], results.inputs[\"exo_message_body\"])\nelse:\n  noteText = \"Exchange Online message NOT sent\\n   From: {0}\\n  To: {1}\".format(results.inputs[\"exo_email_address\"], results.inputs[\"exo_recipients\"])\n  \nif results.content.get(\"failed_attachments\"):\n  noteText += \"\"\"\\nWarning: Exchange Online send message - One or more attachments failed to attach to the message. \nUnable to find a matching attachment name on incident for the following names. Are they spelled correctly and was the extension included?\nFailed attachment names: {}\"\"\".format(\", \".join(results.content[\"failed_attachments\"]))\n\nincident.addNote(noteText)",
           "tags": [],
           "uuid": "508b968d-cfd5-4a7c-9182-1220f7538dae"
         }
@@ -4689,7 +4707,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_a6e61054-fd2e-4ade-86fc-693442bd6688",
-        "id": 52,
+        "id": 506,
         "name": "playbook_a6e61054_fd2e_4ade_86fc_693442bd6688",
         "type": "playbook",
         "uuid": "c1324529-22fd-49c3-b462-22860541f042"
@@ -4697,7 +4715,7 @@
       "tags": [],
       "type": "default",
       "uuid": "a6e61054-fd2e-4ade-86fc-693442bd6688",
-      "version": 4
+      "version": 5
     },
     {
       "activation_type": "manual",
@@ -4705,11 +4723,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_79bda643_c6bb_4d10_82a6_f894fd982d2d\" isExecutable=\"true\" name=\"playbook_79bda643_c6bb_4d10_82a6_f894fd982d2d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0qamyww\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Write Message as Attachment\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"dbb5e3de-0f43-4c7e-b09f-5d50f0ce426c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.exo_attachment_name = playbook.inputs.exchange_online_attachment_name\\ninputs.exo_email_address = row.exo_dt_email_address\\ninputs.exo_messages_id = row.exo_dt_message_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_write_message_as_attachment_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0qamyww\u003c/incoming\u003e\u003coutgoing\u003eFlow_0sua2p7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0qamyww\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0sua2p7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0sua2p7\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_79bda643_c6bb_4d10_82a6_f894fd982d2d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0sua2p7\" id=\"Flow_0sua2p7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"332\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qamyww\" id=\"Flow_0qamyww_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"248\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"248\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654.5\" y=\"483.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1733241220468,
+      "create_date": 1749044594175,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_79bda643_c6bb_4d10_82a6_f894fd982d2d",
@@ -4735,7 +4753,7 @@
             "deprecated": false,
             "export_key": "playbook_79bda643_c6bb_4d10_82a6_f894fd982d2d/exchange_online_attachment_name",
             "hide_notification": false,
-            "id": 699,
+            "id": 5072,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -4750,7 +4768,7 @@
             "templates": [],
             "text": "Attachment Name",
             "tooltip": "",
-            "type_id": 1059,
+            "type_id": 1434,
             "uuid": "8d7bc3e3-8e54-4273-ac25-999908c80763",
             "values": []
           }
@@ -4775,16 +4793,16 @@
         "uuid": "d4e81545-a39c-43f3-ad96-79f339527b50"
       },
       "has_logical_errors": false,
-      "id": 51,
+      "id": 350,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241221546,
+      "last_modified_time": 1749044595462,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -4815,7 +4833,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_79bda643-c6bb-4d10-82a6-f894fd982d2d",
-        "id": 53,
+        "id": 507,
         "name": "playbook_79bda643_c6bb_4d10_82a6_f894fd982d2d",
         "type": "playbook",
         "uuid": "34dca8cc-a9a4-419a-b34f-b17a8421493c"
@@ -4828,14 +4846,14 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 2,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ac12d839_f46a_4252_901f_77862961e1f6\" isExecutable=\"true\" name=\"playbook_ac12d839_f46a_4252_901f_77862961e1f6\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0238nai\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Get Message\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c4748898-439e-496a-bbba-93fbc51582c3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exo_email_address = row.exo_dt_email_address\\ninputs.exo_messages_id = row.exo_dt_message_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_get_message_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0238nai\u003c/incoming\u003e\u003coutgoing\u003eFlow_1tlyv8k\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"exchange_online_write_message_json_as_note_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"a5f0e298-85e6-491b-af57-08b07ca70365\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1tlyv8k\u003c/incoming\u003e\u003coutgoing\u003eFlow_160psfo\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_160psfo\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0238nai\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1tlyv8k\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_160psfo\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ac12d839_f46a_4252_901f_77862961e1f6\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_160psfo\" id=\"Flow_160psfo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"502\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"594\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1tlyv8k\" id=\"Flow_1tlyv8k_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"418\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0238nai\" id=\"Flow_0238nai_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"418\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"594\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1733241221484,
+      "create_date": 1749044595399,
       "creator_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_ac12d839_f46a_4252_901f_77862961e1f6",
@@ -4871,32 +4889,32 @@
         "uuid": "d4682b24-9f47-42c5-9886-504d6800a752"
       },
       "has_logical_errors": false,
-      "id": 52,
+      "id": 351,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "Admin User",
-        "id": 1,
-        "name": "admin@example.com",
+        "display_name": "Resilient Sysadmin",
+        "id": 39,
+        "name": "shresh@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733241222603,
+      "last_modified_time": 1749130394709,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1733241221743,
+          "created_date": 1749044595673,
           "description": "",
           "enabled": false,
           "export_key": "exchange_online_write_message_json_as_note_post_process",
-          "id": 78,
+          "id": 341,
           "language": "python3",
-          "last_modified_by": "admin@example.com",
-          "last_modified_time": 1733241221743,
+          "last_modified_by": "shresh@example.com",
+          "last_modified_time": 1749130386256,
           "name": "exchange_online_write_message_json_as_note_post_process",
           "object_type": "exo_message_query_results_dt",
           "playbook_handle": "example_exchange_online_write_message_json_as_note",
           "programmatic_name": "example_exchange_online_write_message_json_as_note_exchange_online_write_message_json_as_note_post_process",
-          "script_text": "results=playbook.functions.results.exchange_online_get_message_result\n# Print the message to an incident note if it is found, otherwise update the status as Not Found in the datatable.\nif results.content[\"error\"] is not None:\n  noteText = u\"Exchange Online message NOT FOUND: \\n email address: {0}\\n message ID: {1}\\n{2}\".format(results.inputs[\"exo_email_address\"], results.inputs[\"exo_messages_id\"], results.pretty_string)\n  row.exo_dt_status = \"Not Found\"\n  row.exo_dt_web_link = \"\"\nelse:\n  noteText = u\"Exchange Online email address: {0} message:\\n{1}\".format(results.inputs[\"exo_email_address\"], results.pretty_string)\n\nincident.addNote(noteText)",
+          "script_text": "results=playbook.functions.results.exchange_online_get_message_result\n# Print the message to an incident note if it is found, otherwise update the status as Not Found in the datatable.\nif results.content[\"error\"]:\n  noteText = \"Exchange Online message NOT FOUND: \\n email address: {0}\\n message ID: {1}\\n{2}\".format(results.inputs[\"exo_email_address\"], results.inputs[\"exo_messages_id\"], results.pretty_string)\n  row.exo_dt_status = \"Not Found\"\n  row.exo_dt_web_link = \"\"\nelse:\n  noteText = \"Exchange Online email address: {0} message:\\n{1}\".format(results.inputs[\"exo_email_address\"], results.pretty_string)\n\nincident.addNote(noteText)",
           "tags": [],
           "uuid": "a5f0e298-85e6-491b-af57-08b07ca70365"
         }
@@ -4921,7 +4939,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_ac12d839-f46a-4252-901f-77862961e1f6",
-        "id": 54,
+        "id": 508,
         "name": "playbook_ac12d839_f46a_4252_901f_77862961e1f6",
         "type": "playbook",
         "uuid": "9ce43e3c-6fff-415e-aeb9-7a06fbb682d2"
@@ -4929,21 +4947,21 @@
       "tags": [],
       "type": "default",
       "uuid": "ac12d839-f46a-4252-901f-77862961e1f6",
-      "version": 4
+      "version": 5
     }
   ],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 9340,
+    "build_number": 9339,
     "f": 0,
     "m": 0,
     "major": 0,
     "minor": 0,
     "r": 0,
     "v": 51,
-    "version": "51.0.0.0.9340"
+    "version": "51.0.0.0.9339"
   },
   "tags": [],
   "task_order": [],
@@ -4964,7 +4982,7 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_email_address",
           "hide_notification": false,
-          "id": 624,
+          "id": 4998,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4982,7 +5000,7 @@
           "templates": [],
           "text": "Queried Email Address",
           "tooltip": "",
-          "type_id": 1049,
+          "type_id": 1424,
           "uuid": "1430b4c0-c77e-429d-b698-62cb9a6c336b",
           "values": [],
           "width": 62
@@ -4997,7 +5015,7 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_has_attachments",
           "hide_notification": false,
-          "id": 625,
+          "id": 4999,
           "input_type": "boolean",
           "internal": false,
           "is_tracked": false,
@@ -5014,7 +5032,7 @@
           "templates": [],
           "text": "Has Attachments",
           "tooltip": "",
-          "type_id": 1049,
+          "type_id": 1424,
           "uuid": "1818d9f2-ef0f-4981-821a-8b0e6b9f95a8",
           "values": [],
           "width": 98
@@ -5029,7 +5047,7 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_message_folder",
           "hide_notification": false,
-          "id": 626,
+          "id": 5000,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5046,7 +5064,7 @@
           "templates": [],
           "text": "Folder",
           "tooltip": "Only has value when user inputs a folder ID",
-          "type_id": 1049,
+          "type_id": 1424,
           "uuid": "11dad6f2-6f90-47b9-8c5e-af24619471e4",
           "values": [],
           "width": 48
@@ -5061,7 +5079,7 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_message_id",
           "hide_notification": false,
-          "id": 627,
+          "id": 5001,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5079,7 +5097,7 @@
           "templates": [],
           "text": "Message ID",
           "tooltip": "",
-          "type_id": 1049,
+          "type_id": 1424,
           "uuid": "89c605ce-2aaf-4b13-acd6-db150f977a87",
           "values": [],
           "width": 66
@@ -5094,7 +5112,7 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_message_subject",
           "hide_notification": false,
-          "id": 628,
+          "id": 5002,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5111,7 +5129,7 @@
           "templates": [],
           "text": "Message Subject",
           "tooltip": "",
-          "type_id": 1049,
+          "type_id": 1424,
           "uuid": "c67414a0-30bd-43bb-9b86-2cbdbee79bfa",
           "values": [],
           "width": 154
@@ -5126,7 +5144,7 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_query_date",
           "hide_notification": false,
-          "id": 629,
+          "id": 5003,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -5144,7 +5162,7 @@
           "templates": [],
           "text": "Query Date",
           "tooltip": "",
-          "type_id": 1049,
+          "type_id": 1424,
           "uuid": "90d213d4-6efe-4d31-85d2-dc668afb86be",
           "values": [],
           "width": 45
@@ -5159,7 +5177,7 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_received_date",
           "hide_notification": false,
-          "id": 630,
+          "id": 5004,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5176,7 +5194,7 @@
           "templates": [],
           "text": "Received Date",
           "tooltip": "",
-          "type_id": 1049,
+          "type_id": 1424,
           "uuid": "6d199c33-e39c-4377-9a35-32343470d380",
           "values": [],
           "width": 69
@@ -5191,7 +5209,7 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_sender_email",
           "hide_notification": false,
-          "id": 631,
+          "id": 5005,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5208,7 +5226,7 @@
           "templates": [],
           "text": "Sender Email",
           "tooltip": "",
-          "type_id": 1049,
+          "type_id": 1424,
           "uuid": "0244ca3e-a694-41a8-9ce3-569cad2d5be5",
           "values": [],
           "width": 147
@@ -5223,7 +5241,7 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_status",
           "hide_notification": false,
-          "id": 632,
+          "id": 5006,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5241,7 +5259,7 @@
           "templates": [],
           "text": "Status",
           "tooltip": "",
-          "type_id": 1049,
+          "type_id": 1424,
           "uuid": "ee39ace4-a7de-434b-be20-37f8d1c89667",
           "values": [],
           "width": 49
@@ -5256,7 +5274,7 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_web_link",
           "hide_notification": false,
-          "id": 633,
+          "id": 5007,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5273,7 +5291,7 @@
           "templates": [],
           "text": "Web Link",
           "tooltip": "",
-          "type_id": 1049,
+          "type_id": 1424,
           "uuid": "e6975596-3553-4f9b-abc9-d8e18bf6f249",
           "values": [],
           "width": 88

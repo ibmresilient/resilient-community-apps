@@ -1,6 +1,6 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long, too-many-function-args, too-many-function-args
 """Function implementation"""
 
 import logging
@@ -24,7 +24,7 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super().__init__(opts)
         self.load_options(opts)
 
     @handler("reload")
@@ -47,11 +47,11 @@ class FunctionComponent(ResilientComponent):
             mailfolders_id = kwargs.get('exo_mailfolders_id')  # text
             messages_id = kwargs.get('exo_messages_id')  # text
 
-            LOG.info(u"exo_email_address: %s", email_address)
-            LOG.info(u"exo_mailfolders_id: %s", mailfolders_id)
-            LOG.info(u"exo_messages_id: %s", messages_id)
+            LOG.info("exo_email_address: %s", email_address)
+            LOG.info("exo_mailfolders_id: %s", mailfolders_id)
+            LOG.info("exo_messages_id: %s", messages_id)
 
-            yield StatusMessage(u"Starting delete message for email address: {}".format(email_address))
+            yield StatusMessage("Starting delete message for email address: {}".format(email_address))
 
             # Get the MS Graph helper class
             MS_graph_helper = MSGraphHelper(self.options.get("microsoft_graph_token_url"),
@@ -79,7 +79,7 @@ class FunctionComponent(ResilientComponent):
 
             results = rp.done(success, response_json)
 
-            yield StatusMessage(u"Returning delete results for email address: {}".format(email_address))
+            yield StatusMessage("Returning delete results for email address: {}".format(email_address))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

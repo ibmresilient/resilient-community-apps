@@ -1,12 +1,11 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-import sys
-from io import StringIO, BytesIO
+# pragma pylint: disable=line-too-long
+from io import BytesIO
 from datetime import datetime
 import base64
-from resilient_lib import IntegrationError, write_file_attachment, get_file_attachment, get_file_attachment_metadata
 import logging
+from resilient_lib import IntegrationError, write_file_attachment, get_file_attachment
 LOG = logging.getLogger(__name__)
 
 TIME_FORMAT = '%Y-%m-%dT%H:%M:%S'
@@ -21,17 +20,14 @@ def create_incident_attachment(rest_client, incident_id, note, name_prefix):
     """
     try:
         dt = datetime.now()
-        attachment_name = "{0}-{1}.txt".format(name_prefix, dt.strftime(TIME_FORMAT))
-        if sys.version_info.major < 3:
-            datastream = StringIO(note)
-        else:
-            datastream = BytesIO(note.encode("utf-8"))
+        attachment_name = f"{name_prefix}-{dt.strftime(TIME_FORMAT)}.txt"
+        datastream = BytesIO(note.encode("utf-8"))
 
         attachment = write_file_attachment(rest_client, attachment_name, datastream, incident_id, None)
         return attachment
 
     except Exception as err:
-        raise IntegrationError(err)
+        raise IntegrationError(err) from err
 
 
 def create_incident_comment(rest_client, incident_id, note):
@@ -42,7 +38,7 @@ def create_incident_comment(rest_client, incident_id, note):
     :return: Response from Resilient for debug
     """
     try:
-        uri = '/incidents/{}/comments'.format(incident_id)
+        uri = f"/incidents/{incident_id}/comments"
 
         note_json = {
             'format': 'html',
@@ -53,7 +49,7 @@ def create_incident_comment(rest_client, incident_id, note):
         return comment_response
 
     except Exception as err:
-        raise IntegrationError(err)
+        raise IntegrationError(err) from err
 
 def get_attachment_id(rest_client, incident_id, attachment_name):
     """
@@ -65,7 +61,7 @@ def get_attachment_id(rest_client, incident_id, attachment_name):
     :return: incident attachment ID
     """
     # Get incident attachments
-    url = u"/incidents/{}/attachments".format(incident_id)
+    url = f"/incidents/{incident_id}/attachments"
     attachments = rest_client.get(url)
 
     # Find a name that matches provided name, return the ID
@@ -75,7 +71,7 @@ def get_attachment_id(rest_client, incident_id, attachment_name):
             id = attachment["id"]
             break
     if not id:
-        LOG.error(u"Attachment name '%s' not found on the incident! Skipping that attachment.", attachment_name)
+        LOG.error("Attachment name '%s' not found on the incident! Skipping that attachment.", attachment_name)
     return id
 
 def get_incident_file_attachment(rest_client, incident_id, attachment_name):
@@ -94,5 +90,17 @@ def get_incident_file_attachment(rest_client, incident_id, attachment_name):
 
     # Get the attachment data content, base64 encode it, and decode bytes to string
     content = get_file_attachment(rest_client, incident_id, attachment_id=attachment_id)
-    encodedContent = base64.b64encode(content).decode("utf-8")
-    return encodedContent, attachment_id
+    encoded_content = base64.b64encode(content).decode("utf-8")
+    return encoded_content, attachment_id
+
+def check_status_code(status_code):
+    """
+    Check if the HTTP status code is in 200 Range
+    :param status_code: HTTP Status Code
+    :return: boolean value 
+    """
+    # Logic for checking status code between 200 and 300 
+    if int(status_code/100) == 2:
+        return True
+    else: 
+        return False

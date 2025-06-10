@@ -1,22 +1,18 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
+#pragma pylint: disable=line-too-long, too-many-instance-attributes, too-many-arguments, too-many-positional-arguments, too-many-locals, too-many-public-methods
 import logging
-import sys
-if sys.version_info.major >= 3:
-    from urllib.parse import quote as url_encode
-else:
-    from urllib import quote as url_encode
+from urllib.parse import quote as url_encode
 import datetime
-from pytz import timezone
 import pytz
+from pytz import timezone
 from tzlocal.windows_tz import win_tz
-from resilient_lib import OAuth2ClientCredentialsSession
 from urllib3.util import Retry
 from requests.adapters import HTTPAdapter
+from resilient_lib import OAuth2ClientCredentialsSession
 from resilient_lib.components.integration_errors import IntegrationError
 from resilient_lib import get_file_attachment_metadata
-from fn_exchange_online.lib.resilient_helper import get_incident_file_attachment
-from fn_exchange_online.lib.resilient_helper import create_incident_comment
+from fn_exchange_online.lib.resilient_helper import get_incident_file_attachment, check_status_code
 
 LOG = logging.getLogger(__name__)
 DEFAULT_SCOPE = 'https://graph.microsoft.com/.default'
@@ -25,7 +21,7 @@ MAX_RETRIES_TOTAL = 3
 MAX_RETRIES_BACKOFF_FACTOR = 5
 MAX_BATCHED_REQUESTS = 20
 
-class MSGraphHelper(object):
+class MSGraphHelper():
     """
     Helper object MSGraphHelper.
     """
@@ -53,7 +49,7 @@ class MSGraphHelper(object):
         :return:
         """
         if status_code >= 300 and status_code != 404:
-            raise IntegrationError("Invalid response from Microsoft Graph API call: status_code = {0}".format(status_code))
+            raise IntegrationError(f"Invalid response from Microsoft Graph API call: status_code = {status_code}")
 
     def authenticate(self):
         """
@@ -90,7 +86,7 @@ class MSGraphHelper(object):
         :param email_address: email address of the user license details requested
         :return: requests response from the /users/profile endpoint
         """
-        ms_graph_user_license_url = u'{0}/users/{1}/licenseDetails'.format(self.ms_graph_url, email_address)
+        ms_graph_user_license_url = f"{self.ms_graph_url}/users/{email_address}/licenseDetails"
         response = self.ms_graph_session.get(ms_graph_user_license_url)
 
         self.check_ms_graph_response_code(response.status_code)
@@ -102,7 +98,7 @@ class MSGraphHelper(object):
         :param email_address: email address of the user profile requested
         :return: requests response from the /users/profile endpoint
         """
-        ms_graph_user_profile_url = u'{0}/users/{1}'.format(self.ms_graph_url, email_address)
+        ms_graph_user_profile_url = f"{self.ms_graph_url}/users/{email_address}"
         response = self.ms_graph_session.get(ms_graph_user_profile_url)
 
         self.check_ms_graph_response_code(response.status_code)
@@ -115,7 +111,7 @@ class MSGraphHelper(object):
         :param email_address: email address of the user profile requested
         :return: requests response from the /users/mailFolders endpoint
         """
-        ms_graph_user_mail_folders = u'{0}/users/{1}/mailFolders'.format(self.ms_graph_url, email_address)
+        ms_graph_user_mail_folders = f"{self.ms_graph_url}/users/{email_address}/mailFolders"
         response = self.ms_graph_session.get(ms_graph_user_mail_folders)
 
         self.check_ms_graph_response_code(response.status_code)
@@ -135,9 +131,9 @@ class MSGraphHelper(object):
         # return 999 users and $select to specify return just the userPrincipalName of the user.
         if starts_with:
             # Use the $filter parameter to get users with email address starting with specific characters.
-            ms_graph_users_url = u"{0}/users?$filter=startswith(userPrincipalName,'{1}')&$top=999&$select=userPrincipalName".format(self.ms_graph_url, starts_with)
+            ms_graph_users_url = f"{self.ms_graph_url}/users?$filter=startswith(userPrincipalName,'{starts_with}')&$top=999&$select=userPrincipalName"
         else:
-            ms_graph_users_url = u"{0}/users?$top=999&$select=userPrincipalName".format(self.ms_graph_url)
+            ms_graph_users_url = f"{self.ms_graph_url}/users?$top=999&$select=userPrincipalName"
 
         while ms_graph_users_url and user_count <= self.max_users:
 
@@ -155,7 +151,7 @@ class MSGraphHelper(object):
             # Get URL for the next batch of results.
             ms_graph_users_url = json_response.get('@odata.nextLink')
 
-        LOG.info("get_users: Number of Exchange Online users to query: {}".format(user_count))
+        LOG.info("get_users: Number of Exchange Online users to query: %d", user_count)
         LOG.debug(user_list)
         return user_list
 
@@ -166,7 +162,7 @@ class MSGraphHelper(object):
         :param message_id: message id of the message to get
         :return: requests get response for the message to retrieve
         """
-        ms_graph_users_url = u'{0}/users/{1}/messages/{2}'.format(self.ms_graph_url, email_address, message_id)
+        ms_graph_users_url = f"{self.ms_graph_url}/users/{email_address}/messages/{message_id}"
 
         response = self.ms_graph_session.get(ms_graph_users_url)
 
@@ -181,7 +177,7 @@ class MSGraphHelper(object):
         :param message_id: message id of the message to get
         :return: requests get response for the message to retrieve
         """
-        ms_graph_users_url = u'{0}/users/{1}/messages/{2}/$value'.format(self.ms_graph_url, email_address, message_id)
+        ms_graph_users_url = f"{self.ms_graph_url}/users/{email_address}/messages/{message_id}/$value"
 
         response = self.ms_graph_session.get(ms_graph_users_url)
 
@@ -199,8 +195,7 @@ class MSGraphHelper(object):
         """
         mail_folder_string = self.build_folder_string(mail_folder)
 
-        ms_graph_users_url = u'{0}/users/{1}{2}/messages/{3}'.format(self.ms_graph_url, email_address,
-                                                                     mail_folder_string, message_id)
+        ms_graph_users_url = f"{self.ms_graph_url}/users/{email_address}{mail_folder_string}/messages/{message_id}"
 
         response = self.ms_graph_session.delete(ms_graph_users_url)
 
@@ -250,8 +245,7 @@ class MSGraphHelper(object):
         """
         mail_folder_string = self.build_folder_string(mail_folder)
 
-        ms_graph_users_url = u'{0}/users/{1}{2}/messages/{3}/move'.format(self.ms_graph_url, email_address,
-                                                                          mail_folder_string, message_id)
+        ms_graph_users_url = f"{self.ms_graph_url}/users/{email_address}{mail_folder_string}/messages/{message_id}/move"
 
         response = self.ms_graph_session.post(ms_graph_users_url,
                                               headers={'Content-Type': 'application/json'},
@@ -277,18 +271,18 @@ class MSGraphHelper(object):
             base64content, attachment_id = get_incident_file_attachment(resilient_client, incident_id, attachment_name)
             if not attachment_id:
                 failed_attached.append(attachment_name)
-                LOG.info(u"Failed to attach %s. No matching incident attachment found.", attachment_name)
+                LOG.info("Failed to attach %s. No matching incident attachment found.", attachment_name)
                 continue
-            contentType = get_file_attachment_metadata(resilient_client, incident_id, attachment_id=attachment_id)["content_type"]
+            content_type = get_file_attachment_metadata(resilient_client, incident_id, attachment_id=attachment_id)["content_type"]
             attachment = {
                     "@odata.type": "#microsoft.graph.fileAttachment",
                     "name": attachment_name,
-                    "contentType": contentType,
+                    "contentType": content_type,
                     "contentBytes": base64content
                 }
 
             attachments.append(attachment)
-            LOG.info(u"Successfully attached %s", attachment_name)
+            LOG.info("Successfully attached %s", attachment_name)
 
         return attachments , failed_attached
 
@@ -305,7 +299,7 @@ class MSGraphHelper(object):
         :return: requests response from post.
         """
 
-        ms_graph_create_message_url = u'{0}/users/{1}/sendMail'.format(self.ms_graph_url, sender_address)
+        ms_graph_create_message_url = f"{self.ms_graph_url}/users/{sender_address}/sendMail"
 
         # Create recipient list in required format.
         recipient_list = [{'emailAddress': {'address': address.strip()}}
@@ -347,10 +341,10 @@ class MSGraphHelper(object):
         :param location: list of optional attendee email addresses
         :return: response from MS Graph API post to calendar/events endpoint
         """
-        ms_graph_calender_event_url = u'{0}/users/{1}/calendar/events'.format(self.ms_graph_url, email_address)
+        ms_graph_calender_event_url = f"{self.ms_graph_url}/users/{email_address}/calendar/events"
 
         # Get the time zone of the organizer.
-        ms_graph_timezone_url = u'{0}/users/{1}/mailboxSettings/timeZone'.format(self.ms_graph_url, email_address)
+        ms_graph_timezone_url = f"{self.ms_graph_url}/users/{email_address}/mailboxSettings/timeZone"
         response = self.ms_graph_session.get(ms_graph_timezone_url)
 
         self.check_ms_graph_response_code(response.status_code)
@@ -369,11 +363,11 @@ class MSGraphHelper(object):
         to_zone = timezone(iana_time_zone)
 
         # Convert the start time to the time zone of the user mailbox
-        start = datetime.datetime.utcfromtimestamp(start_time / 1000)
+        start = datetime.datetime.fromtimestamp(start_time / 1000, timezone('UTC'))
         start_tz = start.replace(tzinfo=pytz.utc).astimezone(to_zone).strftime(TIME_FORMAT)
 
         # Convert the end time to the time zone of the user mailbox
-        end = datetime.datetime.utcfromtimestamp(end_time / 1000)
+        end = datetime.datetime.fromtimestamp(end_time / 1000, timezone('UTC'))
         end_tz = end.replace(tzinfo=pytz.utc).astimezone(to_zone).strftime(TIME_FORMAT)
 
         LOG.debug("Windows time zone = %s", windows_time_zone)
@@ -419,8 +413,7 @@ class MSGraphHelper(object):
         :param message_id: Message to get the attachments from.
         :return:
         """
-        ms_graph_users_url = u'{0}/users/{1}/messages/{2}/attachments'.format(self.ms_graph_url, email_address,
-                                                                              message_id)
+        ms_graph_users_url = f"{self.ms_graph_url}/users/{email_address}/messages/{message_id}/attachments"
         response = self.ms_graph_session.get(ms_graph_users_url)
 
         self.check_ms_graph_response_code(response.status_code)
@@ -457,11 +450,11 @@ class MSGraphHelper(object):
             # Append results for this user
             status_code = user_query.get('status_code')
             email_list = user_query.get('email_list')
-            if status_code >= 200 and status_code < 300:
+            if check_status_code(status_code):
                 results.append(user_query)
-            LOG.debug(u"***************** status = {0} **************************\n".format(status_code))
+            LOG.debug("***************** status = %d **************************\n", status_code)
 
-            LOG.debug(u"email_address = {0} status_code = {1} number email = {2}".format(email_address, status_code, len(email_list)))
+            LOG.debug("email_address = %s status_code = %d number email = %d", email_address, status_code, len(email_list))
         return results
 
     def query_messages_all_users_batched(self, starts_with, mail_folder, sender, start_date, end_date, has_attachments,
@@ -496,7 +489,7 @@ class MSGraphHelper(object):
             url = self.build_MS_graph_query_url(email_address, mail_folder, sender, start_date, end_date,
                                                 has_attachments, message_subject, message_body)
             # Append to the request url just the json fields we view in the data table.
-            url = u"{0}&$select=id,subject,sender,hasAttachments,receivedDateTime,webLink".format(url)
+            url = f"{url}&$select=id,subject,sender,hasAttachments,receivedDateTime,webLink,replyTo"
 
             # The batch endpoint is different from single GET message API requests in that it takes
             # a relative url not the full url, so remove the base url from the string.
@@ -521,10 +514,10 @@ class MSGraphHelper(object):
                 index = index + 1
 
         # Send out any requests that are still queued.
-        if len(requests_list):
+        if requests_list:
             query_results = self.process_batched_query_requests(requests_list)
             for result in query_results:
-               results.append(result)
+                results.append(result)
         return results
 
     def process_batched_query_requests(self, requests_list):
@@ -537,20 +530,20 @@ class MSGraphHelper(object):
         200 status code (not 404: mailbox not found).
         """
         results = []
-        ms_graph_batch = u"{0}/$batch".format(self.ms_graph_url)
-        LOG.debug(u"POST these query requests to MS Graph $batch endpoint:")
+        ms_graph_batch = f"{self.ms_graph_url}/$batch"
+        LOG.debug("POST these query requests to MS Graph $batch endpoint:")
         LOG.debug(requests_list)
         responses = self.ms_graph_session.post(ms_graph_batch,
                                                headers={'Content-Type': 'application/json'},
                                                json={'requests': requests_list})
         status_code = responses.status_code
-        if status_code >= 200 and status_code < 300:
+        if check_status_code(status_code):
             json_response = responses.json()
             responses_list = json_response.get("responses")
         else:
             # If invalid json then print the requests that failed and try to continue.
-            LOG.error(u"Error: Invalid response from MS Graph $batch endpoint: %s", responses)
-            LOG.error(u"Requests list:")
+            LOG.error("Error: Invalid response from MS Graph $batch endpoint: %s", responses)
+            LOG.error("Requests list:")
             LOG.error(requests_list)
             responses_list = []
 
@@ -559,7 +552,7 @@ class MSGraphHelper(object):
             status_code = response.get('status')
             # Only add to the email results list if the query was found.
             # 404 mailbox not found is status code when the mailbox is not found or it has no license.
-            if status_code >= 200 and status_code < 300:
+            if check_status_code(status_code):
                 email_list = []
                 # The id is a string starting at 1, so subtract 1 when using as an integer index.
                 response_id = int(response.get('id')) - 1
@@ -578,9 +571,7 @@ class MSGraphHelper(object):
                 while len(value) > 0 and self.current_message_count <= self.max_messages:
                     for email in value:
                         # Add these emails to the list
-                        LOG.debug(u"adding email_address = {0} email subject = {1} id = {2}".format(email_address,
-                                                                                                email.get('subject'),
-                                                                                                email.get('id')))
+                        LOG.debug("adding email_address = %s email subject = %s id = %r", email_address, email.get('subject'), email.get('id'))
                         email_list.append(email)
 
                     # Keep track of the total emails retrieved so far.
@@ -628,7 +619,7 @@ class MSGraphHelper(object):
                                                         end_date, has_attachments, message_subject, message_body)
             # Append results for this user
             status_code = user_query.get('status_code')
-            if status_code >= 200 and status_code < 300:
+            if check_status_code(status_code):
                 results.append(user_query)
         return results
 
@@ -686,7 +677,7 @@ class MSGraphHelper(object):
         ms_graph_query_url = self.build_MS_graph_query_url(email_address, mail_folder, sender, start_date, end_date,
                                                            has_attachments, message_subject, message_body)
         # Append to the request url just the json fields we view in the data table.
-        ms_graph_query_url = u"{0}&$select=id,subject,sender,hasAttachments,receivedDateTime,webLink".format(ms_graph_query_url)
+        ms_graph_query_url = f"{ms_graph_query_url}&$select=id,subject,sender,hasAttachments,receivedDateTime,webLink,replyTo"
 
         email_list = []
         # MS Graph will return message results back a certain number at a time, so we need to
@@ -695,7 +686,7 @@ class MSGraphHelper(object):
         # MS Graph sends back the URL for the next batch of results in '@data.nextLink' field.
         response_status = 404
         while ms_graph_query_url and self.current_message_count <= self.max_messages:
-            LOG.debug("ms_graph_query_url = {0}".format(ms_graph_query_url))
+            LOG.debug("ms_graph_query_url = %s", ms_graph_query_url)
             response = self.ms_graph_session.get(ms_graph_query_url)
 
             response_status = response.status_code
@@ -704,13 +695,13 @@ class MSGraphHelper(object):
             # Return empty list if the email address is not found.
             if response_status == 404:
                 email_list = []
-                LOG.debug(u"============== 404 ==================== current_message_count = {0}".format(self.current_message_count))
+                LOG.debug("============== 404 ==================== current_message_count = %d", self.current_message_count)
                 break
 
             json_response = response.json()
             for email in json_response['value']:
                 # Add these emails to the list
-                LOG.debug(u"adding email_address = {0} email subject = {1} id = {2}".format(email_address, email.get('subject'), email.get('id')))
+                LOG.debug("adding email_address = %s email subject = %s id = %r", email_address, email.get('subject'), email.get('id'))
                 email_list.append(email)
 
             # Keep track of the total emails retrieved so far.
@@ -751,21 +742,11 @@ class MSGraphHelper(object):
         # Assemble the MS Graph API query string.
         if search_query:
             if filter_query:
-                ms_graph_query_url = u'{0}/users/{1}{2}/messages{3}&{4}'.format(self.ms_graph_url,
-                                                                                email_address,
-                                                                                folder_string,
-                                                                                search_query,
-                                                                                filter_query)
+                ms_graph_query_url = f"{self.ms_graph_url}/users/{email_address}{folder_string}/messages{search_query}&{filter_query}"
             else:
-                ms_graph_query_url = u'{0}/users/{1}{2}/messages{3}'.format(self.ms_graph_url,
-                                                                            email_address,
-                                                                            folder_string,
-                                                                            search_query)
+                ms_graph_query_url = f"{self.ms_graph_url}/users/{email_address}{folder_string}/messages{search_query}"
         elif filter_query:
-            ms_graph_query_url = u'{0}/users/{1}{2}/messages{3}'.format(self.ms_graph_url,
-                                                                        email_address,
-                                                                        folder_string,
-                                                                        filter_query)
+            ms_graph_query_url = f"{self.ms_graph_url}/users/{email_address}{folder_string}/messages{filter_query}"
         else:
             raise IntegrationError("Exchange Online: Query Messages: no query parameters specified.")
 
@@ -782,7 +763,7 @@ class MSGraphHelper(object):
         if not mail_folder:
             return ""
 
-        folder_string = u"/mailFolders/{}".format(mail_folder)
+        folder_string = f"/mailFolders/{mail_folder}"
         return folder_string
 
     @staticmethod
@@ -797,10 +778,10 @@ class MSGraphHelper(object):
         # ' and ' string should be be placed between the two queries.
         """
         if filter_query.endswith(')'):
-            join_string = u'%20and%20'
+            join_string = '%20and%20'
         else:
             join_string = ""
-        return u'{0}{1}{2}'.format(filter_query, join_string, new_query)
+        return f"{filter_query}{join_string}{new_query}"
 
     @staticmethod
     def build_search_query(message_body):
@@ -811,7 +792,7 @@ class MSGraphHelper(object):
          """
         if message_body:
             url_encoded_body = url_encode(message_body.encode('utf8'))
-            return u'?$search="{0}"'.format(url_encoded_body)
+            return f'?$search="{url_encoded_body}"'
 
         return ""
 
@@ -826,27 +807,27 @@ class MSGraphHelper(object):
            :return: $filter portion of the query string containing parameter
            """
         # Initialize $filter query string
-        filter_query = u'?$filter='
+        filter_query = '?$filter='
         filter_query_start_len = len(filter_query)
 
         if start_date:
             # convert from epoch to utc time.
-            utc_time = datetime.datetime.fromtimestamp(start_date/1000).strftime('%Y-%m-%dT%H:%M:%SZ')
-            start_date_query = u'(receivedDateTime%20ge%20{0})'.format(utc_time)
+            utc_time = datetime.datetime.fromtimestamp(start_date/1000, timezone('UTC')).strftime('%Y-%m-%dT%H:%M:%SZ')
+            start_date_query = f"(receivedDateTime%20ge%20{utc_time})"
             filter_query = self.append_query_to_query_url(filter_query, start_date_query)
 
         if end_date:
             # convert from epoch to utc time.
-            utc_time = datetime.datetime.fromtimestamp(end_date/1000).strftime('%Y-%m-%dT%H:%M:%SZ')
-            end_date_query = u'(receivedDateTime%20le%20{0})'.format(utc_time)
+            utc_time = datetime.datetime.fromtimestamp(end_date/1000, timezone('UTC')).strftime('%Y-%m-%dT%H:%M:%SZ')
+            end_date_query = f"(receivedDateTime%20le%20{utc_time})"
             filter_query = self.append_query_to_query_url(filter_query, end_date_query)
 
         if sender:
-            sender_query = u"(from/emailAddress/address%20eq%20'{0}')".format(sender)
+            sender_query = f"(from/emailAddress/address%20eq%20'{sender}')"
             filter_query = self.append_query_to_query_url(filter_query, sender_query)
 
-        if has_attachments is not None:
-            has_attachments_query = u'(hasAttachments%20eq%20{0})'.format(str(has_attachments).lower())
+        if has_attachments:
+            has_attachments_query = f"(hasAttachments%20eq%20{str(has_attachments).lower()})"
             filter_query = self.append_query_to_query_url(filter_query, has_attachments_query)
 
         if message_subject:
@@ -855,7 +836,7 @@ class MSGraphHelper(object):
             # with 2 single quotes (not url encoded).
             url_encoded_subject = url_encode(message_subject.encode('utf8'))
             url_encoded_subject = url_encoded_subject.replace("%27", "''")
-            subject_query = u"(contains(subject,'{0}'))".format(url_encoded_subject)
+            subject_query = f"(contains(subject,'{url_encoded_subject}'))"
             filter_query = self.append_query_to_query_url(filter_query, subject_query)
 
         # If nothing was added, then return the empty string.

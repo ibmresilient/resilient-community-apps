@@ -1,11 +1,12 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long, too-many-locals, too-many-function-args, too-many-function-args
 """Function implementation"""
 
 import json
 import logging
 import datetime
+import pytz
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import validate_fields, RequestsCommon, ResultPayload
 from resilient_lib.components.integration_errors import IntegrationError
@@ -28,7 +29,7 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super().__init__(opts)
         self.load_options(opts)
 
     @handler("reload")
@@ -57,26 +58,26 @@ class FunctionComponent(ResilientComponent):
             optional_attendees = kwargs.get("exo_meeting_optional_attendees")  # text
             location = kwargs.get("exo_meeting_location")  # text
 
-            LOG.info(u"exo_meeting_email_address: %s", email_address)
-            LOG.info(u"exo_meeting_start_time: %s", start_time)
-            LOG.info(u"exo_meeting_end_time: %s", end_time)
-            LOG.info(u"exo_meeting_subject: %s", subject)
-            LOG.info(u"exo_meeting_body: %s", body)
-            LOG.info(u"exo_meeting_required_attendees: %s", required_attendees)
-            LOG.info(u"exo_meeting_optional_attendees: %s", optional_attendees)
-            LOG.info(u"exo_meeting_location: %s", location)
+            LOG.info("exo_meeting_email_address: %s", email_address)
+            LOG.info("exo_meeting_start_time: %s", start_time)
+            LOG.info("exo_meeting_end_time: %s", end_time)
+            LOG.info("exo_meeting_subject: %s", subject)
+            LOG.info("exo_meeting_body: %s", body)
+            LOG.info("exo_meeting_required_attendees: %s", required_attendees)
+            LOG.info("exo_meeting_optional_attendees: %s", optional_attendees)
+            LOG.info("exo_meeting_location: %s", location)
 
             # Validate the meeting start/end time
             if start_time >= end_time:
                 raise IntegrationError("Exchange Online meeting start time is behind end time.")
 
             # Check meeting time is not in the past.
-            now_utc = datetime.datetime.utcnow()
-            meeting_time_utc = datetime.datetime.utcfromtimestamp(start_time/1000)
+            now_utc = pytz.utc.localize(datetime.datetime.now())
+            meeting_time_utc = datetime.datetime.fromtimestamp(start_time/1000).replace(tzinfo=pytz.utc)
             if now_utc > meeting_time_utc:
                 raise IntegrationError("Exchange Online meeting start date/time is in the past.")
 
-            yield StatusMessage(u"Starting create meeting for email address: {}".format(email_address))
+            yield StatusMessage("Starting create meeting for email address: {}".format(email_address))
 
             # Get the MS Graph helper class
             MS_graph_helper = MSGraphHelper(self.options.get("microsoft_graph_token_url"),
@@ -108,7 +109,7 @@ class FunctionComponent(ResilientComponent):
             pretty_string = json.dumps(response_json, ensure_ascii=False, indent=4, separators=(',', ': '))
             results['pretty_string'] = pretty_string
 
-            yield StatusMessage(u"Returning create meeting results for email address: {}".format(email_address))
+            yield StatusMessage("Starting create meeting for email address: {}".format(email_address))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

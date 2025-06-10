@@ -1,9 +1,8 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long, too-many-locals, too-many-arguments, too-many-positional-arguments, too-many-branches
 """Function implementation"""
 
-import json
 import datetime
 import logging
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
@@ -30,7 +29,7 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super().__init__(opts)
         self.load_options(opts)
 
     @handler("reload")
@@ -60,18 +59,18 @@ class FunctionComponent(ResilientComponent):
             message_body = kwargs.get('exo_message_body')  # text
             query_output_format = self.get_select_param(kwargs.get('exo_query_output_format'))  # select values: "Exchange Online data table", "Incident attachment", "Incident note"
 
-            LOG.info(u"incident_id: %s", str(incident_id))
-            LOG.info(u"exo_email_address: %s", email_address)
-            LOG.info(u"exo_mailfolders: %s", mail_folders)
-            LOG.info(u"exo_email_address_sender: %s", sender)
-            LOG.info(u"exo_start_date: %s", start_date)
-            LOG.info(u"exo_end_date: %s", end_date)
-            LOG.info(u"exo_email_has_attachments: %s", has_attachments)
-            LOG.info(u"exo_message_subject: %s", message_subject)
-            LOG.info(u"exo_message_body: %s", message_body)
-            LOG.info(u"exo_query_output_format: %s", query_output_format)
+            LOG.info("incident_id: %s", str(incident_id))
+            LOG.info("exo_email_address: %s", email_address)
+            LOG.info("exo_mailfolders: %s", mail_folders)
+            LOG.info("exo_email_address_sender: %s", sender)
+            LOG.info("exo_start_date: %s", start_date)
+            LOG.info("exo_end_date: %s", end_date)
+            LOG.info("exo_email_has_attachments: %s", has_attachments)
+            LOG.info("exo_message_subject: %s", message_subject)
+            LOG.info("exo_message_body: %s", message_body)
+            LOG.info("exo_query_output_format: %s", query_output_format)
 
-            yield StatusMessage(u"Starting message query.")
+            yield StatusMessage("Starting message query.")
 
             # Get the MS Graph helper class
             MS_graph_helper = MSGraphHelper(self.options.get("microsoft_graph_token_url"),
@@ -143,43 +142,43 @@ class FunctionComponent(ResilientComponent):
             email_results = query_results.get('email_results')
 
             note = []
-            note.append(u"<b>Exchange Online Message Query Criteria:</b><br><br>")
+            note.append("<b>Exchange Online Message Query Criteria:</b><br><br>")
             if email_address:
-                note.append(u"    <b>email address:</b>   {0}<br>".format(email_address))
+                note.append(f"    <b>email address:</b>   {email_address}<br>")
             if mail_folders:
-                note.append(u"    <b>mail folder:</b>     {0}<br>".format(mail_folders))
+                note.append(f"    <b>mail folder:</b>     {mail_folders}<br>")
             if sender:
-                note.append(u"    <b>email sender:</b>    {0}<br>".format(sender))
+                note.append(f"    <b>email sender:</b>    {sender}<br>")
             if start_date:
                 utc_time = datetime.datetime.fromtimestamp(start_date / 1000).strftime('%Y-%m-%dT%H:%M:%SZ')
-                note.append(u"    <b>start date:</b>      {0}<br>".format(utc_time))
+                note.append(f"    <b>start date:</b>      {utc_time}<br>")
             if end_date:
                 utc_time = datetime.datetime.fromtimestamp(end_date / 1000).strftime('%Y-%m-%dT%H:%M:%SZ')
-                note.append(u"    <b>end date:</b>        {0}<br>".format(utc_time))
+                note.append(f"    <b>end date:</b>        {utc_time}<br>")
             if has_attachments:
-                note.append(u"    <b>has attachments:</b> {0}<br>".format(has_attachments))
+                note.append(f"    <b>has attachments:</b> {has_attachments}<br>")
             if message_subject:
-                note.append(u"    <b>message subject:</b> {0}<br>".format(message_subject))
+                note.append(f"    <b>message subject:</b> {message_subject}<br>")
             if message_body:
-                note.append(u"    <b>message body:</b>    {0}<br>".format(message_body))
+                note.append(f"    <b>message body:</b>    {message_body}<br>")
 
             total_emails = 0
             email_note = []
             for email in email_results:
                 num_emails_found = len(email.get('email_list'))
                 if num_emails_found > 0:
-                    email_note.append(u"    {0}:  {1}<br>".format(email.get('email_address'), num_emails_found))
+                    email_note.append(f"    {email.get('email_address')}:  {num_emails_found}<br>")
                     total_emails = total_emails + num_emails_found
 
             # Add line with total emails found
-            note.append(u"<br><b>Total messages matching search criteria:</b>  {0}<br>".format(total_emails))
+            note.append(f"<br><b>Total messages matching search criteria:</b>  {total_emails}<br>")
 
             # Add one line for each mailbox in which a matching message was found and total matching messages.
             for line in email_note:
                 note.append(line)
 
             # Add the query execution time
-            note.append(u"<b>Query execution time:</b>  {0} seconds.".format(query_time_ms/1000))
+            note.append(f"<b>Query execution time:</b>  {query_time_ms/1000} seconds.")
 
             # Join all of the note lines together
             complete_note = ''.join(note)
@@ -197,4 +196,4 @@ class FunctionComponent(ResilientComponent):
             return True
 
         except Exception as err:
-            raise IntegrationError(err)
+            raise IntegrationError(err) from err

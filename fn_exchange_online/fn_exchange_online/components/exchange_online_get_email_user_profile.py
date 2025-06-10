@@ -1,6 +1,6 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long, too-many-function-args, too-many-function-args
 """Function implementation"""
 
 import json
@@ -26,7 +26,7 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super().__init__(opts)
 
         self.load_options(opts)
 
@@ -49,9 +49,9 @@ class FunctionComponent(ResilientComponent):
             # Get the function parameters
             email_address = kwargs.get('exo_email_address')  # text
 
-            LOG.info(u"exo_email_address: %s", email_address)
+            LOG.info("exo_email_address: %s", email_address)
 
-            yield StatusMessage(u"Starting user profile query for email address: {}".format(email_address))
+            yield StatusMessage("Starting user profile query for email address: {}".format(email_address))
 
             # Get the MS Graph helper class
             # Get the MS Graph helper class
@@ -77,7 +77,7 @@ class FunctionComponent(ResilientComponent):
                                        separators=(',', ': '))
             results['pretty_string'] = pretty_string
 
-            yield StatusMessage(u"Returning user profile results for email address: {}".format(email_address))
+            yield StatusMessage("Returning user profile results for email address: {}".format(email_address))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)

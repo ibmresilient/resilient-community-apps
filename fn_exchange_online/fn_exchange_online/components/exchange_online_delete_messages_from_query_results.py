@@ -1,6 +1,6 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long, too-many-locals
 """Function implementation"""
 import json
 import logging
@@ -26,7 +26,7 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super().__init__(opts)
         self.load_options(opts)
 
     @handler("reload")
@@ -50,9 +50,9 @@ class FunctionComponent(ResilientComponent):
 
             query_results = kwargs.get('exo_query_messages_results')  # text
 
-            LOG.info(u"exo_query_messages_results: %s", query_results)
+            LOG.info("exo_query_messages_results: %s", query_results)
 
-            yield StatusMessage(u"Starting delete messages for query results")
+            yield StatusMessage("Starting delete messages for query results")
 
             # Get the MS Graph helper class
             MS_graph_helper = MSGraphHelper(self.options.get("microsoft_graph_token_url"),
@@ -74,7 +74,7 @@ class FunctionComponent(ResilientComponent):
                 query_output_format = query_results_json.get('exo_query_output_format')
                 incident_id = int(query_results_json.get('incident_id'))
             except ValueError as err:
-                raise IntegrationError("Invalid JSON string in Delete Message from Query Results.")
+                raise IntegrationError("Invalid JSON string in Delete Message from Query Results.") from err
 
             # Delete messages found in the query.
             delete_results = MS_graph_helper.delete_messages_from_query_results(query_message_results)
@@ -93,7 +93,7 @@ class FunctionComponent(ResilientComponent):
             # Writing results to the data table takes place in the post processor script.
             self.write_results_to_note_or_attachment(delete_message_results, execution_time_ms)
 
-            yield StatusMessage(u"Returning Delete Messages From Query Results results.")
+            yield StatusMessage("Returning Delete Messages From Query Results results.")
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
@@ -129,14 +129,13 @@ class FunctionComponent(ResilientComponent):
 
                 total_deleted = total_deleted + number_deleted
                 if number_deleted > 0:
-                    note.append(u"    {0}:  {1}<br>".format(email_address, number_deleted))
+                    note.append(f"    {email_address}:  {number_deleted}<br>")
 
             # Put the total deleted messages number in the note.
-            note.insert(0, u"<b>Exchange Online Delete Message from Query Results:<br><br>Total messages deleted:</b> {0}<br>".format(
-                        total_deleted))
+            note.insert(0, f"<b>Exchange Online Delete Message from Query Results:<br><br>Total messages deleted:</b> {total_deleted}<br>")
 
             # Add the query execution time
-            note.append(u"<b>Deletion execution time:</b>  {0} seconds.".format(execution_time_ms/1000))
+            note.append(f"<b>Deletion execution time:</b>  {execution_time_ms/1000} seconds.")
 
             # Join all of the note lines together
             complete_note = ''.join(note)
@@ -154,4 +153,4 @@ class FunctionComponent(ResilientComponent):
             return True
 
         except Exception as err:
-            raise IntegrationError(err)
+            raise IntegrationError(err) from err

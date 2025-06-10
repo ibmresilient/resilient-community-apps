@@ -1,6 +1,6 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=line-too-long, too-many-locals
 """Function implementation
    test with: resilient-circuits selftest -l fn_exchange_online
 """
@@ -39,15 +39,15 @@ def selftest_function(opts):
     max_retries_backoff_factor = int(options.get('max_retries_backoff_factor', MAX_RETRIES_BACKOFF_FACTOR))
     max_batched_requests = int(options.get("max_batched_requests", MAX_BATCHED_REQUESTS))
     try:
-        log.info(u'Calling MS Graph API with: \n token_url: %s', token_url)
-        log.info(u'MS Graph API url: %s',graph_url)
-        log.info(u'tenant_id: %s', tenant_id)
-        log.info(u'client_id: %s', client_id)
-        log.info(u'max_messages: %s', str(max_messages))
-        log.info(u'max_users: %s', str(max_users))
-        log.info(u'max_retries_total: %s', str(max_retries_total))
-        log.info(u'max_retries_backoff_factor: %s', str(max_retries_backoff_factor))
-        log.info(u'max_batched_requests: %s', str(max_batched_requests))
+        log.info('Calling MS Graph API with: \n token_url: %s', token_url)
+        log.info('MS Graph API url: %s',graph_url)
+        log.info('tenant_id: %s', tenant_id)
+        log.info('client_id: %s', client_id)
+        log.info('max_messages: %s', str(max_messages))
+        log.info('max_users: %s', str(max_users))
+        log.info('max_retries_total: %s', str(max_retries_total))
+        log.info('max_retries_backoff_factor: %s', str(max_retries_backoff_factor))
+        log.info('max_batched_requests: %s', str(max_batched_requests))
 
         state, reason = "", ""
 
@@ -71,7 +71,7 @@ def selftest_function(opts):
             state = "success"
         else:
             state = "failure"
-            reason = "authenication failure"
+            reason = "authentication failure"
     except IntegrationError as err:
         state = "failure"
         reason = err.value

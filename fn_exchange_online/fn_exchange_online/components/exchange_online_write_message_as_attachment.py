@@ -1,6 +1,6 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long, too-many-locals, too-many-function-args, too-many-function-args
 """Function implementation"""
 
 import logging
@@ -25,7 +25,7 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super().__init__(opts)
         self.load_options(opts)
 
     @handler("reload")
@@ -51,13 +51,13 @@ class FunctionComponent(ResilientComponent):
             message_id = kwargs.get("exo_messages_id")  # text
             attachment_name = kwargs.get("exo_attachment_name")  # text
 
-            LOG.info(u"incident_id: %s", incident_id)
-            LOG.info(u"task_id: %s", task_id)
-            LOG.info(u"exo_email_address: %s", email_address)
-            LOG.info(u"exo_messages_id: %s", message_id)
-            LOG.info(u"exo_attachment_name: %s", attachment_name)
+            LOG.info("incident_id: %s", incident_id)
+            LOG.info("task_id: %s", task_id)
+            LOG.info("exo_email_address: %s", email_address)
+            LOG.info("exo_messages_id: %s", message_id)
+            LOG.info("exo_attachment_name: %s", attachment_name)
 
-            yield StatusMessage(u"Starting to get message mime for email address: {}".format(email_address))
+            yield StatusMessage("Starting to get message mime for email address: {}".format(email_address))
 
             # Get the MS Graph helper class
             MS_graph_helper = MSGraphHelper(self.options.get("microsoft_graph_token_url"),
@@ -78,8 +78,8 @@ class FunctionComponent(ResilientComponent):
             datastream = BytesIO(response.content)
 
             if attachment_name is None:
-                attachment_name = u"message-{}-{}.eml".format(email_address, message_id)
-                LOG.info(u"attachment_name: %s", attachment_name)
+                attachment_name = f"message-{email_address}-{message_id}.eml"
+                LOG.info("attachment_name: %s", attachment_name)
 
             # Get the rest client so we can add the attachment to the incident.
             rest_client = self.rest_client()
@@ -91,7 +91,7 @@ class FunctionComponent(ResilientComponent):
             results_data = {"attachment_name": attachment_name}
             results = rp.done(True, results_data)
 
-            yield StatusMessage(u"Returning results for get message mime for email address: {0}\n attachment name: {1}".format(email_address, attachment_name))
+            yield StatusMessage("Returning results for get message mime for email address: {}\n attachment name: {}".format(email_address, attachment_name))
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
