@@ -336,7 +336,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_url_to_dns/README.html">URL to DNS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URLScan.io</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_utilities/README.html">Utilities (Deprecated)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
@@ -493,15 +492,20 @@
 
 -->
 <section id="id1">
-<h3>1.4.2<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
-<p>Fix bug in function Move Message to Folder</p>
+<h3>1.4.3<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<p>Fix bug related to internal email address visibility on sender email column
+Replace deprecated datetime.utcfromtimestamp() with datetime.fromtimestamp()</p>
 </section>
 <section id="id2">
-<h3>1.4.1<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
-<p>Moved a global Python2 script to a local playbook Python3 script</p>
+<h3>1.4.2<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
+<p>Fix bug in function Move Message to Folder</p>
 </section>
 <section id="id3">
-<h3>1.4.0<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<h3>1.4.1<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p>Moved a global Python2 script to a local playbook Python3 script</p>
+</section>
+<section id="id4">
+<h3>1.4.0<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <p>In v1.4.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.</p>
 <p>If upgrading from a previous release, you’ll notice that the previous release’s rules/workflows remain in place. Both sets of rules and playbooks are active. For manual actions, playbooks have the same name as it’s corresponding rule, but with “(PB)” added at the end.</p>
 <p>You can continue to use the rules/workflows. But migrating to playbooks provides greater functionality along with future app enhancements and bug fixes.</p>
@@ -2664,9 +2668,10 @@ for your domain:</p>
 <li><a class="reference internal" href="#">Microsoft Exchange Online</a><ul>
 <li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
-<li><a class="reference internal" href="#id1">1.4.2</a></li>
-<li><a class="reference internal" href="#id2">1.4.1</a></li>
-<li><a class="reference internal" href="#id3">1.4.0</a></li>
+<li><a class="reference internal" href="#id1">1.4.3</a></li>
+<li><a class="reference internal" href="#id2">1.4.2</a></li>
+<li><a class="reference internal" href="#id3">1.4.1</a></li>
+<li><a class="reference internal" href="#id4">1.4.0</a></li>
 <li><a class="reference internal" href="#v1-3-0">v1.3.0</a></li>
 <li><a class="reference internal" href="#v1-2-0">v1.2.0</a></li>
 <li><a class="reference internal" href="#v1-1-0">v1.1.0</a></li>

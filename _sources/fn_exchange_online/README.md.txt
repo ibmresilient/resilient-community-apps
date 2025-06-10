@@ -68,6 +68,11 @@
 <!--
 
 -->
+### 1.4.3
+
+Fix bug related to internal email address visibility on sender email column
+Replace deprecated datetime.utcfromtimestamp() with datetime.fromtimestamp()
+
 ### 1.4.2
 
 Fix bug in function Move Message to Folder
