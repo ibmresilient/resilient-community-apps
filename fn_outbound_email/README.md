@@ -27,7 +27,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.1.3 | 04/2025 |Converted example workflows to python3 |
+| 2.1.3 | 04/2025 | Converted example workflows to python3 |
 | 2.1.2 | 05/2024 | Bug fix for imported packages |
 | 2.1.1 | 03/2024 | Bug fix for external paths to templates when running on windows integration server |
 | 2.1.0 | 05/2023 | Added message signing and encryption capabilities. Replaced workflows with playbooks |
@@ -851,9 +851,9 @@ fn-outbound-email:
 
 * Email servers are often restrictive on which applications or users are authorized to send emails. For example, if you have 2FA authentication enabled on a gmail account, you must add a specific application password or allow less secure apps. (Not recommended.)
 
-   https://hotter.io/docs/email-accounts/app-password-gmail/
+   https://support.google.com/accounts/answer/185833?hl=en
 
-   https://hotter.io/docs/email-accounts/secure-app-gmail/
+   https://support.google.com/a/answer/6260879?hl=en
 
 * Occasionally, mail servers might indicate that emails have been sent successfully (including a successful note on the the associated incident) but they are blocked by the receiving mail server due to insecure spam filters. This is a limitation of SMTP authentication mechanism.
 
