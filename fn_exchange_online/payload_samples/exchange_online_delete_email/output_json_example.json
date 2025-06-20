@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "value": true
+  },
+  "raw": "{\"value\": true}",
+  "inputs": {
+    "exo_mailfolders_id": null,
+    "exo_email_address": "soartester@mytenant.onmicrosoft.com",
+    "exo_messages_id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAA0UCmTAAA="
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-exchange-online",
+    "package_version": "1.4.0",
+    "host": "myLaptop",
+    "execution_time_ms": 1426,
+    "timestamp": "2023-06-15 19:53:56"
+  }
+}
