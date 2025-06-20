@@ -10353,7 +10353,9 @@ class TestDataFeederSyncIncidents:
         ({'inc_a4':'a', 'inc_b4':'b', 'inc_c4':'c'}, ['inc_a4', 'inc_b4', 'inc_c4'], []),
         ({'inc_a4':'a', 'inc_b4':'b', 'inc_c4':'c'}, ['inc_a4 ', ' inc_b4', 'INC_c4'], []),
         ({'inc_a':'a', 'inc_b':'b', 'inc_c':'c', 'xxx':'xxx'}, ['nomatch'], ['inc_a', 'inc_b', 'inc_c', 'xxx']),
-        (None, None, [])
+        (None, None, []),
+        ({'INC_A':'a', 'inc_b':'c', 'INC_C':'c'}, ['inc_a', 'INC_B'], ['inc_c']),
+        ({}, ['something'], [])
     ])
     def test_exclude_incident_fields(self, flattened_incident, exclude_list, expected_result):
         t = TypeInfo("incident", None)

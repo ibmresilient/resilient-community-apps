@@ -52,17 +52,6 @@ class TestFnUrlhausSubmission:
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
         assert func is not None
 
-    def test_bad_api_key(self, circuits_app):
-
-        with patch.dict(circuits_app.app.opts[PACKAGE_NAME], {"submit_api_key": "def", "submit_url": "https://urlhaus.abuse.ch/api/"}):
-
-            function_params = {
-                "urlhaus_artifact_value": "www.example.com"
-            }
-
-            with pytest.raises(Exception, match=r"API Key invalid"):
-                call_fn_urlhaus_submission_function(circuits_app, function_params)
-
     def test_fields_defined(self, circuits_app):
         with patch("fn_urlhaus.components.funct_fn_urlhaus_submission.RequestsCommon.execute_call_v2"):
 

@@ -279,17 +279,19 @@ class TypeInfo(object):
         :return: flattened list without the excluded fields
         :rtype: dict
         """
-        flattened_field_keys = [field.lower() for field in flattened_fields.keys()] if isinstance(flattened_fields, dict) else []
+        # create dict of original flattened_fields keys for case sensitivity 
+        flattened_field_keys = {field.lower():field for field in flattened_fields.keys()} if isinstance(flattened_fields, dict) else {}
         clean_exclude_list = exclude_list if isinstance(exclude_list, list) else []
         # find all the exclusion fields found in flattened_fields
-        matches = [fnmatch_filter(flattened_field_keys, excl_pattern.strip().lower()) for excl_pattern in clean_exclude_list]
+        matches = [fnmatch_filter(flattened_field_keys.keys(), excl_pattern.strip().lower()) for excl_pattern in clean_exclude_list]
         found_excl_list = []
         _ = [found_excl_list.extend(match) for match in matches if match]
         # filter out the exclusion keys found in flattened_fields
-        reduced_field_keys = list(set(flattened_field_keys) - set(found_excl_list))
+        reduced_field_keys = list(set(flattened_field_keys.keys()) - set(found_excl_list))
 
         # return the new dictionary of flattened_fields
-        return {field:flattened_fields[field] for field in reduced_field_keys}
+        #  flattened_field_keys[field] restores the original case of the field name
+        return {field:flattened_fields[flattened_field_keys[field]] for field in reduced_field_keys}
 
     def _get_field_values(self, payload, all_fields, translate_func, bypass_error=False):
         """[convert object values based on a supplied conversion method]
