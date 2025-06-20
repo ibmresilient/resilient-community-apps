@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-
-# (c) Copyright IBM Corp. 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2023, 2025. All Rights Reserved.
 """Function implementation
    test with: resilient-circuits selftest -l fn_proofpoint_campaign
 """
@@ -32,7 +31,7 @@ def selftest_function(opts):
     bundle = os.path.expanduser(cafile) if cafile else False
 
     basic_auth = HTTPBasicAuth(username, password)
-    url = '{}/siem/all?format=JSON&sinceSeconds={}'.format(base_url, 300)  # /v2/siem/all Fetch events for all clicks and messages relating to known threats within the specified time period
+    url = f"{base_url}/siem/all?format=JSON&sinceSeconds={300}"  # /v2/siem/all Fetch events for all clicks and messages relating to known threats within the specified time period
 
     rc = RequestsCommon(opts=opts, function_opts=options)
     try:
@@ -43,7 +42,7 @@ def selftest_function(opts):
 
         return {
             'state': 'failure',
-            'reason': 'status code {0}'.format(res.status_code)
+            'reason': f"status code {res.status_code}"
         }
 
     except Exception as ex:

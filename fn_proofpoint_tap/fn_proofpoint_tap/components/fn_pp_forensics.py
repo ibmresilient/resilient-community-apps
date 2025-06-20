@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-
-# (c) Copyright IBM Corp. 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2023, 2025. All Rights Reserved.
 
 """Function implementation"""
 
@@ -27,7 +26,7 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super().__init__(opts)
 
         self.opts = opts
         self.options = opts.get("fn_proofpoint_tap", {})
@@ -52,11 +51,11 @@ class FunctionComponent(ResilientComponent):
             aggregate_flag = kwargs.get('proofpoint_aggregate_flag')
             malicious_flag = kwargs.get('proofpoint_malicious_flag')
 
-            log.info('incident_id: {}'.format(incident_id))
-            log.info('proofpoint_campaign_id: {}'.format(campaign_id))
-            log.info('proofpoint_threat_id: {}'.format(threat_id))
-            log.info('proofpoint_aggregate_flag: {}'.format(aggregate_flag))
-            log.info('proofpoint_malicious_flag: {}'.format(malicious_flag))
+            log.info(f"incident_id: {incident_id}")
+            log.info(f"proofpoint_campaign_id: {campaign_id}")
+            log.info(f"proofpoint_threat_id: {threat_id}")
+            log.info(f"proofpoint_aggregate_flag: {aggregate_flag}")
+            log.info(f"proofpoint_malicious_flag: {malicious_flag}")
 
             yield StatusMessage("Starting...")
 
@@ -75,16 +74,16 @@ class FunctionComponent(ResilientComponent):
 
             if campaign_id is None:
                 if threat_id is None:
-                    raise FunctionError(u"either campaign_id or threat_id is required")
+                    raise FunctionError("either campaign_id or threat_id is required")
 
-                params = 'threatId={0}'.format(threat_id)
+                params = f"threatId={threat_id}"
                 if aggregate_flag:
                     params += '&includeCampaignForensics=true'
             else:
-                if threat_id is not None:
-                    raise FunctionError(u"only one of campaign_id or threat_id is allowed")
+                if threat_id:
+                    raise FunctionError("only one of campaign_id or threat_id is allowed")
 
-                params = 'campaignId={0}'.format(campaign_id)
+                params = f"campaignId={campaign_id}"
 
             yield StatusMessage("Function inputs OK")
 
@@ -98,10 +97,10 @@ class FunctionComponent(ResilientComponent):
             bundle = os.path.expanduser(cafile) if cafile else False
 
             yield StatusMessage("Configuration values OK")
-            yield StatusMessage(u"Certificate verify {0}".format(bundle))
+            yield StatusMessage("Certificate verify {0}".format(bundle))
 
             basic_auth = HTTPBasicAuth(username, password)
-            url = '{0}/forensics?{1}'.format(base_url, params)  # /v2/forensics Fetch forensic information for a given threat or campaign.
+            url = f"{base_url}/forensics?{params}"  # /v2/forensics Fetch forensic information for a given threat or campaign.
             rc = RequestsCommon(opts=self.opts, function_opts=self.options)
 
             try:
@@ -109,7 +108,7 @@ class FunctionComponent(ResilientComponent):
                 forensics_response = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies(),
                                                         callback=custom_response_err_msg)
                 aggregate_forensics = forensics_response.json()
-                log.debug(u'Get Forensics Response content: {}'.format(aggregate_forensics))
+                log.debug(f"Get Forensics Response content: {aggregate_forensics}")
 
                 with tempfile.NamedTemporaryFile(mode="w+b", delete=False) as temp_file:
                     # "w+b" Binary mode is used so that it behaves consistently on all platforms without
@@ -141,7 +140,7 @@ class FunctionComponent(ResilientComponent):
                             file_name = "Aggregate Forensics Report - {}.txt".format(str(datetime.datetime.now()))
 
                             new_attachment = create_attachment(res_client, file_name, temp_file, incident_id, 'text/plain')
-                            if new_attachment is not None:
+                            if new_attachment:
                                 yield StatusMessage("Report with forensic evidence uploaded as an Attachment: {}".format(file_name))
                             else:
                                 raise FunctionError(
@@ -173,7 +172,7 @@ class FunctionComponent(ResilientComponent):
                     # Produce a FunctionResult with the results
                     yield FunctionResult(results)
                 else:
-                    raise FunctionError(err)
+                    raise FunctionError(err) from err
 
         except Exception as err:
             yield FunctionError(err)

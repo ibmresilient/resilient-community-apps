@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-
-# (c) Copyright IBM Corp. 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2023, 2025. All Rights Reserved.
 
 """ Common code for Proofpoint TAP"""
 
 import logging
 import os
+import json
 import jinja2
 from requests.auth import HTTPBasicAuth
 from requests.exceptions import HTTPError
@@ -14,11 +14,6 @@ from six import string_types, text_type
 from resilient_lib.components.integration_errors import IntegrationError
 from pkg_resources import Requirement, resource_filename
 from resilient_circuits import template_functions
-import json
-try:
-    from json.decoder import JSONDecodeError
-except ImportError:
-    JSONDecodeError = ValueError
 
 log = logging.getLogger(__name__)
 PROOFPOINT_TAP_404_ERROR = "404 Client Error"
@@ -62,18 +57,18 @@ def get_threat_list(rc, options, lastupdate, bundle, event_type):
     # Call a different /siem endpoint depending on the event type specified
     url = get_threat_event_url(base_url, event_type)
 
-    if isinstance(lastupdate, string_types) or isinstance(lastupdate, text_type):
-        url += '&sinceTime={}'.format(lastupdate)
+    if isinstance(lastupdate, (string_types, text_type)):
+        url += f"&sinceTime={lastupdate}"
     else:
         if lastupdate is None:
             # first run, fetch for time span equivalent to polling interval
             lastupdate = int(options['polling_interval']) * 60
-        url += '&sinceSeconds={}'.format(lastupdate)
+        url += f"&sinceSeconds={lastupdate}"
 
     res = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies())
 
     # Debug logging
-    log.debug("SIEM event type: {0} Response content: {1}".format(event_type, res.content))
+    log.debug(f"SIEM event type: {event_type} Response content: {res.content}")
     return res.json()
 
 
@@ -94,10 +89,8 @@ def custom_response_err_msg(response):
         msg = str(err)
 
         if isinstance(err, HTTPError) and response.status_code == 404:
-            msg = "{} - {}".format(PROOFPOINT_TAP_404_ERROR, response.text)
-
-        log and log.error(msg)
-        raise IntegrationError(msg)
+            msg = f"{PROOFPOINT_TAP_404_ERROR} - {response.text}"
+        raise IntegrationError(msg) from err
 
 
 def filter_reports(aggregate_forensics, malicious_flag, temp_file, options, default_path):
@@ -130,7 +123,7 @@ def filter_reports(aggregate_forensics, malicious_flag, temp_file, options, defa
                 continue
 
             # Render the forensics evidence that hasn't been filtered
-            log.debug('Forensic evidence found {}'.format(json.dumps(forensic, indent=2)))
+            log.debug(f"Forensic evidence found {json.dumps(forensic, indent=2)}")
             try:
                 # Get template file path
                 template_path = _get_template_file_path(options, default_path)
@@ -145,7 +138,7 @@ def filter_reports(aggregate_forensics, malicious_flag, temp_file, options, defa
             # append the report to the filtered_reports list
             filtered_reports.append(report)
             # Write in a temp file
-            report_note = u"""\n\nReport {} generated on '{}':\n- Name '{}'\n- Scope '{}'\n- Type '{}'\n- Id '{}'\n- Evidence Objects: \n{}""".format(
+            report_note = """\n\nReport {} generated on '{}':\n- Name '{}'\n- Scope '{}'\n- Type '{}'\n- Id '{}'\n- Evidence Objects: \n{}""".format(
                 count,
                 aggregate_forensics.get('generated'),
                 report.get('name'),
@@ -167,14 +160,14 @@ def _get_template_file_path(options, default_path):
     """
     forensics_path = options.get("forensics_template", default_path)
     if forensics_path and not os.path.exists(forensics_path):
-        log.warning(u"Template file '%s' not found.", forensics_path)
+        log.warning("Template file '%s' not found.", forensics_path)
         forensics_path = None
     if not forensics_path:
         # Use the template file installed by this package
         forensics_path = resource_filename(Requirement("fn-proofpoint_tap"),
                                            "fn_proofpoint_tap/data/templates/pp_threat_forensics.jinja")
     if not os.path.exists(forensics_path):
-        raise Exception(u"Template file '{}' not found".format(forensics_path))
+        raise Exception("Template file '{}' not found".format(forensics_path))
 
     return forensics_path
 
@@ -203,7 +196,7 @@ def create_attachment(res_client, file_name, temp_file, incident_id, content_typ
     :param content_type:
     :return:
     """
-    attachment_uri = "/incidents/{}/attachments".format(incident_id)
+    attachment_uri = f"/incidents/{incident_id}/attachments"
 
     new_attachment = res_client.post_attachment(attachment_uri,
                                                 temp_file.name,

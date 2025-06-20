@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-
-# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 
 """Polling implementation"""
 
@@ -16,6 +15,7 @@ from resilient_circuits import ResilientComponent, handler, template_functions
 from resilient import SimpleHTTPException
 from pkg_resources import Requirement, resource_filename
 from resilient_lib import RequestsCommon
+from resilient_lib import get_artifacts
 from fn_proofpoint_tap.util.proofpoint_common import get_threat_list
 
 
@@ -46,11 +46,11 @@ timefields = [
 
 # Map for Proofpoint threat type to Resilient incident type
 TYPE_2_TYPE_ID_MAP = {
-    u'impostor': u'Other',
-    u'malware': u'Malware',
-    u'phish': u'Phishing',
-    u'spam': u'Other',
-    u'unknown': u'TBD / Unknown',
+    'impostor': 'Other',
+    'malware': 'Malware',
+    'phish': 'Phishing',
+    'spam': 'Other',
+    'unknown': 'TBD / Unknown',
 }
 
 threats_info_map = {
@@ -71,7 +71,7 @@ class PP_ThreatPolling(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(PP_ThreatPolling, self).__init__(opts)
+        super().__init__(opts)
 
         current_path = os.path.dirname(os.path.realpath(__file__))
         self.default_path = os.path.join(current_path, os.path.pardir, "data/templates/pp_threat_description.jinja")
@@ -100,15 +100,15 @@ class PP_ThreatPolling(ResilientComponent):
         # using an optional JSON (JINJA2) template file
         threat_path = self.options.get("threat_template", self.default_path)
         if threat_path and not os.path.exists(threat_path):
-            log.warning(u"Template file '%s' not found.", threat_path)
+            log.warning("Template file '%s' not found.", threat_path)
             threat_path = None
         if not threat_path:
             # Use the template file installed by this package
             threat_path = resource_filename(Requirement("fn-proofpoint_tap"), "fn_proofpoint_tap/data/templates/pp_threat_description.jinja")
             if not os.path.exists(threat_path):
-                raise Exception(u"Template file '{}' not found".format(threat_path))
+                raise Exception("Template file '{}' not found".format(threat_path))
 
-        log.info(u"Template file: %s", threat_path)
+        log.info("Template file: %s", threat_path)
         with open(threat_path, "r") as threat_file:
             self.threat_template = threat_file.read()
 
@@ -142,7 +142,7 @@ class PP_ThreatPolling(ResilientComponent):
             if t_f in TYPE_2_TYPE_ID_MAP:
                 filters_by_name.add(t_f)
             else:
-                log.info(u"Invalid incident type filter option '{}'.".format(t_f))
+                log.info(f"Invalid incident type filter option '{t_f}'.")
 
         return filters_by_name
 
@@ -156,7 +156,7 @@ class PP_ThreatPolling(ResilientComponent):
             thread = Thread(target=self.polling_thread)
             thread.daemon = True
             thread.start()
-            log.info("Polling for threats in Proofpoint every {0} minutes".format(interval))
+            log.info(f"Polling for threats in Proofpoint every {interval} minutes")
         else:
             log.info("Polling for threats in Proofpoint not enabled")
 
@@ -181,8 +181,8 @@ class PP_ThreatPolling(ResilientComponent):
             time.sleep(int(self.options.get("polling_interval", 10)) * 60)
 
     def process_threat_list(self, threat_list):
-         """ Process a list to Proofpoint TAP threats and create incidents if not in SOAR otherwise update the incident. """
-         for kind, datas in threat_list.items():
+        """ Process a list to Proofpoint TAP threats and create incidents if not in SOAR otherwise update the incident. """
+        for kind, datas in threat_list.items():
             if kind == 'queryEndTime':
                 self.lastupdate = datas
                 continue
@@ -196,17 +196,17 @@ class PP_ThreatPolling(ResilientComponent):
                 if len(existing_incidents) == 0:
                     # incident doesn't already exist, create Incident data
                     incident_payload = self.build_incident_dto(data, kind, threat_id)
-                    if incident_payload is not None:
+                    if incident_payload:
                         incident_id = self.create_incident(incident_payload)
-                        log.debug('created Incident ID {}'.format(incident_id))
+                        log.debug(f"created Incident ID {incident_id}")
                     else:
                         log.debug('Incident filtered')
                 else:
                     # incident already exists, extract its ID
-                    log.debug(u'incident {} {} already exists'.format(idtype, threat_id))
+                    log.debug(f"incident {idtype} {threat_id} already exists")
                     incident_id = existing_incidents[0]['id']
 
-                if incident_id is not None:
+                if incident_id:
                     # created or found an Incident, attach any (possibly new) artifacts
                     artifact_payloads = self.build_artifacts(data)
                     self.update_incident(incident_id, artifact_payloads)
@@ -217,7 +217,7 @@ class PP_ThreatPolling(ResilientComponent):
 
         for field in PROOFPOINT_ID_FIELDS:
             value = data.get(field)
-            if value is not None:
+            if value:
                 properties[field] = value
 
         # pull the threat types from the data
@@ -240,21 +240,21 @@ class PP_ThreatPolling(ResilientComponent):
             'description': self.mkdescription(data, kind, threat_id, classification),
             'discovered_date': self.getdiscovereddate(data),
             'incident_type_ids': threat_type_ids,
-            'name': u'Proofpoint TAP Event: {0} {1}'.format(threatname if threatname else "", classification),
+            'name': 'Proofpoint TAP Event: {0} {1}'.format(threatname if threatname else "", classification),
             'properties': properties,
         }
 
     def mkdescription(self, data, kind, threat_id, classification):
         """Make Incident description text"""
-        data[u'kind'] = kind
-        data[u'id'] = threat_id
-        data[u'classification'] = classification
+        data['kind'] = kind
+        data['id'] = threat_id
+        data['classification'] = classification
 
         try:
             return {'format': 'text', 'content': template_functions.render(self.threat_template, data)}
 
         except jinja2.exceptions.TemplateSyntaxError as err:
-            log.info(u'threat template is not set correctly in config file {}'.format(err))
+            log.info(f"threat template is not set correctly in config file {err}")
             raise err
 
     @staticmethod
@@ -269,14 +269,14 @@ class PP_ThreatPolling(ResilientComponent):
                     continue
                 try:
                     dt = datetime.strptime(val, ts_format)
-                    log.debug('dt is {}'.format(dt))
+                    log.debug(f"dt is {dt}")
                     seconds = calendar.timegm(dt.utctimetuple())
                     millis = int(dt.microsecond / 1000)
                     combined = seconds * 1000 + millis
-                    log.debug('seconds {} millis {} combined {}'.format(seconds, millis, combined))
+                    log.debug(f"seconds {seconds} millis {millis} combined {combined}")
                     return combined
                 except ValueError as err:
-                    log.exception(u"{} Not in expected timestamp format {} - {}".format(val, ts_format, err))
+                    log.exception(f"{val} Not in expected timestamp format {ts_format} - {err}")
                     raise err
 
     @staticmethod
@@ -330,22 +330,22 @@ class PP_ThreatPolling(ResilientComponent):
         """
         # Get the TAP classification for this event
         original_threat_types = self._get_event_classification(data)
-        log.debug(u"TAP event threat type classification is '{}'".format(self._format_set(original_threat_types)))
+        log.debug(f"TAP event threat type classification is '{self._format_set(original_threat_types)}'")
 
         # score_threshold is an optional param
         # if score_threshold was defined in the config file
         # filter the score values and pull appropriate threat types
-        if self.score_threshold is not None:
+        if self.score_threshold:
             # extract spam, phishing, malware and impostor scores, if no value default is -1
             spamscore = float(data.get('spamScore', '-1'))
             phishscore = float(data.get('phishScore', '-1'))
             malwarescore = float(data.get('malwareScore', '-1'))
             impostorscore = float(data.get('impostorScore', '-1'))
 
-            log.debug("spamScore {}".format(spamscore))
-            log.debug("phishScore {}".format(phishscore))
-            log.debug("malwareScore {}".format(malwarescore))
-            log.debug("impostorScore {}".format(impostorscore))
+            log.debug(f"spamScore {spamscore}")
+            log.debug(f"phishScore {phishscore}")
+            log.debug(f"malwareScore {malwarescore}")
+            log.debug(f"impostorScore {impostorscore}")
 
             # create a copy of original_threat_types, keep the original values separate
             score_threat_types = original_threat_types.copy()
@@ -355,7 +355,7 @@ class PP_ThreatPolling(ResilientComponent):
             self._check_if_score_above_threshold(malwarescore, 'malware', score_threat_types)
             self._check_if_score_above_threshold(impostorscore, 'impostor', score_threat_types)
 
-            log.debug(u"Updated threat type classification based on score values is '{}'".format(self._format_set(score_threat_types)))
+            log.debug("Updated threat type classification based on score values is '{}'".format(self._format_set(score_threat_types)))
 
             # validation for irregular results
             # example of an irregular result: if the TAP classification is "spam" and the score_threshold is set to 60
@@ -368,7 +368,7 @@ class PP_ThreatPolling(ResilientComponent):
             if len(score_threat_types) > 0:
                 for orig_threat in original_threat_types:
                     if orig_threat not in score_threat_types:
-                        log.info(u"Irregular result. The original TAP threat type classification '{}' was discarded "
+                        log.info("Irregular result. The original TAP threat type classification '{}' was discarded "
                                  "because its score value is lower than the app.config score_threshold value. "
                                  "'{}' - updated threat type classification based on score values is inconsistent with "
                                  "'{}' - the original TAP event threat type classification.".format(
@@ -393,13 +393,11 @@ class PP_ThreatPolling(ResilientComponent):
 
         if score_value >= self.score_threshold:
             threat_types.add(score_type)
-            log.debug(u"'{}' classification was added because its score value '{}' is higher "
-                      "than the score_threshold value '{}'".format(score_type, score_value, self.score_threshold))
+            log.debug(f"'{score_type}' classification was added because its score value '{score_value}' is higher than the score_threshold value '{self.score_threshold}'")
         else:
             if score_type in threat_types:
                 threat_types.remove(score_type)
-                log.debug(u"'{}' classification was removed because its score value '{}' is lower "
-                          "than the score_threshold value '{}'".format(score_type, score_value, self.score_threshold))
+                log.debug(f"'{score_type}' classification was removed because its score value '{score_value}' is lower than the score_threshold value '{self.score_threshold}'")
         return threat_types
 
     def map_to_incident_type_ids(self, threat_types):
@@ -434,7 +432,7 @@ class PP_ThreatPolling(ResilientComponent):
             # no filter or incident type in filter, return list
             return list(incident_type_ids)
 
-        log.info(u"Events with threat type '{}' have been filtered due to type_filter set in app.config".format(self._format_set(threat_types)))
+        log.info(f"Events with threat type '{self._format_set(threat_types)}' have been filtered due to type_filter set in app.config")
         return None
 
     def _get_incident_type_id(self, threat_type):
@@ -477,7 +475,7 @@ class PP_ThreatPolling(ResilientComponent):
             for pp_key in pp_keys:
                 artifact_id = data.get(pp_key)
                 if artifact_id:
-                    log.debug(u'artifact type {} ({}) ID {}'.format(artifact_type, pp_key, artifact_id))
+                    log.debug(f"artifact type {artifact_type} ({pp_key}) ID {artifact_id}")
                     artifact_payloads[artifact_id] = artifact_type
 
         return artifact_payloads
@@ -493,14 +491,14 @@ class PP_ThreatPolling(ResilientComponent):
             return incident_response['id']
 
         except SimpleHTTPException as ex:
-            log.info(u'Something went wrong when attempting to create the Incident: {}'.format(ex))
+            log.info(f"Something went wrong when attempting to create the Incident: {ex}")
             raise ex
 
     def update_incident(self, incident_id, artifacts):
         """Update Resilient Incident"""
         try:
             resilient_client = self.rest_client()
-            artifact_uri = '/incidents/{}/artifacts'.format(incident_id)
+            artifact_uri = get_artifacts(res_client=resilient_client, incident_id=incident_id, query_filters=None, headers=None)
 
             # set up Artifact payload skeleton
             artifact_payload = {
@@ -527,7 +525,7 @@ class PP_ThreatPolling(ResilientComponent):
                     resilient_client.post(uri=artifact_uri, payload=artifact_payload)
 
         except SimpleHTTPException as ex:
-            log.info(u'Something went wrong when attempting to create the Incident: {}'.format(ex))
+            log.info(f"Something went wrong when attempting to create the Incident: {ex}")
             raise ex
 
     def getclass2typeids(self):
@@ -561,10 +559,10 @@ class PP_ThreatPolling(ResilientComponent):
         """Return list of artifacts for the given Incident ID, else returns empty list"""
         r_artifacts = {}
         resilient_client = self.rest_client()
-        artifacts_uri = '/incidents/{}/artifacts'.format(incident_id)
+        artifacts_uri = get_artifacts(res_client=resilient_client, incident_id=incident_id, query_filters=None, headers=None)
         artifact_results = resilient_client.get(uri=artifacts_uri)
 
-        if artifact_results is not None:
+        if artifact_results:
             for artifact_result in artifact_results:
                 artifact_type = artifact_result.get('description')
                 if artifact_type in ARTIFACT_TYPES:
@@ -580,7 +578,7 @@ class PP_ThreatPolling(ResilientComponent):
             'filters': [{
                 'conditions': [
                     {
-                        'field_name': 'properties.{}'.format(idtype),
+                        'field_name': f"properties.{idtype}",
                         'method': 'equals',
                         'value': threat_id
                     },
@@ -601,12 +599,12 @@ class PP_ThreatPolling(ResilientComponent):
         except SimpleHTTPException:
             # Some versions of Resilient 30.2 onward have a bug that prevents query for numeric fields.
             # To work around this issue, let's try a different query, and filter the results. (Expensive!)
-            query_uri = '/incidents/query?return_level=normal&field_handle={}'.format(threat_id)
+            query_uri = f"/incidents/query?return_level=normal&field_handle={threat_id}"
             query = {
                 'filters': [{
                     'conditions': [
                         {
-                            'field_name': 'properties.{}'.format(idtype),
+                            'field_name': f"properties.{idtype}",
                             'method': 'has_a_value'
                         },
                         {

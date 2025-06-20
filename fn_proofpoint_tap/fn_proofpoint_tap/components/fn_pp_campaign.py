@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-
-# (c) Copyright IBM Corp. 2023. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
+# (c) Copyright IBM Corp. 2023, 2025. All Rights Reserved.
 
 """Function implementation"""
 
@@ -25,7 +24,7 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super().__init__(opts)
         self.opts = opts
         self.options = opts.get('fn_proofpoint_tap', {})
 
@@ -57,7 +56,7 @@ class FunctionComponent(ResilientComponent):
             }
 
             if campaign_id is None:
-                raise FunctionError(u"campaign_id is required")
+                raise FunctionError("campaign_id is required")
 
             yield StatusMessage("Function inputs OK")
 
@@ -71,10 +70,10 @@ class FunctionComponent(ResilientComponent):
             bundle = os.path.expanduser(cafile) if cafile else False
 
             yield StatusMessage("Configuration values OK")
-            yield StatusMessage(u"Certificate verify {0}".format(bundle))
+            yield StatusMessage("Certificate verify {0}".format(bundle))
 
             basic_auth = HTTPBasicAuth(username, password)
-            url = '{0}/campaign/{1}'.format(base_url, campaign_id)  # /v2/campaign/<campaignId> Fetch detailed information for a given campaign
+            url = f"{base_url}/campaign/{campaign_id}"  # /v2/campaign/<campaignId> Fetch detailed information for a given campaign
             rc = RequestsCommon(opts=self.opts, function_opts=self.options)
 
             try:
@@ -82,7 +81,7 @@ class FunctionComponent(ResilientComponent):
                 res = rc.execute_call_v2('get', url, auth=basic_auth, verify=bundle, proxies=rc.get_proxies(),
                                          callback=custom_response_err_msg)
                 campaign = res.json()
-                log.debug(u"Get Campaign Response content: {}".format(campaign))
+                log.debug(f"Get Campaign Response content: {campaign}")
 
                 results['data'] = campaign
                 results['success'] = True
@@ -104,7 +103,7 @@ class FunctionComponent(ResilientComponent):
                     # Produce a FunctionResult with the results
                     yield FunctionResult(results)
                 else:
-                    raise FunctionError(err)
+                    raise FunctionError(err) from err
 
         except Exception as err:
             yield FunctionError(err)
