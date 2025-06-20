@@ -51,11 +51,12 @@
 -->
 | Version | Date    | Notes                                                                                                            |
 |---------|---------|------------------------------------------------------------------------------------------------------------------|
+| 1.1.2   | 06/2025 | Update the get_artifacts call for fetching results for artifacts from the provided incident id, removed PY2      |
 | 1.1.1   | 11/2023 | Convert all scripts to Python3                                                                                   |
-| 1.1.0   | 6/2023  | Playbook support; Add siem_event_types app.config parameter to query threats using different TAP /siem endpoints |
-| 1.0.3   | 8/2020  | Fix for event filtering                                                                                          |
-| 1.0.2   | 5/2020  | Fix for Poller                                                                                                   |
-| 1.0.1   | 4/2020  | Bugfix                                                                                                           |
+| 1.1.0   | 06/2023 | Playbook support; Add siem_event_types app.config parameter to query threats using different TAP /siem endpoints |
+| 1.0.3   | 08/2020 | Fix for event filtering                                                                                          |
+| 1.0.2   | 05/2020 | Fix for Poller                                                                                                   |
+| 1.0.1   | 04/2020 | Bugfix                                                                                                           |
 | 1.0.0   | 12/2019 | Initial release                                                                                                  |
 
 ### 1.1 Changes
