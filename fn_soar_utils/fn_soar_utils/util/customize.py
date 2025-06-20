@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
-# Generated with resilient-sdk v51.0.2.2.1096
+# Generated with resilient-sdk v51.0.5.0.1475
 
 """Generate the SOAR customizations required for fn_soar_utils"""
 
@@ -40,45 +39,30 @@ def codegen_reload_data():
             u"soar_utils_soar_search",
             u"soar_utils_string_to_attachment"
         ],
-        "workflows": [
-            u"example_soar_utilities_artifact_attachment_to_base64",
-            u"example_soar_utilities_artifact_hash",
-            u"example_soar_utilities_attachment_hash",
-            u"example_soar_utilities_attachment_to_base64",
-            u"example_soar_utilities_close_incident",
-            u"example_soar_utilities_create_incident",
-            u"example_soar_utilities_get_incident_contact_info",
-            u"example_soar_utilities_get_task_contact_info",
-            u"example_soar_utilities_search_incidents",
-            u"example_soar_utilities_soar_search",
-            u"example_soar_utilities_string_to_attachment",
-            u"example_soar_utilities_zip_extract",
-            u"example_soar_utilities_zip_extract_to_artifact",
-            u"example_soar_utilities_zip_list"
-        ],
-        "actions": [
-            u"Example: SOAR Utilities (Artifact) Attachment to Base64",
-            u"Example: SOAR Utilities Artifact Hash",
-            u"Example: SOAR Utilities Attachment Hash",
-            u"Example: SOAR Utilities Attachment to Base64",
-            u"Example: SOAR Utilities Close Incident",
-            u"Example: SOAR Utilities Create Incident",
-            u"Example: SOAR Utilities Get Incident Contact Info",
-            u"Example: SOAR Utilities Get Task Contact Info",
-            u"Example: SOAR Utilities Search Incidents",
-            u"Example: SOAR Utilities SOAR Search",
-            u"Example: SOAR Utilities String to Attachment",
-            u"Example: SOAR Utilities Zip Extract",
-            u"Example: SOAR Utilities Zip Extract to Artifact",
-            u"Example: SOAR Utilities Zip List"
-        ],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [],
+        "playbooks": [
+            u"soar_utils_artifact_attachment_to_base64_example_pb",
+            u"soar_utils_artifact_hash_example_pb",
+            u"soar_utils_attachment_hash_example_pb",
+            u"soar_utils_attachment_to_base64_example_pb",
+            u"soar_utils_close_incident_example_pb",
+            u"soar_utils_create_incident_example_pb",
+            u"soar_utils_get_incident_contact_info_example_pb",
+            u"soar_utils_get_task_contact_info_example_pb",
+            u"soar_utils_search_incidents_example_pb",
+            u"soar_utils_soar_search_example_pb",
+            u"soar_utils_string_to_attachment_example_pb",
+            u"soar_utils_zip_extract_example_pb",
+            u"soar_utils_zip_extract_to_artifact_example_pb",
+            u"soar_utils_zip_list_example_pb"
+        ]
     }
 
 
@@ -87,7 +71,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 51.0.0.0.9340
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:
@@ -106,36 +90,21 @@ def customization_data(client=None):
         - soar_utils_search_incidents
         - soar_utils_soar_search
         - soar_utils_string_to_attachment
-    - Workflows:
-        - example_soar_utilities_artifact_attachment_to_base64
-        - example_soar_utilities_artifact_hash
-        - example_soar_utilities_attachment_hash
-        - example_soar_utilities_attachment_to_base64
-        - example_soar_utilities_close_incident
-        - example_soar_utilities_create_incident
-        - example_soar_utilities_get_incident_contact_info
-        - example_soar_utilities_get_task_contact_info
-        - example_soar_utilities_search_incidents
-        - example_soar_utilities_soar_search
-        - example_soar_utilities_string_to_attachment
-        - example_soar_utilities_zip_extract
-        - example_soar_utilities_zip_extract_to_artifact
-        - example_soar_utilities_zip_list
-    - Rules:
-        - Example: SOAR Utilities (Artifact) Attachment to Base64
-        - Example: SOAR Utilities Artifact Hash
-        - Example: SOAR Utilities Attachment Hash
-        - Example: SOAR Utilities Attachment to Base64
-        - Example: SOAR Utilities Close Incident
-        - Example: SOAR Utilities Create Incident
-        - Example: SOAR Utilities Get Incident Contact Info
-        - Example: SOAR Utilities Get Task Contact Info
-        - Example: SOAR Utilities Search Incidents
-        - Example: SOAR Utilities SOAR Search
-        - Example: SOAR Utilities String to Attachment
-        - Example: SOAR Utilities Zip Extract
-        - Example: SOAR Utilities Zip Extract to Artifact
-        - Example: SOAR Utilities Zip List
+    - Playbooks:
+        - soar_utils_artifact_attachment_to_base64_example_pb
+        - soar_utils_artifact_hash_example_pb
+        - soar_utils_attachment_hash_example_pb
+        - soar_utils_attachment_to_base64_example_pb
+        - soar_utils_close_incident_example_pb
+        - soar_utils_create_incident_example_pb
+        - soar_utils_get_incident_contact_info_example_pb
+        - soar_utils_get_task_contact_info_example_pb
+        - soar_utils_search_incidents_example_pb
+        - soar_utils_soar_search_example_pb
+        - soar_utils_string_to_attachment_example_pb
+        - soar_utils_zip_extract_example_pb
+        - soar_utils_zip_extract_to_artifact_example_pb
+        - soar_utils_zip_list_example_pb
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

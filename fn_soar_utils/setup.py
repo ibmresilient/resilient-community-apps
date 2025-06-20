@@ -23,15 +23,19 @@ def snake_to_camel(word):
 setup(
     name="fn_soar_utils",
     display_name="SOAR Function Utilities for SOAR",
-    version="1.0.2",
+    version="1.1.0",
     license="MIT",
     author="IBM SOAR",
     url="http://ibm.biz/soarcommunity",
-    description="Useful workflow/playbook functions for common automation and integration activities in the SOAR platform.",
+    description="Useful playbook functions for common automation and integration activities in the SOAR platform.",
     long_description="""SOAR functions taken from fn_utilities to simplify development of integrations by wrapping each external activity
-    into an individual workflow/playbook component. The SOAR Platform sends data from artifacts, attachments, incident data, etc. 
-    to the function component and returns results to the workflow/playbook. The results can be acted upon by scripts, rules, and 
-    workflow/playbook decision points to dynamically orchestrate the security incident response activities.""",
+    into an individual playbook component. The SOAR Platform sends data from artifacts, attachments, incident data, etc. 
+    to the function component and returns results to the playbook. The results can be acted upon by 
+    playbook decision points to dynamically orchestrate the security incident response activities.<br>
+    Link:
+        <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>
+        <ul><a target='blank' href='https://ibmresilient.github.io/resilient-community-apps/fn_soar_utils/README.html'>App Documentation</a></ul>""",
     install_requires=[
         "resilient-circuits>=51.0.0"
     ],

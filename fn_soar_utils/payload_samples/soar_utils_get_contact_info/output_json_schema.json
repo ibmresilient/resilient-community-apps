@@ -5,31 +5,53 @@
     "owner": {
       "type": "object",
       "properties": {
-        "fname": {
+        "owner_type": {
           "type": "string"
         },
-        "lname": {
-          "type": "string"
-        },
-        "title": {
-          "type": "string"
-        },
-        "display_name": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "phone": {
-          "type": "string"
-        },
-        "cell": {
-          "type": "string"
+        "owner_info": {
+          "type": "object",
+          "properties": {
+            "fname": {
+              "type": "string"
+            },
+            "lname": {
+              "type": "string"
+            },
+            "title": {},
+            "display_name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "phone": {},
+            "cell": {}
+          }
         }
       }
     },
     "members": {
-      "type": "array"
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "fname": {
+            "type": "string"
+          },
+          "lname": {
+            "type": "string"
+          },
+          "title": {},
+          "display_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {},
+          "cell": {}
+        }
+      }
     }
   }
 }

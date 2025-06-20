@@ -37,7 +37,7 @@ class TestSoarUtilsGetContactInfo:
         assert func is not None
 
     @pytest.mark.parametrize("incident_id, task_id, expected_results", [
-        (2095, None, {'owner': None, 'members': []})
+        (2095, None, {'owner': {'owner_type': 'unknown', 'owner_info': None}, 'members': []})
     ])
 
     def test_success(self, circuits_app, incident_id, task_id, expected_results):
