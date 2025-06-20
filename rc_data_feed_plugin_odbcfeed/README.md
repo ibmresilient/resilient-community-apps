@@ -1,6 +1,7 @@
 # Data Feeder for ODBC Databases
 
 ## Release Notes
+* v1.2.2 (6/25) Fix for incident API field names in mixed case
 * v1.2.1 (12/24) Fix for race condition initializing PluginPool
 * v1.2.0 Support for incident timeseries data
 * v1.1.1 Refactored exclusion list logic
