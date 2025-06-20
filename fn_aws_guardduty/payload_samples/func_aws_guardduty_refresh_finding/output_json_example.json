@@ -1,0 +1,226 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "timestamp": "2024-04-11 14:08:54",
+    "finding": {
+      "AccountId": "xxxxyyyyzzzz",
+      "Arn": "arn:aws:guardduty:us-east-1:xxxxyyyyzzzz:detector/48bbf98612290af2215c7a02b7ccbc82/finding/xxxxyyyyzzzz",
+      "CreatedAt": "2024-04-11T05:47:16.625Z",
+      "Description": "APIs commonly used in Discovery tactics were invoked by user IAMUser : dummy under unusual circumstances. Such activity is not typically seen from this user.",
+      "Id": "xxxxyyyyzzzz",
+      "Partition": "aws",
+      "Region": "us-east-1",
+      "Resource": {
+        "AccessKeyDetails": {
+          "AccessKeyId": "xxxxyyyy",
+          "PrincipalId": "xxxxyyyy",
+          "UserName": "dummy",
+          "UserType": "IAMUser"
+        },
+        "ResourceType": "AccessKey"
+      },
+      "SchemaVersion": "2.0",
+      "Service": {
+        "Action": {
+          "ActionType": "AWS_API_CALL",
+          "AwsApiCallAction": {
+            "Api": "ListFindings",
+            "CallerType": "Remote IP",
+            "RemoteIpDetails": {
+              "City": {
+                "CityName": "Singapore"
+              },
+              "Country": {
+                "CountryName": "Singapore"
+              },
+              "GeoLocation": {
+                "Lat": 1.2868,
+                "Lon": 103.8503
+              },
+              "IpAddressV4": "129.41.56.2",
+              "Organization": {
+                "Asn": "17390",
+                "AsnOrg": "CIO-ORGANIZATION",
+                "Isp": "IBM Corporation",
+                "Org": "IBM Corporation"
+              }
+            },
+            "ServiceName": "guardduty.amazonaws.com",
+            "AffectedResources": {}
+          }
+        },
+        "Archived": false,
+        "Count": 1,
+        "DetectorId": "48bbf98612290af2215c7a02b7ccbc82",
+        "EventFirstSeen": "2024-04-11T05:26:01.000Z",
+        "EventLastSeen": "2024-04-11T05:32:48.000Z",
+        "ResourceRole": "TARGET",
+        "ServiceName": "guardduty",
+        "AdditionalInfo": {
+          "Value": "{\"userAgent\":{\"fullUserAgent\":\"Boto3/1.34.82 md/Botocore#1.34.82 ua/2.0 os/macos#23.4.0 md/arch#x86_64 lang/python#3.9.16 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.82\",\"userAgentCategory\":\"Botocore\"},\"anomalies\":{\"anomalousAPIs\":\"guardduty.amazonaws.com:[ListFindings:success , ListDetectors:success , GetFindings:success , ArchiveFindings:success] , ec2.amazonaws.com:[DescribeRegions:success]\"},\"profiledBehavior\":{\"rareProfiledAPIsAccountProfiling\":\"\",\"infrequentProfiledAPIsAccountProfiling\":\"\",\"frequentProfiledAPIsAccountProfiling\":\"ListFindings , DescribeVolumes , GetResources , BatchGetResourceConfig , ListHostedZones , SelectResourceConfig , DescribeConfigurationRecorderStatus , ListResourceRecordSets , DescribeTrails , DescribeRegions , GetBucketLocation , DescribeDBInstances , GetAccountPublicAccessBlock , GetBucketLifecycle , GenerateCredentialReport , DescribeMetricFilters , DescribeInstances , DescribeDBClusters , GetTrailStatus , ListBuckets\",\"rareProfiledAPIsUserIdentityProfiling\":\"ListFindings , TerminateInstances , EnableAlarmActions , CreateImage , ListMembers , GetBucketPolicy , DeleteAlarms , ModifyVolume , DescribeRegions , StartInstances , CreateSnapshot , GetFindings\",\"infrequentProfiledAPIsUserIdentityProfiling\":\"DescribeInstances , AllocateAddress , ListDetectors , PutBucketPolicy , RebootInstances , CreateTags\",\"frequentProfiledAPIsUserIdentityProfiling\":\"CreateBucket , ListBuckets\",\"rareProfiledUserTypesAccountProfiling\":\"\",\"infrequentProfiledUserTypesAccountProfiling\":\"\",\"frequentProfiledUserTypesAccountProfiling\":\"IAM_USER , ASSUMED_ROLE , ROOT\",\"rareProfiledUserNamesAccountProfiling\":\"aws:ec2-instance\",\"infrequentProfiledUserNamesAccountProfiling\":\"\",\"frequentProfiledUserNamesAccountProfiling\":\"dummy , AWSServiceRoleForSecurityHub , AWSServiceRoleForTrustedAdvisor , CloudabilityRole , AWSServiceRoleForAccessAnalyzer , AWSServiceRoleForConfig , gtrotman , mscherfling , Root , aws-controltower-ForwardSnsNotificationRole , AWSServiceRoleForAmazonGuardDuty\",\"rareProfiledASNsAccountProfiling\":\"asnNumber: 12271 asnOrg: TWC-12271-NYC asnNumber: 23908 asnOrg: IIAC asnNumber: 6167 asnOrg: CELLCO-PART asnNumber: 701 asnOrg: UUNET asnNumber: 209 asnOrg: CENTURYLINK-US-LEGACY-QWEST\",\"infrequentProfiledASNsAccountProfiling\":\"asnNumber: 4766 asnOrg: Korea Telecom\",\"frequentProfiledASNsAccountProfiling\":\"asnNumber: 17390 asnOrg: CIO-ORGANIZATION asnNumber: 16509 asnOrg: AMAZON-02 asnNumber: 36351 asnOrg: SOFTLAYER asnNumber: 2386 asnOrg: INS-AS asnNumber: 3462 asnOrg: Data Communication Business Group asnNumber: 15502 asnOrg: Vodafone Ireland Limited asnNumber: 14618 asnOrg: AMAZON-AES asnNumber: 7018 asnOrg: ATT-INTERNET4\",\"rareProfiledASNsUserIdentityProfiling\":\"\",\"infrequentProfiledASNsUserIdentityProfiling\":\"\",\"frequentProfiledASNsUserIdentityProfiling\":\"asnNumber: 2386 asnOrg: INS-AS\",\"rareProfiledUserAgentsAccountProfiling\":\"aws-sdk-go\",\"infrequentProfiledUserAgentsAccountProfiling\":\"aws-internal/account-settings\",\"frequentProfiledUserAgentsAccountProfiling\":\"AWS Service , aws-sdk-java , Botocore , AWS Internal , browser , aws-internal/3 , OTHER\",\"rareProfiledUserAgentsUserIdentityProfiling\":\"\",\"infrequentProfiledUserAgentsUserIdentityProfiling\":\"\",\"frequentProfiledUserAgentsUserIdentityProfiling\":\"Botocore\"},\"unusualBehavior\":{\"unusualAPIsAccountProfiling\":\"ArchiveFindings\",\"unusualUserTypesAccountProfiling\":\"\",\"unusualUserNamesAccountProfiling\":\"\",\"unusualASNsAccountProfiling\":\"\",\"unusualUserAgentsAccountProfiling\":\"\",\"unusualAPIsUserIdentityProfiling\":\"ArchiveFindings\",\"unusualASNsUserIdentityProfiling\":\"asnNumber: 17390 asnOrg: CIO-ORGANIZATION\",\"unusualUserAgentsUserIdentityProfiling\":\"\",\"isUnusualUserIdentity\":\"false\"}}",
+          "Type": "default"
+        }
+      },
+      "Severity": 2,
+      "Title": "The user IAMUser : dummy is anomalously invoking APIs commonly used in Discovery tactics.",
+      "Type": "Discovery:IAMUser/AnomalousBehavior",
+      "UpdatedAt": "2024-04-11T05:47:16.625Z"
+    },
+    "region": "us-east-1",
+    "payload": {
+      "name": "AWS GuardDuty: The user IAMUser : dummy is anomalously invoking APIs commonly used in Discovery tactics.",
+      "description": {
+        "format": "text",
+        "content": "APIs commonly used in Discovery tactics were invoked by user IAMUser : dummy under unusual circumstances. Such activity is not typically seen from this user."
+      },
+      "discovered_date": "2024-04-11T05:47:16.625Z",
+      "severity_code": "Low",
+      "properties": {
+        "aws_guardduty_finding_id": "xxxxyyyyzzzz",
+        "aws_guardduty_finding_arn": "arn:aws:guardduty:us-east-1:xxxxyyyyzzzz:detector/48bbf98612290af2215c7a02b7ccbc82/finding/xxxxyyyyzzzz",
+        "aws_guardduty_finding_type": "Discovery:IAMUser/AnomalousBehavior",
+        "aws_guardduty_finding_updated_at": "2024-04-11T05:47:16.625Z",
+        "aws_guardduty_region": "us-east-1",
+        "aws_guardduty_severity": "2",
+        "aws_guardduty_resource_type": "AccessKey",
+        "aws_guardduty_detector_id": "48bbf98612290af2215c7a02b7ccbc82",
+        "aws_guardduty_count": "1",
+        "aws_guardduty_archived": "False"
+      },
+      "artifacts": [],
+      "comments": []
+    },
+    "data_tables": {
+      "gd_finding_overview": [
+        {
+          "cells": {
+            "severity": {
+              "value": "2"
+            },
+            "query_execution_date": {
+              "value": "2024-04-11 14:08:54"
+            },
+            "region": {
+              "value": "us-east-1"
+            },
+            "count": {
+              "value": "1"
+            },
+            "account_id": {
+              "value": "111111111111"
+            },
+            "created_at": {
+              "value": "2024-04-11T05:47:16.625Z"
+            },
+            "updated_at": {
+              "value": "2024-04-11T05:47:16.625Z"
+            }
+          }
+        }
+      ],
+      "gd_action_details": [
+        {
+          "cells": {
+            "action_type": {
+              "value": "AWS_API_CALL"
+            },
+            "query_execution_date": {
+              "value": "2024-04-11 14:08:54"
+            },
+            "action_api": {
+              "value": "ListFindings"
+            },
+            "event_first_seen": {
+              "value": "2024-04-11T05:26:01.000Z"
+            },
+            "event_last_seen": {
+              "value": "2024-04-11T05:32:48.000Z"
+            },
+            "actor_caller_type": {
+              "value": "Remote IP"
+            },
+            "city_name": {
+              "value": "Singapore"
+            },
+            "country_name": {
+              "value": "Singapore"
+            },
+            "asn": {
+              "value": "17390"
+            },
+            "asn_org": {
+              "value": "CIO-ORGANIZATION"
+            },
+            "isp": {
+              "value": "IBM Corporation"
+            },
+            "org": {
+              "value": "IBM Corporation"
+            },
+            "service_name": {
+              "value": "guardduty.amazonaws.com"
+            },
+            "remote_ip": {
+              "value": "129.41.56.2"
+            }
+          }
+        }
+      ],
+      "gd_resource_affected": [
+        {
+          "cells": {
+            "resource_type": {
+              "value": "AccessKey"
+            },
+            "query_execution_date": {
+              "value": "2024-04-11 14:08:54"
+            },
+            "resource_role": {
+              "value": "TARGET"
+            }
+          }
+        }
+      ],
+      "gd_s3_bucket_details": [],
+      "gd_instance_details": [],
+      "gd_access_key_details": [
+        {
+          "cells": {
+            "access_key_id": {
+              "value": "xxxxyyyy"
+            },
+            "query_execution_date": {
+              "value": "2024-04-11 14:08:54"
+            },
+            "principal_id": {
+              "value": "xxxxyyyy"
+            },
+            "user_type": {
+              "value": "IAMUser"
+            },
+            "user_name": {
+              "value": "dummy"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "raw": "{\"timestamp\": \"2024-04-11 14:08:54\", \"finding\": {\"AccountId\": \"xxxxyyyyzzzz\", \"Arn\": \"arn:aws:guardduty:us-east-1:xxxxyyyyzzzz:detector/48bbf98612290af2215c7a02b7ccbc82/finding/xxxxyyyyzzzz\", \"CreatedAt\": \"2024-04-11T05:47:16.625Z\", \"Description\": \"APIs commonly used in Discovery tactics were invoked by user IAMUser : dummy under unusual circumstances. Such activity is not typically seen from this user.\", \"Id\": \"xxxxyyyyzzzz\", \"Partition\": \"aws\", \"Region\": \"us-east-1\", \"Resource\": {\"AccessKeyDetails\": {\"AccessKeyId\": \"xxxxyyyy\", \"PrincipalId\": \"xxxxyyyy\", \"UserName\": \"dummy\", \"UserType\": \"IAMUser\"}, \"ResourceType\": \"AccessKey\"}, \"SchemaVersion\": \"2.0\", \"Service\": {\"Action\": {\"ActionType\": \"AWS_API_CALL\", \"AwsApiCallAction\": {\"Api\": \"ListFindings\", \"CallerType\": \"Remote IP\", \"RemoteIpDetails\": {\"City\": {\"CityName\": \"Singapore\"}, \"Country\": {\"CountryName\": \"Singapore\"}, \"GeoLocation\": {\"Lat\": 1.2868, \"Lon\": 103.8503}, \"IpAddressV4\": \"129.41.56.2\", \"Organization\": {\"Asn\": \"17390\", \"AsnOrg\": \"CIO-ORGANIZATION\", \"Isp\": \"IBM Corporation\", \"Org\": \"IBM Corporation\"}}, \"ServiceName\": \"guardduty.amazonaws.com\", \"AffectedResources\": {}}}, \"Archived\": false, \"Count\": 1, \"DetectorId\": \"48bbf98612290af2215c7a02b7ccbc82\", \"EventFirstSeen\": \"2024-04-11T05:26:01.000Z\", \"EventLastSeen\": \"2024-04-11T05:32:48.000Z\", \"ResourceRole\": \"TARGET\", \"ServiceName\": \"guardduty\", \"AdditionalInfo\": {\"Value\": \"{\\\"userAgent\\\":{\\\"fullUserAgent\\\":\\\"Boto3/1.34.82 md/Botocore#1.34.82 ua/2.0 os/macos#23.4.0 md/arch#x86_64 lang/python#3.9.16 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.82\\\",\\\"userAgentCategory\\\":\\\"Botocore\\\"},\\\"anomalies\\\":{\\\"anomalousAPIs\\\":\\\"guardduty.amazonaws.com:[ListFindings:success , ListDetectors:success , GetFindings:success , ArchiveFindings:success] , ec2.amazonaws.com:[DescribeRegions:success]\\\"},\\\"profiledBehavior\\\":{\\\"rareProfiledAPIsAccountProfiling\\\":\\\"\\\",\\\"infrequentProfiledAPIsAccountProfiling\\\":\\\"\\\",\\\"frequentProfiledAPIsAccountProfiling\\\":\\\"ListFindings , DescribeVolumes , GetResources , BatchGetResourceConfig , ListHostedZones , SelectResourceConfig , DescribeConfigurationRecorderStatus , ListResourceRecordSets , DescribeTrails , DescribeRegions , GetBucketLocation , DescribeDBInstances , GetAccountPublicAccessBlock , GetBucketLifecycle , GenerateCredentialReport , DescribeMetricFilters , DescribeInstances , DescribeDBClusters , GetTrailStatus , ListBuckets\\\",\\\"rareProfiledAPIsUserIdentityProfiling\\\":\\\"ListFindings , TerminateInstances , EnableAlarmActions , CreateImage , ListMembers , GetBucketPolicy , DeleteAlarms , ModifyVolume , DescribeRegions , StartInstances , CreateSnapshot , GetFindings\\\",\\\"infrequentProfiledAPIsUserIdentityProfiling\\\":\\\"DescribeInstances , AllocateAddress , ListDetectors , PutBucketPolicy , RebootInstances , CreateTags\\\",\\\"frequentProfiledAPIsUserIdentityProfiling\\\":\\\"CreateBucket , ListBuckets\\\",\\\"rareProfiledUserTypesAccountProfiling\\\":\\\"\\\",\\\"infrequentProfiledUserTypesAccountProfiling\\\":\\\"\\\",\\\"frequentProfiledUserTypesAccountProfiling\\\":\\\"IAM_USER , ASSUMED_ROLE , ROOT\\\",\\\"rareProfiledUserNamesAccountProfiling\\\":\\\"aws:ec2-instance\\\",\\\"infrequentProfiledUserNamesAccountProfiling\\\":\\\"\\\",\\\"frequentProfiledUserNamesAccountProfiling\\\":\\\"dummy , AWSServiceRoleForSecurityHub , AWSServiceRoleForTrustedAdvisor , CloudabilityRole , AWSServiceRoleForAccessAnalyzer , AWSServiceRoleForConfig , gtrotman , mscherfling , Root , aws-controltower-ForwardSnsNotificationRole , AWSServiceRoleForAmazonGuardDuty\\\",\\\"rareProfiledASNsAccountProfiling\\\":\\\"asnNumber: 12271 asnOrg: TWC-12271-NYC asnNumber: 23908 asnOrg: IIAC asnNumber: 6167 asnOrg: CELLCO-PART asnNumber: 701 asnOrg: UUNET asnNumber: 209 asnOrg: CENTURYLINK-US-LEGACY-QWEST\\\",\\\"infrequentProfiledASNsAccountProfiling\\\":\\\"asnNumber: 4766 asnOrg: Korea Telecom\\\",\\\"frequentProfiledASNsAccountProfiling\\\":\\\"asnNumber: 17390 asnOrg: CIO-ORGANIZATION asnNumber: 16509 asnOrg: AMAZON-02 asnNumber: 36351 asnOrg: SOFTLAYER asnNumber: 2386 asnOrg: INS-AS asnNumber: 3462 asnOrg: Data Communication Business Group asnNumber: 15502 asnOrg: Vodafone Ireland Limited asnNumber: 14618 asnOrg: AMAZON-AES asnNumber: 7018 asnOrg: ATT-INTERNET4\\\",\\\"rareProfiledASNsUserIdentityProfiling\\\":\\\"\\\",\\\"infrequentProfiledASNsUserIdentityProfiling\\\":\\\"\\\",\\\"frequentProfiledASNsUserIdentityProfiling\\\":\\\"asnNumber: 2386 asnOrg: INS-AS\\\",\\\"rareProfiledUserAgentsAccountProfiling\\\":\\\"aws-sdk-go\\\",\\\"infrequentProfiledUserAgentsAccountProfiling\\\":\\\"aws-internal/account-settings\\\",\\\"frequentProfiledUserAgentsAccountProfiling\\\":\\\"AWS Service , aws-sdk-java , Botocore , AWS Internal , browser , aws-internal/3 , OTHER\\\",\\\"rareProfiledUserAgentsUserIdentityProfiling\\\":\\\"\\\",\\\"infrequentProfiledUserAgentsUserIdentityProfiling\\\":\\\"\\\",\\\"frequentProfiledUserAgentsUserIdentityProfiling\\\":\\\"Botocore\\\"},\\\"unusualBehavior\\\":{\\\"unusualAPIsAccountProfiling\\\":\\\"ArchiveFindings\\\",\\\"unusualUserTypesAccountProfiling\\\":\\\"\\\",\\\"unusualUserNamesAccountProfiling\\\":\\\"\\\",\\\"unusualASNsAccountProfiling\\\":\\\"\\\",\\\"unusualUserAgentsAccountProfiling\\\":\\\"\\\",\\\"unusualAPIsUserIdentityProfiling\\\":\\\"ArchiveFindings\\\",\\\"unusualASNsUserIdentityProfiling\\\":\\\"asnNumber: 17390 asnOrg: CIO-ORGANIZATION\\\",\\\"unusualUserAgentsUserIdentityProfiling\\\":\\\"\\\",\\\"isUnusualUserIdentity\\\":\\\"false\\\"}}\", \"Type\": \"default\"}}, \"Severity\": 2, \"Title\": \"The user IAMUser : dummy is anomalously invoking APIs commonly used in Discovery tactics.\", \"Type\": \"Discovery:IAMUser/AnomalousBehavior\", \"UpdatedAt\": \"2024-04-11T05:47:16.625Z\"}, \"region\": \"us-east-1\", \"payload\": {\"name\": \"AWS GuardDuty: The user IAMUser : dummy is anomalously invoking APIs commonly used in Discovery tactics.\", \"description\": {\"format\": \"text\", \"content\": \"APIs commonly used in Discovery tactics were invoked by user IAMUser : dummy under unusual circumstances. Such activity is not typically seen from this user.\"}, \"discovered_date\": \"2024-04-11T05:47:16.625Z\", \"severity_code\": \"Low\", \"properties\": {\"aws_guardduty_finding_id\": \"xxxxyyyyzzzz\", \"aws_guardduty_finding_arn\": \"arn:aws:guardduty:us-east-1:xxxxyyyyzzzz:detector/48bbf98612290af2215c7a02b7ccbc82/finding/xxxxyyyyzzzz\", \"aws_guardduty_finding_type\": \"Discovery:IAMUser/AnomalousBehavior\", \"aws_guardduty_finding_updated_at\": \"2024-04-11T05:47:16.625Z\", \"aws_guardduty_region\": \"us-east-1\", \"aws_guardduty_severity\": \"2\", \"aws_guardduty_resource_type\": \"AccessKey\", \"aws_guardduty_detector_id\": \"48bbf98612290af2215c7a02b7ccbc82\", \"aws_guardduty_count\": \"1\", \"aws_guardduty_archived\": \"False\"}, \"artifacts\": [], \"comments\": []}, \"data_tables\": {\"gd_finding_overview\": [{\"cells\": {\"severity\": {\"value\": \"2\"}, \"query_execution_date\": {\"value\": \"2024-04-11 14:08:54\"}, \"region\": {\"value\": \"us-east-1\"}, \"count\": {\"value\": \"1\"}, \"account_id\": {\"value\": \"xxxxyyyyzzzz\"}, \"created_at\": {\"value\": \"2024-04-11T05:47:16.625Z\"}, \"updated_at\": {\"value\": \"2024-04-11T05:47:16.625Z\"}}}], \"gd_action_details\": [{\"cells\": {\"action_type\": {\"value\": \"AWS_API_CALL\"}, \"query_execution_date\": {\"value\": \"2024-04-11 14:08:54\"}, \"action_api\": {\"value\": \"ListFindings\"}, \"event_first_seen\": {\"value\": \"2024-04-11T05:26:01.000Z\"}, \"event_last_seen\": {\"value\": \"2024-04-11T05:32:48.000Z\"}, \"actor_caller_type\": {\"value\": \"Remote IP\"}, \"city_name\": {\"value\": \"Singapore\"}, \"country_name\": {\"value\": \"Singapore\"}, \"asn\": {\"value\": \"17390\"}, \"asn_org\": {\"value\": \"CIO-ORGANIZATION\"}, \"isp\": {\"value\": \"IBM Corporation\"}, \"org\": {\"value\": \"IBM Corporation\"}, \"service_name\": {\"value\": \"guardduty.amazonaws.com\"}, \"remote_ip\": {\"value\": \"129.41.56.2\"}}}], \"gd_resource_affected\": [{\"cells\": {\"resource_type\": {\"value\": \"AccessKey\"}, \"query_execution_date\": {\"value\": \"2024-04-11 14:08:54\"}, \"resource_role\": {\"value\": \"TARGET\"}}}], \"gd_s3_bucket_details\": [], \"gd_instance_details\": [], \"gd_access_key_details\": [{\"cells\": {\"access_key_id\": {\"value\": \"xxxxyyyy\"}, \"query_execution_date\": {\"value\": \"2024-04-11 14:08:54\"}, \"principal_id\": {\"value\": \"xxxxyyyy\"}, \"user_type\": {\"value\": \"IAMUser\"}, \"user_name\": {\"value\": \"dummy\"}}}]}}",
+  "inputs": {
+    "incident_id": 2114,
+    "aws_gd_finding_id": "xxxxyyyyzzzz",
+    "aws_gd_region": "us-east-1",
+    "aws_gd_detector_id": "48bbf9861*******215c7a02b7ccbc82"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-aws-guardduty",
+    "package_version": "1.1.0",
+    "host": "IBM-dummy-MacBookPro.local",
+    "execution_time_ms": 1530,
+    "timestamp": "2024-04-11 14:08:54"
+  }
+}
