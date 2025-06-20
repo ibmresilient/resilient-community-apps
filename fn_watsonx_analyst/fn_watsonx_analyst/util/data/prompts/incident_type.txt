@@ -1,0 +1,16 @@
+The following is a JSON list of objects representing different types of security incidents:
+
+```json
+{types}
+```
+Here's some extra data about the incident.
+
+```json
+{data}
+```
+
+Respond with the most-applicable type of security incident based on the name, using the below JSON schema.
+
+```json
+{sample}
+```
