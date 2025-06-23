@@ -1,0 +1,21 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "status_code": 204,
+    "message": "Successfully deleted room : Incident 2096 Task 102: Webex Initial Test"
+  },
+  "raw": null,
+  "inputs": {
+    "webex_room_name": "Incident 2096 Task 102: Webex Initial Test"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-webex",
+    "package_version": "2.0.0",
+    "host": "AppHost",
+    "execution_time_ms": 3383,
+    "timestamp": "2022-09-19 11:29:54"
+  }
+}
