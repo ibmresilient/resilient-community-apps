@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_rest_api",
     display_name="REST API Functions for SOAR",
-    version="1.3.0", 
+    version="1.3.1", 
     license="MIT",
     author="IBM SOAR",
     author_email="",
@@ -33,7 +33,7 @@ setup(
  The function parameters determine the type of call, the URL, and optionally the headers, cookies and body.
  The results include the text or structured (JSON) result from the web service, and additional information including the elapsed time.""",
     install_requires=[
-        "resilient-circuits >= 51.0.1.0",
+        "resilient-circuits >= 51.0.0.0",
         "PyJWT"
     ],
     python_requires='>=3.6',

@@ -112,3 +112,21 @@ class TestInternetUtilitiesCallRestApi:
         assert f"retrying in {RETRY_DELAY_COUNT * RETRY_BACKOFF_COUNT * RETRY_BACKOFF_COUNT} seconds..." in records[2].message
         assert f"404 Client Error:" in records[3].message
         self.caplog.clear() # clear caplog
+
+    def test_polish(self, circuits_app):
+        opis = "W dzisiejszych czasach można znaleść telewisor lub komputer w każdym domu. Zaganiani rodzice często stawjają dziecko przed ekranem i puszczają jemu jakąś bajkę gdy nie mają czas je bawić. Właśnie tak się zaczyna ciągly użytek nowych urządzeń i uzależnienie do gier komputerowych, serialii, stron internetowych, i do własnych telefonów komórkowych. Korzystanie z tego" #.encode('utf-8').decode('utf-8')
+        rest_url = "https://postman-echo.com/put" #"https://jira.nasksa.pl/rest/api/2/issue/XXX-120"
+        rest_headers = """
+        Content-Type: application/json
+        Accept: application/json
+        """
+        function_params = {
+            "rest_api_method": "PUT",
+            "rest_api_url"  : rest_url,
+            "rest_api_headers": rest_headers,
+            "rest_api_verify" : False,
+            "rest_api_body" : f'{{"fields": {{"description": "{opis}"}}}}'
+        }
+        results = call_rest_api_function(circuits_app, function_params)
+        content = results.get('content')
+        assert content["json"]["data"]["fields"]["description"] == opis

@@ -51,6 +51,14 @@
 | 1.2.0 | 11/2023 | Added support for Retry mechanism, attachments, query parameters and json formatted body for content-type/json (case-insensitive) |
 | 1.2.1 | 08/2024 | Rebuilt the app to use the latest STOMP package |
 | 1.3.0 | 03/2025 | Added `rest_api_verify_file` function parameter for server certificates |
+| 1.3.1 | 06/2025 | Make selftest URL configurable |
+
+### Notes
+
+Starting in version 1.3.1, selftest will use an app.config setting, `selftest_url`. 
+If specified, a GET method call is made to ensure connectivity. 
+Selftest continues to return success even if this setting is not set.
+See [App Configuration](#app-configuration).
 
 ---
 
@@ -142,6 +150,17 @@ Additional package dependencies may exist for each of these packages:
 * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation.
 
  ---
+ ### App Configuration
+The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
+
+#### [fn_rest_api] <!-- omit in toc -->
+This section defines the app settings.
+
+| Config | Required | Example | Description |
+| ------ | :------: | ------- | ----------- |
+| **selftest_url** | No | `https://postman-echo.com/get` | GET method URL to test connectivity. If missing, no self call is made.  |
+
+---
 
 ## Function - REST API
 

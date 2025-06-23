@@ -21,6 +21,8 @@ def config_section_data():
 # and assigned to a key as shown below.
 # auth_header = $SECRET_EXAMPLE
 #
-# This auth_header can later be accessed in the a playbook or a workflow as {{auth_header}}
+# This auth_header can later be accessed in a playbook or a workflow as {{auth_header}}
 #
+# configure a URL for testing based on company requirements using the GET method
+#selftest_url= https://postman-echo.com/get
 """
