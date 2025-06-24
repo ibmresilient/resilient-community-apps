@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_network_utilities",
     display_name="Network Utilities functions for SOAR",
-    version="1.2.0",
+    version="1.2.1",
     license="MIT",
     author="IBM SOAR",
     author_email="",
@@ -39,7 +39,8 @@ setup(
         'cryptography',
         'pywinrm',
         'paramiko',
-        'chardet'
+        'chardet',
+        "jinja2"
     ],
     python_requires='>=3.6',
     packages=find_packages(),

@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1733926178169,
+  "export_date": 1749489229414,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -18,7 +18,7 @@
       "deprecated": false,
       "export_key": "__function/network_utilities_domain_name",
       "hide_notification": false,
-      "id": 5019,
+      "id": 6800,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -47,7 +47,7 @@
       "deprecated": false,
       "export_key": "__function/network_utilities_send_sudo_password",
       "hide_notification": false,
-      "id": 5020,
+      "id": 6801,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -76,7 +76,7 @@
       "deprecated": false,
       "export_key": "__function/network_utilities_resilient_url",
       "hide_notification": false,
-      "id": 5021,
+      "id": 6802,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -105,7 +105,7 @@
       "deprecated": false,
       "export_key": "__function/network_utilities_ssh_key_auth",
       "hide_notification": false,
-      "id": 5027,
+      "id": 6803,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -134,7 +134,7 @@
       "deprecated": false,
       "export_key": "__function/network_utilities_shell_params",
       "hide_notification": false,
-      "id": 5022,
+      "id": 6804,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -163,7 +163,7 @@
       "deprecated": false,
       "export_key": "__function/network_utilities_shell_command",
       "hide_notification": false,
-      "id": 5023,
+      "id": 6805,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -193,7 +193,7 @@
       "deprecated": false,
       "export_key": "__function/network_utilities_remote_computer",
       "hide_notification": false,
-      "id": 5024,
+      "id": 6806,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -222,7 +222,7 @@
       "deprecated": false,
       "export_key": "__function/network_utilities_https_url",
       "hide_notification": false,
-      "id": 5025,
+      "id": 6807,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -252,7 +252,7 @@
       "deprecated": false,
       "export_key": "__function/network_utilities_domain_list",
       "hide_notification": false,
-      "id": 5026,
+      "id": 6808,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -285,7 +285,7 @@
   ],
   "functions": [
     {
-      "created_date": 1732625845576,
+      "created_date": 1748017908989,
       "description": {
         "content": "Identifies similarity between a suspicious domain name and a list of valid domain names.  Low distance result indicates a possible spoof attempt.",
         "format": "text"
@@ -293,14 +293,14 @@
       "destination_handle": "fn_network_utilities",
       "display_name": "Network Utilities: Domain Distance",
       "export_key": "network_utilities_domain_distance",
-      "id": 18,
+      "id": 264,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1732625845576,
+      "last_modified_time": 1748017908989,
       "name": "network_utilities_domain_distance",
       "output_description": {
         "content": null,
@@ -332,7 +332,7 @@
       "workflows": []
     },
     {
-      "created_date": 1732625845676,
+      "created_date": 1748017909260,
       "description": {
         "content": "Takes a URL (mostly shortened) and follows it through redirects as it expands. The results include each URL, which are added to a new artifact.",
         "format": "text"
@@ -340,14 +340,14 @@
       "destination_handle": "fn_network_utilities",
       "display_name": "Network Utilities: Expand URL",
       "export_key": "network_utilities_expand_url",
-      "id": 19,
+      "id": 265,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1732625845676,
+      "last_modified_time": 1748017909260,
       "name": "network_utilities_expand_url",
       "output_description": {
         "content": null,
@@ -371,7 +371,7 @@
       "workflows": []
     },
     {
-      "created_date": 1732625845797,
+      "created_date": 1748017909534,
       "description": {
         "content": "This function takes in a HTTPS URL or DNS input, establishes a connection and then attempts to acquire the SSL certificate. If successful, the function then saves the certificate as an artifact of type \u2018X509 Certificate File\u2019. Works on most URLs including those with self-signed or expired certificates.",
         "format": "text"
@@ -379,14 +379,14 @@
       "destination_handle": "fn_network_utilities",
       "display_name": "Network Utilities: Extract SSL Cert From URL",
       "export_key": "network_utilities_extract_ssl_cert_from_url",
-      "id": 20,
+      "id": 266,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1732625845797,
+      "last_modified_time": 1748017909534,
       "name": "network_utilities_extract_ssl_cert_from_url",
       "output_description": {
         "content": null,
@@ -410,7 +410,7 @@
       "workflows": []
     },
     {
-      "created_date": 1732625845942,
+      "created_date": 1748017909805,
       "description": {
         "content": "This function allows your playbooks to execute shell-scripts remotely via a linux machine, and return the result into the playbook. The results include the `stdout` and `stderr` streams, the return code, and information about the execution time. If the output of the shell script is JSON, it is returned as structured data. Results can then be added to the incident as file attachments, artifacts, data tables, or any other uses.",
         "format": "text"
@@ -418,14 +418,14 @@
       "destination_handle": "fn_network_utilities",
       "display_name": "Network Utilities: Linux Shell Command",
       "export_key": "network_utilities_linux_shell_command",
-      "id": 21,
+      "id": 267,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733856513906,
+      "last_modified_time": 1748525511603,
       "name": "network_utilities_linux_shell_command",
       "output_description": {
         "content": null,
@@ -435,7 +435,7 @@
       "output_json_schema": "{\n  \"$schema\": \"http://json-schema.org/draft-06/schema\",\n  \"type\": \"object\",\n  \"properties\": {\n    \"version\": {\n      \"type\": \"number\"\n    },\n    \"success\": {\n      \"type\": \"boolean\"\n    },\n    \"reason\": {},\n    \"content\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"commandline\": {\n          \"type\": \"string\"\n        },\n        \"start\": {\n          \"type\": \"integer\"\n        },\n        \"end\": {\n          \"type\": \"integer\"\n        },\n        \"elapsed\": {\n          \"type\": \"integer\"\n        },\n        \"exitcode\": {\n          \"type\": \"integer\"\n        },\n        \"stdout\": {\n          \"type\": \"string\"\n        },\n        \"stderr\": {\n          \"type\": \"string\"\n        },\n        \"stdout_json\": {},\n        \"stderr_json\": {}\n      }\n    },\n    \"raw\": {},\n    \"inputs\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"network_utilities_shell_command\": {\n          \"type\": \"string\"\n        },\n        \"network_utilities_shell_params\": {\n          \"type\": \"string\"\n        }\n      }\n    },\n    \"metrics\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"version\": {\n          \"type\": \"string\"\n        },\n        \"package\": {\n          \"type\": \"string\"\n        },\n        \"package_version\": {\n          \"type\": \"string\"\n        },\n        \"host\": {\n          \"type\": \"string\"\n        },\n        \"execution_time_ms\": {\n          \"type\": \"integer\"\n        },\n        \"timestamp\": {\n          \"type\": \"string\"\n        }\n      }\n    }\n  }\n}",
       "tags": [],
       "uuid": "743e7638-20e7-4cc5-ab80-f669d641c438",
-      "version": 5,
+      "version": 1,
       "view_items": [
         {
           "content": "4f01a5af-4481-4a81-b995-982aaea91491",
@@ -481,7 +481,7 @@
       "workflows": []
     },
     {
-      "created_date": 1732625846042,
+      "created_date": 1748017910094,
       "description": {
         "content": "This function allows your workflows/playbooks to execute shell-scripts locally and return the result into the workflow/playbook. The results include the `stdout` and `stderr` streams, the return code, and information about the execution time. If the output of the shell script is JSON, it is returned as structured data. Results can then be added to the incident as file attachments, artifacts, data tables, or any other uses.",
         "format": "text"
@@ -489,14 +489,14 @@
       "destination_handle": "fn_network_utilities",
       "display_name": "Network Utilities: Local Shell Command",
       "export_key": "network_utilities_local_shell_command",
-      "id": 22,
+      "id": 268,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1732625846042,
+      "last_modified_time": 1748017910094,
       "name": "network_utilities_local_shell_command",
       "output_description": {
         "content": null,
@@ -528,7 +528,7 @@
       "workflows": []
     },
     {
-      "created_date": 1732625846139,
+      "created_date": 1748017910392,
       "description": {
         "content": "This function allows your workflows/playbooks to execute shell-scripts remotely via a windows machine, and return the result into the workflow/playbook. The results include the `stdout` and `stderr` streams, the return code, and information about the execution time. If the output of the shell script is JSON, it is returned as structured data. Results can then be added to the incident as file attachments, artifacts, data tables, or any other uses.",
         "format": "text"
@@ -536,14 +536,14 @@
       "destination_handle": "fn_network_utilities",
       "display_name": "Network Utilities: Windows Shell Command",
       "export_key": "network_utilities_windows_shell_command",
-      "id": 23,
+      "id": 269,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1732625846139,
+      "last_modified_time": 1748017910392,
       "name": "network_utilities_windows_shell_command",
       "output_description": {
         "content": null,
@@ -585,13 +585,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 20,
+  "id": 98,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1733926176176,
+      "create_date": 1749489227140,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -600,7 +600,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1733926176176,
+      "update_date": 1749489227140,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -628,13 +628,13 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_310777a7_78c1_4325_baaf_4f1ed625b28a\" isExecutable=\"true\" name=\"playbook_310777a7_78c1_4325_baaf_4f1ed625b28a\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1w2to1p\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Network Utilities: Domain Distance\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"862f0096-cf1d-4f56-89bb-750e1c794221\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# if email address, return only domain portion\\nif \\\"email\\\" in artifact.type.lower():\\n  split_email = artifact.value.split(\\\"@\\\")\\n  if len(split_email) \u0026gt; 1:\\n    inputs.network_utilities_domain_name = split_email[1]\\n  else:\\n    inputs.network_utilities_domain_name = artifact.value\\nelse:\\n  # The domain name being tested\\n  inputs.network_utilities_domain_name = artifact.value\\n\\n# The list of domains to test against - change as necesary\\ninputs.network_utilities_domain_list = \\\"ibm.com, resilientsystems.com, ibmcloud.com, bluemix.com\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"domain_distance_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1w2to1p\u003c/incoming\u003e\u003coutgoing\u003eFlow_058x10m\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1w2to1p\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0zwwcp5\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"domain_distance_results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"66485b7b-e443-429f-b04c-099adf09aaf0\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_058x10m\u003c/incoming\u003e\u003coutgoing\u003eFlow_0zwwcp5\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_058x10m\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0zwwcp5\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_310777a7_78c1_4325_baaf_4f1ed625b28a\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1w2to1p\" id=\"Flow_1w2to1p_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_058x10m\" id=\"Flow_058x10m_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0zwwcp5\" id=\"Flow_0zwwcp5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.515625\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1732625847118,
+      "create_date": 1748017911845,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -671,27 +671,27 @@
         "uuid": "5cd9c4b9-6a05-4a95-b1fd-387e36e0f24c"
       },
       "has_logical_errors": false,
-      "id": 20,
+      "id": 227,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733856517383,
+      "last_modified_time": 1749489158594,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1732625847312,
+          "created_date": 1748017912186,
           "description": "",
           "enabled": false,
           "export_key": "domain_distance_results",
-          "id": 36,
+          "id": 267,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1732625847312,
+          "last_modified_time": 1748017912186,
           "name": "domain_distance_results",
           "object_type": "artifact",
           "playbook_handle": "network_utilities_domain_distance_pb_example",
@@ -729,7 +729,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_310777a7-78c1-4325-baaf-4f1ed625b28a",
-        "id": 20,
+        "id": 241,
         "name": "playbook_310777a7_78c1_4325_baaf_4f1ed625b28a",
         "type": "playbook",
         "uuid": "370b2c07-e896-4f2e-bc2a-a75bcf65b08a"
@@ -737,18 +737,18 @@
       "tags": [],
       "type": "default",
       "uuid": "310777a7-78c1-4325-baaf-4f1ed625b28a",
-      "version": 8
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8c779f3d_8378_4622_9d58_618343d51127\" isExecutable=\"true\" name=\"playbook_8c779f3d_8378_4622_9d58_618343d51127\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1ktag37\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Network Utilities: Expand URL\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3aef1c42-2c9e-4a7a-9421-8fab3a45e4f1\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.network_utilities_resilient_url = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"expand_url_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ktag37\u003c/incoming\u003e\u003coutgoing\u003eFlow_0w8juvk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1ktag37\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0yjtgnr\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"expand_url_results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"27c63587-e95c-4ae8-9aa0-27907195eaee\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0w8juvk\u003c/incoming\u003e\u003coutgoing\u003eFlow_0yjtgnr\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0w8juvk\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0yjtgnr\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8c779f3d_8378_4622_9d58_618343d51127\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0yjtgnr\" id=\"Flow_0yjtgnr_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0w8juvk\" id=\"Flow_0w8juvk_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ktag37\" id=\"Flow_1ktag37_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.515625\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1732625848177,
+      "create_date": 1748017913573,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -785,27 +785,27 @@
         "uuid": "4b1b991a-faf3-4dc5-a912-e985c22e7bc4"
       },
       "has_logical_errors": false,
-      "id": 21,
+      "id": 228,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733856518779,
+      "last_modified_time": 1749489161532,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1732625848382,
+          "created_date": 1748017913906,
           "description": "",
           "enabled": false,
           "export_key": "expand_url_results",
-          "id": 37,
+          "id": 268,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1732625848382,
+          "last_modified_time": 1748017913906,
           "name": "expand_url_results",
           "object_type": "artifact",
           "playbook_handle": "network_utilities_expand_url_pb_example",
@@ -835,7 +835,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_8c779f3d-8378-4622-9d58-618343d51127",
-        "id": 21,
+        "id": 242,
         "name": "playbook_8c779f3d_8378_4622_9d58_618343d51127",
         "type": "playbook",
         "uuid": "42cfe705-de6f-40e1-a13f-d640767a588d"
@@ -843,18 +843,18 @@
       "tags": [],
       "type": "default",
       "uuid": "8c779f3d-8378-4622-9d58-618343d51127",
-      "version": 8
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d637a844_8897_4dad_970d_878bac13782e\" isExecutable=\"true\" name=\"playbook_d637a844_8897_4dad_970d_878bac13782e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1a1v0oy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Network Utilities: Extract SSL Cert From URL\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7808f13e-7f37-4694-8303-66df82e8d958\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.network_utilities_https_url = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"extract_certificate_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1a1v0oy\u003c/incoming\u003e\u003coutgoing\u003eFlow_03bppsl\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1pqrugt\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"extract_certificate_result\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3b054094-e478-43ed-b969-01d8bb6e3654\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_03bppsl\u003c/incoming\u003e\u003coutgoing\u003eFlow_1pqrugt\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1a1v0oy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_03bppsl\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1pqrugt\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d637a844_8897_4dad_970d_878bac13782e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1pqrugt\" id=\"Flow_1pqrugt_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03bppsl\" id=\"Flow_03bppsl_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1a1v0oy\" id=\"Flow_1a1v0oy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.515625\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1732625849202,
+      "create_date": 1748017915407,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -891,27 +891,27 @@
         "uuid": "c6b01667-1aa3-46f4-9e03-b806652f03b7"
       },
       "has_logical_errors": false,
-      "id": 22,
+      "id": 229,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733856520135,
+      "last_modified_time": 1749489164224,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1732625849420,
+          "created_date": 1748017915740,
           "description": "",
           "enabled": false,
           "export_key": "extract_certificate_result",
-          "id": 38,
+          "id": 269,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1732625849420,
+          "last_modified_time": 1748017915740,
           "name": "extract_certificate_result",
           "object_type": "artifact",
           "playbook_handle": "network_utilities_extract_ssl_certificate_from_url_pb_example",
@@ -945,7 +945,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_d637a844-8897-4dad-970d-878bac13782e",
-        "id": 22,
+        "id": 243,
         "name": "playbook_d637a844_8897_4dad_970d_878bac13782e",
         "type": "playbook",
         "uuid": "ceafd9a5-0de1-4a59-994c-326a890b46f0"
@@ -953,18 +953,18 @@
       "tags": [],
       "type": "default",
       "uuid": "d637a844-8897-4dad-970d-878bac13782e",
-      "version": 8
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 10,
+        "content_version": 5,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_0f2532e7_f904_4f8c_b556_7f65fc0ae110\" isExecutable=\"true\" name=\"playbook_0f2532e7_f904_4f8c_b556_7f65fc0ae110\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0rtddwo\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Network Utilities: Linux Shell Command\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"743e7638-20e7-4cc5-ab80-f669d641c438\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# You can set the command on the \\\"Input\\\" panel or dynamically\\n# NOTE: The administrator must configure each command before you can run it!\\n\\ninputs.network_utilities_shell_params = artifact.value\\ninputs.network_utilities_shell_command = \\\"remote_command_linux:remote_computer\\\"\\n# inputs.network_utilities_ssh_key_auth = \\\"ssh_key_auth\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"network_utilities_shell_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rtddwo\u003c/incoming\u003e\u003coutgoing\u003eFlow_1r27zdb\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0fh35pz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0rtddwo\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1r27zdb\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"network_utilities_shell_results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1a0fab34-ab00-4d2b-ae51-c3fa9adfcc46\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1r27zdb\u003c/incoming\u003e\u003coutgoing\u003eFlow_0fh35pz\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0fh35pz\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_0f2532e7_f904_4f8c_b556_7f65fc0ae110\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fh35pz\" id=\"Flow_0fh35pz_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1r27zdb\" id=\"Flow_1r27zdb_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rtddwo\" id=\"Flow_0rtddwo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.515625\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"297.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1732625850290,
+      "create_date": 1748017917159,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -1001,27 +1001,27 @@
         "uuid": "55a84a7c-0b33-459d-8db7-c61904a07579"
       },
       "has_logical_errors": false,
-      "id": 23,
+      "id": 230,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733926158060,
+      "last_modified_time": 1749489167216,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1732625850500,
+          "created_date": 1748017917502,
           "description": "",
           "enabled": false,
           "export_key": "linux_shell_result",
-          "id": 39,
+          "id": 270,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1732625850500,
+          "last_modified_time": 1748017917502,
           "name": "linux_shell_result",
           "object_type": "artifact",
           "playbook_handle": "network_utilities_linux_shell_command_pb_example",
@@ -1055,7 +1055,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_0f2532e7-f904-4f8c-b556-7f65fc0ae110",
-        "id": 23,
+        "id": 244,
         "name": "playbook_0f2532e7_f904_4f8c_b556_7f65fc0ae110",
         "type": "playbook",
         "uuid": "68e63eb1-7584-4a0e-a139-7a4a4300a565"
@@ -1063,18 +1063,18 @@
       "tags": [],
       "type": "default",
       "uuid": "0f2532e7-f904-4f8c-b556-7f65fc0ae110",
-      "version": 13
+      "version": 8
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 8,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_c52c69bb_d488_45ba_aae5_7e229f4aa556\" isExecutable=\"true\" name=\"playbook_c52c69bb_d488_45ba_aae5_7e229f4aa556\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0lmij0l\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Network Utilities: Local Shell Command\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bdcffebf-b4ae-4566-a2e9-5d68c3f43ce4\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.network_utilities_shell_params = artifact.value\\ninputs.network_utilities_shell_command = \\\"traceroute\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"network_utilities_shell_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0lmij0l\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ddlmrh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0lmij0l\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1ddlmrh\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_4\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0tlb6fk\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"network_utilities_shell_results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1a0fab34-ab00-4d2b-ae51-c3fa9adfcc46\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ddlmrh\u003c/incoming\u003e\u003coutgoing\u003eFlow_0tlb6fk\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0tlb6fk\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_c52c69bb_d488_45ba_aae5_7e229f4aa556\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0tlb6fk\" id=\"Flow_0tlb6fk_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ddlmrh\" id=\"Flow_1ddlmrh_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0lmij0l\" id=\"Flow_0lmij0l_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.515625\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1732625851391,
+      "create_date": 1748017919028,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -1111,27 +1111,27 @@
         "uuid": "5d296bc6-075f-48a0-908d-3c8ef823aaa4"
       },
       "has_logical_errors": false,
-      "id": 24,
+      "id": 231,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733856523036,
+      "last_modified_time": 1749489170244,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1732625851625,
+          "created_date": 1748017919427,
           "description": "",
           "enabled": false,
           "export_key": "local_shell_result",
-          "id": 40,
+          "id": 271,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1732625851625,
+          "last_modified_time": 1748017919427,
           "name": "local_shell_result",
           "object_type": "artifact",
           "playbook_handle": "network_utilities_local_shell_command",
@@ -1165,7 +1165,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_c52c69bb-d488-45ba-aae5-7e229f4aa556",
-        "id": 24,
+        "id": 245,
         "name": "playbook_c52c69bb_d488_45ba_aae5_7e229f4aa556",
         "type": "playbook",
         "uuid": "d34767b8-a408-47eb-aa41-67d905e6f3f0"
@@ -1173,18 +1173,18 @@
       "tags": [],
       "type": "default",
       "uuid": "c52c69bb-d488-45ba-aae5-7e229f4aa556",
-      "version": 8
+      "version": 11
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_d2bcb6aa_1adf_464a_8a23_5862bee20e3e\" isExecutable=\"true\" name=\"playbook_d2bcb6aa_1adf_464a_8a23_5862bee20e3e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_19gcdco\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Network Utilities: Windows Shell Command\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c7da65e5-7760-4e63-9305-7c4f94f6f4ea\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.network_utilities_shell_params = artifact.value\\n# change to your app.config definitions of a powershell script and windows compouter\\ninputs.network_utilities_shell_command = \\\"remote_command_powershell:remote_windows\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"network_utilities_shell_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_19gcdco\u003c/incoming\u003e\u003coutgoing\u003eFlow_0mvieye\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_06cpztc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_19gcdco\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0mvieye\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_4\"/\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"network_utilities_shell_results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1a0fab34-ab00-4d2b-ae51-c3fa9adfcc46\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0mvieye\u003c/incoming\u003e\u003coutgoing\u003eFlow_06cpztc\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_06cpztc\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_d2bcb6aa_1adf_464a_8a23_5862bee20e3e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06cpztc\" id=\"Flow_06cpztc_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0mvieye\" id=\"Flow_0mvieye_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19gcdco\" id=\"Flow_19gcdco_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.515625\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1732625852506,
+      "create_date": 1748017921222,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -1221,27 +1221,27 @@
         "uuid": "7b29b928-8e63-4655-a679-5775cf8b72a4"
       },
       "has_logical_errors": false,
-      "id": 25,
+      "id": 232,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 48,
+        "id": 32,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1733856524069,
+      "last_modified_time": 1749489172481,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1732625852711,
+          "created_date": 1748017921610,
           "description": "",
           "enabled": false,
           "export_key": "windows_powershell_result",
-          "id": 41,
+          "id": 272,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1732625852711,
+          "last_modified_time": 1748017921610,
           "name": "windows_powershell_result",
           "object_type": "artifact",
           "playbook_handle": "network_utilities_windows_shell_command_pb_example",
@@ -1275,7 +1275,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_d2bcb6aa-1adf-464a-8a23-5862bee20e3e",
-        "id": 25,
+        "id": 246,
         "name": "playbook_d2bcb6aa_1adf_464a_8a23_5862bee20e3e",
         "type": "playbook",
         "uuid": "be5b95ec-4796-41ea-aee5-cb9a7c21212d"
@@ -1283,7 +1283,7 @@
       "tags": [],
       "type": "default",
       "uuid": "d2bcb6aa-1adf-464a-8a23-5862bee20e3e",
-      "version": 8
+      "version": 6
     }
   ],
   "regulators": null,
@@ -1291,14 +1291,14 @@
   "scripts": [
     {
       "actions": [],
-      "created_date": 1732625844557,
+      "created_date": 1748017905638,
       "description": "parse and display the results from fn_network_utilities: local_shell, linux_shell and remote powershell functions",
       "enabled": false,
       "export_key": "network_utilities_shell_results",
-      "id": 35,
+      "id": 266,
       "language": "python3",
       "last_modified_by": "admin@example.com",
-      "last_modified_time": 1732625844557,
+      "last_modified_time": 1748017905638,
       "name": "network_utilities_shell_results",
       "object_type": "incident",
       "playbook_handle": null,

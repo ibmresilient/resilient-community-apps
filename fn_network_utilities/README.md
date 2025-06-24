@@ -34,6 +34,7 @@
 | 1.0.2 | 9/2023 | Added missing OS packages: dig, whois, traceroute |
 | 1.1.0 | 9/2023 | Allow ad_hoc shell execution. Added close connection for Remote Shell when complete. String encoded JSON shell parameters allowed. Added support for running linux scripts in sudo. Support for escaping commas within parameters. Converted rules/workflows to playbooks |
 | 1.2.0 | 10/2024 | Add key-based SSH access/shell command |
+| 1.2.1 | 06/2026 | Fix bug in shell command functions when using unicode characters |
 
 ### Notes
 When upgrading from a previous version to 1.2.0, configurations in app.config will have to be manually edited to use the new settings: <ssh_key_auth> and <ssh_key_auth_passphrase>. See [App Configuration](#app-configuration).

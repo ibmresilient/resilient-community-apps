@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # pragma pylint: disable=unused-argument, line-too-long
-from resilient_lib.components.templates_common import sh_filter, ps_filter
+from resilient_lib.components.templates_common import ps_filter
+from jinja2 import Undefined
 
 COMMA_ESCAPED = "\,"
 COMMA_SUBSTITUTE = "|"
@@ -42,3 +43,23 @@ def separate_params(shell_params, shell_escaping=SHELL_TYPE):
             rendered_shell_params[param_name] = converted_param.replace(COMMA_SUBSTITUTE, COMMA)
 
     return rendered_shell_params
+
+def sh_filter(val):
+    """
+    **sh**
+    Escapes characters in ``val`` for use in a Unix shell command line.
+    :param val: The string to escaped
+    :type val: str
+    :return: Escaped string
+    :rtype: str
+    """
+    if isinstance(val, Undefined):
+        return "[undefined]"
+    escaped = []
+    for char in str(val):
+        if char in "$#\"":
+            char = "\\" + char
+        elif ord(char) < 32: # Removed `or ord(char) > 126` so that some unicode characters do not get encoded
+            char = "\\%03o" % ord(char)
+        escaped.append(char)
+    return ''.join(escaped)
