@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name='fn_outbound_email',
     display_name='Outbound Email',
-    version='2.1.3',
+    version='2.1.4',
     license='MIT',
     author='IBM QRadar SOAR',
     url='https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_outbound_email',
@@ -50,7 +50,7 @@ setup(
         'beautifulsoup4',
         'resilient_circuits>=51.0.0',
         'resilient_lib>=51.0.0',
-        'Jinja2>=2.9.6',
+        'Jinja2>=3.1.6',
         'six',
         'python-smail',
         'cryptography'

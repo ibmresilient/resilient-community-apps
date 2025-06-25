@@ -5,7 +5,8 @@
 from logging import getLogger
 from re import compile, split
 from time import time
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import FileSystemLoader
+from jinja2.sandbox import SandboxedEnvironment as Environment
 from os import path
 from datetime import datetime
 from operator import itemgetter

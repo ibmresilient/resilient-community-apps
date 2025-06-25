@@ -10,7 +10,8 @@ from email.mime.application import MIMEApplication
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from ssl import Purpose, create_default_context
-from jinja2 import Environment, select_autoescape
+from jinja2 import select_autoescape
+from jinja2.sandbox import SandboxedEnvironment as Environment
 from resilient_circuits import ResilientComponent
 from resilient_lib import RequestsCommon
 from fn_outbound_email.lib.template_helper import TemplateHelper, CONFIG_DATA_SECTION
