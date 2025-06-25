@@ -4,8 +4,9 @@
 from setuptools import setup, find_packages
 
 setup(
+    display_name='Geocoding',
     name='fn_geocoding',
-    version='1.0.2',
+    version='1.0.3',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
@@ -17,8 +18,8 @@ Two function types are available: address and latlng.
 For an address, return coordinate information.
 For coordinates, return an address.""",
     install_requires=[
-        'resilient_circuits>=32.0.0',
-        'resilient-lib>=32.0.0'
+        'resilient_circuits>=51.0.0',
+        'resilient-lib>=51.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,
