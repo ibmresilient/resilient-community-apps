@@ -60,9 +60,10 @@ But migrating to playbooks provides greater functionality along with future app 
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.0 | 1/2024 | Add playbooks and remove workflows. |
-| 1.0.2 | 2/2023 | Update cryptography to version 39.0.1 and pyOpenSSL to version 23.0 |
-| 1.0.1 | 1/2023 | Bug Fix |
+| 1.1.1 | 06/2025 | Unpin version of cryptography. |
+| 1.1.0 | 01/2024 | Add playbooks and remove workflows. |
+| 1.0.2 | 02/2023 | Update cryptography to version 39.0.1 and pyOpenSSL to version 23.0 |
+| 1.0.1 | 01/2023 | Bug Fix |
 | 1.0.0 | 11/2022 | Initial Release |
 ---
 
@@ -94,11 +95,11 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `48.2.16`.
+* SOAR platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `48.2.16`.
+* SOAR platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient-circuits`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -132,9 +133,9 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Python 3.6 and Python 3.9 are supported.
+Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
-* cryptography~=39.0.1
+* cryptography
 * defusedxml~=0.7.1
 * lxml~=4.8
 * mail-parser~=3.15

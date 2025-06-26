@@ -472,19 +472,23 @@ But migrating to playbooks provides greater functionality along with future app 
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.1.0</p></td>
-<td><p>1/2024</p></td>
+<tr class="row-even"><td><p>1.1.1</p></td>
+<td><p>06/2025</p></td>
+<td><p>Unpin version of cryptography.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.1.0</p></td>
+<td><p>01/2024</p></td>
 <td><p>Add playbooks and remove workflows.</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.2</p></td>
-<td><p>2/2023</p></td>
+<tr class="row-even"><td><p>1.0.2</p></td>
+<td><p>02/2023</p></td>
 <td><p>Update cryptography to version 39.0.1 and pyOpenSSL to version 23.0</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.1</p></td>
-<td><p>1/2023</p></td>
+<tr class="row-odd"><td><p>1.0.1</p></td>
+<td><p>01/2023</p></td>
 <td><p>Bug Fix</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.0</p></td>
+<tr class="row-even"><td><p>1.0.0</p></td>
 <td><p>11/2022</p></td>
 <td><p>Initial Release</p></td>
 </tr>
@@ -522,12 +526,12 @@ But migrating to playbooks provides greater functionality along with future app 
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">48.2.16</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">48.2.16</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
 <li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
@@ -585,10 +589,10 @@ But migrating to playbooks provides greater functionality along with future app 
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
-<p>Python 3.6 and Python 3.9 are supported.
+<p>Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
-<li><p>cryptography~=39.0.1</p></li>
+<li><p>cryptography</p></li>
 <li><p>defusedxml~=0.7.1</p></li>
 <li><p>lxml~=4.8</p></li>
 <li><p>mail-parser~=3.15</p></li>
