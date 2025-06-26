@@ -1,6 +1,5 @@
 # Microsoft Sentinel
 
-
 ## Table of Contents
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -31,12 +30,9 @@
 ---
 
 ## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release 
-  notes of a previous release
--->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.2.0 | 02/2025 | <ul><li>Add custom incident field: sentinel_incident_last_update to track updates from sentinel</li><li>Add app.config setting: clear_datatable=True|False in order to clear the Alert and Entities data table each time the contents are refreshed</li><li>Update all default jinja templates to escape double quotes.</li></ul> |
 | 2.1.3 | 12/2024 | Bug fix for Sentinel URL entities. |
 | 2.1.2 | 10/2024 | Added retry logic to SOAR incident updates |
 | 2.1.1 | 07/2024 | Correction to documentation on template references |
@@ -97,13 +93,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `50.0.9097`.
+* SOAR platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `50.0.9097`.
+* SOAR platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=50.0.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -139,7 +135,7 @@ The app **does** support a proxy server.
 Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
 * jinja2~=3.1.0
-* resilient_circuits>=50.0.0
+* resilient_circuits>=51.0.0
 * simplejson~=3.19.0
 
 ---
@@ -182,6 +178,7 @@ The following table provides the settings you need to configure the app. These s
 | **polling_lookback** | Yes | `120` | *# of minutes to look back for incident changes. This is used only the first time the app starts* |
 | **polling_interval** | Yes | `60` | *# of Seconds to wait until checking for changes in Sentinel. Comment out to disable the poller* |
 | **api_version** | No | `2023-11-01-preview` | *API version to use when making API calls to Microsoft Sentinel. Sentinel API versions can be found https://learn.microsoft.com/en-us/rest/api/securityinsights/api-versions* |
+| **clear_datatable** | No | `true` | *True or False. Clear Alerts and Entities data tables when refreshed.* |
 | **https_proxy**| No | `https:/your.proxy.com` | - |
 | **http_proxy** | No | `http:/your.proxy.com` | - |
 | **verify** | No | `false` | *verify= false or /path/to/client_certificate.pem* |
@@ -923,6 +920,8 @@ sentinel_incident_entities
 | Sentinel Incident Classification | `sentinel_incident_classification` | `text` | `properties` | - | - |
 | Sentinel Incident Classification Comment | `sentinel_incident_classification_comment` | `text` | `properties` | - | - |
 | Sentinel Incident Classification Reason | `sentinel_incident_classification_reason` | `text` | `properties` | - | - |
+| Sentinel Incident Last Modified Time UTC | `sentinel_incident_last_modified_time_utc` | `date time` | `properties` | - | - |
+| sentinel Incident Last Update | `sentinel_incident_last_update` | `date time` | `properties` | - | - |
 | Sentinel Incident ID | `sentinel_incident_id` | `text` | `properties` | - | - |
 | Sentinel Incident Labels | `sentinel_incident_labels` | `text` | `properties` | - | - |
 | Sentinel Incident Number | `sentinel_incident_number` | `text` | `properties` | - | - |
@@ -973,6 +972,7 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
     "sentinel_incident_number": "{{ name|e }}",
     "sentinel_incident_id": "{{ properties.incidentNumber }}",
     "sentinel_incident_status": "{{ properties.status }}",
+    "sentinel_incident_last_modified_time_utc": {{ properties.lastModifiedTimeUtc|soar_datetimeformat }},
     "sentinel_incident_url": "<a target='blank' href='{{ properties.incidentUrl }}'>Sentinel Incident</a>"
     {% if properties.classification %}
       ,"sentinel_incident_classification": "{{ properties.classification }}"
@@ -1008,29 +1008,43 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
     "resolution_summary": "Closed by Sentinel"
   {%endif %}
 }
-
 ```
 
 ### incident_update_template.jinja
 ```
 {
   {# JINJA template for updating a new SOAR incident from a Sentinel incident. #}
-  "description": {
-    "format": "text",
-    "content": "{{ properties.description|replace('"', '\\"') }}"
-  },
+  {% if properties.description %}
+    "description": {
+      "format": "text",
+      "content": "{{ properties.description|replace('"', '\\"') }}"
+    },
+  {% endif %}
   {# if Sentinel users are different than SOAR users, consider using a mapping table using soar_substitute: #}
   {# "owner_id": "{{ properties.owner.userPrincipalName|soar_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
   "plan_status": "{{ properties.status|soar_substitute('{"Closed": "A", "Active": "A", "New": "A"}') }}",
   "severity_code": "{{ properties.severity|soar_substitute('{"Informational": "Low"}') }}",
   "properties": {
     "sentinel_incident_status": "{{ properties.status }}",
-    "sentinel_incident_classification": "{{ properties.classification }}",
-    "sentinel_incident_classification_reason": "{{ properties.classificationReason }}",
-    "sentinel_incident_classification_comment": "{{ properties.classificationComment|replace('"', '\\"') }}",
-    "sentinel_incident_assigned_to": "{{ properties.owner.assignedTo }}",
-    "sentinel_incident_labels": "{{ properties.labels | map(attribute='labelName') | join(',') | replace('"', '\\"') | replace('\\', '\\\\') }}",
-    "sentinel_incident_tactics": "{{ properties.additionalData.tactics|join(' ') }}"
+    "sentinel_incident_last_modified_time_utc": {{ properties.lastModifiedTimeUtc|soar_datetimeformat }}
+    {% if properties.classification %}
+      ,"sentinel_incident_classification": "{{ properties.classification }}"
+    {% endif %}
+    {% if properties.classificationReason %}
+      ,"sentinel_incident_classification_reason": "{{ properties.classificationReason }}"
+    {% endif %}
+    {% if properties.classificationComment %}
+      ,"sentinel_incident_classification_comment": "{{ properties.classificationComment|replace('"', '\\"') }}"
+    {% endif %}
+    {% if properties.owner.assignedTo %}
+      ,"sentinel_incident_assigned_to": "{{ properties.owner.assignedTo }}"
+    {% endif %}
+    {% if properties.labels %}
+      ,"sentinel_incident_labels": "{{ properties.labels | map(attribute='labelName') | join(',') | replace('"', '\\"') | replace('\\', '\\\\') }}"
+    {% endif %}
+    {% if properties.additionalData.tactics %}
+      ,"sentinel_incident_tactics": "{{ properties.additionalData.tactics|join(' ') }}"
+    {% endif %}
   }
 }
 ```
@@ -1043,13 +1057,26 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
   "resolution_id": "Resolved",
   "resolution_summary": "Closed by Sentinel",
   "properties": {
-    "sentinel_incident_status": "{{ properties.status }}",
-    "sentinel_incident_classification": "{{ properties.classification }}",
-    "sentinel_incident_classification_reason": "{{ properties.classificationReason }}",
-    "sentinel_incident_classification_comment": "{{ properties.classificationComment|safe }}",
-    "sentinel_incident_assigned_to": "{{ properties.owner.assignedTo }}",
-    "sentinel_incident_labels": "{{ properties.labels | map(attribute='labelName') | join(',') | replace('"', '\\"') | replace('\\', '\\\\') }}",
-    "sentinel_incident_tactics": "{{ properties.additionalData.tactics|join(' ') }}"
+    "sentinel_incident_last_modified_time_utc": {{ properties.lastModifiedTimeUtc|soar_datetimeformat }},
+    "sentinel_incident_status": "{{ properties.status }}"
+    {% if properties.classification %}
+      ,"sentinel_incident_classification": "{{ properties.classification }}"
+    {% endif %}
+    {% if properties.classificationReason %}
+      ,"sentinel_incident_classification_reason": "{{ properties.classificationReason }}"
+    {% endif %}
+    {% if properties.classificationComment %}
+      ,"sentinel_incident_classification_comment": "{{ properties.classificationComment|replace('"', '\\"') }}"
+    {% endif %}
+    {% if properties.owner.assignedTo %}
+      ,"sentinel_incident_assigned_to": "{{ properties.owner.assignedTo }}"
+    {% endif %}
+    {% if properties.labels %}
+      ,"sentinel_incident_labels": "{{ properties.labels | map(attribute='labelName') | join(',') | replace('"', '\\"') | replace('\\', '\\\\') }}"
+    {% endif %}
+    {% if properties.additionalData.tactics %}
+      ,"sentinel_incident_tactics": "{{ properties.additionalData.tactics|join(' ') }}"
+    {% endif %}
   }
 }
 ```
@@ -1059,7 +1086,7 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 {
     {# JINJA template for closing a new Sentinel incident from a SOAR incident. #}
     "properties": {
-        "title": "{{ name|soar_splitpart(1)}}",
+        "title": "{{ name|soar_splitpart(1)|replace('"', '\\"') }}",
         "severity": "{{ severity_code|string|soar_substitute('{"Low": "Low", "Medium": "Medium", "High": "High"}') }}",
         "status": "Closed",
         "classification": "{{ resolution_id|string|soar_substitute('{"Unresolved": "Undetermined", "Duplicate": "FalsePositive", "Not an Issue": "BenignPositive", "Resolved": "TruePositive"}') }}",
@@ -1089,11 +1116,11 @@ If your Sentinel login users differ from SOAR users, modify the `owner_id` mappi
 {
     {# JINJA template for updating a new Sentinel incident from a SOAR incident. #}
     "properties": {
-        "title": "{{ name|soar_splitpart(1) }}",
+        "title": "{{ name|soar_splitpart(1)|replace('"', '\\"') }}",
         "severity": "{{ severity_code|string|soar_substitute('{"Low": "Low", "Medium": "Medium", "High": "High"}') }}",
         "status": "{{ properties.sentinel_incident_status }}"
         {% if description %}
-            ,"description": "{{ description|striptags|safe }}"
+            ,"description": "{{ description|replace('"', '\\"')|striptags|safe }}"
         {% endif %}
         {% if properties.sentinel_incident_labels %}
             {% set label_list = properties.sentinel_incident_labels.split(',') -%}
@@ -1167,6 +1194,6 @@ that are commented out. The example template shows all Sentinel incident propert
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
- 
+
 ### For Support
 This is a IBM supported App. For assistance, see [https://ibm.com/mysupport](https://ibm.com/mysupport).

@@ -442,10 +442,6 @@
 <hr class="docutils" />
 <section id="release-notes">
 <h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
-<!--
-  Specify all changes in this release. Do not remove the release 
-  notes of a previous release
--->
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -455,51 +451,55 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>2.1.3</p></td>
+<tr class="row-even"><td><p>2.2.0</p></td>
+<td><p>02/2025</p></td>
+<td><p><ul><li>Add custom incident field: sentinel_incident_last_update to track updates from sentinel</li><li>Add app.config setting: clear_datatable=True</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.1.3</p></td>
 <td><p>12/2024</p></td>
 <td><p>Bug fix for Sentinel URL entities.</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.1.2</p></td>
+<tr class="row-even"><td><p>2.1.2</p></td>
 <td><p>10/2024</p></td>
 <td><p>Added retry logic to SOAR incident updates</p></td>
 </tr>
-<tr class="row-even"><td><p>2.1.1</p></td>
+<tr class="row-odd"><td><p>2.1.1</p></td>
 <td><p>07/2024</p></td>
 <td><p>Correction to documentation on template references</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.1.0</p></td>
+<tr class="row-even"><td><p>2.1.0</p></td>
 <td><p>03/2024</p></td>
 <td><p>Add support for multi-tenancy.</p></td>
 </tr>
-<tr class="row-even"><td><p>2.0.0</p></td>
+<tr class="row-odd"><td><p>2.0.0</p></td>
 <td><p>01/2024</p></td>
 <td><p><ul><li>Bug fix in jinja template, “incident_update_template.jinja”, for escaping double quotation mark when rendering in json.</li><li>Update jinja templates to use values rather than IDs.</li><li>Add new setting in the app.config to set api-version.</li><li>Add the ability to use a jinja template as the poller incident filter.</li></ul></p></td>
 </tr>
-<tr class="row-odd"><td><p>1.2.0</p></td>
+<tr class="row-even"><td><p>1.2.0</p></td>
 <td><p>07/2023</p></td>
 <td><p>Add config setting to not close SOAR case was Sentinel incident is closed</p></td>
 </tr>
-<tr class="row-even"><td><p>1.1.0</p></td>
+<tr class="row-odd"><td><p>1.1.0</p></td>
 <td><p>04/2023</p></td>
 <td><p>Update function ‘Sentinel Update Incident’</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.4</p></td>
+<tr class="row-even"><td><p>1.0.4</p></td>
 <td><p>06/2022</p></td>
 <td><p>Several template fixes for tags (labels) and severity</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.3</p></td>
+<tr class="row-odd"><td><p>1.0.3</p></td>
 <td><p>04/2022</p></td>
 <td><p>Support for app.config verify and cert parameters</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.2</p></td>
+<tr class="row-even"><td><p>1.0.2</p></td>
 <td><p>02/2022</p></td>
 <td><p>Bug fix in some situations updating Sentinel from SOAR</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.1</p></td>
+<tr class="row-odd"><td><p>1.0.1</p></td>
 <td><p>11/2021</p></td>
 <td><p>Minor bug fixes and datatable improvements</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.0</p></td>
+<tr class="row-even"><td><p>1.0.0</p></td>
 <td><p>08/2021</p></td>
 <td><p>Initial Release</p></td>
 </tr>
@@ -552,14 +552,14 @@ Sentinel entities are exposed as artifacts for further investigation.</p>
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.9097</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">50.0.9097</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=50.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=51.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -622,7 +622,7 @@ Sentinel entities are exposed as artifacts for further investigation.</p>
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
 <li><p>jinja2~=3.1.0</p></li>
-<li><p>resilient_circuits&gt;=50.0.0</p></li>
+<li><p>resilient_circuits&gt;=51.0.0</p></li>
 <li><p>simplejson~=3.19.0</p></li>
 </ul>
 </section>
@@ -698,17 +698,22 @@ Additional package dependencies may exist for each of these packages:</p>
 <td><p><code class="docutils literal notranslate"><span class="pre">2023-11-01-preview</span></code></p></td>
 <td><p><em>API version to use when making API calls to Microsoft Sentinel. Sentinel API versions can be found https://learn.microsoft.com/en-us/rest/api/securityinsights/api-versions</em></p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>https_proxy</strong></p></td>
+<tr class="row-odd"><td><p><strong>clear_datatable</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p><em>True or False. Clear Alerts and Entities data tables when refreshed.</em></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>https_proxy</strong></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">https:/your.proxy.com</span></code></p></td>
 <td><p>-</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>http_proxy</strong></p></td>
+<tr class="row-odd"><td><p><strong>http_proxy</strong></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">http:/your.proxy.com</span></code></p></td>
 <td><p>-</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>verify</strong></p></td>
+<tr class="row-even"><td><p><strong>verify</strong></p></td>
 <td class="text-center"><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
 <td><p><em>verify= false or /path/to/client_certificate.pem</em></p></td>
@@ -1801,6 +1806,20 @@ SOAR Comments with Sentinel.</p>
 <td><p>-</p></td>
 <td><p>-</p></td>
 </tr>
+<tr class="row-even"><td><p>Sentinel Incident Last Modified Time UTC</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sentinel_incident_last_modified_time_utc</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">date</span> <span class="pre">time</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>sentinel Incident Last Update</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sentinel_incident_last_update</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">date</span> <span class="pre">time</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>-</p></td>
+</tr>
 <tr class="row-even"><td><p>Sentinel Incident ID</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">sentinel_incident_id</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
@@ -1897,6 +1916,7 @@ mapping:</p>
     <span class="s2">&quot;sentinel_incident_number&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ name|e }}&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.incidentNumber }}&quot;</span><span class="p">,</span>
     <span class="s2">&quot;sentinel_incident_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.status }}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;sentinel_incident_last_modified_time_utc&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">lastModifiedTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}},</span>
     <span class="s2">&quot;sentinel_incident_url&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;a target=&#39;blank&#39; href=&#39;{{ properties.incidentUrl }}&#39;&gt;Sentinel Incident&lt;/a&gt;&quot;</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classification</span> <span class="o">%</span><span class="p">}</span>
       <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classification }}&quot;</span>
@@ -1932,7 +1952,6 @@ mapping:</p>
     <span class="s2">&quot;resolution_summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Closed by Sentinel&quot;</span>
   <span class="p">{</span><span class="o">%</span><span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
 <span class="p">}</span>
-
 </pre></div>
 </div>
 </section>
@@ -1940,22 +1959,37 @@ mapping:</p>
 <h3>incident_update_template.jinja<a class="headerlink" href="#incident-update-template-jinja" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="p">{</span><span class="c1"># JINJA template for updating a new SOAR incident from a Sentinel incident. #}</span>
-  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.description|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span>
-  <span class="p">},</span>
+  <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">description</span> <span class="o">%</span><span class="p">}</span>
+    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.description|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span>
+    <span class="p">},</span>
+  <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
   <span class="p">{</span><span class="c1"># if Sentinel users are different than SOAR users, consider using a mapping table using soar_substitute: #}</span>
   <span class="p">{</span><span class="c1"># &quot;owner_id&quot;: &quot;{{ properties.owner.userPrincipalName|soar_substitute(&#39;{&quot;sentinel_user1@co.com&quot;: &quot;soar_user1@ent.com&quot;, &quot;sentinel_user2@co.com&quot;: &quot;soar_user2@ent.com&quot;, &quot;DEFAULT&quot;: &quot;default_user@ent.com&quot; }&#39;) }}&quot;, #}</span>
   <span class="s2">&quot;plan_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.status|soar_substitute(&#39;{&quot;</span><span class="n">Closed</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;, &quot;</span><span class="n">Active</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;, &quot;</span><span class="n">New</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
   <span class="s2">&quot;severity_code&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.severity|soar_substitute(&#39;{&quot;</span><span class="n">Informational</span><span class="s2">&quot;: &quot;</span><span class="n">Low</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
   <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;sentinel_incident_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.status }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classification }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_classification_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationReason }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_classification_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationComment|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_assigned_to&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.owner.assignedTo }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_labels&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.labels | map(attribute=&#39;labelName&#39;) | join(&#39;,&#39;) | replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) | replace(&#39;</span><span class="se">\\</span><span class="s2">&#39;, &#39;</span><span class="se">\\\\</span><span class="s2">&#39;) }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_tactics&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.additionalData.tactics|join(&#39; &#39;) }}&quot;</span>
+    <span class="s2">&quot;sentinel_incident_last_modified_time_utc&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">lastModifiedTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classification</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classification }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classificationReason</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationReason }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classificationComment</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationComment|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">owner</span><span class="o">.</span><span class="n">assignedTo</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_assigned_to&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.owner.assignedTo }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">labels</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_labels&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.labels | map(attribute=&#39;labelName&#39;) | join(&#39;,&#39;) | replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) | replace(&#39;</span><span class="se">\\</span><span class="s2">&#39;, &#39;</span><span class="se">\\\\</span><span class="s2">&#39;) }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">additionalData</span><span class="o">.</span><span class="n">tactics</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_tactics&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.additionalData.tactics|join(&#39; &#39;) }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1969,13 +2003,26 @@ mapping:</p>
   <span class="s2">&quot;resolution_id&quot;</span><span class="p">:</span> <span class="s2">&quot;Resolved&quot;</span><span class="p">,</span>
   <span class="s2">&quot;resolution_summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Closed by Sentinel&quot;</span><span class="p">,</span>
   <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;sentinel_incident_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.status }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classification }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_classification_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationReason }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_classification_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationComment|safe }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_assigned_to&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.owner.assignedTo }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_labels&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.labels | map(attribute=&#39;labelName&#39;) | join(&#39;,&#39;) | replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) | replace(&#39;</span><span class="se">\\</span><span class="s2">&#39;, &#39;</span><span class="se">\\\\</span><span class="s2">&#39;) }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_tactics&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.additionalData.tactics|join(&#39; &#39;) }}&quot;</span>
+    <span class="s2">&quot;sentinel_incident_last_modified_time_utc&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">lastModifiedTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}},</span>
+    <span class="s2">&quot;sentinel_incident_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.status }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classification</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classification }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classificationReason</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationReason }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classificationComment</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationComment|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">owner</span><span class="o">.</span><span class="n">assignedTo</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_assigned_to&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.owner.assignedTo }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">labels</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_labels&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.labels | map(attribute=&#39;labelName&#39;) | join(&#39;,&#39;) | replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) | replace(&#39;</span><span class="se">\\</span><span class="s2">&#39;, &#39;</span><span class="se">\\\\</span><span class="s2">&#39;) }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">additionalData</span><span class="o">.</span><span class="n">tactics</span> <span class="o">%</span><span class="p">}</span>
+      <span class="p">,</span><span class="s2">&quot;sentinel_incident_tactics&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.additionalData.tactics|join(&#39; &#39;) }}&quot;</span>
+    <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1986,7 +2033,7 @@ mapping:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="p">{</span><span class="c1"># JINJA template for closing a new Sentinel incident from a SOAR incident. #}</span>
     <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ name|soar_splitpart(1)}}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ name|soar_splitpart(1)|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span><span class="p">,</span>
         <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ severity_code|string|soar_substitute(&#39;{&quot;</span><span class="n">Low</span><span class="s2">&quot;: &quot;</span><span class="n">Low</span><span class="s2">&quot;, &quot;</span><span class="n">Medium</span><span class="s2">&quot;: &quot;</span><span class="n">Medium</span><span class="s2">&quot;, &quot;</span><span class="n">High</span><span class="s2">&quot;: &quot;</span><span class="n">High</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
         <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Closed&quot;</span><span class="p">,</span>
         <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ resolution_id|string|soar_substitute(&#39;{&quot;</span><span class="n">Unresolved</span><span class="s2">&quot;: &quot;</span><span class="n">Undetermined</span><span class="s2">&quot;, &quot;</span><span class="n">Duplicate</span><span class="s2">&quot;: &quot;</span><span class="n">FalsePositive</span><span class="s2">&quot;, &quot;</span><span class="n">Not</span> <span class="n">an</span> <span class="n">Issue</span><span class="s2">&quot;: &quot;</span><span class="n">BenignPositive</span><span class="s2">&quot;, &quot;</span><span class="n">Resolved</span><span class="s2">&quot;: &quot;</span><span class="n">TruePositive</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
@@ -2017,11 +2064,11 @@ mapping:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="p">{</span><span class="c1"># JINJA template for updating a new Sentinel incident from a SOAR incident. #}</span>
     <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ name|soar_splitpart(1) }}&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ name|soar_splitpart(1)|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span><span class="p">,</span>
         <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ severity_code|string|soar_substitute(&#39;{&quot;</span><span class="n">Low</span><span class="s2">&quot;: &quot;</span><span class="n">Low</span><span class="s2">&quot;, &quot;</span><span class="n">Medium</span><span class="s2">&quot;: &quot;</span><span class="n">Medium</span><span class="s2">&quot;, &quot;</span><span class="n">High</span><span class="s2">&quot;: &quot;</span><span class="n">High</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
         <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.sentinel_incident_status }}&quot;</span>
         <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">description</span> <span class="o">%</span><span class="p">}</span>
-            <span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ description|striptags|safe }}&quot;</span>
+            <span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ description|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;)|striptags|safe }}&quot;</span>
         <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
         <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_labels</span> <span class="o">%</span><span class="p">}</span>
             <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">label_list</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_labels</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
