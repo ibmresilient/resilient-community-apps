@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1712774320183,
+  "export_date": 1742840651123,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -18,7 +18,7 @@
       "deprecated": false,
       "export_key": "__function/sentinel_incident_id",
       "hide_notification": false,
-      "id": 5171,
+      "id": 5697,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -47,7 +47,7 @@
       "deprecated": false,
       "export_key": "__function/sentinel_incident_comment",
       "hide_notification": false,
-      "id": 5172,
+      "id": 5698,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -77,7 +77,7 @@
       "deprecated": false,
       "export_key": "__function/sentinel_profile",
       "hide_notification": false,
-      "id": 5173,
+      "id": 5699,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -106,7 +106,7 @@
       "deprecated": false,
       "export_key": "__function/sentinel_label",
       "hide_notification": false,
-      "id": 5178,
+      "id": 5700,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -135,7 +135,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 5174,
+      "id": 5701,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -162,9 +162,39 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/soar_incident_id",
+      "hide_notification": false,
+      "id": 5765,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "soar_incident_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "soar_incident_id",
+      "tooltip": "SOAR incident ID",
+      "type_id": 11,
+      "uuid": "68aa75c8-913a-4f11-ac54-4f8225c83eb0",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "incident/sentinel_incident_classification_comment",
       "hide_notification": false,
-      "id": 5140,
+      "id": 5666,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -194,7 +224,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_assigned_to",
       "hide_notification": false,
-      "id": 5141,
+      "id": 5667,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -224,7 +254,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_classification",
       "hide_notification": false,
-      "id": 5142,
+      "id": 5668,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -254,7 +284,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_status",
       "hide_notification": false,
-      "id": 5143,
+      "id": 5669,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -283,7 +313,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_classification_reason",
       "hide_notification": false,
-      "id": 5144,
+      "id": 5670,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -313,7 +343,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_number",
       "hide_notification": false,
-      "id": 5145,
+      "id": 5671,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -340,9 +370,39 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "incident/sentinel_incident_last_modified_time_utc",
+      "hide_notification": false,
+      "id": 5764,
+      "input_type": "datetimepicker",
+      "internal": false,
+      "is_tracked": false,
+      "name": "sentinel_incident_last_modified_time_utc",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": "properties",
+      "read_only": false,
+      "rich_text": false,
+      "short_text": "",
+      "tags": [],
+      "templates": [],
+      "text": "Sentinel Incident Last Modified Time UTC",
+      "tooltip": "The UTC time the Sentinel incident was modified last.",
+      "type_id": 0,
+      "uuid": "fd27f28a-f7a1-491e-8bd2-cfc0483eea9c",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "incident/sentinel_incident_id",
       "hide_notification": false,
-      "id": 5146,
+      "id": 5672,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -371,7 +431,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_tactics",
       "hide_notification": false,
-      "id": 5147,
+      "id": 5673,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -400,7 +460,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_profile",
       "hide_notification": false,
-      "id": 5148,
+      "id": 5674,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -430,7 +490,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_url",
       "hide_notification": false,
-      "id": 5149,
+      "id": 5675,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -459,7 +519,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_label",
       "hide_notification": false,
-      "id": 5177,
+      "id": 5676,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -489,7 +549,7 @@
       "deprecated": false,
       "export_key": "incident/sentinel_incident_labels",
       "hide_notification": false,
-      "id": 5150,
+      "id": 5677,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -522,7 +582,7 @@
   ],
   "functions": [
     {
-      "created_date": 1711540483865,
+      "created_date": 1742309374625,
       "description": {
         "content": "Create a comment for a given Sentinel incident. This is used by a playbook to automatically sync\nSOAR Comments with Sentinel.",
         "format": "text"
@@ -530,14 +590,14 @@
       "destination_handle": "fn_microsoft_sentinel",
       "display_name": "Sentinel Add Incident Comment",
       "export_key": "sentinel_add_incident_comment",
-      "id": 76,
+      "id": 119,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "c@example.com",
+        "id": 32,
+        "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712774225924,
+      "last_modified_time": 1742309374625,
       "name": "sentinel_add_incident_comment",
       "output_description": {
         "content": null,
@@ -545,7 +605,7 @@
       },
       "tags": [],
       "uuid": "1c88215e-970d-49bc-97ce-e914ffa63b3f",
-      "version": 2,
+      "version": 0,
       "view_items": [
         {
           "content": "b39c86f1-d5de-40f9-886a-054304aa9b22",
@@ -583,7 +643,7 @@
       "workflows": []
     },
     {
-      "created_date": 1711540483908,
+      "created_date": 1742309375032,
       "description": {
         "content": "Sentinel Get Incident Alerts",
         "format": "text"
@@ -591,14 +651,14 @@
       "destination_handle": "fn_microsoft_sentinel",
       "display_name": "Sentinel Get Incident Alerts",
       "export_key": "sentinel_get_incident_alerts",
-      "id": 77,
+      "id": 120,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "c@example.com",
+        "id": 32,
+        "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1711987039158,
+      "last_modified_time": 1742840304863,
       "name": "sentinel_get_incident_alerts",
       "output_description": {
         "content": null,
@@ -631,12 +691,20 @@
           "show_if": null,
           "show_link_header": false,
           "step_label": null
+        },
+        {
+          "content": "68aa75c8-913a-4f11-ac54-4f8225c83eb0",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
         }
       ],
       "workflows": []
     },
     {
-      "created_date": 1711540483954,
+      "created_date": 1742309375446,
       "description": {
         "content": "Get Comments from a Sentinel Incident.",
         "format": "text"
@@ -644,14 +712,14 @@
       "destination_handle": "fn_microsoft_sentinel",
       "display_name": "Sentinel Get Incident Comments",
       "export_key": "sentinel_get_incident_comments",
-      "id": 78,
+      "id": 121,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "c@example.com",
+        "id": 32,
+        "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1711987044566,
+      "last_modified_time": 1742309375446,
       "name": "sentinel_get_incident_comments",
       "output_description": {
         "content": null,
@@ -659,7 +727,7 @@
       },
       "tags": [],
       "uuid": "5753fe01-6c13-404b-9df2-e1308c3a1f04",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "5eaaeb87-cb70-4877-aa5e-0a5b10f73f3a",
@@ -697,7 +765,7 @@
       "workflows": []
     },
     {
-      "created_date": 1711540484000,
+      "created_date": 1742309375862,
       "description": {
         "content": "Get the Entities associated with a Sentinel Incident.",
         "format": "text"
@@ -705,14 +773,14 @@
       "destination_handle": "fn_microsoft_sentinel",
       "display_name": "Sentinel Get Incident Entities",
       "export_key": "sentinel_get_incident_entities",
-      "id": 79,
+      "id": 122,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "c@example.com",
+        "id": 32,
+        "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1711987052142,
+      "last_modified_time": 1742840304863,
       "name": "sentinel_get_incident_entities",
       "output_description": {
         "content": null,
@@ -745,12 +813,20 @@
           "show_if": null,
           "show_link_header": false,
           "step_label": null
+        },
+        {
+          "content": "68aa75c8-913a-4f11-ac54-4f8225c83eb0",
+          "element": "field_uuid",
+          "field_type": "__function",
+          "show_if": null,
+          "show_link_header": false,
+          "step_label": null
         }
       ],
       "workflows": []
     },
     {
-      "created_date": 1711540484044,
+      "created_date": 1742309376204,
       "description": {
         "content": "Update / Close a Sentinel incident based on Sentinel field changes in the SOAR Incident.",
         "format": "text"
@@ -758,14 +834,14 @@
       "destination_handle": "fn_microsoft_sentinel",
       "display_name": "Sentinel Update Incident",
       "export_key": "sentinel_update_incident",
-      "id": 80,
+      "id": 123,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "c@example.com",
+        "id": 32,
+        "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1711987057800,
+      "last_modified_time": 1742309376204,
       "name": "sentinel_update_incident",
       "output_description": {
         "content": null,
@@ -773,7 +849,7 @@
       },
       "tags": [],
       "uuid": "e41efc23-c78d-4215-8a77-dfb68eca0548",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "5eaaeb87-cb70-4877-aa5e-0a5b10f73f3a",
@@ -813,13 +889,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 17,
+  "id": 26,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1712774318711,
+      "create_date": 1742840649404,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -828,7 +904,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1712774318711,
+      "update_date": 1742840649404,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -844,7 +920,7 @@
       "programmatic_name": "fn_microsoft_sentinel",
       "tags": [],
       "users": [
-        "c@example.com"
+        "admin@example.com"
       ],
       "uuid": "2aa1bbb1-09bc-4a4b-a47f-7bb5195ce878"
     }
@@ -899,14 +975,14 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 6,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_dbba4542_f026_459f_8dcb_7b80ee2bafd2\" isExecutable=\"true\" name=\"playbook_dbba4542_f026_459f_8dcb_7b80ee2bafd2\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0o1p1w5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Sentinel Add Incident Comment\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"1c88215e-970d-49bc-97ce-e914ffa63b3f\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinel_incident_comment = note.text.content\\ninputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\nif incident.properties.sentinel_profile:\\n  inputs.sentinel_profile = incident.properties.sentinel_profile\\nif incident.properties.sentinel_label:\\n  inputs.sentinel_label = incident.properties.sentinel_label\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"comment_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0o1p1w5\u003c/incoming\u003e\u003coutgoing\u003eFlow_1xv9wcp\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0o1p1w5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Sentinel post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"b4ad6140-7b47-4261-a00f-3309ceaad07f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1xv9wcp\u003c/incoming\u003e\u003coutgoing\u003eFlow_1mcj79p\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1xv9wcp\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1mcj79p\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1mcj79p\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_dbba4542_f026_459f_8dcb_7b80ee2bafd2\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mcj79p\" id=\"Flow_1mcj79p_di\"\u003e\u003comgdi:waypoint x=\"1180\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"1180\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xv9wcp\" id=\"Flow_1xv9wcp_di\"\u003e\u003comgdi:waypoint x=\"1180\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"1180\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0o1p1w5\" id=\"Flow_0o1p1w5_di\"\u003e\u003comgdi:waypoint x=\"1180\" y=\"136\"/\u003e\u003comgdi:waypoint x=\"1180\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"162.5667\" x=\"1099\" y=\"84\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"1082\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"1082\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"1114\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1711540484422,
+      "create_date": 1742309379556,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "c@example.com",
+        "id": 32,
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_dbba4542_f026_459f_8dcb_7b80ee2bafd2",
@@ -942,27 +1018,27 @@
         "uuid": "b02d57e7-97bb-4416-b97f-c3e3233fde0e"
       },
       "has_logical_errors": false,
-      "id": 62,
+      "id": 115,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "c@example.com",
+        "id": 32,
+        "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712774169233,
+      "last_modified_time": 1742840582654,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1711540484523,
+          "created_date": 1742309380237,
           "description": "",
           "enabled": false,
           "export_key": "Sentinel post-process",
-          "id": 81,
+          "id": 135,
           "language": "python3",
-          "last_modified_by": "c@example.com",
-          "last_modified_time": 1711540484523,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1742309380237,
           "name": "Sentinel post-process",
           "object_type": "note",
           "playbook_handle": "sentinel_comment_sync",
@@ -977,7 +1053,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_dbba4542-f026-459f-8dcb-7b80ee2bafd2",
-        "id": 62,
+        "id": 118,
         "name": "playbook_dbba4542_f026_459f_8dcb_7b80ee2bafd2",
         "type": "playbook",
         "uuid": "1ed1bce5-a768-4eda-9b7d-61ebf7b7b262"
@@ -985,19 +1061,19 @@
       "tags": [],
       "type": "default",
       "uuid": "dbba4542-f026-459f-8dcb-7b80ee2bafd2",
-      "version": 10
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_c4ea941f_9216_47c2_8088_c5977dfa37bb\" isExecutable=\"true\" name=\"playbook_c4ea941f_9216_47c2_8088_c5977dfa37bb\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_044f2w8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Sentinel Get Incident Alerts\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3cc8ebb2-b61f-449a-a7fb-efc3350f755c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\nif incident.properties.sentinel_profile:\\n  inputs.sentinel_profile = incident.properties.sentinel_profile\\nif incident.properties.sentinel_label:\\n  inputs.sentinel_label = incident.properties.sentinel_label\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"alerts_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_044f2w8\u003c/incoming\u003e\u003coutgoing\u003eFlow_17arpq6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_044f2w8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1d54iqn\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Sentinel post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"94a49f82-d230-406a-8b6e-fa18cc783f8a\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_17arpq6\u003c/incoming\u003e\u003coutgoing\u003eFlow_1d54iqn\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_17arpq6\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_4\"/\u003e\u003csequenceFlow id=\"Flow_1d54iqn\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_c4ea941f_9216_47c2_8088_c5977dfa37bb\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1d54iqn\" id=\"Flow_1d54iqn_di\"\u003e\u003comgdi:waypoint x=\"1190\" y=\"452\"/\u003e\u003comgdi:waypoint x=\"1190\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17arpq6\" id=\"Flow_17arpq6_di\"\u003e\u003comgdi:waypoint x=\"1190\" y=\"332\"/\u003e\u003comgdi:waypoint x=\"1190\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_044f2w8\" id=\"Flow_044f2w8_di\"\u003e\u003comgdi:waypoint x=\"1190\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"1190\" y=\"248\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"1096\" y=\"154\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"1092\" y=\"248\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"1124\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"1091.5\" y=\"368\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_c4ea941f_9216_47c2_8088_c5977dfa37bb\" isExecutable=\"true\" name=\"playbook_c4ea941f_9216_47c2_8088_c5977dfa37bb\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_044f2w8\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Sentinel Get Incident Alerts\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3cc8ebb2-b61f-449a-a7fb-efc3350f755c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\nif incident.properties.sentinel_profile:\\n  inputs.sentinel_profile = incident.properties.sentinel_profile\\nif incident.properties.sentinel_label:\\n  inputs.sentinel_label = incident.properties.sentinel_label\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"alerts_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_044f2w8\u003c/incoming\u003e\u003coutgoing\u003eFlow_17arpq6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_044f2w8\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1d54iqn\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Sentinel post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"94a49f82-d230-406a-8b6e-fa18cc783f8a\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_17arpq6\u003c/incoming\u003e\u003coutgoing\u003eFlow_1d54iqn\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_17arpq6\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_4\"/\u003e\u003csequenceFlow id=\"Flow_1d54iqn\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_c4ea941f_9216_47c2_8088_c5977dfa37bb\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1d54iqn\" id=\"Flow_1d54iqn_di\"\u003e\u003comgdi:waypoint x=\"1190\" y=\"452\"/\u003e\u003comgdi:waypoint x=\"1190\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17arpq6\" id=\"Flow_17arpq6_di\"\u003e\u003comgdi:waypoint x=\"1190\" y=\"332\"/\u003e\u003comgdi:waypoint x=\"1190\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_044f2w8\" id=\"Flow_044f2w8_di\"\u003e\u003comgdi:waypoint x=\"1190\" y=\"206\"/\u003e\u003comgdi:waypoint x=\"1190\" y=\"248\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"1096\" y=\"154\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"1092\" y=\"248\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"1124\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"1091.5\" y=\"368\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1711540484887,
+      "create_date": 1742309382922,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "c@example.com",
+        "id": 32,
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_c4ea941f_9216_47c2_8088_c5977dfa37bb",
@@ -1033,27 +1109,27 @@
         "uuid": "058c5012-cdc7-4dba-ae77-314546ae6d7f"
       },
       "has_logical_errors": false,
-      "id": 63,
+      "id": 116,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "c@example.com",
+        "id": 32,
+        "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712773314579,
+      "last_modified_time": 1742840584046,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1711540484984,
+          "created_date": 1742309383595,
           "description": "",
           "enabled": false,
           "export_key": "Sentinel post-process",
-          "id": 82,
+          "id": 136,
           "language": "python3",
-          "last_modified_by": "c@example.com",
-          "last_modified_time": 1711540484984,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1742309383595,
           "name": "Sentinel post-process",
           "object_type": "incident",
           "playbook_handle": "sentinel_get_incident_alerts",
@@ -1098,7 +1174,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_c4ea941f-9216-47c2-8088-c5977dfa37bb",
-        "id": 63,
+        "id": 119,
         "name": "playbook_c4ea941f_9216_47c2_8088_c5977dfa37bb",
         "type": "playbook",
         "uuid": "3220bcad-3eea-4567-8647-7f22b526647c"
@@ -1106,19 +1182,19 @@
       "tags": [],
       "type": "default",
       "uuid": "c4ea941f-9216-47c2-8088-c5977dfa37bb",
-      "version": 8
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_67810b29_91fb_48aa_b1e6_636dd732fbb0\" isExecutable=\"true\" name=\"playbook_67810b29_91fb_48aa_b1e6_636dd732fbb0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_038q466\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Sentinel Get Incident Comments\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"5753fe01-6c13-404b-9df2-e1308c3a1f04\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\ninputs.incident_id = incident.id\\nif incident.properties.sentinel_profile:\\n  inputs.sentinel_profile = incident.properties.sentinel_profile\\nif incident.properties.sentinel_label:\\n  inputs.sentinel_label = incident.properties.sentinel_label\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"comment_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_038q466\u003c/incoming\u003e\u003coutgoing\u003eFlow_08lh47c\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_038q466\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Sentinel post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"91004892-bf19-43dd-aaab-d69465146ffa\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_08lh47c\u003c/incoming\u003e\u003coutgoing\u003eFlow_0w0j15z\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_08lh47c\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0w0j15z\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0w0j15z\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_67810b29_91fb_48aa_b1e6_636dd732fbb0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0w0j15z\" id=\"Flow_0w0j15z_di\"\u003e\u003comgdi:waypoint x=\"1050\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"1050\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08lh47c\" id=\"Flow_08lh47c_di\"\u003e\u003comgdi:waypoint x=\"1050\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"1050\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_038q466\" id=\"Flow_038q466_di\"\u003e\u003comgdi:waypoint x=\"1050\" y=\"146\"/\u003e\u003comgdi:waypoint x=\"1050\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"956\" y=\"94\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"952\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"952\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"984\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1711540485286,
+      "create_date": 1742309386459,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "c@example.com",
+        "id": 32,
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_67810b29_91fb_48aa_b1e6_636dd732fbb0",
@@ -1154,27 +1230,27 @@
         "uuid": "e5c46c92-9f97-4ca6-af5b-87b762b4b0f7"
       },
       "has_logical_errors": false,
-      "id": 64,
+      "id": 117,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "c@example.com",
+        "id": 32,
+        "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712773327789,
+      "last_modified_time": 1742840585277,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1711540485377,
+          "created_date": 1742309387208,
           "description": "",
           "enabled": false,
           "export_key": "Sentinel post-process",
-          "id": 83,
+          "id": 137,
           "language": "python3",
-          "last_modified_by": "c@example.com",
-          "last_modified_time": 1711540485377,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1742309387208,
           "name": "Sentinel post-process",
           "object_type": "incident",
           "playbook_handle": "sentinel_get_incident_comments",
@@ -1219,7 +1295,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_67810b29-91fb-48aa-b1e6-636dd732fbb0",
-        "id": 64,
+        "id": 120,
         "name": "playbook_67810b29_91fb_48aa_b1e6_636dd732fbb0",
         "type": "playbook",
         "uuid": "537ff1d4-4806-44e3-9cea-9bc5dacd0b18"
@@ -1227,19 +1303,19 @@
       "tags": [],
       "type": "default",
       "uuid": "67810b29-91fb-48aa-b1e6-636dd732fbb0",
-      "version": 7
+      "version": 5
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 6,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b3df1f1c_42d2_41f5_ad51_f34663645fef\" isExecutable=\"true\" name=\"playbook_b3df1f1c_42d2_41f5_ad51_f34663645fef\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0qk5o8i\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Sentinel Get Incident Entities\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"92ff2bad-f427-472f-bca1-f071d687fbb5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\nif incident.properties.sentinel_profile:\\n  inputs.sentinel_profile = incident.properties.sentinel_profile\\nif incident.properties.sentinel_label:\\n  inputs.sentinel_label = incident.properties.sentinel_label\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"entities_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0qk5o8i\u003c/incoming\u003e\u003coutgoing\u003eFlow_12eoo93\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0qk5o8i\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1ozrr8q\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"sentinel post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"75c26011-cf6d-456f-8347-1e022a3a47b3\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_12eoo93\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ozrr8q\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_12eoo93\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_4\"/\u003e\u003csequenceFlow id=\"Flow_1ozrr8q\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b3df1f1c_42d2_41f5_ad51_f34663645fef\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ozrr8q\" id=\"Flow_1ozrr8q_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"404\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_12eoo93\" id=\"Flow_12eoo93_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qk5o8i\" id=\"Flow_0qk5o8i_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"404\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"277.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b3df1f1c_42d2_41f5_ad51_f34663645fef\" isExecutable=\"true\" name=\"playbook_b3df1f1c_42d2_41f5_ad51_f34663645fef\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0qk5o8i\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Sentinel Get Incident Entities\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"92ff2bad-f427-472f-bca1-f071d687fbb5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\nif incident.properties.sentinel_profile:\\n  inputs.sentinel_profile = incident.properties.sentinel_profile\\nif incident.properties.sentinel_label:\\n  inputs.sentinel_label = incident.properties.sentinel_label\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"entities_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0qk5o8i\u003c/incoming\u003e\u003coutgoing\u003eFlow_12eoo93\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0qk5o8i\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1ozrr8q\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"sentinel post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"75c26011-cf6d-456f-8347-1e022a3a47b3\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_12eoo93\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ozrr8q\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_12eoo93\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_4\"/\u003e\u003csequenceFlow id=\"Flow_1ozrr8q\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b3df1f1c_42d2_41f5_ad51_f34663645fef\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ozrr8q\" id=\"Flow_1ozrr8q_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"362\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"404\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_12eoo93\" id=\"Flow_12eoo93_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"278\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qk5o8i\" id=\"Flow_0qk5o8i_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"404\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"277.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1711540485696,
+      "create_date": 1742309389554,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "c@example.com",
+        "id": 32,
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_b3df1f1c_42d2_41f5_ad51_f34663645fef",
@@ -1275,27 +1351,27 @@
         "uuid": "8115cf1a-014d-487e-a734-3582a56a565c"
       },
       "has_logical_errors": false,
-      "id": 65,
+      "id": 118,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "c@example.com",
+        "id": 32,
+        "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712773342847,
+      "last_modified_time": 1742840586532,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1711540485786,
+          "created_date": 1742309390218,
           "description": "",
           "enabled": false,
           "export_key": "sentinel post-process",
-          "id": 84,
+          "id": 138,
           "language": "python3",
-          "last_modified_by": "c@example.com",
-          "last_modified_time": 1711540485786,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1742309390218,
           "name": "sentinel post-process",
           "object_type": "incident",
           "playbook_handle": "sentinel_get_incident_entities",
@@ -1340,7 +1416,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_b3df1f1c-42d2-41f5-ad51-f34663645fef",
-        "id": 65,
+        "id": 121,
         "name": "playbook_b3df1f1c_42d2_41f5_ad51_f34663645fef",
         "type": "playbook",
         "uuid": "805ccf89-7288-4837-b429-aaa4478f1dbd"
@@ -1348,7 +1424,7 @@
       "tags": [],
       "type": "default",
       "uuid": "b3df1f1c-42d2-41f5-ad51-f34663645fef",
-      "version": 8
+      "version": 5
     },
     {
       "activation_details": {
@@ -1389,14 +1465,14 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 8,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_33f5f71d_7739_4d4c_80af_d254e6185d88\" isExecutable=\"true\" name=\"playbook_33f5f71d_7739_4d4c_80af_d254e6185d88\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0v4h18a\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1cqxln4\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Sentinel Get Incident Alerts\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3cc8ebb2-b61f-449a-a7fb-efc3350f755c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\nif incident.properties.sentinel_profile:\\n  inputs.sentinel_profile = incident.properties.sentinel_profile\\nif incident.properties.sentinel_label:\\n  inputs.sentinel_label = incident.properties.sentinel_label\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"alerts_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0v4h18a\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xrhq7l\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0v4h18a\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"Sentinel Get Incident Entities\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"92ff2bad-f427-472f-bca1-f071d687fbb5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\nif incident.properties.sentinel_profile:\\n  inputs.sentinel_profile = incident.properties.sentinel_profile\\nif incident.properties.sentinel_label:\\n  inputs.sentinel_label = incident.properties.sentinel_label\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"entities_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1cqxln4\u003c/incoming\u003e\u003coutgoing\u003eFlow_0k0i1s6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1cqxln4\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_4\"/\u003e\u003cendEvent id=\"EndPoint_7\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1hh3zg0\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_8\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_19yae9a\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_9\" name=\"Sentinel alert post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5cb9aa41-7810-423a-9739-c288c930eed7\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xrhq7l\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hh3zg0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0xrhq7l\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_9\"/\u003e\u003csequenceFlow id=\"Flow_1hh3zg0\" sourceRef=\"ScriptTask_9\" targetRef=\"EndPoint_7\"/\u003e\u003cscriptTask id=\"ScriptTask_10\" name=\"Sentinel entities post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"94d6181c-3f19-4fd4-9ddf-414278806e5d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0k0i1s6\u003c/incoming\u003e\u003coutgoing\u003eFlow_19yae9a\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0k0i1s6\" sourceRef=\"ServiceTask_4\" targetRef=\"ScriptTask_10\"/\u003e\u003csequenceFlow id=\"Flow_19yae9a\" sourceRef=\"ScriptTask_10\" targetRef=\"EndPoint_8\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_33f5f71d_7739_4d4c_80af_d254e6185d88\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19yae9a\" id=\"Flow_19yae9a_di\"\u003e\u003comgdi:waypoint x=\"1300\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"1300\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0k0i1s6\" id=\"Flow_0k0i1s6_di\"\u003e\u003comgdi:waypoint x=\"1300\" y=\"322\"/\u003e\u003comgdi:waypoint x=\"1300\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hh3zg0\" id=\"Flow_1hh3zg0_di\"\u003e\u003comgdi:waypoint x=\"900\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xrhq7l\" id=\"Flow_0xrhq7l_di\"\u003e\u003comgdi:waypoint x=\"900\" y=\"322\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1cqxln4\" id=\"Flow_1cqxln4_di\"\u003e\u003comgdi:waypoint x=\"1100\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"1100\" y=\"207\"/\u003e\u003comgdi:waypoint x=\"1300\" y=\"207\"/\u003e\u003comgdi:waypoint x=\"1300\" y=\"238\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0v4h18a\" id=\"Flow_0v4h18a_di\"\u003e\u003comgdi:waypoint x=\"1100\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"1100\" y=\"207\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"207\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"238\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"1006\" y=\"124\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"802\" y=\"238\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"1202\" y=\"238\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_7\" id=\"EndPoint_7_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"834\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_8\" id=\"EndPoint_8_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"1234\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_9\" id=\"ScriptTask_9_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"801.5\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_10\" id=\"ScriptTask_10_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"1201.5\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 3,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_33f5f71d_7739_4d4c_80af_d254e6185d88\" isExecutable=\"true\" name=\"playbook_33f5f71d_7739_4d4c_80af_d254e6185d88\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0v4h18a\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1cqxln4\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Sentinel Get Incident Alerts\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"3cc8ebb2-b61f-449a-a7fb-efc3350f755c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\nif incident.properties.sentinel_profile:\\n  inputs.sentinel_profile = incident.properties.sentinel_profile\\nif incident.properties.sentinel_label:\\n  inputs.sentinel_label = incident.properties.sentinel_label\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"alerts_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0v4h18a\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xrhq7l\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0v4h18a\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"Sentinel Get Incident Entities\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"92ff2bad-f427-472f-bca1-f071d687fbb5\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\nif incident.properties.sentinel_profile:\\n  inputs.sentinel_profile = incident.properties.sentinel_profile\\nif incident.properties.sentinel_label:\\n  inputs.sentinel_label = incident.properties.sentinel_label\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"entities_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1cqxln4\u003c/incoming\u003e\u003coutgoing\u003eFlow_0k0i1s6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1cqxln4\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_4\"/\u003e\u003cendEvent id=\"EndPoint_7\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1hh3zg0\u003c/incoming\u003e\u003c/endEvent\u003e\u003cendEvent id=\"EndPoint_8\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_19yae9a\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_9\" name=\"Sentinel alert post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"5cb9aa41-7810-423a-9739-c288c930eed7\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xrhq7l\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hh3zg0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0xrhq7l\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_9\"/\u003e\u003csequenceFlow id=\"Flow_1hh3zg0\" sourceRef=\"ScriptTask_9\" targetRef=\"EndPoint_7\"/\u003e\u003cscriptTask id=\"ScriptTask_10\" name=\"Sentinel entities post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"94d6181c-3f19-4fd4-9ddf-414278806e5d\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0k0i1s6\u003c/incoming\u003e\u003coutgoing\u003eFlow_19yae9a\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0k0i1s6\" sourceRef=\"ServiceTask_4\" targetRef=\"ScriptTask_10\"/\u003e\u003csequenceFlow id=\"Flow_19yae9a\" sourceRef=\"ScriptTask_10\" targetRef=\"EndPoint_8\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_33f5f71d_7739_4d4c_80af_d254e6185d88\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19yae9a\" id=\"Flow_19yae9a_di\"\u003e\u003comgdi:waypoint x=\"1300\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"1300\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0k0i1s6\" id=\"Flow_0k0i1s6_di\"\u003e\u003comgdi:waypoint x=\"1300\" y=\"322\"/\u003e\u003comgdi:waypoint x=\"1300\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hh3zg0\" id=\"Flow_1hh3zg0_di\"\u003e\u003comgdi:waypoint x=\"900\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"474\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xrhq7l\" id=\"Flow_0xrhq7l_di\"\u003e\u003comgdi:waypoint x=\"900\" y=\"322\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1cqxln4\" id=\"Flow_1cqxln4_di\"\u003e\u003comgdi:waypoint x=\"1100\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"1100\" y=\"207\"/\u003e\u003comgdi:waypoint x=\"1300\" y=\"207\"/\u003e\u003comgdi:waypoint x=\"1300\" y=\"238\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0v4h18a\" id=\"Flow_0v4h18a_di\"\u003e\u003comgdi:waypoint x=\"1100\" y=\"176\"/\u003e\u003comgdi:waypoint x=\"1100\" y=\"207\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"207\"/\u003e\u003comgdi:waypoint x=\"900\" y=\"238\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"1006\" y=\"124\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"802\" y=\"238\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"1202\" y=\"238\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_7\" id=\"EndPoint_7_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"834\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_8\" id=\"EndPoint_8_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"1234\" y=\"474\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_9\" id=\"ScriptTask_9_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"801.5\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_10\" id=\"ScriptTask_10_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"1201.5\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1711540486093,
+      "create_date": 1742309392625,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "c@example.com",
+        "id": 32,
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_33f5f71d_7739_4d4c_80af_d254e6185d88",
@@ -1432,27 +1508,27 @@
         "uuid": "8540a7ea-4f2f-43cb-b884-fa58c7b6b75e"
       },
       "has_logical_errors": false,
-      "id": 66,
+      "id": 119,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "c@example.com",
+        "id": 32,
+        "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712773374552,
+      "last_modified_time": 1742840587786,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1711540486188,
+          "created_date": 1742309393429,
           "description": "",
           "enabled": false,
           "export_key": "Sentinel alert post-process",
-          "id": 85,
+          "id": 139,
           "language": "python3",
-          "last_modified_by": "c@example.com",
-          "last_modified_time": 1711988396642,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1742309393429,
           "name": "Sentinel alert post-process",
           "object_type": "incident",
           "playbook_handle": "sentinel_incident_sync",
@@ -1463,14 +1539,14 @@
         },
         {
           "actions": [],
-          "created_date": 1711540486210,
+          "created_date": 1742309393584,
           "description": "",
           "enabled": false,
           "export_key": "Sentinel entities post-process",
-          "id": 86,
+          "id": 140,
           "language": "python3",
-          "last_modified_by": "c@example.com",
-          "last_modified_time": 1711540486210,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1742309393584,
           "name": "Sentinel entities post-process",
           "object_type": "incident",
           "playbook_handle": "sentinel_incident_sync",
@@ -1485,7 +1561,7 @@
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_33f5f71d-7739-4d4c-80af-d254e6185d88",
-        "id": 66,
+        "id": 122,
         "name": "playbook_33f5f71d_7739_4d4c_80af_d254e6185d88",
         "type": "playbook",
         "uuid": "ee7ba2c3-158f-4e29-8aeb-4a76ffad9a42"
@@ -1493,7 +1569,7 @@
       "tags": [],
       "type": "default",
       "uuid": "33f5f71d-7739-4d4c-80af-d254e6185d88",
-      "version": 10
+      "version": 5
     },
     {
       "activation_details": {
@@ -1569,14 +1645,14 @@
       },
       "activation_type": "automatic",
       "content": {
-        "content_version": 7,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_67692a87_9c84_4817_89f6_8bb0c6cc8061\" isExecutable=\"true\" name=\"playbook_67692a87_9c84_4817_89f6_8bb0c6cc8061\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_19yx73r\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Sentinel Update Incident\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e41efc23-c78d-4215-8a77-dfb68eca0548\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.sentinel_incident_id = incident.properties.sentinel_incident_number\\nif incident.properties.sentinel_profile:\\n  inputs.sentinel_profile = incident.properties.sentinel_profile\\nif incident.properties.sentinel_label:\\n  inputs.sentinel_label = incident.properties.sentinel_label\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"update_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_19yx73r\u003c/incoming\u003e\u003coutgoing\u003eFlow_14b2gla\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_19yx73r\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_14b2gla\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_14b2gla\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_67692a87_9c84_4817_89f6_8bb0c6cc8061\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14b2gla\" id=\"Flow_14b2gla_di\"\u003e\u003comgdi:waypoint x=\"970\" y=\"102\"/\u003e\u003comgdi:waypoint x=\"970\" y=\"174\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19yx73r\" id=\"Flow_19yx73r_di\"\u003e\u003comgdi:waypoint x=\"970\" y=\"-34\"/\u003e\u003comgdi:waypoint x=\"970\" y=\"18\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"876\" y=\"-86\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"872\" y=\"18\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"904\" y=\"174\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1711540486562,
+      "create_date": 1742309396016,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "c@example.com",
+        "id": 32,
+        "name": "admin@example.com",
         "type": "user"
       },
       "deployment_id": "playbook_67692a87_9c84_4817_89f6_8bb0c6cc8061",
@@ -1612,23 +1688,23 @@
         "uuid": "9abb8a35-282e-48ac-81e1-20dd7be010b6"
       },
       "has_logical_errors": false,
-      "id": 67,
+      "id": 120,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 38,
-        "name": "c@example.com",
+        "id": 32,
+        "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1712773387291,
+      "last_modified_time": 1742840588641,
       "local_scripts": [],
       "name": "sentinel_update_incident",
       "object_type": "incident",
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_67692a87-9c84-4817-89f6-8bb0c6cc8061",
-        "id": 67,
+        "id": 123,
         "name": "playbook_67692a87_9c84_4817_89f6_8bb0c6cc8061",
         "type": "playbook",
         "uuid": "1965f116-a369-4359-8611-19e6f4e2120d"
@@ -1636,17 +1712,21 @@
       "tags": [],
       "type": "default",
       "uuid": "67692a87-9c84-4817-89f6-8bb0c6cc8061",
-      "version": 9
+      "version": 5
     }
   ],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 9097,
-    "major": 50,
+    "build_number": 9339,
+    "f": 0,
+    "m": 0,
+    "major": 0,
     "minor": 0,
-    "version": "50.0.9097"
+    "r": 0,
+    "v": 51,
+    "version": "51.0.0.0.9339"
   },
   "tags": [],
   "task_order": [],
@@ -1667,7 +1747,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_compromised_entity",
           "hide_notification": false,
-          "id": 5152,
+          "id": 5678,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1684,7 +1764,7 @@
           "templates": [],
           "text": "Compromised Entity",
           "tooltip": "Compromised Entities on the Sentinel Alert.",
-          "type_id": 1080,
+          "type_id": 1143,
           "uuid": "439e7e66-4cda-4d8d-a585-e3e1a62a0f29",
           "values": [],
           "width": 106
@@ -1699,7 +1779,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_confidence_level",
           "hide_notification": false,
-          "id": 5153,
+          "id": 5679,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1716,7 +1796,7 @@
           "templates": [],
           "text": "Confidence Level",
           "tooltip": "Confidence level of the Sentinel Alert.",
-          "type_id": 1080,
+          "type_id": 1143,
           "uuid": "400c4dd4-5bb9-41cc-ad1e-30767a3c0c7b",
           "values": [],
           "width": 87
@@ -1731,7 +1811,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_date",
           "hide_notification": false,
-          "id": 5154,
+          "id": 5680,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -1748,7 +1828,7 @@
           "templates": [],
           "text": "Alert Date",
           "tooltip": "Date and time of the Sentinel Alert.",
-          "type_id": 1080,
+          "type_id": 1143,
           "uuid": "59fb8f55-544a-4a66-b448-126a2b0ee61a",
           "values": [],
           "width": 38
@@ -1763,7 +1843,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_description",
           "hide_notification": false,
-          "id": 5155,
+          "id": 5681,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -1780,7 +1860,7 @@
           "templates": [],
           "text": "Description",
           "tooltip": "Description of the Sentinel Alert.",
-          "type_id": 1080,
+          "type_id": 1143,
           "uuid": "846df39a-3406-4ddd-b106-85d08eb13226",
           "values": [],
           "width": 88
@@ -1795,7 +1875,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_id",
           "hide_notification": false,
-          "id": 5156,
+          "id": 5682,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1812,7 +1892,7 @@
           "templates": [],
           "text": "Alert Id",
           "tooltip": "Sentinel Alert ID.",
-          "type_id": 1080,
+          "type_id": 1143,
           "uuid": "9aa30762-4043-4e63-8929-a280a9136137",
           "values": [],
           "width": 38
@@ -1827,7 +1907,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_name",
           "hide_notification": false,
-          "id": 5157,
+          "id": 5683,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1844,7 +1924,7 @@
           "templates": [],
           "text": "Alert Name",
           "tooltip": "Name of the Sentinel Alert.",
-          "type_id": 1080,
+          "type_id": 1143,
           "uuid": "b02bf41d-799e-4ef7-81a4-14c7b5a21f48",
           "values": [],
           "width": 45
@@ -1859,7 +1939,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_remediation_steps",
           "hide_notification": false,
-          "id": 5158,
+          "id": 5684,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -1876,7 +1956,7 @@
           "templates": [],
           "text": "Remediation Steps",
           "tooltip": "Remediation steps from the Sentinel Alert.",
-          "type_id": 1080,
+          "type_id": 1143,
           "uuid": "8653751a-79a7-4962-8110-f19b3e9f6e03",
           "values": [],
           "width": 97
@@ -1891,7 +1971,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_severity",
           "hide_notification": false,
-          "id": 5159,
+          "id": 5685,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1908,7 +1988,7 @@
           "templates": [],
           "text": "Severity",
           "tooltip": "Severity of the Sentinel Alert.",
-          "type_id": 1080,
+          "type_id": 1143,
           "uuid": "d7ec7809-6a88-45f1-968a-a4c4ece571eb",
           "values": [],
           "width": 63
@@ -1923,7 +2003,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_status",
           "hide_notification": false,
-          "id": 5160,
+          "id": 5686,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1940,7 +2020,7 @@
           "templates": [],
           "text": "Status",
           "tooltip": "Status of the Sentinel Alert.",
-          "type_id": 1080,
+          "type_id": 1143,
           "uuid": "b96fdad7-88cd-43ac-941d-e65a2aa56bde",
           "values": [],
           "width": 50
@@ -1955,7 +2035,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_tactics",
           "hide_notification": false,
-          "id": 5161,
+          "id": 5687,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -1972,7 +2052,7 @@
           "templates": [],
           "text": "Tactics",
           "tooltip": "Tactics of the Sentinel Alert.",
-          "type_id": 1080,
+          "type_id": 1143,
           "uuid": "de82c523-d240-4987-abcb-3c58b165b5fe",
           "values": [],
           "width": 54
@@ -1987,7 +2067,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_type",
           "hide_notification": false,
-          "id": 5162,
+          "id": 5688,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2004,7 +2084,7 @@
           "templates": [],
           "text": "Alert Type",
           "tooltip": "The Type of Sentinel Alert.",
-          "type_id": 1080,
+          "type_id": 1143,
           "uuid": "0d8fbe15-0a74-4066-98c2-e902deaddf0d",
           "values": [],
           "width": 38
@@ -2019,7 +2099,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/alert_url",
           "hide_notification": false,
-          "id": 5163,
+          "id": 5689,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2036,7 +2116,7 @@
           "templates": [],
           "text": "Link",
           "tooltip": "URL link to the Sentinel Alert.",
-          "type_id": 1080,
+          "type_id": 1143,
           "uuid": "50e9c795-1e4d-42ca-afd3-5eb4e9e05563",
           "values": [],
           "width": 33
@@ -2051,7 +2131,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_alerts/report_date",
           "hide_notification": false,
-          "id": 5164,
+          "id": 5690,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -2068,7 +2148,7 @@
           "templates": [],
           "text": "Report Date",
           "tooltip": "Report date of the Sentinel Incident.",
-          "type_id": 1080,
+          "type_id": 1143,
           "uuid": "558def38-fcb9-4ea1-8c7f-6552f60c2644",
           "values": [],
           "width": 52
@@ -2108,7 +2188,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_entities/alert_id",
           "hide_notification": false,
-          "id": 5165,
+          "id": 5691,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2125,7 +2205,7 @@
           "templates": [],
           "text": "Alert ID",
           "tooltip": "The Sentinel Alert ID.",
-          "type_id": 1081,
+          "type_id": 1144,
           "uuid": "48ce4eff-adb6-437a-8600-97c0bfb813c2",
           "values": [],
           "width": 152
@@ -2140,7 +2220,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_entities/entity_id",
           "hide_notification": false,
-          "id": 5166,
+          "id": 5692,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2157,7 +2237,7 @@
           "templates": [],
           "text": "Entity ID",
           "tooltip": "The Sentinel Entity ID.",
-          "type_id": 1081,
+          "type_id": 1144,
           "uuid": "83778103-f43b-4ae7-b4cf-e02733da6275",
           "values": [],
           "width": 152
@@ -2172,7 +2252,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_entities/entity_properties",
           "hide_notification": false,
-          "id": 5167,
+          "id": 5693,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -2189,7 +2269,7 @@
           "templates": [],
           "text": "Entity Properties",
           "tooltip": "The properties of the Sentinel Entity.",
-          "type_id": 1081,
+          "type_id": 1144,
           "uuid": "3ad6a9d8-06a3-44e2-bfbe-ed058a833255",
           "values": [],
           "width": 213
@@ -2204,7 +2284,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_entities/entity_type",
           "hide_notification": false,
-          "id": 5168,
+          "id": 5694,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2221,7 +2301,7 @@
           "templates": [],
           "text": "Entity Type",
           "tooltip": "The type of the Sentinel Entity.",
-          "type_id": 1081,
+          "type_id": 1144,
           "uuid": "ec3260a0-7665-455e-858a-85f93662d30a",
           "values": [],
           "width": 86
@@ -2236,7 +2316,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_entities/entity_value",
           "hide_notification": false,
-          "id": 5169,
+          "id": 5695,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -2253,7 +2333,7 @@
           "templates": [],
           "text": "Entity Value",
           "tooltip": "The value of the Sentinel Entity.",
-          "type_id": 1081,
+          "type_id": 1144,
           "uuid": "41ba7c3c-d987-439e-910a-bc53341d5f75",
           "values": [],
           "width": 80
@@ -2268,7 +2348,7 @@
           "deprecated": false,
           "export_key": "sentinel_incident_entities/report_date",
           "hide_notification": false,
-          "id": 5170,
+          "id": 5696,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -2285,7 +2365,7 @@
           "templates": [],
           "text": "Report Date",
           "tooltip": "The reported date and time of the Sentinel Incident.",
-          "type_id": 1081,
+          "type_id": 1144,
           "uuid": "5b8fd925-5236-4782-911f-a11e3067a898",
           "values": [],
           "width": 52

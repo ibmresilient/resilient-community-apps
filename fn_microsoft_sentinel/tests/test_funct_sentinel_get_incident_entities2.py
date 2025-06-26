@@ -50,7 +50,8 @@ class TestSentinelGetIncidentEntities2:
 
     mock_inputs_1 = {
         "sentinel_label": "label1",
-        "sentinel_incident_id": "6c98642b-7248-4b4d-994e-32443f100e78"
+        "sentinel_incident_id": "6c98642b-7248-4b4d-994e-32443f100e78",
+        "soar_incident_id": 123
     }
 
     expected_results_1 = helper.sentinel_get_incident_entities_results()

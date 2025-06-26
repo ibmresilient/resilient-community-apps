@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 """Generate a default configuration-file section for fn_microsoft_sentinel"""
 
 def config_section_data():
@@ -22,6 +22,8 @@ polling_interval = 60
 #  that are configured under the individual labels will be ignored.
 # Sentinel API versions can be found https://learn.microsoft.com/en-us/rest/api/securityinsights/api-versions
 api_version = 2023-11-01-preview
+# Clear the Alerts and Entities datatable before new data is added. True or False
+clear_datatable = false
 # If verify is configured under fn_microsoft_sentinel, then verify
 #  that are configured under the individual labels will be ignored.
 # verify = false | /path/to/client_certificate.pem

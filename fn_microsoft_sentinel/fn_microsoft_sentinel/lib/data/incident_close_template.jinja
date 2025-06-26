@@ -4,6 +4,7 @@
   "resolution_id": "Resolved",
   "resolution_summary": "Closed by Sentinel",
   "properties": {
+    "sentinel_incident_last_modified_time_utc": {{ properties.lastModifiedTimeUtc|soar_datetimeformat }},
     "sentinel_incident_status": "{{ properties.status }}"
     {% if properties.classification %}
       ,"sentinel_incident_classification": "{{ properties.classification }}"

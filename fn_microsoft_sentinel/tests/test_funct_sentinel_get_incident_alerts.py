@@ -50,7 +50,8 @@ class TestSentinelGetIncidentAlerts:
 
     mock_inputs_1 = {
         "sentinel_profile": "profile_a",
-        "sentinel_incident_id": "76ae2188-c4bf-42f3-958a-eb2b148a9190"
+        "sentinel_incident_id": "76ae2188-c4bf-42f3-958a-eb2b148a9190",
+        "soar_incident_id": 123
     }
 
     expected_results_1 = helper.get_incident_alerts_results()

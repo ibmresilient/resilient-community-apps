@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 
 from logging import getLogger
 from resilient_lib import SOARCommon
@@ -34,10 +34,25 @@ class ResilientCommon():
                 if not any([comment['name'] in already_syncd for already_syncd in soar_comment_list])]
 
         return new_comments
-    
+
     def get_soar_incident(self, incident_id):
         """
         Get a SOAR incident (Added so that this can be mocked for tests)
         :param incident_id: SOAR incident ID
         """
         return self.rest_client.get(f"/incidents/{incident_id}?handle_format=names")
+
+    def clear_table(self, table_name: str, incident_id: int):
+        """
+        Clear data in given table on SOAR
+        :param table_name: API access name of the table to clear
+        :param incident_id: SOAR ID for the incident
+        :return: None
+        """
+        if table_name:
+            try:
+                self.rest_client.delete(f"/incidents/{incident_id}/table_data/{table_name}/row_data?handle_format=names")
+                LOG.info(f"Data in table {table_name} in incident {incident_id} has been cleared")
+
+            except Exception as err_msg:
+                LOG.error(f"Failed to clear table: {table_name} error: {err_msg}")

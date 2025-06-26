@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 
 from logging import getLogger
 from resilient_circuits.app import AppArgumentParser
@@ -22,6 +22,8 @@ class IncidentGroupsTab(Tab):
         Field("sentinel_incident_id"),
         Field("sentinel_incident_labels"),
         Field("sentinel_incident_number"),
+        Field("sentinel_incident_last_modified_time_utc"),
+        Field("sentinel_incident_last_update"),
         Field("sentinel_incident_status"),
         Field("sentinel_incident_tactics"),
         Field("sentinel_incident_url"),

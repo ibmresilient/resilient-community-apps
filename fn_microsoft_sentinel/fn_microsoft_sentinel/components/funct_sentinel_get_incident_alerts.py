@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 """Function implementation"""
 
-from resilient_circuits import (AppFunctionComponent, FunctionResult,
-                                app_function)
-from resilient_lib import validate_fields
-
-from fn_microsoft_sentinel.lib.function_common import (PACKAGE_NAME,
-                                                       SentinelProfiles)
+from resilient_circuits import (AppFunctionComponent, FunctionResult, app_function)
+from resilient_lib import validate_fields, str_to_bool
+from fn_microsoft_sentinel.lib.function_common import (PACKAGE_NAME, SentinelProfiles)
 from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI
+from fn_microsoft_sentinel.lib.resilient_common import ResilientCommon
 
 FN_NAME = "sentinel_get_incident_alerts"
 
@@ -28,6 +26,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.sentinel_profile
             -   fn_inputs.sentinel_label
             -   fn_inputs.sentinel_incident_id
+            -   fn_inputs.soar_incident_id
         """
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
@@ -43,7 +42,7 @@ class FunctionComponent(AppFunctionComponent):
         self.LOG.info(f"Sentinel Incident ID: {sentinel_incident_id}")
         self.LOG.info(f"Sentinel Profile: {sentinel_profile}")
         self.LOG.info(f"Sentinel Label: {sentinel_label}")
-        
+
         # Get the configuration for the selected Sentinel profile from the app.config
         profile_data = self.sentinel_profiles.get_profile(sentinel_label if sentinel_label else sentinel_profile)
 
@@ -53,6 +52,11 @@ class FunctionComponent(AppFunctionComponent):
         # Read all alerts associated with a Sentinel incident
         result, status, reason = sentinel_api.get_incident_alerts(profile_data,
                                                                   sentinel_incident_id)
+
+        # Clear Alerts data tables if clear_datatable setting is true in the app.config
+        if str_to_bool(self.app_configs.get("clear_datatable", "false")):
+            validate_fields(["soar_incident_id"], fn_inputs)
+            ResilientCommon(self.rest_client()).clear_table("sentinel_incident_alerts", getattr(fn_inputs, "soar_incident_id", None))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
