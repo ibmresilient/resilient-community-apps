@@ -3,90 +3,56 @@
   "success": true,
   "reason": null,
   "content": {
-    "received": [
+    "body": "This is the first part.\r\n",
+    "attachments": [
       {
-        "from": "www-data@localhost",
-        "by": "example.ibm.com 8.15.2/8.15.2/Submit",
-        "id": "29AJsIaP1141965",
-        "date": "Mon, 10 Oct 2022 12:54:18 -0700",
-        "hop": 1,
-        "date_utc": "2022-10-10T19:54:18",
-        "delay": 0
+        "filename": "<qbFGyPQAS8>",
+        "payload": "jamisSqGSIb3DQEHAqCAMIjamisxCzAJBgUrDgMCGgUAMIAGCSqGSjamisEHAQAAoIIFSjCCBUYw\r\nggQujamisQICBD++ukQwDQYJKojamisNAQEFBQAwMTELMAkGA1UEBhMCRjamisAKBgNVBAoTA1RE\r\nQzEUMBIGjamisxMLVERDIE9DRVMgQ0jamisNMDQwMjI5MTE1OTAxWhcNMDYwMjamisIyOTAxWjCB\r\ngDELMAkGA1UEjamisEsxKTAnBgNVBAoTIEjamisuIG9yZ2FuaXNhdG9yaXNrIHRpbjamisRuaW5=\r\n",
+        "binary": true,
+        "mail_content_type": "image/jpeg",
+        "content-id": "<qbFGyPQAS8>",
+        "content-disposition": "inline",
+        "charset": null,
+        "content_transfer_encoding": "base64"
       }
     ],
-    "x-originatororg": "mail.ibm.com",
-    "x-ms-exchange-organization-expirationstarttimereason": "OriginalSubmit",
-    "x-crosspremisesheadersfiltered": "outlook.com",
-    "x-ms-exchange-organization-scl": "-1",
-    "body": "email body",
-    "x-ms-exchange-organization-network-message-id": "some-id-123456",
-    "x-ms-exchange-crosstenant-fromentityheader": "HybridOnPrem",
-    "date": "2022-10-10T19:54:18",
-    "subject": "Ready",
-    "x-eopattributedmessage": "0",
-    "x-ms-exchange-processed-by-bccfoldering": "00.00.0000.0000",
-    "authentication-results": "spf=none (sender 00.00.0000.0000)\r\n smtp.mailfrom=example.ibm.com; dkim=none (message not signed)\r\n header.d=none;dmarc=fail action=none header.from=us.ibm.com;",
-    "x-ms-exchange-organization-authas": "Anonymous",
-    "content-type": "text/html; charset=\"UTF-8\"",
-    "x-ms-exchange-crosstenant-network-message-id": "some-id-1234567",
-    "x-ms-exchange-organization-authsource": "ibm.com",
-    "x-ms-exchange-crosstenant-authsource": "ibm.com",
-    "x-tm-as-gconf": "00",
-    "message-id": "<2022@example.ibm.com>",
-    "received-spf": "None (protection.outlook.com: example.ibm.com does not\r\n designate permitted sender hosts)",
-    "timezone": "-7.0",
-    "x-ms-exchange-organization-messagedirectionality": "Originating",
-    "x-ms-exchange-crosstenant-id": "dd9e9",
-    "x-organizationheaderspreserved": "ibm.com",
-    "x-ms-exchange-crosstenant-originalarrivaltime": "10 Oct 2022 19:54:24.1967\r\n (UTC)",
+    "from": [
+      [
+        "",
+        "foo@example.com"
+      ]
+    ],
+    "timezone": "+2.0",
+    "content-type": "multipart/mixed; boundary=Apple-Mail-13-196941151",
+    "mime-version": "1.0 (Apple Message framework v730)",
+    "to_domains": [
+      "example.com"
+    ],
+    "message-id": "<9169D984-4E0B-45EF-82D4-8F5E53AD7012@example.com>",
+    "date": "2005-06-06T20:21:22",
+    "subject": "testing",
     "to": [
       [
         "",
-        "example@ibm.com"
-      ]
-    ],
-    "x-ms-exchange-organization-expirationstarttime": "10 Oct 2022 19:54:24.3217\r\n (UTC)",
-    "x-ms-traffictypediagnostic": "ABCDEFGH",
-    "x-ms-exchange-transport-endtoendlatency": "00:00:14.1482542",
-    "x-ms-exchange-organization-expirationinterval": "1:00:00:00.0000000",
-    "x-ms-exchange-crosstenant-originalattributedtenantconnectingip": "TenantId=tenent-id-1234567;Ip=[000.00.00.000];Helo=[gmx.mail.com]",
-    "x-ms-exchange-transport-crosstenantheadersstamped": "MN2PR15MB2877",
-    "x-ms-office365-filtering-correlation-id": "467954c2-54fc-491f-6f45-08daaaf93b34",
-    "x-forefront-antispam-report": "CIP:169.55.84.251;CTRY:US;LANG:en;SCL:-1;SRV:;IPV:NLI;SFV:NSPM;H:gmx.mail.ibm.com;PTR:fb.54.37a9.ip4.static.sl-reverse.com;CAT:NONE;SFS:;DIR:INB;",
-    "x-ms-exchange-organization-expirationintervalreason": "OriginalSubmit",
-    "x-ms-publictraffictype": "Email",
-    "to_domains": [
-      "ibm.com"
-    ],
-    "x-crosspremisesheaderspromoted": "outlook.com",
-    "x-microsoft-antispam-mailbox-delivery": "ucf:0;jmr:0;auth:0;dest:I;ENG:(910001)(944506478)(944626604)(920097)(930097);",
-    "x-ms-exchange-crosstenant-authas": "Anonymous",
-    "x-microsoft-antispam-message-info": "abcdefgh@@@@@@@",
-    "return-path": "www-data@example.ibm.com",
-    "x-microsoft-antispam": "BCL:0;",
-    "mime-version": "1.0",
-    "from": [
-      [
-        "Example Admin",
-        "Example@us.ibm.com"
+        "blah@example.com"
       ]
     ],
     "has_defects": false,
-    "plain_body": "",
-    "html_body": "[\"body\"]"
+    "plain_body": "This is the first part.\r\n",
+    "html_body": "[]"
   },
-  "raw": "{\"received\": [{\"from\": \"www-data@localhost\", \"by\": \"example.ibm.com 8.15.2/8.15.2/Submit\", \"abcdefgh\", \"return-path\": \"www-data@example.ibm.com\"}",
+  "raw": "",
   "inputs": {
-    "incident_id": 2125,
     "parse_utilities_email_attachments": true,
-    "attachment_id": 88
+    "parse_utilities_attachment_id": 9,
+    "parse_utilities_incident_id": 2165
   },
   "metrics": {
     "version": "1.0",
-    "package": "fn-utilities",
-    "package_version": "2.1.1",
-    "host": "My Host",
-    "execution_time_ms": 1347,
-    "timestamp": "2022-10-13 15:50:56"
+    "package": "fn-parse-utilities",
+    "package_version": "1.1.1",
+    "host": "local",
+    "execution_time_ms": 2242,
+    "timestamp": "2025-06-24 11:06:04"
   }
 }

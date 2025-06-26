@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
@@ -40,7 +40,7 @@ class FunctionComponent(ResilientComponent):
             # Get the function inputs:
             fn_inputs = validate_fields(["parse_utilities_incident_id"], kwargs)
 
-            # Instansiate ResultPayload
+            # Instantiate ResultPayload
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
             # If its just base64content as input, use parse_from_string
@@ -55,7 +55,7 @@ class FunctionComponent(ResilientComponent):
                    not (fn_inputs.get("parse_utilities_task_id") and fn_inputs.get("parse_utilities_attachment_id")):
                     raise FunctionError("You must define either: (parse_utilities_incident_id AND (parse_utilities_attachment_id OR parse_utilities_artifact_id)) OR (parse_utilities_task_id AND parse_utilities_attachment_id)")
 
-                # Instansiate new SOAR API object
+                # Instantiate new SOAR API object
                 res_client = self.rest_client()
 
                 # Get attachment metadata
@@ -88,25 +88,25 @@ class FunctionComponent(ResilientComponent):
                         parsed_email = parse_from_file_msg(path_tmp_file)
                         yield StatusMessage("MSG File processed")
                     except Exception as err:
-                        reason = u"Could not parse {0} MSG File".format(attachment_metadata.get("name"))
+                        reason = f"Could not parse {attachment_metadata.get('name')} MSG File"
                         yield StatusMessage(reason)
                         results = rp.done(success=False, content=None, reason=reason)
                         LOG.error(err)
 
                 else:
-                    yield StatusMessage("Processing Raw Email File: {}".format(attachment_metadata.get("name")))
+                    yield StatusMessage(f"Processing Raw Email File: {attachment_metadata.get('name')}")
                     try:
                         parsed_email = parse_from_bytes(attachment_contents)
                         yield StatusMessage("Raw Email File processed")
                     except Exception as err:
-                        reason = u"Could not parse {0} Email File".format(attachment_metadata.get("name"))
+                        reason = f"Could not parse {attachment_metadata.get('name')} Email File"
                         yield StatusMessage(reason)
                         results = rp.done(success=False, content=None, reason=reason)
                         LOG.error(err)
 
             if parsed_email is not None:
                 if not parsed_email.mail:
-                    reason = u"Raw email in unsupported format. Failed to parse {0}".format(u"provided base64content" if fn_inputs.get("parse_utilities_base64content") else attachment_metadata.get("name"))
+                    reason = f"Raw email in unsupported format. Failed to parse {'provided base64content' if fn_inputs.get('parse_utilities_base64content') else attachment_metadata.get('name')}"
                     yield StatusMessage(reason)
                     results = rp.done(success=False, content=None, reason=reason)
 
@@ -127,12 +127,12 @@ class FunctionComponent(ResilientComponent):
                         # Loop attachments found
                         for attachment in attachments_found:
 
-                            yield StatusMessage(u"Attempting to add {0} to Incident: {1}".format(attachment.get("filename"), fn_inputs.get("parse_utilities_incident_id")))
+                            yield StatusMessage(f"Attempting to add {attachment.get('filename')} to Incident: {fn_inputs.get('parse_utilities_incident_id')}")
 
                             # Write the attachment.payload to a temp file
                             file_content = BytesIO(s_to_b(attachment.get("payload")))
 
-                            artifact_description = u"This email attachment was found in the parsed email message from: '{0}'".format(u"provided base64content" if fn_inputs.get("parse_utilities_base64content") else attachment_metadata.get("name"))
+                            artifact_description = f"This email attachment was found in the parsed email message from: '{'provided base64content' if fn_inputs.get('parse_utilities_base64content') else attachment_metadata.get('name')}'"
 
                             # POST the artifact to SOAR as an 'Email Attachment' Artifact
                             res_client.post_artifact_file(uri=ARTIFACT_URI.format(fn_inputs.get("parse_utilities_incident_id")),
@@ -146,7 +146,7 @@ class FunctionComponent(ResilientComponent):
                     results = rp.done(True, parsed_email_dict)
 
             else:
-                reason = u"Raw email in unsupported format. Failed to parse {0}".format(u"provided base64content" if fn_inputs.get("parse_utilities_base64content") else attachment_metadata.get("name"))
+                reason = f"Raw email in unsupported format. Failed to parse {'provided base64content' if fn_inputs.get('parse_utilities_base64content') else attachment_metadata.get('name')}"
                 yield StatusMessage(reason)
                 results = rp.done(success=False, content=None, reason=reason)
 
@@ -180,7 +180,7 @@ def convert_base64_encoding(payload):
     match = RE_CONTENT_TYPE.search(payload)
     if match:
         LOG.INFO("Found bas64 encoded content")
-        # Find the start of the data which is demarked by an empty line
+        # Find the start of the data which is marked by an empty line
         match_base64 = RE_START_BASE64.search(payload[match.end():])
         if match_base64:
             base64_data = payload[match.end()+match_base64.end():]

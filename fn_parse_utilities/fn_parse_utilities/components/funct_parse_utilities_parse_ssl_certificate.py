@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use, broad-except,pointless-string-statement
 """
     Function utilities_parse_ssl_cert receives a certificate as a parameter.
@@ -68,7 +68,7 @@ class FunctionComponent(ResilientComponent):
                 '''
                 For python 2 load_pem_x509_certificate expects a string
 
-                The code in the try clause doesnt work for python 3
+                The code in the try clause doesn't work for python 3
                 In 3, the string needs to be encoded as UTF8
 
                 But in 2 this encoded string throws a similar error
@@ -99,7 +99,7 @@ class FunctionComponent(ResilientComponent):
                     artifact_data, default_backend())
 
             #  Prepare results for return; many fields need to be wrapped as strings or as JSON.
-            #  Some fields must be serialised into JSON in order to be compatible with STOMP
+            #  Some fields must be serialized into JSON in order to be compatible with STOMP
             results = {
                 "subject": dumps(str(parsed_cert_openssl.get_subject().get_components())),
                 "notBefore": str(parsed_cert_crypto.not_valid_before),
@@ -148,7 +148,7 @@ class FunctionComponent(ResilientComponent):
     :incident_id -- The incident to be queried
     :artifact_id -- The artifact that will be queried
 
-    Attempts to gather the binary data for an artifacts attachmentment.
+    Attempts to gather the binary data for an artifacts attachment.
 
     Performs a HTTP to the SOAR REST API and attempts to gather the attachment.
     Returns the data in binary form which can then be written to a local file.
@@ -158,7 +158,7 @@ class FunctionComponent(ResilientComponent):
         """get_binary_data_from_file calls the REST API to get the attachment or artifact data"""
 
         if artifact_id and incident_id:
-            data_uri = "/incidents/{}/artifacts/{}/contents".format(incident_id, artifact_id)
+            data_uri = f"/incidents/{incident_id}/artifacts/{artifact_id}/contents"
         else:
             raise ValueError("artifact and incident id must be specified")
 
@@ -175,7 +175,7 @@ class FunctionComponent(ResilientComponent):
     """
     @staticmethod
     def _get_dns_subject_alternative_names(certificate):
-        # type: (cryptography.x509.Certificate) -> List[Text]
+        # type: (cryptography.x509.Certificate) -> List[Text] # type: ignore
         """Retrieve all the DNS entries of the Subject Alternative Name extension."""
         subj_alt_names = []
         try:
@@ -193,7 +193,7 @@ class FunctionComponent(ResilientComponent):
     """
     @staticmethod
     def _get_issuer_alternative_names(certificate):
-        # type: (cryptography.x509.Certificate) -> List[Text]
+        # type: (cryptography.x509.Certificate) -> List[Text] # type: ignore
         """Retrieve all the DNS entries of the Subject Alternative Name extension."""
         issuer_alt_names = []
         try:

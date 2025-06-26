@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
@@ -39,8 +39,8 @@ class FunctionComponent(ResilientComponent):
 
             validate_fields(("parse_utilities_xml_stylesheet"), kwargs)
             # Confirm that our required parameter exists and is a directory
-            if not (self.options[FunctionComponent.XML_DIR] and isdir(self.options[FunctionComponent.XML_DIR])):
-                raise ValueError("Missing or incorrectly specified configuration property: {}".format(FunctionComponent.XML_DIR))
+            if not (self.options.get(FunctionComponent.XML_DIR) and isdir(self.options.get(FunctionComponent.XML_DIR))):
+                raise ValueError(f"Missing or incorrectly specified configuration property: {FunctionComponent.XML_DIR}")
 
             LOG.info("xml_source: %s", xml_source)
             LOG.info("xml_stylesheet: %s", xml_stylesheet)
@@ -60,7 +60,7 @@ class FunctionComponent(ResilientComponent):
             # Get the stylesheet
             stylesheet = join(self.options.get(FunctionComponent.XML_DIR), xml_stylesheet)
             if not (exists(stylesheet) and isfile(stylesheet)):
-                raise ValueError("Stylesheet file not found: {}".format(stylesheet))
+                raise ValueError(f"Stylesheet file not found: {stylesheet}")
 
             yield StatusMessage("Starting...")
 

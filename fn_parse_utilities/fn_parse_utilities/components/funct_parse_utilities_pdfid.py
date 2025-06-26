@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 
 """Function implementation"""
@@ -38,7 +38,7 @@ class FunctionComponent(ResilientComponent):
 
             log.debug("base64content: %s", base64content)
 
-            yield StatusMessage("Analysing with pdfid...")
+            yield StatusMessage("Analyzing with pdfid...")
             try:
                 pdfcontent = b64decode(base64content)
 

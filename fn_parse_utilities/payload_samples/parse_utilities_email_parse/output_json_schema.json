@@ -12,120 +12,40 @@
     "content": {
       "type": "object",
       "properties": {
-        "received": {
+        "body": {
+          "type": "string"
+        },
+        "attachments": {
           "type": "array",
           "items": {
             "type": "object",
             "properties": {
-              "from": {
+              "filename": {
                 "type": "string"
               },
-              "by": {
+              "payload": {
                 "type": "string"
               },
-              "id": {
+              "binary": {
+                "type": "boolean"
+              },
+              "mail_content_type": {
                 "type": "string"
               },
-              "date": {
+              "content-id": {
                 "type": "string"
               },
-              "hop": {
-                "type": "integer"
-              },
-              "date_utc": {
+              "content-disposition": {
                 "type": "string"
               },
-              "delay": {
-                "type": "number"
-              },
-              "with": {
-                "type": "string"
-              },
-              "for": {
-                "type": "string"
-              },
-              "via": {
+              "charset": {},
+              "content_transfer_encoding": {
                 "type": "string"
               }
             }
           }
         },
-        "x-originatororg": {
-          "type": "string"
-        },
-        "x-ms-exchange-organization-expirationstarttimereason": {
-          "type": "string"
-        },
-        "x-crosspremisesheadersfiltered": {
-          "type": "string"
-        },
-        "x-ms-exchange-organization-scl": {
-          "type": "string"
-        },
-        "body": {
-          "type": "string"
-        },
-        "x-ms-exchange-organization-network-message-id": {
-          "type": "string"
-        },
-        "x-ms-exchange-crosstenant-fromentityheader": {
-          "type": "string"
-        },
-        "date": {
-          "type": "string"
-        },
-        "subject": {
-          "type": "string"
-        },
-        "x-eopattributedmessage": {
-          "type": "string"
-        },
-        "x-ms-exchange-processed-by-bccfoldering": {
-          "type": "string"
-        },
-        "authentication-results": {
-          "type": "string"
-        },
-        "x-ms-exchange-organization-authas": {
-          "type": "string"
-        },
-        "content-type": {
-          "type": "string"
-        },
-        "x-ms-exchange-crosstenant-network-message-id": {
-          "type": "string"
-        },
-        "x-ms-exchange-organization-authsource": {
-          "type": "string"
-        },
-        "x-ms-exchange-crosstenant-authsource": {
-          "type": "string"
-        },
-        "x-tm-as-gconf": {
-          "type": "string"
-        },
-        "message-id": {
-          "type": "string"
-        },
-        "received-spf": {
-          "type": "string"
-        },
-        "timezone": {
-          "type": "string"
-        },
-        "x-ms-exchange-organization-messagedirectionality": {
-          "type": "string"
-        },
-        "x-ms-exchange-crosstenant-id": {
-          "type": "string"
-        },
-        "x-organizationheaderspreserved": {
-          "type": "string"
-        },
-        "x-ms-exchange-crosstenant-originalarrivaltime": {
-          "type": "string"
-        },
-        "to": {
+        "from": {
           "type": "array",
           "items": {
             "type": "array",
@@ -134,34 +54,13 @@
             }
           }
         },
-        "x-ms-exchange-organization-expirationstarttime": {
+        "timezone": {
           "type": "string"
         },
-        "x-ms-traffictypediagnostic": {
+        "content-type": {
           "type": "string"
         },
-        "x-ms-exchange-transport-endtoendlatency": {
-          "type": "string"
-        },
-        "x-ms-exchange-organization-expirationinterval": {
-          "type": "string"
-        },
-        "x-ms-exchange-crosstenant-originalattributedtenantconnectingip": {
-          "type": "string"
-        },
-        "x-ms-exchange-transport-crosstenantheadersstamped": {
-          "type": "string"
-        },
-        "x-ms-office365-filtering-correlation-id": {
-          "type": "string"
-        },
-        "x-forefront-antispam-report": {
-          "type": "string"
-        },
-        "x-ms-exchange-organization-expirationintervalreason": {
-          "type": "string"
-        },
-        "x-ms-publictraffictype": {
+        "mime-version": {
           "type": "string"
         },
         "to_domains": {
@@ -170,28 +69,16 @@
             "type": "string"
           }
         },
-        "x-crosspremisesheaderspromoted": {
+        "message-id": {
           "type": "string"
         },
-        "x-microsoft-antispam-mailbox-delivery": {
+        "date": {
           "type": "string"
         },
-        "x-ms-exchange-crosstenant-authas": {
+        "subject": {
           "type": "string"
         },
-        "x-microsoft-antispam-message-info": {
-          "type": "string"
-        },
-        "return-path": {
-          "type": "string"
-        },
-        "x-microsoft-antispam": {
-          "type": "string"
-        },
-        "mime-version": {
-          "type": "string"
-        },
-        "from": {
+        "to": {
           "type": "array",
           "items": {
             "type": "array",
@@ -217,13 +104,13 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "incident_id": {
-          "type": "integer"
-        },
         "parse_utilities_email_attachments": {
           "type": "boolean"
         },
-        "attachment_id": {
+        "parse_utilities_attachment_id": {
+          "type": "integer"
+        },
+        "parse_utilities_incident_id": {
           "type": "integer"
         }
       }
