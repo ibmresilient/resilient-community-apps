@@ -1,0 +1,4 @@
+include README.md
+include fn_mcafee_atd/components/*
+include fn_mcafee_atd/util/*
+include fn_mcafee_atd/LICENSE
