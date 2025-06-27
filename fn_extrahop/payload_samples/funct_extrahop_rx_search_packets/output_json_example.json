@@ -1,0 +1,33 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "result": {
+      "attachment": "<b>extrahop 2024-11-13 14.14.07 to 14.45.29 PST_20241113174545.pcapng</b>"
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "extrahop_port1": null,
+    "extrahop_ip2": null,
+    "extrahop_ip1": "10.1.100.65",
+    "extrahop_port2": null,
+    "incident_id": 2526,
+    "extrahop_limit_search_duration": null,
+    "extrahop_active_from": 1731536047000,
+    "extrahop_bpf": "host 10.1.100.65",
+    "extrahop_output": "pcapng",
+    "extrahop_include_secrets": true,
+    "extrahop_limit_bytes": null,
+    "extrahop_active_until": null
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-extrahop",
+    "package_version": "1.1.1",
+    "host": "my.app.host",
+    "execution_time_ms": 26985,
+    "timestamp": "2024-11-13 17:45:55"
+  }
+}
