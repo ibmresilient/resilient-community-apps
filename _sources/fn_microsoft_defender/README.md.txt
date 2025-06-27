@@ -54,6 +54,7 @@
 | 1.2.1 | 5/2024 | Fix for defender_find_machines_by_file function |
 | 1.2.2 | 5/2024 | Fix for playbook script common name issue |
 | 1.2.3 | 12/2024 | Fix for FQDN URL artifacts with square brackets and quotes. |
+| 1.3.0 | 03/2025 | Add retry around SOAR incident creation from Defender incident. |
 
 ### 1.2.0 Changes
 In v1.2, the existing rules and workflows have been replaced with playbooks.
@@ -72,7 +73,7 @@ See section [App Configuration](#app-configuration) for the new app.config setti
 
 ## Overview
 
-**Resilient Circuits Components for 'fn_microsoft_defender'**
+**SOAR Components for 'fn_microsoft_defender'**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
@@ -97,13 +98,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
 
 If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `45.0.0`.
+* SOAR platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `45.0.0`.
+* SOAR platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=45.0.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -139,8 +140,8 @@ Python 3.6+ is supported.
 Additional package dependencies may exist for each of these packages:
 * msal
 * rapidjson
-* resilient_circuits>=37.0.0
-* resilient_lib>=37.0.0
+* resilient_circuits>=51.0.0
+* resilient_lib>=51.0.0
 * simplejson
 
 ---
@@ -159,7 +160,7 @@ The following table provides the settings you need to configure the app. These s
 | **tenant_id** | Yes | `89d65-...-57bae1c2` | *Azure tenant Id.* |
 | **client_id** | Yes | `244ad4-...-3564fc4` | *Azure app id (client id).* |
 | **app_secret** | Yes | `940c4d2-...-9d32e1b` | *Azure app secret.* |
-| **api_url** | Yes | `https://api.securitycenter.microsoft.com` | *API utl. This can be customized per Azure region.* |
+| **api_url** | Yes | `https://api.securitycenter.microsoft.com` | *API url. This can be customized per Azure region.* |
 | **polling_lookback** | Yes | `120` | *When resilient-circuits starts, number of minutes to look back for changes to Sentinel incidents.* |
 | **polling_interval** | Yes | `60` | *Number of seconds for the poller to run. Set to 0 to disable the poller* |
 | **new_incident_filters** | No | `"status": ["New", "Active"],"severity": ["High", "Medium","Low"]` | *filters to apply for promoting Defender incidents to SOAR. All criteria need to match. For lists [], one value needs to match.* |
@@ -208,7 +209,7 @@ API Permissions (Application type):
     User.Read
     User.Read.All
     Url.Read.All
-    Vunerabilities.ReadAll
+    Vulnerability.ReadAll
 
 ![screenshot: Azure App Registration](./doc/screenshots/azure_app_registration.png)
 
@@ -219,12 +220,12 @@ API Permissions (Application type):
 ---
 
 ### Template files
-Templates are used during the syncronization of incidents and comments between Defender and IBM SOAR.
+Templates are used during the synchronization of incidents and comments between Defender and IBM SOAR.
 These templates provide the mapping between Defender incident and SOAR incident fields. The templates cover these scenarios:
 
 * create a SOAR incident from a Defender incident
 * update an existing SOAR incident
-* close a SOAR incident when the cooresponding Defender incident closes
+* close a SOAR incident when the corresponding Defender incident closes
 * create a Defender incident comment
 * update a Defender incident alert
 

@@ -495,6 +495,10 @@
 <td><p>12/2024</p></td>
 <td><p>Fix for FQDN URL artifacts with square brackets and quotes.</p></td>
 </tr>
+<tr class="row-even"><td><p>1.3.0</p></td>
+<td><p>03/2025</p></td>
+<td><p>Add retry around SOAR incident creation from Defender incident.</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -517,7 +521,7 @@ But migrating to playbooks provides greater functionality along with future app 
 </section>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<p><strong>Resilient Circuits Components for ‘fn_microsoft_defender’</strong></p>
+<p><strong>SOAR Components for ‘fn_microsoft_defender’</strong></p>
 <p><img alt="screenshot: main" src="../_images/main35.png" /></p>
 <p>Perform operations against Defender such as synchronize incidents and alerts, set indicators, isolate and quarantine machines, and block file execution.</p>
 <section id="key-features">
@@ -543,14 +547,14 @@ But migrating to playbooks provides greater functionality along with future app 
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">45.0.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=45.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=51.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -611,8 +615,8 @@ Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
 <li><p>msal</p></li>
 <li><p>rapidjson</p></li>
-<li><p>resilient_circuits&gt;=37.0.0</p></li>
-<li><p>resilient_lib&gt;=37.0.0</p></li>
+<li><p>resilient_circuits&gt;=51.0.0</p></li>
+<li><p>resilient_lib&gt;=51.0.0</p></li>
 <li><p>simplejson</p></li>
 </ul>
 </section>
@@ -658,7 +662,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <tr class="row-odd"><td><p><strong>api_url</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">https://api.securitycenter.microsoft.com</span></code></p></td>
-<td><p><em>API utl. This can be customized per Azure region.</em></p></td>
+<td><p><em>API url. This can be customized per Azure region.</em></p></td>
 </tr>
 <tr class="row-even"><td><p><strong>polling_lookback</strong></p></td>
 <td class="text-center"><p>Yes</p></td>
@@ -753,7 +757,7 @@ Ti.ReadWrite.All
 User.Read
 User.Read.All
 Url.Read.All
-Vunerabilities.ReadAll
+Vulnerability.ReadAll
 </pre></div>
 </div>
 <p><img alt="screenshot: Azure App Registration" src="../_images/azure_app_registration.png" /></p>
@@ -763,12 +767,12 @@ Vunerabilities.ReadAll
 <hr class="docutils" />
 <section id="template-files">
 <h3>Template files<a class="headerlink" href="#template-files" title="Link to this heading">¶</a></h3>
-<p>Templates are used during the syncronization of incidents and comments between Defender and IBM SOAR.
+<p>Templates are used during the synchronization of incidents and comments between Defender and IBM SOAR.
 These templates provide the mapping between Defender incident and SOAR incident fields. The templates cover these scenarios:</p>
 <ul class="simple">
 <li><p>create a SOAR incident from a Defender incident</p></li>
 <li><p>update an existing SOAR incident</p></li>
-<li><p>close a SOAR incident when the cooresponding Defender incident closes</p></li>
+<li><p>close a SOAR incident when the corresponding Defender incident closes</p></li>
 <li><p>create a Defender incident comment</p></li>
 <li><p>update a Defender incident alert</p></li>
 </ul>
