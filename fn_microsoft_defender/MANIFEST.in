@@ -1,6 +1,5 @@
 include README.md
 include Dockerfile
-include entrypoint.sh
 include apikey_permissions.txt
 recursive-include fn_microsoft_defender/util *
 recursive-include fn_microsoft_defender/lib *

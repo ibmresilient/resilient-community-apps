@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# Copyright IBM Corp. 2010, 2023 - Confidential Information
+# Copyright IBM Corp. 2010, 2025 - Confidential Information
 
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, readable_datetime, validate_fields
+from logging import getLogger
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult
+from resilient_lib import ResultPayload, readable_datetime, validate_fields, IntegrationError
 from fn_microsoft_defender.lib.defender_common import DefenderAPI, convert_date, ALERTS_URL, EXPAND_PARAMS, PACKAGE_NAME
 
 FUNCTION = "defender_alert_search"
+log = getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'defender_alert_search''"""
@@ -19,6 +20,7 @@ class FunctionComponent(ResilientComponent):
         super(FunctionComponent, self).__init__(opts)
         self.opts = opts
         self.options = opts.get(PACKAGE_NAME, {})
+        validate_fields(["tenant_id", "client_id", "app_secret"], self.options)
 
     @handler("reload")
     def _reload(self, event, opts):
@@ -31,7 +33,7 @@ class FunctionComponent(ResilientComponent):
         """Function: Return Defender alerts based on a set of search criteria"""
         try:
             yield StatusMessage("Starting 'defender_alert_search'")
-            validate_fields(["tenant_id", "client_id", "app_secret"], self.options)
+            # Validate required fields
             validate_fields(["defender_machine_id"], kwargs)
 
             # Get the function parameters:
@@ -41,23 +43,20 @@ class FunctionComponent(ResilientComponent):
             defender_alert_lastupdatetime = kwargs.get("defender_alert_lastupdatetime")  # datetimepicker
             defender_alert_creationdate = kwargs.get("defender_alert_creationdate")  # datetimepicker
 
-            log = logging.getLogger(__name__)
             log.info(f"defender_alert_severity: {defender_alert_severity}")
             log.info(f"defender_alert_result_max: {defender_alert_result_max}")
             log.info(f"defender_machine_id: {defender_machine_id}")
             log.info(f"defender_alert_lastupdatetime: {defender_alert_lastupdatetime}")
             log.info(f"defender_alert_creationdate: {defender_alert_creationdate}")
 
-            defender_api = DefenderAPI(self.options['tenant_id'],
-                                       self.options['client_id'],
-                                       self.options['app_secret'],
-                                       self.opts,
-                                       self.options)
+            defender_api = DefenderAPI(self.options.get('tenant_id', None),
+                                       self.options.get('client_id', None),
+                                       self.options.get('app_secret', None),
+                                       self.opts, self.options)
 
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            params = {
-            }
+            params = {**EXPAND_PARAMS}
             filters = []
 
             if defender_alert_result_max:
@@ -72,30 +71,30 @@ class FunctionComponent(ResilientComponent):
             if filters:
                 params['$filter'] = "+and+".join(filters)
 
-            params = {**params, **EXPAND_PARAMS}
             log.debug(params)
 
             alert_payload, status, reason = defender_api.call(ALERTS_URL, payload=params)
 
-            # filter on machine id and convert dates to timestamps
+            # Filter on machine id and convert dates to timestamps
             filtered_alerts = []
             if status:
                 for alert in alert_payload.get('value', []):
-                    # filter on machine_id
-                    if alert['machineId'] == defender_machine_id:
+                    # Filter on machine_id
+                    if alert.get('machineId', None) == defender_machine_id:
                         filtered_alert = alert.copy()
-                        filtered_alert['alertCreationTime_ts'] = convert_date(filtered_alert['alertCreationTime'])
-                        filtered_alert['firstEventTime_ts'] = convert_date(filtered_alert['firstEventTime'])
-                        filtered_alert['lastEventTime_ts'] = convert_date(filtered_alert['lastEventTime'])
-                        filtered_alert['lastUpdateTime_ts'] = convert_date(filtered_alert['lastUpdateTime'])
-                        filtered_alert['resolvedTime_ts'] = convert_date(filtered_alert['resolvedTime'])
+                        filtered_alert['alertCreationTime_ts'] = convert_date(filtered_alert.get('alertCreationTime', None))
+                        filtered_alert['firstEventTime_ts'] = convert_date(filtered_alert.get('firstEventTime', None))
+                        filtered_alert['lastEventTime_ts'] = convert_date(filtered_alert.get('lastEventTime', None))
+                        filtered_alert['lastUpdateTime_ts'] = convert_date(filtered_alert.get('lastUpdateTime', None))
+                        filtered_alert['resolvedTime_ts'] = convert_date(filtered_alert.get('resolvedTime', None))
                         filtered_alerts.append(filtered_alert)
                 alert_payload['value'] = filtered_alerts
 
-                yield StatusMessage("Alerts found: {} for machine_id: {}"\
-                        .format(len(alert_payload['value']), defender_machine_id))
+                yield StatusMessage(f"Alerts found: {len(alert_payload.get('value', None))} for machine_id: {defender_machine_id}")
             else:
-                yield StatusMessage(f"{FUNCTION} failure. Status: {status} Reason: {reason}")
+                err_msg = f"{FUNCTION} failure. Status: {status} Reason: {reason}"
+                yield StatusMessage(err_msg)
+                raise IntegrationError(err_msg)
 
             yield StatusMessage("Finished 'defender_alert_search'")
 
@@ -103,5 +102,5 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=str(err))

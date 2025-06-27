@@ -5,10 +5,7 @@
 """Generate Mock responses to simulate Proofpoint TRAP for Unit and function tests """
 import re
 import json
-from sys import version_info
-from requests import HTTPError
 from requests.models import Response
-import datetime
 
 # Responses for standalone tests
 

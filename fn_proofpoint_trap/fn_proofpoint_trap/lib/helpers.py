@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=line-too-long
 
 """ Helper functions for Resilient circuits Functions supporting ProofPoint TRAP """
 
+import requests
 from resilient_circuits.actions_component import ResilientComponent
 
 CONFIG_DATA_SECTION = "fn_proofpoint_trap"
@@ -59,6 +60,6 @@ def validate_opts(func):
         param_value = func.options.get(param, None)
 
         if param_value is None:
-            raise Exception("Mandatory config setting '{}' not set.".format(param))
+            raise requests.exceptions.RequestException(f"Mandatory config setting '{param}' not set.")
         if not param_value:
-            raise ValueError("Invalid value for config setting '{}'.".format(param))
+            raise ValueError(f"Invalid value for config setting '{param}'.")

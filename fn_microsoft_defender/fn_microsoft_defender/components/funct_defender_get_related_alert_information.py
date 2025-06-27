@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use, line-too-long
-# Copyright IBM Corp. 2010, 2023 - Confidential Information
+# Copyright IBM Corp. 2010, 2025 - Confidential Information
 
 """AppFunction implementation"""
 
@@ -30,34 +30,34 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.defender_alert_info
             -   fn_inputs.defender_alert_id
         """
-
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        alert_id = fn_inputs.defender_alert_id
-        alert_info = fn_inputs.defender_alert_info
+        try:
+            alert_id = getattr(fn_inputs, "defender_alert_id", None)
+            alert_info = getattr(fn_inputs, "defender_alert_info", None)
 
-        defender_api = DefenderAPI(self._app_configs_as_dict['tenant_id'],
-                                   self._app_configs_as_dict['client_id'],
-                                   self._app_configs_as_dict['app_secret'],
-                                   self.opts,
-                                   self._app_configs_as_dict)
+            defender_api = DefenderAPI(self.options.get('tenant_id', None),
+                                        self.options.get('client_id', None),
+                                        self.options.get('app_secret', None),
+                                        self.opts, self.options)
 
-        if 'All' in alert_info:
-            alert_info = ALERT_TYPES.keys()
+            if 'All' in alert_info:
+                alert_info = ALERT_TYPES.keys()
 
-        result = {}
-        url = '/'.join([ALERTS_URL, alert_id])
-        url = f"{url}?{EXPAND_PARAMS_URL}"
-        alert_payload, _status, _reason = defender_api.call(url)
-        self.LOG.debug(alert_payload)
-        result['General'] = alert_payload.get('value') if alert_payload.get('value') else alert_payload
-
-        for alert_type in alert_info:
-            url = '/'.join([ALERTS_URL, alert_id, ALERT_TYPES.get(alert_type)])
-            alert_payload, _status, _reason = defender_api.call(url)
+            result = {}
+            alert_payload, _status, _reason = defender_api.call(
+                f"{'/'.join([ALERTS_URL, alert_id])}?{EXPAND_PARAMS_URL}")
             self.LOG.debug(alert_payload)
-            result[alert_type] = alert_payload.get('value') if alert_payload.get('value') else alert_payload
+            result['General'] = alert_payload.get('value', None) if alert_payload.get('value', None) else alert_payload
 
-        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+            for alert_type in alert_info:
+                alert_payload, _status, _reason = defender_api.call(
+                    '/'.join([ALERTS_URL, alert_id, ALERT_TYPES.get(alert_type)]))
+                self.LOG.debug(alert_payload)
+                result[alert_type] = alert_payload.get('value', None) if alert_payload.get('value', None) else alert_payload
 
-        yield FunctionResult(result)
+            yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+
+            yield FunctionResult(result)
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=str(err))

@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 
 """Function implementation"""
 
-import logging
+from logging import getLogger
 import re
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, validate_fields
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult
+from resilient_lib import ResultPayload, IntegrationError
 from fn_microsoft_defender.lib.defender_common import DefenderAPI, convert_date, INDICATOR_URL, PACKAGE_NAME
 
 FUNCTION = "defender_list_indicators"
+log = getLogger(__name__)
 
 FILTER_FIELD_LOOKUP = {
     "type": "indicatorType",
@@ -34,27 +35,23 @@ class FunctionComponent(ResilientComponent):
 
     @function(FUNCTION)
     def _defender_list_indicators_function(self, event, *args, **kwargs):
-        """Function: None"""
+        """Function: Get a list of all Defender indicators. Optionally, specify a regex filter to limit the responses."""
         try:
-            log = logging.getLogger(__name__)
-
             yield StatusMessage("Starting 'defender_list_indicators'")
-            validate_fields(["tenant_id", "client_id", "app_secret"], self.options)
 
             indicator_filter = kwargs.get('defender_indicator_filter')
             indicator_field = self.get_select_param(kwargs.get('defender_indicator_field'))
             log.info(f"defender_indicator_filter: {indicator_filter}")
             log.info(f"defender_indicator_field: {indicator_field}")
 
-            # convert to field used by the API call
+            # Convert to field used by the API call
             indicator_field = FILTER_FIELD_LOOKUP.get(indicator_field, indicator_field)
 
             # Get the function parameters:
-            defender_api = DefenderAPI(self.options['tenant_id'],
-                                       self.options['client_id'],
-                                       self.options['app_secret'],
-                                       self.opts,
-                                       self.options)
+            defender_api = DefenderAPI(self.options.get('tenant_id', None),
+                                       self.options.get('client_id', None),
+                                       self.options.get('app_secret', None),
+                                       self.opts, self.options)
 
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
             indicator_payload, status, reason = defender_api.call(INDICATOR_URL, content_type=None)
@@ -65,8 +62,8 @@ class FunctionComponent(ResilientComponent):
 
                 # convert dates to timestamps
                 for indicator in filtered_payload.get('value', []):
-                    indicator['creationTimeDateTimeUtc_ts'] = convert_date(indicator['creationTimeDateTimeUtc'])
-                    indicator['expirationTime_ts'] = convert_date(indicator['expirationTime'])
+                    indicator['creationTimeDateTimeUtc_ts'] = convert_date(indicator.get('creationTimeDateTimeUtc', None))
+                    indicator['expirationTime_ts'] = convert_date(indicator.get('expirationTime', None))
             else:
                 yield StatusMessage(f"{FUNCTION} failure. Status: {status} Reason: {reason}")
                 filtered_payload = indicator_payload
@@ -77,19 +74,19 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=str(err))
 
 def filter_indicators(indicator_payload, indicator_field, indicator_filter):
-    """[filter results of the returned indicator using optional regex pattern]
+    """Filter results of the returned indicator using optional regex pattern
 
     Args:
-        indicator_payload ([dict]): [payload to parse]
-        indicator_field ([text]): [field name to apply the filter]
-        indicator_filter ([text]): [regex pattern to use]
+        indicator_payload ([dict]): payload to parse
+        indicator_field ([text]): field name to apply the filter
+        indicator_filter ([text]): regex pattern to use
 
     Returns:
-        [dict]: [filtered list]
+        [dict]: filtered list
     """
     if not (indicator_filter and indicator_field):
         return indicator_payload
@@ -97,7 +94,7 @@ def filter_indicators(indicator_payload, indicator_field, indicator_filter):
     reg = re.compile(indicator_filter)
     filtered_indicators = []
     for indicator in indicator_payload.get('value', []):
-        if reg.match(indicator[indicator_field]):
+        if reg.match(indicator.get(indicator_field, None)):
             filtered_indicators.append(indicator)
 
     return {"value": filtered_indicators}

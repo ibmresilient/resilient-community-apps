@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# Copyright IBM Corp. 2010, 2023 - Confidential Information
+# Copyright IBM Corp. 2010, 2025 - Confidential Information
 
 """AppFunction implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from logging import getLogger
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult
 from resilient_lib import ResultPayload, validate_fields
 from fn_microsoft_defender.lib.defender_common import DefenderAPI, MACHINE_RECOMMENDATIONS_URL, PACKAGE_NAME
 
 FN_NAME = "defender_machine_vulnerabilities"
+log = getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements function 'defender_machine_recommendations'"""
@@ -31,25 +32,23 @@ class FunctionComponent(ResilientComponent):
         """Function: Perform either an 'isolate' or 'unisolate' operation on a MS defender machine"""
         try:
             yield StatusMessage(f"Starting '{FN_NAME}'")
-            validate_fields(["tenant_id", "client_id", "app_secret"], self.options)
+            # Validate required fields
             validate_fields(["defender_machine_id"], kwargs)
 
             # Get the function parameters:
             defender_machine_id = kwargs.get("defender_machine_id")  # text
 
-            log = logging.getLogger(__name__)
             log.info(f"defender_machine_id: {defender_machine_id}")
 
-            defender_api = DefenderAPI(self.options['tenant_id'],
-                                       self.options['client_id'],
-                                       self.options['app_secret'],
-                                       self.opts,
-                                       self.options)
+            defender_api = DefenderAPI(self.options.get('tenant_id', None),
+                                       self.options.get('client_id', None),
+                                       self.options.get('app_secret', None),
+                                       self.opts, self.options)
 
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            recommendation_payload, status, reason = defender_api.call(MACHINE_RECOMMENDATIONS_URL.format(defender_machine_id),
-                                                                  content_type=None)
+            recommendation_payload, status, reason = defender_api.call(
+                MACHINE_RECOMMENDATIONS_URL.format(defender_machine_id), content_type=None)
 
             yield StatusMessage(f"Finished '{FN_NAME}'")
 
@@ -57,5 +56,5 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=str(err))

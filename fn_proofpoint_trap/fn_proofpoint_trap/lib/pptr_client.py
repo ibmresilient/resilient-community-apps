@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=line-too-long, too-many-positional-arguments, too-many-arguments
 """ Class for Resilient circuits Functions supporting REST API client for Proofpoint TRAP  """
 import logging
 import json
 import datetime as dt
-from datetime import datetime
+from pytz import timezone
 from sys import version_info
 import os
 import requests
@@ -42,13 +42,13 @@ def incident_details_exception_handler(response):
         return response
 
     except requests.exceptions.HTTPError as err:
-        if err.response.content is not None:
+        if err.response.content:
             try:
                 custom_error_content = json.loads(err.response.content)
             except JSONDecodeError:
-                raise ValueError(err)  # raise ValueError(custom_error_content)
+                raise ValueError(err) from err  # raise ValueError(custom_error_content)
             return custom_error_content
-        raise ValueError(err)
+        raise ValueError(err) from err
 
 
 def incidents_exception_handler(response):
@@ -64,13 +64,13 @@ def incidents_exception_handler(response):
         return response
 
     except requests.exceptions.HTTPError as err:
-        if err.response.content is not None:
+        if err.response.content:
             try:
                 custom_error_content = json.loads(err.response.content)
             except JSONDecodeError:
-                return {'error': '{}'.format(err)}
+                return {'error': f"{err}"}
             return custom_error_content
-        return {'error': 'HTTP error {}'.format(err)}
+        return {'error': f"HTTP error {err}"}
 
 class PPTRClient():
     """
@@ -94,7 +94,7 @@ class PPTRClient():
             "add_members":      "/lists/{}/members.json",
         }
         self._req = RequestsCommon(options, function_options)
-        self._headers = {"Authorization": "{0}".format(self.api_key)}
+        self._headers = {"Authorization": f"{self.api_key}"}
 
     def get_incidents(self, lastupdate=None, state=None):
         """Get incidents in TRAP. The amount of incidents returned can be filtered by parameter lastupdate.
@@ -103,7 +103,7 @@ class PPTRClient():
         :param state: - Filter incidents by state.
         :return Result in json format.
         """
-        url = "{}{}".format(self.base_url, self._endpoints["incidents"])
+        url = f"{self.base_url}{self._endpoints.get('incidents')}"
         params = {}
         if isinstance(lastupdate, int):
             params['created_after'] = timestamp_minutes_ago(lastupdate)
@@ -122,7 +122,7 @@ class PPTRClient():
 
         except IntegrationError as ierr:
             msg = str(ierr)
-            return {'error': 'Request to {0} failed with error {1}.'.format(url, msg)}
+            return {'error': f"Request to {url} failed with error {msg}."}
 
         # If an error caught in the error handler return the error dict.
         if isinstance(res, dict) and "error" in res:
@@ -150,7 +150,7 @@ class PPTRClient():
 
         except IntegrationError as ierr:
             msg = str(ierr)
-            raise Exception('Request to {0} failed with error {1}.'.format(url, msg))
+            raise requests.exceptions.RequestException(f"Request to {url} failed with error {msg}.") from ierr
 
         if isinstance(res, dict) and "error" in res:
             return res
@@ -174,8 +174,7 @@ class PPTRClient():
                                          members.json.
         :return Result in json format.
         """
-        if member_id is not None:
-
+        if member_id:
             url = "{}{}".format(self.base_url, self._endpoints["list_member"].format(list_id, member_id))
         else:
             url = "{}{}".format(self.base_url, self._endpoints["list_members"].format(list_id, members_type))
@@ -201,10 +200,10 @@ class PPTRClient():
         """
         url = "{}{}".format(self.base_url, self._endpoints["add_members"].format(list_id))
         # Convert expiration timestamp to UTC format.
-        if expiration is not None:
-            expiration = datetime.utcfromtimestamp(int(str(expiration)[0:-3])).strftime('%Y-%m-%dT%H:%M:%SZ')
+        if expiration:
+            expiration = dt.datetime.fromtimestamp(int(str(expiration)[0:-3]), timezone('UTC')).strftime('%Y-%m-%dT%H:%M:%SZ')
 
-        if duration is not None:
+        if duration:
             # Convert parameter (in minutes) to milliseconds for api.
             duration = int(duration) * 60 * 1000
 
@@ -231,10 +230,10 @@ class PPTRClient():
         """
         url = "{}{}".format(self.base_url, self._endpoints["list_member"].format(list_id, member_id))
         # Convert expiration timestamp to UTC format.
-        if expiration is not None:
-            expiration = datetime.utcfromtimestamp(int(str(expiration)[0:-3])).strftime('%Y-%m-%dT%H:%M:%SZ')
+        if expiration:
+            expiration = dt.datetime.fromtimestamp(int(str(expiration)[0:-3]), timezone('UTC')).strftime('%Y-%m-%dT%H:%M:%SZ')
 
-        if duration is not None:
+        if duration:
             # Convert parameter (in minutes) to milliseconds for api.
             duration = int(duration) * 60 * 1000
 

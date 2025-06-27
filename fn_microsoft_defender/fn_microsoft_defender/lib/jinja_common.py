@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
-import calendar
-import logging
-import rapidjson
-import re
-import os
-import time
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+from calendar import timegm
+from logging import getLogger
+from rapidjson import loads, PM_TRAILING_COMMAS, JSONDecodeError
+from re import sub, compile, findall
+from os import path
+from time import strptime
 from resilient_circuits.template_functions import environment, render
 
-LOG = logging.getLogger(__name__)
+LOG = getLogger(__name__)
 
-DUPLICATE_COMMAS = re.compile(r',(\s*,)+')
-LEADING_COMMAS = re.compile(r'\[\s*,')
+DUPLICATE_COMMAS = compile(r',(\s*,)+')
+LEADING_COMMAS = compile(r'\[\s*,')
 
-SANITIZE_URL = re.compile(r"[\[\]\"']") # remove square brackets and quotes
+SANITIZE_URL = compile(r"[\[\]\"']") # Remove square brackets and quotes
 
 class JinjaEnvironment():
     def __init__(self):
@@ -22,25 +22,29 @@ class JinjaEnvironment():
         env = environment()
         env.globals.update({
             "resilient_datetimeformat": jinja_resilient_datetimeformat,
+            "soar_datetimeformat": jinja_resilient_datetimeformat,
             "resilient_substitute": jinja_resilient_substitute,
+            "soar_substitute": jinja_resilient_substitute,
             "regex_sub": jinja_regex_sub,
             "sanitize_url": jinja_sanitize_url
             })
         env.filters.update({
             "resilient_datetimeformat": jinja_resilient_datetimeformat,
+            "soar_datetimeformat": jinja_resilient_datetimeformat,
             "resilient_substitute": jinja_resilient_substitute,
+            "soar_substitute": jinja_resilient_substitute,
             "regex_sub": jinja_regex_sub,
             "sanitize_url": jinja_sanitize_url
             })
 
     def make_payload_from_template(self, template_override, default_template, payload):
-        """convert a payload into a newformat based on a specified template
+        """Convert a payload into a new format based on a specified template
         Args:
-            template_override ([str]): [/path/to/template.jinja]
-            default_template ([str]): [/path/to/template.jinja]
-            payload ([dict]): [data to convert]
+            template_override ([str]): /path/to/template.jinja
+            default_template ([str]): /path/to/template.jinja
+            payload ([dict]): Data to convert
         Returns:
-            [dict]: [converted payload]
+            [dict]: Converted payload
         """
         template_data = self.get_template(template_override, default_template)
 
@@ -51,87 +55,84 @@ class JinjaEnvironment():
         return rendered_payload
 
     def get_template(self, specified_template, default_template):
-        """return the contents of a jinja template, either from the default or a customer specified
+        """Return the contents of a jinja template, either from the default or a customer specified
             custom path
         Args:
-            specified_template ([str]): [customer specified template path]
-            default_template ([str]): [default template location]
+            specified_template ([str]): Customer specified template path
+            default_template ([str]): Default template location
         Returns:
-            [str]: [contents of template]
+            [str]: Contents of template
         """
-        template_file_path = specified_template
-        if template_file_path:
-            if not (os.path.exists(template_file_path) and os.path.isfile(template_file_path)):
-                LOG.error(u"Template file: %s doesn't exist, using default template",
-                        template_file_path)
-                template_file_path = None
+        if specified_template:
+            if not (path.exists(specified_template) and path.isfile(specified_template)):
+                LOG.error("Template file: %s doesn't exist, using default template",
+                        specified_template)
+                specified_template = None
 
-        if not template_file_path:
-            # using default template
-            template_file_path = os.path.join(
-                                    os.path.dirname(os.path.realpath(__file__)),
-                                    default_template
-                                )
+        if not specified_template:
+            # Using default template
+            specified_template = path.join(
+                                    path.dirname(path.realpath(__file__)),
+                                    default_template)
 
-        LOG.debug(u"Incident template file: %s", template_file_path)
-        with open(template_file_path, "r") as definition:
+        LOG.debug("Incident template file: %s", specified_template)
+        with open(specified_template, "r") as definition:
             return definition.read()
-        
-def jinja_regex_sub(value, repl, pattern):
-    """custom filter to run the regex substitute function
 
-    :param pattern: pattern to execute. Can be a compiled patter or string
-    :type pattern: Union[re.Patter, str]
-    :param repl: replacement for found characters
+def jinja_regex_sub(value, repl, pattern):
+    """Custom filter to run the regex substitute function
+
+    :param pattern: Pattern to execute. Can be a compiled patter or string
+    :type pattern: Union[Patter, str]
+    :param repl: Replacement for found characters
     :type repl: str
-    :param value: string to perform substitutes
+    :param value: String to perform substitutes
     :type value: str
-    :return: transformed string
+    :return: Transformed string
     :rtype: str
     """
     if isinstance(pattern, str):
-        return re.sub(pattern, repl, value)
-    
+        return sub(pattern, repl, value)
+
     return pattern.sub(repl, value)
 
 def jinja_sanitize_url(value):
-    """custom filter just for url sanitization
+    """Custom filter just for URL sanitization
 
-    :param value: url to sanitize
+    :param value: URL to sanitize
     :type value: str
-    :return: cleaned url
-    :rtype: url
+    :return: Cleaned URL
+    :rtype: URL
     """
     return jinja_regex_sub(value, "", SANITIZE_URL)
 
-
 def jinja_resilient_datetimeformat(value, date_format="%Y-%m-%dT%H:%M:%S"):
-    """custom jinja filter to convert UTC dates to epoch format
+    """Custom jinja filter to convert UTC dates to epoch format
     Args:
-        value ([str]): [jinja provided field value]
-        date_format (str, optional): [conversion format]. Defaults to "%Y-%m-%dT%H:%M:%S".
+        value ([str]): jinja provided field value
+        date_format (str, optional): Conversion format. Defaults to "%Y-%m-%dT%H:%M:%S".
     Returns:
-        [int]: [epoch value of datetime, in milliseconds]
+        [int]: epoch value of datetime, in milliseconds
     """
     if not value:
         return value
 
-    utc_time = time.strptime(value[:value.rfind('.')], date_format)
-    return calendar.timegm(utc_time)*1000
+    utc_time = strptime(value[:value.rfind('.')], date_format)
+    return timegm(utc_time)*1000
 
 def jinja_resilient_substitute(value, json_str):
     """jinja custom filter to replace values based on a lookup dictionary
     Args:
-        value ([str]): [original value]
-        json_str ([str]): [string encoded json lookup values]
+        value ([str]): Original value
+        json_str ([str]): String encoded json lookup values
     Returns:
-        [str]: [replacement value or original value if no replacement found]
+        [str]: Replacement value or original value if no replacement found
     """
-    replace_dict = rapidjson.loads(json_str)
+    replace_dict = loads(json_str)
     if value in replace_dict:
         return replace_dict[value]
 
-    # use a default value if specific match is missing
+    # Use a default value if specific match is missing
     if 'DEFAULT' in replace_dict:
         return replace_dict['DEFAULT']
 
@@ -139,38 +140,38 @@ def jinja_resilient_substitute(value, json_str):
 
 def render_json(template, data):
     """Render data into a template, producing a JSON result
-       Also clean up any "really bad" control characters to avoid failure.
+       Also clean up any "really bad" control characters to avoid failure
 
        >>> d = {"value": "the" + chr(10) + "new" + chr(10) + "thing"}
        >>> render_json('{"result":"{{value}}"}', d)
-       {u'result': u'the new thing'}
+       {'result': 'the new thing'}
 
        >>> d = {"value": "the" + chr(1) + "new" + chr(9) + "thing"}
        >>> render_json('{"result":"{{value}}"}', d)
-       {u'result': u'the new thing'}
+       {'result': 'the new thing'}
     """
     result = render(template, data)
     for n in range(1, 32):
         result = result.replace(chr(n), " ")
 
-    # remove duplicate/unnecessary commas
+    # Remove duplicate/unnecessary commas
     result = DUPLICATE_COMMAS.sub(',', result)
     result = LEADING_COMMAS.sub('[', result)
 
-    # continue to parse the json, attempting to look for escape characters to fix
+    # Continue to parse the json, attempting to look for escape characters to fix
     attempt_counter = 0
     value = {}
     while attempt_counter < 500:
         try:
-            value = rapidjson.loads(result, parse_mode=rapidjson.PM_TRAILING_COMMAS)
-            break                    # parsing worked -> exit loop
-        except rapidjson.JSONDecodeError as e:
+            value = loads(result, parse_mode=PM_TRAILING_COMMAS)
+            break # Parsing worked -> exit loop
+        except JSONDecodeError as e:
             # Parse error at offset 6946: Invalid escape character in string.
             if "Invalid escape character" in str(e):
-                offset = int(re.findall(r'offset (\d+)', str(e))[0])
+                offset = int(findall(r'offset (\d+)', str(e))[0])
                 if result[offset] != '\\':
                     raise e
-                # position of unescaped '\' before that
+                # Position of unescaped '\' before that
                 result = result[:offset] + r'\\' + result[offset+1:]
             else:
                 LOG.error(result)

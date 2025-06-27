@@ -18,24 +18,23 @@ def snake_to_camel(word):
     return ''.join(x.capitalize() or '_' for x in word.split('_'))
 
 setup(
+    display_name='Proofpoint TRAP',
     name='fn_proofpoint_trap',
-    version='1.0.3',
+    version='1.0.4',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
-    url='https://ibm.biz/resilientcommunity',
-    description="Resilient integration for Proofpoint TRAP",
-    long_description="The Proofpoint Threat Response Auto-Pull (TRAP) integration with the Resilient platform allows "
-                     "for polling, querying and updating of A Proofpoint TRAP deployment. The integration includes a "
-                     "poller and 5 functions which are used to gather results which show information on security "
-                     "incidents in the deployment. The returned results can be used to make customized updates to the "
-                     "Resilient platform, such as updating incidents, artifacts, data tables and so on. The integration "
-                     "can also be used to make changes to a deployment including adding, updating, or removing a member "
-                     "of a list.",
+    url="""<ul><a target='blank' href='https://ibm.biz/soarcommunity'>Support</a></ul>""",
+    description="IBM QRadar SOAR integration for Proofpoint TRAP",
+    long_description="""Perform actions on Github repositories, branches, files, releases, commits and repositories.
+    <br>
+    Links:
+    <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+    <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        'resilient_circuits>=33.0.0',
-        'resilient>=32.0.0',
-        'resilient_lib>=32.0.0'
+        'resilient_circuits>=51.0.0',
+        'resilient>=51.0.0',
+        'resilient_lib>=51.0.6.0'
     ],
     packages=find_packages(),
     include_package_data=True,

@@ -87,9 +87,7 @@ TEST_ALERTS = [
     }
 ]
 
-SUCCESS_ALERT_FILTERS_ONE = {
-    "serviceSource": "MicrosoftDefenderForEndpoint"
-}
+SUCCESS_ALERT_FILTERS_ONE = {"serviceSource": "MicrosoftDefenderForEndpoint"}
 
 SUCCESS_ALERT_FILTERS_TWO = {
     "serviceSource": "MicrosoftDefenderForEndpoint",
@@ -101,27 +99,18 @@ SUCCESS_ALERT_FILTERS_TWO_MISSPELLED = {
     "7everity": "Medium"
 }
 
-FAILURE_ALERT_FILTERS_ONE = {
-    "serviceSource": "something"
-}
+FAILURE_ALERT_FILTERS_ONE = {"serviceSource": "something"}
 
-FAILURE_ALERT_FILTERS_TWO = {
-    "serviceSource": "something",
-    "severity": "Medium"
-}
+FAILURE_ALERT_FILTERS_TWO = {"serviceSource": "something", "severity": "Medium"}
 
 FAILURE_ALERT_FILTERS_TWO_MIXED = {
     "serviceSource": "MicrosoftDefenderForEndpoint",
     "severity": "Medium"
 }
 
-FAILURE_ALERT_FILTERS_NULL = {
-    "classification": "MicrosoftDefenderForEndpoint"
-}
+FAILURE_ALERT_FILTERS_NULL = {"classification": "MicrosoftDefenderForEndpoint"}
 
-FAILURE_ALERT_FILTERS_MISPELLED = {
-    "clazzification": "MicrosoftDefenderForEndpoint"
-}
+FAILURE_ALERT_FILTERS_MISPELLED = {"clazzification": "MicrosoftDefenderForEndpoint"}
 
 class TestSentinel:
     @pytest.mark.parametrize("incident, filter, result", [

@@ -5,7 +5,7 @@
   "start_date": {{ createdTime|resilient_datetimeformat }},
   {# if Defender alert users are different than SOAR users, consider using a mapping table using resilient_substitute: #}
   {# "owner_id": "{{ assignedTo|resilient_substitute('{"Automation": "soar_user1@ent.com", "defender_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
-  "plan_status": "{{ status|resilient_substitute('{"Resolved": "C", "Active": "A", "New": "A"}') }}",
+  "plan_status": "{{ status|resilient_substitute('{"Resolved": "C", "Active": "A", "New": "A", "Redirected": "A"}') }}",
   "severity_code": "{{ severity|resilient_substitute('{"Informational": "Low"}') }}",
   "properties": {
     "defender_incident_id": {{ incidentId }},
@@ -86,7 +86,7 @@
           "content": "creation date: {{ item.evidenceCreationTime }}\n{{ machine_comment }}"
         }
       }
-      {% elif item.entityType == 'File' -%}
+      {% elif item.entityType == 'File' and item.fileName -%}
       {% set artifactFlg = True -%}
       {
         "type": {

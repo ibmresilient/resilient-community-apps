@@ -25,23 +25,13 @@
 ---
 
 ## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release
-  notes of a previous release
--->
-### v1.0.3
-* Fixed bug where incident summary is unavailable.
-* Fixed bug where incidents not being filtered by state.
-* Fixed bug with Resilient incident severity codes.
-
-### v1.0.2
-* Fix bug in workflow 'Proofpoint TRAP Update List Member'.
-
-### v1.0.1
-* Fix url concatenation issue.
-
-### v1.0.0
-* Initial Release
+| Version | Date | Notes |
+| ------- | ---- | ----- |
+| 1.0.4 | 05/2025 | Converted example workflows to python3 |
+| 1.0.3 | 06/2020 | Fixed bug where incident summary is unavailable, Fixed bug where incidents not being filtered by state, Fixed bug with Resilient incident severity codes|
+| 1.0.2 | | Fix bug in workflow 'Proofpoint TRAP Update List Member' |
+| 1.0.1 | | Fix url concatenation issue |
+| 1.0.0 | 10/2018 | Initial Release |
 
 ---
 
@@ -67,8 +57,8 @@ The ProofPoint TRAP function package provides the following features:
 <!--
   List any Requirements
 -->
-* Resilient platform >= `v32`
-* An Integration Server running `resilient_circuits>=33.0.192`
+* Resilient platform >= `51.0.0`
+* An Integration Server running `resilient_circuits>=51.0.0`
   * To set up an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
 
 ---

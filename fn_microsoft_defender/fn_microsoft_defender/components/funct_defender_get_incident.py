@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# Copyright IBM Corp. 2010, 2023 - Confidential Information
+# Copyright IBM Corp. 2010, 2025 - Confidential Information
 
 """AppFunction implementation"""
 
@@ -24,29 +24,30 @@ class FunctionComponent(AppFunctionComponent):
         Inputs:
             -   fn_inputs.defender_incident_id
         """
-
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
         # Validate required fields
         validate_fields(["defender_incident_id"], fn_inputs)
 
-        defender_api = DefenderAPI(self._app_configs_as_dict['tenant_id'],
-                                   self._app_configs_as_dict['client_id'],
-                                   self._app_configs_as_dict['app_secret'],
-                                   self.opts,
-                                   self._app_configs_as_dict,
-                                   scope=DEFENDER_INCIDENT_SCOPE)
+        try:
+            defender_api = DefenderAPI(self.options.get('tenant_id', None),
+                                    self.options.get('client_id', None),
+                                    self.options.get('app_secret', None),
+                                    self.opts, self.options,
+                                    scope=DEFENDER_INCIDENT_SCOPE)
 
-        url = '/'.join([INCIDENTS_URL, str(fn_inputs.defender_incident_id)])
-        incident_payload, status, reason = defender_api.call(url)
-        self.LOG.debug(incident_payload)
+            incident_payload, status, reason = defender_api.call(
+                '/'.join([INCIDENTS_URL, str(fn_inputs.defender_incident_id)]))
+            self.LOG.debug(incident_payload)
 
-        # Convert dates to timestamps for alert devices
-        if status:
-            for alert in incident_payload['alerts']:
-                for device in alert['devices']:
-                    device['firstSeen_ts'] = convert_date(device['firstSeen'])
+            # Convert dates to timestamps for alert devices
+            if status:
+                for alert in incident_payload.get('alerts', {}):
+                    for device in alert.get('devices', {}):
+                        device['firstSeen_ts'] = convert_date(device.get('firstSeen', None))
 
-        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+            yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-        yield FunctionResult(incident_payload)
+            yield FunctionResult(incident_payload)
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=str(err))

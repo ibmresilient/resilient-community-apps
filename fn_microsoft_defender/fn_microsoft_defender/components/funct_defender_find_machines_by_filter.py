@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, validate_fields
+from logging import getLogger
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult
+from resilient_lib import ResultPayload, validate_fields, IntegrationError
 from fn_microsoft_defender.lib.defender_common import DefenderAPI, convert_date, MACHINES_URL, PACKAGE_NAME, make_filter_url
 
 FUNCTION = "defender_find_machines_by_filter"
+log = getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'defender_find_machines_by_filter''"""
@@ -31,14 +32,13 @@ class FunctionComponent(ResilientComponent):
         """Function: Find Defender Machine(s) by filter"""
         try:
             yield StatusMessage("Starting 'defender_find_machines_by_filter'")
-            validate_fields(["tenant_id", "client_id", "app_secret"], self.options)
+            # Validate required fields
             validate_fields(["defender_filter_name", "defender_filter_value"], kwargs)
 
             # Get the function parameters:
             defender_filter_name = kwargs.get("defender_filter_name")  # datepicker
             defender_filter_value = kwargs.get("defender_filter_value")  # text
 
-            log = logging.getLogger(__name__)
             log.info(f"defender_filter_name: {defender_filter_name}")
             log.info(f"defender_filter_value: {defender_filter_value}")
 
@@ -47,12 +47,10 @@ class FunctionComponent(ResilientComponent):
             url = make_filter_url(MACHINES_URL, defender_filter_name, defender_filter_value)
 
             # Get the function parameters:
-            log = logging.getLogger(__name__)
-            defender_api = DefenderAPI(self.options['tenant_id'],
-                                       self.options['client_id'],
-                                       self.options['app_secret'],
-                                       self.opts,
-                                       self.options)
+            defender_api = DefenderAPI(self.options.get('tenant_id', None),
+                                       self.options.get('client_id', None),
+                                       self.options.get('app_secret', None),
+                                       self.opts, self.options)
 
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
             machines_result, status, reason = defender_api.call(url)
@@ -61,10 +59,12 @@ class FunctionComponent(ResilientComponent):
             if status:
                 yield StatusMessage(f"Machines found: {len(machines_result.get('value', []))}")
                 for machine in machines_result.get('value', []):
-                    machine['firstSeen_ts'] = convert_date(machine['firstSeen'])
-                    machine['lastSeen_ts'] = convert_date(machine['lastSeen'])
+                    machine['firstSeen_ts'] = convert_date(machine.get('firstSeen', None))
+                    machine['lastSeen_ts'] = convert_date(machine.get('lastSeen', None))
             else:
-                yield StatusMessage(f"{FUNCTION} failure. Status: {status} Reason: {reason}")
+                err_msg = f"{FUNCTION} failure. Status: {status} Reason: {reason}"
+                yield StatusMessage(err_msg)
+                raise IntegrationError(err_msg)
 
             yield StatusMessage("Finished 'defender_find_machines_by_filter'")
 
@@ -72,5 +72,5 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=str(err))

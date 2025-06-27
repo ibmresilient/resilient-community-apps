@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument
 """ Resilient functions component to run a ProofPoint TRAP query - get incident details. """
 
 # Set up:
@@ -8,7 +8,6 @@
 # Manual Action: Execute a REST query against a ProofPoint TRAP server.
 
 import logging
-
 from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
 from fn_proofpoint_trap.lib.pptr_client import PPTRClient
@@ -21,7 +20,7 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super().__init__(opts)
         self.options = opts.get("fn_proofpoint_trap", {})
         validate_opts(self)
 

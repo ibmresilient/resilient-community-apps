@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long
 """ Incident poller for a ProofPoint TRAP server """
 
 import logging
@@ -8,9 +8,11 @@ import time
 import pprint
 import re
 from threading import Thread
+import requests
 from resilient_circuits import ResilientComponent, handler
 from resilient import SimpleHTTPException
 from resilient_lib.components.integration_errors import IntegrationError
+from resilient_lib import get_artifacts
 from fn_proofpoint_trap.lib.helpers import validate_opts
 from fn_proofpoint_trap.lib.pptr_client import PPTRClient
 
@@ -413,7 +415,7 @@ class PPTRIncidentPolling(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(PPTRIncidentPolling, self).__init__(opts)
+        super().__init__(opts)
         self.options = opts.get("fn_proofpoint_trap", {})
         validate_opts(self)
         self.stop_thread = False
@@ -453,8 +455,7 @@ class PPTRIncidentPolling(ResilientComponent):
             # Polling threads still running raise runtime error.
             LOG.error("There were %d polling threads which did not stop within timeout period on restart",
                       len(self.threads))
-            raise RuntimeError("There were {} polling threads which did not stop within timeout period on restart."
-                               .format(len(self.threads)))
+            raise RuntimeError(f"There were {len(self.threads)} polling threads which did not stop within timeout period on restart.")
 
         # Turn off 'stop_thread' flag.
         self.stop_thread = False
@@ -502,8 +503,6 @@ class PPTRIncidentPolling(ResilientComponent):
                         # Add Artifacts
                         self.create_incident_artifact(i_response['id'], i_artifacts)
 
-                        # Add raw event payload as note
-                        i_comment = self.create_incident_comment(i_response['id'], incident)
                     else:
                         LOG.info("Incident already exists for TRAP Incident %d", incident['id'])
                         # TODO: Add checks for Artifacts and Data Table rows
@@ -567,7 +566,7 @@ class PPTRIncidentPolling(ResilientComponent):
         # Fill event summary when blank
         i_summary = incident.get('summary', 'No Summary Provided')
 
-        iname = "Proofpoint TRAP Incident: ID {} - {}".format(incident['id'], i_summary)
+        iname = f"Proofpoint TRAP Incident: ID {incident.get('id')} - {i_summary}"
         LOG.debug("Incident Label Assembled: %s", iname)
 
         return iname
@@ -626,14 +625,14 @@ class PPTRIncidentPolling(ResilientComponent):
                 if contents:
                     if table_id in DATA_TABLE_IDS:
                         # table data, add row to specified data table
-                        uri = '/incidents/{0}/table_data/{1}/row_data'.format(incident_id, table_id)
+                        uri = f"/incidents/{incident_id}/table_data/{table_id}/row_data"
                         LOG.info("Attempting to create table with the following: %s", uri)
 
                         for content in contents:
                             resilient_client.post(uri=uri, payload=content)
                     else:
                         # other data, create Note with details
-                        uri = '/incidents/{0}/comments'.format(incident_id)
+                        uri = f"/incidents/{incident_id}/comments"
                         LOG.info("Attempting to add note with the following: %s", uri)
                         for content in contents:
                             resilient_client.post(uri=uri, payload=content)
@@ -652,12 +651,12 @@ class PPTRIncidentPolling(ResilientComponent):
         :return: Response from Resilient for debug
         """
         try:
-            uri = '/incidents/{}/comments'.format(incident_id)
+            uri = f"/incidents/{incident_id}/comments"
             resilient_client = self.rest_client()
             heading = "Raw Proofpoint TRAP Event Payload:\n"
             note = {
                 'format': 'text',
-                'content': '{}{}'.format(heading, pprint.pformat(data, indent=4))
+                'content': f"{heading}{pprint.pformat(data, indent=4)}"
             }
             payload = {'text': note}
             comment_response = resilient_client.post(uri=uri, payload=payload)
@@ -675,13 +674,13 @@ class PPTRIncidentPolling(ResilientComponent):
         :return:
         """
         try:
-            uri = '/incidents/{}/artifacts'.format(incident_id)
             resilient_client = self.rest_client()
+            uri = get_artifacts(res_client=resilient_client, incident_id=incident_id, query_filters=None, headers=None)
 
             for key, val in data.items():
                 LOG.debug("Processing list of %s: %s", key, val)
                 for _v in val:
-                    _desc = "{} extracted from Proofpoint TRAP Incident".format(key)
+                    _desc = f"{key} extracted from Proofpoint TRAP Incident"
                     payload = {
                         "type": key,
                         "value": _v,
@@ -746,7 +745,7 @@ class PPTRIncidentPolling(ResilientComponent):
         i_event_count = len(incident['events'])
         i_sources = incident.get('event_sources', 'No Sources Found')
 
-        description = '{}\n\nTotal Events in incident: {}\n\nFrom: {}\n'.format(i_summary, i_event_count, i_sources)
+        description = f"{i_summary}\n\nTotal Events in incident: {i_event_count}\n\nFrom: {i_sources}\n"
         return {'format': 'text', 'content': description}
 
 
@@ -758,7 +757,7 @@ class PPTRIncidentPolling(ResilientComponent):
         :return: Dictionary of Artifacts for event
         """
         host_categories = self.options.get('host_categories', None)
-        if host_categories is not None:
+        if host_categories:
             host_categories = host_categories.split(",")
         else:
             host_categories = ["forensics"]
@@ -784,7 +783,7 @@ class PPTRIncidentPolling(ResilientComponent):
             'filters': [{
                 'conditions': [
                     {
-                        'field_name': 'properties.{}'.format(idtype),
+                        'field_name': f"properties.{idtype}",
                         'method': 'equals',
                         'value': incident_id
                     },
@@ -805,12 +804,12 @@ class PPTRIncidentPolling(ResilientComponent):
         except SimpleHTTPException:
             # Some versions of Resilient 30.2 onward have a bug that prevents query for numeric fields.
             # To work around this issue, let's try a different query, and filter the results. (Expensive!)
-            query_uri = '/incidents/query?return_level=normal&field_handle={}'.format(incident_id)
+            query_uri = f"/incidents/query?return_level=normal&field_handle={incident_id}"
             query = {
                 'filters': [{
                     'conditions': [
                         {
-                            'field_name': 'properties.{}'.format(idtype),
+                            'field_name': f"properties.{idtype}",
                             'method': 'has_a_value'
                         },
                         {
@@ -826,13 +825,9 @@ class PPTRIncidentPolling(ResilientComponent):
                 r_incidents_tmp = self.rest_client().post(query_uri, query)
 
             except Exception as err:
-                raise Exception("Exception '{}' while trying to get list of Resilient incidents.".format(err))
+                raise Exception(f"Exception '{err}' while trying to get list of Resilient incidents.") from err
 
             r_incidents = [r_inc for r_inc in r_incidents_tmp
                            if r_inc['properties'].get(idtype) == incident_id]
 
         return r_incidents
-
-
-
-

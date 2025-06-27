@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 
-import logging
-import resilient
-from resilient import SimpleHTTPException
+from logging import getLogger
+from resilient import SimpleHTTPException, Patch
 from resilient_lib import IntegrationError
 
 DEFENDER_INCIDENT_ID = "defender_incident_id"
-
-LOG = logging.getLogger(__name__)
-
+LOG = getLogger(__name__)
 IBM_SOAR_LABEL = "IBM SOAR"
 
 class ResilientCommon():
@@ -19,12 +16,11 @@ class ResilientCommon():
         self.rest_client = rest_client
 
     def find_incident(self, defender_incident_id):
-        """Find a Resilient incident which contains a custom field associated with a Defender
-             alert
+        """Find a SOAR incident which contains a custom field associated with a Defender alert
         Args:
-            defender_incident_id ([str]): [defender incident id]
+            defender_incident_id ([str]): Defender incident id
         Returns:
-            [dict]: [API results of the first incident found]
+            [dict]: API results of the first incident found
         """
         r_incidents = []
         query_uri = "/incidents/query?return_level=partial"
@@ -55,48 +51,44 @@ class ResilientCommon():
 
     def create_incident(self, incident_payload):
         """
-        Create a new Resilient incident by rendering a jinja2 template
+        Create a new SOAR incident by rendering a jinja2 template
         :param defender_incident: defender_incident (json object)
-        :return: Resilient incident
+        :return: SOAR incident
         """
         try:
-            # Post incident to Resilient
-            incident = self.rest_client.post("/incidents", incident_payload)
-            return incident
+            # Post incident to SOAR
+            return self.rest_client.post("/incidents", incident_payload)
         except Exception as err:
-            raise IntegrationError(str(err))
+            raise IntegrationError(f"Failed to create SOAR incident with reason: {str(err)}")
 
     def update_incident(self, incident_id, incident_payload):
         """
-        Update a Resilient incident by rendering a jinja2 template
-        :param incident_id: incident to modify
+        Update a SOAR incident by rendering a jinja2 template
+        :param incident_id: Incident to modify
         :param incident_payload: [dict] of patched fields
-        :return: Resilient incident updated
+        :return: SOAR incident updated
         """
-
         try:
-            result = self._patch_incident(incident_id, incident_payload)
-            return result
-
+            return self._patch_incident(incident_id, incident_payload)
         except Exception as err:
-            raise IntegrationError(err)
+            raise IntegrationError(f"Failed to update SOAR incident with reason: {str(err)}")
 
     def _patch_incident(self, incident_id, incident_payload):
         """ _patch_incident will update an incident with the specified json payload.
-        :param incident_id: incident ID of incident to be updated.
-        ;param incident_payload: incident fields to be updated.
+        :param incident_id: Incident ID of incident to be updated.
+        ;param incident_payload: Incident fields to be updated.
         :return:
         """
         try:
             # Update incident
             incident_url = f"/incidents/{incident_id}"
             incident = self.rest_client.get(incident_url)
-            patch = resilient.Patch(incident)
+            patch = Patch(incident)
 
             # Iterate over payload dict.
             for name, _ in incident_payload.items():
                 if name == 'properties':
-                    for field_name, field_value in incident_payload['properties'].items():
+                    for field_name, field_value in incident_payload.get('properties', {}).items():
                         patch.add_value(field_name, field_value)
                 else:
                     payload_value = incident_payload.get(name)
@@ -104,48 +96,43 @@ class ResilientCommon():
 
             patch_result = self.rest_client.patch(incident_url, patch)
             result = self._chk_status(patch_result)
-            # add back the incident id
+            # Add back the incident id
             result['id'] = incident_id
             return result
 
         except Exception as err:
-            raise IntegrationError(err)
+            raise IntegrationError(f"Failed to patch SOAR incident with reason: {str(err)}")
 
     def create_incident_comment(self, incident_id, note):
         """
-        Add a comment to the specified Resilient Incident by ID
-        :param incident_id:  Resilient Incident ID
+        Add a comment to the specified SOAR Incident by ID
+        :param incident_id: SOAR Incident ID
         :param note: Content to be added as note
-        :return: Response from Resilient for debug
+        :return: Response from SOAR for debug
         """
         try:
-            uri = f'/incidents/{incident_id}/comments'
-            note_json = {
-                'format': 'text',
-                'content': note
-            }
-            payload = {'text': note_json}
-
-            comment_response = self.rest_client.post(uri=uri, payload=payload)
-
-            return comment_response
+            return self.rest_client.post(
+                uri=f'/incidents/{incident_id}/comments',
+                payload={
+                    'text': {
+                        'format': 'text',
+                        'content': note
+                    }
+                }
+            )
 
         except Exception as err:
             raise IntegrationError(err)
 
     def get_incident_comments(self, incident_id):
         try:
-            uri = f'/incidents/{incident_id}/comments'
-
-            comment_response = self.rest_client.get(uri=uri)
-            return comment_response
-
+            return self.rest_client.get(uri=f'/incidents/{incident_id}/comments')
         except Exception as err:
             raise IntegrationError(err)
 
     def _chk_status(self, resp, rc=200):
         """
-        check the return status. If return code is not met, raise IntegrationError,
+        Check the return status. If return code is not met, raise IntegrationError,
         if success, return the json payload
         :param resp:
         :param rc:

@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
-from resilient_lib import ResultPayload, readable_datetime, validate_fields
+from logging import getLogger
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult
+from resilient_lib import ResultPayload, readable_datetime, validate_fields, IntegrationError
 from fn_microsoft_defender.lib.defender_common import DefenderAPI, convert_date, INDICATOR_URL, PACKAGE_NAME
 
 LOOKUP_ARTIFACT_TYPES = {
@@ -25,6 +25,7 @@ LOOKUP_ARTIFACT_TYPES = {
     }
 
 FUNCTION = "defender_set_indicator"
+log = getLogger(__name__)
 
 class FunctionComponent(ResilientComponent):
     """Component that implements Resilient function 'defender_set_indicator''"""
@@ -46,13 +47,8 @@ class FunctionComponent(ResilientComponent):
         """Function: None"""
         try:
             yield StatusMessage("Starting 'defender_set_indicator'")
-            validate_fields(["tenant_id", "client_id", "app_secret"], self.options)
-            validate_fields(["defender_title",
-                             "defender_description",
-                             "defender_indicator_action"], kwargs)
-
-            # Get the function parameters:
-            log = logging.getLogger(__name__)
+            # Validate required fields
+            validate_fields(["defender_title", "defender_description", "defender_indicator_action"], kwargs)
 
             # Get the function parameters:
             defender_title = kwargs.get("defender_title")  # text
@@ -64,7 +60,6 @@ class FunctionComponent(ResilientComponent):
             defender_severity = self.get_select_param(kwargs.get("defender_severity"))  # select, values: "Low", "Medium", "High"
             defender_indicator_action = self.get_select_param(kwargs.get("defender_indicator_action"))  # select, values: "AlertAndBlock", "Alert", "Allowed"
 
-            log = logging.getLogger(__name__)
             log.info(f"defender_title: {defender_title}")
             log.info(f"defender_expiration_time: {defender_expiration_time}")
             log.info(f"defender_indicator_type: {defender_indicator_type}")
@@ -74,15 +69,14 @@ class FunctionComponent(ResilientComponent):
             log.info(f"defender_severity: {defender_severity}")
             log.info(f"defender_indicator_action: {defender_indicator_action}")
 
-            defender_api = DefenderAPI(self.options['tenant_id'],
-                                       self.options['client_id'],
-                                       self.options['app_secret'],
-                                       self.opts,
-                                       self.options)
+            defender_api = DefenderAPI(self.options.get('tenant_id', None),
+                                       self.options.get('client_id', None),
+                                       self.options.get('app_secret', None),
+                                       self.opts, self.options)
 
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            # build the payload
+            # Build the payload
             payload = {
                 "action": defender_indicator_action,
                 "title": defender_title,
@@ -98,18 +92,19 @@ class FunctionComponent(ResilientComponent):
                 payload["severity"] = defender_severity
             log.debug(payload)
 
-            url = '/'.join([INDICATOR_URL, defender_indicator_id]) if defender_indicator_id else INDICATOR_URL
-            oper = "PATCH" if defender_indicator_id else "POST"
-            indicator_payload, status, reason = defender_api.call(url,
-                                                                  payload=payload,
-                                                                  oper=oper)
-            # convert dates to timestamps
+            indicator_payload, status, reason = defender_api.call(
+                '/'.join([INDICATOR_URL, defender_indicator_id]) if defender_indicator_id else INDICATOR_URL,
+                payload=payload,
+                oper="PATCH" if defender_indicator_id else "POST")
+            # Convert dates to timestamps
             if status:
-                indicator_payload['creationTimeDateTimeUtc_ts'] = convert_date(indicator_payload['creationTimeDateTimeUtc'])
-                indicator_payload['expirationTime_ts'] = convert_date(indicator_payload['expirationTime'])
-                indicator_payload['lastUpdateTime_ts'] = convert_date(indicator_payload['lastUpdateTime'])
+                indicator_payload['creationTimeDateTimeUtc_ts'] = convert_date(indicator_payload.get('creationTimeDateTimeUtc', None))
+                indicator_payload['expirationTime_ts'] = convert_date(indicator_payload.get('expirationTime', None))
+                indicator_payload['lastUpdateTime_ts'] = convert_date(indicator_payload.get('lastUpdateTime', None))
             else:
-                yield StatusMessage(f"{FUNCTION} failure. Status: {status} Reason: {reason}")
+                err_msg = f"{FUNCTION} failure. Status: {status} Reason: {reason}"
+                yield StatusMessage(err_msg)
+                raise IntegrationError(err_msg)
 
             yield StatusMessage("Finished 'defender_list_indicators'")
 
@@ -117,21 +112,20 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
-
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=str(err))
 
 def lookup_artifact_type(artifact_type):
-    """[convert artifact types to defender types]
+    """Convert artifact types to defender types
 
     Args:
-        artifact_type ([str]): [IP Address, Malware Sha1, etc.]
+        artifact_type ([str]): IP Address, Malware Sha1, etc.
 
     Raises:
-        ValueError: [if artifact type not allowed by Defender]
+        ValueError: If artifact type not allowed by Defender
 
     Returns:
-        [str]: [defender indicator type]
+        [str]: Defender indicator type
     """
     if not artifact_type:
         return
