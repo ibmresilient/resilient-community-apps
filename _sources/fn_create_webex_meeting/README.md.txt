@@ -39,9 +39,10 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.1 | 8/2021 | Rebuild app.zip |
-| 1.1.0 | 2/2021 | App Host Support|
-| 1.0.0 | 8/2018 | Initial Release |
+| 1.1.2 | 06/2025 | Converted example workflows to python3 |
+| 1.1.1 | 08/2021 | Rebuild app.zip |
+| 1.1.0 | 02/2021 | App Host Support|
+| 1.0.0 | 08/2018 | Initial Release |
 
 ---
 
@@ -77,13 +78,13 @@ This app supports the IBM Resilient SOAR Platform and the IBM Cloud Pak for Secu
 The Resilient platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a Resilient platform with an App Host, the requirements are:
-* Resilient platform >= `36.0.5634`.
+* Resilient platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a Resilient platform with an integration server, the requirements are:
-* Resilient platform >= `36.0.5634`.
+* Resilient platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=30.0.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -199,7 +200,7 @@ inputs.webex_meeting_end_time = inputs.webex_meeting_end_time if rule.properties
 
 # Get the agenda from the activity field or the incident description
 if rule.properties.webex_meeting_agenda is None:
-  if incident.description is not None and incident.description.content is not None:
+  if incident.description and incident.description.content:
     inputs.webex_meeting_agenda = incident.description.content
   else:
     inputs.webex_meeting_agenda = ""
@@ -220,11 +221,11 @@ inputs.webex_meeting_password = inputs.webex_meeting_password if rule.properties
 content = results.get("content")
 
 if not results.success:
-  text = u"Unable to create Cisco WebEx Meeting"
+  text = "Unable to create Cisco WebEx Meeting"
 
   fail_reason = content.get("fail_reason")
   if fail_reason:
-    text = u"{0}:\n\tFailure reason: {1}".format(text, fail_reason)
+    text = "{0}:\n\tFailure reason: {1}".format(text, fail_reason)
 else:
 
   host_url = content.get("host_url")
@@ -236,10 +237,10 @@ else:
   if attendee_url is None:
     attendee_url = ""
 
-  ref_html_host = u"""<a href='{0}'>Link</a>""".format(host_url)
-  ref_html_attendee = u"""<a href='{0}'>Link</a>""".format(attendee_url)
+  ref_html_host = """<a href='{0}'>Link</a>""".format(host_url)
+  ref_html_attendee = """<a href='{0}'>Link</a>""".format(attendee_url)
 
-  text = u"<b>Cisco WebEx Meeting Links:</b><br />Host URL: {0}<br />Attendee URL: {1}".format(ref_html_host, ref_html_attendee)
+  text = "<b>Cisco WebEx Meeting Links:</b><br />Host URL: {0}<br />Attendee URL: {1}".format(ref_html_host, ref_html_attendee)
 
 note = helper.createRichText(text)
 incident.addNote(note)
