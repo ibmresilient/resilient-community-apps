@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-#pragma pylint: disable=unused-argument, no-self-use, line-too-long
+#(c) Copyright IBM Corp. 2025. All Rights Reserved.
+#pragma pylint: disable=line-too-long
 """Utility to retrieve OAuth 2.0 refresh token in order to configure the Outbound email app"""
 import os
 import sys
@@ -9,14 +9,12 @@ import hashlib
 import webbrowser
 from threading import Event
 from textwrap import dedent
+from urllib.parse import urlparse, parse_qs
 import urllib3
-if sys.version_info[0] == 3:
-    from urllib.parse import urlparse, parse_qs
-else:
-    from urlparse import urlparse, parse_qs
-
 from oauth_utils.lib.helpers import get_config_file, get_configs, set_configs
 from oauth_utils.lib.oauth2flow import OAuth2Flow
+from oauth_utils.bin.flask_app import FlaskApp
+
 
 # Global variables
 FLASK_TIMEOUT = 60 # Timeout Flask server after 60 secs, can be over-ridden by command line arg -t
@@ -27,15 +25,15 @@ CSRF_TOKEN = hashlib.sha256(os.urandom(64)).hexdigest()
 urllib3.disable_warnings()
 
 def get_cmd_usage():
-    cmd_name, ext = os.path.splitext(os.path.basename(os.path.abspath(__file__)))
-    cmd_usage = dedent("""
-    $ {0}
-    $ {0} -b --port 4000 -t 90
-    $ {0} --app_name fn_test_app
-    $ {0} -c <path_to_config_file>/app.config
-    $ {0} -ci 1234567a-abc8-90d1-2efa3-123456789abcd -cs ABCDEF-123456789abcd123456789a_aWX4 -sc 
+    cmd_name = os.path.splitext(os.path.basename(os.path.abspath(__file__)))
+    cmd_usage = dedent(f"""
+    $ {cmd_name}
+    $ {cmd_name} -b --port 4000 -t 90
+    $ {cmd_name} --app_name fn_test_app
+    $ {cmd_name} -c <path_to_config_file>/app.config
+    $ {cmd_name} -ci 1234567a-abc8-90d1-2efa3-123456789abcd -cs ABCDEF-123456789abcd123456789a_aWX4 -sc
     https://mail.myservice.com/ -tu https://myservice.com/o/oauth2/token -au https://myservice.com/o/oauth2/auth
-    """.format(cmd_name))
+    """)
     return cmd_usage
 
 def parse_args(args=None):
@@ -59,13 +57,13 @@ def parse_args(args=None):
         args = parser.parse_args()
 
     if args.config_file:
-        print("Using config file {}.".format(args.config_file))
+        print(f"Using config file {args.config_file}.")
     if args.app_name:
-        print("Using app name {}.".format(args.app_name))
+        print(f"Using app name {args.app_name}.")
     if args.timeout:
-        print("Timeout callback listener app after {} seconds.".format(args.timeout))
+        print(f"Timeout callback listener app after {args.timeout} seconds.")
     if args.port:
-        print("Using port {}.".format(args.port))
+        print(f"Using port {args.port}.")
     if args.browser:
         print("Running with callback listener and web browser.")
     else:
@@ -99,11 +97,8 @@ def cli_authorize(oauth2, auth_url):
     """
     print('\nTo authorize a token, copy the following URL into a browser and follow the directions then enter the '
           'generated callback URL below:\n')
-    print("{}\n".format(auth_url))
-    if sys.version_info[0] == 3:
-        auth_code = input("Enter callback URL: ") # nosec - Will fail bandit for python2 which uses raw_input.
-    else:
-        auth_code = raw_input("Enter redirected URL: ")
+    print(f"{auth_url}\n")
+    auth_code = input("Enter callback URL: ") # nosec - Will fail bandit for python2 which uses raw_input.
     params = parse_qs(urlparse(auth_code).query)
     if params.get("code"):
         auth_code = params['code'][0]
@@ -132,7 +127,7 @@ def main(args=None):
     else:
         # Use values from an app.config file.
         path_config_file = get_config_file(script_args.config_file)
-        print("Reading OAuth 2.0 settings from app.config file {}.".format(path_config_file))
+        print(f"Reading OAuth 2.0 settings from app.config file {path_config_file}.")
         # Get the app.config section for the app.
         fn_opts = get_configs(path_config_file=path_config_file, app_name=script_args.app_name)
 
@@ -144,8 +139,6 @@ def main(args=None):
     auth_url = oauth2.get_authorization_url()
     try:
         if script_args.browser:
-            # Import flask app
-            from oauth_utils.bin.flask_app import FlaskApp
             # Create stop event object
             stop_event = Event()
             # Setup Flask object
@@ -164,4 +157,3 @@ def main(args=None):
 
 if __name__ == "__main__":
     main()
-

@@ -1,9 +1,10 @@
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=line-too-long
 """Function implementation"""
 import datetime
 import logging
+import requests
 from resilient_lib import validate_fields, RequestsCommon
 from fn_create_webex_meeting.lib.cisco_api import WebexAPI
 
@@ -27,7 +28,7 @@ def selftest_function(opts):
     required_fields = ["webex_email", "webex_password", "webex_site_url", "webex_timezone"]
     validate_fields(required_fields, options)
 
-    opts = dict()
+    opts = {}
     opts["rc"] = RequestsCommon(opts, options)
     opts["webex_site_url"] = options.get("webex_site_url")
     opts["email"] = options.get("webex_email")
@@ -39,7 +40,7 @@ def selftest_function(opts):
     opts["meeting_agenda"] = "Agenda"
 
     # compute meeting start/end time for 1 day in the future (in epoch)
-    now = datetime.datetime.utcnow()
+    now = datetime.datetime.now()
     meeting_start = now + datetime.timedelta(days=1)
     meeting_end = meeting_start + datetime.timedelta(minutes= 10)
     webex_meeting_start_time = int(meeting_start.timestamp()*1000)
@@ -56,6 +57,6 @@ def selftest_function(opts):
         else:
             return {"state": "failure",
                     "reason": response.get("fail_reason")}
-    except Exception as err:
+    except requests.exceptions.RequestException as err:
         return {"state": "failure",
                 "reason": err}

@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 #-- coding: utf-8 --
-#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
+#(c) Copyright IBM Corp. 2025. All Rights Reserved.
 #pragma pylint: disable=unused-argument, no-self-use, line-too-long
 
 from setuptools import setup, find_packages
 
 setup(
+    display_name='Oauth Utilities for SOAR',
     name="oauth-utils",
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     author='IBM SOAR',
     url='https://ibm.com/mysupport',

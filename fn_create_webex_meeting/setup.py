@@ -22,15 +22,19 @@ def snake_to_camel(word):
 setup(
     name="fn_create_webex_meeting",
     display_name="Create Webex Meeting",
-    version="1.1.1",
+    version="1.1.2",
     license="MIT",
     author="IBM SOAR",
     author_email="",
-    url="http://ibm.biz/soarcommunity",
+    url="'https://github.com/ibmresilient/resilient-community-apps'",
     description="Resilient Circuits Components for 'fn_create_webex_meeting'",
-    long_description="Resilient Circuits Components for 'fn_create_webex_meeting'",
+    long_description="""Perform actions on Github repositories, branches, files, releases, commits and repositories.
+    <br>
+    Links:
+    <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+    <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        "resilient_circuits>=30.0.0",
+        "resilient_circuits>=51.0.0",
         "resilient-lib",
         "pytz"
     ],

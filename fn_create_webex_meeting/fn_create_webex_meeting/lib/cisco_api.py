@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=line-too-long
 
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# (c) Copyright IBM Corp. 2025. All Rights Reserved.
 
 import re
 import logging
@@ -17,7 +17,7 @@ class WebexAPI:
         self.opts = options
 
         self.meeting_start_time = meeting_start_time
-        if meeting_end_time is not None:
+        if meeting_end_time:
             if meeting_start_time:
                 if meeting_end_time < meeting_start_time:
                     raise ValueError('End time must be after start time')
@@ -47,10 +47,10 @@ class WebexAPI:
             response = rc.execute_call_v2("post", url, data=query, headers=headers, proxies=rc.get_proxies())
 
         if response is None:
-            raise FunctionError("Invalid METHOD passed to webex_request! Method: {}".format(method))
+            raise FunctionError(f"Invalid METHOD passed to webex_request! Method: {method}")
 
-        if response.status_code != 200 and response.status_code != 201 and response.status_code != 401:
-            raise FunctionError("API call failed! HTTP Status: {}, URL: {}".format(response.status_code, url))
+        if response.status_code not in (200, 201, 401):
+            raise FunctionError(f"API call failed! HTTP Status: {response.status_code}, URL: {url}")
         elif response.status_code == 401:
             # access token probably expired
             raise FunctionError("Security context is invalid, API returned 401!")
@@ -84,12 +84,12 @@ class WebexAPI:
 
         log.debug(response.text)
 
-        status_regex = "<serv:result>(.*)<\/serv:result>"
+        status_regex = "<serv:result>(.*)<\\/serv:result>"
         status_regex_search = re.search(status_regex, response.text)
 
         # check if call failed
         if status_regex_search is not None and status_regex_search.group(1) == "FAILURE":
-            reason_regex = "<serv:reason>(.*)<\/serv:reason>"
+            reason_regex = "<serv:reason>(.*)<\\/serv:reason>"
             reason_regex_search = re.search(reason_regex, response.text)
             return {"id": 0, "gmt_hour": 0, "gmt_minute": 0, "reason": reason_regex_search.group(1)}
 
@@ -97,7 +97,7 @@ class WebexAPI:
         gmt_time_pattern = r'GMT([\-+0-9]*):([0-9]*)'
 
         for m in re.finditer(timezone_pattern, response.text):
-            if self.opts["timezone"] in m.group(2):
+            if self.opts.get('timezone') in m.group(2):
                 gmt_time_match = re.search(gmt_time_pattern, m.group(2))
                 gmt_hour = 0
                 gmt_minute = 0
@@ -108,18 +108,18 @@ class WebexAPI:
 
                 return {"id": str(m.group(1)), "gmt_hour": gmt_hour, "gmt_minute": gmt_minute}
 
-        return {"id": 0, "gmt_hour": 0, "gmt_minute": 0, "reason": "timezone not found: {}".format(self.opts["timezone"])}
+        return {"id": 0, "gmt_hour": 0, "gmt_minute": 0, "reason": f"timezone not found: {self.opts.get('timezone')}"}
 
     def generate_security_context(self):
         """Generates the security context required by the API for authentication"""
-        xml = "<webExID>{}</webExID><password>{}</password>".format(self.opts.get("email"), self.opts.get("password"))
+        xml = f"<webExID>{self.opts.get('email')}</webExID><password>{self.opts.get('password')}</password>"
 
         if self.opts.get("site_id") and self.opts.get("partner_id"):
-            xml = xml + "<siteID>{}</siteID><partnerID>{}</partnerID>".format(self.opts.get("site_id"), self.opts.get("partner_id"))
+            xml = xml + f"<siteID>{self.opts.get('site_id')}</siteID><partnerID>{self.opts.get('partner_id')}</partnerID>"
         else:
-            xml = xml + "<siteName>{}</siteName>".format(self.opts.get("sitename"))
+            xml = xml + f"<siteName>{self.opts.get('sitename')}</siteName>"
 
-        xml = "<securityContext>{}</securityContext>".format(xml)
+        xml = f"<securityContext>{xml}</securityContext>"
 
         return xml
 
@@ -130,7 +130,7 @@ class WebexAPI:
         meeting_agenda = self.opts.get("meeting_agenda")
 
         timezone_info = self.get_timezone_info()
-        if type(timezone_info.get("id")) is int and timezone_info.get("id") is 0:
+        if isinstance(timezone_info.get("id"), int) and timezone_info.get("id") == 0:
             raise FunctionError(timezone_info.get("reason", "unknown reason"))
 
         utc_offset = datetime.timedelta(hours=timezone_info["gmt_hour"], minutes=timezone_info["gmt_minute"])
@@ -149,19 +149,18 @@ class WebexAPI:
                 duration = DEFAULT_MEETING_LENGTH
         meeting_time = time.strftime("%m/%d/%Y %H:%M:%S")
 
-        xml = """<accessControl>
-        <meetingPassword>{}</meetingPassword>
+        xml = f"""<accessControl>
+        <meetingPassword>{meeting_password}</meetingPassword>
         </accessControl>
         <metaData>
-        <confName>{}</confName>
-        <agenda>{}</agenda>
+        <confName>{meeting_name}</confName>
+        <agenda>{meeting_agenda}</agenda>
         </metaData>
         <schedule>
-        <startDate>{}</startDate>
-        <duration>{}</duration>
-        <timeZoneID>{}</timeZoneID>
-        </schedule>""".format(meeting_password, meeting_name, meeting_agenda, meeting_time, duration,
-                              timezone_info.get("id"))
+        <startDate>{meeting_time}</startDate>
+        <duration>{duration}</duration>
+        <timeZoneID>{timezone_info.get("id")}</timeZoneID>
+        </schedule>"""
 
         return xml
 
@@ -194,8 +193,8 @@ class WebexAPI:
         if response.text == "":
             raise FunctionError("Failed to create meeting, null response")
 
-        status_regex = "<serv:result>(.*)<\/serv:result>"
-        failure_reason_regex = "<serv:reason>(.*)<\/serv:reason>"
+        status_regex = "<serv:result>(.*)<\\/serv:result>"
+        failure_reason_regex = "<serv:reason>(.*)<\\/serv:reason>"
 
         status_regex_search = re.search(status_regex, response.text)
         failure_reason_regex_search = re.search(failure_reason_regex, response.text)
@@ -209,7 +208,7 @@ class WebexAPI:
             results["fail_reason"] = failure_reason_regex_search.group(1)
             return results
 
-        success_details_regex = "<serv:host>(.*)<\/serv:host>\s*<serv:attendee>(.*)<\/serv:attendee>"
+        success_details_regex = "<serv:host>(.*)<\\/serv:host>\\s*<serv:attendee>(.*)<\\/serv:attendee>"
 
         success_details_regex_search = re.search(success_details_regex, response.text)
 

@@ -38,6 +38,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.1 | 06/2025 | Replacing Deprecated setDaemon() method |
 | 1.0.0 | 07/2022 | Initial Release |
 
 ---
@@ -64,7 +65,7 @@ The OAuth Utilities package provides tools and utilities to support OAuth for IB
   List any Requirements
 -->
 ### Python Environment
-Both Python 3.6 and python 3.9 are supported.
+Both Python 3.9 and python 3.11 are supported.
 Additional package dependencies might exist for each of these packages:
 * Jinja2>=30.0.0
 * six>=39.0.0

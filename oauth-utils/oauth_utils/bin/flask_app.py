@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-#pragma pylint: disable=unused-argument, no-self-use, line-too-long
+#(c) Copyright IBM Corp. 2025. All Rights Reserved.
+
 """Flask support classes for OAuth2 utility for the Outbound email app"""
 import os
 from threading import Thread
@@ -25,7 +25,7 @@ class FlaskThread(Thread):
     easier to shutdown.
     """
     def __init__(self, app, s_event, port=None):
-        super(FlaskThread, self).__init__(args=(s_event,))
+        super().__init__(args=(s_event,))
         # Run app with self-signed cert, server visible only on local host.
         self.port = port if port else 8080
         self.server = make_server("127.0.0.1", self.port, app, ssl_context="adhoc")
@@ -35,7 +35,7 @@ class FlaskThread(Thread):
 
     def run(self):
         # Start Flask.
-        print("Starting callback listener on port {}.".format(self.port))
+        print(f"Starting callback listener on port {self.port}.")
         self.server.serve_forever()
 
     def set_stop(self):
@@ -91,7 +91,7 @@ class FlaskApp():
                 session.permanent = True
                 app.permanent_session_lifetime = timedelta(seconds=10)
 
-        self.thread.setDaemon(True)
+        self.thread.daemon = True
         self.thread.start()
 
     def stop(self):

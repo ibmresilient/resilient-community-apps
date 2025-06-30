@@ -1,24 +1,19 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-#pragma pylint: disable=unused-argument, no-self-use, line-too-long
+#(c) Copyright IBM Corp. 2025. All Rights Reserved.
+#pragma pylint: disable=line-too-long
 """OAuth2 support classes and functions for the Outbound email app"""
-import sys
-import requests
-if sys.version_info[0] == 3:
-    from urllib.parse import urlencode
-else:
-    from urllib import urlencode
 
+from urllib.parse import urlencode
+import requests
 from oauth_utils.lib.helpers import validate_fields, validate_url
 
 REDIRECT_URI = "https://localhost:{}/callback"
-
+TIME_OUT = 300 # seconds
 
 class OAuth2Error(Exception):
     """
-    Class  for Errors in script.
+    Class for Errors in script.
     """
-    pass
 
 class OAuth2Flow:
     """
@@ -87,7 +82,7 @@ class OAuth2Flow:
         }
         data.update({"redirect_uri": self._redirect_uri})
 
-        response = requests.post(self._token_url, data=data)
+        response = requests.post(self._token_url, data=data, timeout=TIME_OUT)
 
         token_response = response.json()
 
@@ -113,7 +108,7 @@ class OAuth2Flow:
         )
 
         if missing_fields:
-            plural = True if len(missing_fields) > 1 else False
+            plural = bool(len(missing_fields) > 1)
             required_err_msg = "Parameter{s} '{0}' {ia} required {cf} and {ia} not set. You must set {tv} to run this " \
                                "function."\
                 .format(', '.join(missing_fields), s='s' if plural else '', ia='are' if plural else 'is',
@@ -133,8 +128,7 @@ class OAuth2Flow:
             if not validate_url(fn_opts.get(f)):
                 bad_urls.append(f)
         if bad_urls:
-            plural = True if len(bad_urls) > 1 else False
+            plural = bool(len(bad_urls) > 1)
             badurl_err_msg = "The URL{s} {0} {ia} malformed." \
-                .format(', '.join("'"+b+"'" for b in bad_urls), s='s' if plural else '', ia='are' if plural else 'is',
-                        tv='these values' if plural else 'this value')
+                    .format(', '.join("'"+b+"'" for b in bad_urls), s='s' if plural else '', ia='are' if plural else 'is')
             raise ValueError(badurl_err_msg)

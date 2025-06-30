@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.5.0.1475
 
-"""Generate the Resilient customizations required for fn_create_webex_meeting"""
+"""Generate the SOAR customizations required for fn_create_webex_meeting"""
 
 import base64
 import os
@@ -20,15 +22,25 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_create_webex_meeting",
-        "message_destinations": [u"fn_create_webex_meeting"],
-        "functions": [u"fn_create_webex_meeting"],
-        "workflows": [u"example_create_webex_meeting"],
-        "actions": [u"Example: Create WebEx Meeting: Incident"],
+        "message_destinations": [
+            u"fn_create_webex_meeting"
+        ],
+        "functions": [
+            u"fn_create_webex_meeting"
+        ],
+        "workflows": [
+            u"example_create_webex_meeting"
+        ],
+        "actions": [
+            u"Example: Create WebEx Meeting: Incident"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
+        "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
-        "scripts": []
+        "scripts": [],
+        "playbooks": [],
     }
 
 
@@ -37,7 +49,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM Resilient Platform Version: 40.0.0
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:

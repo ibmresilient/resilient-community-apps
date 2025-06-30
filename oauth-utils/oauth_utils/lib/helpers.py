@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-#pragma pylint: disable=unused-argument, no-self-use, line-too-long
+#(c) Copyright IBM Corp. 2025. All Rights Reserved.
+#pragma pylint: disable=line-too-long
 """Helper functions for the Outbound email app"""
 import configparser
-import argparse
 import os
-import sys
-from six import string_types
 from urllib.parse import urlparse
+from six import string_types
 
 DEFAULT_CONFIG_FILENAME = "app.config"
 
@@ -41,7 +39,7 @@ def get_config_file(filename=None):
         config_file = env_app_config_file
 
     if not os.path.isfile(config_file):
-        print("ERROR: The app.config file {} does not exist.".format(config_file))
+        print(f"ERROR: The app.config file {config_file} does not exist.")
         os._exit(0)
 
     return config_file
@@ -54,8 +52,7 @@ def set_configs(script_args):
     :param script_args: Parsed cli parameters.
     :return: dictionary of all the configs.
     """
-    script_args.scope, script_args.client_id, script_args.client_secret,
-    script_args.token_url, script_args.auth_url
+
     opts = {
         "scope": script_args.scope,
         "client_id": script_args.client_id,
@@ -100,7 +97,7 @@ def get_configs(path_config_file=None, app_name=None):
         raise ValueError("There is no function defined in app.config.")
 
     if not opts.get(app_name, None):
-        raise ValueError("The function '{}' not defined in the app.config.".format(app_name))
+        raise ValueError(f"The function '{app_name}' not defined in the app.config.")
 
     return opts[app_name]
 
@@ -124,13 +121,13 @@ def validate_fields(field_list, kwargs):
     missing_fields = []
 
     if not isinstance(mandatory_fields, list):
-        raise ValueError("'field_list' must be of type list, not {0}".format(type(mandatory_fields)))
+        raise ValueError(f"'field_list' must be of type list, not {type(mandatory_fields)}")
 
     if not isinstance(provided_fields, dict):
         try:
             provided_fields = provided_fields._asdict()
-        except AttributeError:
-            raise ValueError("'kwargs' must be of type dict or namedtuple, not {0}".format(type(provided_fields)))
+        except AttributeError as ae:
+            raise ValueError(f"'kwargs' must be of type dict or namedtuple, not {type(provided_fields)}") from ae
 
     # Validate that mandatory fields exist + are not  blank
     for field in mandatory_fields:
@@ -155,5 +152,5 @@ def validate_url(url):
     try:
         result = urlparse(url)
         return all([result.scheme, result.netloc])
-    except:
+    except TypeError:
         return False

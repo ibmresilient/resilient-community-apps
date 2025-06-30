@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
-
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
+# pragma pylint: disable=line-too-long
+# (c) Copyright IBM Corp. 2025. All Rights Reserved.
 
 """Function implementation"""
 
-import logging
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+import requests
+from resilient_circuits import ResilientComponent, function, handler, FunctionResult, FunctionError
 from resilient_lib import validate_fields, ResultPayload, RequestsCommon
 from fn_create_webex_meeting.lib.cisco_api import WebexAPI
 
@@ -28,7 +27,7 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super().__init__(opts)
         self.load_opts(opts)
 
     @handler("reload")
@@ -42,7 +41,7 @@ class FunctionComponent(ResilientComponent):
         try:
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            opts = dict()
+            opts = {}
             opts["rc"] = RequestsCommon(self.opts, self.options)
             opts["webex_site_url"] = self.options.get("webex_site_url")
             opts["email"] = self.options.get("webex_email")
@@ -77,5 +76,5 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception as err:
+        except requests.exceptions.RequestException as err:
             yield FunctionError(err)

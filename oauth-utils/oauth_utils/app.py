@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-#(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
-#pragma pylint: disable=unused-argument, no-self-use, line-too-long
+#(c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+#pragma pylint: disable=line-too-long
 """App builder for oauth-utils package"""
 import argparse
 import logging
@@ -100,7 +100,7 @@ def main():
     try:
         args.function(args)
     except AttributeError as ae:
-        parent_parser.print_help()
+        parent_parser.print_help(ae)
     except (KeyboardInterrupt, Abort):
         print('')
 
