@@ -1,0 +1,26 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "status": "OK",
+    "status_message": "BigFix action created successfully.",
+    "remediation_date": "08-08-2022 14:06:24",
+    "action_id": "48"
+  },
+  "raw": null,
+  "inputs": {
+    "bigfix_asset_id": 12315195,
+    "bigfix_incident_id": 2111,
+    "bigfix_artifact_value": "Run Intel SA-00086 Vulnerability Detection Tool",
+    "bigfix_artifact_type": "Process Name"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-bigfix",
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 412,
+    "timestamp": "2022-08-08 14:06:24"
+  }
+}
