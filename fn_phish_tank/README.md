@@ -45,6 +45,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.4 | 07/2025 | Converted example workflows to python3 |
 | 1.0.3 | 11/2024 | Rebuilt the app for SOAR v40 |
 | 1.0.2 | 04/2020 | Support for App Host |
 | 1.0.1 | 01/2020 | Default URL fixes |
@@ -57,7 +58,7 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**PhishTank Lookup URL Function for IBM Resilient**
+**PhishTank Lookup URL Function for IBM SOAR**
 
  ![screenshot: main](./doc/screenshots/main.png) 
 
@@ -78,13 +79,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `40.0.6554`.
+* SOAR platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `40.0.6554`.
+* SOAR platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=40.0.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -119,8 +120,8 @@ Python 3.9, 3.11, and 3.12 are officially supported. When deployed as an app, th
 Additional package dependencies may exist for each of these packages:
 * python-dateutil>=2.8.0
 * requests>=2.21.0
-* resilient-lib>=40.0
-* resilient_circuits>=40.0.0
+* resilient-lib>=51.0.6
+* resilient_circuits>=51.0.0
 
 
 ## Installation
@@ -157,7 +158,7 @@ The following table provides the settings you need to configure the app. These s
   ```
   $ resilient-circuits config -u
   ```
-* Import the fn_phish_tank **customizations** into the Resilient platform:
+* Import the fn_phish_tank **customizations** into the SOAR platform:
   ```
   $ resilient-circuits customize -y -l fn-phish-tank
   ```
@@ -274,18 +275,18 @@ def append_artifact_description(the_artifact, the_text):
   """Appends the_text to the_artifact.description safely
   handling unicode"""
   
-  new_description = u""
+  new_description = ""
   
   if the_artifact.description is None:
     current_description = None
   else:
     current_description = the_artifact.description.get("content", None)
 
-  if current_description is not None:
-    new_description = u"{0}<br>---<br>{1}".format(unicode(current_description), unicode(the_text))
+  if current_description:
+    new_description = "{0}<br>---<br>{1}".format(current_description, the_text)
 
   else:
-    new_description = u"{0}".format(unicode(the_text))
+    new_description = "{0}".format(the_text)
 
   the_artifact.description = helper.createRichText(new_description)
 
@@ -293,40 +294,40 @@ if results.success:
   
   # Get the PhishTank Results
   phish_tank_results = results.content.get("results", {})
-  url = phish_tank_results.get("url", u"")
+  url = phish_tank_results.get("url", "")
   in_database = phish_tank_results.get("in_database", False)
   is_verified = phish_tank_results.get("verified", False)
   is_valid = phish_tank_results.get("valid", False)
   
   # Define the comment and msg to be appended to the Artifact's Description
-  comment = u""
-  msg = u"""<b>PhishTank Lookup</b> has complete
+  comment = ""
+  msg = """<b>PhishTank Lookup</b> has complete
             <br><b>URL:</b> {0}</b>
-            <br><b>Found in Database:</b> {1}""".format(url, unicode(in_database))
+            <br><b>Found in Database:</b> {1}""".format(url, in_database)
 
   if not in_database:
-    comment = u"Nothing known about this url"
+    comment = "Nothing known about this url"
   
   else:
     phish_id = phish_tank_results.get("phish_id")
     phish_detail_page_url = phish_tank_results.get("phish_detail_page")
     
-    msg = u"""{0}
+    msg = """{0}
           <br><b>Phish ID:</b> {1}
           <br><b>Valid Phish:</b> {2}
           <br><b>Verified:</b> {3}
-          <br><b>Link to PhishTank: <a href={4}>{4}</a></b>""".format(msg, phish_id, u"Yes" if is_valid else u"No", u"Yes" if is_verified else "No", phish_detail_page_url)
+          <br><b>Link to PhishTank: <a href={4}>{4}</a></b>""".format(msg, phish_id, "Yes" if is_valid else "No", "Yes" if is_verified else "No", phish_detail_page_url)
     
     if is_verified and is_valid:
-      comment = u"Verified: Is a phishing site"
+      comment = "Verified: Is a phishing site"
   
     elif is_verified and not is_valid:
-      comment = u"This site is not a phishing site"
+      comment = "This site is not a phishing site"
       
     elif not is_verified:
-      comment = u"This url has not been verified"
+      comment = "This url has not been verified"
   
-  msg = u"""{0}<br><br><b>Comment:</b> {1}""".format(msg, comment)
+  msg = """{0}<br><br><b>Comment:</b> {1}""".format(msg, comment)
   
   append_artifact_description(artifact, msg)
   incident.addNote(helper.createRichText(msg))

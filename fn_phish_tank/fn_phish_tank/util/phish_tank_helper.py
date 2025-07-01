@@ -1,10 +1,11 @@
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
+# pragma pylint: disable=unused-argument, line-too-long
 
-import requests
-from requests.packages.urllib3.util import Retry
-from requests.adapters import HTTPAdapter
 import calendar
+import requests
+from urllib3.util import Retry
+from requests.adapters import HTTPAdapter
 from dateutil import parser
 
 TOTAL_RETRIES = 3
@@ -14,6 +15,10 @@ BACK_OFF_FACTOR = 5
 class phish_tank_helper(object):
     def __init__(self, req_session=None):
         self.request_session = req_session
+
+    @staticmethod
+    def create_headers():
+        return { "User-Agent": "phishtank/IBMSOAR" }
 
     @staticmethod
     def create_post_data(url, api_key=None):

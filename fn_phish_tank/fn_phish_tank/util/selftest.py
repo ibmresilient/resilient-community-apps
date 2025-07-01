@@ -1,12 +1,12 @@
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, no-self-use
+# pragma pylint: disable=unused-argument, line-too-long
 """Function implementation
    test with: resilient-circuits selftest -l fn_phish_tank
 """
 
 import logging
-from fn_phish_tank.util.phish_tank_helper import *
+from fn_phish_tank.util.phish_tank_helper import phish_tank_helper
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -30,7 +30,10 @@ def selftest_function(opts):
 
     _api_session = phish_helper_obj.session()
     try:
-        _api_response = _api_session.post(phishtank_url, data=post_data_header, proxies=proxy_header)
+        _api_response = _api_session.post(phishtank_url,
+                                          data=post_data_header,
+                                          headers=phish_tank_helper.create_headers(),
+                                          proxies=proxy_header)
         _api_response.raise_for_status()
         _api_response_json = _api_response.json()
         log.info("Successfully Established the connection to the PhishTank Database.")

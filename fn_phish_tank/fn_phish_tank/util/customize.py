@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v51.0.2.2.1096
+# (c) Copyright IBM Corp. 2025. All Rights Reserved.
+# Generated with resilient-sdk v51.0.6.0.1543
 
 """Generate the SOAR customizations required for fn_phish_tank"""
 
@@ -49,7 +49,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 40.0.6554
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:

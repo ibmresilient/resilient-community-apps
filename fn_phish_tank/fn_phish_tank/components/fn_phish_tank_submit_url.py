@@ -1,4 +1,4 @@
-# (c) Copyright IBM Corp. 2010, 2019. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, line-too-long
 """Function implementation"""
@@ -14,7 +14,7 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super().__init__(opts)
         self.options = opts.get("fn_phish_tank", {})
 
     @handler("reload")
@@ -65,12 +65,10 @@ class FunctionComponent(ResilientComponent):
             pt_helper_class_instance = phish_tank_helper()
             _request_session = pt_helper_class_instance.session()
 
-            headers = { "User-Agent": "phishtank/IBMSOAR" }
-
             # Making Post request to PhishTank Database for check Phishing status against given URL
             _api_response = _request_session.post(phish_tank_api_url,
                                                   data=pt_post_call_data,
-                                                  headers=headers,
+                                                  headers=phish_tank_helper.create_headers(),
                                                   proxies=pt_proxy)
 
             _api_response.raise_for_status()

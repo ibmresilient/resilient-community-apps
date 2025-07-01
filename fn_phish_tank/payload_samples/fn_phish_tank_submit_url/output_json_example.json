@@ -4,32 +4,32 @@
   "reason": null,
   "content": {
     "meta": {
-      "timestamp": "2024-11-14T15:01:10+00:00",
+      "timestamp": "2025-07-01T15:00:23+00:00",
       "serverid": "e5f3084e",
       "status": "success",
-      "requestid": "172.17.128.1.673610b6b42867.38342693",
-      "timestamp_modified": 1731596470000
+      "requestid": "172.17.128.1.6863f807add173.18851644",
+      "timestamp_modified": 1751382023000
     },
     "results": {
-      "url": "https://ld-procedura.info/sut-mpar-e/",
+      "url": "https://paymentltre.icu/",
       "in_database": true,
-      "phish_id": 8852101,
-      "phish_detail_page": "http://www.phishtank.com/phish_detail.php?phish_id=8852101",
+      "phish_id": 9143272,
+      "phish_detail_page": "http://www.phishtank.com/phish_detail.php?phish_id=9143272",
       "verified": false,
       "verified_at": null,
       "valid": false
     }
   },
-  "raw": "{\"meta\": {\"timestamp\": \"2024-11-14T15:01:10+00:00\", \"serverid\": \"e5f3084e\", \"status\": \"success\", \"requestid\": \"172.17.128.1.673610b6b42867.38342693\", \"timestamp_modified\": 1731596470000}, \"results\": {\"url\": \"https://ld-procedura.info/sut-mpar-e/\", \"in_database\": true, \"phish_id\": 8852101, \"phish_detail_page\": \"http://www.phishtank.com/phish_detail.php?phish_id=8852101\", \"verified\": false, \"verified_at\": null, \"valid\": false}}",
+  "raw": "",
   "inputs": {
-    "phish_tank_check_url": "https://ld-procedura.info/sut-mpar-e/"
+    "phish_tank_check_url": "https://paymentltre.icu/"
   },
   "metrics": {
     "version": "1.0",
     "package": "fn-phish-tank",
-    "package_version": "1.0.2",
+    "package_version": "1.0.4",
     "host": "my.app.host",
-    "execution_time_ms": 140,
-    "timestamp": "2024-11-14 10:01:10"
+    "execution_time_ms": 952,
+    "timestamp": "2025-07-01 16:00:23"
   }
 }
