@@ -460,19 +460,23 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.0.3</p></td>
+<tr class="row-even"><td><p>1.0.4</p></td>
+<td><p>07/2025</p></td>
+<td><p>Converted example workflows to python3</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.3</p></td>
 <td><p>11/2024</p></td>
 <td><p>Rebuilt the app for SOAR v40</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.2</p></td>
+<tr class="row-even"><td><p>1.0.2</p></td>
 <td><p>04/2020</p></td>
 <td><p>Support for App Host</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.1</p></td>
+<tr class="row-odd"><td><p>1.0.1</p></td>
 <td><p>01/2020</p></td>
 <td><p>Default URL fixes</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.0</p></td>
+<tr class="row-even"><td><p>1.0.0</p></td>
 <td><p>07/2019</p></td>
 <td><p>Initial Release</p></td>
 </tr>
@@ -487,7 +491,7 @@
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-<p><strong>PhishTank Lookup URL Function for IBM Resilient</strong></p>
+<p><strong>PhishTank Lookup URL Function for IBM SOAR</strong></p>
 <p><img alt="screenshot: main" src="../_images/main45.png" /></p>
 <p>Searches the PhishTank database (https://www.phishtank.com/) to determine if a URL is a phishing URL or not.</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>The information returned from PhishTank is used to update the Artifacts description and add a note to the incident.
@@ -506,14 +510,14 @@
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">40.0.6554</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">40.0.6554</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=40.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=51.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -568,8 +572,8 @@ Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
 <li><p>python-dateutil&gt;=2.8.0</p></li>
 <li><p>requests&gt;=2.21.0</p></li>
-<li><p>resilient-lib&gt;=40.0</p></li>
-<li><p>resilient_circuits&gt;=40.0.0</p></li>
+<li><p>resilient-lib&gt;=51.0.6</p></li>
+<li><p>resilient_circuits&gt;=51.0.0</p></li>
 </ul>
 </section>
 </section>
@@ -639,7 +643,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </pre></div>
 </div>
 </li>
-<li><p>Import the fn_phish_tank <strong>customizations</strong> into the Resilient platform:</p>
+<li><p>Import the fn_phish_tank <strong>customizations</strong> into the SOAR platform:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ resilient-circuits customize -y -l fn-phish-tank
 </pre></div>
 </div>
@@ -793,18 +797,18 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot;Appends the_text to the_artifact.description safely</span>
 <span class="sd">  handling unicode&quot;&quot;&quot;</span>
   
-  <span class="n">new_description</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span>
+  <span class="n">new_description</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
   
   <span class="k">if</span> <span class="n">the_artifact</span><span class="o">.</span><span class="n">description</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">current_description</span> <span class="o">=</span> <span class="kc">None</span>
   <span class="k">else</span><span class="p">:</span>
     <span class="n">current_description</span> <span class="o">=</span> <span class="n">the_artifact</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
-  <span class="k">if</span> <span class="n">current_description</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">new_description</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&lt;br&gt;---&lt;br&gt;</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">current_description</span><span class="p">),</span> <span class="n">unicode</span><span class="p">(</span><span class="n">the_text</span><span class="p">))</span>
+  <span class="k">if</span> <span class="n">current_description</span><span class="p">:</span>
+    <span class="n">new_description</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&lt;br&gt;---&lt;br&gt;</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">current_description</span><span class="p">,</span> <span class="n">the_text</span><span class="p">)</span>
 
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">new_description</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">the_text</span><span class="p">))</span>
+    <span class="n">new_description</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">the_text</span><span class="p">)</span>
 
   <span class="n">the_artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">new_description</span><span class="p">)</span>
 
@@ -812,40 +816,40 @@ Additional package dependencies may exist for each of these packages:</p>
   
   <span class="c1"># Get the PhishTank Results</span>
   <span class="n">phish_tank_results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span> <span class="p">{})</span>
-  <span class="n">url</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+  <span class="n">url</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
   <span class="n">in_database</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;in_database&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
   <span class="n">is_verified</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;verified&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
   <span class="n">is_valid</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;valid&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
   
   <span class="c1"># Define the comment and msg to be appended to the Artifact&#39;s Description</span>
-  <span class="n">comment</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span>
-  <span class="n">msg</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;PhishTank Lookup&lt;/b&gt; has complete</span>
+  <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;b&gt;PhishTank Lookup&lt;/b&gt; has complete</span>
 <span class="s2">            &lt;br&gt;&lt;b&gt;URL:&lt;/b&gt; </span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
-<span class="s2">            &lt;br&gt;&lt;b&gt;Found in Database:&lt;/b&gt; </span><span class="si">{1}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">unicode</span><span class="p">(</span><span class="n">in_database</span><span class="p">))</span>
+<span class="s2">            &lt;br&gt;&lt;b&gt;Found in Database:&lt;/b&gt; </span><span class="si">{1}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">in_database</span><span class="p">)</span>
 
   <span class="k">if</span> <span class="ow">not</span> <span class="n">in_database</span><span class="p">:</span>
-    <span class="n">comment</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Nothing known about this url&quot;</span>
+    <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;Nothing known about this url&quot;</span>
   
   <span class="k">else</span><span class="p">:</span>
     <span class="n">phish_id</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;phish_id&quot;</span><span class="p">)</span>
     <span class="n">phish_detail_page_url</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;phish_detail_page&quot;</span><span class="p">)</span>
     
-    <span class="n">msg</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;</span><span class="si">{0}</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="si">{0}</span>
 <span class="s2">          &lt;br&gt;&lt;b&gt;Phish ID:&lt;/b&gt; </span><span class="si">{1}</span>
 <span class="s2">          &lt;br&gt;&lt;b&gt;Valid Phish:&lt;/b&gt; </span><span class="si">{2}</span>
 <span class="s2">          &lt;br&gt;&lt;b&gt;Verified:&lt;/b&gt; </span><span class="si">{3}</span>
-<span class="s2">          &lt;br&gt;&lt;b&gt;Link to PhishTank: &lt;a href=</span><span class="si">{4}</span><span class="s2">&gt;</span><span class="si">{4}</span><span class="s2">&lt;/a&gt;&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">phish_id</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;Yes&quot;</span> <span class="k">if</span> <span class="n">is_valid</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;Yes&quot;</span> <span class="k">if</span> <span class="n">is_verified</span> <span class="k">else</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="n">phish_detail_page_url</span><span class="p">)</span>
+<span class="s2">          &lt;br&gt;&lt;b&gt;Link to PhishTank: &lt;a href=</span><span class="si">{4}</span><span class="s2">&gt;</span><span class="si">{4}</span><span class="s2">&lt;/a&gt;&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">phish_id</span><span class="p">,</span> <span class="s2">&quot;Yes&quot;</span> <span class="k">if</span> <span class="n">is_valid</span> <span class="k">else</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="s2">&quot;Yes&quot;</span> <span class="k">if</span> <span class="n">is_verified</span> <span class="k">else</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="n">phish_detail_page_url</span><span class="p">)</span>
     
     <span class="k">if</span> <span class="n">is_verified</span> <span class="ow">and</span> <span class="n">is_valid</span><span class="p">:</span>
-      <span class="n">comment</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Verified: Is a phishing site&quot;</span>
+      <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;Verified: Is a phishing site&quot;</span>
   
     <span class="k">elif</span> <span class="n">is_verified</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_valid</span><span class="p">:</span>
-      <span class="n">comment</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;This site is not a phishing site&quot;</span>
+      <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;This site is not a phishing site&quot;</span>
       
     <span class="k">elif</span> <span class="ow">not</span> <span class="n">is_verified</span><span class="p">:</span>
-      <span class="n">comment</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;This url has not been verified&quot;</span>
+      <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;This url has not been verified&quot;</span>
   
-  <span class="n">msg</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;</span><span class="si">{0}</span><span class="s2">&lt;br&gt;&lt;br&gt;&lt;b&gt;Comment:&lt;/b&gt; </span><span class="si">{1}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">comment</span><span class="p">)</span>
+  <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="si">{0}</span><span class="s2">&lt;br&gt;&lt;br&gt;&lt;b&gt;Comment:&lt;/b&gt; </span><span class="si">{1}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">comment</span><span class="p">)</span>
   
   <span class="n">append_artifact_description</span><span class="p">(</span><span class="n">artifact</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
