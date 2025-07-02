@@ -93,7 +93,7 @@ class TestPrompting:
 
     def test_default_model(self):
         """ Test to see if the method catches an invalid model ask"""
-        model = next((model for model in self.model_config if model['model_name'] == 'google/flan-t5-xl-3b'), None)
+        model = next((model for model in self.model_config if model['model_name'] == 'ibm/granite-3-2b-instruct'), None)
         query = "summarise this incident"
         context = "In the age of information, data-driven decisions shape the world. Every click, like, and share becomes a data point in a vast digital ecosystem, where algorithms analyze human behavior to predict preferences"
         result = Prompting.build_prompt(
@@ -104,7 +104,7 @@ class TestPrompting:
             context=context,
             chunking=self.create_chunker()
         )
-        assert result.strip().startswith("<|system|>")
+        assert result.strip().startswith("<|start_of_role|>")
 
 
     def test_contains_header(self):

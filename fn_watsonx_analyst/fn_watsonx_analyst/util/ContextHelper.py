@@ -168,8 +168,7 @@ class ContextHelper:
             raise
 
         except Exception as e:  
-            log.exception("An error occurred during user file parsing: %s", e)
-            raise
+            raise RuntimeError("Tika was unable to extract text from the given content.") from e
 
     def _timestamp_to_readable(self, unix_timestamp: int) -> str:
         """Converts a Unix millis timestamp to a mixture of ISO 8601 and human readable date string"""

@@ -28,7 +28,7 @@ resilient-circuits run & CIRCUITS_PID=$(echo $!)
 # shellcheck disable=SC2116
 java -jar -Xmx300m /opt/tika/tika-server.jar >/var/log/tika/tika.log 2>&1 & TIKA_PID=$(echo $!)
 
-tika_expected_output="This is Tika Server (Apache Tika 2.9.3). Please PUT"
+tika_expected_output="This is Tika Server (Apache Tika 2.9.4). Please PUT"
 
 while true
 do

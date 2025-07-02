@@ -30,7 +30,7 @@ RUN yum -vy install java-11-openjdk
 RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 
 RUN mkdir -p /opt/tika
-RUN curl -o /opt/tika/tika-server.jar https://dlcdn.apache.org/tika/2.9.3/tika-server-standard-2.9.3.jar
+RUN curl -o /opt/tika/tika-server.jar https://dlcdn.apache.org/tika/2.9.4/tika-server-standard-2.9.4.jar
 RUN chmod +x /opt/tika/tika-server.jar
 
 RUN mkdir -p /var/log/tika

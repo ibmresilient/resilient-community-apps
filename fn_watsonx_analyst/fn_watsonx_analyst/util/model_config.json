@@ -1,40 +1,32 @@
 [
     {
-        "model_name": "ibm/granite-3-8b-instruct",
-        "context_length": 128000 
-    }, 
-    {
         "model_name": "ibm/granite-3-2b-instruct",
         "context_length": 128000
-    }, 
-    {
-        "model_name": "ibm/granite-guardian-3-8b",
-        "context_length": 128000
-    }, 
-    {
-        "model_name": "ibm/granite-guardian-3-2b",
-        "context_length": 128000
-    }, 
-    {
-        "model_name": "ibm/granite-34b-code-instruct",
-        "context_length": 8192
     },
     {
-        "model_name": "ibm/granite-20b-code-instruct",
-        "context_length": 8192
+        "model_name": "ibm/granite-3-8b-instruct",
+        "context_length": 128000 
+    },
+    {
+        "model_name": "ibm/granite-3-2-8b-instruct",
+        "context_length": 128000 
+    },
+    {
+        "model_name": "ibm/granite-3-3-8b-instruct",
+        "context_length": 128000 
     },
     {
         "model_name": "ibm/granite-8b-code-instruct",
         "context_length": 128000
     },
     {
-        "model_name": "ibm/granite-3b-code-instruct",
+        "model_name": "meta-llama/llama-3-405b-instruct",
         "context_length": 128000
     },
     {
-        "model_name": "meta-llama/llama-3-2-1b-instruct",
+        "model_name": "meta-llama/llama-3-2-90b-vision-instruct",
         "context_length": 128000
-    }, 
+    },
     {
         "model_name": "meta-llama/llama-3-3-70b-instruct",
         "context_length": 128000
@@ -42,13 +34,13 @@
     {
         "model_name": "mistralai/mistral-large",
         "context_length": 128000
-    }, 
+    },
     {
         "model_name": "mistralai/mixtral-8x7b-instruct-v01",
         "context_length": 32768
-    }, 
+    },
     {
-        "model_name": "google/flan-t5-xl-3b",
-        "context_length": 4096
+        "model_name": "ibm/granite-guardian-3-8b",
+        "context_length": 128000
     }
 ]

@@ -463,7 +463,7 @@ class Chunking:
             raise
 
     def split_json_to_chunks_prompts(
-        self, data: dict, max_chunk_size=2000
+        self, data: dict, max_chunk_size=400
     ) -> List[str]:
         """
         Splits a JSON-like dictionary prompt into chunks of string prompts, each limited to a specified maximum size.

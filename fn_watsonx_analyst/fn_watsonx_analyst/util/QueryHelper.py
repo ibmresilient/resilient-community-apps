@@ -1,6 +1,5 @@
 import json
 import re
-import time
 from typing import List
 
 import requests
@@ -133,8 +132,8 @@ class QueryHelper:
         ],
         repetition_penalty: float = 1.2,
         min_new_tokens: int = 1,
-        max_new_tokens: int = 900,
-        timeout=25 * 1000,
+        max_new_tokens: int = 2000,
+        timeout=120 * 1000,
         purpose=AiResponsePurpose.NOTE_CONVERSATION,
         enable_moderation=True,
     ) -> AIResponse:

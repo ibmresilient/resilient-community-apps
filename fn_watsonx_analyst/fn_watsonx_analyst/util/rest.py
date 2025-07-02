@@ -205,7 +205,7 @@ class RestHelper:
                                 result = res_client.post(
                                     option.value[1].format(**kwargs),
                                     self.__get_paged_query(
-                                        option,
+                                        RestUrls.PLAYBOOK_EXECUTIONS,
                                         kwargs.get("inc_id", None),
                                         length,
                                         kwargs.get("art_name", None),
