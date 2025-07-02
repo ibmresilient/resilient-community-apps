@@ -409,14 +409,7 @@
 </li>
 <li><p><a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a></p>
 <ul>
-<li><p><a class="reference internal" href="#watsonxai-subscription-and-project"><span class="xref myst">Watsonx.ai Subscription and Project</span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#watsonxai-project-id"><span class="xref myst">Watsonx.ai Project ID</span></a></p></li>
-<li><p><a class="reference internal" href="#ibm-cloud-iam-api-key"><span class="xref myst">IBM Cloud IAM API Key</span></a></p></li>
-<li><p><a class="reference internal" href="#watsonxai-endpoint-url"><span class="xref myst">Watsonx.ai Endpoint URL</span></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#watsonxai-free-credits"><span class="xref myst">Watsonx.ai Free Credits</span></a></p></li>
+<li><p><a class="reference internal" href="#watsonx-ai-free-credits"><span class="xref myst">Watsonx.ai Free Credits</span></a></p></li>
 <li><p><a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR platform</span></a></p></li>
 <li><p><a class="reference internal" href="#cloud-pak-for-security"><span class="xref myst">Cloud Pak for Security</span></a></p></li>
 <li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
@@ -450,14 +443,14 @@
 </li>
 <li><p><a class="reference internal" href="#soar-customizations"><span class="xref myst">SOAR Customizations</span></a></p>
 <ul>
-<li><p><a class="reference internal" href="#function---watsonxai-converse-via-notes"><span class="xref myst">Function - watsonx.ai Converse via Notes</span></a></p></li>
-<li><p><a class="reference internal" href="#function---watsonxai-scan-artifact"><span class="xref myst">Function - watsonx.ai Scan Artifact</span></a></p></li>
-<li><p><a class="reference internal" href="#function---watsonxai-scan-attachment"><span class="xref myst">Function - watsonx.ai Scan Attachment</span></a></p></li>
-<li><p><a class="reference internal" href="#function---watsonxai-text-generation"><span class="xref myst">Function - watsonx.ai Text Generation</span></a></p></li>
-<li><p><a class="reference internal" href="#script---watsonxai-add-artifact-report-to-notes"><span class="xref myst">Script - watsonx.ai Add Artifact Report to Notes</span></a></p></li>
-<li><p><a class="reference internal" href="#script---watsonxai-respond-to-note"><span class="xref myst">Script - watsonx.ai Respond to note</span></a></p></li>
+<li><p><a class="reference internal" href="#function-watsonx-ai-converse-via-notes"><span class="xref myst">Function - watsonx.ai Converse via Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#function-watsonx-ai-scan-artifact"><span class="xref myst">Function - watsonx.ai Scan Artifact</span></a></p></li>
+<li><p><a class="reference internal" href="#function-watsonx-ai-scan-attachment"><span class="xref myst">Function - watsonx.ai Scan Attachment</span></a></p></li>
+<li><p><a class="reference internal" href="#function-watsonx-ai-text-generation"><span class="xref myst">Function - watsonx.ai Text Generation</span></a></p></li>
+<li><p><a class="reference internal" href="#script-watsonx-ai-add-artifact-report-to-notes"><span class="xref myst">Script - watsonx.ai Add Artifact Report to Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#script-watsonx-ai-respond-to-note"><span class="xref myst">Script - watsonx.ai Respond to note</span></a></p></li>
 <li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
-<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
+<li><p><a class="reference internal" href="#troubleshooting-support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
 <ul>
 <li><p><a class="reference internal" href="#for-support"><span class="xref myst">For Support</span></a></p></li>
 </ul>
@@ -482,19 +475,23 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.1.0</p></td>
+<tr class="row-even"><td><p>1.1.1</p></td>
+<td><p>06/2025</p></td>
+<td><p>Updated model list, rich text whitespace fixes, playbook execution API fixes, improved stability in generating embeddings, minor change to scan playbooks’ activation form.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.1.0</p></td>
 <td><p>02/2025</p></td>
 <td><p>Semantic context retrieval (embeddings), multilingual prompts, artifact scans can handle more file types, attachment scanning (equivalent to artifact scan), organization type ID resolution<a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.2</p></td>
+<tr class="row-even"><td><p>1.0.2</p></td>
 <td><p>12/2024</p></td>
 <td><p>Rich text output, request ID in logs, and a data processing fix for incidents with larger data.</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.1</p></td>
+<tr class="row-odd"><td><p>1.0.1</p></td>
 <td><p>12/2024</p></td>
 <td><p>Bugfix for SOAR versions &lt;= 51.0.2.1 and &gt;= 51.0.4.1 for Note Conversation Function.</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.0</p></td>
+<tr class="row-even"><td><p>1.0.0</p></td>
 <td><p>12/2024</p></td>
 <td><p>Initial “<strong>Early Access</strong>” release. Uses watsonx.ai SaaS Version <code class="docutils literal notranslate"><span class="pre">2023-05-29</span></code></p></td>
 </tr>
@@ -767,9 +764,9 @@ Additional package dependencies may exist for each of these packages:</p>
 <h3>What file formats can be scanned?<a class="headerlink" href="#what-file-formats-can-be-scanned" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>This app uses the <a class="reference external" href="https://tika.apache.org">Apache Tika</a> project to extract text from documents.</p></li>
-<li><p>This allows for plaintext extract from text-based documents as well as extracting OCR text from images.</p>
+<li><p>This allows for plaintext to be extracted extract from text-based documents as well as extracting OCR text from images.</p>
 <ul>
-<li><p>This means that any non-text information from an image is disregarded.</p></li>
+<li><p>This means that any non-text information from an image is disregarded, and if text is not clear, it may not be extracted.</p></li>
 </ul>
 </li>
 </ul>
@@ -1269,7 +1266,10 @@ Additional package dependencies may exist for each of these packages:</p>
 </tbody>
 </table>
 </div>
+</section>
 <hr class="docutils" />
+<section id="troubleshooting-support">
+<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
 <p>If any of the actions fail, the following steps may help:</p>
 <ul class="simple">
 <li><p>Check playbook progress on the incident</p>
@@ -1284,12 +1284,8 @@ Additional package dependencies may exist for each of these packages:</p>
 <li><p>Check SOAR’s <code class="docutils literal notranslate"><span class="pre">client.log</span></code> log file which may give some extra information.</p></li>
 </ul>
 </li>
-<li><p>If these do not give sufficient information, then you may enable debug level logging for the app by editing the <code class="docutils literal notranslate"><span class="pre">app.config</span></code> and adding <code class="docutils literal notranslate"><span class="pre">loglevel</span> <span class="pre">=</span> <span class="pre">DEBUG</span></code> below the <code class="docutils literal notranslate"><span class="pre">[resilient]</span></code> section</p></li>
+<li><p>If these do not give sufficient information, then you may enable debug level logging for the app by editing the <code class="docutils literal notranslate"><span class="pre">app.config</span></code> and adding <code class="docutils literal notranslate"><span class="pre">loglevel=DEBUG</span></code> inside the <code class="docutils literal notranslate"><span class="pre">[resilient]</span></code> section</p></li>
 </ul>
-</section>
-<section id="troubleshooting-support">
-<h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
-<p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
 <section id="for-support">
 <h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
 <p>This is a IBM Community provided app. Please search the Community <a class="reference external" href="https://ibm.biz/soarcommunity">ibm.biz/soarcommunity</a> for assistance.</p>

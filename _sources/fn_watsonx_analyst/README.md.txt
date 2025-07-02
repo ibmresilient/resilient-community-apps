@@ -6,11 +6,7 @@
   * [Overview](#overview)
     * [Key Features](#key-features)
   * [Requirements](#requirements)
-    * [Watsonx.ai Subscription and Project](#watsonxai-subscription-and-project)
-      * [Watsonx.ai Project ID](#watsonxai-project-id)
-      * [IBM Cloud IAM API Key](#ibm-cloud-iam-api-key)
-      * [Watsonx.ai Endpoint URL](#watsonxai-endpoint-url)
-    * [Watsonx.ai Free Credits](#watsonxai-free-credits)
+    * [Watsonx.ai Free Credits](#watsonx-ai-free-credits)
     * [SOAR platform](#soar-platform)
     * [Cloud Pak for Security](#cloud-pak-for-security)
     * [Proxy Server](#proxy-server)
@@ -27,14 +23,14 @@
     * [Background on how a note conversation response is generated](#background-on-how-a-note-conversation-response-is-generated)
     * [Prompting Guide](#prompting-guide)
 * [SOAR Customizations](#soar-customizations)
-  * [Function - watsonx.ai Converse via Notes](#function---watsonxai-converse-via-notes)
-  * [Function - watsonx.ai Scan Artifact](#function---watsonxai-scan-artifact)
-  * [Function - watsonx.ai Scan Attachment](#function---watsonxai-scan-attachment)
-  * [Function - watsonx.ai Text Generation](#function---watsonxai-text-generation)
-  * [Script - watsonx.ai Add Artifact Report to Notes](#script---watsonxai-add-artifact-report-to-notes)
-  * [Script - watsonx.ai Respond to note](#script---watsonxai-respond-to-note)
+  * [Function - watsonx.ai Converse via Notes](#function-watsonx-ai-converse-via-notes)
+  * [Function - watsonx.ai Scan Artifact](#function-watsonx-ai-scan-artifact)
+  * [Function - watsonx.ai Scan Attachment](#function-watsonx-ai-scan-attachment)
+  * [Function - watsonx.ai Text Generation](#function-watsonx-ai-text-generation)
+  * [Script - watsonx.ai Add Artifact Report to Notes](#script-watsonx-ai-add-artifact-report-to-notes)
+  * [Script - watsonx.ai Respond to note](#script-watsonx-ai-respond-to-note)
   * [Playbooks](#playbooks)
-  * [Troubleshooting & Support](#troubleshooting--support)
+  * [Troubleshooting & Support](#troubleshooting-support)
     * [For Support](#for-support)
 <!-- TOC -->
 
@@ -48,6 +44,7 @@
 
 | Version | Date    | Notes                                                                                                                                                                                             |
 |---------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1.1.1   | 06/2025 | Updated model list, rich text whitespace fixes, playbook execution API fixes, improved stability in generating embeddings, minor change to scan playbooks' activation form.                       |
 | 1.1.0   | 02/2025 | Semantic context retrieval (embeddings), multilingual prompts, artifact scans can handle more file types, attachment scanning (equivalent to artifact scan), organization type ID resolution[^1]. |
 | 1.0.2   | 12/2024 | Rich text output, request ID in logs, and a data processing fix for incidents with larger data.                                                                                                   |
 | 1.0.1   | 12/2024 | Bugfix for SOAR versions <= 51.0.2.1 and >= 51.0.4.1 for Note Conversation Function.                                                                                                              |
@@ -250,8 +247,8 @@ The *watsonx.ai Scan Artifact* and *watsonx.ai Scan Attachment* playbooks summar
 #### What file formats can be scanned?
 
 - This app uses the [Apache Tika](https://tika.apache.org) project to extract text from documents.
-- This allows for plaintext extract from text-based documents as well as extracting OCR text from images.
-  - This means that any non-text information from an image is disregarded.
+- This allows for plaintext to be extracted extract from text-based documents as well as extracting OCR text from images.
+  - This means that any non-text information from an image is disregarded, and if text is not clear, it may not be extracted.
 
 Examples of supported file formats include:
 - Document formats: pdf, docx, pptx, odf, rtf
@@ -623,24 +620,16 @@ if generated_text != "":
 
 ---
 
-If any of the actions fail, the following steps may help:
+## Troubleshooting & Support
 
+If any of the actions fail, the following steps may help:
 - Check playbook progress on the incident
   - The playbook may have failed. If so, the error message in the function's response may help you interpret the problem.
 - Check app logs
   - Download the apps’ logs from Administrator Settings -> Apps page. Go to the details of the app, and click “Download Logs.”
   - Function invocations will create a request ID, which can be used to identify logs for a specific invocation.
   - Check SOAR’s `client.log` log file which may give some extra information.
-- If these do not give sufficient information, then you may enable debug level logging for the app by editing the `app.config` and adding `loglevel = DEBUG` below the `[resilient]` section
-
-
-
-
-
-
-
-## Troubleshooting & Support
-Refer to the documentation listed in the Requirements section for troubleshooting information.
+- If these do not give sufficient information, then you may enable debug level logging for the app by editing the `app.config` and adding `loglevel=DEBUG` inside the `[resilient]` section
  
 ### For Support
 This is a IBM Community provided app. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
