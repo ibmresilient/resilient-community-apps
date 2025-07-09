@@ -141,7 +141,7 @@ The following table provides the settings you need to configure the app. These s
 
 | Config | Required | Example | Description |
 | ------ | :------: | ------- | ----------- |
-| **add_user_info_to_note** | Yes | `False` | *(Included in v1.1.0) Set this to true to automatically include the user's name and email to task note* |
+| **add_user_info_to_note** | No | `False` | *(Included in v1.1.0) Set this to true to automatically include the user's name and email to task note* |
  ---
 
 ## Function - Task Utils: Add Note
