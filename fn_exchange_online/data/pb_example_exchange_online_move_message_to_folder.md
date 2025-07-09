@@ -21,7 +21,8 @@
 ### Activation Form Elements
 | Input Field Label | API Name | Element Type | Tooltip | Requirement |
 | ----------------- | -------- | ------------ | ------- | ----------- |
-| Well-known Folders | `exchange_online_wellknown_folders` | select | Destination folder to of moved message | Always |
+| Custom Folder Name | `exchange_online_custom_folder` | text | If the folder isn't listed, enter the custom folder name or folder path to move the message. | Optional |
+| Well-known Folders | `exchange_online_wellknown_folders` | select | Choose a folder from the list or enter a custom name below. | Optional |
 
 ### Object Type
 `exo_message_query_results_dt`
@@ -48,6 +49,11 @@ inputs.exo_email_address = row.exo_dt_email_address
 inputs.exo_mailfolders_id = None
 inputs.exo_messages_id = row.exo_dt_message_id
 inputs.exo_destination_mailfolder_id = playbook.inputs.exchange_online_wellknown_folders
+inputs.exo_custom_folder_name = playbook.inputs.exchange_online_custom_folder
+if not inputs.exo_custom_folder_name and not inputs.exo_destination_mailfolder_id:
+  helper.fail("Destination folder or custom folder is required.")
+elif inputs.exo_custom_folder_name and inputs.exo_destination_mailfolder_id:
+  helper.fail("Need to enter either destination folder or custom folder")
 ```
 
 ---
@@ -66,27 +72,27 @@ Write results of move message function to a note and update the data table.
 ### Script Content
 ```python
 results = playbook.functions.results.exchange_online_move_nessage_to_folder_result
-email_address = results.inputs["exo_email_address"]
-message_id = results.inputs["exo_messages_id"]
-destination_folder = results.inputs["exo_destination_mailfolder_id"]["name"]
+
+inputs = results.inputs or {}
+email_address = inputs.get("exo_email_address", "Unknown")
+message_id = inputs.get("exo_messages_id", "Unknown")
+destination_folder_info = inputs.get("exo_destination_mailfolder_id")
+destination_folder = destination_folder_info.get("name") if destination_folder_info else "Unknown"
+custom_folder_name = inputs.get("exo_custom_folder_name")
+
+
 note_text = f"Exchange Online: Move Message to Folder:\n email address: {email_address}\n"
 
 if results.success:
   # When a message is moved it's ID changes, so update the new message ID into the data table
   # The message status is still "Active" but the weblink is no longer valid, so make is empty string.
   new_message_id = results.content["new_message_id"]
-  noteText = f"{note_text} Message has been moved to destination folder: <b>{destination_folder}</b>\n\n  Old message ID: {message_id} \n\n  New message ID: {new_message_id}"
+  noteText = f"{note_text} Message has been moved to destination folder: <b>{custom_folder_name or destination_folder}</b>\n\n  Old message ID: {message_id} \n\n  New message ID: {new_message_id}"
   row['exo_dt_message_id'] = new_message_id
   row['exo_dt_web_link'] = ref_html = """<a href='{0}'>Link</a>""".format(results.content["new_web_link"])
-  row['exo_dt_message_folder'] = results.inputs["exo_destination_mailfolder_id"]["name"]
+  row['exo_dt_message_folder'] = custom_folder_name or destination_folder
 else: 
-  note_text = f"{note_text} FAILED to move message to folder <b>{destination_folder}</b>\n"
-  error_results = results.content.get("error")
-
-  if error_results:
-    error_code = error_results.get("code", None)
-    error_message = error_results.get("message", None)
-    noteText = f"{note_text} error code: {error_code}\n error message: {error_message}"
+  noteText = f"<b>Exchange Online: Move Message to Folder:</b> Failed: {results.reason}"
 
 incident.addNote(noteText)
 ```

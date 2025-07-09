@@ -13,8 +13,8 @@ else:
     from unittest.mock import patch
 
 MOCKED_OPTS = {
-    "microsoft_graph_token_url": "microsoft_graph_token_url",
-    "microsoft_graph_url": u'microsoft_graph_url',
+    "microsoft_graph_token_url": "https://login.microsoftonline.com/token",
+    "microsoft_graph_url": "https://graph.microsoft.com/v1.0",
     "tenant_id": "tenant_id",
     "client_id": "client_id",
     "client_secret": "client_secret",
@@ -374,12 +374,12 @@ class TestMSGraphHelper(object):
             # Test sender, hasAttachments, message subject
             url = MS_graph_helper.build_MS_graph_query_url("tester1@example.com", None, "tester2@example.com", None,
                                                            None, True, "lunch", None)
-            assert url == u'microsoft_graph_url/users/tester1@example.com/messages?$filter=(from/emailAddress/address%20eq%20\'tester2@example.com\')%20and%20(hasAttachments%20eq%20true)%20and%20(contains(subject,\'lunch\'))'
+            assert url == u'https://graph.microsoft.com/v1.0/users/tester1@example.com/messages?$filter=(from/emailAddress/address%20eq%20\'tester2@example.com\')%20and%20(hasAttachments%20eq%20true)%20and%20(contains(subject,\'lunch\'))'
 
             # Test $search in query (message body)
             url = MS_graph_helper.build_MS_graph_query_url("tester1@example.com", None, "tester2@example.com", None,
                                                            None, True, None, "lunch")
-            assert url == u'microsoft_graph_url/users/tester1@example.com/messages?$search="lunch"&?$filter=(from/emailAddress/address%20eq%20\'tester2@example.com\')%20and%20(hasAttachments%20eq%20true)'
+            assert url == u'https://graph.microsoft.com/v1.0/users/tester1@example.com/messages?$search="lunch"&?$filter=(from/emailAddress/address%20eq%20\'tester2@example.com\')%20and%20(hasAttachments%20eq%20true)'
 
             # Test query: sender, start date, hasAttachments
             url = MS_graph_helper.build_MS_graph_query_url("tester1@example.com", None, "tester2@example.com",

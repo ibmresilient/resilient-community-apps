@@ -81,7 +81,7 @@ Creating a new custom task.
 results = playbook.functions.results.create_task_result
 
 if results.success:
-  note_text = f"<b>Task Utils: Create Custom Task - Example (PB):</b> {playbook.inputs.task_utils_task_name} created sucessfully"
+  note_text = f"<b>Task Utils: Create Custom Task - Example (PB):</b> {playbook.inputs.task_utils_task_name} created successfully"
 else:
   note_text = f"<b>Task Utils: Create Custom Task - Example (PB):</b> Failed: {results.reason}"
   

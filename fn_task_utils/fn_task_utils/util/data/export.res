@@ -4,7 +4,7 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "export_date": 1751963487628,
+  "export_date": 1752090626126,
   "export_format_version": 2,
   "export_type": null,
   "fields": [
@@ -527,13 +527,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 90,
+  "id": 92,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1751963485112,
+      "create_date": 1752090624191,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -542,7 +542,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1751963485112,
+      "update_date": 1752090624191,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -886,7 +886,7 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 16,
+        "content_version": 18,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_3aa344a5_1dab_4581_a1ad_6bc6550d5ee0\" isExecutable=\"true\" name=\"playbook_3aa344a5_1dab_4581_a1ad_6bc6550d5ee0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0qaif69\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Task Utils: Create Custom Task\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c4281bd4-d872-4562-b7c8-b0e379aea8ad\"\u003e{\"inputs\":{},\"pre_processing_script\":\"from json import dumps\\n\\n# Take the incident id from this incident\\ninputs.incident_id = incident.id\\n\\n# If you specified a value in the Activity Field then use it for task_name\\nif playbook.inputs.task_utils_task_name:\\n    inputs.task_name = playbook.inputs.task_utils_task_name\\n\\npayload = {\\n    \\\"required\\\": True,\\n    \\\"instr_text\\\": \\\"Close out this required Task\\\",\\n    \\\"phase_id\\\": \\\"Initial\\\"\\n}\\n\\ninputs.task_utils_payload = dumps(payload)\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_task_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0qaif69\u003c/incoming\u003e\u003coutgoing\u003eFlow_0twv0al\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0qaif69\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Task Utils: Create Custom Task\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f8672af1-eb92-488d-b52a-c96b72d194ed\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0twv0al\u003c/incoming\u003e\u003coutgoing\u003eFlow_0658fag\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0twv0al\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0658fag\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0658fag\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_3aa344a5_1dab_4581_a1ad_6bc6550d5ee0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0658fag\" id=\"Flow_0658fag_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0twv0al\" id=\"Flow_0twv0al_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qaif69\" id=\"Flow_0qaif69_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.1875\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"656\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1751030481272,
@@ -969,7 +969,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1751963120144,
+      "last_modified_time": 1752090478199,
       "local_scripts": [
         {
           "actions": [],
@@ -980,12 +980,12 @@
           "id": 53,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1751033646535,
+          "last_modified_time": 1752090465228,
           "name": "Task Utils: Create Custom Task",
           "object_type": "incident",
           "playbook_handle": "task_utils_create_custom_task_example_pb",
           "programmatic_name": "task_utils_create_custom_task_example_pb_task_util_create_custom_task",
-          "script_text": "results = playbook.functions.results.create_task_result\n\nif results.success:\n  note_text = f\"\u003cb\u003eTask Utils: Create Custom Task - Example (PB):\u003c/b\u003e {playbook.inputs.task_utils_task_name} created sucessfully\"\nelse:\n  note_text = f\"\u003cb\u003eTask Utils: Create Custom Task - Example (PB):\u003c/b\u003e Failed: {results.reason}\"\n  \nincident.addNote(note_text)",
+          "script_text": "results = playbook.functions.results.create_task_result\n\nif results.success:\n  note_text = f\"\u003cb\u003eTask Utils: Create Custom Task - Example (PB):\u003c/b\u003e {playbook.inputs.task_utils_task_name} created successfully\"\nelse:\n  note_text = f\"\u003cb\u003eTask Utils: Create Custom Task - Example (PB):\u003c/b\u003e Failed: {results.reason}\"\n  \nincident.addNote(note_text)",
           "tags": [],
           "uuid": "f8672af1-eb92-488d-b52a-c96b72d194ed"
         }
@@ -1019,12 +1019,12 @@
       "tags": [],
       "type": "default",
       "uuid": "3aa344a5-1dab-4581-a1ad-6bc6550d5ee0",
-      "version": 19
+      "version": 21
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 4,
+        "content_version": 5,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_18045e38_6981_4b7f_923b_8e3e9d759242\" isExecutable=\"true\" name=\"playbook_18045e38_6981_4b7f_923b_8e3e9d759242\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1w5788o\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Task Utils: Update Task\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"bd8df53a-6443-40f1-90f9-eb5993996925\"\u003e{\"inputs\":{},\"pre_processing_script\":\"from json import dumps\\n\\ninputs.task_id = task.id\\ninputs.incident_id = incident.id\\ninputs.task_name = task.name\\n\\npayload = {\\n\\\"required\\\": False\\n}\\ninputs.task_utils_payload = dumps(payload)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"task_as_optional_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1w5788o\u003c/incoming\u003e\u003coutgoing\u003eFlow_1sgcflo\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1w5788o\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Task Util: Mark Task a Optional\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"86c0804b-7927-40ba-a29b-84d3b58ee877\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1sgcflo\u003c/incoming\u003e\u003coutgoing\u003eFlow_16d98q0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1sgcflo\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_16d98q0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_16d98q0\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_18045e38_6981_4b7f_923b_8e3e9d759242\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_16d98q0\" id=\"Flow_16d98q0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1sgcflo\" id=\"Flow_1sgcflo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1w5788o\" id=\"Flow_1w5788o_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"161.578125\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
       "create_date": 1751031119115,
@@ -1076,7 +1076,7 @@
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1751031611773,
+      "last_modified_time": 1752090518693,
       "local_scripts": [
         {
           "actions": [],
@@ -1087,12 +1087,12 @@
           "id": 54,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1751032016353,
+          "last_modified_time": 1752090516129,
           "name": "Task Util: Mark Task a Optional",
           "object_type": "task",
           "playbook_handle": "task_utils_mark_task_as_optional__example_pb",
           "programmatic_name": "task_utils_mark_task_as_optional__example_pb_task_util_mark_task_a_optional",
-          "script_text": "results = playbook.functions.results.task_as_optional_result\n\nif results:\n  note_text = f\"\u003cb\u003e Task Utils: Mark Task as Optional - Example (PB):\u003c/b\u003e Task: {task.name} marked as optinal\"\nelse:\n  note_text = f\"\u003cb\u003e Task Utils: Mark Task as Optional - Example (PB):\u003c/b\u003e Failed: {results.reason}\"\n  \ntask.addNote(note_text)",
+          "script_text": "results = playbook.functions.results.task_as_optional_result\n\nif results:\n  note_text = f\"\u003cb\u003e Task Utils: Mark Task as Optional - Example (PB):\u003c/b\u003e Task: {task.name} marked as optional\"\nelse:\n  note_text = f\"\u003cb\u003e Task Utils: Mark Task as Optional - Example (PB):\u003c/b\u003e Failed: {results.reason}\"\n  \ntask.addNote(note_text)",
           "tags": [],
           "uuid": "86c0804b-7927-40ba-a29b-84d3b58ee877"
         }
@@ -1117,7 +1117,7 @@
       "tags": [],
       "type": "default",
       "uuid": "18045e38-6981-4b7f-923b-8e3e9d759242",
-      "version": 6
+      "version": 7
     }
   ],
   "regulators": null,

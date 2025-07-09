@@ -1,6 +1,8 @@
 # (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # -*- coding: utf-8 -*-
 #pragma pylint: disable=line-too-long, too-many-instance-attributes, too-many-arguments, too-many-positional-arguments, too-many-locals, too-many-public-methods
+"""Helper Class"""
+
 import logging
 from urllib.parse import quote as url_encode
 import datetime
@@ -105,15 +107,17 @@ class MSGraphHelper():
 
         return response
 
-    def get_user_mail_folders(self, email_address):
+    def get_user_mail_folders(self, email_address, folder_id=None):
         """
         Query MS Graph user mailFolders endpoint using the MS graph session.
         :param email_address: email address of the user profile requested
         :return: requests response from the /users/mailFolders endpoint
         """
-        ms_graph_user_mail_folders = f"{self.ms_graph_url}/users/{email_address}/mailFolders"
+        if folder_id:
+            ms_graph_user_mail_folders = f"{self.ms_graph_url}/users/{email_address}/mailFolders/{folder_id}/childFolders"
+        else:
+            ms_graph_user_mail_folders = f"{self.ms_graph_url}/users/{email_address}/mailFolders?$expand=childFolders"
         response = self.ms_graph_session.get(ms_graph_user_mail_folders)
-
         self.check_ms_graph_response_code(response.status_code)
 
         return response
@@ -193,6 +197,8 @@ class MSGraphHelper():
         :param message_id: message id of the message to be deleted
         :return: requests response from the /users/ endpoint which is the list of all users.
         """
+        if not mail_folder:
+            mail_folder = self.resolve_mail_folder(email_address, message_id, mail_folder)
         mail_folder_string = self.build_folder_string(mail_folder)
 
         ms_graph_users_url = f"{self.ms_graph_url}/users/{email_address}{mail_folder_string}/messages/{message_id}"
@@ -243,6 +249,8 @@ class MSGraphHelper():
         :param dest_folder: mailFolder id (string) of the folder to move the message to 
         :return: requests response from the /users/ endpoint which is the list of all users.
         """
+        if not mail_folder:
+            mail_folder = self.resolve_mail_folder(email_address, message_id, mail_folder)
         mail_folder_string = self.build_folder_string(mail_folder)
 
         ms_graph_users_url = f"{self.ms_graph_url}/users/{email_address}{mail_folder_string}/messages/{message_id}/move"
@@ -254,6 +262,79 @@ class MSGraphHelper():
         self.check_ms_graph_response_code(response.status_code)
 
         return response
+
+    def get_folder_id_by_input(self, email_address, folder_input):
+        """
+        Accepts either a folder name or a full path (e.g., 'Inbox/Reports').
+        Returns the folder ID if found, else None.
+        """
+        if '/' in folder_input:
+            return self._get_folder_id_by_path(email_address, folder_input)
+
+        return self._get_folder_id_by_name(email_address, folder_input)
+
+
+    def _get_folder_id_by_name(self, email_address, folder_name):
+        """
+        Returns the ID of a mail folder matching the given name for the specified user.
+        Searches top-level and child folders. Case-insensitive match.
+            
+        :param email_address: User's email address
+        :param folder_name: Folder display name to search
+        :return: Folder ID if found, else None
+        """
+        def search_folder(folder):
+            if folder.get('displayName', '').lower() == folder_name.lower():
+                return folder['id']
+            response = self.get_user_mail_folders(email_address, folder['id'])
+            child_folders = response.json().get("value", [])
+            for child in child_folders:
+                result = search_folder(child)
+                if result:
+                    return result
+            return
+
+        response = self.get_user_mail_folders(email_address).json()
+        top_folders = response.get("value", [])
+
+        for folder in top_folders:
+            result = search_folder(folder)
+            if result:
+                return result
+
+        return
+
+    def _get_folder_id_by_path(self, email_address, folder_path):
+        """
+        Traverses the folder hierarchy based on a path like 'Inbox/Reports/2025'.
+        Returns the folder ID if the full path is found, else None.
+        """
+        path_parts = folder_path.strip('/').split('/')
+        current_folders = self.get_user_mail_folders(email_address).json().get("value", [])
+        current_folder = None
+
+        for part in path_parts:
+            current_folder = next(
+                (f for f in current_folders if f.get('displayName', '').lower() == part.lower()), None
+            )
+            if not current_folder:
+                return None
+            # Move to next level
+            current_folders = self.get_user_mail_folders(email_address, current_folder['id']).json().get("value", [])
+
+        return current_folder['id'] if current_folder else None
+
+    def resolve_mail_folder(self, email_address, message_id, mail_folder):
+        """
+        Resolve the mail folder ID. If not provided, fetch it using the message ID.
+        """
+        if not mail_folder:
+            message_response = self.get_message(email_address, message_id)
+            mail_folder = message_response.json().get("parentFolderId")
+            if not mail_folder:
+                raise ValueError("Unable to determine the source folder ID from the message.")
+        return mail_folder
+
 
     def build_attachments(self, attachment_names, incident_id, resilient_client):
         """

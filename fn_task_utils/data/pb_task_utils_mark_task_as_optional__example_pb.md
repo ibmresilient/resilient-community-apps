@@ -69,7 +69,7 @@ Mark task as optional.
 results = playbook.functions.results.task_as_optional_result
 
 if results:
-  note_text = f"<b> Task Utils: Mark Task as Optional - Example (PB):</b> Task: {task.name} marked as optinal"
+  note_text = f"<b> Task Utils: Mark Task as Optional - Example (PB):</b> Task: {task.name} marked as optional"
 else:
   note_text = f"<b> Task Utils: Mark Task as Optional - Example (PB):</b> Failed: {results.reason}"
   
