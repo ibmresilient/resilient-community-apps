@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
-# Generated with resilient-sdk v51.0.1.1.824
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# Generated with resilient-sdk v51.0.6.0.1543
 
 """Generate the SOAR customizations required for fn_qradar_integration"""
 
@@ -37,6 +37,7 @@ def codegen_reload_data():
             u"qradar_reference_table_get_table",
             u"qradar_reference_table_update_item",
             u"qradar_search",
+            u"qradar_siem_bulk_add_reference_set_items",
             u"qradar_update_offense"
         ],
         "workflows": [],
@@ -65,6 +66,7 @@ def codegen_reload_data():
             u"qradar_gather_reference_table_data_example",
             u"qradar_get_all_reference_tables_example",
             u"qradar_move_from_sample_blocked_to_sample_suspected",
+            u"qradar_siem_bulk_add_reference_set_items",
             u"qradar_siem_create_note",
             u"qradar_siem_update_offense",
             u"qradar_update_this_reference_table_item_example",
@@ -78,7 +80,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 50.0.9097
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:
@@ -95,6 +97,7 @@ def customization_data(client=None):
         - qradar_reference_table_get_table
         - qradar_reference_table_update_item
         - qradar_search
+        - qradar_siem_bulk_add_reference_set_items
         - qradar_update_offense
     - Playbooks:
         - find_in_qradar_reference_set_pb
@@ -106,6 +109,7 @@ def customization_data(client=None):
         - qradar_gather_reference_table_data_example
         - qradar_get_all_reference_tables_example
         - qradar_move_from_sample_blocked_to_sample_suspected
+        - qradar_siem_bulk_add_reference_set_items
         - qradar_siem_create_note
         - qradar_siem_update_offense
         - qradar_update_this_reference_table_item_example

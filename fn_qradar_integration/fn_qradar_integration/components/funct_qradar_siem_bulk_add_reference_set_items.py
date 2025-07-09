@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, line-too-long
-# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
-# Generated with resilient-sdk v51.0.1.0.695
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.5.0.1475
 
 """AppFunction implementation"""
 
@@ -9,12 +8,12 @@ from resilient_circuits import AppFunctionComponent, app_function, FunctionResul
 from resilient_lib import validate_fields
 from fn_qradar_integration.util.qradar_utils import QRadarClient, QRadarServers
 from fn_qradar_integration.util.qradar_constants import PACKAGE_NAME
-from fn_qradar_integration.util import function_utils
+import fn_qradar_integration.util.function_utils as function_utils
 
-FN_NAME = "qradar_create_offense_note"
+FN_NAME = "qradar_siem_bulk_add_reference_set_items"
 
 class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'qradar_create_offense_note'"""
+    """Component that implements function 'qradar_siem_bulk_add_reference_set_items'"""
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -23,18 +22,18 @@ class FunctionComponent(AppFunctionComponent):
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
         """
-        Function: None
+        Function: Add or update data in a reference set.
         Inputs:
-            -   fn_inputs.qradar_id
+            -   fn_inputs.qradar_domain_id
+            -   fn_inputs.qradar_namespace
             -   fn_inputs.qradar_label
-            -   fn_inputs.qradar_siem_note
+            -   fn_inputs.qradar_reference_set_values
+            -   fn_inputs.qradar_reference_set_name
         """
         try:
             yield self.status_message(f"Starting App Function: '{FN_NAME}'")
-
-            validate_fields(["qradar_id", "qradar_siem_note"], fn_inputs)
-
-            yield self.status_message(f"Starting App Function: '{FN_NAME}'")
+            # Validate required fields
+            validate_fields(["qradar_namespace", "qradar_reference_set_name", "qradar_domain_id", "qradar_reference_set_values"], fn_inputs)
 
             # Get qradar_label if one is given
             qradar_label = fn_inputs.qradar_label if getattr(fn_inputs, "qradar_label", None) else None
@@ -55,10 +54,13 @@ class FunctionComponent(AppFunctionComponent):
                                         opts=self.opts,
                                         function_opts=server_options)
 
-            results = qradar_client.create_offense_note(fn_inputs.qradar_id, fn_inputs.qradar_siem_note)
+            ref_set_values_list = fn_inputs.qradar_reference_set_values.replace(", ", ",").split(",")
+            # Make call to bulk load values into a reference set
+            results = qradar_client.bulk_load_ref_set_values(namespace=getattr(fn_inputs, "qradar_namespace", None),
+                                                             name=getattr(fn_inputs, "qradar_reference_set_name", None),
+                                                             domain_id=getattr(fn_inputs, "qradar_domain_id", None),
+                                                             values=ref_set_values_list)
 
-            yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
-
-            yield FunctionResult(results, success=bool(results))
+            yield FunctionResult(results)
         except Exception as err:
             yield FunctionResult({}, success=False, reason=str(err))

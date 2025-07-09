@@ -1,9 +1,9 @@
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Function implementation"""
 
 from logging import getLogger
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult
 from resilient_lib import validate_fields
 from fn_qradar_integration.util.qradar_utils import QRadarClient, QRadarServers
 from fn_qradar_integration.util import function_utils
@@ -101,6 +101,5 @@ class FunctionComponent(ResilientComponent):
             yield StatusMessage(f"Finished 'qradar_search' that was running in workflow '{wf_instance_id}'")
 
             yield FunctionResult(results)
-        except Exception as e:
-            LOG.error(str(e))
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=str(err))

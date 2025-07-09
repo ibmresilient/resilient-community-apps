@@ -1,9 +1,9 @@
 # pragma pylint: disable=unused-argument, no-self-use
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 """Function implementation"""
 
 from logging import getLogger
-from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
+from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult
 from resilient_lib import ResultPayload
 from fn_qradar_integration.util.qradar_utils import QRadarClient, QRadarServers
 from fn_qradar_integration.util.qradar_constants import PACKAGE_NAME
@@ -36,10 +36,13 @@ class FunctionComponent(ResilientComponent):
             # Get the wf_instance_id of the workflow this Function was called in, if not found return a backup string
             wf_instance_id = event.message.get("workflow_instance", {}).get("workflow_instance_id", "no instance id found")
             yield StatusMessage(f"Starting 'qradar_get_all_reference_table' that was running in workflow '{wf_instance_id}'")
-            
+
             rp = ResultPayload(PACKAGE_NAME, **kwargs)
 
-            qradar_label = kwargs.get("qradar_label")  # text
+            qradar_label = kwargs.get("qradar_label", None)  # text
+            range_start = kwargs.get("qradar_query_range_start", 0)
+            range_end = kwargs.get("qradar_query_range_end", None)
+            returned_fields = kwargs.get("qradar_reference_table_return_fields", None)
 
             LOG.info(f"qradar_label: {qradar_label}")
 
@@ -56,7 +59,7 @@ class FunctionComponent(ResilientComponent):
                                          cafile=qradar_verify_cert,
                                          opts=self.opts, function_opts=options)
 
-            result = qradar_client.get_all_ref_tables()
+            result = qradar_client.get_all_ref_tables(range_start, range_end, returned_fields)
 
             status_code = isinstance(result, list)
             reason = None if status_code else result["content"]["http_response"].get("message")
@@ -68,5 +71,5 @@ class FunctionComponent(ResilientComponent):
 
             # Produce a FunctionResult with the results
             yield FunctionResult(results)
-        except Exception:
-            yield FunctionError()
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=err)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, line-too-long
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # Util classes for qradar
 
 from base64 import b64encode
@@ -141,7 +141,9 @@ class AuthInfo(object):
         self.rc = RequestsCommon(opts, function_opts)
 
     def make_call(self, method, url, headers=None, data=None):
-        my_headers = headers if headers else self.headers
+        my_headers = self.headers.copy()
+        if headers:
+            my_headers.update(headers)
 
         def make_call_callback(response):
             # 404 is not found, such as reference not found or item not found in reference set
@@ -151,7 +153,7 @@ class AuthInfo(object):
             response.raise_for_status()
             return response
 
-        return self.rc.execute_call_v2(method, url, data=data, headers=my_headers, verify=self.cafile, callback=make_call_callback)
+        return self.rc.execute(method, url, data=data, headers=my_headers, verify=self.cafile, callback=make_call_callback)
 
 class ArielSearch(SearchWaitCommand):
     """
@@ -247,9 +249,10 @@ class ArielSearch(SearchWaitCommand):
 
         ret = {}
         if int(response.status_code/100) == 2:
-            events = response.json()["events"]
+            events = response.json().get("events", [])
             events = function_utils.fix_dict_value(events)
-            ret = {"events": events}
+            ret = {"events": events,
+                   "results": response.json()}
 
         return ret
 
@@ -319,12 +322,6 @@ class QRadarClient(object):
         auth_info.create(host, username, password, token,
                          cafile, opts, function_opts)
 
-    def check_openssl(self):
-        """
-        Do we need to verify openssl version?
-        :return:
-        """
-
     def get_versions(self):
         """
         Util function used to test connectivity to QRadar
@@ -388,16 +385,24 @@ class QRadarClient(object):
         return connected
 
     @staticmethod
-    def get_all_ref_set():
+    def get_all_ref_set(range_start:int=None, range_end:int=None, returned_fields:list=None):
         """
         Get a list of all the reference sets.
+        :param range_start: int for range start
+        :param range_end: int for range end
+        :param returned_fields: list of fields to return
         :return: list of reference set names
         """
         auth_info = AuthInfo.get_authInfo()
         url = f"{auth_info.api_url}{qradar_constants.REFERENCE_SET_URL}"
+        if returned_fields: # If returned_fields is given then add filter to only return those fields
+            url += f"?fields={','.join(returned_fields)}"
+        header = {}
+        if range_start and range_end:
+            header = {"Range": f"items={range_start}-{range_end}"}
         ret = []
         try:
-            response = auth_info.make_call("GET", url)
+            response = auth_info.make_call("GET", url, headers=header)
             ret = response.json()
         except Exception as e:
             LOG.error(str(e))
@@ -405,11 +410,20 @@ class QRadarClient(object):
 
         return ret
 
+    def bulk_load_ref_set_values(self, namespace: str=None, name: str=None, domain_id: str=None, values: list=None):
+        auth_info = AuthInfo.get_authInfo()
+        # Build url for bulk_load
+        url = f"{auth_info.api_url}{qradar_constants.REFERENCE_SET_URL}/bulk_load/{namespace}/{name}/{domain_id}"
+        return auth_info.make_call("POST", url, data=str(values)).json()
+
     @staticmethod
     def find_all_ref_set_contains(value):
         """
         Find all reference sets that contain user given value
         :param value: Value given by user
+        :param range_start: (int) The starting index of the range of results to return.
+        :param range_end: (int) The ending index of the range of results to return.
+        :param returned_fields: (list) A list of fields to return in the response.
         :return: List of reference sets that contain the user given value
         """
         ref_sets = QRadarClient.get_all_ref_set()
@@ -537,11 +551,11 @@ class QRadarClient(object):
         """
         return cls.reference_tables.delete_ref_element(AuthInfo.get_authInfo(), ref_table, inner_key, outer_key, value)
 
-    def get_all_ref_tables(self):
+    def get_all_ref_tables(self, range_start:int=None, range_end:int=None, returned_fields:list=None):
         """
         :return: All reference tables
         """
-        return self.reference_tables.get_all_reference_tables(AuthInfo.get_authInfo())
+        return self.reference_tables.get_all_reference_tables(AuthInfo.get_authInfo(), range_start, range_end, returned_fields)
 
     @classmethod
     def add_ref_table_element(cls, ref_table, inner_key, outer_key, value):

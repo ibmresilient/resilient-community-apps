@@ -1,4 +1,4 @@
-# QRadar Integration
+# QRadar SIEM
 
 ## Table of Contents
 - [Release Notes](#release-notes)
@@ -12,19 +12,20 @@
 - [Installation](#installation)
   - [Install](#install)
   - [App Configuration](#app-configuration)
-  - [Custom Layouts](#custom-layouts)
-- [Function - QRadar SIEM: Add Reference Set Item ](#function---qradar-siem-add-reference-set-item)
+- [Function - QRadar SIEM: Add Reference Set Item](#function---qradar-siem-add-reference-set-item)
+- [Function - QRadar SIEM: Bulk Add Reference Set Items](#function---qradar-siem-bulk-add-reference-set-items)
 - [Function - QRadar SIEM: Create Offense Note](#function---qradar-siem-create-offense-note)
-- [Function - QRadar SIEM: Delete Reference Set Item ](#function---qradar-siem-delete-reference-set-item)
-- [Function - QRadar SIEM: Find Reference Set Item ](#function---qradar-siem-find-reference-set-item)
-- [Function - QRadar SIEM: Find Reference Sets ](#function---qradar-siem-find-reference-sets)
-- [Function - QRadar SIEM: Reference Table Add Item ](#function---qradar-siem-reference-table-add-item)
-- [Function - QRadar SIEM: Reference Table Delete Item ](#function---qradar-siem-reference-table-delete-item)
-- [Function - QRadar SIEM: Reference Table Get All Tables ](#function---qradar-siem-reference-table-get-all-tables)
-- [Function - QRadar SIEM: Reference Table Get Table Data ](#function---qradar-siem-reference-table-get-table-data)
-- [Function - QRadar SIEM: Reference Table Update Item ](#function---qradar-siem-reference-table-update-item)
-- [Function - QRadar SIEM: QRadar Search ](#function---qradar-siem-qradar-search)
+- [Function - QRadar SIEM: Delete Reference Set Item](#function---qradar-siem-delete-reference-set-item)
+- [Function - QRadar SIEM: Find Reference Set Item](#function---qradar-siem-find-reference-set-item)
+- [Function - QRadar SIEM: Find Reference Sets](#function---qradar-siem-find-reference-sets)
+- [Function - QRadar SIEM: QRadar Search](#function---qradar-siem-qradar-search)
+- [Function - QRadar SIEM: Reference Table Add Item](#function---qradar-siem-reference-table-add-item)
+- [Function - QRadar SIEM: Reference Table Delete Item](#function---qradar-siem-reference-table-delete-item)
+- [Function - QRadar SIEM: Reference Table Get All Tables](#function---qradar-siem-reference-table-get-all-tables)
+- [Function - QRadar SIEM: Reference Table Get Table Data](#function---qradar-siem-reference-table-get-table-data)
+- [Function - QRadar SIEM: Reference Table Update Item](#function---qradar-siem-reference-table-update-item)
 - [Function - QRadar SIEM: Update Offense](#function---qradar-siem-update-offense)
+  - [Custom Layouts](#custom-layouts)
 - [Data Table - QRadar SIEM Offense Events](#data-table---qradar-siem-offense-events)
 - [Data Table - QRadar SIEM Reference Sets](#data-table---qradar-siem-reference-sets)
 - [Data Table - QRadar SIEM Reference Table Queried Rows](#data-table---qradar-siem-reference-table-queried-rows)
@@ -37,13 +38,14 @@
 
 ## Release Notes
 <!--
-  Specify all changes in this release. Do not remove the release 
+  Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
 | Version | Publication | Notes |
 | ------- | ----------- | ----- |
+| 2.5.0 | June. 2025 | <ul><li>Update functions to return status=False and reason when fail.</li><li>Update search function to handle subqueries.</li><li>Add bulk_load for reference sets.</li><li></li>Updated funct_qradar_reference_table_get_table to use filters range limits and fields</ul> |
 | 2.4.1 | May. 2024 | Bug fix for function input field name qradar_note. Change it to qradar_siem_note. |
-| 2.4.0 | April. 2024 | Added functions to create offense notes and make changes to an offense |
+| 2.4.0 | April. 2024 | Added functions to create offense notes and make changes to an offense. |
 | 2.3.1 | April. 2024 | Bug fix for search_ref_set function |
 | 2.3.0 | September. 2023 | Python3 / Playbook Conversion |
 | 2.2.6 | June. 2023 | Fix bug in qradar_search function |
@@ -72,7 +74,7 @@
 -->
 **IBM QRadar SOAR Components for 'fn_qradar_integration'**
 
- ![screenshot: main](./doc/screenshots/main.png) 
+![screenshot: main](./doc/screenshots/main.png)
 
 fn_qradar_integration supports performing ariel search to retrieve data from QRadar. It also provide functions to find/add/delete reference set items.
 
@@ -96,60 +98,58 @@ The QRadar app with the SOAR platform package provides the following:
 
 With the above functions, this package includes example workflows that demonstrate how to call the functions, rules that start the example workflows, and custom data tables updated by the example workflows.
 
-
 ---
 
 ## Requirements
 <!--
-  List any Requirements 
---> 
-
+  List any Requirements
+-->
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
-The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
+The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
-If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `50.0.0`.
+If deploying to a SOAR platform with an App Host, the requirements are:
+* SOAR platform >= `51.0.0.0.9339`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `50.0.0`.
+* SOAR platform >= `51.0.0.0.9339`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=50.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read, edit |
   | Function | Read |
+ 
 
-
-The following SOAR platform guides provide additional information: 
-* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
 The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= `1.10`.
+* IBM Cloud Pak for Security >= `1.10.15`.
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
+The following Cloud Pak guides provide additional information:
 * _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
-The app does support a proxy server.
+The app **does** support a proxy server.
 
 ### Python Environment
-Python 3.6, 3.9, and 3.11 are supported.
+Python 3.9, 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
 Additional package dependencies may exist for each of these packages:
-* resilient_circuits>=50.0.0
+* resilient_circuits>=51.0.0
 
 ---
 
@@ -187,22 +187,12 @@ Be aware that modifications to the workflows will be needed to correctly pass th
 
 If you have existing custom workflows, see [Creating workflows when server/servers in app.config are labeled](#creating-workflows-when-serverservers-in-appconfig-are-labeled) for more information about changing them to reference the `qradar_label` function input field.
 
-### Custom Layouts
-<!--
-  Use this section to provide guidance on where the user should add any custom fields and data tables.
-  You may wish to recommend a new incident tab.
-  You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
--->
-* Import the Data Tables and Custom Fields like the screenshot below:
-
-  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
-
 ---
 
-## Function - QRadar SIEM: Add Reference Set Item 
+## Function - QRadar SIEM: Add Reference Set Item
 Add an item to a given QRadar reference set
 
- ![screenshot: fn-qradar-add-reference-set-item ](./doc/screenshots/fn-qradar-add-reference-set-item.png) 
+ ![screenshot: fn-qradar-siem-add-reference-set-item ](./doc/screenshots/fn-qradar-siem-add-reference-set-item.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -244,44 +234,51 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
-inputs.qradar_reference_set_name  = playbook.inputs.qradar_reference_set_name
-inputs.qradar_label = playbook.inputs.qradar_server
+inputs.qradar_reference_set_name = getattr(playbook.inputs, "qradar_reference_set_to_move_to")
+inputs.qradar_label = getattr(playbook.inputs, "qradar_server")
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
 results = playbook.functions.results.qradar_add_reference_set_item_result
-if results["status_code"] == 200:
-  incident.addNote(u"IP: {} added to reference set: {} on QRadar server: {}".format(artifact.value, results.inputs["qradar_reference_set_name"], results.inputs["qradar_label"]))
+
+if results.get("status_code") == 200:
+  incident.addNote(u"Successfully added {} to {} on QRadar Server: {}".format(artifact.value, playbook.inputs.qradar_reference_set_name, results.get("inputs", {}).get("qradar_label")))
 else:
-  incident.addNote(u"Failed to add IP: {} to reference set on QRadar server: {}. Status Code: {}, message: {}".format(artifact.value, results.inputs["qradar_label"], str(results["status_code"]), results.inputs["qradar_reference_set_name"]))
+  incident.addNote(u"Failed to add {} to {} on QRadar server: {}. Status code: {}, message: {}".format(artifact.value, playbook.inputs.qradar_reference_set_name, results.get("inputs", {}).get("qradar_label"), results.get("status_code"), results.get
+  ("message")))
+  
 ```
 
 </p>
 </details>
 
 ---
-## Function - QRadar SIEM: Create Offense Note 
-Add a note to an offense 
+## Function - QRadar SIEM: Bulk Add Reference Set Items
+Add or update data in a reference set.
+
+ ![screenshot: fn-qradar-siem-bulk-add-reference-set-items ](./doc/screenshots/fn-qradar-siem-bulk-add-reference-set-items.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `qradar_domain_id` | `text` | No | `SHARED` | Specify the numeric domain_id tag for the data or SHARED for Admin users. Must be a domain ID for which the caller has access. |
 | `qradar_label` | `text` | No | `-` | Enter name of QRadar server to use from the app.config |
-| `qradar_id` | `int` | Yes | `-` | QRadar Id |
-| `qradar_siem_note` | `text` | Yes | `-` | Note to create |
+| `qradar_namespace` | `select` | Yes | `-` | - |
+| `qradar_reference_set_name` | `text` | No | `-` | Name of a QRadar reference set |
+| `qradar_reference_set_values` | `text` | Yes | `string, string, string` | A comma seperated list of values to add to the reference set. |
 
 </p>
 </details>
@@ -293,66 +290,160 @@ Add a note to an offense
 
 ```python
 results = {
-    "version": 2,
-    "success": true,
-    "reason": null,
-    "content": {
-        "note_text": "test from soar\\x03",
-        "create_time": 1713464714559,
-        "id": 214,
-        "username": "API_token: ms qradar integration"
-    },
-    "raw": null,
-    "inputs": {
-        "qradar_siem_note": "test from soar",
-        "qradar_id": 164,
-        "qradar_label": "9.46.246.248"
-    },
-    "metrics": {
-        "version": "1.0",
-        "package": "fn-qradar-integration",
-        "package_version": "2.4.0",
-        "host": "localhost",
-        "execution_time_ms": 463,
-        "timestamp": "2024-04-18 14:25:14"
-    }
+  "content": {
+    "collection_id": 44,
+    "creation_time": 1712668910618,
+    "element_type": "ALN",
+    "name": "test",
+    "namespace": "SHARED",
+    "number_of_elements": 12,
+    "timeout_type": "FIRST_SEEN"
+  },
+  "inputs": {
+    "qradar_domain_id": "SHARED",
+    "qradar_namespace": "SHARED",
+    "qradar_reference_set_name": "test",
+    "qradar_reference_set_values": "thing3, thing6"
+  },
+  "metrics": {
+    "execution_time_ms": 31368,
+    "host": "local",
+    "package": "fn-qradar-integration",
+    "package_version": "2.5.0",
+    "timestamp": "2025-04-25 11:00:01",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2.0
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
-inputs.qradar_id = playbook.inputs.qradar_id
-inputs.qradar_siem_note  = playbook.inputs.qradar_siem_note
-inputs.qradar_label = playbook.inputs.qradar_server
+if getattr(playbook.inputs, "qradar_siem_namespace", None):
+  inputs.qradar_namespace = getattr(playbook.inputs, "qradar_siem_namespace", None)
+if getattr(playbook.inputs, "qradar_siem_reference_set_values", None):
+  inputs.qradar_reference_set_values = getattr(playbook.inputs, "qradar_siem_reference_set_values", None)
+if getattr(playbook.inputs, "qradar_server", None):
+  inputs.qradar_label = getattr(playbook.inputs, "qradar_server", None)
+if getattr(playbook.inputs, "qradar_siem_reference_set_name", None):
+  inputs.qradar_reference_set_name = getattr(playbook.inputs, "qradar_siem_reference_set_name", None)
+if getattr(playbook.inputs, "qradar_siem_domain_id", None):
+  inputs.qradar_domain_id = getattr(playbook.inputs, "qradar_siem_domain_id", None)
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
-results = playbook.functions.results.create_note_results
-if results.success:
-  incident.addNote(f"QRadar note created for {playbook.inputs.qradar_id} '{playbook.inputs.qradar_siem_note}'")
+results = playbook.functions.results.qradar_siem_bulk_add_ref_set_items_results
+if results.get("success", None):
+  if results.get('content', {}).get('http_response', {}):
+    incident.addNote(f"QRadar SIEM: Bulk Add Reference Set Items returned:\n{results.get('content', {}).get('http_response', {})}")
+  else:
+    incident.addNote(f"QRadar SIEM: Bulk Add Reference Set Items\nItems: {playbook.inputs.qradar_siem_reference_set_values} added to reference set: {playbook.inputs.qradar_siem_reference_set_name} on QRadar server: {playbook.inputs.qradar_server}")
 else:
-  incident.addNote(f"QRadar note failed for: {playbook.inputs.qradar_id} Reason: {results.reason}")
+  incident.addNote(f"QRadar SIEM: Bulk Add Reference Set Items failed with reason:\n{results.get('reason', None)}")
 ```
 
 </p>
 </details>
 
 ---
-## Function - QRadar SIEM: Delete Reference Set Item 
+## Function - QRadar SIEM: Create Offense Note
+Add a note to the QRadar offense.
+
+ ![screenshot: fn-qradar-siem-create-offense-note ](./doc/screenshots/fn-qradar-siem-create-offense-note.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `qradar_id` | `number` | Yes | `-` | - |
+| `qradar_label` | `text` | No | `-` | Enter name of QRadar server to use from the app.config |
+| `qradar_siem_note` | `text` | Yes | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "create_time": 1713464714559,
+    "id": 214,
+    "note_text": "test from soar\\x03",
+    "username": "API_token: ms qradar integration"
+  },
+  "inputs": {
+    "qradar_id": 164,
+    "qradar_label": "9.46.246.248",
+    "qradar_siem_note": "test from soar"
+  },
+  "metrics": {
+    "execution_time_ms": 463,
+    "host": "localhost",
+    "package": "fn-qradar-integration",
+    "package_version": "2.4.0",
+    "timestamp": "2024-04-18 14:25:14",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+inputs.qradar_id = playbook.inputs.qradar_id
+inputs.qradar_siem_note = playbook.inputs.qradar_siem_note
+inputs.qradar_label = playbook.inputs.qradar_label
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+results = playbook.functions.results.create_note_results
+if results.success:
+  incident.addNote(f"QRadar note created for offense {playbook.inputs.qradar_id}: '{playbook.inputs.qradar_siem_note}'")
+else:
+  incident.addNote(f"QRadar note failed for offense: {playbook.inputs.qradar_id} Reason: {results.reason}")
+```
+
+</p>
+</details>
+
+---
+## Function - QRadar SIEM: Delete Reference Set Item
 Delete an item from a given QRadar reference set
 
- ![screenshot: fn-qradar-delete-reference-set-item ](./doc/screenshots/fn-qradar-delete-reference-set-item.png) 
+ ![screenshot: fn-qradar-siem-delete-reference-set-item ](./doc/screenshots/fn-qradar-siem-delete-reference-set-item.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -408,39 +499,33 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
-inputs.qradar_reference_set_name = playbook.inputs.qradar_reference_set_name
-inputs.qradar_label = playbook.inputs.qradar_server
+inputs.qradar_reference_set_name = getattr(playbook.inputs, "qradar_reference_set_name")
+inputs.qradar_label = getattr(playbook.inputs, "qradar_server")
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
-results = playbook.functions.results.qradar_add_reference_set_item_result
-
-if results.get("status_code") == 200:
-  incident.addNote(u"Successfully added {} to {} on QRadar Server: {}".format(artifact.value, playbook.inputs.qradar_reference_set_name, results.inputs["qradar_label"]))
-else:
-  incident.addNote(u"Failed to add {} to {} on QRadar server: {}. Status code: {}, message: {}".format(artifact.value, playbook.inputs.qradar_reference_set_name, results.inputs["qradar_label"], results.get("status_code"), results['message']))
-  
+None
 ```
 
 </p>
 </details>
 
 ---
-## Function - QRadar SIEM: Find Reference Set Item 
+## Function - QRadar SIEM: Find Reference Set Item
 Find an item in a given QRadar reference set
 
- ![screenshot: fn-qradar-find-reference-set-item ](./doc/screenshots/fn-qradar-find-reference-set-item.png) 
+ ![screenshot: fn-qradar-siem-find-reference-set-item ](./doc/screenshots/fn-qradar-siem-find-reference-set-item.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -492,37 +577,38 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
 inputs.qradar_reference_set_name = playbook.inputs.qradar_reference_set_name
-inputs.qradar_label = playbook.inputs.qradar_server
+inputs.qradar_label = getattr(playbook.inputs, "qradar_server")
+
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
 results = playbook.functions.results.qradar_find_reference_set_item_result
-if results.found == "True":
-  incident.addNote(u"Found IP: {} in list: {} on QRadar server: {}.".format(artifact.value, results.inputs["qradar_reference_set_name"], results.inputs["qradar_label"]))
+if results.get("found") == "True":
+  incident.addNote("Found {} in list: {} on QRadar server: {}.".format(artifact.value, results.get("inputs", {}).get("qradar_reference_set_name"), results.get("inputs", {}).get("qradar_label")))
 else:
-  incident.addNote("IP:{} not found in list: {} on QRadar server: {}.".format(artifact.value, results.inputs["qradar_reference_set_name"], results.inputs["qradar_label"]))
+  incident.addNote("{} not found in list: {} on QRadar server: {}.".format(artifact.value, results.get("inputs", {}).get("qradar_reference_set_name"), results.get("inputs", {}).get("qradar_label")))
 ```
 
 </p>
 </details>
 
 ---
-## Function - QRadar SIEM: Find Reference Sets 
+## Function - QRadar SIEM: Find Reference Sets
 Find reference sets that contain a given item value, together with information about this item in those reference sets. Information includes whether this item is added to the reference set manually or by a rule.
 
- ![screenshot: fn-qradar-find-reference-sets ](./doc/screenshots/fn-qradar-find-reference-sets.png) 
+ ![screenshot: fn-qradar-siem-find-reference-sets ](./doc/screenshots/fn-qradar-siem-find-reference-sets.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -572,45 +658,174 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
 inputs.qradar_reference_set_item_value = artifact.value
-inputs.qradar_label = playbook.inputs.qradar_server
+inputs.qradar_label = getattr(playbook.inputs, "qradar_server", None)
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
 results = playbook.functions.results.qradar_find_reference_sets_result
 from datetime import datetime
 current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
-if results.reference_items:
-  for item in results.reference_items:
-    item_row = incident.addRow("qradar_reference_set")
-    item_row["query_time"] = current_time
-    item_row["qradar_server"] = results.inputs["qradar_label"]
-    item_row["reference_set"] = item["name"]
-    item_row["item_value"] = item["data"][0]["value"]
-    item_row["source"] = item["data"][0]["source"]
-  incident.addNote("{} Reference sets found".format(len(results.reference_items)))
+if results.get("reference_items"):
+  for item in results.get("reference_items"):
+    for ref_set_data in item.get("data"):
+      if artifact.value == ref_set_data.get("value"):
+        item_row = incident.addRow("qradar_reference_set")
+        item_row["query_time"] = current_time
+        item_row["qradar_server"] = results.get("inputs", {}).get("qradar_label")
+        item_row["reference_set"] = item.get("name")
+        item_row["item_value"] = ref_set_data.get("value")
+        item_row["source"] = ref_set_data.get("source")
+        item_row["qradar_siem_ref_set_namespace"] = item.get("namespace", None)
+        item_row["qradar_siem_domain_id"] = ref_set_data.get("domain_id", None)
+
+  incident.addNote("{} Reference sets found. Please refer to the QRadar SIEM Reference Sets data table".format(len(results.get("reference_items"))))
 else:
-  incident.addNote("No reference sets contain artifact: {} on QRadar server: {}".format(artifact.value, results.inputs["qradar_label"]))
+  incident.addNote("No reference sets contain artifact: {} on QRadar server: {}".format(artifact.value, results.get("inputs", {}).get("qradar_label")))
 ```
 
 </p>
 </details>
 
 ---
-## Function - QRadar SIEM: Reference Table Add Item 
+## Function - QRadar SIEM: QRadar Search
+Search QRadar for events
+
+ ![screenshot: fn-qradar-siem-qradar-search ](./doc/screenshots/fn-qradar-siem-qradar-search.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `qradar_label` | `text` | No | `-` | Enter name of QRadar server to use from the app.config |
+| `qradar_query` | `textarea` | No | `-` | A qradar query string with parameters |
+| `qradar_query_all_results` | `select` | No | `-` | Display all results from search. By default, a range for the number of returned results is set. |
+| `qradar_query_range_end` | `number` | No | `-` | Range end number |
+| `qradar_query_range_start` | `number` | No | `-` | Range start number |
+| `qradar_search_param1` | `text` | No | `-` | - |
+| `qradar_search_param2` | `text` | No | `-` | - |
+| `qradar_search_param3` | `text` | No | `-` | - |
+| `qradar_search_param4` | `text` | No | `-` | - |
+| `qradar_search_param5` | `text` | No | `-` | - |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "events": [
+    {
+      "StartTime": "2023-09-12 01:53",
+      "categoryname_category": "Information",
+      "logsourcename_logsourceid": "Experience Center: Cisco IronPort @ 192.168.0.15",
+      "protocolname_protocolid": "Reserved",
+      "rulename_creeventlist": "[\u0027Context is Local to Local\u0027, \u0027EC: AWS Cloud - Detected An Email with An Attachment From a Spam Sender\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027BB:DeviceDefinition: Mail\u0027, \u0027BB:DeviceDefinition: Proxy\u0027, \u0027Load Basic Building Blocks\u0027]"
+    },
+    {
+      "StartTime": "2023-09-12 01:53",
+      "categoryname_category": "Suspicious Activity",
+      "logsourcename_logsourceid": "Custom Rule Engine-8 :: hychuang-4",
+      "protocolname_protocolid": "Reserved",
+      "rulename_creeventlist": "[\u0027EC: AWS Cloud - Detected An Email with An Attachment From a Spam Sender\u0027, \u0027BB:CategoryDefinition: Suspicious Event Categories\u0027, \u0027BB:CategoryDefinition: Suspicious Events\u0027, \u0027Context is Local to Local\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027]"
+    },
+    {
+      "StartTime": "2023-09-12 01:53",
+      "categoryname_category": "User Login Attempt",
+      "logsourcename_logsourceid": "Experience Center: AWS Syslog @ 192.168.0.17",
+      "protocolname_protocolid": "Reserved",
+      "rulename_creeventlist": "[\u0027EC: AWS Cloud - Detected A Successful Login From Different Geographies For the Same Username\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Context is Remote to Local\u0027]"
+    }
+  ],
+  "inputs": {
+    "qradar_label": "1.1.1.1",
+    "qradar_query": "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% Days",
+    "qradar_query_all_results": true,
+    "qradar_search_param1": "DATEFORMAT(starttime, \u0027YYYY-MM-dd HH:mm\u0027) as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)",
+    "qradar_search_param2": "7",
+    "qradar_search_param3": "7",
+    "qradar_search_param4": "",
+    "qradar_search_param5": ""
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+inputs.qradar_label = getattr(playbook.inputs, "qradar_server")
+
+
+if getattr(playbook.inputs, "qradar_query_all_results"):
+  inputs.qradar_query_all_results = getattr(playbook.inputs, "qradar_query_all_results")
+
+inputs.qradar_query = "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% Days"
+inputs.qradar_search_param1  = "DATEFORMAT(starttime, 'YYYY-MM-dd HH:mm') as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)"
+inputs.qradar_search_param2 = incident.properties.qradar_id
+if getattr(playbook.inputs, "days_to_search_back"): 
+  inputs.qradar_search_param3 = getattr(playbook.inputs, "days_to_search_back")
+else:
+  inputs.qradar_search_param3 = '7'
+inputs.qradar_query_range_start = '1'
+inputs.qradar_query_range_end = '5'
+
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+results = playbook.functions.results.qradar_search_result
+from datetime import datetime
+current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+for event in results.get("events"):
+  qradar_event = incident.addRow("qradar_offense_event")
+  qradar_event.query_time = current_time
+  qradar_event.qradar_server = results.get("inputs", {}).get("qradar_label")
+  qradar_event.start_time = event.get("StartTime")
+  qradar_event.category = event.get("categoryname_category")
+  qradar_event.log_source = event.get("logsourcename_logsourceid")
+  qradar_event.protocol = event.get("protocolname_protocolid")
+  qradar_event.rule = event.get("rulename_creeventlist")
+if getattr(playbook.inputs, "days_to_search_back"):
+  incident.addNote("QRadar SIEM: Get QRadar Offense Events: {} events have successfully been queried for the last {} days".format(len(results.get("events")), getattr(playbook.inputs,"days_to_search_back")))
+else:
+  incident.addNote("QRadar SIEM: Get QRadar Offense Events: {} events have successfully been queried for the last 7 days".format(len(results.get("events"))))
+
+
+```
+
+</p>
+</details>
+
+---
+## Function - QRadar SIEM: Reference Table Add Item
 Add an item to a given QRadar reference table
 
- ![screenshot: fn-qradar-reference-table-add-item ](./doc/screenshots/fn-qradar-reference-table-add-item.png) 
+ ![screenshot: fn-qradar-siem-reference-table-add-item ](./doc/screenshots/fn-qradar-siem-reference-table-add-item.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -674,21 +889,21 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
 inputs.qradar_reference_table_item_value = artifact.value
-inputs.qradar_reference_table_item_inner_key = playbook.inputs.qradar_ref_table_inner_key
-inputs.qradar_reference_table_item_outer_key = playbook.inputs.qradar_ref_table_outer_key
-inputs.qradar_reference_table_name = playbook.inputs.qradar_reference_table_name
-inputs.qradar_label = playbook.inputs.qradar_server
+inputs.qradar_reference_table_item_inner_key = getattr(playbook.inputs, "qradar_ref_table_inner_key")
+inputs.qradar_reference_table_item_outer_key = getattr(playbook.inputs, "qradar_ref_table_outer_key")
+inputs.qradar_reference_table_name = getattr(playbook.inputs, "qradar_reference_table_name")
+inputs.qradar_label = getattr(playbook.inputs, "qradar_server")
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
@@ -697,25 +912,25 @@ note = u"""Outer key: {}
 Inner key: {}
 Entry: {}
 Reference table: {}
-QRadar Server: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
-                              results.inputs.qradar_reference_table_item_inner_key,
-                              results.inputs.qradar_reference_table_item_value, 
-                              results.inputs.qradar_reference_table_name,
-                              results.inputs["qradar_label"])
-if results.success:
+QRadar Server: {}""".format(results.get("inputs", {}).get("qradar_reference_table_item_outer_key"),
+                              results.get("inputs", {}).get("qradar_reference_table_item_inner_key"),
+                              results.get("inputs", {}).get("qradar_reference_table_item_value"), 
+                              results.get("inputs", {}).get("qradar_reference_table_name"),
+                              results.get("inputs", {}).get("qradar_label"))
+if results.get("success"):
     incident.addNote(u"Successful add\n{}".format(note))
 else:
-    incident.addNote(u"Failure to add item: {}\n{}".format(results['reason'], note))
+    incident.addNote(u"Failure to add item: {}\n{}".format(results.get("reason"), note))
 ```
 
 </p>
 </details>
 
 ---
-## Function - QRadar SIEM: Reference Table Delete Item 
+## Function - QRadar SIEM: Reference Table Delete Item
 Delete an item from a given QRadar reference table
 
- ![screenshot: fn-qradar-reference-table-delete-item ](./doc/screenshots/fn-qradar-reference-table-delete-item.png) 
+ ![screenshot: fn-qradar-siem-reference-table-delete-item ](./doc/screenshots/fn-qradar-siem-reference-table-delete-item.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -775,7 +990,7 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
@@ -789,7 +1004,7 @@ inputs.qradar_label = row["qradar_server"]
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
@@ -798,16 +1013,16 @@ note = u"""Outer key: {}
 Inner key: {}
 Entry: {}
 Reference table: {}
-QRadar Server: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
-                              results.inputs.qradar_reference_table_item_inner_key,
-                              results.inputs.qradar_reference_table_item_value, 
-                              results.inputs.qradar_reference_table_name,
+QRadar Server: {}""".format(results.get("inputs", {}).get("qradar_reference_table_item_outer_key"),
+                              results.get("inputs", {}).get("qradar_reference_table_item_inner_key"),
+                              results.get("inputs", {}).get("qradar_reference_table_item_value"), 
+                              results.get("inputs", {}).get("qradar_reference_table_name"),
                               row["qradar_server"])
-if results.success:
+if results.get("success"):
     incident.addNote(u"Successful delete\n{}".format(note))
     row['status'] = "deleted"
 else:
-    incident.addNote(u"Failure to delete item: {}\n{}".format(results.reason, note))
+    incident.addNote(u"Failure to delete item: {}\n{}".format(results.get("reason"), note))
 ```
 
 </p>
@@ -817,13 +1032,17 @@ else:
 ## Function - QRadar SIEM: Reference Table Get All Tables
 Get all reference tables from a QRadar instance
 
- ![screenshot: fn-qradar-reference-table-get-all-tables ](./doc/screenshots/fn-qradar-reference-table-get-all-tables.png) 
+ ![screenshot: fn-qradar-siem-reference-table-get-all-tables ](./doc/screenshots/fn-qradar-siem-reference-table-get-all-tables.png)
+
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `qradar_label` | `text` | No | `-` | Enter name of QRadar server to use from the app.config |
+| `qradar_query_range_end` | `number` | No | `-` | Range end number |
+| `qradar_query_range_start` | `number` | No | `-` | Range start number |
+| `qradar_reference_table_return_fields` | `multiselect` | No | `-` | The fields that will be returned. |
 
 </p>
 </details>
@@ -891,48 +1110,53 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
-inputs.qradar_label = playbook.inputs.qradar_server
+inputs.qradar_label = getattr(playbook.inputs, "qradar_server")
+if getattr(playbook.inputs, "qradar_ref_table_range_limit_start", None) and if getattr(playbook.inputs, "qradar_ref_table_range_limit_end", None):
+  inputs.qradar_query_range_start = playbook.inputs.qradar_ref_table_range_limit_start
+  inputs.qradar_query_range_end = playbook.inputs.qradar_ref_table_range_limit_end
+if getattr(playbook.inputs, "qradar_ref_table_fields_to_be_returned", None):
+  inputs.qradar_reference_table_return_fields = playbook.inputs.qradar_ref_table_fields_to_be_returned
 ```
 
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
 results = playbook.functions.results.qradar_reference_table_get_all_tables_result
 from datetime import datetime
 current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
-if results.success:
-  if results.content:
-    for item in results.content:
+if results.get("success"):
+  if results.get("content"):
+    for item in results.get("content"):
       item_row = incident.addRow("qradar_reference_table")
       item_row["query_time"] = current_time
-      item_row["qradar_server"] = results.inputs["qradar_label"]
-      item_row["reference_table"] = item["name"]
-      item_row["collection_id"] = item["collection_id"]
-      item_row["number_of_elements"] = item["number_of_elements"]
-      item_row["namespace"] = item["namespace"]
-    incident.addNote("{} Reference tables have successfully been queried".format(len(results.content)))
+      item_row["qradar_server"] = results.get("inputs", {}).get("qradar_label")
+      item_row["reference_table"] = item.get("name")
+      item_row["collection_id"] = item.get("collection_id")
+      item_row["number_of_elements"] = item.get("number_of_elements")
+      item_row["namespace"] = item.get("namespace")
+    incident.addNote("QRadar SIEM: Get all Reference Tables: {} Reference tables have successfully been queried".format(len(results.get("content"))))
   else:
     incident.addNote("No reference tables found")
 else:
-  incident.addNote("An error occurred getting the reference tables: {} from QRadar server: {}".format(results.reason, rule.properties.qradar_label))
+  incident.addNote("An error occurred getting the reference tables: {} from QRadar server: {}".format(results.get("reason"), getattr(playbook.inputs, "qradar_label")))
 ```
 
 </p>
 </details>
 
 ---
-## Function - QRadar SIEM: Reference Table Get Table Data 
+## Function - QRadar SIEM: Reference Table Get Table Data
 Get the elements in the reference table
 
- ![screenshot: fn-qradar-reference-table-get-table-data ](./doc/screenshots/fn-qradar-reference-table-get-table-data.png)
+ ![screenshot: fn-qradar-siem-reference-table-get-table-data ](./doc/screenshots/fn-qradar-siem-reference-table-get-table-data.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -998,7 +1222,7 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
@@ -1009,29 +1233,29 @@ inputs.qradar_label = row["qradar_server"]
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
 results = playbook.functions.results.qradar_reference_table_get_table_data_result
 from datetime import datetime
 current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S") 
-if results.success:
-  for outer_key, item in results.content.get('data',[]).items():
+if results.get("success"):
+  for outer_key, item in results.get("content", {}).get('data',[]).items():
     for inner_key, inner_item in item.items():
       table_row = incident.addRow('qradar_reference_table_queried_rows')
       table_row['query_time'] = current_time
       table_row['qradar_server'] = row["qradar_server"]
-      table_row['table'] = results.inputs.qradar_reference_table_name
+      table_row['table'] = results.get("inputs", {}).get("qradar_reference_table_name")
       table_row['outer_key'] = outer_key
       table_row['inner_key'] = inner_key
       
-      table_row['value'] = inner_item['value']
+      table_row['value'] = inner_item.get('value')
       table_row['status'] = 'active'
-  num_data_gathered = len(results.content.get('data',[]).items()) * len(item.items())
+  num_data_gathered = len(results.get("content").get('data',[]).items()) * len(item.items())
   incident.addNote("{} Reference table data have been gathered".format(num_data_gathered))
 else:
-  incident.addNote("An error occurred getting the reference table data: {}".format(results.reason))
+  incident.addNote("An error occurred getting the reference table data: {}".format(results.get("reason")))
 ```
 
 </p>
@@ -1041,7 +1265,7 @@ else:
 ## Function - QRadar SIEM: Reference Table Update Item
 Update an item in a given QRadar reference table
 
- ![screenshot: fn-qradar-reference-table-update-item ](./doc/screenshots/fn-qradar-reference-table-update-item.png) 
+ ![screenshot: fn-qradar-siem-reference-table-update-item ](./doc/screenshots/fn-qradar-siem-reference-table-update-item.png)
 
 <details><summary>Inputs:</summary>
 <p>
@@ -1101,7 +1325,7 @@ results = {
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
@@ -1111,7 +1335,7 @@ inputs.qradar_reference_table_item_outer_key = row.outer_key
 inputs.qradar_reference_table_item_inner_key = row.inner_key
 
 if playbook.inputs.qradar_ref_table_update:
-  inputs.qradar_reference_table_item_value = playbook.inputs.qradar_ref_table_update
+  inputs.qradar_reference_table_item_value = getattr(playbook.inputs, "qradar_ref_table_update")
 else:
   inputs.qradar_reference_table_item_value = "This is an example"
 ```
@@ -1119,7 +1343,7 @@ else:
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
@@ -1128,43 +1352,36 @@ note = u"""Outer key: {}
 Inner key: {}
 Entry: {}
 Reference table: {}
-QRadar Server: {}""".format(results.inputs.qradar_reference_table_item_outer_key,
-                              results.inputs.qradar_reference_table_item_inner_key,
-                              results.inputs.qradar_reference_table_item_value, 
-                              results.inputs.qradar_reference_table_name,
+QRadar Server: {}""".format(results.get("inputs", {}).get("qradar_reference_table_item_outer_key"),
+                              results.get("inputs", {}).get("qradar_reference_table_item_inner_key"),
+                              results.get("inputs", {}).get("qradar_reference_table_item_value"), 
+                              results.get("inputs", {}).get("qradar_reference_table_name"),
                               row["qradar_server"])
-if results.success:
+if results.get("success"):
     incident.addNote(u"Successful updated\n{}".format(note))
     row['status'] = 'updated'
-    row['value'] = results.inputs.qradar_reference_table_item_value
+    row['value'] = results.get("inputs", {}).get("qradar_reference_table_item_value")
 else:
-    incident.addNote(u"Failure to updated item: {}\n{}".format(results['reason'], note))
+    incident.addNote(u"Failure to updated item: {}\n{}".format(results.get("reason"), note))
 ```
 
 </p>
 </details>
 
 ---
-## Function - QRadar SIEM: QRadar Search
-Search QRadar for events
+## Function - QRadar SIEM: Update Offense
+Use for making updates to a QRadar offense, including closing an offense
 
- ![screenshot: fn-qradar-search ](./doc/screenshots/fn-qradar-search.png)
+ ![screenshot: fn-qradar-siem-update-offense ](./doc/screenshots/fn-qradar-siem-update-offense.png)
 
 <details><summary>Inputs:</summary>
 <p>
 
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
+| `qradar_id` | `number` | Yes | `-` | - |
 | `qradar_label` | `text` | No | `-` | Enter name of QRadar server to use from the app.config |
-| `qradar_query` | `textarea` | No | `-` | A qradar query string with parameters |
-| `qradar_query_all_results` | `select` | No | `-` | Display all results from search. By default, a range for the number of returned results is set. |
-| `qradar_query_range_end` | `number` | No | `-` | - |
-| `qradar_query_range_start` | `number` | No | `-` | - |
-| `qradar_search_param1` | `text` | No | `-` | - |
-| `qradar_search_param2` | `text` | No | `-` | - |
-| `qradar_search_param3` | `text` | No | `-` | - |
-| `qradar_search_param4` | `text` | No | `-` | - |
-| `qradar_search_param5` | `text` | No | `-` | - |
+| `qradar_update_json` | `text` | Yes | `{ "status": "CLOSED", "closing_reason_id":1 }` | json encoding of fields to update |
 
 </p>
 </details>
@@ -1176,212 +1393,88 @@ Search QRadar for events
 
 ```python
 results = {
-  "events": [
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Information",
-      "logsourcename_logsourceid": "Experience Center: Cisco IronPort @ 192.168.0.15",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027Context is Local to Local\u0027, \u0027EC: AWS Cloud - Detected An Email with An Attachment From a Spam Sender\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027BB:DeviceDefinition: Mail\u0027, \u0027BB:DeviceDefinition: Proxy\u0027, \u0027Load Basic Building Blocks\u0027]"
-    },
-    {
-      "StartTime": "2023-09-12 01:53",
-      "categoryname_category": "Suspicious Activity",
-      "logsourcename_logsourceid": "Custom Rule Engine-8 :: hychuang-4",
-      "protocolname_protocolid": "Reserved",
-      "rulename_creeventlist": "[\u0027EC: AWS Cloud - Detected An Email with An Attachment From a Spam Sender\u0027, \u0027BB:CategoryDefinition: Suspicious Event Categories\u0027, \u0027BB:CategoryDefinition: Suspicious Events\u0027, \u0027Context is Local to Local\u0027, \u0027BB:CategoryDefinition: Medium Magnitude Events\u0027, \u0027BB:CategoryDefinition: High Magnitude Events\u0027, \u0027Source Asset Weight is Low\u0027, \u0027ECBB:CategoryDefinition: Destination IP is a Third Country/Region\u0027, \u0027Destination Asset Weight is Low\u0027, \u0027Load Basic Building Blocks\u0027]"
-    }
-   
-   
-  ],
+  "content": {
+    "assigned_to": null,
+    "categories": [
+      "User Login Success"
+    ],
+    "category_count": 1,
+    "close_time": 1713465658000,
+    "closing_reason_id": 1,
+    "closing_user": "API_token: ms qradar integration",
+    "credibility": 2,
+    "description": "Login\n",
+    "destination_networks": [
+      "other"
+    ],
+    "device_count": 1,
+    "domain_id": 3,
+    "event_count": 1,
+    "first_persisted_time": 1711492873000,
+    "flow_count": 0,
+    "follow_up": false,
+    "id": 164,
+    "inactive": true,
+    "last_persisted_time": 1713465658000,
+    "last_updated_time": 1711492873201,
+    "local_destination_address_ids": [],
+    "local_destination_count": 0,
+    "log_sources": [
+      {
+        "id": 962,
+        "name": "F5FirePass @ f5networks.firepass.test.com",
+        "type_id": 232,
+        "type_name": "F5FirePass"
+      }
+    ],
+    "magnitude": 1,
+    "offense_source": "31.107.167.255",
+    "offense_type": 0,
+    "policy_category_count": 0,
+    "protected": false,
+    "relevance": 0,
+    "remote_destination_count": 1,
+    "rules": [
+      {
+        "id": 100462,
+        "type": "CRE_RULE"
+      }
+    ],
+    "security_category_count": 1,
+    "severity": 1,
+    "source_address_ids": [
+      99
+    ],
+    "source_count": 1,
+    "source_network": "other",
+    "start_time": 1711492873201,
+    "status": "CLOSED",
+    "username_count": 1
+  },
   "inputs": {
-    "qradar_label": "1.1.1.1",
-    "qradar_query": "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% Days",
-    "qradar_query_all_results": true,
-    "qradar_search_param1": "DATEFORMAT(starttime, \u0027YYYY-MM-dd HH:mm\u0027) as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)",
-    "qradar_search_param2": "7",
-    "qradar_search_param3": "7",
-    "qradar_search_param4": "",
-    "qradar_search_param5": ""
-  }
+    "qradar_id": 164,
+    "qradar_label": "11.22.33.44",
+    "qradar_update_json": "{\"status\": \"CLOSED\", \"closing_reason_id\": 1}"
+  },
+  "metrics": {
+    "execution_time_ms": 499,
+    "host": "localhost",
+    "package": "fn-qradar-integration",
+    "package_version": "2.4.0",
+    "timestamp": "2024-04-18 14:40:58",
+    "version": "1.0"
+  },
+  "raw": null,
+  "reason": null,
+  "success": true,
+  "version": 2
 }
 ```
 
 </p>
 </details>
 
-<details><summary>Example Pre-Process Script:</summary>
-<p>
-
-```python
-inputs.qradar_label = playbook.inputs.qradar_server
-
-
-if playbook.inputs.qradar_query_all_results:
-  inputs.qradar_query_all_results = playbook.inputs.qradar_query_all_results
-
-  
-inputs.qradar_query = "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% Days"
-inputs.qradar_search_param1  = "DATEFORMAT(starttime, 'YYYY-MM-dd HH:mm') as StartTime, CATEGORYNAME(category), LOGSOURCENAME(logsourceid), PROTOCOLNAME(protocolid), RULENAME(creeventlist)"
-inputs.qradar_search_param2 = incident.properties.qradar_id
-if playbook.inputs.days_to_search_back: 
-  inputs.qradar_search_param3 = playbook.inputs.days_to_search_back
-else:
-  inputs.qradar_search_param3 = '7'
-inputs.qradar_query_range_start = '1'
-inputs.qradar_query_range_end = '5'
-
-```
-
-</p>
-</details>
-
-<details><summary>Example Post-Process Script:</summary>
-<p>
-
-```python
-results = playbook.functions.results.qradar_search_result
-from datetime import datetime
-current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-for event in results["events"]:
-  qradar_event = incident.addRow("qradar_offense_event")
-  qradar_event.query_time = current_time
-  qradar_event.qradar_server = results.inputs.get("qradar_label")
-  qradar_event.start_time = event["StartTime"]
-  qradar_event.category = event["categoryname_category"]
-  qradar_event.log_source = event["logsourcename_logsourceid"]
-  qradar_event.protocol = event["protocolname_protocolid"]
-  qradar_event.rule = event["rulename_creeventlist"]
-incident.addNote("{} offenses have successfully been queried".format(len(results["events"])))
-
-
-```
-
-</p>
-</details>
-
----
-## Function - QRadar SIEM: Update Offense 
-Update information about an offense.
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `qradar_label` | `text` | No | `-` | Enter name of QRadar server to use from the app.config |
-| `qradar_id` | `number` | yes | `-` | QRadar Id |
-| `qradar_update_json` | `text` | yes | `{"severity": 50, "categories": ["Virtual Machine Creation Attempt", "Read Activity Attempted"]}` | JSON formatted fields to update an app. Use double quotes. |
-
-The following fields are available (but not limited to) to change:
-* assigned_to
-* categories
-* closing_reason_id
-* credibility
-* description
-* follow_up
-* inactive
-* magnitude
-* offense_type
-* protected
-* relevance
-* severity
-* status
-
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
-
-```python
-results = {
-    "version": 2,
-    "success": true,
-    "reason": null,
-    "content": {
-        "last_persisted_time": 1713465658000,
-        "username_count": 1,
-        "description": "Login\n",
-        "rules": [
-            {
-                "id": 100462,
-                "type": "CRE_RULE"
-            }
-        ],
-        "event_count": 1,
-        "flow_count": 0,
-        "assigned_to": null,
-        "security_category_count": 1,
-        "follow_up": false,
-        "source_address_ids": [
-            99
-        ],
-        "source_count": 1,
-        "inactive": true,
-        "protected": false,
-        "closing_user": "API_token: ms qradar integration",
-        "destination_networks": [
-            "other"
-        ],
-        "source_network": "other",
-        "category_count": 1,
-        "close_time": 1713465658000,
-        "remote_destination_count": 1,
-        "start_time": 1711492873201,
-        "magnitude": 1,
-        "last_updated_time": 1711492873201,
-        "credibility": 2,
-        "id": 164,
-        "categories": [
-            "User Login Success"
-        ],
-        "severity": 1,
-        "policy_category_count": 0,
-        "log_sources": [
-            {
-                "type_name": "F5FirePass",
-                "type_id": 232,
-                "name": "F5FirePass @ f5networks.firepass.test.com",
-                "id": 962
-            }
-        ],
-        "closing_reason_id": 1,
-        "device_count": 1,
-        "first_persisted_time": 1711492873000,
-        "offense_type": 0,
-        "relevance": 0,
-        "domain_id": 3,
-        "offense_source": "31.107.167.255",
-        "local_destination_address_ids": [],
-        "local_destination_count": 0,
-        "status": "CLOSED"
-    },
-    "raw": null,
-    "inputs": {
-        "qradar_update_json": "{\"status\": \"CLOSED\", \"closing_reason_id\": 1}",
-        "qradar_id": 164,
-        "qradar_label": "11.22.33.44"
-    },
-    "metrics": {
-        "version": "1.0",
-        "package": "fn-qradar-integration",
-        "package_version": "2.4.0",
-        "host": "localhost",
-        "execution_time_ms": 499,
-        "timestamp": "2024-04-18 14:40:58"
-    }
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 
 ```python
@@ -1411,7 +1504,7 @@ inputs.qradar_update_json = json.dumps({
 </p>
 </details>
 
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 
 ```python
@@ -1424,11 +1517,44 @@ else:
 
 </p>
 </details>
+
 ---
+
+
+## Playbooks
+| Playbook Name | Description | Activation Type | Object | Status | Condition | 
+| ------------- | ----------- | --------------- | ------ | ------ | --------- | 
+| QRadar SIEM: Find in Reference Set - Example (PB) | Look for an item in QRadar reference set and add a note to the SOAR Incident | Manual | artifact | `enabled` | `-` | 
+| QRadar SIEM: Get All Reference Sets -Example (PB) | Get all the QRadar reference sets that contain the given artifact | Manual | artifact | `enabled` | `-` | 
+| QRadar SIEM: Add Item to this Reference Table - Example (PB) | Add a reference table item based on an existing named reference table | Manual | qradar_reference_table | `enabled` | `-` | 
+| QRadar SIEM: Add to Reference Set - Example (PB) | Add an IP address artifact to QRadar reference set | Manual | artifact | `enabled` | `artifact.type equals IP Address` | 
+| QRadar SIEM: Add to Reference Table - Example (PB) | Add a reference table item based on an artifact value | Manual | artifact | `enabled` | `-` | 
+| QRadar SIEM: Delete this Reference Table Item - Example (PB) | An example playbook that deletes a Reference Table Queried Row | Manual | qradar_reference_table_queried_rows | `enabled` | `qradar_reference_table_queried_rows.status not_equals deleted` | 
+| QRadar SIEM: Gather Reference Table Data - Example (PB) | Make a query on a reference table and return its results into another datatable | Manual | qradar_reference_table | `enabled` | `-` | 
+| QRadar SIEM: Get all Reference Tables - Example (PB)  | An example playbook that returns a list of all Reference Tables on the QRadar instance. | Manual | incident | `enabled` | `-` | 
+| QRadar SIEM: Move from Sample Blocked to Sample Suspected - Example (PB) | Remove an item from QRadar reference set and add it to reference set. Add a note to the Incident after completing each step. | Manual | artifact | `enabled` | `artifact.type equals IP Address` | 
+| QRadar SIEM: Bulk Add Reference Set Items - Example (PB) | Add or update data in a reference set. | Manual | incident | `enabled` | `-` | 
+| QRadar SIEM: Create Note | Create a note for an offense | Manual | incident | `enabled` | `-` | 
+| QRadar SIEM: Update Offense (close offense) | Example of closing an offense using the Update Offense function | Manual | incident | `enabled` | `-` | 
+| QRadar SIEM: Update this Reference Table Item - Example (PB) | Update an existing reference table item. If it does not exist, it will be added | Manual | qradar_reference_table_queried_rows | `enabled` | `qradar_reference_table_queried_rows.status not_equals deleted` | 
+| QRadar SIEM: Get QRadar Offense Events - Example (PB) | Use the qradar_id field of the incident to search qradar events, and update the data table, qradar_offense_event, with the first 5 results. | Manual | incident | `enabled` | `incident.properties.qradar_id has_a_value` | 
+
+---
+
+## Custom Layouts
+<!--
+  Use this section to provide guidance on where the user should add any custom fields and data tables.
+  You may wish to recommend a new incident tab.
+  You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
+-->
+* Import the Data Tables and Custom Fields like the screenshot below:
+
+  ![screenshot: custom_layouts](./doc/screenshots/custom_layouts.png)
+
 
 ## Data Table - QRadar SIEM Offense Events
 
- ![screenshot: dt-qradar-offense-events](./doc/screenshots/dt-qradar-offense-events.png) 
+ ![screenshot: dt-qradar-siem-offense-events](./doc/screenshots/dt-qradar-siem-offense-events.png)
 
 #### API Name:
 qradar_offense_event
@@ -1439,14 +1565,15 @@ qradar_offense_event
 | Category | `category` | `text` | - |
 | Log Source | `log_source` | `text` | logsourceid |
 | Protocol | `protocol` | `text` | protocolid |
-| QRadar Server | `qradar_server` | `text` | Label from app.config of the QRadar server used |
+| QRadar Server | `qradar_server` | `text` | - |
+| Query Time | `query_time` | `text` | - |
 | Rule | `rule` | `text` | creeventlist |
 | Start Time | `start_time` | `text` | starttime |
 
 ---
 ## Data Table - QRadar SIEM Reference Sets
 
- ![screenshot: dt-qradar-reference-sets](./doc/screenshots/dt-qradar-reference-sets.png) 
+ ![screenshot: dt-qradar-siem-reference-sets](./doc/screenshots/dt-qradar-siem-reference-sets.png)
 
 #### API Name:
 qradar_reference_set
@@ -1454,16 +1581,18 @@ qradar_reference_set
 #### Columns:
 | Column Name | API Access Name | Type | Tooltip |
 | ----------- | --------------- | ---- | ------- |
+| Domain ID | `qradar_siem_domain_id` | `text` | Specify the numeric domain_id tag for the data or SHARED for Admin users. |
 | Item Value | `item_value` | `text` | Item value |
-| QRadar Server | `qradar_server` | `text` | Label from app.config of the QRadar server used |
+| Namespace | `qradar_siem_ref_set_namespace` | `text` |  Either SHARED or TENANT. |
+| QRadar Server | `qradar_server` | `text` | - |
+| Query Time | `query_time` | `text` | - |
 | Reference Set | `reference_set` | `text` | Name of reference set |
 | Source | `source` | `text` | how this value is added to the reference set |
 
 ---
 ## Data Table - QRadar SIEM Reference Table Queried Rows
 
- ![screenshot: dt-qradar-reference-table-queried-rows](./doc/screenshots/dt-qradar-reference-table-queried-rows.png) 
-
+ ![screenshot: dt-qradar-siem-reference-table-queried-rows](./doc/screenshots/dt-qradar-siem-reference-table-queried-rows.png)
 
 #### API Name:
 qradar_reference_table_queried_rows
@@ -1473,7 +1602,8 @@ qradar_reference_table_queried_rows
 | ----------- | --------------- | ---- | ------- |
 | Inner Key | `inner_key` | `text` | - |
 | Outer Key | `outer_key` | `text` | - |
-| QRadar Server | `qradar_server` | `text` | Label from app.config of the QRadar server used |
+| QRadar Server | `qradar_server` | `text` | - |
+| Query Time | `query_time` | `text` | - |
 | Status | `status` | `text` | - |
 | Table | `table` | `text` | - |
 | Value | `value` | `text` | - |
@@ -1481,7 +1611,7 @@ qradar_reference_table_queried_rows
 ---
 ## Data Table - QRadar SIEM Reference Tables
 
- ![screenshot: dt-qradar-reference-tables](./doc/screenshots/dt-qradar-reference-tables.png) 
+ ![screenshot: dt-qradar-siem-reference-tables](./doc/screenshots/dt-qradar-siem-reference-tables.png)
 
 #### API Name:
 qradar_reference_table
@@ -1492,7 +1622,8 @@ qradar_reference_table
 | Collection Id | `collection_id` | `text` | - |
 | Namespace | `namespace` | `text` | - |
 | Number Of Elements | `number_of_elements` | `text` | - |
-| QRadar Server | `qradar_server` | `text` | Label from app.config of the QRadar server used |
+| QRadar Server | `qradar_server` | `text` | - |
+| Query Time | `query_time` | `text` | - |
 | Reference Table | `reference_table` | `text` | - |
 
 ---
@@ -1500,29 +1631,8 @@ qradar_reference_table
 ## Custom Fields
 | Label | API Access Name | Type | Prefix | Placeholder | Tooltip |
 | ----- | --------------- | ---- | ------ | ----------- | ------- |
+| QRadar SIEM Offense ID | `qradar_id` | `text` | `properties` | - | ID number of the QRadar offense |
 | qradar_destination | `qradar_destination` | `text` | `properties` | - | QRadar Destination to Sync With |
-| qradar_id | `qradar_id` | `text` | `properties` | - | ID number of the QRadar offense |
-
----
-
-
-
-## Playbooks
-| Playbook Name | Description | Object | Status |
-| ------------- | ----------- | ------ | ------ |
-| QRadar SIEM: Get All Reference Sets -Example (PB) | Find all the QRadar reference sets that contain the given artifact | artifact | `enabled` |
-| QRadar SIEM: Find in Reference Set - Example (PB) | Look for an item in QRadar reference set and add a note to the Incident | artifact | `enabled` |
-| QRadar SIEM: Add Item to this Reference Table - Example (PB) | Add a reference table item based on an existing named reference table | qradar_reference_table | `enabled` |
-| QRadar SIEM: Delete this Reference Table Item - Example (PB) | An example workflow that takes in a Reference Table name, an inner key, an outer key and a value to delete for the table | qradar_reference_table_queried_rows | `enabled` |
-| QRadar SIEM: Gather Reference Table Data - Example (PB) | Make a query on a reference table and return its results into another datatable | qradar_reference_table | `enabled` |
-| QRadar SIEM: Add to Reference Set -Example (PB) | Add an IP address artifact to QRadar reference set | artifact | `enabled` |
-| QRadar SIEM: Add to Reference Table -Example (PB) | Add a reference table item based on an artifact value | artifact | `enabled` |
-| QRadar SIEM: Get all Reference Tables - Example (PB)   | An example workflow that returns a list of all Reference Tables on the QRadar instance. | incident | `enabled` |
-| QRadar SIEM: Move from Sample Blocked to Sample Suspected - Example (PB) | Remove an item from QRadar reference set and add it to reference set. Add a note to the Incident after completing each step. | artifact | `enabled` |
-| QRadar SIEM: Update this Reference Table Item - Example (PB) | Update an existing reference table item. If it does not exist, it will be added | qradar_reference_table_queried_rows | `enabled` |
-| QRadar SIEM: Search QRadar for offense id -Example (PB) | Use the qradar_id field of the incident to search qradar events, and update the data table, qradar_offense_event, with the first 5 results. | incident | `enabled` |
-| QRadar SIEM: Update Offense (close offense) | Example of closing an offense | incident | `enabled` |
-| QRadar SIEM: Create Note | Create a note for an offense | incident | `enabled` | 
 
 ---
 
@@ -1542,6 +1652,6 @@ inputs.qradar_label = incident.properties.qradar_destination
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
-
+ 
 ### For Support
-This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
+This is a IBM Community provided app. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.

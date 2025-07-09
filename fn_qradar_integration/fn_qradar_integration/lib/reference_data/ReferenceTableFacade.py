@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=W0221
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 from json import dumps, JSONEncoder
 import logging
 from requests.compat import urljoin, quote
@@ -190,15 +190,23 @@ class ReferenceTableFacade(ReferenceObjectBase):
             return response.json()
 
     @staticmethod
-    def get_all_reference_tables(client):
+    def get_all_reference_tables(client, range_start: int=0, range_end: int=None, returned_fields: list=None):
         """
         Get a list of all the reference tables.
+        :param range_start: (int) The number the range limit starts on.
+        :param range_end: (int) The number the range limit ends on.
+        :param returned_fields: (list) A list of fields that will be returned.
         :return: list of reference table names
         """
+        header = {}
+        if range_start is not None and range_end: # Check if both are given
+            header = {"Range": f"items={range_start}-{range_end}"}
         url = f"{client.api_url}{REF_TABLE_ENDPOINT}"
+        if returned_fields: # Add fields to return if given
+            url += f"?fields={','.join(returned_fields)}"
         try:
-            response = client.make_call("GET", url)
-            #
+            response = client.make_call("GET", url, headers=header)
+            return response.json()
             # Sample return:
             """
             [
@@ -212,9 +220,6 @@ class ReferenceTableFacade(ReferenceObjectBase):
                 ...
             ]
             """
-
         except Exception as e:
             LOG.error(str(e))
             raise IntegrationError(f"Request to url [{url}] throws exception. Error [get_all_ref_tables call failed with exception {str(e)}]")
-        else:
-            return response.json()

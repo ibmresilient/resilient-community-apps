@@ -55,9 +55,7 @@
     "inputs": {
       "type": "object",
       "properties": {
-        "qradar_label": {
-          "type": "string"
-        },
+        "qradar_label": {},
         "qradar_reference_set_item_value": {
           "type": "string"
         }

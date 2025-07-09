@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pragma pylint: disable=unused-argument, line-too-long
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # Generated with resilient-sdk v51.0.1.0.695
 
 """AppFunction implementation"""
@@ -33,34 +33,37 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.qradar_label
             -   fn_inputs.qradar_update_json
         """
-        validate_fields(["qradar_id", "qradar_update_json"], fn_inputs)
-
-        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
-
-        qradar_label = fn_inputs.qradar_label
-        self.LOG.info("qradar_label: %s", qradar_label)
-
-        # Test to see if given label exists then return server_options for the server with that label
-        server_options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
-        qradar_verify_cert = False if server_options.get("verify_cert", "false").lower() == "false" else server_options.get("verify_cert")
-
-        self.LOG.debug("Connecting to QRadar instance @ %s", server_options.get('host'))
-
-        qradar_client = QRadarClient(host=server_options.get("host"),
-                                     username=server_options.get("username", None),
-                                     password=server_options.get("qradarpassword", None),
-                                     token=server_options.get("qradartoken", None),
-                                     cafile=qradar_verify_cert,
-                                     opts=self.opts,
-                                     function_opts=server_options)
-
-        results = reason = None
         try:
-            update_payload = json.loads(fn_inputs.qradar_update_json)
-            results = qradar_client.update_offense(fn_inputs.qradar_id, update_payload)
-        except JSONDecodeError as err:
-            reason = str(err)
+            validate_fields(["qradar_id", "qradar_update_json"], fn_inputs)
 
-        yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+            yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        yield FunctionResult(results, success=bool(results), reason=reason)
+            qradar_label = fn_inputs.qradar_label
+            self.LOG.info("qradar_label: %s", qradar_label)
+
+            # Test to see if given label exists then return server_options for the server with that label
+            server_options = QRadarServers.qradar_label_test(qradar_label, self.servers_list)
+            qradar_verify_cert = False if server_options.get("verify_cert", "false").lower() == "false" else server_options.get("verify_cert")
+
+            self.LOG.debug("Connecting to QRadar instance @ %s", server_options.get('host'))
+
+            qradar_client = QRadarClient(host=server_options.get("host"),
+                                        username=server_options.get("username", None),
+                                        password=server_options.get("qradarpassword", None),
+                                        token=server_options.get("qradartoken", None),
+                                        cafile=qradar_verify_cert,
+                                        opts=self.opts,
+                                        function_opts=server_options)
+
+            results = reason = None
+            try:
+                update_payload = json.loads(fn_inputs.qradar_update_json)
+                results = qradar_client.update_offense(fn_inputs.qradar_id, update_payload)
+            except JSONDecodeError as err:
+                reason = str(err)
+
+            yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
+
+            yield FunctionResult(results, success=bool(results), reason=reason)
+        except Exception as err:
+            yield FunctionResult({}, success=False, reason=str(err))
