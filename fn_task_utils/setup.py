@@ -20,16 +20,21 @@ def snake_to_camel(word):
 
 setup(
     name='fn_task_utils',
-    version='1.0.3',
+    display_name="Task Utilities Function for SOAR",
+    version='1.1.0',
     license='MIT',
     author='Resilient Labs',
     author_email='resil.labs@gmail.com',
     url='http://ibm.biz/resilientcommunity',
     description="Resilient Circuits Components for 'fn_task_utils'",
-    long_description="Resilient Circuits Components which can be used to manipulate existing tasks or create new ones. Provides functions which can be invoked through standalone example rules or can be integrated as part of a custom workflow",
+    long_description="""Resilient Circuits Components which can be used to manipulate existing tasks or create new ones. Provides functions which can be invoked through standalone example rules or can be integrated as part of a custom workflow<br>
+    Link:
+        <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
+        <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>
+        <ul><a target='blank' href='https://ibmresilient.github.io/resilient-community-apps/fn_soar_utils/README.html'>App Documentation</a></ul>""",
     install_requires=[
         'resilient_circuits>=51.0.0',
-        'resilient-lib>=51.0.0'
+        'resilient_lib>=51.0.0'
     ],
     packages=find_packages(),
     include_package_data=True,

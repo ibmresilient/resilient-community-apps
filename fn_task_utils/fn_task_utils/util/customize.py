@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v51.0.5.0.1475
+# Generated with resilient-sdk v51.0.6.0.1543
 
 """Generate the SOAR customizations required for fn_task_utils"""
 
@@ -31,25 +31,20 @@ def codegen_reload_data():
             u"task_utils_create",
             u"task_utils_update_task"
         ],
-        "workflows": [
-            u"task_utils_add_note_to_task",
-            u"task_utils_close_task",
-            u"task_utils_create_custom_task",
-            u"task_utils_mark_task_optional"
-        ],
-        "actions": [
-            u"Example: Task Utils - Add Note to Task",
-            u"Example: Task Utils - Close Task",
-            u"Example: Task Utils - Create Custom Task",
-            u"Example: Task Utils - Make this Task Optional"
-        ],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [],
+        "playbooks": [
+            u"task_utils_add_note_to_task_example_pb",
+            u"task_utils_close_task_example_pb",
+            u"task_utils_create_custom_task_example_pb",
+            u"task_utils_mark_task_as_optional__example_pb"
+        ]
     }
 
 
@@ -68,16 +63,11 @@ def customization_data(client=None):
         - task_utils_close_task
         - task_utils_create
         - task_utils_update_task
-    - Workflows:
-        - task_utils_add_note_to_task
-        - task_utils_close_task
-        - task_utils_create_custom_task
-        - task_utils_mark_task_optional
-    - Rules:
-        - Example: Task Utils - Add Note to Task
-        - Example: Task Utils - Close Task
-        - Example: Task Utils - Create Custom Task
-        - Example: Task Utils - Make this Task Optional
+    - Playbooks:
+        - task_utils_add_note_to_task_example_pb
+        - task_utils_close_task_example_pb
+        - task_utils_create_custom_task_example_pb
+        - task_utils_mark_task_as_optional__example_pb
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

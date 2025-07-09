@@ -94,11 +94,11 @@ class TestTaskUtilsCloseTask:
         with pytest.raises(ValueError) as err:
             call_task_utils_close_task_function(circuits_app, function_params)
 
-            assert err.value.args[0] == u"Could not find task with name {}".format(function_params["task_name"])
+            assert err.value.args[0] == f'Could not find task with name {function_params["task_name"]}'
 
     @pytest.mark.mock_test
     @pytest.mark.parametrize("incident_id, task_id, task_name, expected_results", [
-        (2096, 2251301, "text", {"task_id": 2251301})
+        (2111, 231, "Test_task", {"task_id": 231})
     ])
     def test_close_task_status(self, circuits_app, incident_id, task_id, task_name, expected_results):
         """ Test calling with sample values for the parameters """
