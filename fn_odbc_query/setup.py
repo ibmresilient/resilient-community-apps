@@ -33,7 +33,8 @@ setup(
         <ul><a target='blank' href='https://ibmresilient.github.io/resilient-community-apps/fn_odbc_query/README.html'>App Documentation</a></ul>""",
     install_requires=[
         'resilient_circuits>=43.0.0',
-        'pyodbc~=4.0'
+        'pyodbc~=4.0; python_version<"3.12"',
+        'pyodbc~=5.0; python_version>="3.12"'
     ],
     packages=find_packages(),
     include_package_data=True,

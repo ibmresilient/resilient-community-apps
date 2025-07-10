@@ -50,7 +50,7 @@ def prepare_results(cursor_description, rows):
 
 def get_database_settings(opts, db_label):
     """
-    Used for initilizing or reloading the options variable
+    Used for initializing or reloading the options variable
     :param opts: List of options
     :return: ODBC settings for specified database
     """
