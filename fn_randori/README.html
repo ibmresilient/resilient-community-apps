@@ -4,14 +4,16 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="search" title="Search" href="../search.html" /><link rel="next" title="Rapid7 InsightIDR" href="../fn_rapid7_insight_idr/README.html" /><link rel="prev" title="QRadar SIEM" href="../fn_qradar_integration/README.html" />
+        <link rel="prefetch" href="../_static/IBM_Security_Light.png" as="image" />
+        <link rel="prefetch" href="../_static/IBM_Security_Dark.png" as="image" />
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"/><!-- Generated with Sphinx 8.2.3 and Furo 2025.07.19 -->
         <title>Randori - QRadar SOAR Apps</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=25af2a20" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=afe95b24" />
     
     
@@ -19,20 +21,20 @@
 
 <style>
   body {
-    --color-code-background: #f8f8f8;
-  --color-code-foreground: black;
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
   
   }
   @media not print {
     body[data-theme="dark"] {
-      --color-code-background: #202020;
-  --color-code-foreground: #d0d0d0;
+      --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
-        --color-code-background: #202020;
-  --color-code-foreground: #d0d0d0;
+        --color-code-background: #2b2b2b;
+  --color-code-foreground: #f8f8f2;
   
       }
     }
@@ -191,7 +193,6 @@
     <div class="sidebar-container">
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
-  
   <div class="sidebar-logo-container">
     <img class="sidebar-logo only-light" src="../_static/IBM_Security_Light.png" alt="Light Logo"/>
     <img class="sidebar-logo only-dark" src="../_static/IBM_Security_Dark.png" alt="Dark Logo"/>
@@ -226,6 +227,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../fn_bitsight_cyber_insurance/README.html">BitSight Cyber Insurance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_algosec/README.html">AlgoSec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_alienvault_otx/README.html">AlienVault OTX</a></li>
@@ -292,6 +294,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_netdevice/README.html">netMiko</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_network_utilities/README.html">Network Utilities</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_ocr/README.html">Image OCR</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_ocm/README.html">On Call Manager for IBM SOAR</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_odbc_query/README.html">ODBC Query</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_outbound_email/README.html">Outbound Email</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_pa_panorama/README.html">Palo Alto Networks Panorama Integration for SOAR</a></li>
@@ -530,7 +533,7 @@
 -->
 <p><strong>IBM SOAR app bidirectional synchronization and functions for Randori</strong></p>
 <p>Randori Recon is an Attack Surface Management (ASM) solution which helps to identify externally-facing customer assets that could be targeted and lead to a breach.</p>
-<p><img alt="screenshot: main" src="../_images/main53.png" /></p>
+<p><img alt="screenshot: main" src="../_images/main55.png" /></p>
 <p>Bidirectional app for Randori for IBM SOAR. Query Randori for targets based on user-defined query parameters and create and update cases in SOAR.  The app will poll Randori for Targets that meet one of the two criteria:</p>
 <ol class="arabic simple">
 <li><p>Net new Targets on the customer attack surface</p></li>
@@ -772,7 +775,7 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
   You should save a screenshot "custom_layouts.png" in the doc/screenshots directory and reference it here
 -->
 <p>The following Randori Tab custom layout is included in the app:</p>
-<p><img alt="screenshot: custom_layouts" src="../_images/custom_layouts27.png" /></p>
+<p><img alt="screenshot: custom_layouts" src="../_images/custom_layouts29.png" /></p>
 </section>
 </section>
 <section id="poller-considerations">
@@ -2497,7 +2500,7 @@ Here is an polling filter example that adds or updates targets that have a "targ
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
