@@ -1,0 +1,53 @@
+---
+# the key is the number of newlines to append to the 
+# given string
+newline_tags:
+  1:
+    - "</p>"
+    - "<ul>"
+    - "</ul>"
+    - "<ol>"
+    - "</ol>"
+    - "</h1>"
+    - "</h2>"
+    - "</h3>"
+    - "</h4>"
+    - "</h5>"
+    - "</h6>"
+
+
+# em font sizes for bs4 tags
+font_sizes:
+  h1: 1.7
+  h2: 1.6
+  h3: 1.4
+  h4: 1.2
+  h5: 1
+  h6: 0.8
+
+# used for nh3 sanitization, all other tags will be blocked.
+allowed_tags:
+  - h1
+  - h2
+  - h3
+  - h4
+  - h5
+  - h6
+  - p
+  - i
+  - b
+  - em
+  - strong
+  - span
+  - ul
+  - ol
+  - li
+  - hr
+  - blockquote
+  - table
+  - tr
+  - td
+  - thead
+  - tbody
+  - th
+  - br
