@@ -1,0 +1,13 @@
+{"totalSize":2,
+ "done": true,
+ "nextRecordsUrl": "/services/data/v58.0/query/01gRO0000016PIAYA2-500",
+ "records":[{"attributes":{"type":"Case",
+                            "url":"/services/data/v58.0/sobjects/Case/500Hr00001Wuk5zIAB"},
+              "Id":"500Hr00001Wuk5zIAB",
+              "CaseNumber":"00002296"}, 
+            {"attributes":{"type":"Case",
+                           "url":"/services/data/v58.0/sobjects/Case/500Hr00001WuTFoIAN"},
+                "Id":"500Hr00001WuTFoIAN",
+                "CaseNumber":"00002280"}
+            ]
+}
