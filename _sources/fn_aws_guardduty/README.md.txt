@@ -25,6 +25,7 @@
 - [AWS GuardDuty](#aws-guardduty)
   - [Table of Contents](#table-of-contents)
   - [Release Notes](#release-notes)
+    - [AWS GuardDuty App 2.0.0 Changes](#aws-guardduty-app--200-changes)
     - [AWS GuardDuty App  1.1.0 Changes](#aws-guardduty-app--110-changes)
   - [Overview](#overview)
     - [Key Features](#key-features)
@@ -39,6 +40,16 @@
   - [Poller - AWS GuardDuty: Escalate Findings](#poller---aws-guardduty-escalate-findings)
   - [Function - AWS GuardDuty: Archive finding](#function---aws-guardduty-archive-finding)
   - [Function - AWS GuardDuty: Refresh Finding](#function---aws-guardduty-refresh-finding)
+  - [Function - AWS GuardDuty: Create ThreatIntelSet](#function---aws-guardduty-create-threatintelset)
+  - [Function - AWS GuardDuty: Get ThreatIntelSet](#function---aws-guardduty-get-threatintelset)
+  - [Function - AWS GuardDuty: List ThreatIntelSet](#function---aws-guardduty-list-threatintelset)
+  - [Function - AWS GuardDuty: Update ThreatIntelSet](#function---aws-guardduty-update-threatintelset)
+  - [Function - AWS GuardDuty: Delete ThreatIntelSet](#function---aws-guardduty-delete-threatintelset)
+  - [Function - AWS GuardDuty: Create IPSet](#function---aws-guardduty-create-ipset)
+  - [Function - AWS GuardDuty: Get IPSet](#function---aws-guardduty-get-ipset)
+  - [Function - AWS GuardDuty: List IPSet](#function---aws-guardduty-list-ipset)
+  - [Function - AWS GuardDuty: Update IPSet](#function---aws-guardduty-update-ipset)
+  - [Function - AWS GuardDuty: Delete IPSet](#function---aws-guardduty-delete-ipset)
   - [Playbooks](#playbooks)
   - [Custom Layouts](#custom-layouts)
   - [Data Table - GuardDuty Action/Actor Details](#data-table---guardduty-actionactor-details)
@@ -61,6 +72,7 @@
       - [Columns:](#columns-5)
   - [Custom Fields](#custom-fields)
   - [Custom Artifact Types](#custom-artifact-types)
+  - [AWS GuardDuty Troubleshooting](#aws-guardduty-troubleshooting)
   - [Troubleshooting \& Support](#troubleshooting--support)
     - [For Support](#for-support)
 
@@ -73,10 +85,18 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.0.0 | 07/2025 | Added CRUD Functionality for ThreatIntelSets and IPSets |
+| 1.1.0 | 04/2024 | Add Playbooks |
 | 1.0.0 | 03/2021 | Initial Release |
-| 1.1.0 | 04/2024 | Add Playbooks
 
 ---
+### AWS GuardDuty App  2.0.0 Changes
+In v2.0.0, there are 2 new capabilities for Guardduty that have been added. For the trusted IP addresses we have IPSets and for the malicious IP addresses we have ThreatIntelSets.
+This will enhance with the existing capabilities and make it easier to specify which IP addresses to generate findings for.
+
+There have been 10 new playbooks introduced which basically deals with create, read, update and delete methods for these sets on AWS Guardduty from SOAR.
+When upgrading to the newer version, nothing is changed from the previous methods for IPSets and ThreatIntelSets.
+
 ### AWS GuardDuty App  1.1.0 Changes
 In v1.1.0, the existing rules and workflows have been replaced with playbooks. This change is made to support the ongoing, newer capabilities of playbooks. Each playbook has the same functionality as the previous, corresponding rule/workflow.
 
@@ -88,7 +108,7 @@ You can continue to use the rules/workflows. But migrating to playbooks will pro
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**Amazon AWS GuardDuty Integration for Resilient.**
+**Amazon AWS GuardDuty Integration for SOAR.**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
@@ -96,7 +116,7 @@ Amazon AWS GuardDuty is a continuous security monitoring service that identifies
 GuardDuty informs the user of the status of their AWS environment by producing security findings that can be viewed in the GuardDuty console.
 A finding is a potential security issue discovered by GuardDuty.
 
-The Amazon AWS GuardDuty Integration for Resilient allows you to process and respond to GuardDuty findings within the IBM Resilient Platform.
+The Amazon AWS GuardDuty Integration for SOAR allows you to process and respond to GuardDuty findings within the IBM SOAR Platform.
 
         
 
@@ -105,13 +125,32 @@ The Amazon AWS GuardDuty Integration for Resilient allows you to process and res
   List the Key Features of the Integration
 -->
 The GuardDuty Integration provides the following functionality:
-* A poller which gathers current findings from GuardDuty and escalates to the Resilient platform as incidents.
-* A function to archive a GuardDuty finding when the corresponding Resilient incident is closed.
-* A function to refresh a Resilient incident with the latest information from the corresponding GuardDuty finding.
-* Close Resilient incidents if the corresponding GuardDuty findings are archived.
-* Archive GuardDuty findings if the corresponding Resilient incidents are closed.
-* Trigger a refresh for a Resilient incident if the corresponding GuardDuty finding gets updated.
-* A refresh of Resilient incidents can be executed manually.
+* A poller which gathers current findings from GuardDuty and escalates to the SOAR platform as incidents.
+* A function to archive a GuardDuty finding when the corresponding SOAR incident is closed.
+* A function to refresh a SOAR incident with the latest information from the corresponding GuardDuty finding.
+* Close SOAR incidents if the corresponding GuardDuty findings are archived.
+* Archive GuardDuty findings if the corresponding SOAR incidents are closed.
+* Trigger a refresh for a SOAR incident if the corresponding GuardDuty finding gets updated.
+* A refresh of SOAR incidents can be executed manually.
+
+**Note: AWS Region should always be cross-checked before working with ThreatIntelSets/IPSets**
+**Note: ThreatIntelSets/IPSets playbook actions are only available on AWS incidents in SOAR created by the poller**
+
+ThreatIntelSets:
+Manage known malicious IP addresses within your AWS environment. You can upload up to 6 threat IP lists per Region.
+* Create a new threatintelset on AWS GuardDuty from SOAR and activate the set to generate findings.
+* Get the details of a threatintelset on AWS GuardDuty by specifying a threatintelsetid.
+* List all the threatintelsets on AWS GuardDuty for a given detector_id and region.
+* Update an existing threatintelset on AWS GuardDuty by specifying the threatintelsetid.
+* Delete the threatintelset on AWS GuardDuty environment from SOAR.
+
+IPSets:
+Manage IP addresses that you trust for secure communication within your AWS environment. You can have only one trusted IP list per Region.
+* Create a new ipset on AWS GuardDuty from SOAR and activate the set to skip generating findings for the trusted IP's.
+* Get the details of an ipset on AWS GuardDuty by specifying an ipsetid.
+* List all the ipsets on AWS GuardDuty for a given detector_id and region.
+* Update an existing ipset on AWS GuardDuty by specifying the ipsetid.
+* Delete the ipset on AWS GuardDuty environment from SOAR.
 
 ---
 
@@ -125,13 +164,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `51.0.0.0.9339`.
+* SOAR platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `51.0.0.0.9339`.
+* SOAR platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=51.0.1.1.824`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions: 
   | Name | Permissions |
   | ---- | ----------- |
@@ -163,10 +202,10 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does support a proxy server.
 
 ### Python Environment
-Python 3.6 and Python 3.9 are supported.
+Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
 * boto3>=1.16.19
-* resilient_circuits>=45.0.0
+* resilient_circuits>=51.0.0
 ---
 
 ## Installation
@@ -188,7 +227,7 @@ The following table provides the settings you need to configure the app. These s
 | **aws_gd_polling_interval** | Yes | `15` | *Interval to poll GuardDuty for findings (in minutes).* |
 | **aws_gd_severity_threshold** | No | `7` | *Severity threshold (int) to use in criterion to filter findings .* |
 | **aws_gd_lookback_interval** | No | `60` | *How long, (in minutes) to check back for previous findings at startup. Filter to process only more recent findings.* |
-| **aws_gd_close_incident_template** | No | `` | *User defined JSON template file to use for closing Resilient incidents.* |
+| **aws_gd_close_incident_template** | No | `` | *User defined JSON template file to use for closing SOAR incidents.* |
 | **http_proxy** | No | `http://proxy:80` | *Optional setting for an http proxy if required.*  |
 | **https_proxy** | No | `https://proxy:443` | *Optional setting for an https proxy if required.* |
 
@@ -200,30 +239,30 @@ The GuardDuty integration poller starts querying GuardDuty for findings as soon 
 
 The poller provide the following functionality.
 
-* For any new findings discovered, creates a  matching incident in the Resilient platform.
+* For any new findings discovered, creates a  matching incident in the SOAR platform.
 * Enhances the incidents by adding artifacts, data tables and a note with data from the findings. The note includes the JSON content of the finding.
-* Can be configured to filter the findings, which are escalated to the Resilient incidents.
-* Closes Resilient incidents if the corresponding GuardDuty findings are archived.
-* Archives GuardDuty findings if the corresponding Resilient incidents are closed.
-* Triggers a refresh of GuardDuty information for a Resilient incident if the corresponding GuardDuty finding is updated.
+* Can be configured to filter the findings, which are escalated to the SOAR incidents.
+* Closes SOAR incidents if the corresponding GuardDuty findings are archived.
+* Archives GuardDuty findings if the corresponding SOAR incidents are closed.
+* Triggers a refresh of GuardDuty information for a SOAR incident if the corresponding GuardDuty finding is updated.
 
-The following screenshot shows examples of Resilient incidents created by the poller from GuardDuty findings:
+The following screenshot shows examples of SOAR incidents created by the poller from GuardDuty findings:
 
   ![screenshot: fn-aws-guardduty-incidents](./doc/screenshots/fn-aws-guardduty-incidents.png)
 
-The following screenshot shows an example of a Resilient incident Details tab created by the poller:
+The following screenshot shows an example of a SOAR incident Details tab created by the poller:
 
   ![screenshot: fn-aws-guardduty-incident-details](./doc/screenshots/fn-aws-guardduty-incident-details.png)
 
-The following screenshot shows an example of GuardDuty finding custom properties in the Details tab of a Resilient incident created by the poller:
+The following screenshot shows an example of GuardDuty finding custom properties in the Details tab of a SOAR incident created by the poller:
 
    ![screenshot: fn-aws-guardduty-incident-properties](./doc/screenshots/fn-aws-guardduty-incident-properties.png)
 
-The following screenshot shows examples of artifacts added to a Resilient incident created by the poller:
+The following screenshot shows examples of artifacts added to a SOAR incident created by the poller:
 
    ![screenshot: fn-aws-guardduty-incident-artifacts](./doc/screenshots/fn-aws-guardduty-incident-artifacts.png)
 
-The following screenshot shows an example of a note added to a Resilient incident created by the poller:
+The following screenshot shows an example of a note added to a SOAR incident created by the poller:
 
    ![screenshot: fn-aws-guardduty-incident-note](./doc/screenshots/fn-aws-guardduty-incident-note.png)
 
@@ -232,7 +271,7 @@ Note: See the data tables section for examples of data tables added by the polle
 ---
 
 ## Function - AWS GuardDuty: Archive finding
-Resilient Function to archive an AWS GuardDuty finding when the corresponding incident is closed.
+SOAR Function to archive an AWS GuardDuty finding when the corresponding incident is closed.
 
  ![screenshot: fn-aws-guardduty-archive-finding ](./doc/screenshots/fn-aws-guardduty-archive-finding.png) 
 
@@ -259,7 +298,7 @@ results = {
     "status": "ok"
   },
   "inputs": {
-    "aws_gd_detector_id": "48bbf98612290af2215c7a02b7ccbc82",
+    "aws_gd_detector_id": "48bb********************b7ccbc82",
     "aws_gd_finding_id": "xxxxyyyyzzzz",
     "aws_gd_region": "us-east-1"
   },
@@ -330,7 +369,7 @@ Result: {'version': '1.0', 'success': True, 'reason': None,
 #  Globals
 FN_NAME = "func_aws_guardduty_archive_finding"
 WF_NAME = "Example: AWS GuardDuty: Archive Finding"
-# Resilient artifact names to api names.
+# SOAR artifact names to api names.
 # Processing
 # Processing
 CONTENT = playbook.functions.results.output
@@ -345,7 +384,7 @@ def main():
     if CONTENT:
         if CONTENT["status"] == "ok":
             note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The finding with id <b>{1}</b> and detector id " \
-                        "<b>{2}</b> in region <b>{3}</b> was successfully archived for Resilient function <b>{4}</b>"\
+                        "<b>{2}</b> in region <b>{3}</b> was successfully archived for SOAR function <b>{4}</b>"\
                 .format(WF_NAME, INPUTS["aws_gd_finding_id"], INPUTS["aws_gd_detector_id"], INPUTS["aws_gd_region"], FN_NAME)
             # Update archived property.
             incident.properties.aws_guardduty_archived = "True"  
@@ -353,18 +392,18 @@ def main():
 
         elif CONTENT["status"] == "error":
             note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The finding with id <b>{1}</b> and detector id " \
-                        "<b>{2}</b> in region <b>{3}</b> failed archive with error <b>{4}</b> for Resilient function <b>{5}</b>"\
+                        "<b>{2}</b> in region <b>{3}</b> failed archive with error <b>{4}</b> for SOAR function <b>{5}</b>"\
                 .format(WF_NAME, INPUTS["aws_gd_finding_id"], INPUTS["aws_gd_detector_id"], INPUTS["aws_gd_region"],
                         CONTENT["msg"], FN_NAME)
 
         else:
             note_text = "AWS IAM Integration: Workflow <b>{0}</b>: The finding with id <b>{1}</b> and detector id " \
-                        "<b>{2}</b> in region <b>{3}</b> got unexpected status <b>{4}</b> for Resilient function <b>{5}</b>" \
+                        "<b>{2}</b> in region <b>{3}</b> got unexpected status <b>{4}</b> for SOAR function <b>{5}</b>" \
                 .format(WF_NAME, INPUTS["aws_gd_finding_id"], INPUTS["aws_gd_detector_id"], CONTENT["status"], INPUTS["aws_gd_region"],
                         FN_NAME)
 
     else:
-        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for Resilient function <b>{0}</b>"\
+        note_text += "AWS IAM Integration: Workflow <b>{0}</b>: There was no result returned for SOAR function <b>{0}</b>"\
             .format(WF_NAME, FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
@@ -379,7 +418,7 @@ if __name__ == "__main__":
 
 ---
 ## Function - AWS GuardDuty: Refresh Finding
-Resilient Function to refresh AWS GuardDuty finding details in an incident.
+SOAR Function to refresh AWS GuardDuty finding details in an incident.
 
  ![screenshot: fn-aws-guardduty-refresh-finding ](./doc/screenshots/fn-aws-guardduty-refresh-finding.png)
 
@@ -391,7 +430,7 @@ Resilient Function to refresh AWS GuardDuty finding details in an incident.
 | `aws_gd_detector_id` | `text` | No | `-` | AWS GuardDuty detector ID. |
 | `aws_gd_finding_id` | `text` | No | `-` | AWS GuardDuty finding ID. |
 | `aws_gd_region` | `text` | No | `-` | AWS GuardDuty region. |
-| `incident_id` | `number` | No | `-` | Resilient incident ID. |
+| `incident_id` | `number` | No | `-` | SOAR incident ID. |
 
 </p>
 </details>
@@ -521,7 +560,7 @@ results = {
     },
     "finding": {
       "AccountId": "xxxxyyyyzzzz",
-      "Arn": "arn:aws:guardduty:us-east-1:xxxxyyyyzzzz:detector/48bbf98612290af2215c7a02b7ccbc82/finding/xxxxyyyyzzzz",
+      "Arn": "arn:aws:guardduty:us-east-1:xxxxyyyyzzzz:detector/48bb********************b7ccbc82/finding/xxxxyyyyzzzz",
       "CreatedAt": "2024-04-11T05:47:16.625Z",
       "Description": "APIs commonly used in Discovery tactics were invoked by user IAMUser : dummy under unusual circumstances. Such activity is not typically seen from this user.",
       "Id": "xxxxyyyyzzzz",
@@ -568,11 +607,10 @@ results = {
         },
         "AdditionalInfo": {
           "Type": "default",
-          "Value": "{\"userAgent\":{\"fullUserAgent\":\"Boto3/1.34.82 md/Botocore#1.34.82 ua/2.0 os/macos#23.4.0 md/arch#x86_64 lang/python#3.9.16 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.82\",\"userAgentCategory\":\"Botocore\"},\"anomalies\":{\"anomalousAPIs\":\"guardduty.amazonaws.com:[ListFindings:success , ListDetectors:success , GetFindings:success , ArchiveFindings:success] , ec2.amazonaws.com:[DescribeRegions:success]\"},\"profiledBehavior\":{\"rareProfiledAPIsAccountProfiling\":\"\",\"infrequentProfiledAPIsAccountProfiling\":\"\",\"frequentProfiledAPIsAccountProfiling\":\"ListFindings , DescribeVolumes , GetResources , BatchGetResourceConfig , ListHostedZones , SelectResourceConfig , DescribeConfigurationRecorderStatus , ListResourceRecordSets , DescribeTrails , DescribeRegions , GetBucketLocation , DescribeDBInstances , GetAccountPublicAccessBlock , GetBucketLifecycle , GenerateCredentialReport , DescribeMetricFilters , DescribeInstances , DescribeDBClusters , GetTrailStatus , ListBuckets\",\"rareProfiledAPIsUserIdentityProfiling\":\"ListFindings , TerminateInstances , EnableAlarmActions , CreateImage , ListMembers , GetBucketPolicy , DeleteAlarms , ModifyVolume , DescribeRegions , StartInstances , CreateSnapshot , GetFindings\",\"infrequentProfiledAPIsUserIdentityProfiling\":\"DescribeInstances , AllocateAddress , ListDetectors , PutBucketPolicy , RebootInstances , CreateTags\",\"frequentProfiledAPIsUserIdentityProfiling\":\"CreateBucket , ListBuckets\",\"rareProfiledUserTypesAccountProfiling\":\"\",\"infrequentProfiledUserTypesAccountProfiling\":\"\",\"frequentProfiledUserTypesAccountProfiling\":\"IAM_USER , ASSUMED_ROLE , ROOT\",\"rareProfiledUserNamesAccountProfiling\":\"aws:ec2-instance\",\"infrequentProfiledUserNamesAccountProfiling\":\"\",\"frequentProfiledUserNamesAccountProfiling\":\"dummy , AWSServiceRoleForSecurityHub , AWSServiceRoleForTrustedAdvisor , CloudabilityRole , AWSServiceRoleForAccessAnalyzer , AWSServiceRoleForConfig , gtrotman , mscherfling , Root , aws-controltower-ForwardSnsNotificationRole , AWSServiceRoleForAmazonGuardDuty\",\"rareProfiledASNsAccountProfiling\":\"asnNumber: 12271 asnOrg: TWC-12271-NYC asnNumber: 23908 asnOrg: IIAC asnNumber: 6167 asnOrg: CELLCO-PART asnNumber: 701 asnOrg: UUNET asnNumber: 209 asnOrg: CENTURYLINK-US-LEGACY-QWEST\",\"infrequentProfiledASNsAccountProfiling\":\"asnNumber: 4766 asnOrg: Korea Telecom\",\"frequentProfiledASNsAccountProfiling\":\"asnNumber: 17390 asnOrg: CIO-ORGANIZATION asnNumber: 16509 asnOrg: AMAZON-02 asnNumber: 36351 asnOrg: SOFTLAYER asnNumber: 2386 asnOrg: INS-AS asnNumber: 3462 asnOrg: Data Communication Business Group asnNumber: 15502 asnOrg: Vodafone Ireland Limited asnNumber: 14618 asnOrg: AMAZON-AES asnNumber: 7018 asnOrg: ATT-INTERNET4\",\"rareProfiledASNsUserIdentityProfiling\":\"\",\"infrequentProfiledASNsUserIdentityProfiling\":\"\",\"frequentProfiledASNsUserIdentityProfiling\":\"asnNumber: 2386 asnOrg: INS-AS\",\"rareProfiledUserAgentsAccountProfiling\":\"aws-sdk-go\",\"infrequentProfiledUserAgentsAccountProfiling\":\"aws-internal/account-settings\",\"frequentProfiledUserAgentsAccountProfiling\":\"AWS Service , aws-sdk-java , Botocore , AWS Internal , browser , aws-internal/3 , OTHER\",\"rareProfiledUserAgentsUserIdentityProfiling\":\"\",\"infrequentProfiledUserAgentsUserIdentityProfiling\":\"\",\"frequentProfiledUserAgentsUserIdentityProfiling\":\"Botocore\"},\"unusualBehavior\":{\"unusualAPIsAccountProfiling\":\"ArchiveFindings\",\"unusualUserTypesAccountProfiling\":\"\",\"unusualUserNamesAccountProfiling\":\"\",\"unusualASNsAccountProfiling\":\"\",\"unusualUserAgentsAccountProfiling\":\"\",\"unusualAPIsUserIdentityProfiling\":\"ArchiveFindings\",\"unusualASNsUserIdentityProfiling\":\"asnNumber: 17390 asnOrg: CIO-ORGANIZATION\",\"unusualUserAgentsUserIdentityProfiling\":\"\",\"isUnusualUserIdentity\":\"false\"}}"
-        },
+          "Value":{"String encoded json. Review full payload in payload_samples folder"},
         "Archived": false,
         "Count": 1,
-        "DetectorId": "48bbf98612290af2215c7a02b7ccbc82",
+        "DetectorId": "48bb********************b7ccbc82",
         "EventFirstSeen": "2024-04-11T05:26:01.000Z",
         "EventLastSeen": "2024-04-11T05:32:48.000Z",
         "ResourceRole": "TARGET",
@@ -596,7 +634,7 @@ results = {
         "aws_guardduty_archived": "False",
         "aws_guardduty_count": "1",
         "aws_guardduty_detector_id": "48bbf98*******215c7a02b7ccbc82",
-        "aws_guardduty_finding_arn": "arn:aws:guardduty:us-east-1:xxxxyyyyzzzz:detector/48bbf98612290af2215c7a02b7ccbc82/finding/xxxxyyyyzzzz",
+        "aws_guardduty_finding_arn": "arn:aws:guardduty:us-east-1:xxxxyyyyzzzz:detector/48bb********************b7ccbc82/finding/xxxxyyyyzzzz",
         "aws_guardduty_finding_id": "xxxxyyyyzzzz",
         "aws_guardduty_finding_type": "Discovery:IAMUser/AnomalousBehavior",
         "aws_guardduty_finding_updated_at": "2024-04-11T05:47:16.625Z",
@@ -610,7 +648,7 @@ results = {
     "timestamp": "2024-04-11 14:08:54"
   },
   "inputs": {
-    "aws_gd_detector_id": "48bbf98612290af2215c7a02b7ccbc82",
+    "aws_gd_detector_id": "48bb********************b7ccbc82",
     "aws_gd_finding_id": "xxxxyyyyzzzz",
     "aws_gd_region": "us-east-1",
     "incident_id": 2114
@@ -623,10 +661,11 @@ results = {
     "timestamp": "2024-04-11 14:08:54",
     "version": "1.0"
   },
-  "raw": "{\"timestamp\": \"2024-04-11 14:08:54\", \"finding\": {\"AccountId\": \"xxxxyyyyzzzz\", \"Arn\": \"arn:aws:guardduty:us-east-1:xxxxyyyyzzzz:detector/48bbf98612290af2215c7a02b7ccbc82/finding/xxxxyyyyzzzz\", \"CreatedAt\": \"2024-04-11T05:47:16.625Z\", \"Description\": \"APIs commonly used in Discovery tactics were invoked by user IAMUser : dummy under unusual circumstances. Such activity is not typically seen from this user.\", \"Id\": \"xxxxyyyyzzzz\", \"Partition\": \"aws\", \"Region\": \"us-east-1\", \"Resource\": {\"AccessKeyDetails\": {\"AccessKeyId\": \"xxxxyyyy\", \"PrincipalId\": \"xxxxyyyy\", \"UserName\": \"dummy\", \"UserType\": \"IAMUser\"}, \"ResourceType\": \"AccessKey\"}, \"SchemaVersion\": \"2.0\", \"Service\": {\"Action\": {\"ActionType\": \"AWS_API_CALL\", \"AwsApiCallAction\": {\"Api\": \"ListFindings\", \"CallerType\": \"Remote IP\", \"RemoteIpDetails\": {\"City\": {\"CityName\": \"Singapore\"}, \"Country\": {\"CountryName\": \"Singapore\"}, \"GeoLocation\": {\"Lat\": 1.2868, \"Lon\": 103.8503}, \"IpAddressV4\": \"129.41.56.2\", \"Organization\": {\"Asn\": \"17390\", \"AsnOrg\": \"CIO-ORGANIZATION\", \"Isp\": \"IBM Corporation\", \"Org\": \"IBM Corporation\"}}, \"ServiceName\": \"guardduty.amazonaws.com\", \"AffectedResources\": {}}}, \"Archived\": false, \"Count\": 1, \"DetectorId\": \"48bbf98612290af2215c7a02b7ccbc82\", \"EventFirstSeen\": \"2024-04-11T05:26:01.000Z\", \"EventLastSeen\": \"2024-04-11T05:32:48.000Z\", \"ResourceRole\": \"TARGET\", \"ServiceName\": \"guardduty\", \"AdditionalInfo\": {\"Value\": \"{\\\"userAgent\\\":{\\\"fullUserAgent\\\":\\\"Boto3/1.34.82 md/Botocore#1.34.82 ua/2.0 os/macos#23.4.0 md/arch#x86_64 lang/python#3.9.16 md/pyimpl#CPython cfg/retry-mode#legacy Botocore/1.34.82\\\",\\\"userAgentCategory\\\":\\\"Botocore\\\"},\\\"anomalies\\\":{\\\"anomalousAPIs\\\":\\\"guardduty.amazonaws.com:[ListFindings:success , ListDetectors:success , GetFindings:success , ArchiveFindings:success] , ec2.amazonaws.com:[DescribeRegions:success]\\\"},\\\"profiledBehavior\\\":{\\\"rareProfiledAPIsAccountProfiling\\\":\\\"\\\",\\\"infrequentProfiledAPIsAccountProfiling\\\":\\\"\\\",\\\"frequentProfiledAPIsAccountProfiling\\\":\\\"ListFindings , DescribeVolumes , GetResources , BatchGetResourceConfig , ListHostedZones , SelectResourceConfig , DescribeConfigurationRecorderStatus , ListResourceRecordSets , DescribeTrails , DescribeRegions , GetBucketLocation , DescribeDBInstances , GetAccountPublicAccessBlock , GetBucketLifecycle , GenerateCredentialReport , DescribeMetricFilters , DescribeInstances , DescribeDBClusters , GetTrailStatus , ListBuckets\\\",\\\"rareProfiledAPIsUserIdentityProfiling\\\":\\\"ListFindings , TerminateInstances , EnableAlarmActions , CreateImage , ListMembers , GetBucketPolicy , DeleteAlarms , ModifyVolume , DescribeRegions , StartInstances , CreateSnapshot , GetFindings\\\",\\\"infrequentProfiledAPIsUserIdentityProfiling\\\":\\\"DescribeInstances , AllocateAddress , ListDetectors , PutBucketPolicy , RebootInstances , CreateTags\\\",\\\"frequentProfiledAPIsUserIdentityProfiling\\\":\\\"CreateBucket , ListBuckets\\\",\\\"rareProfiledUserTypesAccountProfiling\\\":\\\"\\\",\\\"infrequentProfiledUserTypesAccountProfiling\\\":\\\"\\\",\\\"frequentProfiledUserTypesAccountProfiling\\\":\\\"IAM_USER , ASSUMED_ROLE , ROOT\\\",\\\"rareProfiledUserNamesAccountProfiling\\\":\\\"aws:ec2-instance\\\",\\\"infrequentProfiledUserNamesAccountProfiling\\\":\\\"\\\",\\\"frequentProfiledUserNamesAccountProfiling\\\":\\\"dummy , AWSServiceRoleForSecurityHub , AWSServiceRoleForTrustedAdvisor , CloudabilityRole , AWSServiceRoleForAccessAnalyzer , AWSServiceRoleForConfig , gtrotman , mscherfling , Root , aws-controltower-ForwardSnsNotificationRole , AWSServiceRoleForAmazonGuardDuty\\\",\\\"rareProfiledASNsAccountProfiling\\\":\\\"asnNumber: 12271 asnOrg: TWC-12271-NYC asnNumber: 23908 asnOrg: IIAC asnNumber: 6167 asnOrg: CELLCO-PART asnNumber: 701 asnOrg: UUNET asnNumber: 209 asnOrg: CENTURYLINK-US-LEGACY-QWEST\\\",\\\"infrequentProfiledASNsAccountProfiling\\\":\\\"asnNumber: 4766 asnOrg: Korea Telecom\\\",\\\"frequentProfiledASNsAccountProfiling\\\":\\\"asnNumber: 17390 asnOrg: CIO-ORGANIZATION asnNumber: 16509 asnOrg: AMAZON-02 asnNumber: 36351 asnOrg: SOFTLAYER asnNumber: 2386 asnOrg: INS-AS asnNumber: 3462 asnOrg: Data Communication Business Group asnNumber: 15502 asnOrg: Vodafone Ireland Limited asnNumber: 14618 asnOrg: AMAZON-AES asnNumber: 7018 asnOrg: ATT-INTERNET4\\\",\\\"rareProfiledASNsUserIdentityProfiling\\\":\\\"\\\",\\\"infrequentProfiledASNsUserIdentityProfiling\\\":\\\"\\\",\\\"frequentProfiledASNsUserIdentityProfiling\\\":\\\"asnNumber: 2386 asnOrg: INS-AS\\\",\\\"rareProfiledUserAgentsAccountProfiling\\\":\\\"aws-sdk-go\\\",\\\"infrequentProfiledUserAgentsAccountProfiling\\\":\\\"aws-internal/account-settings\\\",\\\"frequentProfiledUserAgentsAccountProfiling\\\":\\\"AWS Service , aws-sdk-java , Botocore , AWS Internal , browser , aws-internal/3 , OTHER\\\",\\\"rareProfiledUserAgentsUserIdentityProfiling\\\":\\\"\\\",\\\"infrequentProfiledUserAgentsUserIdentityProfiling\\\":\\\"\\\",\\\"frequentProfiledUserAgentsUserIdentityProfiling\\\":\\\"Botocore\\\"},\\\"unusualBehavior\\\":{\\\"unusualAPIsAccountProfiling\\\":\\\"ArchiveFindings\\\",\\\"unusualUserTypesAccountProfiling\\\":\\\"\\\",\\\"unusualUserNamesAccountProfiling\\\":\\\"\\\",\\\"unusualASNsAccountProfiling\\\":\\\"\\\",\\\"unusualUserAgentsAccountProfiling\\\":\\\"\\\",\\\"unusualAPIsUserIdentityProfiling\\\":\\\"ArchiveFindings\\\",\\\"unusualASNsUserIdentityProfiling\\\":\\\"asnNumber: 17390 asnOrg: CIO-ORGANIZATION\\\",\\\"unusualUserAgentsUserIdentityProfiling\\\":\\\"\\\",\\\"isUnusualUserIdentity\\\":\\\"false\\\"}}\", \"Type\": \"default\"}}, \"Severity\": 2, \"Title\": \"The user IAMUser : dummy is anomalously invoking APIs commonly used in Discovery tactics.\", \"Type\": \"Discovery:IAMUser/AnomalousBehavior\", \"UpdatedAt\": \"2024-04-11T05:47:16.625Z\"}, \"region\": \"us-east-1\", \"payload\": {\"name\": \"AWS GuardDuty: The user IAMUser : dummy is anomalously invoking APIs commonly used in Discovery tactics.\", \"description\": {\"format\": \"text\", \"content\": \"APIs commonly used in Discovery tactics were invoked by user IAMUser : dummy under unusual circumstances. Such activity is not typically seen from this user.\"}, \"discovered_date\": \"2024-04-11T05:47:16.625Z\", \"severity_code\": \"Low\", \"properties\": {\"aws_guardduty_finding_id\": \"xxxxyyyyzzzz\", \"aws_guardduty_finding_arn\": \"arn:aws:guardduty:us-east-1:xxxxyyyyzzzz:detector/48bbf98612290af2215c7a02b7ccbc82/finding/xxxxyyyyzzzz\", \"aws_guardduty_finding_type\": \"Discovery:IAMUser/AnomalousBehavior\", \"aws_guardduty_finding_updated_at\": \"2024-04-11T05:47:16.625Z\", \"aws_guardduty_region\": \"us-east-1\", \"aws_guardduty_severity\": \"2\", \"aws_guardduty_resource_type\": \"AccessKey\", \"aws_guardduty_detector_id\": \"48bbf98612290af2215c7a02b7ccbc82\", \"aws_guardduty_count\": \"1\", \"aws_guardduty_archived\": \"False\"}, \"artifacts\": [], \"comments\": []}, \"data_tables\": {\"gd_finding_overview\": [{\"cells\": {\"severity\": {\"value\": \"2\"}, \"query_execution_date\": {\"value\": \"2024-04-11 14:08:54\"}, \"region\": {\"value\": \"us-east-1\"}, \"count\": {\"value\": \"1\"}, \"account_id\": {\"value\": \"xxxxyyyyzzzz\"}, \"created_at\": {\"value\": \"2024-04-11T05:47:16.625Z\"}, \"updated_at\": {\"value\": \"2024-04-11T05:47:16.625Z\"}}}], \"gd_action_details\": [{\"cells\": {\"action_type\": {\"value\": \"AWS_API_CALL\"}, \"query_execution_date\": {\"value\": \"2024-04-11 14:08:54\"}, \"action_api\": {\"value\": \"ListFindings\"}, \"event_first_seen\": {\"value\": \"2024-04-11T05:26:01.000Z\"}, \"event_last_seen\": {\"value\": \"2024-04-11T05:32:48.000Z\"}, \"actor_caller_type\": {\"value\": \"Remote IP\"}, \"city_name\": {\"value\": \"Singapore\"}, \"country_name\": {\"value\": \"Singapore\"}, \"asn\": {\"value\": \"17390\"}, \"asn_org\": {\"value\": \"CIO-ORGANIZATION\"}, \"isp\": {\"value\": \"IBM Corporation\"}, \"org\": {\"value\": \"IBM Corporation\"}, \"service_name\": {\"value\": \"guardduty.amazonaws.com\"}, \"remote_ip\": {\"value\": \"129.41.56.2\"}}}], \"gd_resource_affected\": [{\"cells\": {\"resource_type\": {\"value\": \"AccessKey\"}, \"query_execution_date\": {\"value\": \"2024-04-11 14:08:54\"}, \"resource_role\": {\"value\": \"TARGET\"}}}], \"gd_s3_bucket_details\": [], \"gd_instance_details\": [], \"gd_access_key_details\": [{\"cells\": {\"access_key_id\": {\"value\": \"xxxxyyyy\"}, \"query_execution_date\": {\"value\": \"2024-04-11 14:08:54\"}, \"principal_id\": {\"value\": \"xxxxyyyy\"}, \"user_type\": {\"value\": \"IAMUser\"}, \"user_name\": {\"value\": \"dummy\"}}}]}}",
-  "reason": null,
+  "raw": "String encoded json. Review full payload in payload_samples folder",
+    "reason": null,
   "success": true,
   "version": "1.0"
+  }
 }
 ```
 
@@ -690,7 +729,7 @@ Result: { 'version': '1.0',
 DATA_TABLES = ["gd_action_details", "gd_resource_affected"]
 FN_NAME = "func_aws_guardduty_refresh_finding"
 WF_NAME = "Example: AWS GuardDuty: Refresh Finding"
-# Resilient artifact names to api names.
+# SOAR artifact names to api names.
 ARTIFACT_API_TO_TYPE = {
     "aws_iam_access_key_id": "AWS IAM Access Key ID",
     "aws_iam_user_name": "AWS IAM User Name",
@@ -713,7 +752,7 @@ if CONTENT:
 def main():
     note_text = ''
     if CONTENT:
-        note_text = "AWS GuardDuty Integration: Workflow <b>{0}</b>: Finding data returned for Resilient function " \
+        note_text = "AWS GuardDuty Integration: Workflow <b>{0}</b>: Finding data returned for SOAR function " \
                     "<b>{2}</b>".format(WF_NAME, len(CONTENT), FN_NAME)
 
         update_fields()
@@ -721,7 +760,7 @@ def main():
         if ARTIFACTS:
             add_artifacts()
     else:
-        note_text = "AWS GuardDuty Integration: Workflow <b>{0}</b>: No finding data returned for Resilient function " \
+        note_text = "AWS GuardDuty Integration: Workflow <b>{0}</b>: No finding data returned for SOAR function " \
                     "<b>{2}</b>".format(WF_NAME, len(CONTENT), FN_NAME)
 
     incident.addNote(helper.createRichText(note_text))
@@ -760,6 +799,1152 @@ if __name__ == "__main__":
 </details>
 
 ---
+## Function - AWS GuardDuty: Create ThreatIntelSet
+SOAR function to create a new threat intel set on AWS GuardDuty.
+
+![screenshot: fn-aws-guardduty-create-threatintelset ](./doc/screenshots/fn-aws-guardduty-create-threatintelset.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `aws_gd_detector_id` | `text` | Yes | `-` | AWS GuardDuty detector ID. |
+| `aws_gd_region` | `text` | Yes | `-` | AWS GuardDuty region. |
+| `aws_gd_name` | `text` | Yes | `-` | AWS GuardDuty threatintelset name that we specify. |
+| `aws_gd_format` | `text` | Yes | `TXT, STIX, OTX_CSV, ALIEN_VAULT, PROOF_POINT, FIRE_EYE` | AWS GuardDuty file format for the threatintelset. |
+| `aws_gd_location` | `text` | Yes | `s3://example_bucket/example.txt` | AWS GuardDuty threatintelset file location. URI can be retrieved from AWS S3 bucket. |
+| `aws_gd_activate` | `boolean` | Yes | `-` | AWS GuardDuty threatintelset activation. True indicates that the AWS GuardDuty can use this threatintelset in AWS GuardDuty findings. |
+| `aws_gd_client_token` | `text` | No | `-` | AWS GuardDuty threatintelset idempotency token. (Autopopulated when not specified)|
+| `aws_gd_tags` | `text` | No | `-` | AWS GuardDuty tags. These are key-value pairs used to categorize and manage the threatintelset lists. It is also a form of metadata which gives more insights about the resource. |
+
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "version": 2,
+  "success": "True",
+  "reason": "None",
+  "content": {
+    "ResponseMetadata": {
+      "RequestId": "df0f48de-de02-4d20-b88b-5234c715a14a",
+      "HTTPStatusCode": 200,
+      "HTTPHeaders": {
+        "date": "Fri, 18 Jul 2025 13:27:40 GMT",
+        "content-type": "application/json",
+        "content-length": "55",
+        "connection": "***",
+        "x-amzn-requestid": "df0f48de-de02-4d20-b88b-5234c715a14a",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-Content-Sha256,X-Amz-User-Agent,*,Date,X-Amz-Target,x-amzn-platform-id,x-amzn-trace-id",
+        "x-amz-apigw-id": "N6DIBG_7IAMEogw=",
+        "access-control-expose-headers": "x-amzn-ErrorType,x-amzn-requestid,x-amzn-errormessage,x-amzn-trace-id,x-amz-apigw-id,Date",
+        "x-amzn-trace-id": "Root=1-687a4bcc-149a260c62ef8c641a7c8df5;Parent=3a406d782efd26b9;Sampled=0;Lineage=1:045398e1:0",
+        "access-control-max-age": "86400"
+      },
+      "RetryAttempts": 0
+    },
+    "ThreatIntelSetId": "114da827a1d0442b96f7039275b321e8",
+    "status": "ok"
+  },
+  "raw": "None",
+  "inputs": {
+    "aws_gd_format": "TXT",
+    "aws_gd_name": "Test 18",
+    "aws_gd_region": "us-east-1",
+    "aws_gd_location": "s3://test-threat-intel-set/malicious_ip.txt",
+    "aws_gd_client_token": "***",
+    "aws_gd_tags": "Severity:LOW, Mitigation:Possible",
+    "aws_gd_activate": "False",
+    "aws_gd_detector_id": "48bb********************b7ccbc82"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-aws-guardduty",
+    "package_version": "2.0.0",
+    "host": "localhost",
+    "execution_time_ms": 1303,
+    "timestamp": "2025-07-18 14:27:41"
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+inputs.aws_gd_region = incident.properties.aws_guardduty_region
+inputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id
+inputs.aws_gd_name = playbook.inputs.aws_gd_name
+inputs.aws_gd_activate = playbook.inputs.aws_gd_activate
+inputs.aws_gd_format = playbook.inputs.aws_gd_format
+inputs.aws_gd_location = playbook.inputs.aws_gd_location
+inputs.aws_gd_client_token = playbook.inputs.aws_gd_client_token
+inputs.aws_gd_tags = playbook.inputs.aws_gd_tags
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+#This is a Post-Processing Script for AWS GuardDuty Create ThreatIntelset
+
+FN_NAME = "aws_guardduty_create_threatintelset"
+WF_NAME = "AWS GuardDuty: Create ThreatIntelSet"
+
+results = playbook.functions.results.response_output
+
+note_text = f"Action ran for AWS Region: <b>{incident.properties.aws_guardduty_region}</b><br>"
+
+if results.content.status != 'error' and results.success:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Successfully executed for SOAR function <b>{FN_NAME}</b><br>"
+  if results.content:
+    response_body = results.get("content")
+    threat_intel_set_id = response_body.get("ThreatIntelSetId")
+    note_text += f"ThreatIntelSetId: {threat_intel_set_id}"
+else:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Execution error for SOAR function <b>{FN_NAME}</b><br>"
+  if results.reason is None:
+    note_text += f"<b>Reason:</b> {results.get('content').get('msg')}"
+  else:
+    note_text += f"<b>Reason:</b> {results.get('reason')}"
+incident.addNote(helper.createRichText(note_text))
+```
+</p>
+</details>
+
+---
+## Function - AWS GuardDuty: Get ThreatIntelSet
+SOAR function to read a threat intel set from AWS GuardDuty.
+
+![screenshot: fn-aws-guardduty-get-threatintelset ](./doc/screenshots/fn-aws-guardduty-get-threatintelset.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `aws_gd_detector_id` | `text` | Yes | `-` | AWS GuardDuty detector ID. |
+| `aws_gd_region` | `text` | Yes | `-` | AWS GuardDuty region. |
+| `aws_gd_threat_intel_set_id` | `text` | Yes | `-` | AWS GuardDuty unique id associated with a threatintelset. |
+
+
+</p>
+</details>
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "version": 2,
+  "success": "True",
+  "reason": "None",
+  "content": {
+    "Name": "Test 18",
+    "Format": "TXT",
+    "Location": "s3://test-threat-intel-set/malicious_ip.txt",
+    "Tags": {
+      "Mitigation": "Possible",
+      "Severity": "LOW"
+    },
+    "Status": "INACTIVE"
+  },
+  "raw": "None",
+  "inputs": {
+    "aws_gd_region": "us-east-1",
+    "aws_gd_detector_id": "48bb********************b7ccbc82",
+    "aws_gd_threat_intel_set_id": "114da827a1d0442b96f7039275b321e8"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-aws-guardduty",
+    "package_version": "2.0.0",
+    "host": "localhost",
+    "execution_time_ms": 972,
+    "timestamp": "2025-07-18 14:41:10"
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+inputs.aws_gd_region = incident.properties.aws_guardduty_region
+inputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id
+inputs.aws_gd_threat_intel_set_id = playbook.inputs.aws_gd_threat_intel_set_id
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+#This is a Post-Processing Script for AWS GuardDuty GET ThreatIntelset
+
+FN_NAME = "aws_guardduty_get_threatintelset"
+WF_NAME = "AWS GuardDuty: GET ThreatIntelSet"
+
+results = playbook.functions.results.response_output
+
+note_text = f"Action ran for AWS Region: <b>{incident.properties.aws_guardduty_region}</b><br>"
+
+if results.success:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Successfully executed for SOAR function <b>{FN_NAME}</b><br>"
+  if results.content:
+    response_body = results.get("content")
+    threat_intel_set_id = response_body.get("ThreatIntelSetId")
+    note_text += f"<b>Information about the ThreatIntelSet:</b><br>"
+    note_text += f"ThreatIntelSetId: {playbook.inputs.aws_gd_threat_intel_set_id}<br>"
+    note_text += f"Name: {response_body.get('Name')}<br>Format: {response_body.get('Format')}<br>Location: {response_body.get('Location')}<br>Status: {response_body.get('Status')}<br>Tags: {response_body.get('Tags')}<br>"
+else:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Execution error for SOAR function <b>{FN_NAME}</b><br>"
+  note_text += f"<b>Reason:</b> {results.get('reason')}"
+incident.addNote(helper.createRichText(note_text))
+```
+</p>
+</details>
+
+---
+## Function - AWS GuardDuty: List ThreatIntelSet
+SOAR function to read list of all threat intel sets from AWS GuardDuty.
+
+![screenshot: fn-aws-guardduty-list-threatintelset ](./doc/screenshots/fn-aws-guardduty-list-threatintelset.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `aws_gd_detector_id` | `text` | Yes | `-` | AWS GuardDuty detector ID. |
+| `aws_gd_region` | `text` | Yes | `-` | AWS GuardDuty region. |
+| `aws_gd_max_results` | `number` | No | `-` | AWS GuardDuty maximum number of results you want to retrieve. |
+| `aws_gd_next_token` | `text` | No | `-` | AWS GuardDuty pagination parameter to be used on the next list operation to retrieve more items. |
+
+
+</p>
+</details>
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "version": 2,
+  "success": "True",
+  "reason": "None",
+  "content": [
+    "114da827a1d0442b96f7039275b321e8",
+    "1acc0467837941db18401c6cd2e2287b",
+    "4face156778d48a3a06663dd461187ce",
+    "68e7855700034e989863db54335ae22b"
+  ],
+  "raw": "None",
+  "inputs": {
+    "aws_gd_max_results": 5,
+    "aws_gd_region": "us-east-1",
+    "aws_gd_next_token": "***",
+    "aws_gd_detector_id": "48bb********************b7ccbc82"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-aws-guardduty",
+    "package_version": "2.0.0",
+    "hoat": "localhost",
+    "execution_time_ms": 1080,
+    "timestamp": "2025-07-18 14:54:25"
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+inputs.aws_gd_region = incident.properties.aws_guardduty_region
+inputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id
+inputs.aws_gd_max_results = playbook.inputs.aws_gd_max_results
+inputs.aws_gd_next_token = playbook.inputs.aws_gd_next_token
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+#This is a Post-Processing Script for AWS GuardDuty List ThreatIntelset
+
+FN_NAME = "aws_guardduty_list_threatintelset"
+WF_NAME = "AWS GuardDuty: List ThreatIntelSet"
+
+results = playbook.functions.results.response_output
+
+note_text = f"Action ran for AWS Region: <b>{incident.properties.aws_guardduty_region}</b><br>"
+
+if results.content and results.success:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Successfully executed for SOAR function <b>{FN_NAME}</b><br>"
+  if results.content:
+    threat_intel_set_ids = results.get("content")
+    note_text += f"<b>Listing all the ThreatIntelSetIds:</b><br>{threat_intel_set_ids}"
+else:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Execution error for SOAR function <b>{FN_NAME}</b><br>"
+  if results.reason is None:
+    note_text += f"<b>Reason:</b> No ThreatIntelSets found on AWS GuardDuty for this region"
+  else:
+    note_text += f"<b>Reason:</b> {results.get('reason')}"
+incident.addNote(helper.createRichText(note_text))
+```
+</p>
+</details>
+
+---
+## Function - AWS GuardDuty: Update ThreatIntelSet
+SOAR function to update an existing threat intel set on AWS GuardDuty.
+
+![screenshot: fn-aws-guardduty-update-threatintelset ](./doc/screenshots/fn-aws-guardduty-update-threatintelset.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `aws_gd_detector_id` | `text` | Yes | `-` | AWS GuardDuty detector ID. |
+| `aws_gd_region` | `text` | Yes | `-` | AWS GuardDuty region. |
+| `aws_gd_threat_intel_set_id` | `text` | Yes | `-` | AWS GuardDuty unique id associated with a threatintelset. |
+| `aws_gd_new_name` | `text` | No | `-` | AWS GuardDuty new name for the threatintelset. |
+| `aws_gd_new_location` | `text` | No | `s3://example_bucket/example.txt` | AWS GuardDuty threatintelset new file location. URI can be retrieved from AWS S3 bucket. |
+| `aws_gd_new_activate` | `boolean` | No | `-` | AWS GuardDuty update threatintelset new activation status. True indicates that the AWS GuardDuty can use this threatintelset in AWS GuardDuty findings. |
+
+
+</p>
+</details>
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "version": 2,
+  "success": "True",
+  "reason": "None",
+  "content": {
+    "ResponseMetadata": {
+      "RequestId": "ef9c6a36-1a25-495c-b193-59a45e5764c5",
+      "HTTPStatusCode": 200,
+      "HTTPHeaders": {
+        "date": "Fri, 18 Jul 2025 14:11:35 GMT",
+        "content-type": "application/json",
+        "content-length": "0",
+        "connection": "***",
+        "x-amzn-requestid": "ef9c6a36-1a25-495c-b193-59a45e5764c5",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-Content-Sha256,X-Amz-User-Agent,*,Date,X-Amz-Target,x-amzn-platform-id,x-amzn-trace-id",
+        "x-amz-apigw-id": "N6JjrHLdIAMEt8Q=",
+        "access-control-expose-headers": "x-amzn-ErrorType,x-amzn-requestid,x-amzn-errormessage,x-amzn-trace-id,x-amz-apigw-id,Date",
+        "x-amzn-trace-id": "Root=1-687a5617-2f62a30c63bb69fb29504207;Parent=3aba685ead709b1f;Sampled=0;Lineage=1:c7568072:0",
+        "access-control-max-age": "86400"
+      },
+      "RetryAttempts": 0
+    },
+    "status": "ok"
+  },
+  "raw": "None",
+  "inputs": {
+    "aws_gd_new_location": "None",
+    "aws_gd_region": "us-east-1",
+    "aws_gd_new_name": "New Test 18",
+    "aws_gd_detector_id": "48bb********************b7ccbc82",
+    "aws_gd_threat_intel_set_id": "4face156778d48a3a06663dd461187ce",
+    "aws_gd_new_activate": "None"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-aws-guardduty",
+    "package_version": "2.0.0",
+    "host": "localhost",
+    "execution_time_ms": 1269,
+    "timestamp": "2025-07-18 15:11:35"
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+inputs.aws_gd_region = incident.properties.aws_guardduty_region
+inputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id
+inputs.aws_gd_threat_intel_set_id = playbook.inputs.aws_gd_threat_intel_set_id
+inputs.aws_gd_new_name = playbook.inputs.aws_gd_new_name
+inputs.aws_gd_new_location = playbook.inputs.aws_gd_new_location
+inputs.aws_gd_new_activate = playbook.inputs.aws_gd_new_activate
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+#This is a Post-Processing Script for AWS GuardDuty Update ThreatIntelset
+
+FN_NAME = "aws_guardduty_update_threatintelset"
+WF_NAME = "AWS GuardDuty: Update ThreatIntelSet"
+
+results = playbook.functions.results.response_output
+
+note_text = f"Action ran for AWS Region: <b>{incident.properties.aws_guardduty_region}</b><br>"
+
+if results.content.status != 'error' and results.success:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Successfully executed for SOAR function <b>{FN_NAME}</b><br>"
+  if results.content:
+    response_body = results.get("content")
+    response_status = response_body.get("status")
+    note_text += f"<b>Status of request:</b> {response_status}<br>"
+else:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Execution error for SOAR function <b>{FN_NAME}</b><br>"
+  if results.reason is None:
+    note_text += f"<b>Reason:</b> {results.get('content').get('msg')}"
+  else:
+    note_text += f"<b>Reason:</b> {results.get('reason')}"
+incident.addNote(helper.createRichText(note_text))
+```
+</p>
+</details>
+
+---
+## Function - AWS GuardDuty: Delete ThreatIntelSet
+SOAR function to delete a threat intel set from AWS GuardDuty.
+
+![screenshot: fn-aws-guardduty-delete-threatintelset ](./doc/screenshots/fn-aws-guardduty-delete-threatintelset.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `aws_gd_detector_id` | `text` | Yes | `-` | AWS GuardDuty detector ID. |
+| `aws_gd_region` | `text` | Yes | `-` | AWS GuardDuty region. |
+| `aws_gd_threat_intel_set_id` | `text` | Yes | `-` | AWS GuardDuty unique id associated with a threatintelset. |
+
+
+</p>
+</details>
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "version": 2,
+  "success": "True",
+  "reason": "None",
+  "content": {
+    "ResponseMetadata": {
+      "RequestId": "070495ba-88a7-4c18-93f7-a0d89136763d",
+      "HTTPStatusCode": 200,
+      "HTTPHeaders": {
+        "date": "Fri, 18 Jul 2025 14:25:30 GMT",
+        "content-type": "application/json",
+        "content-length": "0",
+        "connection": "***",
+        "x-amzn-requestid": "070495ba-88a7-4c18-93f7-a0d89136763d",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-Content-Sha256,X-Amz-User-Agent,*,Date,X-Amz-Target,x-amzn-platform-id,x-amzn-trace-id",
+        "x-amz-apigw-id": "N6LlsGaZIAMEqpw=",
+        "access-control-expose-headers": "x-amzn-ErrorType,x-amzn-requestid,x-amzn-errormessage,x-amzn-trace-id,x-amz-apigw-id,Date",
+        "x-amzn-trace-id": "Root=1-687a5957-396bfc5e5ec974a90850c898;Parent=166ae2d7206e62ff;Sampled=0;Lineage=1:511d78a8:0",
+        "access-control-max-age": "86400"
+      },
+      "RetryAttempts": 0
+    },
+    "status": "ok"
+  },
+  "raw": "None",
+  "inputs": {
+    "aws_gd_region": "us-east-1",
+    "aws_gd_detector_id": "48bb********************b7ccbc82",
+    "aws_gd_threat_intel_set_id": "1acc0467837941db18401c6cd2e2287b"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-aws-guardduty",
+    "package_version": "2.0.0",
+    "host": "localhost",
+    "execution_time_ms": 3659,
+    "timestamp": "2025-07-18 15:25:30"
+  }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+inputs.aws_gd_region = incident.properties.aws_guardduty_region
+inputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id
+inputs.aws_gd_threat_intel_set_id = playbook.inputs.aws_gd_threat_intel_set_id
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+#This is a Post-Processing Script for AWS GuardDuty Delete ThreatIntelset
+
+FN_NAME = "aws_guardduty_delete_threatintelset"
+WF_NAME = "AWS GuardDuty: Delete ThreatIntelSet"
+
+results = playbook.functions.results.response_output
+
+note_text = f"Action ran for AWS Region: <b>{incident.properties.aws_guardduty_region}</b><br>"
+
+if results.content.status != 'error' and results.success:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Successfully executed for SOAR function <b>{FN_NAME}</b><br>"
+  if results.content:
+    response_body = results.get("content")
+    note_text += f"ThreatIntelSet Deleted: {playbook.inputs.aws_gd_threat_intel_set_id}<br>"
+    note_text += f"<b>Status of request:</b> {response_body.get('status')}"
+else:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Execution error for SOAR function <b>{FN_NAME}</b><br>"
+  if results.reason is None:
+    note_text += f"<b>Reason:</b> {results.get('content').get('msg')}"
+  else:
+    note_text += f"<b>Reason:</b> {results.get('reason')}"
+incident.addNote(helper.createRichText(note_text))
+```
+</p>
+</details>
+
+---
+## Function - AWS GuardDuty: Create IPSet
+SOAR function to create a new ip set on AWS GuardDuty.
+
+![screenshot: fn-aws-guardduty-create-ipset ](./doc/screenshots/fn-aws-guardduty-create-ipset.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `aws_gd_detector_id` | `text` | Yes | `-` | AWS GuardDuty detector ID. |
+| `aws_gd_region` | `text` | Yes | `-` | AWS GuardDuty region. |
+| `aws_gd_name` | `text` | Yes | `-` | AWS GuardDuty ipset name that we specify. |
+| `aws_gd_format` | `text` | Yes | `TXT, STIX, OTX_CSV, ALIEN_VAULT, PROOF_POINT, FIRE_EYE` | AWS GuardDuty file format for the ipset. |
+| `aws_gd_location` | `text` | Yes | `s3://example_bucket/example.txt` | AWS GuardDuty ipset file location. URI can be retrieved from AWS S3 bucket. |
+| `aws_gd_activate` | `boolean` | Yes | `-` | AWS GuardDuty ipset activation. True indicates that the AWS GuardDuty can use this ipset in AWS GuardDuty findings. |
+| `aws_gd_client_token` | `text` | No | `-` | AWS GuardDuty ipset idempotency token. (Autopopulated when not specified)|
+| `aws_gd_tags` | `text` | No | `-` | AWS GuardDuty tags. These are key-value pairs used to categorize and manage the ipset lists. It is also a form of metadata which gives more insights about the resource. |
+| `aws_gd_bucket_owner` | `text` | No | `-` | AWS GuardDuty S3 bucket owner account id. |
+
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+    "version": 2,
+    "success": "True",
+    "reason": "None",
+    "content": {
+      "ResponseMetadata": {
+        "RequestId": "1be8305d-f302-4301-8f00-4a6d15c0a821",
+        "HTTPStatusCode": 200,
+        "HTTPHeaders": {
+          "date": "Mon, 21 Jul 2025 15:52:24 GMT",
+          "content-type": "application/json",
+          "content-length": "46",
+          "connection": "***",
+          "x-amzn-requestid": "1be8305d-f302-4301-8f00-4a6d15c0a821",
+          "access-control-allow-origin": "*",
+          "access-control-allow-headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-Content-Sha256,X-Amz-User-Agent,*,Date,X-Amz-Target,x-amzn-platform-id,x-amzn-trace-id",
+          "x-amz-apigw-id": "OERH2EjfIAMEVrA=",
+          "access-control-expose-headers": "x-amzn-ErrorType,x-amzn-requestid,x-amzn-errormessage,x-amzn-trace-id,x-amz-apigw-id,Date",
+          "x-amzn-trace-id": "Root=1-687e6231-7b0f093571c8dbf50752f9d2;Parent=0774277cbf97c298;Sampled=0;Lineage=1:d3f66639:0",
+          "access-control-max-age": "86400"
+        },
+        "RetryAttempts": 0
+      },
+      "IpSetId": "6c4c7290f81b40ab85e298a785b1db38",
+      "status": "ok"
+    },
+    "raw": "None",
+    "inputs": {
+      "aws_gd_format": "TXT",
+      "aws_gd_bucket_owner": "None",
+      "aws_gd_name": "Test 21",
+      "aws_gd_region": "us-east-1",
+      "aws_gd_location": "s3://test-ip-set/trusted_ip.txt",
+      "aws_gd_client_token": "***",
+      "aws_gd_tags": "Owner: Hydra",
+      "aws_gd_activate": "True",
+      "aws_gd_detector_id": "48bb********************b7ccbc82"
+    },
+    "metrics": {
+      "version": "1.0",
+      "package": "fn-aws-guardduty",
+      "package_version": "2.0.0",
+      "host": "localhost",
+      "execution_time_ms": 8094,
+      "timestamp": "2025-07-21 16:52:24"
+    }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+inputs.aws_gd_region = incident.properties.aws_guardduty_region
+inputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id
+inputs.aws_gd_name = playbook.inputs.aws_gd_name
+inputs.aws_gd_activate = playbook.inputs.aws_gd_activate
+inputs.aws_gd_format = playbook.inputs.aws_gd_format
+inputs.aws_gd_location = playbook.inputs.aws_gd_location
+inputs.aws_gd_client_token = playbook.inputs.aws_gd_client_token
+inputs.aws_gd_tags = playbook.inputs.aws_gd_tags
+inputs.aws_gd_bucket_owner = playbook.inputs.aws_gd_bucket_owner
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+#This is a Post-Processing Script for AWS GuardDuty Create IPset
+
+FN_NAME = "aws_guardduty_create_ipset"
+WF_NAME = "AWS GuardDuty: Create IPSet"
+
+results = playbook.functions.results.response_output
+
+note_text = f"Action ran for AWS Region: <b>{incident.properties.aws_guardduty_region}</b><br>"
+
+if results.content.status != 'error' and results.success:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Successfully executed for SOAR function <b>{FN_NAME}</b><br>"
+  if results.content:
+    response_body = results.get("content")
+    ip_set_id = response_body.get("IpSetId")
+    note_text += f"IPSetId: {ip_set_id}"
+else:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Execution error for SOAR function <b>{FN_NAME}</b><br>"
+  if results.reason is None:
+    note_text += f"<b>Reason:</b> {results.get('content').get('msg')}"
+  else:
+    note_text += f"<b>Reason:</b> {results.get('reason')}"
+incident.addNote(helper.createRichText(note_text))
+```
+</p>
+</details>
+
+---
+## Function - AWS GuardDuty: Get IPSet
+SOAR function to read a ip set from AWS GuardDuty.
+
+![screenshot: fn-aws-guardduty-get-ipset ](./doc/screenshots/fn-aws-guardduty-get-ipset.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `aws_gd_detector_id` | `text` | Yes | `-` | AWS GuardDuty detector ID. |
+| `aws_gd_region` | `text` | Yes | `-` | AWS GuardDuty region. |
+| `aws_gd_ip_set_id` | `text` | Yes | `-` | AWS GuardDuty unique id associated with a ipset. |
+
+
+</p>
+</details>
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+    "version": 2,
+    "success": "True",
+    "reason": "None",
+    "content": {
+      "Name": "Test 21",
+      "Format": "TXT",
+      "Location": "s3://test-ip-set/trusted_ip.txt",
+      "Tags": {
+        "Owner": "Hydra"
+      },
+      "Status": "ACTIVE"
+    },
+    "raw": "None",
+    "inputs": {
+      "aws_gd_region": "us-east-1",
+      "aws_gd_ip_set_id": "6c4c7290f81b40ab85e298a785b1db38",
+      "aws_gd_detector_id": "48bb********************b7ccbc82"
+    },
+    "metrics": {
+      "version": "1.0",
+      "package": "fn-aws-guardduty",
+      "package_version": "2.0.0",
+      "host": "localhost",
+      "execution_time_ms": 720,
+      "timestamp": "2025-07-23 10:20:20"
+    }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+inputs.aws_gd_region = incident.properties.aws_guardduty_region
+inputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id
+inputs.aws_gd_ip_set_id = playbook.inputs.aws_gd_ip_set_id
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+#This is a Post-Processing Script for AWS GuardDuty GET IPset
+
+FN_NAME = "aws_guardduty_get_ipset"
+WF_NAME = "AWS GuardDuty: GET IPSet"
+
+results = playbook.functions.results.response_output
+
+note_text = f"Action ran for AWS Region: <b>{incident.properties.aws_guardduty_region}</b><br>"
+
+if results.success:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Successfully executed for SOAR function <b>{FN_NAME}</b><br>"
+  if results.content:
+    response_body = results.get("content")
+    ip_set_id = response_body.get("IpSetId")
+    note_text += f"<b>Information about the IPSet:</b><br>"
+    note_text += f"IPSetId: {playbook.inputs.aws_gd_ip_set_id}<br>"
+    note_text += f"Name: {response_body.get('Name')}<br>Format: {response_body.get('Format')}<br>Location: {response_body.get('Location')}<br>Status: {response_body.get('Status')}<br>Tags: {response_body.get('Tags')}<br>BucketOwner: {response_body.get('ExpectedBucketOwner')}<br>"
+else:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Execution error for SOAR function <b>{FN_NAME}</b><br>"
+  note_text += f"<b>Reason:</b> {results.get('reason')}"
+incident.addNote(helper.createRichText(note_text))
+```
+</p>
+</details>
+
+---
+## Function - AWS GuardDuty: List IPSet
+SOAR function to read list of all ip sets from AWS GuardDuty.
+
+![screenshot: fn-aws-guardduty-list-ipset ](./doc/screenshots/fn-aws-guardduty-list-ipset.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `aws_gd_detector_id` | `text` | Yes | `-` | AWS GuardDuty detector ID. |
+| `aws_gd_region` | `text` | Yes | `-` | AWS GuardDuty region. |
+| `aws_gd_max_results` | `number` | No | `-` | AWS GuardDuty maximum number of results you want to retrieve. |
+| `aws_gd_next_token` | `text` | No | `-` | AWS GuardDuty pagination parameter to be used on the next list operation to retrieve more items. |
+
+
+</p>
+</details>
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+    "version": 2,
+    "success": "True",
+    "reason": "None",
+    "content": [
+      "6c4c7290f81b40ab85e298a785b1db38"
+    ],
+    "raw": "None",
+    "inputs": {
+      "aws_gd_max_results": 5,
+      "aws_gd_region": "us-east-1",
+      "aws_gd_next_token": "***",
+      "aws_gd_detector_id": "48bb********************b7ccbc82"
+    },
+    "metrics": {
+      "version": "1.0",
+      "package": "fn-aws-guardduty",
+      "package_version": "2.0.0",
+      "host": "localhost",
+      "execution_time_ms": 698,
+      "timestamp": "2025-07-23 15:54:02"
+    }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+inputs.aws_gd_region = incident.properties.aws_guardduty_region
+inputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id
+inputs.aws_gd_max_results = playbook.inputs.aws_gd_max_results
+inputs.aws_gd_next_token = playbook.inputs.aws_gd_next_token
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+#This is a Post-Processing Script for AWS GuardDuty List IPset
+
+FN_NAME = "aws_guardduty_list_ip_set"
+WF_NAME = "AWS GuardDuty: List IPSet"
+
+results = playbook.functions.results.response_output
+
+note_text = f"Action ran for AWS Region: <b>{incident.properties.aws_guardduty_region}</b><br>"
+
+if results.content and results.success:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Successfully executed for SOAR function <b>{FN_NAME}</b><br>"
+  if results.content:
+    ip_set_ids = results.get("content")
+    note_text += f"<b>Listing all the IPSetIds:</b><br>{ip_set_ids}"
+else:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Execution error for SOAR function <b>{FN_NAME}</b><br>"
+  if results.reason is None:
+    note_text += f"<b>Reason:</b> No IPSets found on AWS GuardDuty for this region"
+  else:
+    note_text += f"<b>Reason:</b> {results.get('reason')}"
+incident.addNote(helper.createRichText(note_text))
+```
+</p>
+</details>
+
+---
+## Function - AWS GuardDuty: Update IPSet
+SOAR function to update an existing ip set on AWS GuardDuty.
+
+![screenshot: fn-aws-guardduty-update-ipset ](./doc/screenshots/fn-aws-guardduty-update-ipset.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `aws_gd_detector_id` | `text` | Yes | `-` | AWS GuardDuty detector ID. |
+| `aws_gd_region` | `text` | Yes | `-` | AWS GuardDuty region. |
+| `aws_gd_threat_intel_set_id` | `text` | Yes | `-` | AWS GuardDuty unique id associated with a ipset. |
+| `aws_gd_new_name` | `text` | No | `-` | AWS GuardDuty new name for the ipset. |
+| `aws_gd_new_location` | `text` | No | `s3://example_bucket/example.txt` | AWS GuardDuty ipset new file location. URI can be retrieved from AWS S3 bucket. |
+| `aws_gd_new_activate` | `boolean` | No | `-` | AWS GuardDuty update ipset new activation status. True indicates that the AWS GuardDuty can use this ipset in AWS GuardDuty findings. |
+| `aws_gd_bucket_owner` | `text` | No | `-` | AWS GuardDuty S3 bucket owner account id. |
+
+
+</p>
+</details>
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+    "version": 2,
+    "success": "True",
+    "reason": "None",
+    "content": {
+      "ResponseMetadata": {
+        "RequestId": "1b12ee00-ad22-4282-acdd-b00392e7cf9b",
+        "HTTPStatusCode": 200,
+        "HTTPHeaders": {
+          "date": "Thu, 24 Jul 2025 15:30:47 GMT",
+          "content-type": "application/json",
+          "content-length": "0",
+          "connection": "***",
+          "x-amzn-requestid": "1b12ee00-ad22-4282-acdd-b00392e7cf9b",
+          "access-control-allow-origin": "*",
+          "access-control-allow-headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-Content-Sha256,X-Amz-User-Agent,*,Date,X-Amz-Target,x-amzn-platform-id,x-amzn-trace-id",
+          "x-amz-apigw-id": "OOGyPEGLoAMEjtg=",
+          "access-control-expose-headers": "x-amzn-ErrorType,x-amzn-requestid,x-amzn-errormessage,x-amzn-trace-id,x-amz-apigw-id,Date",
+          "x-amzn-trace-id": "Root=1-688251a7-3dff520410c0e6d3091b3ec1;Parent=03617a02703ed4c9;Sampled=0;Lineage=1:f75216a5:0",
+          "access-control-max-age": "86400"
+        },
+        "RetryAttempts": 0
+      },
+      "status": "ok"
+    },
+    "raw": "None",
+    "inputs": {
+      "aws_gd_new_location": "None",
+      "aws_gd_bucket_owner": "None",
+      "aws_gd_region": "us-east-1",
+      "aws_gd_new_name": "None",
+      "aws_gd_ip_set_id": "6c4c7290f81b40ab85e298a785b1db38",
+      "aws_gd_detector_id": "48bb********************b7ccbc82",
+      "aws_gd_new_activate": "False"
+    },
+    "metrics": {
+      "version": "1.0",
+      "package": "fn-aws-guardduty",
+      "package_version": "2.0.0",
+      "host": "localhost",
+      "execution_time_ms": 1573,
+      "timestamp": "2025-07-24 16:30:47"
+    }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+inputs.aws_gd_region = incident.properties.aws_guardduty_region
+inputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id
+inputs.aws_gd_ip_set_id = playbook.inputs.aws_gd_ip_set_id
+inputs.aws_gd_new_name = playbook.inputs.aws_gd_new_name
+inputs.aws_gd_new_location = playbook.inputs.aws_gd_new_location
+inputs.aws_gd_new_activate = playbook.inputs.aws_gd_new_activate
+inputs.aws_gd_bucket_owner = playbook.inputs.aws_gd_bucket_owner
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+#This is a Post-Processing Script for AWS GuardDuty Update IPset
+
+FN_NAME = "aws_guardduty_update_ipset"
+WF_NAME = "AWS GuardDuty: Update IPSet"
+
+results = playbook.functions.results.response_output
+
+note_text = f"Action ran for AWS Region: <b>{incident.properties.aws_guardduty_region}</b><br>"
+
+if results.content.status != 'error' and results.success:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Successfully executed for SOAR function <b>{FN_NAME}</b><br>"
+  if results.content:
+    response_body = results.get("content")
+    response_status = response_body.get("status")
+    note_text += f"<b>Status of request:</b> {response_status}<br>"
+else:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Execution error for SOAR function <b>{FN_NAME}</b><br>"
+  if results.reason is None:
+    note_text += f"<b>Reason:</b> {results.get('content').get('msg')}"
+  else:
+    note_text += f"<b>Reason:</b> {results.get('reason')}"
+incident.addNote(helper.createRichText(note_text))
+```
+</p>
+</details>
+
+---
+## Function - AWS GuardDuty: Delete IPSet
+SOAR function to delete a ip set from AWS GuardDuty.
+
+![screenshot: fn-aws-guardduty-delete-ipset ](./doc/screenshots/fn-aws-guardduty-delete-ipset.png)
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `aws_gd_detector_id` | `text` | Yes | `-` | AWS GuardDuty detector ID. |
+| `aws_gd_region` | `text` | Yes | `-` | AWS GuardDuty region. |
+| `aws_gd_ip_set_id` | `text` | Yes | `-` | AWS GuardDuty unique id associated with a ipset. |
+
+
+</p>
+</details>
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+    "version": 2,
+    "success": "True",
+    "reason": "None",
+    "content": {
+      "ResponseMetadata": {
+        "RequestId": "5b6eb26f-29f2-42fd-997f-6617dd1c2e40",
+        "HTTPStatusCode": 200,
+        "HTTPHeaders": {
+          "date": "Fri, 25 Jul 2025 10:58:36 GMT",
+          "content-type": "application/json",
+          "content-length": "0",
+          "connection": "***",
+          "x-amzn-requestid": "5b6eb26f-29f2-42fd-997f-6617dd1c2e40",
+          "access-control-allow-origin": "*",
+          "access-control-allow-headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-Content-Sha256,X-Amz-User-Agent,*,Date,X-Amz-Target,x-amzn-platform-id,x-amzn-trace-id",
+          "x-amz-apigw-id": "OQx2fHRDIAMEnfQ=",
+          "access-control-expose-headers": "x-amzn-ErrorType,x-amzn-requestid,x-amzn-errormessage,x-amzn-trace-id,x-amz-apigw-id,Date",
+          "x-amzn-trace-id": "Root=1-6883635c-4177cf1b3b77b0c042d84c30;Parent=34bf08862f02b77e;Sampled=0;Lineage=1:7ef22fc1:0",
+          "access-control-max-age": "86400"
+        },
+        "RetryAttempts": 0
+      },
+      "status": "ok"
+    },
+    "raw": "None",
+    "inputs": {
+      "aws_gd_region": "us-east-1",
+      "aws_gd_ip_set_id": "6c4c7290f81b40ab85e298a785b1db38",
+      "aws_gd_detector_id": "48bb********************b7ccbc82"
+    },
+    "metrics": {
+      "version": "1.0",
+      "package": "fn-aws-guardduty",
+      "package_version": "2.0.0",
+      "host": "localhost",
+      "execution_time_ms": 4106,
+      "timestamp": "2025-07-25 11:58:36"
+    }
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+inputs.aws_gd_region = incident.properties.aws_guardduty_region
+inputs.aws_gd_detector_id = incident.properties.aws_guardduty_detector_id
+inputs.aws_gd_ip_set_id = playbook.inputs.aws_gd_ip_set_id
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+#This is a Post-Processing Script for AWS GuardDuty Delete IPset
+
+FN_NAME = "aws_guardduty_delete_IPset"
+WF_NAME = "AWS GuardDuty: Delete IPSet"
+
+results = playbook.functions.results.response_output
+
+note_text = f"Action ran for AWS Region: <b>{incident.properties.aws_guardduty_region}</b><br>"
+
+if results.content.status != 'error' and results.success:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Successfully executed for SOAR function <b>{FN_NAME}</b><br>"
+  if results.content:
+    response_body = results.get("content")
+    note_text += f"IPSet Deleted: {playbook.inputs.aws_gd_ip_set_id}<br>"
+    note_text += f"<b>Status of request:</b> {response_body.get('status')}"
+else:
+  note_text += f"AWS GuardDuty: Playbook: <b>{WF_NAME}</b><br>Execution error for SOAR function <b>{FN_NAME}</b><br>"
+  if results.reason is None:
+    note_text += f"<b>Reason:</b> {results.get('content').get('msg')}"
+  else:
+    note_text += f"<b>Reason:</b> {results.get('reason')}"
+incident.addNote(helper.createRichText(note_text))
+```
+</p>
+</details>
+
+---
 
 
 ## Playbooks
@@ -768,6 +1953,16 @@ if __name__ == "__main__":
 | Example: AWS GuardDuty: Archive Finding (PB) | A SOAR playbook to archive an AWS GuardDuty finding when the corresponding incident is closed. | Automatic | incident | `enabled` | `incident.plan_status changed_to Closed AND incident.properties.aws_guardduty_archived not_equals True AND incident.properties.aws_guardduty_detector_id has_a_value AND incident.properties.aws_guardduty_finding_id has_a_value AND incident.properties.aws_guardduty_region has_a_value` | 
 | Example: AWS GuardDuty: Refresh Finding Details (PB) | A SOAR playbook to refresh or update AWS GuardDuty finding details in an incident. | Manual | incident | `enabled` | `incident.properties.aws_guardduty_detector_id has_a_value AND incident.properties.aws_guardduty_finding_id has_a_value AND incident.properties.aws_guardduty_region has_a_value` | 
 | Example: AWS GuardDuty: Update Finding Details (PB) | None | Automatic | incident | `enabled` | `incident.properties.aws_guardduty_detector_id has_a_value AND incident.properties.aws_guardduty_finding_id has_a_value AND incident.properties.aws_guardduty_finding_updated_at has_a_value AND incident.properties.aws_guardduty_region has_a_value AND incident.properties.aws_guardduty_trigger_refresh changed AND incident.properties.aws_guardduty_trigger_refresh equals True` | 
+| AWS GuardDuty: Create ThreatIntelSet (PB) | SOAR function to create a new threat intel set on AWS GuardDuty. | Manual | incident | `enabled` | `incident.properties.aws_guardduty_detector_id has_a_value AND incident.properties.aws_guardduty_region has_a_value` |
+| AWS GuardDuty: GET ThreatIntelSet (PB) | SOAR function to read a threat intel set from AWS GuardDuty. | Manual | incident | `enabled` | `incident.properties.aws_guardduty_detector_id has_a_value AND incident.properties.aws_guardduty_region has_a_value` |
+| AWS GuardDuty: List ThreatIntelSet (PB) | SOAR function to read list of all threat intel sets from AWS GuardDuty. | Manual | incident | `enabled` | `incident.properties.aws_guardduty_detector_id has_a_value AND incident.properties.aws_guardduty_region has_a_value` |
+| AWS GuardDuty: Update ThreatIntelSet (PB) | SOAR function to update an existing threat intel set on AWS GuardDuty. | Manual | incident | `enabled` | `incident.properties.aws_guardduty_detector_id has_a_value AND incident.properties.aws_guardduty_region has_a_value` |
+| AWS GuardDuty: Delete ThreatIntelSet (PB) | SOAR function to delete a threat intel set from AWS GuardDuty. | Manual | incident | `enabled` | `incident.properties.aws_guardduty_detector_id has_a_value AND incident.properties.aws_guardduty_region has_a_value` |
+| AWS GuardDuty: Create IPSet (PB) | SOAR function to create a new ip set on AWS GuardDuty. | Manual | incident | `enabled` | `incident.properties.aws_guardduty_detector_id has_a_value AND incident.properties.aws_guardduty_region has_a_value` |
+| AWS GuardDuty: GET IPSet (PB) | SOAR function to read a ip set from AWS GuardDuty. | Manual | incident | `enabled` | `incident.properties.aws_guardduty_detector_id has_a_value AND incident.properties.aws_guardduty_region has_a_value` |
+| AWS GuardDuty: List IPSet (PB) | SOAR function to read list of all ip sets from AWS GuardDuty. | Manual | incident | `enabled` | `incident.properties.aws_guardduty_detector_id has_a_value AND incident.properties.aws_guardduty_region has_a_value` |
+| AWS GuardDuty: Update IPSet (PB) | SOAR function to update an existing ip set on AWS GuardDuty. | Manual | incident | `enabled` | `incident.properties.aws_guardduty_detector_id has_a_value AND incident.properties.aws_guardduty_region has_a_value` |
+| AWS GuardDuty: Delete IPSet (PB) | SOAR function to delete a ip set from AWS GuardDuty. | Manual | incident | `enabled` | `incident.properties.aws_guardduty_detector_id has_a_value AND incident.properties.aws_guardduty_region has_a_value` |
 
 ---
 
@@ -935,7 +2130,14 @@ gd_resource_affected
 
 ---
 
+## AWS GuardDuty Troubleshooting
+*AccessDeniedException --> HTTP Status Code: 403
+*BadRequestException --> HTTP Status Code: 400
+*InternalServerErrorException --> HTTP Status Code: 500
 
+*Implementing CRUD functionality for ThreatIntelSets/IPSets depend a lot on the region which you are choosing. There might be cases where you feel the result should be visible but get an error of BadRequestException.
+Example: Region us-east-1 has a threatintelset but when running the list function to see all the threatintelsets, it fails. One of the reasons could be that you are running this playbook for a different region. 
+Remedy: Cross verify the AWS region for which you are running the playbook and what you see the region on AWS GuardDuty environment for those ThreatIntelSets/IPSets.
 
 ## Troubleshooting & Support
 Refer to the documentation listed in the Requirements section for troubleshooting information.
