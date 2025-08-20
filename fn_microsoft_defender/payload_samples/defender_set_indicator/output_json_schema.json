@@ -1,0 +1,148 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "indicatorValue": {
+          "type": "string"
+        },
+        "indicatorType": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "category": {},
+        "application": {},
+        "educateUrl": {},
+        "bypassDurationHours": {
+          "type": "boolean"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "recommendedActions": {},
+        "creationTimeDateTimeUtc": {
+          "type": "string"
+        },
+        "expirationTime": {},
+        "lastUpdateTime": {
+          "type": "string"
+        },
+        "lastUpdatedBy": {},
+        "rbacGroupNames": {
+          "type": "array"
+        },
+        "rbacGroupIds": {
+          "type": "array"
+        },
+        "notificationId": {},
+        "notificationBody": {},
+        "version": {},
+        "mitreTechniques": {
+          "type": "array"
+        },
+        "historicalDetection": {
+          "type": "boolean"
+        },
+        "lookBackPeriod": {},
+        "generateAlert": {
+          "type": "boolean"
+        },
+        "additionalInfo": {},
+        "createdByDisplayName": {
+          "type": "string"
+        },
+        "externalId": {},
+        "createdBySource": {
+          "type": "string"
+        },
+        "certificateInfo": {},
+        "creationTimeDateTimeUtc_ts": {
+          "type": "integer"
+        },
+        "expirationTime_ts": {},
+        "lastUpdateTime_ts": {
+          "type": "integer"
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "defender_indicator_type": {
+          "type": "string"
+        },
+        "defender_title": {
+          "type": "string"
+        },
+        "defender_description": {
+          "type": "string"
+        },
+        "defender_expiration_time": {},
+        "defender_indicator_action": {
+          "type": "string"
+        },
+        "defender_indicator_id": {
+          "type": "string"
+        },
+        "defender_indicator_value": {
+          "type": "string"
+        },
+        "defender_severity": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
