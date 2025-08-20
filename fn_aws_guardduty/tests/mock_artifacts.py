@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """Generate Mock responses to simulate AWS IAM for Unit and function tests """
 
 import datetime
 from dateutil.tz import tzlocal
+PACKAGE_NAME = "fn_aws_guardduty"
 
 def get_mock_config():
     config_data = u"""[fn_aws_guardduty]
@@ -254,6 +255,99 @@ def get_cli_raw_responses(op):
                                                   'x-amzn-trace-id': 'Root=1-6013f9ff-7991c29e4458ff242c99d482;Sampled=0',
                                                   'connection': 'keep-alive', 'date': 'Fri, 29 Jan 2021 12:05:19 GMT',
                                                   'content-type': 'application/json'}}}
+        ),
+        "create_threat_intel_set": (
+            {"ResponseMetadata": {"RequestId": "0*****59-****-4979-***-3bd4*****bd5", "HTTPStatusCode": 200,
+                                  "HTTPHeaders": {"date": "Tue, 08 Jul 2025 11:13:46 GMT", "content-type": "application/json",
+                                                  "content-length": "55", "connection": "***", "x-amzn-requestid": "0f34d359-7d9e-4979-8fbc-3bd4c470dbd5",
+                                                  "access-control-allow-origin": "*", "access-control-allow-headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-Content-Sha256,X-Amz-User-Agent,*,Date,X-Amz-Target,x-amzn-platform-id,x-amzn-trace-id",
+                                                  "x-amz-apigw-id": "NYyIqFy0IAMESWw=", "access-control-expose-headers": "x-amzn-ErrorType,x-amzn-requestid,x-amzn-errormessage,x-amzn-trace-id,x-amz-apigw-id,Date",
+                                                  "x-amzn-trace-id": "Root=1-686cfd6a-31585aab06b339265bf15054;Parent=5e2b327b5ea316b8;Sampled=0;Lineage=1:045398e1:0",
+                                                  "access-control-max-age": "86400"},
+                                  "RetryAttempts": 0},
+             "ThreatIntelSetId": "224f40264075481b8eeb999c7eadf7f8",
+             "status":"ok"}
+        ),
+        "get_threat_intel_set":({"ThreatIntelSet":
+                                                 {"Name": "Testing1", "Format": "TXT",
+                                                 "Location": "s3://test-threat-intel-set/malicious_ip.txt",
+                                                 "Status": "ACTIVE",
+                                                 "Tags": {"Owner": "Hydra"}}}
+        ),
+        "list_threat_intel_sets":({"ThreatIntelSetIds":
+                                                 ["224f40264075481b8eeb999c7eadf7f8",
+                                                 "4face156778d48a3a06663dd461187ce",
+                                                 "53f2ab3e426d4fa0ab906e7dacb9e36a"]}
+        ),
+        "update_threat_intel_set":(
+            {"ResponseMetadata": {"RequestId": "f144192a-383f-4956-a768-79ff1d676b28", "HTTPStatusCode": 200,
+                                  "HTTPHeaders": {"date": "Wed, 16 Jul 2025 09:11:24 GMT", "content-type": "application/json",
+                                                  "content-length": "0", "connection": "***", "x-amzn-requestid": "f144192a-383f-4956-a768-79ff1d676b28",
+                                                  "access-control-allow-origin": "*", "access-control-allow-headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-Content-Sha256,X-Amz-User-Agent,*,Date,X-Amz-Target,x-amzn-platform-id,x-amzn-trace-id",
+                                                  "x-amz-apigw-id": "Ny3tYETqoAMEtpQ=", "access-control-expose-headers": "x-amzn-ErrorType,x-amzn-requestid,x-amzn-errormessage,x-amzn-trace-id,x-amz-apigw-id,Date",
+                                                  "x-amzn-trace-id": "Root=1-68776cbb-473dda0a5866459c2b355996;Parent=1698718260ba5a4d;Sampled=0;Lineage=1:c7568072:0",
+                                                  "access-control-max-age": "86400"},
+                                  "RetryAttempts": 0},
+             "status": "ok"}
+        ),
+        "delete_threat_intel_set":(
+            {"ResponseMetadata": {"RequestId": "cb13c869-250c-456b-8faa-2acfc283198a", "HTTPStatusCode": 200,
+                                  "HTTPHeaders": {"date": "Thu, 17 Jul 2025 09:22:39 GMT", "content-type": "application/json",
+                                                  "content-length": "0", "connection": "***", "x-amzn-requestid": "cb13c869-250c-456b-8faa-2acfc283198a",
+                                                  "access-control-allow-origin": "*", "access-control-allow-headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-Content-Sha256,X-Amz-User-Agent,*,Date,X-Amz-Target,x-amzn-platform-id,x-amzn-trace-id",
+                                                  "x-amz-apigw-id": "N2MS-ECioAMEl-g=", "access-control-expose-headers": "x-amzn-ErrorType,x-amzn-requestid,x-amzn-errormessage,x-amzn-trace-id,x-amz-apigw-id,Date",
+                                                  "x-amzn-trace-id": "Root=1-6878c0df-207b621c66e909061ed84b2c;Parent=49b14cfb3df45a76;Sampled=0;Lineage=1:511d78a8:0",
+                                                  "access-control-max-age": "86400"},          
+                                  "RetryAttempts": 0},
+             "status": "ok"}
+        ),
+        "create_ip_set":(
+            {"ResponseMetadata": {"RequestId": "1be8305d-f302-4301-8f00-4a6d15c0a821", "HTTPStatusCode": 200,
+                                  "HTTPHeaders": {"date": "Mon, 21 Jul 2025 15:52:24 GMT", "content-type": "application/json",
+                                                  "content-length": "46", "connection": "***", "x-amzn-requestid": "1be8305d-f302-4301-8f00-4a6d15c0a821",
+                                                  "access-control-allow-origin": "*", "access-control-allow-headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-Content-Sha256,X-Amz-User-Agent,*,Date,X-Amz-Target,x-amzn-platform-id,x-amzn-trace-id",
+                                                  "x-amz-apigw-id": "OERH2EjfIAMEVrA=", "access-control-expose-headers": "x-amzn-ErrorType,x-amzn-requestid,x-amzn-errormessage,x-amzn-trace-id,x-amz-apigw-id,Date",
+                                                  "x-amzn-trace-id": "Root=1-687e6231-7b0f093571c8dbf50752f9d2;Parent=0774277cbf97c298;Sampled=0;Lineage=1:d3f66639:0",
+                                                  "access-control-max-age": "86400"},
+                                  "RetryAttempts": 0},
+             "IpSetId": "6c4c7290f81b40ab85e298a785b1db38",
+             "status": "ok"}
+        ),
+        "get_ip_set":({"IPSet":
+                             {"Name": "Test 21",
+                             "Format": "TXT",
+                             "Location": "s3://test-ip-set/trusted_ip.txt",
+                             "Tags": {"Owner": "Hydra"},
+                             "Status": "ACTIVE"}}
+        ),
+        "list_ip_sets": ({"IpSetIds":
+                                ["224f40264075481b8eeb999c7eadf7f8",
+                                "4face156778d48a3a06663dd461187ce",
+                                "53f2ab3e426d4fa0ab906e7dacb9e36a"]}
+        ),
+        "update_ip_set": (
+            {"ResponseMetadata": {"RequestId": "1b12ee00-ad22-4282-acdd-b00392e7cf9b", "HTTPStatusCode": 200,
+                                  "HTTPHeaders": {"date": "Thu, 24 Jul 2025 15:30:47 GMT", "content-type": "application/json",
+                                                  "content-length": "0", "connection": "***",
+                                                  "x-amzn-requestid": "1b12ee00-ad22-4282-acdd-b00392e7cf9b", "access-control-allow-origin": "*",
+                                                  "access-control-allow-headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-Content-Sha256,X-Amz-User-Agent,*,Date,X-Amz-Target,x-amzn-platform-id,x-amzn-trace-id", "x-amz-apigw-id": "OOGyPEGLoAMEjtg=",
+                                                  "access-control-expose-headers": "x-amzn-ErrorType,x-amzn-requestid,x-amzn-errormessage,x-amzn-trace-id,x-amz-apigw-id,Date",
+                                                  "x-amzn-trace-id": "Root=1-688251a7-3dff520410c0e6d3091b3ec1;Parent=03617a02703ed4c9;Sampled=0;Lineage=1:f75216a5:0",
+                                                  "access-control-max-age": "86400"},
+                                  "RetryAttempts": 0},
+             "status": "ok"}
+        ),
+        "delete_ip_set": (
+            {"ResponseMetadata": {"RequestId": "5b6eb26f-29f2-42fd-997f-6617dd1c2e40", "HTTPStatusCode": 200,
+                                  "HTTPHeaders": {"date": "Fri, 25 Jul 2025 10:58:36 GMT", "content-type": "application/json",
+                                                  "content-length": "0", "connection": "***",
+                                                  "x-amzn-requestid": "5b6eb26f-29f2-42fd-997f-6617dd1c2e40", "access-control-allow-origin": "*",
+                                                  "access-control-allow-headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-Content-Sha256,X-Amz-User-Agent,*,Date,X-Amz-Target,x-amzn-platform-id,x-amzn-trace-id", "x-amz-apigw-id": "OQx2fHRDIAMEnfQ=",
+                                                  "access-control-expose-headers": "x-amzn-ErrorType,x-amzn-requestid,x-amzn-errormessage,x-amzn-trace-id,x-amz-apigw-id,Date",
+                                                  "x-amzn-trace-id": "Root=1-6883635c-4177cf1b3b77b0c042d84c30;Parent=34bf08862f02b77e;Sampled=0;Lineage=1:7ef22fc1:0",
+                                                  "access-control-max-age": "86400"},
+                                  "RetryAttempts": 0},
+             "status": "ok"}
         )
     }
     return response[op]
@@ -976,19 +1070,43 @@ def mocked_aws(*args, **kwargs):
 
         def get_findings(self):
             return get_cli_raw_responses("get_findings")
+        
+        def get_threat_intel_set(self):
+            return get_cli_raw_responses("get_threat_intel_set")
+        
+        def get_ip_set(self):
+            return get_cli_raw_responses("get_ip_set")
 
         def __init__(self, *args, **kwargs):
             self.exceptions = {}
 
         def can_paginate(self, op):
-            if  op in ["list_findings", "list_detectors"]:
+            if op in ["list_findings", "list_detectors", "ThreatIntelSetIds", "IpSetIds"]:
                 return True
             else:
                 return False
 
         def archive_findings(self):
             return get_cli_raw_responses("archive_findings")
+        
+        def create_threat_intel_set(self):
+            return get_cli_raw_responses("create_threat_intel_set")
 
+        def update_threat_intel_set(self):
+            return get_cli_raw_responses("update_threat_intel_set")
+        
+        def delete_threat_intel_set(self):
+            return get_cli_raw_responses("delete_threat_intel_set")
+
+        def create_ip_set(self):
+            return get_cli_raw_responses("create_ip_set")
+
+        def update_ip_set(self):
+            return get_cli_raw_responses("update_ip_set")
+
+        def delete_ip_set(self):
+            return get_cli_raw_responses("delete_ip_set")
+        
     return MockResponse(args, **kwargs)
 
 
@@ -1038,9 +1156,40 @@ def mocked_gd_client(*args, **kwargs):
                     return []
                 else:
                     return get_cli_raw_responses("get_findings")["Findings"]
+            if op == "get_threat_intel_set":
+                return get_cli_raw_responses("get_threat_intel_set") ["ThreatIntelSet"]
+            if op == "list_threat_intel_sets":
+                return get_cli_raw_responses("list_threat_intel_sets")["ThreatIntelSetIds"]
+            if op == "get_ip_set":
+                return get_cli_raw_responses("get_ip_set")["IPSet"]
+            if op == "list_ip_sets":
+                return get_cli_raw_responses("list_ip_sets")["IPSetIds"]
 
         def post(self, op, **kwargs):
             if op == "archive_findings":
+                if "32b7017d2019dfe922abc4e07c3fdfff" in kwargs["DetectorId"]:
+                    return {"status": "error",
+                            "msg": "An error occurred (BadRequestException) when calling the ArchiveFindings operation: "
+                                   "The request is rejected because the input detectorId is not owned by the current account."}
+                else:
+                    return{"status": "ok"}
+            if op == "create_threat_intel_set" or op == "create_ip_set":
+                if "32b7017d2019dfe922abc4e07c3fdfff" in kwargs["DetectorId"]:
+                    return {"status": "error",
+                            "msg": "An error occurred (BadRequestException) when calling the ArchiveFindings operation: "
+                                   "The request is rejected because the input detectorId is not owned by the current account."}
+                else:
+                    return{"status": "ok"}
+            if op == "update_threat_intel_set" or op == "update_ip_set":
+                if "32b7017d2019dfe922abc4e07c3fdfff" in kwargs["DetectorId"]:
+                    return {"status": "error",
+                            "msg": "An error occurred (BadRequestException) when calling the ArchiveFindings operation: "
+                                   "The request is rejected because the input detectorId is not owned by the current account."}
+                else:
+                    return{"status": "ok"}
+                
+        def delete(self, op, **kwargs):
+            if op == "delete_threat_intel_set" or op == "delete_ip_set":
                 if "32b7017d2019dfe922abc4e07c3fdfff" in kwargs["DetectorId"]:
                     return {"status": "error",
                             "msg": "An error occurred (BadRequestException) when calling the ArchiveFindings operation: "

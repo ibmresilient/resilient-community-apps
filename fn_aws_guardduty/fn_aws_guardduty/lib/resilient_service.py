@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 """ Functions accessing Resilient """
 import logging
 import re
-
 import resilient
 from resilient_circuits import ResilientComponent
 from resilient import SimpleHTTPException
+from resilient_lib import get_artifacts
 from fn_aws_guardduty.lib.helpers import IQuery
 from fn_aws_guardduty.util import const
 
@@ -20,7 +20,7 @@ class ResSvc(ResilientComponent):
     """
 
     def __init__(self, opts, options):
-        super(ResSvc, self).__init__(opts)
+        super().__init__(opts)
         self.opts = opts
         self.options = options
 
@@ -57,7 +57,7 @@ class ResSvc(ResilientComponent):
                 r_incidents_tmp = self.rest_client().post(query_uri, query)
 
             except Exception as err:
-                raise Exception("Exception '{}' while trying to get list of Resilient incidents.".format(err))
+                raise Exception("Exception '{}' while trying to get list of Resilient incidents.".format(err)) from err
 
             r_incidents = [r_inc for r_inc in r_incidents_tmp
                            if r_inc["properties"].get(const.CUSTOM_FIELDS_MAP["Id"]) == finding["Id"]]
@@ -99,7 +99,7 @@ class ResSvc(ResilientComponent):
                 if contents:
                     if table_id in const.DATA_TABLE_IDS:
                         # Table data, add row to specified data table
-                        uri = '/incidents/{0}/table_data/{1}/row_data'.format(incident_id, table_id)
+                        uri = f"/incidents/{incident_id}/table_data/{table_id}/row_data"
                         LOG.debug("Attempting to create table with the following: %s", uri)
 
                         for content in contents:
@@ -114,19 +114,15 @@ class ResSvc(ResilientComponent):
         :param incident_id: Incident ID from incident creation.
         :return: Return dict of artifacts with key=artifact value, value=artifact type.
         """
-        r_artifacts = {}
-        artifact_types = list(const.ARTIFACT_TYPES_MAP.keys())
-        resilient_client = self.rest_client()
-        artifacts_uri = '/incidents/{}/artifacts'.format(incident_id)
-        artifact_results = resilient_client.get(uri=artifacts_uri)
 
-        if artifact_results is not None:
-            for artifact_result in artifact_results:
-                artifact_desc = artifact_result.get('description')
-                # Match artifact type at beginning of description e.g. artifact_desc = "\'IP Address\' ... "
-                artifact_type = next((t for t in artifact_types if re.match("\'"+t+"\'", artifact_desc)), None)
-                if artifact_type:
-                    r_artifacts[artifact_result['value']] = artifact_type
+        r_artifacts = {}
+        resilient_client = self.rest_client()
+        artifacts_uri = get_artifacts(res_client=resilient_client, incident_id=incident_id, query_filters=None, headers=None)
+
+        if artifacts_uri is not None:
+            for artifact_result in artifacts_uri:
+                key = artifact_result.get('value')
+                r_artifacts[key] = artifact_result.get('type')
 
         return r_artifacts
 
@@ -138,7 +134,7 @@ class ResSvc(ResilientComponent):
         :param note: Content to be added as a note.
         """
         try:
-            uri = '/incidents/{}/comments'.format(incident_id)
+            uri = f"/incidents/{incident_id}/comments"
             resilient_client = self.rest_client()
 
             comment_response = resilient_client.post(uri=uri, payload=note)
@@ -176,7 +172,7 @@ class ResSvc(ResilientComponent):
 
         except Exception as err:
             LOG.error("Got Exception '%s' while trying to get list of Resilient incidents.", err)
-            raise Exception(err)
+            raise Exception(err) from err
 
     def update_incident_properties(self, incident_id, fields):
         """ Update Resilient incident custom property or fields.
@@ -188,7 +184,7 @@ class ResSvc(ResilientComponent):
         try:
             response = None
             resilient_client = self.rest_client()
-            uri = "/incidents/{}".format(incident_id)
+            uri = f"/incidents/{incident_id}"
 
             previous_object = resilient_client.get(uri)
             patch = resilient.Patch(previous_object)

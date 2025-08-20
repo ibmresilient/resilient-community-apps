@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 """ Generate payload and data tables data for Resilinet incident from AWS GuardDuty finding"""
 import json
 import logging
@@ -8,7 +8,6 @@ import pprint
 import copy
 import datetime as dt
 from sys import version_info
-
 from fn_aws_guardduty.lib.helpers import search_json, map_property
 from fn_aws_guardduty.util import const
 
@@ -82,13 +81,12 @@ class ParseFinding():
             else:
                 gd_prop_val = self.finding.get(gd_prop)
 
-            # Convert boolean value to string 'True' or 'False'
-            if isinstance(gd_prop_val, bool):
-                gd_prop_val = "{}".format(gd_prop_val)
-
-            if isinstance(gd_prop_val, int):
-                # Convert number to text equivalent.
+            # Convert boolean, integer, float value to string
+            if isinstance(gd_prop_val, (bool, int, float)):
                 gd_prop_val = str(gd_prop_val)
+
+            # Convert severity value from float to string
+            self.finding['Severity'] = str(self.finding.get('Severity'))
 
             self.payload["properties"][res_prop] = gd_prop_val
 
@@ -111,7 +109,7 @@ class ParseFinding():
         else:
             i_title = self.finding.get("Title")
 
-        iname = "AWS GuardDuty: {}".format(i_title)
+        iname = f"AWS GuardDuty: {i_title}"
         LOG.debug("Incident Label Assembled: %s", iname)
 
         return iname
@@ -213,8 +211,7 @@ class ParseFinding():
             if artifact_val not in self.existing_artifacts or self.existing_artifacts[artifact_val] != artifact_type:
                 # Populate payload with ID and type and description.
                 artifact = copy.deepcopy(artifact_payload)
-                desc = "'{}' extracted from GuardDuty from finding property '{}' at path '{}'." \
-                    .format(artifact_type, gd_key, path)
+                desc = f"'{artifact_type}' extracted from GuardDuty from finding property '{gd_key}' at path '{path}'."
                 artifact['value'] = artifact_val
                 artifact['type']['name'] = const.ARTIFACT_TYPE_API_NAME.get(artifact_type, "String")
                 artifact['description']['content'] = desc
@@ -340,7 +337,7 @@ class ParseFinding():
                     (value, _) = result.pop(0)
                     # Convert boolean values to string 'True' or 'False'
                     if isinstance(value, bool):
-                        value = "{}".format(value)
+                        value = f"{str(value)}"
                     table_row[val] = {"value": value}
                     if isinstance(value, int):
                         value = str(value)
@@ -383,10 +380,10 @@ class ParseFinding():
 
         if isinstance(conv_finding, (dict, list)):
             for k, v in conv_finding.items() if isinstance(conv_finding, dict) else enumerate(conv_finding):
-                if isinstance(k, unicode):
+                if isinstance(k, str):
                     del conv_finding[k]
                     conv_finding[k.encode('utf-8')] = v
-                if isinstance(v, unicode):
+                if isinstance(v, str):
                     conv_finding[k] = v.encode('utf-8')
                 self.convert_unicode(v, level=level+1)
 

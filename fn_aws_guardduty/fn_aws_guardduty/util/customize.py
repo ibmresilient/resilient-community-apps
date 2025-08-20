@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
-# Generated with resilient-sdk v51.0.2.2.1096
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.7.0.1603
 
 """Generate the SOAR customizations required for fn_aws_guardduty"""
 
@@ -26,6 +26,16 @@ def codegen_reload_data():
             u"fn_aws_gd"
         ],
         "functions": [
+            u"aws_guardduty_create_ipset",
+            u"aws_guardduty_create_threatintelset",
+            u"aws_guardduty_delete_ipset",
+            u"aws_guardduty_delete_threatintelset",
+            u"aws_guardduty_get_ipset",
+            u"aws_guardduty_get_threatintelset",
+            u"aws_guardduty_list_ipset",
+            u"aws_guardduty_list_threatintelset",
+            u"aws_guardduty_update_ipset",
+            u"aws_guardduty_update_threatintelset",
             u"func_aws_guardduty_archive_finding",
             u"func_aws_guardduty_refresh_finding"
         ],
@@ -61,6 +71,16 @@ def codegen_reload_data():
         "automatic_tasks": [],
         "scripts": [],
         "playbooks": [
+            u"aws_guardduty_create_ipset_pb",
+            u"aws_guardduty_create_threatintelset_pb",
+            u"aws_guardduty_delete_ipset_pb",
+            u"aws_guardduty_delete_threatintelset_pb",
+            u"aws_guardduty_get_ipset_pb",
+            u"aws_guardduty_get_threatintelset_pb",
+            u"aws_guardduty_list_ipset_pb",
+            u"aws_guardduty_list_threatintelset_pb",
+            u"aws_guardduty_update_ipset_pb",
+            u"aws_guardduty_update_threatintelset_pb",
             u"example_aws_guardduty_archive_finding_pb",
             u"example_aws_guardduty_refresh_finding_details_pb",
             u"example_aws_guardduty_update_finding_details_pb"
@@ -73,15 +93,35 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 51.0.0.0.9340
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:
         - fn_aws_gd
     - Functions:
+        - aws_guardduty_create_ipset
+        - aws_guardduty_create_threatintelset
+        - aws_guardduty_delete_ipset
+        - aws_guardduty_delete_threatintelset
+        - aws_guardduty_get_ipset
+        - aws_guardduty_get_threatintelset
+        - aws_guardduty_list_ipset
+        - aws_guardduty_list_threatintelset
+        - aws_guardduty_update_ipset
+        - aws_guardduty_update_threatintelset
         - func_aws_guardduty_archive_finding
         - func_aws_guardduty_refresh_finding
     - Playbooks:
+        - aws_guardduty_create_ipset_pb
+        - aws_guardduty_create_threatintelset_pb
+        - aws_guardduty_delete_ipset_pb
+        - aws_guardduty_delete_threatintelset_pb
+        - aws_guardduty_get_ipset_pb
+        - aws_guardduty_get_threatintelset_pb
+        - aws_guardduty_list_ipset_pb
+        - aws_guardduty_list_threatintelset_pb
+        - aws_guardduty_update_ipset_pb
+        - aws_guardduty_update_threatintelset_pb
         - example_aws_guardduty_archive_finding_pb
         - example_aws_guardduty_refresh_finding_details_pb
         - example_aws_guardduty_update_finding_details_pb

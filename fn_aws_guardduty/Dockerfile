@@ -1,7 +1,7 @@
-# Generated with resilient-sdk v51.0.1.1.824
-# docker build -t ibmresilient/fn_aws_guardduty:1.1.0 .
+# Generated with resilient-sdk v51.0.6.0.1543
+# docker build -t ibmresilient/fn_aws_guardduty:2.0.0 .
 ARG BASE_IMAGE_REPO=quay.io
-# BASE_IMAGE_TAG options: latest, python-39, python-311. See https://quay.io/repository/ibmresilient/soarapps-base-docker-image?tab=tags for all options
+# BASE_IMAGE_TAG options: latest, python-311, python-312. See https://quay.io/repository/ibmresilient/soarapps-base-docker-image?tab=tags for all options
 # use --build-arg BASE_IMAGE_TAG=<tag> to set base image to be built from
 ARG BASE_IMAGE_TAG=latest
 

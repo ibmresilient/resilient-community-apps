@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 """ Function to refresh data for AWS GuardDuty finding"""
 import logging
-
 from resilient_circuits import ResilientComponent, function, handler, StatusMessage, FunctionResult, FunctionError
 from resilient_lib import ResultPayload, validate_fields
 from fn_aws_guardduty.lib.aws_gd_client import AwsGdClient
@@ -19,7 +18,7 @@ class FunctionComponent(ResilientComponent):
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(FunctionComponent, self).__init__(opts)
+        super().__init__(opts)
         self.options = opts.get(PACKAGE_NAME, {})
         self.opts = opts
         validate_fields(config.REQUIRED_CONFIG_SETTINGS, self.options)

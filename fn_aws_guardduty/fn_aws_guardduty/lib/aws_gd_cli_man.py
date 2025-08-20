@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 """ AWS GuardDuty client manager support class. """
 import re
 from  datetime import datetime
@@ -69,7 +69,7 @@ class AwsGdCliMan():
                 detectors = aws_gd.get("list_detectors")
 
             except aws_gd.gd.exceptions.ClientError as invalid_ex:
-                if "The security token included in the request is invalid" in invalid_ex.__repr__():
+                if "The security token included in the request is invalid" in invalid_ex:
                     LOG.warning("Invalid security token for region %s, Got exception: %s. "
                                 "GuardDuty may need to be enabled for the user in the AWS region.",
                                 region, str(invalid_ex))

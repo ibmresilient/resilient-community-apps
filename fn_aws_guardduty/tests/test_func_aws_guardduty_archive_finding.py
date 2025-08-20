@@ -4,12 +4,10 @@
 """ Test AWS GuardDuty archive finding function. """
 import pytest
 from mock import patch
-from sys import version_info
-from resilient_circuits.util import get_config_data, get_function_definition
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from .mock_artifacts import *
 
-PACKAGE_NAME = "fn_aws_guardduty"
 FUNCTION_NAME = "func_aws_guardduty_archive_finding"
 
 # Read the mock configuration-data section from the package

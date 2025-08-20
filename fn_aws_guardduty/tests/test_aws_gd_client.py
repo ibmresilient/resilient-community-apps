@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
 # pragma pylint: disable=unused-argument, no-self-use
 """ Test AWS GuardDuty client class. """
 from mock import patch
@@ -50,8 +50,12 @@ class TestAWSGdClient:
     @pytest.mark.parametrize("op, type_list, expected_result", [
         ("get_findings", SUPPORTED_GET_TYPES, "Findings"),
         ("describe_regions", SUPPORTED_GET_TYPES, "Regions"),
+        ("get_threat_intel_set", SUPPORTED_GET_TYPES, "ThreatIntelSet"),
+        ("get_ip_set", SUPPORTED_GET_TYPES, "IPSet"),
         ("list_detectors", SUPPORTED_PAGINATE_TYPES, "DetectorIds"),
-        ("list_findings", SUPPORTED_PAGINATE_TYPES, "FindingIds")
+        ("list_findings", SUPPORTED_PAGINATE_TYPES, "FindingIds"),
+        ("list_threat_intel_sets", SUPPORTED_PAGINATE_TYPES, "ThreatIntelSetIds"),
+        ("list_ip_sets", SUPPORTED_PAGINATE_TYPES, "IpSetIds")
     ])
     def test_get_type_from_response(self, op, type_list, expected_result):
         options = {}

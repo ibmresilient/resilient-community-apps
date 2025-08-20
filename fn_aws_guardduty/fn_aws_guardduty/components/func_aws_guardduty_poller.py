@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 """ Findings poller for AWS GuardDuty """
 import logging
 import time
 from threading import Thread
-import sys
-
 from resilient_circuits import ResilientComponent, handler
 from resilient_lib import validate_fields
 from fn_aws_guardduty.lib.aws_gd_poller import AwsGdPoller
@@ -20,12 +18,12 @@ TIMEOUT_MULTIPLIER = 60
 TIMEOUT_WAIT = 10
 
 
-class FuncAwsGuarddutyPoller(ResilientComponent):
+class FunctionComponent(ResilientComponent):
     """Component that polls for new findings from AWS GuardDuty"""
 
     def __init__(self, opts):
         """constructor provides access to the configuration options"""
-        super(FuncAwsGuarddutyPoller, self).__init__(opts)
+        super().__init__(opts)
         self.options = opts.get("fn_aws_guardduty", {})
         self.opts = opts
         if int(self.options.get("aws_gd_polling_interval", POLLING_INTERVAL_DEFAULT)) == 0:

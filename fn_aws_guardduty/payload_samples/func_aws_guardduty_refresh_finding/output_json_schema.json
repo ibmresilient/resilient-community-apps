@@ -1,5 +1,6 @@
 {
-  "$schema": "http://json-schema.org/draft-06/schema",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
   "type": "object",
   "properties": {
     "version": {
@@ -57,12 +58,22 @@
                     "UserType": {
                       "type": "string"
                     }
-                  }
+                  },
+                  "required": [
+                    "AccessKeyId",
+                    "PrincipalId",
+                    "UserName",
+                    "UserType"
+                  ]
                 },
                 "ResourceType": {
                   "type": "string"
                 }
-              }
+              },
+              "required": [
+                "AccessKeyDetails",
+                "ResourceType"
+              ]
             },
             "SchemaVersion": {
               "type": "string"
@@ -94,7 +105,10 @@
                                 "CityName": {
                                   "type": "string"
                                 }
-                              }
+                              },
+                              "required": [
+                                "CityName"
+                              ]
                             },
                             "Country": {
                               "type": "object",
@@ -102,7 +116,10 @@
                                 "CountryName": {
                                   "type": "string"
                                 }
-                              }
+                              },
+                              "required": [
+                                "CountryName"
+                              ]
                             },
                             "GeoLocation": {
                               "type": "object",
@@ -113,7 +130,11 @@
                                 "Lon": {
                                   "type": "number"
                                 }
-                              }
+                              },
+                              "required": [
+                                "Lat",
+                                "Lon"
+                              ]
                             },
                             "IpAddressV4": {
                               "type": "string"
@@ -133,25 +154,51 @@
                                 "Org": {
                                   "type": "string"
                                 }
-                              }
+                              },
+                              "required": [
+                                "Asn",
+                                "AsnOrg",
+                                "Isp",
+                                "Org"
+                              ]
                             }
-                          }
+                          },
+                          "required": [
+                            "City",
+                            "Country",
+                            "GeoLocation",
+                            "IpAddressV4",
+                            "Organization"
+                          ]
                         },
                         "ServiceName": {
                           "type": "string"
                         },
                         "AffectedResources": {
-                          "type": "object"
+                          "type": "object",
+                          "properties": {},
+                          "required": []
                         }
-                      }
+                      },
+                      "required": [
+                        "Api",
+                        "CallerType",
+                        "RemoteIpDetails",
+                        "ServiceName",
+                        "AffectedResources"
+                      ]
                     }
-                  }
+                  },
+                  "required": [
+                    "ActionType",
+                    "AwsApiCallAction"
+                  ]
                 },
                 "Archived": {
                   "type": "boolean"
                 },
                 "Count": {
-                  "type": "integer"
+                  "type": "number"
                 },
                 "DetectorId": {
                   "type": "string"
@@ -177,12 +224,27 @@
                     "Type": {
                       "type": "string"
                     }
-                  }
+                  },
+                  "required": [
+                    "Value",
+                    "Type"
+                  ]
                 }
-              }
+              },
+              "required": [
+                "Action",
+                "Archived",
+                "Count",
+                "DetectorId",
+                "EventFirstSeen",
+                "EventLastSeen",
+                "ResourceRole",
+                "ServiceName",
+                "AdditionalInfo"
+              ]
             },
             "Severity": {
-              "type": "integer"
+              "type": "number"
             },
             "Title": {
               "type": "string"
@@ -193,7 +255,23 @@
             "UpdatedAt": {
               "type": "string"
             }
-          }
+          },
+          "required": [
+            "AccountId",
+            "Arn",
+            "CreatedAt",
+            "Description",
+            "Id",
+            "Partition",
+            "Region",
+            "Resource",
+            "SchemaVersion",
+            "Service",
+            "Severity",
+            "Title",
+            "Type",
+            "UpdatedAt"
+          ]
         },
         "region": {
           "type": "string"
@@ -213,7 +291,11 @@
                 "content": {
                   "type": "string"
                 }
-              }
+              },
+              "required": [
+                "format",
+                "content"
+              ]
             },
             "discovered_date": {
               "type": "string"
@@ -254,15 +336,38 @@
                 "aws_guardduty_archived": {
                   "type": "string"
                 }
-              }
+              },
+              "required": [
+                "aws_guardduty_finding_id",
+                "aws_guardduty_finding_arn",
+                "aws_guardduty_finding_type",
+                "aws_guardduty_finding_updated_at",
+                "aws_guardduty_region",
+                "aws_guardduty_severity",
+                "aws_guardduty_resource_type",
+                "aws_guardduty_detector_id",
+                "aws_guardduty_count",
+                "aws_guardduty_archived"
+              ]
             },
             "artifacts": {
-              "type": "array"
+              "type": "array",
+              "items": {}
             },
             "comments": {
-              "type": "array"
+              "type": "array",
+              "items": {}
             }
-          }
+          },
+          "required": [
+            "name",
+            "description",
+            "discovered_date",
+            "severity_code",
+            "properties",
+            "artifacts",
+            "comments"
+          ]
         },
         "data_tables": {
           "type": "object",
@@ -281,7 +386,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "query_execution_date": {
                         "type": "object",
@@ -289,7 +397,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "region": {
                         "type": "object",
@@ -297,7 +408,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "count": {
                         "type": "object",
@@ -305,7 +419,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "account_id": {
                         "type": "object",
@@ -313,7 +430,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "created_at": {
                         "type": "object",
@@ -321,7 +441,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "updated_at": {
                         "type": "object",
@@ -329,11 +452,26 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       }
-                    }
+                    },
+                    "required": [
+                      "severity",
+                      "query_execution_date",
+                      "region",
+                      "count",
+                      "account_id",
+                      "created_at",
+                      "updated_at"
+                    ]
                   }
-                }
+                },
+                "required": [
+                  "cells"
+                ]
               }
             },
             "gd_action_details": {
@@ -350,7 +488,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "query_execution_date": {
                         "type": "object",
@@ -358,7 +499,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "action_api": {
                         "type": "object",
@@ -366,7 +510,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "event_first_seen": {
                         "type": "object",
@@ -374,7 +521,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "event_last_seen": {
                         "type": "object",
@@ -382,7 +532,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "actor_caller_type": {
                         "type": "object",
@@ -390,7 +543,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "city_name": {
                         "type": "object",
@@ -398,7 +554,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "country_name": {
                         "type": "object",
@@ -406,7 +565,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "asn": {
                         "type": "object",
@@ -414,7 +576,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "asn_org": {
                         "type": "object",
@@ -422,7 +587,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "isp": {
                         "type": "object",
@@ -430,7 +598,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "org": {
                         "type": "object",
@@ -438,7 +609,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "service_name": {
                         "type": "object",
@@ -446,7 +620,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "remote_ip": {
                         "type": "object",
@@ -454,11 +631,33 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       }
-                    }
+                    },
+                    "required": [
+                      "action_type",
+                      "query_execution_date",
+                      "action_api",
+                      "event_first_seen",
+                      "event_last_seen",
+                      "actor_caller_type",
+                      "city_name",
+                      "country_name",
+                      "asn",
+                      "asn_org",
+                      "isp",
+                      "org",
+                      "service_name",
+                      "remote_ip"
+                    ]
                   }
-                }
+                },
+                "required": [
+                  "cells"
+                ]
               }
             },
             "gd_resource_affected": {
@@ -475,7 +674,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "query_execution_date": {
                         "type": "object",
@@ -483,7 +685,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "resource_role": {
                         "type": "object",
@@ -491,18 +696,31 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       }
-                    }
+                    },
+                    "required": [
+                      "resource_type",
+                      "query_execution_date",
+                      "resource_role"
+                    ]
                   }
-                }
+                },
+                "required": [
+                  "cells"
+                ]
               }
             },
             "gd_s3_bucket_details": {
-              "type": "array"
+              "type": "array",
+              "items": {}
             },
             "gd_instance_details": {
-              "type": "array"
+              "type": "array",
+              "items": {}
             },
             "gd_access_key_details": {
               "type": "array",
@@ -518,7 +736,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "query_execution_date": {
                         "type": "object",
@@ -526,7 +747,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "principal_id": {
                         "type": "object",
@@ -534,7 +758,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "user_type": {
                         "type": "object",
@@ -542,7 +769,10 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       },
                       "user_name": {
                         "type": "object",
@@ -550,16 +780,44 @@
                           "value": {
                             "type": "string"
                           }
-                        }
+                        },
+                        "required": [
+                          "value"
+                        ]
                       }
-                    }
+                    },
+                    "required": [
+                      "access_key_id",
+                      "query_execution_date",
+                      "principal_id",
+                      "user_type",
+                      "user_name"
+                    ]
                   }
-                }
+                },
+                "required": [
+                  "cells"
+                ]
               }
             }
-          }
+          },
+          "required": [
+            "gd_finding_overview",
+            "gd_action_details",
+            "gd_resource_affected",
+            "gd_s3_bucket_details",
+            "gd_instance_details",
+            "gd_access_key_details"
+          ]
         }
-      }
+      },
+      "required": [
+        "timestamp",
+        "finding",
+        "region",
+        "payload",
+        "data_tables"
+      ]
     },
     "raw": {
       "type": "string"
@@ -568,7 +826,7 @@
       "type": "object",
       "properties": {
         "incident_id": {
-          "type": "integer"
+          "type": "number"
         },
         "aws_gd_finding_id": {
           "type": "string"
@@ -579,7 +837,13 @@
         "aws_gd_detector_id": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "incident_id",
+        "aws_gd_finding_id",
+        "aws_gd_region",
+        "aws_gd_detector_id"
+      ]
     },
     "metrics": {
       "type": "object",
@@ -597,12 +861,29 @@
           "type": "string"
         },
         "execution_time_ms": {
-          "type": "integer"
+          "type": "number"
         },
         "timestamp": {
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "version",
+        "package",
+        "package_version",
+        "host",
+        "execution_time_ms",
+        "timestamp"
+      ]
     }
-  }
+  },
+  "required": [
+    "version",
+    "success",
+    "reason",
+    "content",
+    "raw",
+    "inputs",
+    "metrics"
+  ]
 }

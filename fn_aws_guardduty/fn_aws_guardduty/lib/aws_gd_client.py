@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 """ AWS GuardDuty client class. """
 import logging
 
@@ -13,14 +13,22 @@ LOG = logging.getLogger(__name__)
 # List of get types supported for the integration.
 SUPPORTED_GET_TYPES = [
     "Findings",
-    "Regions"
+    "Regions",
+    "ThreatIntelSet",
+    "IPSet"
 ]
 # List of get paginated types supported for the integration.
 SUPPORTED_PAGINATE_TYPES = [
     "DetectorIds",
-    "FindingIds"
+    "FindingIds",
+    "ThreatIntelSetIds",
+    "IpSetIds"
 ]
+# Get ThreatIntelSet Functionality
+DETAILS_THREAT_INTEL_SET = ["Name", "Format", "Location", "Tags", "Status"]
 
+# Get IPSet Functionality
+DETAILS_IP_SET = ["Name", "Format", "Location", "Tags", "Status", "ExpectedBucketOwner"]
 
 class AwsGdClient():
     """
@@ -115,7 +123,7 @@ class AwsGdClient():
         return result
 
     def get(self, op=None, paginate=False, **kwargs):
-        """ Execute a "query" type AWS GuardDuty  operation.
+        """ Execute a "query" type AWS GuardDuty operation.
         The calls will translate to actual "get" or query operations. The operation will return
         standard or paginated result since not all query operations support pagination.
 
@@ -129,6 +137,7 @@ class AwsGdClient():
 
         result = []
         result_type = None
+
         try:
             # Get the AWS GuardDuty object corresponding to the operation "op".
             aws_gd_op = getattr(self.gd, op)
@@ -136,9 +145,29 @@ class AwsGdClient():
             LOG.error("Unknown AWS GuardDuty operation %s, Got exception: %s",
                       op, str(attr_ex))
             raise attr_ex
-
+            
         try:
             response = aws_gd_op(**kwargs)
+
+            if op=="get_threat_intel_set":
+                main_payload = {}
+                threat_intel_set_detail = {}
+                for value in DETAILS_THREAT_INTEL_SET:
+                        if value in response:
+                            threat_intel_set_detail.update({value:response[value]})
+                            response.pop(value)
+                main_payload["ThreatIntelSet"] = threat_intel_set_detail
+                response.update(main_payload)
+
+            if op=="get_ip_set":
+                main_payload = {}
+                ip_set_detail = {}
+                for value in DETAILS_IP_SET:
+                    if value in response:
+                        ip_set_detail.update({value:response[value]})
+                        response.pop(value)
+                main_payload["IPSet"] = ip_set_detail
+                response.update(main_payload)
 
             if not result_type:
                 result_type = self._get_type_from_response(response, SUPPORTED_GET_TYPES)
@@ -173,7 +202,7 @@ class AwsGdClient():
         return result
 
     def post(self, op, **kwargs):
-        """ Execute a "post" type AWS GuardDuty  operation which results in an update or change
+        """ Execute a "post" type AWS GuardDuty operation which results in an update or change
         to the AWS GuardDuty environment.
 
         :param op: The AWS GuardDuty operation to execute.
@@ -205,9 +234,44 @@ class AwsGdClient():
         except Exception as int_ex:
             LOG.error("ERROR with %s and args '%s', Got exception: %s", aws_gd_op.__name__, kwargs, str(int_ex))
             raise int_ex
+        res["status"]=status.get("status")
+        return res
 
-        return status
+    def delete(self, op, **kwargs):
+        """ Execute a "delete" type AWS GuardDuty operation which results in an update or change
+        to the AWS GuardDuty environment.
 
+        :param op: The AWS GuardDuty operation to execute.
+        :param kwargs: Dictionary of AWS API parameters for function call .
+        :return status: Return status string.
+        """
+        # Set default good status:
+        status = {"status": "ok"}
+        try:
+            # Get the AWS GuardDuty object corresponding to the operation "op".
+            aws_gd_op = getattr(self.gd, op)
+        except AttributeError as attr_ex:
+            LOG.error("Unknown AWS GuardDuty operation %s, Got exception: %s",
+                      op, str(attr_ex))
+            raise attr_ex
+        try:
+            res = aws_gd_op(**kwargs)
+
+        except self.gd.exceptions.ClientError as invalid_ex:
+            for excp in ["ValidationError", "BadRequestException", "InternalServerErrorException"
+                         "EndpointConnectionError"]:
+                if excp in str(invalid_ex):
+                    return {"status": "error", "msg": str(invalid_ex)}
+
+            LOG.info("ERROR with %s and args: '%s', Got exception: %s",
+                     aws_gd_op.__name__, kwargs, "ValidationErrorException")
+            raise invalid_ex
+
+        except Exception as int_ex:
+            LOG.error("ERROR with %s and args '%s', Got exception: %s", aws_gd_op.__name__, kwargs, str(int_ex))
+            raise int_ex
+        res["status"]=status.get("status")
+        return res
 
     @staticmethod
     def _get_type_from_response(response, type_list):
@@ -224,5 +288,5 @@ class AwsGdClient():
 
         if not result_type:
             raise ValueError("No supported type for integration found in AWS GuardDuty response")
-
+        
         return result_type

@@ -21,29 +21,30 @@ def snake_to_camel(word):
 setup(
     name="fn_aws_guardduty",
     display_name="AWS GuardDuty",
-    version="1.1.0",
+    version="2.0.0",
     license="MIT",
     author="IBM SOAR",
     author_email="",
     url='https://ibm.com/mysupport',
-    description="Amazon AWS GuardDuty Integration for Resilient",
-    long_description="""The Amazon AWS GuardDuty Integration for Resilient allows you to process and respond to Amazon 
-        AWS GuardDuty findings within the IBM Resilient Platform.
+    description="Amazon AWS GuardDuty Integration for SOAR",
+    long_description="""The Amazon AWS GuardDuty Integration for SOAR allows you to process and respond to Amazon 
+        AWS GuardDuty findings within the IBM SOAR Platform.
         <br>
         The AWS GuardDuty Integration provides the following functionality:
         <ul>
-        * A poller which gathers current findings from GuardDuty and escalates to the Resilient platform as incidents.
+        * A poller which gathers current findings from GuardDuty and escalates to the SOAR platform as incidents.
         </ul><ul>
-        * A function to archive a GuardDuty finding when the corresponding Resilient incident is closed.
+        * A function to archive a GuardDuty finding when the corresponding SOAR incident is closed.
         </ul><ul>
-        * A function to refresh a Resilient incident with the latest information from the corresponding GuardDuty finding.
+        * A function to refresh a SOAR incident with the latest information from the corresponding GuardDuty finding.
         </ul><br>
         Links:
 <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
 <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>
         """,
     install_requires=[
-        'resilient_circuits>=45.0.0',
+        'resilient_circuits>=51.0.0',
+        'resilient_lib>=51.0.6',
         'boto3>=1.16.19'
     ],
     packages=find_packages(),
@@ -55,9 +56,7 @@ setup(
     entry_points={
         "resilient.circuits.components": [
             # When setup.py is executed, loop through the .py files in the components directory and create the entry points.
-            "FuncAwsGuarddutyPoller = fn_aws_guardduty.components.func_aws_guardduty_poller:FuncAwsGuarddutyPoller",
-            "FuncAwsGuarddutyRefreshFindingFunctionComponent = fn_aws_guardduty.components.func_aws_guardduty_refresh_finding:FunctionComponent",
-            "FuncAwsGuarddutyArchiveFindingFunctionComponent = fn_aws_guardduty.components.func_aws_guardduty_archive_finding:FunctionComponent",
+            "{}FunctionComponent = fn_aws_guardduty.components.{}:FunctionComponent".format(snake_to_camel(get_module_name(filename)), get_module_name(filename)) for filename in glob.glob("./fn_aws_guardduty/components/[a-zA-Z]*.py")
         ],
         "resilient.circuits.configsection": ["gen_config = fn_aws_guardduty.util.config:config_section_data"],
         "resilient.circuits.customize": ["customize = fn_aws_guardduty.util.customize:customization_data"],

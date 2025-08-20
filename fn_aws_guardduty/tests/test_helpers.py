@@ -199,3 +199,7 @@ class TestMapProperty:
         with pytest.raises(KeyError) as e:
             response = map_property(gd_prop)
         assert str(e.value) == expected_results
+
+def assert_keys_in(json_obj, *keys):
+    for key in keys:
+        assert key in json_obj

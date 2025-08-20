@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 """ Helpers for AWS GuardDuty """
 import json
 import os
@@ -10,8 +10,8 @@ import datetime as dt
 import time
 import fnmatch
 import logging
-from fn_aws_guardduty.util import const
 from pkg_resources import resource_filename, Requirement
+from fn_aws_guardduty.util import const
 
 LOG = logging.getLogger(__name__)
 # Interval (in millisecs) to decrement last_update epoch to correct
@@ -43,7 +43,7 @@ class IQuery(dict):
         }
     """
     def __init__(self, paged=False):
-        super(IQuery, self).__init__()
+        super().__init__()
         # Add default condition.
         self["filters"] = [{
             "conditions": [
@@ -114,7 +114,7 @@ class FCrit(dict):
 
     """
     def __init__(self):
-        super(FCrit, self).__init__()
+        super().__init__()
         # Add default empty criterion.
         self["Criterion"] = {}
 
@@ -284,8 +284,8 @@ def map_property(gd_prop):
             path = list(prop.values())[0]["path"]
         else:
             res_prop = prop
-    except KeyError:
-        raise KeyError("Unsupported finding property: {}.".format(gd_prop))
+    except KeyError as exc:
+        raise KeyError("Unsupported finding property: {}.".format(gd_prop)) from exc
 
     return (res_prop, path)
 
@@ -323,3 +323,21 @@ def load_template(filename, override_template_file=None):
         file_contents = json.load(load_file)
 
     return file_contents
+
+def extract_key_value_pairs(input_string):
+    """Function that extracts key:value pairs from a string
+
+    :param input_string: Input string that contains key:value pairs
+
+    :return: dict. A dictionary of key:value pairs
+    :rtype: dict"""
+    pairs = input_string.strip().split(',')    # Strip leading/trailing whitespaces and split the input data
+    result_dict = {}
+
+    for pair in pairs:
+        key_value = pair.strip().split(':')     # Strip leading/trailing whitespaces and split the key:value pair
+        if len(key_value) == 2:
+            key, value = key_value
+            result_dict[key.strip()] = value.strip()    # Add the key-value pair to the result dictionary
+
+    return result_dict

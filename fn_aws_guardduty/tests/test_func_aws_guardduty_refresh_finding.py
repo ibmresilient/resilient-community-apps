@@ -5,11 +5,10 @@
 import pytest
 from mock import patch
 from sys import version_info
-from resilient_circuits.util import get_config_data, get_function_definition
+from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from .mock_artifacts import *
 
-PACKAGE_NAME = "fn_aws_guardduty"
 FUNCTION_NAME = "func_aws_guardduty_refresh_finding"
 
 # Read the mockconfiguration-data section from the package

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2021. All Rights Reserved.
-# pragma pylint: disable=unused-argument, no-self-use
+# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# pragma pylint: disable=unused-argument, line-too-long
 """ Findings poller class for AWS GuardDuty """
 import logging
 import os
@@ -88,7 +88,7 @@ class AwsGdPoller():
                     LOG.error("Something went wrong when attempting to get list of GuardDuty findings for region '%s'.",
                               gd_region)
                     LOG.error(str(ex))
-                    if u"detectorId is not owned by the current account" in str(ex):
+                    if "detectorId is not owned by the current account" in str(ex):
                         # Delete discovered detectors for region if it has been disabled.
                         del gd_client_info["detectors"]
                     continue
