@@ -447,7 +447,7 @@
 </ul>
 </li>
 <li><p><a class="reference internal" href="#function---abuseipdb"><span class="xref myst">Function - AbuseIPDB</span></a></p></li>
-<li><p><a class="reference internal" href="#rules"><span class="xref myst">Rules</span></a></p></li>
+<li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
 <li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
 <ul>
 <li><p><a class="reference internal" href="#for-support"><span class="xref myst">For Support</span></a></p></li>
@@ -471,15 +471,19 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.0.2</p></td>
+<tr class="row-even"><td><p>1.1.0</p></td>
+<td><p>08/2025</p></td>
+<td><p>Replaced workflow with playbook</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.0.2</p></td>
 <td><p>10/2023</p></td>
 <td><p>Fix for selftest function</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.1</p></td>
+<tr class="row-even"><td><p>1.0.1</p></td>
 <td><p>03/2022</p></td>
 <td><p>Update Workflow Post-Processing Script</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.0</p></td>
+<tr class="row-odd"><td><p>1.0.0</p></td>
 <td><p>02/2022</p></td>
 <td><p>Initial Release</p></td>
 </tr>
@@ -488,13 +492,17 @@
 </div>
 </section>
 <hr class="docutils" />
+<section id="abuseipdb-1-1-0-changes">
+<h2>AbuseIPDB 1.1.0 Changes<a class="headerlink" href="#abuseipdb-1-1-0-changes" title="Link to this heading">¶</a></h2>
+<p>In v1.1.0, playbook is added and the workflow is removed. Directly upgrading to the newer version would not remove the workflow, rule from the SOAR instance so, when upgrading to the newer version of the app it is recommended to uninstall the earlier version and then install the latest version to avoid any conflicts.</p>
+</section>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <!--
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-<p><strong>IBM Security SOAR app for AbuseIPDB’</strong></p>
+<p><strong>IBM Security SOAR app for AbuseIPDB</strong></p>
 <p><img alt="screenshot: main" src="../_images/main.png" /></p>
 <p>This app pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artifact is blacklisted. If so, it will add a hit to the artifact. This app requires an AbuseIPDB account and an v2 api key to work.</p>
 <section id="key-features">
@@ -503,7 +511,7 @@
   List the Key Features of the Integration
 -->
 <ul class="simple">
-<li><p>The workflow checks the IP address’s reputation and creates a hit in the artifact if AbuseIPDB reports that it is an abusive IP address.</p></li>
+<li><p>The playbook checks the IP address’s reputation and creates a hit in the artifact if AbuseIPDB reports that it is an abusive IP address.</p></li>
 </ul>
 </section>
 </section>
@@ -514,7 +522,7 @@
   List any Requirements
 -->
 <ul class="simple">
-<li><p>resilient-circuits&gt;=50.1.0</p></li>
+<li><p>resilient-circuits&gt;=51.0.0</p></li>
 </ul>
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
 <section id="soar-platform">
@@ -522,14 +530,14 @@
 <p>The SOAR platform supports two app deployment mechanisms, App Host and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">43.0.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">43.0.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient-circuits&gt;=43.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient-circuits&gt;=51.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -579,10 +587,10 @@
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
-<p>Python 3.6 is supported.
+<p>Python 3.9, 3.11, 3.12 are supported.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
-<li><p>resilient-circuits&gt;=43.0.0</p></li>
+<li><p>resilient-circuits&gt;=51.0.0</p></li>
 </ul>
 </section>
 <section id="endpoint-developed-with">
@@ -772,6 +780,7 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">abuseipdb_artifact_type</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">abuseipdb_artifact_value</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">abuseipdb_range_of_days</span> <span class="o">=</span> <span class="mi">30</span> <span class="c1">#Range of days from current time to get reports. Default is 30</span>
 </pre></div>
 </div>
 </p>
@@ -802,6 +811,8 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
   <span class="mi">23</span><span class="p">:</span> <span class="s2">&quot;IoT Targeted&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">result_ip_hits</span>
+
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
   <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
     <span class="n">resp_data</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
@@ -809,9 +820,9 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
     <span class="n">country_name</span> <span class="o">=</span> <span class="n">resp_data</span><span class="p">[</span><span class="s1">&#39;countryName&#39;</span><span class="p">]</span>
     <span class="n">most_recent_report</span> <span class="o">=</span> <span class="n">resp_data</span><span class="p">[</span><span class="s1">&#39;lastReportedAt&#39;</span><span class="p">]</span>
     <span class="n">confidence_score</span> <span class="o">=</span> <span class="n">resp_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;abuseConfidenceScore&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-
+    
     <span class="n">hit</span> <span class="o">=</span> <span class="p">[]</span>
-
+    
     <span class="c1"># get clean list of de-duped categories</span>
     <span class="n">categories_names</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="k">if</span> <span class="n">resp_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reports&#39;</span><span class="p">):</span>
@@ -819,9 +830,9 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
         <span class="k">for</span> <span class="n">report</span> <span class="ow">in</span> <span class="n">resp_data</span><span class="p">[</span><span class="s1">&#39;reports&#39;</span><span class="p">]:</span>
             <span class="n">categories_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">report</span><span class="p">[</span><span class="s2">&quot;categories&quot;</span><span class="p">])</span>
         <span class="n">categories_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">categories_list</span><span class="p">)</span>  <span class="c1"># dedup list</span>
-        <span class="n">categories_names</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">CATEGORIES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">categories_set</span><span class="p">)</span>
-
-
+        <span class="n">categories_names</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">CATEGORIES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">categories_set</span><span class="p">)</span>
+  
+    
     <span class="c1"># only return data if there&#39;s anything useful</span>
     <span class="k">if</span> <span class="n">number_of_reports</span> <span class="ow">or</span> <span class="n">confidence_score</span><span class="p">:</span>
       <span class="n">hit</span> <span class="o">=</span> <span class="p">[</span>
@@ -829,12 +840,12 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
           <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Confidence Score&quot;</span><span class="p">,</span>
           <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;number&quot;</span><span class="p">,</span>
           <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">confidence_score</span><span class="p">)</span>
-        <span class="p">},</span>
+        <span class="p">},</span> 
         <span class="p">{</span>
           <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Number of Reports&quot;</span><span class="p">,</span>
           <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;number&quot;</span><span class="p">,</span>
           <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number_of_reports</span><span class="p">)</span>
-        <span class="p">},</span>
+        <span class="p">},</span> 
         <span class="p">{</span>
           <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Country&quot;</span><span class="p">,</span>
           <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
@@ -853,9 +864,9 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
         <span class="p">]</span>
       <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="s2">&quot;AbuseIPDB Function hits added&quot;</span><span class="p">,</span> <span class="n">hit</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-      <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> has no reports or confidence score to return or is not in AbuseIPDB&#39;s database.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">resp_data</span><span class="p">[</span><span class="s2">&quot;ipAddress&quot;</span><span class="p">]))</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">resp_data</span><span class="p">[</span><span class="s1">&#39;ipAddress&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> has no reports or confidence score to return or is not in AbuseIPDB&#39;s database.&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;AbuseIPDB Check IP Address Blocklist failed: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;AbuseIPDB Check IP Address Blocklist failed: </span><span class="si">{results.reason}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -863,20 +874,26 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 </details>
 </section>
 <hr class="docutils" />
-<section id="rules">
-<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
+<section id="playbooks">
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
-<tr class="row-odd"><th class="head"><p>Rule Name</p></th>
+<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Activation Type</p></th>
 <th class="head"><p>Object</p></th>
-<th class="head"><p>Workflow Triggered</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Condition</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>AbuseIPDB Check IP Address Blocklist</p></td>
+<tr class="row-even"><td><p>AbuseIPDB Check IP Address Blocklist (PB)</p></td>
+<td><p>Pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artifact is blacklisted. Needs an AbuseIPDB account and an v2 api key to work. Default is reports from the last 30 days, but can be changed to as many as the last 365 days’ reports.</p></td>
+<td><p>Automatic</p></td>
 <td><p>artifact</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">abuseipdb_check_ip_address_blocklist</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">artifact.type</span> <span class="pre">equals</span> <span class="pre">IP</span> <span class="pre">Address</span></code></p></td>
 </tr>
 </tbody>
 </table>
@@ -885,6 +902,7 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 <hr class="docutils" />
 <section id="troubleshooting-support">
 <h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
+<p>Sometimes the result for hits on an IP Address on SOAR platform may differ from what is seen on Abuse IPDB service which runs on the AbuseIPDB URL site https://www.abuseipdb.com/ and the reason might be the duration for which the check is run on both. While the SOAR runs the scan for a default time of last 30 days, the Abuse IPDB service runs it for a default time of last 90 days.</p>
 <p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
 <section id="for-support">
 <h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
@@ -951,6 +969,7 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 <li><a class="reference internal" href="#">AbuseIPDB</a><ul>
 <li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
 <li><a class="reference internal" href="#release-notes">Release Notes</a></li>
+<li><a class="reference internal" href="#abuseipdb-1-1-0-changes">AbuseIPDB 1.1.0 Changes</a></li>
 <li><a class="reference internal" href="#overview">Overview</a><ul>
 <li><a class="reference internal" href="#key-features">Key Features</a></li>
 </ul>
@@ -972,7 +991,7 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 </ul>
 </li>
 <li><a class="reference internal" href="#function-abuseipdb">Function - AbuseIPDB</a></li>
-<li><a class="reference internal" href="#rules">Rules</a></li>
+<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
 <li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
 <li><a class="reference internal" href="#for-support">For Support</a></li>
 </ul>

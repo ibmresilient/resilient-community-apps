@@ -34,7 +34,7 @@
   - [Install](#install)
   - [App Configuration](#app-configuration)
 - [Function - AbuseIPDB](#function---abuseipdb)
-- [Rules](#rules)
+- [Playbooks](#playbooks)
 - [Troubleshooting \& Support](#troubleshooting--support)
   - [For Support](#for-support)
 ---
@@ -46,18 +46,21 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.1.0 | 08/2025 | Replaced workflow with playbook | 
 | 1.0.2 | 10/2023 | Fix for selftest function |
 | 1.0.1 | 03/2022 | Update Workflow Post-Processing Script |
 | 1.0.0 | 02/2022 | Initial Release |
 
 ---
+## AbuseIPDB 1.1.0 Changes
+In v1.1.0, playbook is added and the workflow is removed. Directly upgrading to the newer version would not remove the workflow, rule from the SOAR instance so, when upgrading to the newer version of the app it is recommended to uninstall the earlier version and then install the latest version to avoid any conflicts. 
 
 ## Overview
 <!--
   Provide a high-level description of the function itself and its remote software or application.
   The text below is parsed from the "description" and "long_description" attributes in the setup.py file
 -->
-**IBM Security SOAR app for AbuseIPDB'**
+**IBM Security SOAR app for AbuseIPDB**
 
  ![screenshot: main](./doc/screenshots/main.png)
 
@@ -67,7 +70,7 @@ This app pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artif
 <!--
   List the Key Features of the Integration
 -->
-* The workflow checks the IP address's reputation and creates a hit in the artifact if AbuseIPDB reports that it is an abusive IP address.
+* The playbook checks the IP address's reputation and creates a hit in the artifact if AbuseIPDB reports that it is an abusive IP address.
 
 ---
 
@@ -75,7 +78,7 @@ This app pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artif
 <!--
   List any Requirements
 -->
-* resilient-circuits>=50.1.0
+* resilient-circuits>=51.0.0
 
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
@@ -83,13 +86,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `43.0.0`.
+* SOAR platform >= `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `43.0.0`.
+* SOAR platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient-circuits>=43.0.0`.
+* Integration server is running `resilient-circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -119,9 +122,9 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does support a proxy server.
 
 ### Python Environment
-Python 3.6 is supported.
+Python 3.9, 3.11, 3.12 are supported.
 Additional package dependencies may exist for each of these packages:
-* resilient-circuits>=43.0.0
+* resilient-circuits>=51.0.0
 
 ### Endpoint Developed With
 
@@ -248,6 +251,7 @@ results = {
 ```python
 inputs.abuseipdb_artifact_type = artifact.type
 inputs.abuseipdb_artifact_value = artifact.value
+inputs.abuseipdb_range_of_days = 30 #Range of days from current time to get reports. Default is 30
 ```
 
 </p>
@@ -281,6 +285,8 @@ CATEGORIES= {
   23: "IoT Targeted",
 }
 
+results = playbook.functions.results.result_ip_hits
+
 if results.success:
   if results.content:
     resp_data = results.content['data']
@@ -288,9 +294,9 @@ if results.success:
     country_name = resp_data['countryName']
     most_recent_report = resp_data['lastReportedAt']
     confidence_score = resp_data.get("abuseConfidenceScore", 0)
-
+    
     hit = []
-
+    
     # get clean list of de-duped categories
     categories_names = ""
     if resp_data.get('reports'):
@@ -298,9 +304,9 @@ if results.success:
         for report in resp_data['reports']:
             categories_list.extend(report["categories"])
         categories_set = set(categories_list)  # dedup list
-        categories_names = u', '.join(CATEGORIES.get(item, 'unknown') for item in categories_set)
-
-
+        categories_names = ', '.join(CATEGORIES.get(item, 'unknown') for item in categories_set)
+  
+    
     # only return data if there's anything useful
     if number_of_reports or confidence_score:
       hit = [
@@ -308,12 +314,12 @@ if results.success:
           "name": "Confidence Score",
           "type": "number",
           "value": "{}".format(confidence_score)
-        },
+        }, 
         {
           "name": "Number of Reports",
           "type": "number",
           "value": "{}".format(number_of_reports)
-        },
+        }, 
         {
           "name": "Country",
           "type": "string",
@@ -332,9 +338,9 @@ if results.success:
         ]
       artifact.addHit("AbuseIPDB Function hits added", hit)
     else:
-      incident.addNote("{} has no reports or confidence score to return or is not in AbuseIPDB's database.".format(resp_data["ipAddress"]))
+      incident.addNote(f"{resp_data['ipAddress']} has no reports or confidence score to return or is not in AbuseIPDB's database.")
 else:
-  incident.addNote("AbuseIPDB Check IP Address Blocklist failed: {}".format(results.reason))
+  incident.addNote("AbuseIPDB Check IP Address Blocklist failed: {results.reason}")
 
 ```
 
@@ -343,18 +349,16 @@ else:
 
 ---
 
-
-
-
-
-## Rules
-| Rule Name | Object | Workflow Triggered |
-| --------- | ------ | ------------------ |
-| AbuseIPDB Check IP Address Blocklist | artifact | `abuseipdb_check_ip_address_blocklist` |
+## Playbooks
+| Playbook Name | Description | Activation Type | Object | Status | Condition |
+| ------------- | ----------- | --------------- | ------ | ------ | --------- |
+| AbuseIPDB Check IP Address Blocklist (PB) | Pulls data from AbuseIPDB (www.abuseipdb.com) and checks if an IP artifact is blacklisted. Needs an AbuseIPDB account and an v2 api key to work. Default is reports from the last 30 days, but can be changed to as many as the last 365 days' reports.| Automatic | artifact | `enabled` | `artifact.type equals IP Address` |
 
 ---
 
 ## Troubleshooting & Support
+Sometimes the result for hits on an IP Address on SOAR platform may differ from what is seen on Abuse IPDB service which runs on the AbuseIPDB URL site https://www.abuseipdb.com/ and the reason might be the duration for which the check is run on both. While the SOAR runs the scan for a default time of last 30 days, the Abuse IPDB service runs it for a default time of last 90 days.
+
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
