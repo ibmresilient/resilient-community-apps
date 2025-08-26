@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# Generated with resilient-sdk v51.0.7.0.1603
 
-"""Generate the Resilient customizations required for fn_abuseipdb"""
+"""Generate the SOAR customizations required for fn_abuseipdb"""
 
 import base64
 import os
@@ -21,17 +22,23 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_abuseipdb",
-        "message_destinations": [u"abuseipdb"],
-        "functions": [u"fn_abuseipdb"],
-        "workflows": [u"abuseipdb_check_ip_address_blocklist"],
-        "actions": [u"AbuseIPDB Check IP Address Blocklist"],
+        "message_destinations": [
+            u"abuseipdb"
+        ],
+        "functions": [
+            u"fn_abuseipdb"
+        ],
+        "workflows": [],
+        "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [
+            u"abuseipdb_check_ip_address_blocklist_pb"
+        ]
     }
 
 
@@ -40,17 +47,15 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 43.1.49
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:
         - abuseipdb
     - Functions:
         - fn_abuseipdb
-    - Workflows:
-        - abuseipdb_check_ip_address_blocklist
-    - Rules:
-        - AbuseIPDB Check IP Address Blocklist
+    - Playbooks:
+        - abuseipdb_check_ip_address_blocklist_pb
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
