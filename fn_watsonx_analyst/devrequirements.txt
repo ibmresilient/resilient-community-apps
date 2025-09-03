@@ -1,0 +1,15 @@
+pytest
+pytest-resilient-circuits
+resilient
+resilient_lib
+resilient_sdk
+resilient-circuits
+pytest-cov
+memray
+sphinx
+furo
+sphinx-copybutton
+build
+myst-parser
+sphinx-design
+
