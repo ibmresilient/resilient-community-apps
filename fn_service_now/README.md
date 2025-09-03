@@ -14,8 +14,16 @@ docs/customize_resilient_guide/README
   Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
+
 ### v2.3.1
-* Add new input for function fn_snow_create_record. The new boolean input, sn_add_soar_link_on_snow, will determine if a link to the SOAR incident will be added in a note on the ServiceNow incident.
+Add new input for function fn_snow_create_record. The new boolean input, sn_add_soar_link_on_snow, will determine if a link to the SOAR incident will be added in a note on the ServiceNow incident.
+
+To update incidents, the user must have the following role:
+`x_ibmrt_resilient.integrator`
+As of v2.3.2, this role includes:
+* `itil`: Grants access to create, read, update, and delete incidents.
+* `rest_api_explorer`: Allows testing and using REST APIs.
+This ensures the integration user has the necessary permissions to update fields like state on the incident table.
 
 ### v2.3.0
 * Multiple tables can be used at the same time. See the "Create Record" function in **Customize SOAR Guide** for details.
