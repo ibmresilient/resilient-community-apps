@@ -410,8 +410,14 @@
 -->
 <section id="v2-3-1">
 <h3>v2.3.1<a class="headerlink" href="#v2-3-1" title="Link to this heading">¶</a></h3>
+<p>Add new input for function fn_snow_create_record. The new boolean input, sn_add_soar_link_on_snow, will determine if a link to the SOAR incident will be added in a note on the ServiceNow incident.</p>
+<p>To update incidents, the user must have the following role:
+<code class="docutils literal notranslate"><span class="pre">x_ibmrt_resilient.integrator</span></code>
+As of v2.3.2, this role includes:</p>
 <ul class="simple">
-<li><p>Add new input for function fn_snow_create_record. The new boolean input, sn_add_soar_link_on_snow, will determine if a link to the SOAR incident will be added in a note on the ServiceNow incident.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">itil</span></code>: Grants access to create, read, update, and delete incidents.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rest_api_explorer</span></code>: Allows testing and using REST APIs.
+This ensures the integration user has the necessary permissions to update fields like state on the incident table.</p></li>
 </ul>
 </section>
 <section id="v2-3-0">
