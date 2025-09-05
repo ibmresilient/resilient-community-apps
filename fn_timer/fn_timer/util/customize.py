@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2022, 2025. All Rights Reserved.
+# Generated with resilient-sdk v51.0.7.0.1603
 
-"""Generate the Resilient customizations required for fn_timer"""
+"""Generate the SOAR customizations required for fn_timer"""
 
 import base64
 import os
@@ -20,17 +22,27 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_timer",
-        "message_destinations": [u"fn_timer"],
-        "functions": [u"fn_timer"],
-        "workflows": [u"timer_epoch", u"timer_in_parallel"],
-        "actions": [u"Timer Epoch", u"Timer in Parallel"],
+        "message_destinations": [
+            u"fn_timer"
+        ],
+        "functions": [
+            u"fn_timer"
+        ],
+        "workflows": [
+            u"timer_epoch",
+            u"timer_in_parallel"
+        ],
+        "actions": [
+            u"Timer Epoch",
+            u"Timer in Parallel"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": []
+        "playbooks": [],
     }
 
 
@@ -39,7 +51,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 43.1.49
+    IBM SOAR Platform Version: 51.0.0.0.9339
 
     Contents:
     - Message Destinations:

@@ -10,8 +10,8 @@ def config_section_data():
     """
     config_data = u"""[fn_timer]
 # Max Timer sleep time. The input string is of format “time value” concatenated with a
-# “time unit” character, where character is: ‘s’ for seconds, ‘m’ for minutes, ‘h’ for hours
-# ‘d’ for days.  For example: '30s' = 30 seconds; '40m' = 40 minutes;
+# “time unit” character, where character is: 's' for seconds, 'm' for minutes, 'h' for hours
+# 'd' for days.  For example: '30s' = 30 seconds; '40m' = 40 minutes;
 max_timer=30d
 
 # Add num_workers= to the resilient section to set the number of threads

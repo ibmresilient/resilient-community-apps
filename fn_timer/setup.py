@@ -23,17 +23,20 @@ def snake_to_camel(word):
 setup(
     name="fn_timer",
     display_name="Timer Function for SOAR",
-    version="1.0.0",
+    version="1.0.1",
     license="MIT",
     author="IBM SOAR",
-    url="http://ibm.biz/soarcommunity",
+    url="""<ul><a target='blank' href='https://ibm.biz/soarcommunity'>Support</a></ul>""",
     description="Simple timer function to be used in the SOAR platform",
     long_description="""App used in the SOAR platform. A workflow using this function will sleep for the
         specified amount of time. The function takes as input timer_time or timer_epoch as input.
         The function periodically checks the status of the calling workflow and will end
-        function execution if the workflow has been terminated.""",
+        function execution if the workflow has been terminated.
+        Links:
+    <ul><a target='blank' href='https://ibm.biz/soarcommunity'>Support</a></ul>
+    <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        "resilient-circuits>=46.0.0"
+        "resilient-circuits>=51.0.0"
     ],
     python_requires='>=3.6',
     packages=find_packages(),

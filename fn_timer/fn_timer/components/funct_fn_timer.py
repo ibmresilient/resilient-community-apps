@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+# (c) Copyright IBM Corp. 2022, 2025. All Rights Reserved.
 """AppFunction implementation"""
 
 import time
@@ -35,10 +35,10 @@ class FunctionComponent(AppFunctionComponent):
 
         The timer_time parameter is a string is of format “time value” concatenated with a
         “time unit” character, where character is:
-        ‘s’ for seconds
-        ‘m’ for minutes
-        ‘h’ for hours
-        ‘d’ for days
+        's' for seconds
+        'm' for minutes
+        'h' for hours
+        'd' for days
         For example: '30s' = 30 seconds; '40m' = 40 minutes;
 
         The timer_epoch parameter is an epoch time value that specifies the time the timer should
@@ -159,8 +159,8 @@ def get_sleep_time_from_epoch(end_epoch):
     Given the epoch time to end the timer, compute the total number of seconds to sleep.
     """
     # Make sure timer end is not in the past.
-    now_utc = datetime.datetime.utcnow()
-    end_timer_utc = datetime.datetime.utcfromtimestamp(end_epoch / 1000)
+    now_utc = datetime.datetime.now()
+    end_timer_utc = datetime.datetime.fromtimestamp(end_epoch / 1000)
 
     if now_utc > end_timer_utc:
         raise ValueError("Timer end date is in the past: {0}".format(end_epoch))
