@@ -343,6 +343,7 @@
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">watsonx.ai for SOAR Analysts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#data-selection">Data selection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#soar-customizations">SOAR Customizations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Whois</a></li>
@@ -412,7 +413,14 @@
 </li>
 <li><p><a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a></p>
 <ul>
-<li><p><a class="reference internal" href="#watsonx-ai-free-credits"><span class="xref myst">Watsonx.ai Free Credits</span></a></p></li>
+<li><p><a class="reference internal" href="#watsonxai-subscription-and-project"><span class="xref myst">Watsonx.ai Subscription and Project</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#watsonxai-project-id"><span class="xref myst">Watsonx.ai Project ID</span></a></p></li>
+<li><p><a class="reference internal" href="#ibm-cloud-iam-api-key"><span class="xref myst">IBM Cloud IAM API Key</span></a></p></li>
+<li><p><a class="reference internal" href="#watsonxai-endpoint-url"><span class="xref myst">Watsonx.ai Endpoint URL</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#watsonxai-free-credits"><span class="xref myst">Watsonx.ai Free Credits</span></a></p></li>
 <li><p><a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR platform</span></a></p></li>
 <li><p><a class="reference internal" href="#cloud-pak-for-security"><span class="xref myst">Cloud Pak for Security</span></a></p></li>
 <li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
@@ -436,24 +444,41 @@
 </ul>
 </li>
 <li><p><a class="reference internal" href="#text-generation"><span class="xref myst">Text Generation</span></a></p></li>
+<li><p><a class="reference internal" href="#incident-summarization"><span class="xref myst">Incident Summarization</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#what-type-of-summaries-are-available"><span class="xref myst">What type of summaries are available?</span></a></p></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#how-to-get-the-best-out-of-the-app"><span class="xref myst">How to get the best out of the app</span></a></p>
 <ul>
+<li><p><a class="reference internal" href="#model-quality"><span class="xref myst">Model quality</span></a></p></li>
 <li><p><a class="reference internal" href="#background-on-how-a-note-conversation-response-is-generated"><span class="xref myst">Background on how a note conversation response is generated</span></a></p></li>
-<li><p><a class="reference internal" href="#prompting-guide"><span class="xref myst">Prompting Guide</span></a></p></li>
+<li><p><a class="reference internal" href="#prompting-guide"><span class="xref myst">Prompting Guide</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#response-quality"><span class="xref myst">Response Quality</span></a></p></li>
+<li><p><a class="reference internal" href="#reply-chain-prompts"><span class="xref myst">Reply chain prompts</span></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#data-selection"><span class="xref myst">Data selection</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#creating-the-override-config"><span class="xref myst">Creating the override config</span></a></p></li>
+<li><p><a class="reference internal" href="#setting-up-the-dropdown"><span class="xref myst">Setting up the dropdown</span></a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#soar-customizations"><span class="xref myst">SOAR Customizations</span></a></p>
 <ul>
-<li><p><a class="reference internal" href="#function-watsonx-ai-converse-via-notes"><span class="xref myst">Function - watsonx.ai Converse via Notes</span></a></p></li>
-<li><p><a class="reference internal" href="#function-watsonx-ai-scan-artifact"><span class="xref myst">Function - watsonx.ai Scan Artifact</span></a></p></li>
-<li><p><a class="reference internal" href="#function-watsonx-ai-scan-attachment"><span class="xref myst">Function - watsonx.ai Scan Attachment</span></a></p></li>
-<li><p><a class="reference internal" href="#function-watsonx-ai-text-generation"><span class="xref myst">Function - watsonx.ai Text Generation</span></a></p></li>
-<li><p><a class="reference internal" href="#script-watsonx-ai-add-artifact-report-to-notes"><span class="xref myst">Script - watsonx.ai Add Artifact Report to Notes</span></a></p></li>
-<li><p><a class="reference internal" href="#script-watsonx-ai-respond-to-note"><span class="xref myst">Script - watsonx.ai Respond to note</span></a></p></li>
+<li><p><a class="reference internal" href="#function---watsonxai-converse-via-notes"><span class="xref myst">Function - watsonx.ai Converse via Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#function---watsonxai-scan-artifact"><span class="xref myst">Function - watsonx.ai Scan Artifact</span></a></p></li>
+<li><p><a class="reference internal" href="#function---watsonxai-scan-attachment"><span class="xref myst">Function - watsonx.ai Scan Attachment</span></a></p></li>
+<li><p><a class="reference internal" href="#function---watsonxai-text-generation"><span class="xref myst">Function - watsonx.ai Text Generation</span></a></p></li>
+<li><p><a class="reference internal" href="#script---watsonxai-add-artifact-report-to-notes"><span class="xref myst">Script - watsonx.ai Add Artifact Report to Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#script---watsonxai-respond-to-note"><span class="xref myst">Script - watsonx.ai Respond to note</span></a></p></li>
 <li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
-<li><p><a class="reference internal" href="#troubleshooting-support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
+<li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
 <ul>
 <li><p><a class="reference internal" href="#for-support"><span class="xref myst">For Support</span></a></p></li>
 </ul>
@@ -478,23 +503,27 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.1.1</p></td>
+<tr class="row-even"><td><p>1.2.0</p></td>
+<td><p>06/2025</p></td>
+<td><p>Incident summary playbook, support for artifact/attachment scans on images and non-file artifacts, token usage &amp; estimated cost (in USD cents) in all scans and summaries, data ingestion optimisation and user-customization feature, japanese language inclusion and prompt optimisations.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.1.1</p></td>
 <td><p>06/2025</p></td>
 <td><p>Updated model list, rich text whitespace fixes, playbook execution API fixes, improved stability in generating embeddings, minor change to scan playbooks’ activation form.</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1.0</p></td>
+<tr class="row-even"><td><p>1.1.0</p></td>
 <td><p>02/2025</p></td>
 <td><p>Semantic context retrieval (embeddings), multilingual prompts, artifact scans can handle more file types, attachment scanning (equivalent to artifact scan), organization type ID resolution<a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.2</p></td>
+<tr class="row-odd"><td><p>1.0.2</p></td>
 <td><p>12/2024</p></td>
 <td><p>Rich text output, request ID in logs, and a data processing fix for incidents with larger data.</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.1</p></td>
+<tr class="row-even"><td><p>1.0.1</p></td>
 <td><p>12/2024</p></td>
 <td><p>Bugfix for SOAR versions &lt;= 51.0.2.1 and &gt;= 51.0.4.1 for Note Conversation Function.</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.0</p></td>
+<tr class="row-odd"><td><p>1.0.0</p></td>
 <td><p>12/2024</p></td>
 <td><p>Initial “<strong>Early Access</strong>” release. Uses watsonx.ai SaaS Version <code class="docutils literal notranslate"><span class="pre">2023-05-29</span></code></p></td>
 </tr>
@@ -513,9 +542,26 @@
 <li><p>Q&amp;A: ask watsonx.ai questions about an incident, artifact, or attachment.</p>
 <ul>
 <li><p>Portions of relevant SOAR data will be used in the answer generation process.</p></li>
-<li><p>Prompts can be written in the following languages: English, French, German, Portuguese, and Spanish.</p>
+<li><p>Prompts can be written in the following languages: English, French, German, Portuguese, Spanish, and Japanese.</p>
 <ul>
 <li><p>Responses will then be generated in the given language.</p></li>
+</ul>
+</li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">watsonx.ai</span> <span class="pre">Retry</span> <span class="pre">Note</span> <span class="pre">Conversation</span></code> playbook makes it easy to execute the same query again without rewriting it.</p>
+<ul>
+<li><p>helpful in comparing results of two models for example.</p></li>
+<li><p>note: changing model in one playbook will not change it for the other.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Query cost estimation.</p>
+<ul>
+<li><p>The estimated cost (in USD cents) is shown in the AI content heading in notes.</p>
+<ul>
+<li><p>Its shown for QnA, scanned artifacts/attachments and summarization.</p></li>
+<li><p>example - <code class="docutils literal notranslate"><span class="pre">Generation</span> <span class="pre">tokens:</span> <span class="pre">78650,</span> <span class="pre">Embedding</span> <span class="pre">tokens:</span> <span class="pre">54829.</span> <span class="pre">Estimated</span> <span class="pre">cost:</span> <span class="pre">1.33479</span> <span class="pre">USD</span> <span class="pre">cents</span></code></p></li>
+<li><p><strong>Note</strong>: This is just an estimation based off the understood pricing at time of release of each app version. To get actual token usage and billing information, navigate to the billing page in watsonx.ai or IBM Cloud.</p></li>
 </ul>
 </li>
 </ul>
@@ -523,7 +569,7 @@
 <li><p>Artifact and attachment analysis:</p>
 <ul>
 <li><p>Use playbooks to quickly generate a report on an artifact or attachment, as a preliminary assessment.</p></li>
-<li><p>Supported file types include: any plaintext file, <code class="docutils literal notranslate"><span class="pre">pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">docx</span></code>, <code class="docutils literal notranslate"><span class="pre">xlsx</span></code>, <code class="docutils literal notranslate"><span class="pre">pptx</span></code>, <code class="docutils literal notranslate"><span class="pre">png</span></code>, <code class="docutils literal notranslate"><span class="pre">jpg</span></code>, and <code class="docutils literal notranslate"><span class="pre">eml</span></code>.</p>
+<li><p>Supported file types include: any plaintext file, <code class="docutils literal notranslate"><span class="pre">pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">docx</span></code>, <code class="docutils literal notranslate"><span class="pre">xlsx</span></code>, <code class="docutils literal notranslate"><span class="pre">pptx</span></code>, <code class="docutils literal notranslate"><span class="pre">png</span></code>, <code class="docutils literal notranslate"><span class="pre">jpg</span></code>, <code class="docutils literal notranslate"><span class="pre">gif</span></code>and <code class="docutils literal notranslate"><span class="pre">eml</span></code>.</p>
 <ul>
 <li><p><strong>Note</strong>: Image files will be converted to text using OCR.</p></li>
 </ul>
@@ -533,6 +579,21 @@
 <li><p>Text generation:</p>
 <ul>
 <li><p>Use watsonx.ai to generate text based on a given prompt in a function.</p></li>
+</ul>
+</li>
+<li><p>Incident Summarization: ask watsonx.ai to generate a summary of the incident.</p>
+<ul>
+<li><p>Uses Incident data to generate an AI Summary. Two types of summaries are generated:</p>
+<ul>
+<li><p>Executive Summary: Generates a high-level overview of a cybersecurity incident, detailing situation, attack, and defense in three sections for executive audiences.</p></li>
+<li><p>Technical Summary: Produces a detailed technical report of a cybersecurity incident, covering overview, artifact analysis, and mitigation actions for incident response teams.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Guardrails.</p>
+<ul>
+<li><p>We have now implemented guardrails to ensure that only queries related to the security domain are covered.</p></li>
 </ul>
 </li>
 </ul>
@@ -665,17 +726,31 @@
 <p>Python 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
-<li><p>beautifulsoup4==4.12.3</p></li>
-<li><p>faiss-cpu==1.9.0</p></li>
-<li><p>jsonpath-ng==1.7.0</p></li>
-<li><p>markdown2==2.5.3</p></li>
-<li><p>nh3==0.2.19</p></li>
 <li><p>numpy==2.2.0</p></li>
+<li><p>mail-parser==4.1.2</p></li>
+<li><p>xlrd==2.0.1</p></li>
 <li><p>py3langid==0.3.0</p></li>
+<li><p>openpyxl==3.1.5</p></li>
+<li><p>unoconv==0.9.0</p></li>
+<li><p>markdown2==2.5.3</p></li>
+<li><p>python-docx==1.1.2</p></li>
+<li><p>jsonpath-ng==1.7.0</p></li>
+<li><p>pdf2image==1.17.0</p></li>
+<li><p>sentence-transformers==3.3.1</p></li>
+<li><p>python-pptx==1.0.2</p></li>
+<li><p>nh3==0.2.19</p></li>
 <li><p>resilient-circuits&gt;=51.0.2.0.0</p></li>
 <li><p>scikit-learn==1.5.2</p></li>
-<li><p>tika==2.6.0</p></li>
+<li><p>beautifulsoup4==4.12.3</p></li>
+<li><p>pillow==11.1.0</p></li>
+<li><p>faiss-cpu==1.9.0</p></li>
+<li><p>pypdf==5.4.0</p></li>
+<li><p>ics==0.7.2</p></li>
+<li><p>pydantic==2.10.6</p></li>
+<li><p>pytesseract==0.3.13</p></li>
 <li><p>tiktoken==0.8.0</p></li>
+<li><p>bs4==0.0.2</p></li>
+<li><p>PyYAML==6.0.2</p></li>
 </ul>
 </section>
 </section>
@@ -724,12 +799,23 @@ Additional package dependencies may exist for each of these packages:</p>
 </tr>
 <tr class="row-even"><td><p><strong>default_language</strong></p></td>
 <td><p>No</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">en</span></code> or <code class="docutils literal notranslate"><span class="pre">fr</span></code> or <code class="docutils literal notranslate"><span class="pre">de</span></code> or <code class="docutils literal notranslate"><span class="pre">pt</span></code> or <code class="docutils literal notranslate"><span class="pre">es</span></code></p></td>
-<td><p>Language used for scans, and fallback language if prompt’s language can’t be detected.</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">en</span></code>, <code class="docutils literal notranslate"><span class="pre">fr</span></code>, <code class="docutils literal notranslate"><span class="pre">de</span></code>, <code class="docutils literal notranslate"><span class="pre">pt</span></code>, <code class="docutils literal notranslate"><span class="pre">es</span></code> or <code class="docutils literal notranslate"><span class="pre">ja</span></code></p></td>
+<td><p>Language used for scans and summaries, and is used as the fallback language if prompt’s language can’t be detected.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>local_embeddings</strong></p></td>
+<td><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
+<td><p>Use local (App host/integration server) compute resources to generate embeddings instead of watsonx.ai. Only recommended for integration servers that have &gt;6GB of memory.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<p>The config is setup automatically, you just need to add the following <strong>case sensitive</strong> App secrets with the details from the <a class="reference internal" href="#requirements"><span class="xref myst">requirements</span></a> section:</p>
+<ul class="simple">
+<li><p>WATSONX_ENDPOINT_URL</p></li>
+<li><p>WATSONX_API_KEY</p></li>
+<li><p>WATSONX_PROJECT_ID</p></li>
+</ul>
 </section>
 </section>
 </section>
@@ -766,8 +852,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <section id="what-file-formats-can-be-scanned">
 <h3>What file formats can be scanned?<a class="headerlink" href="#what-file-formats-can-be-scanned" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>This app uses the <a class="reference external" href="https://tika.apache.org">Apache Tika</a> project to extract text from documents.</p></li>
-<li><p>This allows for plaintext to be extracted extract from text-based documents as well as extracting OCR text from images.</p>
+<li><p>The app supports plaintext to be extracted from text-based documents (utf-8 and ascii) as well as extracting OCR text from images.</p>
 <ul>
 <li><p>This means that any non-text information from an image is disregarded, and if text is not clear, it may not be extracted.</p></li>
 </ul>
@@ -775,9 +860,9 @@ Additional package dependencies may exist for each of these packages:</p>
 </ul>
 <p>Examples of supported file formats include:</p>
 <ul class="simple">
-<li><p>Document formats: pdf, docx, pptx, odf, rtf</p></li>
-<li><p>Image formats: png, jpg, gif, bmp</p></li>
-<li><p>Any generic plaintext file with standard text encoding: txt, md, json, code source files.</p></li>
+<li><p>Document formats: <code class="docutils literal notranslate"><span class="pre">pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">docx</span></code>, <code class="docutils literal notranslate"><span class="pre">xlsx</span></code>, <code class="docutils literal notranslate"><span class="pre">pptx</span></code> and <code class="docutils literal notranslate"><span class="pre">eml</span></code>.</p></li>
+<li><p>Image formats: <code class="docutils literal notranslate"><span class="pre">png</span></code>, <code class="docutils literal notranslate"><span class="pre">jpg</span></code>,<code class="docutils literal notranslate"><span class="pre">gif</span></code>.</p></li>
+<li><p>Any generic plaintext file with standard text encoding: ascii &amp; utf-8.</p></li>
 </ul>
 </section>
 </section>
@@ -789,10 +874,44 @@ Additional package dependencies may exist for each of these packages:</p>
 <li><p>Playbook logic can act as a force multiplier to create sophisticated AI workflows to perform predefined tasks automatically.</p></li>
 </ul>
 </section>
+<section id="incident-summarization">
+<h2>Incident Summarization<a class="headerlink" href="#incident-summarization" title="Link to this heading">¶</a></h2>
+<p><img alt="" src="../_images/incident_summarizer_action.png" />
+<img alt="" src="../_images/incident_summarizer_selection.png" />
+<img alt="" src="../_images/incident_summarizer_result.png" /></p>
+<p>The <em>watsonx.ai Summarize Incident</em> playbooks summarizes the whole incident based on selected summary type.</p>
+<p><strong>This scan is not intended to replace detailed analysis of the security incidents recorded in QRadar SOAR</strong>. It’s intended use is to be a utility to summarize and get a precise overview of the incident depending on user type.</p>
+<section id="what-type-of-summaries-are-available">
+<h3>What type of summaries are available?<a class="headerlink" href="#what-type-of-summaries-are-available" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>There are two type of summaries avaiable to the users:</p>
+<ul>
+<li><p>Executive Summary: Delivers a clear, high-level overview of a cybersecurity incident, tailored for executives and decision-makers to quickly grasp the situation, attack details, and defensive actions. Its concise, formal structure supports strategic planning and communication without requiring technical expertise.</p></li>
+<li><p>Technical Summmary: Provides an in-depth technical report for incident response teams and cybersecurity analysts, detailing the incident’s technical aspects, artifact analysis, and mitigation steps. Its structured format aids operational teams in investigating, responding to, and preventing future incidents effectively.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
 </section>
 <hr class="docutils" />
 <section id="how-to-get-the-best-out-of-the-app">
 <h1>How to get the best out of the app<a class="headerlink" href="#how-to-get-the-best-out-of-the-app" title="Link to this heading">¶</a></h1>
+<section id="model-quality">
+<h2>Model quality<a class="headerlink" href="#model-quality" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Each large language model is different, and perform differently depending on the situation.</p></li>
+<li><p>You can switch model at any time at the function level in the Playbook designer for each use-case.</p></li>
+<li><p>This can allow you to try out different models hosted by IBM.</p></li>
+<li><p>The default IBM granite model performs well, and is very competitively priced.</p></li>
+<li><p>Certain topics and use-cases like task-related questions may be better suited for a mistral model.</p>
+<ul>
+<li><p>mistralai/mistral-small-3-1-24b-instruct-2503 - very cost efficient</p></li>
+<li><p>mistralai/mistral-large - good reasoning capabilities</p></li>
+</ul>
+</li>
+</ul>
+</section>
 <section id="background-on-how-a-note-conversation-response-is-generated">
 <h2>Background on how a note conversation response is generated<a class="headerlink" href="#background-on-how-a-note-conversation-response-is-generated" title="Link to this heading">¶</a></h2>
 <ul class="simple">
@@ -838,6 +957,140 @@ Additional package dependencies may exist for each of these packages:</p>
 </li>
 </ul>
 </section>
+</section>
+</section>
+<hr class="docutils" />
+<section id="data-selection">
+<h1>Data selection<a class="headerlink" href="#data-selection" title="Link to this heading">¶</a></h1>
+<p>You can override the configuration for the data we send to watsonx. While we wouldn’t recommend stripping too much from the default configuration, as adding or removing data will likely impact the quality of responses.</p>
+<section id="creating-the-override-config">
+<h2>Creating the override config<a class="headerlink" href="#creating-the-override-config" title="Link to this heading">¶</a></h2>
+<p>By creating a <code class="docutils literal notranslate"><span class="pre">yaml</span></code> file under <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code> in the App Configuration page, you can provide an override config, which you can choose to use, for each compatible function (Converse via Notes, and Summarize Incident).</p>
+<p>Make sure that the file name is <code class="docutils literal notranslate"><span class="pre">&lt;yourname&gt;.yaml</span></code>, and that the file path is <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code>.</p>
+<p>The contents of the default configuration will be below, you can use this as a base config to modify. <strong>Note</strong>: Quality will vary if the config is changed from the default, continue at your own risk, and revert back to default if the data configuration causes a drop in quality.</p>
+<p><strong>Note</strong>: You should restart the app after creating the new payload file, as until then, the app will fallback to default configuration.</p>
+<details>
+  <summary>Show <code>datapayload.yaml</code></summary>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+<span class="nt">incident</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># define only the fields we want to keep</span>
+<span class="w">  </span><span class="nt">allow_list</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">confirmed</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">addr</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">city</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">start_date</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inc_start</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">discovered_date</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">creator_principal</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reporter</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">state</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">country</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">severity_code</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">zip</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">workspace</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">members</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">negative_pr_likely</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">assessment</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">properties</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inc_last_modified_date</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">incident_type_ids</span>
+
+<span class="w">  </span><span class="c1"># define the fields that will be converted from timestamp to human-readable time.</span>
+<span class="w">  </span><span class="c1"># if these fields are removed from the allow_list, they should be removed here too</span>
+<span class="w">  </span><span class="nt">date_list</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">start_date</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inc_start</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">discovered_date</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inc_last_modified_date</span>
+
+<span class="nt">playbook_executions</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">allow_list</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">last_activated_by</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">status</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elapsed_time</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">playbook</span>
+
+<span class="w">  </span><span class="c1"># minimal playbok objects are a sub element of a playbook execution</span>
+<span class="w">  </span><span class="c1"># these fields are what we keep from these playbook objects</span>
+<span class="w">  </span><span class="nt">playbook_allow_list</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">display_name</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">activate_type</span>
+
+<span class="nt">artifacts</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">allow_list</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">type</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">related_incident_count</span>
+
+<span class="w">  </span><span class="nt">date_list</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">created</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">last_modified_time</span>
+
+<span class="w">  </span><span class="c1"># keep only this field from artifact threat hits</span>
+<span class="w">  </span><span class="nt">hit_allow_list</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">threat_source_id</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">properties</span>
+
+<span class="w">  </span><span class="c1"># block these bits of hit data, as they don&#39;t provide much use to LLM</span>
+<span class="w">  </span><span class="c1"># feel free to experiment</span>
+<span class="w">  </span><span class="nt">hit_block_list</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">resource</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scan_id</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sha1</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sha256</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">md5</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">response_code</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">verbose_msg</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">permalink</span>
+
+<span class="w">  </span><span class="c1"># re-label the keys in threat hit properties</span>
+<span class="w">  </span><span class="c1"># change key to value for field names</span>
+<span class="w">  </span><span class="nt">hit_relabel_list</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">total</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">number of scans performed</span>
+<span class="w">    </span><span class="nt">positives</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">number of scans indicating malicious behavior</span>
+<span class="w">    </span><span class="nt">community coverage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">percentage of scans indicating malicious behavior</span>
+
+<span class="nt">attachments</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">allow_list</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">related_incident_count</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">content_type</span>
+
+<span class="w">  </span><span class="nt">date_list</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">created</span>
+
+<span class="nt">phases</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">allow_list</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
+<span class="w">  </span><span class="nt">relabel_list</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">phase_name</span>
+
+<span class="nt">tasks</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">allow_list</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">active</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">required</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">status</span>
+</pre></div>
+</div>
+</details>
+</section>
+<section id="setting-up-the-dropdown">
+<h2>Setting up the dropdown<a class="headerlink" href="#setting-up-the-dropdown" title="Link to this heading">¶</a></h2>
+<p>To be able to use this configuration, we’ll have to add and entry to the data config dropdown function input.</p>
+<ul class="simple">
+<li><p>in the Customization settings page, navigate to ‘Functions’, and click on a watsonx function.</p></li>
+<li><p>click the pencil icon on the right-hand-side of the <code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_data_config</span></code> Global Input Field.</p></li>
+<li><p>click the ‘Add/Edit values’ label</p></li>
+<li><p>under <code class="docutils literal notranslate"><span class="pre">default</span></code>, add a new config option with the filename of the config without the file extension - e.g., <code>config1.yaml</code> → <code>config1</code></p></li>
+<li><p>click the checkmark, and hit save</p></li>
+<li><p>now you can switch the data config to use on compatible functions in the playbook designer</p></li>
+</ul>
 </section>
 </section>
 <hr class="docutils" />
@@ -1392,15 +1645,25 @@ Additional package dependencies may exist for each of these packages:</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#text-generation">Text Generation</a></li>
+<li><a class="reference internal" href="#incident-summarization">Incident Summarization</a><ul>
+<li><a class="reference internal" href="#what-type-of-summaries-are-available">What type of summaries are available?</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a class="reference internal" href="#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a><ul>
+<li><a class="reference internal" href="#model-quality">Model quality</a></li>
 <li><a class="reference internal" href="#background-on-how-a-note-conversation-response-is-generated">Background on how a note conversation response is generated</a></li>
 <li><a class="reference internal" href="#prompting-guide">Prompting Guide</a><ul>
 <li><a class="reference internal" href="#response-quality">Response Quality</a></li>
 <li><a class="reference internal" href="#reply-chain-prompts">Reply chain prompts</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-selection">Data selection</a><ul>
+<li><a class="reference internal" href="#creating-the-override-config">Creating the override config</a></li>
+<li><a class="reference internal" href="#setting-up-the-dropdown">Setting up the dropdown</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#soar-customizations">SOAR Customizations</a><ul>
