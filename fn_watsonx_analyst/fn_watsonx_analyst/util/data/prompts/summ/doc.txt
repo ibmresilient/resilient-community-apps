@@ -8,6 +8,6 @@ Artifacts in IBM QRadar SOAR are pieces of data that supports or relates to the 
 {data}
 ```
 
-Your task is to summarize the above summaries of a {content_type} artifact's contents to help a cybersecurity analyst assess the security incident. The tone of the summary must be speculative since the adversarial goal is yet to be proven. Your summary should be no longer than 200 words.
+Your task is to summarize the above summaries of a {content_type} artifact's contents to help a cybersecurity analyst assess the security incident. The tone of the summary must be speculative since the adversarial goal is yet to be proven. 
 <|assistant|>
 Summary:

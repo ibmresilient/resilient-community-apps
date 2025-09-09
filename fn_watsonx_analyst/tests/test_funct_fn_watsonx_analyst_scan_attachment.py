@@ -53,17 +53,17 @@ class TestFnWatsonxAnalystScanAttachment:
 
     mock_inputs_1 = {
         "fn_watsonx_analyst_incident_id": 123,
-        "fn_watsonx_analyst_attachment_id": 123,
-        "fn_watsonx_analyst_model_id": "ibm/granite-13b-chat-v2",
+        "fn_watsonx_analyst_attachment_id": 1411,
+        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
         "fn_watsonx_analyst_task_id": None,
     }
 
-    expected_results_1 = "Attachment name: runme2.sh\n\n<p>Lorem ipsum</p>"
+    expected_results_1 = 'Attachment name: runme2.sh\n\n<p style="display: inline">Lorem ipsum</p>'
 
     mock_inputs_2 = {
         "fn_watsonx_analyst_incident_id": 123,
         "fn_watsonx_analyst_attachment_id": 321,
-        "fn_watsonx_analyst_model_id": "ibm/granite-13b-chat-v2",
+        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
         "fn_watsonx_analyst_task_id": 1,
     }
 
@@ -77,4 +77,4 @@ class TestFnWatsonxAnalystScanAttachment:
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
         results = call_fn_watsonx_analyst_scan_attachment_function(circuits_app, mock_inputs)
-        assert results["content"]["generated_text"] == expected_results
+        assert results["content"]["generated_text"].strip() == expected_results

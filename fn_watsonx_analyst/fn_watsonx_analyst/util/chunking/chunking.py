@@ -1,183 +1,325 @@
 """Chunking class to generate segmented data, which can be used in the RAG system."""
 
 import json
+import re
+from typing import List
+
 import numpy as np
 import faiss
-import random
-from typing import List, Optional
-from resilient import SimpleClient
-
-
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+from bs4 import BeautifulSoup
 import tiktoken
 
 from fn_watsonx_analyst.types.incident_full_data import IncidentFullData
-from fn_watsonx_analyst.util.util import create_logger
-from fn_watsonx_analyst.util.util import get_model_config
+from fn_watsonx_analyst.util.model_helper import ModelHelper
+from fn_watsonx_analyst.util.logging_helper import create_logger
+from fn_watsonx_analyst.config import load_model_config
 from fn_watsonx_analyst.util.QueryHelper import QueryHelper
+from fn_watsonx_analyst.util.state_manager import app_state
 
 logger = create_logger(__name__)
+
 
 class Chunking:
     """Class for Chunking and picking most relevant chunk for GenAI use cases"""
 
     query_helper: QueryHelper
 
-    def __init__(self, res_client: Optional[SimpleClient]=None, opts: Optional[dict]=None) -> None:
-        if opts is not None:
-            self.query_helper = QueryHelper(res_client, opts=opts)
+    def __init__(
+        self, init_query_helper=True
+    ) -> None:
+        if init_query_helper:
+            self.query_helper = QueryHelper()
 
-    def split_json_to_chunks(self, data: IncidentFullData, max_tokens_per_chunk = 400) -> List[str]:
-        """This is a custom chunking method of JSON payload for Case QnA via Notes
+    def clamped_chunks_for_model(self, data: List[str], model_id: str, threshold: float) -> List[str]:
+        """
+        Returns the maximum chunks that can be fit in the model with the given threshold percentage
 
+        data: List of string chunks
+        model_id: Model which we use to find maximum tokens for input. Will default to 32k tokens if unkown model
+        threshold: Fraction of input to use for this chunk data - e.g., 0.4
+        """
+        max_tokens: int
+        try:
+            max_tokens = self.max_tokens_for_model(model_id)
+        except:
+            max_tokens = 32000 # fallback
+
+        max_tokens = int(max_tokens * threshold)
+
+        cumulative_tokens = 0
+        output = []
+
+        for chunk in data:
+            chunk_tokens = self.estimate_tokens(chunk)
+
+            if cumulative_tokens + chunk_tokens < max_tokens:
+                output.append(chunk)
+                cumulative_tokens += chunk_tokens
+            else:
+                break
+        return output
+
+    def extract_key_value_pairs(self, data: dict, parent_key: str = '') -> list[tuple[str, any]]:
+        """Recursively extracts key-value pairs from nested JSON-like data, including lists.
         Args:
             data (dict): Input Data
 
         Returns:
-            List[str]: Chunks - the sections of input
+            List[str]: all the key-value data
+
+        Calling function(s): process_json_data
         """
         try:
-            chunks = []
-
-            # Helper function to filter out null fields
-            def filter_null_fields(d):
-                return {k: v for k, v in d.items() if v is not None}
-
-            # Chunk incident details excluding description and properties
-            incident_data = filter_null_fields({
-                "name": data['incident'].get('name', None),
-                "addr": data['incident'].get('addr', None),
-                "city": data['incident'].get('city', None),
-                "start_date": data['incident'].get('start_date', None),
-                "inc_start": data['incident'].get('inc_start', None),
-                "discovered_date": data['incident'].get('discovered_date', None),
-                "creator_principal": filter_null_fields({
-                    "type": data['incident']['creator_principal'].get('type', None) if data['incident'].get('creator_principal') else None,
-                    "display_name": data['incident']['creator_principal'].get('display_name', None) if data['incident'].get('creator_principal') else None,
-                }),
-                "reporter": data['incident'].get('reporter', None),
-                "state": data['incident'].get('state', None),
-                "country": data['incident'].get('country', None),
-                "zip": data['incident'].get('zip', None),
-                "workspace": data['incident'].get('workspace', None),
-                "members": data['incident'].get('members', []),
-                "negative_pr_likely": data['incident'].get('negative_pr_likely', None),
-                "inc_last_modified_date": data['incident'].get('inc_last_modified_date', None),
-                "incident_disposition": data['incident'].get('incident_disposition', None),
-                "incident_types": data['incident'].get('incident_type_ids', None)
-            })
-
-            description = data['incident'].get('description', None)
-            if description:  # Check if description is not None before processing
-                if self.estimate_tokens(description) > max_tokens_per_chunk:
-                    description_chunks = self.split_text_to_token_chunks(description, max_tokens_per_chunk)
-                    for idx, desc_chunk in enumerate(description_chunks):
-                        chunks.append(json.dumps({
-                            "incident_description": {
-                                "index": idx,
-                                "description": desc_chunk
-                            }
-                        }))
-                else:
-                    # Add the description as a single chunk if it fits
-                    incident_data["description"] = description
-
-            # Check if properties is not None before proceeding
-            properties = data['incident'].get('properties', {})
-            if properties:  # Only process if properties is not None or empty
-                flat_properties = self.flatten_dict(properties)
-
-                # Flatten the nested dictionary
-                chunk_index = 0
-                for key, value in flat_properties.items():
-                    if isinstance(value, str):  # Only split string values
-                        property_chunks = self.split_text_to_token_chunks(value, max_tokens_per_chunk)
-                        for prop_chunk in property_chunks:
-                            chunks.append(json.dumps({
-                                "properties": {
-                                    "index": chunk_index,
-                                    "properties": f"'{key}': '{prop_chunk}'"
-                                }
-                            }))
-                            chunk_index += 1
-                    else:
-                        # Handle non-string values as-is (e.g., None or numeric values)
-                        chunks.append(json.dumps({
-                            "properties": {
-                                "index": chunk_index,
-                                "properties": f"'{key}': {value}"
-                            }
-                        }))
-                        chunk_index += 1
-
-            chunks.append(json.dumps({"incident": incident_data}))
-
-            # Chunk artifacts
-            for artifact in data['incident'].get('artifacts', []):
-                artifact_chunk = {
-                    "artifact": filter_null_fields({
-                        "value": artifact.get('value', None),
-                        "description": artifact.get('description', None),
-                        "type": artifact.get('type', None),
-                        "inc_name": artifact.get('inc_name', None),
-                        "created": artifact.get("created", None),
-                        "related_incident_count": artifact.get('related_incident_count', None),
-                        "summary": artifact.get('summary', None)
-                    })
-                }
-                chunks.append(json.dumps(artifact_chunk))
-
-            # Chunk attachments
-            for attachment in data['incident'].get('attachments', []):
-                attachment_chunk = {
-                    "attachment": filter_null_fields({
-                        "name": attachment.get('name', None),
-                        "content_type": attachment.get('content_type', None),
-                        "created": attachment.get('created', None)
-                    })
-                }
-                chunks.append(json.dumps(attachment_chunk))
-
-            # Chunk playbook executions
-            for execution in data['incident'].get('playbook_executions', []):
-                playbook_chunk = {
-                    "playbook_execution": filter_null_fields({
-                        "status": execution.get('status', None),
-                        "object": filter_null_fields({
-                            "parent": filter_null_fields({
-                                "object_name": execution['object'].get('parent', {}).get('object_name', None),
-                                "type_name": execution['object'].get('parent', {}).get('type_name', None)
-                            }) if execution['object'].get('parent') else None,
-                            "object_name": execution['object'].get('object_name', None),
-                            "type_name": execution['object'].get('type_name', None)
-                        }),
-                        "elapsed_time": execution.get('elapsed_time', None),
-                        "playbook": filter_null_fields({
-                            "display_name": execution['playbook'].get('display_name', None),
-                            "description": execution['playbook'].get('description', None)
-                        })
-                    })
-                }
-                chunks.append(json.dumps(playbook_chunk))
-
-            # Chunk tasks
-            for phase in data['incident'].get('tasktree', []):
-                for task in phase.get('tasks', []):
-                    task_chunk = {
-                        "task": filter_null_fields({
-                            "phase": phase.get('phase_name', None),
-                            "name": task.get('name', None),
-                            "active": task.get('active', None),
-                            "required": task.get('required', None),
-                            "complete": "complete" if task.get('complete', False) else "incomplete"
-                        })
-                    }
-                    chunks.append(json.dumps(task_chunk))
-            return chunks
+            results = []
+            if isinstance(data, dict):
+                for key, value in data.items():
+                    if value is not None:
+                        new_key = f"{parent_key}.{key}" if parent_key else key
+                        if isinstance(value, (dict, list)):
+                            results.extend(self.extract_key_value_pairs(value, parent_key=new_key))
+                        else:
+                            results.append((new_key, value))
+            elif isinstance(data, list):
+                for index, item in enumerate(data):
+                    if item is not None:
+                        new_key = f"{parent_key}[{index}]"
+                        if isinstance(item, (dict, list)):
+                            results.extend(self.extract_key_value_pairs(item, parent_key=new_key))
+                        else:
+                            results.append((new_key, item))
+            return results
         except Exception as e:
             logger.exception(
-                "An error occurred while running pre-processing json data into chunks: %s", e
+                "An error occurred while extracting key-value pairs from json data: %s", e
+            )
+            raise
+
+    def process_json_data(self, data: dict) -> dict:
+        """This method groups the json data based on first 3 keys.
+        It also keeps the subgroup key-value in the group so that
+        the data makes more sense
+
+        input: json data.
+        returns: a dictionary of new and modified key-valu pairs that are more meaningful.
+        """
+        try:
+            key_value_pairs = self.extract_key_value_pairs(data)
+
+            # Group by the third key if nested keys > 3; otherwise, group by the second key
+            grouped_results = {}
+            for key, value in key_value_pairs:
+                key_parts = key.split(".")
+                if len(key_parts) > 3:
+                    subgroup_key = ".".join(
+                        key_parts[:-2]
+                    )  # Extract the key before the last one
+                    group_key = ".".join(
+                        key_parts[:3]
+                    )  # Use the first 3 keys as the group
+
+                elif len(key_parts) > 1:
+                    subgroup_key = ".".join(
+                        key_parts[:0]
+                    )  # Extract the key before the last one
+                    group_key = key_parts[1]  # Use the second key as the group
+                else:
+                    subgroup_key = None
+                    group_key = key_parts[0]  # Fallback to the first key
+
+                if group_key not in grouped_results:
+                    grouped_results[group_key] = []
+                grouped_results[group_key].append((key, value))
+
+                # Add the phase_key and its value
+                if subgroup_key:
+                    subgroup_key_value = next(
+                        (
+                            (k, v)
+                            for k, v in key_value_pairs
+                            if k.startswith(subgroup_key) and k != key
+                        ),
+                        None,
+                    )
+                    if (
+                        subgroup_key_value
+                        and subgroup_key_value not in grouped_results[group_key]
+                    ):
+                        # Ensure this key is at the top
+                        grouped_results[group_key].insert(0, subgroup_key_value)
+            return grouped_results
+        except Exception as e:
+            logger.exception("An error occurred while grouping json data: %s", e)
+            raise
+
+    def replace_commas_in_brackets(self, text):
+        """ 
+
+        Replace commas with colons, but only inside top-level square brackets 
+        (e.g., turn [a, b] into [a: b], but leave [x[1, 2], y] as [x[1, 2]: y]).
+        1. Ignore square brackets nested within other square brackets.
+        2. Only change the commas that are not inside those nested brackets.
+        3. Leave anything outside square brackets untouched.
+
+        result: final list of characters to build the output string.
+        inside_brackets: flag to tell if we’re inside the outermost square brackets.
+        bracket_depth: tracks how deep inside brackets we are. Depth = 0 → outside any [].
+        buffer: temporarily holds characters within square brackets, for processing.
+
+        """
+        try:
+            result = []
+            inside_brackets = False
+            bracket_depth = 0
+            buffer = []
+
+            for char in text:
+                if char == '[':
+                    bracket_depth += 1
+                    if bracket_depth == 1:
+                        inside_brackets = True
+                        buffer = ['[']
+                        continue
+                elif char == ']':
+                    bracket_depth -= 1
+                    if bracket_depth == 0:
+                        inside_brackets = False
+                        buffer.append(']')
+                        # Process content of outermost brackets
+                        content = ''.join(buffer[1:-1])
+                        # Replace commas only at top level (i.e., not nested)
+                        processed = []
+                        level = 0
+                        for c in content:
+                            if c == '[':
+                                level += 1
+                            elif c == ']':
+                                level -= 1
+                            if c == ',' and level == 0:
+                                processed.append(':')
+                            else:
+                                processed.append(c)
+                        result.append('[' + ''.join(processed) + ']')
+                        continue
+
+                if inside_brackets:
+                    buffer.append(char)
+                else:
+                    result.append(char)
+
+            return ''.join(result)
+        
+        except Exception as e:
+            logger.exception("An error occurred while replacing commas in brackets: %s", e)
+            return text  # also fallback to original text if something goes wrong
+    
+    def clean_text(self, chunk: str) -> str:
+        """Preprocessing chunks"""
+        try:
+            # Remove " (including double quotes)
+            text = re.sub(r'"', "", chunk)
+
+            # Remove HTML tags
+            text = BeautifulSoup(text, "html.parser").get_text()
+
+            # Extract key-value pairs inside curly braces
+            def process_match(match):
+                key, value = match.groups()
+                key = key.split('.')[-2:]
+                return f"{key}: {value}"
+
+            # Process occurrences like "incident.artifacts[2].value: Pay 500 000 in Bitcoin.txt"
+            text = re.sub(
+                r"([\w\[\]{}_/\\]+(?:\.[\w\[\]{}_/\\]+)+): ([^,}]*)",
+                process_match,
+                text,
+            )
+
+            # Remove extra spaces, newlines, and tabs
+            text = re.sub(r"\s+", " ", text).strip()
+
+            # Remove non-ASCII characters
+            text = text.encode("ascii", "ignore").decode()
+
+            # Remove unwanted special characters but KEEP [], {}, /, \, and _
+            text = re.sub(r'[^a-zA-Z0-9.,!?;:()\[\]{}_/\\@ -]', '', text)
+
+            # Transform bracketed content with commas into colon-separated
+            text = self.replace_commas_in_brackets(text)
+
+            # Remove the final square brackets and the numbers within them
+            text = re.sub(r'\[\d+\]', '', text)
+
+            # Convert [word1: word2: ...]: value -> {word1.word2...: value}
+            return re.sub(r'\[([\w\s:]+?)\]: ([^,}]+)', lambda m: "{" + m.group(1).replace(": ", ".") + ": " + m.group(2) + "}", text)
+
+        except Exception as e:
+            logger.exception("An error occurred while cleaning chunk: %s", e)
+            raise
+
+    def remove_duplicate_value(self, text: str) -> str:
+        """
+        Removes redundant value text if it is a reformatted duplicate of the path.
+        Example: path: incident.description, value: incident: description: --> value:
+        """
+        try:
+            pattern = r'path: ([\w\.]+), value: ([\w\s:]+):'
+            if text:
+                matches = re.findall(pattern, text)
+
+                for path, value in matches:
+                    path_parts = path.split('.')[-2:]  # Last two tokens from path
+                    value_parts = [v.strip() for v in value.strip().split(':') if v]
+
+                    if path_parts == value_parts:
+                        # Remove redundant value content
+                        redundant = f"value: {value.strip()}:"
+                        text = text.replace(redundant, "value:")
+
+            return text
+        except Exception as e:
+            logger.exception("Error in remove_duplicate_value: %s", e)
+            return text
+
+    def preprocess_chunks(self, chunks: List[str])-> List[str]:
+        """calling clean_text to preprocess all the chunks"""
+        try:
+            return [self.remove_duplicate_value(self.clean_text(chunk)) for chunk in chunks]
+        except Exception as e:
+            logger.exception("An error occurred while pre-processing the chunks: %s", e)
+            raise
+
+    def split_json_to_chunks(self, data:dict= IncidentFullData, max_tokens_per_chunk:int=400)-> list[str]:
+        """ Splits the Indcident data into  meanignful chunks"""
+        try:
+            processed_data = self.process_json_data(data)
+            chunks = []
+            chunk_index = 0
+            for _, value in processed_data.items():
+                if value is not None:
+                    if isinstance(value[0], tuple):  # Only split string values
+                        result = ', '.join(f"{k}: {v}" for k, v in value)
+                        result_tag = result.split(':', maxsplit=1)[0].strip()
+                        if self.estimate_tokens(result) > max_tokens_per_chunk:
+                            property_chunks = self.split_text_to_token_chunks(
+                                result, max_tokens_per_chunk
+                            )
+                            for prop_chunk in property_chunks:
+                                chunks.append(json.dumps({
+                                        "path": result_tag ,
+                                        "value": prop_chunk
+                                    }))
+                                chunk_index += 1
+                        else:
+                            # Handle non-string values as-is (e.g., None or numeric values)
+                            chunks.append(json.dumps({
+                                   # "path": chunk_index,
+                                    "value": result
+                            }))
+                            chunk_index += 1
+            return self.preprocess_chunks(chunks)
+        except Exception as e:
+            logger.exception(
+                "An error occurred while chunking processed json data: %s", e
             )
             raise
 
@@ -194,11 +336,11 @@ class Chunking:
         """
         try:
             # Get the list of models from the model_config.json file
-            model_config = get_model_config()
+            model_config = load_model_config()
 
             # Find the configuration for the given model
             model_conf = next(
-                (config for config in model_config if config["model_name"] == model_id),
+                (config for config in model_config if config["name"] == model_id),
                 None,
             )
 
@@ -218,15 +360,21 @@ class Chunking:
         """
         Return a list of chunks of data, with each chunk not exceeding max_tokens
         """
+        newline_placeholder = '<newline/>'
+
         try:
             chunks: List[str] = []
             current_chunk = ""
             current_token_count = 0
 
+            text = text.replace('\n', f' {newline_placeholder} ') # add spaces so is a separate word
             # Split the text into words
             words = text.split()
 
             for word in words:
+                if word == newline_placeholder:
+                    word = '\n'
+
                 # Estimate tokens for the current word
                 word_token_count = self.estimate_tokens(word)
 
@@ -258,7 +406,7 @@ class Chunking:
         """
         try:
             encoding = tiktoken.get_encoding("cl100k_base")
-            num_tokens = len(encoding.encode(text))
+            num_tokens = len(encoding.encode(text, disallowed_special=()))
             return num_tokens
         except Exception as e:
             logger.exception(
@@ -272,8 +420,10 @@ class Chunking:
         """
         try:
             encoding = tiktoken.get_encoding("cl100k_base")
-            tokens = encoding.encode(text)
-            token_chunks = [tokens[i:i + max_tokens] for i in range(0, len(tokens), max_tokens)]
+            tokens = encoding.encode(text, disallowed_special=())
+            token_chunks = [
+                tokens[i : i + max_tokens] for i in range(0, len(tokens), max_tokens)
+            ]
             return [encoding.decode(chunk) for chunk in token_chunks]
         except Exception as e:
             logger.exception(
@@ -333,8 +483,8 @@ class Chunking:
                 e,
             )
             raise
-    
-    def create_faiss_index(self, embeddings: List[list])->faiss.IndexFlatL2:
+
+    def create_faiss_index(self, embeddings: List[list]) -> faiss.IndexFlatL2:
         """Create a Faiss index which stores the embedded chunks for retrieval
 
         Args:
@@ -346,13 +496,15 @@ class Chunking:
         try:
             # Convert embeddings to numpy array
             embeddings_array = np.array(embeddings)
-            
+
             # Initialize FAISS index
             index = faiss.IndexFlatL2(embeddings_array.shape[1])
-            
+
             # Add the embeddings to the FAISS index
+            # suppress error
+            # pylint: disable=no-value-for-parameter
             index.add(embeddings_array)
-            
+
             return index
         except Exception as e:
             logger.exception(
@@ -360,13 +512,13 @@ class Chunking:
                 e,
             )
             raise
-    
-    def normalize_l2_distances(self, distances:np.array)-> np.array:
-        """ normalizes the L2 scores that we generate in Faiss index search
-            Args:
-                distances(array)
-            returns:
-                normalized_scores(array)
+
+    def normalize_l2_distances(self, distances: np.array) -> np.array:
+        """normalizes the L2 scores that we generate in Faiss index search
+        Args:
+            distances(array)
+        returns:
+            normalized_scores(array)
 
         """
         try:
@@ -386,7 +538,9 @@ class Chunking:
             )
             raise
 
-    def retrieve_relevant_chunks_watsonx(self, query: str, chunks:List[str], model_id:str, total_tokens=None, threshold=0.7)->List[str]:
+    def retrieve_relevant_chunks_watsonx(
+        self, query: str, chunks: List[str], total_tokens=None, threshold=0.7, score_threshold=0.2
+    ) -> List[str]:
         """Retrieve relevant chunks from Faiss Index semantically using emedding models from WatsonX API
 
         Args:
@@ -399,18 +553,23 @@ class Chunking:
             _type_: _description_
         """
         try:
-            #get total tokens
-            total_tokens = total_tokens or self.max_tokens_for_model(model_id)
-            logger.debug("Total tokens: %d for model_id: %s", total_tokens, model_id)
+            # get total tokens
+            total_tokens = total_tokens or ModelHelper.context_length_for_model(
+                app_state.get().model_id
+            )
+            logger.debug(
+                "Total tokens: %d for model_id: %s",
+                total_tokens,
+                app_state.get().model_id,
+            )
 
-            #Create embeddings of Chunks
-            payload_chunk_embeddings = self.query_helper.generate_embeddings(data=chunks)
+            # Create embeddings of Chunks
+            payload_chunk_embeddings = self.query_helper.generate_embeddings(
+                data=chunks
+            )
 
-            #Create Faiss Index
+            # Create Faiss Index
             payload_index = self.create_faiss_index(payload_chunk_embeddings)
-            
-            #Calculate token limit
-            token_limit = round(total_tokens*threshold)
             
             # Create embedding for the query
             query_embedding = self.query_helper.generate_embeddings(data=[query])
@@ -421,44 +580,18 @@ class Chunking:
 
             # Select the indexes that have the distance greater than .2
             distances = self.normalize_l2_distances(distances)
-            selected_indices = [idx for score, idx in zip(distances[0], indices[0]) if score >= 0.2]
+            selected_indices = [
+                idx for score, idx in zip(distances[0], indices[0]) if score >= score_threshold
+            ]
 
-            selected_chunks = []
-            current_tokens = 0
-            
-            # Iterate over the retrieved chunks
-            for idx in selected_indices:
-                chunk = chunks[idx]
-                
-                # Estimate the token count for the current chunk
-                chunk_text = json.dumps(chunk)
-                chunk_tokens = self.estimate_tokens(chunk_text)
-                
-                # Check if adding this chunk exceeds the token limit
-                if current_tokens + chunk_tokens <= token_limit:
-                    selected_chunks.append(chunk)  # Add the chunk to the result set
-                    current_tokens += chunk_tokens  # Update the current token count
-                else:
-                    break  # Stop adding more chunks if token limit is reached
-            
-            return selected_chunks
+            selected_chunks = [chunks[idx] for idx in selected_indices]
+
+            return self.clamped_chunks_for_model(selected_chunks, app_state.get().model_id, threshold)
+    
         except Exception as e:
             logger.exception(
                 "An error occurred while retrieving relevant chunks: %s",
                 e,
-            )
-            raise
-
-    def random_chunks(self, chunks: List[str], k=3) -> List[str]:
-        """
-        Returns a simple random sample of the input chunks, with up to k chunks
-        """
-        try:
-            k = min(k, len(chunks))
-            return random.sample(chunks, k)
-        except Exception as e:
-            logger.exception(
-                "An error occurred while retieving random chunks: %s", e
             )
             raise
 
@@ -468,7 +601,7 @@ class Chunking:
         """
         Splits a JSON-like dictionary prompt into chunks of string prompts, each limited to a specified maximum size.
         Args:
-            data (dict): A JSON-like prompt dict where each header description pair will be processed and converted to a string chunk.
+            data (dict): A dict where each header description pair will be processed and converted to a string chunk.
             max_chunk_size (int) optional: The maximum allowed character length for each chunk (default is 2000).
         Returns:
             chunks (list): A list of string chunks, each representing a portion of the original data dictionary
@@ -492,7 +625,8 @@ class Chunking:
                 e,
             )
             raise
-    def flatten_dict(self, d:dict, parent_key='', sep='.')->dict:
+
+    def flatten_dict(self, d: dict, parent_key="", sep=".") -> dict:
         """Recursively flatten a nested dictionary and prepend parent keys to maintain hierarchy.
         Args:
             d (dict): give a dictionary

@@ -11,10 +11,13 @@ from fn_watsonx_analyst.util.errors import (
     WatsonxTokenLimitExceededException,
     WatsonxUnauthorizedException,
 )
-from tests.helper import FakeResponse
+
+from tests import helper
+from tests.helper import FakeResponse, generate_app_state
 
 from fn_watsonx_analyst.util.persistent_org_cache import CacheObj
 from fn_watsonx_analyst.util.QueryHelper import QueryHelper
+from fn_watsonx_analyst.util.state_manager import app_state
 
 def mock_fetch_data(_self, _res_client, cache_obj: CacheObj, watsonx_api_key):
     match cache_obj:
@@ -165,16 +168,11 @@ def mock_req_post(url: str, data, json=None, timeout=None, headers=None):
 class TestQueryHelper:
 
     def test_text_generation(self):
-        opts = {
-            "fn_watsonx_analyst": {
-                "watsonx_api_key": "api_key",
-                "watsonx_project_id": "1234-1234-1234",
-                "watsonx_endpoint": watsonx_endpoint_url,
-            }
-        }
-        query_helper = QueryHelper(None, "ibm/granite-3-2b-instruct", opts)
+
+        generate_app_state(watsonx_endpoint=watsonx_endpoint_url)
+        query_helper = QueryHelper()
         x = query_helper.text_generation("test_prompt")
-        assert x["raw_output"] == sample_response["results"][0]["generated_text"]
+        assert x["results"][0]["generated_text"] == sample_response["results"][0]["generated_text"]
 
     def test_ensure_correct_excs(self):
         def expect_exc(qh: QueryHelper, url: str, exc: WatsonxApiException):
@@ -188,14 +186,7 @@ class TestQueryHelper:
                 with pytest.raises(exc):
                     qh.text_generation("test prompt")
 
-        opts = {
-            "fn_watsonx_analyst": {
-                "watsonx_api_key": "api_key",
-                "watsonx_project_id": "",
-                "watsonx_endpoint": "",
-            }
-        }
-        query_helper = QueryHelper(None, "ibm/granite-3-2b-instruct", opts)
+        query_helper = QueryHelper()
 
         expect_exc(query_helper, "bad_req", WatsonxBadRequestException)
         expect_exc(
@@ -209,14 +200,9 @@ class TestQueryHelper:
         expect_exc(query_helper, "model_not_supported", WatsonxModelIdNotFoundException)
 
     def test_get_embeddings(self):
-        opts = {
-            "fn_watsonx_analyst": {
-                "watsonx_api_key": "api_key",
-                "watsonx_project_id": "",
-                "watsonx_endpoint": watsonx_endpoint_url,
-            }
-        }
-        query_helper = QueryHelper(None, "ibm/granite-3-2b-instruct", opts)
+
+        generate_app_state(watsonx_endpoint=watsonx_endpoint_url)
+        query_helper = QueryHelper()
 
         assert query_helper.generate_embeddings("test_prompt") == [
             embedding_response["results"][0]["embedding"]
@@ -224,84 +210,28 @@ class TestQueryHelper:
 
     @patch("requests.get", mock_req_get)
     def test_get_models(self):
-        opts = {
-            "fn_watsonx_analyst": {
-                "watsonx_api_key": "api_key",
-                "watsonx_project_id": "",
-                "watsonx_endpoint": watsonx_endpoint_url,
-            }
-        }
-        query_helper = QueryHelper(None, "ibm/granite-3-2b-instruct", opts)
+        generate_app_state(watsonx_endpoint=watsonx_endpoint_url)
+        query_helper = QueryHelper()
 
         assert query_helper.get_generation_models() == ["bigcode/starcoder"]
 
     def test_get_api_key(self):
+        api_key = "api_key_123"
         opts = {
             "fn_watsonx_analyst": {
-                "watsonx_api_key": "api_key",
+                "watsonx_api_key": api_key,
                 "watsonx_project_id": "",
                 "watsonx_endpoint": "",
             }
         }
-        query_helper = QueryHelper(None, "ibm/granite-3-2b-instruct", opts)
+
+        generate_app_state()
+        app_state.get().opts = opts
+
+        query_helper = QueryHelper()
 
         assert (
             query_helper.get_api_key(None)
             == opts["fn_watsonx_analyst"]["watsonx_api_key"]
         )
 
-    def test_opt_out_of_rich_text(self):
-        """
-        Run QueryHelper().text_generation() and pass in opts with
-        """
-        opts = {
-            "fn_watsonx_analyst": {
-                "watsonx_api_key": "api_key",
-                "watsonx_project_id": "",
-                "watsonx_endpoint": watsonx_endpoint_url,
-                "render_markdown": False,
-            }
-        }
-
-        query_helper = QueryHelper(None, "ibm/granite-3-2b-instruct", opts)
-        text_generation_result = query_helper.text_generation(
-            prompt="generate some markdown"
-        )
-        assert text_generation_result["generated_text"] == text_generation_result["raw_output"]
-
-    def test_no_rich_text_opt(self):
-        """
-        Run QueryHelper().text_generation() and pass in opts with
-        """
-        opts = {
-            "fn_watsonx_analyst": {
-                "watsonx_api_key": "api_key",
-                "watsonx_project_id": "",
-                "watsonx_endpoint": watsonx_endpoint_url,
-            }
-        }
-
-        query_helper = QueryHelper(None, "ibm/granite-3-2b-instruct", opts)
-        text_generation_result = query_helper.text_generation(
-            prompt="generate some markdown"
-        )
-        assert text_generation_result["generated_text"] != text_generation_result["raw_output"]
-
-    def test_opt_in_for_rich_text(self):
-        """
-        Run QueryHelper().text_generation() and pass in opts with
-        """
-        opts = {
-            "fn_watsonx_analyst": {
-                "watsonx_api_key": "api_key",
-                "watsonx_project_id": "",
-                "watsonx_endpoint": watsonx_endpoint_url,
-                "render_markdown": True,
-            }
-        }
-
-        query_helper = QueryHelper(None, "ibm/granite-3-2b-instruct", opts)
-        text_generation_result = query_helper.text_generation(
-            prompt="generate some markdown"
-        )
-        assert text_generation_result["generated_text"] != text_generation_result["raw_output"]

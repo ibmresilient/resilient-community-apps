@@ -10,39 +10,50 @@ FROM ${BASE_IMAGE_REPO}/ibmresilient/soarapps-base-docker-image:${BASE_IMAGE_TAG
 ARG APPLICATION=fn_watsonx_analyst
 ENV APPLICATION=$APPLICATION
 
-
 COPY ./dist /tmp/packages
-COPY . /opt/app-root/src
+
+# Copy in the config files
+RUN mkdir -p /opt/app-root/src/fn_watsonx_analyst
+COPY ./fn_watsonx_analyst/config/ /opt/app-root/src/fn_watsonx_analyst/config/
 
 USER 0
 
+# Update system
 RUN yum -y update
 
-RUN yum -vy install https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/tesseract-tessdata-doc-4.1.0-3.el9.noarch.rpm # tesseract dependency
-RUN yum -vy install https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/leptonica-1.80.0-4.el9.1.x86_64.rpm # tesseract dependency
-RUN yum -vy install https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/tesseract-langpack-eng-4.1.0-3.el9.noarch.rpm \
-                    https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/tesseract-4.1.1-7.el9.x86_64.rpm
+# Install tesseract and its dependencies and clean cache
+RUN yum -vy install \
+      https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/tesseract-tessdata-doc-4.1.0-3.el9.noarch.rpm && \
+    yum -vy install \
+      https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/leptonica-1.80.0-4.el9.1.x86_64.rpm && \
+    yum -vy install \
+      https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/tesseract-langpack-eng-4.1.0-3.el9.noarch.rpm \
+      https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/tesseract-4.1.1-7.el9.x86_64.rpm
 
-RUN yum clean all
 
-RUN yum -vy install java-11-openjdk
+# Install LibreOffice and LibreOffice Impress while ignoring broken dependencies,
+# then clean cache. (Consider using rpm --nodeps if you really want to ignore dependencies.)
+RUN yum -vy install \
+      https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/libreoffice-7.1.8.1-14.el9.x86_64.rpm \
+      https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/libreoffice-impress-7.1.8.1-14.el9.x86_64.rpm \
+      --skip-broken
 
+# Install Poppler tools here
+RUN yum -vy install poppler poppler-utils
+
+RUN yum clean all && rm -rf /var/cache/yum
+
+# Install the CPU version of pytorch
+RUN pip install torch --index-url https://download.pytorch.org/whl/cpu
+
+# Install Python package for the application
 RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 
-RUN mkdir -p /opt/tika
-RUN curl -o /opt/tika/tika-server.jar https://dlcdn.apache.org/tika/2.9.4/tika-server-standard-2.9.4.jar
-RUN chmod +x /opt/tika/tika-server.jar
-
-RUN mkdir -p /var/log/tika
-RUN chown 1001:1001 /var/log/tika # allow app to write logs
-
-
-ENV export TIKA_SERVER_ENDPOINT=http://localhost:9998
-ENV export TIKA_CLIENT_ONLY=True
-
+# Set up the application directory and copy entrypoint script
 RUN mkdir -p /opt/${APPLICATION}
 COPY entrypoint.sh /opt/${APPLICATION}/entrypoint.sh
 
 USER 1001
 
 ENTRYPOINT sh /opt/$APPLICATION/entrypoint.sh
+

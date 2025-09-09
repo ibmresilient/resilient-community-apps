@@ -3,7 +3,6 @@
 # given string
 newline_tags:
   1:
-    - "</p>"
     - "<ul>"
     - "</ul>"
     - "<ol>"
@@ -14,6 +13,9 @@ newline_tags:
     - "</h4>"
     - "</h5>"
     - "</h6>"
+    - "</li"
+  2:
+    - "</p>"
 
 
 # em font sizes for bs4 tags
@@ -51,3 +53,4 @@ allowed_tags:
   - tbody
   - th
   - br
+  - div

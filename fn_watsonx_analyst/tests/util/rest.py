@@ -80,7 +80,6 @@ class TestRest:
     def test_pbx_api_retry(self, input_value):
         client = SimpleClient()
         assert sample_data["data"] == RestHelper().do_request(
-            client,
             RestUrls.PLAYBOOK_EXECUTIONS,
             happy_path=input_value,
             workspace_id=0,

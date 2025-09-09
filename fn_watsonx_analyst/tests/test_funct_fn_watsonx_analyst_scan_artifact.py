@@ -59,21 +59,31 @@ class TestFnWatsonxScanArtifact:
 
     mock_inputs_1 = {
         "fn_watsonx_analyst_incident_id": 123,
-        "fn_watsonx_analyst_artifact_id": 123,
-        "fn_watsonx_analyst_model_id": "ibm/granite-13b-chat-v2",
+        "fn_watsonx_analyst_artifact_id": 1411,
+        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
         "fn_watsonx_analyst_system_prompt": "sample text",
     }
 
-    expected_results_1 = "Artifact name: runme2.sh\n\n<p>Lorem ipsum</p>"
+    expected_results_1 = (
+        'Artifact name: runme2.sh\n\n<p style="display: inline">Lorem ipsum</p>'
+    )
 
     mock_inputs_2 = {
         "fn_watsonx_analyst_incident_id": 123,
         "fn_watsonx_analyst_artifact_id": 1412,
-        "fn_watsonx_analyst_model_id": "ibm/granite-13b-chat-v2",
+        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
         "fn_watsonx_analyst_system_prompt": "sample text",
     }
 
-    expected_results_2 = "Parsed content from the artifact 'image.png' is empty or could not be extracted."
+    expected_results_2 = 'Artifact name: image.png\n\n<p style="display: inline">Lorem ipsum</p>'
+
+    mock_inputs_3 = {
+        "fn_watsonx_analyst_incident_id": 123,
+        "fn_watsonx_analyst_artifact_id": 1413,
+        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
+    }
+
+    expected_results_3 = 'Artifact name: 128.210.157.251\n\n<p style="display: inline">Lorem ipsum</p>'
 
     @patch("fn_watsonx_analyst.util.rest.RestHelper.do_request", helper.mock_do_request)
     @patch(
@@ -95,4 +105,5 @@ class TestFnWatsonxScanArtifact:
         results = call_fn_watsonx_analyst_scan_artifact_function(
             circuits_app, mock_inputs
         )
-        assert results["content"]["generated_text"] == expected_results
+
+        assert results["content"]["generated_text"].strip() == expected_results

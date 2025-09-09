@@ -1,6 +1,6 @@
 pytest==7.4.4
 coverage==7.6.9
 pytest-cov==6.0.0
-memray==1.15.0
+memray==1.17.2
 pytest-memray==1.7.0
 pytest_resilient_circuits==51.0.2.2.1096

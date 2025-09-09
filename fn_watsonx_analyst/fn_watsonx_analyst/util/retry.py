@@ -3,7 +3,7 @@ from functools import wraps
 import time
 
 from fn_watsonx_analyst.util.errors import WatsonxTooManyRequestsException
-from fn_watsonx_analyst.util.util import create_logger
+from fn_watsonx_analyst.util.logging_helper import create_logger
 
 log = create_logger(__name__)
 

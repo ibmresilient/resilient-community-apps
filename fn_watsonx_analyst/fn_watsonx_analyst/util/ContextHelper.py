@@ -3,21 +3,22 @@ from enum import Enum
 from functools import cache
 import os
 import re
-from typing import List, Optional, Tuple, Union
+from typing import Any, List, Optional, Tuple, Union
 import jsonpath_ng as jsonpath
-from bs4 import BeautifulSoup
 from resilient import SimpleClient
 
+from fn_watsonx_analyst.config.loaders import load_data_config
 from fn_watsonx_analyst.types.artifact import Artifact
 from fn_watsonx_analyst.types.attachment import Attachment
 from fn_watsonx_analyst.types.incident import Incident
 from fn_watsonx_analyst.types.incident_full_data import IncidentFullData
 from fn_watsonx_analyst.types.pbx_detail import PBExecDetail
-from fn_watsonx_analyst.types.phase import Phase, Task
+from fn_watsonx_analyst.types.phase import Phase
 
 from fn_watsonx_analyst.util.persistent_org_cache import PersistentCache
 from fn_watsonx_analyst.util.rest import RestHelper, RestUrls
-from fn_watsonx_analyst.util.util import create_logger
+from fn_watsonx_analyst.util.logging_helper import create_logger
+from fn_watsonx_analyst.util.state_manager import app_state
 
 
 class Templates(Enum):
@@ -49,13 +50,13 @@ class Templates(Enum):
 
 log = create_logger(__name__)
 
-
 class ContextHelper:
     """
     Can fetch and process context data for generic Q&A
     """
 
     res_client: SimpleClient = None
+    opts: dict = None
 
     inc_id: Optional[int] = None
     ws_id: Optional[int] = None
@@ -71,11 +72,11 @@ class ContextHelper:
     date_fmt = "%Y-%m-%d %H:%M:%S"
 
     def __init__(
-        self, res_client: SimpleClient = None, inc_id: int = None, opts: dict = {}
+        self, inc_id: int = None
     ):
-        self.res_client = res_client
         self.inc_id = inc_id
-        self.opts = opts
+        self.res_client = app_state.get().res_client
+        self.opts = app_state.get().opts
 
     def build_full_data(self) -> IncidentFullData:
         """
@@ -95,25 +96,33 @@ class ContextHelper:
 
         return self.full_data
 
+    def get_incident_data(self) -> Incident:
+        helper = RestHelper()
+        inc_data = helper.do_request(
+            RestUrls.INCIDENT_DETAILS, inc_id=self.inc_id
+        )
+        return inc_data
+
     def __get_data(self):
         helper = RestHelper()
-        self.inc_data = helper.do_request(
-            self.res_client, RestUrls.INCIDENT_DETAILS, inc_id=self.inc_id
-        )
+        self.inc_data = self.get_incident_data()
+
         self.pbx_data = helper.do_request(
-            self.res_client,
             RestUrls.PLAYBOOK_EXECUTIONS,
             inc_id=self.inc_id,
             workspace_id=self.inc_data["workspace"],
         )
+
         self.art_data = helper.do_request(
-            self.res_client, RestUrls.GET_ARTIFACTS, inc_id=self.inc_id
+            RestUrls.GET_ARTIFACTS, inc_id=self.inc_id
         )
+
         self.attach_data = helper.do_request(
-            self.res_client, RestUrls.GET_ATTACHMENTS, inc_id=self.inc_id
+            RestUrls.GET_ATTACHMENTS, inc_id=self.inc_id
         )
+
         self.task_data = helper.do_request(
-            self.res_client, RestUrls.TASK_TREE, inc_id=self.inc_id
+            RestUrls.TASK_TREE, inc_id=self.inc_id
         )
 
     def get_prompt(self, tmpl: Templates, **kwargs) -> str:
@@ -136,40 +145,6 @@ class ContextHelper:
         prompt_txt = prompt_txt.format(**kwargs)
         return prompt_txt
 
-    def multi_format_parser(self, data: str) -> str:
-        """Formats the input into text and removes the extra empty lines."""
-        try:
-            import tika
-            tika.initVM()
-            from tika import parser
-            # Ensure data is not empty after stripping
-            if not data or not data.strip():
-                raise ValueError("Input data is empty or contains only whitespace.")
-
-            parsed_doc = parser.from_buffer(data)
-
-            # Ensure parsed content is not None
-            if parsed_doc.get("content") is None:
-                raise ValueError("Parsed content is empty or could not be extracted.")
-
-            # Check if the content type is HTML
-            if "metadata" in parsed_doc and "Content-Type" in parsed_doc["metadata"]:
-                content_type = parsed_doc["metadata"]["Content-Type"]
-                if "text/plain" in content_type: # Note: tika doesn't show text/html but text/plain
-                    soup = BeautifulSoup(parsed_doc["content"], "html.parser")
-                    parsed_doc["content"] = soup.get_text(separator="\n")  # Extract text only
-
-            # Clean up extra newlines
-            cleaned_text = re.sub(r'\n+', '\n', parsed_doc["content"]).strip()
-            return cleaned_text
-
-        except ValueError as ve:
-            log.error("Validation error: %s", ve)
-            raise
-
-        except Exception as e:  
-            raise RuntimeError("Tika was unable to extract text from the given content.") from e
-
     def _timestamp_to_readable(self, unix_timestamp: int) -> str:
         """Converts a Unix millis timestamp to a mixture of ISO 8601 and human readable date string"""
         timestamp = datetime.datetime.fromtimestamp(unix_timestamp / 1000)
@@ -188,7 +163,6 @@ class ContextHelper:
 
             # if not an int or digit, just return as-is (it's probably the type's name already...)
             return value
-
         @cache
         def type_id_to_name(type_id: Union[int, str], type_group: str) -> str:
             """Using Org data, search for the Type name"""
@@ -229,15 +203,36 @@ class ContextHelper:
 
         for group, paths in conf.items():
             for path in paths:
-                jsonpath_expr = jsonpath.parse(path)
-                matches = jsonpath_expr.find(full_data)
+                try:
+                    jsonpath_expr = jsonpath.parse(path)
+                    matches = jsonpath_expr.find(full_data)
 
-                for match in matches:
-                    match.context.value[match.path.fields[-1]] = modify(match.value, group)
+                    for match in matches:
+                        match.context.value[match.path.fields[-1]] = modify(match.value, group)
+                except:
+                    # don't interrupt execution
+                    log.debug(f'failed to resolve type id for {group}, using jsonpath {path}')
 
         return full_data
 
-    def replace_string_in_values(self, data: Union[dict[str], List[str]], target_string:str, replacement_string:str) -> dict[str]:
+    @cache
+    def __severity_code_to_name(self, severity_code: int) -> str:
+        """Tries to get the API name for a severity code ID"""
+        incident_types = RestHelper().do_request(RestUrls.GET_TYPES, type='incident') or []
+        for type in incident_types:
+            if type.get('name', '') == 'severity_code':
+                for value in type.get('values', []):
+                    if value.get('value') == severity_code:
+                        return value.get('label')
+        return str(severity_code)
+
+
+    def replace_string_in_values(
+        self,
+        data: Union[dict[str], List[str]],
+        target_string: str,
+        replacement_string: str,
+    ) -> dict[str]:
         """
         Recursively traverses a nested dictionary and replaces occurrences of
         `target_string` (case-insensitive) in string values with `replacement_string`.
@@ -267,11 +262,11 @@ class ContextHelper:
 
             return data  # Return unchanged if not a match
         except Exception as e:
-                log.exception(
+            log.exception(
                     "An error occurred while flattening a nested json: %s",
                     e
                 )
-                raise
+            raise
 
     def cleanse_data(
         self,
@@ -284,50 +279,39 @@ class ContextHelper:
         """
         Pre-process data to only include specific fields
         """
-        inc_list = [
-            "name",
-            "description",
-            "confirmed",
-            "addr",
-            "city",
-            "start_date",
-            "inc_start",
-            "discovered_date",
-            "creator_principal",
-            "reporter",
-            "state",
-            "country",
-            "zip",
-            "workspace",
-            "members",
-            "negative_pr_likely",
-            "assessment",
-            "properties",
-            "inc_last_modified_date",
-            "incident_type_ids"
-        ]
-        inc_date_list = [
-            "start_date",
-            "inc_start",
-            "discovered_date",
-            "inc_last_modified_date",
-        ]
 
-        pbx_list = ["last_activated_by", "status", "object", "elapsed_time", "playbook"]
-        pbx_pb_list = ["display_name", "description", "activate_type"]
-        art_list = ["value", "type", "related_incident_count"]
-        art_date_list = ["created", "last_modified_time"]
-        attach_list = ["value", "related_incident_count", "name","content_type"]
-        attach_date_list = ["created"]
-        phase_list = []  # fields are set manually below
-        task_list = ["name", "active", "required"]
+        config = load_data_config(app_state.get().data_config)
+
+        inc_list = config.get("incident").get("allow_list") or []
+        inc_date_list = config.get("incident").get("date_list") or []
+
+        pbx_list = config.get("playbook_executions", {}).get("allow_list") or []
+        pbx_pb_list = config.get("playbook_executions", {}).get("playbook_allow_list") or []
+
+        art_list = config.get("artifacts", {}).get("allow_list") or []
+        art_date_list = config.get("artifacts", {}).get("date_list") or []
+        art_hit_list = config.get("artifacts", {}).get("hit_allow_list") or []
+        art_hit_property_blocklist = config.get("artifacts", {}).get("hit_block_list") or []
+        art_hit_property_relabel = config.get("artifacts", {}).get("hit_relabel_list") or {}
+
+        attach_list = config.get("attachments", {}).get("allow_list") or []
+        attach_date_list = config.get("attachments", {}).get("date_list") or []
+
+        phase_list = config.get("phases", {}).get("allow_list") or []
+        phase_relabel_map = config.get("phases", {}).get("relabel_list") or {}
+        task_list = config.get("tasks", {}).get("allow_list") or []
 
         inc = None
         if inc_data:
             inc = self.__mask_data(inc_data, inc_list)
-            inc["incident_disposition"] = (
-                "confirmed" if inc["confirmed"] else "not yet confirmed"
-            )
+            if "confirmed" in inc:
+                inc["incident_disposition"] = (
+                    "confirmed" if inc["confirmed"] else "not yet confirmed"
+                )
+            if 'severity_code' in inc:   
+                inc['severity_code'] = self.__severity_code_to_name(inc['severity_code'])
+
+
             for field in inc_date_list:
                 try:
                     inc[field] = self._timestamp_to_readable(inc[field])
@@ -335,7 +319,7 @@ class ContextHelper:
                     # will raise if null, which can be safely ignored.
                     pass
 
-            if inc["properties"]:
+            if "properties" in inc and inc["properties"]:
                 labels = self.__get_property_labels()
                 new_props = {}
                 for key, val in inc["properties"].items():
@@ -359,8 +343,49 @@ class ContextHelper:
                 new: Artifact = old
                 new = self.__mask_data(new, art_list)
 
+                # add hits - for each, get the mask of the dictionary
+                hits_info = {}
+                if "hits" in old and old["hits"]:
+                    for i, hit in enumerate(old.get("hits", [])):
+                        hit = self.__mask_data(hit, art_hit_list)
+                        hit_source = 'Unspecified' # fallback
+                        if 'threat_source_id' in hit:
+                            hit_source = hit['threat_source_id']
+                            if hit_source and isinstance(hit_source, dict):
+                                hit_source = hit['threat_source_id'].get('name', hit_source)
+
+                        if isinstance(hit.get("properties"), dict):
+                            hit["properties"] = dict(hit["properties"])  # assert type
+
+                            for k, v in hit.get("properties", []).items():
+                                if k not in art_hit_property_blocklist:
+                                    # if we need to re-key the label, change the key, default to existing
+                                    k = art_hit_property_relabel.get(k, k)
+                                    hits_info[k] = v
+
+                        else:
+                            props = [
+                                prop
+                                for prop in hit.get("properties", [])
+                                if prop.get("name", "") not in art_hit_property_blocklist
+                            ]
+
+                            for prop in props:
+                                prop_name = prop.get("name", None)
+                                if isinstance(prop_name, str):
+                                    prop_name = prop_name.lower()
+                                else:
+                                    continue
+
+                                if prop_name in art_hit_property_relabel:
+                                    prop["name"] = art_hit_property_relabel[prop_name]
+
+                            hits_info[i] = {"properties": props, "threat_source": hit_source}
+
+                new["hits"] = hits_info
+
                 # add content-type if possible
-                if old["attachment"] and old["attachment"]["content_type"]:
+                if "attachment" in old and old["attachment"] and "content_type" in old["attachment"]:
                     new["content-type"] = old["attachment"]["content_type"]
 
                 for field in art_date_list:
@@ -386,23 +411,50 @@ class ContextHelper:
 
         phases = []
         if task_data:
-            for old_phase in task_data:
-                new_phase: Phase = old_phase
+
+            def process_phase(phase: Union[Phase, dict]) -> dict:
+                """
+                    Return a cleaned phase, with all tasks' fields masked
+                """
+
+                new_phase = phase
                 new_phase = self.__mask_data(new_phase, phase_list)
-                new_phase["phase_name"] = old_phase["name"]
+
+                for old_name, new_name in phase_relabel_map.items():
+                    new_phase[new_name] = phase[old_name]
+                    try:
+                        del new_phase[old_name]
+                    except KeyError:
+                        pass
+
                 tasks = []
-                for old_task in old_phase["child_tasks"]:
-                    new_task: Task = old_task
-                    new_task = self.__mask_data(new_task, task_list)
-                    new_task["complete"] = True if old_task["status"] == "C" else False
-                    tasks.append(new_task)
+
+                if "child_tasks" in phase:
+                    for old_task in phase["child_tasks"]:
+                        new_task = old_task
+                        new_task = self.__mask_data(new_task, task_list)
+                        if "status" in task_list:
+                            new_task["complete"] = True if old_task["status"] == "C" else False
+                            new_task.pop('status', None) # remove the status key as not needed
+                        if new_task:
+                            tasks.append(new_task)
 
                 new_phase["tasks"] = tasks
-                phases.append(new_phase)
+
+                if "child_cats" in phase and phase["child_cats"]:
+                    new_phase["child_phases"] = []
+                    for old_child_phase in phase["child_cats"]:
+                        new_child_phase = old_child_phase
+                        new_child_phase = self.__mask_data(new_child_phase, phase_list)
+                        new_phase["child_phases"].append(process_phase(old_child_phase))
+
+                return new_phase
+
+            phases = [process_phase(x) for x in task_data]
 
         return (inc, pbxs, arts, attachs, phases)
 
-    def __mask_data(self, original: dict, allowed_keys: List[str]):
+    def __mask_data(self, original: Any, allowed_keys: List[str]):
         return {key: original[key] for key in allowed_keys if key in original}
 
     def __get_property_labels(self) -> dict:

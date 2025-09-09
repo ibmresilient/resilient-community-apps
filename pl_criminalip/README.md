@@ -45,8 +45,9 @@ Theses playbooks will perform automatic threat enrichment when an IP Address or 
 ## History
 | Date | Version | Notes |
 | ---- | ------- | ----- |
-| 1/2024 | 1.0 | Initial Release |
-| 1/2025 | 1.1 | Fix for version of fn_rest_api incompatibilities |
+| 09/2025 | 1.1.1 | Fix import error for SOAR>=51.0.5 |
+| 01/2025 | 1.1.0 | Fix for version of fn_rest_api incompatibilities |
+| 01/2024 | 1.0.0 | Initial Release |
 
 ## Export Description
 Minimum SOAR version required for this export: `51.0.0` (NOTE: this may be higher than each app's minimum required version).
@@ -54,14 +55,14 @@ Minimum SOAR version required for this export: `51.0.0` (NOTE: this may be highe
 ### Apps Included with Export
 | App | Version | Minimum SOAR Version |
 | --- | ------- | -------------------- |
-| REST API Functions for SOAR | 1.2.1 | 51.0.0 |
-| Timer Function for SOAR | 1.0.0 | 43.1.49 |
+| REST API Functions for SOAR | 1.3.1 | 51.0.0 |
+| Timer Function for SOAR | 1.0.1 | 51.0.0 |
  
 ---
 ## Installation instructions
 
 Before installing, verify that your environment meets the following prerequisites:
-* SOAR platform version 50.0.0 or later. 
+* SOAR platform version 51.0.0 or later. 
 * CP4S platform version 1.10 or later.
 * You have a SOAR or CP4S account to use for the installation. This can be any account that has the permission to view and modify playbooks and apps.
 

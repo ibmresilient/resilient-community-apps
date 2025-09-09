@@ -15,7 +15,8 @@ from fn_watsonx_analyst.components.funct_fn_watsonx_analyst_scan_artifact import
     scan_artifact_or_attachment,
 )
 from fn_watsonx_analyst.util.errors import WatsonxApiException
-from fn_watsonx_analyst.util.util import create_logger, generate_request_id
+from fn_watsonx_analyst.util.logging_helper import create_logger, generate_request_id
+from fn_watsonx_analyst.util.state_manager import app_state
 
 PACKAGE_NAME = "fn_watsonx_analyst"
 FN_NAME = "fn_watsonx_analyst_scan_attachment"
@@ -37,6 +38,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.fn_watsonx_analyst_attachment_id
             -   fn_inputs.fn_watsonx_analyst_model_id
             -   fn_inputs.fn_watsonx_analyst_incident_id
+            -   fn_watsonx_analyst_task_id
         """
 
         _ = generate_request_id()
@@ -44,15 +46,20 @@ class FunctionComponent(AppFunctionComponent):
 
         inc_id = getattr(fn_inputs, "fn_watsonx_analyst_incident_id", None)
         att_id = getattr(fn_inputs, "fn_watsonx_analyst_attachment_id", None)
-        model_id = getattr(fn_inputs, "fn_watsonx_analyst_model_id", None)
         task_id = getattr(fn_inputs, "fn_watsonx_analyst_task_id", None)
 
-        res_client = self.rest_client()
+        app_state.get().reset()
+
+        app_state.get().set_model(
+            getattr(fn_inputs, "fn_watsonx_analyst_model_id", None)
+        )
+        app_state.get().opts = self.opts
+        app_state.get().res_client = self.rest_client()
 
         err_msg = "Unable to generate attachment summary. "
         try:
             results = scan_artifact_or_attachment(
-                res_client, inc_id, None, att_id, self.opts, model_id, task_id=task_id
+                inc_id, None, att_id, task_id
             )
 
             yield FunctionResult(results)
@@ -70,5 +77,3 @@ class FunctionComponent(AppFunctionComponent):
         yield FunctionError(err_msg)
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
-
-        # yield FunctionResult({}, success=False, reason="Bad call")

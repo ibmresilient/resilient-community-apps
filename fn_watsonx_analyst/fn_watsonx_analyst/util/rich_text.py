@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 import nh3
 import yaml
 
-from fn_watsonx_analyst.util.util import create_logger
+from fn_watsonx_analyst.util.logging_helper import create_logger
 
 log = create_logger(__name__)
 
@@ -44,20 +44,18 @@ class RichTextHelper:
         original_text = text
 
         text = text.replace("_", "&#95;") # LLM rarely escapes underscores, so html escape the underscore
-        text = text.replace("<br> ", "\\r")
 
         try:
+            RichTextHelper.sanitize(text, config["allowed_tags"])
             text = markdown2.markdown(
                 text,
                 extras=["fenced-code-blocks", "cuddled-lists", "tables"],
-                safe_mode="escape",
             )
 
             text = text.replace("\n", "\\n") # allow for newlines in codeblocks to be persisted
             text = RichTextHelper.conv_code_to_rich_text(text)
 
             text = text.replace("\\n", "") # remove non-codeblock newlines
-            text = text.replace("\\r", "\n")
 
             newline_tags = config["newline_tags"]
 
@@ -73,6 +71,9 @@ class RichTextHelper:
                     heading.attrs["style"] = f"font-size: {heading_size}em;"
 
             try:
+                for p in soup.find_all('p'):
+                    p.attrs['style'] = 'display: inline'
+
                 text = str(soup)
                 text = RichTextHelper.construct_blockquotes(text)
             except:
@@ -131,7 +132,7 @@ class RichTextHelper:
                 code_text = el.get_text()
                 code_text = unescape_code(code_text)
 
-                new_tag = soup.new_tag("p" if tag == "pre" else "i")
+                new_tag = soup.new_tag("div" if tag == "pre" else "i")
                 new_tag.string = code_text
 
                 style = RichTextHelper.code_block_style if tag == "pre" else RichTextHelper.code_inline_style

@@ -9,3 +9,5 @@ customize.py-*
 *.pyc
 venv
 app.config
+htmlcov/
+.coverage*

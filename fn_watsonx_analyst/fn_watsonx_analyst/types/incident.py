@@ -1,4 +1,4 @@
-from typing import List, TypedDict
+from typing import List, TypedDict, Union
 
 from fn_watsonx_analyst.types.artifact import Artifact
 
@@ -23,7 +23,7 @@ class Incident(TypedDict):
     addr: str
     city: str
 
-    incident_type_ids: List[int]
+    incident_type_ids: Union[List[int], List[str]]
 
     create_date: int
     end_date: int
@@ -41,7 +41,7 @@ class Incident(TypedDict):
     actions: List[dict]
     artifacts: List[Artifact]
 
-    severity_code: int
+    severity_code: Union[int, str]
     score: int
     phase_id: int
 

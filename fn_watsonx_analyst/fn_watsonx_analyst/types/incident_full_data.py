@@ -13,3 +13,4 @@ class IncidentFullData(TypedDict):
     pbexec_details: List[PBExecDetail]
     artifacts: List[Artifact]
     attachments: List[Attachment]
+    tasktree: List[dict]

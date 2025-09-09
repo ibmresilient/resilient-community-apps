@@ -1,4 +1,4 @@
-from typing import TypedDict
+from typing import List, Optional, TypedDict
 
 from fn_watsonx_analyst.types.object_handle import ObjectHandle
 from fn_watsonx_analyst.types.principal import Principal
@@ -21,6 +21,7 @@ class Artifact(GlobalArtifact):
     related_incident_count: int
 
     global_info: GlobalArtifact
+    hits: Optional[List[dict]]
 
     value: str
     attachment: Attachment

@@ -34,8 +34,8 @@ setup(
         'pdfid~=1.1',
         'defusedxml~=0.7.1',
         'lxml~=4.8',
-        'cryptography',
-        'pyOpenSSL~=23.0',
+        'cryptography>=42.0.4', # Defining minimum to fix CVE-2024-6119, CVE-2024-26130, CVE-2023-50782 for SOARAPPS-9089
+        'pyOpenSSL>=24.0', # Defining minimum to fix CVE-2024-6119, CVE-2024-26130, CVE-2023-50782 for SOARAPPS-9089
         'mail-parser~=4.1.2'
     ],
     python_requires='>=3.9',

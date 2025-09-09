@@ -6,7 +6,7 @@ from typing import Literal
 import requests
 from resilient import SimpleClient
 
-from fn_watsonx_analyst.util.util import create_logger
+from fn_watsonx_analyst.util.logging_helper import create_logger
 
 CacheObj = Literal["org", "watsonx_key"]
 

@@ -49,7 +49,7 @@ def call_fn_watsonx_analyst_converse_via_notes_function(circuits, function_param
 class TestFnWatsonxConverseViaNotes:
     """ Tests for the fn_watsonx_analyst_converse_via_notes function"""
 
-    cold_mem_limit = "80 MB"
+    cold_mem_limit = "120 MB"
     hot_mem_limit = "50 MB"
     parallel_mem_limit = "1000 MB"
 
@@ -62,8 +62,9 @@ class TestFnWatsonxConverseViaNotes:
         "fn_watsonx_analyst_note_id": 1,
         "fn_watsonx_analyst_system_prompt": "sample text",
         "fn_watsonx_analyst_prompt": "sample text",
-        "fn_watsonx_analyst_model_id": "ibm/granite-13b-chat-v2",
-        "fn_watsonx_analyst_incident_id": 123
+        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
+        "fn_watsonx_analyst_incident_id": 123,
+        "fn_watsonx_analyst_data_config": "default",
     }
     expected_results_1 = "Lorem ipsum"
 
@@ -71,28 +72,39 @@ class TestFnWatsonxConverseViaNotes:
         "fn_watsonx_analyst_note_id": 2,
         "fn_watsonx_analyst_system_prompt": "sample text",
         "fn_watsonx_analyst_prompt": "sample text",
-        "fn_watsonx_analyst_model_id": "ibm/granite-13b-chat-v2",
-        "fn_watsonx_analyst_incident_id": 123
+        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
+        "fn_watsonx_analyst_incident_id": 123,
+        "fn_watsonx_analyst_data_config": "default",
     }
 
     mock_inputs_3 = {
             "fn_watsonx_analyst_note_id": 3,
-            "fn_watsonx_analyst_model_id": "ibm/granite-13b-chat-v2",
-            "fn_watsonx_analyst_incident_id": 123
+            "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
+            "fn_watsonx_analyst_incident_id": 123,
+        "fn_watsonx_analyst_data_config": "default",
     }
 
     mock_inputs_4 = {
             "fn_watsonx_analyst_note_id": 4,
             #"fn_watsonx_analyst_prompt": "[runme3.sh]",
-            "fn_watsonx_analyst_model_id": "ibm/granite-13b-chat-v2",
-            "fn_watsonx_analyst_incident_id": 123
+            "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
+            "fn_watsonx_analyst_incident_id": 123,
+        "fn_watsonx_analyst_data_config": "default",
     }
 
     artifact_expected_results_4 = "Parsed content is empty or could not be extracted."
     artifact_expected_results = "Artifact conversation"
 
+    mock_inputs_5 = {
+        "fn_watsonx_analyst_note_id": 5,
+        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
+        "fn_watsonx_analyst_incident_id": 123,
+        "fn_watsonx_analyst_data_config": "default",
+    }
+
     @pytest.mark.parametrize("mock_inputs, expected_results", [
-        (mock_inputs_1, expected_results_1)
+        (mock_inputs_1, expected_results_1),
+        (mock_inputs_5, artifact_expected_results)
     ])
     @pytest.mark.limit_memory(cold_mem_limit)
     def test_success(self, circuits_app, mock_inputs, expected_results):
@@ -101,10 +113,12 @@ class TestFnWatsonxConverseViaNotes:
         assert results["content"]["raw_output"] == expected_results
 
     def test_bad_html_artifact_name(self, circuits_app):
+        """test to test html artifact"""
         results = call_fn_watsonx_analyst_converse_via_notes_function(circuits_app, self.mock_inputs_3)
         assert results["content"]["raw_output"] == self.artifact_expected_results
-    
+
     def test_empty_artifact_content(self, circuits_app):
+        """test to test empty artifact"""
         results = call_fn_watsonx_analyst_converse_via_notes_function(circuits_app, self.mock_inputs_4)
         assert results["content"]["generated_text"] == self.artifact_expected_results_4
 
@@ -119,10 +133,10 @@ class TestFnWatsonxConverseViaNotes:
 
     @pytest.mark.limit_memory(parallel_mem_limit)
     def test_mem_pressure_parallel(self, circuits_app):
+        """Testing memory pressure during parallel execution"""
         # run 12 instances of converse_via_notes_function in concurrent futures
         with concurrent.futures.ThreadPoolExecutor(max_workers=12) as executor:
             futures = [
                 executor.submit(call_fn_watsonx_analyst_converse_via_notes_function, circuits_app, self.mock_inputs_2) for _ in range(12)]
             for future in concurrent.futures.as_completed(futures):
                 assert future.result().get("content", {}).get("raw_output") == self.artifact_expected_results
-

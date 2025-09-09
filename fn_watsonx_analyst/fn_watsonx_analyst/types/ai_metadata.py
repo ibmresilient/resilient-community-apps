@@ -5,7 +5,10 @@ class AIMetadata(TypedDict):
     """Type for AI response metadata"""
 
     model_id: str
-    stop_reason: str
+    estimated_cost: float
+
     created_at: str
-    generated_token_count: int
-    input_token_count: int
+    stop_reason: str
+    input_tokens: int
+    output_tokens: int
+

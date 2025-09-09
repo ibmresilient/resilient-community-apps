@@ -1,16 +1,15 @@
 import json
-import re
 from typing import List
-
 import requests
 from requests import RequestException, JSONDecodeError
 from requests import ConnectionError as RequestsConnectionError
 
 from resilient import SimpleClient
 
-from fn_watsonx_analyst.types import AIResponse, MessagePayload, MessageRole
+from fn_watsonx_analyst.types import MessagePayload, MessageRole
 
-from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose, ModelTag
+from fn_watsonx_analyst.types.watsonx_responses import WatsonxTextGenerationResponse
+from fn_watsonx_analyst.util.model_helper import ModelHelper
 from fn_watsonx_analyst.util.errors import (
     WatsonxBadRequestException,
     WatsonxForbiddenException,
@@ -19,14 +18,17 @@ from fn_watsonx_analyst.util.errors import (
     WatsonxTokenLimitExceededException,
     WatsonxUnauthorizedException,
     WatsonxUnreachableException,
-    WatsonxUnparseableResponseException, WatsonxApiException, WatsonxTooManyRequestsException,
+    WatsonxUnparseableResponseException,
+    WatsonxApiException,
+    WatsonxTooManyRequestsException,
 )
 from fn_watsonx_analyst.util.persistent_org_cache import PersistentCache
 from fn_watsonx_analyst.util.retry import retry_with_backoff
-from fn_watsonx_analyst.util.util import create_logger, defang_text
-from fn_watsonx_analyst.util.rich_text import RichTextHelper
+from fn_watsonx_analyst.util.logging_helper import create_logger
+from fn_watsonx_analyst.util.state_manager import app_state
 
 log = create_logger(__name__)
+
 
 class QueryHelper:
     """
@@ -36,38 +38,22 @@ class QueryHelper:
     API_KEY: str
     ENDPOINT: str
 
-    model_id: str
-    res_client: SimpleClient
-    opts: dict
+    model_id: str = app_state.get().model_id
+    res_client: SimpleClient = app_state.get().res_client
+    opts: dict = app_state.get().opts
 
-    headers: dict
+    headers: dict = None
 
-    filtered_elements = [
-        "h1",
-        "h2",
-        "h3",
-        "h4",
-        "h5",
-        "h6",
-        "table",
-        "tbody",
-        "thead",
-        "tr",
-        "td",
-    ]
-
-    def __init__(
-        self, res_client: SimpleClient = None, model_id: str = None, opts: dict = None
-    ):
-        self.res_client = res_client
-        self.model_id = model_id
-        self.opts = opts
+    def __init__(self):
+        self.model_id = app_state.get().model_id
+        self.res_client = app_state.get().res_client
+        self.opts = app_state.get().opts
         if self.opts:
             self.headers = {
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {self.get_api_key(self.res_client)}",
             }
-    
+
     def build_message(self, role: MessageRole, content: str) -> MessagePayload:
         """Builds a MessagePayload from a role and text content"""
         return {"content": content, "role": role}
@@ -105,55 +91,40 @@ class QueryHelper:
         except Exception as e:
             raise WatsonxUnauthorizedException() from e
 
-    def process_output(self, text: str) -> str:
-        """
-        Run the post-processing of text - replace certain HTML elements that would distract, defang, etc.
-        """
-        text = defang_text(text)
-        for ptrn in self.filtered_elements:
-            text = re.sub(rf"<{ptrn}.*?>", "", text)
-            text = re.sub(rf"</{ptrn}.*?>", "<br>", text)
-            text = re.sub(rf"<{ptrn}.*?/>", "<br>", text)
-
-        return f"<div style='white-space: break-word; white-space-collapse: collapse;'>{text}</div>"
-
     @retry_with_backoff()
     def text_generation(
         self,
         prompt: str,
         arguments: str = None,
-        stop_sequences: List[str] = [
-            "<|assistant|>",
-            "<|system|>",
-            "@Watsonx",
-            "@WatsonX",
-            "@watsonx",
-            "<|watsonx|>",
-        ],
+        stop_sequences: List[str] = None,
         repetition_penalty: float = 1.2,
         min_new_tokens: int = 1,
-        max_new_tokens: int = 2000,
+        max_new_tokens: int = 4096,
         timeout=120 * 1000,
-        purpose=AiResponsePurpose.NOTE_CONVERSATION,
         enable_moderation=True,
-    ) -> AIResponse:
+    ) -> WatsonxTextGenerationResponse:
         """
         Invoke watsonx.ai text generation endpoint, asking to complete the input until it reaches a stop sequence
         """
+        if not stop_sequences:
+            stop_sequences = [
+                "<|assistant|>",
+                "<|system|>",
+                "@Watsonx",
+                "@WatsonX",
+                "@watsonx",
+                "<|watsonx|>",
+            ]
+
         if arguments:
             arguments = arguments.split(",")
             prompt = prompt.format(*arguments)
-
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {self.get_api_key(self.res_client)}",
-        }
 
         hap = {"output": {"enabled": True, "threshold": 0.5}}
         if enable_moderation:
             hap["input"] = {"enabled": True, "threshold": 0.5}
 
-        body = {
+        request_body = {
             "model_id": self.model_id,
             "input": prompt,
             "project_id": self._get_project_id(),
@@ -162,56 +133,38 @@ class QueryHelper:
                 "decoding_method": "greedy",
                 "repetition_penalty": repetition_penalty,
                 "min_new_tokens": min_new_tokens,
-                "max_new_tokens": max_new_tokens,
+                "max_new_tokens": min(
+                    max_new_tokens,
+                    ModelHelper.max_output_tokens_for_model(self.model_id),
+                ),
                 "stop_sequences": stop_sequences,
                 "include_stop_sequence": False,
                 "time_limit": timeout,
             },
         }
+
         try:
-            with (requests.post(
+            with requests.post(
                 self._get_api_endpoint(),
-                json.dumps(body),
-                headers=headers,
+                json.dumps(request_body),
+                headers=self.headers,
                 timeout=(timeout + 1000) / 1000,
-            ) as response):
+            ) as response:
                 match response.status_code:
                     case 200:
-                        body = response.json()
-                        result = body["results"][0]
-                        generated_text: str
-
-                        # flag to render markdown to HTML
-                        if self._get_config().get("render_markdown", "true") in ["true", "True", True]:
-                            generated_text = defang_text(RichTextHelper.toHTML(result["generated_text"]))
-                        else:
-                            generated_text = defang_text(result["generated_text"])
-
-                        model_tag = ModelTag(self.model_id, purpose)
-
-                        output: AIResponse = {
-                            "generated_text": generated_text,
-                            "raw_output": result["generated_text"],
-                            "metadata": {
-                                "created_at": model_tag.created_at,
-                                "input_token_count": result["input_token_count"],
-                                "generated_token_count": result[
-                                    "generated_token_count"
-                                ],
-                                "stop_reason": result["stop_reason"],
-                                "model_id": body["model_id"],
-                            },
-                            "tag": str(model_tag),
-                        }
+                        response_body: WatsonxTextGenerationResponse = response.json()
                         log.debug(
-                            "[Input]:\n%s\n[Output]:\n%s\nInput tokens: %d\tOutput tokens: %d",
-                            prompt,
-                            output["raw_output"],
-                            result["input_token_count"],
-                            result["generated_token_count"],
+                            "[Input]:\n%s\n[Output]:\n%s",
+                            request_body["input"],
+                            response_body["results"][0]["generated_text"],
                         )
-
-                        return output
+                        app_state.get().increment_input_tokens(
+                            response_body["results"][0]["input_token_count"]
+                        )
+                        app_state.get().increment_output_tokens(
+                            response_body["results"][0]["generated_token_count"]
+                        )
+                        return response_body
                     case WatsonxBadRequestException.status_code:
                         body = response.json()
 
@@ -263,7 +216,7 @@ class QueryHelper:
         try:
             response = requests.get(url, headers=headers, timeout=30)
             match response.status_code:
-                case (200 | 201):
+                case 200 | 201:
                     resources = response.json().get("resources", None)
                     if resources is None:
                         raise WatsonxUnparseableResponseException()
@@ -274,42 +227,80 @@ class QueryHelper:
                     return models
 
                 case WatsonxBadRequestException.status_code:
-                    raise WatsonxBadRequestException()
-                case (WatsonxUnauthorizedException.status_code | WatsonxForbiddenException.status_code):
-                    raise WatsonxUnauthorizedException()
+                    raise WatsonxBadRequestException(response.text)
+                case (
+                    WatsonxUnauthorizedException.status_code
+                    | WatsonxForbiddenException.status_code
+                ):
+                    raise WatsonxUnauthorizedException(response.text)
                 case _:
                     raise WatsonxApiException(f"Status code: {response.status_code}")
 
         except (RequestsConnectionError, ConnectionError, RequestException) as e:
+            log.exception('unknown network/connection exception %s', e)
             raise WatsonxUnreachableException() from e
+
+    def get_sentence_transformer(self):
+        try:
+            from sentence_transformers import SentenceTransformer
+            return SentenceTransformer('all-MiniLM-L6-v2')
+        except Exception as e:
+            log.exception(
+                "An error occurred while importing and loading sentence transformer model: %s",
+                e,
+            )
+            raise
 
     @retry_with_backoff()
     def generate_embeddings(self, data: List[str])->List[list]:
-        url = (
-            self._get_base_endpoint()
-            + "/ml/v1/text/embeddings?version=2023-10-25"
-        )
-        try:
-            body = {
-                "inputs": data,
-                "model_id": "ibm/slate-125m-english-rtrvr",
-                "project_id": self._get_project_id()
-            }
-            response = requests.post(url, json.dumps(body), headers=self.headers, timeout=30)
-            match response.status_code:
-                case (200 | 201):
-                    results = response.json().get("results")
-                    # Extracting the 'embedding' values
-                    formatted_results = [item['embedding'] for item in results]
-                    return formatted_results
-                case (WatsonxBadRequestException.status_code):
-                    raise WatsonxBadRequestException()
-                case (WatsonxUnauthorizedException.status_code | WatsonxForbiddenException.status_code):
-                    raise WatsonxUnauthorizedException()
-                case (WatsonxTooManyRequestsException.status_code):
-                    raise WatsonxTooManyRequestsException()
-                case _:
-                    raise WatsonxApiException(f"Status code: {response.status_code}")
+        """
+        generate embeddings (vector representations) of text data using either 
+        a local sentence transformer model or an external Watson Natural Language Understanding (NLU) API, 
+        depending on the configuration. 
 
-        except (RequestsConnectionError, ConnectionError, RequestException) as e:
-            raise WatsonxUnreachableException() from e
+        Takes only first 1000 chunks of data if data is too large.
+        """
+        local_embeddings = self._get_config().get("local_embeddings")
+        if len(data) > 1000:
+            data = data[0:1000]
+        if local_embeddings is not None and local_embeddings not in ("False", "false"):
+            try:
+                transformer_model = self.get_sentence_transformer()
+                embeddings = transformer_model.encode(data)
+                return embeddings
+            except Exception as e:
+                log.exception(
+                    "An error occurred while generating embeddings: %s",
+                    e,
+                )
+                raise
+        else:
+            url = (
+                self._get_base_endpoint()
+                + "/ml/v1/text/embeddings?version=2023-10-25"
+            )
+            try:
+                body = {
+                    "inputs": data,
+                    "model_id": "ibm/slate-125m-english-rtrvr",
+                    "project_id": self._get_project_id()
+                }
+                response = requests.post(url, json.dumps(body), headers=self.headers, timeout=60)
+                match response.status_code:
+                    case (200 | 201):
+                        results = response.json().get("results")
+                        # Extracting the 'embedding' values
+                        formatted_results = [item['embedding'] for item in results]
+                        app_state.get().increment_embedding_tokens(response.json().get("input_token_count", 0))
+                        return formatted_results
+                    case (WatsonxBadRequestException.status_code):
+                        raise WatsonxBadRequestException(response.text)
+                    case (WatsonxUnauthorizedException.status_code | WatsonxForbiddenException.status_code):
+                        raise WatsonxUnauthorizedException(response.text)
+                    case (WatsonxTooManyRequestsException.status_code):
+                        raise WatsonxTooManyRequestsException(response.text)
+                    case _:
+                        raise WatsonxApiException(f"Status code: {response.status_code}")
+
+            except (RequestsConnectionError, ConnectionError, RequestException) as e:
+                raise WatsonxUnreachableException() from e

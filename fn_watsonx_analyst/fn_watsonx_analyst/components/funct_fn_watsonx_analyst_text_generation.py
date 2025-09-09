@@ -6,8 +6,11 @@
 
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
+from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose
 from fn_watsonx_analyst.util.QueryHelper import QueryHelper
-from fn_watsonx_analyst.util.util import create_logger, generate_request_id
+from fn_watsonx_analyst.util.response_helper import ResponseHelper
+from fn_watsonx_analyst.util.logging_helper import create_logger, generate_request_id
+from fn_watsonx_analyst.util.state_manager import app_state
 
 PACKAGE_NAME = "fn_watsonx_analyst"
 FN_NAME = "fn_watsonx_analyst_text_generation"
@@ -36,7 +39,13 @@ class FunctionComponent(AppFunctionComponent):
 
         yield self.status_message(f"Starting App Function: '{FN_NAME}'")
 
-        model_id = getattr(fn_inputs, "fn_watsonx_analyst_model_id", None)
+        app_state.get().reset()
+
+        app_state.get().set_model(getattr(fn_inputs, "fn_watsonx_analyst_model_id", None))
+        app_state.get().opts = self.opts
+        app_state.get().res_client = self.rest_client()
+        app_state.get().purpose = AiResponsePurpose.TEXT_GENERATION
+
         prompt = getattr(fn_inputs, "fn_watsonx_analyst_prompt", None)
         system_prompt = ""
         args = ""
@@ -48,18 +57,16 @@ class FunctionComponent(AppFunctionComponent):
         except:
             pass  # ignore as optional parameters not being found is fine
 
-        res_client = self.rest_client()
         text_prompt = "" + system_prompt + "\n\n" + prompt
-        results = {"error": "something went wrong"}
         try:
-            query_helper = QueryHelper(res_client, model_id, self.opts)
+            query_helper = QueryHelper()
             response = query_helper.text_generation(text_prompt, args)
-            results = response
+            results = ResponseHelper().text_generation_to_ai_response(response)
 
+            yield FunctionResult(results)
         # pylint: disable=broad-exception-caught
         except Exception as e:
             yield FunctionResult({"error": str(e)}, success=False, reason=str(e))
 
         yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
 
-        yield FunctionResult(results)

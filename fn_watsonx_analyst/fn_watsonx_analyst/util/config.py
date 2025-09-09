@@ -17,10 +17,15 @@ watsonx_project_id=$WATSONX_PROJECT_ID
 watsonx_endpoint=$WATSONX_ENDPOINT
 
 # options: en, fr, de, pt, es
+# Options:
+# English - en, Francais - fr, - de, Portugese - pt, Spanish - es, 日本語 (Japanese) - ja
 default_language=en
 
 # options: true, false
 render_markdown=true
+
+# uncomment to perform text processing locally instead of on watsonx.ai. Will increase resource consumption significantly.
+#local_embeddings=true
 
 [watsonx_property_labels]
 # Note: don't use quotes around values.

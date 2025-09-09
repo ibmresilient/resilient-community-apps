@@ -1,4 +1,7 @@
+"""Artifact summary generator class"""
+
 from typing import List, Optional
+from math import ceil
 
 from resilient import SimpleClient
 
@@ -8,83 +11,81 @@ from fn_watsonx_analyst.types.ai_response import AIResponse
 from fn_watsonx_analyst.types.artifact import Artifact
 
 from fn_watsonx_analyst.types.attachment import Attachment
-from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose, ModelTag
-from fn_watsonx_analyst.util.ContextHelper import ContextHelper
+from fn_watsonx_analyst.types.watsonx_responses import WatsonxTextGenerationResponse
+from fn_watsonx_analyst.util.FileParser import FileParser
 from fn_watsonx_analyst.util.chunking.chunking import Chunking
 from fn_watsonx_analyst.util.parallel.parallel import ParallelRunnableRunner
 from fn_watsonx_analyst.util.rest import RestHelper, RestUrls
-from fn_watsonx_analyst.util.util import create_logger
+from fn_watsonx_analyst.util.logging_helper import create_logger
+from fn_watsonx_analyst.util.state_manager import app_state
 
-MAX_THRESHOLD = 2000000  # bytes
 
 log = create_logger(__name__)
+
 
 class ArtifactSummaryGenerator:
     """Generate a summary of an artifact in layers of summaries"""
 
     res_client: SimpleClient
-
     inc_id: int
     artifact: Artifact
     content_type: str
     contents: bytes
 
-    model_id: str
-    model_tag: ModelTag
-
     opts: dict
 
     def __init__(
         self,
-        res_client: SimpleClient,
         inc_id: int,
         artifact: Optional[Artifact],
         attachment: Optional[Attachment],
-        model_id: str,
-        opts: dict,
     ):
-        self.res_client = res_client
+        state = app_state.get()
+        self.res_client = state.res_client
+        self.model_id = state.model_id
+        self.opts = state.opts
 
         self.inc_id = inc_id
         self.artifact = artifact
         self.attachment = attachment
-        
+
         if self.artifact:
             self.content_type = artifact.get("attachment", {}).get("content_type", "")
         else:
             self.content_type = attachment.get("content_type", "")
 
-        self.model_id = model_id
-        self.opts = opts
-
-        self.model_tag = ModelTag(model_id, AiResponsePurpose.ARTIFACT_SUMMARY)
-
     def generate(self) -> AIResponse:
-        """Generate a random sample-based summary of the artifact, truncate if over max threshold"""
+        """Generate a summary of the artifact(using top n chunks), truncate if over max threshold
+        At the moment, we only scan the artifact/attachment till the context limit of the model 
+        used.
+        """
+
         data = self.__get_contents()
-
-        # don't spend too long chunking
-        if len(data) > MAX_THRESHOLD:
-            data = data[:MAX_THRESHOLD]
-
         chunker = Chunking()
-        chunks = chunker.split_data_into_token_chunks(data, max_tokens=2500)
-        chunks = chunker.random_chunks(chunks, 12)
+        # max input tokens model supports
+        model_context_limit = chunker.max_tokens_for_model(self.model_id)
+
+        #tokens per chunk
+        chunk_size=0.5 * model_context_limit
+
+        # tokens to be consumed from the input artifact - keeping a buffer of 3K
+        max_data_to_scan = 125000
+
+        total_chunks = chunker.split_data_into_token_chunks(data, chunk_size)
+        total_executions = int(ceil(max_data_to_scan/chunk_size))
+        total_chunks = total_chunks[:total_executions]
 
         contents_summarizers: List[ContentsSummarizer] = []
-        for chunk in chunks:
+        for chunk in total_chunks:
             if len(chunk) > 0:
                 contents_summarizers.append(
                     ContentsSummarizer(
                         chunk,
                         self.content_type,
-                        self.model_id,
-                        self.res_client,
-                        self.opts,
                     )
                 )
 
-        summaries: List[AIResponse] = ParallelRunnableRunner(contents_summarizers).run()
+        summaries: List[WatsonxTextGenerationResponse] = ParallelRunnableRunner(contents_summarizers).run()
         if isinstance(summaries, dict):
             summaries = [summaries]
 
@@ -105,7 +106,6 @@ class ArtifactSummaryGenerator:
                 "Failed to generate section summaries for artifact scan. Review the logs for more details."
             )
         if summaries[0] is not None:
-            summaries[0]["tag"] = str(self.model_tag)
             return summaries[0]
 
         return
@@ -119,26 +119,25 @@ class ArtifactSummaryGenerator:
             return summaries
 
         chunker = Chunking()
-        summaries_text = [x["generated_text"] for x in summaries]
+        summaries_text = [x["results"][0]["generated_text"] for x in summaries]
         chunks = chunker.split_data_into_token_chunks(
-            "\n---\n".join(summaries_text), 2000
+            "\n---\n".join(summaries_text), 5000
         )
 
         for chunk in chunks:
             doc_summarizers.append(
                 DocumentSummarizer(
-                    chunk, "text", self.model_id, self.res_client, self.opts
+                    chunk, "text"
                 )
             )
 
-        summaries: List[AIResponse] = ParallelRunnableRunner(doc_summarizers).run()
+        summaries: List[WatsonxTextGenerationResponse] = ParallelRunnableRunner(doc_summarizers).run()
         return summaries
 
     def __get_contents(self):
         contents: str = None
         if self.artifact:
             contents = RestHelper().do_request(
-                self.res_client,
                 RestUrls.ARTIFACT_CONTENTS,
                 inc_id=self.inc_id,
                 art_id=self.artifact["id"],
@@ -146,14 +145,12 @@ class ArtifactSummaryGenerator:
         elif self.attachment:
             if not self.attachment["task_id"]:
                 contents = RestHelper().do_request(
-                    self.res_client,
                     RestUrls.ATTACHMENT_CONTENTS,
                     inc_id=self.inc_id,
                     attach_id=self.attachment["id"],
                 )
             else:
                 contents = RestHelper().do_request(
-                    self.res_client,
                     RestUrls.TASK_ATTACHMENT_CONTENTS,
                     task_id=self.attachment["task_id"],
                     attach_id=self.attachment["id"],
@@ -162,6 +159,9 @@ class ArtifactSummaryGenerator:
         else:
             raise ValueError("Please provide a valid artifact or attachment")
 
-        parser_instance = ContextHelper()
-        contents = parser_instance.multi_format_parser(data=contents)
+        parser_instance = FileParser()
+        object_name=self.artifact["value"] if self.artifact else self.attachment["name"]
+        contents = parser_instance.multi_format_parser(
+            data=contents, object_name=object_name
+        )
         return contents

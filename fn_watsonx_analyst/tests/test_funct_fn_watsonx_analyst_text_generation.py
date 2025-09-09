@@ -54,7 +54,7 @@ class TestFnWatsonxTextGeneration:
         assert func is not None
 
     mock_inputs_1 = {
-        "fn_watsonx_analyst_model_id": "ibm/granite-13b-chat-v2",
+        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
         "fn_watsonx_analyst_system_prompt": "sample text",
         "fn_watsonx_analyst_arguments": "sample text",
         "fn_watsonx_analyst_prompt": "sample text"

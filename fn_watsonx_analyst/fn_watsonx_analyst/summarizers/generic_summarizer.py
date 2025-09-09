@@ -1,12 +1,13 @@
 from typing import Literal
 from fn_watsonx_analyst.types.ai_response import AIResponse
+from fn_watsonx_analyst.types.watsonx_responses import WatsonxTextGenerationResponse
 from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose
 from fn_watsonx_analyst.util.QueryHelper import QueryHelper
 
 from resilient import SimpleClient
 
 from fn_watsonx_analyst.util.parallel.parallel import ParallelRunnable
-from fn_watsonx_analyst.util.util import create_logger
+from fn_watsonx_analyst.util.logging_helper import create_logger
 
 log = create_logger(__name__)
 
@@ -29,24 +30,16 @@ class GenericSummarizer(ParallelRunnable):
             "aggregate", "incident", "playbook_executions", "artifacts", "notes", "contents"
         ],
         instruction: str,
-        model_id: str,
-        res_client: SimpleClient,
-        opts: dict,
-        purpose: AiResponsePurpose
     ):
         self.typ = typ
         self.instruction = instruction
-        self.model_id = model_id
-        self.res_client = res_client
-        self.opts = opts
-        self.purpose = purpose
 
-    def run(self) -> AIResponse:
+    def run(self) -> WatsonxTextGenerationResponse:
         if not self.valid:
             return (self.typ, {}, self.valid)
-        query_helper = QueryHelper(self.res_client, self.model_id, self.opts)
+        query_helper = QueryHelper()
         try:
-            return query_helper.text_generation(self.instruction, purpose=self.purpose)
+            return query_helper.text_generation(self.instruction)
         except Exception as e:
             import traceback
 

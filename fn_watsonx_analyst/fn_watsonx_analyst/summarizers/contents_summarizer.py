@@ -17,12 +17,7 @@ class ContentsSummarizer(GenericSummarizer):
         self,
         data: Union[str, bytes],
         content_type: str,
-        model_id: str,
-        res_client: SimpleClient,
-        opts: dict,
     ):
-        self.instruction = Prompting(opts).build_prompt(
-            AiResponsePurpose.ARTIFACT_SUMMARY, model_id,
-            None, data, None, [], False, content_type=content_type)
+        self.instruction = Prompting().build_prompt(query=None, context=data, get_relevant_prompts=False, content_type=content_type)
 
-        super().__init__(self.name, self.instruction, model_id, res_client, opts, AiResponsePurpose.ARTIFACT_SUMMARY)
+        super().__init__(self.name, self.instruction)

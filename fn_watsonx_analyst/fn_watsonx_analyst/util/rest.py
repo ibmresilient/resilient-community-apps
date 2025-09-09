@@ -1,7 +1,7 @@
 from enum import Enum
-from resilient import SimpleClient
 
-from fn_watsonx_analyst.util.util import create_logger
+from fn_watsonx_analyst.util.logging_helper import create_logger
+from fn_watsonx_analyst.util.state_manager import app_state
 
 # pylint: disable=line-too-long
 
@@ -11,14 +11,23 @@ log = create_logger(__name__)
 class RestUrls(Enum):
     """Enum to determine which URL and method to use for each request"""
 
-    GET_ARTIFACTS = ["POST", "/incidents/{inc_id}/artifacts/query_paged"]
+    GET_ARTIFACTS = [
+        "POST",
+        "/incidents/{inc_id}/artifacts/query_paged?threat_hit_prop_format=objects&include_related_incident_count=true&handle_format=objects",
+    ]
 
     # include trailing '/' to differentiate from above enum value
-    ARTIFACT_BY_NAME = ["POST", "/incidents/{inc_id}/artifacts/query_paged/"]
-    INC_ART_ID = ["POST", "/artifacts/{art_id}/related_incident_artifacts/query_paged"]
+    ARTIFACT_BY_NAME = [
+        "POST",
+        "/incidents/{inc_id}/artifacts/query_paged/?threat_hit_prop_format=objects&include_related_incident_count=true&handle_format=objects",
+    ]
+    INC_ART_ID = [
+        "POST",
+        "/artifacts/{art_id}/related_incident_artifacts/query_paged?threat_hit_prop_format=objects&include_related_incident_count=true&handle_format=objects",
+    ]
     ARTIFACT_DETAILS = [
         "GET",
-        "/incidents/{inc_id}/artifacts/{art_id}?threat_hit_prop_format=objects&syncHits=true",
+        "/incidents/{inc_id}/artifacts/{art_id}?threat_hit_prop_format=objects&include_related_incident_count=true&handle_format=objects",
     ]
     ARTIFACT_CONTENTS = ["GET", "/incidents/{inc_id}/artifacts/{art_id}/contents"]
     UPDATE_ARTIFACT = [
@@ -45,6 +54,10 @@ class RestUrls(Enum):
         "POST",
         "/playbooks/execution/incident/{inc_id}/query_paged?include_activity_error_msg=false",
     ]  # Up to & including SOAR v51.0.2.1
+    PLAYBOOK_EXECUTIONS_3 = [
+        "POST",
+        "/playbooks/execution/query_paged?include_activity_error_msg=false",
+    ]
 
     ATTACHMENT_BY_NAME = [
         "POST",
@@ -64,6 +77,7 @@ class RestUrls(Enum):
     ]
 
     GET_ATTACHMENTS = ["GET", "/incidents/{inc_id}/attachments?exclude_mismatch=true"]
+    GET_TYPES = ["GET", "/types/{type}/fields"]
 
 
 class RestHelper:
@@ -73,6 +87,7 @@ class RestHelper:
         RestUrls.PLAYBOOK_EXECUTIONS,
         RestUrls.PLAYBOOK_EXECUTIONS_1,
         RestUrls.PLAYBOOK_EXECUTIONS_2,
+        RestUrls.PLAYBOOK_EXECUTIONS_3,
     ]
 
     def __get_paged_query(
@@ -158,13 +173,14 @@ class RestHelper:
                     "filters": [{"conditions": []}],
                 }
 
-    def do_request(self, res_client: SimpleClient, url: RestUrls, **kwargs) -> dict:
+    def do_request(self, url: RestUrls, **kwargs) -> dict:
         """
         Given the RestUrl enum value, perform the operation, using kwargs as query params.
         Kwargs should generally have at least the incident ID.
         """
 
         log.info("Making %s request for %s", url.value[0], url.name)
+        res_client = app_state.get().res_client
 
         match url.value[0]:
             case "GET":
@@ -196,6 +212,7 @@ class RestHelper:
                         RestUrls.PLAYBOOK_EXECUTIONS
                         | RestUrls.PLAYBOOK_EXECUTIONS_1
                         | RestUrls.PLAYBOOK_EXECUTIONS_2
+                        | RestUrls.PLAYBOOK_EXECUTIONS_3
                     ):
                         for i, option in enumerate(self.playbook_exec_group):
                             args = {}

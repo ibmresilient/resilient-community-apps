@@ -23,7 +23,8 @@ Return examples:
 from requests import RequestException
 from fn_watsonx_analyst.util.QueryHelper import QueryHelper
 from fn_watsonx_analyst.util.errors import WatsonxApiException
-from fn_watsonx_analyst.util.util import create_logger
+from fn_watsonx_analyst.util.logging_helper import create_logger
+from fn_watsonx_analyst.util.state_manager import app_state
 
 log = create_logger(__name__)
 
@@ -39,7 +40,8 @@ def selftest_function(opts):
     reason = "Check the configuration file for invalid syntax. Ensure that secrets are set for watsonx_endpoint, watsonx_project_id, and watsonx_api_key. Also ensure that the [watsonx_property_labels] section is in the config and valid."
 
     try:
-        models = QueryHelper(opts=opts).get_generation_models()
+        app_state.get().opts = opts
+        models = QueryHelper().get_generation_models()
 
         if models is None or len(models) == 0:
             raise RequestException
@@ -52,7 +54,7 @@ def selftest_function(opts):
             if not key or not value:
                 raise ValueError
 
-        state = ("success",)
+        state = "success"
         reason = f"Successfully connected to watsonx.ai. Found {len(models)} models with text_generation capability."
 
     except ValueError:

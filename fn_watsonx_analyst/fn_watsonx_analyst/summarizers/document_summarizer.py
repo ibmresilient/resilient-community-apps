@@ -13,12 +13,9 @@ class DocumentSummarizer(GenericSummarizer):
         self,
         data: str,
         content_type: str,
-        model_id: str,
-        res_client: SimpleClient,
-        opts: dict,
     ):
         self.instruction = ContextHelper().get_prompt(
             Templates.SUMM_DOCUMENT, data=data, content_type=content_type
         )
         self.MAX_NEW_TOKENS = 200
-        super().__init__(self.name, self.instruction, model_id, res_client, opts, AiResponsePurpose.ARTIFACT_SUMMARY)
+        super().__init__(self.name, self.instruction)

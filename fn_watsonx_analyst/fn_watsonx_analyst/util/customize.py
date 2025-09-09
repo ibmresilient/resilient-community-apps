@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v51.0.5.0.1475
+# Generated with resilient-sdk v51.0.2.2.1096
 
 """Generate the SOAR customizations required for fn_watsonx_analyst"""
 
@@ -29,6 +29,7 @@ def codegen_reload_data():
             u"fn_watsonx_analyst_converse_via_notes",
             u"fn_watsonx_analyst_scan_artifact",
             u"fn_watsonx_analyst_scan_attachment",
+            u"fn_watsonx_analyst_summarize_incident",
             u"fn_watsonx_analyst_text_generation"
         ],
         "workflows": [],
@@ -46,7 +47,8 @@ def codegen_reload_data():
             u"fn_watsonx_analyst_note_conversation",
             u"fn_watsonx_analyst_retry_note_conversation",
             u"fn_watsonx_analyst_scan_artifact",
-            u"fn_watsonx_analyst_scan_attachment"
+            u"fn_watsonx_analyst_scan_attachment",
+            u"fn_watsonx_analyst_summarize_incident"
         ]
     }
 
@@ -65,12 +67,14 @@ def customization_data(client=None):
         - fn_watsonx_analyst_converse_via_notes
         - fn_watsonx_analyst_scan_artifact
         - fn_watsonx_analyst_scan_attachment
+        - fn_watsonx_analyst_summarize_incident
         - fn_watsonx_analyst_text_generation
     - Playbooks:
         - fn_watsonx_analyst_note_conversation
         - fn_watsonx_analyst_retry_note_conversation
         - fn_watsonx_analyst_scan_artifact
         - fn_watsonx_analyst_scan_attachment
+        - fn_watsonx_analyst_summarize_incident
     - Scripts:
         - watsonx.ai Add Artifact Report to Notes
         - watsonx.ai Respond to note
