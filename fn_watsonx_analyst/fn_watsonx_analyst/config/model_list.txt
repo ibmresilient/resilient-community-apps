@@ -1,0 +1,20 @@
+# model_id input_cost_per_mill_tokens output_cost_per_mill_tokens
+# updated 08-08-2025
+
+ibm/granite-3-2b-instruct 0.1
+ibm/granite-3-8b-instruct 0.2
+ibm/granite-3-2-8b-instruct 0.2
+ibm/granite-3-3-8b-instruct 0.2
+ibm/granite-8b-code-instruct 0.6
+ibm/granite-vision-3-2-2b 0.1
+
+meta-llama/llama-3-405b-instruct 5 16
+meta-llama/llama-3-2-1b-instruct 0.1
+meta-llama/llama-3-2-90b-vision-instruct 2
+meta-llama/llama-3-3-70b-instruct 0.71
+
+mistralai/mistral-large 3 10
+mistralai/mistral-medium-2505 3 10
+mistralai/mistral-small-3-1-24b-instruct-2503 0.1 0.3
+
+ibm/granite-guardian-3-8b 0.2

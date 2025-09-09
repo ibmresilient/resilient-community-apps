@@ -1,0 +1,15 @@
+pytest
+pytest-resilient-circuits
+resilient==51.0.2.2.1096
+resilient_lib==51.0.2.2.1096
+resilient_sdk==51.0.2.2.1096
+resilient-circuits==51.0.2.2.1096
+pytest-cov
+memray==1.17.2
+pytest-memray==1.7.0
+sphinx
+furo
+sphinx-copybutton
+build
+myst-parser
+sphinx-design

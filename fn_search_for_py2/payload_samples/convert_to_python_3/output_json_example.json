@@ -1,0 +1,38 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "script": {
+      "id": 5,
+      "name": "email py2",
+      "description": "",
+      "language": "python3",
+      "object_type": "__emailmessage",
+      "uuid": "*****-31fb-4d9a-a3b3-95c6c9c9f148",
+      "actions": [],
+      "tags": [],
+      "creator_id": "sysadmin@example.com",
+      "last_modified_by": "sysadmin@example.com",
+      "last_modified_time": 1743719293802,
+      "created_date": 1743719293802,
+      "playbook_handle": null,
+      "programmatic_name": "email_py2",
+      "script_text": "incident.addNote(emailmessage.sender)\n",
+      "enabled": false
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "py2_item_id": 5,
+    "py2_item_type": "script"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-search-for-py2",
+    "package_version": "1.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 798,
+    "timestamp": "2025-04-04 12:25:47"
+  }
+}
