@@ -1,0 +1,37 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "id": "_ip-9.61.102.36",
+      "activityScore": 0,
+      "lastSeen": "2024-08-20T08:39:03",
+      "firstSeen": null,
+      "isSuppressed": false,
+      "name": "9.61.102.36",
+      "tags": [],
+      "criticality": null,
+      "reputation": null,
+      "recentSignalSeverity": 10,
+      "entityType": "_ip",
+      "sensorZone": null,
+      "value": "9.61.102.36",
+      "hostname": null,
+      "macAddress": null
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "sumo_logic_entity_type": "_ip",
+    "sumo_logic_entity_value": "9.61.102.36"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sumo-logic",
+    "package_version": "1.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 7397,
+    "timestamp": "2024-08-21 11:39:58"
+  }
+}

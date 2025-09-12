@@ -1,0 +1,189 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "incidentId": {
+          "type": "integer"
+        },
+        "incidentUri": {
+          "type": "string"
+        },
+        "redirectIncidentId": {},
+        "incidentName": {
+          "type": "string"
+        },
+        "createdTime": {
+          "type": "string"
+        },
+        "lastUpdateTime": {
+          "type": "string"
+        },
+        "assignedTo": {},
+        "classification": {
+          "type": "string"
+        },
+        "determination": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array"
+        },
+        "comments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "comment": {
+                "type": "string"
+              },
+              "createdBy": {
+                "type": "string"
+              },
+              "createdTime": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "alerts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "alertId": {
+                "type": "string"
+              },
+              "providerAlertId": {
+                "type": "string"
+              },
+              "incidentId": {
+                "type": "integer"
+              },
+              "serviceSource": {
+                "type": "string"
+              },
+              "creationTime": {
+                "type": "string"
+              },
+              "lastUpdatedTime": {
+                "type": "string"
+              },
+              "resolvedTime": {},
+              "firstActivity": {
+                "type": "string"
+              },
+              "lastActivity": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "severity": {
+                "type": "string"
+              },
+              "investigationId": {},
+              "investigationState": {
+                "type": "string"
+              },
+              "classification": {},
+              "determination": {},
+              "detectionSource": {
+                "type": "string"
+              },
+              "detectorId": {
+                "type": "string"
+              },
+              "***": {},
+              "actorName": {},
+              "threatFamilyName": {},
+              "mitreTechniques": {
+                "type": "array"
+              },
+              "devices": {
+                "type": "array"
+              },
+              "entities": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "defender_classification": {
+          "type": "string"
+        },
+        "defender_incident_id": {
+          "type": "integer"
+        },
+        "defender_determination": {
+          "type": "string"
+        },
+        "defender_comment": {
+          "type": "string"
+        },
+        "defender_tags": {
+          "type": "string"
+        },
+        "defender_incident_status": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

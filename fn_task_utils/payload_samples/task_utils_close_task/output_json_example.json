@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "task_id": 302,
+    "task_name": "Sample_task"
+  },
+  "raw": "",
+  "inputs": {
+    "task_name": "Sample_task",
+    "incident_id": 2117
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "unknown",
+    "package_version": "unknown",
+    "host": "my.app.host",
+    "execution_time_ms": 1815,
+    "timestamp": "2025-07-04 14:54:21"
+  }
+}
