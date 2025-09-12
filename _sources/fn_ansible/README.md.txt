@@ -95,8 +95,8 @@ are used with any file defined in `/var/rescircuits/ansible/env`.
 ### Prerequisites:
 This integration relies on the installation of the ansible solution on the integration server. The process of installing ansible can be followed [here](https://docs.ansible.com/ansible/latest/installation_guide/).
 
-* ansible >= 2.8.1
-* ansible-runner >= 2.3.6
+* ansible >= 9.3.0
+* ansible-runner >= 2.4.1
 * SOAR platform >= v50.0.0
 * Integrations Server Resilient Circuits >= v50.0.0
 * Ansible config directory per the [ansible-runner convention](https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html)
