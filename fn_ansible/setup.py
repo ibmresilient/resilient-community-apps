@@ -30,19 +30,14 @@ setup(
     long_description="""This app runs the Ansible environment to allow the running of playbooks and modules against your enterprise.
         Specify the playbooks, hosts and environment variables necessary for execution.""",
     install_requires=[
-        'ansible>=9.3.0; python_version>="3.11"',
-        'ansible~=8.7.0; python_version=="3.9"',
-        'ansible-runner~=2.3.6; python_version>="3.9"',
-        'python-daemon~=3.0.1; python_version>="3.9"',
-        'ansible==2.8.3; python_version=="3.6"',
-        'ansible-runner==1.3.4; python_version=="3.6"',
-        'python-daemon==2.3.2; python_version=="3.6"', # a sub dependency of ansible-runner whose version needs to be pinned for PY36
+        'ansible>=11.1.0; python_version>="3.11"', # removed python 3.6/3.9/3.10 support and bump version to 11.1 to fix CVE-2024-8775 and CVE-2024-11079 which requires ansible-core 2.18.1 minimum
+        'ansible-runner',
         'resilient_circuits>=50.0.0',
         'resilient_lib>=50.0.0',
         'pywinrm'
     ],
+    python_requires=">=3.10",
     packages=find_packages(),
-    python_requires='>=3.6',
     include_package_data=True,
     platforms='any',
     classifiers=[
