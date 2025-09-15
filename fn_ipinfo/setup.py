@@ -15,11 +15,10 @@ setup(
     long_description="Contains a function which accepts an IP Address as an input and attempts to query IPInfo against this IP",
     install_requires=[
         "resilient_circuits>=51.0.0",
-        "ipinfo<4.0.0 ; python_version<'3.0'",
-        "ipinfo>=4.0.0 ; python_version>='3.0'",
-        "ipaddress"
+        "ipinfo>=4.0.0",
     ],
     packages=find_packages(),
+    python_requires=">=3.6.12",
     include_package_data=True,
     platforms='any',
     classifiers=[
