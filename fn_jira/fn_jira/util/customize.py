@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
-# Generated with resilient-sdk v51.0.4.0.1351
+# Generated with resilient-sdk v51.0.7.0.1603
 
 """Generate the SOAR customizations required for fn_jira"""
 

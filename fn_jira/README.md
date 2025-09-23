@@ -34,6 +34,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 3.2.1 | 09/2025 | Update version for jira dependency to support new search endpoints for Jira cloud |
 | 3.2.0 | 02/2025 | Add new app.config setting create_soar_incidents, that controls if the poller creates new SOAR cases or not. |
 | 3.1.0 | 03/2024 | Update to poller to automatically account for time zone differences between SOAR and Jira. |
 | 3.0.5 | 10/2023 | Bug fix for poller not closing SOAR incident |
@@ -94,7 +95,7 @@ If deploying to a SOAR platform with an integration server, the requirements are
 * SOAR platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=51.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
