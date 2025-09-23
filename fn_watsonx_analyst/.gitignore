@@ -1,0 +1,13 @@
+logs/
+dist/
+*.bak
+temp/
+__pycache__
+**/__pycache__
+.python-version
+customize.py-*
+*.pyc
+venv
+app.config
+htmlcov/
+.coverage*
