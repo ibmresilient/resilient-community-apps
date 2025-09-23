@@ -1,0 +1,15 @@
+include README.md
+include Dockerfile
+include entrypoint.sh
+recursive-include fn_elasticsearch/util *
+include fn_elasticsearch/LICENSE
+include fn_elasticsearch/doc/*
+include doc/*.md
+include doc/screenshots/*
+include apikey_permissions.txt
+include icons/*.png
+recursive-include payload_samples/*/ *.json
+include tox.ini 
+recursive-include tests/ *
+global-exclude *.bak
+exclude *.bak
