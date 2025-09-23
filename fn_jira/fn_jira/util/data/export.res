@@ -4,7 +4,6 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "connectors": null,
   "export_date": 1758117486771,
   "export_format_version": 2,
   "export_notes": null,
@@ -1805,12 +1804,12 @@
   "server_version": {
     "build_number": 0,
     "f": 0,
-    "m": 8,
+    "m": 6,
     "major": 0,
     "minor": 0,
     "r": 0,
     "v": 51,
-    "version": "51.0.8.0.0"
+    "version": "51.0.6.0.0"
   },
   "tags": [],
   "task_order": [],
