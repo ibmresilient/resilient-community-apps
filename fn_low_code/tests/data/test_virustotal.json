@@ -1,0 +1,51 @@
+{
+    "headers": {
+        "expires": "0",
+        "Co3ContextToken": "aaaaa-bbbb-cccc",
+        "Co3RemoteAddr": "127.0.0.1",
+        "correlation-id": "invid:214",
+        "destination": "/queue/connectors.202.c_2284d434_9430_4c2d_aba1_a045aa342a49",
+        "JMSXUserID": "SYSTEM",
+        "ack": "ID:for-priya1.fyre.ibm.com-46007-1733924692382-6:54",
+        "subscription": "connectors.202.c_2284d434_9430_4c2d_aba1_a045aa342a49",
+        "priority": "4",
+        "Co3MessagePayload": "RestAPIExecutionEventDTO",
+        "message-id": "ID:for-priya1.fyre.ibm.com-38185-1734557825076-5:1:5:1:1",
+        "Co3ContentType": "application/json",
+        "persistent": "true",
+        "reply-to": "/queue/acks.connectors.202.c_2284d434_9430_4c2d_aba1_a045aa342a49",
+        "timestamp": "1734645096546"
+    },
+    "message": {
+        "request_originator": {
+            "correlation_id": "invid:196",
+            "function_programmatic_name": "get_virustotal",
+            "object_id": 2096,
+            "object_type": "incident",
+            "org_id": 202,
+            "parent_object_id": 2096,
+            "playbook_id": 10,
+            "playbook_instance_id": 79,
+            "request_uuid": "08ae399c-4963-4c52-9c41-5587c60a2641",
+            "reply-to": "/queue/acks.connectors.202.c_2284d434_9430_4c2d_aba1_a045aa342a49"
+        },
+        "request_payload": {
+            "custom_params": {
+                "secureContext": "true"
+            },
+            "method": "GET",
+            "query_params": {
+                "resource": "google.com"
+            },
+            "response_content_type": "application/json",
+            "security": {
+                "api_key": "xxxxxx",
+                "api_key_in": "QUERY",
+                "api_key_param_name": "apikey",
+                "generate_bearer_token": false,
+                "scheme": "APIKEY"
+            },
+            "server_url": "https://www.virustotal.com/vtapi/v2/url/report"
+        }
+    }
+}
