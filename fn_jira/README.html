@@ -457,63 +457,67 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>3.2.0</p></td>
+<tr class="row-even"><td><p>3.2.1</p></td>
+<td><p>09/2025</p></td>
+<td><p>Update version for jira dependency to support new search endpoints for Jira cloud</p></td>
+</tr>
+<tr class="row-odd"><td><p>3.2.0</p></td>
 <td><p>02/2025</p></td>
 <td><p>Add new app.config setting create_soar_incidents, that controls if the poller creates new SOAR cases or not.</p></td>
 </tr>
-<tr class="row-odd"><td><p>3.1.0</p></td>
+<tr class="row-even"><td><p>3.1.0</p></td>
 <td><p>03/2024</p></td>
 <td><p>Update to poller to automatically account for time zone differences between SOAR and Jira.</p></td>
 </tr>
-<tr class="row-even"><td><p>3.0.5</p></td>
+<tr class="row-odd"><td><p>3.0.5</p></td>
 <td><p>10/2023</p></td>
 <td><p>Bug fix for poller not closing SOAR incident</p></td>
 </tr>
-<tr class="row-odd"><td><p>3.0.4</p></td>
+<tr class="row-even"><td><p>3.0.4</p></td>
 <td><p>10/2023</p></td>
 <td><p>Bug fix for transitioning a Jira issue from SOAR</p></td>
 </tr>
-<tr class="row-even"><td><p>3.0.3</p></td>
+<tr class="row-odd"><td><p>3.0.3</p></td>
 <td><p>09/2023</p></td>
 <td><p>Bug fix for jira_transition_issue function</p></td>
 </tr>
-<tr class="row-odd"><td><p>3.0.2</p></td>
+<tr class="row-even"><td><p>3.0.2</p></td>
 <td><p>08/2023</p></td>
 <td><p>Bug fix for playbook, Example: Jira Create Comment</p></td>
 </tr>
-<tr class="row-even"><td><p>3.0.1</p></td>
+<tr class="row-odd"><td><p>3.0.1</p></td>
 <td><p>05/2023</p></td>
 <td><p>Bug fix for SOAR note synchronization</p></td>
 </tr>
-<tr class="row-odd"><td><p>3.0.0</p></td>
+<tr class="row-even"><td><p>3.0.0</p></td>
 <td><p>01/2023</p></td>
 <td><p><ul><li>Add poller for bidirectional sync</li><li>Updated to work with Jira Cloud</li><li>Add global_settings to app.config that contains the settings for the poller</li></ul></p></td>
 </tr>
-<tr class="row-even"><td><p>2.2.0</p></td>
+<tr class="row-odd"><td><p>2.2.0</p></td>
 <td><p>10/2022</p></td>
 <td><p><ul><li>Added support for multi-tenancy</li><li>Added support for authentication with token</li><li>Removed support for python 2</li></ul></p></td>
 </tr>
-<tr class="row-odd"><td><p>2.1.1</p></td>
+<tr class="row-even"><td><p>2.1.1</p></td>
 <td><p>05/2022</p></td>
 <td><p>Updated version for pyjwt dependency</p></td>
 </tr>
-<tr class="row-even"><td><p>2.1.0</p></td>
+<tr class="row-odd"><td><p>2.1.0</p></td>
 <td><p>04/2022</p></td>
 <td><p><ul><li>Added support for authentication with OAuth</li><li>Includes new configs: <code class="docutils literal notranslate"><span class="pre">access_token</span></code>, <code class="docutils literal notranslate"><span class="pre">access_token_secret</span></code>, <code class="docutils literal notranslate"><span class="pre">consumer_key_name</span></code>, <code class="docutils literal notranslate"><span class="pre">private_rsa_key_file_path</span></code></li><li>Added support for sending SOAR task notes to Jira – see updated example workflow</li><li>Added support for images in notes synchronizing to Jira</li><li>Added config <code class="docutils literal notranslate"><span class="pre">jira_task_references</span></code> for custom datatables</li><li>Added option in example rule to set Jira project ID as activity field</li></ul></p></td>
 </tr>
-<tr class="row-odd"><td><p>2.0.0</p></td>
+<tr class="row-even"><td><p>2.0.0</p></td>
 <td><p>10/2020</p></td>
 <td><p><ul><li>Added App Host support</li><li>Added proxy support</li><li>Added support for https://pypi.org/project/jira/</li><li>Changed config heading from <code class="docutils literal notranslate"><span class="pre">jira</span></code> to <code class="docutils literal notranslate"><span class="pre">fn_jira</span></code></li><li>Added configs: <code class="docutils literal notranslate"><span class="pre">timeout</span></code>, <code class="docutils literal notranslate"><span class="pre">auth_method</span></code>, <code class="docutils literal notranslate"><span class="pre">http_proxy</span></code> and <code class="docutils literal notranslate"><span class="pre">https_proxy</span></code></li><li>Added incident field <code class="docutils literal notranslate"><span class="pre">jira_issue_id</span></code></li><li>Changed column name in <code class="docutils literal notranslate"><span class="pre">jira_task_references</span></code> Data Table from <code class="docutils literal notranslate"><span class="pre">jira_api_url</span></code> to <code class="docutils literal notranslate"><span class="pre">jira_issue_id_col</span></code></li></ul></p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.2</p></td>
+<tr class="row-odd"><td><p>1.0.2</p></td>
 <td><p>10/2019</p></td>
 <td><p>Improvements to data table handling and Bug fixes</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.1</p></td>
+<tr class="row-even"><td><p>1.0.1</p></td>
 <td><p>04/2019</p></td>
 <td><p>Support for versions of SOAR 31.0 and beyond</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.0</p></td>
+<tr class="row-odd"><td><p>1.0.0</p></td>
 <td><p>12/2018</p></td>
 <td><p>Initial Release</p></td>
 </tr>
