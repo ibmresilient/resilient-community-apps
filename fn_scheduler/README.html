@@ -554,6 +554,10 @@ But migrating to playbooks provides greater functionality along with future app 
 </table>
 </div>
 </section>
+<section id="notes-regarding-v2-2-0">
+<h3>Notes regarding v2.2.0<a class="headerlink" href="#notes-regarding-v2-2-0" title="Link to this heading">¶</a></h3>
+<p>Versions of SOAR equal or later than 51.0.2.0 require an additional permission to run playbooks and rules: <code class="docutils literal notranslate"><span class="pre">Run</span> <span class="pre">Incident</span> <span class="pre">Actions</span></code>. Please ensure this permission is set for the Scheduler API key and if not, add it to the api key manually.</p>
+</section>
 </section>
 <hr class="docutils" />
 <section id="overview">
@@ -623,11 +627,6 @@ But migrating to playbooks provides greater functionality along with future app 
 </div>
 </li>
 </ul>
-<section id="notes">
-<h4>NOTES<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h4>
-<ul class="simple">
-<li><p>Versions of SOAR later than 51.0.0 may require additional permissions: Run All Invocations. If failures occur in rule/playbook execution, check to see if this permission exists and set for the Scheduler API key.</p></li>
-</ul>
 <p>The following SOAR platform guides provide additional information:</p>
 <ul class="simple">
 <li><p><em>App Host Deployment Guide</em>: provides installation, configuration, and troubleshooting information, including proxy server settings.</p></li>
@@ -635,7 +634,6 @@ But migrating to playbooks provides greater functionality along with future app 
 <li><p><em>System Administrator Guide</em>: provides the procedure to install, configure and deploy apps.</p></li>
 </ul>
 <p>The above guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>App Host Deployment Guide</em> or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
-</section>
 </section>
 <section id="cloud-pak-for-security">
 <h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
@@ -845,8 +843,8 @@ Additional package dependencies may exist for each of these packages:</p>
 </tbody>
 </table>
 </div>
-<section id="id1">
-<h3>Notes<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>When scheduling a job from a child org,</p>
 <ul>
@@ -1731,14 +1729,12 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 <li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
 <li><a class="reference internal" href="#migrating-to-v1-0-2">Migrating to v1.0.2</a></li>
 <li><a class="reference internal" href="#notes-regarding-v2-1-0">Notes regarding v2.1.0</a></li>
+<li><a class="reference internal" href="#notes-regarding-v2-2-0">Notes regarding v2.2.0</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#overview">Overview</a></li>
 <li><a class="reference internal" href="#requirements">Requirements</a><ul>
-<li><a class="reference internal" href="#soar-platform">SOAR platform</a><ul>
-<li><a class="reference internal" href="#notes">NOTES</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#soar-platform">SOAR platform</a></li>
 <li><a class="reference internal" href="#cloud-pak-for-security">Cloud Pak for Security</a></li>
 <li><a class="reference internal" href="#proxy-server">Proxy Server</a></li>
 <li><a class="reference internal" href="#python-environment">Python Environment</a></li>
@@ -1752,7 +1748,7 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 </ul>
 </li>
 <li><a class="reference internal" href="#function-scheduled-rule-create">Function - Scheduled Rule Create</a><ul>
-<li><a class="reference internal" href="#id1">Notes</a></li>
+<li><a class="reference internal" href="#notes">Notes</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#function-scheduled-rule-modify">Function - Scheduled Rule Modify</a></li>
