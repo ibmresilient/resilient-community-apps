@@ -1,0 +1,94 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Incidents/$entity",
+    "incidentId": 67,
+    "incidentUri": "https://security.microsoft.com/incidents/67?tid=82319d65-80f7-431f-8ee7-57bae5b231c2",
+    "redirectIncidentId": null,
+    "incidentName": "[SAMPLE ALERT] MicroBurst exploitation toolkit used to extract keys to your storage accounts (Preview)",
+    "createdTime": "2025-05-16T17:18:40.14Z",
+    "lastUpdateTime": "2025-06-26T14:55:03.1939816Z",
+    "assignedTo": null,
+    "classification": "Unknown",
+    "determination": "NotAvailable",
+    "status": "Active",
+    "severity": "High",
+    "tags": [],
+    "comments": [
+      {
+        "comment": "Created by IBM SOAR<br>Snapshot URL for https://wumb.org/ succeeded with attachment: override",
+        "createdBy": "API-App:defender",
+        "createdTime": "2025-06-26T14:55:02.2373446Z"
+      },
+      {
+        "comment": "Created by IBM SOAR<br>Snapshot URL for https://wumb.org/ succeeded with attachment: https://wumb.org/",
+        "createdBy": "API-App:defender",
+        "createdTime": "2025-06-26T14:55:02.2361541Z"
+      },
+      {
+        "comment": "Created by IBM SOAR<br>Snapshot URL for https://www.darkreading.com/ succeeded with attachment: https://www.darkreading.com/",
+        "createdBy": "API-App:defender",
+        "createdTime": "2025-06-26T14:55:02.4351735Z"
+      },
+      {
+        "comment": "Created by IBM SOAR<br>Snapshot URL for https://www.darkreading.com/ succeeded with attachment: dark reading",
+        "createdBy": "API-App:defender",
+        "createdTime": "2025-06-26T14:55:02.6161014Z"
+      },
+      {
+        "comment": "Created by IBM SOAR<br>Snapshot URL for https://www.darkreading.com/ succeeded with attachment: dark reading2",
+        "createdBy": "API-App:defender",
+        "createdTime": "2025-06-26T14:55:02.7755103Z"
+      },
+      {
+        "comment": "Created by IBM SOAR<br>Snapshot URL for https://www.darkreading.com/ succeeded with attachment: https://www.darkreading.com/",
+        "createdBy": "API-App:defender",
+        "createdTime": "2025-06-26T14:55:03.1939816Z"
+      }
+    ],
+    "alerts": [
+      {
+        "alertId": "dc37baef9d-89b0-955e-e745-655e52288919",
+        "providerAlertId": "37baef9d-89b0-955e-e745-655e52288919",
+        "incidentId": 67,
+        "serviceSource": "MicrosoftDefenderForCloud",
+        "creationTime": "2025-05-16T17:18:40.1Z",
+        "lastUpdatedTime": "2025-05-16T17:18:41.7833333Z",
+        "resolvedTime": null,
+        "firstActivity": "2025-05-16T17:17:28.143969Z",
+        "lastActivity": "2025-05-16T17:17:28.143969Z",
+        "title": "[SAMPLE ALERT] MicroBurst exploitation toolkit used to extract keys to your storage accounts (Preview)",
+        "description": "THIS IS A SAMPLE ALERT: MicroBurst's exploitation toolkit was used to extract keys to your storage accounts. This was detected by analyzing Azure Activity logs and resource management operations in your subscription.",
+        "category": "Collection",
+        "status": "New",
+        "severity": "High",
+        "investigationId": null,
+        "investigationState": "UnsupportedAlertType",
+        "classification": null,
+        "determination": null,
+        "detectionSource": "DefenderForResourceManager",
+        "detectorId": "SIMULATED_ARM_MicroBurst.AZStorageKeysREST",
+        "***": null,
+        "actorName": null,
+        "threatFamilyName": null,
+        "mitreTechniques": [],
+        "devices": [],
+        "entities": []
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "defender_incident_id": 67
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-microsoft-defender",
+    "package_version": "1.3.0",
+    "host": "my.app.host",
+    "execution_time_ms": 590,
+    "timestamp": "2025-06-26 10:57:57"
+  }
+}

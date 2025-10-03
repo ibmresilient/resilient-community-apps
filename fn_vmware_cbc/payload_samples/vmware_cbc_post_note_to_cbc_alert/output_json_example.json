@@ -1,0 +1,27 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "author": "FR6K2KN2K",
+    "create_timestamp": "2024-04-26T20:30:03.905Z",
+    "last_update_timestamp": "2024-04-26T20:30:03.905Z",
+    "id": "50c323c1-8495-4fe4-815f-7bc411976ec9",
+    "source": "CUSTOMER",
+    "note": "Created by IBM SOAR:  VMware CBC Update Case on Creation:  populated Process data table 2  artifact(s) added to the case.",
+    "note_json_format": null
+  },
+  "raw": null,
+  "inputs": {
+    "vmware_cbc_alert_note_text": "<b>VMware CBC Update Case on Creation:</b> populated Process data table<br /><b>2</b> artifact(s) added to the case.",
+    "vmware_cbc_alert_id": "0730b7bc-7d51-9d64-68b1-d3e01d28a716"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-vmware-cbc",
+    "package_version": "1.0.0",
+    "host": "myapphost",
+    "execution_time_ms": 19794,
+    "timestamp": "2024-04-26 16:30:04"
+  }
+}
