@@ -85,6 +85,10 @@ But migrating to playbooks provides greater functionality along with future app 
 | ------------ | ---------- |
 | V46.0 | All scheduler Workflows and Rules have been recreated in Playbooks |
 
+### Notes regarding v2.2.0
+
+Versions of SOAR equal or later than 51.0.2.0 require an additional permission to run playbooks and rules: `Run Incident Actions`. Please ensure this permission is set for the Scheduler API key and if not, add it to the api key manually.
+
 ---
 
 ## Overview
@@ -138,8 +142,6 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | Playbook | Read |
   | Incident | Read all incidents |
 
-#### NOTES
-* Versions of SOAR later than 51.0.0 may require additional permissions: Run All Invocations. If failures occur in rule/playbook execution, check to see if this permission exists and set for the Scheduler API key.
 
 The following SOAR platform guides provide additional information:
 * _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
