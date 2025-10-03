@@ -1,0 +1,26 @@
+{
+  "reference_items": [
+    {
+      "timeout_type": "FIRST_SEEN",
+      "number_of_elements": 1,
+      "data": [
+        {
+          "last_seen": 1694498079793,
+          "first_seen": 1694498079793,
+          "source": "EC: Sysmon - Detected a Possible Credential Dumping Tool",
+          "value": "192.168.107.107",
+          "domain_id": null
+        }
+      ],
+      "creation_time": 1557250160405,
+      "name": "EC Compromised Hosts",
+      "namespace": "SHARED",
+      "element_type": "IP",
+      "collection_id": 35
+    }
+  ],
+  "inputs": {
+    "qradar_label": "1.1.1.1",
+    "qradar_reference_set_item_value": "192.168.107.107"
+  }
+}

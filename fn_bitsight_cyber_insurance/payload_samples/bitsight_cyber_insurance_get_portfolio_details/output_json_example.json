@@ -1,0 +1,97 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "custom_id": null,
+      "name": "Actors Films",
+      "shortname": "Actors Films",
+      "network_size_v4": 512,
+      "rating": 650,
+      "rating_date": "2025-04-13",
+      "added_date": "2024-04-19",
+      "industry": {
+        "name": "Media/Entertainment",
+        "slug": "mediaentertainment"
+      },
+      "sub_industry": {
+        "name": "Motion Pictures and Film",
+        "slug": "motion_pictures_and_film"
+      },
+      "type": [
+        "CURATED",
+        "PRIVATE"
+      ],
+      "logo": "https://api.bitsighttech.com/ratings/v1/companies/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/logo-image",
+      "sparkline": "https://api.bitsighttech.com/ratings/v1/companies/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/sparkline?size=small",
+      "subscription_type": {
+        "name": "Total Risk Monitoring",
+        "slug": "continuous_monitoring"
+      },
+      "primary_domain": "actorsfilms.us",
+      "display_url": "https://service.bitsighttech.com/app/tprm/company/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/overview/",
+      "tier": null,
+      "tier_name": null,
+      "life_cycle": null,
+      "relationship": null,
+      "details": {
+        "confidence": "HIGH",
+        "is_primary": false,
+        "primary_company": null
+      }
+    },
+    {
+      "guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "custom_id": null,
+      "name": "Bitsight Labs",
+      "shortname": "AnubisNetworks - Labs",
+      "network_size_v4": 438,
+      "rating": 560,
+      "rating_date": "2025-04-13",
+      "added_date": "2024-04-19",
+      "industry": {
+        "name": "Technology",
+        "slug": "technology"
+      },
+      "sub_industry": {
+        "name": "Computer Software",
+        "slug": "computer_software"
+      },
+      "type": [
+        "CURATED",
+        "SELF-PUBLISHED"
+      ],
+      "logo": "https://api.bitsighttech.com/ratings/v1/companies/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/logo-image",
+      "sparkline": "https://api.bitsighttech.com/ratings/v1/companies/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/sparkline?size=small",
+      "subscription_type": {
+        "name": "Total Risk Monitoring",
+        "slug": "continuous_monitoring"
+      },
+      "primary_domain": "bitsight.io",
+      "display_url": "https://service.bitsighttech.com/app/tprm/company/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/overview/",
+      "tier": null,
+      "tier_name": null,
+      "life_cycle": null,
+      "relationship": null,
+      "details": {
+        "confidence": "HIGH",
+        "is_primary": false,
+        "primary_company": null
+      }
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "bitsight_ci_limit": 2
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-bitsight-cyber-insurance",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 25941,
+    "timestamp": "2025-04-14 13:53:53"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "result": "unknown"
+  },
+  "raw": "",
+  "inputs": {
+    "incident_id": 3102,
+    "attachment_id": 34,
+    "filename": "Test URL.txt"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-isitphishing",
+    "package_version": "1.2.0",
+    "host": "my.app.host",
+    "execution_time_ms": 3397,
+    "timestamp": "2025-05-15 11:03:49"
+  }
+}
