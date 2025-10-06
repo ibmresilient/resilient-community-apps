@@ -444,8 +444,8 @@ The contents of the default configuration will be below, you can use this as a b
   
     # keep only this field from artifact threat hits
     hit_allow_list:
-    - threat_source_id
     - properties
+    - created
   
     # block these bits of hit data, as they don't provide much use to LLM
     # feel free to experiment

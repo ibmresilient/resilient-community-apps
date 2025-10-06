@@ -69,12 +69,18 @@ class FunctionComponent(AppFunctionComponent):
 
         app_state.get().reset()
 
-        app_state.get().set_model(getattr(fn_inputs, "fn_watsonx_analyst_model_id", None))
+        app_state.get().set_model(
+            getattr(fn_inputs, "fn_watsonx_analyst_model_id", None)
+        )
         app_state.get().opts = self.opts
         app_state.get().res_client = self.rest_client()
 
-        app_state.get().purpose = AiResponsePurpose.NOTE_CONVERSATION  # placeholder for error messages
-        app_state.get().data_config = getattr(fn_inputs, "fn_watsonx_analyst_data_config", None)
+        app_state.get().purpose = (
+            AiResponsePurpose.NOTE_CONVERSATION
+        )  # placeholder for error messages
+        app_state.get().data_config = getattr(
+            fn_inputs, "fn_watsonx_analyst_data_config", None
+        )
 
         results = {}
         note_id = getattr(fn_inputs, "fn_watsonx_analyst_note_id", None)
@@ -110,7 +116,9 @@ class FunctionComponent(AppFunctionComponent):
 
         # unescape HTML escaped strings (like &, <, >, %, etc.)
         target_note["raw_text"] = target_note["text"]
-        target_note["text"] = BeautifulSoup.get_text(BeautifulSoup(target_note["text"], "html.parser"))
+        target_note["text"] = BeautifulSoup.get_text(
+            BeautifulSoup(target_note["text"], "html.parser")
+        )
 
         if not note_ancestors or len(note_ancestors) < 1:
             messages.append(QueryHelper().build_message("user", target_note["text"]))
@@ -129,14 +137,19 @@ class FunctionComponent(AppFunctionComponent):
         # with weird characters like angle brackets.
         if "[" in target_note["raw_text"]:
             err_response = FunctionResult(
-                ResponseHelper().error_response("Parsed content is empty or could not be extracted."))
+                ResponseHelper().error_response(
+                    "Parsed content is empty or could not be extracted."
+                )
+            )
 
             matches = self.ART_BRACKETS.finditer(target_note["raw_text"])
             for match in matches:
                 obj_name = match.group(1)
 
                 # take out non-HTML text
-                obj_name = BeautifulSoup.get_text(BeautifulSoup(obj_name, "html.parser")).strip()
+                obj_name = BeautifulSoup.get_text(
+                    BeautifulSoup(obj_name, "html.parser")
+                ).strip()
                 obj_name = html.unescape(obj_name)  # re-escape
 
                 log.debug("Found %s", obj_name)
@@ -153,10 +166,12 @@ class FunctionComponent(AppFunctionComponent):
 
                 contents: Union[dict, str] = None
                 for art in artifact_results:
-                    if art.get("value") == obj_name and art.get("attachment") is not None:
+                    if (
+                        art.get("value") == obj_name
+                        and art.get("attachment") is not None
+                    ):
                         contents = RestHelper().do_request(
-                            RestUrls.ARTIFACT_CONTENTS,
-                            inc_id=inc_id, art_id=art["id"]
+                            RestUrls.ARTIFACT_CONTENTS, inc_id=inc_id, art_id=art["id"]
                         )
                         if not contents or not contents.strip():
                             yield err_response
@@ -170,12 +185,14 @@ class FunctionComponent(AppFunctionComponent):
                             if att.get("task_id", None) is not None:
                                 contents = RestHelper().do_request(
                                     RestUrls.TASK_ATTACHMENT_CONTENTS,
-                                    task_id=att["task_id"], attach_id=att["id"]
+                                    task_id=att["task_id"],
+                                    attach_id=att["id"],
                                 )
                             else:
                                 contents = RestHelper().do_request(
                                     RestUrls.ATTACHMENT_CONTENTS,
-                                    inc_id=inc_id, attach_id=att["id"]
+                                    inc_id=inc_id,
+                                    attach_id=att["id"],
                                 )
                             if not contents or not contents.strip():
                                 yield err_response
@@ -187,6 +204,16 @@ class FunctionComponent(AppFunctionComponent):
                         contents = parser_instance.multi_format_parser(
                             data=contents, object_name=obj_name
                         )
+                        # Check if the parser returned the known error string
+                        if (
+                            contents
+                            == "Parsed content is empty or could not be extracted"
+                        ):
+                            yield FunctionResult(
+                                ResponseHelper().error_response(contents)
+                            )
+                            return
+
                         contents = contents.strip()
                         chunks = chunker.split_data_into_token_chunks(contents)
                         purpose = AiResponsePurpose.ARTIFACT_CONVERSATION
@@ -197,9 +224,7 @@ class FunctionComponent(AppFunctionComponent):
 
         if not purpose:
             purpose = AiResponsePurpose.NOTE_CONVERSATION
-            incident_payload = ContextHelper(
-                inc_id=inc_id
-            ).build_full_data()
+            incident_payload = ContextHelper(inc_id=inc_id).build_full_data()
             chunks = chunker.split_json_to_chunks(incident_payload)
 
         results: AIResponse = None
@@ -226,7 +251,7 @@ class FunctionComponent(AppFunctionComponent):
                     purpose,
                     messages,
                     target_note["text"],
-                    threshold=0.5
+                    threshold=0.5,
                 )
                 success = True
             except Exception as e:
@@ -237,7 +262,9 @@ class FunctionComponent(AppFunctionComponent):
             if not success:
                 yield FunctionError(ResponseHelper().error_response(err_msg))
             else:
-                yield FunctionResult(ResponseHelper().text_generation_to_ai_response(results))
+                yield FunctionResult(
+                    ResponseHelper().text_generation_to_ai_response(results)
+                )
 
 
 def get_chat_response(
@@ -254,27 +281,21 @@ def get_chat_response(
     """
     app_state.get().purpose = purpose
 
-    relevant_chunks = chunker.retrieve_relevant_chunks_watsonx(
-        query, chunks, **kwargs
-    )
+    relevant_chunks = chunker.retrieve_relevant_chunks_watsonx(query, chunks, **kwargs)
     data = " ".join(relevant_chunks)
     query = query.replace("@watsonx", "")
     try:
         prompt = Prompting().build_prompt(
-            query,
-            data,
-            messages,
-            get_relevant_prompts=True
+            query, data, messages, get_relevant_prompts=True
         )
 
         log.info("Attempting text generation")
-        output = QueryHelper().text_generation(
-            prompt
-        )
+        output = QueryHelper().text_generation(prompt)
         return output
 
     except Exception as e:
         raise e
+
 
 def search_children(root_note: Note, target_id: int) -> List[Note]:
     """

@@ -36,6 +36,7 @@ FN_NAME = "fn_watsonx_analyst_scan_artifact"
 
 log = create_logger(__name__)
 
+
 class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'fn_watsonx_analyst_scan_artifact'"""
 
@@ -79,7 +80,7 @@ class FunctionComponent(AppFunctionComponent):
             err_msg = f"{err_msg}{str(e)}"
             log.exception(err_msg)
         except WatsonxApiException as e:
-            err_msg += str(e) # get the string repr
+            err_msg += str(e)  # get the string repr
             log.exception("API exception when invoking artifact scan.")
         except Exception as e:
             log.exception(e)
@@ -128,7 +129,9 @@ def scan_artifact_or_attachment(
                 context_helper = ContextHelper(inc_id)
                 inc_data = context_helper.get_incident_data()
 
-                inc_data, _, art_data, _, _ = context_helper.cleanse_data(inc_data, None, [data], None, None)
+                inc_data, _, art_data, _, _ = context_helper.cleanse_data(
+                    inc_data, None, [data], None, None
+                )
                 inc_data["artifacts"] = art_data
                 resolved = context_helper.resolve_type_ids({"incident": inc_data})
                 inc_data = resolved["incident"]
@@ -137,14 +140,20 @@ def scan_artifact_or_attachment(
 
                 # limit number of tokens used here
                 chunker = Chunking()
-                art_chunks = chunker.split_data_into_token_chunks(json.dumps(art_data), max_tokens=350)
-                inc_chunks = chunker.split_data_into_token_chunks(json.dumps(inc_data), max_tokens=350)
+                art_chunks = chunker.split_data_into_token_chunks(
+                    json.dumps(art_data), max_tokens=350
+                )
+                inc_chunks = chunker.split_data_into_token_chunks(
+                    json.dumps(inc_data), max_tokens=350
+                )
 
                 # 0.5 and 0.2 share to add to 0.7 of max chunks for model
                 art_chunks = chunker.clamped_chunks_for_model(art_chunks, model_id, 0.5)
 
                 inc_query = f"Information related to artifact {obj_name} of type {data['type']}."
-                inc_chunks = chunker.retrieve_relevant_chunks_watsonx(inc_query, inc_chunks, None, 0.2)
+                inc_chunks = chunker.retrieve_relevant_chunks_watsonx(
+                    inc_query, inc_chunks, None, 0.2
+                )
 
                 app_state.get().purpose = AiResponsePurpose.ARITFACT_META_SUMMARY
 
@@ -152,8 +161,8 @@ def scan_artifact_or_attachment(
                     query=None,
                     context=None,
                     chunking=None,
-                    art_data=''.join(art_chunks),
-                    inc_data=''.join(inc_chunks),
+                    art_data="".join(art_chunks),
+                    inc_data="".join(inc_chunks),
                 )
 
                 response = QueryHelper().text_generation(prompt)
@@ -178,7 +187,16 @@ def scan_artifact_or_attachment(
             response = ArtifactSummaryGenerator(inc_id, None, data).generate()
 
         if response:
-            ai_response = ResponseHelper().text_generation_to_ai_response(response)
+            # If response is already a fallback dict, skip LLM conversion
+            if (
+                isinstance(response, dict)
+                and "generated_text" in response
+                and "results" not in response
+            ):
+                ai_response = response
+            else:
+                ai_response = ResponseHelper().text_generation_to_ai_response(response)
+
             ai_response["generated_text"] = (
                 f"{'Artifact' if art_id else 'Attachment'} name: {obj_name}\n\n"
                 + ai_response["generated_text"]

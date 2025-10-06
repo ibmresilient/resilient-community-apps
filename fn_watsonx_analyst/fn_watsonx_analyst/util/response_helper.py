@@ -1,3 +1,4 @@
+from typing import Dict, Union
 from fn_watsonx_analyst.types.ai_response import AIResponse
 from fn_watsonx_analyst.types.watsonx_responses import WatsonxTextGenerationResponse
 from fn_watsonx_analyst.util.model_helper import ModelHelper
@@ -9,6 +10,7 @@ from fn_watsonx_analyst.util.logging_helper import create_logger, request_id_var
 
 log = create_logger(__name__)
 
+
 class ResponseHelper:
     """
     Convert watsonx responses to a function result AIResponsePurpose.
@@ -19,7 +21,7 @@ class ResponseHelper:
     request_context: AppState
 
     def __init__(self):
-        self.request_id = request_id_var.get() or ''
+        self.request_id = request_id_var.get() or ""
         self.request_context = app_state.get()
 
     def estimate_invocation_cost(
@@ -31,7 +33,9 @@ class ResponseHelper:
     ) -> float:
         input_cost, output_cost, embedding_cost = 0.0, 0.0, 0.0
         try:
-            input_cost, output_cost, embedding_cost = ModelHelper().get_model_cost(model_id)
+            input_cost, output_cost, embedding_cost = ModelHelper().get_model_cost(
+                model_id
+            )
         except:
             log.warning("Model cost unavailable for %s", model_id)
         cost = 0.0
@@ -55,7 +59,6 @@ class ResponseHelper:
             self.request_context.embedding_tokens,
         )
 
-
         response_tag = ModelTag(
             model_id,
             "",
@@ -63,7 +66,7 @@ class ResponseHelper:
             self.request_id,
             generation_tokens,
             self.request_context.embedding_tokens,
-            estimated_cost
+            estimated_cost,
         )
 
         return {
@@ -76,13 +79,15 @@ class ResponseHelper:
                 "input_tokens": self.request_context.input_tokens,
                 "output_tokens": self.request_context.output_tokens,
                 "stop_reason": "",
-                "created_at": ""
-            }
+                "created_at": "",
+            },
         }
 
     def text_generation_to_ai_response(
         self, text_generation: WatsonxTextGenerationResponse
     ) -> AIResponse:
+
+        # Normal Watsonx response handling
         generation_result = text_generation["results"][0]
         model_id = text_generation["model_id"]
 
@@ -94,7 +99,7 @@ class ResponseHelper:
             model_id,
             self.request_context.input_tokens,
             self.request_context.output_tokens,
-            self.request_context.embedding_tokens
+            self.request_context.embedding_tokens,
         )
 
         response_tag = ModelTag(
@@ -108,10 +113,14 @@ class ResponseHelper:
         )
 
         generated_text = generation_result["generated_text"]
-        if self.request_context.opts.get("render_markdown", "true") in ["true", "True", True]:
+        if self.request_context.opts.get("render_markdown", "true") in [
+            "true",
+            "True",
+            True,
+        ]:
             generated_text = RichTextHelper().toHTML(generated_text)
 
-        output: AIResponse = {
+        return {
             "generated_text": generated_text,
             "raw_output": generation_result["generated_text"],
             "tag": str(response_tag),
@@ -124,5 +133,3 @@ class ResponseHelper:
                 "stop_reason": generation_result["stop_reason"],
             },
         }
-        return output
-

@@ -152,6 +152,9 @@ class ContextHelper:
         date_2 = timestamp.strftime("%A, %B %d, %Y")
         return f"{date_1} ({date_2})"
 
+    def _milliseconds_to_datetime(self, millis: int) -> datetime.datetime:
+        return datetime.datetime.fromtimestamp(millis // 1000)
+
     def resolve_type_ids(self, full_data: IncidentFullData) -> IncidentFullData:
         """Goes through payload to replace Type ID references, with the Type's name"""
 
@@ -347,17 +350,19 @@ class ContextHelper:
                 hits_info = {}
                 if "hits" in old and old["hits"]:
                     for i, hit in enumerate(old.get("hits", [])):
-                        hit = self.__mask_data(hit, art_hit_list)
                         hit_source = 'Unspecified' # fallback
+
                         if 'threat_source_id' in hit:
                             hit_source = hit['threat_source_id']
                             if hit_source and isinstance(hit_source, dict):
                                 hit_source = hit['threat_source_id'].get('name', hit_source)
 
+                        hit = self.__mask_data(hit, art_hit_list)
+
+
                         if isinstance(hit.get("properties"), dict):
                             hit["properties"] = dict(hit["properties"])  # assert type
-
-                            for k, v in hit.get("properties", []).items():
+                            for k, v in hit["properties"].items():
                                 if k not in art_hit_property_blocklist:
                                     # if we need to re-key the label, change the key, default to existing
                                     k = art_hit_property_relabel.get(k, k)
@@ -367,7 +372,8 @@ class ContextHelper:
                             props = [
                                 prop
                                 for prop in hit.get("properties", [])
-                                if prop.get("name", "") not in art_hit_property_blocklist
+                                if prop
+                                and prop.get("name", "") not in art_hit_property_blocklist
                             ]
 
                             for prop in props:
@@ -380,9 +386,19 @@ class ContextHelper:
                                 if prop_name in art_hit_property_relabel:
                                     prop["name"] = art_hit_property_relabel[prop_name]
 
-                            hits_info[i] = {"properties": props, "threat_source": hit_source}
+                            if hit_source in hits_info.keys():
+                                if hits_info[hit_source].get('created') > self._milliseconds_to_datetime(hit.get('created')):
+                                    continue
+                            # if this hit is newer, or first instance for threat source, add it
+                            hits_info[hit_source] = {"properties": props, 'created': self._milliseconds_to_datetime(hit.get('created'))}
+                        
 
-                new["hits"] = hits_info
+                properties = []
+                for hit in hits_info.values():
+                    properties.extend(hit.get('properties'))
+                properties.append({'threat_sources': list(hits_info.keys())})
+
+                new["hits"] = properties
 
                 # add content-type if possible
                 if "attachment" in old and old["attachment"] and "content_type" in old["attachment"]:

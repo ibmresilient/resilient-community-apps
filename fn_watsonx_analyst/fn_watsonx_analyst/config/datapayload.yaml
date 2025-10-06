@@ -54,7 +54,7 @@ artifacts:
     - last_modified_time
 
   hit_allow_list:
-  - threat_source_id
+  - created
   - properties
 
   hit_block_list:

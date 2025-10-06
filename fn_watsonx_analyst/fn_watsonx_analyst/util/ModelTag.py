@@ -4,11 +4,12 @@ from enum import Enum
 
 import pkg_resources
 
+
 class AiResponsePurpose(Enum):
     ARTIFACT_SUMMARY = "Artifact Summary"
     NOTE_CONVERSATION = "Note Conversation"
     ARTIFACT_CONVERSATION = "Artifact Conversation"
-    ARITFACT_META_SUMMARY= "Artifact Metadata Summary"
+    ARITFACT_META_SUMMARY = "Artifact Metadata Summary"
     INCIDENT_SUMMARY = "Incident Summary"
     TEXT_GENERATION = "Text Generation"
 
@@ -46,23 +47,24 @@ class ModelTag:
 
         self.purpose = purpose
         if not self.purpose:
-            self.purpose = AiResponsePurpose.NOTE_CONVERSATION # fallback default
-        
+            self.purpose = AiResponsePurpose.NOTE_CONVERSATION  # fallback default
 
         self.request_id = request_id
         if not self.request_id:
             self.request_id = self.UNKNOWN
 
         try:
-            self.created_at = datetime.strptime(created_at, '%Y-%m-%dT%H:%M:%SZ').strftime("%H:%M %B %d, %Y")
+            self.created_at = datetime.strptime(
+                created_at, "%Y-%m-%dT%H:%M:%SZ"
+            ).strftime("%H:%M %B %d, %Y")
         except:
             # fallback to now if time format changes
             self.created_at = datetime.now().strftime("%H:%M %B %d, %Y")
         self.generation_tokens = generation_tokens
         self.embedding_tokens = embedding_tokens
 
-        if estimated_cost > 0.0:
-            self.estimated_cost = round(estimated_cost * 100, 6) # dollar to cents
+        if estimated_cost >= 0.0:
+            self.estimated_cost = round(estimated_cost * 100, 6)  # dollar to cents
         else:
             self.estimated_cost = self.UNKNOWN
 
