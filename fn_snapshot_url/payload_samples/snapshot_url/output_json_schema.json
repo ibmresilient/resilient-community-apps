@@ -1,0 +1,83 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "version": {
+        "type": "integer"
+      },
+      "success": {
+        "type": "boolean"
+      },
+      "reason": {
+        "type": "null"
+      },
+      "content": {
+        "type": "object",
+        "properties": {
+          "attachment_name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "attachment_name"
+        ]
+      },
+      "raw": {
+        "type": "null"
+      },
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "snapshot_incident_id": {
+            "type": "integer"
+          },
+          "snapshot_url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "snapshot_incident_id",
+          "snapshot_url"
+        ]
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "package": {
+            "type": "string"
+          },
+          "package_version": {
+            "type": "string"
+          },
+          "host": {
+            "type": "string"
+          },
+          "execution_time_ms": {
+            "type": "integer"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "version",
+          "package",
+          "package_version",
+          "host",
+          "execution_time_ms",
+          "timestamp"
+        ]
+      }
+    },
+    "required": [
+      "version",
+      "success",
+      "reason",
+      "content",
+      "inputs",
+      "metrics"
+    ]
+  }

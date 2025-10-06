@@ -1,0 +1,28 @@
+{
+    "version": "1.0",
+    "success": true,
+    "reason": null,
+    "content": {
+        "ip": "210.68.105.68",
+        "noise": true,
+        "riot": false,
+        "classification": "malicious",
+        "name": "unknown",
+        "link": "https://viz.greynoise.io/ip/210.68.105.68",
+        "last_seen": "2025-03-04",
+        "message": "Success"
+    },
+    "raw": "",
+    "inputs": {
+        "greynoise_value": "210.68.105.68",
+        "greynoise_type": "community"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-greynoise",
+        "package_version": "1.1.0",
+        "host": "localhost",
+        "execution_time_ms": 180,
+        "timestamp": "2025-03-20 14:32:23"
+    }
+}
