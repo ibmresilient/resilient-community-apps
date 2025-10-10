@@ -19,23 +19,28 @@
 # Symantec ICDx
 
 ## Table of Contents
-- [Release Notes](#release-notes)
-- [Overview](#overview)
-  - [Key Features](#key-features)
-- [Requirements](#requirements)
-  - [SOAR platform](#soar-platform)
-  - [Cloud Pak for Security](#cloud-pak-for-security)
-  - [Proxy Server](#proxy-server)
-  - [Python Environment](#python-environment)
-- [Installation](#installation)
-  - [Install](#install)
-  - [App Configuration](#app-configuration)
-- [Function - ICDx: Find Events](#function---icdx-find-events)
-- [Function - ICDx: Get Archive List](#function---icdx-get-archive-list)
-- [Function - ICDx: Get Event](#function---icdx-get-event)
-- [Data Table - ICDx Queried Events](#data-table---icdx-queried-events)
-- [Rules](#rules)
-- [Troubleshooting & Support](#troubleshooting--support)
+- [Symantec ICDx](#symantec-icdx)
+  - [Table of Contents](#table-of-contents)
+  - [Release Notes](#release-notes)
+  - [Overview](#overview)
+    - [Key Features](#key-features)
+  - [Requirements](#requirements)
+    - [SOAR platform](#soar-platform)
+    - [Cloud Pak for Security](#cloud-pak-for-security)
+    - [Proxy Server](#proxy-server)
+    - [Python Environment](#python-environment)
+  - [Installation](#installation)
+    - [Install](#install)
+    - [App Configuration](#app-configuration)
+  - [Function - ICDx: Find Events](#function---icdx-find-events)
+  - [Function - ICDx: Get Archive List](#function---icdx-get-archive-list)
+  - [Function - ICDx: Get Event](#function---icdx-get-event)
+  - [Data Table - ICDx Queried Events](#data-table---icdx-queried-events)
+      - [API Name:](#api-name)
+      - [Columns:](#columns)
+  - [Rules](#rules)
+  - [Troubleshooting \& Support](#troubleshooting--support)
+    - [For Support](#for-support)
 
 ---
 
@@ -484,8 +489,8 @@ results = {
          "log_time":"2020-10-02T05:20:33.109-04:00",
          "device_ip":"9.70.194.66",
          "event_id":20001,
-         "x-epmp-traceId":"0482fb724eca2f19",
-         "x-epmp-spanId":"0482fb724eca2f19",
+         "x-epmp-traceId":"048******eca2f19",
+         "x-epmp-spanId":"048******eca2f19",
          "time":"2020-10-02T05:20:33.109-04:00",
          "severity_id":1,
          "status_thread_name":"SimpleAsyncTaskExecutor-2"
