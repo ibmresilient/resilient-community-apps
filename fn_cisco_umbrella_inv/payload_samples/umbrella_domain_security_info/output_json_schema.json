@@ -1,0 +1,133 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "security_info": {
+          "type": "object",
+          "properties": {
+            "dga_score": {
+              "type": "number"
+            },
+            "perplexity": {
+              "type": "number"
+            },
+            "entropy": {
+              "type": "number"
+            },
+            "securerank2": {
+              "type": "number"
+            },
+            "pagerank": {
+              "type": "number"
+            },
+            "asn_score": {
+              "type": "number"
+            },
+            "prefix_score": {
+              "type": "number"
+            },
+            "rip_score": {
+              "type": "number"
+            },
+            "popularity": {
+              "type": "number"
+            },
+            "fastflux": {
+              "type": "boolean"
+            },
+            "geodiversity": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "string"
+                  ]
+                }
+              }
+            },
+            "geodiversity_normalized": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": [
+                    "number",
+                    "string"
+                  ]
+                }
+              }
+            },
+            "tld_geodiversity": {
+              "type": "array"
+            },
+            "geoscore": {
+              "type": "number"
+            },
+            "ks_test": {
+              "type": "number"
+            },
+            "attack": {
+              "type": "string"
+            },
+            "threat_type": {
+              "type": "string"
+            },
+            "found": {
+              "type": "boolean"
+            }
+          }
+        },
+        "domain_name": {
+          "type": "string"
+        },
+        "query_execution_time": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "umbinv_domain": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

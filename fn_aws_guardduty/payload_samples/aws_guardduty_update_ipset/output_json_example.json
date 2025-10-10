@@ -1,0 +1,44 @@
+{
+    "version": 2,
+    "success": "True",
+    "reason": "None",
+    "content": {
+      "ResponseMetadata": {
+        "RequestId": "1b12ee00-ad22-4282-acdd-b00392e7cf9b",
+        "HTTPStatusCode": 200,
+        "HTTPHeaders": {
+          "date": "Thu, 24 Jul 2025 15:30:47 GMT",
+          "content-type": "application/json",
+          "content-length": "0",
+          "connection": "***",
+          "x-amzn-requestid": "1b12ee00-ad22-4282-acdd-b00392e7cf9b",
+          "access-control-allow-origin": "*",
+          "access-control-allow-headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-Content-Sha256,X-Amz-User-Agent,*,Date,X-Amz-Target,x-amzn-platform-id,x-amzn-trace-id",
+          "x-amz-apigw-id": "OOGyPEGLoAMEjtg=",
+          "access-control-expose-headers": "x-amzn-ErrorType,x-amzn-requestid,x-amzn-errormessage,x-amzn-trace-id,x-amz-apigw-id,Date",
+          "x-amzn-trace-id": "Root=1-688251a7-3dff520410c0e6d3091b3ec1;Parent=03617a02703ed4c9;Sampled=0;Lineage=1:f75216a5:0",
+          "access-control-max-age": "86400"
+        },
+        "RetryAttempts": 0
+      },
+      "status": "ok"
+    },
+    "raw": "None",
+    "inputs": {
+      "aws_gd_new_location": "None",
+      "aws_gd_bucket_owner": "None",
+      "aws_gd_region": "us-east-1",
+      "aws_gd_new_name": "None",
+      "aws_gd_ip_set_id": "6c4c7290f81b40ab85e298a785b1db38",
+      "aws_gd_detector_id": "48bb********************b7ccbc82",
+      "aws_gd_new_activate": "False"
+    },
+    "metrics": {
+      "version": "1.0",
+      "package": "fn-aws-guardduty",
+      "package_version": "2.0.0",
+      "host": "localhost",
+      "execution_time_ms": 1573,
+      "timestamp": "2025-07-24 16:30:47"
+    }
+}

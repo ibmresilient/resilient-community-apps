@@ -1,0 +1,97 @@
+---
+
+incident:
+  allow_list:
+    - name
+    - description
+    - confirmed
+    - addr
+    - city
+    - start_date
+    - inc_start
+    - discovered_date
+    - creator_principal
+    - reporter
+    - state
+    - country
+    - severity_code
+    - zip
+    - workspace
+    - members
+    - negative_pr_likely
+    - assessment
+    - properties
+    - inc_last_modified_date
+    - incident_type_ids
+
+  date_list:
+    - start_date
+    - inc_start
+    - discovered_date
+    - inc_last_modified_date
+
+playbook_executions:
+  allow_list:
+    - last_activated_by
+    - status
+    - object
+    - elapsed_time
+    - playbook
+
+  playbook_allow_list:
+    - display_name
+    - description
+    - activate_type
+
+artifacts:
+  allow_list:
+    - value
+    - type
+    - related_incident_count
+
+  date_list:
+    - created
+    - last_modified_time
+
+  hit_allow_list:
+  - created
+  - properties
+
+  hit_block_list:
+    - resource
+    - scan_id
+    - sha1
+    - sha256
+    - md5
+    - response_code
+    - verbose_msg
+    - permalink
+
+  hit_relabel_list:
+    total: number of scans performed
+    positives: number of scans indicating malicious behavior
+    community coverage: percentage of scans indicating malicious behavior
+
+attachments:
+  allow_list:
+    - name
+    - value
+    - related_incident_count
+    - content_type
+
+  date_list:
+    - created
+
+phases:
+  allow_list:
+    - name
+  relabel_list:
+    name: phase_name
+
+tasks:
+  allow_list:
+    - name
+    - active
+    - required
+    - status
+
