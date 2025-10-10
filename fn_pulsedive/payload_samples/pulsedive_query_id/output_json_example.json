@@ -116,7 +116,7 @@
           "expires": "2025-06-01 02:42:06",
           "valid": "2025-03-03 02:42:07",
           "subject": "/CN=*.afobal.cl",
-          "fingerprint": "e3b9b0b962851ca9dde22569c2984a24db668402708fb5a244b84e26457c2e7a"
+          "fingerprint": "e3b9b0b962851c********69c2984a24db668402708fb5a244b84e26457c2e7a"
         },
         "whois": {
           "registrar url": "https://www.nic.cl",
@@ -147,7 +147,7 @@
           "++title": "Index of /"
         },
         "banners": {
-          "143": "* OK [CAPABILITY IMAP4rev1 SASL-IR LOGIN-REFERRALS ID ENABLE IDLE NAMESPACE LITERAL+ STARTTLS AUTH=PLAIN AUTH=LOGIN] Dovecot ready.\n",
+          "143": "* OK CAPABILITY ready.\n",
           "21": "220---------- Welcome to Pure-FTPd [privsep] [TLS] ----------\n220-You are user number 1 of 50 allowed.\n220-Local time is now 11:58. Server port: 21.\n220-This is a private system - No anonymous login\n220-IPv6 connections are also welcome on this server.\n220 You will be disconnected after 15 minutes of inactivity.\n",
           "993": "\u0005\u0004\u0000\u0000",
           "465": "\u0005\u0004\u0000\u0000",

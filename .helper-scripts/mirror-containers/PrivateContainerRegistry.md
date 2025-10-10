@@ -57,6 +57,7 @@ use API tokens and access policies for registry access. Enable `read` permission
 registry access. 
 
 ### IBM Cloud Container Registry (CR) Setup
+<!-- TODO: Need to update this. Will be done under https://ibm-qrs.atlassian.net/browse/SOARAPPS-9178. -->
 To illustrate the setup of a private registry, the following steps were used to 
 configure IBM Cloud Registry for App Host. Each step could be performed using either the `ibmcloud cr` CLI tool
 or the web-based console. Documentation on all these steps is found [here](https://cloud.ibm.com/docs/Registry).

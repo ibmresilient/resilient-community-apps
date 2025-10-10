@@ -103,9 +103,9 @@
             "151.101.2.49"
           ],
           "txt": [
-            "_globalsign-domain-verification=3_1gRaAk96wFvXtXKHjIaI9Ew5GcqF5wtj8Uyt292w",
-            "google-site-verification=9GmGDr8P2F0vNkxmJlN8PMBfJSlDyiltmmXIyqi01tg",
-            "globalsign-domain-verification=o5TMkvqJXWM01aNCIJz3LZjm6Vc2Yv7_Go1DndvoC7",
+            "_globalsign-domain-verification=3_1gRaAk96wFvXtX*******Ew5GcqF5wtj8Uyt292w",
+            "google-site-verification=9GmGDr8P2F0vNkxmJl*******lDyiltmmXIyqi01tg",
+            "globalsign-domain-verification=o5TMkvqJXW*********LZjm6Vc2Yv7_Go1DndvoC7",
             "v=spf1 mx ip4:207.154.192.128 ip4:92.42.187.64 ~all"
           ],
           "caa": [
