@@ -1,0 +1,20 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "status": "TIMEOUT"
+  },
+  "raw": "",
+  "inputs": {
+    "isitphishing_url": "https://www.example.com/page.html"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-isitphishing",
+    "package_version": "1.2.0",
+    "host": "my.app.host",
+    "execution_time_ms": 2812,
+    "timestamp": "2025-05-15 10:48:04"
+  }
+}

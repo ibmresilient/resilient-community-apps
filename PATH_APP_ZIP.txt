@@ -1,0 +1,1 @@
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_pa_panorama/main/1.6/app-fn_pa_panorama-1.6.0-14265.zip
