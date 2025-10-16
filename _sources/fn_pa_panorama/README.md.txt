@@ -152,6 +152,21 @@ The following table provides the settings you need to configure the app. These s
 | **http_proxy** | No | `<http://proxy.server:3128>` | *Optional http proxy server.* |
 | **https_proxy** | No | `<https://proxy.server:3128>` | *Optional https proxy server.* |
 
+---
+
+## Playbook Prerequisite
+
+All Panorama block/unblock playbooks require a pre-configured address group named **`Blocked Group`** in Panorama.
+- Navigate to `Objects > Address Groups` in the Panorama UI.
+- Create an address group with:  
+  - **Name**: `Blocked Group`  
+  - **Type**: Static or Dynamic  
+  - **Location**: `shared` or the relevant device group used in your playbooks
+
+If this group is not present, playbooks may fail with errors such as `Object Not Present`.
+
+---
+
 #### 1.2.0 Changes
 Starting in version 1.2.0, more than one Panorama instance can be configured for SOAR case data synchronization. For enterprises with only one Panorama instance, your app.config file will continue to define the Panorama instance under the `[fn_pa_panorama]` section header.
 

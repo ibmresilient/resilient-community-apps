@@ -664,13 +664,30 @@ Additional package dependencies may exist for each of these packages:</p>
 </tbody>
 </table>
 </div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="playbook-prerequisite">
+<h2>Playbook Prerequisite<a class="headerlink" href="#playbook-prerequisite" title="Link to this heading">¶</a></h2>
+<p>All Panorama block/unblock playbooks require a pre-configured address group named <strong><code class="docutils literal notranslate"><span class="pre">Blocked</span> <span class="pre">Group</span></code></strong> in Panorama.</p>
+<ul class="simple">
+<li><p>Navigate to <code class="docutils literal notranslate"><span class="pre">Objects</span> <span class="pre">&gt;</span> <span class="pre">Address</span> <span class="pre">Groups</span></code> in the Panorama UI.</p></li>
+<li><p>Create an address group with:</p>
+<ul>
+<li><p><strong>Name</strong>: <code class="docutils literal notranslate"><span class="pre">Blocked</span> <span class="pre">Group</span></code></p></li>
+<li><p><strong>Type</strong>: Static or Dynamic</p></li>
+<li><p><strong>Location</strong>: <code class="docutils literal notranslate"><span class="pre">shared</span></code> or the relevant device group used in your playbooks</p></li>
+</ul>
+</li>
+</ul>
+<p>If this group is not present, playbooks may fail with errors such as <code class="docutils literal notranslate"><span class="pre">Object</span> <span class="pre">Not</span> <span class="pre">Present</span></code>.</p>
+<hr class="docutils" />
 <section id="id2">
-<h4>1.2.0 Changes<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
+<h3>1.2.0 Changes<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <p>Starting in version 1.2.0, more than one Panorama instance can be configured for SOAR case data synchronization. For enterprises with only one Panorama instance, your app.config file will continue to define the Panorama instance under the <code class="docutils literal notranslate"><span class="pre">[fn_pa_panorama]</span></code> section header.</p>
 <p>For enterprises with more than one Panorama instance, each instance will have it’s own section header, such as <code class="docutils literal notranslate"><span class="pre">[fn_pa_panorama:panorama_label1]</span></code> where <code class="docutils literal notranslate"><span class="pre">panorama_label1</span></code> represents any label helpful to define your Panorama environment.</p>
 <p>Be aware that modifications to the workflows will be needed to correctly pass this label through the <code class="docutils literal notranslate"><span class="pre">panorama_label</span></code> function input field if the Panorama server/servers in the app.config have labels.</p>
 <p>If you have existing custom playbooks, see <a class="reference internal" href="#creating-playbooks-when-serverservers-in-appconfig-are-labeled"><span class="xref myst">Creating playbooks when server/servers in app.config are labeled</span></a> for more information about changing them to reference the <code class="docutils literal notranslate"><span class="pre">panorama_label</span></code> function input field.</p>
-</section>
 </section>
 </section>
 <hr class="docutils" />
@@ -2156,10 +2173,11 @@ input field <code class="docutils literal notranslate"><span class="pre">panoram
 <li><a class="reference internal" href="#installation">Installation</a><ul>
 <li><a class="reference internal" href="#install">Install</a></li>
 <li><a class="reference internal" href="#panorama-api-permissions">Panorama API permissions</a></li>
-<li><a class="reference internal" href="#app-configuration">App Configuration</a><ul>
-<li><a class="reference internal" href="#id2">1.2.0 Changes</a></li>
+<li><a class="reference internal" href="#app-configuration">App Configuration</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#playbook-prerequisite">Playbook Prerequisite</a><ul>
+<li><a class="reference internal" href="#id2">1.2.0 Changes</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#function-panorama-commit">Function - Panorama Commit</a></li>
