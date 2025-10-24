@@ -1,0 +1,15 @@
+{
+  "inputs": {
+    "incident_id": 3123,
+    "artifact_id": 369,
+    "task_id": null,
+    "attachment_id": null
+  },
+  "file_name": "testit.zip",
+  "response": {
+    "stream": [
+      "OK",
+      "Clean"
+    ]
+  }
+}
