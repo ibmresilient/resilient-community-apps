@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "integer"
+          },
+          "alert_type": {
+            "type": "string"
+          },
+          "alert_date": {
+            "type": "string"
+          },
+          "start_date": {
+            "type": "string"
+          },
+          "company_name": {
+            "type": "string"
+          },
+          "company_guid": {
+            "type": "string"
+          },
+          "company_url": {
+            "type": "string"
+          },
+          "folder_guid": {
+            "type": "string"
+          },
+          "folder_name": {
+            "type": "string"
+          },
+          "severity": {},
+          "trigger": {
+            "type": "string"
+          },
+          "alert_set_name": {
+            "type": "string"
+          },
+          "alert_set_guid": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "bitsight_ci_limit": {
+          "type": "integer"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
