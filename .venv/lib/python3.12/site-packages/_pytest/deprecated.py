@@ -15,6 +15,7 @@ from warnings import warn
 
 from _pytest.warning_types import PytestDeprecationWarning
 from _pytest.warning_types import PytestRemovedIn9Warning
+from _pytest.warning_types import PytestRemovedIn10Warning
 from _pytest.warning_types import UnformattedWarning
 
 
@@ -24,11 +25,11 @@ DEPRECATED_EXTERNAL_PLUGINS = {
     "pytest_catchlog",
     "pytest_capturelog",
     "pytest_faulthandler",
+    "pytest_subtests",
 }
 
 
-# This can be* removed pytest 8, but it's harmless and common, so no rush to remove.
-# * If you're in the future: "could have been".
+# This could have been removed pytest 8, but it's harmless and common, so no rush to remove.
 YIELD_FIXTURE = PytestDeprecationWarning(
     "@pytest.yield_fixture is deprecated.\n"
     "Use @pytest.fixture instead; they are the same."
@@ -65,6 +66,13 @@ HOOK_LEGACY_MARKING = UnformattedWarning(
 MARKED_FIXTURE = PytestRemovedIn9Warning(
     "Marks applied to fixtures have no effect\n"
     "See docs: https://docs.pytest.org/en/stable/deprecations.html#applying-a-mark-to-a-fixture-function"
+)
+
+MONKEYPATCH_LEGACY_NAMESPACE_PACKAGES = PytestRemovedIn10Warning(
+    "monkeypatch.syspath_prepend() called with pkg_resources legacy namespace packages detected.\n"
+    "Legacy namespace packages (using pkg_resources.declare_namespace) are deprecated.\n"
+    "Please use native namespace packages (PEP 420) instead.\n"
+    "See https://docs.pytest.org/en/stable/deprecations.html#monkeypatch-fixup-namespace-packages"
 )
 
 # You want to make some `__init__` or function "private".

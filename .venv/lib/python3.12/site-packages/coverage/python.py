@@ -1,5 +1,5 @@
 # Licensed under the Apache License: http://www.apache.org/licenses/LICENSE-2.0
-# For details: https://github.com/nedbat/coveragepy/blob/master/NOTICE.txt
+# For details: https://github.com/coveragepy/coveragepy/blob/main/NOTICE.txt
 
 """Python source expertise for coverage.py"""
 
@@ -24,7 +24,10 @@ from coverage.types import TArc, TLineNo, TMorf, TSourceTokenLines
 if TYPE_CHECKING:
     from coverage import Coverage
 
+# Protect ourselves against aggressive mocking.
 os = isolate_module(os)
+# Save the original `open` function so later mocks don't break us.
+open = open  # pylint: disable=redefined-builtin
 
 
 def read_python_source(filename: str) -> bytes:
@@ -195,7 +198,7 @@ class PythonFileReporter(FileReporter):
 
     def multiline_map(self) -> dict[TLineNo, TLineNo]:
         """A map of line numbers to first-line in a multi-line statement."""
-        return self.parser._multiline
+        return self.parser.multiline_map
 
     def excluded_lines(self) -> set[TLineNo]:
         """Return the line numbers of statements in the file."""

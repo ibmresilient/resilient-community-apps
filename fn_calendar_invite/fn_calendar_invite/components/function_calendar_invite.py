@@ -58,8 +58,8 @@ class FunctionComponent(ResilientComponent):
             e_login = self.options.get("email_username")
             e_password = self.options.get("email_password")
 
-            now_utc = datetime.datetime.utcnow()
-            meeting_time_utc = datetime.datetime.utcfromtimestamp(calendar_invite_datetime / 1000)
+            now_utc = datetime.datetime.now(datetime.timezone.utc)
+            meeting_time_utc = datetime.datetime.fromtimestamp(calendar_invite_datetime / 1000, datetime.timezone.utc)
             if now_utc > meeting_time_utc:
                 log.error("Calendar date and time for meeting is in the past.")
                 raise ValueError("Calendar date and time for meeting is in the past.")

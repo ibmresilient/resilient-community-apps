@@ -21,8 +21,10 @@ import itertools
 import os
 from pathlib import Path
 import re
+import textwrap
 import types
 from typing import Any
+from typing import cast
 from typing import final
 from typing import Literal
 from typing import NoReturn
@@ -106,6 +108,13 @@ def pytest_addoption(parser: Parser) -> None:
         default=False,
         help="Disable string escape non-ASCII characters, might cause unwanted "
         "side effects(use at your own risk)",
+    )
+    parser.addini(
+        "strict_parametrization_ids",
+        type="bool",
+        # None => fallback to `strict`.
+        default=None,
+        help="Emit an error if non-unique parameter set IDs are detected",
     )
 
 
@@ -210,7 +219,7 @@ def pytest_pycollect_makemodule(module_path: Path, parent) -> Module:
 def pytest_pycollect_makeitem(
     collector: Module | Class, name: str, obj: object
 ) -> None | nodes.Item | nodes.Collector | list[nodes.Item | nodes.Collector]:
-    assert isinstance(collector, (Class, Module)), type(collector)
+    assert isinstance(collector, Class | Module), type(collector)
     # Nothing was collected elsewhere, let's do it here.
     if safe_isclass(obj):
         if collector.istestclass(obj, name):
@@ -358,7 +367,7 @@ class PyCollector(PyobjMixin, nodes.Collector, abc.ABC):
 
     def istestfunction(self, obj: object, name: str) -> bool:
         if self.funcnamefilter(name) or self.isnosetest(obj):
-            if isinstance(obj, (staticmethod, classmethod)):
+            if isinstance(obj, staticmethod | classmethod):
                 # staticmethods and classmethods need to be unwrapped.
                 obj = safe_getattr(obj, "__func__", False)
             return callable(obj) and fixtures.getfixturemarker(obj) is None
@@ -374,7 +383,7 @@ class PyCollector(PyobjMixin, nodes.Collector, abc.ABC):
 
     def _matches_prefix_or_glob_option(self, option_name: str, name: str) -> bool:
         """Check if the given name matches the prefix or glob-pattern defined
-        in ini configuration."""
+        in configuration."""
         for option in self.config.getini(option_name):
             if name.startswith(option):
                 return True
@@ -878,8 +887,8 @@ class IdMaker:
     # Optionally, explicit IDs for ParameterSets by index.
     ids: Sequence[object | None] | None
     # Optionally, the pytest config.
-    # Used for controlling ASCII escaping, and for calling the
-    # :hook:`pytest_make_parametrize_id` hook.
+    # Used for controlling ASCII escaping, determining parametrization ID
+    # strictness, and for calling the :hook:`pytest_make_parametrize_id` hook.
     config: Config | None
     # Optionally, the ID of the node being parametrized.
     # Used only for clearer error messages.
@@ -891,6 +900,9 @@ class IdMaker:
     def make_unique_parameterset_ids(self) -> list[str | _HiddenParam]:
         """Make a unique identifier for each ParameterSet, that may be used to
         identify the parametrization in a node ID.
+
+        If strict_parametrization_ids is enabled, and duplicates are detected,
+        raises CollectError. Otherwise makes the IDs unique as follows:
 
         Format is <prm_1_token>-...-<prm_n_token>[counter], where prm_x_token is
         - user-provided id, if given
@@ -904,6 +916,33 @@ class IdMaker:
         if len(resolved_ids) != len(set(resolved_ids)):
             # Record the number of occurrences of each ID.
             id_counts = Counter(resolved_ids)
+
+            if self._strict_parametrization_ids_enabled():
+                parameters = ", ".join(self.argnames)
+                parametersets = ", ".join(
+                    [saferepr(list(param.values)) for param in self.parametersets]
+                )
+                ids = ", ".join(
+                    id if id is not HIDDEN_PARAM else "<hidden>" for id in resolved_ids
+                )
+                duplicates = ", ".join(
+                    id if id is not HIDDEN_PARAM else "<hidden>"
+                    for id, count in id_counts.items()
+                    if count > 1
+                )
+                msg = textwrap.dedent(f"""
+                    Duplicate parametrization IDs detected, but strict_parametrization_ids is set.
+
+                    Test name:      {self.nodeid}
+                    Parameters:     {parameters}
+                    Parameter sets: {parametersets}
+                    IDs:            {ids}
+                    Duplicates:     {duplicates}
+
+                    You can fix this problem using `@pytest.mark.parametrize(..., ids=...)` or `pytest.param(..., id=...)`.
+                """).strip()  # noqa: E501
+                raise nodes.Collector.CollectError(msg)
+
             # Map the ID to its next suffix.
             id_suffixes: dict[str, int] = defaultdict(int)
             # Suffix non-unique IDs to make them unique.
@@ -925,6 +964,14 @@ class IdMaker:
         )
         return resolved_ids
 
+    def _strict_parametrization_ids_enabled(self) -> bool:
+        if self.config is None:
+            return False
+        strict_parametrization_ids = self.config.getini("strict_parametrization_ids")
+        if strict_parametrization_ids is None:
+            strict_parametrization_ids = self.config.getini("strict")
+        return cast(bool, strict_parametrization_ids)
+
     def _resolve_ids(self) -> Iterable[str | _HiddenParam]:
         """Resolve IDs for all ParameterSets (may contain duplicates)."""
         for idx, parameterset in enumerate(self.parametersets):
@@ -944,7 +991,9 @@ class IdMaker:
                 # ID not provided - generate it.
                 yield "-".join(
                     self._idval(val, argname, idx)
-                    for val, argname in zip(parameterset.values, self.argnames)
+                    for val, argname in zip(
+                        parameterset.values, self.argnames, strict=True
+                    )
                 )
 
     def _idval(self, val: object, argname: str, idx: int) -> str:
@@ -989,9 +1038,9 @@ class IdMaker:
     def _idval_from_value(self, val: object) -> str | None:
         """Try to make an ID for a parameter in a ParameterSet from its value,
         if the value type is supported."""
-        if isinstance(val, (str, bytes)):
+        if isinstance(val, str | bytes):
             return _ascii_escaped_by_config(val, self.config)
-        elif val is None or isinstance(val, (float, int, bool, complex)):
+        elif val is None or isinstance(val, float | int | bool | complex):
             return str(val)
         elif isinstance(val, re.Pattern):
             return ascii_escaped(val.pattern)
@@ -1079,7 +1128,7 @@ class CallSpec2:
         params = self.params.copy()
         indices = self.indices.copy()
         arg2scope = dict(self._arg2scope)
-        for arg, val in zip(argnames, valset):
+        for arg, val in zip(argnames, valset, strict=True):
             if arg in params:
                 raise nodes.Collector.CollectError(
                     f"{nodeid}: duplicate parametrization of {arg!r}"
@@ -1336,7 +1385,7 @@ class Metafunc:
         newcalls = []
         for callspec in self._calls or [CallSpec2()]:
             for param_index, (param_id, param_set) in enumerate(
-                zip(ids, parametersets)
+                zip(ids, parametersets, strict=True)
             ):
                 newcallspec = callspec.setmulti(
                     argnames=argnames,

@@ -18,7 +18,6 @@ from typing import NamedTuple
 from typing import overload
 from typing import TYPE_CHECKING
 from typing import TypeVar
-from typing import Union
 import warnings
 
 from .._code import getfslineno
@@ -61,7 +60,7 @@ def get_empty_parameterset_mark(
 
     argslisting = ", ".join(argnames)
 
-    fs, lineno = getfslineno(func)
+    _fs, lineno = getfslineno(func)
     reason = f"got empty parameter set for ({argslisting})"
     requested_mark = config.getini(EMPTY_PARAMETERSET_OPTION)
     if requested_mark in ("", None, "skip"):
@@ -102,7 +101,7 @@ class ParameterSet(NamedTuple):
             ],
         )
         # ParameterSet(values=(1, 2, 3), marks=(), id=None)
-        # ParameterSet(values=(2, 2, 3), marks=(), id="everything")
+        # ParameterSet(values=(40, 2, 42), marks=(), id="everything")
     """
 
     values: Sequence[object | NotSetType]
@@ -302,7 +301,7 @@ class Mark:
 # A generic parameter designating an object to which a Mark may
 # be applied -- a test function (callable) or class.
 # Note: a lambda is not allowed, but this can't be represented.
-Markable = TypeVar("Markable", bound=Union[Callable[..., object], type])
+Markable = TypeVar("Markable", bound=Callable[..., object] | type)
 
 
 @dataclasses.dataclass
@@ -396,7 +395,7 @@ class MarkDecorator:
             # For staticmethods/classmethods, the marks are eventually fetched from the
             # function object, not the descriptor, so unwrap.
             unwrapped_func = func
-            if isinstance(func, (staticmethod, classmethod)):
+            if isinstance(func, staticmethod | classmethod):
                 unwrapped_func = func.__func__
             if len(args) == 1 and (istestfunc(unwrapped_func) or is_class):
                 store_mark(unwrapped_func, self.mark, stacklevel=3)
@@ -581,16 +580,19 @@ class MarkGenerator:
             # If the name is not in the set of known marks after updating,
             # then it really is time to issue a warning or an error.
             if name not in self._markers:
-                if self._config.option.strict_markers or self._config.option.strict:
-                    fail(
-                        f"{name!r} not found in `markers` configuration option",
-                        pytrace=False,
-                    )
-
                 # Raise a specific error for common misspellings of "parametrize".
                 if name in ["parameterize", "parametrise", "parameterise"]:
                     __tracebackhide__ = True
                     fail(f"Unknown '{name}' mark, did you mean 'parametrize'?")
+
+                strict_markers = self._config.getini("strict_markers")
+                if strict_markers is None:
+                    strict_markers = self._config.getini("strict")
+                if strict_markers:
+                    fail(
+                        f"{name!r} not found in `markers` configuration option",
+                        pytrace=False,
+                    )
 
                 warnings.warn(
                     f"Unknown pytest.mark.{name} - is this a typo?  You can register "

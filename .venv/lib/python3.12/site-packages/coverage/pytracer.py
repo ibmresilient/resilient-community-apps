@@ -1,5 +1,5 @@
 # Licensed under the Apache License: http://www.apache.org/licenses/LICENSE-2.0
-# For details: https://github.com/nedbat/coveragepy/blob/master/NOTICE.txt
+# For details: https://github.com/coveragepy/coveragepy/blob/main/NOTICE.txt
 
 """Raw data collector for coverage.py."""
 
@@ -30,7 +30,7 @@ from coverage.types import (
 # I don't understand why, but if we use `cast(set[TLineNo], ...)` inside
 # the _trace() function, we get some strange behavior on PyPy 3.10.
 # Assigning these names here and using them below fixes the problem.
-# See https://github.com/nedbat/coveragepy/issues/1902
+# See https://github.com/coveragepy/coveragepy/issues/1902
 set_TLineNo = set[TLineNo]
 set_TArc = set[TArc]
 

@@ -1,5 +1,5 @@
 # Licensed under the Apache License: http://www.apache.org/licenses/LICENSE-2.0
-# For details: https://github.com/nedbat/coveragepy/blob/master/NOTICE.txt
+# For details: https://github.com/coveragepy/coveragepy/blob/main/NOTICE.txt
 
 """Management of core choices."""
 
@@ -16,7 +16,7 @@ from coverage.exceptions import ConfigError
 from coverage.misc import isolate_module
 from coverage.pytracer import PyTracer
 from coverage.sysmon import SysMonitor
-from coverage.types import TFileDisposition, Tracer, TWarnFn
+from coverage.types import TDebugCtl, TFileDisposition, Tracer, TWarnFn
 
 os = isolate_module(os)
 
@@ -56,42 +56,60 @@ class Core:
 
     def __init__(
         self,
+        *,
         warn: TWarnFn,
+        debug: TDebugCtl | None,
         config: CoverageConfig,
         dynamic_contexts: bool,
         metacov: bool,
     ) -> None:
+        def _debug(msg: str) -> None:
+            if debug:
+                debug.write(msg)
+
+        _debug("in core.py")
+
         # Check the conditions that preclude us from using sys.monitoring.
         reason_no_sysmon = ""
         if not env.PYBEHAVIOR.pep669:
-            reason_no_sysmon = "isn't available in this version"
+            reason_no_sysmon = "sys.monitoring isn't available in this version"
         elif config.branch and not env.PYBEHAVIOR.branch_right_left:
-            reason_no_sysmon = "can't measure branches in this version"
+            reason_no_sysmon = "sys.monitoring can't measure branches in this version"
         elif dynamic_contexts:
-            reason_no_sysmon = "doesn't yet support dynamic contexts"
+            reason_no_sysmon = "it doesn't yet support dynamic contexts"
+        elif any((bad := c) in config.concurrency for c in ["greenlet", "eventlet", "gevent"]):
+            reason_no_sysmon = f"it doesn't support concurrency={bad}"
 
         core_name: str | None = None
         if config.timid:
             core_name = "pytrace"
-
-        if core_name is None:
+            _debug("core.py: Using pytrace because timid=True")
+        elif core_name is None:
+            # This could still leave core_name as None.
             core_name = config.core
+            _debug(f"core.py: core from config is {core_name!r}")
 
         if core_name == "sysmon" and reason_no_sysmon:
-            warn(f"sys.monitoring {reason_no_sysmon}, using default core", slug="no-sysmon")
+            _debug(f"core.py: defaulting because sysmon not usable: {reason_no_sysmon}")
+            warn(f"Can't use core=sysmon: {reason_no_sysmon}, using default core", slug="no-sysmon")
             core_name = None
 
         if core_name is None:
             if env.SYSMON_DEFAULT and not reason_no_sysmon:
                 core_name = "sysmon"
+                _debug("core.py: Using sysmon because SYSMON_DEFAULT is set")
             else:
                 core_name = "ctrace"
+                _debug("core.py: Defaulting to ctrace core")
 
         if core_name == "ctrace":
             if not CTRACER_FILE:
                 if IMPORT_ERROR and env.SHIPPING_WHEELS:
                     warn(f"Couldn't import C tracer: {IMPORT_ERROR}", slug="no-ctracer", once=True)
                 core_name = "pytrace"
+                _debug("core.py: Falling back to pytrace because C tracer not available")
+
+        _debug(f"core.py: Using core={core_name}")
 
         self.tracer_kwargs = {}
 
@@ -116,3 +134,6 @@ class Core:
             self.systrace = True
         else:
             raise ConfigError(f"Unknown core value: {core_name!r}")
+
+    def __repr__(self) -> str:
+        return f"<Core tracer_class={self.tracer_class.__name__}>"

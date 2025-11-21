@@ -682,9 +682,11 @@ class Pytester:
         self._name = name
         self._path: Path = tmp_path_factory.mktemp(name, numbered=True)
         #: A list of plugins to use with :py:meth:`parseconfig` and
-        #: :py:meth:`runpytest`.  Initially this is an empty list but plugins can
-        #: be added to the list.  The type of items to add to the list depends on
-        #: the method using them so refer to them for details.
+        #: :py:meth:`runpytest`. Initially this is an empty list but plugins can
+        #: be added to the list.
+        #:
+        #: When running in subprocess mode, specify plugins by name (str) - adding
+        #: plugin objects directly is not supported.
         self.plugins: list[str | _PluggyPlugin] = []
         self._sys_path_snapshot = SysPathsSnapshot()
         self._sys_modules_snapshot = self.__take_sys_modules_snapshot()
@@ -834,6 +836,16 @@ class Pytester:
         :returns: The tox.ini file.
         """
         return self.makefile(".ini", tox=source)
+
+    def maketoml(self, source: str) -> Path:
+        """Write a pytest.toml file.
+
+        :param source: The contents.
+        :returns: The pytest.toml file.
+
+        .. versionadded:: 9.0
+        """
+        return self.makefile(".toml", pytest=source)
 
     def getinicfg(self, source: str) -> SectionWrapper:
         """Return the pytest section from the tox.ini config file."""
@@ -1229,10 +1241,9 @@ class Pytester:
         """
         import _pytest.config
 
-        new_args = self._ensure_basetemp(args)
-        new_args = [str(x) for x in new_args]
+        new_args = [str(x) for x in self._ensure_basetemp(args)]
 
-        config = _pytest.config._prepareconfig(new_args, self.plugins)  # type: ignore[arg-type]
+        config = _pytest.config._prepareconfig(new_args, self.plugins)
         # we don't know what the test will do with this half-setup config
         # object and thus we make sure it gets unconfigured properly in any
         # case (otherwise capturing could still be active, for example)
@@ -1421,7 +1432,6 @@ class Pytester:
                 stdin=stdin,
                 stdout=f1,
                 stderr=f2,
-                close_fds=(sys.platform != "win32"),
             )
             if popen.stdin is not None:
                 popen.stdin.close()
@@ -1442,6 +1452,8 @@ class Pytester:
                     ret = popen.wait(timeout)
                 except subprocess.TimeoutExpired:
                     handle_timeout()
+            f1.flush()
+            f2.flush()
 
         with p1.open(encoding="utf8") as f1, p2.open(encoding="utf8") as f2:
             out = f1.read().splitlines()
@@ -1494,9 +1506,13 @@ class Pytester:
         __tracebackhide__ = True
         p = make_numbered_dir(root=self.path, prefix="runpytest-", mode=0o700)
         args = (f"--basetemp={p}", *args)
-        plugins = [x for x in self.plugins if isinstance(x, str)]
-        if plugins:
-            args = ("-p", plugins[0], *args)
+        for plugin in self.plugins:
+            if not isinstance(plugin, str):
+                raise ValueError(
+                    f"Specifying plugins as objects is not supported in pytester subprocess mode; "
+                    f"specify by name instead: {plugin}"
+                )
+            args = ("-p", plugin, *args)
         args = self._getpytestargs() + args
         return self.run(*args, timeout=timeout)
 

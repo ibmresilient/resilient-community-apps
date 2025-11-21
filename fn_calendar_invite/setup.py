@@ -18,7 +18,7 @@ setup(
         <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
         <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        'resilient_circuits>=49.0.0',
+        'resilient_circuits>=51.0.0',
         'email; python_version<"3.0"'
     ],
     packages=find_packages(),
