@@ -90,7 +90,7 @@ class TestChunking:
         total_tokens = 1000
         threshold = 0.6
 
-        app_state.get().set_model("mistralai/mistral-large",)
+        app_state.get().set_model("mistralai/mistral-small-3-1-24b-instruct-2503",)
         
         # Call the method under test
         selected_chunks = self.chunking.retrieve_relevant_chunks_watsonx(

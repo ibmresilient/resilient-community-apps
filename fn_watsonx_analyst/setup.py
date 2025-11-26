@@ -26,7 +26,7 @@ def snake_to_camel(word):
 setup(
     name="fn_watsonx_analyst",
     display_name="watsonx.ai for SOAR Analysts",
-    version="1.2.0",
+    version="1.2.1",
     license="© Copyright IBM Corporation 2025.",
     author="IBM™ Security",
     url="https://ibm.com/security",

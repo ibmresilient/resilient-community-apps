@@ -60,7 +60,7 @@ class TestFnWatsonxScanArtifact:
     mock_inputs_1 = {
         "fn_watsonx_analyst_incident_id": 123,
         "fn_watsonx_analyst_artifact_id": 1411,
-        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
+        "fn_watsonx_analyst_model_id": "mistralai/mistral-small-3-1-24b-instruct-2503",
         "fn_watsonx_analyst_system_prompt": "sample text",
     }
 
@@ -71,7 +71,7 @@ class TestFnWatsonxScanArtifact:
     mock_inputs_2 = {
         "fn_watsonx_analyst_incident_id": 123,
         "fn_watsonx_analyst_artifact_id": 1412,
-        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
+        "fn_watsonx_analyst_model_id": "mistralai/mistral-small-3-1-24b-instruct-2503",
         "fn_watsonx_analyst_system_prompt": "sample text",
     }
 
@@ -82,7 +82,7 @@ class TestFnWatsonxScanArtifact:
     mock_inputs_3 = {
         "fn_watsonx_analyst_incident_id": 123,
         "fn_watsonx_analyst_artifact_id": 1413,
-        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
+        "fn_watsonx_analyst_model_id": "mistralai/mistral-small-3-1-24b-instruct-2503",
     }
 
     expected_results_3 = (

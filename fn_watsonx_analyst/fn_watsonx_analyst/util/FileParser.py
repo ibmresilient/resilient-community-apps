@@ -438,10 +438,6 @@ class FileParser:
                             raise UnsupportedEncodingError("File is not UTF-8 or ASCII encoded.") from ue
                     parsed_content = self.read_txt(decoded)
                 elif isinstance(data, str):
-                    try:
-                        data.encode('ascii')  # Check if string can be represented in ASCII
-                    except UnicodeEncodeError as ue:
-                        raise UnsupportedEncodingError("String data is not ASCII encodable.") from ue
                     parsed_content = self.read_txt(data)
                 else:
                     raise UnsupportedEncodingError("Unsupported data type for decoding.")

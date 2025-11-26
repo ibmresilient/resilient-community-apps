@@ -11,3 +11,4 @@ venv
 app.config
 htmlcov/
 .coverage*
+.venv

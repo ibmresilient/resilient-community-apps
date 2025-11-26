@@ -8,6 +8,7 @@ import os
 
 from unittest.mock import patch
 
+from fn_watsonx_analyst.config.loaders import load_model_config
 from fn_watsonx_analyst.types.message_payload import MessagePayload
 from fn_watsonx_analyst.util.prompting import Prompting
 from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose
@@ -56,7 +57,7 @@ class TestPrompting:
 
     def test_return_type(self):
         """Test to see if the prompt is of a correct type for granite 3"""
-        model = "ibm/granite-3-2b-instruct"
+        model = "mistralai/mistral-small-3-1-24b-instruct-2503"
         generate_app_state(model_id=model)
         query = "summarise this incident"
         context = "In the age of information, data-driven decisions shape the world. Every click, like, and share becomes a data point in a vast digital ecosystem, where algorithms analyze human behavior to predict preferences"
@@ -68,21 +69,6 @@ class TestPrompting:
             chunking=self.create_chunker(),
         )
         assert isinstance(result, str)
-
-    def test_code_results(self):
-        """Test to see if the prompt format is correct for code instruct models"""
-        model = "ibm/granite-8b-code-instruct"
-        generate_app_state(model_id=model)
-        query = "Give me a code to loop from 1 to 3"
-        context = "In the age of information, data-driven decisions shape the world. Every click, like, and share becomes a data point in a vast digital ecosystem, where algorithms analyze human behavior to predict preferences"
-        app_state.get().set_model(model)
-
-        result = Prompting.build_prompt(
-            self.prompting,
-            query=query,
-            context=context,
-        )
-        assert result.strip().endswith("Answer:")
 
     def test_invalid_model(self):
         """Test to see if the method catches an invalid model ask"""
@@ -106,7 +92,7 @@ class TestPrompting:
             query=query,
             context=context,
         )
-        assert result.strip().startswith("<|start_of_role|>")
+        assert result.strip().startswith("<s>[INST]")
 
     def test_contains_header(self):
         """Test to see if the tag is contained in the prompt for granite"""
@@ -118,19 +104,19 @@ class TestPrompting:
             query=query,
             context=context,
         )
-        assert "<|start_of_role|>" in result
+        assert "<s>[INST]" in result
 
     def test_result_length(self):
         """Test to see if the prompt length is within the window for mistral"""
+
         model = next(
             (
-                model
-                for model in self.model_config
-                if model["model_name"] == "mistralai/mistral-large"
-            ),
-            None,
+                model for model in load_model_config() 
+                if model["name"] == "mistralai/mistral-small-3-1-24b-instruct-2503"
+            ), None
         )
-        app_state.get().model_id = model["model_name"]
+
+        app_state.get().model_id = model["name"]
         query = "summarise this incident"
         context = "In the age of information, data-driven decisions shape the world. Every click, like, and share becomes a data point in a vast digital ecosystem, where algorithms analyze human behavior to predict preferences"
 

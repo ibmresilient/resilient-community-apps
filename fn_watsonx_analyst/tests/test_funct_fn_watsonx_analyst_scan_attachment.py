@@ -54,7 +54,7 @@ class TestFnWatsonxAnalystScanAttachment:
     mock_inputs_1 = {
         "fn_watsonx_analyst_incident_id": 123,
         "fn_watsonx_analyst_attachment_id": 1411,
-        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
+        "fn_watsonx_analyst_model_id": "mistralai/mistral-small-3-1-24b-instruct-2503",
         "fn_watsonx_analyst_task_id": None,
     }
 
@@ -63,7 +63,7 @@ class TestFnWatsonxAnalystScanAttachment:
     mock_inputs_2 = {
         "fn_watsonx_analyst_incident_id": 123,
         "fn_watsonx_analyst_attachment_id": 321,
-        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
+        "fn_watsonx_analyst_model_id": "mistralai/mistral-small-3-1-24b-instruct-2503",
         "fn_watsonx_analyst_task_id": 1,
     }
 

@@ -11,7 +11,7 @@ from tests import helper
 class TestResponseHelper:
 
     mock_inputs = [
-        "ibm/granite-3-2b-instruct",
+        "mistralai/mistral-small-3-1-24b-instruct-2503",
         "meta-llama/llama-3-405b-instruct"
     ]
 

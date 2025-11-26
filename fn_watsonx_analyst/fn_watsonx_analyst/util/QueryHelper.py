@@ -282,7 +282,7 @@ class QueryHelper:
             try:
                 body = {
                     "inputs": data,
-                    "model_id": "ibm/slate-125m-english-rtrvr",
+                    "model_id": "ibm/slate-125m-english-rtrvr-v2",
                     "project_id": self._get_project_id()
                 }
                 response = requests.post(url, json.dumps(body), headers=self.headers, timeout=60)

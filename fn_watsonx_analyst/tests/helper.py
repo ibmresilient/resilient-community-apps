@@ -19,7 +19,7 @@ from fn_watsonx_analyst.util.state_manager import app_state
 
 def generate_app_state(
     purpose: AiResponsePurpose = AiResponsePurpose.NOTE_CONVERSATION,
-    model_id="ibm/granite-3-2b-instruct",
+    model_id="mistralai/mistral-small-3-1-24b-instruct-2503",
     watsonx_endpoint="",
 ):
     app_state.get().set_model(model_id)
@@ -209,7 +209,7 @@ inc_details = {
 
 
 sample_output: WatsonxTextGenerationResponse = {
-    "model_id": "ibm/granite-3-2b-instruct",
+    "model_id": "mistralai/mistral-small-3-1-24b-instruct-2503",
     "created_at": "2023-07-21T16:52:32.190Z",
     "results": [
         {

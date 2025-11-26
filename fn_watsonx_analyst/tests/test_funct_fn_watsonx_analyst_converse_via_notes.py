@@ -76,7 +76,7 @@ class TestFnWatsonxConverseViaNotes:
         "fn_watsonx_analyst_note_id": 1,
         "fn_watsonx_analyst_system_prompt": "sample text",
         "fn_watsonx_analyst_prompt": "sample text",
-        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
+        "fn_watsonx_analyst_model_id": "mistralai/mistral-small-3-1-24b-instruct-2503",
         "fn_watsonx_analyst_incident_id": 123,
         "fn_watsonx_analyst_data_config": "default",
     }
@@ -86,14 +86,14 @@ class TestFnWatsonxConverseViaNotes:
         "fn_watsonx_analyst_note_id": 2,
         "fn_watsonx_analyst_system_prompt": "sample text",
         "fn_watsonx_analyst_prompt": "sample text",
-        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
+        "fn_watsonx_analyst_model_id": "mistralai/mistral-small-3-1-24b-instruct-2503",
         "fn_watsonx_analyst_incident_id": 123,
         "fn_watsonx_analyst_data_config": "default",
     }
 
     mock_inputs_3 = {
         "fn_watsonx_analyst_note_id": 3,
-        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
+        "fn_watsonx_analyst_model_id": "mistralai/mistral-small-3-1-24b-instruct-2503",
         "fn_watsonx_analyst_incident_id": 123,
         "fn_watsonx_analyst_data_config": "default",
     }
@@ -101,7 +101,7 @@ class TestFnWatsonxConverseViaNotes:
     mock_inputs_4 = {
         "fn_watsonx_analyst_note_id": 4,
         # "fn_watsonx_analyst_prompt": "[runme3.sh]",
-        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
+        "fn_watsonx_analyst_model_id": "mistralai/mistral-small-3-1-24b-instruct-2503",
         "fn_watsonx_analyst_incident_id": 123,
         "fn_watsonx_analyst_data_config": "default",
     }
@@ -112,7 +112,7 @@ class TestFnWatsonxConverseViaNotes:
 
     mock_inputs_5 = {
         "fn_watsonx_analyst_note_id": 5,
-        "fn_watsonx_analyst_model_id": "ibm/granite-3-2b-instruct",
+        "fn_watsonx_analyst_model_id": "mistralai/mistral-small-3-1-24b-instruct-2503",
         "fn_watsonx_analyst_incident_id": 123,
         "fn_watsonx_analyst_data_config": "default",
     }

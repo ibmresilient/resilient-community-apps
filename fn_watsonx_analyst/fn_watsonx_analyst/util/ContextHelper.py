@@ -287,6 +287,7 @@ class ContextHelper:
 
         inc_list = config.get("incident").get("allow_list") or []
         inc_date_list = config.get("incident").get("date_list") or []
+        inc_properties_list = config.get("incident").get("properties") or []
 
         pbx_list = config.get("playbook_executions", {}).get("allow_list") or []
         pbx_pb_list = config.get("playbook_executions", {}).get("playbook_allow_list") or []
@@ -326,11 +327,8 @@ class ContextHelper:
                 labels = self.__get_property_labels()
                 new_props = {}
                 for key, val in inc["properties"].items():
-                    if key in labels.keys():
-                        new_props[labels[key]] = val
-                    else:
-                        new_props[key] = val
-
+                    if "*" in inc_properties_list or key in inc_properties_list:
+                        new_props[labels.get(key, key)] = val
                 inc["properties"] = new_props
         pbxs = []
         if pbx_data:

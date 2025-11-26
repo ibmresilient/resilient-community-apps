@@ -29,6 +29,9 @@ incident:
     - inc_start
     - discovered_date
     - inc_last_modified_date
+  
+  properties:
+    - "*"
 
 playbook_executions:
   allow_list:
