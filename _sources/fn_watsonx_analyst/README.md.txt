@@ -370,10 +370,16 @@ The *watsonx.ai Summarize Incident* playbooks summarizes the whole incident base
 
 You can override the configuration for the data we send to watsonx. While we wouldn't recommend stripping too much from the default configuration, as adding or removing data will likely impact the quality of responses.
 
+## Custom incident properties
+
+The default configuration allows all custom properties to be sent to watsonx, if you want to limit which properties are sent, you can do so by modifying the `properties` field in an override config below, remove the `"*"` item under properties, and specify each property key you want to keep.
+
+
 ## Creating the override config
 By creating a `yaml` file under `/var/rescircuits` in the App Configuration page, you can provide an override config, which you can choose to use, for each compatible function (Converse via Notes, and Summarize Incident).
 
-Make sure that the file name is `<yourname>.yaml`, and that the file path is `/var/rescircuits`.
+
+Make sure that the file name is `<yourname>.yaml`, and that the file path is `/var/rescircuits` (the file path in the UI should not include the file's name).
 
 The contents of the default configuration will be below, you can use this as a base config to modify. **Note**: Quality will vary if the config is changed from the default, continue at your own risk, and revert back to default if the data configuration causes a drop in quality.
 
@@ -385,7 +391,7 @@ The contents of the default configuration will be below, you can use this as a b
   ```yaml
   ---
   incident:
-    # define only the fields we want to keep
+  # define only the fields we want to keep
     allow_list:
       - name
       - description
@@ -408,7 +414,6 @@ The contents of the default configuration will be below, you can use this as a b
       - properties
       - inc_last_modified_date
       - incident_type_ids
-  
     # define the fields that will be converted from timestamp to human-readable time.
     # if these fields are removed from the allow_list, they should be removed here too
     date_list:
@@ -416,6 +421,9 @@ The contents of the default configuration will be below, you can use this as a b
       - inc_start
       - discovered_date
       - inc_last_modified_date
+    
+    properties:
+      - "*"
 
   playbook_executions:
     allow_list:
@@ -424,7 +432,6 @@ The contents of the default configuration will be below, you can use this as a b
       - object
       - elapsed_time
       - playbook
-  
     # minimal playbok objects are a sub element of a playbook execution
     # these fields are what we keep from these playbook objects
     playbook_allow_list:
@@ -441,12 +448,10 @@ The contents of the default configuration will be below, you can use this as a b
     date_list:
       - created
       - last_modified_time
-  
     # keep only this field from artifact threat hits
     hit_allow_list:
-    - properties
     - created
-  
+    - properties
     # block these bits of hit data, as they don't provide much use to LLM
     # feel free to experiment
     hit_block_list:
@@ -458,10 +463,8 @@ The contents of the default configuration will be below, you can use this as a b
       - response_code
       - verbose_msg
       - permalink
-  
     # re-label the keys in threat hit properties
     # change key to value for field names
-    hit_relabel_list:
       total: number of scans performed
       positives: number of scans indicating malicious behavior
       community coverage: percentage of scans indicating malicious behavior

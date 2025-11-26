@@ -954,17 +954,21 @@ Additional package dependencies may exist for each of these packages:</p>
 <section id="data-selection">
 <h1>Data selection<a class="headerlink" href="#data-selection" title="Link to this heading">¶</a></h1>
 <p>You can override the configuration for the data we send to watsonx. While we wouldn’t recommend stripping too much from the default configuration, as adding or removing data will likely impact the quality of responses.</p>
+<section id="custom-incident-properties">
+<h2>Custom incident properties<a class="headerlink" href="#custom-incident-properties" title="Link to this heading">¶</a></h2>
+<p>The default configuration allows all custom properties to be sent to watsonx, if you want to limit which properties are sent, you can do so by modifying the <code class="docutils literal notranslate"><span class="pre">properties</span></code> field in an override config below, remove the <code class="docutils literal notranslate"><span class="pre">&quot;*&quot;</span></code> item under properties, and specify each property key you want to keep.</p>
+</section>
 <section id="creating-the-override-config">
 <h2>Creating the override config<a class="headerlink" href="#creating-the-override-config" title="Link to this heading">¶</a></h2>
 <p>By creating a <code class="docutils literal notranslate"><span class="pre">yaml</span></code> file under <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code> in the App Configuration page, you can provide an override config, which you can choose to use, for each compatible function (Converse via Notes, and Summarize Incident).</p>
-<p>Make sure that the file name is <code class="docutils literal notranslate"><span class="pre">&lt;yourname&gt;.yaml</span></code>, and that the file path is <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code>.</p>
+<p>Make sure that the file name is <code class="docutils literal notranslate"><span class="pre">&lt;yourname&gt;.yaml</span></code>, and that the file path is <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code> (the file path in the UI should not include the file’s name).</p>
 <p>The contents of the default configuration will be below, you can use this as a base config to modify. <strong>Note</strong>: Quality will vary if the config is changed from the default, continue at your own risk, and revert back to default if the data configuration causes a drop in quality.</p>
 <p><strong>Note</strong>: You should restart the app after creating the new payload file, as until then, the app will fallback to default configuration.</p>
 <details>
   <summary>Show <code>datapayload.yaml</code></summary>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
 <span class="nt">incident</span><span class="p">:</span>
-<span class="w">  </span><span class="c1"># define only the fields we want to keep</span>
+<span class="c1"># define only the fields we want to keep</span>
 <span class="w">  </span><span class="nt">allow_list</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
@@ -987,7 +991,6 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">properties</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inc_last_modified_date</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">incident_type_ids</span>
-
 <span class="w">  </span><span class="c1"># define the fields that will be converted from timestamp to human-readable time.</span>
 <span class="w">  </span><span class="c1"># if these fields are removed from the allow_list, they should be removed here too</span>
 <span class="w">  </span><span class="nt">date_list</span><span class="p">:</span>
@@ -995,6 +998,9 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inc_start</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">discovered_date</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inc_last_modified_date</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="nt">properties</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;*&quot;</span>
 
 <span class="nt">playbook_executions</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">allow_list</span><span class="p">:</span>
@@ -1003,7 +1009,6 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elapsed_time</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">playbook</span>
-
 <span class="w">  </span><span class="c1"># minimal playbok objects are a sub element of a playbook execution</span>
 <span class="w">  </span><span class="c1"># these fields are what we keep from these playbook objects</span>
 <span class="w">  </span><span class="nt">playbook_allow_list</span><span class="p">:</span>
@@ -1020,12 +1025,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="w">  </span><span class="nt">date_list</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">created</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">last_modified_time</span>
-
 <span class="w">  </span><span class="c1"># keep only this field from artifact threat hits</span>
 <span class="w">  </span><span class="nt">hit_allow_list</span><span class="p">:</span>
-<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">properties</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">created</span>
-
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">properties</span>
 <span class="w">  </span><span class="c1"># block these bits of hit data, as they don&#39;t provide much use to LLM</span>
 <span class="w">  </span><span class="c1"># feel free to experiment</span>
 <span class="w">  </span><span class="nt">hit_block_list</span><span class="p">:</span>
@@ -1037,10 +1040,8 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">response_code</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">verbose_msg</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">permalink</span>
-
 <span class="w">  </span><span class="c1"># re-label the keys in threat hit properties</span>
 <span class="w">  </span><span class="c1"># change key to value for field names</span>
-<span class="w">  </span><span class="nt">hit_relabel_list</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">total</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">number of scans performed</span>
 <span class="w">    </span><span class="nt">positives</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">number of scans indicating malicious behavior</span>
 <span class="w">    </span><span class="nt">community coverage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">percentage of scans indicating malicious behavior</span>
@@ -1653,6 +1654,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#data-selection">Data selection</a><ul>
+<li><a class="reference internal" href="#custom-incident-properties">Custom incident properties</a></li>
 <li><a class="reference internal" href="#creating-the-override-config">Creating the override config</a></li>
 <li><a class="reference internal" href="#setting-up-the-dropdown">Setting up the dropdown</a></li>
 </ul>
