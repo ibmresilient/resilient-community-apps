@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name='fn_qradar_integration',
     display_name="QRadar SIEM",
-    version='2.5.0',
+    version='2.5.1',
     license='MIT License',
     author='IBM SOAR',
     author_email='',

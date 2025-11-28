@@ -43,6 +43,7 @@
 -->
 | Version | Publication | Notes |
 | ------- | ----------- | ----- |
+| 2.5.1 | November. 2025 | Updated required fields in QRadar Search function. |
 | 2.5.0 | June. 2025 | <ul><li>Update functions to return status=False and reason when fail.</li><li>Update search function to handle subqueries.</li><li>Add bulk_load for reference sets.</li><li></li>Updated funct_qradar_reference_table_get_table to use filters range limits and fields</ul> |
 | 2.4.1 | May. 2024 | Bug fix for function input field name qradar_note. Change it to qradar_siem_note. |
 | 2.4.0 | April. 2024 | Added functions to create offense notes and make changes to an offense. |
@@ -309,7 +310,7 @@ results = {
     "execution_time_ms": 31368,
     "host": "local",
     "package": "fn-qradar-integration",
-    "package_version": "2.5.0",
+    "package_version": "2.5.1",
     "timestamp": "2025-04-25 11:00:01",
     "version": "1.0"
   },
@@ -709,8 +710,8 @@ Search QRadar for events
 | Name | Type | Required | Example | Tooltip |
 | ---- | :--: | :------: | ------- | ------- |
 | `qradar_label` | `text` | No | `-` | Enter name of QRadar server to use from the app.config |
-| `qradar_query` | `textarea` | No | `-` | A qradar query string with parameters |
-| `qradar_query_all_results` | `select` | No | `-` | Display all results from search. By default, a range for the number of returned results is set. |
+| `qradar_query` | `textarea` | Yes | `-` | A qradar query string with parameters |
+| `qradar_query_all_results` | `select` | Yes | `-` | Display all results from search. This field accepts only `Yes` or `No`. By default, a range for the number of returned results is set. |
 | `qradar_query_range_end` | `number` | No | `-` | Range end number |
 | `qradar_query_range_start` | `number` | No | `-` | Range start number |
 | `qradar_search_param1` | `text` | No | `-` | - |

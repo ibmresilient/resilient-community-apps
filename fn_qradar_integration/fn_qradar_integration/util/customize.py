@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
-# Generated with resilient-sdk v51.0.6.0.1543
+# Generated with resilient-sdk v51.0.7.2.16540
 
 """Generate the SOAR customizations required for fn_qradar_integration"""
 
