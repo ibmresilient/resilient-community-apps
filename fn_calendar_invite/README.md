@@ -42,8 +42,8 @@ Note: The results payload returned by the Calendar Invite function has changed i
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.1.2 | 11/2023| Replace deprecated datetime methods |
-| 1.1.1 | 7/2023 | Update for app host support |
+| 1.1.3 | 11/2023| Replace deprecated datetime methods |
+| 1.1.2 | 7/2023 | Update for app host support |
 | 1.1.1 | 2/2021 | Update copyright |
 | 1.1.0 | 1/2021 | App Host and Proxy Support |
 | 1.0.0 | 9/2018 | Initial Release |

@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 setup(
     name="fn_calendar_invite",
     display_name="Calendar Invite",
-    version='1.1.2',
+    version='1.1.3',
     license='MIT',
     author='IBM SOAR',
     author_email='',
