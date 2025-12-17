@@ -27,6 +27,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.1.5 | 12/2025 | Bug fix for referencing empty or none values with get_datatable_value_array in jinja2 template |
 | 2.1.4 | 06/2025 | Remove jinja2 vulnerability |
 | 2.1.3 | 04/2025 |Converted example workflows to python3 |
 | 2.1.2 | 05/2024 | Bug fix for imported packages |
