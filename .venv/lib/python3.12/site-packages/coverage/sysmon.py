@@ -265,7 +265,7 @@ class SysMonitor(Tracer):
                         self.sysmon_branch_either,
                     )
                     register(
-                        events.BRANCH_LEFT,  # type:ignore[attr-defined]
+                        events.BRANCH_LEFT,
                         self.sysmon_branch_either,
                     )
             else:
@@ -326,6 +326,10 @@ class SysMonitor(Tracer):
         if self.stats is not None:
             self.stats["starts"] += 1
 
+        if code.co_name == "__annotate__":
+            # Type annotation code objects don't execute, ignore them.
+            return DISABLE
+
         # Entering a new frame.  Decide if we should trace in this file.
         code_info = self.code_infos.get(id(code))
         tracing_code: bool | None = None
@@ -385,7 +389,7 @@ class SysMonitor(Tracer):
                             assert env.PYBEHAVIOR.branch_right_left
                             local_events |= (
                                 events.BRANCH_RIGHT  # type:ignore[attr-defined]
-                                | events.BRANCH_LEFT  # type:ignore[attr-defined]
+                                | events.BRANCH_LEFT
                             )
                         sys_monitoring.set_local_events(self.myid, code, local_events)
 
@@ -495,7 +499,7 @@ class SysMonitor(Tracer):
         return DISABLE
 
 
-@functools.lru_cache(maxsize=5)
+@functools.lru_cache(maxsize=20)
 def get_multiline_map(filename: str) -> dict[TLineNo, TLineNo]:
     """Get a PythonParser for the given filename, cached."""
     try:

@@ -1161,6 +1161,20 @@ def main(argv: list[str] | None = None) -> int | None:
     return status
 
 
+def main_deprecated(argv: list[str] | None = None) -> int | None:
+    """For entry points we'll be getting rid of."""
+    print(
+        textwrap.dedent("""\
+        **
+        ** This entry point is deprecated and will be removed.
+        ** Send me an email if you want to keep this command name working:
+        ** ned@nedbatchelder.com
+        **
+        """)
+    )
+    return main(argv)
+
+
 # Profiling using ox_profile.  Install it from GitHub:
 #   pip install git+https://github.com/emin63/ox_profile.git
 #

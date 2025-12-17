@@ -759,7 +759,8 @@ $border-indicator-width: .2em;
         font-style: italic;
         color: $light-gray6;
         @include color-dark($dark-gray6);
-        border-color: #ccc;
+        border-color: $light-gray3;
+        @include border-color-dark($dark-gray3);
         cursor: pointer;
         &:hover {
             background: $light-gray2;
@@ -789,7 +790,8 @@ $border-indicator-width: .2em;
         th {
             cursor: default;
             font-style: normal;
-            border-color: #999;
+            border-color: $light-gray4;
+            @include border-color-dark($dark-gray4);
         }
     }
     td.name {

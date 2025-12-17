@@ -169,7 +169,7 @@ class SummaryReporter:
         # Write the TOTAL line
         formats.update(
             dict(
-                Name="|{:>{name_len}} |",
+                Name="|{:{name_len}} |",
                 Cover="{:>{n}} |",
             ),
         )
