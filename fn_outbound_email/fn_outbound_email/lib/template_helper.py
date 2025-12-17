@@ -172,8 +172,12 @@ class TemplateHelper(object):
 
         result = set()
         for table_row in datatable["rows"]:
-            result.add(self.get_datatable_value(field_def=table_def.get("fields", {}).get(field_name),
-                                                          table_row=table_row))
+            value = self.get_datatable_value(
+                field_def=table_def.get("fields", {}).get(field_name),
+                table_row=table_row,
+            )
+            if value:
+                result.add(value)
 
         return ', '.join(result)
 

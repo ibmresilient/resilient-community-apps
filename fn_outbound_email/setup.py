@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name='fn_outbound_email',
     display_name='Outbound Email',
-    version='2.1.4',
+    version='2.1.5',
     license='MIT',
     author='IBM QRadar SOAR',
     url='https://github.com/ibmresilient/resilient-community-apps/tree/master/fn_outbound_email',
