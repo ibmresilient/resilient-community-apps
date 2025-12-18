@@ -1,0 +1,1 @@
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_outbound_email/main/2.1/app-fn_outbound_email-2.1.5-18906.zip
