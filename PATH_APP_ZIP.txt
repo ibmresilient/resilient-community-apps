@@ -1,1 +1,1 @@
-https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_watsonx_analyst/main/1.2/app-fn_watsonx_analyst-1.2.1-18855.zip
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_outbound_email/main/2.1/app-fn_outbound_email-2.1.5-18906.zip
