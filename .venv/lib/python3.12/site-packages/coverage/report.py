@@ -14,7 +14,7 @@ from coverage.misc import human_sorted_items, plural
 from coverage.plugin import FileReporter
 from coverage.report_core import get_analysis_to_report
 from coverage.results import Analysis, Numbers
-from coverage.types import TMorf
+from coverage.types import TMorfs
 
 if TYPE_CHECKING:
     from coverage import Coverage
@@ -187,7 +187,7 @@ class SummaryReporter:
         for end_line in end_lines:
             self.write(end_line)
 
-    def report(self, morfs: Iterable[TMorf] | None, outfile: IO[str] | None = None) -> float:
+    def report(self, morfs: TMorfs, outfile: IO[str] | None = None) -> float:
         """Writes a report summarizing coverage statistics per module.
 
         `outfile` is a text-mode file object to write the summary to.

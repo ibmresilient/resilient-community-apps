@@ -8,9 +8,9 @@ from __future__ import annotations
 import os
 import os.path
 import sys
-from collections.abc import Iterable, Iterator
+from collections.abc import Callable, Iterable, Iterator
 from types import FrameType
-from typing import Any, Callable
+from typing import Any
 
 from coverage.exceptions import PluginError
 from coverage.misc import isolate_module

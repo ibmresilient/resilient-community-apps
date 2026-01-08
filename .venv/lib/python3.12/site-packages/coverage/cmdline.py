@@ -33,9 +33,12 @@ from coverage.version import __url__
 # "alphabetize" comments throughout.
 
 
-def oneline(text: str) -> str:
-    """Turn a multi-line string into one line for help to reformat nicely."""
-    return " ".join(text.split())
+def prep_help(text: str) -> str:
+    r"""Prepare a multi-line string for help to reformat nicely.
+
+    A \f character indicates a paragraph break.
+    """
+    return "\f".join(" ".join(p.split()) for p in text.split("\f"))
 
 
 class Opts:
@@ -61,7 +64,7 @@ class Opts:
         "--concurrency",
         action="store",
         metavar="LIBS",
-        help=oneline(
+        help=prep_help(
             """
             Properly measure code using a concurrency library.
             Valid values are: {}, or a comma-list of them.
@@ -80,7 +83,7 @@ class Opts:
         "--contexts",
         action="store",
         metavar="REGEX1,REGEX2,...",
-        help=oneline(
+        help=prep_help(
             """
             Only display data from lines covered in the given contexts.
             Accepts Python regexes, which must be quoted.
@@ -92,7 +95,7 @@ class Opts:
         "--data-file",
         action="store",
         metavar="DATAFILE",
-        help=oneline(
+        help=prep_help(
             """
             Base name of the data files to operate on.
             Defaults to '.coverage'. [env: COVERAGE_FILE]
@@ -104,7 +107,7 @@ class Opts:
         "--data-file",
         action="store",
         metavar="INFILE",
-        help=oneline(
+        help=prep_help(
             """
             Read coverage data for report generation from this file.
             Defaults to '.coverage'. [env: COVERAGE_FILE]
@@ -116,7 +119,7 @@ class Opts:
         "--data-file",
         action="store",
         metavar="OUTFILE",
-        help=oneline(
+        help=prep_help(
             """
             Write the recorded coverage data to this file.
             Defaults to '.coverage'. [env: COVERAGE_FILE]
@@ -169,7 +172,7 @@ class Opts:
         "--include",
         action="store",
         metavar="PAT1,PAT2,...",
-        help=oneline(
+        help=prep_help(
             """
             Include only files whose paths match one of these patterns.
             Accepts shell-style wildcards, which must be quoted.
@@ -186,7 +189,7 @@ class Opts:
         "-L",
         "--pylib",
         action="store_true",
-        help=oneline(
+        help=prep_help(
             """
             Measure coverage even inside the Python installed library,
             which isn't done by default.
@@ -203,7 +206,7 @@ class Opts:
         "-m",
         "--module",
         action="store_true",
-        help=oneline(
+        help=prep_help(
             """
             <pyfile> is an importable Python module, not a script path,
             to be run as 'python -m' would run it.
@@ -215,7 +218,7 @@ class Opts:
         "--omit",
         action="store",
         metavar="PAT1,PAT2,...",
-        help=oneline(
+        help=prep_help(
             """
             Omit files whose paths match one of these patterns.
             Accepts shell-style wildcards, which must be quoted.
@@ -256,7 +259,7 @@ class Opts:
         "-p",
         "--parallel-mode",
         action="store_true",
-        help=oneline(
+        help=prep_help(
             """
             Append a unique suffix to the data file name to collect separate
             data from multiple processes.
@@ -269,7 +272,7 @@ class Opts:
         action="store",
         metavar="N",
         type=int,
-        help=oneline(
+        help=prep_help(
             """
             Number of digits after the decimal point to display for
             reported coverage percentages.
@@ -286,7 +289,7 @@ class Opts:
         "",
         "--rcfile",
         action="store",
-        help=oneline(
+        help=prep_help(
             """
             Specify configuration file.
             By default '.coveragerc', 'setup.cfg', 'tox.ini', and
@@ -300,7 +303,7 @@ class Opts:
         action="store",
         metavar="SIGNAL",
         choices=["USR1", "USR2"],
-        help=oneline(
+        help=prep_help(
             """
             Specify a signal that will trigger coverage to write its collected data.
             Supported values are: USR1, USR2. Not available on Windows.
@@ -332,7 +335,7 @@ class Opts:
         "--sort",
         action="store",
         metavar="COLUMN",
-        help=oneline(
+        help=prep_help(
             """
             Sort the report by the named column: name, stmts, miss, branch, brpart, or cover.
             Default is name.
@@ -375,9 +378,12 @@ class CoverageOptionParser(optparse.OptionParser):
 
     """
 
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        kwargs["add_help_option"] = False
-        super().__init__(*args, **kwargs)
+    def __init__(self, **kwargs: Any) -> None:
+        super().__init__(
+            add_help_option=False,
+            formatter=MultiParaHelpFormatter(),
+            **kwargs,
+        )
         self.set_defaults(
             # Keep these arguments alphabetized by their names.
             action=None,
@@ -453,6 +459,19 @@ class GlobalOptionParser(CoverageOptionParser):
         )
 
 
+class MultiParaHelpFormatter(optparse.IndentedHelpFormatter):
+    """An optparse formatter that allows multi-paragraph help text."""
+
+    def _format_text(self, text: str) -> str:
+        r"""
+        Format help text. \f characters become paragraph breaks with blank lines.
+        """
+        # _format_text is not documented in optparse, so mypy can't find it.
+        super_format = super()._format_text  # type: ignore[misc]
+        paras = text.split("\f")
+        return "\n\n".join(super_format(p) for p in paras)
+
+
 class CmdOptionParser(CoverageOptionParser):
     """Parse one of the new-style commands for coverage.py."""
 
@@ -520,7 +539,7 @@ COMMANDS = {
         ]
         + GLOBAL_ARGS,
         usage="[options] [modules]",
-        description=oneline(
+        description=prep_help(
             """
             Make annotated copies of the given files, marking statements that are executed
             with > and statements that are missed with !.
@@ -537,7 +556,7 @@ COMMANDS = {
         ]
         + GLOBAL_ARGS,
         usage="[options] <path1> <path2> ... <pathN>",
-        description=oneline(
+        description=prep_help(
             """
             Combine data from multiple coverage files.
             The combined results are written to a single
@@ -552,17 +571,16 @@ COMMANDS = {
         "debug",
         GLOBAL_ARGS,
         usage="<topic>",
-        description=oneline(
+        description=prep_help(
             """
             Display information about the internals of coverage.py,
-            for diagnosing problems.
-            Topics are:
-                'data' to show a summary of the collected data;
-                'sys' to show installation information;
-                'config' to show the configuration;
-                'premain' to show what is calling coverage;
-                'pybehave' to show internal flags describing Python behavior;
-                'sqlite' to show SQLite compilation options.
+            for diagnosing problems. Topics are:
+            \f 'config' to show configuration settings.
+            \f 'data [filenames]' to summarize data files.
+            \f 'premain' to show what is calling coverage.
+            \f 'pybehave' to show internal flags describing Python behavior.
+            \f 'sqlite' to show SQLite compilation options.
+            \f 'sys' to show installation information.
             """
         ),
     ),
@@ -600,7 +618,7 @@ COMMANDS = {
         ]
         + GLOBAL_ARGS,
         usage="[options] [modules]",
-        description=oneline(
+        description=prep_help(
             """
             Create an HTML report of the coverage of the files.
             Each file gets its own page, with the source decorated to show
@@ -843,7 +861,7 @@ class CoverageScript:
             return OK
 
         # Remaining actions are reporting, with some common options.
-        report_args = dict(
+        report_args: dict[str, Any] = dict(
             morfs=unglob_args(args),
             ignore_errors=options.ignore_errors,
             omit=omit,
@@ -1041,31 +1059,35 @@ class CoverageScript:
                 + "config, data, sys, premain, pybehave, sqlite?"
             )
             return ERR
-        if args[1:]:
-            show_help("Only one topic at a time, please")
-            return ERR
 
-        if args[0] == "sys":
-            write_formatted_info(print, "sys", self.coverage.sys_info())
-        elif args[0] == "data":
-            print(info_header("data"))
-            data_file = self.coverage.config.data_file
-            debug_data_file(data_file)
-            for filename in combinable_files(data_file):
-                print("-----")
-                debug_data_file(filename)
-        elif args[0] == "config":
-            write_formatted_info(print, "config", self.coverage.config.debug_info())
-        elif args[0] == "premain":
-            print(info_header("premain"))
-            print(short_stack(full=True))
-        elif args[0] == "pybehave":
-            write_formatted_info(print, "pybehave", env.debug_info())
-        elif args[0] == "sqlite":
-            write_formatted_info(print, "sqlite", CoverageData.sys_info())
+        if args[0] == "data":
+            file_names = args[1:]
+            if not file_names:
+                file_names = [self.coverage.config.data_file]
+            for data_file in file_names:
+                print(info_header("data"))
+                debug_data_file(data_file)
+                for filename in combinable_files(data_file):
+                    print("-----")
+                    debug_data_file(filename)
         else:
-            show_help(f"Don't know what you mean by {args[0]!r}")
-            return ERR
+            if args[1:]:
+                show_help(f"'debug {args[0]}' takes no additional arguments")
+                return ERR
+            if args[0] == "sys":
+                write_formatted_info(print, "sys", self.coverage.sys_info())
+            elif args[0] == "config":
+                write_formatted_info(print, "config", self.coverage.config.debug_info())
+            elif args[0] == "premain":
+                print(info_header("premain"))
+                print(short_stack(full=True))
+            elif args[0] == "pybehave":
+                write_formatted_info(print, "pybehave", env.debug_info())
+            elif args[0] == "sqlite":
+                write_formatted_info(print, "sqlite", CoverageData.sys_info())
+            else:
+                show_help(f"Don't know what you mean by {args[0]!r}")
+                return ERR
 
         return OK
 
@@ -1119,7 +1141,7 @@ HELP_TOPICS = {
 
         Use "{program_name} help <command>" for detailed help on any command.
     """,
-    "minimum_help": oneline(
+    "minimum_help": prep_help(
         """
         Code coverage for Python, version {__version__} {extension_modifier}.
         Use '{program_name} help' for help.

@@ -13,7 +13,8 @@ http://aosabook.org/en/500L/a-template-engine.html
 from __future__ import annotations
 
 import re
-from typing import Any, Callable, NoReturn, cast
+from collections.abc import Callable
+from typing import Any, NoReturn, cast
 
 
 class TempliteSyntaxError(ValueError):

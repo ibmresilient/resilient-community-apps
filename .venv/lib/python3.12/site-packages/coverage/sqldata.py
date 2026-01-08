@@ -5,6 +5,7 @@
 
 from __future__ import annotations
 
+import base64
 import collections
 import datetime
 import functools
@@ -12,6 +13,7 @@ import glob
 import itertools
 import os
 import random
+import re
 import socket
 import sqlite3
 import string
@@ -20,12 +22,12 @@ import textwrap
 import threading
 import uuid
 import zlib
-from collections.abc import Collection, Mapping, Sequence
-from typing import Any, Callable, cast
+from collections.abc import Callable, Collection, Mapping, Sequence
+from typing import Any, cast
 
 from coverage.debug import NoDebugging, auto_repr, file_summary
 from coverage.exceptions import CoverageException, DataError
-from coverage.misc import file_be_gone, isolate_module
+from coverage.misc import Hasher, file_be_gone, isolate_module
 from coverage.numbits import numbits_to_nums, numbits_union, nums_to_numbits
 from coverage.sqlitedb import SqliteDb
 from coverage.types import AnyCallable, FilePath, TArc, TDebugCtl, TLineNo, TWarnFn
@@ -63,6 +65,7 @@ CREATE TABLE meta (
     --  'sys_argv' text         -- The coverage command line that recorded the data.
     --  'version' text          -- The version of coverage.py that made the file.
     --  'when' text             -- Datetime when the file was created.
+    --  'hash' text             -- Hash of the data.
 );
 
 CREATE TABLE file (
@@ -250,6 +253,7 @@ class CoverageData:
         self._no_disk = no_disk
         self._basename = os.path.abspath(basename or ".coverage")
         self._suffix = suffix
+        self._our_suffix = suffix is True
         self._warn = warn
         self._debug = debug or NoDebugging()
 
@@ -261,6 +265,9 @@ class CoverageData:
         self._pid = os.getpid()
         # Synchronize the operations used during collection.
         self._lock = threading.RLock()
+
+        self._wrote_hash = False
+        self._hasher = Hasher()
 
         # Are we in sync with the data file?
         self._have_used = False
@@ -355,10 +362,13 @@ class CoverageData:
 
         # When writing metadata, avoid information that will needlessly change
         # the hash of the data file, unless we're debugging processes.
+        # If we control the suffix, then the hash is in the file name, and we
+        # can write any metadata without affecting the hash determination
+        # later.
         meta_data = [
             ("version", __version__),
         ]
-        if self._debug.should("process"):
+        if self._our_suffix or self._debug.should("process"):
             meta_data.extend(
                 [
                     ("sys_argv", str(getattr(sys, "argv", None))),
@@ -472,6 +482,7 @@ class CoverageData:
             self._debug.write(f"Setting coverage context: {context!r}")
         self._current_context = context
         self._current_context_id = None
+        self._hasher.update(context)
 
     def _set_context_id(self) -> None:
         """Use the _current_context to set _current_context_id."""
@@ -529,7 +540,9 @@ class CoverageData:
         with self._connect() as con:
             self._set_context_id()
             for filename, linenos in line_data.items():
+                self._hasher.update(filename)
                 line_bits = nums_to_numbits(linenos)
+                self._hasher.update(line_bits)
                 file_id = self._file_id(filename, add=True)
                 query = "SELECT numbits FROM line_bits WHERE file_id = ? AND context_id = ?"
                 with con.execute(query, (file_id, self._current_context_id)) as cur:
@@ -573,6 +586,8 @@ class CoverageData:
         with self._connect() as con:
             self._set_context_id()
             for filename, arcs in arc_data.items():
+                self._hasher.update(filename)
+                self._hasher.update(arcs)
                 if not arcs:
                     continue
                 file_id = self._file_id(filename, add=True)
@@ -620,6 +635,8 @@ class CoverageData:
         self._start_using()
         with self._connect() as con:
             for filename, plugin_name in file_tracers.items():
+                self._hasher.update(filename)
+                self._hasher.update(plugin_name)
                 file_id = self._file_id(filename, add=True)
                 existing_plugin = self.file_tracer(filename)
                 if existing_plugin:
@@ -897,7 +914,22 @@ class CoverageData:
 
     def write(self) -> None:
         """Ensure the data is written to the data file."""
-        self._debug_dataio("Writing (no-op) data file", self._filename)
+        if self._our_suffix and not self._wrote_hash:
+            self._debug_dataio("Finishing data file", self._filename)
+            with self._connect() as con:
+                con.execute_void(
+                    "INSERT OR IGNORE INTO meta (key, value) VALUES ('hash', ?)",
+                    (self._hasher.hexdigest(),),
+                )
+            self.close()
+            data_hash = base64.b64encode(self._hasher.digest(), altchars=b"01").decode()[:NHASH]
+            current_filename = self._filename
+            self._filename += f".H{data_hash}h"
+            self._debug_dataio("Renaming data file to", self._filename)
+            os.rename(current_filename, self._filename)
+            self._wrote_hash = True
+        else:
+            self._debug_dataio("Writing (no-op) data file", self._filename)
 
     def _start_using(self) -> None:
         """Call this before using the database at all."""
@@ -1129,6 +1161,11 @@ class CoverageData:
         ]
 
 
+ASCII = string.ascii_letters + string.digits
+NRAND = 6
+NHASH = 10
+
+
 def filename_suffix(suffix: str | bool | None) -> str | None:
     """Compute a filename suffix for a data file.
 
@@ -1145,9 +1182,31 @@ def filename_suffix(suffix: str | bool | None) -> str | None:
         # `save()` at the last minute so that the pid will be correct even
         # if the process forks.
         die = random.Random(os.urandom(8))
-        letters = string.ascii_uppercase + string.ascii_lowercase
-        rolls = "".join(die.choice(letters) for _ in range(6))
-        suffix = f"{socket.gethostname()}.{os.getpid()}.X{rolls}x"
+        rolls = "".join(die.choice(ASCII) for _ in range(NRAND))
+        host = socket.gethostname().replace(".", "_")
+        suffix = f"{host}.pid{os.getpid()}.X{rolls}x"
     elif suffix is False:
         suffix = None
     return suffix
+
+
+# A regex to match parallel file name suffixes, with named groups.
+# We combine this with other regexes, so be careful with flags.
+SUFFIX_PATTERN = rf"""(?x:              # re.VERBOSE, but only for part of the pattern
+    \.(?P<host>[^.]+)                   # .hostname
+    \.pid(?P<pid>\d+)                   # .pid1234
+    \.X(?P<random>\w{{{NRAND}}})x       # .Xabc123x
+    (\.H(?P<hash>\w{{{NHASH}}}h))?      # .Habcdef1234h (optional)
+    )"""
+
+
+def filename_match(filename: str) -> re.Match[str] | None:
+    """Return a match object to pick apart the filename."""
+    return re.search(f"{SUFFIX_PATTERN}$", filename)
+
+
+def good_filename_match(filename: str) -> re.Match[str]:
+    """Match the filename where we know it will match."""
+    m = filename_match(filename)
+    assert m is not None
+    return m

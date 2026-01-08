@@ -10,7 +10,6 @@ import os.path
 import sys
 import time
 import xml.dom.minidom
-from collections.abc import Iterable
 from dataclasses import dataclass
 from typing import IO, TYPE_CHECKING, Any
 
@@ -19,7 +18,7 @@ from coverage.misc import human_sorted, human_sorted_items, isolate_module
 from coverage.plugin import FileReporter
 from coverage.report_core import get_analysis_to_report
 from coverage.results import Analysis
-from coverage.types import TMorf
+from coverage.types import TMorfs
 from coverage.version import __url__
 
 if TYPE_CHECKING:
@@ -76,7 +75,7 @@ class XmlReporter:
         self.packages: dict[str, PackageData] = {}
         self.xml_out: xml.dom.minidom.Document
 
-    def report(self, morfs: Iterable[TMorf] | None, outfile: IO[str] | None = None) -> float:
+    def report(self, morfs: TMorfs, outfile: IO[str] | None = None) -> float:
         """Generate a Cobertura-compatible XML report for `morfs`.
 
         `morfs` is a list of modules or file names.

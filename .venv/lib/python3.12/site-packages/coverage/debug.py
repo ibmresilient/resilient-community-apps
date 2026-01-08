@@ -19,8 +19,8 @@ import reprlib
 import sys
 import traceback
 import types
-from collections.abc import Iterable, Iterator, Mapping
-from typing import IO, Any, Callable, Final, overload
+from collections.abc import Callable, Iterable, Iterator, Mapping
+from typing import IO, Any, Final, overload
 
 from coverage.misc import human_sorted_items, isolate_module
 from coverage.types import AnyCallable, TWritable

@@ -12,10 +12,10 @@ import os
 import re
 import token
 import tokenize
-from collections.abc import Iterable, Sequence
+from collections.abc import Callable, Iterable, Sequence
 from dataclasses import dataclass
 from types import CodeType
-from typing import Callable, Optional, Protocol, cast
+from typing import Optional, Protocol, cast
 
 from coverage import env
 from coverage.bytecode import code_objects

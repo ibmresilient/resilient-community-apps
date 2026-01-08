@@ -12,12 +12,12 @@ import os.path
 import posixpath
 import re
 import sys
-from collections.abc import Iterable
-from typing import Callable
+from collections.abc import Callable, Iterable
 
 from coverage import env
 from coverage.exceptions import ConfigError
 from coverage.misc import human_sorted, isolate_module, join_regex
+from coverage.types import TMatcher
 
 os = isolate_module(os)
 
@@ -215,7 +215,7 @@ def prep_patterns(patterns: Iterable[str]) -> list[str]:
     return prepped
 
 
-class TreeMatcher:
+class TreeMatcher(TMatcher):
     """A matcher for files in a tree.
 
     Construct with a list of paths, either files or directories. Paths match
@@ -236,7 +236,7 @@ class TreeMatcher:
         """A list of strings for displaying when dumping state."""
         return self.original_paths
 
-    def match(self, fpath: str) -> bool:
+    def match(self, fpath: str) -> bool:  # pylint: disable=arguments-renamed
         """Does `fpath` indicate a file in one of our trees?"""
         fpath = os.path.normcase(fpath)
         for p in self.paths:
@@ -250,7 +250,7 @@ class TreeMatcher:
         return False
 
 
-class ModuleMatcher:
+class ModuleMatcher(TMatcher):
     """A matcher for modules in a tree."""
 
     def __init__(self, module_names: Iterable[str], name: str = "unknown") -> None:
@@ -264,7 +264,7 @@ class ModuleMatcher:
         """A list of strings for displaying when dumping state."""
         return self.modules
 
-    def match(self, module_name: str) -> bool:
+    def match(self, module_name: str) -> bool:  # pylint: disable=arguments-renamed
         """Does `module_name` indicate a module in one of our packages?"""
         if not module_name:
             return False
@@ -280,7 +280,7 @@ class ModuleMatcher:
         return False
 
 
-class GlobMatcher:
+class GlobMatcher(TMatcher):
     """A matcher for files by file name pattern."""
 
     def __init__(self, pats: Iterable[str], name: str = "unknown") -> None:
@@ -295,7 +295,7 @@ class GlobMatcher:
         """A list of strings for displaying when dumping state."""
         return self.pats
 
-    def match(self, fpath: str) -> bool:
+    def match(self, fpath: str) -> bool:  # pylint: disable=arguments-renamed
         """Does `fpath` match one of our file name patterns?"""
         return self.re.match(fpath) is not None
 

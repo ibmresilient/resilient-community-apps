@@ -9,9 +9,9 @@ import contextlib
 import functools
 import os
 import sys
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from types import FrameType
-from typing import Any, Callable, TypeVar, cast
+from typing import Any, TypeVar, cast
 
 from coverage import env
 from coverage.core import Core
@@ -283,6 +283,7 @@ class Collector:
     # install this as a trace function, and the first time it's called, it does
     # the real trace installation.
     #
+    # PYVERSIONS
     # New in 3.12: threading.settrace_all_threads: https://github.com/python/cpython/pull/96681
 
     def _installation_trace(self, frame: FrameType, event: str, arg: Any) -> TTraceFn | None:

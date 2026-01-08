@@ -10,8 +10,6 @@ import inspect
 import itertools
 import os
 import os.path
-import platform
-import re
 import sys
 import sysconfig
 import traceback
@@ -37,27 +35,6 @@ from coverage.types import TDebugCtl, TFileDisposition, TMorf, TWarnFn
 if TYPE_CHECKING:
     from coverage.config import CoverageConfig
     from coverage.plugin_support import Plugins
-
-
-modules_we_happen_to_have: list[ModuleType] = [
-    inspect,
-    itertools,
-    os,
-    platform,
-    re,
-    sysconfig,
-    traceback,
-]
-
-if env.PYPY:
-    # Pypy has some unusual stuff in the "stdlib".  Consider those locations
-    # when deciding where the stdlib is.  These modules are not used for anything,
-    # they are modules importable from the pypy lib directories, so that we can
-    # find those directories.
-    import _pypy_irc_topic  # pylint: disable=import-error
-    import _structseq  # pylint: disable=import-error
-
-    modules_we_happen_to_have.extend([_structseq, _pypy_irc_topic])
 
 
 os = isolate_module(os)
@@ -145,30 +122,24 @@ def file_and_path_for_module(modulename: str) -> tuple[str | None, list[str]]:
     return filename, path
 
 
+def add_sysconfig_paths(paths: set[str], path_names: list[str]) -> None:
+    """Get paths from `sysconfig.get_paths`"""
+    scheme_names = set(sysconfig.get_scheme_names())
+
+    for scheme in scheme_names:
+        config_paths = sysconfig.get_paths(scheme)
+        for path_name in path_names:
+            paths.add(config_paths[path_name])
+
+
 def add_stdlib_paths(paths: set[str]) -> None:
     """Add paths where the stdlib can be found to the set `paths`."""
-    # Look at where some standard modules are located. That's the
-    # indication for "installed with the interpreter". In some
-    # environments (virtualenv, for example), these modules may be
-    # spread across a few locations. Look at all the candidate modules
-    # we've imported, and take all the different ones.
-    for m in modules_we_happen_to_have:
-        if hasattr(m, "__file__"):
-            paths.add(canonical_path(m, directory=True))
+    add_sysconfig_paths(paths, ["stdlib", "platstdlib"])
 
 
 def add_third_party_paths(paths: set[str]) -> None:
     """Add locations for third-party packages to the set `paths`."""
-    # Get the paths that sysconfig knows about.
-    scheme_names = set(sysconfig.get_scheme_names())
-
-    for scheme in scheme_names:
-        # https://foss.heptapod.net/pypy/pypy/-/issues/3433
-        better_scheme = "pypy_posix" if scheme == "pypy" else scheme
-        if os.name in better_scheme.split("_"):
-            config_paths = sysconfig.get_paths(scheme)
-            for path_name in ["platlib", "purelib", "scripts"]:
-                paths.add(config_paths[path_name])
+    add_sysconfig_paths(paths, ["platlib", "purelib", "scripts"])
 
 
 def add_coverage_paths(paths: set[str]) -> None:
@@ -234,10 +205,15 @@ class InOrOut:
             if self.debug:
                 self.debug.write(msg)
 
-        # The matchers for should_trace.
-
         # Generally useful information
         _debug("sys.path:" + "".join(f"\n    {p}" for p in sys.path))
+
+        if self.debug:
+            _debug("sysconfig paths:")
+            for scheme in sorted(sysconfig.get_scheme_names()):
+                _debug(f"    {scheme}:")
+                for k, v in sysconfig.get_paths(scheme).items():
+                    _debug(f"        {k}: {v}")
 
         # Create the matchers we need for should_trace
         self.source_match = None

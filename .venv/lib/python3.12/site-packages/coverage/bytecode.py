@@ -7,8 +7,9 @@ from __future__ import annotations
 
 import collections
 import dis
+from collections.abc import Iterable, Mapping
 from types import CodeType
-from typing import Iterable, Mapping, Optional
+from typing import Optional
 
 from coverage.types import TArc, TLineNo, TOffset
 

@@ -9,9 +9,9 @@ from __future__ import annotations
 
 import os
 import pathlib
-from collections.abc import Iterable, Mapping
+from collections.abc import Callable, Iterable, Mapping
 from types import FrameType, ModuleType
-from typing import TYPE_CHECKING, Any, Callable, Optional, Protocol
+from typing import TYPE_CHECKING, Any, Optional, Protocol
 
 if TYPE_CHECKING:
     from coverage.plugin import FileTracer
@@ -63,6 +63,13 @@ class TFileDisposition(Protocol):
     reason: str
     file_tracer: FileTracer | None
     has_dynamic_filename: bool
+
+
+class TMatcher(Protocol):
+    """The shape all Matchers have."""
+
+    def match(self, s: str) -> bool:
+        """Does this string match?"""
 
 
 # When collecting data, we use a dictionary with a few possible shapes. The
@@ -166,6 +173,7 @@ class TPluginConfig(Protocol):
 ## Parsing
 
 TMorf = ModuleType | str
+TMorfs = TMorf | Iterable[TMorf] | None
 
 TSourceTokenLines = Iterable[list[tuple[str, str]]]
 

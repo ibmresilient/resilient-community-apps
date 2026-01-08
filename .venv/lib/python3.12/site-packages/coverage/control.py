@@ -17,9 +17,9 @@ import sys
 import threading
 import time
 import warnings
-from collections.abc import Iterable, Iterator
+from collections.abc import Callable, Iterable, Iterator
 from types import FrameType
-from typing import IO, Any, Callable, cast
+from typing import IO, Any, cast
 
 from coverage import env
 from coverage.annotate import AnnotateReporter
@@ -66,6 +66,7 @@ from coverage.types import (
     TFileDisposition,
     TLineNo,
     TMorf,
+    TMorfs,
 )
 from coverage.version import __url__
 from coverage.xmlreport import XmlReporter
@@ -1056,7 +1057,7 @@ class Coverage(TConfigurable):
 
     def _get_file_reporters(
         self,
-        morfs: Iterable[TMorf] | None = None,
+        morfs: TMorfs = None,
     ) -> list[tuple[FileReporter, TMorf]]:
         """Get FileReporters for a list of modules or file names.
 
@@ -1090,7 +1091,7 @@ class Coverage(TConfigurable):
 
     def report(
         self,
-        morfs: Iterable[TMorf] | None = None,
+        morfs: TMorfs = None,
         show_missing: bool | None = None,
         ignore_errors: bool | None = None,
         file: IO[str] | None = None,
@@ -1172,7 +1173,7 @@ class Coverage(TConfigurable):
 
     def annotate(
         self,
-        morfs: Iterable[TMorf] | None = None,
+        morfs: TMorfs = None,
         directory: str | None = None,
         ignore_errors: bool | None = None,
         omit: str | list[str] | None = None,
@@ -1202,7 +1203,7 @@ class Coverage(TConfigurable):
 
     def html_report(
         self,
-        morfs: Iterable[TMorf] | None = None,
+        morfs: TMorfs = None,
         directory: str | None = None,
         ignore_errors: bool | None = None,
         omit: str | list[str] | None = None,
@@ -1259,7 +1260,7 @@ class Coverage(TConfigurable):
 
     def xml_report(
         self,
-        morfs: Iterable[TMorf] | None = None,
+        morfs: TMorfs = None,
         outfile: str | None = None,
         ignore_errors: bool | None = None,
         omit: str | list[str] | None = None,
@@ -1293,7 +1294,7 @@ class Coverage(TConfigurable):
 
     def json_report(
         self,
-        morfs: Iterable[TMorf] | None = None,
+        morfs: TMorfs = None,
         outfile: str | None = None,
         ignore_errors: bool | None = None,
         omit: str | list[str] | None = None,
@@ -1331,7 +1332,7 @@ class Coverage(TConfigurable):
 
     def lcov_report(
         self,
-        morfs: Iterable[TMorf] | None = None,
+        morfs: TMorfs = None,
         outfile: str | None = None,
         ignore_errors: bool | None = None,
         omit: str | list[str] | None = None,

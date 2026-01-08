@@ -7,7 +7,6 @@ from __future__ import annotations
 
 import os
 import re
-from collections.abc import Iterable
 from typing import TYPE_CHECKING
 
 from coverage.files import flat_rootname
@@ -15,7 +14,7 @@ from coverage.misc import ensure_dir, isolate_module
 from coverage.plugin import FileReporter
 from coverage.report_core import get_analysis_to_report
 from coverage.results import Analysis
-from coverage.types import TMorf
+from coverage.types import TMorfs
 
 if TYPE_CHECKING:
     from coverage import Coverage
@@ -53,7 +52,7 @@ class AnnotateReporter:
     blank_re = re.compile(r"\s*(#|$)")
     else_re = re.compile(r"\s*else\s*:\s*(#|$)")
 
-    def report(self, morfs: Iterable[TMorf] | None, directory: str | None = None) -> None:
+    def report(self, morfs: TMorfs, directory: str | None = None) -> None:
         """Run the report.
 
         See `coverage.report()` for arguments.

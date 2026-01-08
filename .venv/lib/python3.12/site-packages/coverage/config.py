@@ -13,8 +13,8 @@ import json
 import os
 import os.path
 import re
-from collections.abc import Iterable
-from typing import Any, Callable, Final, Mapping
+from collections.abc import Callable, Iterable, Mapping
+from typing import Any, Final
 
 from coverage.exceptions import ConfigError
 from coverage.misc import human_sorted_items, isolate_module, substitute_variables

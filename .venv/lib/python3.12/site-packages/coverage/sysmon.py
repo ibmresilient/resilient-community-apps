@@ -13,9 +13,10 @@ import os.path
 import sys
 import threading
 import traceback
+from collections.abc import Callable
 from dataclasses import dataclass
 from types import CodeType
-from typing import Any, Callable, NewType, Optional, cast
+from typing import Any, NewType, Optional, cast
 
 from coverage import env
 from coverage.bytecode import TBranchTrails, always_jumps, branch_trails
@@ -260,14 +261,8 @@ class SysMonitor(Tracer):
                 register(events.PY_RETURN, self.sysmon_py_return)
                 register(events.LINE, self.sysmon_line_arcs)
                 if env.PYBEHAVIOR.branch_right_left:
-                    register(
-                        events.BRANCH_RIGHT,  # type:ignore[attr-defined]
-                        self.sysmon_branch_either,
-                    )
-                    register(
-                        events.BRANCH_LEFT,
-                        self.sysmon_branch_either,
-                    )
+                    register(events.BRANCH_RIGHT, self.sysmon_branch_either)
+                    register(events.BRANCH_LEFT, self.sysmon_branch_either)
             else:
                 register(events.LINE, self.sysmon_line_lines)
             sys_monitoring.restart_events()
@@ -387,10 +382,7 @@ class SysMonitor(Tracer):
                         local_events = events.PY_RETURN | events.PY_RESUME | events.LINE
                         if self.trace_arcs:
                             assert env.PYBEHAVIOR.branch_right_left
-                            local_events |= (
-                                events.BRANCH_RIGHT  # type:ignore[attr-defined]
-                                | events.BRANCH_LEFT
-                            )
+                            local_events |= events.BRANCH_RIGHT | events.BRANCH_LEFT
                         sys_monitoring.set_local_events(self.myid, code, local_events)
 
                         if LOG:  # pragma: debugging

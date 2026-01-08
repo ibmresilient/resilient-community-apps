@@ -6,15 +6,15 @@
 from __future__ import annotations
 
 import sys
-from collections.abc import Iterable
-from typing import IO, TYPE_CHECKING, Callable, Protocol
+from collections.abc import Callable, Iterable
+from typing import IO, TYPE_CHECKING, Protocol
 
 from coverage.exceptions import NoDataError, NotPython
 from coverage.files import GlobMatcher, prep_patterns
 from coverage.misc import ensure_dir_for_file, file_be_gone
 from coverage.plugin import FileReporter
 from coverage.results import Analysis
-from coverage.types import TMorf
+from coverage.types import TMorfs
 
 if TYPE_CHECKING:
     from coverage import Coverage
@@ -25,14 +25,14 @@ class Reporter(Protocol):
 
     report_type: str
 
-    def report(self, morfs: Iterable[TMorf] | None, outfile: IO[str]) -> float:
+    def report(self, morfs: TMorfs, outfile: IO[str]) -> float:
         """Generate a report of `morfs`, written to `outfile`."""
 
 
 def render_report(
     output_path: str,
     reporter: Reporter,
-    morfs: Iterable[TMorf] | None,
+    morfs: TMorfs,
     msgfn: Callable[[str], None],
 ) -> float:
     """Run a one-file report generator, managing the output file.
@@ -70,7 +70,7 @@ def render_report(
 
 def get_analysis_to_report(
     coverage: Coverage,
-    morfs: Iterable[TMorf] | None,
+    morfs: TMorfs,
 ) -> Iterable[tuple[FileReporter, Analysis]]:
     """Get the files to report on.
 
