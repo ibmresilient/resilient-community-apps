@@ -1,0 +1,22 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "device_status": "success"
+  },
+  "raw": null,
+  "inputs": {
+    "vmware_cbc_device_action": "QUARANTINE",
+    "vmware_cbc_device_id": "212389492",
+    "vmware_cbc_device_toggle": "OFF"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-vmware-cbc",
+    "package_version": "1.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 54545,
+    "timestamp": "2024-05-31 12:31:34"
+  }
+}
