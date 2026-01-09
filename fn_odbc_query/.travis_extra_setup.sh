@@ -11,5 +11,5 @@ echo "copying drivers into the fn_odbc_query/.drivers directory"
 cp -R $TRAVIS_BUILD_DIR/.drivers $PACKAGE_PATH/.drivers
 
 echo "Installing OS-level packages"
-sudo apt-get install -y unixodbc-dev
-sudo apt-get install -y gcc
+sudo yum install -y unixodbc-dev
+sudo yum install -y gcc
