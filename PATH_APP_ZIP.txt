@@ -1,0 +1,1 @@
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_soar_utils/main/1.1/app-fn_soar_utils-1.1.0-19961.zip
