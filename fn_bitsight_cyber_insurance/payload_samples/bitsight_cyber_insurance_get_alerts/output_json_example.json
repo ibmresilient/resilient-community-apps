@@ -1,0 +1,97 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "guid": 617110381,
+      "alert_type": "FINDINGS_FILTER",
+      "alert_date": "2025-04-01",
+      "start_date": "2025-04-01",
+      "company_name": "Saperix Corporate",
+      "company_guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "company_url": "/company/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/",
+      "folder_guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "folder_name": "alertset_483413_virtual_folder",
+      "severity": null,
+      "trigger": "FINDINGS_FILTER",
+      "alert_set_name": "New findings",
+      "alert_set_guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    },
+    {
+      "guid": 617110382,
+      "alert_type": "FINDINGS_FILTER",
+      "alert_date": "2025-04-01",
+      "start_date": "2025-04-01",
+      "company_name": "Saperix Corporate - US West",
+      "company_guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "company_url": "/company/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/",
+      "folder_guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "folder_name": "alertset_483413_virtual_folder",
+      "severity": null,
+      "trigger": "FINDINGS_FILTER",
+      "alert_set_name": "New findings",
+      "alert_set_guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    },
+    {
+      "guid": 617110383,
+      "alert_type": "FINDINGS_FILTER",
+      "alert_date": "2025-04-01",
+      "start_date": "2025-04-01",
+      "company_name": "Saperix, Inc - Wifi testing",
+      "company_guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "company_url": "/company/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/",
+      "folder_guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "folder_name": "alertset_483413_virtual_folder",
+      "severity": null,
+      "trigger": "FINDINGS_FILTER",
+      "alert_set_name": "New findings",
+      "alert_set_guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    },
+    {
+      "guid": 617110380,
+      "alert_type": "FINDINGS_FILTER",
+      "alert_date": "2025-04-01",
+      "start_date": "2025-04-01",
+      "company_name": "Saperix, Inc.",
+      "company_guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "company_url": "/company/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/",
+      "folder_guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "folder_name": "alertset_483413_virtual_folder",
+      "severity": null,
+      "trigger": "FINDINGS_FILTER",
+      "alert_set_name": "New findings",
+      "alert_set_guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    },
+    {
+      "guid": 617110384,
+      "alert_type": "RISK_GRADE_CHANGE",
+      "alert_date": "2025-04-01",
+      "start_date": "2025-03-31",
+      "company_name": "Saperix, Inc.",
+      "company_guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "company_url": "/company/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/",
+      "folder_guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "folder_name": "alertset_483431_virtual_folder",
+      "severity": null,
+      "trigger": "RISK_GRADE_CHANGE",
+      "alert_set_name": "Risk Vector Grades",
+      "alert_set_guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "bitsight_ci_alert_date_gte": 1743552000000,
+    "bitsight_ci_alert_date": 1743465600000,
+    "bitsight_ci_alert_date_gt": 1740787200000,
+    "bitsight_ci_limit": 5
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-bitsight-cyber-insurance",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 177,
+    "timestamp": "2025-04-14 09:19:46"
+  }
+}

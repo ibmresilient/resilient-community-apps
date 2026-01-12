@@ -1,0 +1,367 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "incident_id": 2102,
+    "exo_query_output_format": [
+      "Exchange Online data table"
+    ],
+    "email_results": [
+      {
+        "email_address": "soartester@mytenant.onmicrosoft.com",
+        "status_code": 200,
+        "email_list": [
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAb4l2O\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAb6QY8AAA=",
+            "receivedDateTime": "2023-05-15T07:44:34Z",
+            "hasAttachments": false,
+            "subject": "test",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAb6QY8AAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETUm\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_OAAA=",
+            "receivedDateTime": "2023-05-18T08:43:22Z",
+            "hasAttachments": false,
+            "subject": "test pb",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BOAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETUi\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_NAAA=",
+            "receivedDateTime": "2023-05-18T08:55:41Z",
+            "hasAttachments": false,
+            "subject": "test pb",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BNAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETUe\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_MAAA=",
+            "receivedDateTime": "2023-05-22T04:58:14Z",
+            "hasAttachments": false,
+            "subject": "test pb",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BMAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETUa\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_LAAA=",
+            "receivedDateTime": "2023-05-26T03:58:50Z",
+            "hasAttachments": false,
+            "subject": "test pb 123",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BLAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETT8\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_KAAA=",
+            "receivedDateTime": "2023-05-26T04:55:57Z",
+            "hasAttachments": false,
+            "subject": "test pb 456",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BKAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETT4\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_JAAA=",
+            "receivedDateTime": "2023-05-26T04:56:00Z",
+            "hasAttachments": false,
+            "subject": "test pb 456",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BJAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "soartester@mytenant.onmicrosoft.com"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETVN\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAApGmcOAAA=",
+            "receivedDateTime": "2023-05-30T04:31:18Z",
+            "hasAttachments": false,
+            "subject": "test pb",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGmcOAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETyz\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAApGmcPAAA=",
+            "receivedDateTime": "2023-05-30T07:41:39Z",
+            "hasAttachments": false,
+            "subject": "test pb ",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGmcPAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETzY\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAApGmcQAAA=",
+            "receivedDateTime": "2023-05-30T07:49:23Z",
+            "hasAttachments": false,
+            "subject": "test pb",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGmcQAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApET0K\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAApGmcRAAA=",
+            "receivedDateTime": "2023-05-30T07:53:57Z",
+            "hasAttachments": false,
+            "subject": "test pb",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGmcRAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuFf\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlOMAAA=",
+            "receivedDateTime": "2023-06-08T07:04:23Z",
+            "hasAttachments": false,
+            "subject": "123",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlOMAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuFh\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld2AAA=",
+            "receivedDateTime": "2023-06-08T07:04:26Z",
+            "hasAttachments": false,
+            "subject": "123",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld2AAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "soartester@mytenant.onmicrosoft.com"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuGD\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlONAAA=",
+            "receivedDateTime": "2023-06-08T07:04:31Z",
+            "hasAttachments": false,
+            "subject": "456",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlONAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuF9\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld3AAA=",
+            "receivedDateTime": "2023-06-08T07:04:31Z",
+            "hasAttachments": false,
+            "subject": "456",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld3AAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "soartester@mytenant.onmicrosoft.com"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuGd\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlOOAAA=",
+            "receivedDateTime": "2023-06-08T07:04:57Z",
+            "hasAttachments": false,
+            "subject": "123",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlOOAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuGU\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld4AAA=",
+            "receivedDateTime": "2023-06-08T07:04:57Z",
+            "hasAttachments": false,
+            "subject": "123",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld4AAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "soartester@mytenant.onmicrosoft.com"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuHc\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlOPAAA=",
+            "receivedDateTime": "2023-06-08T07:12:43Z",
+            "hasAttachments": false,
+            "subject": "123",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlOPAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuHn\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld5AAA=",
+            "receivedDateTime": "2023-06-08T07:12:48Z",
+            "hasAttachments": false,
+            "subject": "123",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld5AAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "soartester@mytenant.onmicrosoft.com"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuIA\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlOQAAA=",
+            "receivedDateTime": "2023-06-08T07:13:06Z",
+            "hasAttachments": false,
+            "subject": null,
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlOQAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuH7\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld6AAA=",
+            "receivedDateTime": "2023-06-08T07:13:06Z",
+            "hasAttachments": false,
+            "subject": "",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld6AAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "soartester@mytenant.onmicrosoft.com"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAA0Qx/Z\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAA0UCmSAAA=",
+            "receivedDateTime": "2023-06-08T07:21:41Z",
+            "hasAttachments": false,
+            "subject": null,
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAA0UCmSAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A"
+              }
+            }
+          },
+          {
+            "@odata.etag": "W/\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAA0Qx/6\"",
+            "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAA0UETzAAA=",
+            "receivedDateTime": "2023-06-15T07:56:32Z",
+            "hasAttachments": false,
+            "subject": "test123456",
+            "webLink": "https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAA0UETzAAA%3D&exvsurl=1&viewmodel=ReadMessageItem",
+            "sender": {
+              "emailAddress": {
+                "name": "SOAR tester",
+                "address": "/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "raw": "{\"incident_id\": 2102, \"exo_query_output_format\": [\"Exchange Online data table\"], \"email_results\": [{\"email_address\": \"soartester@mytenant.onmicrosoft.com\", \"status_code\": 200, \"email_list\": [{\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAb4l2O\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAb6QY8AAA=\", \"receivedDateTime\": \"2023-05-15T07:44:34Z\", \"hasAttachments\": false, \"subject\": \"test\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAb6QY8AAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETUm\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_OAAA=\", \"receivedDateTime\": \"2023-05-18T08:43:22Z\", \"hasAttachments\": false, \"subject\": \"test pb\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BOAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETUi\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_NAAA=\", \"receivedDateTime\": \"2023-05-18T08:55:41Z\", \"hasAttachments\": false, \"subject\": \"test pb\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BNAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETUe\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_MAAA=\", \"receivedDateTime\": \"2023-05-22T04:58:14Z\", \"hasAttachments\": false, \"subject\": \"test pb\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BMAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETUa\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_LAAA=\", \"receivedDateTime\": \"2023-05-26T03:58:50Z\", \"hasAttachments\": false, \"subject\": \"test pb 123\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BLAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETT8\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_KAAA=\", \"receivedDateTime\": \"2023-05-26T04:55:57Z\", \"hasAttachments\": false, \"subject\": \"test pb 456\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BKAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETT4\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEKAADi5Xky9KHuQ48Uewaxv-e8AAApGk_JAAA=\", \"receivedDateTime\": \"2023-05-26T04:56:00Z\", \"hasAttachments\": false, \"subject\": \"test pb 456\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEKAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGk%2BJAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETVN\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAApGmcOAAA=\", \"receivedDateTime\": \"2023-05-30T04:31:18Z\", \"hasAttachments\": false, \"subject\": \"test pb\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGmcOAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETyz\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAApGmcPAAA=\", \"receivedDateTime\": \"2023-05-30T07:41:39Z\", \"hasAttachments\": false, \"subject\": \"test pb \", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGmcPAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApETzY\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAApGmcQAAA=\", \"receivedDateTime\": \"2023-05-30T07:49:23Z\", \"hasAttachments\": false, \"subject\": \"test pb\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGmcQAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAApET0K\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAApGmcRAAA=\", \"receivedDateTime\": \"2023-05-30T07:53:57Z\", \"hasAttachments\": false, \"subject\": \"test pb\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAApGmcRAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuFf\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlOMAAA=\", \"receivedDateTime\": \"2023-06-08T07:04:23Z\", \"hasAttachments\": false, \"subject\": \"123\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlOMAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuFh\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld2AAA=\", \"receivedDateTime\": \"2023-06-08T07:04:26Z\", \"hasAttachments\": false, \"subject\": \"123\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld2AAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuGD\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlONAAA=\", \"receivedDateTime\": \"2023-06-08T07:04:31Z\", \"hasAttachments\": false, \"subject\": \"456\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlONAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuF9\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld3AAA=\", \"receivedDateTime\": \"2023-06-08T07:04:31Z\", \"hasAttachments\": false, \"subject\": \"456\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld3AAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuGd\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlOOAAA=\", \"receivedDateTime\": \"2023-06-08T07:04:57Z\", \"hasAttachments\": false, \"subject\": \"123\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlOOAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuGU\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld4AAA=\", \"receivedDateTime\": \"2023-06-08T07:04:57Z\", \"hasAttachments\": false, \"subject\": \"123\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld4AAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuHc\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlOPAAA=\", \"receivedDateTime\": \"2023-06-08T07:12:43Z\", \"hasAttachments\": false, \"subject\": \"123\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlOPAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuHn\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld5AAA=\", \"receivedDateTime\": \"2023-06-08T07:12:48Z\", \"hasAttachments\": false, \"subject\": \"123\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld5AAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuIA\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAAvnlOQAAA=\", \"receivedDateTime\": \"2023-06-08T07:13:06Z\", \"hasAttachments\": false, \"subject\": null, \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnlOQAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAAvkuH7\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAAvnld6AAA=\", \"receivedDateTime\": \"2023-06-08T07:13:06Z\", \"hasAttachments\": false, \"subject\": \"\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAAvnld6AAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAA0Qx/Z\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEMAADi5Xky9KHuQ48Uewaxv-e8AAA0UCmSAAA=\", \"receivedDateTime\": \"2023-06-08T07:21:41Z\", \"hasAttachments\": false, \"subject\": null, \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEMAADi5Xky9KHuQ48Uewaxv%2Fe8AAA0UCmSAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}, {\"@odata.etag\": \"W/\\\"CQAAABYAAADi5Xky9KHuQ48Uewaxv/e8AAA0Qx/6\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAEJAADi5Xky9KHuQ48Uewaxv-e8AAA0UETzAAA=\", \"receivedDateTime\": \"2023-06-15T07:56:32Z\", \"hasAttachments\": false, \"subject\": \"test123456\", \"webLink\": \"https://outlook.office365.com/owa/?ItemID=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAEJAADi5Xky9KHuQ48Uewaxv%2Fe8AAA0UETzAAA%3D&exvsurl=1&viewmodel=ReadMessageItem\", \"sender\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"/O=EXCHANGELABS/OU=EXCHANGE ADMINISTRATIVE GROUP (FYDIBOHF23SPDLT)/CN=RECIPIENTS/CN=1EAA9DAC99144C61B699D7F3AED52106-47314D20-5A\"}}}]}]}",
+  "inputs": {
+    "incident_id": 2102,
+    "exo_has_attachments": null,
+    "exo_message_subject": null,
+    "exo_email_address": "soartester@mytenant.onmicrosoft.com",
+    "exo_start_date": null,
+    "exo_query_output_format": [
+      {
+        "id": 206,
+        "name": "Exchange Online data table"
+      }
+    ],
+    "exo_email_address_sender": "soartester@mytenant.onmicrosoft.com",
+    "exo_end_date": null,
+    "exo_message_body": null,
+    "exo_mail_folders": null
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-exchange-online",
+    "package_version": "1.4.0",
+    "host": "myLaptop",
+    "execution_time_ms": 2118,
+    "timestamp": "2023-06-15 19:55:23"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {},
+  "raw": "",
+  "inputs": {
+    "defender_indicator_id": "15"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-microsoft-defender",
+    "package_version": "1.3.0",
+    "host": "my.app.host",
+    "execution_time_ms": 754,
+    "timestamp": "2025-06-26 11:04:36"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": "inserted: https://www.autohausmeister.eu\n",
+  "raw": "",
+  "inputs": {
+    "urlhaus_artifact_value": "https://www.autohausmeister.eu"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-urlhaus",
+    "package_version": "1.0.3",
+    "host": "97472623-103e-44d1-a1da-c1d6296cbf8e-669f5f5bfc-sg65t",
+    "execution_time_ms": 330,
+    "timestamp": "2024-09-20 15:53:23"
+  }
+}
