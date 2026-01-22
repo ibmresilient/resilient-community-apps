@@ -1,0 +1,130 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "state": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "owner": {
+            "type": "string"
+          },
+          "team": {
+            "type": "string"
+          },
+          "closedOwner": {
+            "type": "string"
+          },
+          "closedTeam": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "displayId": {
+            "type": "string"
+          },
+          "createdTime": {
+            "type": "string"
+          },
+          "lastChanged": {
+            "type": "string"
+          },
+          "firstInProgressTime": {
+            "type": "string"
+          },
+          "resolvedTime": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "integer"
+          },
+          "escalated": {
+            "type": "boolean"
+          },
+          "wasEscalated": {
+            "type": "boolean"
+          },
+          "correlationDetails": {
+            "type": "object",
+            "properties": {
+              "application": {
+                "type": "string"
+              }
+            }
+          },
+          "accessScopes": {
+            "type": "array"
+          },
+          "incidentURL": {
+            "type": "string"
+          },
+          "eventsURL": {
+            "type": "string"
+          },
+          "timelineURL": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "ocm_endtime": {
+          "type": "integer"
+        },
+        "ocm_event_combiner": {
+          "type": "string"
+        },
+        "ocm_starttime": {
+          "type": "integer"
+        },
+        "ocm_event_filter_1": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
