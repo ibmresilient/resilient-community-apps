@@ -32,13 +32,17 @@
   - [Function - MS Teams: Delete Channel](#function---ms-teams-delete-channel)
   - [Function - MS Teams: Delete Group](#function---ms-teams-delete-group)
   - [Function - MS Teams: Enable Team](#function---ms-teams-enable-team)
+  - [Function - MS Teams: List Groups](#function---ms-teams-list-groups)
+  - [Function - MS Teams: List Team Channels](#function---ms-teams-list-team-channels)
+  - [Function - MS Teams: List Teams](#function---ms-teams-list-teams)
   - [Function - MS Teams: Post Message](#function---ms-teams-post-message)
-  - [Function - MS Teams: Post Message for Workflows](#function---ms-teams-post-message-for-workflows)
   - [Function - MS Teams: Read Message](#function---ms-teams-read-message)
+
   <!--
   - [Custom Layouts](#custom-layouts)
     - [Data Table - MS Teams Approval Process](#data-table---ms-teams-approval-process)
   -->
+
   - [Playbooks](#playbooks)
   - [Troubleshooting & Support](#troubleshooting--support)
     - [For Support](#for-support)
@@ -47,11 +51,13 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.2.0 | 10/2024 | New function to support MS Teams Workflows |
+| 2.3.0 | 02/2025 | Add functions: list groups, list teams, list channels. Better proxy support. |
+| 2.2.0 | 08/2024 | New function to support MS Teams Workflows |
 | 2.1.0 | 05/2023 | Add playbooks and removed workflows|
 | 2.0.1 | 12/2022 | Bug fix in workflows for MS Teams: Enable Teams for Groups and MS Teams: Read messages |
 | 2.0.0 | 12/2022 | Added support for creating and deleting MS Groups, Teams and Channels |
 | 1.0.0 | 10/2019 | Post Incident/task information to MS Teams |
+
 
 ### 2.2.0 Changes
 <!--
@@ -110,7 +116,7 @@ If deploying to a SOAR platform with an App Host, the requirements are:
 If deploying to a SOAR platform with an integration server, the requirements are:
 * SOAR platform >= `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=45.0.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -149,7 +155,7 @@ Both Python 3.9 and Python 3.11 are supported.
 Additional package dependencies may exist for each of these packages:
 * msal ~= 1.30
 * pymsteams ~= 0.2.3
-* resilient_circuits>=50.0.0
+* resilient_circuits>=51.0.0
 
 ### Endpoint Developed With MS Teams
 
@@ -187,55 +193,7 @@ The access token includes details about the application and the permission it ha
 * Select `Yes` for `Enable the following mobile and desktop flows` then click `Save`.
 
 ### API Permissions
-The application requires admins consent to access a protected resource, such as user information and Team settings. Microsoft Graph exposes certain predetermined APIs and only accepts requests made to them. These predetermined APIs or permissions can be added to individual applications thereby limiting them to only make controlled changes to the objects they are exposed to. In this case, we require permission to operate on Groups, Teams, and to read User information. You can learn more about this concept at [learn.microsoft.com/scopes-oidc](https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc).
-
-This application requires two different types of permissions to access the required Graph Objects:
-* Application permission
-* Delegated permission (Optional)
-
-| Feature | Permission Type |
-| --------- | ------------------ |
-| Archive Team |`Application` |
-| Create Channel | `Application` |
-| Create Group | `Application` |
-| Create Team | `Application` |
-| Delete Channel | `Application` |
-| Delete Group | `Application` |
-| Enable Teams for Group | `Application` |
-| Post Incident Information | `Application` |
-| Read Channel Messages | `Delegated` |
-
-### Application Permission
-Application permissions, also called app roles, allow the app to access data on its own, without a signed-in user. In this access scenario, the application can interact with data on its own, without a signed in user. App-only access is used in scenarios such as automation, and is mostly used by apps that run as background services or daemons. It's suitable when it's undesirable to have a user signed in, or when the data required can't be scoped to a single user.
-
-### Delegated Permission
-This type of permission is optional and is only required for the **Read Channel messages** feature. If you wish to use the application without this feature (read channel messages), you can do so by leaving out the delegated permission setup process and following the remaining steps. Delegated permissions, also called scopes, allow the application to act on behalf of the signed-in user. In this access scenario, the user signs in on behalf of the application and provides it with the required permissions to call the Microsoft Graph API. Both the client and the user must be authorized to make the request. The Graph API's **read message** method is one of Microsoft's protected APIs since it has access to sensitive data. The user must grant this application permission to access their data in order for this application to function. This means that only the resources to which the user has access, such as channels and teams, will be available to this application.
-
-### Setting up API Permissions (Both Permissions)
-
-* In the left-hand navigation pane under the `Manage` section select `API Permission`.
-* Click `Add a permission`. On the Request API permission screen, select `Microsoft Graph`.
-* Select the `Application permissions` option and search for all relevant permissions and add them as shown below.
-* An admin account is required to `Grant admin consent`, to enable these permissions.
-
-### List of required permissions
-
-| Category | API/Permission | Permission Type | Description |
-| ------ | ------ | ------- | ------- |
-| Group | `Create` |  Application | Create groups |
-| Group | `ReadWrite.All` | Application | Read and write all groups |
-| GroupMember | `ReadWrite.All` | Application | Read and write all group memberships |
-| Team | `Create` | Application | Create teams |
-| Team | `ReadBasic.All` | Application | Get a list of all teams |
-| TeamMember | `ReadWrite.All` | Application | Add and remove members from all teams |
-| TeamMember | `ReadWriteNonOwnerRole.All` | Application | Add and remove members with non-owner role |
-| TeamSettings | `ReadWrite.All` | Application | Read and change all teams' settings |
-| User | `Read.All` | Application | Read all users' full profiles |
-| ChannelMessage | `Read.All` | Application | Read all messages |
-| ChannelMessage | `ReadWrite` | Delegated | Read and write user channel messages |
-| ChannelMessage | `Send` | Delegated | Send channel messages |
-| offline_access | `--` | Delegated | Maintain access to data you have given it access to |
-
+See the list permissions needed for the App associated with the Team app.
 
 ![screenshot: app_scopes_permissions.png](./doc/screenshots/app_scopes_permissions.png)
 
@@ -249,9 +207,6 @@ This type of permission is optional and is only required for the **Read Channel 
 ![screenshot: app_certificate_secrets.png](./doc/screenshots/app_certificate_secrets.png)
 
 ### Setting up Incoming Webhooks (Both Permissions)
-
-The **SOAR Platform** can share content in Microsoft channels using an incoming webhook.
-The webhooks are utilized as tracking and notifying mechanisms. The webhooks offer a specific URL that can be used to transmit a JSON payload along with a card-format message. To configure webhooks for a channel, please refer to this documentation [Create Incoming Webhooks](https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook).
 
 *Note*: Webhooks are now replaced by MS Teams Workflows. Refer to [MS Teams Workflows](#ms-teams-workflows) on how to start using this new capability. 
 
@@ -295,7 +250,8 @@ The following table provides the settings you need to configure the app. These s
 | **<channel_name>** | Optional | ****.webhook.office.com/webhookb2/ | Webhook URL for a channel |
 | **selftest** | Optional | https://teams.microsoft.com/l/channel/xxx | Webhook URL for channel connectors to test posting of messages.  **This capability is deprecated and selftest_workflows should be used starting with V2.2** |
 | **selftest_workflows** | Optional | https://azure.com/workflows/xxx | Webhook URL for Teams Workflows to test posting of messages. |
-| ***<webhook label>** | Optional | https://azure.com/workflows/xxx | Additional webhook URLs. Reference the `webhook label` used when post messaging via the functions which use the `teams_channel` input field. |
+| ***<webhook_label>** | Optional | https://azure.com/workflows/xxx | Additional webhook URLs. Reference the `webhook label` used when post messaging via the functions which use the `teams_channel` input field. |
+
 
 ### MS Teams Workflows
 In V2.2, messages can be sent via the MS Teams Workflows capability. Although a powerful way to set up complex capabilities, the basic enablement can be performed via these steps:
@@ -334,7 +290,7 @@ rejection_words=reject, rejected, deny, denied, no
 -->
 ---
 
-## Function - MS Teams Post Message for Workflows
+<!-- ## Function - MS Teams Post Message for Workflows
 Post a message to a Microsoft Teams channel intended for Workflows
 
 <details><summary>Inputs:</summary>
@@ -345,7 +301,7 @@ Post a message to a Microsoft Teams channel intended for Workflows
 | `incident_id` | `number` | No | `2095` | Incident id from which artifacts are to be fetched |
 | `task_id` | `number` | No | `-` | - |
 | `teams_channel` | `text` | Yes | `-` | Lookup value to channel to post a message |
-| `teams_payload` | `text` | Yes | `-` | string-encoded json of teams conversation message: See [Adaptive Cards]](https://adaptivecards.io/) |
+| `teams_payload` | `text` | Yes | `-` | string-encoded json of teams conversation message: See [Adaptive Cards](https://adaptivecards.io/) |
 
 </p>
 </details>
@@ -472,7 +428,7 @@ else:
 </p>
 </details>
 
----
+--- -->
 
 ## Function - MS Teams: Archive Team
 This function allows for archiving or unarchiving a Microsoft Team. The `archive_operation` input parameter specifies if the team is to be archived or unarchived. Archiving does not delete the MS Team. To identify the team for archival or unarchival, one of the following inputs can be used:
@@ -609,17 +565,23 @@ else:
 <p>
 
 ```python
+FN_NAME = "ms_teams_archive_team"
+WF_NAME = "MS Teams: Archive Team (PB)"
+
 results = playbook.functions.results.archive_results
-content = results.get("content")
+content = results.get("content", {})
 
 if not results.get("success"):
-  text = "Unable to archive the Microsoft Team"
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Failed for SOAR function <b>{FN_NAME}</b><br>"
+  text += "Unable to archive the Microsoft Team"
   fail_reason = results.get("reason")
   if fail_reason:
     text = f"{text}:\n\tFailure reason: {fail_reason}"
+    text += f"\n\tInputs: {results.get('inputs')}"
 
 else:
-  text  = f"""<b>Microsoft Team Details:</b><br />
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Successfully Executed for SOAR function <b>{FN_NAME}</b><br>"
+  text += f"""<b>Microsoft Team Details:</b><br />
   <br />The Team associated with this Group has now been {content.get('teamsEnabled')}.<br />
   <br />Name: {content.get('displayName')}
   <br />Description: {content.get('description')}
@@ -632,8 +594,7 @@ else:
   if content.get("unfoundUsers"):
     text += f"<br />*Note the following users were unable to be added to the group: {content.get('unfoundUsers')}"
 
-note = helper.createRichText(text)
-incident.addNote(note)
+incident.addNote(helper.createRichText(text))
 ```
 
 </p>
@@ -739,28 +700,35 @@ else:
 <p>
 
 ```python
+FN_NAME = "ms_teams_create_channel"
+WF_NAME = "MS Teams: Create Channel (PB)"
+
 results = playbook.functions.results.create_channel_results
-content = results.get("content")
+content = results.get("content", {})
+team = playbook.inputs.ms_groupteam_name or playbook.inputs.ms_group_mail_nickname or playbook.inputs.ms_groupteam_id
 
 if not results.get("success"):
-  text = "Unable to create Microsoft Group"
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Failed for SOAR function <b>{FN_NAME}</b><br>"
+  text += f"Unable to create Microsoft Group: {playbook.inputs.ms_channel_name}"
   fail_reason = results.get("reason")
   if fail_reason:
     text = f"{text}:\n\tFailure reason: {fail_reason}"
+    text += f"\n\tInputs: {results.get('inputs')}"
 
 else:
-  text = f'''<a href="{content.get("webUrl")}">Click here</a>
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Successfully Executed for SOAR function <b>{FN_NAME}</b><br>"
+  text += f'''<a href="{content.get("webUrl", "")}">Click here to go to channel</a>
   <b>Microsoft Channel Details:</b><br />
-  <br />Name: {content.get("displayName")}
-  <br />Web URL: {url}
-  <br />Description: {content.get("description")}
-  <br />Teams Enabled: {True}
-  <br />ID: {content.get("id")}
-  <br />Mail: {content.get("email")}
-  <br />Membership Type: {content.get("membershipType")}'''
+  Name: {content.get("displayName", "")}
+  Team: {team}
+  Web URL: {content.get("webUrl", "")}
+  Description: {content.get("description", "")}
+  Teams Enabled: {True}
+  ID: {content.get("id")}
+  Mail: {content.get("email", "")}
+  Membership Type: {content.get("membershipType")}'''
 
-note = helper.createRichText(text)
-incident.addNote(note)
+incident.addNote(helper.createRichText(text))
 ```
 
 </p>
@@ -906,30 +874,36 @@ if playbook.inputs.ms_group_mail_nickname:
 <p>
 
 ```python
+FN_NAME = "ms_teams_create_group"
+WF_NAME = "MS Teams: Create Group (PB)"
+
 results = playbook.functions.results.create_group_results
-content = results.get("content")
+content = results.get("content", {})
 
 if not results.get("success"):
-  text = "Unable to create Microsoft Group"
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Failed for SOAR function <b>{FN_NAME}</b><br>"
+  text += f"Unable to create Microsoft Group: {playbook.inputs.ms_group_name}"
   fail_reason = results.get("reason")
   if fail_reason:
-    text = f"{text}:\n\tFailure reason: {fail_reason}"
+    text = f"""{text}:\n\tFailure reason: {fail_reason}
+    Inputs: {str(playbook.inputs)}"""
 
 else:
-  text  = f'''<b>Microsoft Group Details:</b><br />
-  <br />Name: {content.get("displayName")}
-  <br />Description: {content.get("description")}
-  <br />Teams Enabled: {content.get("teamsEnabled")}
-  <br />ID: {content.get("id")}
-  <br />Mail: {content.get("mail")}
-  <br />Visibility: {content.get("visibility")}
-  <br />Group Types: {content.get("groupTypes")}
-  <br />Created date and time: {content.get("createdDateTime")}'''
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Successfully Executed for SOAR function <b>{FN_NAME}</b><br>"
+  text += f'''<b>Microsoft Group Details:</b><br />
+  Name: {content.get("displayName")}
+  Description: {content.get("description")}
+  Nickname: {content.get("mailNickname")}
+  Teams Enabled: {content.get("teamsEnabled")}
+  ID: {content.get("id")}
+  Mail: {content.get("mail")}
+  Visibility: {content.get("visibility")}
+  Group Types: {content.get("groupTypes")}
+  Created date and time: {content.get("createdDateTime")}'''
   if content.get("unfoundUsers"):
     text += f'<br />*Note the following users were unable to be added to the group: {content.get("unfoundUsers")}'
 
-note = helper.createRichText(text)
-incident.addNote(note)
+incident.addNote(helper.createRichText(text))
 ```
 
 </p>
@@ -1082,30 +1056,35 @@ else:
 <p>
 
 ```python
+FN_NAME = "ms_teams_create_team"
+WF_NAME = "MS Teams: Create Team (PB)"
+
 results = playbook.functions.results.create_team
-content = results.get("content")
+content = results.get("content", {})
 
 if not results.get("success"):
-  text = "Unable to create Microsoft Team"
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Failed for SOAR function <b>{FN_NAME}</b><br>"
+  text += "Unable to create Microsoft Team"
   fail_reason = results.get("reason")
   if fail_reason:
     text = f"{text}:\n\tFailure reason: {fail_reason}"
+    text += f"\n\tInputs: {results.get('inputs')}"
 
 else:
-  text  = f'''<b>Microsoft Group Details:</b><br />
-  <br />Name: {content.get("displayName")}
-  <br />Description: {content.get("description")}
-  <br />Teams Enabled: {content.get("teamsEnabled")}
-  <br />ID: {content.get("id")}
-  <br />Mail: {content.get("mail")}
-  <br />Visibility: {content.get("visibility")}
-  <br />Group Types: {content.get("groupTypes")}
-  <br />Created date and time: {content.get("createdDateTime")}'''
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Successfully Executed for SOAR function <b>{FN_NAME}</b><br>"
+  text += f'''<b>Microsoft Team Details:</b><br />
+  Name: {content.get("displayName")}
+  Description: {content.get("description")}
+  Teams Enabled: {content.get("teamsEnabled")}
+  ID: {content.get("id")}
+  Mail: {content.get("mail")}
+  Visibility: {content.get("visibility")}
+  Group Types: {content.get("groupTypes")}
+  Created date and time: {content.get("createdDateTime")}'''
   if content.get("unfoundUsers"):
     text += f'<br />*Note the following users were unable to be added to the group: {content.get("unfoundUsers")}'
 
-note = helper.createRichText(text)
-incident.addNote(note)
+incident.addNote(helper.createRichText(text))
 ```
 
 </p>
@@ -1193,21 +1172,27 @@ else:
 <p>
 
 ```python
+FN_NAME = "ms_teams_delete_channel"
+WF_NAME = "MS Teams: Delete Channel (PB)"
+
 results = playbook.functions.results.delete_channel
-content = results.get("content")
+content = results.get("content", {})
+channel_name = playbook.inputs.ms_channel_name
 
 if not results.get("success"):
-  text = "Unable to delete Microsoft Channel"
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Failed for SOAR function <b>{FN_NAME}</b><br>"
+  text += f"Unable to delete Microsoft Channel: {channel_name}"
   fail_reason = results.get("reason")
   if fail_reason:
     text = f"{text}:\n\tFailure reason: {fail_reason}"
+    text += f"\n\tInputs: {results.get('inputs')}"
 
 else:
-  text  = f"""<b>Microsoft Channels:</b><br />
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Successfully Executed for SOAR function <b>{FN_NAME}</b><br>"
+  text += f"""<b>Delete Microsoft Channel: {channel_name} result</b><br />
   <br />{content.get('message')}"""
 
-note = helper.createRichText(text)
-incident.addNote(note)
+incident.addNote(helper.createRichText(text))
 ```
 
 </p>
@@ -1294,21 +1279,26 @@ else:
 <p>
 
 ```python
+FN_NAME = "ms_teams_delete_group"
+WF_NAME = "MS Teams: Delete Group (PB)"
+
 results = playbook.functions.results.delete_group
-content = results.get("content")
+content = results.get("content", {})
+group = playbook.inputs.ms_group_name or playbook.inputs.ms_group_mail_nickname or playbook.inputs.ms_group_id
 
 if not results.get("success"):
-  text = "Unable to delete Microsoft Group"
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Failed for SOAR function <b>{FN_NAME}</b><br>"
+  text += f"Unable to delete Microsoft Group: {group}"
   fail_reason = results.get("reason")
   if fail_reason:
     text = f"{text}:\n\tFailure reason: {fail_reason}"
+    text += f"\n\tInputs: {results.get('inputs')}"
 
 else:
-  text = f'''<b>Microsoft Groups:</b><br />
-  <br />{content.get("message")}'''
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Successfully Executed for SOAR function <b>{FN_NAME}</b><br>"
+  text += content.get("message")
 
-note = helper.createRichText(text)
-incident.addNote(note)
+incident.addNote(helper.createRichText(text))
 ```
 
 </p>
@@ -1432,30 +1422,369 @@ else:
 <p>
 
 ```python
+FN_NAME = "ms_teams_enable_team"
+WF_NAME = "MS Teams: Enable Teams for Group (PB)"
+
 results = playbook.functions.results.enable_team
-content = results.get("content")
+content = results.get("content", {})
 
 if not results.get("success"):
-  text = "Could not enable Teams for this MS Group"
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Failed for SOAR function <b>{FN_NAME}</b><br>"
+  text += "Could not enable Teams for this MS Group"
   fail_reason = results.get("reason")
   if fail_reason:
     text = f"{text}:\n\tFailure reason: {fail_reason}"
+    text += f"\n\tInputs: {results.get('inputs')}"
 
 else:
-  text  = f'''<b>Microsoft Group Details:</b><br />
-  <br />Name: {content.get("displayName")}
-  <br />Description: {content.get("description")}
-  <br />Teams Enabled: {content.get("teamsEnabled")}
-  <br />ID: {content.get("id")}
-  <br />Mail: {content.get("mail")}
-  <br />Visibility: {content.get("visibility")}
-  <br />Group Types: {content.get("groupTypes")}
-  <br />Created date and time: {content.get("createdDateTime")}'''
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Successfully Executed for SOAR function <b>{FN_NAME}</b><br>"
+  text += f'''<b>Enabled Microsoft Group Details:</b><br />
+  Name: {content.get("displayName")}
+  Description: {content.get("description")}
+  Teams Enabled: {content.get("teamsEnabled")}
+  ID: {content.get("id")}
+  Mail: {content.get("mail")}
+  Visibility: {content.get("visibility")}
+  Group Types: {content.get("groupTypes")}
+  Created date and time: {content.get("createdDateTime")}'''
   if content.get("unfoundUsers"):
     text += f'<br />*Note the following users were unable to be added to the group: {content.get("unfoundUsers")}'
 
-note = helper.createRichText(text)
-incident.addNote(note)
+incident.addNote(helper.createRichText(text))
+```
+
+</p>
+</details>
+
+---
+## Function - MS Teams: List Groups
+List available groups
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `teams_filter` | `text` | No | `displayName eq 'Incident 2026'` | optional filter values |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": [
+    {
+      "classification": "None",
+      "createdDateTime": "2024-10-16T09:39:39Z",
+      "creationOptions": [
+        "Team",
+        "ExchangeProvisioningFlags:3552"
+      ],
+      "deletedDateTime": "None",
+      "description": "Incident 2386: DOS 11102004",
+      "displayName": "msjq01",
+      "expirationDateTime": "None",
+      "groupTypes": [
+        "Unified"
+      ],
+      "id": "08dcc0f1-80f8-41c5-98b9*****",
+      "isAssignableToRole": "None",
+      "mail": "msjq01@example.com",
+      "mailEnabled": true,
+      "mailNickname": "msjq01",
+      "membershipRule": "None",
+      "membershipRuleProcessingState": "None",
+      "onPremisesDomainName": "None",
+      "onPremisesLastSyncDateTime": "None",
+      "onPremisesNetBiosName": "None",
+      "onPremisesProvisioningErrors": [],
+      "onPremisesSamAccountName": "None",
+      "onPremisesSecurityIdentifier": "None",
+      "onPremisesSyncEnabled": "None",
+      "preferredDataLocation": "None",
+      "preferredLanguage": "None",
+      "proxyAddresses": [
+        "SPO:SPO_78794e5c-da33-46e1-abdf-6d2c28c2a6c6@SPO_50ad7d3e-b889-434d-802d*****",
+        "SMTP:msjq01@example.com"
+      ],
+      "renewedDateTime": "2024-10-16T09:39:39Z",
+      "resourceBehaviorOptions": [
+        "HideGroupInOutlook",
+        "SubscribeMembersToCalendarEventsDisabled",
+        "WelcomeEmailDisabled"
+      ],
+      "resourceProvisioningOptions": [
+        "Team"
+      ],
+      "securityEnabled": false,
+      "securityIdentifier": "S-1-12-1-148685041-1103462648-1283570072*****",
+      "serviceProvisioningErrors": [],
+      "theme": "None",
+      "uniqueName": "None",
+      "visibility": "Private"
+    }
+  ],
+  "inputs": {},
+  "metrics": {
+    "execution_time_ms": 2725,
+    "host": "localhost",
+    "package": "fn-teams",
+    "package_version": "2.3.0",
+    "timestamp": "2025-02-20 15:40:15",
+    "version": "1.0"
+  },
+  "raw": "None",
+  "reason": "None",
+  "success": true,
+  "version": 2.0
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+if hasattr(playbook.inputs, "teams_filter"):
+  inputs.teams_filter = playbook.inputs.teams_filter
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+FN_NAME = "ms_teams_list_groups"
+WF_NAME = "MS Teams: List Group (PB)"
+
+results = playbook.functions.results.list_group_result
+content = results.get("content", {})
+
+if not results.get("success"):
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Failed for SOAR function <b>{FN_NAME}</b><br>"
+  text += f"Unable to List Microsoft Groups"
+  fail_reason = results.get("reason")
+  if fail_reason:
+    text = f"""{text}:\n\tFailure reason: {fail_reason}
+    Inputs: {str(playbook.inputs)}"""
+
+else:
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Successfully Executed for SOAR function <b>{FN_NAME}</b><br>"
+  for ms_group in content:
+    row = incident.addRow("ms_teams_list_groups_teams_channels_datatable")
+    row["group_id"] = ms_group.get("id")
+    row["group_name"] = ms_group.get("displayName")
+    row["group_type"] = ms_group.get("groupTypes")[0]
+incident.addNote(helper.createRichText(text))
+```
+
+</p>
+</details>
+
+---
+## Function - MS Teams: List Team Channels
+List all the channels associated with a Team. A filter can be used to narrow the results
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `ms_groupteam_id` | `text` | No | `-` | Unique id assigned to a MS Group or Team while being created |
+| `teams_filter` | `text` | No | `displayName eq 'General'` | optional filter values |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": {
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#Collection(microsoft.graph.channel)",
+    "@odata.count": 2,
+    "value": [
+      {
+        "@odata.id": "https://graph.microsoft.com/v1.0/tenants/ddd-eee-fff/teams/aaa-bbb-ccc/channels/19:cd40beb34fca44de97d1c01c3839c425@thread.tacv2",
+        "createdDateTime": "2025-02-20T19:37:05.225Z",
+        "description": null,
+        "displayName": "Chat",
+        "email": null,
+        "id": "19:cd40beb34fca44de97d1c01c3839c425@thread.tacv2",
+        "isArchived": false,
+        "isFavoriteByDefault": null,
+        "membershipType": "standard",
+        "tenantId": "ddd-eee-fff",
+        "webUrl": "https://teams.microsoft.com/l/channel/11-555-77/Chat?groupId=aaa-bbb-ccc\u0026tenantId=ddd-eee-fff\u0026allowXTenantAccess=True\u0026ngc=True"
+      },
+      {
+        "@odata.id": "https://graph.microsoft.com/v1.0/tenants/11111-2222-333333/teams/aaa-bbb-ccc/channels/abc-def",
+        "createdDateTime": "2025-02-19T17:09:46.05Z",
+        "description": "some description",
+        "displayName": "General",
+        "email": "Incident2106@example.com",
+        "id": "abc-def",
+        "isArchived": false,
+        "isFavoriteByDefault": null,
+        "membershipType": "standard",
+        "tenantId": "ddd-eee-fff",
+        "webUrl": "https://teams.microsoft.com/l/channel/abc-def-ghi/Incident%3A%202106?groupId=aaa-bbb-ccc\u0026tenantId=ddd-eee-fff\u0026allowXTenantAccess=True\u0026ngc=True"
+      }
+    ]
+  },
+  "reason": "success",
+  "success": true
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+if hasattr(playbook.inputs, "teams_filter"):
+  inputs.teams_filter = playbook.inputs.teams_filter
+inputs.ms_channel_team_id = playbook.inputs.ms_channel_team_id
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+FN_NAME = "ms_teams_list_team_channels"
+WF_NAME = "MS Teams: List Team Channels (PB)"
+
+results = playbook.functions.results.list_channel_result
+content = results.get("content", {})
+
+if not results.get("success"):
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Failed for SOAR function <b>{FN_NAME}</b><br>"
+  text += f"Unable to List Microsoft Team Channels"
+  fail_reason = results.get("reason")
+  if fail_reason:
+    text = f"""{text}:\n\tFailure reason: {fail_reason}
+    Inputs: {str(playbook.inputs)}"""
+
+else:
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Successfully Executed for SOAR function <b>{FN_NAME}</b><br>"
+  for ms_group in content:
+    row = incident.addRow("ms_teams_list_groups_teams_channels_datatable")
+    row["group_id"] = ms_group.get("id")
+    row["group_name"] = ms_group.get("displayName")
+    if "groupTypes" in ms_group.keys():
+      row["group_type"] = ms_group.get("groupTypes")[0]
+incident.addNote(helper.createRichText(text))
+```
+
+</p>
+</details>
+
+---
+## Function - MS Teams: List Teams
+List available teams
+
+<details><summary>Inputs:</summary>
+<p>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `teams_filter` | `text` | No | `displayName eq 'Incident 2026'` | optional filter values |
+
+</p>
+</details>
+
+<details><summary>Outputs:</summary>
+<p>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+```python
+results = {
+  "content": [
+    {
+      "classification": null,
+      "createdDateTime": null,
+      "description": "example",
+      "discoverySettings": null,
+      "displayName": "example",
+      "funSettings": null,
+      "guestSettings": null,
+      "id": "322d20bf-450e-46d6-9338-*****",
+      "internalId": null,
+      "isArchived": null,
+      "isMembershipLimitedToOwners": null,
+      "memberSettings": null,
+      "messagingSettings": null,
+      "specialization": null,
+      "summary": null,
+      "tagSettings": null,
+      "visibility": "public",
+      "webUrl": null
+    }
+  ],
+  "reason": "success",
+  "success": true
+}
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Input Script:</summary>
+<p>
+
+```python
+if hasattr(playbook.inputs, "teams_filter"):
+  inputs.teams_filter = playbook.inputs.teams_filter
+```
+
+</p>
+</details>
+
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+
+```python
+FN_NAME = "ms_teams_list_teams"
+WF_NAME = "MS Teams: List Teams (PB)"
+
+results = playbook.functions.results.list_teams_result
+content = results.get("content", {})
+
+if not results.get("success"):
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Failed for SOAR function <b>{FN_NAME}</b><br>"
+  text += f"Unable to List Microsoft Teams"
+  fail_reason = results.get("reason")
+  if fail_reason:
+    text = f"""{text}:\n\tFailure reason: {fail_reason}
+    Inputs: {str(playbook.inputs)}"""
+
+else:
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Successfully Executed for SOAR function <b>{FN_NAME}</b><br>"
+  for ms_group in content:
+    row = incident.addRow("ms_teams_list_groups_teams_channels_datatable")
+    row["group_id"] = ms_group.get("id")
+    row["group_name"] = ms_group.get("displayName")
+    if "group_type" in ms_group.keys():
+      row["group_type"] = ms_group.get("groupTypes")[0]
+incident.addNote(helper.createRichText(text))
 ```
 
 </p>
@@ -1568,15 +1897,23 @@ inputs.teams_mrkdown = True
 <p>
 
 ```python
+FN_NAME = "ms_teams_post_message"
+WF_NAME = "MS Teams: Post Incident Information (PB)"
+
 results = playbook.functions.results.post_message
-content = results.get("content")
 
 if not results.get("success"):
-  text = "Unable to Post message"
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Failed for SOAR function <b>{FN_NAME}</b><br>"
+  text += "Unable to Post message"
   fail_reason = results.get("reason")
   if fail_reason:
     text = f"{text}:\n\tFailure reason: {fail_reason}"
-  text = helper.createRichText(text)
+    text += f"\n\tInputs: {results.get('inputs')}"
+
+  incident.addNote(helper.createRichText(text))
+else:
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Successfully Executed for SOAR function <b>{FN_NAME}</b><br>"
+  text += f"Successfully posted a MS Teams message to channel: {results.get('inputs', {}).get('teams_channel')}"
   incident.addNote(text)
 ```
 
@@ -1703,40 +2040,48 @@ if playbook.inputs.ms_groupteam_name:
 <p>
 
 ```python
+FN_NAME = "ms_teams_read_message"
+WF_NAME = "MS Teams: Read Channel Messages (PB)"
+
 results = playbook.functions.results.read_message
 content = results.get("content", {})
+channel = playbook.inputs.ms_channel_name or playbook.inputs.ms_channel_id
+group = playbook.inputs.ms_group_mail_nickname or playbook.inputs.ms_groupteam_id or playbook.inputs.ms_groupteam_name
 
 if not results.get("success"):
-  text = "Unable to read messages from Microsoft Channel"
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Failed for SOAR function <b>{FN_NAME}</b><br>"
+  text += f"Unable to read messages from Microsoft Channel: {channel}"
   fail_reason = results.get("reason")
   if fail_reason:
     text = f"{text}:\n\tFailure reason: {fail_reason}"
+    text += f"\n\tInputs: {results.get('inputs')}"
 
 else:
-  text  = f"""<b>Microsoft Channels:</b><br />
-  Successfully retrieved <b>{len(content)}</b> messages <br /><br />"""
+  text = f"MS Teams Playbook: <b>{WF_NAME}</b><br>Successfully Executed for SOAR function <b>{FN_NAME}</b><br>"
+  text += f"""Successfully retrieved <b>{len(content)}</b> messages from:<br />
+  Channel's Group Name - Mail Nickname - Group/Team ID: {group}
+  Channel: {channel}<br />"""
 
   for message in content:
     url = f'''<a href="{message.get("webUrl")}">Click here</a>
-    Message Id : {message.get("id")} <br />
-    Channel Id : {message.get("channelIdentity", {}).get("channelId")} <br />
-    Team Id : {message.get("channelIdentity", {}).get("teamId")} <br />'''
+    Message Id: {message.get("id")}'''
 
+    text += f'''<br />Message Id : {message.get("id")}
+    Created Time: {message.get("createdDateTime")}
+    Web URL: <a href="{message.get("webUrl")}">Click here</a>
+    '''
+    
     if message.get("from"):
       user_messages = message.get("from", {}).get("user", {})
       if user_messages:
-        text += f'From User : {user_messages.get("displayName")} <br />'
+        text += f'From User: {user_messages.get("displayName")} <br />'
       else:
-        text += f'From Application : {message.get("from", {}).get("application", {}).get("displayName")} <br />'
+        text += f'From Application: {message.get("from", {}).get("application", {}).get("displayName")} <br />'
 
-    text += f'''Body Content : {message.get("body", {}).get("content")} <br />
-    Content Type : {message.get("body", {}).get("contentType")} <br />
-    Created Time : {message.get("createdDateTime")} <br />
-    Web URL : {url} <br />
-    <br />'''
+    if message.get("subject"):
+      text += f'''    Subject: {message.get("subject")}<br>{message.get("body", {}).get("content")}'''
 
-note = helper.createRichText(text)
-incident.addNote(note)
+incident.addNote(helper.createRichText(text))
 ```
 
 </p>
@@ -1768,11 +2113,11 @@ incident.addNote(note)
 | MS Teams: Post Task Information (PB) | None | Manual | task | `enabled` | `-` | 
 | MS Teams: Read Channel Messages From task (PB) | None | Manual | task | `enabled` | `-` | 
 | MS Teams: Read Channel Messages (PB) | None | Manual | incident | `enabled` | `-` | 
-
-<!--
-| MS Teams: Send Approval Request | Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the 'MS Teams Approval Process' datatable. | Manual | incident | `enabled` | `-` | 
-| MS Teams: Send Approval Request for Tasks | Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the 'MS Teams Approval Process' datatable. | Manual | task | `enabled` | `-` | 
--->
+| MS Teams: List Group (PB) | None | Manual | incident | `enabled` | `-` | 
+| MS Teams: List Team Channels (PB) | None | Manual | incident | `enabled` | `-` | 
+| MS Teams: List Teams (PB) | None | Manual | incident | `enabled` | `-` | 
+<!-- | MS Teams: Send Approval Request | Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the 'MS Teams Approval Process' datatable. | Manual | incident | `enabled` | `-` | 
+| MS Teams: Send Approval Request for Tasks | Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the 'MS Teams Approval Process' datatable. | Manual | task | `enabled` | `-` |  -->
 
 ---
 <!--

@@ -7,7 +7,7 @@
         <link rel="prefetch" href="../_static/IBM_Security_Light.png" as="image">
         <link rel="prefetch" href="../_static/IBM_Security_Dark.png" as="image">
 
-    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+    <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
         <title>Microsoft Teams - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
@@ -437,8 +437,10 @@
 <li><p><a class="reference internal" href="#function---ms-teams-delete-channel"><span class="xref myst">Function - MS Teams: Delete Channel</span></a></p></li>
 <li><p><a class="reference internal" href="#function---ms-teams-delete-group"><span class="xref myst">Function - MS Teams: Delete Group</span></a></p></li>
 <li><p><a class="reference internal" href="#function---ms-teams-enable-team"><span class="xref myst">Function - MS Teams: Enable Team</span></a></p></li>
+<li><p><a class="reference internal" href="#function---ms-teams-list-groups"><span class="xref myst">Function - MS Teams: List Groups</span></a></p></li>
+<li><p><a class="reference internal" href="#function---ms-teams-list-team-channels"><span class="xref myst">Function - MS Teams: List Team Channels</span></a></p></li>
+<li><p><a class="reference internal" href="#function---ms-teams-list-teams"><span class="xref myst">Function - MS Teams: List Teams</span></a></p></li>
 <li><p><a class="reference internal" href="#function---ms-teams-post-message"><span class="xref myst">Function - MS Teams: Post Message</span></a></p></li>
-<li><p><a class="reference internal" href="#function---ms-teams-post-message-for-workflows"><span class="xref myst">Function - MS Teams: Post Message for Workflows</span></a></p></li>
 <li><p><a class="reference internal" href="#function---ms-teams-read-message"><span class="xref myst">Function - MS Teams: Read Message</span></a></p></li>
 </ul>
 <!--
@@ -468,23 +470,27 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>2.2.0</p></td>
-<td><p>10/2024</p></td>
+<tr class="row-even"><td><p>2.3.0</p></td>
+<td><p>02/2025</p></td>
+<td><p>Add functions: list groups, list teams, list channels. Better proxy support.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2.2.0</p></td>
+<td><p>08/2024</p></td>
 <td><p>New function to support MS Teams Workflows</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.1.0</p></td>
+<tr class="row-even"><td><p>2.1.0</p></td>
 <td><p>05/2023</p></td>
 <td><p>Add playbooks and removed workflows</p></td>
 </tr>
-<tr class="row-even"><td><p>2.0.1</p></td>
+<tr class="row-odd"><td><p>2.0.1</p></td>
 <td><p>12/2022</p></td>
 <td><p>Bug fix in workflows for MS Teams: Enable Teams for Groups and MS Teams: Read messages</p></td>
 </tr>
-<tr class="row-odd"><td><p>2.0.0</p></td>
+<tr class="row-even"><td><p>2.0.0</p></td>
 <td><p>12/2022</p></td>
 <td><p>Added support for creating and deleting MS Groups, Teams and Channels</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.0</p></td>
+<tr class="row-odd"><td><p>1.0.0</p></td>
 <td><p>10/2019</p></td>
 <td><p>Post Incident/task information to MS Teams</p></td>
 </tr>
@@ -553,7 +559,7 @@ But migrating to playbooks provides greater functionality along with future app 
 <ul>
 <li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=45.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient_circuits&gt;=51.0.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -620,7 +626,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
 <li><p>msal ~= 1.30</p></li>
 <li><p>pymsteams ~= 0.2.3</p></li>
-<li><p>resilient_circuits&gt;=50.0.0</p></li>
+<li><p>resilient_circuits&gt;=51.0.0</p></li>
 </ul>
 </section>
 <section id="endpoint-developed-with-ms-teams">
@@ -681,148 +687,7 @@ The access token includes details about the application and the permission it ha
 </section>
 <section id="api-permissions">
 <h3>API Permissions<a class="headerlink" href="#api-permissions" title="Link to this heading">¶</a></h3>
-<p>The application requires admins consent to access a protected resource, such as user information and Team settings. Microsoft Graph exposes certain predetermined APIs and only accepts requests made to them. These predetermined APIs or permissions can be added to individual applications thereby limiting them to only make controlled changes to the objects they are exposed to. In this case, we require permission to operate on Groups, Teams, and to read User information. You can learn more about this concept at <a class="reference external" href="https://learn.microsoft.com/en-us/azure/active-directory/develop/scopes-oidc">learn.microsoft.com/scopes-oidc</a>.</p>
-<p>This application requires two different types of permissions to access the required Graph Objects:</p>
-<ul class="simple">
-<li><p>Application permission</p></li>
-<li><p>Delegated permission (Optional)</p></li>
-</ul>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Feature</p></th>
-<th class="head"><p>Permission Type</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Archive Team</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Application</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Create Channel</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Application</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Create Group</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Application</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Create Team</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Application</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Delete Channel</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Application</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Delete Group</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Application</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Enable Teams for Group</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Application</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Post Incident Information</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Application</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Read Channel Messages</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Delegated</span></code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="application-permission">
-<h3>Application Permission<a class="headerlink" href="#application-permission" title="Link to this heading">¶</a></h3>
-<p>Application permissions, also called app roles, allow the app to access data on its own, without a signed-in user. In this access scenario, the application can interact with data on its own, without a signed in user. App-only access is used in scenarios such as automation, and is mostly used by apps that run as background services or daemons. It’s suitable when it’s undesirable to have a user signed in, or when the data required can’t be scoped to a single user.</p>
-</section>
-<section id="delegated-permission">
-<h3>Delegated Permission<a class="headerlink" href="#delegated-permission" title="Link to this heading">¶</a></h3>
-<p>This type of permission is optional and is only required for the <strong>Read Channel messages</strong> feature. If you wish to use the application without this feature (read channel messages), you can do so by leaving out the delegated permission setup process and following the remaining steps. Delegated permissions, also called scopes, allow the application to act on behalf of the signed-in user. In this access scenario, the user signs in on behalf of the application and provides it with the required permissions to call the Microsoft Graph API. Both the client and the user must be authorized to make the request. The Graph API’s <strong>read message</strong> method is one of Microsoft’s protected APIs since it has access to sensitive data. The user must grant this application permission to access their data in order for this application to function. This means that only the resources to which the user has access, such as channels and teams, will be available to this application.</p>
-</section>
-<section id="setting-up-api-permissions-both-permissions">
-<h3>Setting up API Permissions (Both Permissions)<a class="headerlink" href="#setting-up-api-permissions-both-permissions" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>In the left-hand navigation pane under the <code class="docutils literal notranslate"><span class="pre">Manage</span></code> section select <code class="docutils literal notranslate"><span class="pre">API</span> <span class="pre">Permission</span></code>.</p></li>
-<li><p>Click <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">a</span> <span class="pre">permission</span></code>. On the Request API permission screen, select <code class="docutils literal notranslate"><span class="pre">Microsoft</span> <span class="pre">Graph</span></code>.</p></li>
-<li><p>Select the <code class="docutils literal notranslate"><span class="pre">Application</span> <span class="pre">permissions</span></code> option and search for all relevant permissions and add them as shown below.</p></li>
-<li><p>An admin account is required to <code class="docutils literal notranslate"><span class="pre">Grant</span> <span class="pre">admin</span> <span class="pre">consent</span></code>, to enable these permissions.</p></li>
-</ul>
-</section>
-<section id="list-of-required-permissions">
-<h3>List of required permissions<a class="headerlink" href="#list-of-required-permissions" title="Link to this heading">¶</a></h3>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Category</p></th>
-<th class="head"><p>API/Permission</p></th>
-<th class="head"><p>Permission Type</p></th>
-<th class="head"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Group</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Create</span></code></p></td>
-<td><p>Application</p></td>
-<td><p>Create groups</p></td>
-</tr>
-<tr class="row-odd"><td><p>Group</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ReadWrite.All</span></code></p></td>
-<td><p>Application</p></td>
-<td><p>Read and write all groups</p></td>
-</tr>
-<tr class="row-even"><td><p>GroupMember</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ReadWrite.All</span></code></p></td>
-<td><p>Application</p></td>
-<td><p>Read and write all group memberships</p></td>
-</tr>
-<tr class="row-odd"><td><p>Team</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Create</span></code></p></td>
-<td><p>Application</p></td>
-<td><p>Create teams</p></td>
-</tr>
-<tr class="row-even"><td><p>Team</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ReadBasic.All</span></code></p></td>
-<td><p>Application</p></td>
-<td><p>Get a list of all teams</p></td>
-</tr>
-<tr class="row-odd"><td><p>TeamMember</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ReadWrite.All</span></code></p></td>
-<td><p>Application</p></td>
-<td><p>Add and remove members from all teams</p></td>
-</tr>
-<tr class="row-even"><td><p>TeamMember</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ReadWriteNonOwnerRole.All</span></code></p></td>
-<td><p>Application</p></td>
-<td><p>Add and remove members with non-owner role</p></td>
-</tr>
-<tr class="row-odd"><td><p>TeamSettings</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ReadWrite.All</span></code></p></td>
-<td><p>Application</p></td>
-<td><p>Read and change all teams’ settings</p></td>
-</tr>
-<tr class="row-even"><td><p>User</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Read.All</span></code></p></td>
-<td><p>Application</p></td>
-<td><p>Read all users’ full profiles</p></td>
-</tr>
-<tr class="row-odd"><td><p>ChannelMessage</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Read.All</span></code></p></td>
-<td><p>Application</p></td>
-<td><p>Read all messages</p></td>
-</tr>
-<tr class="row-even"><td><p>ChannelMessage</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">ReadWrite</span></code></p></td>
-<td><p>Delegated</p></td>
-<td><p>Read and write user channel messages</p></td>
-</tr>
-<tr class="row-odd"><td><p>ChannelMessage</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Send</span></code></p></td>
-<td><p>Delegated</p></td>
-<td><p>Send channel messages</p></td>
-</tr>
-<tr class="row-even"><td><p>offline_access</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">--</span></code></p></td>
-<td><p>Delegated</p></td>
-<td><p>Maintain access to data you have given it access to</p></td>
-</tr>
-</tbody>
-</table>
-</div>
+<p>See the list permissions needed for the App associated with the Team app.</p>
 <p><img alt="screenshot: app_scopes_permissions.png" src="../_images/app_scopes_permissions.png" /></p>
 </section>
 <section id="create-a-client-secret-value-both-permissions">
@@ -837,8 +702,6 @@ The access token includes details about the application and the permission it ha
 </section>
 <section id="setting-up-incoming-webhooks-both-permissions">
 <h3>Setting up Incoming Webhooks (Both Permissions)<a class="headerlink" href="#setting-up-incoming-webhooks-both-permissions" title="Link to this heading">¶</a></h3>
-<p>The <strong>SOAR Platform</strong> can share content in Microsoft channels using an incoming webhook.
-The webhooks are utilized as tracking and notifying mechanisms. The webhooks offer a specific URL that can be used to transmit a JSON payload along with a card-format message. To configure webhooks for a channel, please refer to this documentation <a class="reference external" href="https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook">Create Incoming Webhooks</a>.</p>
 <p><em>Note</em>: Webhooks are now replaced by MS Teams Workflows. Refer to <a class="reference internal" href="#ms-teams-workflows"><span class="xref myst">MS Teams Workflows</span></a> on how to start using this new capability.</p>
 </section>
 <section id="setting-up-delegated-permissions-delegated-permissions">
@@ -912,7 +775,7 @@ The webhooks are utilized as tracking and notifying mechanisms. The webhooks off
 <td><p>https://azure.com/workflows/xxx</p></td>
 <td><p>Webhook URL for Teams Workflows to test posting of messages.</p></td>
 </tr>
-<tr class="row-odd"><td><p>*<strong><webhook label></strong></p></td>
+<tr class="row-odd"><td><p>*<strong>&lt;webhook_label&gt;</strong></p></td>
 <td class="text-center"><p>Optional</p></td>
 <td><p>https://azure.com/workflows/xxx</p></td>
 <td><p>Additional webhook URLs. Reference the <code class="docutils literal notranslate"><span class="pre">webhook</span> <span class="pre">label</span></code> used when post messaging via the functions which use the <code class="docutils literal notranslate"><span class="pre">teams_channel</span></code> input field.</p></td>
@@ -956,169 +819,148 @@ approval_words=accept, accepted, approve, approved, ok
 rejection_words=reject, rejected, deny, denied, no
 ```
 -->
-</section>
-</section>
 <hr class="docutils" />
-<section id="function-ms-teams-post-message-for-workflows">
-<h2>Function - MS Teams Post Message for Workflows<a class="headerlink" href="#function-ms-teams-post-message-for-workflows" title="Link to this heading">¶</a></h2>
-<p>Post a message to a Microsoft Teams channel intended for Workflows</p>
+<!-- ## Function - MS Teams Post Message for Workflows
+Post a message to a Microsoft Teams channel intended for Workflows
+
 <details><summary>Inputs:</summary>
 <p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Name</p></th>
-<th class="head text-center"><p>Type</p></th>
-<th class="head text-center"><p>Required</p></th>
-<th class="head"><p>Example</p></th>
-<th class="head"><p>Tooltip</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">incident_id</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
-<td class="text-center"><p>No</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">2095</span></code></p></td>
-<td><p>Incident id from which artifacts are to be fetched</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">task_id</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
-<td class="text-center"><p>No</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>-</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">teams_channel</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>Lookup value to channel to post a message</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">teams_payload</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>string-encoded json of teams conversation message: See [Adaptive Cards]](https://adaptivecards.io/)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
+
+| Name | Type | Required | Example | Tooltip |
+| ---- | :--: | :------: | ------- | ------- |
+| `incident_id` | `number` | No | `2095` | Incident id from which artifacts are to be fetched |
+| `task_id` | `number` | No | `-` | - |
+| `teams_channel` | `text` | Yes | `-` | Lookup value to channel to post a message |
+| `teams_payload` | `text` | Yes | `-` | string-encoded json of teams conversation message: See [Adaptive Cards](https://adaptivecards.io/) |
+
 </p>
 </details>
+
 <details><summary>Outputs:</summary>
 <p>
-<blockquote>
-<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
-</div></blockquote>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
-  <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-  <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;status_code&#39;</span><span class="p">:</span> <span class="mi">202</span><span class="p">},</span> 
-  <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="o">...</span> <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
+
+> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
+
+
+```python
+results = {
+  'version': 2.0,
+  'success': True,
+  'reason': None,
+  'content': {'status_code': 202}, 
+  'inputs': { ... }
+}
+```
+
 </p>
 </details>
+
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
 
-<span class="n">ADAPTIVE_CARD_TYPE</span> <span class="o">=</span> <span class="s2">&quot;AdaptiveCard&quot;</span>
-<span class="n">ADAPTIVE_CARD_VERSION</span> <span class="o">=</span> <span class="s2">&quot;1.4&quot;</span>
+```python
+import json
+import datetime
 
-<span class="k">def</span><span class="w"> </span><span class="nf">create_textblock</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> 
-                     <span class="n">style</span><span class="o">=</span><span class="s2">&quot;Default&quot;</span><span class="p">,</span> 
-                     <span class="n">font_type</span><span class="o">=</span><span class="s2">&quot;Default&quot;</span><span class="p">,</span>
-                     <span class="n">font_size</span><span class="o">=</span><span class="s2">&quot;Default&quot;</span><span class="p">,</span> 
-                     <span class="n">font_weight</span><span class="o">=</span><span class="s2">&quot;Default&quot;</span><span class="p">,</span> 
-                     <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Default&quot;</span><span class="p">,</span>
-                     <span class="n">is_visible</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-  <span class="k">return</span> <span class="p">{</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;TextBlock&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
-    <span class="s2">&quot;wrap&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;weight&quot;</span><span class="p">:</span> <span class="n">font_weight</span><span class="p">,</span>
-    <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="n">font_size</span><span class="p">,</span>
-    <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">color</span><span class="p">,</span>
-    <span class="s2">&quot;style&quot;</span><span class="p">:</span> <span class="n">style</span><span class="p">,</span>
-    <span class="s2">&quot;isVisible&quot;</span><span class="p">:</span> <span class="n">is_visible</span>
-  <span class="p">}</span>
+ADAPTIVE_CARD_TYPE = "AdaptiveCard"
+ADAPTIVE_CARD_VERSION = "1.4"
+
+def create_textblock(text, 
+                     style="Default", 
+                     font_type="Default",
+                     font_size="Default", 
+                     font_weight="Default", 
+                     color="Default",
+                     is_visible=True):
+  return {
+    "type": "TextBlock",
+    "text": text,
+    "wrap": True,
+    "weight": font_weight,
+    "size": font_size,
+    "color": color,
+    "style": style,
+    "isVisible": is_visible
+  }
   
-<span class="k">def</span><span class="w"> </span><span class="nf">create_factset</span><span class="p">(</span><span class="n">separator</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">facts</span><span class="o">=</span><span class="p">[],</span> <span class="n">is_visible</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-  <span class="k">return</span> <span class="p">{</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;FactSet&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;facts&quot;</span><span class="p">:</span> <span class="n">facts</span><span class="p">,</span>
-    <span class="s2">&quot;separator&quot;</span><span class="p">:</span> <span class="n">separator</span><span class="p">,</span>
-    <span class="s2">&quot;isVisible&quot;</span><span class="p">:</span> <span class="n">is_visible</span>
-  <span class="p">}</span>
+def create_factset(separator=False, facts=[], is_visible=True):
+  return {
+    "type": "FactSet",
+    "facts": facts,
+    "separator": separator,
+    "isVisible": is_visible
+  }
   
-<span class="k">def</span><span class="w"> </span><span class="nf">create_fact</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-  <span class="k">return</span> <span class="p">{</span>
-    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
-    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">value</span>
-  <span class="p">}</span>
+def create_fact(title, value):
+  return {
+    "title": title,
+    "value": value
+  }
 
 
-<span class="c1"># S T A R T</span>
+# S T A R T
 
-<span class="n">body</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="n">create_textblock</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SOAR Incident </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">font_weight</span><span class="o">=</span><span class="s2">&quot;bolder&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;Attention&quot;</span><span class="p">),</span>
-  <span class="n">create_factset</span><span class="p">(</span><span class="n">facts</span><span class="o">=</span><span class="p">[</span>
-    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Title&quot;</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
-    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Description&quot;</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">description</span> <span class="k">else</span> <span class="s2">&quot;-&quot;</span><span class="p">),</span>
-    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Owner&quot;</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">owner_id</span><span class="p">),</span>
-    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Types&quot;</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">incident</span><span class="o">.</span><span class="n">incident_type_ids</span><span class="p">)),</span>
-    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;NIST Attack Vectors&quot;</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">incident</span><span class="o">.</span><span class="n">nist_attack_vectors</span><span class="p">)),</span>
-    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Create Date&quot;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">create_date</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%c</span><span class="s1">&#39;</span><span class="p">)),</span>
-    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Date Occurred&quot;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">start_date</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%c</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">start_date</span> <span class="k">else</span> <span class="s2">&quot;-&quot;</span><span class="p">),</span>
-    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Discovered Date&quot;</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">discovered_date</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%c</span><span class="s1">&#39;</span><span class="p">)),</span>
-    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Confirmed&quot;</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">confirmed</span><span class="p">),</span>
-    <span class="n">create_fact</span><span class="p">(</span><span class="s2">&quot;Severity&quot;</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="p">)</span>
-  <span class="p">])</span>
-<span class="p">]</span>
+body = [
+  create_textblock(f"SOAR Incident {incident.id}", font_weight="bolder", color="Attention"),
+  create_factset(facts=[
+    create_fact("Title", incident.name),
+    create_fact("Description", incident.description.content.replace('"', '\\"') if incident.description else "-"),
+    create_fact("Owner", incident.owner_id),
+    create_fact("Types", ", ".join(str(x) for x in incident.incident_type_ids)),
+    create_fact("NIST Attack Vectors", ", ".join(str(x) for x in incident.nist_attack_vectors)),
+    create_fact("Create Date", datetime.datetime.fromtimestamp(incident.create_date/1000).strftime('%c')),
+    create_fact("Date Occurred", datetime.datetime.fromtimestamp(incident.start_date/1000).strftime('%c') if incident.start_date else "-"),
+    create_fact("Discovered Date", datetime.datetime.fromtimestamp(incident.discovered_date/1000).strftime('%c')),
+    create_fact("Confirmed", incident.confirmed),
+    create_fact("Severity", incident.severity_code)
+  ])
+]
 
-<span class="k">if</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_additional_comments</span><span class="p">:</span>
-  <span class="n">body</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">create_textblock</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_additional_comments</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+if playbook.inputs.teams_additional_comments:
+  body.append(create_textblock(playbook.inputs.teams_additional_comments.content))
 
-<span class="n">adaptive_card</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;contentType&quot;</span><span class="p">:</span> <span class="s2">&quot;application/vnd.microsoft.card.adaptive&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;$schema&quot;</span><span class="p">:</span> <span class="s2">&quot;http://adaptivecards.io/schemas/adaptive-card.json&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">ADAPTIVE_CARD_TYPE</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">ADAPTIVE_CARD_VERSION</span><span class="p">,</span>
-    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="n">body</span><span class="p">,</span>
-    <span class="s2">&quot;actions&quot;</span><span class="p">:</span> <span class="p">[]</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+adaptive_card = {
+  "contentType": "application/vnd.microsoft.card.adaptive",
+  "content": {
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+    "type": ADAPTIVE_CARD_TYPE,
+    "version": ADAPTIVE_CARD_VERSION,
+    "body": body,
+    "actions": []
+  }
+}
 
-<span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">teams_payload</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">adaptive_card</span><span class="p">)</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">teams_channel</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_channel</span>
+inputs.incident_id = incident.id
+inputs.teams_payload = json.dumps(adaptive_card)
+inputs.teams_channel = playbook.inputs.teams_channel
 
-</pre></div>
-</div>
+```
+
 </p>
 </details>
+
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">post_message_workflow_results</span>
 
-<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Unable to Post Task Information to channel: </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_channel</span><span class="si">}</span><span class="s2">&quot;</span>
-  <span class="n">fail_reason</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
-  <span class="k">if</span> <span class="n">fail_reason</span><span class="p">:</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Failure reason: </span><span class="si">{</span><span class="n">fail_reason</span><span class="si">}</span><span class="s2">&quot;</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
-<span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Successfully queued workflow message to channel: </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_channel</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
+```python
+results = playbook.functions.results.post_message_workflow_results
+
+if not results.get("success"):
+  text = f"Unable to Post Task Information to channel: {playbook.inputs.teams_channel}"
+  fail_reason = results.get("reason")
+  if fail_reason:
+    text = f"{text}:\n\tFailure reason: {fail_reason}"
+  incident.addNote(helper.createRichText(text))
+else:
+  incident.addNote(f"Successfully queued workflow message to channel: {playbook.inputs.teams_channel}.")
+```
+
 </p>
 </details>
+
+--- -->
 </section>
-<hr class="docutils" />
+</section>
 <section id="function-ms-teams-archive-team">
 <h2>Function - MS Teams: Archive Team<a class="headerlink" href="#function-ms-teams-archive-team" title="Link to this heading">¶</a></h2>
 <p>This function allows for archiving or unarchiving a Microsoft Team. The <code class="docutils literal notranslate"><span class="pre">archive_operation</span></code> input parameter specifies if the team is to be archived or unarchived. Archiving does not delete the MS Team. To identify the team for archival or unarchival, one of the following inputs can be used:</p>
@@ -1274,17 +1116,23 @@ rejection_words=reject, rejected, deny, denied, no
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">archive_results</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FN_NAME</span> <span class="o">=</span> <span class="s2">&quot;ms_teams_archive_team&quot;</span>
+<span class="n">WF_NAME</span> <span class="o">=</span> <span class="s2">&quot;MS Teams: Archive Team (PB)&quot;</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">archive_results</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Unable to archive the Microsoft Team&quot;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Failed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;Unable to archive the Microsoft Team&quot;</span>
   <span class="n">fail_reason</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">fail_reason</span><span class="p">:</span>
     <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Failure reason: </span><span class="si">{</span><span class="n">fail_reason</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">Inputs: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">text</span>  <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Microsoft Team Details:&lt;/b&gt;&lt;br /&gt;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Successfully Executed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Microsoft Team Details:&lt;/b&gt;&lt;br /&gt;</span>
 <span class="s2">  &lt;br /&gt;The Team associated with this Group has now been </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;teamsEnabled&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">.&lt;br /&gt;</span>
 <span class="s2">  &lt;br /&gt;Name: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;displayName&#39;</span><span class="p">)</span><span class="si">}</span>
 <span class="s2">  &lt;br /&gt;Description: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span><span class="si">}</span>
@@ -1297,8 +1145,7 @@ rejection_words=reject, rejected, deny, denied, no
   <span class="k">if</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;unfoundUsers&quot;</span><span class="p">):</span>
     <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;br /&gt;*Note the following users were unable to be added to the group: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;unfoundUsers&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
-<span class="n">note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>
@@ -1429,28 +1276,35 @@ rejection_words=reject, rejected, deny, denied, no
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">create_channel_results</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FN_NAME</span> <span class="o">=</span> <span class="s2">&quot;ms_teams_create_channel&quot;</span>
+<span class="n">WF_NAME</span> <span class="o">=</span> <span class="s2">&quot;MS Teams: Create Channel (PB)&quot;</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">create_channel_results</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">team</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ms_groupteam_name</span> <span class="ow">or</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ms_group_mail_nickname</span> <span class="ow">or</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ms_groupteam_id</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Unable to create Microsoft Group&quot;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Failed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Unable to create Microsoft Group: </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ms_channel_name</span><span class="si">}</span><span class="s2">&quot;</span>
   <span class="n">fail_reason</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">fail_reason</span><span class="p">:</span>
     <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Failure reason: </span><span class="si">{</span><span class="n">fail_reason</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">Inputs: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;&lt;a href=&quot;</span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;webUrl&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&quot;&gt;Click here&lt;/a&gt;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Successfully Executed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;&lt;a href=&quot;</span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;webUrl&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&quot;&gt;Click here to go to channel&lt;/a&gt;</span>
 <span class="s1">  &lt;b&gt;Microsoft Channel Details:&lt;/b&gt;&lt;br /&gt;</span>
-<span class="s1">  &lt;br /&gt;Name: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayName&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Web URL: </span><span class="si">{</span><span class="n">url</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Description: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Teams Enabled: </span><span class="si">{</span><span class="kc">True</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;ID: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Mail: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Membership Type: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;membershipType&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">  Name: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayName&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Team: </span><span class="si">{</span><span class="n">team</span><span class="si">}</span>
+<span class="s1">  Web URL: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;webUrl&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Description: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Teams Enabled: </span><span class="si">{</span><span class="kc">True</span><span class="si">}</span>
+<span class="s1">  ID: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Mail: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Membership Type: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;membershipType&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span>
 
-<span class="n">note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>
@@ -1636,30 +1490,36 @@ rejection_words=reject, rejected, deny, denied, no
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">create_group_results</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FN_NAME</span> <span class="o">=</span> <span class="s2">&quot;ms_teams_create_group&quot;</span>
+<span class="n">WF_NAME</span> <span class="o">=</span> <span class="s2">&quot;MS Teams: Create Group (PB)&quot;</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">create_group_results</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Unable to create Microsoft Group&quot;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Failed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Unable to create Microsoft Group: </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ms_group_name</span><span class="si">}</span><span class="s2">&quot;</span>
   <span class="n">fail_reason</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">fail_reason</span><span class="p">:</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Failure reason: </span><span class="si">{</span><span class="n">fail_reason</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Failure reason: </span><span class="si">{</span><span class="n">fail_reason</span><span class="si">}</span>
+<span class="s2">    Inputs: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
 
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">text</span>  <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;&lt;b&gt;Microsoft Group Details:&lt;/b&gt;&lt;br /&gt;</span>
-<span class="s1">  &lt;br /&gt;Name: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayName&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Description: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Teams Enabled: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;teamsEnabled&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;ID: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Mail: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mail&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Visibility: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;visibility&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Group Types: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groupTypes&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Created date and time: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;createdDateTime&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Successfully Executed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;&lt;b&gt;Microsoft Group Details:&lt;/b&gt;&lt;br /&gt;</span>
+<span class="s1">  Name: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayName&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Description: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Nickname: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mailNickname&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Teams Enabled: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;teamsEnabled&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  ID: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Mail: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mail&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Visibility: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;visibility&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Group Types: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groupTypes&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Created date and time: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;createdDateTime&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span>
   <span class="k">if</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;unfoundUsers&quot;</span><span class="p">):</span>
     <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&lt;br /&gt;*Note the following users were unable to be added to the group: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;unfoundUsers&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
 
-<span class="n">note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>
@@ -1846,30 +1706,35 @@ rejection_words=reject, rejected, deny, denied, no
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">create_team</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FN_NAME</span> <span class="o">=</span> <span class="s2">&quot;ms_teams_create_team&quot;</span>
+<span class="n">WF_NAME</span> <span class="o">=</span> <span class="s2">&quot;MS Teams: Create Team (PB)&quot;</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">create_team</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Unable to create Microsoft Team&quot;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Failed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;Unable to create Microsoft Team&quot;</span>
   <span class="n">fail_reason</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">fail_reason</span><span class="p">:</span>
     <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Failure reason: </span><span class="si">{</span><span class="n">fail_reason</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">Inputs: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">text</span>  <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;&lt;b&gt;Microsoft Group Details:&lt;/b&gt;&lt;br /&gt;</span>
-<span class="s1">  &lt;br /&gt;Name: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayName&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Description: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Teams Enabled: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;teamsEnabled&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;ID: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Mail: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mail&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Visibility: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;visibility&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Group Types: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groupTypes&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Created date and time: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;createdDateTime&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Successfully Executed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;&lt;b&gt;Microsoft Team Details:&lt;/b&gt;&lt;br /&gt;</span>
+<span class="s1">  Name: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayName&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Description: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Teams Enabled: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;teamsEnabled&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  ID: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Mail: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mail&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Visibility: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;visibility&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Group Types: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groupTypes&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Created date and time: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;createdDateTime&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span>
   <span class="k">if</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;unfoundUsers&quot;</span><span class="p">):</span>
     <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&lt;br /&gt;*Note the following users were unable to be added to the group: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;unfoundUsers&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
 
-<span class="n">note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>
@@ -1977,21 +1842,27 @@ rejection_words=reject, rejected, deny, denied, no
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">delete_channel</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FN_NAME</span> <span class="o">=</span> <span class="s2">&quot;ms_teams_delete_channel&quot;</span>
+<span class="n">WF_NAME</span> <span class="o">=</span> <span class="s2">&quot;MS Teams: Delete Channel (PB)&quot;</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">delete_channel</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">channel_name</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ms_channel_name</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Unable to delete Microsoft Channel&quot;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Failed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Unable to delete Microsoft Channel: </span><span class="si">{</span><span class="n">channel_name</span><span class="si">}</span><span class="s2">&quot;</span>
   <span class="n">fail_reason</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">fail_reason</span><span class="p">:</span>
     <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Failure reason: </span><span class="si">{</span><span class="n">fail_reason</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">Inputs: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">text</span>  <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Microsoft Channels:&lt;/b&gt;&lt;br /&gt;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Successfully Executed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Delete Microsoft Channel: </span><span class="si">{</span><span class="n">channel_name</span><span class="si">}</span><span class="s2"> result&lt;/b&gt;&lt;br /&gt;</span>
 <span class="s2">  &lt;br /&gt;</span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
 
-<span class="n">note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>
@@ -2093,21 +1964,26 @@ rejection_words=reject, rejected, deny, denied, no
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">delete_group</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FN_NAME</span> <span class="o">=</span> <span class="s2">&quot;ms_teams_delete_group&quot;</span>
+<span class="n">WF_NAME</span> <span class="o">=</span> <span class="s2">&quot;MS Teams: Delete Group (PB)&quot;</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">delete_group</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ms_group_name</span> <span class="ow">or</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ms_group_mail_nickname</span> <span class="ow">or</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ms_group_id</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Unable to delete Microsoft Group&quot;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Failed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Unable to delete Microsoft Group: </span><span class="si">{</span><span class="n">group</span><span class="si">}</span><span class="s2">&quot;</span>
   <span class="n">fail_reason</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">fail_reason</span><span class="p">:</span>
     <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Failure reason: </span><span class="si">{</span><span class="n">fail_reason</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">Inputs: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;&lt;b&gt;Microsoft Groups:&lt;/b&gt;&lt;br /&gt;</span>
-<span class="s1">  &lt;br /&gt;</span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;message&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Successfully Executed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;message&quot;</span><span class="p">)</span>
 
-<span class="n">note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>
@@ -2245,30 +2121,395 @@ rejection_words=reject, rejected, deny, denied, no
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">enable_team</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FN_NAME</span> <span class="o">=</span> <span class="s2">&quot;ms_teams_enable_team&quot;</span>
+<span class="n">WF_NAME</span> <span class="o">=</span> <span class="s2">&quot;MS Teams: Enable Teams for Group (PB)&quot;</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">enable_team</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Could not enable Teams for this MS Group&quot;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Failed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;Could not enable Teams for this MS Group&quot;</span>
   <span class="n">fail_reason</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">fail_reason</span><span class="p">:</span>
     <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Failure reason: </span><span class="si">{</span><span class="n">fail_reason</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">Inputs: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">text</span>  <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;&lt;b&gt;Microsoft Group Details:&lt;/b&gt;&lt;br /&gt;</span>
-<span class="s1">  &lt;br /&gt;Name: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayName&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Description: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Teams Enabled: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;teamsEnabled&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;ID: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Mail: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mail&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Visibility: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;visibility&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Group Types: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groupTypes&quot;</span><span class="p">)</span><span class="si">}</span>
-<span class="s1">  &lt;br /&gt;Created date and time: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;createdDateTime&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Successfully Executed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;&lt;b&gt;Enabled Microsoft Group Details:&lt;/b&gt;&lt;br /&gt;</span>
+<span class="s1">  Name: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayName&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Description: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Teams Enabled: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;teamsEnabled&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  ID: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Mail: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mail&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Visibility: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;visibility&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Group Types: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groupTypes&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">  Created date and time: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;createdDateTime&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span>
   <span class="k">if</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;unfoundUsers&quot;</span><span class="p">):</span>
     <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&lt;br /&gt;*Note the following users were unable to be added to the group: </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;unfoundUsers&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span>
 
-<span class="n">note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-ms-teams-list-groups">
+<h2>Function - MS Teams: List Groups<a class="headerlink" href="#function-ms-teams-list-groups" title="Link to this heading">¶</a></h2>
+<p>List available groups</p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">teams_filter</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">displayName</span> <span class="pre">eq</span> <span class="pre">'Incident</span> <span class="pre">2026'</span></code></p></td>
+<td><p>optional filter values</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;createdDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-10-16T09:39:39Z&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;creationOptions&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Team&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;ExchangeProvisioningFlags:3552&quot;</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;deletedDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Incident 2386: DOS 11102004&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;msjq01&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;expirationDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;groupTypes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Unified&quot;</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;08dcc0f1-80f8-41c5-98b9*****&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;isAssignableToRole&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;mail&quot;</span><span class="p">:</span> <span class="s2">&quot;msjq01@example.com&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;mailEnabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">&quot;mailNickname&quot;</span><span class="p">:</span> <span class="s2">&quot;msjq01&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;membershipRule&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;membershipRuleProcessingState&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;onPremisesDomainName&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;onPremisesLastSyncDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;onPremisesNetBiosName&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;onPremisesProvisioningErrors&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">&quot;onPremisesSamAccountName&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;onPremisesSecurityIdentifier&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;onPremisesSyncEnabled&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;preferredDataLocation&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;preferredLanguage&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;proxyAddresses&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;SPO:SPO_78794e5c-da33-46e1-abdf-6d2c28c2a6c6@SPO_50ad7d3e-b889-434d-802d*****&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;SMTP:msjq01@example.com&quot;</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;renewedDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-10-16T09:39:39Z&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;resourceBehaviorOptions&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;HideGroupInOutlook&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;SubscribeMembersToCalendarEventsDisabled&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;WelcomeEmailDisabled&quot;</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;resourceProvisioningOptions&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">&quot;Team&quot;</span>
+      <span class="p">],</span>
+      <span class="s2">&quot;securityEnabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">&quot;securityIdentifier&quot;</span><span class="p">:</span> <span class="s2">&quot;S-1-12-1-148685041-1103462648-1283570072*****&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;serviceProvisioningErrors&quot;</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">&quot;theme&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;uniqueName&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;visibility&quot;</span><span class="p">:</span> <span class="s2">&quot;Private&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2725</span><span class="p">,</span>
+    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-teams&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.3.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-02-20 15:40:15&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;teams_filter&quot;</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">teams_filter</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_filter</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FN_NAME</span> <span class="o">=</span> <span class="s2">&quot;ms_teams_list_groups&quot;</span>
+<span class="n">WF_NAME</span> <span class="o">=</span> <span class="s2">&quot;MS Teams: List Group (PB)&quot;</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">list_group_result</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Failed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Unable to List Microsoft Groups&quot;</span>
+  <span class="n">fail_reason</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">fail_reason</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Failure reason: </span><span class="si">{</span><span class="n">fail_reason</span><span class="si">}</span>
+<span class="s2">    Inputs: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Successfully Executed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="k">for</span> <span class="n">ms_group</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;ms_teams_list_groups_teams_channels_datatable&quot;</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;group_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ms_group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;group_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ms_group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayName&quot;</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;group_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ms_group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groupTypes&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-ms-teams-list-team-channels">
+<h2>Function - MS Teams: List Team Channels<a class="headerlink" href="#function-ms-teams-list-team-channels" title="Link to this heading">¶</a></h2>
+<p>List all the channels associated with a Team. A filter can be used to narrow the results</p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ms_groupteam_id</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+<td><p>Unique id assigned to a MS Group or Team while being created</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">teams_filter</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">displayName</span> <span class="pre">eq</span> <span class="pre">'General'</span></code></p></td>
+<td><p>optional filter values</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;@odata.context&quot;</span><span class="p">:</span> <span class="s2">&quot;https://graph.microsoft.com/v1.0/$metadata#Collection(microsoft.graph.channel)&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;@odata.count&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;@odata.id&quot;</span><span class="p">:</span> <span class="s2">&quot;https://graph.microsoft.com/v1.0/tenants/ddd-eee-fff/teams/aaa-bbb-ccc/channels/19:cd40beb34fca44de97d1c01c3839c425@thread.tacv2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;createdDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-02-20T19:37:05.225Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Chat&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;19:cd40beb34fca44de97d1c01c3839c425@thread.tacv2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;isArchived&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">&quot;isFavoriteByDefault&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;membershipType&quot;</span><span class="p">:</span> <span class="s2">&quot;standard&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tenantId&quot;</span><span class="p">:</span> <span class="s2">&quot;ddd-eee-fff&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;webUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://teams.microsoft.com/l/channel/11-555-77/Chat?groupId=aaa-bbb-ccc</span><span class="se">\u0026</span><span class="s2">tenantId=ddd-eee-fff</span><span class="se">\u0026</span><span class="s2">allowXTenantAccess=True</span><span class="se">\u0026</span><span class="s2">ngc=True&quot;</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;@odata.id&quot;</span><span class="p">:</span> <span class="s2">&quot;https://graph.microsoft.com/v1.0/tenants/11111-2222-333333/teams/aaa-bbb-ccc/channels/abc-def&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;createdDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-02-19T17:09:46.05Z&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;some description&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;General&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;Incident2106@example.com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;abc-def&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;isArchived&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">&quot;isFavoriteByDefault&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;membershipType&quot;</span><span class="p">:</span> <span class="s2">&quot;standard&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;tenantId&quot;</span><span class="p">:</span> <span class="s2">&quot;ddd-eee-fff&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;webUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://teams.microsoft.com/l/channel/abc-def-ghi/Incident%3A%202106?groupId=aaa-bbb-ccc</span><span class="se">\u0026</span><span class="s2">tenantId=ddd-eee-fff</span><span class="se">\u0026</span><span class="s2">allowXTenantAccess=True</span><span class="se">\u0026</span><span class="s2">ngc=True&quot;</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;teams_filter&quot;</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">teams_filter</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_filter</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ms_channel_team_id</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ms_channel_team_id</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FN_NAME</span> <span class="o">=</span> <span class="s2">&quot;ms_teams_list_team_channels&quot;</span>
+<span class="n">WF_NAME</span> <span class="o">=</span> <span class="s2">&quot;MS Teams: List Team Channels (PB)&quot;</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">list_channel_result</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Failed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Unable to List Microsoft Team Channels&quot;</span>
+  <span class="n">fail_reason</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">fail_reason</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Failure reason: </span><span class="si">{</span><span class="n">fail_reason</span><span class="si">}</span>
+<span class="s2">    Inputs: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Successfully Executed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="k">for</span> <span class="n">ms_group</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;ms_teams_list_groups_teams_channels_datatable&quot;</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;group_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ms_group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;group_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ms_group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayName&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;groupTypes&quot;</span> <span class="ow">in</span> <span class="n">ms_group</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;group_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ms_group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groupTypes&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="function-ms-teams-list-teams">
+<h2>Function - MS Teams: List Teams<a class="headerlink" href="#function-ms-teams-list-teams" title="Link to this heading">¶</a></h2>
+<p>List available teams</p>
+<details><summary>Inputs:</summary>
+<p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head text-center"><p>Type</p></th>
+<th class="head text-center"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">teams_filter</span></code></p></td>
+<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">displayName</span> <span class="pre">eq</span> <span class="pre">'Incident</span> <span class="pre">2026'</span></code></p></td>
+<td><p>optional filter values</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</p>
+</details>
+<details><summary>Outputs:</summary>
+<p>
+<blockquote>
+<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;createdDateTime&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;example&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;discoverySettings&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;example&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;funSettings&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;guestSettings&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;322d20bf-450e-46d6-9338-*****&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;internalId&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;isArchived&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;isMembershipLimitedToOwners&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;memberSettings&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;messagingSettings&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;specialization&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;tagSettings&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;visibility&quot;</span><span class="p">:</span> <span class="s2">&quot;public&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;webUrl&quot;</span><span class="p">:</span> <span class="n">null</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Input Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;teams_filter&quot;</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">teams_filter</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">teams_filter</span>
+</pre></div>
+</div>
+</p>
+</details>
+<details><summary>Example Function Post Process Script:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FN_NAME</span> <span class="o">=</span> <span class="s2">&quot;ms_teams_list_teams&quot;</span>
+<span class="n">WF_NAME</span> <span class="o">=</span> <span class="s2">&quot;MS Teams: List Teams (PB)&quot;</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">list_teams_result</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Failed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Unable to List Microsoft Teams&quot;</span>
+  <span class="n">fail_reason</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">fail_reason</span><span class="p">:</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Failure reason: </span><span class="si">{</span><span class="n">fail_reason</span><span class="si">}</span>
+<span class="s2">    Inputs: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Successfully Executed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="k">for</span> <span class="n">ms_group</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;ms_teams_list_groups_teams_channels_datatable&quot;</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;group_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ms_group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;group_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ms_group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayName&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;group_type&quot;</span> <span class="ow">in</span> <span class="n">ms_group</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;group_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ms_group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;groupTypes&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>
@@ -2406,15 +2647,23 @@ rejection_words=reject, rejected, deny, denied, no
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">post_message</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FN_NAME</span> <span class="o">=</span> <span class="s2">&quot;ms_teams_post_message&quot;</span>
+<span class="n">WF_NAME</span> <span class="o">=</span> <span class="s2">&quot;MS Teams: Post Incident Information (PB)&quot;</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">post_message</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Unable to Post message&quot;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Failed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;Unable to Post message&quot;</span>
   <span class="n">fail_reason</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">fail_reason</span><span class="p">:</span>
     <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Failure reason: </span><span class="si">{</span><span class="n">fail_reason</span><span class="si">}</span><span class="s2">&quot;</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">Inputs: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Successfully Executed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Successfully posted a MS Teams message to channel: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;teams_channel&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -2571,40 +2820,48 @@ rejection_words=reject, rejected, deny, denied, no
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">read_message</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">FN_NAME</span> <span class="o">=</span> <span class="s2">&quot;ms_teams_read_message&quot;</span>
+<span class="n">WF_NAME</span> <span class="o">=</span> <span class="s2">&quot;MS Teams: Read Channel Messages (PB)&quot;</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">read_message</span>
 <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">channel</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ms_channel_name</span> <span class="ow">or</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ms_channel_id</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ms_group_mail_nickname</span> <span class="ow">or</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ms_groupteam_id</span> <span class="ow">or</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ms_groupteam_name</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Unable to read messages from Microsoft Channel&quot;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Failed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Unable to read messages from Microsoft Channel: </span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">&quot;</span>
   <span class="n">fail_reason</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">fail_reason</span><span class="p">:</span>
     <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Failure reason: </span><span class="si">{</span><span class="n">fail_reason</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n\t</span><span class="s2">Inputs: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">text</span>  <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Microsoft Channels:&lt;/b&gt;&lt;br /&gt;</span>
-<span class="s2">  Successfully retrieved &lt;b&gt;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/b&gt; messages &lt;br /&gt;&lt;br /&gt;&quot;&quot;&quot;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;MS Teams Playbook: &lt;b&gt;</span><span class="si">{</span><span class="n">WF_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;Successfully Executed for SOAR function &lt;b&gt;</span><span class="si">{</span><span class="n">FN_NAME</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span>
+  <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Successfully retrieved &lt;b&gt;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/b&gt; messages from:&lt;br /&gt;</span>
+<span class="s2">  Channel&#39;s Group Name - Mail Nickname - Group/Team ID: </span><span class="si">{</span><span class="n">group</span><span class="si">}</span>
+<span class="s2">  Channel: </span><span class="si">{</span><span class="n">channel</span><span class="si">}</span><span class="s2">&lt;br /&gt;&quot;&quot;&quot;</span>
 
   <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
     <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;&lt;a href=&quot;</span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;webUrl&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&quot;&gt;Click here&lt;/a&gt;</span>
-<span class="s1">    Message Id : </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1"> &lt;br /&gt;</span>
-<span class="s1">    Channel Id : </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;channelIdentity&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;channelId&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1"> &lt;br /&gt;</span>
-<span class="s1">    Team Id : </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;channelIdentity&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;teamId&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1"> &lt;br /&gt;&#39;&#39;&#39;</span>
+<span class="s1">    Message Id: </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span>
 
+    <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;&lt;br /&gt;Message Id : </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">    Created Time: </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;createdDateTime&quot;</span><span class="p">)</span><span class="si">}</span>
+<span class="s1">    Web URL: &lt;a href=&quot;</span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;webUrl&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&quot;&gt;Click here&lt;/a&gt;</span>
+<span class="s1">    &#39;&#39;&#39;</span>
+    
     <span class="k">if</span> <span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;from&quot;</span><span class="p">):</span>
       <span class="n">user_messages</span> <span class="o">=</span> <span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;from&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="p">{})</span>
       <span class="k">if</span> <span class="n">user_messages</span><span class="p">:</span>
-        <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;From User : </span><span class="si">{</span><span class="n">user_messages</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayName&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1"> &lt;br /&gt;&#39;</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;From User: </span><span class="si">{</span><span class="n">user_messages</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayName&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1"> &lt;br /&gt;&#39;</span>
       <span class="k">else</span><span class="p">:</span>
-        <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;From Application : </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;from&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;application&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayName&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1"> &lt;br /&gt;&#39;</span>
+        <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;From Application: </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;from&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;application&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayName&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1"> &lt;br /&gt;&#39;</span>
 
-    <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;Body Content : </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1"> &lt;br /&gt;</span>
-<span class="s1">    Content Type : </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;contentType&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1"> &lt;br /&gt;</span>
-<span class="s1">    Created Time : </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;createdDateTime&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1"> &lt;br /&gt;</span>
-<span class="s1">    Web URL : </span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s1"> &lt;br /&gt;</span>
-<span class="s1">    &lt;br /&gt;&#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;subject&quot;</span><span class="p">):</span>
+      <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;    Subject: </span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;subject&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&lt;br&gt;</span><span class="si">{</span><span class="n">message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;&#39;&#39;</span>
 
-<span class="n">note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>
@@ -2772,13 +3029,32 @@ rejection_words=reject, rejected, deny, denied, no
 <td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
 </tr>
+<tr class="row-odd"><td><p>MS Teams: List Group (PB)</p></td>
+<td><p>None</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>MS Teams: List Team Channels (PB)</p></td>
+<td><p>None</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>MS Teams: List Teams (PB)</p></td>
+<td><p>None</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
 </tbody>
 </table>
 </div>
-<!--
-| MS Teams: Send Approval Request | Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the 'MS Teams Approval Process' datatable. | Manual | incident | `enabled` | `-` | 
-| MS Teams: Send Approval Request for Tasks | Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the 'MS Teams Approval Process' datatable. | Manual | task | `enabled` | `-` | 
--->
+<!-- | MS Teams: Send Approval Request | Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the 'MS Teams Approval Process' datatable. | Manual | incident | `enabled` | `-` | 
+| MS Teams: Send Approval Request for Tasks | Playbook to send an approval for change to a MS Teams channel. The status of the approval is tracked in the 'MS Teams Approval Process' datatable. | Manual | task | `enabled` | `-` |  -->
 <hr class="docutils" />
 <!--
 ## Custom Layouts
@@ -2900,10 +3176,6 @@ msteams_approval_process
 <li><a class="reference internal" href="#endpoint-configuration">Endpoint Configuration</a><ul>
 <li><a class="reference internal" href="#register-a-new-application-using-the-azure-portal">Register a new application using the Azure portal</a></li>
 <li><a class="reference internal" href="#api-permissions">API Permissions</a></li>
-<li><a class="reference internal" href="#application-permission">Application Permission</a></li>
-<li><a class="reference internal" href="#delegated-permission">Delegated Permission</a></li>
-<li><a class="reference internal" href="#setting-up-api-permissions-both-permissions">Setting up API Permissions (Both Permissions)</a></li>
-<li><a class="reference internal" href="#list-of-required-permissions">List of required permissions</a></li>
 <li><a class="reference internal" href="#create-a-client-secret-value-both-permissions">Create a client Secret Value (Both Permissions)</a></li>
 <li><a class="reference internal" href="#setting-up-incoming-webhooks-both-permissions">Setting up Incoming Webhooks (Both Permissions)</a></li>
 <li><a class="reference internal" href="#setting-up-delegated-permissions-delegated-permissions">Setting up Delegated permissions (Delegated permissions)</a></li>
@@ -2911,7 +3183,6 @@ msteams_approval_process
 <li><a class="reference internal" href="#ms-teams-workflows">MS Teams Workflows</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#function-ms-teams-post-message-for-workflows">Function - MS Teams Post Message for Workflows</a></li>
 <li><a class="reference internal" href="#function-ms-teams-archive-team">Function - MS Teams: Archive Team</a></li>
 <li><a class="reference internal" href="#function-ms-teams-create-channel">Function - MS Teams: Create Channel</a></li>
 <li><a class="reference internal" href="#function-ms-teams-create-group">Function - MS Teams: Create group</a></li>
@@ -2919,6 +3190,9 @@ msteams_approval_process
 <li><a class="reference internal" href="#function-ms-teams-delete-channel">Function - MS Teams: Delete Channel</a></li>
 <li><a class="reference internal" href="#function-ms-teams-delete-group">Function - MS Teams: Delete Group</a></li>
 <li><a class="reference internal" href="#function-ms-teams-enable-team">Function - MS Teams: Enable Team</a></li>
+<li><a class="reference internal" href="#function-ms-teams-list-groups">Function - MS Teams: List Groups</a></li>
+<li><a class="reference internal" href="#function-ms-teams-list-team-channels">Function - MS Teams: List Team Channels</a></li>
+<li><a class="reference internal" href="#function-ms-teams-list-teams">Function - MS Teams: List Teams</a></li>
 <li><a class="reference internal" href="#function-ms-teams-post-message">Function - MS Teams: Post Message</a></li>
 <li><a class="reference internal" href="#function-ms-teams-read-message">Function - MS Teams: Read Message</a></li>
 <li><a class="reference internal" href="#playbooks">Playbooks</a></li>
@@ -2938,8 +3212,8 @@ msteams_approval_process
     </aside>
   </div>
 </div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
