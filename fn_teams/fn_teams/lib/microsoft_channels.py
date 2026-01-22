@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, line-too-long
+# pragma pylint: disable=unused-argument, line-too-long, wrong-import-order
 # (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 ''' Helper function for funct_ms_teams_create_teams'''
 
-import json, logging
+import json
+import logging
 
 from urllib import parse
 from resilient_lib import IntegrationError
@@ -30,6 +31,7 @@ class ChannelInterface:
         self.log = logging.getLogger(__file__)
         self.headers = required_parameters.get("header")
         self.response_handler = ResponseHandler()
+        self.proxies = self.rc.get_proxies()
 
 
     def create_channel(self, options):
@@ -93,6 +95,7 @@ class ChannelInterface:
             url=url,
             data=body,
             headers=self.headers,
+            proxies=self.proxies,
             callback=self.response_handler.check_response)
 
         if response.get("status_code") == 201:
@@ -152,6 +155,7 @@ class ChannelInterface:
             method="delete",
             url=url,
             headers=self.headers,
+            proxies=self.proxies,
             callback=self.response_handler.check_response)
 
         if response.get("status_code") == 204:

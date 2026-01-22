@@ -1,7 +1,7 @@
-# Generated with resilient-sdk v52.0.0.0.927
-# docker build -t ibmresilient/fn_teams:2.2.0 .
+# Generated with resilient-sdk v51.0.7.0.1603
+# docker build -t ibmresilient/fn_teams:2.3.0 .
 ARG BASE_IMAGE_REPO=quay.io
-# BASE_IMAGE_TAG options: latest, python-39, python-311. See https://quay.io/repository/ibmresilient/soarapps-base-docker-image?tab=tags for all options
+# BASE_IMAGE_TAG options: latest, python-311, python-312. See https://quay.io/repository/ibmresilient/soarapps-base-docker-image?tab=tags for all options
 # use --build-arg BASE_IMAGE_TAG=<tag> to set base image to be built from
 ARG BASE_IMAGE_TAG=latest
 
@@ -11,7 +11,6 @@ ARG APPLICATION=fn_teams
 
 COPY ./dist /tmp/packages
 USER 0
-
-RUN yum -y update && yum clean all 
+RUN yum -y update && yum clean all
 RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
 USER 1001

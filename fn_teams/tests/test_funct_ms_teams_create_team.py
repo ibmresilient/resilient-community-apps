@@ -8,7 +8,7 @@ from fn_teams.lib.microsoft_teams import TeamsInterface
 from tests.testcommons import required_parameters
 
 
-def patch_build_member_format(method, url, headers, callback) -> dict:
+def patch_build_member_format(method, url, headers, callback, proxies=None) -> dict:
     testcommons.check_request_parameters(
         method=method,
         url=url,
@@ -54,7 +54,7 @@ def test_build_member_format(patch_rc, required_parameters):
         member_format = ti._build_member_format(user_email, True)
 
 
-def patch_add_members(method, url, headers, callback, data=None) -> dict:
+def patch_add_members(method, url, headers, callback, data=None, proxies=None) -> dict:
     body = testcommons.check_request_parameters(
         method=method,
         url=url,

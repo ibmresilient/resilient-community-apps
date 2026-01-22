@@ -1,5 +1,6 @@
 import os, json
 import pytest, logging
+from unittest.mock import patch
 from resilient_lib import RequestsCommon
 
 APP_CONFIG = {
@@ -19,14 +20,19 @@ def required_parameters():
     log = logging.getLogger(__name__)
     log.setLevel(logging.INFO)
     log.addHandler(logging.StreamHandler())
-    header = {
-        'Authorization': 'Bearer ID123',
-        'Content-type': 'application/json'}
-    yield {
-        "rc" : RequestsCommon(),
-        "logger" : log,
-        "header" : header,
-        "resclient" : None}
+   
+    rc = RequestsCommon()
+
+    with patch.object(rc, "get_proxies", return_value={"http": "http://proxy.example.com"}):
+        header = {
+            'Authorization': 'Bearer ID123',
+            'Content-type': 'application/json'}
+        yield {
+            "rc": rc,
+            "logger": log,
+            "header": header,
+            "resclient": None}
+
 
 class MockRestClient:
     def __init__(self):

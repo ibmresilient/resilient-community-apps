@@ -8,7 +8,7 @@ from fn_teams.lib.microsoft_teams import TeamsInterface
 from tests.testcommons import required_parameters
 
 
-def patch_archive_unarchive_team(method, url, headers, callback, data=None):
+def patch_archive_unarchive_team(method, url, headers, callback, data=None, proxies=None):
     ret = testcommons.json_read(testcommons.PATH_MS_GROUP)
     testcommons.check_request_parameters(
         method=method,

@@ -6,7 +6,7 @@ from fn_teams.lib.microsoft_groups import GroupsInterface
 from tests.testcommons import required_parameters
 
 
-def patch_write_group(method, url, data, headers, callback):
+def patch_write_group(method, url, data, headers, callback, proxies=None):
     body = testcommons.check_request_parameters(
         method=method,
         url=url,

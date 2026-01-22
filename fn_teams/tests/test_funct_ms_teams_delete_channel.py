@@ -14,7 +14,7 @@ PATH_TEST_DATA = os.path.join(os.path.abspath(os.path.dirname(__file__)), "data"
 PATH_MS_GROUP = os.path.join(PATH_TEST_DATA, "find_group.json")
 
 
-def patch_archive_unarchive_team(method, url, headers, callback):
+def patch_archive_unarchive_team(method, url, headers, callback, proxies=None):
     ret = testcommons.json_read(PATH_MS_GROUP)
     testcommons.check_request_parameters(
         method=method,

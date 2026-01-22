@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, line-too-long
+# pragma pylint: disable=unused-argument, line-too-long, wrong-import-order
 # (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 """ Helper function for funct_ms_teams_post_message"""
@@ -34,7 +34,7 @@ class MessageClient:
     def __init__(self, rc):
         self.rc  = rc
         self.log = logging.getLogger(__file__)
-
+        self.proxies = self.rc.get_proxies()
 
     def post_message(self, options, **kwargs):
         """
@@ -157,7 +157,7 @@ class MessageClient:
             card.addSection(cardsection)
         return card
 
-    def post_message_workflow(self, channel_url, adaptive_card, proxies):
+    def post_message_workflow(self, channel_url, adaptive_card):
         workflow_payload = {
             "type":"message",
             "attachments": [
@@ -172,7 +172,7 @@ class MessageClient:
             "post",
             url=channel_url,
             json= workflow_payload,
-            proxies=proxies,
+            proxies=self.proxies,
             callback=response_handler.check_response
         )
 
@@ -196,7 +196,7 @@ class MessageClient:
         """
 
         # get url information for either incident or incident task
-        incident_url = None
+        incident_url = case_type = None
         if fn_inputs.get("task_id"):
             incident_url = build_task_url(
                 build_resilient_url(
@@ -282,6 +282,7 @@ class MessageClient:
             results = self.rc.execute("get",
                                         url=url,
                                         headers=dual_headers.get("delegated"),
+                                        proxies=self.proxies,
                                         callback=response_handler.check_response)
             if results:
                 results = [results] # make it look like the other API call for all messages
@@ -319,6 +320,7 @@ class MessageClient:
             method,
             url=url,
             headers=headers,
+            proxies=self.proxies,
             callback=callback)
 
         results = response.get("value")

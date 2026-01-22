@@ -1,17 +1,21 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, line-too-long
+# pragma pylint: disable=unused-argument, line-too-long, wrong-import-order
 # (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 """AppFunction Common utilities"""
 import json
 import logging
+import re
+import traceback
 from urllib import parse
 
 from resilient_lib import IntegrationError
 from fn_teams.lib import constants
+from fn_teams.lib.microsoft_authentication import  MicrosoftAuthentication
 
-log = logging.getLogger(__name__)
+LOG = logging.getLogger(__name__)
 
+re_display_name = re.compile(r'[^a-zA-Z0-9 ]')
 
 class ResponseHandler:
     """
@@ -286,13 +290,13 @@ class MSFinder():
         """
 
         if options.get("group_id"):
-            log.info(constants.INFO_FIND_GROUP_BY_ID)
+            LOG.info(constants.INFO_FIND_GROUP_BY_ID)
             _id = options.get("group_id")
             error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Group ID", _id)
             _query = f"/{_id}"
 
         elif options.get("group_mail_nickname"):
-            log.info(constants.INFO_FIND_GROUP_BY_MAIL)
+            LOG.info(constants.INFO_FIND_GROUP_BY_MAIL)
             _name = options.get("group_mail_nickname")
             if "@" in _name:
                 _name = _name.split("@")[0]
@@ -300,7 +304,7 @@ class MSFinder():
             _query = constants.QUERY_GROUP_FIND_BY_MAIL.format(_name)
 
         elif options.get("group_name"):
-            log.info(constants.INFO_FIND_GROUP_BY_NAME)
+            LOG.info(constants.INFO_FIND_GROUP_BY_NAME)
             _name = options.get("group_name")
             error_msg = constants.ERROR_DIDNOT_FIND_GROUP.format("Group Name", _name)
             _query = constants.QUERY_GROUP_FIND_BY_NAME.format(_name)
@@ -318,17 +322,17 @@ class MSFinder():
             headers=self.headers,
             callback=self.rh.check_response)
 
-        log.debug(json.dumps(response, indent=2))
+        LOG.debug(json.dumps(response, indent=2))
 
         if options.get("group_id") and response.get("status_code") == 200:
-            log.info(constants.INFO_FOUND_GROUP)
+            LOG.debug(f"group found: {options.get('group_id')}")
             return [response]
 
         if len(response.get("value")) > 0 :
-            log.info(constants.INFO_FOUND_GROUP)
+            LOG.info(constants.INFO_FOUND_GROUP)
             return response.get("value")
 
-        log.error(error_msg)
+        LOG.error(error_msg)
         raise IntegrationError(error_msg)
 
 
@@ -360,7 +364,7 @@ class MSFinder():
         if "mail" in response:
             return response
 
-        log.warning(constants.WARN_DIDNOT_FIND_USER.format(user_id))
+        LOG.warning(constants.WARN_DIDNOT_FIND_USER.format(user_id))
 
     def find_group_id(self, options):
         """find the group id for a given group
@@ -426,7 +430,7 @@ class MSFinder():
         # filtering out the required channel using the displayName attribute
         channel_details = list(filter(
             lambda channel: channel.get("displayName") == channel_name, channel_list))
-        log.debug(json.dumps(channel_details, indent=2))
+        LOG.debug(json.dumps(channel_details, indent=2))
 
         if len(channel_details) == 0:
             raise IntegrationError(constants.ERROR_COULDNOT_FIND_CHANNEL.format(channel_name))
@@ -436,6 +440,8 @@ class MSFinder():
 
         return channel_details
 
+def clean_display_name(display_name):
+    return re_display_name.sub('', display_name)[:50]
 
 def is_direct_member(incident_member_id, org_member_list):
     """
@@ -514,10 +520,10 @@ def generate_member_list(**kwargs):
     add_members_from = add_members_from.lower().strip()
     add_members_from = None if add_members_from == "none" else add_members_from
 
-    log.debug(f"task_id            : {task_id}")
-    log.debug(f"incident_id        : {incident_id}")
-    log.debug(f"add_members_from   : {add_members_from}")
-    log.debug(f"additional_members : {additional_members}")
+    LOG.debug(f"task_id            : {task_id}")
+    LOG.debug(f"incident_id        : {incident_id}")
+    LOG.debug(f"add_members_from   : {add_members_from}")
+    LOG.debug(f"additional_members : {additional_members}")
 
     email_ids = []
     if add_members_from:
@@ -528,7 +534,7 @@ def generate_member_list(**kwargs):
             incident_members = resclient.get(parse.urljoin(constants.RES_INCIDENT,
                 constants.MEMBERS_URL.format(incident_id)))
         if not incident_members.get("members") or len(incident_members.get("members")) == 0:
-            log.warning(constants.WARN_INCIDENT_NO_MEMBERS)
+            LOG.info(constants.WARN_INCIDENT_NO_MEMBERS)
         else:
             for incident_member in incident_members.get("members"):
                 if is_direct_member(incident_member, org_member_list):
@@ -538,9 +544,9 @@ def generate_member_list(**kwargs):
                     email_ids.extend(
                         is_group_member(
                             incident_member, org_member_list, org_group_list))
-        log.debug(email_ids)
+        LOG.debug(email_ids)
     elif not additional_members:
-        log.warning(constants.WARN_NO_ADDITIONAL_PARTICIPANTS)
+        LOG.info(constants.WARN_NO_ADDITIONAL_PARTICIPANTS)
 
     if additional_members:
         email_ids += (additional_members
@@ -548,7 +554,7 @@ def generate_member_list(**kwargs):
         .replace(" ", "")
         .split(","))
     email_ids = list(set(email_ids))
-    log.info(constants.INFO_ADD_MEMEBERS.format(email_ids))
+    LOG.info(constants.INFO_ADD_MEMEBERS.format(email_ids))
     return email_ids
 
 def get_principal_user(message):
@@ -560,3 +566,10 @@ def get_principal_user(message):
     :rtype: (str, str)
     """
     return message.get("principal", {}).get("display_name"), message.get("principal", {}).get("name")
+
+def ms_authenticate(rc: dict, options: dict) -> MicrosoftAuthentication:
+    try:
+        return MicrosoftAuthentication(rc, options)
+    except IntegrationError as err:
+        LOG.error(traceback.format_exc())
+        return None

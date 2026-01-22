@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, line-too-long
+# pragma pylint: disable=unused-argument, line-too-long, wrong-import-order
 # (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 ''' Helper function for funct_ms_teams_create_teams'''
@@ -39,6 +39,7 @@ class TeamsInterface:
         self.log = logging.getLogger(__file__)
         self.headers = required_parameters["header"]
         self.resclient = required_parameters["resclient"]
+        self.proxies = self.rc.get_proxies()
 
 
     def _build_member_format(self, email_id, owner=False):
@@ -66,6 +67,7 @@ class TeamsInterface:
             method="get",
             url=url,
             headers=self.headers,
+            proxies=self.proxies,
             callback=self.response_handler.check_response)
 
         if "mail" in response:
@@ -163,6 +165,7 @@ class TeamsInterface:
             url=url,
             data=body,
             headers=self.headers,
+            proxies=self.proxies,
             callback=self.response_handler.check_response)
 
         self.log.debug(json.dumps(response, indent=2))
@@ -224,6 +227,7 @@ class TeamsInterface:
             url=url,
             data=body,
             headers=self.headers,
+            proxies=self.proxies,
             callback=self.response_handler.check_response)
         self.log.debug(response.raw.info())
         self.response_handler.set_return_raw(False)
@@ -308,6 +312,7 @@ class TeamsInterface:
             url=url,
             data=json.dumps(constants.TEAMS_FROM_GROUP_CONFIGURATION),
             headers=self.headers,
+            proxies=self.proxies,
             callback=self.response_handler.check_response)
 
         self.log.debug(json.dumps(response))
@@ -354,6 +359,7 @@ class TeamsInterface:
         group_details = group_finder.find_group(options)
         team_id = group_details[0].get("id")
 
+        url = None
         if operation == "archive":
             url = parse.urljoin(
                 constants.BASE_URL,
@@ -370,6 +376,7 @@ class TeamsInterface:
             method="post",
             url=url,
             headers=self.headers,
+            proxies=self.proxies,
             callback=self.response_handler.check_response)
         self.response_handler.clear_empty_response_codes(default=True)
 
@@ -385,3 +392,41 @@ class TeamsInterface:
                     group_details.get("displayName"))
                 group_details["teamsEnabled"] = "Unarchived"
         return group_details
+
+    def list_teams(self, team_filter: str):
+        url = parse.urljoin(
+            constants.BASE_URL,
+            constants.URL_LIST_TEAMS)
+        self.log.debug(url)
+
+        params = {"$filter": team_filter} if team_filter else None
+
+        response = self.rc.execute(
+            method="get",
+            url=url,
+            headers=self.headers,
+            proxies=self.proxies,
+            params=params,
+            callback=self.response_handler.check_response)
+
+        return response
+
+    def list_team_channels(self, team_id, team_filter):
+        """GET /teams/{team-id}/allChannels"""
+        url = parse.urljoin(
+            constants.BASE_URL,
+            constants.URL_LIST_TEAMS)
+        url = f"{url}/{team_id}/allChannels"
+        self.log.debug(url)
+
+        params = {"$filter": team_filter} if team_filter else None
+
+        response = self.rc.execute(
+            method="get",
+            url=url,
+            headers=self.headers,
+            proxies=self.proxies,
+            params=params,
+            callback=self.response_handler.check_response)
+
+        return response

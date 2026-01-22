@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, line-too-long
+# pragma pylint: disable=unused-argument, line-too-long, wrong-import-order
 ''' (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved. '''
 
 import logging
@@ -55,6 +55,8 @@ class MicrosoftAuthentication:
         self.required_parameters["redirect_uri"] = app_config.get(
             "redirect_uri",
             constants.DEFAULT_REDIRECT_URI)
+
+        self.proxies = self.rc.get_proxies()
 
 
     def _generate_application_bearer_id(self) -> str:
@@ -150,6 +152,7 @@ class MicrosoftAuthentication:
             "post",
             url=url,
             headers=header,
+            proxies=self.proxies,
             data=authorization_body)
         response = response.json()
 

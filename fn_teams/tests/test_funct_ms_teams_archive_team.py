@@ -32,7 +32,7 @@ def required_parameters():
         "resclient" : None}
 
 
-def patch_archive_unarchive_team(method, url, headers, callback):
+def patch_archive_unarchive_team(method, url, headers, callback, proxies=None):
     ret = testcommons.json_read(PATH_MS_GROUP)
     testcommons.check_request_parameters(
         method=method,

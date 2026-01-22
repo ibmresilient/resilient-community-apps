@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, line-too-long
+# pragma pylint: disable=unused-argument, line-too-long, wrong-import-order
 # (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 """AppFunction implementation"""
@@ -7,6 +7,7 @@ from resilient_lib import IntegrationError, validate_fields
 from resilient_circuits import AppFunctionComponent, app_function, FunctionResult
 
 from fn_teams.lib import constants
+from fn_teams.lib.microsoft_commons import clean_display_name
 from fn_teams.lib.microsoft_channels import ChannelInterface
 from fn_teams.lib.microsoft_authentication import  MicrosoftAuthentication
 
@@ -58,9 +59,8 @@ class FunctionComponent(AppFunctionComponent):
         required_parameters["logger"] = self.LOG
         required_parameters["resclient"] = self.rest_client()
 
-        options["displayName"] = fn_inputs.ms_channel_name
+        options["displayName"] = clean_display_name(fn_inputs.ms_channel_name)
         options["description"] = fn_inputs.ms_description
-
 
         try:
             yield self.status_message(constants.STATUS_GENERATE_HEADER)

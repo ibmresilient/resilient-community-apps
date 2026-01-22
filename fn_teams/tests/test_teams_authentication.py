@@ -21,7 +21,12 @@ def required_parameters():
     log = logging.getLogger(__name__)
     log.setLevel(logging.INFO)
     log.addHandler(logging.StreamHandler())
-    yield {"rc" : RequestsCommon(), "logger" : log}
+    
+    rc = RequestsCommon()
+
+    with patch.object(rc, "get_proxies", return_value={"http": "http://proxy.example.com"}):
+        yield {"rc": rc, "logger": log}
+
 
 
 @pytest.fixture(scope="function")
@@ -30,7 +35,9 @@ def mocked_authenticator(required_parameters):
         "directory_id"   : MOCK_ID_VALUE,
         "application_id" : MOCK_ID_VALUE,
         "secret_value"   : MOCK_ID_VALUE}
-    yield MicrosoftAuthentication(required_parameters, app_config)
+    
+    rc = required_parameters["rc"]
+    yield MicrosoftAuthentication(rc, app_config)
 
 
 class MockMSAL:
@@ -48,7 +55,8 @@ class MockMSAL:
 
 @pytest.mark.livetest
 def test_connect_endpoint(required_parameters):
-    authenticator = MicrosoftAuthentication(required_parameters, APP_CONFIG)
+    rc = required_parameters["rc"]
+    authenticator = MicrosoftAuthentication(rc, APP_CONFIG)
     header = authenticator.authenticate_application_permissions()
     assert header
     assert "Authorization" in header

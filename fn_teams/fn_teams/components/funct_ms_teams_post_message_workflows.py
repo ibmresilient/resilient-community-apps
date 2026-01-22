@@ -37,6 +37,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.teams_payload
             -   fn_inputs.incident_id
             -   fn_inputs.teams_channel
+            -   fn_inputs.teams_channel_url
             -   fn_inputs.task_id
         """
 
@@ -44,7 +45,6 @@ class FunctionComponent(AppFunctionComponent):
 
         validate_fields([
             "incident_id",
-            "teams_channel",
             "teams_payload"], fn_inputs)
 
         # confirm that the message payload follows the ActiveCard format
@@ -58,9 +58,15 @@ class FunctionComponent(AppFunctionComponent):
         message_client = MessageClient(self.rc)
 
         # get components of the webhook we'll be using
-        webhook = self.options.get(fn_inputs.teams_channel.lower())
-        if not webhook:
-            yield FunctionResult({}, success=False, reason=f"app.config webhook not found: {fn_inputs.teams_channel}")
+        if getattr(fn_inputs, "teams_channel_url", None):
+            webhook = fn_inputs.teams_channel_url
+        elif getattr(fn_inputs, "teams_channel", None):
+            webhook = self.options.get(fn_inputs.teams_channel.lower())
+            if not webhook:
+                yield FunctionResult({}, success=False, reason=f"app.config webhook not found: {fn_inputs.teams_channel}")
+                return
+        else:
+            yield FunctionResult({}, success=False, reason="Either teams_channel or teams_channel_url are required")
             return
 
         teams_payload = message_client.build_workflow_adaptive_card(
@@ -72,12 +78,9 @@ class FunctionComponent(AppFunctionComponent):
         # fill in requesting user if that information is specified
         teams_payload = get_soar_submission_user(teams_payload, self.get_fn_msg())
 
-        proxies = self.rc.get_proxies()
-
         results = message_client.post_message_workflow(
             webhook,
-            teams_payload,
-            proxies
+            teams_payload
         )
 
         yield FunctionResult(results)

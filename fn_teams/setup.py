@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name='fn_teams',
     display_name="Microsoft Teams",
-    version='2.2.0',
+    version='2.3.0',
     license='MIT License',
     author='IBM SOAR',
     author_email='',
@@ -35,11 +35,11 @@ setup(
         <ul><a target='blank' href='https://ibmresilient.github.io/resilient-community-apps/fn_teams/README.html'>App Documentation</a></ul>''',
     install_requires=[
         "bs4",
-        "resilient_circuits>=45.0.0",
+        "resilient_circuits>=51.0.0",
         "pymsteams ~= 0.2.1",
         "msal ~= 1.19"
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.9',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, line-too-long
+# pragma pylint: disable=unused-argument, line-too-long, wrong-import-order
 #(c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.
 
 import json
@@ -40,6 +40,7 @@ class GroupsInterface:
         self.rc = required_parameters["rc"]
         self.headers = required_parameters["header"]
         self.resclient = required_parameters["resclient"]
+        self.proxies = self.rc.get_proxies()
 
 
     def _write_group(self, **kwargs):
@@ -88,6 +89,7 @@ class GroupsInterface:
             url=url,
             data=json.dumps(body),
             headers=self.headers,
+            proxies=self.proxies,
             callback=self.response_handler.check_response)
 
         self.log.debug(json.dumps(response, indent=2))
@@ -186,6 +188,7 @@ class GroupsInterface:
                 url=url,
                 data=body,
                 headers=self.headers,
+                proxies=self.proxies,
                 callback=self.response_handler.check_response)
         self.response_handler.clear_exempt_codes(default=True)
 
@@ -302,6 +305,7 @@ class GroupsInterface:
             method="delete",
             url=url,
             headers=self.headers,
+            proxies=self.proxies,
             callback=self.response_handler.check_response)
 
         if response.get("status_code") == 204:
@@ -309,4 +313,22 @@ class GroupsInterface:
                 "Group",
                 group_details[0].get("displayName"))
             self.log.info(response["message"])
+        return response
+
+    def list_groups(self, group_filter: str):
+        url = parse.urljoin(
+            constants.BASE_URL,
+            constants.URL_LIST_GROUPS)
+        self.log.debug(url)
+
+        params = {"$filter": group_filter} if group_filter else None
+
+        response = self.rc.execute(
+            method="get",
+            url=url,
+            headers=self.headers,
+            params=params,
+            proxies=self.proxies,
+            callback=self.response_handler.check_response)
+
         return response

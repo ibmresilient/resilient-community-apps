@@ -8,7 +8,7 @@ from tests.testcommons import required_parameters
 from fn_teams.lib.microsoft_channels import ChannelInterface
 
 
-def patch_create_channel(method, url, headers, callback, data=None):
+def patch_create_channel(method, url, headers, callback, data=None, proxies=None):
     ret = testcommons.json_read(testcommons.PATH_MS_GROUP)
     body = testcommons.check_request_parameters(
         method=method,

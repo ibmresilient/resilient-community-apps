@@ -10,7 +10,7 @@ from resilient_lib.ui import Datatable, Tab, create_tab
 LOG = logging.getLogger(__name__)
 
 PACKAGE_NAME = "fn_teams"
-TAB_NAME = "MS Teams Approval"
+TAB_NAME = "MS Teams"
 
 class MSTeamsTab(Tab):
     SECTION = PACKAGE_NAME
@@ -18,7 +18,9 @@ class MSTeamsTab(Tab):
     UUID = "c8a84bcb-fd24-4788-8d8c-3c81f474cb95"
 
     CONTAINS = [
-        Datatable("msteams_approval_process")
+        Datatable("ms_teams_list_team"),
+        Datatable("ms_teams_list_groups"),
+        Datatable("ms_teams_list_team_channels")
     ]
 
 # Continue if exception is thrown

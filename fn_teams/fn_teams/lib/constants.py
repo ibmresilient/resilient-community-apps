@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# pragma pylint: disable=unused-argument, line-too-long
+# pragma pylint: disable=unused-argument, line-too-long, wrong-import-order
 # (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
 
 # Teams Authentication
@@ -52,6 +52,8 @@ URL_GROUPS_OWNERS = URL_GROUPS + "/{}/owners"
 URL_GROUPS_MEMBERS = URL_GROUPS + "/{}/members"
 URL_GROUP_ADD_MEMBERS = URL_GROUPS + "/{}/members/$ref"
 URL_DIRECTORY_OBJECT = "/v1.0/directoryObjects/{}"
+URL_LIST_GROUPS = "/v1.0/groups"
+URL_LIST_TEAMS = "/v1.0/teams"
 
 CREATE_GROUP_CONFIGURATION = {
     "visibility": "Private"}
@@ -128,7 +130,7 @@ WARN_NO_OWNER_EMAIL_ID_PROVIDED = ''' No owner Email ID provided.
  cannot be modified until an owner is assigned to the group'''
 WARN_NO_MEMBER_EMAIL_ID_PROVIDED = ''' No member Email ID found.
  Unable to find a user associated with the Incident/Task who has a valid MS account'''
-WARN_NO_ADDITIONAL_PARTICIPANTS = '''No participants were added to the {}.
+WARN_NO_ADDITIONAL_PARTICIPANTS = '''No participants were added to the team.
  ADD MEMBERS FROM field was set to None and no list of participants were provided
  in the Additional members field.'''
 WARN_INCIDENT_NO_MEMBERS = "There are no members assigned to this incident"

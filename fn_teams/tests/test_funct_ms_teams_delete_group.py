@@ -8,7 +8,7 @@ from fn_teams.lib.microsoft_groups import GroupsInterface
 from tests.testcommons import required_parameters
 
 
-def patch_delete_group(method, url, headers, callback):
+def patch_delete_group(method, url, headers, callback, proxies=None):
     ret = testcommons.json_read(testcommons.PATH_MS_GROUP)
     testcommons.check_request_parameters(
         method=method,

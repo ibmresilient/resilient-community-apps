@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
-# Generated with resilient-sdk v51.0.2.2.1096
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.7.0.1603
 
 """Generate the SOAR customizations required for fn_teams"""
 
@@ -33,17 +33,23 @@ def codegen_reload_data():
             u"ms_teams_delete_channel",
             u"ms_teams_delete_group",
             u"ms_teams_enable_team",
+            u"ms_teams_list_groups",
+            u"ms_teams_list_team_channels",
+            u"ms_teams_list_teams",
             u"ms_teams_post_message",
             u"ms_teams_post_message_workflows",
-            u"ms_teams_read_message",
-            u"ms_teams_read_message_replies"
+            u"ms_teams_read_message"
         ],
         "workflows": [],
         "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [],
+        "datatables": [
+            u"ms_teams_list_groups",
+            u"ms_teams_list_team",
+            u"ms_teams_list_team_channels"
+        ],
         "automatic_tasks": [],
         "scripts": [],
         "playbooks": [
@@ -61,6 +67,9 @@ def codegen_reload_data():
             u"ms_teams_delete_group_pb",
             u"ms_teams_enable_teams_for_group_from_task_pb",
             u"ms_teams_enable_teams_for_group_pb",
+            u"ms_teams_list_group_pb",
+            u"ms_teams_list_team_channels_pb",
+            u"ms_teams_list_teams_pb",
             u"ms_teams_post_chat_message_using_workflows",
             u"ms_teams_post_chat_task_message_using_workflows",
             u"ms_teams_post_incident_information_pb",
@@ -78,7 +87,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 51.0.0.0.9340
+    IBM SOAR Platform Version: 51.0.4.0.10288
 
     Contents:
     - Message Destinations:
@@ -91,10 +100,12 @@ def customization_data(client=None):
         - ms_teams_delete_channel
         - ms_teams_delete_group
         - ms_teams_enable_team
+        - ms_teams_list_groups
+        - ms_teams_list_team_channels
+        - ms_teams_list_teams
         - ms_teams_post_message
         - ms_teams_post_message_workflows
         - ms_teams_read_message
-        - ms_teams_read_message_replies
     - Playbooks:
         - ms_teams_archive_team_from_task_pb
         - ms_teams_archive_team_pb
@@ -110,6 +121,9 @@ def customization_data(client=None):
         - ms_teams_delete_group_pb
         - ms_teams_enable_teams_for_group_from_task_pb
         - ms_teams_enable_teams_for_group_pb
+        - ms_teams_list_group_pb
+        - ms_teams_list_team_channels_pb
+        - ms_teams_list_teams_pb
         - ms_teams_post_chat_message_using_workflows
         - ms_teams_post_chat_task_message_using_workflows
         - ms_teams_post_incident_information_pb
@@ -118,6 +132,10 @@ def customization_data(client=None):
         - ms_teams_post_task_information_pb
         - ms_teams_read_channel_messages_from_task_pb
         - ms_teams_read_channel_messages_pb
+    - Data Tables:
+        - ms_teams_list_groups
+        - ms_teams_list_team
+        - ms_teams_list_team_channels
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)
