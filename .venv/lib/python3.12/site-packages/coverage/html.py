@@ -638,11 +638,11 @@ class HtmlReporter:
         """
         skipped_covered_msg = skipped_empty_msg = ""
         if n := index_page.skipped_covered_count:
-            word = plural(n, index_page.noun, index_page.plural)
-            skipped_covered_msg = f"{n} {word} skipped due to complete coverage."
+            things = plural(n, index_page.noun, index_page.plural)
+            skipped_covered_msg = f"{things} skipped due to complete coverage."
         if n := index_page.skipped_empty_count:
-            word = plural(n, index_page.noun, index_page.plural)
-            skipped_empty_msg = f"{n} empty {word} skipped."
+            things = plural(n, "empty " + index_page.noun, "empty " + index_page.plural)
+            skipped_empty_msg = f"{things} skipped."
 
         index_buttons = [
             {

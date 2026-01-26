@@ -129,7 +129,8 @@ def add_sysconfig_paths(paths: set[str], path_names: list[str]) -> None:
     for scheme in scheme_names:
         config_paths = sysconfig.get_paths(scheme)
         for path_name in path_names:
-            paths.add(config_paths[path_name])
+            if path_name in config_paths:
+                paths.add(config_paths[path_name])
 
 
 def add_stdlib_paths(paths: set[str]) -> None:
@@ -206,46 +207,42 @@ class InOrOut:
                 self.debug.write(msg)
 
         # Generally useful information
-        _debug("sys.path:" + "".join(f"\n    {p}" for p in sys.path))
+        _debug("sys.path:" + "".join(f"\n    {p!r}" for p in sys.path))
 
         if self.debug:
             _debug("sysconfig paths:")
             for scheme in sorted(sysconfig.get_scheme_names()):
                 _debug(f"    {scheme}:")
                 for k, v in sysconfig.get_paths(scheme).items():
-                    _debug(f"        {k}: {v}")
+                    _debug(f"        {k}: {v!r}")
 
         # Create the matchers we need for should_trace
         self.source_match = None
         self.source_pkgs_match = None
         self.pylib_match = None
-        self.include_match = self.omit_match = None
+        self.include_match = None
+        self.omit_match = None
 
         if self.source_dirs or self.source_pkgs:
-            against = []
             if self.source_dirs:
-                self.source_match = TreeMatcher(self.source_dirs, "source")
-                against.append(f"trees {self.source_match!r}")
+                self.source_match = TreeMatcher(
+                    self.source_dirs, "source", "Source directory", _debug
+                )
             if self.source_pkgs:
-                self.source_pkgs_match = ModuleMatcher(self.source_pkgs, "source_pkgs")
-                against.append(f"modules {self.source_pkgs_match!r}")
-            _debug("Source matching against " + " and ".join(against))
+                self.source_pkgs_match = ModuleMatcher(
+                    self.source_pkgs, "source_pkgs", "Source imports", _debug
+                )
         else:
             if self.pylib_paths:
-                self.pylib_match = TreeMatcher(self.pylib_paths, "pylib")
-                _debug(f"Python stdlib matching: {self.pylib_match!r}")
+                self.pylib_match = TreeMatcher(self.pylib_paths, "pylib", "Python stdlib", _debug)
         if self.include:
-            self.include_match = GlobMatcher(self.include, "include")
-            _debug(f"Include matching: {self.include_match!r}")
+            self.include_match = GlobMatcher(self.include, "include", "Include", _debug)
         if self.omit:
-            self.omit_match = GlobMatcher(self.omit, "omit")
-            _debug(f"Omit matching: {self.omit_match!r}")
+            self.omit_match = GlobMatcher(self.omit, "omit", "Omit", _debug)
 
-        self.cover_match = TreeMatcher(self.cover_paths, "coverage")
-        _debug(f"Coverage code matching: {self.cover_match!r}")
+        self.cover_match = TreeMatcher(self.cover_paths, "coverage", "Coverage code", _debug)
 
-        self.third_match = TreeMatcher(self.third_paths, "third")
-        _debug(f"Third-party lib matching: {self.third_match!r}")
+        self.third_match = TreeMatcher(self.third_paths, "third", "Third-party lib", _debug)
 
         # Check if the source we want to measure has been installed as a
         # third-party package.
@@ -277,8 +274,9 @@ class InOrOut:
             if self.third_match.match(src):
                 _debug(f"Source in third-party: source directory {src!r}")
                 self.source_in_third_paths.add(src)
-        self.source_in_third_match = TreeMatcher(self.source_in_third_paths, "source_in_third")
-        _debug(f"Source in third-party matching: {self.source_in_third_match}")
+        self.source_in_third_match = TreeMatcher(
+            self.source_in_third_paths, "source_in_third", "Source in third-party", _debug
+        )
 
         self.plugins: Plugins
         self.disp_class: type[TFileDisposition] = FileDisposition

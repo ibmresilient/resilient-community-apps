@@ -267,13 +267,11 @@ class SummaryReporter:
         # Create other final lines.
         end_lines = []
         if self.config.skip_covered and self.skipped_count:
-            files = plural(self.skipped_count, "file")
             end_lines.append(
-                f"\n{self.skipped_count} {files} skipped due to complete coverage.",
+                f"\n{plural(self.skipped_count, 'file')} skipped due to complete coverage.",
             )
         if self.config.skip_empty and self.empty_count:
-            files = plural(self.empty_count, "file")
-            end_lines.append(f"\n{self.empty_count} empty {files} skipped.")
+            end_lines.append(f"\n{plural(self.empty_count, 'empty file')} skipped.")
 
         if self.output_format == "markdown":
             formatter = self.report_markdown

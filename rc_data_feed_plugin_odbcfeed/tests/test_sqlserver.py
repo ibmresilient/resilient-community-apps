@@ -42,7 +42,7 @@ else:
     result_payload['test_datetime'] = datetime.datetime(2019, 2, 13, 15, 55, 47, 448000)
 
 def test_default_passing_test():
-    # needed to allow travis tox to pass with one successful test
+    # needed to allow build tox to pass with one successful test
     pass
 
 @pytest.mark.livetest

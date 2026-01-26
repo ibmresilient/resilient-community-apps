@@ -116,7 +116,12 @@ class DataFileClassifier:
 
     def classify(self, f: str) -> Literal["combine", "skip"]:
         """Determine whether to combine or skip this file."""
-        sha = hash_for_data_file(f)
+        try:
+            sha = hash_for_data_file(f)
+        except Exception:
+            # We can't get the hash of the file, so let's try to combine it.
+            # Probably it will fail later, but that error will be handled.
+            return "combine"
         if sha in self.file_hashes:
             return "skip"
         else:
@@ -236,9 +241,9 @@ def debug_data_file(filename: str) -> None:
     summary = line_counts(data, fullpath=True)
     filenames = human_sorted(summary.keys())
     nfiles = len(filenames)
-    print(f"{nfiles} file{plural(nfiles)}:")
+    print(f"{plural(nfiles, 'file')}:")
     for f in filenames:
-        line = f"{f}: {summary[f]} line{plural(summary[f])}"
+        line = f"{f}: {plural(summary[f], 'line')}"
         plugin = data.file_tracer(f)
         if plugin:
             line += f" [{plugin}]"

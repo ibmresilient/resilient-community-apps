@@ -237,12 +237,12 @@ class Collector:
         self._clear_data()
 
     def lock_data(self) -> None:
-        """Lock self.data_lock, for use by the C tracer."""
+        """Lock self.data_lock, for use by tracers."""
         if self.data_lock is not None:
             self.data_lock.acquire()
 
     def unlock_data(self) -> None:
-        """Unlock self.data_lock, for use by the C tracer."""
+        """Unlock self.data_lock, for use by tracers."""
         if self.data_lock is not None:
             self.data_lock.release()
 
@@ -463,11 +463,11 @@ class Collector:
                 for fname, packeds in list(packed_data.items()):
                     tuples = []
                     for packed in list(packeds):
-                        l1 = packed & 0xFFFFF
-                        l2 = (packed & (0xFFFFF << 20)) >> 20
-                        if packed & (1 << 40):
+                        l1 = packed & 0xFFFFFFF
+                        l2 = (packed & (0xFFFFFFF << 28)) >> 28
+                        if packed & (1 << 56):
                             l1 *= -1
-                        if packed & (1 << 41):
+                        if packed & (1 << 57):
                             l2 *= -1
                         tuples.append((l1, l2))
                     arc_data[fname] = tuples
@@ -479,9 +479,11 @@ class Collector:
             self.covdata.add_lines(self.mapped_file_dict(line_data))
 
         file_tracers = {
-            k: v for k, v in self.file_tracers.items() if v not in self.disabled_plugins
+            self.cached_mapped_file(k): v
+            for k, v in self.file_tracers.items()
+            if v not in self.disabled_plugins
         }
-        self.covdata.add_file_tracers(self.mapped_file_dict(file_tracers))
+        self.covdata.add_file_tracers(file_tracers)
 
         self._clear_data()
         return True

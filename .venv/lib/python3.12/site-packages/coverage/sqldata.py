@@ -49,68 +49,68 @@ SCHEMA_VERSION = 7
 # 6: Key-value in meta.
 # 7: line_map -> line_bits
 
-SCHEMA = """\
-CREATE TABLE coverage_schema (
-    -- One row, to record the version of the schema in this db.
-    version integer
-);
+SCHEMA = textwrap.dedent("""\
+    CREATE TABLE coverage_schema (
+        -- One row, to record the version of the schema in this db.
+        version integer
+    );
 
-CREATE TABLE meta (
-    -- Key-value pairs, to record metadata about the data
-    key text,
-    value text,
-    unique (key)
-    -- Possible keys:
-    --  'has_arcs' boolean      -- Is this data recording branches?
-    --  'sys_argv' text         -- The coverage command line that recorded the data.
-    --  'version' text          -- The version of coverage.py that made the file.
-    --  'when' text             -- Datetime when the file was created.
-    --  'hash' text             -- Hash of the data.
-);
+    CREATE TABLE meta (
+        -- Key-value pairs, to record metadata about the data
+        key text,
+        value text,
+        unique (key)
+        -- Possible keys:
+        --  'has_arcs' boolean      -- Is this data recording branches?
+        --  'sys_argv' text         -- The coverage command line that recorded the data.
+        --  'version' text          -- The version of coverage.py that made the file.
+        --  'when' text             -- Datetime when the file was created.
+        --  'hash' text             -- Hash of the data.
+    );
 
-CREATE TABLE file (
-    -- A row per file measured.
-    id integer primary key,
-    path text,
-    unique (path)
-);
+    CREATE TABLE file (
+        -- A row per file measured.
+        id integer primary key,
+        path text,
+        unique (path)
+    );
 
-CREATE TABLE context (
-    -- A row per context measured.
-    id integer primary key,
-    context text,
-    unique (context)
-);
+    CREATE TABLE context (
+        -- A row per context measured.
+        id integer primary key,
+        context text,
+        unique (context)
+    );
 
-CREATE TABLE line_bits (
-    -- If recording lines, a row per context per file executed.
-    -- All of the line numbers for that file/context are in one numbits.
-    file_id integer,            -- foreign key to `file`.
-    context_id integer,         -- foreign key to `context`.
-    numbits blob,               -- see the numbits functions in coverage.numbits
-    foreign key (file_id) references file (id),
-    foreign key (context_id) references context (id),
-    unique (file_id, context_id)
-);
+    CREATE TABLE line_bits (
+        -- If recording lines, a row per context per file executed.
+        -- All of the line numbers for that file/context are in one numbits.
+        file_id integer,            -- foreign key to `file`.
+        context_id integer,         -- foreign key to `context`.
+        numbits blob,               -- see the numbits functions in coverage.numbits
+        foreign key (file_id) references file (id),
+        foreign key (context_id) references context (id),
+        unique (file_id, context_id)
+    );
 
-CREATE TABLE arc (
-    -- If recording branches, a row per context per from/to line transition executed.
-    file_id integer,            -- foreign key to `file`.
-    context_id integer,         -- foreign key to `context`.
-    fromno integer,             -- line number jumped from.
-    tono integer,               -- line number jumped to.
-    foreign key (file_id) references file (id),
-    foreign key (context_id) references context (id),
-    unique (file_id, context_id, fromno, tono)
-);
+    CREATE TABLE arc (
+        -- If recording branches, a row per context per from/to line transition executed.
+        file_id integer,            -- foreign key to `file`.
+        context_id integer,         -- foreign key to `context`.
+        fromno integer,             -- line number jumped from.
+        tono integer,               -- line number jumped to.
+        foreign key (file_id) references file (id),
+        foreign key (context_id) references context (id),
+        unique (file_id, context_id, fromno, tono)
+    );
 
-CREATE TABLE tracer (
-    -- A row per file indicating the tracer used for that file.
-    file_id integer primary key,
-    tracer text,
-    foreign key (file_id) references file (id)
-);
-"""
+    CREATE TABLE tracer (
+        -- A row per file indicating the tracer used for that file.
+        file_id integer primary key,
+        tracer text,
+        foreign key (file_id) references file (id)
+    );
+    """)
 
 
 def _locked(method: AnyCallable) -> AnyCallable:
@@ -329,20 +329,14 @@ class CoverageData:
                     self._init_db(db)
                 else:
                     raise DataError(
-                        "Data file {!r} doesn't seem to be a coverage data file: {}".format(
-                            self._filename,
-                            exc,
-                        ),
+                        f"Data file {self._filename!r} isn't a coverage data file: {exc}"
                     ) from exc
             else:
                 schema_version = row[0]
                 if schema_version != SCHEMA_VERSION:
                     raise DataError(
-                        "Couldn't use data file {!r}: wrong schema: {} instead of {}".format(
-                            self._filename,
-                            schema_version,
-                            SCHEMA_VERSION,
-                        ),
+                        f"Couldn't use data file {self._filename!r}: "
+                        + f"wrong schema: {schema_version} instead of {SCHEMA_VERSION}"
                     )
 
             row = db.execute_one("select value from meta where key = 'has_arcs'")
@@ -488,14 +482,13 @@ class CoverageData:
         """Use the _current_context to set _current_context_id."""
         context = self._current_context or ""
         context_id = self._context_id(context)
-        if context_id is not None:
-            self._current_context_id = context_id
-        else:
+        if context_id is None:
             with self._connect() as con:
-                self._current_context_id = con.execute_for_rowid(
+                context_id = con.execute_for_rowid(
                     "INSERT INTO context (context) VALUES (?)",
                     (context,),
                 )
+        self._current_context_id = context_id
 
     def base_filename(self) -> str:
         """The base filename for storing data.
@@ -523,13 +516,8 @@ class CoverageData:
 
         """
         if self._debug.should("dataop"):
-            self._debug.write(
-                "Adding lines: %d files, %d lines total"
-                % (
-                    len(line_data),
-                    sum(len(lines) for lines in line_data.values()),
-                )
-            )
+            nlines = sum(len(lines) for lines in line_data.values())
+            self._debug.write(f"Adding lines: {len(line_data)} files, {nlines} lines total")
             if self._debug.should("dataop2"):
                 for filename, linenos in sorted(line_data.items()):
                     self._debug.write(f"  {filename}: {linenos}")
@@ -569,13 +557,8 @@ class CoverageData:
 
         """
         if self._debug.should("dataop"):
-            self._debug.write(
-                "Adding arcs: %d files, %d arcs total"
-                % (
-                    len(arc_data),
-                    sum(len(arcs) for arcs in arc_data.values()),
-                )
-            )
+            narcs = sum(len(arcs) for arcs in arc_data.values())
+            self._debug.write(f"Adding arcs: {len(arc_data)} files, {narcs} arcs total")
             if self._debug.should("dataop2"):
                 for filename, arcs in sorted(arc_data.items()):
                     self._debug.write(f"  {filename}: {arcs}")
@@ -642,11 +625,8 @@ class CoverageData:
                 if existing_plugin:
                     if existing_plugin != plugin_name:
                         raise DataError(
-                            "Conflicting file tracer name for '{}': {!r} vs {!r}".format(
-                                filename,
-                                existing_plugin,
-                                plugin_name,
-                            ),
+                            f"Conflicting file tracer name for {filename!r}: "
+                            + f"{existing_plugin!r} vs {plugin_name!r}"
                         )
                 elif plugin_name:
                     con.execute_void(
@@ -717,11 +697,8 @@ class CoverageData:
 
         """
         if self._debug.should("dataop"):
-            self._debug.write(
-                "Updating with data from {!r}".format(
-                    getattr(other_data, "_filename", "???"),
-                )
-            )
+            other_filename = getattr(other_data, "_filename", "???")
+            self._debug.write(f"Updating with data from {other_filename!r}")
         if self._has_lines and other_data._has_arcs:
             raise DataError(
                 "Can't combine branch coverage data with statement data", slug="cant-combine"
@@ -781,11 +758,8 @@ class CoverageData:
                 if conflicts:
                     path, this_tracer, other_tracer = conflicts[0]
                     raise DataError(
-                        "Conflicting file tracer name for '{}': {!r} vs {!r}".format(
-                            path,
-                            this_tracer,
-                            other_tracer,
-                        ),
+                        f"Conflicting file tracer name for {path!r}: "
+                        + f"{this_tracer!r} vs {other_tracer!r}"
                     )
 
             # Insert missing files from other_db (with map_path applied)

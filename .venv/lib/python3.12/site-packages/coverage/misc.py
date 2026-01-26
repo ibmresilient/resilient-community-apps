@@ -364,9 +364,10 @@ def plural(n: int, thing: str = "", things: str = "") -> str:
     If n is 1, return thing.  Otherwise return things, or thing+s.
     """
     if n == 1:
-        return thing
+        noun = thing
     else:
-        return things or (thing + "s")
+        noun = things or (thing + "s")
+    return f"{n} {noun}"
 
 
 def stdout_link(text: str, url: str) -> str:

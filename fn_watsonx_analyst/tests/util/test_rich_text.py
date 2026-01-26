@@ -39,7 +39,7 @@ echo 'hello world'
         output = RichTextHelper.toHTML(inputstr)
         assert f"""<div style=\"{RichTextHelper.code_block_style}\">echo \'hello world\'\n</div>\n""" in output
 
-    @pytest.mark.livetest # this test fails in travis, but passes locally
+    @pytest.mark.livetest # this test fails in a pipeline, but passes locally
     def test_ensure_code_block_in_body(self):
         inputstr="""Here's some of my code, I hope you like it :)
 

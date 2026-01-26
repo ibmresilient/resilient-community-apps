@@ -14,11 +14,10 @@ import token
 import tokenize
 from collections.abc import Callable, Iterable, Sequence
 from dataclasses import dataclass
-from types import CodeType
 from typing import Optional, Protocol, cast
 
 from coverage import env
-from coverage.bytecode import code_objects
+from coverage.bytecode import ByteParser
 from coverage.debug import short_stack
 from coverage.exceptions import NoSource, NotPython
 from coverage.misc import isolate_module, nice_pair
@@ -200,8 +199,8 @@ class PythonParser:
 
         # Find the starts of the executable statements.
         if not empty:
-            byte_parser = ByteParser(self.text, filename=self.filename)
-            self.raw_statements.update(byte_parser._find_statements())
+            byte_parser = ByteParser(text=self.text, filename=self.filename)
+            self.raw_statements.update(byte_parser.find_statements())
 
         self.excluded = self.first_lines(self.excluded)
 
@@ -411,62 +410,6 @@ class PythonParser:
         fragment_pairs = self._missing_arc_fragments.get((start, end), [(None, None)])
         action_msg = self._finish_action_msg(fragment_pairs[0][1], end)
         return action_msg
-
-
-class ByteParser:
-    """Parse bytecode to understand the structure of code."""
-
-    def __init__(
-        self,
-        text: str,
-        code: CodeType | None = None,
-        filename: str | None = None,
-    ) -> None:
-        self.text = text
-        if code is not None:
-            self.code = code
-        else:
-            assert filename is not None
-            # We only get here if earlier ast parsing succeeded, so no need to
-            # catch errors.
-            self.code = compile(text, filename, "exec", dont_inherit=True)
-
-    def child_parsers(self) -> Iterable[ByteParser]:
-        """Iterate over all the code objects nested within this one.
-
-        The iteration includes `self` as its first value.
-
-        We skip code objects named `__annotate__` since they are deferred
-        annotations that usually are never run.  If there are errors in the
-        annotations, they will be caught by type checkers or other tools that
-        use annotations.
-
-        """
-        return (
-            ByteParser(self.text, code=c)
-            for c in code_objects(self.code)
-            if c.co_name != "__annotate__"
-        )
-
-    def _line_numbers(self) -> Iterable[TLineNo]:
-        """Yield the line numbers possible in this code object.
-
-        Uses co_lines() to produce a sequence: l0, l1, ...
-        """
-        for _, _, line in self.code.co_lines():
-            if line:
-                yield line
-
-    def _find_statements(self) -> Iterable[TLineNo]:
-        """Find the statements in `self.code`.
-
-        Produce a sequence of line numbers that start statements.  Recurses
-        into all code objects reachable from `self.code`.
-
-        """
-        for bp in self.child_parsers():
-            # Get all of the lineno information from this code.
-            yield from bp._line_numbers()
 
 
 #

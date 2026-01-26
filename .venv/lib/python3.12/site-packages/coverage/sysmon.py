@@ -19,7 +19,7 @@ from types import CodeType
 from typing import Any, NewType, Optional, cast
 
 from coverage import env
-from coverage.bytecode import TBranchTrails, always_jumps, branch_trails
+from coverage.bytecode import TBranchTrails, always_jumps, branch_trails, bytes_to_lines
 from coverage.debug import short_filename, short_stack
 from coverage.exceptions import NoSource, NotPython
 from coverage.misc import isolate_module
@@ -186,16 +186,6 @@ class CodeInfo:
     # Always-jumps are bytecode offsets that do no work but move
     # to another offset.
     always_jumps: dict[TOffset, TOffset]
-
-
-def bytes_to_lines(code: CodeType) -> dict[TOffset, TLineNo]:
-    """Make a dict mapping byte code offsets to line numbers."""
-    b2l = {}
-    for bstart, bend, lineno in code.co_lines():
-        if lineno is not None:
-            for boffset in range(bstart, bend, 2):
-                b2l[boffset] = lineno
-    return b2l
 
 
 class SysMonitor(Tracer):
