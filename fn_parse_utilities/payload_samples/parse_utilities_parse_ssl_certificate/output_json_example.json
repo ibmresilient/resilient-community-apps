@@ -1,0 +1,15 @@
+{
+  "subject": "\"[(b'C', b'US'), (b'ST', b'MA'), (b'L', b'Boston'), (b'O', b'IBM'), (b'OU', b'SOAR'), (b'CN', b'Test CSR'), (b'emailAddress', b'example@example.com')]\"",
+  "notBefore": "2023-01-27 21:32:52",
+  "notAfter": "2033-01-24 21:32:52",
+  "issuer": "\"[(b'C', b'US'), (b'ST', b'MA'), (b'L', b'Boston'), (b'O', b'IBM'), (b'OU', b'SOAR'), (b'CN', b'Test CSR'), (b'emailAddress', b'example@example.com')]\"",
+  "version": 0,
+  "expiration_status": "Valid",
+  "signature_algorithm": "b'sha1WithRSAEncryption'",
+  "public_key": "***'-----BEGIN PUBLIC KEY-----\\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA37tjOw58fRUcwRwLbH4L\\nHdQ2iVPY3cVKRf4b87gIXUMaXk3g43ckuLZG1Nlw7s9f0RaWIrBFthNAzWb3qIg1\\nCYbjdB+KNF8XiLARTC4CbLWbDeJAAgWMq5zfFq+RvcMtnV3bQeSnMJODuADbVwO6\\n2M1STNq0YQKv8zHiNnAiBzFKafObOzdpn1G+13rEedKEgM1LGHM+45DLWkh323C+\\nWeeZL4EdLfPSjbDgxyWbP7EBnBXoLxPrcFgkrBQAzRpjS9ZZer5dtddHoX0kR7tX\\nRUk3c4uSWbxSRYMtrIFpP6MvS90ra2+87dcUCKgPCS1f3QWumb3Z6xmOiYRZzPJu\\nQUYblrUdn2TFIjdaVByB9Bxqo4G9s3GQSk8G/PlGYhHxpKvQZ+8qMbL81BPpn5hY\\nNm9LJE4bEm4CZLitoibRAs2vn5nTMOuOz2s8zUl7JLznhhQPiZvr2z2/qzNTdZve\\nqoQjDYdsvSg61SYqSJNq6ru8IYaLPkfGvSHtgEGIPikOH6/y/DkcdvqqK8kBd9/x\\n6KU09dnv0zreWQcoyj2zJCEqhhPYASxuX+avwfyAdHAmV8g3LjObOP+hiVeIhp+C\\nDK6FDm61zRRImZ1M2yVhFLMh9ciiNXkwmS1qwuKfSVSqIlcpd84dR7v/LR0G2em3\\nIAArvL9MppUHVhxu9QjSLf0CAwEAAQ==\\n-----END PUBLIC KEY-----\\n'",
+  "extensions": {
+    "subjectAltNames": "[]",
+    "basicConstraints": "false",
+    "issuerAltNames": "[]"
+  }
+}
