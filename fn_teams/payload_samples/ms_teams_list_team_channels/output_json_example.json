@@ -1,0 +1,36 @@
+{
+ "success": true,
+ "reason": "success",
+ "content": {
+    "@odata.context":"https://graph.microsoft.com/v1.0/$metadata#Collection(microsoft.graph.channel)",
+    "@odata.count":2,
+    "value":[
+       {
+          "@odata.id":"https://graph.microsoft.com/v1.0/tenants/ddd-eee-fff/teams/aaa-bbb-ccc/channels/19:cd40beb34fca44de97d1c01c3839c425@thread.tacv2",
+          "id":"19:cd40beb34fca44de97d1c01c3839c425@thread.tacv2",
+          "createdDateTime":"2025-02-20T19:37:05.225Z",
+          "displayName":"Chat",
+          "description":null,
+          "isFavoriteByDefault":null,
+          "email":null,
+          "tenantId":"ddd-eee-fff",
+          "webUrl":"https://teams.microsoft.com/l/channel/11-555-77/Chat?groupId=aaa-bbb-ccc&tenantId=ddd-eee-fff&allowXTenantAccess=True&ngc=True",
+          "membershipType":"standard",
+          "isArchived":false
+       },
+       {
+          "@odata.id":"https://graph.microsoft.com/v1.0/tenants/11111-2222-333333/teams/aaa-bbb-ccc/channels/abc-def",
+          "id":"abc-def",
+          "createdDateTime":"2025-02-19T17:09:46.05Z",
+          "displayName":"General",
+          "description":"some description",
+          "isFavoriteByDefault":null,
+          "email":"Incident2106@example.com",
+          "tenantId":"ddd-eee-fff",
+          "webUrl":"https://teams.microsoft.com/l/channel/abc-def-ghi/Incident%3A%202106?groupId=aaa-bbb-ccc&tenantId=ddd-eee-fff&allowXTenantAccess=True&ngc=True",
+          "membershipType":"standard",
+          "isArchived":false
+       }
+    ]
+ }
+}
