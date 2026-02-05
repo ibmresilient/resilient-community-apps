@@ -32,16 +32,14 @@ def _convert_time_as_timezone(epoch_sec, timezone="UTC", format_str="%Y-%m-%dT%H
     Convert given epoch sec to date time format as per timezone, default UTC
     """
     # 2021-03-01 10:00
-    utc_dt = datetime.utcfromtimestamp(epoch_sec)
-    utc_dt = pytz.UTC.localize(utc_dt)
+    utc_dt = datetime.fromtimestamp(epoch_sec, tz=pytz.UTC)
     t_zone = pytz.timezone(timezone)
     cet_dt = utc_dt.astimezone(t_zone)
     return datetime.strftime(cet_dt, format_str)
 
 
 def convert_epoch_utc_date_time(epoch_sec, format_str="%Y-%m-%dT%H:%M:%SZ"):
-    utc_dt = datetime.utcfromtimestamp(epoch_sec)
-    utc_dt = pytz.UTC.localize(utc_dt)
+    utc_dt = datetime.fromtimestamp(epoch_sec, tz=pytz.UTC)
     return datetime.strftime(utc_dt, format_str)
 
 

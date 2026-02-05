@@ -50,6 +50,7 @@
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.0.1 | 01/2026 | Added support for Python 3.12 |
 | 1.0.0 | 08/2021 | Initial Release |
 
 ---
@@ -102,15 +103,15 @@ The Resilient platform supports two app deployment mechanisms, App Host and inte
 
 If deploying to a Resilient platform with an App Host, the requirements are:
 
-* Resilient platform > `36.0.5634`.
+* Resilient platform > `51.0.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a Resilient platform with an integration server, the requirements are:
 
-* Resilient platform > `36.0.5634`.
+* Resilient platform > `51.0.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz`
   file).
-* Integration server is running `resilient_circuits>=37.0.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
 
 | Name | Permissions | 
@@ -138,7 +139,7 @@ Administrator Guide is available by expanding **System Administrator**.
 
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
 
-* IBM Cloud Pak for Security >= 1.4.
+* IBM Cloud Pak for Security >= 1.10
 * Cloud Pak is configured with an App Host.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -161,11 +162,11 @@ The app **does** support a proxy server. proxy server configuration should done 
 
 ### Python Environment
 
-Both Python 2.7 and Python 3.6 are supported. Additional package dependencies may exist for each of these packages:
+Both Python 3.11 and Python 3.12 are supported. Additional package dependencies may exist for each of these packages:
 
-* resilient_circuits>=37.0.0
-* resilient_lib>=37.0.0'
-* resilient>=37.0.0
+* resilient_circuits>=51.0.0
+* resilient_lib>=51.0.0'
+* resilient>=51.0.0
 * circuits>=3.2
 * six>=1.15.0
 * requests>=2.25.0

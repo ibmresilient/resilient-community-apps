@@ -1,1 +1,1 @@
-https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_teams/main/2.3/app-fn_teams-2.3.0-20952.zip
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_guardium_insights_integration/main/1.0/app-fn_guardium_insights_integration-1.0.1-21739.zip

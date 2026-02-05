@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_guardium_insights_integration",
     display_name="Resilient Guardium Insights Integration App",
-    version="1.0.0",
+    version="1.0.1",
     license="MIT",
     author="Neetin Kandhare",
     author_email="nkandha1@in.ibm.com",
@@ -37,9 +37,9 @@ setup(
     5. Automatically create artifacts based on anamolies data in each crated incident.
     6. Enrich who, what, when, where information for each created incidents.""",
     install_requires=[
-        'resilient_circuits>=37.0.0',
-        'resilient_lib>=37.0.0',
-        'resilient>=37.0.0',
+        'resilient_circuits>=51.0.0',
+        'resilient_lib>=51.0.0',
+        'resilient>=51.0.0',
         'circuits>=3.2',
         'six>=1.15.0',
         'requests>=2.25.0',
