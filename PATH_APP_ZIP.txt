@@ -1,0 +1,1 @@
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_splunk_integration/main/1.4/app-fn_splunk_integration-1.4.0-22031.zip
