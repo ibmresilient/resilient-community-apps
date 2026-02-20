@@ -457,6 +457,7 @@
 </li>
 <li><p><a class="reference internal" href="#data-selection"><span class="xref myst">Data selection</span></a></p>
 <ul>
+<li><p><a class="reference internal" href="#custom-incident-properties"><span class="xref myst">Custom incident properties</span></a></p></li>
 <li><p><a class="reference internal" href="#creating-the-override-config"><span class="xref myst">Creating the override config</span></a></p></li>
 <li><p><a class="reference internal" href="#setting-up-the-dropdown"><span class="xref myst">Setting up the dropdown</span></a></p></li>
 </ul>
@@ -495,6 +496,14 @@
 </tr>
 </thead>
 <tbody>
+<tr class="row-even"><td><p>1.2.2</p></td>
+<td><p>02/2026</p></td>
+<td><p>Support for new chat models (e.g., IBM’s granite-4-h-small, openai’s gpt-oss, etc.). Embedding model now configurable. Fix for mistral models outputing [INST]. Workspace names will be known to the assistant in incident Q&amp;A, and incident summary.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.2.1</p></td>
+<td><p>01/2026</p></td>
+<td><p>Data payload config can control individual incident properties. Fix for failing to extract contents from plaintext files.</p></td>
+</tr>
 <tr class="row-even"><td><p>1.2.0</p></td>
 <td><p>06/2025</p></td>
 <td><p>Incident summary playbook, support for artifact/attachment scans on images and non-file artifacts, token usage &amp; estimated cost (in USD cents) in all scans and summaries, data ingestion optimisation and user-customization feature, japanese language inclusion and prompt optimisations.</p></td>
@@ -799,9 +808,15 @@ Additional package dependencies may exist for each of these packages:</p>
 <td><p><code class="docutils literal notranslate"><span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
 <td><p>Use local (App host/integration server) compute resources to generate embeddings instead of watsonx.ai. Only recommended for integration servers that have &gt;6GB of memory.</p></td>
 </tr>
+<tr class="row-even"><td><p><strong>embedding_model</strong></p></td>
+<td><p>No</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ibm/granite-278m-multilingual-embedding</span></code></p></td>
+<td><p>Watsonx model to generate embeddings. [See options](https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/fm-models-embed.html?context=wx#ibm-provided</p></td>
+</tr>
 </tbody>
 </table>
 </div>
+<p><strong>Note</strong>: The watsonx embedding model needs to support at least 500 input tokens (<code class="docutils literal notranslate"><span class="pre">sentence-transformers/all-minilm-l6-v2</span></code> will not work)</p>
 <p>The config is setup automatically, you just need to add the following <strong>case sensitive</strong> App secrets with the details from the <a class="reference internal" href="#requirements"><span class="xref myst">requirements</span></a> section:</p>
 <ul class="simple">
 <li><p>WATSONX_ENDPOINT_URL</p></li>
@@ -853,8 +868,8 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>Examples of supported file formats include:</p>
 <ul class="simple">
 <li><p>Document formats: <code class="docutils literal notranslate"><span class="pre">pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">docx</span></code>, <code class="docutils literal notranslate"><span class="pre">xlsx</span></code>, <code class="docutils literal notranslate"><span class="pre">pptx</span></code> and <code class="docutils literal notranslate"><span class="pre">eml</span></code>.</p></li>
-<li><p>Image formats: <code class="docutils literal notranslate"><span class="pre">png</span></code>, <code class="docutils literal notranslate"><span class="pre">jpg</span></code>,<code class="docutils literal notranslate"><span class="pre">gif</span></code>.</p></li>
-<li><p>Any generic plaintext file with standard text encoding: ascii &amp; utf-8.</p></li>
+<li><p>Image formats: <code class="docutils literal notranslate"><span class="pre">png</span></code>, <code class="docutils literal notranslate"><span class="pre">jpg</span></code>.</p></li>
+<li><p>Any plaintext file with standard text encoding: ascii &amp; utf-8.</p></li>
 </ul>
 </section>
 </section>
@@ -895,11 +910,18 @@ Additional package dependencies may exist for each of these packages:</p>
 <li><p>Each large language model is different, and perform differently depending on the situation.</p></li>
 <li><p>You can switch model at any time at the function level in the Playbook designer for each use-case.</p></li>
 <li><p>This can allow you to try out different models hosted by IBM.</p></li>
-<li><p>The default IBM granite model performs well, and is very competitively priced.</p></li>
-<li><p>Certain topics and use-cases like task-related questions may be better suited for a mistral model.</p>
+<li><p>The default mistral model performs well, and is very competitively priced.</p></li>
+<li><p>Certain topics and use-cases like task-related questions may be better suited for a different model.</p></li>
+<li><p>Model list:</p>
 <ul>
-<li><p>mistralai/mistral-small-3-1-24b-instruct-2503 - very cost efficient</p></li>
-<li><p>mistralai/mistral-large - good reasoning capabilities</p></li>
+<li><p>ibm/granite-4-h-small</p></li>
+<li><p>meta-llama/llama-3-2-11b-vision-instruct</p></li>
+<li><p>meta-llama/llama-3-3-70b-instruct</p></li>
+<li><p>meta-llama/llama-4-maverick-17b-128e-instruct-fp8</p></li>
+<li><p>mistralai/mistral-small-3-1-24b-instruct-2503</p></li>
+<li><p>mistralai/mistral-medium-2505</p></li>
+<li><p>mistralai/mistral-large-2512</p></li>
+<li><p>openai/gpt-oss-120b</p></li>
 </ul>
 </li>
 </ul>
@@ -958,19 +980,21 @@ Additional package dependencies may exist for each of these packages:</p>
 <section id="custom-incident-properties">
 <h2>Custom incident properties<a class="headerlink" href="#custom-incident-properties" title="Link to this heading">¶</a></h2>
 <p>The default configuration allows all custom properties to be sent to watsonx, if you want to limit which properties are sent, you can do so by modifying the <code class="docutils literal notranslate"><span class="pre">properties</span></code> field in an override config below, remove the <code class="docutils literal notranslate"><span class="pre">&quot;*&quot;</span></code> item under properties, and specify each property key you want to keep.</p>
+<p><strong>Note</strong>: Use the API Name property from the Customization settings -&gt; Layouts page for the properties’ field names.</p>
 </section>
 <section id="creating-the-override-config">
 <h2>Creating the override config<a class="headerlink" href="#creating-the-override-config" title="Link to this heading">¶</a></h2>
 <p>By creating a <code class="docutils literal notranslate"><span class="pre">yaml</span></code> file under <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code> in the App Configuration page, you can provide an override config, which you can choose to use, for each compatible function (Converse via Notes, and Summarize Incident).</p>
 <p>Make sure that the file name is <code class="docutils literal notranslate"><span class="pre">&lt;yourname&gt;.yaml</span></code>, and that the file path is <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code> (the file path in the UI should not include the file’s name).</p>
 <p>The contents of the default configuration will be below, you can use this as a base config to modify. <strong>Note</strong>: Quality will vary if the config is changed from the default, continue at your own risk, and revert back to default if the data configuration causes a drop in quality.</p>
-<p><strong>Note</strong>: You should restart the app after creating the new payload file, as until then, the app will fallback to default configuration.</p>
+<p><strong>Note</strong>: <strong>You must restart the app after creating the new payload file, as until then, the app will fallback to default configuration.</strong></p>
 <details>
   <summary>Show <code>datapayload.yaml</code></summary>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nn">---</span>
+
 <span class="nt">incident</span><span class="p">:</span>
-<span class="c1"># define only the fields we want to keep</span>
 <span class="w">  </span><span class="nt">allow_list</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># only the fields being kept and shown to LLM</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">confirmed</span>
@@ -979,7 +1003,8 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">start_date</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inc_start</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">discovered_date</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">creator_principal</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owner_id</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">creator_id</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">reporter</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">state</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">country</span>
@@ -992,9 +1017,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">properties</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inc_last_modified_date</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">incident_type_ids</span>
-<span class="w">  </span><span class="c1"># define the fields that will be converted from timestamp to human-readable time.</span>
-<span class="w">  </span><span class="c1"># if these fields are removed from the allow_list, they should be removed here too</span>
+
 <span class="w">  </span><span class="nt">date_list</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># define the fields that will be converted from timestamp to human-readable time.</span>
+<span class="w">    </span><span class="c1"># if these fields are removed from the allow_list, they should be removed here too</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">start_date</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inc_start</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">discovered_date</span>
@@ -1010,8 +1036,11 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">elapsed_time</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">playbook</span>
-<span class="w">  </span><span class="c1"># minimal playbok objects are a sub element of a playbook execution</span>
-<span class="w">  </span><span class="c1"># these fields are what we keep from these playbook objects</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">start_time</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="nt">date_list</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">start_time</span>
+
 <span class="w">  </span><span class="nt">playbook_allow_list</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">display_name</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
@@ -1026,13 +1055,14 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="w">  </span><span class="nt">date_list</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">created</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">last_modified_time</span>
-<span class="w">  </span><span class="c1"># keep only this field from artifact threat hits</span>
+
 <span class="w">  </span><span class="nt">hit_allow_list</span><span class="p">:</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">created</span>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">properties</span>
-<span class="w">  </span><span class="c1"># block these bits of hit data, as they don&#39;t provide much use to LLM</span>
-<span class="w">  </span><span class="c1"># feel free to experiment</span>
+
 <span class="w">  </span><span class="nt">hit_block_list</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># block these bits of hit data, as they don&#39;t provide much use to LLM</span>
+<span class="w">    </span><span class="c1"># feel free to experiment</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">resource</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scan_id</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sha1</span>
@@ -1041,8 +1071,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">response_code</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">verbose_msg</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">permalink</span>
-<span class="w">  </span><span class="c1"># re-label the keys in threat hit properties</span>
-<span class="w">  </span><span class="c1"># change key to value for field names</span>
+
+<span class="w">  </span><span class="nt">hit_relabel_list</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># re-label the keys in threat hit properties</span>
+<span class="w">    </span><span class="c1"># change key to value for field names</span>
 <span class="w">    </span><span class="nt">total</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">number of scans performed</span>
 <span class="w">    </span><span class="nt">positives</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">number of scans indicating malicious behavior</span>
 <span class="w">    </span><span class="nt">community coverage</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">percentage of scans indicating malicious behavior</span>
@@ -1069,6 +1101,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">active</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">required</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">status</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owner_id</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">due_date</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">required</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
 </pre></div>
 </div>
 </details>
@@ -1082,7 +1118,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <li><p>click the ‘Add/Edit values’ label</p></li>
 <li><p>under <code class="docutils literal notranslate"><span class="pre">default</span></code>, add a new config option with the filename of the config without the file extension - e.g., <code>config1.yaml</code> → <code>config1</code></p></li>
 <li><p>click the checkmark, and hit save</p></li>
-<li><p>now you can switch the data config to use on compatible functions in the playbook designer</p></li>
+<li><p>now to set the config on supporting functions (Converse via Notes, Summarize Incident), open the relevant playbooks, edit the watsonx function’s input script and set the <code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_data_config</span></code> value to the file name (without extension) that you set in the Customization settings.</p></li>
 </ul>
 </section>
 </section>
