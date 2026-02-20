@@ -1,6 +1,6 @@
 from typing import Dict, Union
 from fn_watsonx_analyst.types.ai_response import AIResponse
-from fn_watsonx_analyst.types.watsonx_responses import WatsonxTextGenerationResponse
+from fn_watsonx_analyst.types.watsonx_responses import WatsonxTextGenerationResponse, WatsonxChatResponse
 from fn_watsonx_analyst.util.model_helper import ModelHelper
 from fn_watsonx_analyst.util.ModelTag import ModelTag
 from fn_watsonx_analyst.util.rich_text import RichTextHelper
@@ -82,6 +82,60 @@ class ResponseHelper:
                 "created_at": "",
             },
         }
+
+    def text_chat_to_ai_response(
+            self, chat_response: WatsonxChatResponse
+    ) -> AIResponse:
+        
+        # Normal Watsonx response handling
+        generation_result = chat_response["choices"][0]
+        model_id = chat_response["model_id"]
+
+        generation_tokens = (
+            self.request_context.input_tokens + self.request_context.output_tokens
+        )
+
+        estimated_cost = self.estimate_invocation_cost(
+            model_id,
+            self.request_context.input_tokens,
+            self.request_context.output_tokens,
+            self.request_context.embedding_tokens,
+        )
+
+        response_tag = ModelTag(
+            model_id,
+            chat_response["created_at"],
+            self.request_context.purpose,
+            self.request_id,
+            generation_tokens,
+            self.request_context.embedding_tokens,
+            estimated_cost,
+        )
+
+        raw_text = generation_result["message"]['content']
+        if self.request_context.opts.get("render_markdown", "true") in [
+            "true",
+            "True",
+            True,
+        ]:
+            generated_text = RichTextHelper().toHTML(raw_text)
+        else:
+            generated_text = raw_text
+
+        return {
+            "generated_text": generated_text,
+            "raw_output": raw_text,
+            "tag": str(response_tag),
+            "metadata": {
+                "model_id": model_id,
+                "created_at": chat_response["created_at"],
+                "estimated_cost": estimated_cost,
+                "input_tokens": self.request_context.input_tokens,
+                "output_tokens": self.request_context.output_tokens,
+                "stop_reason": generation_result["finish_reason"],
+            },
+        }
+
 
     def text_generation_to_ai_response(
         self, text_generation: WatsonxTextGenerationResponse

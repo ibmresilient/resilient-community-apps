@@ -1,4 +1,5 @@
 from enum import Enum
+from typing import List
 
 from fn_watsonx_analyst.util.logging_helper import create_logger
 from fn_watsonx_analyst.util.state_manager import app_state
@@ -10,6 +11,16 @@ log = create_logger(__name__)
 
 class RestUrls(Enum):
     """Enum to determine which URL and method to use for each request"""
+
+    GET_WORKSPACES = [
+        "GET",
+        "/workspaces"
+    ]
+
+    SEARCH_PRINCIPALS = [
+        "POST",
+        "/principals/search?want_disabled_groups=true"
+    ]
 
     GET_ARTIFACTS = [
         "POST",
@@ -91,9 +102,17 @@ class RestHelper:
     ]
 
     def __get_paged_query(
-        self, url: RestUrls, inc_id: int = None, length: int = 100, obj_name: str = None
+        self, url: RestUrls, inc_id: int | None = None, length: int = 100, obj_name: str | None = None, user_ids: List[int] | None = None
     ):
         match url:
+            case RestUrls.SEARCH_PRINCIPALS:
+                return {
+                    "filters": [
+                        {"conditions": [{"field_name":"id","method":"in","value": user_ids}]}
+                    ],
+                    "start": 0, "length": length
+                }
+
             case RestUrls.GET_ARTIFACTS:
                 return {
                     "sorts": [{"field_name": "last_modified_time", "type": "desc"}],
@@ -245,7 +264,8 @@ class RestHelper:
                         return []
 
                     case (
-                        RestUrls.ARTIFACT_BY_NAME
+                        RestUrls.SEARCH_PRINCIPALS
+                        | RestUrls.ARTIFACT_BY_NAME
                         | RestUrls.GET_ARTIFACTS
                         | RestUrls.INC_ART_ID
                         | RestUrls.ATTACHMENT_BY_NAME
@@ -258,6 +278,7 @@ class RestHelper:
                                     kwargs.get("inc_id", None),
                                     length,
                                     kwargs.get("obj_name", None),
+                                    user_ids=kwargs.get("user_ids", None)
                                 ),
                             )
 

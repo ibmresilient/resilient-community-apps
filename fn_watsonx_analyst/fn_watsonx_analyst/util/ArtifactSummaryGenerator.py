@@ -12,7 +12,7 @@ from fn_watsonx_analyst.types.ai_response import AIResponse
 from fn_watsonx_analyst.types.artifact import Artifact
 
 from fn_watsonx_analyst.types.attachment import Attachment
-from fn_watsonx_analyst.types.watsonx_responses import WatsonxTextGenerationResponse
+from fn_watsonx_analyst.types.watsonx_responses import WatsonxChatResponse, WatsonxTextGenerationResponse
 from fn_watsonx_analyst.util.FileParser import FileParser
 from fn_watsonx_analyst.util.chunking.chunking import Chunking
 from fn_watsonx_analyst.util.parallel.parallel import ParallelRunnableRunner
@@ -23,14 +23,16 @@ from fn_watsonx_analyst.util.response_helper import ResponseHelper
 
 
 log = create_logger(__name__)
-
+MAX_ALLOWED_FILE_DATA = 125000
 
 class ArtifactSummaryGenerator:
     """Generate a summary of an artifact in layers of summaries"""
 
     res_client: SimpleClient
     inc_id: int
-    artifact: Artifact
+    
+    artifact: Optional[Artifact]
+    attachment: Optional[Attachment]
     content_type: str
     contents: bytes
 
@@ -60,17 +62,16 @@ class ArtifactSummaryGenerator:
         data = self.__get_contents()
 
         # Guard clause to avoid LLM call if content is empty or failed to parse
-        if data == "Parsed content is empty or could not be extracted":
+        if data == FileParser.PARSED_CONTENT_EMPTY:
             response = ResponseHelper()
             return response.error_response(data)
 
         chunker = Chunking()
         model_context_limit = chunker.max_tokens_for_model(self.model_id)
         chunk_size = 0.5 * model_context_limit
-        max_data_to_scan = 125000
 
         total_chunks = chunker.split_data_into_token_chunks(data, chunk_size)
-        total_executions = int(ceil(max_data_to_scan / chunk_size))
+        total_executions = int(ceil(MAX_ALLOWED_FILE_DATA / chunk_size))
         total_chunks = total_chunks[:total_executions]
 
         contents_summarizers: List[ContentsSummarizer] = []
@@ -83,11 +84,17 @@ class ArtifactSummaryGenerator:
                     )
                 )
 
-        summaries: List[WatsonxTextGenerationResponse] = ParallelRunnableRunner(
+        raw_summaries: List[AIResponse] = ParallelRunnableRunner(
             contents_summarizers
         ).run()
-        if isinstance(summaries, dict):
-            summaries = [summaries]
+        if isinstance(raw_summaries, dict):
+            raw_summaries = [raw_summaries]
+
+        # Convert raw Watsonx responses to AIResponse format
+        summaries: List[AIResponse] = [
+            ResponseHelper().text_chat_to_ai_response(summary)
+            for summary in raw_summaries
+        ]
 
         cnt = 0
         if len(summaries) < 1:
@@ -107,7 +114,7 @@ class ArtifactSummaryGenerator:
         if summaries[0] is not None:
             return summaries[0]
 
-        return
+        return None
 
     def __summarize_layer(self, summaries: List[AIResponse]):
         log.debug("Summarizing layer")
@@ -118,7 +125,7 @@ class ArtifactSummaryGenerator:
             return summaries
 
         chunker = Chunking()
-        summaries_text = [x["results"][0]["generated_text"] for x in summaries]
+        summaries_text = [x["generated_text"] for x in summaries]
         chunks = chunker.split_data_into_token_chunks(
             "\n---\n".join(summaries_text), 5000
         )
@@ -126,9 +133,15 @@ class ArtifactSummaryGenerator:
         for chunk in chunks:
             doc_summarizers.append(DocumentSummarizer(chunk, "text"))
 
-        summaries: List[WatsonxTextGenerationResponse] = ParallelRunnableRunner(
+        raw_summaries: List[WatsonxChatResponse] = ParallelRunnableRunner(
             doc_summarizers
         ).run()
+        
+        # Convert raw Watsonx responses to AIResponse format
+        summaries: List[AIResponse] = [
+            ResponseHelper().text_chat_to_ai_response(summary)
+            for summary in raw_summaries
+        ]
         return summaries
 
     def __get_contents(self):

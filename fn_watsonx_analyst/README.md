@@ -32,6 +32,7 @@
       - [Response Quality](#response-quality)
       - [Reply chain prompts](#reply-chain-prompts)
 - [Data selection](#data-selection)
+  - [Custom incident properties](#custom-incident-properties)
   - [Creating the override config](#creating-the-override-config)
   - [Setting up the dropdown](#setting-up-the-dropdown)
 - [SOAR Customizations](#soar-customizations)
@@ -56,6 +57,8 @@
 
 | Version | Date    | Notes                                                                                                                                                                                             |
 |---------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1.2.2   | 02/2026 | Support for new chat models (e.g., IBM's granite-4-h-small, openai's gpt-oss, etc.). Embedding model now configurable. Fix for mistral models outputing [INST]. Workspace names will be known to the assistant in incident Q&A, and incident summary. |  
+| 1.2.1   | 01/2026 | Data payload config can control individual incident properties. Fix for failing to extract contents from plaintext files.                                                                         |
 | 1.2.0   | 06/2025 | Incident summary playbook, support for artifact/attachment scans on images and non-file artifacts, token usage & estimated cost (in USD cents) in all scans and summaries, data ingestion optimisation and user-customization feature, japanese language inclusion and prompt optimisations. |
 | 1.1.1   | 06/2025 | Updated model list, rich text whitespace fixes, playbook execution API fixes, improved stability in generating embeddings, minor change to scan playbooks' activation form.                       |
 | 1.1.0   | 02/2025 | Semantic context retrieval (embeddings), multilingual prompts, artifact scans can handle more file types, attachment scanning (equivalent to artifact scan), organization type ID resolution[^1]. |
@@ -248,14 +251,17 @@ Additional package dependencies may exist for each of these packages:
 ### App Configuration
 The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
 
-| Config                 | Required | Example                              | Description                                                                                                               |
-|------------------------|----------|--------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| **watsonx_api_key**    | Yes      | 0123-4567-89ab-cdef                  | Your watsonx.ai API key - see [IBM Cloud IAM API Key](#ibm-cloud-iam-api-key). **This should be saved as an App Secret.** |
-| **watsonx_endpoint**   | Yes      | `https://us-south.ml.cloud.ibm.com`  | The watsonx.ai API URL - see [watsonx.ai Endpoint URL](#watsonxai-endpoint-url).                                          |
-| **watsonx_project_id** | Yes      | 0123-4567-89ab-cdef                  | The watsonx.ai project id - see [watsonx.ai Project ID](#watsonxai-endpoint-url).                                         |
-| **render_markdown**    | No       | `true` or `false`                    | Set to `false` to disable rendering of markdown in incident notes.                                                        |
-| **default_language**   | No       | `en`, `fr`, `de`, `pt`, `es` or `ja` | Language used for scans and summaries, and is used as the fallback language if prompt's language can't be detected.       |
-| **local_embeddings**   | No       | `true`, `false` | Use local (App host/integration server) compute resources to generate embeddings instead of watsonx.ai. Only recommended for integration servers that have >6GB of memory.      |
+| Config                 | Required | Example                                  | Description                                                                                                               |
+|------------------------|----------|------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
+| **watsonx_api_key**    | Yes      | 0123-4567-89ab-cdef                      | Your watsonx.ai API key - see [IBM Cloud IAM API Key](#ibm-cloud-iam-api-key). **This should be saved as an App Secret.** |
+| **watsonx_endpoint**   | Yes      | `https://us-south.ml.cloud.ibm.com`      | The watsonx.ai API URL - see [watsonx.ai Endpoint URL](#watsonxai-endpoint-url).                                          |
+| **watsonx_project_id** | Yes      | 0123-4567-89ab-cdef                      | The watsonx.ai project id - see [watsonx.ai Project ID](#watsonxai-endpoint-url).                                         |
+| **render_markdown**    | No       | `true` or `false`                        | Set to `false` to disable rendering of markdown in incident notes.                                                        |
+| **default_language**   | No       | `en`, `fr`, `de`, `pt`, `es` or `ja`     | Language used for scans and summaries, and is used as the fallback language if prompt's language can't be detected.       |
+| **local_embeddings**   | No       | `true`, `false`                          | Use local (App host/integration server) compute resources to generate embeddings instead of watsonx.ai. Only recommended for integration servers that have >6GB of memory. |
+| **embedding_model**    | No       | `ibm/granite-278m-multilingual-embedding` | Watsonx model to generate embeddings. [See options](https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/fm-models-embed.html?context=wx#ibm-provided|
+
+**Note**: The watsonx embedding model needs to support at least 500 input tokens (`sentence-transformers/all-minilm-l6-v2` will not work)
 
 The config is setup automatically, you just need to add the following **case sensitive** App secrets with the details from the [requirements](#requirements) section:
   - WATSONX_ENDPOINT_URL
@@ -296,8 +302,8 @@ The *watsonx.ai Scan Artifact* and *watsonx.ai Scan Attachment* playbooks summar
 
 Examples of supported file formats include:
 - Document formats: `pdf`, `docx`, `xlsx`, `pptx` and `eml`.
-- Image formats: `png`, `jpg`,`gif`.
-- Any generic plaintext file with standard text encoding: ascii & utf-8.
+- Image formats: `png`, `jpg`.
+- Any plaintext file with standard text encoding: ascii & utf-8.
 
 ## Text Generation
 
@@ -330,10 +336,17 @@ The *watsonx.ai Summarize Incident* playbooks summarizes the whole incident base
 - Each large language model is different, and perform differently depending on the situation.
 - You can switch model at any time at the function level in the Playbook designer for each use-case.
 - This can allow you to try out different models hosted by IBM.
-- The default IBM granite model performs well, and is very competitively priced.
-- Certain topics and use-cases like task-related questions may be better suited for a mistral model.
-  - mistralai/mistral-small-3-1-24b-instruct-2503 - very cost efficient
-  - mistralai/mistral-large - good reasoning capabilities
+- The default mistral model performs well, and is very competitively priced.
+- Certain topics and use-cases like task-related questions may be better suited for a different model.
+- Model list:
+  - ibm/granite-4-h-small
+  - meta-llama/llama-3-2-11b-vision-instruct
+  - meta-llama/llama-3-3-70b-instruct
+  - meta-llama/llama-4-maverick-17b-128e-instruct-fp8
+  - mistralai/mistral-small-3-1-24b-instruct-2503
+  - mistralai/mistral-medium-2505
+  - mistralai/mistral-large-2512
+  - openai/gpt-oss-120b
 
 
 ### Background on how a note conversation response is generated
@@ -374,6 +387,8 @@ You can override the configuration for the data we send to watsonx. While we wou
 
 The default configuration allows all custom properties to be sent to watsonx, if you want to limit which properties are sent, you can do so by modifying the `properties` field in an override config below, remove the `"*"` item under properties, and specify each property key you want to keep.
 
+**Note**: Use the API Name property from the Customization settings -> Layouts page for the properties' field names.
+
 
 ## Creating the override config
 By creating a `yaml` file under `/var/rescircuits` in the App Configuration page, you can provide an override config, which you can choose to use, for each compatible function (Converse via Notes, and Summarize Incident).
@@ -383,16 +398,17 @@ Make sure that the file name is `<yourname>.yaml`, and that the file path is `/v
 
 The contents of the default configuration will be below, you can use this as a base config to modify. **Note**: Quality will vary if the config is changed from the default, continue at your own risk, and revert back to default if the data configuration causes a drop in quality.
 
-**Note**: You should restart the app after creating the new payload file, as until then, the app will fallback to default configuration.
+**Note**: **You must restart the app after creating the new payload file, as until then, the app will fallback to default configuration.**
 
 <details>
   <summary>Show <code>datapayload.yaml</code></summary>
 
   ```yaml
   ---
+
   incident:
-  # define only the fields we want to keep
     allow_list:
+      # only the fields being kept and shown to LLM
       - name
       - description
       - confirmed
@@ -401,7 +417,8 @@ The contents of the default configuration will be below, you can use this as a b
       - start_date
       - inc_start
       - discovered_date
-      - creator_principal
+      - owner_id
+      - creator_id
       - reporter
       - state
       - country
@@ -414,9 +431,10 @@ The contents of the default configuration will be below, you can use this as a b
       - properties
       - inc_last_modified_date
       - incident_type_ids
-    # define the fields that will be converted from timestamp to human-readable time.
-    # if these fields are removed from the allow_list, they should be removed here too
+
     date_list:
+      # define the fields that will be converted from timestamp to human-readable time.
+      # if these fields are removed from the allow_list, they should be removed here too
       - start_date
       - inc_start
       - discovered_date
@@ -432,8 +450,11 @@ The contents of the default configuration will be below, you can use this as a b
       - object
       - elapsed_time
       - playbook
-    # minimal playbok objects are a sub element of a playbook execution
-    # these fields are what we keep from these playbook objects
+      - start_time
+    
+    date_list:
+      - start_time
+
     playbook_allow_list:
       - display_name
       - description
@@ -448,13 +469,14 @@ The contents of the default configuration will be below, you can use this as a b
     date_list:
       - created
       - last_modified_time
-    # keep only this field from artifact threat hits
+
     hit_allow_list:
     - created
     - properties
-    # block these bits of hit data, as they don't provide much use to LLM
-    # feel free to experiment
+
     hit_block_list:
+      # block these bits of hit data, as they don't provide much use to LLM
+      # feel free to experiment
       - resource
       - scan_id
       - sha1
@@ -463,8 +485,10 @@ The contents of the default configuration will be below, you can use this as a b
       - response_code
       - verbose_msg
       - permalink
-    # re-label the keys in threat hit properties
-    # change key to value for field names
+
+    hit_relabel_list:
+      # re-label the keys in threat hit properties
+      # change key to value for field names
       total: number of scans performed
       positives: number of scans indicating malicious behavior
       community coverage: percentage of scans indicating malicious behavior
@@ -491,6 +515,11 @@ The contents of the default configuration will be below, you can use this as a b
       - active
       - required
       - status
+      - owner_id
+      - due_date
+      - required
+      - description
+
   ```
 
 </details>
@@ -505,7 +534,7 @@ To be able to use this configuration, we'll have to add and entry to the data co
 - click the 'Add/Edit values' label
 - under `default`, add a new config option with the filename of the config without the file extension - e.g., <code>config1.yaml</code> &rarr; <code>config1</code>
 - click the checkmark, and hit save
-- now you can switch the data config to use on compatible functions in the playbook designer
+- now to set the config on supporting functions (Converse via Notes, Summarize Incident), open the relevant playbooks, edit the watsonx function's input script and set the `fn_watsonx_analyst_data_config` value to the file name (without extension) that you set in the Customization settings.
 
 ---
 

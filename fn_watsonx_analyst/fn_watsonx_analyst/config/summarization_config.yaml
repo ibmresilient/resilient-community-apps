@@ -31,9 +31,11 @@ summary_types:
       ## Sections
 
       ### Situation Summary
+
       **Description**: Provide an overview of the incident, including what happened, its status, and relevant context.
 
       **Mandatory Fields**:
+
       - **incident.name**: Incident name (required).
       - **incident.discovered_date**: Date discovered, in exact format (e.g., 20-03-2025) (required).
       - **incident.confirmed**: Confirmation status ("Confirmed" if True, "Not yet confirmed" if False) (required).
@@ -54,13 +56,16 @@ summary_types:
         - Under 200 words.
 
       ### Attack Summary
+
       **Description**: Summarize artifacts grouped by type and provide attack context from incident.description and properties, including specific threat indicators for individual artifacts when available.
 
       **Mandatory Fields**:
+
       - **artifacts.value**: All artifact values, grouped by type (e.g., "log files (error.log, access.log)") (required).
       - **artifacts.type**: Distinct type for each artifact group (e.g., "Log File", "IP Address") (required).
 
       **Instructions**:
+
       - Group artifacts by exact artifacts.type (e.g., "Log File", "MAC Address"), listing all artifacts.value in parentheses without abbreviations, placeholders (e.g., "..."), or omissions.
       - Include every artifact from artifacts.value and artifacts.type.
       - If artifacts.hits or similar metadata (e.g., number of scans indicating malicious behavior) is present, explicitly mention threat indicators for the specific artifacts.value they apply to (e.g., "URL http://example.com flagged with 6 malicious scans out of 97"). Do not generalize malicious findings across all artifacts.
@@ -82,18 +87,22 @@ summary_types:
         - Under 200 words.
 
       ### Defense Summary
+
       **Description**: Summarize defensive actions from tasks data or provide recommendations if tasks are missing, using incident.description and properties for context.
 
       **Mandatory Fields**:
+
       - **tasks**: Tasks data (if available) to summarize actions (optional).
 
       **Task Rules**:
+
       - tasks.active: True: "Task is active."
       - tasks.required: True: "Task is required."
       - tasks.complete: True: "Task is complete."
       - tasks.complete: False: "Task is not complete."
 
       **Instructions**:
+
       - If tasks data is available:
         - Summarize completed tasks (tasks.complete: True) and key next steps (tasks.active: True, tasks.required: True) in a narrative (e.g., "System isolation completed; traffic analysis pending").
         - Group by status (completed vs. ongoing) and phase (e.g., Engage, Respond), do not list all tasks.
@@ -111,6 +120,7 @@ summary_types:
         - Under 200 words.
 
       ## Post-Processing Validation
+
       After generating the output, validate:
       1. **Situation Summary**:
         - incident.discovered_date matches raw data (e.g., 20-03-2025).
@@ -134,6 +144,7 @@ summary_types:
       ## Few-Shot Examples
 
       ### Example 1: Large Artifact List, No Tasks
+
       **Input**:
       - incident: {name: "Suspected Phishing Attack", discovered_date: "12-12-2023", confirmed: False, description: "A suspected phishing attack was detected. Emails targeted employees.", negative_pr_likely: True}
       - artifacts: [{value: "file1.eml", type: "Email File"}, {value: "192.168.1.1", type: "IP Address"}]
@@ -158,7 +169,9 @@ summary_types:
       Starts with Situation Summary, uses full incident.description and negative_pr_likely, lists all artifacts by type, includes "No association" for unlinked artifacts, provides two recommendations.
 
       ### Example 2: Artifacts and Tasks
+
       **Input**:
+
       - incident: {name: "DoS Attack", discovered_date: "28-04-2025", confirmed: True, description: "A DoS attack targeted the website, causing downtime.", city: "Dublin"}
       - artifacts: [{value: "file1.eml", type: "Email File"}, {value: "1.1.1.1", type: "IP Address", hits: {number of scans performed: 10, number of scans indicating malicious behavior: 2}}]
       - tasks: [{name: "Isolate system", complete: True}, {name: "Analyze traffic", active: True, required: True}]
@@ -353,7 +366,7 @@ summary_types:
       - Tokenizer.ipynb (Email File, created 30-04-2025, last modified 30-04-2025, content-type text/plain)
       - 128.210.157.251 (IP Address, created 30-04-2025, last modified 30-04-2025, content-type text/plain, flagged with 2 malicious scans out of 10)
       - Vulns_IBM_QRadar_SOAR_17.01.2025.xlsx (Spreadsheet, created 30-04-2025, last modified unknown, content-type application/vnd.openxmlformats-officedocument.spreadsheetml.sheet)
-      No association with the incident has been established beyond the IP address’s malicious indicators.
+      No association with the incident has been established beyond the IP address's malicious indicators.
 
       **Mitigation Actions**
 
@@ -364,7 +377,9 @@ summary_types:
       Starts with Technical Overview, uses incident.description and city, lists artifacts with specific threat indicators, includes "No association" for unlinked artifacts, provides two recommendations based on incident data.
 
       ### Example 2: Data Breach, Artifacts
+
       **Input**:
+
       - incident: {name: "Major Data Breach at FinSecure Bank", discovered_date: "20-03-2025", confirmed: True, description: "FinSecure Bank detected unauthorized access to its internal systems, leading to data exfiltration.", workspace: 4, inc_last_modified_date: "07-05-2025", incident_disposition: "confirmed", negative_pr_likely: True}
       - artifacts: [{value: "error.log", type: "Log File", created: "20-03-2025", last_modified_time: "20-03-2025", content-type: "application/octet-stream"}, {value: "1.1.1.1", type: "IP Address", created: "20-03-2025", last_modified_time: "20-03-2025", content-type: "text/plain"}]
       - properties: {severity: "High"}
@@ -391,7 +406,9 @@ summary_types:
       Starts with Technical Overview, uses incident.description and negative_pr_likely, includes properties, lists artifacts with "No association," provides two recommendations based on incident data.
 
       ### Example 3: Minimal Data, No Artifacts
+
       **Input**:
+
       - incident: {name: "Suspected Malware Infection", discovered_date: "01-06-2025", confirmed: False, description: "A suspected malware infection was detected on an endpoint device.", workspace: 4, inc_last_modified_date: "02-06-2025", incident_disposition: "not yet confirmed"}
 
       **Output**:
@@ -413,6 +430,7 @@ summary_types:
       Starts with Technical Overview, uses incident.description, notes no artifacts, provides two recommendations based on incident data.
 
       ## Common Errors to Avoid
+
       - Using incorrect dates (e.g., "March 10, 2025" instead of 20-03-2025).
       - Omitting mandatory fields (e.g., incident.confirmed, incident.workspace).
       - Omitting artifacts or misformatting (e.g., wrong type).

@@ -3,9 +3,7 @@
 # given string
 newline_tags:
   1:
-    - "<ul>"
     - "</ul>"
-    - "<ol>"
     - "</ol>"
     - "</h1>"
     - "</h2>"

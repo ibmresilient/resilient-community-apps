@@ -1,15 +1,13 @@
-from typing import Union
+from typing import Union, List
 
 from .generic_summarizer import GenericSummarizer
 
-from resilient import SimpleClient
-
+from fn_watsonx_analyst.types import MessagePayload
 from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose
-from fn_watsonx_analyst.util.prompting import Prompting
+from fn_watsonx_analyst.util.chat_prompting import ChatPrompting
 
 class ContentsSummarizer(GenericSummarizer):
-    instruction = ""
-    name = "contents"
+    instruction: List[MessagePayload] = []
 
     MAX_NEW_TOKENS = 350
 
@@ -18,6 +16,20 @@ class ContentsSummarizer(GenericSummarizer):
         data: Union[str, bytes],
         content_type: str,
     ):
-        self.instruction = Prompting().build_prompt(query=None, context=data, get_relevant_prompts=False, content_type=content_type)
+        # Build chat messages for content summarization
+        chat_prompting = ChatPrompting()
+        
+        # Prepare file contents with optional content type prefix
+        file_data = str(data)
 
-        super().__init__(self.name, self.instruction)
+        # Pass file contents as format kwarg for user prompt substitution
+        self.instruction = chat_prompting.build_chat_messages(
+            purpose=AiResponsePurpose.ARTIFACT_SUMMARY,
+            query="",  # Empty query for content summary
+            context="",  # Don't use legacy context
+            include_relevant_prompts=False,
+            file_contents=file_data,  # Will substitute {file_contents} in user prompt
+            content_type=content_type
+        )
+
+        super().__init__("contents", self.instruction)

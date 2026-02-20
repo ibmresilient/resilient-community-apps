@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2026. All Rights Reserved.
 # pylint: disable=line-too-long
 
 """Helper for tests"""
@@ -7,9 +7,10 @@ from typing import List
 
 import copy
 
+from ibm_watsonx_ai.foundation_models.schema import TextChatParameters
 from resilient import SimpleClient
 
-from fn_watsonx_analyst.types.watsonx_responses import WatsonxTextGenerationResponse
+from fn_watsonx_analyst.types.watsonx_responses import WatsonxChatResponse, WatsonxTextGenerationResponse
 from fn_watsonx_analyst.util.rest import RestUrls
 from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose
 from fn_watsonx_analyst.types.ai_response import AIResponse
@@ -223,6 +224,87 @@ sample_output: WatsonxTextGenerationResponse = {
 
 PACKAGE_NAME = "fn_watsonx_analyst"
 
+class modelInference:
+    def __init__(_self, model_id: str, api_client: object, params: TextChatParameters, project_id: str):
+        pass
+
+    def chat(_self, messages: list[dict[str, str]]) -> WatsonxChatResponse:
+        msg = "Lorem ipsum"
+            # special case for artifact qna
+        if app_state.get().purpose == AiResponsePurpose.ARTIFACT_CONVERSATION:
+            msg = "Artifact conversation"
+
+        return {
+            "id": "asdf",
+            "object": "asdf",
+
+            "model_id": "mistralai/mistral-small-3-1-24b-instruct-2503",
+            "model": "mistralai/mistral-small-3-1-24b-instruct-2503",
+
+
+            "choices" : [
+                {
+                    "finish_reason" : "stop",
+                    "index": 0,
+                    "message": {
+                        "content" : msg,
+                        "role" : "assistant"
+                    }
+                }
+            ],
+
+            "created": 1234567890,
+            "created_at": "123456789",
+
+            "usage": {
+                "prompt_tokens": 200,
+                "completion_tokens": 1000
+            },
+            "system": {},
+        }
+
+
+class mock_watsonx_client:
+    def __init__(self, credentials):
+        self.credentials = credentials
+    
+    def set(self, *args, **kwargs):
+        """Mock the set method that watsonx APIClient uses"""
+        pass
+
+# def mock_chat(        
+#     _self,
+#     messages: Sequence[MessagePayload],
+#     temperature: float = 1.0,
+#     max_tokens: int | None = None
+# ) -> WatsonxChatResponse | None:
+    
+#     return {
+#         "id": "asdf",
+#         "object": "asdf",
+
+#         "model_id": "mistralai/mistral-small-3-1-24b-instruct-2503",
+#         "model": "mistralai/mistral-small-3-1-24b-instruct-2503",
+
+
+#         "choices" : [
+#             {
+#                 "finish_reason" : "stop",
+#                 "index": 0,
+#                 "message": {
+#                     "content" : "Lorem ipsum",
+#                     "role" : "assistant"
+#                 }
+#             }
+#         ],
+
+#         "created": 1234567890,
+#         "created_at": "123456789",
+
+#         "usage": {},
+#         "system": {},
+#     }
+
 
 def mock_get_api_key(_self, _res_client):
     """
@@ -406,6 +488,44 @@ def mock_do_request(_self, uri, **kwargs):
                         "user_fname": "Resilient",
                         "user_lname": "Sysadmin",
                         "text": '<div class="soar-rte-content"><p>@watsonx does [<span><span><span>output.txt]</span></span></span> seem like it could be used maliciously?</p></div>',
+                        "create_date": 1732115801922,
+                        "modify_date": 1732115801922,
+                        "children": [],
+                        "mentioned_users": [],
+                        "is_deleted": False,
+                        "modify_user": {
+                            "id": 34,
+                            "first_name": "Resilient",
+                            "last_name": "Sysadmin",
+                        },
+                        "actions": [],
+                        "playbooks": [],
+                        "inc_id": 2414,
+                        "inc_name": "asdf",
+                        "task_id": None,
+                        "task_name": None,
+                        "task_custom": None,
+                        "task_members": None,
+                        "task_at_id": None,
+                        "inc_owner": 34,
+                        "user_name": "Resilient Sysadmin",
+                        "modify_principal": {
+                            "id": 34,
+                            "type": "user",
+                            "name": "thomas@example.com",
+                            "display_name": "Resilient Sysadmin",
+                        },
+                        "comment_perms": None,
+                    }
+                case 6:
+                    return {
+                        "type": "incident",
+                        "id": 6,
+                        "parent_id": None,
+                        "user_id": 34,
+                        "user_fname": "Resilient",
+                        "user_lname": "Sysadmin",
+                        "text": '<div class="soar-rte-content"><p>@watsonx what can you tell me about [malicious-ip]?</p></div>',
                         "create_date": 1732115801922,
                         "modify_date": 1732115801922,
                         "children": [],
@@ -1223,6 +1343,66 @@ def mock_do_request(_self, uri, **kwargs):
                                     "summary": None,
                                 }
                             ],
+                        }
+                    ]
+                case "malicious-ip":
+                    return [
+                        {
+                            "id": 1500,
+                            "type": 2,  # IP Address type
+                            "value": "malicious-ip",
+                            "description": "Suspicious IP address detected in network traffic",
+                            "attachment": None,  # No attachment - this is a metadata artifact
+                            "parent_id": None,
+                            "creator": {
+                                "id": 34,
+                                "fname": "Resilient",
+                                "lname": "Sysadmin",
+                                "display_name": "Resilient Sysadmin",
+                                "status": "A",
+                                "email": "thomas@example.com",
+                                "locked": False,
+                                "password_changed": False,
+                                "is_external": False,
+                                "ui_theme": "verydarkmode",
+                                "is_ldap": False,
+                                "is_saml": False,
+                            },
+                            "inc_id": 2414,
+                            "inc_name": "asdf",
+                            "inc_owner": 34,
+                            "hits": [
+                                {
+                                    "threat_source_id": 1,
+                                    "threat_source_name": "X-Force",
+                                    "score": 8,
+                                    "severity": "high",
+                                    "description": "Known malicious IP associated with botnet activity"
+                                }
+                            ],
+                            "created": 1732119882637,
+                            "last_modified_time": 1732119882742,
+                            "last_modified_by": {
+                                "id": 34,
+                                "type": "user",
+                                "name": "thomas@example.com",
+                                "display_name": "Resilient Sysadmin",
+                            },
+                            "pending_sources": [],
+                            "perms": {"read": True, "write": False, "delete": False},
+                            "properties": None,
+                            "actions": [],
+                            "playbooks": [],
+                            "relating": True,
+                            "creator_principal": {
+                                "id": 34,
+                                "type": "user",
+                                "name": "thomas@example.com",
+                                "display_name": "Resilient Sysadmin",
+                            },
+                            "related_incident_count": 1,
+                            "pending_scan_result": False,
+                            "ip": {"source": None, "destination": None},
                         }
                     ]
             return [
@@ -2277,5 +2457,5 @@ def mock_text_generation(
     return output
 
 
-def mock_generate_embeddings(_self, data: List[str]) -> List[list]:
+def mock_generate_embeddings(_self, texts: List[str], use_local: bool | None = None) -> List[list]:
     return [[-1, 2, 3]]

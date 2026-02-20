@@ -101,4 +101,4 @@ def test_phase_with_child_phase(context_helper: ContextHelper):
     assert "child_phases" in task_data[0]
     assert len(task_data[0]["child_phases"])
     assert "phase_name" in task_data[0]["child_phases"][0]
-    assert "complete" in task_data[0]["child_phases"][0]['tasks'][0]
+    assert "status" in task_data[0]["child_phases"][0]['tasks'][0]

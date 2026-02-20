@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2026. All Rights Reserved.
 # Generated with resilient-sdk v51.0.2.0.974
 
 """AppFunction implementation"""
@@ -14,10 +14,10 @@ from fn_watsonx_analyst.util.response_helper import ResponseHelper
 from fn_watsonx_analyst.util.logging_helper import create_logger, generate_request_id
 from fn_watsonx_analyst.config import load_summarization_config
 from fn_watsonx_analyst.util.ContextHelper import ContextHelper
-from fn_watsonx_analyst.util.QueryHelper import QueryHelper
 from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose
 from fn_watsonx_analyst.util.chunking.chunking import Chunking
-from fn_watsonx_analyst.util.prompting import Prompting
+from fn_watsonx_analyst.util.chat_prompting import ChatPrompting
+from fn_watsonx_analyst.util.watsonx_client import WatsonxClient
 from fn_watsonx_analyst.types.ai_response import AIResponse
 
 from fn_watsonx_analyst.util.state_manager import app_state
@@ -84,24 +84,40 @@ class FunctionComponent(AppFunctionComponent):
             if summary_type_lower not in summary_types_config:
                 raise ValueError(f"Unknown summary type '{summary_type}'. Available types: {', '.join(summary_types_config.keys())}")
 
-            # Assemble context and prompt
+            # Assemble context and user message
             context = " ".join(chunks)
-            query = f"Provide a {summary_type} summary of this incident."
+            
+            system_prompt_parts = []
+            
+            # Add relevant fields info if present
+            if config.get("relevant_fields_info"):
+                system_prompt_parts.append(config["relevant_fields_info"])
+            
+            # Add the main system prompt for the summary type
+            system_prompt_parts.append(summary_types_config[summary_type_lower]["system_prompt"])
+            
+            system_prompt = "\n\n".join(system_prompt_parts)
+            
+            # Build user message with help text and context
+            user_message_parts = []
+            
+            if config.get("help_user_text"):
+                user_message_parts.append(config["help_user_text"])
+            
+            user_message_parts.append(f"Provide a {summary_type} summary of this incident.")
+            user_message_parts.append(f"\nIncident Data:\n{context}")
+            
+            user_message = "\n\n".join(user_message_parts)
 
-            # 4. Build prompt by extracting values from summarization config
-            prompting = Prompting()
-            prompt = prompting.build_prompt(
-                query=query,
-                context=context,
-                messages=config["help_user_text"],
-                relevant_fields_info = config["relevant_fields_info"],
-                system_prompt=summary_types_config[summary_type_lower]["system_prompt"],
-                max_token_limit=config.get("default_max_token_limit", 800))
-
-            # 5. Generate summary via WatsonX
-            response = QueryHelper().text_generation(
-                prompt,
+            # 4. Build chat messages using ChatPrompting
+            chat_prompting = ChatPrompting()
+            messages = chat_prompting.build_simple_chat(
+                system_prompt=system_prompt,
+                user_message=user_message
             )
+
+            # 5. Generate summary via WatsonX using chat API
+            response = WatsonxClient().chat(messages)
 
             # 6. Prepend Incident name, Incident types, and Incident severity to the summary
             incident_name = incident_payload.get('incident', {}).get('name', 'Unknown')
@@ -131,9 +147,8 @@ class FunctionComponent(AppFunctionComponent):
                         
 
                         for task in phase.get('tasks', []):
-                            if task.get('complete') == True:
+                            if task.get("status", "") == "Closed":
                                 complete_tasktree[phase_name]['tasks'].append(task.get('name'))
-
                             else:
                                 incomplete_tasktree[phase_name]['tasks'].append(task.get('name'))
                         complete_children, incomplete_children = traverse_tasktree(
@@ -152,17 +167,17 @@ class FunctionComponent(AppFunctionComponent):
                         output.append('\n')
                     
                     if complete_tasks:
-                        output.append('\n**Completed tasks**:')
+                        output.append('\n#### Completed tasks:')
                     else:
-                        output.append('\n**Incomplete tasks**:')
+                        output.append('\n#### Incomplete tasks:')
                     complete_tasks = not complete_tasks
 
                     def add_phase(phase: dict, indent=0):
                         # add phase (recurses into child_phases) to output
                         if len(phase.get('tasks', [])) > 0:
-                            output.append(f'\n{"- " * indent}**Phase: ' + phase.get('phase_name', 'idk') + '**')
+                            output.append(f'\n{"- " * indent}**Phase: ' + phase.get('phase_name', 'Unknown') + '**')
                             for task in phase['tasks']:
-                                output.append("\n" + "\t" * indent + "- Task: " + str(task)) 
+                                output.append("\n" + "\t" * indent + "- Task: " + str(task))
 
                         for child_phase_name, child_phase in phase.get('child_phases', {}).items():
                             child_phase['phase_name'] = child_phase_name
@@ -175,10 +190,12 @@ class FunctionComponent(AppFunctionComponent):
                 postfix = '\n'.join(output)
             else:
                 prefix = f"**Executive Summary**: {incident_name}\n\n**Incident Type(s)**: {', '.join(incident_types)}\n\n**Incident Severity**: {incident_severity}\n"
-            response['results'][0]['generated_text'] = prefix + '<br>' + response['results'][0]['generated_text'] + '\n' + postfix
+            
+            # Modify the chat response content
+            response['choices'][0]['message']['content'] = prefix + '<br>' + response['choices'][0]['message']['content'] + '\n' + postfix
 
-            # 7. Respond
-            result: AIResponse = ResponseHelper().text_generation_to_ai_response(
+            # 7. Respond using chat response handler
+            result: AIResponse = ResponseHelper().text_chat_to_ai_response(
                 response
             )
             

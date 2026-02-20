@@ -6,7 +6,6 @@ import faiss
 from unittest.mock import Mock, patch
 
 from fn_watsonx_analyst.util.chunking.chunking import Chunking
-from fn_watsonx_analyst.util.QueryHelper import QueryHelper
 from fn_watsonx_analyst.util.state_manager import app_state
 from tests import helper
 
@@ -24,7 +23,7 @@ class TestChunking:
         """
         self.text = "This is a sample text to test the split_data_into_token_chunks function."
         self.max_tokens = 10
-        self.chunking = Chunking(init_query_helper=False)
+        self.chunking = Chunking(False)
 
     def test_special_token_encoding(self):
         self.chunking.split_data_into_token_chunks("<|endoftext|>", self.max_tokens)
@@ -69,20 +68,20 @@ class TestChunking:
         """Tests the token langth of the model"""
         model_name = "ibm/granite-guardian-3-8b"
         length = Chunking.max_tokens_for_model(model_name)
-        assert length==8192
+        assert length==8000
 
     def test_relevant_chunks_watsonx(self):
         """Test the retrieval of relevant chunks from a list of chunks based on a query and a similarity threshold."""
         # Mock the query_helper
-        mock_query_helper = Mock()
+        mock_watsonx_client = Mock()
         
         # Define the mock behavior for generate_embeddings
-        mock_query_helper.generate_embeddings.side_effect = lambda data: [
-            [0.1, 0.2, 0.3] if d == "example query" else [0.3, 0.2, 0.1] for d in data
+        mock_watsonx_client.generate_embeddings.side_effect = lambda texts: [
+            [0.1, 0.2, 0.3] if d == "example query" else [0.3, 0.2, 0.1] for d in texts
         ]
         
         # Inject the mock query_helper
-        self.chunking.query_helper = mock_query_helper
+        self.chunking.watsonx_client = mock_watsonx_client
         
         # Define the test inputs
         query = "example query"

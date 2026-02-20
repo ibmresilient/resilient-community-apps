@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2026. All Rights Reserved.
 # Generated with resilient-sdk v51.0.2.0.974
 
 """Generate a default configuration-file section for fn_watsonx_analyst"""
@@ -26,6 +26,13 @@ render_markdown=true
 
 # uncomment to perform text processing locally instead of on watsonx.ai. Will increase resource consumption significantly.
 #local_embeddings=true
+
+# override the embedding model 
+# to find valid embedding models, check here: 
+# https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/fm-models-embed.html?context=wx#embed
+# to find models that can "vectorize text from API" and have input size greater than or equal to 512 tokens
+
+#embedding_model=ibm/slate-125m-english-rtrvr-v2
 
 [watsonx_property_labels]
 # Note: don't use quotes around values.

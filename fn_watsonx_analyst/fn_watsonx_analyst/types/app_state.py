@@ -47,7 +47,9 @@ class AppState():
         self.opts = None
         self.data_config = "default"
 
-    def set_model(self, model_id: str):
+    def set_model(self, model_id: str | None):
+        if not model_id:
+            raise ValueError("Model ID is required")
         if model_id not in [model["name"] for model in load_model_config()]:
             log.warning("Model ID %s not supported", model_id)
         self.model_id = model_id

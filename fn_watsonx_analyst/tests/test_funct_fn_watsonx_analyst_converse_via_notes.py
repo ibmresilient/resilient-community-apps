@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2026. All Rights Reserved.
 # Generated with resilient-sdk v51.0.2.0.974
 """Tests using pytest_resilient_circuits"""
 from unittest.mock import patch
 import concurrent
 import pytest
+from fn_watsonx_analyst.util.FileParser import FileParser
+from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose
 from tests import helper
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
@@ -48,18 +50,6 @@ def call_fn_watsonx_analyst_converse_via_notes_function(
 
 
 @patch("fn_watsonx_analyst.util.rest.RestHelper.do_request", helper.mock_do_request)
-@patch(
-    "fn_watsonx_analyst.util.QueryHelper.QueryHelper.get_api_key",
-    helper.mock_get_api_key,
-)
-@patch(
-    "fn_watsonx_analyst.util.QueryHelper.QueryHelper.text_generation",
-    helper.mock_text_generation,
-)
-@patch(
-    "fn_watsonx_analyst.util.QueryHelper.QueryHelper.generate_embeddings",
-    helper.mock_generate_embeddings,
-)
 class TestFnWatsonxConverseViaNotes:
     """Tests for the fn_watsonx_analyst_converse_via_notes function"""
 
@@ -106,7 +96,7 @@ class TestFnWatsonxConverseViaNotes:
         "fn_watsonx_analyst_data_config": "default",
     }
 
-    artifact_expected_results_4 = "Parsed content is empty or could not be extracted."
+    artifact_expected_results_4 = FileParser.PARSED_CONTENT_EMPTY
     artifact_expected_results = "Artifact conversation"
     artifact_expected_results_5 = "Lorem ipsum"
 
@@ -116,6 +106,15 @@ class TestFnWatsonxConverseViaNotes:
         "fn_watsonx_analyst_incident_id": 123,
         "fn_watsonx_analyst_data_config": "default",
     }
+
+    mock_inputs_6 = {
+        "fn_watsonx_analyst_note_id": 6,
+        "fn_watsonx_analyst_model_id": "mistralai/mistral-small-3-1-24b-instruct-2503",
+        "fn_watsonx_analyst_incident_id": 123,
+        "fn_watsonx_analyst_data_config": "default",
+    }
+
+    metadata_artifact_expected_results = AiResponsePurpose.ARTIFACT_META_CONVERSATION.value
 
     @pytest.mark.parametrize(
         "mock_inputs, expected_results",
@@ -144,7 +143,7 @@ class TestFnWatsonxConverseViaNotes:
         results = call_fn_watsonx_analyst_converse_via_notes_function(
             circuits_app, self.mock_inputs_4
         )
-        assert results["content"]["generated_text"] == self.artifact_expected_results_4
+        assert results["content"]["raw_output"] == self.artifact_expected_results_4
 
     @pytest.mark.parametrize(
         "mock_inputs, expected_results", [(mock_inputs_2, artifact_expected_results)]
@@ -175,3 +174,13 @@ class TestFnWatsonxConverseViaNotes:
                     future.result().get("content", {}).get("raw_output")
                     == self.artifact_expected_results
                 )
+
+    def test_metadata_artifact_conversation(self, circuits_app):
+
+        results = call_fn_watsonx_analyst_converse_via_notes_function(
+            circuits_app, self.mock_inputs_6
+        )
+
+        assert results["content"].get("tag") is not None
+        model_tag = results["content"]["tag"]
+        assert self.metadata_artifact_expected_results in str(model_tag)

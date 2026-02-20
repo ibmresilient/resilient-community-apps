@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2026. All Rights Reserved.
 # Generated with resilient-sdk v51.0.2.2.1096
 """Tests using pytest_resilient_circuits"""
 
@@ -45,6 +45,7 @@ def call_fn_watsonx_analyst_summarize_incident_function(circuits, function_param
         return event.kwargs["result"].value
 
 
+@patch("fn_watsonx_analyst.util.rest.RestHelper.do_request", helper.mock_do_request)
 class TestFnWatsonxSummarizeIncident:
     """Tests for the fn_watsonx_analyst_summarize_incident function"""
 
@@ -70,18 +71,9 @@ class TestFnWatsonxSummarizeIncident:
         "fn_watsonx_analyst_data_config": "default",
     }
 
-    expected_results_2 = "**Incomplete tasks**"
+    expected_results_2 = "#### Incomplete tasks"
 
     @pytest.mark.limit_memory(cold_mem_limit)
-    @patch("fn_watsonx_analyst.util.rest.RestHelper.do_request", helper.mock_do_request)
-    @patch(
-        "fn_watsonx_analyst.util.QueryHelper.QueryHelper.get_api_key",
-        helper.mock_get_api_key,
-    )
-    @patch(
-        "fn_watsonx_analyst.util.QueryHelper.QueryHelper.text_generation",
-        helper.mock_text_generation,
-    )
     def test_success_executive(self, circuits_app):
         """Test calling with sample values for the parameters"""
 
@@ -93,15 +85,7 @@ class TestFnWatsonxSummarizeIncident:
 
         for check in ['<strong>Executive Summary</strong>', '<strong>Incident Type(s)</strong>', '<strong>Incident Severity</strong>']:
             assert check in results["content"]["generated_text"]
-    @patch("fn_watsonx_analyst.util.rest.RestHelper.do_request", helper.mock_do_request)
-    @patch(
-        "fn_watsonx_analyst.util.QueryHelper.QueryHelper.get_api_key",
-        helper.mock_get_api_key,
-    )
-    @patch(
-        "fn_watsonx_analyst.util.QueryHelper.QueryHelper.text_generation",
-        helper.mock_text_generation,
-    )
+
     def test_success_technical(self, circuits_app):
         """Test calling with sample values for the parameters"""
 

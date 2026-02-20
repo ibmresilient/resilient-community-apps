@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2026. All Rights Reserved.
 # Generated with resilient-sdk v51.0.2.0.974
 
 """
@@ -21,10 +21,10 @@ Return examples:
 """
 
 from requests import RequestException
-from fn_watsonx_analyst.util.QueryHelper import QueryHelper
 from fn_watsonx_analyst.util.errors import WatsonxApiException
 from fn_watsonx_analyst.util.logging_helper import create_logger
 from fn_watsonx_analyst.util.state_manager import app_state
+from fn_watsonx_analyst.util.watsonx_client import WatsonxClient
 
 log = create_logger(__name__)
 
@@ -41,21 +41,15 @@ def selftest_function(opts):
 
     try:
         app_state.get().opts = opts
-        models = QueryHelper().get_generation_models()
+        client = WatsonxClient()
 
-        if models is None or len(models) == 0:
-            raise RequestException
+        client.get_available_models()
 
-        labels = opts.get("watsonx_property_labels", None)
-        if labels is None or not hasattr(labels, "items"):
-            raise ValueError
-
-        for key, value in labels.items():
-            if not key or not value:
-                raise ValueError
-
-        state = "success"
-        reason = f"Successfully connected to watsonx.ai. Found {len(models)} models with text_generation capability."
+        if not client.check_project():
+            reason = "Project details could not be retrieved. Check the `watsonx_project_id` field in app.config"
+        else:
+            state = "success"
+            reason = "Successfully connected to watsonx.ai."
 
     except ValueError:
         reason = "Invalid property labels configuration. " + reason

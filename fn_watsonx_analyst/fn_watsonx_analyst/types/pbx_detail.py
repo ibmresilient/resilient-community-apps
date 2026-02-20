@@ -3,6 +3,14 @@ from typing import Literal, TypedDict
 from .principal import Principal
 from .playbook import Playbook
 
+class PlaybookTarget(TypedDict):
+    """Type for Playbook target object"""
+
+    parent: object
+    object_id: int
+    object_name: str
+    type_id: int
+    type_name: str
 
 class PBExecDetail(TypedDict):
     """Type for Playbook execution detail (playbook progress item)"""
@@ -18,3 +26,4 @@ class PBExecDetail(TypedDict):
 
     last_activated_by: Principal
     playbook: Playbook
+    object: PlaybookTarget

@@ -10,7 +10,8 @@ incident:
     - start_date
     - inc_start
     - discovered_date
-    - creator_principal
+    - owner_id
+    - creator_id
     - reporter
     - state
     - country
@@ -40,6 +41,10 @@ playbook_executions:
     - object
     - elapsed_time
     - playbook
+    - start_time
+  
+  date_list:
+    - start_time
 
   playbook_allow_list:
     - display_name
@@ -97,4 +102,7 @@ tasks:
     - active
     - required
     - status
-
+    - owner_id
+    - due_date
+    - required
+    - description

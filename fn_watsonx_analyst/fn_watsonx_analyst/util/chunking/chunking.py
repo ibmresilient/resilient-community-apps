@@ -13,8 +13,8 @@ from fn_watsonx_analyst.types.incident_full_data import IncidentFullData
 from fn_watsonx_analyst.util.model_helper import ModelHelper
 from fn_watsonx_analyst.util.logging_helper import create_logger
 from fn_watsonx_analyst.config import load_model_config
-from fn_watsonx_analyst.util.QueryHelper import QueryHelper
 from fn_watsonx_analyst.util.state_manager import app_state
+from fn_watsonx_analyst.util.watsonx_client import WatsonxClient
 
 logger = create_logger(__name__)
 
@@ -22,13 +22,13 @@ logger = create_logger(__name__)
 class Chunking:
     """Class for Chunking and picking most relevant chunk for GenAI use cases"""
 
-    query_helper: QueryHelper
+    watsonx_client: WatsonxClient
 
     def __init__(
-        self, init_query_helper=True
+        self, init_watsonx_client=True
     ) -> None:
-        if init_query_helper:
-            self.query_helper = QueryHelper()
+        if init_watsonx_client:
+            self.watsonx_client = WatsonxClient()
 
     def clamped_chunks_for_model(self, data: List[str], model_id: str, threshold: float) -> List[str]:
         """
@@ -288,7 +288,7 @@ class Chunking:
             logger.exception("An error occurred while pre-processing the chunks: %s", e)
             raise
 
-    def split_json_to_chunks(self, data:dict= IncidentFullData, max_tokens_per_chunk:int=400)-> list[str]:
+    def split_json_to_chunks(self, data: IncidentFullData, max_tokens_per_chunk:int=400)-> list[str]:
         """ Splits the Indcident data into  meanignful chunks"""
         try:
             processed_data = self.process_json_data(data)
@@ -346,7 +346,7 @@ class Chunking:
 
             if not model_conf:
                 # default
-                return 4000
+                return 8000
 
             return model_conf["context_length"]
 
@@ -564,15 +564,15 @@ class Chunking:
             )
 
             # Create embeddings of Chunks
-            payload_chunk_embeddings = self.query_helper.generate_embeddings(
-                data=chunks
+            payload_chunk_embeddings = self.watsonx_client.generate_embeddings(
+                chunks
             )
 
             # Create Faiss Index
             payload_index = self.create_faiss_index(payload_chunk_embeddings)
             
             # Create embedding for the query
-            query_embedding = self.query_helper.generate_embeddings(data=[query])
+            query_embedding = self.watsonx_client.generate_embeddings([query])
 
             # Search the index for top K most relevant chunks (set a high enough top_k initially)
             top_k = len(chunks)  # Search all chunks to evaluate token limit

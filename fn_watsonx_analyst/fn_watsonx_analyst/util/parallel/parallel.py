@@ -4,7 +4,7 @@ import traceback
 
 
 from fn_watsonx_analyst.types.ai_response import AIResponse
-from fn_watsonx_analyst.types.watsonx_responses import WatsonxTextGenerationResponse
+from fn_watsonx_analyst.types.watsonx_responses import WatsonxChatResponse, WatsonxTextGenerationResponse
 from fn_watsonx_analyst.types import AppState
 from fn_watsonx_analyst.util.logging_helper import create_logger, get_request_id, set_request_id
 from fn_watsonx_analyst.util.state_manager import app_state
@@ -63,13 +63,14 @@ class ParallelRunnableRunner:
                 app_state.set(state)
 
                 try:
-                    result: WatsonxTextGenerationResponse = future.result()
+                    result: WatsonxChatResponse = future.result()
                     results.append(result)
                     try:
-                        app_state.get().increment_input_tokens(result["results"][0]["input_token_count"])
-                        app_state.get().increment_output_tokens(result["results"][0]["generated_token_count"])
-                    except:
-                        log.warning("Failed to retrieve token usage from parallel execution.")
+                        usage = result["usage"]
+                        app_state.get().increment_input_tokens(usage["prompt_tokens"])
+                        app_state.get().increment_output_tokens(usage["completion_tokens"])
+                    except Exception as e:
+                        log.warning(f"Failed to retrieve token usage from parallel execution. Error: {e}")
                 except:
                     inner_log.error(traceback.format_exc())
                     inner_log.error("Failed to run runnable %s", r.name)

@@ -10,6 +10,7 @@ class AiResponsePurpose(Enum):
     NOTE_CONVERSATION = "Note Conversation"
     ARTIFACT_CONVERSATION = "Artifact Conversation"
     ARITFACT_META_SUMMARY = "Artifact Metadata Summary"
+    ARTIFACT_META_CONVERSATION = "Artifact Metadata Conversation"
     INCIDENT_SUMMARY = "Incident Summary"
     TEXT_GENERATION = "Text Generation"
 
@@ -74,5 +75,5 @@ class ModelTag:
     def __repr__(self) -> str:
         return f"""<div style="white-space: nowrap; display: table-row; height:48px; border: 1px solid #4589ff;">
 <span style="display: table-cell; text-align: center; vertical-align: middle; width: 48px; font-size: 12px; border: 1px solid #fff;user-select: none;"title="AI-Generated Content"><span style="user-select: none;">AI</span></span>
-<small style="font-size: 12px;"><span style="display: table-cell; font-size: 12px; padding-left: 1em;"><span style="color: lightgrey;">GenAI Contribution by {self._get_name()} for {self.purpose.value}</span><br><span>Using {self.model_id} at {self.created_at}. Request ID: <span style="font-family: monospace;">{self.request_id}</span></span><br><span style="color: lightgrey;"><span title="Input and output tokens used to generate text.">Generation tokens: <span style="font-family: monospace">{self.generation_tokens}</span></span>, <span title="Tokens used for embedding reference data.">Embedding tokens: <span style="font-family: monospace">{self.embedding_tokens}</span></span>. <span title="Estimated cost in US Dollar cents of generation and embedding tokens used for this request.">Estimated cost: <span style="font-family: monosace">{self.estimated_cost}</span> USD cents</span>. <a href="https://www.ibm.com/products/watsonx-ai/pricing">Learn more</a>.</small></div>
+<small style="font-size: 12px;"><span style="display: table-cell; font-size: 12px; padding-left: 1em;"><span style="color: lightgrey;">GenAI Contribution by {self._get_name()} for {self.purpose.value}</span><br><span>Using {self.model_id} at {self.created_at}. Request ID: <span style="font-family: monospace;">{self.request_id}</span></span><br><span style="color: lightgrey;"><span title="Input and output tokens used to generate text.">Generation tokens: <span style="font-family: monospace">{self.generation_tokens}</span></span>, <span title="Tokens used for embedding reference data.">Embedding tokens: <span style="font-family: monospace">{self.embedding_tokens}</span></span>. <span title="Estimated cost in US Dollar cents of generation and embedding tokens used for this request.">Estimated cost: <span style="font-family: monospace">{self.estimated_cost}</span> USD cents</span>. <a href="https://www.ibm.com/products/watsonx-ai/pricing">Learn more</a>.</small></div>
 """

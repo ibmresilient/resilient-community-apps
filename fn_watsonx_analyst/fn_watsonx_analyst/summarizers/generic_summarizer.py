@@ -1,8 +1,9 @@
-from typing import Literal
+from typing import Literal, List, Union
 from fn_watsonx_analyst.types.ai_response import AIResponse
-from fn_watsonx_analyst.types.watsonx_responses import WatsonxTextGenerationResponse
+from fn_watsonx_analyst.types.watsonx_responses import WatsonxTextGenerationResponse, WatsonxChatResponse
+from fn_watsonx_analyst.types import MessagePayload
 from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose
-from fn_watsonx_analyst.util.QueryHelper import QueryHelper
+from fn_watsonx_analyst.util.watsonx_client import WatsonxClient
 
 from resilient import SimpleClient
 
@@ -18,28 +19,39 @@ class GenericSummarizer(ParallelRunnable):
     model_id: str
     opts: dict
 
-    typ: Literal["incident", "playbook_executions", "artifacts", "notes"]
-    instruction: str
-    purpose: AiResponsePurpose = None
+    typ: Literal["aggregate", "incident", "playbook_executions", "artifacts", "notes", "contents", "document"]
+    instruction: Union[str, List[MessagePayload]]
+    purpose: AiResponsePurpose | None = None
 
     res_client: SimpleClient
 
     def __init__(
         self,
         typ: Literal[
-            "aggregate", "incident", "playbook_executions", "artifacts", "notes", "contents"
+            "aggregate", "incident", "playbook_executions", "artifacts", "notes", "contents", "document"
         ],
-        instruction: str,
+        instruction: Union[str, List[MessagePayload]],
     ):
         self.typ = typ
         self.instruction = instruction
 
-    def run(self) -> WatsonxTextGenerationResponse:
+    def run(self) -> Union[WatsonxTextGenerationResponse, WatsonxChatResponse]:
         if not self.valid:
             return (self.typ, {}, self.valid)
-        query_helper = QueryHelper()
+        
         try:
-            return query_helper.text_generation(self.instruction)
+            wx_client = WatsonxClient()
+            
+            # If instruction is a list of messages, use directly
+            if isinstance(self.instruction, list):
+                return wx_client.chat(self.instruction)
+            # If instruction is a string, convert to chat message format
+            else:
+                messages: List[MessagePayload] = [
+                    {"role": "user", "content": self.instruction}
+                ]
+                return wx_client.chat(messages)
+                
         except Exception as e:
             import traceback
 

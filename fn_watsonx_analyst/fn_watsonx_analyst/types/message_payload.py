@@ -1,4 +1,4 @@
-from typing import Literal, TypedDict
+from typing import Literal, NotRequired, Optional, TypedDict
 
 MessageRole = Literal["system", "assistant", "user"]
 
@@ -10,3 +10,4 @@ class MessagePayload(TypedDict):
 
     role: MessageRole
     content: str
+    reasoning_content: NotRequired[str]

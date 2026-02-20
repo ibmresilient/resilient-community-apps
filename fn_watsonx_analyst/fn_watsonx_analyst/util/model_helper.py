@@ -6,6 +6,15 @@ from fn_watsonx_analyst.config import ModelConfig, load_model_config
 class ModelHelper:
 
     EMBEDDING_MODEL_COST = 0.1
+    DEFAULT_EMBEDDING_MODEL = "ibm/slate-125m-english-rtrvr-v2"
+
+    @staticmethod
+    def get_embedding_model(opts: dict | None) -> str:
+        model = ModelHelper.DEFAULT_EMBEDDING_MODEL
+        if opts and "fn_watsonx_analyst" in opts and "embedding_model" in opts["fn_watsonx_analyst"]:
+            model = opts["fn_watsonx_analyst"]["embedding_model"]
+        
+        return model
 
     @staticmethod
     @cache

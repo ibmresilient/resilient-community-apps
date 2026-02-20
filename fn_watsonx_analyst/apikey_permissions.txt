@@ -40,6 +40,7 @@ read_playbook
 #
 ## Administration Permissions
 #edit_data
+read_workspace
 #
 ## Customization Permissions
 #read_layouts

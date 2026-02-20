@@ -32,6 +32,8 @@ class FileParser:
     """Class to parse multiple file types"""
     parsers: Dict[str, Callable[[Any], str]]
     supported_extensions: Set[str]
+
+    PARSED_CONTENT_EMPTY: str = "Parsed content is empty or could not be extracted."
     
     def __init__(self):
         """Initialize the file parser with supported extensions and parser mapping."""
@@ -189,7 +191,7 @@ class FileParser:
             text = mail.text_plain[0] if mail.text_plain else ""
             return text.strip()
         except Exception as e:
-            print(f"Error reading EML: {e}")
+            log.exception(f"Error reading EML: {e}")
             raise
 
     def read_xls(self, data: str) -> str:
@@ -443,11 +445,10 @@ class FileParser:
                     raise UnsupportedEncodingError("Unsupported data type for decoding.")
 
             if not parsed_content or not parsed_content.strip():
-                raise ValueError("Parsed content is empty or could not be extracted.")
+                raise ValueError(self.PARSED_CONTENT_EMPTY)
 
         except Exception:
-            parsed_content = "Parsed content is empty or could not be extracted"
+            parsed_content = self.PARSED_CONTENT_EMPTY
             raise  # Re-raise the same exception to be caught by the caller
         finally:
             return parsed_content
-

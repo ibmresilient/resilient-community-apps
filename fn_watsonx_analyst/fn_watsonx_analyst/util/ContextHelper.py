@@ -19,6 +19,7 @@ from fn_watsonx_analyst.util.persistent_org_cache import PersistentCache
 from fn_watsonx_analyst.util.rest import RestHelper, RestUrls
 from fn_watsonx_analyst.util.logging_helper import create_logger
 from fn_watsonx_analyst.util.state_manager import app_state
+from fn_watsonx_analyst.util.data.incident_template import INCIDENT_TEMPLATE
 
 
 class Templates(Enum):
@@ -67,7 +68,7 @@ class ContextHelper:
     pbx_data: List[PBExecDetail] = []
     task_data: List[any] = []
 
-    full_data: IncidentFullData = None
+    full_data: IncidentFullData | None = None
 
     date_fmt = "%Y-%m-%d %H:%M:%S"
 
@@ -86,15 +87,253 @@ class ContextHelper:
         self.inc_data, self.pbx_data, self.art_data, self.attach_data, self.task_data = self.cleanse_data(
             self.inc_data, self.pbx_data, self.art_data, self.attach_data, self.task_data
         )
+
         self.inc_data["artifacts"] = self.art_data or []
         self.inc_data["attachments"] = self.attach_data or []
         self.inc_data["playbook_executions"] = self.pbx_data or []
         self.inc_data["tasktree"] = self.task_data or []
         self.full_data = self.resolve_type_ids({"incident": self.inc_data})
-        self.full_data = self.replace_string_in_values(self.full_data, 'Attachment', 'File') # Fix: SOARAPPS-8551
-        self.full_data = self.replace_string_in_values(self.full_data, 'Artifact', 'File') # Fix: SOARAPPS-8551
 
         return self.full_data
+
+    def format_incident_for_context(self) -> str:
+        """
+        Formats incident data using the incident template for better context in conversations.
+        Returns a formatted string with all incident details.
+        """
+        # Get all the data we need
+        if not self.full_data:
+            self.build_full_data()
+
+        # Get organization and workspace names
+        org_name = "N/A"
+        workspace_name = "Default workspace"
+        workspace_id = "N/A"
+        try:
+            org_data = PersistentCache("org").get_data(self.res_client, "org", None)
+            if org_data and "org_info" in org_data and "name" in org_data["org_info"]:
+                org_name = org_data["org_info"]["name"]
+        except Exception:
+            log.debug("Could not retrieve organization name")
+
+        try:
+            # Get workspace name from incident data
+            if self.inc_data and "workspace" in self.inc_data:
+                workspace_id = self.inc_data["workspace"]
+
+                for workspace in RestHelper().do_request(RestUrls.GET_WORKSPACES)["entities"]:
+                    if str(workspace["id"]) == str(workspace_id):
+                        workspace_name = workspace["display_name"]
+        except Exception:
+            log.debug("Could not retrieve workspace name")
+
+        # Format members list - include owner and creator in the analysts list
+        members_list = []
+        owner = None
+        creator = None
+        members = []
+        members_str = "No users assigned to this incident"
+        
+        if self.full_data and "incident" in self.full_data:
+            incident_data = self.full_data["incident"]
+        else:
+            raise ValueError()
+        incident_types = incident_data.get('incident_type_ids', "N/A")
+
+        if "owner_id" in incident_data:
+            owner = incident_data.get("owner_id", "N/A")
+        if "creator_id" in incident_data:
+            creator = incident_data.get("creator_id", "N/A")
+        if "members" in incident_data:
+            members = incident_data.get("members", [])
+
+        all_members = set()
+        all_members.update([creator, owner, *members])
+        try:
+            all_members.remove(None) # guard removal of None, as if not present, will get KeyError
+        except:
+            pass
+
+        users = RestHelper().do_request(RestUrls.SEARCH_PRINCIPALS, user_ids=list(all_members))
+        user_map = {}
+        for user in users:
+            if "result" in user and "id" in user["result"]:
+                user_map[user["result"]["id"]] = user["result"].get("display_name", user["result"]["id"])
+
+        if owner in user_map:
+            members_list.append(f"Owner: {user_map[owner]}")
+        if creator in user_map:
+            members_list.append(f"Creator: {user_map[creator]}")
+        
+        if not members:
+            members_list.append("- No incident members assigned")
+        else:
+            members_list.append("- Incident members:")
+            for member in members:
+                if member in user_map:
+                    members_list.append(f"\t- {user_map[member]}")
+                else:
+                    members_list.append(f"\t- User/Principal with ID: `{member}`")
+
+        members_str = "\n".join(members_list)
+
+        # Format artifacts by type
+        artifacts_section = "No artifacts found for this incident"
+        if "artifacts" in incident_data:
+            artifacts_by_type = {}
+            # for artifact in self.art_data:
+            for artifact in incident_data.get("artifacts", []):
+                art_type = artifact.get("type", {}).get("name")
+                if isinstance(art_type, dict):
+                    art_type = art_type.get("name", "Unknown")
+
+                if art_type not in artifacts_by_type:
+                    artifacts_by_type[art_type] = []
+
+                art_info = f"- Value: `{artifact.get('value', 'N/A')}`"
+                if artifact.get("description", ''):
+                    art_info += f"\n\t- Description:\n\t{artifact.get('description', 'N/A')}"
+
+                if "hits" in artifact and artifact["hits"] is not None:
+                    if len(artifact.get("hits", 0)) > 1:
+                        art_info += "\n\t- Hits:"
+                        for hit in artifact.get("hits", []):
+                            if "name" in hit and "value" in hit:
+                                art_info += f"\n\t\t- {hit.get('name', 'N/A')}: {hit.get('value', 'N/A')}"
+
+                artifacts_by_type[art_type].append(art_info)
+
+            if artifacts_by_type:
+                sections = []
+                for art_type, artifacts in artifacts_by_type.items():
+                    section = f"#### `{art_type}` Artifacts:\n\n" + "\n\n".join(artifacts)
+                    sections.append(section)
+                artifacts_section = "\n".join(sections)
+
+        # Format tasks by phase
+        tasks_section = "No tasks found for this incident."
+        if self.task_data:
+            tasks_by_phase = {}
+
+            def extract_tasks_from_phase(phase, phase_name=None):
+                """Recursively extract tasks from phases"""
+                current_phase_name = phase_name or phase.get("phase_name", "Unknown Phase")
+
+                if current_phase_name not in tasks_by_phase:
+                    tasks_by_phase[current_phase_name] = []
+
+                # Add tasks from this phase
+                for task in phase.get("tasks", []):
+                    task_status = task.get("status", "Unknown")
+
+                    owner = user_map.get(task.get("owner_id", 0), "Unassigned")
+
+                    task_info = {
+                        "name": task.get("name", "Unnamed Task"),
+                        "status": task_status,
+                        "owner": owner,
+                        "required": task.get("required", False),
+                        "due_date": task.get("due_date", "N/A"),
+                        "description": task.get("instructions", {}).get("content") if task.get("instructions") and "content" in task["instructions"] else None
+                    }
+                    tasks_by_phase[current_phase_name].append(task_info)
+
+                # Process child phases recursively
+                for child_phase in phase.get("child_cats", []):
+                    extract_tasks_from_phase(child_phase, child_phase.get("name", "Unknown Phase"))
+
+            # Extract tasks from all phases
+            for phase in self.task_data:
+                extract_tasks_from_phase(phase)
+
+            if tasks_by_phase:
+                sections = []
+                for phase_name, tasks in tasks_by_phase.items():
+                    if tasks:
+                        section = f"\n#### Phase: {phase_name}\n"
+                        for task in tasks:
+                            task_str = f"\n**Task: {task.get('name', 'N/A')}**\n"
+                            task_str += f"- Status: {task.get('status', 'N/A')}\n"
+                            task_str += f"- Assigned to: {task['owner']}\n"
+                            task_str += f"- Required: {'Yes' if task.get('required', False) else 'No'}\n"
+                            if 'due_date' in task and task['due_date']:
+                                due_date = self._timestamp_to_readable(task['due_date'])
+                                task_str += f"- Due Date: {due_date}\n"
+                            if task['description']:
+                                task_str += f"- Description: {task.get('description', 'N/A')}\n"
+                            section += task_str
+                        sections.append(section)
+                tasks_section = "\n".join(sections)
+
+        playbook_executions = "No playbooks have been executed on this incident yet."
+        pbx_data: List[PBExecDetail] = incident_data.get("playbook_executions", [])
+        if pbx_data:
+            pb_sections = []
+
+            for pbx in pbx_data:
+                pb_name = pbx['playbook'].get('display_name', "N/A")
+                pbx_status = pbx.get("status", "N/A")
+                pbx_start_time = pbx.get("start_time", "N/A")
+                pbx_object = pbx.get("object", {})
+                pbx_target = f"{pbx_object.get('type_name', 'N/A').capitalize()}: `{pbx_object.get('object_name', 'N/A')}`"
+
+                pb_sections.append(f"- Playbook: {pb_name}\n\t- Status: {pbx_status}\n\t- Started at: {pbx_start_time}\n\t- Targeting: {pbx_target}")
+            playbook_executions = "\n\n".join(pb_sections)
+
+        # Format timeline dates
+        def format_date_line(field_name, label):
+            if self.inc_data and field_name in self.inc_data and self.inc_data[field_name]:
+                try:
+                    date_str = self._timestamp_to_readable(self.inc_data[field_name])
+                except:
+                    date_str = self.inc_data[field_name]
+                return f"{label}: {date_str}"
+            return ""
+
+        timeline_parts = [
+            format_date_line("discovered_date", "Incident discovered at"),
+            format_date_line("create_date", "Incident created at"),
+            format_date_line("end_date", "Incident closed at"),
+            format_date_line("inc_last_modified_date", "Incident details last modified at"),
+            format_date_line("start_date", "Investigation started at"),
+        ]
+        timeline_str = "\n".join([part for part in timeline_parts if part])
+
+        custom_properties_section = ""
+        for ikey, ivalue in self.inc_data.get("properties", {}).items():
+            custom_properties_section += f"- {ikey}: {ivalue}\n"
+        
+        if custom_properties_section:
+            custom_properties_section = f"### Custom Incident Properties\n\n{custom_properties_section}"
+
+        # Build the template data dictionary
+        template_data = {
+            "inc_id": self.inc_id,
+            "org_name": org_name,
+            "workspace_name": workspace_name,
+            "workspace_id": workspace_id,
+            "inc_name": self.inc_data.get("name", "N/A") if self.inc_data else "N/A",
+            "severity_code": self.__severity_code_to_name(self.inc_data.get("severity_code")) if self.inc_data and "severity_code" in self.inc_data else "N/A",
+            "incident_types": incident_types,
+            "inc_enabled": "Enabled" if self.inc_data and self.inc_data.get("enabled", True) else "Disabled",
+            "inc_disposition": "Confirmed" if self.inc_data and self.inc_data.get("confirmed", False) else "Unconfirmed",
+            "inc_description": self.inc_data.get("description", "N/A") if self.inc_data else "N/A",
+            "training_line": "\nTraining incident\n" if self.inc_data and self.inc_data.get("training", False) else "",
+            "inc_address": self.inc_data.get("addr", "N/A") if self.inc_data else "N/A",
+            "inc_city": self.inc_data.get("city", "N/A") if self.inc_data else "N/A",
+            "inc_state": self.inc_data.get("state", "N/A") if self.inc_data else "N/A",
+            "inc_zip": self.inc_data.get("zip", "N/A") if self.inc_data else "N/A",
+            "timeline": timeline_str if timeline_str else "No timeline information available",
+            "members": members_str,
+            "artifacts_section": artifacts_section,
+            "tasks_section": tasks_section,
+            "playbook_executions": playbook_executions,
+            "custom_properties_section": custom_properties_section,
+        }
+
+        # Format using the template
+        formatted_text = INCIDENT_TEMPLATE.format(**template_data)
+        return formatted_text
 
     def get_incident_data(self) -> Incident:
         helper = RestHelper()
@@ -148,7 +387,7 @@ class ContextHelper:
     def _timestamp_to_readable(self, unix_timestamp: int) -> str:
         """Converts a Unix millis timestamp to a mixture of ISO 8601 and human readable date string"""
         timestamp = datetime.datetime.fromtimestamp(unix_timestamp / 1000)
-        date_1 = timestamp.strftime("%d-%m-%Y")
+        date_1 = timestamp.strftime("%H:%M %d-%m-%Y")
         date_2 = timestamp.strftime("%A, %B %d, %Y")
         return f"{date_1} ({date_2})"
 
@@ -291,6 +530,7 @@ class ContextHelper:
 
         pbx_list = config.get("playbook_executions", {}).get("allow_list") or []
         pbx_pb_list = config.get("playbook_executions", {}).get("playbook_allow_list") or []
+        pbx_date_list = config.get("playbook_executions", {}).get("date_list") or []
 
         art_list = config.get("artifacts", {}).get("allow_list") or []
         art_date_list = config.get("artifacts", {}).get("date_list") or []
@@ -318,7 +558,8 @@ class ContextHelper:
 
             for field in inc_date_list:
                 try:
-                    inc[field] = self._timestamp_to_readable(inc[field])
+                    if field in inc_list:
+                        inc[field] = self._timestamp_to_readable(inc[field])
                 except:
                     # will raise if null, which can be safely ignored.
                     pass
@@ -335,7 +576,15 @@ class ContextHelper:
             for old in pbx_data:
                 new: PBExecDetail = old
                 new = self.__mask_data(new, pbx_list)
-                new["playbook"] = self.__mask_data(new["playbook"], pbx_pb_list)
+                new["playbook"] = self.__mask_data(new.get("playbook", {}), pbx_pb_list)
+                for field in pbx_date_list:
+                    try:
+                        if field in pbx_list:
+                            new[field] = self._timestamp_to_readable(old[field])
+                    except:
+                        # will raise if null or not timestamp
+                        pass
+
                 pbxs.append(new)
 
         arts = []
@@ -404,7 +653,8 @@ class ContextHelper:
 
                 for field in art_date_list:
                     try:
-                        new[field] = self._timestamp_to_readable(old[field])
+                        if field in art_list:
+                            new[field] = self._timestamp_to_readable(old[field])
                     except:
                         # will raise if null or not timestamp
                         pass
@@ -417,7 +667,8 @@ class ContextHelper:
                 new = self.__mask_data(new, attach_list)
                 for field in attach_date_list:
                     try:
-                        new[field] = self._timestamp_to_readable(old[field])
+                        if field in attach_list:
+                            new[field] = self._timestamp_to_readable(old[field])
                     except:
                         # will raise if null or not timestamp
                         pass
@@ -447,9 +698,23 @@ class ContextHelper:
                     for old_task in phase["child_tasks"]:
                         new_task = old_task
                         new_task = self.__mask_data(new_task, task_list)
+                        task_status = "Unknown"
+                        
                         if "status" in task_list:
-                            new_task["complete"] = True if old_task["status"] == "C" else False
-                            new_task.pop('status', None) # remove the status key as not needed
+                            match old_task['status']:
+                                case "O":
+                                    task_status = "Open (on-time)"
+                                case "D":
+                                    task_status = "Potential delay"
+                                case "C":
+                                    task_status = "Closed"
+                                case "R":
+                                    task_status = "At risk"
+                                case "S":
+                                    task_status = "Suspended"
+                        
+                        new_task["status"] = task_status
+
                         if new_task:
                             tasks.append(new_task)
 

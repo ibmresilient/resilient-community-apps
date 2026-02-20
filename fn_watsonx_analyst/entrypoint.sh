@@ -24,7 +24,7 @@ else
 fi
 
 # shellcheck disable=SC2116
-resilient-circuits run & CIRCUITS_PID=$(echo $!)
+resilient-circuits run --config-file /etc/rescircuits/app.config & CIRCUITS_PID=$(echo $!)
 
 while true
 do

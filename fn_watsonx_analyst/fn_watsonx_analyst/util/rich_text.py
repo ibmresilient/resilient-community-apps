@@ -5,6 +5,7 @@ import markdown2
 from bs4 import BeautifulSoup
 import nh3
 import yaml
+import re
 
 from fn_watsonx_analyst.util.logging_helper import create_logger
 
@@ -42,6 +43,9 @@ class RichTextHelper:
         log.debug("Converting AI's markdown to HTML")
         config = RichTextHelper.get_config()
         original_text = text
+
+        # Convert **text**\nmore text to **text**\n\nmore text
+        text = re.sub(r'(\*\*[^*]+\*\*)\n([^\n])', r'\1\n\n\2', text)
 
         text = text.replace("_", "&#95;") # LLM rarely escapes underscores, so html escape the underscore
 

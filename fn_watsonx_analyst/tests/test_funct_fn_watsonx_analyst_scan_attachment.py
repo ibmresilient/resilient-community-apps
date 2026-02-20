@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2026. All Rights Reserved.
 # Generated with resilient-sdk v51.0.2.2.1096
 """Tests using pytest_resilient_circuits"""
 
@@ -43,6 +44,7 @@ def call_fn_watsonx_analyst_scan_attachment_function(circuits, function_params, 
         return event.kwargs["result"].value
 
 
+@patch("fn_watsonx_analyst.util.rest.RestHelper.do_request", helper.mock_do_request)
 class TestFnWatsonxAnalystScanAttachment:
     """ Tests for the fn_watsonx_analyst_scan_attachment function"""
 
@@ -67,9 +69,6 @@ class TestFnWatsonxAnalystScanAttachment:
         "fn_watsonx_analyst_task_id": 1,
     }
 
-    @patch("fn_watsonx_analyst.util.rest.RestHelper.do_request", helper.mock_do_request)
-    @patch("fn_watsonx_analyst.util.QueryHelper.QueryHelper.get_api_key", helper.mock_get_api_key)
-    @patch("fn_watsonx_analyst.util.QueryHelper.QueryHelper.text_generation", helper.mock_text_generation)
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_1),
         (mock_inputs_2, expected_results_1)

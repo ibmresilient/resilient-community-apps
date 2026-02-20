@@ -201,4 +201,4 @@ END:VCALENDAR"""
     def test_format_parser_unknown(self):
         """Test for unsupported format"""
         result = self.parser.multi_format_parser(b"\xff\xfe\xfa\xfb", "test.abc")
-        assert "Parsed content is empty or could not be extracted" in result
+        assert FileParser.PARSED_CONTENT_EMPTY in result
