@@ -1,0 +1,9 @@
+{
+  "title": "incident title",
+  "createdTimeUtc": "2021-03-28T14:45:02",
+  "firstActivityTimeUtc": "2021-03-28T14:45:02",
+  "description": "description field",
+  "status": "A",
+  "severity": "High",
+  "category": "Malware"
+}

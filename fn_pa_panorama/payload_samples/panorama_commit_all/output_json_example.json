@@ -1,0 +1,29 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "@status": "success",
+    "@code": "19",
+    "result": {
+      "msg": {
+        "line": "Job enqueued with jobid 576"
+      },
+      "job": "576"
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "panorama_commit_without_default_template": false,
+    "panorama_device_group": "group1",
+    "panorama_label": "panorama"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-pa-panorama",
+    "package_version": "1.6.0",
+    "host": "local",
+    "execution_time_ms": 13235,
+    "timestamp": "2025-01-28 09:54:17"
+  }
+}
