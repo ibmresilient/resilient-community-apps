@@ -1,0 +1,73 @@
+# This file is used to setup permissions applied to an API key which is
+# automatically generated for this integration.
+# Below are a set of base permissions which should not changed.
+# Add any additional permissions if your app directly makes Resilient API calls.
+##START_BASE_PERMISSIONS - DO NOT CHANGE##
+read_data
+read_function
+##END_BASE_PERMISSIONS - DO NOT CHANGE##
+# Add additional permissions below, one per line.
+#
+## incident permissions
+#create_incident
+#read_all_incidents
+#delete_all_incidents
+#edit_all_incidents_members
+#edit_all_incidents_owner
+#edit_all_incidents_status
+#
+## incident fields, artifacts, attachments, milestones, datatables
+#edit_all_incidents_fields
+#
+## notes permissions
+#edit_all_incident_notes
+#
+## tasks permissions
+#edit_incident_public_task_fields
+#read_all_private_tasks
+#edit_incident_private_task_member
+#edit_all_private_task_notes
+#edit_incident_public_task_member
+#edit_all_public_task_notes
+#edit_incident_private_task_fields
+#read_incident_public_task
+#
+## users and groups permissions
+#create_group
+#read_group
+#edit_group
+#create_users
+#edit_users
+#read_users
+#
+## workflow permissions - needed when using workflow_id
+#read_workflow
+#
+## wiki permissions
+#create_wiki
+#edit_wiki
+#
+## email permissions
+#read_inbox_emails
+#download_inbox_emails
+#
+## other permissions
+#read_layouts
+#edit_layouts
+#delete_layouts
+#create_function
+#read_function
+#edit_function
+#delete_function
+#create_script
+#read_script
+#edit_script
+#delete_script
+#create_workflow
+#edit_workflow
+#delete_workflow
+#edit_privacy_data
+#read_stats
+#read_all_action_invocations
+#read_workspace
+#edit_data
