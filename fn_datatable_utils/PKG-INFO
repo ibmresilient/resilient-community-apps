@@ -1,12 +1,23 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: fn_datatable_utils
-Version: 2.0.0
+Version: 2.1.1
 Summary: Functions manipulate data in a Datatable
 Home-page: http://ibm.biz/soarcommunity
 Author: IBM SOAR
 License: MIT
 Platform: any
 Classifier: Programming Language :: Python
-Requires-Python: >=3.6
+Requires-Python: >=3.11
+Requires-Dist: resilient_circuits>=51.0.4.0
+Requires-Dist: resilient-lib>=51.0.4.0
+Dynamic: author
+Dynamic: classifier
+Dynamic: description
+Dynamic: home-page
+Dynamic: license
+Dynamic: platform
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
 
 This package contains 6 functions that help you manipulate IBM SOAR Data Tables: Get Row,  Get Rows, Update Row, Delete Row, Delete Rows and Convert CSV Data to a datatable.

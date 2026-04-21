@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4423
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.7.2.16540
 
-"""Generate the Resilient customizations required for fn_datatable_utils"""
+"""Generate the SOAR customizations required for fn_datatable_utils"""
 
 import base64
 import os
@@ -21,17 +22,46 @@ def codegen_reload_data():
     """
     return {
         "package": u"fn_datatable_utils",
-        "message_destinations": [u"fn_datatable_utils"],
-        "functions": [u"dt_utils_add_row", u"dt_utils_clear_datatable", u"dt_utils_create_csv_table", u"dt_utils_delete_row", u"dt_utils_delete_rows", u"dt_utils_get_all_data_table_rows", u"dt_utils_get_row", u"dt_utils_get_rows", u"dt_utils_update_row"],
+        "message_destinations": [
+            u"fn_datatable_utils"
+        ],
+        "functions": [
+            u"dt_utils_add_row",
+            u"dt_utils_clear_datatable",
+            u"dt_utils_create_csv_table",
+            u"dt_utils_delete_row",
+            u"dt_utils_delete_rows",
+            u"dt_utils_get_all_data_table_rows",
+            u"dt_utils_get_row",
+            u"dt_utils_get_rows",
+            u"dt_utils_update_row"
+        ],
         "workflows": [],
         "actions": [],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
-        "datatables": [u"dt_utils_test_data_table"],
+        "datatables": [
+            u"dt_utils_test_data_table"
+        ],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"example_create_csv_datatable_pb", u"example_data_table_utils_add_row_pb", u"example_data_table_utils_add_row_to_datatable_pb", u"example_data_table_utils_clear_datatable_pb", u"example_data_table_utils_delete_row_from_datatable_pb", u"example_data_table_utils_delete_row_pb", u"example_data_table_utils_delete_rows_from_datatable_pb", u"example_data_table_utils_delete_rows_pb", u"example_data_table_utils_get_all_data_table_rows_pb", u"example_data_table_utils_get_current_row_pb", u"example_data_table_utils_get_row_pb", u"example_data_table_utils_get_rows_pb", u"example_data_table_utils_update_row_pb", u"example_data_utils_update_row_pb"]
+        "playbooks": [
+            u"example_create_csv_datatable_pb",
+            u"example_data_table_utils_add_row_pb",
+            u"example_data_table_utils_add_row_to_datatable_pb",
+            u"example_data_table_utils_clear_datatable_pb",
+            u"example_data_table_utils_delete_row_from_datatable_pb",
+            u"example_data_table_utils_delete_row_pb",
+            u"example_data_table_utils_delete_rows_from_datatable_pb",
+            u"example_data_table_utils_delete_rows_pb",
+            u"example_data_table_utils_get_all_data_table_rows_pb",
+            u"example_data_table_utils_get_current_row_pb",
+            u"example_data_table_utils_get_row_pb",
+            u"example_data_table_utils_get_rows_pb",
+            u"example_data_table_utils_update_row_pb",
+            u"example_data_utils_update_row_pb"
+        ]
     }
 
 
@@ -40,7 +70,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 46.0.8131
+    IBM SOAR Platform Version: 51.0.8.0.20729
 
     Contents:
     - Message Destinations:

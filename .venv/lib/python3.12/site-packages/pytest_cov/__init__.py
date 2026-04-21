@@ -1,6 +1,6 @@
 """pytest-cov: avoid already-imported warning: PYTEST_DONT_REWRITE."""
 
-__version__ = '7.0.0'
+__version__ = '7.1.0'
 
 import pytest
 

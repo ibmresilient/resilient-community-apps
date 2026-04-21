@@ -1,5 +1,6 @@
 # Datatable Utilities
 
+
 ## Table of Contents
 - [Release Notes](#release-notes)
 - [Overview](#overview)
@@ -22,13 +23,15 @@
 - [Function - Data Table Utils: Get Rows](#function---data-table-utils-get-rows)
 - [Function - Data Table Utils: Update Row](#function---data-table-utils-update-row)
 - [Data Table - Example CSV Datatable](#data-table---example-csv-datatable)
-- [Playbooks](#Playbooks)
+- [Playbooks](#playbooks)
 - [Troubleshooting & Support](#troubleshooting--support)
+
 ---
 
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| v2.1.1  | 3/2026 | Updated Dockerfile base image to address security vulnerabilities, Added support for Python 3.11 and Python 3.12 |
 | v2.1.0  | 7/2023 | Add playbooks
 | v2.0.0  | 5/2022 | <ul><li>Added function dt_utils_add_row that adds a row to a datatable</li><li>Function dt_utils_get_row can now get a row from menu of a datatable row</li><li>Added function dt_utils_get_all_data_table_rows that gets all rows from a data table in SOAR</li><li>Update example workflows</li><li>Added function dt_utils_clear_datatable that deletes all the contents of a datatable</li></ul> |
 | v1.2.0  | 2/2021 | Functions dt_utils_get_rows and dt_utils_delete_rows can now return or delete all datatable rows |
@@ -58,17 +61,17 @@ This package contains 8 functions that help you manipulate IBM SOAR Data Tables:
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
-The SOAR platform supports two app deployment mechanisms, App Host and integration server.
+The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `41.0.6783`.
+* SOAR platform >= `51.0.4.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `41.0.6783`.
+* SOAR platform >= `51.0.4.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=41.0.0`.
-* If using an API key account, make sure the account provides the following minimum permissions: 
+* Integration server is running `resilient_circuits>=51.0.4.0`.
+* If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
   | Org Data | Read |
@@ -77,21 +80,21 @@ If deploying to a SOAR platform with an integration server, the requirements are
   | Incidents Fields | Edit |
   | Data | Edit |
 
-The following SOAR platform guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. 
+The following SOAR platform guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
 * _Integration Server Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings.
-* _System Administrator Guide_: provides the procedure to install, configure and deploy apps. 
+* _System Administrator Guide_: provides the procedure to install, configure and deploy apps.
 
-The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _App Host Deployment Guide_ or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+The above guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= 1.4.
-* Cloud Pak is configured with an App Host.
+* IBM Cloud Pak for Security >= `1.10.15`.
+* Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
-The following Cloud Pak guides provide additional information: 
-* _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
+The following Cloud Pak guides provide additional information:
+* _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_: provides installation, configuration, and troubleshooting information, including proxy server settings. From the Table of Contents, select Case Management and Orchestration & Automation > **Orchestration and Automation Apps**.
 * _System Administrator Guide_: provides information to install, configure, and deploy apps. From the IBM Cloud Pak for Security IBM Documentation table of contents, select Case Management and Orchestration & Automation > **System administrator**.
 
 These guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
@@ -100,10 +103,10 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does not support a proxy server.
 
 ### Python Environment
-Both Python 2.7 and Python 3.6 are supported.
+Python 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
 Additional package dependencies may exist for each of these packages:
-* resilient-lib>=41.0.0
-* resilient_circuits>=41.0.0
+* resilient-lib>=51.0.4.0
+* resilient_circuits>=51.0.4.0
 
 ---
 
@@ -153,8 +156,8 @@ results = {
   "content": {
     "row": {
       "boolean": true,
-      "datetime": 1654019149216,
-      "dt_col_name": "fGzfdhgxj",
+      "datetime": 1686038646387,
+      "dt_col_name": "2",
       "multi_select": [
         "a",
         "b"
@@ -165,16 +168,16 @@ results = {
     }
   },
   "inputs": {
-    "dt_utils_cells_to_update": "{ \"select\":\"1\",\"number\":1,\"datetime\":1654019149216,\"boolean\":true,\"multi_select\":[\u0027a\u0027, \u0027b\u0027],\"dt_col_name\":\"fGzfdhgxj\",\"text\":\"example add row\" }",
+    "dt_utils_cells_to_update": "{ \"select\":\"1\",\"number\":1,\"datetime\":1686038646387,\"boolean\":true,\"multi_select\":[\u0027a\u0027, \u0027b\u0027],\"dt_col_name\":\"2\",\"text\":\"example add row\" }",
     "dt_utils_datatable_api_name": "dt_utils_test_data_table",
-    "incident_id": 2269
+    "incident_id": 2101
   },
   "metrics": {
-    "execution_time_ms": 546,
-    "host": "local",
+    "execution_time_ms": 432,
+    "host": "dummy",
     "package": "fn-datatable-utils",
     "package_version": "2.0.0",
-    "timestamp": "2022-05-31 13:45:50",
+    "timestamp": "2023-06-06 01:04:07",
     "version": "1.0"
   },
   "raw": null,
@@ -283,14 +286,14 @@ results = {
   },
   "inputs": {
     "dt_utils_datatable_api_name": "dt_utils_test_data_table",
-    "incident_id": 2269
+    "incident_id": 2101
   },
   "metrics": {
-    "execution_time_ms": 626,
-    "host": "local",
+    "execution_time_ms": 398,
+    "host": "dummy",
     "package": "fn-datatable-utils",
     "package_version": "2.0.0",
-    "timestamp": "2022-05-31 13:46:14",
+    "timestamp": "2023-06-06 00:56:27",
     "version": "1.0"
   },
   "raw": null,
@@ -388,24 +391,24 @@ Attempts are made to match the field type of the datatable. CSV data matched to 
 ```python
 results = {
   "content": {
-    "data_source": "test_types_utf-8.csv",
-    "rows_added": 12,
+    "data_source": "addresses4.csv",
+    "rows_added": 6,
     "rows_with_errors": 0
   },
   "inputs": {
-    "attachment_id": 12,
+    "attachment_id": 5,
     "dt_datable_name": "dt_utils_test_data_table",
     "dt_date_time_format": "%m/%d/%y %H:%M",
     "dt_has_headers": true,
     "dt_mapping_table": "{\n  \"hdr_number\": \"number\",\n  \"hdr_text\": \"text\",\n  \"hdr_boolean\": \"boolean\",\n  \"hdr_datetime\": \"datetime\",\n  \"hdr_select\": \"select\",\n  \"hdr_multiselect\": \"multi_select\"\n}",
-    "incident_id": 2269
+    "incident_id": 2101
   },
   "metrics": {
-    "execution_time_ms": 5471,
-    "host": "local",
+    "execution_time_ms": 2456,
+    "host": "dummy",
     "package": "fn-datatable-utils",
     "package_version": "2.0.0",
-    "timestamp": "2022-05-31 13:30:04",
+    "timestamp": "2023-06-06 01:02:51",
     "version": "1.0"
   },
   "raw": null,
@@ -502,7 +505,9 @@ An example playbook available for deleting datatable rows based on an artifact v
 results = {
   "content": {
     "row": {
-      "hints": [],
+      "hints": [
+        91
+      ],
       "message": null,
       "success": true,
       "title": null
@@ -510,15 +515,15 @@ results = {
   },
   "inputs": {
     "dt_utils_datatable_api_name": "dt_utils_test_data_table",
-    "dt_utils_row_id": 642,
-    "incident_id": 2269
+    "dt_utils_row_id": 0,
+    "incident_id": 2101
   },
   "metrics": {
-    "execution_time_ms": 543,
-    "host": "local",
+    "execution_time_ms": 107,
+    "host": "dummy",
     "package": "fn-datatable-utils",
     "package_version": "2.0.0",
-    "timestamp": "2022-05-31 13:44:54",
+    "timestamp": "2023-06-06 00:59:13",
     "version": "1.0"
   },
   "raw": null,
@@ -596,20 +601,21 @@ An example playbook available for deleting datatable rows based on an artifact v
 results = {
   "content": {
     "rows_ids": [
-      643
+      89
     ]
   },
   "inputs": {
     "dt_utils_datatable_api_name": "dt_utils_test_data_table",
-    "dt_utils_rows_ids": "[643]",
-    "incident_id": 2269
+    "dt_utils_search_column": "dt_col_name",
+    "dt_utils_search_value": "4",
+    "incident_id": 2101
   },
   "metrics": {
-    "execution_time_ms": 759,
-    "host": "local",
+    "execution_time_ms": 158,
+    "host": "dummy",
     "package": "fn-datatable-utils",
     "package_version": "2.0.0",
-    "timestamp": "2022-05-31 13:45:13",
+    "timestamp": "2023-06-06 01:00:00",
     "version": "1.0"
   },
   "raw": null,
@@ -660,7 +666,7 @@ incident.addNote(helper.createRichText(note))
 
 ---
 ## Function - Data Table Utils: Get All Data Table Rows
-Function that returns the information for all the rows in a data table.
+Return all of the rows from a data table in SOAR.
 
 An example playbook exists for using this function on the example datatable from an artifact value.
 
@@ -690,177 +696,216 @@ results = {
         "actions": [
           {
             "enabled": true,
-            "id": 43,
-            "name": "Get Current Row"
-          },
-          {
-            "enabled": true,
-            "id": 56,
-            "name": "Get All Rows"
-          },
-          {
-            "enabled": true,
-            "id": 38,
-            "name": "Delete Current Row"
-          },
-          {
-            "enabled": true,
-            "id": 41,
+            "id": 117,
             "name": "Delete Rows by Name"
           },
           {
             "enabled": true,
-            "id": 46,
+            "id": 119,
+            "name": "Get All Rows"
+          },
+          {
+            "enabled": true,
+            "id": 123,
             "name": "Update Current Row"
           },
           {
             "enabled": true,
-            "id": 58,
+            "id": 111,
             "name": "Add Row"
+          },
+          {
+            "enabled": true,
+            "id": 114,
+            "name": "Delete Current Row"
+          },
+          {
+            "enabled": true,
+            "id": 120,
+            "name": "Get Current Row"
           }
         ],
         "cells": {
           "boolean": {
             "id": "boolean",
-            "row_id": 641,
-            "value": true
+            "row_id": 92
           },
           "datetime": {
             "id": "datetime",
-            "row_id": 641,
-            "value": 1654018496000
+            "row_id": 92
           },
           "dt_col_name": {
             "id": "dt_col_name",
-            "row_id": 641,
-            "value": "dgzsfhcjv"
+            "row_id": 92,
+            "value": "1"
           },
           "multi_select": {
             "id": "multi_select",
-            "row_id": 641,
-            "value": [
-              "e",
-              "g",
-              "b"
-            ]
+            "row_id": 92,
+            "value": []
           },
           "number": {
             "id": "number",
-            "row_id": 641,
-            "value": 4598
+            "row_id": 92,
+            "value": 2
           },
           "select": {
             "id": "select",
-            "row_id": 641,
-            "value": "3"
+            "row_id": 92
           },
           "text": {
             "id": "text",
-            "row_id": 641,
-            "value": "Update from datatable"
+            "row_id": 92,
+            "value": "3"
           }
         },
-        "id": 641,
-        "inc_id": 2269,
-        "inc_name": "f",
-        "inc_owner": "admin@example.com",
+        "id": 92,
+        "inc_id": 2101,
+        "inc_name": "datatable",
+        "inc_owner": "datatable@ibm.com",
+        "playbooks": [
+          {
+            "display_name": "Example: Data Table Utils: Add Row (PB)",
+            "playbook_handle": "example_data_table_utils_add_row_pb"
+          },
+          {
+            "display_name": "Example: Data Table Utils: Get Current Row (PB)",
+            "playbook_handle": "example_data_table_utils_get_current_row_pb"
+          },
+          {
+            "display_name": "Example: Data Table Utils: Delete Row from Datatable (PB)",
+            "playbook_handle": "example_data_table_utils_delete_row_from_datatable_pb"
+          },
+          {
+            "display_name": "Example: Data Table Utils: Delete Rows from Datatable (PB)",
+            "playbook_handle": "example_data_table_utils_delete_rows_from_datatable_pb"
+          },
+          {
+            "display_name": "Example: Data Table Utils: Get All Data Table Rows (PB)",
+            "playbook_handle": "example_data_table_utils_get_all_data_table_rows_pb"
+          },
+          {
+            "display_name": "Example Data Utils: Update Row (PB)",
+            "playbook_handle": "example_data_utils_update_row_pb"
+          }
+        ],
         "table_name": "Example CSV Datatable",
-        "type_id": 1002,
-        "version": 2
+        "type_id": 1010,
+        "version": 1
       },
       {
         "actions": [
           {
             "enabled": true,
-            "id": 43,
-            "name": "Get Current Row"
-          },
-          {
-            "enabled": true,
-            "id": 56,
-            "name": "Get All Rows"
-          },
-          {
-            "enabled": true,
-            "id": 38,
-            "name": "Delete Current Row"
-          },
-          {
-            "enabled": true,
-            "id": 41,
+            "id": 117,
             "name": "Delete Rows by Name"
           },
           {
             "enabled": true,
-            "id": 46,
+            "id": 119,
+            "name": "Get All Rows"
+          },
+          {
+            "enabled": true,
+            "id": 123,
             "name": "Update Current Row"
           },
           {
             "enabled": true,
-            "id": 58,
+            "id": 111,
             "name": "Add Row"
+          },
+          {
+            "enabled": true,
+            "id": 114,
+            "name": "Delete Current Row"
+          },
+          {
+            "enabled": true,
+            "id": 120,
+            "name": "Get Current Row"
           }
         ],
         "cells": {
           "boolean": {
             "id": "boolean",
-            "row_id": 644,
-            "value": true
+            "row_id": 93
           },
           "datetime": {
             "id": "datetime",
-            "row_id": 644,
-            "value": 1654019149216
+            "row_id": 93
           },
           "dt_col_name": {
             "id": "dt_col_name",
-            "row_id": 644,
-            "value": "fGzfdhgxj"
+            "row_id": 93,
+            "value": "4"
           },
           "multi_select": {
             "id": "multi_select",
-            "row_id": 644,
-            "value": [
-              "b",
-              "a"
-            ]
+            "row_id": 93,
+            "value": []
           },
           "number": {
             "id": "number",
-            "row_id": 644,
-            "value": 1
+            "row_id": 93,
+            "value": 5
           },
           "select": {
             "id": "select",
-            "row_id": 644,
-            "value": "1"
+            "row_id": 93
           },
           "text": {
             "id": "text",
-            "row_id": 644,
-            "value": "example add row"
+            "row_id": 93,
+            "value": "6"
           }
         },
-        "id": 644,
-        "inc_id": 2269,
-        "inc_name": "f",
-        "inc_owner": "admin@example.com",
+        "id": 93,
+        "inc_id": 2101,
+        "inc_name": "datatable",
+        "inc_owner": "datatable@ibm.com",
+        "playbooks": [
+          {
+            "display_name": "Example: Data Table Utils: Add Row (PB)",
+            "playbook_handle": "example_data_table_utils_add_row_pb"
+          },
+          {
+            "display_name": "Example: Data Table Utils: Get Current Row (PB)",
+            "playbook_handle": "example_data_table_utils_get_current_row_pb"
+          },
+          {
+            "display_name": "Example: Data Table Utils: Delete Row from Datatable (PB)",
+            "playbook_handle": "example_data_table_utils_delete_row_from_datatable_pb"
+          },
+          {
+            "display_name": "Example: Data Table Utils: Delete Rows from Datatable (PB)",
+            "playbook_handle": "example_data_table_utils_delete_rows_from_datatable_pb"
+          },
+          {
+            "display_name": "Example: Data Table Utils: Get All Data Table Rows (PB)",
+            "playbook_handle": "example_data_table_utils_get_all_data_table_rows_pb"
+          },
+          {
+            "display_name": "Example Data Utils: Update Row (PB)",
+            "playbook_handle": "example_data_utils_update_row_pb"
+          }
+        ],
         "table_name": "Example CSV Datatable",
-        "type_id": 1002,
+        "type_id": 1010,
         "version": 1
       }
     ]
   },
   "inputs": {
     "dt_utils_datatable_api_name": "dt_utils_test_data_table",
-    "incident_id": 2269
+    "incident_id": 2101
   },
   "metrics": {
-    "execution_time_ms": 173,
-    "host": "local",
+    "execution_time_ms": 66,
+    "host": "dummy",
     "package": "fn-datatable-utils",
     "package_version": "2.0.0",
-    "timestamp": "2022-05-31 13:45:59",
+    "timestamp": "2023-06-06 01:01:08",
     "version": "1.0"
   },
   "raw": null,
@@ -902,7 +947,7 @@ incident.addNote(helper.createRichText(note_text))
 
 ---
 ## Function - Data Table Utils: Get Row
-Function that searches for a row using a internal row ID or a search_column and search_value pair, and returns the information on the row that is found, if such a row exists.
+Function that searches for a row using a internal row ID or a 'search_column and search_value' pair and returns the cells of the row that is found, if such a row exists.
 
 An example playbook exists for using this function on the example datatable from an artifact value.
 
@@ -934,96 +979,122 @@ results = {
       "actions": [
         {
           "enabled": true,
-          "id": 43,
-          "name": "Get Current Row"
-        },
-        {
-          "enabled": true,
-          "id": 56,
-          "name": "Get All Rows"
-        },
-        {
-          "enabled": true,
-          "id": 38,
-          "name": "Delete Current Row"
-        },
-        {
-          "enabled": true,
-          "id": 41,
+          "id": 117,
           "name": "Delete Rows by Name"
         },
         {
           "enabled": true,
-          "id": 46,
+          "id": 119,
+          "name": "Get All Rows"
+        },
+        {
+          "enabled": true,
+          "id": 123,
           "name": "Update Current Row"
         },
         {
           "enabled": true,
-          "id": 58,
+          "id": 111,
           "name": "Add Row"
+        },
+        {
+          "enabled": true,
+          "id": 114,
+          "name": "Delete Current Row"
+        },
+        {
+          "enabled": true,
+          "id": 120,
+          "name": "Get Current Row"
         }
       ],
       "cells": {
         "boolean": {
           "id": "boolean",
-          "row_id": 642,
+          "row_id": 92,
           "value": true
         },
         "datetime": {
           "id": "datetime",
-          "row_id": 642,
-          "value": 1654018816842
+          "row_id": 92,
+          "value": 1686038790018
         },
         "dt_col_name": {
           "id": "dt_col_name",
-          "row_id": 642,
-          "value": "fgshdsgfjn"
+          "row_id": 92,
+          "value": "1"
         },
         "multi_select": {
           "id": "multi_select",
-          "row_id": 642,
+          "row_id": 92,
           "value": [
-            "a",
-            "b"
+            "e",
+            "b",
+            "g"
           ]
         },
         "number": {
           "id": "number",
-          "row_id": 642,
-          "value": 1
+          "row_id": 92,
+          "value": 4598
         },
         "select": {
           "id": "select",
-          "row_id": 642,
-          "value": "1"
+          "row_id": 92
         },
         "text": {
           "id": "text",
-          "row_id": 642,
-          "value": "example add row"
+          "row_id": 92,
+          "value": "Updated from Artifact"
         }
       },
-      "id": 642,
-      "inc_id": 2269,
-      "inc_name": "f",
-      "inc_owner": "admin@example.com",
+      "id": 92,
+      "inc_id": 2101,
+      "inc_name": "datatable",
+      "inc_owner": "datatable@ibm.com",
+      "playbooks": [
+        {
+          "display_name": "Example: Data Table Utils: Add Row (PB)",
+          "playbook_handle": "example_data_table_utils_add_row_pb"
+        },
+        {
+          "display_name": "Example: Data Table Utils: Get Current Row (PB)",
+          "playbook_handle": "example_data_table_utils_get_current_row_pb"
+        },
+        {
+          "display_name": "Example: Data Table Utils: Delete Row from Datatable (PB)",
+          "playbook_handle": "example_data_table_utils_delete_row_from_datatable_pb"
+        },
+        {
+          "display_name": "Example: Data Table Utils: Delete Rows from Datatable (PB)",
+          "playbook_handle": "example_data_table_utils_delete_rows_from_datatable_pb"
+        },
+        {
+          "display_name": "Example: Data Table Utils: Get All Data Table Rows (PB)",
+          "playbook_handle": "example_data_table_utils_get_all_data_table_rows_pb"
+        },
+        {
+          "display_name": "Example Data Utils: Update Row (PB)",
+          "playbook_handle": "example_data_utils_update_row_pb"
+        }
+      ],
       "table_name": "Example CSV Datatable",
-      "type_id": 1002,
-      "version": 1
+      "type_id": 1010,
+      "version": 3
     }
   },
   "inputs": {
     "dt_utils_datatable_api_name": "dt_utils_test_data_table",
     "dt_utils_search_column": "dt_col_name",
-    "dt_utils_search_value": "fgshdsgfjn",
-    "incident_id": 2269
+    "dt_utils_search_value": "1",
+    "incident_id": 2101
   },
   "metrics": {
-    "execution_time_ms": 329,
-    "host": "local",
+    "execution_time_ms": 110,
+    "host": "dummy",
     "package": "fn-datatable-utils",
     "package_version": "2.0.0",
-    "timestamp": "2022-05-31 13:44:52",
+    "timestamp": "2023-06-06 01:06:53",
     "version": "1.0"
   },
   "raw": null,
@@ -1195,17 +1266,17 @@ results = {
     "dt_utils_datatable_api_name": "dt_utils_test_data_table",
     "dt_utils_max_rows": 0,
     "dt_utils_search_column": "dt_col_name",
-    "dt_utils_search_value": "fGzfdhgxj",
+    "dt_utils_search_value": "2",
     "dt_utils_sort_by": null,
     "dt_utils_sort_direction": "ASC",
-    "incident_id": 2269
+    "incident_id": 2101
   },
   "metrics": {
-    "execution_time_ms": 192,
-    "host": "local",
+    "execution_time_ms": 59,
+    "host": "dummy",
     "package": "fn-datatable-utils",
     "package_version": "2.0.0",
-    "timestamp": "2022-05-31 13:45:11",
+    "timestamp": "2023-06-06 01:07:54",
     "version": "1.0"
   },
   "raw": null,
@@ -1303,96 +1374,121 @@ results = {
       "actions": [
         {
           "enabled": true,
-          "id": 43,
-          "name": "Get Current Row"
-        },
-        {
-          "enabled": true,
-          "id": 56,
-          "name": "Get All Rows"
-        },
-        {
-          "enabled": true,
-          "id": 38,
-          "name": "Delete Current Row"
-        },
-        {
-          "enabled": true,
-          "id": 41,
+          "id": 117,
           "name": "Delete Rows by Name"
         },
         {
           "enabled": true,
-          "id": 46,
+          "id": 119,
+          "name": "Get All Rows"
+        },
+        {
+          "enabled": true,
+          "id": 123,
           "name": "Update Current Row"
         },
         {
           "enabled": true,
-          "id": 58,
+          "id": 111,
           "name": "Add Row"
+        },
+        {
+          "enabled": true,
+          "id": 114,
+          "name": "Delete Current Row"
+        },
+        {
+          "enabled": true,
+          "id": 120,
+          "name": "Get Current Row"
         }
       ],
       "cells": {
         "boolean": {
           "id": "boolean",
-          "row_id": 643,
+          "row_id": 93,
           "value": true
         },
         "datetime": {
           "id": "datetime",
-          "row_id": 643,
-          "value": 1654019072126
+          "row_id": 93
         },
         "dt_col_name": {
           "id": "dt_col_name",
-          "row_id": 643,
-          "value": "fGzfdhgxj"
+          "row_id": 93,
+          "value": "4"
         },
         "multi_select": {
           "id": "multi_select",
-          "row_id": 643,
+          "row_id": 93,
           "value": [
-            "a",
-            "b"
+            "b",
+            "e",
+            "g"
           ]
         },
         "number": {
           "id": "number",
-          "row_id": 643,
-          "value": 1
+          "row_id": 93,
+          "value": 4598
         },
         "select": {
           "id": "select",
-          "row_id": 643,
-          "value": "1"
+          "row_id": 93
         },
         "text": {
           "id": "text",
-          "row_id": 643,
-          "value": "Updated from Artifact"
+          "row_id": 93,
+          "value": "Update from datatable"
         }
       },
-      "id": 643,
-      "inc_id": 2269,
-      "inc_name": "f",
-      "inc_owner": "admin@example.com",
+      "id": 93,
+      "inc_id": 2101,
+      "inc_name": "datatable",
+      "inc_owner": "datatable@ibm.com",
+      "playbooks": [
+        {
+          "display_name": "Example: Data Table Utils: Add Row (PB)",
+          "playbook_handle": "example_data_table_utils_add_row_pb"
+        },
+        {
+          "display_name": "Example: Data Table Utils: Get Current Row (PB)",
+          "playbook_handle": "example_data_table_utils_get_current_row_pb"
+        },
+        {
+          "display_name": "Example: Data Table Utils: Delete Row from Datatable (PB)",
+          "playbook_handle": "example_data_table_utils_delete_row_from_datatable_pb"
+        },
+        {
+          "display_name": "Example: Data Table Utils: Delete Rows from Datatable (PB)",
+          "playbook_handle": "example_data_table_utils_delete_rows_from_datatable_pb"
+        },
+        {
+          "display_name": "Example: Data Table Utils: Get All Data Table Rows (PB)",
+          "playbook_handle": "example_data_table_utils_get_all_data_table_rows_pb"
+        },
+        {
+          "display_name": "Example Data Utils: Update Row (PB)",
+          "playbook_handle": "example_data_utils_update_row_pb"
+        }
+      ],
       "table_name": "Example CSV Datatable",
-      "type_id": 1002,
+      "type_id": 1010,
       "version": 2
     }
   },
   "inputs": {
-    "dt_utils_cells_to_update": "{ \"datetime\":1654019072126,\"text\":\"Updated from Artifact\" }",
+    "dt_utils_cells_to_update": "{ \"number\":4598,\"multi_select\":[\u0027b\u0027, \u0027e\u0027, \u0027g\u0027],\"boolean\":true,\"name\":\"Updated Example\",\"text\":\"Update from datatable\" }",
     "dt_utils_datatable_api_name": "dt_utils_test_data_table",
-    "dt_utils_row_id": 643,
-    "incident_id": 2269
+    "dt_utils_row_id": 0,
+    "incident_id": 2101
   },
   "metrics": {
-    "execution_time_ms": 598,
-    "host": "local",
+    "execution_time_ms": 501,
+    "host": "dummy",
     "package": "fn-datatable-utils",
     "package_version": "2.0.0",
-    "timestamp": "2022-05-31 13:44:33",
+    "timestamp": "2023-06-06 01:01:41",
     "version": "1.0"
   },
   "raw": null,
@@ -1513,4 +1609,4 @@ dt_utils_test_data_table
 Refer to the documentation listed in the Requirements section for troubleshooting information.
 
 ### For Support
-This is a IBM Community provided App. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
+This is a IBM Community provided app. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.

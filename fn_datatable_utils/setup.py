@@ -19,7 +19,7 @@ def snake_to_camel(word):
 
 setup(
     name='fn_datatable_utils',
-    version='2.1.0',
+    version='2.1.1',
     display_name="Datatable Utilities",
     license='MIT',
     author='IBM SOAR',
@@ -27,11 +27,11 @@ setup(
     description="Functions manipulate data in a Datatable",
     long_description="This package contains 6 functions that help you manipulate IBM SOAR Data Tables: Get Row,  Get Rows, Update Row, Delete Row, Delete Rows and Convert CSV Data to a datatable.",
     install_requires=[
-        'resilient_circuits>=41.0.0',
-        'resilient-lib>=41.0.0'
+        'resilient_circuits>=51.0.4.0',
+        'resilient-lib>=51.0.4.0'
     ],
     packages=find_packages(),
-    python_requires='>=3.6',
+    python_requires='>=3.11',
     include_package_data=True,
     platforms='any',
     classifiers=[
