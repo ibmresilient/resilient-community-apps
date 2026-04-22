@@ -4,10 +4,8 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "connectors": null,
-  "export_date": 1774348908649,
+  "export_date": 1776867260125,
   "export_format_version": 2,
-  "export_notes": null,
   "export_type": null,
   "fields": [
     {
@@ -20,7 +18,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 389,
+      "id": 346,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -52,7 +50,7 @@
       "deprecated": false,
       "export_key": "__function/dt_mapping_table",
       "hide_notification": false,
-      "id": 390,
+      "id": 367,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -84,7 +82,7 @@
       "deprecated": false,
       "export_key": "__function/dt_start_row",
       "hide_notification": false,
-      "id": 391,
+      "id": 368,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -115,7 +113,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_cells_to_update",
       "hide_notification": false,
-      "id": 392,
+      "id": 369,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -147,7 +145,7 @@
       "deprecated": false,
       "export_key": "__function/dt_csv_data",
       "hide_notification": false,
-      "id": 393,
+      "id": 370,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -178,7 +176,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_rows_ids",
       "hide_notification": false,
-      "id": 394,
+      "id": 371,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -209,7 +207,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_max_rows",
       "hide_notification": false,
-      "id": 395,
+      "id": 372,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -240,7 +238,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_delete_all_rows",
       "hide_notification": false,
-      "id": 396,
+      "id": 373,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -271,7 +269,7 @@
       "deprecated": false,
       "export_key": "__function/dt_date_time_format",
       "hide_notification": false,
-      "id": 397,
+      "id": 374,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -302,7 +300,7 @@
       "deprecated": false,
       "export_key": "__function/dt_has_headers",
       "hide_notification": false,
-      "id": 398,
+      "id": 375,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -333,7 +331,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_datatable_api_name",
       "hide_notification": false,
-      "id": 399,
+      "id": 376,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -365,7 +363,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_search_value",
       "hide_notification": false,
-      "id": 400,
+      "id": 377,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -396,7 +394,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_sort_by",
       "hide_notification": false,
-      "id": 401,
+      "id": 378,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -427,7 +425,7 @@
       "deprecated": false,
       "export_key": "__function/attachment_id",
       "hide_notification": false,
-      "id": 402,
+      "id": 379,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -458,7 +456,7 @@
       "deprecated": false,
       "export_key": "__function/dt_datable_name",
       "hide_notification": false,
-      "id": 403,
+      "id": 380,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -490,7 +488,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_row_id",
       "hide_notification": false,
-      "id": 404,
+      "id": 381,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -521,7 +519,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_search_column",
       "hide_notification": false,
-      "id": 405,
+      "id": 382,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -552,7 +550,7 @@
       "deprecated": false,
       "export_key": "__function/dt_utils_sort_direction",
       "hide_notification": false,
-      "id": 406,
+      "id": 383,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
@@ -579,7 +577,7 @@
           "label": "ASC",
           "properties": null,
           "uuid": "61729b10-cdab-48eb-bc8b-9f30af3afec5",
-          "value": 2201
+          "value": 77
         },
         {
           "default": false,
@@ -588,7 +586,7 @@
           "label": "DESC",
           "properties": null,
           "uuid": "4c223e4f-b70c-4957-9c7f-86761015b24c",
-          "value": 2251
+          "value": 78
         }
       ]
     },
@@ -602,7 +600,7 @@
       "deprecated": false,
       "export_key": "__function/dt_max_rows",
       "hide_notification": false,
-      "id": 407,
+      "id": 384,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -637,7 +635,7 @@
   ],
   "functions": [
     {
-      "created_date": 1774348453841,
+      "created_date": 1776867179355,
       "description": {
         "content": "Add a row to a given datatable.",
         "format": "text"
@@ -645,14 +643,14 @@
       "destination_handle": "fn_datatable_utils",
       "display_name": "Data Table Utils: Add Row",
       "export_key": "dt_utils_add_row",
-      "id": 6,
+      "id": 10,
       "last_modified_by": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348453841,
+      "last_modified_time": 1776867179355,
       "name": "dt_utils_add_row",
       "output_description": {
         "content": null,
@@ -692,7 +690,7 @@
       "workflows": []
     },
     {
-      "created_date": 1774348453981,
+      "created_date": 1776867179483,
       "description": {
         "content": "Delete all the contents of a datatable.",
         "format": "text"
@@ -700,14 +698,14 @@
       "destination_handle": "fn_datatable_utils",
       "display_name": "Data Table Utils: Clear Datatable",
       "export_key": "dt_utils_clear_datatable",
-      "id": 7,
+      "id": 11,
       "last_modified_by": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348453981,
+      "last_modified_time": 1776867179483,
       "name": "dt_utils_clear_datatable",
       "output_description": {
         "content": null,
@@ -739,7 +737,7 @@
       "workflows": []
     },
     {
-      "created_date": 1774348454079,
+      "created_date": 1776867179628,
       "description": {
         "content": "Add CSV data to a named datatable.",
         "format": "text"
@@ -747,14 +745,14 @@
       "destination_handle": "fn_datatable_utils",
       "display_name": "Data Table Utils: Create CSV Datatable",
       "export_key": "dt_utils_create_csv_table",
-      "id": 8,
+      "id": 12,
       "last_modified_by": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348454079,
+      "last_modified_time": 1776867179628,
       "name": "dt_utils_create_csv_table",
       "output_description": {
         "content": null,
@@ -842,7 +840,7 @@
       "workflows": []
     },
     {
-      "created_date": 1774348454151,
+      "created_date": 1776867179723,
       "description": {
         "content": "Function that deletes a row from a Data Table given the internal row ID.",
         "format": "text"
@@ -850,14 +848,14 @@
       "destination_handle": "fn_datatable_utils",
       "display_name": "Data Table Utils: Delete Row",
       "export_key": "dt_utils_delete_row",
-      "id": 9,
+      "id": 13,
       "last_modified_by": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348454151,
+      "last_modified_time": 1776867179723,
       "name": "dt_utils_delete_row",
       "output_description": {
         "content": null,
@@ -897,7 +895,7 @@
       "workflows": []
     },
     {
-      "created_date": 1774348454215,
+      "created_date": 1776867179894,
       "description": {
         "content": "Function that deletes rows from a Data Table given a list of internal row IDs or a \u0027search_column and search_value\u0027 pair.",
         "format": "text"
@@ -905,14 +903,14 @@
       "destination_handle": "fn_datatable_utils",
       "display_name": "Data Table Utils: Delete Rows",
       "export_key": "dt_utils_delete_rows",
-      "id": 10,
+      "id": 14,
       "last_modified_by": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348454215,
+      "last_modified_time": 1776867179894,
       "name": "dt_utils_delete_rows",
       "output_description": {
         "content": null,
@@ -976,7 +974,7 @@
       "workflows": []
     },
     {
-      "created_date": 1774348454274,
+      "created_date": 1776867180033,
       "description": {
         "content": "Return all of the rows from a data table in SOAR.",
         "format": "text"
@@ -984,14 +982,14 @@
       "destination_handle": "fn_datatable_utils",
       "display_name": "Data Table Utils: Get All Data Table Rows",
       "export_key": "dt_utils_get_all_data_table_rows",
-      "id": 11,
+      "id": 15,
       "last_modified_by": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348454274,
+      "last_modified_time": 1776867180033,
       "name": "dt_utils_get_all_data_table_rows",
       "output_description": {
         "content": null,
@@ -1023,7 +1021,7 @@
       "workflows": []
     },
     {
-      "created_date": 1774348454348,
+      "created_date": 1776867180195,
       "description": {
         "content": "Function that searches for a row using a internal row ID or a \u0027search_column and search_value\u0027 pair and returns the cells of the row that is found, if such a row exists.",
         "format": "text"
@@ -1031,14 +1029,14 @@
       "destination_handle": "fn_datatable_utils",
       "display_name": "Data Table Utils: Get Row",
       "export_key": "dt_utils_get_row",
-      "id": 12,
+      "id": 16,
       "last_modified_by": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348454348,
+      "last_modified_time": 1776867180195,
       "name": "dt_utils_get_row",
       "output_description": {
         "content": null,
@@ -1094,7 +1092,7 @@
       "workflows": []
     },
     {
-      "created_date": 1774348454430,
+      "created_date": 1776867180325,
       "description": {
         "content": "Function that returns the full unsorted list of JSON objects which contain all information regarding each row found, if no searching/sorting criteria were provided.",
         "format": "text"
@@ -1102,14 +1100,14 @@
       "destination_handle": "fn_datatable_utils",
       "display_name": "Data Table Utils: Get Rows",
       "export_key": "dt_utils_get_rows",
-      "id": 13,
+      "id": 17,
       "last_modified_by": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348454430,
+      "last_modified_time": 1776867180325,
       "name": "dt_utils_get_rows",
       "output_description": {
         "content": null,
@@ -1181,7 +1179,7 @@
       "workflows": []
     },
     {
-      "created_date": 1774348454494,
+      "created_date": 1776867180421,
       "description": {
         "content": "Function that takes a JSON String of \u0027search_column and search_value\u0027 pairs to update a Data Table row.",
         "format": "text"
@@ -1189,14 +1187,14 @@
       "destination_handle": "fn_datatable_utils",
       "display_name": "Data Table Utils: Update Row",
       "export_key": "dt_utils_update_row",
-      "id": 14,
+      "id": 18,
       "last_modified_by": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348454494,
+      "last_modified_time": 1776867180421,
       "name": "dt_utils_update_row",
       "output_description": {
         "content": null,
@@ -1246,13 +1244,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 8,
+  "id": 2,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1774348905991,
+      "create_date": 1776867257411,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1261,7 +1259,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1774348905991,
+      "update_date": 1776867257411,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1270,7 +1268,7 @@
   "message_destinations": [
     {
       "api_keys": [
-        "b8ef507a-b644-46ce-b7c2-ee29c5d6641e"
+        "2c065e70-5382-4867-8b2c-21795f27ae17"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -1292,11 +1290,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_362842b9_ada1_4d5a_be0c_28c8fbb8b52b\" isExecutable=\"true\" name=\"playbook_362842b9_ada1_4d5a_be0c_28c8fbb8b52b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1kfvs3g\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Data Table Utils: Add Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"88e45595-8f9b-4521-986c-22e53de7abf3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"from datetime import datetime\\n\\ndef dict_to_json_str(d):\\n  \\\"\\\"\\\"Function that converts a dictionary into a JSON string.\\n     Supports types: basestring, bool, int, nested dicts and lists.\\n     If the value is None, it sets it to False.\\\"\\\"\\\"\\n\\n  json_entry = \u0027\\\"{0}\\\":{1}\u0027\\n  json_entry_str = \u0027\\\"{0}\\\":\\\"{1}\\\"\u0027\\n  entries = []\\n\\n  for entry in d:\\n    key = entry\\n    value = d[entry]\\n\\n    if not value:\\n      value = False\\n\\n    elif isinstance(value, str):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027)\\n      entries.append(json_entry_str.format(key, value))\\n\\n    elif isinstance(value, bool):\\n      value = \u0027true\u0027 if value else \u0027false\u0027\\n      entries.append(json_entry.format(key, value))\\n\\n    elif isinstance(value, dict):\\n      entries.append(json_entry.format(key, dict_to_json_str(value)))\\n\\n    else:\\n      entries.append(json_entry.format(key, value))\\n\\n  return \u0027{0} {1} {2}\u0027.format(\u0027{\u0027, \u0027,\u0027.join(entries), \u0027}\u0027)\\n\\n# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\n# The column api names and the value to update the cell to\\n# Example: {\\\"dt_col_name\\\": \\\"example\\\", \\\"number\\\": 1, \\\"text\\\": \\\"example\\\", \\\"datetime\\\": Date().getTime(), \\\"boolean\\\": True, \\\"select\\\": \\\"1\\\", \\\"multi_select\\\": [\\\"a\\\", \\\"b\\\"]}\\ninputs.dt_utils_cells_to_update = dict_to_json_str({\\\"dt_col_name\\\": playbook.inputs.dt_name_field, \\\"number\\\": playbook.inputs.dt_number_field, \\\"text\\\": playbook.inputs.dt_text_field, \\\"datetime\\\": playbook.inputs.dt_datetime_field, \\\"boolean\\\": playbook.inputs.dt_boolean_field, \\\"select\\\": playbook.inputs.dt_select_field, \\\"multi_select\\\": playbook.inputs.dt_multi_select_field})\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1kfvs3g\u003c/incoming\u003e\u003coutgoing\u003eFlow_002kch5\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1kfvs3g\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_002kch5\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_002kch5\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_362842b9_ada1_4d5a_be0c_28c8fbb8b52b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_002kch5\" id=\"Flow_002kch5_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"384\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kfvs3g\" id=\"Flow_1kfvs3g_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"158\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.758\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"664\" y=\"384\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1774348455131,
+      "create_date": 1776867181143,
       "creator_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
       "deployment_id": "playbook_362842b9_ada1_4d5a_be0c_28c8fbb8b52b",
@@ -1322,7 +1320,7 @@
             "deprecated": false,
             "export_key": "playbook_362842b9_ada1_4d5a_be0c_28c8fbb8b52b/dt_boolean_field",
             "hide_notification": false,
-            "id": 408,
+            "id": 385,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -1339,7 +1337,7 @@
             "templates": [],
             "text": "Boolean Field",
             "tooltip": "",
-            "type_id": 1005,
+            "type_id": 1013,
             "uuid": "8b3cc34e-f797-4600-a9f9-39d9ae46c5df",
             "values": []
           },
@@ -1353,7 +1351,7 @@
             "deprecated": false,
             "export_key": "playbook_362842b9_ada1_4d5a_be0c_28c8fbb8b52b/dt_datetime_field",
             "hide_notification": false,
-            "id": 409,
+            "id": 386,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
@@ -1370,7 +1368,7 @@
             "templates": [],
             "text": "Datetime Field",
             "tooltip": "",
-            "type_id": 1005,
+            "type_id": 1013,
             "uuid": "5d65faed-6942-4dee-a898-ca72cfb32e5a",
             "values": []
           },
@@ -1384,7 +1382,7 @@
             "deprecated": false,
             "export_key": "playbook_362842b9_ada1_4d5a_be0c_28c8fbb8b52b/dt_multi_select_field",
             "hide_notification": false,
-            "id": 410,
+            "id": 387,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
@@ -1401,7 +1399,7 @@
             "templates": [],
             "text": "Multi_Select Field",
             "tooltip": "",
-            "type_id": 1005,
+            "type_id": 1013,
             "uuid": "5655c8ea-32a0-42b9-9e9c-82879a6d76a8",
             "values": [
               {
@@ -1411,7 +1409,7 @@
                 "label": "a",
                 "properties": null,
                 "uuid": "dc3caf70-713a-4f03-ac5f-49a1f1c120bb",
-                "value": 2301
+                "value": 79
               },
               {
                 "default": false,
@@ -1420,7 +1418,7 @@
                 "label": "b",
                 "properties": null,
                 "uuid": "a2bdb6bf-1ce0-4183-93e1-fbb0e79a84f3",
-                "value": 2351
+                "value": 80
               },
               {
                 "default": false,
@@ -1429,7 +1427,7 @@
                 "label": "c",
                 "properties": null,
                 "uuid": "895e2bcb-1c8c-4e33-a171-3351942d7cfa",
-                "value": 2401
+                "value": 81
               },
               {
                 "default": false,
@@ -1438,7 +1436,7 @@
                 "label": "d",
                 "properties": null,
                 "uuid": "b525f47c-a8ec-41ff-a8c8-9726a1cfed33",
-                "value": 2451
+                "value": 82
               },
               {
                 "default": false,
@@ -1447,7 +1445,7 @@
                 "label": "e",
                 "properties": null,
                 "uuid": "f9603017-7e80-4edc-81fb-561933754ab5",
-                "value": 2501
+                "value": 83
               },
               {
                 "default": false,
@@ -1456,7 +1454,7 @@
                 "label": "f",
                 "properties": null,
                 "uuid": "dd1f435f-7e17-48ad-971a-4f53db3bc7e7",
-                "value": 2551
+                "value": 84
               },
               {
                 "default": false,
@@ -1465,7 +1463,7 @@
                 "label": "g",
                 "properties": null,
                 "uuid": "4f1d5e96-f2a3-4043-aba0-7fca6352baf0",
-                "value": 2601
+                "value": 85
               },
               {
                 "default": false,
@@ -1474,7 +1472,7 @@
                 "label": "h",
                 "properties": null,
                 "uuid": "73b9c9dc-326c-4005-acac-fd64e7f51d68",
-                "value": 2651
+                "value": 86
               },
               {
                 "default": false,
@@ -1483,7 +1481,7 @@
                 "label": "i",
                 "properties": null,
                 "uuid": "0b1cee5c-db45-46c1-8ff1-ca6a01d70b87",
-                "value": 2701
+                "value": 87
               },
               {
                 "default": false,
@@ -1492,7 +1490,7 @@
                 "label": "j",
                 "properties": null,
                 "uuid": "cc600118-426b-41f4-bd8c-3f0662cc3b31",
-                "value": 2751
+                "value": 88
               },
               {
                 "default": false,
@@ -1501,7 +1499,7 @@
                 "label": "k",
                 "properties": null,
                 "uuid": "83c9dcd4-c91a-4332-9ebe-feafa3361ee5",
-                "value": 2801
+                "value": 89
               },
               {
                 "default": false,
@@ -1510,7 +1508,7 @@
                 "label": "l",
                 "properties": null,
                 "uuid": "13cf19bb-9ee3-485e-9fd0-cd8626cfefc4",
-                "value": 2851
+                "value": 90
               },
               {
                 "default": false,
@@ -1519,7 +1517,7 @@
                 "label": "m",
                 "properties": null,
                 "uuid": "ea52b01c-dc43-4f06-a947-2b050a5a37b2",
-                "value": 2901
+                "value": 91
               },
               {
                 "default": false,
@@ -1528,7 +1526,7 @@
                 "label": "n",
                 "properties": null,
                 "uuid": "89677db2-a38f-43cb-b0c1-8bdbf78fffd8",
-                "value": 2951
+                "value": 92
               },
               {
                 "default": false,
@@ -1537,7 +1535,7 @@
                 "label": "o",
                 "properties": null,
                 "uuid": "82b5dbf7-7f09-4528-9205-78e11e3105a5",
-                "value": 3001
+                "value": 93
               },
               {
                 "default": false,
@@ -1546,7 +1544,7 @@
                 "label": "p",
                 "properties": null,
                 "uuid": "244aceab-083e-4dc6-bf24-3d918e2956a6",
-                "value": 3051
+                "value": 94
               }
             ]
           },
@@ -1560,7 +1558,7 @@
             "deprecated": false,
             "export_key": "playbook_362842b9_ada1_4d5a_be0c_28c8fbb8b52b/dt_name_field",
             "hide_notification": false,
-            "id": 411,
+            "id": 388,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1577,7 +1575,7 @@
             "templates": [],
             "text": "Name Field",
             "tooltip": "",
-            "type_id": 1005,
+            "type_id": 1013,
             "uuid": "a6a4d19d-9a55-4b7c-9f58-6c4f862b5f53",
             "values": []
           },
@@ -1591,7 +1589,7 @@
             "deprecated": false,
             "export_key": "playbook_362842b9_ada1_4d5a_be0c_28c8fbb8b52b/dt_number_field",
             "hide_notification": false,
-            "id": 412,
+            "id": 389,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -1608,7 +1606,7 @@
             "templates": [],
             "text": "Number Field",
             "tooltip": "",
-            "type_id": 1005,
+            "type_id": 1013,
             "uuid": "9bc7faa0-b6e7-4980-81b5-e65fe03648bc",
             "values": []
           },
@@ -1622,7 +1620,7 @@
             "deprecated": false,
             "export_key": "playbook_362842b9_ada1_4d5a_be0c_28c8fbb8b52b/dt_select_field",
             "hide_notification": false,
-            "id": 413,
+            "id": 390,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -1639,7 +1637,7 @@
             "templates": [],
             "text": "Select Field",
             "tooltip": "",
-            "type_id": 1005,
+            "type_id": 1013,
             "uuid": "a6716c38-f0dd-4ee3-bf7b-8c3ac3341c82",
             "values": [
               {
@@ -1649,7 +1647,7 @@
                 "label": "1",
                 "properties": null,
                 "uuid": "e95187ca-3ddb-4ba3-b591-7e014ab4d849",
-                "value": 3101
+                "value": 95
               },
               {
                 "default": true,
@@ -1658,7 +1656,7 @@
                 "label": "2",
                 "properties": null,
                 "uuid": "ca883afb-a15f-499f-b835-58319ac8d1df",
-                "value": 3151
+                "value": 96
               },
               {
                 "default": false,
@@ -1667,7 +1665,7 @@
                 "label": "3",
                 "properties": null,
                 "uuid": "8f9e3eaa-5d8a-4259-93f4-bea1fe696d2b",
-                "value": 3201
+                "value": 97
               },
               {
                 "default": false,
@@ -1676,7 +1674,7 @@
                 "label": "4",
                 "properties": null,
                 "uuid": "6cf0be13-49d8-4630-a7be-562345764430",
-                "value": 3251
+                "value": 98
               },
               {
                 "default": false,
@@ -1685,7 +1683,7 @@
                 "label": "5",
                 "properties": null,
                 "uuid": "8d6eb000-8b5a-4e83-b4a5-0eb1e67157cf",
-                "value": 3301
+                "value": 99
               },
               {
                 "default": false,
@@ -1694,7 +1692,7 @@
                 "label": "6",
                 "properties": null,
                 "uuid": "9b57b95a-dd17-4e5a-b010-1d9d48a912c6",
-                "value": 3351
+                "value": 100
               },
               {
                 "default": false,
@@ -1703,7 +1701,7 @@
                 "label": "7",
                 "properties": null,
                 "uuid": "31448e6a-5591-46e2-ae6a-ad36be13ade5",
-                "value": 3401
+                "value": 101
               },
               {
                 "default": false,
@@ -1712,7 +1710,7 @@
                 "label": "8",
                 "properties": null,
                 "uuid": "2508a90e-79be-4c6f-912f-78b053318364",
-                "value": 3451
+                "value": 102
               },
               {
                 "default": false,
@@ -1721,7 +1719,7 @@
                 "label": "9",
                 "properties": null,
                 "uuid": "b89e30ee-4878-4bb5-ae6b-4069b3d3e36f",
-                "value": 3501
+                "value": 103
               }
             ]
           },
@@ -1735,7 +1733,7 @@
             "deprecated": false,
             "export_key": "playbook_362842b9_ada1_4d5a_be0c_28c8fbb8b52b/dt_text_field",
             "hide_notification": false,
-            "id": 414,
+            "id": 391,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -1752,7 +1750,7 @@
             "templates": [],
             "text": "Text Field",
             "tooltip": "",
-            "type_id": 1005,
+            "type_id": 1013,
             "uuid": "28f9617f-68ce-45f1-b7f2-f56872683e17",
             "values": []
           }
@@ -1777,16 +1775,16 @@
         "uuid": "c7d46677-ab8c-41dc-b573-2f6520065e6a"
       },
       "has_logical_errors": false,
-      "id": 1,
+      "id": 12,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348456370,
+      "last_modified_time": 1776867182685,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -1854,23 +1852,10 @@
       },
       "name": "example_data_table_utils_add_row_pb",
       "object_type": "dt_utils_test_data_table",
-      "playbook_change_log_info": {
-        "change_log_id": 1,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "f6958a0d-fe0d-4db8-baf1-1b43887853aa",
-        "create_date": 1774348456097,
-        "modified_principal": {
-          "display_name": "aces",
-          "id": 5,
-          "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "type": "apikey"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_362842b9-ada1-4d5a-be0c-28c8fbb8b52b",
-        "id": 1,
+        "id": 12,
         "name": "playbook_362842b9_ada1_4d5a_be0c_28c8fbb8b52b",
         "type": "playbook",
         "uuid": "59774dfe-48e3-4792-9ac1-a855bd0a5d23"
@@ -1886,11 +1871,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_4b0bbbda_4e65_4341_a3d3_ad42a03474b3\" isExecutable=\"true\" name=\"playbook_4b0bbbda_4e65_4341_a3d3_ad42a03474b3\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0xhbnck\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Data Table Utils: Add Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"88e45595-8f9b-4521-986c-22e53de7abf3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"from datetime import datetime\\nfrom json import dumps\\n\\n# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\n# The column api names and the value to update the cell to\\n# Example: {\\\"dt_col_name\\\": \\\"example\\\", \\\"number\\\": 1, \\\"text\\\": \\\"example\\\", \\\"datetime\\\": Date().getTime(), \\\"boolean\\\": True, \\\"select\\\": \\\"1\\\", \\\"multi_select\\\": [\\\"a\\\", \\\"b\\\"]}\\ntmp = {\\\"dt_col_name\\\": str(artifact.value), \\\"number\\\": 1, \\\"text\\\": \\\"example add row\\\", \\\"datetime\\\": int(datetime.now().timestamp()*1000), \\\"boolean\\\": True, \\\"select\\\": \\\"1\\\", \\\"multi_select\\\": [\\\"a\\\", \\\"b\\\"]}\\ninputs.dt_utils_cells_to_update = f\u0027{dumps(tmp)}\u0027\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xhbnck\u003c/incoming\u003e\u003coutgoing\u003eFlow_0et0m9d\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0et0m9d\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0xhbnck\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0et0m9d\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_4b0bbbda_4e65_4341_a3d3_ad42a03474b3\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0et0m9d\" id=\"Flow_0et0m9d_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"304\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xhbnck\" id=\"Flow_0xhbnck_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.51600000000002\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"655\" y=\"304\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1774348456341,
+      "create_date": 1776867182610,
       "creator_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
       "deployment_id": "playbook_4b0bbbda_4e65_4341_a3d3_ad42a03474b3",
@@ -1926,16 +1911,16 @@
         "uuid": "7ec90181-9aa5-48fe-93cd-2610eaa1a0b9"
       },
       "has_logical_errors": false,
-      "id": 2,
+      "id": 13,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348456937,
+      "last_modified_time": 1776867183716,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -1946,23 +1931,10 @@
       },
       "name": "example_data_table_utils_add_row_to_datatable_pb",
       "object_type": "artifact",
-      "playbook_change_log_info": {
-        "change_log_id": 2,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "f6958a0d-fe0d-4db8-baf1-1b43887853aa",
-        "create_date": 1774348456750,
-        "modified_principal": {
-          "display_name": "aces",
-          "id": 5,
-          "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "type": "apikey"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_4b0bbbda-4e65-4341-a3d3-ad42a03474b3",
-        "id": 2,
+        "id": 13,
         "name": "playbook_4b0bbbda_4e65_4341_a3d3_ad42a03474b3",
         "type": "playbook",
         "uuid": "b11c4a82-fe88-49c2-a60b-1bf1a91f0c7e"
@@ -1978,11 +1950,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_646d920a_1548_489f_ab1c_2232d323227f\" isExecutable=\"true\" name=\"playbook_646d920a_1548_489f_ab1c_2232d323227f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0wj46yc\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Data Table Utils: Clear Datatable\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9149563c-8e72-4025-ab71-305cda30dcc7\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update\\nif playbook.inputs.datatable_api_name:\\n  inputs.dt_utils_datatable_api_name = playbook.inputs.datatable_api_name\\nelse:\\n  # Defaults to example data table\\n  inputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"clear_datatable\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0wj46yc\u003c/incoming\u003e\u003coutgoing\u003eFlow_15zqe0u\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Clear Datatable Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"2438b0e5-db83-4abb-afe0-ebca4c291b43\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_15zqe0u\u003c/incoming\u003e\u003coutgoing\u003eFlow_1h68mky\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0wj46yc\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_15zqe0u\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1h68mky\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1h68mky\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_646d920a_1548_489f_ab1c_2232d323227f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1h68mky\" id=\"Flow_1h68mky_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"433\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"433\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_15zqe0u\" id=\"Flow_15zqe0u_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"305\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"305\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0wj46yc\" id=\"Flow_0wj46yc_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"158\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"158\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.188\" x=\"628\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"644\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1774348456906,
+      "create_date": 1776867183661,
       "creator_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
       "deployment_id": "playbook_646d920a_1548_489f_ab1c_2232d323227f",
@@ -2008,7 +1980,7 @@
             "deprecated": false,
             "export_key": "playbook_646d920a_1548_489f_ab1c_2232d323227f/datatable_api_name",
             "hide_notification": false,
-            "id": 415,
+            "id": 392,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -2025,7 +1997,7 @@
             "templates": [],
             "text": "Datatable API Name",
             "tooltip": "API name of the datatable to clear",
-            "type_id": 1007,
+            "type_id": 1015,
             "uuid": "768a050c-446c-4c59-b110-85be6b171540",
             "values": []
           }
@@ -2050,27 +2022,27 @@
         "uuid": "c8a0dd6d-9a57-4cfc-a75e-e8423641e175"
       },
       "has_logical_errors": false,
-      "id": 3,
+      "id": 14,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348457579,
+      "last_modified_time": 1776867184722,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1774348457056,
+          "created_date": 1776867183927,
           "description": "",
           "enabled": false,
           "export_key": "Clear Datatable Post-Process Script",
           "id": 2,
           "language": "python3",
-          "last_modified_by": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "last_modified_time": 1774348457056,
+          "last_modified_by": "2c065e70-5382-4867-8b2c-21795f27ae17",
+          "last_modified_time": 1776867183927,
           "name": "Clear Datatable Post-Process Script",
           "object_type": "incident",
           "playbook_handle": "example_data_table_utils_clear_datatable_pb",
@@ -2098,23 +2070,10 @@
       },
       "name": "example_data_table_utils_clear_datatable_pb",
       "object_type": "incident",
-      "playbook_change_log_info": {
-        "change_log_id": 3,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "f6958a0d-fe0d-4db8-baf1-1b43887853aa",
-        "create_date": 1774348457407,
-        "modified_principal": {
-          "display_name": "aces",
-          "id": 5,
-          "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "type": "apikey"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_646d920a-1548-489f-ab1c-2232d323227f",
-        "id": 3,
+        "id": 14,
         "name": "playbook_646d920a_1548_489f_ab1c_2232d323227f",
         "type": "playbook",
         "uuid": "66aee9c7-73db-4fde-9dca-5c1823a0488d"
@@ -2130,11 +2089,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8b654e16_001f_42c1_a283_28cd56c84dba\" isExecutable=\"true\" name=\"playbook_8b654e16_001f_42c1_a283_28cd56c84dba\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0oqf1jy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Data Table Utils: Create CSV Datatable\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6edc80c4-e5ae-4c33-b1f1-f0c101918d7a\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# The ID of this incident\\ninputs.incident_id = incident.id\\n# The api name of the Data Table to update\\ninputs.dt_datable_name = \\\"dt_utils_test_data_table\\\"\\n# uncomment attachment_id when reading csv data from an attachmennt\\ninputs.attachment_id = attachment.id\\n\\n# A boolean to determine if CSV headers are present\\ninputs.dt_has_headers = True\\n\\n## The mapping format should be \\\"csv_header\\\":\\\"dt_column_name\\\"\\nmapping = \u0027\u0027\u0027{\\n  \\\"hdr_number\\\": \\\"number\\\",\\n  \\\"hdr_text\\\": \\\"text\\\",\\n  \\\"hdr_boolean\\\": \\\"boolean\\\",\\n  \\\"hdr_datetime\\\": \\\"datetime\\\",\\n  \\\"hdr_select\\\": \\\"select\\\",\\n  \\\"hdr_multiselect\\\": \\\"multi_select\\\"\\n}\u0027\u0027\u0027\\n# mappings of csv data without headers will be a list of data_table column names. Use null to bypass a csv data column\\nmapping_no_headers = \u0027\u0027\u0027[\\\"number\\\",\\\"text\\\",\\\"boolean\\\",\\\"datetime\\\",\\\"select\\\",\\\"multi_select\\\",\\\"x\\\",\\\"y\\\",\\\"z\\\"]\u0027\u0027\u0027\\ninputs.dt_mapping_table = mapping\\n# year - %Y, month - %m, day - %d, hour - %H, minutes - %M, seconds - %S, milliseconds - %f, timezone offset - %z\u0027\\ninputs.dt_date_time_format = \\\"%m/%d/%y %H:%M\\\"\\n# optional start row csv data. The first data row = 1\\n##inputs.dt_start_row = 0\\n# optional max number of csv rows to add relative to dt_start_row\\n##inputs.dt_max_rows = 5\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"create_csv\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0oqf1jy\u003c/incoming\u003e\u003coutgoing\u003eFlow_0yqfaqh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Create CSV Datatable Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d2400744-b8e5-4f18-ab2a-9a1a16cee3fc\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0yqfaqh\u003c/incoming\u003e\u003coutgoing\u003eFlow_08gr5ba\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0oqf1jy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0yqfaqh\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_08gr5ba\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_08gr5ba\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8b654e16_001f_42c1_a283_28cd56c84dba\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_08gr5ba\" id=\"Flow_08gr5ba_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"422\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"443\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"443\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0yqfaqh\" id=\"Flow_0yqfaqh_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"295\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"295\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0oqf1jy\" id=\"Flow_0oqf1jy_di\"\u003e\u003comgdi:waypoint x=\"722\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"722\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"209.125\" x=\"617\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"624\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"634\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1774348457593,
+      "create_date": 1776867184760,
       "creator_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
       "deployment_id": "playbook_8b654e16_001f_42c1_a283_28cd56c84dba",
@@ -2170,27 +2129,27 @@
         "uuid": "856f172c-62ed-4fa9-a82e-358e4ce55831"
       },
       "has_logical_errors": false,
-      "id": 4,
+      "id": 15,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348458442,
+      "last_modified_time": 1776867186044,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1774348457695,
+          "created_date": 1776867185012,
           "description": "",
           "enabled": false,
           "export_key": "Create CSV Datatable Post-Process Script",
           "id": 3,
           "language": "python3",
-          "last_modified_by": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "last_modified_time": 1774348457695,
+          "last_modified_by": "2c065e70-5382-4867-8b2c-21795f27ae17",
+          "last_modified_time": 1776867185012,
           "name": "Create CSV Datatable Post-Process Script",
           "object_type": "attachment",
           "playbook_handle": "example_create_csv_datatable_pb",
@@ -2209,23 +2168,10 @@
       },
       "name": "example_create_csv_datatable_pb",
       "object_type": "attachment",
-      "playbook_change_log_info": {
-        "change_log_id": 4,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "f6958a0d-fe0d-4db8-baf1-1b43887853aa",
-        "create_date": 1774348458154,
-        "modified_principal": {
-          "display_name": "aces",
-          "id": 5,
-          "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "type": "apikey"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_8b654e16-001f-42c1-a283-28cd56c84dba",
-        "id": 4,
+        "id": 15,
         "name": "playbook_8b654e16_001f_42c1_a283_28cd56c84dba",
         "type": "playbook",
         "uuid": "38007b25-a5c9-4e0b-bce6-25afe06c0664"
@@ -2241,11 +2187,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_44eeca2b_fa37_41d8_9a41_a8b8d02b7d64\" isExecutable=\"true\" name=\"playbook_44eeca2b_fa37_41d8_9a41_a8b8d02b7d64\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_01fdkfs\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Data Table Utils: Get Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77e98bdb-2843-4cd6-8294-5a9dbef6a08e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\n# The column api name to search for\\ninputs.dt_utils_search_column = \\\"dt_col_name\\\"\\n\\n# The cell value to search for\\ninputs.dt_utils_search_value = artifact.value\\n\\n## Alternatively you can get the row by its ID by defining this input:\\n# inputs.dt_utils_row_id = 3\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"row_to_delete\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_01fdkfs\u003c/incoming\u003e\u003coutgoing\u003eFlow_06j00o3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cinclusiveGateway default=\"Flow_0ky4pb4\" id=\"ConditionPoint_2\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_06j00o3\u003c/incoming\u003e\u003coutgoing\u003eFlow_0tq9jk7\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0ky4pb4\u003c/outgoing\u003e\u003c/inclusiveGateway\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Data Table Utils: Delete Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"50cf405e-aac1-43e7-961e-3894d38688ad\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table [here it is taken from previous Get Row Function]\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\n# The ID of the row to delete [again, taken from previous Get Row Function]\\ninputs.dt_utils_row_id = playbook.functions.results.row_to_delete.content.row[\\\"id\\\"]\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"delete_row\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0tq9jk7\u003c/incoming\u003e\u003coutgoing\u003eFlow_0o6932b\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Delete Row Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"fe3ee2b9-19b5-4fa7-9941-1758a88da4a6\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0o6932b\u003c/incoming\u003e\u003coutgoing\u003eFlow_17c1fkk\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_5\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_17c1fkk\u003c/incoming\u003e\u003cincoming\u003eFlow_0ky4pb4\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_01fdkfs\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_06j00o3\" sourceRef=\"ServiceTask_1\" targetRef=\"ConditionPoint_2\"/\u003e\u003csequenceFlow id=\"Flow_0o6932b\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_4\"/\u003e\u003csequenceFlow id=\"Flow_17c1fkk\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_5\"/\u003e\u003csequenceFlow id=\"Flow_0tq9jk7\" name=\"success\" sourceRef=\"ConditionPoint_2\" targetRef=\"ServiceTask_3\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"success\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\\n\\nresults = playbook.functions.results.row_to_delete\\n\\nif results[\u0027success\u0027]:\\n  result = True\\nelse:\\n  result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_0ky4pb4\" name=\"Else\" sourceRef=\"ConditionPoint_2\" targetRef=\"EndPoint_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_44eeca2b_fa37_41d8_9a41_a8b8d02b7d64\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ky4pb4\" id=\"Flow_0ky4pb4_di\"\u003e\u003comgdi:waypoint x=\"719\" y=\"366\"/\u003e\u003comgdi:waypoint x=\"719\" y=\"465\"/\u003e\u003comgdi:waypoint x=\"780\" y=\"465\"/\u003e\u003comgdi:waypoint x=\"780\" y=\"564\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"738\" y=\"447\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0tq9jk7\" id=\"Flow_0tq9jk7_di\"\u003e\u003comgdi:waypoint x=\"719\" y=\"366\"/\u003e\u003comgdi:waypoint x=\"719\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"418\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"41\" x=\"599\" y=\"374\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17c1fkk\" id=\"Flow_17c1fkk_di\"\u003e\u003comgdi:waypoint x=\"618\" y=\"590\"/\u003e\u003comgdi:waypoint x=\"714\" y=\"590\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0o6932b\" id=\"Flow_0o6932b_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"502\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"548\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06j00o3\" id=\"Flow_06j00o3_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"293\"/\u003e\u003comgdi:waypoint x=\"719\" y=\"293\"/\u003e\u003comgdi:waypoint x=\"719\" y=\"314\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01fdkfs\" id=\"Flow_01fdkfs_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.51600000000002\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_2\" id=\"ConditionPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"238.828\" x=\"600\" y=\"314\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"422\" y=\"418\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"422\" y=\"548\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_5\" id=\"EndPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"714\" y=\"564\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1774348458412,
+      "create_date": 1776867185989,
       "creator_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
       "deployment_id": "playbook_44eeca2b_fa37_41d8_9a41_a8b8d02b7d64",
@@ -2281,27 +2227,27 @@
         "uuid": "0a68436a-8691-4538-b940-3954c2b474e7"
       },
       "has_logical_errors": false,
-      "id": 5,
+      "id": 16,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348459256,
+      "last_modified_time": 1776867187086,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1774348458516,
+          "created_date": 1776867186186,
           "description": "",
           "enabled": false,
           "export_key": "Delete Row Post-Process Script",
           "id": 4,
           "language": "python3",
-          "last_modified_by": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "last_modified_time": 1774348458516,
+          "last_modified_by": "2c065e70-5382-4867-8b2c-21795f27ae17",
+          "last_modified_time": 1776867186186,
           "name": "Delete Row Post-Process Script",
           "object_type": "artifact",
           "playbook_handle": "example_data_table_utils_delete_row_pb",
@@ -2320,23 +2266,10 @@
       },
       "name": "example_data_table_utils_delete_row_pb",
       "object_type": "artifact",
-      "playbook_change_log_info": {
-        "change_log_id": 5,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "f6958a0d-fe0d-4db8-baf1-1b43887853aa",
-        "create_date": 1774348458970,
-        "modified_principal": {
-          "display_name": "aces",
-          "id": 5,
-          "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "type": "apikey"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_44eeca2b-fa37-41d8-9a41-a8b8d02b7d64",
-        "id": 5,
+        "id": 16,
         "name": "playbook_44eeca2b_fa37_41d8_9a41_a8b8d02b7d64",
         "type": "playbook",
         "uuid": "4c155367-bade-480b-a2bf-2bebc829d2f2"
@@ -2352,11 +2285,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1ab48fa8_3873_40d0_b9f8_f5b6ed693a97\" isExecutable=\"true\" name=\"playbook_1ab48fa8_3873_40d0_b9f8_f5b6ed693a97\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_06hm4f5\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Data Table Utils: Delete Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"50cf405e-aac1-43e7-961e-3894d38688ad\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\ninputs.incident_id = incident.id\\ninputs.dt_utils_row_id = 0 # 0 represents current row\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_06hm4f5\u003c/incoming\u003e\u003coutgoing\u003eFlow_151dd2w\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_06hm4f5\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_151dd2w\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_151dd2w\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1ab48fa8_3873_40d0_b9f8_f5b6ed693a97\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_151dd2w\" id=\"Flow_151dd2w_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"288\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"314\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06hm4f5\" id=\"Flow_06hm4f5_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.758\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"644\" y=\"314\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1774348459225,
+      "create_date": 1776867187034,
       "creator_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
       "deployment_id": "playbook_1ab48fa8_3873_40d0_b9f8_f5b6ed693a97",
@@ -2392,16 +2325,16 @@
         "uuid": "4c96c7d1-4da8-45cd-8447-873964f958c7"
       },
       "has_logical_errors": false,
-      "id": 6,
+      "id": 17,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348459878,
+      "last_modified_time": 1776867187877,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -2412,23 +2345,10 @@
       },
       "name": "example_data_table_utils_delete_row_from_datatable_pb",
       "object_type": "dt_utils_test_data_table",
-      "playbook_change_log_info": {
-        "change_log_id": 6,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "f6958a0d-fe0d-4db8-baf1-1b43887853aa",
-        "create_date": 1774348459652,
-        "modified_principal": {
-          "display_name": "aces",
-          "id": 5,
-          "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "type": "apikey"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_1ab48fa8-3873-40d0-b9f8-f5b6ed693a97",
-        "id": 6,
+        "id": 17,
         "name": "playbook_1ab48fa8_3873_40d0_b9f8_f5b6ed693a97",
         "type": "playbook",
         "uuid": "72d65d23-2055-4df1-b3eb-d8bc7a496574"
@@ -2444,11 +2364,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8f7c422a_2d77_4a36_a211_4fe474881303\" isExecutable=\"true\" name=\"playbook_8f7c422a_2d77_4a36_a211_4fe474881303\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1lcjb7g\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Data Table Utils: Get Rows\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9f9d8570-c33f-4f30-ab32-9448c3ff8d67\"\u003e{\"inputs\":{\"811e99d7-d194-4ce8-86cc-aff5e01ab85c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"f7f51c3f-1601-44df-bb83-f7ec9583da96\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"11e8aca8-05bd-467b-8071-9dd160d9e14a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"2fea7801-9ec6-4f95-812b-31aec2661fca\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"61729b10-cdab-48eb-bc8b-9f30af3afec5\"}},\"c42f5cac-9e46-4ee3-bda4-6c9dbe17c516\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"2c359b58-e41e-4dd1-ac65-138e85a27363\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"fca27f70-867b-4899-b7c5-f8bdf1bbec13\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\n# The column api name to search for\\ninputs.dt_utils_search_column = \\\"dt_col_name\\\"\\n\\n# The cell value to search for\\ninputs.dt_utils_search_value = artifact.value\\n\\n## Alternatively you can get the row by its ID by defining this input:\\n# inputs.dt_utils_row_id = 3\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"rows_to_delete\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1lcjb7g\u003c/incoming\u003e\u003coutgoing\u003eFlow_12ipn3j\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1lcjb7g\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Get Rows Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3dbd1e67-96b6-4eab-9805-788e159a4f2f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_12ipn3j\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hkuwsq\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cinclusiveGateway default=\"Flow_1bpkcfz\" id=\"ConditionPoint_3\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_1hkuwsq\u003c/incoming\u003e\u003coutgoing\u003eFlow_0qt09uh\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1bpkcfz\u003c/outgoing\u003e\u003c/inclusiveGateway\u003e\u003cserviceTask id=\"ServiceTask_4\" name=\"Data Table Utils: Delete Rows\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ef4ef5c0-5de2-4fbc-90c9-f7568451da95\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table, search column, search value [here it is taken from previous Get Rows Function inputs]\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\n# The internal IDs of the rows that will be deleted [again, taken from previous Get Rows Function]\\nif playbook.functions.results.rows_to_delete and playbook.functions.results.rows_to_delete.content.rows:\\n  rows_ids = []\\n  for row in playbook.functions.results.rows_to_delete.content.rows:\\n    rows_ids.append(row[\\\"id\\\"])\\n  inputs.dt_utils_rows_ids = str(rows_ids)\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"delete_rows\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0qt09uh\u003c/incoming\u003e\u003coutgoing\u003eFlow_19kwp5r\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_5\" name=\"Delete Rows Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"0884170c-86bd-446f-a126-9e1950285b84\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_19kwp5r\u003c/incoming\u003e\u003coutgoing\u003eFlow_0jl2xlf\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_12ipn3j\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_1hkuwsq\" sourceRef=\"ScriptTask_2\" targetRef=\"ConditionPoint_3\"/\u003e\u003csequenceFlow id=\"Flow_19kwp5r\" sourceRef=\"ServiceTask_4\" targetRef=\"ScriptTask_5\"/\u003e\u003cendEvent id=\"EndPoint_6\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0jl2xlf\u003c/incoming\u003e\u003cincoming\u003eFlow_1bpkcfz\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0jl2xlf\" sourceRef=\"ScriptTask_5\" targetRef=\"EndPoint_6\"/\u003e\u003csequenceFlow id=\"Flow_0qt09uh\" name=\"success\" sourceRef=\"ConditionPoint_3\" targetRef=\"ServiceTask_4\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"success\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\\nresults = playbook.functions.results.rows_to_delete\\n\\nif results[\u0027success\u0027]:\\n  result = True\\nelse:\\n  result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_1bpkcfz\" name=\"Else\" sourceRef=\"ConditionPoint_3\" targetRef=\"EndPoint_6\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8f7c422a_2d77_4a36_a211_4fe474881303\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1bpkcfz\" id=\"Flow_1bpkcfz_di\"\u003e\u003comgdi:waypoint x=\"760\" y=\"496\"/\u003e\u003comgdi:waypoint x=\"760\" y=\"590\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"590\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"684\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"758\" y=\"572\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qt09uh\" id=\"Flow_0qt09uh_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"496\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"517\"/\u003e\u003comgdi:waypoint x=\"530\" y=\"517\"/\u003e\u003comgdi:waypoint x=\"530\" y=\"538\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"41\" x=\"605\" y=\"499\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0jl2xlf\" id=\"Flow_0jl2xlf_di\"\u003e\u003comgdi:waypoint x=\"448\" y=\"740\"/\u003e\u003comgdi:waypoint x=\"626\" y=\"740\"/\u003e\u003comgdi:waypoint x=\"626\" y=\"710\"/\u003e\u003comgdi:waypoint x=\"674\" y=\"710\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19kwp5r\" id=\"Flow_19kwp5r_di\"\u003e\u003comgdi:waypoint x=\"432\" y=\"580\"/\u003e\u003comgdi:waypoint x=\"350\" y=\"580\"/\u003e\u003comgdi:waypoint x=\"350\" y=\"698\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hkuwsq\" id=\"Flow_1hkuwsq_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_12ipn3j\" id=\"Flow_12ipn3j_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1lcjb7g\" id=\"Flow_1lcjb7g_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.51600000000002\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"328\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_3\" id=\"ConditionPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"238.828\" x=\"602\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_4\" id=\"ServiceTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"432\" y=\"538\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_5\" id=\"ScriptTask_5_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"252\" y=\"698\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_6\" id=\"EndPoint_6_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"674\" y=\"684\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1774348459839,
+      "create_date": 1776867187824,
       "creator_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
       "deployment_id": "playbook_8f7c422a_2d77_4a36_a211_4fe474881303",
@@ -2484,27 +2404,27 @@
         "uuid": "fe08434f-ca74-4393-ab3c-126ffc6bf6cf"
       },
       "has_logical_errors": false,
-      "id": 7,
+      "id": 18,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348460850,
+      "last_modified_time": 1776867188989,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1774348459970,
+          "created_date": 1776867188047,
           "description": "",
           "enabled": false,
           "export_key": "Delete Rows Post-Process Script",
           "id": 5,
           "language": "python3",
-          "last_modified_by": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "last_modified_time": 1774348459970,
+          "last_modified_by": "2c065e70-5382-4867-8b2c-21795f27ae17",
+          "last_modified_time": 1776867188047,
           "name": "Delete Rows Post-Process Script",
           "object_type": "artifact",
           "playbook_handle": "example_data_table_utils_delete_rows_pb",
@@ -2515,14 +2435,14 @@
         },
         {
           "actions": [],
-          "created_date": 1774348460007,
+          "created_date": 1776867188109,
           "description": "",
           "enabled": false,
           "export_key": "Get Rows Post-Process Script",
           "id": 6,
           "language": "python3",
-          "last_modified_by": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "last_modified_time": 1774348460007,
+          "last_modified_by": "2c065e70-5382-4867-8b2c-21795f27ae17",
+          "last_modified_time": 1776867188109,
           "name": "Get Rows Post-Process Script",
           "object_type": "artifact",
           "playbook_handle": "example_data_table_utils_delete_rows_pb",
@@ -2541,23 +2461,10 @@
       },
       "name": "example_data_table_utils_delete_rows_pb",
       "object_type": "artifact",
-      "playbook_change_log_info": {
-        "change_log_id": 7,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "f6958a0d-fe0d-4db8-baf1-1b43887853aa",
-        "create_date": 1774348460503,
-        "modified_principal": {
-          "display_name": "aces",
-          "id": 5,
-          "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "type": "apikey"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_8f7c422a-2d77-4a36-a211-4fe474881303",
-        "id": 7,
+        "id": 18,
         "name": "playbook_8f7c422a_2d77_4a36_a211_4fe474881303",
         "type": "playbook",
         "uuid": "d983447c-e904-4fcf-aa81-23ec40fd9bd0"
@@ -2573,11 +2480,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_eefbfde1_691f_460d_b485_63f26aae936c\" isExecutable=\"true\" name=\"playbook_eefbfde1_691f_460d_b485_63f26aae936c\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1dsa4ou\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Data Table Utils: Delete Rows\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ef4ef5c0-5de2-4fbc-90c9-f7568451da95\"\u003e{\"inputs\":{},\"pre_processing_script\":\"if not row.dt_col_name:\\n  helper.fail(\\\"The data table column \u0027name\u0027 must contain a value\\\")\\n\\ninputs.incident_id = incident.id\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\ninputs.dt_utils_search_column = \\\"dt_col_name\\\"\\ninputs.dt_utils_search_value = row.dt_col_name\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1dsa4ou\u003c/incoming\u003e\u003coutgoing\u003eFlow_10jdwqa\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1dsa4ou\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_10jdwqa\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_10jdwqa\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_eefbfde1_691f_460d_b485_63f26aae936c\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_10jdwqa\" id=\"Flow_10jdwqa_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"323\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"323\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"364\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1dsa4ou\" id=\"Flow_1dsa4ou_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.758\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"644\" y=\"364\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1774348460812,
+      "create_date": 1776867188946,
       "creator_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
       "deployment_id": "playbook_eefbfde1_691f_460d_b485_63f26aae936c",
@@ -2613,16 +2520,16 @@
         "uuid": "802a1158-dba6-4b06-bfd8-dce7c3bdf964"
       },
       "has_logical_errors": false,
-      "id": 8,
+      "id": 19,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348461713,
+      "last_modified_time": 1776867189699,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -2633,23 +2540,10 @@
       },
       "name": "example_data_table_utils_delete_rows_from_datatable_pb",
       "object_type": "dt_utils_test_data_table",
-      "playbook_change_log_info": {
-        "change_log_id": 8,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "f6958a0d-fe0d-4db8-baf1-1b43887853aa",
-        "create_date": 1774348461402,
-        "modified_principal": {
-          "display_name": "aces",
-          "id": 5,
-          "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "type": "apikey"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_eefbfde1-691f-460d-b485-63f26aae936c",
-        "id": 8,
+        "id": 19,
         "name": "playbook_eefbfde1_691f_460d_b485_63f26aae936c",
         "type": "playbook",
         "uuid": "f2547bb5-71c3-4973-8c10-d70a2c03019b"
@@ -2665,11 +2559,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_7e3edc59_0f64_4a28_8c64_d1d2375eb1d0\" isExecutable=\"true\" name=\"playbook_7e3edc59_0f64_4a28_8c64_d1d2375eb1d0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1gawkcj\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Data Table Utils: Get All Data Table Rows\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"8a56f5fb-1623-4039-bd80-ed5a5a1bf05b\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_all_rows\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1gawkcj\u003c/incoming\u003e\u003coutgoing\u003eFlow_0slr94v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Get All Data Table Rows Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"a93254df-73f2-417f-80ea-79438ae27374\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0slr94v\u003c/incoming\u003e\u003coutgoing\u003eFlow_0w6apcm\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1gawkcj\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0slr94v\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0w6apcm\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0w6apcm\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_7e3edc59_0f64_4a28_8c64_d1d2375eb1d0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0w6apcm\" id=\"Flow_0w6apcm_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0slr94v\" id=\"Flow_0slr94v_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1gawkcj\" id=\"Flow_1gawkcj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.758\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"655\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1774348461671,
+      "create_date": 1776867189648,
       "creator_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
       "deployment_id": "playbook_7e3edc59_0f64_4a28_8c64_d1d2375eb1d0",
@@ -2705,27 +2599,27 @@
         "uuid": "cd03b17e-e423-465a-b75f-49a588066eb6"
       },
       "has_logical_errors": false,
-      "id": 9,
+      "id": 20,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348462815,
+      "last_modified_time": 1776867190715,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1774348461815,
+          "created_date": 1776867189877,
           "description": "",
           "enabled": false,
           "export_key": "Get All Data Table Rows Post-Process Script",
           "id": 7,
           "language": "python3",
-          "last_modified_by": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "last_modified_time": 1774348461815,
+          "last_modified_by": "2c065e70-5382-4867-8b2c-21795f27ae17",
+          "last_modified_time": 1776867189877,
           "name": "Get All Data Table Rows Post-Process Script",
           "object_type": "dt_utils_test_data_table",
           "playbook_handle": "example_data_table_utils_get_all_data_table_rows_pb",
@@ -2744,23 +2638,10 @@
       },
       "name": "example_data_table_utils_get_all_data_table_rows_pb",
       "object_type": "dt_utils_test_data_table",
-      "playbook_change_log_info": {
-        "change_log_id": 9,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "f6958a0d-fe0d-4db8-baf1-1b43887853aa",
-        "create_date": 1774348462390,
-        "modified_principal": {
-          "display_name": "aces",
-          "id": 5,
-          "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "type": "apikey"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_7e3edc59-0f64-4a28-8c64-d1d2375eb1d0",
-        "id": 9,
+        "id": 20,
         "name": "playbook_7e3edc59_0f64_4a28_8c64_d1d2375eb1d0",
         "type": "playbook",
         "uuid": "44d31ab9-08c2-4e08-95f3-85b4a767f5e9"
@@ -2776,11 +2657,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_adfa4ae2_c29d_4eb1_92f5_64265808f698\" isExecutable=\"true\" name=\"playbook_adfa4ae2_c29d_4eb1_92f5_64265808f698\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_11fb9je\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Data Table Utils: Get Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77e98bdb-2843-4cd6-8294-5a9dbef6a08e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\ninputs.incident_id = incident.id\\ninputs.dt_utils_row_id = 0 # 0 represents current row\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_current_row\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_11fb9je\u003c/incoming\u003e\u003coutgoing\u003eFlow_0cv2qrq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_11fb9je\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Get Current Row Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"89b709aa-d31f-4aed-95d7-494d4ad6ef01\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0cv2qrq\u003c/incoming\u003e\u003coutgoing\u003eFlow_19uzvwq\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0cv2qrq\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_19uzvwq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_19uzvwq\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_adfa4ae2_c29d_4eb1_92f5_64265808f698\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19uzvwq\" id=\"Flow_19uzvwq_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"382\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"403\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"403\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"424\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0cv2qrq\" id=\"Flow_0cv2qrq_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"242\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"270\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"270\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"298\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11fb9je\" id=\"Flow_11fb9je_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.758\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"158\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"298\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"634\" y=\"424\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1774348462770,
+      "create_date": 1776867190647,
       "creator_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
       "deployment_id": "playbook_adfa4ae2_c29d_4eb1_92f5_64265808f698",
@@ -2816,27 +2697,27 @@
         "uuid": "2b35fc48-3607-4a67-9f0f-a8bb8af34424"
       },
       "has_logical_errors": false,
-      "id": 10,
+      "id": 21,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348463834,
+      "last_modified_time": 1776867191796,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1774348462924,
+          "created_date": 1776867190860,
           "description": "",
           "enabled": false,
           "export_key": "Get Current Row Post-Process Script",
           "id": 8,
           "language": "python3",
-          "last_modified_by": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "last_modified_time": 1774348462924,
+          "last_modified_by": "2c065e70-5382-4867-8b2c-21795f27ae17",
+          "last_modified_time": 1776867190860,
           "name": "Get Current Row Post-Process Script",
           "object_type": "dt_utils_test_data_table",
           "playbook_handle": "example_data_table_utils_get_current_row_pb",
@@ -2855,23 +2736,10 @@
       },
       "name": "example_data_table_utils_get_current_row_pb",
       "object_type": "dt_utils_test_data_table",
-      "playbook_change_log_info": {
-        "change_log_id": 10,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "f6958a0d-fe0d-4db8-baf1-1b43887853aa",
-        "create_date": 1774348463449,
-        "modified_principal": {
-          "display_name": "aces",
-          "id": 5,
-          "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "type": "apikey"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_adfa4ae2-c29d-4eb1-92f5-64265808f698",
-        "id": 10,
+        "id": 21,
         "name": "playbook_adfa4ae2_c29d_4eb1_92f5_64265808f698",
         "type": "playbook",
         "uuid": "d46ff091-c292-410e-a02b-9dbefabd634a"
@@ -2887,11 +2755,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b91648da_1ce0_41da_8876_a8f83447150d\" isExecutable=\"true\" name=\"playbook_b91648da_1ce0_41da_8876_a8f83447150d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1mu2344\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Data Table Utils: Get Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77e98bdb-2843-4cd6-8294-5a9dbef6a08e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\n# The column api name to search for\\ninputs.dt_utils_search_column = \\\"dt_col_name\\\"\\n\\n# The cell value to search for\\ninputs.dt_utils_search_value = artifact.value\\n\\n## Alternatively you can get the row by its ID by defining this input:\\n# inputs.dt_utils_row_id = 3\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_row\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1mu2344\u003c/incoming\u003e\u003coutgoing\u003eFlow_13q1ilh\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Get Row Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e850b28f-d3f2-4327-91a0-309ef3e562f9\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_13q1ilh\u003c/incoming\u003e\u003coutgoing\u003eFlow_0q9ysxq\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0q9ysxq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1mu2344\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_13q1ilh\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_0q9ysxq\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b91648da_1ce0_41da_8876_a8f83447150d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0q9ysxq\" id=\"Flow_0q9ysxq_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"428\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"428\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_13q1ilh\" id=\"Flow_13q1ilh_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"295\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"295\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1mu2344\" id=\"Flow_1mu2344_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.51600000000002\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"634\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1774348463799,
+      "create_date": 1776867191735,
       "creator_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
       "deployment_id": "playbook_b91648da_1ce0_41da_8876_a8f83447150d",
@@ -2927,27 +2795,27 @@
         "uuid": "7bca1e5c-4985-4462-bd22-74f2a945bada"
       },
       "has_logical_errors": false,
-      "id": 11,
+      "id": 22,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348464653,
+      "last_modified_time": 1776867192903,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1774348463911,
+          "created_date": 1776867192003,
           "description": "",
           "enabled": false,
           "export_key": "Get Row Post-Process Script",
           "id": 9,
           "language": "python3",
-          "last_modified_by": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "last_modified_time": 1774348463911,
+          "last_modified_by": "2c065e70-5382-4867-8b2c-21795f27ae17",
+          "last_modified_time": 1776867192003,
           "name": "Get Row Post-Process Script",
           "object_type": "artifact",
           "playbook_handle": "example_data_table_utils_get_row_pb",
@@ -2966,23 +2834,10 @@
       },
       "name": "example_data_table_utils_get_row_pb",
       "object_type": "artifact",
-      "playbook_change_log_info": {
-        "change_log_id": 11,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "f6958a0d-fe0d-4db8-baf1-1b43887853aa",
-        "create_date": 1774348464336,
-        "modified_principal": {
-          "display_name": "aces",
-          "id": 5,
-          "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "type": "apikey"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_b91648da-1ce0-41da-8876-a8f83447150d",
-        "id": 11,
+        "id": 22,
         "name": "playbook_b91648da_1ce0_41da_8876_a8f83447150d",
         "type": "playbook",
         "uuid": "700d57cd-5f3b-4be9-ac37-a7af130cce81"
@@ -2998,11 +2853,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1c8044df_59e9_4f55_b823_67d0522c4a42\" isExecutable=\"true\" name=\"playbook_1c8044df_59e9_4f55_b823_67d0522c4a42\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_14a6t43\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Data Table Utils: Get Rows\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"9f9d8570-c33f-4f30-ab32-9448c3ff8d67\"\u003e{\"inputs\":{\"811e99d7-d194-4ce8-86cc-aff5e01ab85c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"f7f51c3f-1601-44df-bb83-f7ec9583da96\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"11e8aca8-05bd-467b-8071-9dd160d9e14a\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"2fea7801-9ec6-4f95-812b-31aec2661fca\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"61729b10-cdab-48eb-bc8b-9f30af3afec5\"}},\"c42f5cac-9e46-4ee3-bda4-6c9dbe17c516\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"2c359b58-e41e-4dd1-ac65-138e85a27363\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"fca27f70-867b-4899-b7c5-f8bdf1bbec13\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\n# The number of max rows to return\\nif playbook.inputs.dt_utils_max_rows:\\n  inputs.dt_utils_max_rows = playbook.inputs.dt_utils_max_rows\\nelse:\\n  inputs.dt_utils_max_rows = 0\\n\\n# The direction of the sort\\ninputs.dt_utils_sort_direction = playbook.inputs.dt_utils_sort_direction\\n\\n# The api name of the column to sort by\\nif playbook.inputs.dt_utils_sort_by:\\n  inputs.dt_utils_sort_by = playbook.inputs.dt_utils_sort_by\\nelse:\\n  inputs.dt_utils_sort_by = None\\n\\n# The column api name to search for\\ninputs.dt_utils_search_column = \\\"dt_col_name\\\"\\n\\n# The cell value to search for\\ninputs.dt_utils_search_value = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"get_rows\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_14a6t43\u003c/incoming\u003e\u003coutgoing\u003eFlow_0c03m7w\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Get Rows Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"66947e6c-6582-4880-8234-9d3f05e6efb0\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0c03m7w\u003c/incoming\u003e\u003coutgoing\u003eFlow_1a26xmy\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1a26xmy\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_14a6t43\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0c03m7w\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_1a26xmy\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1c8044df_59e9_4f55_b823_67d0522c4a42\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1a26xmy\" id=\"Flow_1a26xmy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"372\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"414\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0c03m7w\" id=\"Flow_0c03m7w_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"288\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14a6t43\" id=\"Flow_14a6t43_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.51600000000002\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"288\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"655\" y=\"414\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1774348464613,
+      "create_date": 1776867192859,
       "creator_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
       "deployment_id": "playbook_1c8044df_59e9_4f55_b823_67d0522c4a42",
@@ -3028,7 +2883,7 @@
             "deprecated": false,
             "export_key": "playbook_1c8044df_59e9_4f55_b823_67d0522c4a42/dt_utils_max_rows",
             "hide_notification": false,
-            "id": 416,
+            "id": 393,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
@@ -3045,7 +2900,7 @@
             "templates": [],
             "text": "Max Rows",
             "tooltip": "A number of max rows to return",
-            "type_id": 1016,
+            "type_id": 1024,
             "uuid": "b5e4b03e-e24e-4866-928b-23764285c0bf",
             "values": []
           },
@@ -3059,7 +2914,7 @@
             "deprecated": false,
             "export_key": "playbook_1c8044df_59e9_4f55_b823_67d0522c4a42/dt_utils_sort_by",
             "hide_notification": false,
-            "id": 417,
+            "id": 394,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
@@ -3076,7 +2931,7 @@
             "templates": [],
             "text": "Sort By",
             "tooltip": "The name of the API column",
-            "type_id": 1016,
+            "type_id": 1024,
             "uuid": "e27380b1-2106-4a5c-863b-077ff0455ada",
             "values": []
           },
@@ -3090,7 +2945,7 @@
             "deprecated": false,
             "export_key": "playbook_1c8044df_59e9_4f55_b823_67d0522c4a42/dt_utils_sort_direction",
             "hide_notification": false,
-            "id": 418,
+            "id": 395,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
@@ -3107,7 +2962,7 @@
             "templates": [],
             "text": "Sort Direction",
             "tooltip": "Used with the Sort By API column name",
-            "type_id": 1016,
+            "type_id": 1024,
             "uuid": "2a182307-e67e-4fa1-a8d9-caf0168a263c",
             "values": [
               {
@@ -3117,7 +2972,7 @@
                 "label": "ASC",
                 "properties": null,
                 "uuid": "aea640b3-7921-4f33-931c-1c31dba47235",
-                "value": 3551
+                "value": 104
               },
               {
                 "default": false,
@@ -3126,7 +2981,7 @@
                 "label": "DESC",
                 "properties": null,
                 "uuid": "36fb2a7b-a917-49f3-8f4f-7b75bff4daf0",
-                "value": 3601
+                "value": 105
               }
             ]
           }
@@ -3151,27 +3006,27 @@
         "uuid": "ffa9fae3-cf0a-4ac3-98cc-9a06cd505325"
       },
       "has_logical_errors": false,
-      "id": 12,
+      "id": 23,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348465784,
+      "last_modified_time": 1776867193928,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1774348464898,
+          "created_date": 1776867193150,
           "description": "",
           "enabled": false,
           "export_key": "Get Rows Post-Process Script",
           "id": 10,
           "language": "python3",
-          "last_modified_by": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "last_modified_time": 1774348464898,
+          "last_modified_by": "2c065e70-5382-4867-8b2c-21795f27ae17",
+          "last_modified_time": 1776867193150,
           "name": "Get Rows Post-Process Script",
           "object_type": "artifact",
           "playbook_handle": "example_data_table_utils_get_rows_pb",
@@ -3215,23 +3070,10 @@
       },
       "name": "example_data_table_utils_get_rows_pb",
       "object_type": "artifact",
-      "playbook_change_log_info": {
-        "change_log_id": 12,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "f6958a0d-fe0d-4db8-baf1-1b43887853aa",
-        "create_date": 1774348465399,
-        "modified_principal": {
-          "display_name": "aces",
-          "id": 5,
-          "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "type": "apikey"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_1c8044df-59e9-4f55-b823-67d0522c4a42",
-        "id": 12,
+        "id": 23,
         "name": "playbook_1c8044df_59e9_4f55_b823_67d0522c4a42",
         "type": "playbook",
         "uuid": "2d5fdc42-bc80-4378-bdcb-37583b45d700"
@@ -3247,11 +3089,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_fb922654_9fff_4452_87b7_bebcb3606d30\" isExecutable=\"true\" name=\"playbook_fb922654_9fff_4452_87b7_bebcb3606d30\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0g62n7n\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Data Table Utils: Get Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77e98bdb-2843-4cd6-8294-5a9dbef6a08e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\n# The column api name to search for\\ninputs.dt_utils_search_column = \\\"dt_col_name\\\"\\n\\n# The cell value to search for\\ninputs.dt_utils_search_value = artifact.value\\n\\n## Alternatively you can get the row by its ID by defining this input:\\n# inputs.dt_utils_row_id = 3\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"row_to_update\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0g62n7n\u003c/incoming\u003e\u003coutgoing\u003eFlow_121xvw9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cinclusiveGateway default=\"Flow_1fu9la0\" id=\"ConditionPoint_2\" resilient:documentation=\"Condition point\"\u003e\u003cextensionElements/\u003e\u003cincoming\u003eFlow_121xvw9\u003c/incoming\u003e\u003coutgoing\u003eFlow_0zyrg8v\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1fu9la0\u003c/outgoing\u003e\u003c/inclusiveGateway\u003e\u003cserviceTask id=\"ServiceTask_3\" name=\"Data Table Utils: Update Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77b8451e-3137-4362-840a-ac724b674b73\"\u003e{\"inputs\":{},\"pre_processing_script\":\"from datetime import datetime\\nfrom json import dumps\\n\\n# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\ninputs.dt_utils_row_id = playbook.functions.results.row_to_update.content.row[\\\"id\\\"]\\n\\n# The column api names and the value to update the cell to\\n# Example: {\\\"dt_col_name\\\": \\\"example\\\", \\\"number\\\": 1, \\\"text\\\": \\\"example\\\", \\\"datetime\\\": Date().getTime(), \\\"boolean\\\": True, \\\"select\\\": \\\"1\\\", \\\"multi_select\\\": [\\\"a\\\", \\\"b\\\"]}\\ntmp = {\\\"datetime\\\": int(datetime.now().timestamp()*1000), \\\"text\\\": \\\"Updated from Artifact\\\"}\\ninputs.dt_utils_cells_to_update = f\u0027{dumps(tmp)}\u0027\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"update_row\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0zyrg8v\u003c/incoming\u003e\u003coutgoing\u003eFlow_1qv0pwk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Delete Row Post-Process Script\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1eb54c2d-1cbe-4886-9764-a27f9431cc2b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1qv0pwk\u003c/incoming\u003e\u003coutgoing\u003eFlow_0jraktx\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_5\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0jraktx\u003c/incoming\u003e\u003cincoming\u003eFlow_1fu9la0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0g62n7n\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_121xvw9\" sourceRef=\"ServiceTask_1\" targetRef=\"ConditionPoint_2\"/\u003e\u003csequenceFlow id=\"Flow_1qv0pwk\" sourceRef=\"ServiceTask_3\" targetRef=\"ScriptTask_4\"/\u003e\u003csequenceFlow id=\"Flow_0jraktx\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_5\"/\u003e\u003csequenceFlow id=\"Flow_0zyrg8v\" name=\"success\" sourceRef=\"ConditionPoint_2\" targetRef=\"ServiceTask_3\"\u003e\u003cextensionElements\u003e\u003cresilient:condition label=\"success\" order=\"0\"/\u003e\u003c/extensionElements\u003e\u003cconditionExpression language=\"resilient-conditions\" xsi:type=\"tFormalExpression\"\u003e{\"conditions\":[{\"evaluation_id\":null,\"field_name\":null,\"method\":\"script\",\"type\":null,\"value\":{\"script_text\":\"# One line example:\\n#\\n# result = incident.employee_involved = True\\n#\\n# Multi-line example:\\n#\\n# certificate_expired = playbook.functions.results.certificate_results.is_expired\\n# if (incident.employee_involved == True and certificate_expired):\\n#     result = True\\n# else:\\n#     result = False\\n\\nresults = playbook.functions.results.row_to_update\\n\\nif results[\u0027success\u0027]:\\n  result = True\\nelse:\\n  result = False\",\"final_expression_text\":\"result\",\"final_expression_only_boolean\":true,\"language\":\"python3\"}}],\"logic_type\":\"all\",\"script_language\":null}\u003c/conditionExpression\u003e\u003c/sequenceFlow\u003e\u003csequenceFlow id=\"Flow_1fu9la0\" name=\"Else\" sourceRef=\"ConditionPoint_2\" targetRef=\"EndPoint_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_fb922654_9fff_4452_87b7_bebcb3606d30\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fu9la0\" id=\"Flow_1fu9la0_di\"\u003e\u003comgdi:waypoint x=\"719\" y=\"396\"/\u003e\u003comgdi:waypoint x=\"719\" y=\"515\"/\u003e\u003comgdi:waypoint x=\"800\" y=\"515\"/\u003e\u003comgdi:waypoint x=\"800\" y=\"634\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"23\" x=\"748\" y=\"497\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0zyrg8v\" id=\"Flow_0zyrg8v_di\"\u003e\u003comgdi:waypoint x=\"719\" y=\"396\"/\u003e\u003comgdi:waypoint x=\"719\" y=\"437\"/\u003e\u003comgdi:waypoint x=\"530\" y=\"437\"/\u003e\u003comgdi:waypoint x=\"530\" y=\"478\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"14\" width=\"41\" x=\"604\" y=\"419\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0jraktx\" id=\"Flow_0jraktx_di\"\u003e\u003comgdi:waypoint x=\"608\" y=\"650\"/\u003e\u003comgdi:waypoint x=\"671\" y=\"650\"/\u003e\u003comgdi:waypoint x=\"671\" y=\"660\"/\u003e\u003comgdi:waypoint x=\"734\" y=\"660\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1qv0pwk\" id=\"Flow_1qv0pwk_di\"\u003e\u003comgdi:waypoint x=\"530\" y=\"562\"/\u003e\u003comgdi:waypoint x=\"530\" y=\"585\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"585\"/\u003e\u003comgdi:waypoint x=\"510\" y=\"608\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_121xvw9\" id=\"Flow_121xvw9_di\"\u003e\u003comgdi:waypoint x=\"710\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"308\"/\u003e\u003comgdi:waypoint x=\"719\" y=\"308\"/\u003e\u003comgdi:waypoint x=\"719\" y=\"344\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0g62n7n\" id=\"Flow_0g62n7n_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"710\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.51600000000002\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"612\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ConditionPoint_2\" id=\"ConditionPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"238.828\" x=\"600\" y=\"344\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_3\" id=\"ServiceTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"432\" y=\"478\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"412\" y=\"608\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_5\" id=\"EndPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"734\" y=\"634\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1774348465745,
+      "create_date": 1776867193872,
       "creator_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
       "deployment_id": "playbook_fb922654_9fff_4452_87b7_bebcb3606d30",
@@ -3287,27 +3129,27 @@
         "uuid": "f42104de-9c0e-4b73-adf4-234930a5fb2e"
       },
       "has_logical_errors": false,
-      "id": 13,
+      "id": 24,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348466585,
+      "last_modified_time": 1776867195059,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1774348465866,
+          "created_date": 1776867194121,
           "description": "",
           "enabled": false,
           "export_key": "Delete Row Post-Process Script",
           "id": 11,
           "language": "python3",
-          "last_modified_by": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "last_modified_time": 1774348465866,
+          "last_modified_by": "2c065e70-5382-4867-8b2c-21795f27ae17",
+          "last_modified_time": 1776867194121,
           "name": "Delete Row Post-Process Script",
           "object_type": "artifact",
           "playbook_handle": "example_data_table_utils_update_row_pb",
@@ -3326,23 +3168,10 @@
       },
       "name": "example_data_table_utils_update_row_pb",
       "object_type": "artifact",
-      "playbook_change_log_info": {
-        "change_log_id": 13,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "f6958a0d-fe0d-4db8-baf1-1b43887853aa",
-        "create_date": 1774348466308,
-        "modified_principal": {
-          "display_name": "aces",
-          "id": 5,
-          "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "type": "apikey"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_fb922654-9fff-4452-87b7-bebcb3606d30",
-        "id": 13,
+        "id": 24,
         "name": "playbook_fb922654_9fff_4452_87b7_bebcb3606d30",
         "type": "playbook",
         "uuid": "c0ae2cff-a769-45fb-9855-e97380dec0b1"
@@ -3358,11 +3187,11 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_55c36624_35fe_4f2d_bb71_ab62f4d51081\" isExecutable=\"true\" name=\"playbook_55c36624_35fe_4f2d_bb71_ab62f4d51081\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_16ogfqu\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Data Table Utils: Update Row\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"77b8451e-3137-4362-840a-ac724b674b73\"\u003e{\"inputs\":{},\"pre_processing_script\":\"from datetime import datetime\\n\\ndef dict_to_json_str(d):\\n  \\\"\\\"\\\"Function that converts a dictionary into a JSON string.\\n     Supports types: basestring, bool, int, nested dicts and lists.\\n     If the value is None, it sets it to False.\\\"\\\"\\\"\\n\\n  json_entry = \u0027\\\"{0}\\\":{1}\u0027\\n  json_entry_str = \u0027\\\"{0}\\\":\\\"{1}\\\"\u0027\\n  entries = []\\n\\n  for entry in d:\\n    key = entry\\n    value = d[entry]\\n\\n    if not value:\\n      value = False\\n\\n    elif isinstance(value, str):\\n      value = value.replace(u\u0027\\\"\u0027, u\u0027\\\\\\\\\\\"\u0027)\\n      entries.append(json_entry_str.format(key, value))\\n\\n    elif isinstance(value, bool):\\n      value = \u0027true\u0027 if value else \u0027false\u0027\\n      entries.append(json_entry.format(key, value))\\n\\n    elif isinstance(value, dict):\\n      entries.append(json_entry.format(key, dict_to_json_str(value)))\\n\\n    else:\\n      entries.append(json_entry.format(key, value))\\n\\n  return \u0027{0} {1} {2}\u0027.format(\u0027{\u0027, \u0027,\u0027.join(entries), \u0027}\u0027)\\n\\n# The ID of this incident\\ninputs.incident_id = incident.id\\n\\n# The api name of the Data Table to update [here it is taken from previous Get Row Function]\\ninputs.dt_utils_datatable_api_name = \\\"dt_utils_test_data_table\\\"\\n\\n# Refer to the existing row (value: 0)\\ninputs.dt_utils_row_id = 0\\n\\n# The column api names and the value to update the cell to\\ninputs.dt_utils_cells_to_update = dict_to_json_str({\\\"name\\\": \\\"Updated Example\\\", \\\"text\\\": \\\"Update from datatable\\\", \\\"number\\\": 4598, \\\"multi_select\\\": [\\\"b\\\", \\\"e\\\", \\\"g\\\"], \\\"boolean\\\": True})\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_16ogfqu\u003c/incoming\u003e\u003coutgoing\u003eFlow_0w3vcm8\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0w3vcm8\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_16ogfqu\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0w3vcm8\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_55c36624_35fe_4f2d_bb71_ab62f4d51081\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0w3vcm8\" id=\"Flow_0w3vcm8_di\"\u003e\u003comgdi:waypoint x=\"700\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"318\"/\u003e\u003comgdi:waypoint x=\"670\" y=\"318\"/\u003e\u003comgdi:waypoint x=\"670\" y=\"354\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_16ogfqu\" id=\"Flow_16ogfqu_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"158\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"158\"/\u003e\u003comgdi:waypoint x=\"700\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.758\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"602\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.2109\" x=\"604\" y=\"354\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1774348466555,
+      "create_date": 1776867195013,
       "creator_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
       "deployment_id": "playbook_55c36624_35fe_4f2d_bb71_ab62f4d51081",
@@ -3398,16 +3227,16 @@
         "uuid": "08b8f7f1-4c16-4d3b-ae95-a924e8a4fb23"
       },
       "has_logical_errors": false,
-      "id": 14,
+      "id": 25,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aces",
-        "id": 5,
-        "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
+        "display_name": "svdvsv",
+        "id": 4,
+        "name": "2c065e70-5382-4867-8b2c-21795f27ae17",
         "type": "apikey"
       },
-      "last_modified_time": 1774348467155,
+      "last_modified_time": 1776867195762,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -3418,23 +3247,10 @@
       },
       "name": "example_data_utils_update_row_pb",
       "object_type": "dt_utils_test_data_table",
-      "playbook_change_log_info": {
-        "change_log_id": 14,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "f6958a0d-fe0d-4db8-baf1-1b43887853aa",
-        "create_date": 1774348466990,
-        "modified_principal": {
-          "display_name": "aces",
-          "id": 5,
-          "name": "b8ef507a-b644-46ce-b7c2-ee29c5d6641e",
-          "type": "apikey"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_55c36624-35fe-4f2d-bb71-ab62f4d51081",
-        "id": 14,
+        "id": 25,
         "name": "playbook_55c36624_35fe_4f2d_bb71_ab62f4d51081",
         "type": "playbook",
         "uuid": "53fee2be-21b1-4438-82a6-0eaeb0339840"
@@ -3449,14 +3265,14 @@
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 20729,
+    "build_number": 10290,
     "f": 0,
-    "m": 8,
+    "m": 4,
     "major": 0,
     "minor": 0,
     "r": 0,
     "v": 51,
-    "version": "51.0.8.0.20729"
+    "version": "51.0.4.0.10290"
   },
   "tags": [],
   "task_order": [],
@@ -3477,7 +3293,7 @@
           "deprecated": false,
           "export_key": "dt_utils_test_data_table/boolean",
           "hide_notification": false,
-          "id": 382,
+          "id": 360,
           "input_type": "boolean",
           "internal": false,
           "is_tracked": false,
@@ -3495,7 +3311,7 @@
           "templates": [],
           "text": "boolean",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1012,
           "uuid": "8fe94e4d-e591-41e9-af15-18fc2cf96a96",
           "values": [],
           "width": 87
@@ -3510,7 +3326,7 @@
           "deprecated": false,
           "export_key": "dt_utils_test_data_table/datetime",
           "hide_notification": false,
-          "id": 383,
+          "id": 361,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -3528,7 +3344,7 @@
           "templates": [],
           "text": "datetime",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1012,
           "uuid": "bf9e6153-abe6-40e7-bcb0-f45024804eef",
           "values": [],
           "width": 225
@@ -3543,7 +3359,7 @@
           "deprecated": false,
           "export_key": "dt_utils_test_data_table/dt_col_name",
           "hide_notification": false,
-          "id": 384,
+          "id": 362,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3561,7 +3377,7 @@
           "templates": [],
           "text": "name",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1012,
           "uuid": "b167a766-24fc-4c68-a865-b44f19b53b97",
           "values": [],
           "width": 68
@@ -3576,7 +3392,7 @@
           "deprecated": false,
           "export_key": "dt_utils_test_data_table/multi_select",
           "hide_notification": false,
-          "id": 385,
+          "id": 363,
           "input_type": "multiselect",
           "internal": false,
           "is_tracked": false,
@@ -3594,7 +3410,7 @@
           "templates": [],
           "text": "multi_select",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1012,
           "uuid": "5686792a-79b8-4756-b0f2-f1ec085bc37a",
           "values": [
             {
@@ -3604,7 +3420,7 @@
               "label": "a",
               "properties": null,
               "uuid": "587c135e-2d39-4140-822e-7829b03d4a21",
-              "value": 1201
+              "value": 57
             },
             {
               "default": false,
@@ -3613,7 +3429,7 @@
               "label": "b",
               "properties": null,
               "uuid": "b5514bda-e2f8-41d1-bf39-a2d09f37214a",
-              "value": 1251
+              "value": 58
             },
             {
               "default": false,
@@ -3622,7 +3438,7 @@
               "label": "c",
               "properties": null,
               "uuid": "6282c55c-af54-4c98-b5d1-12db87a4c76a",
-              "value": 1301
+              "value": 59
             },
             {
               "default": false,
@@ -3631,7 +3447,7 @@
               "label": "d",
               "properties": null,
               "uuid": "29eaf525-205a-46a5-b591-e023157053b4",
-              "value": 1351
+              "value": 60
             },
             {
               "default": false,
@@ -3640,7 +3456,7 @@
               "label": "e",
               "properties": null,
               "uuid": "48f95069-25a8-4919-9004-7066543dbcd5",
-              "value": 1401
+              "value": 61
             },
             {
               "default": false,
@@ -3649,7 +3465,7 @@
               "label": "f",
               "properties": null,
               "uuid": "e11c6dc8-70cc-4448-917a-93ab16c864e0",
-              "value": 1451
+              "value": 62
             },
             {
               "default": false,
@@ -3658,7 +3474,7 @@
               "label": "g",
               "properties": null,
               "uuid": "ebcbf31c-f5b2-4d3a-b1fe-334ce7cdaa9b",
-              "value": 1501
+              "value": 63
             },
             {
               "default": false,
@@ -3667,7 +3483,7 @@
               "label": "h",
               "properties": null,
               "uuid": "3f2963b6-8e1b-44b5-ba59-32cfbe7bdf5b",
-              "value": 1551
+              "value": 64
             },
             {
               "default": false,
@@ -3676,7 +3492,7 @@
               "label": "I",
               "properties": null,
               "uuid": "484dc992-3526-4e06-a392-fe8647373913",
-              "value": 1601
+              "value": 65
             },
             {
               "default": false,
@@ -3685,7 +3501,7 @@
               "label": "j",
               "properties": null,
               "uuid": "28c16106-f096-4565-b601-3a03da496559",
-              "value": 1651
+              "value": 66
             },
             {
               "default": false,
@@ -3694,7 +3510,7 @@
               "label": "k",
               "properties": null,
               "uuid": "260a964d-63e7-483d-b4f8-6822206830d0",
-              "value": 1701
+              "value": 67
             }
           ],
           "width": 64
@@ -3709,7 +3525,7 @@
           "deprecated": false,
           "export_key": "dt_utils_test_data_table/number",
           "hide_notification": false,
-          "id": 386,
+          "id": 364,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -3727,7 +3543,7 @@
           "templates": [],
           "text": "number",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1012,
           "uuid": "97a819fd-cbcf-4eda-a245-c1d50ce27ae6",
           "values": [],
           "width": 84
@@ -3742,7 +3558,7 @@
           "deprecated": false,
           "export_key": "dt_utils_test_data_table/select",
           "hide_notification": false,
-          "id": 387,
+          "id": 365,
           "input_type": "select",
           "internal": false,
           "is_tracked": false,
@@ -3760,7 +3576,7 @@
           "templates": [],
           "text": "select",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1012,
           "uuid": "e2239bee-9516-4c7f-852a-2a884bcbaf0f",
           "values": [
             {
@@ -3770,7 +3586,7 @@
               "label": "1",
               "properties": null,
               "uuid": "6559ac56-25a2-4015-a681-9e89328da0a3",
-              "value": 1751
+              "value": 68
             },
             {
               "default": false,
@@ -3779,7 +3595,7 @@
               "label": "2",
               "properties": null,
               "uuid": "bd341de4-c08e-4ba2-9179-04a28a32e22e",
-              "value": 1801
+              "value": 69
             },
             {
               "default": false,
@@ -3788,7 +3604,7 @@
               "label": "3",
               "properties": null,
               "uuid": "9d7a37be-a50a-4bdf-8478-63e4be6ec4bc",
-              "value": 1851
+              "value": 70
             },
             {
               "default": false,
@@ -3797,7 +3613,7 @@
               "label": "4",
               "properties": null,
               "uuid": "8ecdf624-0e32-46f7-8d8a-f183c8559032",
-              "value": 1901
+              "value": 71
             },
             {
               "default": false,
@@ -3806,7 +3622,7 @@
               "label": "5",
               "properties": null,
               "uuid": "653d3e8e-00c9-41f4-85f2-10addde4b1ba",
-              "value": 1951
+              "value": 72
             },
             {
               "default": false,
@@ -3815,7 +3631,7 @@
               "label": "6",
               "properties": null,
               "uuid": "b5746a1b-9404-4b9c-bb20-924682a3ad97",
-              "value": 2001
+              "value": 73
             },
             {
               "default": false,
@@ -3824,7 +3640,7 @@
               "label": "7",
               "properties": null,
               "uuid": "b3f95da8-12fb-44f0-9f89-9b1ee269762b",
-              "value": 2051
+              "value": 74
             },
             {
               "default": false,
@@ -3833,7 +3649,7 @@
               "label": "8",
               "properties": null,
               "uuid": "d6d40d79-d0c4-4122-b982-91114e4b801b",
-              "value": 2101
+              "value": 75
             },
             {
               "default": false,
@@ -3842,7 +3658,7 @@
               "label": "9",
               "properties": null,
               "uuid": "ec4b97d4-b313-4ded-bb0d-eda35b6dc172",
-              "value": 2151
+              "value": 76
             }
           ],
           "width": 32
@@ -3857,7 +3673,7 @@
           "deprecated": false,
           "export_key": "dt_utils_test_data_table/text",
           "hide_notification": false,
-          "id": 388,
+          "id": 366,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -3875,7 +3691,7 @@
           "templates": [],
           "text": "text",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1012,
           "uuid": "3be7be3d-9931-4386-a845-a62bfe26f017",
           "values": [],
           "width": 123
