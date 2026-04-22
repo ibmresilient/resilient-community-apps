@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v51.0.0.2.575
+# Generated with resilient-sdk v51.0.7.2.16540
 
 """Generate the SOAR customizations required for fn_relations"""
 
@@ -72,7 +72,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 48.2.16
+    IBM SOAR Platform Version: 51.0.4.0.10290
 
     Contents:
     - Message Destinations:

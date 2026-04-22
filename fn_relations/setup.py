@@ -25,7 +25,7 @@ def snake_to_camel(word):
 setup(
     name="fn_relations",
     display_name="Parent/Child Relationships",
-    version="3.1.0",
+    version="3.1.1",
     license="MIT",
     author="Nick Mumaw",
     author_email="Nick.Mumaw@ibm.com",
@@ -39,7 +39,7 @@ Links:
 <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
 <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",    
     install_requires=[
-        "resilient-circuits>=48.0.0"
+        "resilient-circuits>=51.0.4.0"
     ],
     packages=find_packages(),
     include_package_data=True,
