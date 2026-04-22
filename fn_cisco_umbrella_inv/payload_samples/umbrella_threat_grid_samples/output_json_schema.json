@@ -1,0 +1,130 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "thread_grid_samples": {
+          "type": "object",
+          "properties": {
+            "totalResults": {
+              "type": "integer"
+            },
+            "moreDataAvailable": {
+              "type": "boolean"
+            },
+            "offset": {
+              "type": "integer"
+            },
+            "query": {
+              "type": "string"
+            },
+            "limit": {
+              "type": "integer"
+            },
+            "samples": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "sha256": {
+                    "type": "string"
+                  },
+                  "sha1": {
+                    "type": "string"
+                  },
+                  "md5": {
+                    "type": "string"
+                  },
+                  "magicType": {
+                    "type": "string"
+                  },
+                  "threatScore": {
+                    "type": "integer"
+                  },
+                  "size": {
+                    "type": "integer"
+                  },
+                  "firstSeen": {},
+                  "lastSeen": {},
+                  "visible": {
+                    "type": "boolean"
+                  },
+                  "avresults": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "signature": {
+                          "type": "string"
+                        },
+                        "product": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "resource_name": {
+          "type": "string"
+        },
+        "query_execution_time": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "umbinv_offset": {
+          "type": "integer"
+        },
+        "umbinv_limit": {
+          "type": "integer"
+        },
+        "umbinv_resource": {
+          "type": "string"
+        },
+        "umbinv_sortby": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

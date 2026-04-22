@@ -1,0 +1,61 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "state": "unassigned",
+      "summary": "Cluster: SAMPLE - Pipeline Project",
+      "description": "Cluster: SAMPLE - Pipeline Project",
+      "owner": "-",
+      "team": "-",
+      "closedOwner": "-",
+      "closedTeam": "-",
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "displayId": "0000-20m1",
+      "createdTime": "2025-05-23T14:29:03.698Z",
+      "lastChanged": "2025-05-23T14:29:10.258Z",
+      "firstInProgressTime": "-",
+      "resolvedTime": "-",
+      "priority": 2,
+      "escalated": false,
+      "wasEscalated": false,
+      "correlationDetails": {
+        "cluster": "SAMPLE - Pipeline Project"
+      },
+      "accessScopes": []
+    },
+    {
+      "state": "unassigned",
+      "summary": "Application: SAMPLE - Online Sales",
+      "description": "Application: SAMPLE - Online Sales",
+      "owner": "-",
+      "team": "-",
+      "closedOwner": "-",
+      "closedTeam": "-",
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "displayId": "0000-19m1",
+      "createdTime": "2025-05-23T14:29:00.871Z",
+      "lastChanged": "2025-05-23T14:29:14.512Z",
+      "firstInProgressTime": "-",
+      "resolvedTime": "-",
+      "priority": 2,
+      "escalated": false,
+      "wasEscalated": false,
+      "correlationDetails": {
+        "application": "SAMPLE - Online Sales"
+      },
+      "accessScopes": []
+    }
+  ],
+  "raw": null,
+  "inputs": {},
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ocm",
+    "package_version": "1.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 3845,
+    "timestamp": "2025-05-23 10:45:17"
+  }
+}
