@@ -422,13 +422,13 @@
 <li><p><a class="reference internal" href="#function---relations-remove-child-relation"><span class="xref myst">Function - Relations: Remove Child Relation</span></a></p></li>
 <li><p><a class="reference internal" href="#function---relations-sync-artifact"><span class="xref myst">Function - Relations: Sync Artifact</span></a></p></li>
 <li><p><a class="reference internal" href="#function---relations-sync-child-table-data"><span class="xref myst">Function - Relations: Sync Child Table Data</span></a></p></li>
-<li><p><a class="reference internal" href="#function---relations-sync-datatable-data"><span class="xref myst">Function - Relations: Sync Datatable Data</span></a></p></li>
+<li><p><a class="reference internal" href="#function---relations-sync-datatable-data"><span class="xref myst">Function - Relations: Sync DataTable Data</span></a></p></li>
 <li><p><a class="reference internal" href="#function---relations-sync-notes"><span class="xref myst">Function - Relations: Sync Notes</span></a></p></li>
 <li><p><a class="reference internal" href="#function---relations-sync-task-notes"><span class="xref myst">Function - Relations: Sync Task Notes</span></a></p></li>
 <li><p><a class="reference internal" href="#data-table---relations-child-incidents"><span class="xref myst">Data Table - Relations Child Incidents</span></a></p></li>
 <li><p><a class="reference internal" href="#custom-fields"><span class="xref myst">Custom Fields</span></a></p></li>
 <li><p><a class="reference internal" href="#custom-artifact-types"><span class="xref myst">Custom Artifact Types</span></a></p></li>
-<li><p><a class="reference internal" href="#rules"><span class="xref myst">Rules</span></a></p></li>
+<li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
 <li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p></li>
 </ul>
 </section>
@@ -467,6 +467,10 @@
 <tr class="row-odd"><td><p>3.1.0</p></td>
 <td><p>1/2023</p></td>
 <td><p>Auto configuration of Child layout tab and summary information, and use of playbooks</p></td>
+</tr>
+<tr class="row-even"><td><p>3.1.1</p></td>
+<td><p>4/2026</p></td>
+<td><p>Updated Dockerfile base image to address security vulnerabilities, Added support for Python 3.11 and Python 3.12</p></td>
 </tr>
 </tbody>
 </table>
@@ -513,17 +517,17 @@
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
 <section id="soar-platform">
 <h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
-<p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.</p>
-<p>If deploying to a SOAR platform with an Edge Gateway, the requirements are:</p>
+<p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.</p>
+<p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">48.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.4.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
 <p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
 <ul>
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">48.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.4.0</span></code>.</p></li>
 <li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient-circuits&gt;=48.0.0</span></code>.</p></li>
+<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient-circuits&gt;=51.0.4.0</span></code>.</p></li>
 <li><p>If using an API key account, make sure the account provides the following minimum permissions:</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -568,7 +572,7 @@
 <h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
 <ul class="simple">
-<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.8</span></code>.</p></li>
+<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.10.15</span></code>.</p></li>
 <li><p>Cloud Pak is configured with an Edge Gateway.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
@@ -581,10 +585,10 @@
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
-<p>Python 3.6 and Python 3.9 are supported.
+<p>Python 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
-<li><p>resilient-circuits&gt;=48.0.0</p></li>
+<li><p>resilient-circuits&gt;=51.0.0</p></li>
 </ul>
 </section>
 </section>
@@ -675,35 +679,54 @@ Additional package dependencies may exist for each of these packages:</p>
     <span class="s2">&quot;child_artifact_results&quot;</span><span class="p">:</span> <span class="p">{</span>
       <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;actions&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">38</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: Relations - Sync Artifact&quot;</span>
+          <span class="p">}</span>
         <span class="p">],</span>
         <span class="s2">&quot;attachment&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="mi">1693442727342</span><span class="p">,</span>
+        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="mi">1705509534505</span><span class="p">,</span>
+        <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient Sysadmin&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;a@example.com&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;fname&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+          <span class="s2">&quot;is_external&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;is_ldap&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;is_saml&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;lname&quot;</span><span class="p">:</span> <span class="s2">&quot;Sysadmin&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;locked&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;password_changed&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;ui_theme&quot;</span><span class="p">:</span> <span class="s2">&quot;verydarkmode&quot;</span>
+        <span class="p">},</span>
         <span class="s2">&quot;creator_principal&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AppBuilder&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;6bf8c47e-77a6-41ad-ad22-1004f7eee7cb&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;apikey&quot;</span>
+          <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient Sysadmin&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;a@example.com&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span>
         <span class="p">},</span>
         <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Parent Incident ID in Relationship&quot;</span><span class="p">,</span>
         <span class="s2">&quot;global_artifact&quot;</span><span class="p">:</span> <span class="p">[],</span>
         <span class="s2">&quot;global_info&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;hash&quot;</span><span class="p">:</span> <span class="s2">&quot;99e5ebfa1cbebdd970bb3d841bb645d8bee76c375a637406859e2a8425951177&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;hash&quot;</span><span class="p">:</span> <span class="s2">&quot;99e5ebfa...25951177&quot;</span><span class="p">,</span>
         <span class="s2">&quot;hits&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">3828</span><span class="p">,</span>
-        <span class="s2">&quot;inc_id&quot;</span><span class="p">:</span> <span class="mi">2802</span><span class="p">,</span>
-        <span class="s2">&quot;inc_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Child 3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;inc_owner&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+        <span class="s2">&quot;inc_id&quot;</span><span class="p">:</span> <span class="mi">2102</span><span class="p">,</span>
+        <span class="s2">&quot;inc_name&quot;</span><span class="p">:</span> <span class="s2">&quot;child3-1&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;inc_owner&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
         <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="p">{</span>
           <span class="s2">&quot;destination&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
           <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="n">null</span>
         <span class="p">},</span>
         <span class="s2">&quot;last_modified_by&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AppBuilder&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;6bf8c47e-77a6-41ad-ad22-1004f7eee7cb&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;apikey&quot;</span>
+          <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient Sysadmin&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;a@example.com&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span>
         <span class="p">},</span>
-        <span class="s2">&quot;last_modified_time&quot;</span><span class="p">:</span> <span class="mi">1693442727362</span><span class="p">,</span>
+        <span class="s2">&quot;last_modified_time&quot;</span><span class="p">:</span> <span class="mi">1705509534512</span><span class="p">,</span>
         <span class="s2">&quot;parent_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
         <span class="s2">&quot;pending_scan_result&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
         <span class="s2">&quot;pending_sources&quot;</span><span class="p">:</span> <span class="p">[],</span>
@@ -715,25 +738,90 @@ Additional package dependencies may exist for each of these packages:</p>
         <span class="s2">&quot;playbooks&quot;</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
             <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Relations: Sync Artifact&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;playbook_handle&quot;</span><span class="p">:</span> <span class="mi">138</span>
-          <span class="p">},</span>
-          <span class="p">{</span>
-            <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Scheduler: Schedule a Job (Artifact) (PB)&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;playbook_handle&quot;</span><span class="p">:</span> <span class="mi">131</span>
+            <span class="s2">&quot;playbook_handle&quot;</span><span class="p">:</span> <span class="mi">12</span>
           <span class="p">}</span>
         <span class="p">],</span>
         <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
         <span class="s2">&quot;related_incident_count&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
         <span class="s2">&quot;relating&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">1040</span><span class="p">,</span>
-        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;2799&quot;</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">1084</span><span class="p">,</span>
+        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;2101&quot;</span>
       <span class="p">},</span>
       <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
     <span class="p">},</span>
-    <span class="s2">&quot;notes_synced&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">&quot;notes_synced&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">&quot;parent_artifact_results&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Parent Already in Artifacts&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;actions&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">38</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: Relations - Sync Artifact&quot;</span>
+          <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;attachment&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="mi">1705509537212</span><span class="p">,</span>
+        <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient Sysadmin&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;a@example.com&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;fname&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+          <span class="s2">&quot;is_external&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;is_ldap&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;is_saml&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;lname&quot;</span><span class="p">:</span> <span class="s2">&quot;Sysadmin&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;locked&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;password_changed&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;ui_theme&quot;</span><span class="p">:</span> <span class="s2">&quot;verydarkmode&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;creator_principal&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient Sysadmin&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;a@example.com&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Parent Incident ID in Relationship&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;global_artifact&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;global_info&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;hash&quot;</span><span class="p">:</span> <span class="s2">&quot;6750ee9e...ff2824ec&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;hits&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+        <span class="s2">&quot;inc_id&quot;</span><span class="p">:</span> <span class="mi">2101</span><span class="p">,</span>
+        <span class="s2">&quot;inc_name&quot;</span><span class="p">:</span> <span class="s2">&quot;parent3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;inc_owner&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+        <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;destination&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="n">null</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;last_modified_by&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient Sysadmin&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;a@example.com&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;last_modified_time&quot;</span><span class="p">:</span> <span class="mi">1705509537219</span><span class="p">,</span>
+        <span class="s2">&quot;parent_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;pending_scan_result&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">&quot;pending_sources&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;perms&quot;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">&quot;delete&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">&quot;read&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">&quot;write&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;playbooks&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Relations: Sync Artifact&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;playbook_handle&quot;</span><span class="p">:</span> <span class="mi">12</span>
+          <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;related_incident_count&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">&quot;relating&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">1084</span><span class="p">,</span>
+        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;2101&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
     <span class="p">},</span>
     <span class="s2">&quot;table_addition_results&quot;</span><span class="p">:</span> <span class="p">{</span>
       <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -741,42 +829,42 @@ Additional package dependencies may exist for each of these packages:</p>
         <span class="s2">&quot;cells&quot;</span><span class="p">:</span> <span class="p">{</span>
           <span class="s2">&quot;relations_incident_id&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;relations_incident_id&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">6786</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\&quot;</span><span class="s2">rte</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e\u003c</span><span class="s2">a href=</span><span class="se">\&quot;</span><span class="s2">#incidents/2802</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;\u003e</span><span class="s2">2802</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\&quot;</span><span class="s2">rte</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e\u003c</span><span class="s2">a href=</span><span class="se">\&quot;</span><span class="s2">#incidents/2102</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;\u003e</span><span class="s2">2102</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">&quot;</span>
           <span class="p">},</span>
           <span class="s2">&quot;relations_incident_name&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;relations_incident_name&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">6786</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;Child 3&quot;</span>
+            <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;child3-1&quot;</span>
           <span class="p">},</span>
           <span class="s2">&quot;relations_incident_status&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;relations_incident_status&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">6786</span><span class="p">,</span>
+            <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
             <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;Active&quot;</span>
           <span class="p">}</span>
         <span class="p">},</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">6786</span><span class="p">,</span>
-        <span class="s2">&quot;inc_id&quot;</span><span class="p">:</span> <span class="mi">2799</span><span class="p">,</span>
-        <span class="s2">&quot;inc_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Parent&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;inc_owner&quot;</span><span class="p">:</span> <span class="s2">&quot;john_doe@company.com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+        <span class="s2">&quot;inc_id&quot;</span><span class="p">:</span> <span class="mi">2101</span><span class="p">,</span>
+        <span class="s2">&quot;inc_name&quot;</span><span class="p">:</span> <span class="s2">&quot;parent3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;inc_owner&quot;</span><span class="p">:</span> <span class="s2">&quot;a@example.com&quot;</span><span class="p">,</span>
         <span class="s2">&quot;playbooks&quot;</span><span class="p">:</span> <span class="p">[],</span>
         <span class="s2">&quot;table_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Relations Child Incidents&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type_id&quot;</span><span class="p">:</span> <span class="mi">1043</span><span class="p">,</span>
+        <span class="s2">&quot;type_id&quot;</span><span class="p">:</span> <span class="mi">1001</span><span class="p">,</span>
         <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span>
       <span class="p">},</span>
       <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
     <span class="p">}</span>
   <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;relations_child_incident_id&quot;</span><span class="p">:</span> <span class="mi">2802</span><span class="p">,</span>
-    <span class="s2">&quot;relations_parent_incident_id&quot;</span><span class="p">:</span> <span class="mi">2799</span>
+    <span class="s2">&quot;relations_child_incident_id&quot;</span><span class="p">:</span> <span class="mi">2102</span><span class="p">,</span>
+    <span class="s2">&quot;relations_parent_incident_id&quot;</span><span class="p">:</span> <span class="mi">2101</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">11502</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">5060</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
     <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-relations&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-30 20:45:34&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-17 11:38:57&quot;</span><span class="p">,</span>
     <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -788,7 +876,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">relations_child_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">relations_parent_incident_id</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">relations_parent_incident</span>
@@ -842,19 +930,18 @@ Additional package dependencies may exist for each of these packages:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;incidents&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="mi">2801</span><span class="p">,</span>
-      <span class="mi">2800</span>
+      <span class="mi">2097</span>
     <span class="p">]</span>
   <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;relations_parent_incident_id&quot;</span><span class="p">:</span> <span class="mi">2799</span>
+    <span class="s2">&quot;relations_parent_incident_id&quot;</span><span class="p">:</span> <span class="mi">2096</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">10038</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2514</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
     <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-relations&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-30 21:12:37&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-17 11:32:49&quot;</span><span class="p">,</span>
     <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -866,7 +953,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">relations_parent_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 
@@ -925,28 +1012,27 @@ Additional package dependencies may exist for each of these packages:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;children&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="mi">2797</span><span class="p">,</span>
-      <span class="mi">2796</span><span class="p">,</span>
-      <span class="mi">2798</span>
+      <span class="mi">2097</span><span class="p">,</span>
+      <span class="mi">2100</span>
     <span class="p">],</span>
     <span class="s2">&quot;task&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;due_date&quot;</span><span class="p">:</span> <span class="mi">1693454400000</span><span class="p">,</span>
-      <span class="s2">&quot;instructions&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\&quot;</span><span class="s2">rte</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e</span><span class="s2">This is a instruction list for the new task!</span><span class="se">\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Task 615 from Parent: New Task for the Kids&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;phase_id&quot;</span><span class="p">:</span> <span class="s2">&quot;Containment </span><span class="se">\u0026</span><span class="s2"> Remediation&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;due_date&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">&quot;instructions&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\&quot;</span><span class="s2">rte</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e</span><span class="s2">some instructions</span><span class="se">\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Task 60 from Parent: parent1 task&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;phase_id&quot;</span><span class="p">:</span> <span class="s2">&quot;Initial&quot;</span><span class="p">,</span>
       <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="n">true</span>
     <span class="p">}</span>
   <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;relations_parent_incident_id&quot;</span><span class="p">:</span> <span class="mi">2795</span><span class="p">,</span>
-    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="mi">615</span>
+    <span class="s2">&quot;relations_parent_incident_id&quot;</span><span class="p">:</span> <span class="mi">2096</span><span class="p">,</span>
+    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="mi">60</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">7216</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2517</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
     <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-relations&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-30 23:29:46&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-17 11:25:51&quot;</span><span class="p">,</span>
     <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -958,7 +1044,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">relations_parent_incident_id</span>
 </pre></div>
@@ -1015,19 +1101,19 @@ Additional package dependencies may exist for each of these packages:</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;child_incident&quot;</span><span class="p">:</span> <span class="mi">2800</span><span class="p">,</span>
-    <span class="s2">&quot;parent_incident&quot;</span><span class="p">:</span> <span class="mi">2799</span>
+    <span class="s2">&quot;child_incident&quot;</span><span class="p">:</span> <span class="mi">2100</span><span class="p">,</span>
+    <span class="s2">&quot;parent_incident&quot;</span><span class="p">:</span> <span class="mi">2096</span>
   <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;relations_child_incident_id&quot;</span><span class="p">:</span> <span class="mi">2802</span><span class="p">,</span>
-    <span class="s2">&quot;relations_remove_notes&quot;</span><span class="p">:</span> <span class="n">true</span>
+    <span class="s2">&quot;relations_child_incident_id&quot;</span><span class="p">:</span> <span class="mi">2100</span><span class="p">,</span>
+    <span class="s2">&quot;relations_remove_notes&quot;</span><span class="p">:</span> <span class="n">false</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">15068</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">3181</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
     <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-relations&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-30 20:44:47&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-17 11:32:10&quot;</span><span class="p">,</span>
     <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -1039,7 +1125,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">relations_child_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">relations_remove_notes</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">relations_remove_notes</span>
@@ -1099,26 +1185,24 @@ Additional package dependencies may exist for each of these packages:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;artifact&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Artifact Synced from incident 2795. created from Sentinel entity: cb1a7e68-4ff3-9aef-4224-e2b3b5adbdbc&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Artifact Synced from incident 2100.&quot;</span><span class="p">,</span>
       <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;String&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;windowsvmos2&quot;</span>
+      <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;child1-2 artifact&quot;</span>
     <span class="p">},</span>
     <span class="s2">&quot;incidents&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="mi">2797</span><span class="p">,</span>
-      <span class="mi">2796</span><span class="p">,</span>
-      <span class="mi">2798</span>
+      <span class="mi">2096</span>
     <span class="p">]</span>
   <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;artifact_id&quot;</span><span class="p">:</span> <span class="mi">3805</span><span class="p">,</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2795</span>
+    <span class="s2">&quot;artifact_id&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
+    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2100</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">5944</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1471</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
     <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-relations&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-30 23:27:26&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-17 11:28:48&quot;</span><span class="p">,</span>
     <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -1130,7 +1214,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">artifact_id</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">id</span>
@@ -1194,40 +1278,40 @@ Additional package dependencies may exist for each of these packages:</p>
       <span class="s2">&quot;cells&quot;</span><span class="p">:</span> <span class="p">{</span>
         <span class="s2">&quot;relations_incident_id&quot;</span><span class="p">:</span> <span class="p">{</span>
           <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;relations_incident_id&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">6786</span><span class="p">,</span>
-          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\&quot;</span><span class="s2">rte</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e\u003c</span><span class="s2">a href=</span><span class="se">\&quot;</span><span class="s2">#incidents/2802</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;\u003e</span><span class="s2">2802</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">&quot;</span>
+          <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\&quot;</span><span class="s2">rte</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e\u003c</span><span class="s2">a href=</span><span class="se">\&quot;</span><span class="s2">#incidents/2102</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;\u003e</span><span class="s2">2102</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">&quot;</span>
         <span class="p">},</span>
         <span class="s2">&quot;relations_incident_name&quot;</span><span class="p">:</span> <span class="p">{</span>
           <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;relations_incident_name&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">6786</span><span class="p">,</span>
-          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;Child 3&quot;</span>
+          <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;child3-1 chg&quot;</span>
         <span class="p">},</span>
         <span class="s2">&quot;relations_incident_status&quot;</span><span class="p">:</span> <span class="p">{</span>
           <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;relations_incident_status&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">6786</span><span class="p">,</span>
-          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;Closed&quot;</span>
+          <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;Active&quot;</span>
         <span class="p">}</span>
       <span class="p">},</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">6786</span><span class="p">,</span>
-      <span class="s2">&quot;inc_id&quot;</span><span class="p">:</span> <span class="mi">2799</span><span class="p">,</span>
-      <span class="s2">&quot;inc_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Parent&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;inc_owner&quot;</span><span class="p">:</span> <span class="s2">&quot;john_doe@company.com&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+      <span class="s2">&quot;inc_id&quot;</span><span class="p">:</span> <span class="mi">2101</span><span class="p">,</span>
+      <span class="s2">&quot;inc_name&quot;</span><span class="p">:</span> <span class="s2">&quot;parent3&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;inc_owner&quot;</span><span class="p">:</span> <span class="s2">&quot;a@example.com&quot;</span><span class="p">,</span>
       <span class="s2">&quot;playbooks&quot;</span><span class="p">:</span> <span class="p">[],</span>
       <span class="s2">&quot;table_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Relations Child Incidents&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type_id&quot;</span><span class="p">:</span> <span class="mi">1043</span><span class="p">,</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">4</span>
+      <span class="s2">&quot;type_id&quot;</span><span class="p">:</span> <span class="mi">1001</span><span class="p">,</span>
+      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">2</span>
     <span class="p">}</span>
   <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;relations_child_incident_id&quot;</span><span class="p">:</span> <span class="mi">2802</span><span class="p">,</span>
-    <span class="s2">&quot;relations_parent_incident_id&quot;</span><span class="p">:</span> <span class="mi">2799</span>
+    <span class="s2">&quot;relations_child_incident_id&quot;</span><span class="p">:</span> <span class="mi">2102</span><span class="p">,</span>
+    <span class="s2">&quot;relations_parent_incident_id&quot;</span><span class="p">:</span> <span class="mi">2101</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2219</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1060</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
     <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-relations&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-30 21:58:36&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-17 11:41:38&quot;</span><span class="p">,</span>
     <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -1239,7 +1323,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
@@ -1262,8 +1346,8 @@ Additional package dependencies may exist for each of these packages:</p>
 </section>
 <hr class="docutils" />
 <section id="function-relations-sync-datatable-data">
-<h2>Function - Relations: Sync Datatable Data<a class="headerlink" href="#function-relations-sync-datatable-data" title="Link to this heading">¶</a></h2>
-<p>A Function used to Sync Datatable Data from the incident where it resides to the parent or children.</p>
+<h2>Function - Relations: Sync DataTable Data<a class="headerlink" href="#function-relations-sync-datatable-data" title="Link to this heading">¶</a></h2>
+<p>A Function used to Sync DataTable Data from the incident where it resides to the parent or child.</p>
 <p><img alt="screenshot: fn-relations-sync-datatable-data " src="../_images/fn-relations-sync-datatable-data.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
@@ -1315,26 +1399,24 @@ Additional package dependencies may exist for each of these packages:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;datatables&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;ldap_users&quot;</span>
+      <span class="s2">&quot;email_conversations&quot;</span>
     <span class="p">],</span>
     <span class="s2">&quot;incidents&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="mi">2797</span><span class="p">,</span>
-      <span class="mi">2796</span><span class="p">,</span>
-      <span class="mi">2798</span>
+      <span class="mi">2097</span>
     <span class="p">],</span>
     <span class="s2">&quot;rows&quot;</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2795</span><span class="p">,</span>
-    <span class="s2">&quot;relations_datatables&quot;</span><span class="p">:</span> <span class="s2">&quot;ldap_users&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2096</span><span class="p">,</span>
+    <span class="s2">&quot;relations_datatables&quot;</span><span class="p">:</span> <span class="s2">&quot;email_conversations&quot;</span><span class="p">,</span>
     <span class="s2">&quot;relations_exclude_datatables&quot;</span><span class="p">:</span> <span class="s2">&quot;dt_relations_child_incidents&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">5321</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1076</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
     <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-relations&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-30 23:41:19&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-17 11:23:17&quot;</span><span class="p">,</span>
     <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -1346,7 +1428,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">relations_datatables</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">relations_datatables_to_sync</span>
@@ -1359,7 +1441,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kc">None</span>
 </pre></div>
@@ -1370,7 +1452,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <hr class="docutils" />
 <section id="function-relations-sync-notes">
 <h2>Function - Relations: Sync Notes<a class="headerlink" href="#function-relations-sync-notes" title="Link to this heading">¶</a></h2>
-<p>Sync notes from the incident where the note is currently to the parent or children.</p>
+<p>Sync notes from the incident where the note is currently to the parent or child.</p>
 <p><img alt="screenshot: fn-relations-sync-notes " src="../_images/fn-relations-sync-notes.png" /></p>
 <details><summary>Inputs:</summary>
 <p>
@@ -1411,21 +1493,21 @@ Additional package dependencies may exist for each of these packages:</p>
   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;new_note&quot;</span><span class="p">:</span> <span class="p">{</span>
       <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Note from Parent Incident: </span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\&quot;</span><span class="s2">#incidents/2799</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;\u003e</span><span class="s2">2799</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e\u003c</span><span class="s2">br</span><span class="se">\u003e</span><span class="s2">Note ID: 609</span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e</span><span class="s2">On Date: 08/30/2023 20:43:40</span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e</span><span class="s2">By: John Doe</span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\u003c</span><span class="s2">br</span><span class="se">\u003e\u003c</span><span class="s2">div class=</span><span class="se">\&quot;</span><span class="s2">rte</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e</span><span class="s2">Reply to the privileged note!</span><span class="se">\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Note from Parent Incident: </span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\&quot;</span><span class="s2">#incidents/2096</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;\u003e</span><span class="s2">2096</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e\u003c</span><span class="s2">br</span><span class="se">\u003e</span><span class="s2">Note ID: 111</span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e</span><span class="s2">On Date: 01/17/2024 11:27:09</span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e</span><span class="s2">By: Resilient Sysadmin</span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\u003c</span><span class="s2">br</span><span class="se">\u003e\u003c</span><span class="s2">div class=</span><span class="se">\&quot;</span><span class="s2">rte</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e</span><span class="s2">parent note</span><span class="se">\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;html&quot;</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2799</span><span class="p">,</span>
-    <span class="s2">&quot;relations_note_id&quot;</span><span class="p">:</span> <span class="mi">609</span>
+    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2096</span><span class="p">,</span>
+    <span class="s2">&quot;relations_note_id&quot;</span><span class="p">:</span> <span class="mi">111</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">5574</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1882</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
     <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-relations&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-30 20:43:56&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-17 11:27:17&quot;</span><span class="p">,</span>
     <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -1437,7 +1519,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">relations_note_id</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">id</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
@@ -1446,7 +1528,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kc">None</span>
 </pre></div>
@@ -1497,23 +1579,22 @@ Additional package dependencies may exist for each of these packages:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">&quot;new_note&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;parent_id&quot;</span><span class="p">:</span> <span class="s2">&quot;409&quot;</span><span class="p">,</span>
       <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Response from Child Incident: </span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\&quot;</span><span class="s2">#incidents/2796</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;\u003e</span><span class="s2">2796</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e\u003c</span><span class="s2">br</span><span class="se">\u003e</span><span class="s2">Task: </span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\&quot;</span><span class="s2">#incidents/2796?taskId=617</span><span class="se">\u0026</span><span class="s2">tabName=comments</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;\u003e</span><span class="s2">Task 615 from Parent: New Task for the Kids</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e\u003c</span><span class="s2">br</span><span class="se">\u003e</span><span class="s2">Note ID: 413</span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e</span><span class="s2">On Date: 08/30/2023 23:31:03</span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e</span><span class="s2">By: John Doe</span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\u003c</span><span class="s2">br</span><span class="se">\u003e\u003c</span><span class="s2">div class=</span><span class="se">\&quot;</span><span class="s2">rte</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e</span><span class="s2">Sure looks like you can!</span><span class="se">\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Note from Child Incident: </span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\&quot;</span><span class="s2">#incidents/2100</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;\u003e</span><span class="s2">2100</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e\u003c</span><span class="s2">br</span><span class="se">\u003e</span><span class="s2">Task: </span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\&quot;</span><span class="s2">#incidents/2100?taskId=62</span><span class="se">\u0026</span><span class="s2">tabName=comments</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;\u003e</span><span class="s2">Task 60 from Parent: parent1 task</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e\u003c</span><span class="s2">br</span><span class="se">\u003e</span><span class="s2">Note ID: 257</span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e</span><span class="s2">On Date: 01/17/2024 11:29:07</span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e</span><span class="s2">By: Resilient Sysadmin</span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\u003c</span><span class="s2">br</span><span class="se">\u003e\u003c</span><span class="s2">div class=</span><span class="se">\&quot;</span><span class="s2">rte</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e</span><span class="s2">new notes from child1-2</span><span class="se">\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
         <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;html&quot;</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">},</span>
   <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;relations_note_id&quot;</span><span class="p">:</span> <span class="mi">413</span><span class="p">,</span>
-    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="mi">617</span>
+    <span class="s2">&quot;relations_note_id&quot;</span><span class="p">:</span> <span class="mi">257</span><span class="p">,</span>
+    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="mi">62</span>
   <span class="p">},</span>
   <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">4242</span><span class="p">,</span>
+    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1171</span><span class="p">,</span>
     <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
     <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-relations&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-30 23:31:10&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.1.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-17 11:29:09&quot;</span><span class="p">,</span>
     <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
   <span class="p">},</span>
   <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
@@ -1525,21 +1606,118 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 </p>
 </details>
-<details><summary>Example Pre-Process Script:</summary>
+<details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">relations_note_id</span> <span class="n">note</span><span class="o">.</span><span class="n">id</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">relations_note_id</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">id</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">id</span>
+
 </pre></div>
 </div>
 </p>
 </details>
-<details><summary>Example Post-Process Script:</summary>
+<details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kc">None</span>
 </pre></div>
 </div>
 </p>
 </details>
+</section>
+<hr class="docutils" />
+<section id="playbooks">
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Activation Type</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Condition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Relations: Assign Parent Incident</p></td>
+<td><p>Change the necessary information to establish a child/parent relationship.</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.relations_level</span> <span class="pre">not_in</span> <span class="pre">['Parent',</span> <span class="pre">'Child']</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Relations: Auto Close Child Incidents</p></td>
+<td><p>Close the incidents of the child incidents when the parent incident is closed.</p></td>
+<td><p>Automatic</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.plan_status</span> <span class="pre">changed_to</span> <span class="pre">Closed</span> <span class="pre">AND</span> <span class="pre">incident.properties.relations_level</span> <span class="pre">equals</span> <span class="pre">Parent</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Relations: Copy Task to Children</p></td>
+<td><p>Copy a task from a parent incident to the children.</p></td>
+<td><p>Manual</p></td>
+<td><p>task</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.relations_level</span> <span class="pre">equals</span> <span class="pre">Parent</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Relations: Remove Child Relation</p></td>
+<td><p>Removes the child incident relation with the parent.</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.relations_level</span> <span class="pre">equals</span> <span class="pre">Child</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Relations: Sync Artifact</p></td>
+<td><p>Sync an artifact to either its parent or children.</p></td>
+<td><p>Manual</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.relations_level</span> <span class="pre">in</span> <span class="pre">['Parent',</span> <span class="pre">'Child']</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Relations: Sync Datatable Data</p></td>
+<td><p>Sync Data from DataTables to the incidents Parent or Child to track data across incidents.</p></td>
+<td><p>Manual</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.relations_level</span> <span class="pre">in</span> <span class="pre">['Parent',</span> <span class="pre">'Child']</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Relations: Sync Note to Children</p></td>
+<td><p>Sync a note from a parent incident to the children incidents.</p></td>
+<td><p>Manual</p></td>
+<td><p>note</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.relations_level</span> <span class="pre">equals</span> <span class="pre">Parent</span> <span class="pre">AND</span> <span class="pre">task.id</span> <span class="pre">not_has_a_value</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Relations: Sync Notes to Parent</p></td>
+<td><p>Sync any new notes created in the child to the parent incident.</p></td>
+<td><p>Automatic</p></td>
+<td><p>note</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.relations_level</span> <span class="pre">equals</span> <span class="pre">Child</span> <span class="pre">AND</span> <span class="pre">incident.properties.relations_parent_id</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">note.text</span> <span class="pre">not_contains</span> <span class="pre">from</span> <span class="pre">parent</span> <span class="pre">incident:</span> <span class="pre">AND</span> <span class="pre">task.id</span> <span class="pre">not_has_a_value</span> <span class="pre">AND</span> <span class="pre">object_added</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Relations: Sync Task Note to Children</p></td>
+<td><p>Sync Copied Task Notes to Children Tasks.</p></td>
+<td><p>Manual</p></td>
+<td><p>note</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.relations_level</span> <span class="pre">equals</span> <span class="pre">Parent</span> <span class="pre">AND</span> <span class="pre">task.id</span> <span class="pre">has_a_value</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Relations: Sync Task Notes to Parent</p></td>
+<td><p>Sync Copied Task Notes to Parent Task.</p></td>
+<td><p>Automatic</p></td>
+<td><p>note</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">incident.properties.relations_level</span> <span class="pre">equals</span> <span class="pre">Child</span> <span class="pre">AND</span> <span class="pre">note.text</span> <span class="pre">not_contains</span> <span class="pre">from</span> <span class="pre">Parent</span> <span class="pre">Incident:</span> <span class="pre">AND</span> <span class="pre">task.id</span> <span class="pre">has_a_value</span> <span class="pre">AND</span> <span class="pre">task.name</span> <span class="pre">contains</span> <span class="pre">from</span> <span class="pre">Parent:</span> <span class="pre">AND</span> <span class="pre">object_added</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Relations: Update Child Table Data</p></td>
+<td><p>Update any data stored in the Child Incidents Data Table on the parent incident if changed, such as if the incident is closed.</p></td>
+<td><p>Automatic</p></td>
+<td><p>incident</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(incident.properties.relations_level</span> <span class="pre">equals</span> <span class="pre">Child</span> <span class="pre">AND</span> <span class="pre">incident.properties.relations_parent_id</span> <span class="pre">has_a_value)</span> <span class="pre">AND</span> <span class="pre">(incident.name</span> <span class="pre">changed</span> <span class="pre">OR</span> <span class="pre">incident.plan_status</span> <span class="pre">changed)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <hr class="docutils" />
 <section id="data-table-relations-child-incidents">
@@ -1596,19 +1774,19 @@ Additional package dependencies may exist for each of these packages:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Relation Level</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">relations_level</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
-<td><p>-</p></td>
-<td><p>Is this incident considered a Parent or Child incident?</p></td>
-</tr>
-<tr class="row-odd"><td><p>Parent ID</p></td>
+<tr class="row-even"><td><p>Parent ID</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">relations_parent_id</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
 <td><p>-</p></td>
 <td><p>Incident Number of the Parent Incident</p></td>
+</tr>
+<tr class="row-odd"><td><p>Relation Level</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">relations_level</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">properties</span></code></p></td>
+<td><p>-</p></td>
+<td><p>Is this incident considered a Parent or Child incident?</p></td>
 </tr>
 </tbody>
 </table>
@@ -1628,67 +1806,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <tbody>
 <tr class="row-even"><td><p>Related Parent Incident</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">related_parent_incident</span></code></p></td>
-<td><p>Incident ID of the parent of all related incidents to create a relation within QRadar SOAR incidents manually.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<hr class="docutils" />
-<section id="rules">
-<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Rule Name</p></th>
-<th class="head"><p>Object</p></th>
-<th class="head"><p>Playbook Triggered</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Relations: Assign Parent Incident</p></td>
-<td><p>incident</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">relations_assign_parent</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Relations: Close Child Incidents</p></td>
-<td><p>incident</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">relations_auto_close_child_incidents</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Relations: Remove Child Relation</p></td>
-<td><p>incident</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">relations_remove_child_relation</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Relations: Send Task to Children</p></td>
-<td><p>task</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">relations_send_task_to_children</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Relations: Sync Artifact</p></td>
-<td><p>artifact</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">relations_sync_artifact_to_parentchild</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Relations: Sync Datatable Data</p></td>
-<td><p>incident</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">relations_sync_datatable_data_to_parentchild</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Relations: Sync Notes with Child</p></td>
-<td><p>note</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">relations_sync_notes_to_parentchild</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Relations: Sync Notes with Parent</p></td>
-<td><p>note</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">relations_sync_notes_to_parentchild</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Relations: Sync Task Note to Child</p></td>
-<td><p>note</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">relations_sync_task_notes_to_parentchild</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Relations: Sync Task Notes to Parent</p></td>
-<td><p>note</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">relations_sync_task_notes_to_parentchild</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Relations: Update Child Incident Parent Data Table</p></td>
-<td><p>incident</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">relations_update_child_table_data</span></code></p></td>
+<td><p>Incident ID of the parent of all related incidents to create a relation within Resilient incidents manually.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1700,7 +1818,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>Refer to the documentation listed in the Requirements section for troubleshooting information.</p>
 <section id="for-support">
 <h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
-<p>This is a IBM Supported provided App. Please search the Community <a class="reference external" href="https://ibm.biz/soarcommunity">ibm.biz/soarcommunity</a> for assistance or <a class="reference external" href="https://ibm.com/mysupport">open a support case</a>.</p>
+<p>This is a IBM Community provided app. Please search the Community <a class="reference external" href="https://ibm.biz/soarcommunity">ibm.biz/soarcommunity</a> for assistance.</p>
 </section>
 </section>
 </section>
@@ -1789,9 +1907,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <li><a class="reference internal" href="#function-relations-remove-child-relation">Function - Relations: Remove Child Relation</a></li>
 <li><a class="reference internal" href="#function-relations-sync-artifact">Function - Relations: Sync Artifact</a></li>
 <li><a class="reference internal" href="#function-relations-sync-child-table-data">Function - Relations: Sync Child Table Data</a></li>
-<li><a class="reference internal" href="#function-relations-sync-datatable-data">Function - Relations: Sync Datatable Data</a></li>
+<li><a class="reference internal" href="#function-relations-sync-datatable-data">Function - Relations: Sync DataTable Data</a></li>
 <li><a class="reference internal" href="#function-relations-sync-notes">Function - Relations: Sync Notes</a></li>
 <li><a class="reference internal" href="#function-relations-sync-task-notes">Function - Relations: Sync Task Notes</a></li>
+<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
 <li><a class="reference internal" href="#data-table-relations-child-incidents">Data Table - Relations Child Incidents</a><ul>
 <li><a class="reference internal" href="#api-name">API Name:</a></li>
 <li><a class="reference internal" href="#columns">Columns:</a></li>
@@ -1799,7 +1918,6 @@ Additional package dependencies may exist for each of these packages:</p>
 </li>
 <li><a class="reference internal" href="#custom-fields">Custom Fields</a></li>
 <li><a class="reference internal" href="#custom-artifact-types">Custom Artifact Types</a></li>
-<li><a class="reference internal" href="#rules">Rules</a></li>
 <li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
 <li><a class="reference internal" href="#for-support">For Support</a></li>
 </ul>
