@@ -1,0 +1,77 @@
+{
+    "version": "1.0",
+    "success": true,
+    "reason": "",
+    "content": {
+      "hashes": {
+        "sha1": "d5dd920be5bcfe******5da4b6d0ccca0727d692"
+      },
+      "oldReputations": {
+        "3": {
+          "createDate": 1608652058,
+          "providerId": 3,
+          "trustLevel": 50,
+          "attributes": {
+            "2101652": "1",
+            "2123156": "0",
+            "2098277": "0",
+            "2102165": "1608652058",
+            "2114965": "1",
+            "2111893": "4",
+            "2139285": "216172786408751223"
+          }
+        },
+        "1": {
+          "createDate": 1608652105,
+          "providerId": 1,
+          "trustLevel": 1,
+          "attributes": {
+            "2120340": "2134902792"
+          }
+        }
+      },
+      "newReputations": {
+        "3": {
+          "createDate": 1608652058,
+          "providerId": 3,
+          "trustLevel": 99,
+          "attributes": {
+            "2101652": "1",
+            "2123156": "0",
+            "2098277": "0",
+            "2102165": "1608652058",
+            "2114965": "1",
+            "2111893": "4",
+            "2139285": "216172786408751223"
+          }
+        },
+        "1": {
+          "createDate": 1608652105,
+          "providerId": 1,
+          "trustLevel": 1,
+          "attributes": {
+            "2120340": "2134902792"
+          }
+        }
+      },
+      "updateTime": 1608669082
+    },
+    "raw": {"hashes": {"sha1": "d5dd920b******904e95da4b6d0ccca0727d692"}, "oldReputations": {"3": {"createDate": 1608652058, "providerId": 3, "trustLevel": 50, "attributes": {"2101652": "1", "2123156": "0", "2098277": "0", "2102165": "1608652058", "2114965": "1", "2111893": "4", "2139285": "216172786408751223"}}, "1": {"createDate": 1608652105, "providerId": 1, "trustLevel": 1, "attributes": {"2120340": "2134902792"}}}, "newReputations": {"3": {"createDate": 1608652058, "providerId": 3, "trustLevel": 99, "attributes": {"2101652": "1", "2123156": "0", "2098277": "0", "2102165": "1608652058", "2114965": "1", "2111893": "4", "2139285": "216172786408751223"}}, "1": {"createDate": 1608652105, "providerId": 1, "trustLevel": 1, "attributes": {"2120340": "2134902792"}}}, "updateTime": 1608669082},
+    "inputs": {
+      "mcafee_tie_hash_type": "Malware SHA-1 Hash",
+      "mcafee_tie_hash": "D5DD920BE5BC******E95DA4B6D0CCCA0727D692",
+      "mcafee_tie_trust_level": {
+        "id": 880,
+        "name": "Known Trusted"
+      },
+      "mcafee_tie_comment": ""
+    },
+    "metrics": {
+      "version": "1.0",
+      "package": "fn-mcafee-tie",
+      "package_version": "1.1.0",
+      "host": "Marks-MacBook-Pro.local",
+      "execution_time_ms": 5048,
+      "timestamp": "2020-12-22 15:31:27"
+    }
+}

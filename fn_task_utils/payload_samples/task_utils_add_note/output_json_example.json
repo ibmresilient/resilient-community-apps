@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "task_note": {
+      "type": "task",
+      "id": 298,
+      "parent_id": null,
+      "user_id": 5,
+      "user_fname": "admin",
+      "user_lname": "example",
+      "text": "<div>admin example (admin&#x40;example.com) added a note:<br/>test</div>",
+      "create_date": 1751637194035,
+      "modify_date": 1751637194035,
+      "children": [],
+      "mentioned_users": [],
+      "is_deleted": false,
+      "modify_user": {
+        "id": 5,
+        "first_name": "admin",
+        "last_name": "example"
+      },
+      "actions": [],
+      "playbooks": [],
+      "inc_id": 2117,
+      "inc_name": "Test_task_utils",
+      "task_id": 302,
+      "task_name": "Sample_task",
+      "task_custom": true,
+      "task_members": null,
+      "task_at_id": null,
+      "inc_owner": 5,
+      "user_name": "admin example",
+      "modify_principal": {
+        "id": 5,
+        "type": "user",
+        "name": "admin@example.com",
+        "display_name": "admin example"
+      },
+      "comment_perms": {
+        "update": true,
+        "delete": true
+      }
+    }
+  },
+  "raw": "",
+  "inputs": {
+    "task_name": "Sample_task",
+    "incident_id": 2117,
+    "task_utils_note_type": {
+      "id": 302,
+      "name": "text"
+    },
+    "task_utils_note_body": "test"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "unknown",
+    "package_version": "unknown",
+    "host": "my.app.host",
+    "execution_time_ms": 1808,
+    "timestamp": "2025-07-04 14:53:15"
+  }
+}

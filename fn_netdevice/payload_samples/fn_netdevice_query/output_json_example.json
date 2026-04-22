@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "docker": {
+      "send_command": "ls",
+      "send_result": "\nintermediate.cer  snap",
+      "status": "success"
+    }
+  },
+  "raw": "",
+  "inputs": {
+    "netdevice_ids": "docker",
+    "netdevice_use_textfsm": false,
+    "netdevice_send_cmd": "ls"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-netdevice",
+    "package_version": "1.1.1",
+    "host": "my.app.host",
+    "execution_time_ms": 14006,
+    "timestamp": "2025-04-01 15:18:47"
+  }
+}
