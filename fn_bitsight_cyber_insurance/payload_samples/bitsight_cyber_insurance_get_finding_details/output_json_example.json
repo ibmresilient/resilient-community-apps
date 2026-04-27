@@ -1,0 +1,184 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "temporary_id": "A9Jq47BBje5203d5b107bb1ef688e5290e3021685f4786023f325d86ef3884fe15d76c14a5",
+      "affects_rating": true,
+      "assets": [
+        {
+          "asset": "saperix.com",
+          "identifier": null,
+          "category": "low",
+          "importance": 0.0,
+          "is_ip": false,
+          "asset_type": "Domain",
+          "is_monitored": false
+        }
+      ],
+      "details": {
+        "cvss": {
+          "base": []
+        },
+        "check_pass": "***",
+        "diligence_annotations": {
+          "message": "DNSSEC is not configured on this domain",
+          "annotation_tokens": [
+            {
+              "***": "dns.no_dnssec_on_domain",
+              "values": []
+            }
+          ],
+          "security outcome": "Provably Insecure",
+          "dnskeys": [],
+          "***": [],
+          "reason": "{{saperix.com./DNSKEY}} does not have a validated chain of trust",
+          "dses": [],
+          "nsecs": [
+            {
+              "recordType": "NSEC3",
+              "algorithm": "SHA1",
+              "flags": "Opt-out",
+              "iterations": 0,
+              "nextHash": "7tljso37jdfmo5go4kctqtc3sg8ikan6",
+              "prevHash": "7TLJF311GL3UM2MIM44C9QB4L1MJRTO3",
+              "salt": "-",
+              "recordHash": "7tljqejgqkadoviqpav2ttv4k40ver77",
+              "types": "NS DS RRSIG"
+            }
+          ]
+        },
+        "grade": "NEUTRAL",
+        "remediations": [
+          {
+            "message": "DNSSEC is not configured on this domain",
+            "help_text": "This domain is missing a DNSKEY record and therefore cannot be authenticated using DNSSEC.",
+            "remediation_tip": "You will need to set up DNSSEC for your domain, including generating necessary keys and updating DNS zone records accordingly. See this <a target=\"new\" href=\"https://www.digitalocean.com/community/tutorials/how-to-setup-dnssec-on-an-authoritative-bind-dns-server--2\">DigitalOcean guide</a> for instructions which may be applicable to your server configuration, as well as <a target=\"new\" href=\"http://www.dnssec.net/practical-documents\">dnssec.net</a> for practical documents related to DNSSEC setup."
+          }
+        ],
+        "sample_timestamp": "2025-04-13T12:02:51Z",
+        "vulnerabilities": [],
+        "rollup_end_date": "2025-04-13",
+        "rollup_start_date": "2024-01-20",
+        "searchable_details": "DNSSEC is not configured on this domain"
+      },
+      "evidence_key": "***",
+      "first_seen": "2024-01-20",
+      "last_seen": "2025-04-13",
+      "related_findings": [],
+      "risk_category": "Diligence",
+      "risk_vector": "dnssec",
+      "risk_vector_label": "DNSSEC",
+      "rolledup_observation_id": "rPFFNU9KxWPvS55FgjhbEQ==",
+      "severity": 1.0,
+      "severity_category": "minor",
+      "tags": [],
+      "remediation_history": {
+        "last_requested_refresh_date": null,
+        "last_refresh_status_date": null,
+        "last_refresh_status_label": null,
+        "last_refresh_status_reason": null,
+        "last_refresh_reason_code": null,
+        "last_refresh_requester": null,
+        "result_finding_date": null
+      },
+      "duration": null,
+      "comments": null,
+      "remaining_decay": 59,
+      "remediated": null,
+      "impacts_risk_vector_details": "AFFECTS_RATING",
+      "grace_period_end_date": null
+    },
+    {
+      "temporary_id": "A9Jq47BBjeb903751c1ff8a4aaa0329e0ded23d87e940c27bfe5f4b56e0749e18b27f30bee",
+      "affects_rating": true,
+      "assets": [
+        {
+          "asset": "saperix.com",
+          "identifier": null,
+          "category": "low",
+          "importance": 0.0,
+          "is_ip": false,
+          "asset_type": "Domain",
+          "is_monitored": false
+        }
+      ],
+      "details": {
+        "cvss": {
+          "base": []
+        },
+        "check_pass": "***",
+        "diligence_annotations": {
+          "message": "Record does not exist",
+          "annotation_tokens": [
+            {
+              "***": "dmarc.no_record",
+              "values": []
+            }
+          ],
+          "record": [
+            []
+          ],
+          "percentage": 0,
+          "policy": "NOT_SET",
+          "ruaReportEmail": [],
+          "rufReportEmail": []
+        },
+        "grade": "BAD",
+        "remediations": [
+          {
+            "message": "Record does not exist",
+            "help_text": "The domain does not have a DMARC record in place.",
+            "remediation_tip": "See <a href=\"https://help.bitsight.com/hc/en-us/articles/23007682932247-Setting-a-DMARC-Policy\">how to set a DMARC policy</a> and implement a DMARC policy for this domain."
+          }
+        ],
+        "sample_timestamp": "2025-04-12T21:29:39Z",
+        "vulnerabilities": [],
+        "rollup_end_date": "2025-04-12",
+        "rollup_start_date": "2024-03-31"
+      },
+      "evidence_key": "***",
+      "first_seen": "2024-03-31",
+      "last_seen": "2025-04-12",
+      "related_findings": [],
+      "risk_category": "Diligence",
+      "risk_vector": "dmarc",
+      "risk_vector_label": "DMARC",
+      "rolledup_observation_id": "mwiQBQcVjbtfZ7f95I95Xw==",
+      "severity": 8.0,
+      "severity_category": "material",
+      "tags": [],
+      "remediation_history": {
+        "last_requested_refresh_date": null,
+        "last_refresh_status_date": null,
+        "last_refresh_status_label": null,
+        "last_refresh_status_reason": null,
+        "last_refresh_reason_code": null,
+        "last_refresh_requester": null,
+        "result_finding_date": null
+      },
+      "duration": null,
+      "comments": null,
+      "remaining_decay": 58,
+      "remediated": null,
+      "impacts_risk_vector_details": "AFFECTS_RATING",
+      "grace_period_end_date": null
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "bitsight_ci_affects_rating_details": "AFFECTS_RATING",
+    "bitsight_ci_company_guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "bitsight_ci_limit": 2,
+    "bitsight_ci_affects_rating": true
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-bitsight-cyber-insurance",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 1110,
+    "timestamp": "2025-04-14 13:50:45"
+  }
+}

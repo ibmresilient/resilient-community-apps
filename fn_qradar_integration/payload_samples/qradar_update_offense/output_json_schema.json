@@ -1,0 +1,295 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "version": {
+        "type": "integer"
+      },
+      "success": {
+        "type": "boolean"
+      },
+      "reason": {
+        "type": "null"
+      },
+      "content": {
+        "type": "object",
+        "properties": {
+          "last_persisted_time": {
+            "type": "integer"
+          },
+          "username_count": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "string"
+          },
+          "rules": {
+            "type": "array",
+            "items": [
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "type": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "type"
+                ]
+              }
+            ]
+          },
+          "event_count": {
+            "type": "integer"
+          },
+          "flow_count": {
+            "type": "integer"
+          },
+          "assigned_to": {
+            "type": "null"
+          },
+          "security_category_count": {
+            "type": "integer"
+          },
+          "follow_up": {
+            "type": "boolean"
+          },
+          "source_address_ids": {
+            "type": "array",
+            "items": [
+              {
+                "type": "integer"
+              }
+            ]
+          },
+          "source_count": {
+            "type": "integer"
+          },
+          "inactive": {
+            "type": "boolean"
+          },
+          "protected": {
+            "type": "boolean"
+          },
+          "closing_user": {
+            "type": "string"
+          },
+          "destination_networks": {
+            "type": "array",
+            "items": [
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "source_network": {
+            "type": "string"
+          },
+          "category_count": {
+            "type": "integer"
+          },
+          "close_time": {
+            "type": "integer"
+          },
+          "remote_destination_count": {
+            "type": "integer"
+          },
+          "start_time": {
+            "type": "integer"
+          },
+          "magnitude": {
+            "type": "integer"
+          },
+          "last_updated_time": {
+            "type": "integer"
+          },
+          "credibility": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "categories": {
+            "type": "array",
+            "items": [
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "severity": {
+            "type": "integer"
+          },
+          "policy_category_count": {
+            "type": "integer"
+          },
+          "log_sources": {
+            "type": "array",
+            "items": [
+              {
+                "type": "object",
+                "properties": {
+                  "type_name": {
+                    "type": "string"
+                  },
+                  "type_id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "integer"
+                  }
+                },
+                "required": [
+                  "type_name",
+                  "type_id",
+                  "name",
+                  "id"
+                ]
+              }
+            ]
+          },
+          "closing_reason_id": {
+            "type": "integer"
+          },
+          "device_count": {
+            "type": "integer"
+          },
+          "first_persisted_time": {
+            "type": "integer"
+          },
+          "offense_type": {
+            "type": "integer"
+          },
+          "relevance": {
+            "type": "integer"
+          },
+          "domain_id": {
+            "type": "integer"
+          },
+          "offense_source": {
+            "type": "string"
+          },
+          "local_destination_address_ids": {
+            "type": "array",
+            "items": {}
+          },
+          "local_destination_count": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "last_persisted_time",
+          "username_count",
+          "description",
+          "rules",
+          "event_count",
+          "flow_count",
+          "assigned_to",
+          "security_category_count",
+          "follow_up",
+          "source_address_ids",
+          "source_count",
+          "inactive",
+          "protected",
+          "closing_user",
+          "destination_networks",
+          "source_network",
+          "category_count",
+          "close_time",
+          "remote_destination_count",
+          "start_time",
+          "magnitude",
+          "last_updated_time",
+          "credibility",
+          "id",
+          "categories",
+          "severity",
+          "policy_category_count",
+          "log_sources",
+          "closing_reason_id",
+          "device_count",
+          "first_persisted_time",
+          "offense_type",
+          "relevance",
+          "domain_id",
+          "offense_source",
+          "local_destination_address_ids",
+          "local_destination_count",
+          "status"
+        ]
+      },
+      "raw": {
+        "type": "null"
+      },
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "qradar_update_json": {
+            "type": "string"
+          },
+          "qradar_id": {
+            "type": "integer"
+          },
+          "qradar_label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "qradar_update_json",
+          "qradar_id",
+          "qradar_label"
+        ]
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "package": {
+            "type": "string"
+          },
+          "package_version": {
+            "type": "string"
+          },
+          "host": {
+            "type": "string"
+          },
+          "execution_time_ms": {
+            "type": "integer"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "version",
+          "package",
+          "package_version",
+          "host",
+          "execution_time_ms",
+          "timestamp"
+        ]
+      }
+    },
+    "required": [
+      "version",
+      "success",
+      "reason",
+      "content",
+      "raw",
+      "inputs",
+      "metrics"
+    ]
+  }
+  

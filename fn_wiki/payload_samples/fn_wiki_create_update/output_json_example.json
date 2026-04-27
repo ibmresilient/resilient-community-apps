@@ -1,0 +1,45 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": 1,
+    "title": "test page \u03a3\u03a4",
+    "children": [],
+    "text": "test of fn_wiki_create_update\u03a3 \u03a4 ",
+    "creator": {
+      "id": 39,
+      "type": "user",
+      "name": "shresh@example.com",
+      "display_name": "Resilient Sysadmin"
+    },
+    "create_date": 1743079240704,
+    "last_modified_time": 1743079240704,
+    "last_modified_by": {
+      "id": 39,
+      "type": "user",
+      "name": "shresh@example.com",
+      "display_name": "Resilient Sysadmin"
+    },
+    "mentioned_widgets": [],
+    "perms": {
+      "update": true,
+      "delete": true
+    },
+    "parent": null
+  },
+  "raw": "",
+  "inputs": {
+    "wiki_path": "test page \u03a3\u03a4",
+    "wiki_body": "test of fn_wiki_create_update\u03a3 \u03a4 ",
+    "wiki_create_if_missing": true
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-wiki",
+    "package_version": "1.0.1",
+    "host": "my.app.host",
+    "execution_time_ms": 624,
+    "timestamp": "2025-03-27 12:40:40"
+  }
+}

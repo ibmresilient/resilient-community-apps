@@ -1,0 +1,89 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "assets": [
+      {
+        "internal_axon_id": "ca1df3031a00*******a086272f2b6",
+        "adapters": [
+          "cisco_meraki_adapter",
+          "counter_act_adapter",
+          "crowd_strike_adapter",
+          "deep_security_adapter",
+          "epo_adapter",
+          "google_mdm_adapter",
+          "paloalto_panorama_adapter",
+          "sccm_adapter",
+          "service_now_adapter",
+          "tanium_adapter",
+          "tanium_asset_adapter",
+          "zoom_adapter"
+        ],
+        "adapter_list_length": 12,
+        "labels": [
+          "Shirley"
+        ],
+        "specific_data.data.hostname_preferred": "DESKTOP-shirleyc",
+        "specific_data.data.last_used_users_departments_association": [
+          "Legal",
+          "Product"
+        ],
+        "specific_data.data.name": [
+          "DESKTOP-shirleyc",
+          "DESKTOP-shirleyc",
+          "DESKTOP-shirleyc",
+          "DESKTOP-shirleyc",
+          "DESKTOP-shirleyc",
+          "DESKTOP-shirleyc"
+        ],
+        "specific_data.data.os.type_distribution": [
+          "Windows XP",
+          "Windows XP",
+          "Windows XP",
+          "Windows XP",
+          "Windows XP",
+          "Windows XP",
+          "Windows XP"
+        ],
+        "specific_data.data.last_used_users": [
+          "shirley.cook@demo.local",
+          "van.greer@demo.local",
+          "shirley.cook@demo.local",
+          "van.greer@demo.local",
+          "shirley.cook@demo.local",
+          "van.greer@demo.local",
+          "shirley.cook@demo.local",
+          "van.greer@demo.local"
+        ],
+        "specific_data.data.network_interfaces.ips_preferred": [
+          "10.0.50.111"
+        ],
+        "specific_data.data.last_used_users_mail_association": [
+          "shirley.cook@demo.local",
+          "van.greer@demo.local"
+        ]
+      }
+    ],
+    "device_count": 1,
+    "endpoint_url": "https://myaxonius.on.axonius.com"
+  },
+  "raw": null,
+  "inputs": {
+    "axonius_write_attachment": false,
+    "axonius_field_name_list": "[\"specific_data.data.network_interfaces.ips_preferred\", \"specific_data.data.name\", \"specific_data.data.hostname_preferred\", \"specific_data.data.owner\", \"specific_data.data.last_used_users_mail_association\", \"specific_data.data.os.type_distribution\", \"specific_data.data.last_used_users\", \"specific_data.data.last_used_users_departments_association\", \"specific_data.data.hard_drives.encryption_status\", \"specific_data.data.device_disabled\", \"specific_data.data.network_interfaces.security_level_preferred\", \"specific_data.data.network_interfaces.region_preferred\", \"specific_data.data.network_interfaces.country_preferred\", \"labels\"]",
+    "axonius_saved_query_name": null,
+    "axonius_query_string": "(\"specific_data.data.hostname\" == \"DESKTOP-shirleyc\")",
+    "axonius_incident_id": 2144,
+    "axonius_task_id": null,
+    "axonius_device_limit": 1
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-axonius",
+    "package_version": "1.0.0",
+    "host": "mylaptop",
+    "execution_time_ms": 24906,
+    "timestamp": "2024-03-21 16:41:51"
+  }
+}

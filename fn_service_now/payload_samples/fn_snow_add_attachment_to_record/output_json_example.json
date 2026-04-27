@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "success": true,
+    "inputs": {
+      "attachment_id": 2,
+      "incident_id": 2117,
+      "task_id": null
+    },
+    "res_id": "RES-2117",
+    "sn_ref_id": "SIR0010024",
+    "attachment_name": "sample_attachment.png",
+    "sn_attachment_sys_id": "ef44473e1b4d09103351ca2b234bcbc6"
+  },
+  "raw": "{\"success\": true, \"inputs\": {\"attachment_id\": 2, \"incident_id\": 2117, \"task_id\": null}, \"res_id\": \"RES-2117\", \"sn_ref_id\": \"SIR0010024\", \"attachment_name\": \"sample_attachment.png\", \"sn_attachment_sys_id\": \"ef44473e1b4d09103351ca2b234bcbc6\"}",
+  "inputs": {
+    "attachment_id": 2,
+    "incident_id": 2117,
+    "task_id": null
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-service-now",
+    "package_version": "2.0.0",
+    "host": "myhost",
+    "execution_time_ms": 1485,
+    "timestamp": "1971-01-01 00:00:00"
+  },
+  "res_id": "RES-2117",
+  "sn_ref_id": "SIR0010024",
+  "attachment_name": "sample_attachment.png",
+  "sn_attachment_sys_id": "ef44473e1b4d09103351ca2b234bcbc6"
+}

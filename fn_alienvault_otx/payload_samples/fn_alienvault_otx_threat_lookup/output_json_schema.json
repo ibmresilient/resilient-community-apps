@@ -1,0 +1,145 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "content": {
+      "type": "object",
+      "properties": {
+        "sections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "whois": {
+          "type": "string"
+        },
+        "alexa": {
+          "type": "string"
+        },
+        "indicator": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "type_title": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "validation": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "source": {
+                "type": "string"
+              },
+              "message": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "base_indicator": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "indicator": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            },
+            "access_type": {
+              "type": "string"
+            },
+            "access_reason": {
+              "type": "string"
+            }
+          }
+        },
+        "pulse_info": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "integer"
+            },
+            "pulses": {
+              "type": "array"
+            },
+            "references": {
+              "type": "array"
+            },
+            "related": {
+              "type": "object",
+              "properties": {
+                "alienvault": {
+                  "type": "object",
+                  "properties": {
+                    "adversary": {
+                      "type": "array"
+                    },
+                    "malware_families": {
+                      "type": "array"
+                    },
+                    "industries": {
+                      "type": "array"
+                    }
+                  }
+                },
+                "other": {
+                  "type": "object",
+                  "properties": {
+                    "adversary": {
+                      "type": "array"
+                    },
+                    "malware_families": {
+                      "type": "array"
+                    },
+                    "industries": {
+                      "type": "array"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "false_positive": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "assessment": {
+                "type": "string"
+              },
+              "assessment_date": {
+                "type": "integer"
+              },
+              "report_date": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
