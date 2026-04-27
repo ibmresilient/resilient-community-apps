@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+# <<PUT YOUR COPYRIGHT TEXT HERE>>
+# Generated with resilient-sdk v51.0.7.2.16540
 
-"""Generate the Resilient customizations required for rc_data_feed_plugin_resilientfeed"""
+"""Generate the SOAR customizations required for resilientfeed"""
 
 import base64
 import os
@@ -16,21 +18,39 @@ RES_FILE = "data/export.res"
 
 def codegen_reload_data():
     """
-    Parameters required reload codegen for the rc_data_feed_plugin_resilientfeed package
+    Parameters required reload codegen for the resilientfeed package
     """
     return {
-        "package": u"rc_data_feed_plugin_resilientfeed",
-        "message_destinations": [u"feed_data", "feed_data_resilient"],
-        "functions": [],
+        "package": u"resilientfeed",
+        "message_destinations": [
+            u"feed_data_resilient"
+        ],
+        "functions": [
+            u"data_feeder_sync_incidents"
+        ],
         "workflows": [],
-        "actions": [u"Data Feeder: Artifact", u"Data Feeder: Note", u"Data Feeder: Attachment", u"Data Feeder: Sync Incidents", u"Data Feeder: Task", u"Data Feeder: Milestone", u"Data Feeder: Incident"],
-        "incident_fields": ["df_org_id", "df_inc_id", "df_create_date", "df_host"],
+        "actions": [
+            u"Data Feeder: Artifact",
+            u"Data Feeder: Attachment",
+            u"Data Feeder: Incident",
+            u"Data Feeder: Milestone",
+            u"Data Feeder: Note",
+            u"Data Feeder: Task"
+        ],
+        "incident_fields": [
+            u"df_create_date",
+            u"df_host",
+            u"df_inc_id",
+            u"df_org_id"
+        ],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": ["data_feeder_sync_incidents_pb"]
+        "playbooks": [
+            u"data_feeder_sync_incidents_pb"
+        ]
     }
 
 
@@ -39,27 +59,27 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 45.0
+    IBM SOAR Platform Version: 51.0.4.0.10290
 
     Contents:
     - Message Destinations:
-        - feed_data_unused
         - feed_data_resilient
+    - Functions:
+        - data_feeder_sync_incidents
     - Playbooks:
         - data_feeder_sync_incidents_pb
     - Rules:
         - Data Feeder: Artifact
-        - Data Feeder: Note
         - Data Feeder: Attachment
-        - Data Feeder: Sync Incidents
-        - Data Feeder: Task
-        - Data Feeder: Milestone
         - Data Feeder: Incident
+        - Data Feeder: Milestone
+        - Data Feeder: Note
+        - Data Feeder: Task
     - Incident Fields:
-        - df_org_id
-        - df_host
         - df_create_date
+        - df_host
         - df_inc_id
+        - df_org_id
     """
 
     res_file = os.path.join(os.path.dirname(__file__), RES_FILE)

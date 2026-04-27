@@ -1,1 +1,1 @@
-https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_datatable_utils/main/2.1/app-fn_datatable_utils-2.1.1-28769.zip
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_datatable_utils/main/2.1/app-fn_datatable_utils-2.1.1-29709.zip

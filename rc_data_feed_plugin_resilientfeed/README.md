@@ -19,6 +19,7 @@ Unless otherwise specified, contents of this repository are published under the 
 ## History
 | Date | Version | Notes |
 | ---: | ------: | ----: |
+| 4/2026 | 2.1.1 | Fixed missing custom fields preventing incident sync |
 | 9/2024 | 2.1.0 | Custom artifact types supported |
 | 5/2024 | 2.0.0 | Bi-directional synchronization between _source_ and _destination_ SOAR organizations |
 | 4/2024 | 1.1.0 | Enhancements for datatable select/multi-select fields. Fixes for synchronizing task attachments and notes. Threaded updates for better performance. |
@@ -160,8 +161,7 @@ The following configuration items are supported:
 | sync_role_source | true\|false | Specify 'True' to identify this SOAR organization as the *source* SOAR. 'False' represents the _destination_ SOAR. The default is 'True'. |
 
 ## Requirements
-* This functionality has been tested with QRadar SOAR instances >= v48. 
-There is presently an issue with v37.0 restricting the live synchronization of a newly deleted artifact. If this capability is critical to your requirements, use QRadar SOAR version >=v37.1.
+* This functionality has been tested with QRadar SOAR instances >=51.0.4.0. 
 * The _destination_ QRadar SOAR platform must be at the same version or greater than the _source_ QRadar SOAR platform.
 * The _destination_ QRadar SOAR organization must have the same set of custom fields, datatables, incident types, playbooks (tasks and phases) in order to synchronize incident data. Use the export/import functionality under `Administrator Settings`.
 * The _destination_ QRadar SOAR organization should have the same users and groups defined. For any user or group not found, incident and task ownership as well as member lists will be left empty. 
