@@ -397,7 +397,7 @@
       "tags": [],
       "templates": [],
       "text": "Technique Name",
-      "tooltip": "MITRE ATT\u0026CK technique\u0027s name",
+      "tooltip": "MITRE ATT\u0026CK technique\u0027s name (required if Technique ID is not provided)",
       "type_id": 6,
       "uuid": "947b6d17-985a-4173-bd8f-3bdb5973af20",
       "values": []
@@ -428,7 +428,7 @@
       "tags": [],
       "templates": [],
       "text": "Tactic Name",
-      "tooltip": "MITRE ATT\u0026CK tactic\u0027s name",
+      "tooltip": "MITRE ATT\u0026CK tactic\u0027s name (required if Tactic ID is not provided)",
       "type_id": 6,
       "uuid": "96cd1cb3-0bdd-4a57-9706-a33f60eb0c59",
       "values": []
@@ -490,7 +490,7 @@
       "tags": [],
       "templates": [],
       "text": "Tactic ID",
-      "tooltip": "MITRE ATT\u0026CK\u0027s ID of a tactic",
+      "tooltip": "MITRE ATT\u0026CK\u0027s ID of a tactic (required if Tactic Name is not provided)",
       "type_id": 6,
       "uuid": "205a5789-e4b6-491f-9d07-8fc282e8ab15",
       "values": []
@@ -521,7 +521,7 @@
       "tags": [],
       "templates": [],
       "text": "Technique ID",
-      "tooltip": "MITRE ATT\u0026CK technique\u0027s ID",
+      "tooltip": "MITRE ATT\u0026CK technique\u0027s ID (required if Technique Name is not provided)",
       "type_id": 6,
       "uuid": "3fb85bf8-2b6e-420e-a72b-b36665c2c293",
       "values": []

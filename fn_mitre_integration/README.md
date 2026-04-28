@@ -43,6 +43,7 @@
 | 2.1.0 | 10/2024 | Added verify support |
 | 2.2.0 | 01/2025 | Support for TAXII2.1 APIs |
 | 2.2.1 | 02/2025 | Version correction for SOAR 51.0.0 |
+| 2.2.2 | 04/2026 | Updated tooltips to clarify mandatory field requirements |
 
 ### v2.1.0
 
@@ -119,6 +120,43 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 ### Proxy Server
 The app **does** support a proxy server.
 
+### Network Requirements
+
+This app requires outbound HTTPS (port 443) access to the following MITRE ATT&CK servers:
+
+| Hostname | IP Address(es) | Port | Purpose |
+| -------- | -------------- | ---- | ------- |
+| **attack-taxii.mitre.org** | 54.205.119.123, 100.49.57.179 | 443 | Primary TAXII 2.1 server for ATT&CK data |
+| **attack.mitre.org** | 185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153 | 443 | ATT&CK framework website and reference links |
+| **cti-taxii.mitre.org** | 3.221.214.19 | 443 | Legacy TAXII server (used in tools directory) |
+
+**Note:** IP addresses may change over time. MITRE uses cloud infrastructure (AWS ELB and GitHub Pages), so IP addresses are subject to change.
+
+#### DNS Configuration
+
+If your environment does not have DNS configured or you need to manually configure hostname resolution, you can use the App Host's DNS management command:
+
+```bash
+# For attack-taxii.mitre.org (primary TAXII server)
+sudo manageAppHost dns --set --ip=54.205.119.123 --hostname=attack-taxii.mitre.org
+sudo manageAppHost dns --set --ip=100.49.57.179 --hostname=attack-taxii.mitre.org
+
+# For attack.mitre.org (ATT&CK website)
+sudo manageAppHost dns --set --ip=185.199.108.153 --hostname=attack.mitre.org
+sudo manageAppHost dns --set --ip=185.199.109.153 --hostname=attack.mitre.org
+sudo manageAppHost dns --set --ip=185.199.110.153 --hostname=attack.mitre.org
+sudo manageAppHost dns --set --ip=185.199.111.153 --hostname=attack.mitre.org
+
+# For cti-taxii.mitre.org (legacy server, if needed)
+sudo manageAppHost dns --set --ip=3.221.214.19 --hostname=cti-taxii.mitre.org
+```
+
+**Important:**
+- The IP addresses listed above were current as of the documentation date but may change as MITRE uses cloud-based infrastructure.
+- To verify current IP addresses, use: `nslookup <hostname>` or `dig <hostname>`
+- Multiple IP addresses are provided for redundancy and load balancing.
+- Ensure your firewall rules allow outbound HTTPS (TCP port 443) to these addresses.
+
 ### Python Environment
 Python 3.6 and Python 3.9 are supported.
 Additional package dependencies may exist for each of these packages:
@@ -157,6 +195,8 @@ In case both are provided, the ID values take precedence as names are not guaran
 | ---- | :--: | :------: | ------- | ------- |
 | `mitre_technique_id` | `text` | No | `-` | - |
 | `mitre_technique_name` | `text` | No | `-` | - |
+
+**Note:** At least one of the above inputs is required. If no value is provided, a ValueError will be raised.
 
 </p>
 </details>
@@ -253,6 +293,8 @@ In case both are provided, the ID values take precedence as names are not guaran
 | `mitre_technique_id` | `text` | No | `-` | - |
 | `mitre_technique_name` | `text` | No | `-` | - |
 
+**Note:** At least one of the above inputs is required. If no value is provided, a ValueError will be raised.
+
 </p>
 </details>
 
@@ -347,6 +389,8 @@ In case both are provided, the ID values take precedence as names are not guaran
 | ---- | :--: | :------: | ------- | ------- |
 | `mitre_tactic_id` | `text` | No | `-` | MITRE ATT&CK Tactic ID |
 | `mitre_tactic_name` | `text` | No | `-` | MITRE Tactic Name |
+
+**Note:** At least one of the above inputs is required. If no value is provided, a ValueError will be raised.
 
 </p>
 </details>
@@ -502,6 +546,8 @@ In case both ID and name are provided, the ID value takes precedence as names ar
 | `mitre_technique_mitigation_only` | `boolean` | No | `-` | Retrieve the mitigation only |
 | `mitre_technique_name` | `text` | No | `-` | - |
 
+**Note:** At least one of `mitre_technique_id` or `mitre_technique_name` is required. If no value is provided, a ValueError will be raised.
+
 </p>
 </details>
 
@@ -613,6 +659,8 @@ In case both are provided, the ID values take precedence as names are not guaran
 | ---- | :--: | :------: | ------- | ------- |
 | `mitre_technique_id` | `text` | No | `-` | - |
 | `mitre_technique_name` | `text` | No | `-` | - |
+
+**Note:** At least one of the above inputs is required. If no value is provided, a ValueError will be raised.
 
 </p>
 </details>

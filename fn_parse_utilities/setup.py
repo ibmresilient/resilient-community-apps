@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_parse_utilities",
     display_name="Parse Utilities Function for SOAR",
-    version="1.1.1",
+    version="1.1.2",
     license="MIT",
     author="IBM SOAR",
     url="http://ibm.biz/soarcommunity",
@@ -33,7 +33,7 @@ setup(
         "resilient-circuits",
         'pdfid~=1.1',
         'defusedxml~=0.7.1',
-        'lxml~=4.8',
+        'lxml~=6.1',
         'cryptography>=42.0.4', # Defining minimum to fix CVE-2024-6119, CVE-2024-26130, CVE-2023-50782 for SOARAPPS-9089
         'pyOpenSSL>=24.0', # Defining minimum to fix CVE-2024-6119, CVE-2024-26130, CVE-2023-50782 for SOARAPPS-9089
         'mail-parser~=4.1.2'

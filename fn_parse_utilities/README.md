@@ -60,6 +60,7 @@ But migrating to playbooks provides greater functionality along with future app 
 
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.1.2 | 04/2026 | Vulnerability fix: Bumped lxml library to 6.1 |
 | 1.1.1 | 06/2025 | Unpin version of cryptography. |
 | 1.1.0 | 01/2024 | Add playbooks and remove workflows. |
 | 1.0.2 | 02/2023 | Update cryptography to version 39.0.1 and pyOpenSSL to version 23.0 |
@@ -133,7 +134,7 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Python 3.9 and Python 3.11 are supported.
+Python 3.11 and Python 3.12 are supported.
 Additional package dependencies may exist for each of these packages:
 * cryptography
 * defusedxml~=0.7.1
