@@ -1,0 +1,15 @@
+{
+    "version": 0.1,
+    "success": true,
+    "reason": null,
+    "status_code": 999,
+    "content": "{\"some\": \"content\"}",
+    "content_type": "application/json",
+    "metrics": {
+      "version": "2.0",
+      "package": "fn-low-code",
+      "package_version": "0.0.1",
+      "host": "localhost",
+      "execution_time_ms": 2280
+    }
+  }

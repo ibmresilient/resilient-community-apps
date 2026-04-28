@@ -1,0 +1,1 @@
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_parse_utilities/main/1.1/app-fn_parse_utilities-1.1.2-30001.zip

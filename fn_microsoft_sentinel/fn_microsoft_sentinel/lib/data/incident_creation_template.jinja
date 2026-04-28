@@ -1,0 +1,55 @@
+{
+  {# JINJA template for creating a new SOAR incident from a Sentinel incident. #}
+  "name": "Sentinel Incident {{ properties.incidentNumber|e }} - {{ properties.title|replace('"', '\\"') }}",
+  "discovered_date": {{ properties.createdTimeUtc|soar_datetimeformat }},
+  "start_date": {% if properties.firstActivityTimeUtc %} {{ properties.firstActivityTimeUtc|soar_datetimeformat }} {% else %} {{ properties.createdTimeUtc|soar_datetimeformat }} {%endif %},
+  {% if properties.description %}
+    "description": {
+      "format": "text",
+      "content": "{{ properties.description|replace('"', '\\"') }}"
+    },
+  {% endif %}
+  {# if Sentinel users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# "owner_id": "{{ properties.owner.userPrincipalName|soar_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}
+  "plan_status": "{{ properties.status|soar_substitute('{"Closed": "C", "Active": "A", "New": "A"}') }}",
+  "severity_code": "{{ properties.severity|soar_substitute('{"Informational": "Low"}') }}",
+  "properties": {
+    "sentinel_incident_number": "{{ name|e }}",
+    "sentinel_incident_id": "{{ properties.incidentNumber }}",
+    "sentinel_incident_status": "{{ properties.status }}",
+    "sentinel_incident_last_modified_time_utc": {{ properties.lastModifiedTimeUtc|soar_datetimeformat }},
+    "sentinel_incident_url": "<a target='blank' href='{{ properties.incidentUrl }}'>Sentinel Incident</a>"
+    {% if properties.classification %}
+      ,"sentinel_incident_classification": "{{ properties.classification }}"
+    {% endif %}
+    {% if properties.classificationReason %}
+      ,"sentinel_incident_classification_reason": "{{ properties.classificationReason }}"
+    {% endif %}
+    {% if properties.classificationComment %}
+      ,"sentinel_incident_classification_comment": "{{ properties.classificationComment|replace('"', '\\"') }}"
+    {% endif %}
+    {% if properties.owner.assignedTo %}
+      ,"sentinel_incident_assigned_to": "{{ properties.owner.assignedTo }}"
+    {% endif %}
+    {% if properties.labels %}
+      ,"sentinel_incident_labels": "{{ properties.labels | map(attribute='labelName') | join(',') | replace('"', '\\"') | replace('\\', '\\\\') }}"
+    {% endif %}
+    {% if properties.additionalData.tactics %}
+      ,"sentinel_incident_tactics": "{{ properties.additionalData.tactics|join(' ') }}"
+    {% endif %}
+    {% if soar_profile %}
+      ,"sentinel_profile": "{{ soar_profile }}"
+    {% endif %}
+    {% if resilient_profile %}
+      ,"sentinel_profile": "{{ resilient_profile }}"
+    {% endif %}
+    {% if soar_label %}
+      ,"sentinel_label": "{{ soar_label }}"
+    {% endif %}
+  }
+  {% if properties.status == "Closed" %}
+    ,
+    "resolution_id": "Resolved",
+    "resolution_summary": "Closed by Sentinel"
+  {%endif %}
+}
