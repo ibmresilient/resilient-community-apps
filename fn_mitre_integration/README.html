@@ -482,6 +482,10 @@
 <td><p>02/2025</p></td>
 <td><p>Version correction for SOAR 51.0.0</p></td>
 </tr>
+<tr class="row-even"><td><p>2.2.2</p></td>
+<td><p>04/2026</p></td>
+<td><p>Updated tooltips to clarify mandatory field requirements</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -582,6 +586,64 @@ tactic or technique has been identified. This information can help security anal
 <h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">¶</a></h3>
 <p>The app <strong>does</strong> support a proxy server.</p>
 </section>
+<section id="network-requirements">
+<h3>Network Requirements<a class="headerlink" href="#network-requirements" title="Link to this heading">¶</a></h3>
+<p>This app requires outbound HTTPS (port 443) access to the following MITRE ATT&amp;CK servers:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Hostname</p></th>
+<th class="head"><p>IP Address(es)</p></th>
+<th class="head"><p>Port</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>attack-taxii.mitre.org</strong></p></td>
+<td><p>54.205.119.123, 100.49.57.179</p></td>
+<td><p>443</p></td>
+<td><p>Primary TAXII 2.1 server for ATT&amp;CK data</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>attack.mitre.org</strong></p></td>
+<td><p>185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153</p></td>
+<td><p>443</p></td>
+<td><p>ATT&amp;CK framework website and reference links</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>cti-taxii.mitre.org</strong></p></td>
+<td><p>3.221.214.19</p></td>
+<td><p>443</p></td>
+<td><p>Legacy TAXII server (used in tools directory)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Note:</strong> IP addresses may change over time. MITRE uses cloud infrastructure (AWS ELB and GitHub Pages), so IP addresses are subject to change.</p>
+<section id="dns-configuration">
+<h4>DNS Configuration<a class="headerlink" href="#dns-configuration" title="Link to this heading">¶</a></h4>
+<p>If your environment does not have DNS configured or you need to manually configure hostname resolution, you can use the App Host’s DNS management command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># For attack-taxii.mitre.org (primary TAXII server)</span>
+sudo<span class="w"> </span>manageAppHost<span class="w"> </span>dns<span class="w"> </span>--set<span class="w"> </span>--ip<span class="o">=</span><span class="m">54</span>.205.119.123<span class="w"> </span>--hostname<span class="o">=</span>attack-taxii.mitre.org
+sudo<span class="w"> </span>manageAppHost<span class="w"> </span>dns<span class="w"> </span>--set<span class="w"> </span>--ip<span class="o">=</span><span class="m">100</span>.49.57.179<span class="w"> </span>--hostname<span class="o">=</span>attack-taxii.mitre.org
+
+<span class="c1"># For attack.mitre.org (ATT&amp;CK website)</span>
+sudo<span class="w"> </span>manageAppHost<span class="w"> </span>dns<span class="w"> </span>--set<span class="w"> </span>--ip<span class="o">=</span><span class="m">185</span>.199.108.153<span class="w"> </span>--hostname<span class="o">=</span>attack.mitre.org
+sudo<span class="w"> </span>manageAppHost<span class="w"> </span>dns<span class="w"> </span>--set<span class="w"> </span>--ip<span class="o">=</span><span class="m">185</span>.199.109.153<span class="w"> </span>--hostname<span class="o">=</span>attack.mitre.org
+sudo<span class="w"> </span>manageAppHost<span class="w"> </span>dns<span class="w"> </span>--set<span class="w"> </span>--ip<span class="o">=</span><span class="m">185</span>.199.110.153<span class="w"> </span>--hostname<span class="o">=</span>attack.mitre.org
+sudo<span class="w"> </span>manageAppHost<span class="w"> </span>dns<span class="w"> </span>--set<span class="w"> </span>--ip<span class="o">=</span><span class="m">185</span>.199.111.153<span class="w"> </span>--hostname<span class="o">=</span>attack.mitre.org
+
+<span class="c1"># For cti-taxii.mitre.org (legacy server, if needed)</span>
+sudo<span class="w"> </span>manageAppHost<span class="w"> </span>dns<span class="w"> </span>--set<span class="w"> </span>--ip<span class="o">=</span><span class="m">3</span>.221.214.19<span class="w"> </span>--hostname<span class="o">=</span>cti-taxii.mitre.org
+</pre></div>
+</div>
+<p><strong>Important:</strong></p>
+<ul class="simple">
+<li><p>The IP addresses listed above were current as of the documentation date but may change as MITRE uses cloud-based infrastructure.</p></li>
+<li><p>To verify current IP addresses, use: <code class="docutils literal notranslate"><span class="pre">nslookup</span> <span class="pre">&lt;hostname&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">dig</span> <span class="pre">&lt;hostname&gt;</span></code></p></li>
+<li><p>Multiple IP addresses are provided for redundancy and load balancing.</p></li>
+<li><p>Ensure your firewall rules allow outbound HTTPS (TCP port 443) to these addresses.</p></li>
+</ul>
+</section>
+</section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
 <p>Python 3.6 and Python 3.9 are supported.
@@ -668,6 +730,7 @@ In case both are provided, the ID values take precedence as names are not guaran
 </tbody>
 </table>
 </div>
+<p><strong>Note:</strong> At least one of the above inputs is required. If no value is provided, a ValueError will be raised.</p>
 </p>
 </details>
 <details><summary>Outputs:</summary>
@@ -773,6 +836,7 @@ In case both are provided, the ID values take precedence as names are not guaran
 </tbody>
 </table>
 </div>
+<p><strong>Note:</strong> At least one of the above inputs is required. If no value is provided, a ValueError will be raised.</p>
 </p>
 </details>
 <details><summary>Outputs:</summary>
@@ -878,6 +942,7 @@ In case both are provided, the ID values take precedence as names are not guaran
 </tbody>
 </table>
 </div>
+<p><strong>Note:</strong> At least one of the above inputs is required. If no value is provided, a ValueError will be raised.</p>
 </p>
 </details>
 <details><summary>Outputs:</summary>
@@ -1048,6 +1113,7 @@ In case both ID and name are provided, the ID value takes precedence as names ar
 </tbody>
 </table>
 </div>
+<p><strong>Note:</strong> At least one of <code class="docutils literal notranslate"><span class="pre">mitre_technique_id</span></code> or <code class="docutils literal notranslate"><span class="pre">mitre_technique_name</span></code> is required. If no value is provided, a ValueError will be raised.</p>
 </p>
 </details>
 <details><summary>Outputs:</summary>
@@ -1171,6 +1237,7 @@ In case both are provided, the ID values take precedence as names are not guaran
 </tbody>
 </table>
 </div>
+<p><strong>Note:</strong> At least one of the above inputs is required. If no value is provided, a ValueError will be raised.</p>
 </p>
 </details>
 <details><summary>Outputs:</summary>
@@ -1646,6 +1713,10 @@ In case both are provided, the ID values take precedence as names are not guaran
 <li><a class="reference internal" href="#soar-platform">SOAR platform</a></li>
 <li><a class="reference internal" href="#cloud-pak-for-security">Cloud Pak for Security</a></li>
 <li><a class="reference internal" href="#proxy-server">Proxy Server</a></li>
+<li><a class="reference internal" href="#network-requirements">Network Requirements</a><ul>
+<li><a class="reference internal" href="#dns-configuration">DNS Configuration</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#python-environment">Python Environment</a><ul>
 <li><a class="reference internal" href="#configuration">Configuration</a></li>
 </ul>

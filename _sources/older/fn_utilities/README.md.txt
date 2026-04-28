@@ -25,6 +25,7 @@
 
 | Version | Date   | Notes |
 | ------- | ------ |:----- |
+| 2.1.4 | 04/2026 | Vulnerability fix: lxml updated to 6.1.0 |
 | 2.1.3 | 03/2023 | Remove log for rest_headers in fn_call_rest_api |
 | 2.1.2 | 01/2023 | Bug fix for version of cryptography |
 | 2.1.1 | 04/2022 | Bug fix for selftest |
