@@ -460,23 +460,27 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.2.1</p></td>
+<tr class="row-even"><td><p>1.2.2</p></td>
+<td><p>04/2026</p></td>
+<td><p>Replaced deprecated datetime methods</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.2.1</p></td>
 <td><p>07/2024</p></td>
 <td><p>Converted to Python3</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.2.0</p></td>
+<tr class="row-even"><td><p>1.2.0</p></td>
 <td><p>04/2022</p></td>
 <td><p><ul><li>Move functions to their own files</li><li>Timestamp conversion fix</li><li>Add scope option to app.config and when connecting to Microsoft Security Graph</li></ul></p></td>
 </tr>
-<tr class="row-even"><td><p>1.1.0</p></td>
+<tr class="row-odd"><td><p>1.1.0</p></td>
 <td><p>09/2020</p></td>
 <td><p><ul><li>Support for App Host</li><li>Proxy support</li><li>Readable formatting of incident notes containing Alert JSON data</li></ul></p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.1</p></td>
+<tr class="row-even"><td><p>1.0.1</p></td>
 <td><p>08/2020</p></td>
 <td><p>UI version changes</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.0</p></td>
+<tr class="row-odd"><td><p>1.0.0</p></td>
 <td><p>10/2018</p></td>
 <td><p>Initial Release</p></td>
 </tr>
@@ -576,11 +580,11 @@
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
-<p>Python 3.9, 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
+<p>Python 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
-<li><p>resilient-lib&gt;=40.0.0</p></li>
-<li><p>resilient_circuits&gt;=40.0.0</p></li>
+<li><p>resilient-lib&gt;=51.0.0</p></li>
+<li><p>resilient_circuits&gt;=51.0.0</p></li>
 </ul>
 </section>
 <section id="app-configuration">
@@ -1122,10 +1126,10 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timezone</span>
 
 <span class="c1"># Current time in ISO 8601 format</span>
-<span class="n">epoch_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+<span class="n">epoch_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
 <span class="n">closedDateTime</span> <span class="o">=</span> <span class="n">epoch_time</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;Z&quot;</span>  <span class="c1"># Adding &#39;Z&#39; to indicate UTC time</span>
 
 <span class="n">provider</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">msg_alert_details</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">vendorInformation</span><span class="o">.</span><span class="n">provider</span>

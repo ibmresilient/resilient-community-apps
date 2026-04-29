@@ -50,6 +50,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.2.2 | 04/2026 | Replaced deprecated datetime methods |
 | 1.2.1 | 07/2024 | Converted to Python3 |
 | 1.2.0 | 04/2022 | <ul><li>Move functions to their own files</li><li>Timestamp conversion fix</li><li>Add scope option to app.config and when connecting to Microsoft Security Graph</li></ul>
 | 1.1.0 | 09/2020 | <ul><li>Support for App Host</li><li>Proxy support</li><li>Readable formatting of incident notes containing Alert JSON data</li></ul>
@@ -125,10 +126,10 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does support a proxy server.
 
 ### Python Environment
-Python 3.9, 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
+Python 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
 Additional package dependencies may exist for each of these packages:
-* resilient-lib>=40.0.0
-* resilient_circuits>=40.0.0
+* resilient-lib>=51.0.0
+* resilient_circuits>=51.0.0
 
 ### App Configuration
 The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
@@ -546,10 +547,10 @@ results = {
 <p>
 
 ```python
-from datetime import datetime
+from datetime import datetime, timezone
 
 # Current time in ISO 8601 format
-epoch_time = datetime.utcnow()
+epoch_time = datetime.now(timezone.utc)
 closedDateTime = epoch_time.isoformat() + "Z"  # Adding 'Z' to indicate UTC time
 
 provider = workflow.properties.msg_alert_details.content.vendorInformation.provider
