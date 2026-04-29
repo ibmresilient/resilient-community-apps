@@ -1,0 +1,29 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "timeout_type": "FIRST_SEEN",
+    "number_of_elements": 12,
+    "creation_time": 1712668910618,
+    "name": "test",
+    "namespace": "SHARED",
+    "element_type": "ALN",
+    "collection_id": 44
+  },
+  "raw": null,
+  "inputs": {
+    "qradar_domain_id": "SHARED",
+    "qradar_reference_set_name": "test",
+    "qradar_namespace": "SHARED",
+    "qradar_reference_set_values": "thing3, thing6"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-qradar-integration",
+    "package_version": "2.5.0",
+    "host": "local",
+    "execution_time_ms": 31368,
+    "timestamp": "2025-04-25 11:00:01"
+  }
+}

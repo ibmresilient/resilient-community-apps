@@ -1,0 +1,14 @@
+include README.md
+include Dockerfile
+include apikey_permissions.txt
+recursive-include fn_extrahop/lib *
+recursive-include fn_extrahop/util *
+include fn_extrahop/LICENSE
+include doc/*.md
+include doc/screenshots/*
+include icons/*.png
+recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
+
+global-exclude *.bak
