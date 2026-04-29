@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name='fn_microsoft_security_graph',
     display_name='Microsoft Security Graph Integration for SOAR',
-    version='1.2.1',
+    version='1.2.2',
     license='MIT',
     author='IBM SOAR',
     url = 'https://ibm.com/mysupport',
@@ -33,7 +33,7 @@ setup(
         'resilient-lib>=40.0.0'
     ],
     packages=find_packages(),
-    python_requires='>=3.6',
+    python_requires='>=3.11',
     include_package_data=True,
     platforms='any',
     classifiers=[

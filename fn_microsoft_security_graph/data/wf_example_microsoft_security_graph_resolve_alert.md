@@ -19,10 +19,10 @@
 
 ### Pre-Processing Script
 ```python
-from datetime import datetime
+from datetime import datetime, timezone
 
 # Current time in ISO 8601 format
-epoch_time = datetime.utcnow()
+epoch_time = datetime.now(timezone.utc)
 closedDateTime = epoch_time.isoformat() + "Z"  # Adding 'Z' to indicate UTC time
 
 provider = workflow.properties.msg_alert_details.content.vendorInformation.provider

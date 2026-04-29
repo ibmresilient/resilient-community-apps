@@ -5,7 +5,7 @@ from time import sleep
 from json import loads
 from calendar import timegm
 from threading import Thread
-from datetime import datetime
+from datetime import datetime, timezone
 from logging import getLogger
 from resilient import SimpleHTTPException
 from jinja2.exceptions import TemplateSyntaxError
@@ -136,7 +136,7 @@ def get_alerts(options, ms_graph_helper):
     alert_time_range_sec = options.get("alert_time_range_sec")
     createdDateTime_filter = ""
     if alert_time_range_sec:
-        createdDateTime_start = datetime.utcnow().isoformat() + 'Z'
+        createdDateTime_start = datetime.now(timezone.utc).isoformat() + 'Z'
         createdDateTime_filter = "createdDateTime%20ge%20{}".format(createdDateTime_start)
 
     url = "{}/security/alerts{}".format(options.get("microsoft_graph_url"), create_query(options.get("alert_query"),

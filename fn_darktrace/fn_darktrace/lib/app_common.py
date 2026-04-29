@@ -4,7 +4,7 @@
 import hashlib
 import hmac
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from urllib.parse import quote_plus, urljoin
 
 from requests import Session, HTTPError
@@ -218,7 +218,7 @@ class AppCommon():
         """
 
         if not time:
-            time = datetime.utcnow().strftime(DT_TIME_FORMATTER)
+            time = datetime.now(timezone.utc).strftime(DT_TIME_FORMATTER)
 
         # need to add the query params to the path_request so that the signature is correct
         # NOTE: cannot specify params as an argument in resilient_lib.execute() because that 

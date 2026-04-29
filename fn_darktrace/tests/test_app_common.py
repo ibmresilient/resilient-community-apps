@@ -3,7 +3,7 @@
 
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 from unittest import mock
 
 import pytest
@@ -136,13 +136,13 @@ def test_generate_query_from_params():
     assert query2 == "/aianalyst/groups?includegroupurl=true&groupid=1,2,3,4"
 
 def test_get_headers(app_common: AppCommon):
-    time = datetime.utcnow().strftime(DT_TIME_FORMATTER)
+    time = datetime.now(timezone.utc).strftime(DT_TIME_FORMATTER)
     headers = app_common._get_headers(time, "signature")
 
     assert headers == {"DTAPI-Token": "abcd-efgh", "DTAPI-Date": time, "DTAPI-Signature": "signature"}
 
 def test_generate_signature(app_common: AppCommon):
-    time = datetime.utcfromtimestamp(100000).strftime(DT_TIME_FORMATTER)
+    time = datetime.fromtimestamp(100000, timezone.utc).strftime(DT_TIME_FORMATTER)
     request = "/aianalyst/groups?includegroupurl=true&groupid=1,2,3,4"
     signature = app_common._generate_signature(request, time)
 
@@ -150,7 +150,7 @@ def test_generate_signature(app_common: AppCommon):
 
 def test_execute_dt_request(mock_api: requests_mock.Mocker, app_common: AppCommon):
     method = "GET"
-    time = datetime.utcfromtimestamp(100000).strftime(DT_TIME_FORMATTER)
+    time = datetime.fromtimestamp(100000, timezone.utc).strftime(DT_TIME_FORMATTER)
     request = "/aianalyst/groups"
     params = {"includegroupurl": "true", "groupid": "1,2,3,4"}
 

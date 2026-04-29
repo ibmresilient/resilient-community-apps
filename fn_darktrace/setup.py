@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_darktrace",
     display_name="Darktrace",
-    version="1.0.0",
+    version="1.0.1",
     license="MIT",
     author="IBM SOAR",
     author_email="",
@@ -40,9 +40,9 @@ setup(
         <ul><a target='blank' href='https://ibm.com/mysupport'>Support</a></ul>
         <ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
-        "resilient-circuits>=47.0.0"
+        "resilient-circuits>=51.0.0"
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.11',
     packages=find_packages(),
     include_package_data=True,
     platforms="any",

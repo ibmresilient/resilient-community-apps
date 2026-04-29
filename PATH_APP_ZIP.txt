@@ -1,1 +1,1 @@
-https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_microsoft_sentinel/main/2.2/app-fn_microsoft_sentinel-2.2.1-30093.zip
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_microsoft_security_graph/main/1.2/app-fn_microsoft_security_graph-1.2.2-30122.zip
