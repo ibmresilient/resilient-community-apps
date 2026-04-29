@@ -1,0 +1,291 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "temporary_id": {
+            "type": "string"
+          },
+          "affects_rating": {
+            "type": "boolean"
+          },
+          "assets": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "asset": {
+                  "type": "string"
+                },
+                "identifier": {},
+                "category": {
+                  "type": "string"
+                },
+                "importance": {
+                  "type": "number"
+                },
+                "is_ip": {
+                  "type": "boolean"
+                },
+                "asset_type": {
+                  "type": "string"
+                },
+                "is_monitored": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "details": {
+            "type": "object",
+            "properties": {
+              "cvss": {
+                "type": "object",
+                "properties": {
+                  "base": {
+                    "type": "array"
+                  }
+                }
+              },
+              "check_pass": {
+                "type": "string"
+              },
+              "diligence_annotations": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string"
+                  },
+                  "annotation_tokens": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "***": {
+                          "type": "string"
+                        },
+                        "values": {
+                          "type": "array"
+                        }
+                      }
+                    }
+                  },
+                  "security outcome": {
+                    "type": "string"
+                  },
+                  "dnskeys": {
+                    "type": "array"
+                  },
+                  "***": {
+                    "type": "array"
+                  },
+                  "reason": {
+                    "type": "string"
+                  },
+                  "dses": {
+                    "type": "array"
+                  },
+                  "nsecs": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "recordType": {
+                          "type": "string"
+                        },
+                        "algorithm": {
+                          "type": "string"
+                        },
+                        "flags": {
+                          "type": "string"
+                        },
+                        "iterations": {
+                          "type": "integer"
+                        },
+                        "nextHash": {
+                          "type": "string"
+                        },
+                        "prevHash": {
+                          "type": "string"
+                        },
+                        "salt": {
+                          "type": "string"
+                        },
+                        "recordHash": {
+                          "type": "string"
+                        },
+                        "types": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "record": {
+                    "type": "array",
+                    "items": {
+                      "type": "array"
+                    }
+                  },
+                  "percentage": {
+                    "type": "integer"
+                  },
+                  "policy": {
+                    "type": "string"
+                  },
+                  "ruaReportEmail": {
+                    "type": "array"
+                  },
+                  "rufReportEmail": {
+                    "type": "array"
+                  }
+                }
+              },
+              "grade": {
+                "type": "string"
+              },
+              "remediations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "help_text": {
+                      "type": "string"
+                    },
+                    "remediation_tip": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "sample_timestamp": {
+                "type": "string"
+              },
+              "vulnerabilities": {
+                "type": "array"
+              },
+              "rollup_end_date": {
+                "type": "string"
+              },
+              "rollup_start_date": {
+                "type": "string"
+              },
+              "searchable_details": {
+                "type": "string"
+              }
+            }
+          },
+          "evidence_key": {
+            "type": "string"
+          },
+          "first_seen": {
+            "type": "string"
+          },
+          "last_seen": {
+            "type": "string"
+          },
+          "related_findings": {
+            "type": "array"
+          },
+          "risk_category": {
+            "type": "string"
+          },
+          "risk_vector": {
+            "type": "string"
+          },
+          "risk_vector_label": {
+            "type": "string"
+          },
+          "rolledup_observation_id": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "number"
+          },
+          "severity_category": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array"
+          },
+          "remediation_history": {
+            "type": "object",
+            "properties": {
+              "last_requested_refresh_date": {},
+              "last_refresh_status_date": {},
+              "last_refresh_status_label": {},
+              "last_refresh_status_reason": {},
+              "last_refresh_reason_code": {},
+              "last_refresh_requester": {},
+              "result_finding_date": {}
+            }
+          },
+          "duration": {},
+          "comments": {},
+          "remaining_decay": {
+            "type": "integer"
+          },
+          "remediated": {},
+          "impacts_risk_vector_details": {
+            "type": "string"
+          },
+          "grace_period_end_date": {}
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "bitsight_ci_affects_rating_details": {
+          "type": "string"
+        },
+        "bitsight_ci_company_guid": {
+          "type": "string"
+        },
+        "bitsight_ci_limit": {
+          "type": "integer"
+        },
+        "bitsight_ci_affects_rating": {
+          "type": "boolean"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

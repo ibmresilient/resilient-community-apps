@@ -1,0 +1,28 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "content": null,
+    "commit": "aa916f54d4e2bdf424a8e36a5fa2252770cbcbf3",
+    "Last-Modified": "",
+    "ETag": "W/\"b6929ec040fc733128de56e0dadbb6d6211fd6169ac2150af9df4bc0d47f1a1a\""
+  },
+  "raw": null,
+  "inputs": {
+    "github_owner": "test-owner",
+    "github_commit_message": "deleting this",
+    "github_branch": "testit_20221202_143109",
+    "github_committer": null,
+    "github_file_path": "test_folder/testit.txt",
+    "github_repo": "personal"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-github",
+    "package_version": "1.0.0",
+    "host": "host",
+    "execution_time_ms": 2247,
+    "timestamp": "2022-12-02 17:04:27"
+  }
+}

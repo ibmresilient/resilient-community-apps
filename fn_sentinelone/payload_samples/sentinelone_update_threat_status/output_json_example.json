@@ -1,0 +1,24 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "data": {
+      "affected": 1
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "sentinelone_threat_id": "1308905355630511064",
+    "sentinelone_threat_status": "in_progress",
+    "sentinelone_threat_analyst_verdict": "suspicious"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "host": "myHost",
+    "execution_time_ms": 5215,
+    "timestamp": "2021-12-13 11:25:54"
+  }
+}

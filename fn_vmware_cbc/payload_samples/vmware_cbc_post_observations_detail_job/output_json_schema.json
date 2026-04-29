@@ -1,0 +1,346 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "alert_category": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "alert_id": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "backend_timestamp": {
+                "type": "string"
+              },
+              "device_external_ip": {
+                "type": "string"
+              },
+              "device_group_id": {
+                "type": "integer"
+              },
+              "device_id": {
+                "type": "integer"
+              },
+              "device_installed_by": {
+                "type": "string"
+              },
+              "device_internal_ip": {
+                "type": "string"
+              },
+              "device_location": {
+                "type": "string"
+              },
+              "device_name": {
+                "type": "string"
+              },
+              "device_os": {
+                "type": "string"
+              },
+              "device_os_version": {
+                "type": "string"
+              },
+              "device_policy": {
+                "type": "string"
+              },
+              "device_policy_id": {
+                "type": "integer"
+              },
+              "device_sensor_version": {
+                "type": "string"
+              },
+              "device_target_priority": {
+                "type": "string"
+              },
+              "device_timestamp": {
+                "type": "string"
+              },
+              "document_guid": {
+                "type": "string"
+              },
+              "enriched": {
+                "type": "boolean"
+              },
+              "enriched_event_type": {
+                "type": "string"
+              },
+              "event_attack_stage": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "event_description": {
+                "type": "string"
+              },
+              "event_id": {
+                "type": "string"
+              },
+              "event_threat_score": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "event_type": {
+                "type": "string"
+              },
+              "file_scan_result": {
+                "type": "string"
+              },
+              "filemod_action": {
+                "type": "string"
+              },
+              "filemod_hash": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "filemod_issuer": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "filemod_name": {
+                "type": "string"
+              },
+              "filemod_publisher": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "filemod_publisher_state": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "filemod_reputation": {
+                "type": "string"
+              },
+              "ingress_time": {
+                "type": "integer"
+              },
+              "legacy": {
+                "type": "boolean"
+              },
+              "observation_description": {
+                "type": "string"
+              },
+              "observation_id": {
+                "type": "string"
+              },
+              "observation_type": {
+                "type": "string"
+              },
+              "org_id": {
+                "type": "string"
+              },
+              "parent_effective_reputation": {
+                "type": "string"
+              },
+              "parent_effective_reputation_source": {
+                "type": "string"
+              },
+              "parent_guid": {
+                "type": "string"
+              },
+              "parent_hash": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "parent_issuer": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "parent_name": {
+                "type": "string"
+              },
+              "parent_pid": {
+                "type": "integer"
+              },
+              "parent_publisher": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "parent_publisher_state": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "parent_reputation": {
+                "type": "string"
+              },
+              "parent_user_id": {
+                "type": "string"
+              },
+              "parent_username": {
+                "type": "string"
+              },
+              "process_cmdline": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "process_cmdline_length": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "process_effective_reputation": {
+                "type": "string"
+              },
+              "process_effective_reputation_source": {
+                "type": "string"
+              },
+              "process_guid": {
+                "type": "string"
+              },
+              "process_hash": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "process_issuer": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "process_name": {
+                "type": "string"
+              },
+              "process_pid": {
+                "type": "array",
+                "items": {
+                  "type": "integer"
+                }
+              },
+              "process_publisher": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "process_publisher_state": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "process_reputation": {
+                "type": "string"
+              },
+              "process_sha256": {
+                "type": "string"
+              },
+              "process_start_time": {
+                "type": "string"
+              },
+              "process_user_id": {
+                "type": "string"
+              },
+              "process_username": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "ttp": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "num_found": {
+          "type": "integer"
+        },
+        "num_available": {
+          "type": "integer"
+        },
+        "approximate_unaggregated": {
+          "type": "integer"
+        },
+        "num_aggregated": {
+          "type": "integer"
+        },
+        "contacted": {
+          "type": "integer"
+        },
+        "completed": {
+          "type": "integer"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "vmware_cbc_observations": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
