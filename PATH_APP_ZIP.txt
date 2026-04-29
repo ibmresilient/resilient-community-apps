@@ -1,0 +1,1 @@
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_extrahop/main/1.2/app-fn_extrahop-1.2.1-30123.zip

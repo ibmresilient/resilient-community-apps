@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "incident_id": {
+          "type": "integer"
+        },
+        "exo_query_output_format": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "delete_results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "email_address": {
+                "type": "string"
+              },
+              "deleted_list": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "@odata.etag": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "receivedDateTime": {
+                      "type": "string"
+                    },
+                    "hasAttachments": {
+                      "type": "boolean"
+                    },
+                    "subject": {
+                      "type": "string"
+                    },
+                    "webLink": {
+                      "type": "string"
+                    },
+                    "sender": {
+                      "type": "object",
+                      "properties": {
+                        "emailAddress": {
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "type": "string"
+                            },
+                            "address": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "not_deleted_list": {
+                "type": "array"
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "exo_query_messages_results": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

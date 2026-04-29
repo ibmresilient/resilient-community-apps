@@ -1,0 +1,81 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "value": [
+      {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Entities/4c4831e9-2ed7-a44a-e530-c784cc7c2ddc",
+        "name": "4c4831e9-2ed7-a44a-e530-c784cc7c2ddc",
+        "type": "Microsoft.SecurityInsights/Entities",
+        "kind": "SecurityAlert",
+        "properties": {
+          "systemAlertId": "4c4831e9-2ed7-a44a-e530-c784cc7c2ddc",
+          "tactics": [
+            "PreAttack"
+          ],
+          "alertDisplayName": "Suspected brute-force attack attempt",
+          "description": "Brute-force attack is a common attack technique for finding valid credentials to the database. By submitting many users/passwords combinations, an attacker can guess a correct one.\r\nOnce obtained, an attacker can have full access to the database. While this specific alert doesn't indicate a successful brute-force, it is advised to take safety measures to protect your resource against this attack.\r\nTo investigate this suspected brute-force attempt, review it's origin (based on the application name and IP/Location), and try to find out whether it's recognized to you, or suspicious.\r\nIf you believe this to be an attack on your database, use firewall rules to limit the access to your resource, and make sure you use strong passwords and not well known user names.\r\nAlso, consider using only AAD authentication to further enhance your security posture.\r\n",
+          "remediationSteps": [
+            "* Apply [workflow automation](https://go.microsoft.com/fwlink/?linkid=2174808) to block future attacks.",
+            "* Consider [blocking the IP address](https://go.microsoft.com/fwlink/?linkid=2099055) of the attacking client and hardening your firewall.",
+            "* When possible, use [Windows authentication](https://go.microsoft.com/fwlink/?linkid=2129121) and disable SQL Server authentication.",
+            "* Use [strong passwords](https://go.microsoft.com/fwlink/?linkid=2099068) and avoid reusing them across multiple databases.",
+            "* If applicable, disable default and well known application/database accounts such as SA."
+          ],
+          "confidenceLevel": "Unknown",
+          "severity": "High",
+          "vendorName": "Microsoft",
+          "productName": "Azure Security Center",
+          "productComponentName": "Databases",
+          "alertType": "SQL.VM_BruteForce",
+          "processingEndTime": "2024-04-10T15:29:40.734843Z",
+          "status": "New",
+          "endTimeUtc": "2024-04-10T15:29:10Z",
+          "startTimeUtc": "2024-04-10T15:29:10Z",
+          "timeGenerated": "2024-04-10T15:29:49.9010714Z",
+          "compromisedEntity": "PAMSqlSv",
+          "providerAlertId": "2516895378499999999_c01aa88b-4520-4c62-a80d-c61f3dfaf47e",
+          "alertLink": "https://portal.azure.com/#blade/Microsoft_Azure_Security_AzureDefenderForData/AlertBlade/alertId/2516895378499999999_c01aa88b-4520-4c62-a80d-c61f3dfaf47e/subscriptionId/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroup/DemoAssets/referencedFrom/alertDeepLink/location/centralus",
+          "resourceIdentifiers": [
+            {
+              "type": "AzureResource",
+              "resourceId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/DemoAssets/providers/Microsoft.Compute/virtualMachines/PAMSqlSv",
+              "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+            },
+            {
+              "type": "LogAnalytics",
+              "workspaceId": "c6c712b0-dc3d-4408-945a-4bde1db6579b",
+              "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+              "agentId": "7db452ea-1cae-4079-94a5-85dc76156e96"
+            }
+          ],
+          "additionalData": {
+            "MTP_Classification": "Unknown",
+            "StoreAlertPublisher": "{\"Succeeded\":true,\"Reason\":null,\"PublishTime\":\"2024-04-10T15:29:41.6565662Z\"}",
+            "AlertMessageEnqueueTime": "2024-04-10T15:29:49.911Z",
+            "OriginalProductName": "Azure Security Center",
+            "OriginalProductComponentName": "Databases",
+            "effectiveSubscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+          },
+          "friendlyName": "Suspected brute-force attack attempt",
+          "timeGenerated_ms": 1712762989000
+        }
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "sentinel_incident_id": "b3763ac5-6319-496b-b404-6c5000418a81",
+    "sentinel_profile": null,
+    "sentinel_label": "label1"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-microsoft-sentinel",
+    "package_version": "2.1.0",
+    "host": "local",
+    "execution_time_ms": 883,
+    "timestamp": "2024-04-10 14:07:28"
+  }
+}

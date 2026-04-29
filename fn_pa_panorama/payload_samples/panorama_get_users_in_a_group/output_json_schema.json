@@ -1,0 +1,152 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "response": {
+          "type": "object",
+          "properties": {
+            "@status": {
+              "type": "string"
+            },
+            "@code": {
+              "type": "string"
+            },
+            "result": {
+              "type": "object",
+              "properties": {
+                "@total-count": {
+                  "type": "string"
+                },
+                "@count": {
+                  "type": "string"
+                },
+                "entry": {
+                  "type": "object",
+                  "properties": {
+                    "@name": {
+                      "type": "string"
+                    },
+                    "@admin": {
+                      "type": "string"
+                    },
+                    "@dirtyId": {
+                      "type": "string"
+                    },
+                    "@time": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "@admin": {
+                          "type": "string"
+                        },
+                        "@dirtyId": {
+                          "type": "string"
+                        },
+                        "@time": {
+                          "type": "string"
+                        },
+                        "member": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "@admin": {
+                                "type": "string"
+                              },
+                              "@dirtyId": {
+                                "type": "string"
+                              },
+                              "@time": {
+                                "type": "string"
+                              },
+                              "#text": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "user_list": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@admin": {
+                "type": "string"
+              },
+              "@dirtyId": {
+                "type": "string"
+              },
+              "@time": {
+                "type": "string"
+              },
+              "#text": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "xml_response": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "panorama_location": {
+          "type": "string"
+        },
+        "panorama_user_group_xpath": {
+          "type": "string"
+        },
+        "panorama_label": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
