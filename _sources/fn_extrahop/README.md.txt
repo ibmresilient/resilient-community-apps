@@ -96,6 +96,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.2.1 | 04/2026 | Replace deprecated datetime methods |
 | 1.2.0 | 11/2024 | Search Packet: function and playbook bug fix and enhancements |
 | 1.1.0 | 04/2023 | Use mod_time instead of update_time in poller. Convert rules/workflows to playbooks |
 | 1.0.0 | 06/2022 | Initial Release |
@@ -203,7 +204,7 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Python 3.9, 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
+Python 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
 Additional package dependencies may exist for each of these packages:
 * resilient-circuits>=51.0.2.2.0
 * retry2 ~= 0.9
