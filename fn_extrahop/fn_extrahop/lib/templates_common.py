@@ -402,7 +402,7 @@ def pretty_filter(val, indent=2):
 
 def iso8601(val):
     """Assuming val is an epoch milliseconds timestamp, produce ISO8601 datetime"""
-    dt = datetime.datetime.utcfromtimestamp(int(int(val)/1000))
+    dt = datetime.datetime.fromtimestamp(int(int(val)/1000), datetime.timezone.utc)
     # pylint: disable = no-value-for-parameter
     return pytz.UTC.localize(dt).isoformat()
 

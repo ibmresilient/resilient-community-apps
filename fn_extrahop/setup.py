@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_extrahop",
     display_name="ExtraHop for IBM SOAR",
-    version="1.2.0",
+    version="1.2.1",
     license="MIT",
     author="IBM SOAR",
     author_email="",
@@ -38,7 +38,7 @@ setup(
         "resilient-circuits>=51.0.2.2.0",
         "retry2 ~= 0.9"
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.11',
     packages=find_packages(),
     include_package_data=True,
     platforms="any",
