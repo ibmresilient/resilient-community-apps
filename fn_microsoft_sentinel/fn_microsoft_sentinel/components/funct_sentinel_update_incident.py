@@ -5,14 +5,13 @@
 
 from resilient_circuits import (AppFunctionComponent, FunctionResult,
                                 app_function)
-from resilient_lib import validate_fields
+from resilient_lib import validate_fields, make_payload_from_template
 
 from fn_microsoft_sentinel.lib.resilient_common import ResilientCommon
 from fn_microsoft_sentinel.lib.constants import SENTINEL_INCIDENT_NUMBER
 from fn_microsoft_sentinel.lib.function_common import (
     DEFAULT_SENTINEL_CLOSE_INCIDENT_TEMPLATE,
     DEFAULT_SENTINEL_UPDATE_INCIDENT_TEMPLATE, PACKAGE_NAME, SentinelProfiles)
-from fn_microsoft_sentinel.lib.jinja_common import JinjaEnvironment
 from fn_microsoft_sentinel.lib.sentinel_common import SentinelAPI
 
 FN_NAME = "sentinel_update_incident"
@@ -24,7 +23,6 @@ class FunctionComponent(AppFunctionComponent):
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
         self.sentinel_profiles = SentinelProfiles(opts, self.options)
-        self.jinja_env = JinjaEnvironment()
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -77,7 +75,7 @@ class FunctionComponent(AppFunctionComponent):
             template = profile_data.get("sentinel_close_incident_template")
             default_template = DEFAULT_SENTINEL_CLOSE_INCIDENT_TEMPLATE
 
-        incident_payload = self.jinja_env.make_payload_from_template(
+        incident_payload = make_payload_from_template(
             template,
             default_template,
             soar_incident

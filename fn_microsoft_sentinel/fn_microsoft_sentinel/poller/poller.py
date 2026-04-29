@@ -10,13 +10,11 @@ from threading import Thread
 
 from resilient_circuits import AppFunctionComponent, is_this_a_selftest
 from resilient_lib import (SOARCommon, get_last_poller_date, poller,
-                           validate_fields, str_to_bool, IntegrationError)
-
+                           validate_fields, str_to_bool, IntegrationError, make_payload_from_template)
 from fn_microsoft_sentinel.lib.function_common import (
     DEFAULT_INCIDENT_CLOSE_TEMPLATE, DEFAULT_INCIDENT_CREATION_TEMPLATE,
     DEFAULT_INCIDENT_UPDATE_TEMPLATE, DEFAULT_POLLER_FILTERS_TEMPLATE,
     PACKAGE_NAME, SentinelProfiles)
-from fn_microsoft_sentinel.lib.jinja_common import JinjaEnvironment
 from fn_microsoft_sentinel.lib.resilient_common import ResilientCommon
 from fn_microsoft_sentinel.lib.sentinel_common import (
     SentinelAPI, get_sentinel_incident_ids)
@@ -39,7 +37,6 @@ class PollerComponent(AppFunctionComponent):
         super(PollerComponent, self).__init__(opts, PACKAGE_NAME)
         self.opts = opts
         self.sentinel_profiles = SentinelProfiles(opts, self.options)
-        self.jinja_env = JinjaEnvironment()
         init_incident_groups_tab()
 
         # Collect settings necessary and initialize libraries used by the poller
@@ -175,7 +172,7 @@ class PollerComponent(AppFunctionComponent):
                 LOG.info(f"Bypassing update to closed incident {soar_incident_id} from Sentinel incident {sentinel_incident_number}")
             elif sentinel_incident['properties']['status'] == "Closed" and close_soar_case:
                 # Close the incident
-                incident_payload = self.jinja_env.make_payload_from_template(
+                incident_payload = make_payload_from_template(
                     profile_data.get("close_incident_template"),
                     DEFAULT_INCIDENT_CLOSE_TEMPLATE,
                     sentinel_incident
@@ -185,7 +182,7 @@ class PollerComponent(AppFunctionComponent):
                 LOG.info(f"Closed incident {soar_incident_id} from Sentinel incident {sentinel_incident_number}")
             else:
                 # Update an incident incident
-                incident_payload = self.jinja_env.make_payload_from_template(
+                incident_payload = make_payload_from_template(
                     profile_data.get("update_incident_template"),
                     DEFAULT_INCIDENT_UPDATE_TEMPLATE,
                     sentinel_incident
@@ -220,7 +217,7 @@ class PollerComponent(AppFunctionComponent):
             sentinel_incident['resilient_profile'] = profile_name
 
         # Create a new incident
-        incident_payload = self.jinja_env.make_payload_from_template(
+        incident_payload = make_payload_from_template(
             profile_data.get("create_incident_template"),
             DEFAULT_INCIDENT_CREATION_TEMPLATE,
             sentinel_incident
@@ -251,7 +248,7 @@ def check_incident_template_filters(sentinel_incident, custom_poller_filters_tem
     :return [boolean]: If all the filters are True or not
     """
     # Check if the Sentinel incident passes all the filters in the jinja template
-    filtered_results = JinjaEnvironment().make_payload_from_template(
+    filtered_results = make_payload_from_template(
         custom_poller_filters_template,
         DEFAULT_POLLER_FILTERS_TEMPLATE,
         flatten(sentinel_incident)
