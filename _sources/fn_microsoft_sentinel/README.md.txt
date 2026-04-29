@@ -32,6 +32,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.2.1 | 04/2026 | Bug Fix for jinja2 template conflict |
 | 2.2.0 | 02/2025 | <ul><li>Add custom incident field: sentinel_incident_last_update to track updates from sentinel</li><li>Add app.config setting: clear_datatable=True|False in order to clear the Alert and Entities data table each time the contents are refreshed</li><li>Update all default jinja templates to escape double quotes.</li></ul> |
 | 2.1.3 | 12/2024 | Bug fix for Sentinel URL entities. |
 | 2.1.2 | 10/2024 | Added retry logic to SOAR incident updates |
@@ -132,9 +133,8 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Python 3.9 and Python 3.11 are supported.
+Python 3.11 and Python 3.12 are supported.
 Additional package dependencies may exist for each of these packages:
-* jinja2~=3.1.0
 * resilient_circuits>=51.0.0
 * simplejson~=3.19.0
 
