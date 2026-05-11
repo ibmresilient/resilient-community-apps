@@ -42,8 +42,9 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| v2.0.2 | May 2026 | Fix impersonation errors when finding/moving/deleting emails, fix bug when providing both start_date and end_date parameters |
 | v2.0.1 | May 2024 | Bug fix for selftest failures |
-| v2.0.0 | February | UI update, Playbook Migration, Custom Layout, Data-tables, Timezone support and bug fixes |
+| v2.0.0 | February 2023 | UI update, Playbook Migration, Custom Layout, Data-tables, Timezone support and bug fixes |
 | v1.0.4 | September 2022 | Bugfix on Selftest |
 | v1.0.3 | June 2022 | Add support for Python 3.9. |
 | v1.0.2 | June 2021 | Fix for ``selftest``. |
@@ -96,9 +97,9 @@ The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly
 
 If deploying to a SOAR platform with an integration server, the requirements are:
 
-* SOAR platform >= `46.0`.
+* SOAR platform >= `51.0.7`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=48.0.0`.
+* Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -128,18 +129,17 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Python 3.6 and Python 3.9 are supported.
+Python 3.11 and 3.12 are supported.
 Additional package dependencies may exist for each of these packages:
-* exchangelib ~= 4.6.2;python_version=='3.6'
-* exchangelib ~= 4.9.0;python_version>='3.9'
-* resilient_circuits>=48.0.0
+* exchangelib ~= 4.9.0
+* resilient_circuits>=51.0.0
 
 ### Development Version
 
 This app has been implemented using:
 | Product Name | Product Version |
 | ------------ | --------------- |
-| Microsoft Exchange | 2016 |
+| Microsoft Exchange | 2019 |
 
 ### Endpoint Developed With
 
