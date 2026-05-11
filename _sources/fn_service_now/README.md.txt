@@ -20,9 +20,8 @@ Add new input for function fn_snow_create_record. The new boolean input, sn_add_
 
 To update incidents, the user must have the following role:
 `x_ibmrt_resilient.integrator`
-As of v2.3.2, this role includes:
+The additional permission needed to edit the incident if necessary: 
 * `itil`: Grants access to create, read, update, and delete incidents.
-* `rest_api_explorer`: Allows testing and using REST APIs.
 This ensures the integration user has the necessary permissions to update fields like state on the incident table.
 
 ### v2.3.0

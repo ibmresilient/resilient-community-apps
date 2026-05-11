@@ -396,7 +396,7 @@
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>ServiceNow Instance with ITSM enabled and running <code class="docutils literal notranslate"><span class="pre">Kingston</span></code> or newer releases</p></li>
+<li><p>ServiceNow Instance with ITSM enabled and running <code class="docutils literal notranslate"><span class="pre">Xanadu</span></code> or newer releases</p></li>
 <li><p>Access to the <code class="docutils literal notranslate"><span class="pre">Incident</span> <span class="pre">Table</span></code> in ServiceNow</p></li>
 <li><p>A user in ServiceNow with an <code class="docutils literal notranslate"><span class="pre">admin</span></code> role</p></li>
 <li><p>IBM Cloud Pak for Security <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">1.10.18</span></code> <em>or</em> IBM SOAR <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">v51.0.0.0</span></code></p></li>
@@ -546,21 +546,29 @@
 <td class="text-center"><p>No</p></td>
 <td><p>(Required if configuring with CP4S) The rest URL of the CP4S instance. Usually this is <code class="docutils literal notranslate"><span class="pre">cases-rest.&lt;host_name&gt;</span></code> but sometimes it is a custom prefix.</p></td>
 </tr>
-<tr class="row-even"><td><p>ServiceNowAllowedTableNames</p></td>
+<tr class="row-even"><td><p>RequestTimeout</p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p>Timeout in seconds to wait for response from IBM SOAR instance. Recommended 30 sec.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ServiceNowAllowedTableNames</p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p>A CSV list of all the <strong>Table Names</strong> in ServiceNow IBM SOAR is allowed to integrate with. <em>Out-of-the-box this app requires access to the <code class="docutils literal notranslate"><span class="pre">incident</span></code>, <code class="docutils literal notranslate"><span class="pre">sys_user</span></code> and <code class="docutils literal notranslate"><span class="pre">sys_user_group</span></code> tables.</em> For integrating with ServiceNow Security Incident Response (SIR) this app requires <code class="docutils literal notranslate"><span class="pre">sn_si_incident</span></code> and <code class="docutils literal notranslate"><span class="pre">sn_si_task</span></code>. Since v2.3.0 this apps supports integrating with both the <code class="docutils literal notranslate"><span class="pre">incident</span></code> and <code class="docutils literal notranslate"><span class="pre">sn_si_incident</span></code> tables at the same time</p></td>
 </tr>
-<tr class="row-odd"><td><p>IBM SOAR Assignment Group Names</p></td>
+<tr class="row-even"><td><p>IBM SOAR Assignment Group Names</p></td>
 <td class="text-center"><p>No</p></td>
 <td><p>A CSV list of assignment groups that, upon assignment on a SIR incident, will automatically sync the security incident or task to SOAR</p></td>
 </tr>
-<tr class="row-even"><td><p>Logging Verbosity</p></td>
+<tr class="row-odd"><td><p>Logging Verbosity</p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p>Defaults to <strong>error</strong>. Can be changed to <strong>debug</strong> if needed later.</p></td>
 </tr>
-<tr class="row-odd"><td><p>Logging Destination</p></td>
+<tr class="row-even"><td><p>Logging Destination</p></td>
 <td class="text-center"><p>Yes</p></td>
 <td><p>Defaults to <strong>db</strong> (which will print any error logs to the Application Logs Table). Can be changed to <strong>file</strong> if needed later.</p></td>
+</tr>
+<tr class="row-odd"><td><p>RetryMaxAttempts</p></td>
+<td class="text-center"><p>Yes</p></td>
+<td><p>Maximum number of retry attempts for failed API calls to IBM Security QRadar SOAR. Set to 1 to disable retry (default behavior). Recommended: 3-5 attempts.</p></td>
 </tr>
 </tbody>
 </table>
@@ -730,7 +738,7 @@
 <li><p>In ServiceNow, look for the <strong>IBM Security QRadar SOAR</strong> menu in the navigation panel.
 <img alt="screenshot" src="../../../_images/81.png" /></p></li>
 <li><p>Click <strong>Properties.</strong> A new tab opens.
-<img alt="screenshot" src="../../../_images/111.png" /></p></li>
+<img alt="screenshot" src="../../../_images/72.png" /></p></li>
 </ul>
 </section>
 <section id="add-ibm-soar-tab-to-security-incident-ui-sir-only">

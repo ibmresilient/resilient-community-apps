@@ -2,7 +2,7 @@
 
 
 ## Prerequisites
-* ServiceNow Instance with ITSM enabled and running `Kingston` or newer releases
+* ServiceNow Instance with ITSM enabled and running `Xanadu` or newer releases
 * Access to the `Incident Table` in ServiceNow
 * A user in ServiceNow with an `admin` role
 * IBM Cloud Pak for Security `>= 1.10.18` *or* IBM SOAR `>= v51.0.0.0`
@@ -89,10 +89,12 @@
   | ServiceNow MID Server Name | No | The MID Server to use with this App or leave blank if not using a MID Server |
   | Configure with CP4S? | Yes | Defaults to **No**. Should be changed to **Yes** if you are connecting to a Cloud Pak for Security instance |
   | CP4S Rest URL | No | (Required if configuring with CP4S) The rest URL of the CP4S instance. Usually this is `cases-rest.<host_name>` but sometimes it is a custom prefix. |
+  | RequestTimeout | Yes | Timeout in seconds to wait for response from IBM SOAR instance. Recommended 30 sec. |
   | ServiceNowAllowedTableNames | Yes | A CSV list of all the **Table Names** in ServiceNow IBM SOAR is allowed to integrate with. *Out-of-the-box this app requires access to the `incident`, `sys_user` and `sys_user_group` tables.* For integrating with ServiceNow Security Incident Response (SIR) this app requires `sn_si_incident` and `sn_si_task`. Since v2.3.0 this apps supports integrating with both the `incident` and `sn_si_incident` tables at the same time |
   | IBM SOAR Assignment Group Names | No | A CSV list of assignment groups that, upon assignment on a SIR incident, will automatically sync the security incident or task to SOAR |
   | Logging Verbosity | Yes | Defaults to **error**. Can be changed to **debug** if needed later. |
   | Logging Destination | Yes | Defaults to **db** (which will print any error logs to the Application Logs Table). Can be changed to **file** if needed later. |
+  | RetryMaxAttempts | Yes | Maximum number of retry attempts for failed API calls to IBM Security QRadar SOAR. Set to 1 to disable retry (default behavior). Recommended: 3-5 attempts. |
 
 * Click **Save.** You should see a **Properties updated** banner at the top of the page if the save was successful.
 * **Close** the tab.
@@ -209,7 +211,7 @@ ServiceNow SecOps module offers the Security Incident Response (SIR) add-on. The
 * In ServiceNow, look for the **IBM Security QRadar SOAR** menu in the navigation panel.
  ![screenshot](./screenshots/8.png)
 * Click **Properties.** A new tab opens.
-  ![screenshot](./screenshots/11.png)
+  ![screenshot](./screenshots/7.png)
 
 ### Add IBM SOAR tab to Security Incident UI (SIR only)
 > *Note: the app is fully supported only when using the Security Incident "Classic UI".*
