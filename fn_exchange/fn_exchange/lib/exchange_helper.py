@@ -106,6 +106,8 @@ class ImpersonationError(Exception):
 
 
 def get_timezone(format) -> EWSTimeZone:
+    if isinstance(format, EWSTimeZone):
+        return format
     if not format:
         format = "Etc/GMT"
     else:

@@ -19,7 +19,7 @@ def snake_to_camel(word):
 setup(
     name='fn_exchange',
     display_name='Microsoft Exchange',
-    version='2.0.1',
+    version='2.0.2',
     license='MIT',
     author='IBM SOAR',
     url='https://ibm.com/mysupport',
@@ -39,11 +39,9 @@ Exchange email and meeting capabilities. The package provided has the following 
         <ul><a target='blank' href='https://ibmresilient.github.io/resilient-community-apps/fn_exchange/README.html'>App Documentation</a></ul>""",
     install_requires=[
         "resilient_circuits>=51.0.0",
-        "backports-datetime-fromisoformat == 2.0.0;python_version=='3.6'",
-        "exchangelib ~= 4.6.2;python_version=='3.6'",
-        "exchangelib ~= 4.9.0;python_version>='3.9'"
+        "exchangelib ~= 4.9.0"
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.11',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',

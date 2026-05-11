@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2026. All Rights Reserved.
 
 import re
 import base64
@@ -122,7 +122,7 @@ class  exchange_interface:
         default_folder_path = self.options.get("default_folder_path")
 
         timezone = self.options.get("timezone")
-        account = self.connect_to_account(username)
+        account = self.connect_to_account(username, impersonation=(username.lower() != self.options.get("email").lower()))
 
         # Defaults to folder specified in app.conf (Top of Information Store/Inbox) if not 
         # specified in input.
@@ -163,14 +163,14 @@ class  exchange_interface:
         if body:
             filtered_emails = filtered_emails.filter(body__contains=body)
 
+        # get YYYY/MM/DD from epoch time in milliseconds
+        timezone = exchange_helper.get_timezone(timezone)
+
         if start_date:
-            # get YYYY/MM/DD from epoch time in milliseconds
-            timezone = exchange_helper.get_timezone(timezone)
             start_date = EWSDateTime.fromtimestamp(start_date/1000, tz=timezone)
             filtered_emails = filtered_emails.filter(datetime_received__gte=start_date)
 
         if end_date:
-            timezone = exchange_helper.get_timezone(timezone)
             end_date = EWSDateTime.fromtimestamp(end_date/1000, tz=timezone)
             filtered_emails = filtered_emails.filter(datetime_received__lte=end_date)
 
@@ -277,7 +277,7 @@ class  exchange_interface:
         username   = function_parameters.get("username")
         src_folder = function_parameters.get("src_folder")
         dst_folder = function_parameters.get("dst_folder")
-        account    = self.connect_to_account(username)
+        account    = self.connect_to_account(username, impersonation=(username.lower() != self.options.get("email").lower()))
         
         if not delete_src_folder:
             self.log.info("Querying emails base on provided attributes")
