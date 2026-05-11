@@ -1,0 +1,57 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "value": [
+      {
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/statistics/New",
+        "counterProperty": "New",
+        "counterValue": 0,
+        "startTime": "2023-08-30T13:58:01.5985342+00:00",
+        "endTime": "2023-09-06T13:58:01.5985342+00:00"
+      },
+      {
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/statistics/Activating",
+        "counterProperty": "Activating",
+        "counterValue": 0,
+        "startTime": "2023-08-30T13:58:01.5985342+00:00",
+        "endTime": "2023-09-06T13:58:01.5985342+00:00"
+      },
+      {
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/statistics/Running",
+        "counterProperty": "Running",
+        "counterValue": 0,
+        "startTime": "2023-08-30T13:58:01.5985342+00:00",
+        "endTime": "2023-09-06T13:58:01.5985342+00:00"
+      },
+      {
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/statistics/Completed",
+        "counterProperty": "Completed",
+        "counterValue": 0,
+        "startTime": "2023-08-30T13:58:01.5985342+00:00",
+        "endTime": "2023-09-06T13:58:01.5985342+00:00"
+      },
+      {
+        "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/automation1/statistics/Failed",
+        "counterProperty": "Failed",
+        "counterValue": 0,
+        "startTime": "2023-08-30T13:58:01.5985342+00:00",
+        "endTime": "2023-09-06T13:58:01.5985342+00:00"
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "account_name": "automation1",
+    "resource_group_name": "DemoAssets"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-azure-automation-utilities",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 773,
+    "timestamp": "2023-09-06 09:58:01"
+  }
+}

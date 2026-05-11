@@ -1,0 +1,24 @@
+{
+    "sid": "SM611175aba15b49c9994e3d855b8245a8",
+    "date_created": "Fri, 03 Apr 2020 18:40:32 +0000",
+    "date_updated": "Fri, 03 Apr 2020 18:40:32 +0000",
+    "date_sent": null,
+    "account_sid": "AC6f9432844e6f7ff6d8ae896ea47f72cc",
+    "to": "+19788354530",
+    "from": "+12056513811",
+    "messaging_service_sid": null,
+    "body": "hello world",
+    "status": "queued",
+    "num_segments": "1",
+    "num_media": "0",
+    "direction": "outbound-api",
+    "api_version": "2010-04-01",
+    "price": null,
+    "price_unit": "USD",
+    "error_code": null,
+    "error_message": null,
+    "uri": "/2010-04-01/Accounts/AC6f9432844e6f7ff6d8ae896ea47f72cc/Messages/SM611175aba15b49c9994e3d855b8245a8.json",
+    "subresource_uris": {
+        "media": "/2010-04-01/Accounts/AC6f9432844e6f7ff6d8ae896ea47f72cc/Messages/SM611175aba15b49c9994e3d855b8245a8/Media.json"
+    }
+}
