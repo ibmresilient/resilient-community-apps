@@ -1,0 +1,24 @@
+2019-10-21 14:08:42,990 DEBUG Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
+2019-10-21 14:09:42,990 INFO Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
+2019-10-21 14:10:42,990 WARNING Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
+2019-10-21 14:11:42,990 ERROR Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
+Sample Message Ā ā Ă ă Ą ą Ć ć Ĉ ĉ
+1
+2
+3
+2019-10-21 15:08:42,990 DEBUG Sample Message
+2019-10-21 15:09:42,990 INFO Sample Message
+2019-10-21 15:10:42,990 WARNING Sample Message
+2019-10-21 15:11:42,990 ERROR Sample Message
+Sample Message
+1
+2
+3
+2019-10-21 16:08:42,990 DEBUG Sample Message
+2019-10-21 16:09:42,990 INFO Sample Message
+2019-10-21 16:10:42,990 WARNING Sample Message
+2019-10-21 16:11:42,990 ERROR Sample Message
+2019-10-22 16:08:42,990 DEBUG Sample Message
+2019-10-22 16:09:42,990 INFO Sample Message
+2019-10-22 16:10:42,990 WARNING Sample Message
+2019-10-22 16:11:42,990 ERROR Sample Message

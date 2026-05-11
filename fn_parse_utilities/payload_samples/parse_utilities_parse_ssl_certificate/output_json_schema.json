@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "subject": {
+      "type": "string"
+    },
+    "notBefore": {
+      "type": "string"
+    },
+    "notAfter": {
+      "type": "string"
+    },
+    "issuer": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer"
+    },
+    "expiration_status": {
+      "type": "string"
+    },
+    "signature_algorithm": {
+      "type": "string"
+    },
+    "public_key": {
+      "type": "string"
+    },
+    "extensions": {
+      "type": "object",
+      "properties": {
+        "subjectAltNames": {
+          "type": "string"
+        },
+        "basicConstraints": {
+          "type": "string"
+        },
+        "issuerAltNames": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
