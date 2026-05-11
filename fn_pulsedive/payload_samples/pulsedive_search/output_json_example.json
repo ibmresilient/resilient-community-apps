@@ -1,0 +1,192 @@
+{
+  "resp_json": {
+    "version": "1.0",
+    "success": true,
+    "reason": null,
+    "content": {
+      "results": [
+        {
+          "fid": 2,
+          "name": "Zeus Bad IPs",
+          "category": "malware",
+          "organization": "abuse.ch",
+          "pricing": "free",
+          "schedule": "daily",
+          "stamp_updated": "2025-04-04 09:21:48",
+          "stamp_pulled": "2025-04-03 22:30:37",
+          "stamp_modified": "2019-08-07 18:29:01",
+          "indicators": {
+            "critical": 0,
+            "low": 4,
+            "none": 6,
+            "retired": 203,
+            "medium": 1,
+            "unknown": 0,
+            "high": 0
+          }
+        }
+      ]
+    },
+    "raw": "",
+    "inputs": {
+      "pulsedive_search_type": {
+        "id": 3633,
+        "name": "Feed"
+      },
+      "pulsedive_indicator_type": [
+        {
+          "id": 3660,
+          "name": "Artifact"
+        },
+        {
+          "id": 3661,
+          "name": "Domain"
+        },
+        {
+          "id": 3662,
+          "name": "IP"
+        },
+        {
+          "id": 3663,
+          "name": "IPv6"
+        },
+        {
+          "id": 3664,
+          "name": "URL"
+        }
+      ],
+      "pulsedive_limit": {
+        "id": 3628,
+        "name": "100 results"
+      },
+      "attachment_name": null,
+      "pulsedive_splitrisk": {
+        "id": 3673,
+        "name": "Yes"
+      },
+      "pulsedive_threat": null,
+      "pulsedive_risk": [
+        {
+          "id": 3634,
+          "name": "Unknown"
+        },
+        {
+          "id": 3635,
+          "name": "None"
+        },
+        {
+          "id": 3636,
+          "name": "Low"
+        },
+        {
+          "id": 3637,
+          "name": "Medium"
+        },
+        {
+          "id": 3638,
+          "name": "High"
+        },
+        {
+          "id": 3639,
+          "name": "Critical"
+        }
+      ],
+      "incident_id": 3102,
+      "pulsedive_attribute": null,
+      "pulsedive_lastseen": {
+        "id": 3665,
+        "name": "Last 24 hours"
+      },
+      "pulsedive_property": null,
+      "pulsedive_category": [
+        {
+          "id": 3642,
+          "name": "General"
+        },
+        {
+          "id": 3643,
+          "name": "Abuse"
+        },
+        {
+          "id": 3644,
+          "name": "APT"
+        },
+        {
+          "id": 3645,
+          "name": "Attack"
+        },
+        {
+          "id": 3646,
+          "name": "Botnet"
+        },
+        {
+          "id": 3647,
+          "name": "Crime"
+        },
+        {
+          "id": 3648,
+          "name": "Exploit Kit"
+        },
+        {
+          "id": 3649,
+          "name": "Fraud"
+        },
+        {
+          "id": 3650,
+          "name": "Group"
+        },
+        {
+          "id": 3651,
+          "name": "Malware"
+        },
+        {
+          "id": 3652,
+          "name": "Proxy"
+        },
+        {
+          "id": 3653,
+          "name": "PUP"
+        },
+        {
+          "id": 3654,
+          "name": "RAT"
+        },
+        {
+          "id": 3655,
+          "name": "Reconnaissance"
+        },
+        {
+          "id": 3656,
+          "name": "Spam"
+        },
+        {
+          "id": 3657,
+          "name": "Phishing"
+        },
+        {
+          "id": 3658,
+          "name": "Terrorism"
+        },
+        {
+          "id": 3659,
+          "name": "Vulnerability"
+        }
+      ],
+      "pulsedive_search_value": "Zeus Bad IPs",
+      "pulsedive_feed": null,
+      "pulsedive_pretty": {
+        "id": 3640,
+        "name": "Yes"
+      }
+    },
+    "metrics": {
+      "version": "1.0",
+      "package": "fn-pulsedive",
+      "package_version": "1.0.1",
+      "host": "li-b6f3814c-2cf7-11b2-a85c-95da948e58bf.ibm.com",
+      "execution_time_ms": 1854,
+      "timestamp": "2025-04-04 15:10:49"
+    }
+  },
+  "att_name": "pulsedive_search_Feed.txt"
+}

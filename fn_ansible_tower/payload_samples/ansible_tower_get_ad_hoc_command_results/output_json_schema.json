@@ -1,0 +1,830 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "summary": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "type": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            },
+            "related": {
+              "type": "object",
+              "properties": {
+                "created_by": {
+                  "type": "string"
+                },
+                "stdout": {
+                  "type": "string"
+                },
+                "execution_environment": {
+                  "type": "string"
+                },
+                "inventory": {
+                  "type": "string"
+                },
+                "credential": {
+                  "type": "string"
+                },
+                "events": {
+                  "type": "string"
+                },
+                "activity_stream": {
+                  "type": "string"
+                },
+                "notifications": {
+                  "type": "string"
+                },
+                "cancel": {
+                  "type": "string"
+                },
+                "relaunch": {
+                  "type": "string"
+                }
+              }
+            },
+            "summary_fields": {
+              "type": "object",
+              "properties": {
+                "inventory": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "has_active_failures": {
+                      "type": "boolean"
+                    },
+                    "total_hosts": {
+                      "type": "integer"
+                    },
+                    "hosts_with_active_failures": {
+                      "type": "integer"
+                    },
+                    "total_groups": {
+                      "type": "integer"
+                    },
+                    "has_inventory_sources": {
+                      "type": "boolean"
+                    },
+                    "total_inventory_sources": {
+                      "type": "integer"
+                    },
+                    "inventory_sources_with_failures": {
+                      "type": "integer"
+                    },
+                    "organization_id": {
+                      "type": "integer"
+                    },
+                    "kind": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "execution_environment": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "credential": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "kind": {
+                      "type": "string"
+                    },
+                    "cloud": {
+                      "type": "boolean"
+                    },
+                    "kubernetes": {
+                      "type": "boolean"
+                    },
+                    "credential_type_id": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "instance_group": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "is_container_group": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "created_by": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "username": {
+                      "type": "string"
+                    },
+                    "first_name": {
+                      "type": "string"
+                    },
+                    "last_name": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "user_capabilities": {
+                  "type": "object",
+                  "properties": {
+                    "delete": {
+                      "type": "boolean"
+                    },
+                    "start": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            },
+            "created": {
+              "type": "string"
+            },
+            "modified": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "launch_type": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "execution_environment": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "boolean"
+            },
+            "started": {
+              "type": "string"
+            },
+            "finished": {
+              "type": "string"
+            },
+            "canceled_on": {},
+            "elapsed": {
+              "type": "number"
+            },
+            "job_args": {
+              "type": "string"
+            },
+            "job_cwd": {
+              "type": "string"
+            },
+            "job_env": {
+              "type": "object",
+              "properties": {
+                "PWD": {
+                  "type": "string"
+                },
+                "HOME": {
+                  "type": "string"
+                },
+                "PATH": {
+                  "type": "string"
+                },
+                "SHLVL": {
+                  "type": "string"
+                },
+                "HOSTNAME": {
+                  "type": "string"
+                },
+                "LC_CTYPE": {
+                  "type": "string"
+                },
+                "INVENTORY_ID": {
+                  "type": "string"
+                },
+                "KUBERNETES_PORT": {
+                  "type": "string"
+                },
+                "AD_HOC_COMMAND_ID": {
+                  "type": "string"
+                },
+                "AWX_DEMO_WEB_PORT": {
+                  "type": "string"
+                },
+                "INVENTORY_HOSTVARS": {
+                  "type": "string"
+                },
+                "RUNNER_OMIT_EVENTS": {
+                  "type": "string"
+                },
+                "ANSIBLE_FORCE_COLOR": {
+                  "type": "string"
+                },
+                "AWX_PRIVATE_DATA_DIR": {
+                  "type": "string"
+                },
+                "AWX_DEMO_SERVICE_PORT": {
+                  "type": "string"
+                },
+                "AWX_ISOLATED_DATA_DIR": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_TEAM_MODEL": {
+                  "type": "string"
+                },
+                "ANSIBLE_SFTP_BATCH_MODE": {
+                  "type": "string"
+                },
+                "ANSIBLE_STDOUT_CALLBACK": {
+                  "type": "string"
+                },
+                "KUBERNETES_PORT_443_TCP": {
+                  "type": "string"
+                },
+                "KUBERNETES_SERVICE_HOST": {
+                  "type": "string"
+                },
+                "KUBERNETES_SERVICE_PORT": {
+                  "type": "string"
+                },
+                "ANSIBLE_CALLBACK_PLUGINS": {
+                  "type": "string"
+                },
+                "ANSIBLE_HOST_KEY_CHECKING": {
+                  "type": "string"
+                },
+                "AWX_DEMO_WEB_SERVICE_HOST": {
+                  "type": "string"
+                },
+                "AWX_DEMO_WEB_SERVICE_PORT": {
+                  "type": "string"
+                },
+                "PIP_BREAK_SYSTEM_PACKAGES": {
+                  "type": "string"
+                },
+                "RUNNER_ONLY_FAILED_EVENTS": {
+                  "type": "string"
+                },
+                "AWX_DEMO_WEB_PORT_8080_TCP": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_ROLE_PRECREATE": {
+                  "type": "string"
+                },
+                "ANSIBLE_RETRY_FILES_ENABLED": {
+                  "type": "string"
+                },
+                "AWX_DEMO_SERVICE_PORT_80_TCP": {
+                  "type": "string"
+                },
+                "KUBERNETES_PORT_443_TCP_ADDR": {
+                  "type": "string"
+                },
+                "KUBERNETES_PORT_443_TCP_PORT": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_ALL_REST_FILTERS": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_CREATOR_DEFAULTS": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_PERMISSION_MODEL": {
+                  "type": "string"
+                },
+                "ANSIBLE_LOAD_CALLBACK_PLUGINS": {
+                  "type": "string"
+                },
+                "AWX_DEMO_SERVICE_SERVICE_HOST": {
+                  "type": "string"
+                },
+                "AWX_DEMO_SERVICE_SERVICE_PORT": {
+                  "type": "string"
+                },
+                "KUBERNETES_PORT_443_TCP_PROTO": {
+                  "type": "string"
+                },
+                "KUBERNETES_SERVICE_PORT_HTTPS": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_ROLE_CREATOR_NAME": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_ALLOW_CUSTOM_ROLES": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_ALLOW_TEAM_PARENTS": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_CUSTOM_VIEW_PARENT": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_ORGANIZATION_MODEL": {
+                  "type": "string"
+                },
+                "AWX_DEMO_WEB_PORT_8080_TCP_ADDR": {
+                  "type": "string"
+                },
+                "AWX_DEMO_WEB_PORT_8080_TCP_PORT": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_BYPASS_ACTION_FLAGS": {
+                  "type": "string"
+                },
+                "AWX_DEMO_WEB_PORT_8080_TCP_PROTO": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_ALLOW_TEAM_ORG_ADMIN": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_ALLOW_TEAM_ORG_PERMS": {
+                  "type": "string"
+                },
+                "ANSIBLE_INVENTORY_UNPARSED_FAILED": {
+                  "type": "string"
+                },
+                "ANSIBLE_PARAMIKO_RECORD_HOST_KEYS": {
+                  "type": "string"
+                },
+                "AWX_DEMO_SERVICE_PORT_80_TCP_ADDR": {
+                  "type": "string"
+                },
+                "AWX_DEMO_SERVICE_PORT_80_TCP_PORT": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_ALLOW_TEAM_ORG_MEMBER": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_MANAGED_ROLE_REGISTRY": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_ROLE_SYSTEM_ACTIVATED": {
+                  "type": "string"
+                },
+                "AWX_DEMO_SERVICE_PORT_80_TCP_PROTO": {
+                  "type": "string"
+                },
+                "AWX_DEMO_SERVICE_SERVICE_PORT_HTTP": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_BYPASS_SUPERUSER_FLAGS": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_RESOURCE_CONFIG_MODULE": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_ALLOW_CUSTOM_TEAM_ROLES": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_CACHE_PARENT_PERMISSIONS": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_ALLOW_SINGLETON_ROLES_API": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_CHECK_RELATED_PERMISSIONS": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_ALLOW_SINGLETON_TEAM_ROLES": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_ALLOW_SINGLETON_USER_ROLES": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_REST_FILTERS_RESERVED_NAMES": {
+                  "type": "string"
+                },
+                "ANSIBLE_BASE_EVALUATIONS_IGNORE_CONFLICTS": {
+                  "type": "string"
+                },
+                "AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_PORT": {
+                  "type": "string"
+                },
+                "AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_SERVICE_HOST": {
+                  "type": "string"
+                },
+                "AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_SERVICE_PORT": {
+                  "type": "string"
+                },
+                "AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_PORT_8443_TCP": {
+                  "type": "string"
+                },
+                "AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_PORT_8443_TCP_ADDR": {
+                  "type": "string"
+                },
+                "AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_PORT_8443_TCP_PORT": {
+                  "type": "string"
+                },
+                "AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_SERVICE_PORT_HTTPS": {
+                  "type": "string"
+                },
+                "AWX_OPERATOR_CONTROLLER_MANAGER_METRICS_SERVICE_PORT_8443_TCP_PROTO": {
+                  "type": "string"
+                }
+              }
+            },
+            "job_explanation": {
+              "type": "string"
+            },
+            "execution_node": {
+              "type": "string"
+            },
+            "controller_node": {
+              "type": "string"
+            },
+            "result_traceback": {
+              "type": "string"
+            },
+            "event_processing_finished": {
+              "type": "boolean"
+            },
+            "launched_by": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            },
+            "work_unit_id": {
+              "type": "string"
+            },
+            "job_type": {
+              "type": "string"
+            },
+            "inventory": {
+              "type": "integer"
+            },
+            "limit": {
+              "type": "string"
+            },
+            "credential": {
+              "type": "integer"
+            },
+            "module_name": {
+              "type": "string"
+            },
+            "module_args": {
+              "type": "string"
+            },
+            "forks": {
+              "type": "integer"
+            },
+            "verbosity": {
+              "type": "integer"
+            },
+            "extra_vars": {
+              "type": "string"
+            },
+            "become_enabled": {
+              "type": "boolean"
+            },
+            "diff_mode": {
+              "type": "boolean"
+            },
+            "host_status_counts": {
+              "type": "object",
+              "properties": {
+                "ok": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "events": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "integer"
+            },
+            "next": {},
+            "previous": {},
+            "results": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  },
+                  "related": {
+                    "type": "object",
+                    "properties": {
+                      "ad_hoc_command": {
+                        "type": "string"
+                      },
+                      "host": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "summary_fields": {
+                    "type": "object",
+                    "properties": {
+                      "host": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "created": {
+                    "type": "string"
+                  },
+                  "modified": {
+                    "type": "string"
+                  },
+                  "ad_hoc_command": {
+                    "type": "integer"
+                  },
+                  "event": {
+                    "type": "string"
+                  },
+                  "counter": {
+                    "type": "integer"
+                  },
+                  "event_display": {
+                    "type": "string"
+                  },
+                  "event_data": {
+                    "type": "object",
+                    "properties": {
+                      "playbook": {
+                        "type": "string"
+                      },
+                      "playbook_uuid": {
+                        "type": "string"
+                      },
+                      "changed": {
+                        "type": "object"
+                      },
+                      "dark": {
+                        "type": "object"
+                      },
+                      "failures": {
+                        "type": "object"
+                      },
+                      "ignored": {
+                        "type": "object"
+                      },
+                      "ok": {
+                        "type": "object",
+                        "properties": {
+                          "9.30.253.145": {
+                            "type": "integer"
+                          }
+                        }
+                      },
+                      "processed": {
+                        "type": "object",
+                        "properties": {
+                          "9.30.253.145": {
+                            "type": "integer"
+                          }
+                        }
+                      },
+                      "rescued": {
+                        "type": "object"
+                      },
+                      "skipped": {
+                        "type": "object"
+                      },
+                      "artifact_data": {
+                        "type": "object"
+                      },
+                      "uuid": {
+                        "type": "string"
+                      },
+                      "guid": {
+                        "type": "string"
+                      },
+                      "task": {
+                        "type": "string"
+                      },
+                      "task_uuid": {
+                        "type": "string"
+                      },
+                      "task_action": {
+                        "type": "string"
+                      },
+                      "resolved_action": {},
+                      "task_args": {
+                        "type": "string"
+                      },
+                      "task_path": {
+                        "type": "string"
+                      },
+                      "host": {
+                        "type": "string"
+                      },
+                      "remote_addr": {
+                        "type": "string"
+                      },
+                      "res": {
+                        "type": "object",
+                        "properties": {
+                          "ping": {
+                            "type": "string"
+                          },
+                          "invocation": {
+                            "type": "object",
+                            "properties": {
+                              "module_args": {
+                                "type": "object",
+                                "properties": {
+                                  "data": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "ansible_facts": {
+                            "type": "object",
+                            "properties": {
+                              "discovered_interpreter_python": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          "_ansible_no_log": {
+                            "type": "boolean"
+                          },
+                          "changed": {
+                            "type": "boolean"
+                          }
+                        }
+                      },
+                      "start": {
+                        "type": "string"
+                      },
+                      "end": {
+                        "type": "string"
+                      },
+                      "duration": {
+                        "type": "number"
+                      },
+                      "event_loop": {}
+                    }
+                  },
+                  "failed": {
+                    "type": "boolean"
+                  },
+                  "changed": {
+                    "type": "boolean"
+                  },
+                  "uuid": {
+                    "type": "string"
+                  },
+                  "host": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ]
+                  },
+                  "host_name": {
+                    "type": "string"
+                  },
+                  "stdout": {
+                    "type": "string"
+                  },
+                  "start_line": {
+                    "type": "integer"
+                  },
+                  "end_line": {
+                    "type": "integer"
+                  },
+                  "verbosity": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "incident_id": {
+          "type": "integer"
+        },
+        "tower_save_as": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        "tower_job_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

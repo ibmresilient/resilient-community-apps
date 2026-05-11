@@ -1,0 +1,21 @@
+{
+    "version": 2,
+    "success": true,
+    "reason": null,
+    "content": {
+        "attachment_name": "https://cybersecuritynordic.messukeskus.com/program-3/.png"
+    },
+    "raw": null,
+    "inputs": {
+        "snapshot_incident_id": 2103,
+        "snapshot_url": "https://cybersecuritynordic.messukeskus.com/program-3/"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-snapshot-url",
+        "package_version": "1.0.0",
+        "host": "1fd9269d-5558-411b-ba33-e4767f763c59-8678ccd8c8-xs2vr",
+        "execution_time_ms": 49769,
+        "timestamp": "2023-12-28 20:51:10"
+    }
+}

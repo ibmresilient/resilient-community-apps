@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "deduplicationKey": {
+          "type": "string"
+        },
+        "eventid": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "ocm_event_priority": {
+          "type": "string"
+        },
+        "ocm_event_summary": {
+          "type": "string"
+        },
+        "ocm_type_statusorthreshold": {
+          "type": "string"
+        },
+        "ocm_soar_inc_id": {
+          "type": "integer"
+        },
+        "ocm_event_severity": {
+          "type": "string"
+        },
+        "ocm_resource_name": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
