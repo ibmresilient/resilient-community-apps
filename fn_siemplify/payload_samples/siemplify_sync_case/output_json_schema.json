@@ -1,0 +1,453 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "wallData": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "comment": {
+                "type": "string"
+              },
+              "creatorUserId": {
+                "type": "string"
+              },
+              "id": {
+                "type": "integer"
+              },
+              "type": {
+                "type": "integer"
+              },
+              "caseId": {
+                "type": "integer"
+              },
+              "isFavorite": {
+                "type": "boolean"
+              },
+              "modificationTimeUnixTimeInMs": {
+                "type": "integer"
+              },
+              "creationTimeUnixTimeInMs": {
+                "type": "integer"
+              },
+              "alertIdentifier": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "description": {
+                "type": "string"
+              },
+              "activityKind": {
+                "type": "integer"
+              },
+              "newValue": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              }
+            }
+          }
+        },
+        "alerts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ticketId": {
+                "type": "string"
+              },
+              "identifier": {
+                "type": "string"
+              },
+              "hasWorkflows": {
+                "type": "boolean"
+              },
+              "workflowsStatus": {
+                "type": "integer"
+              },
+              "sourceSystemName": {
+                "type": "string"
+              },
+              "securityEventCards": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "caseId": {
+                      "type": "integer"
+                    },
+                    "eventId": {},
+                    "alertIdentifier": {
+                      "type": "string"
+                    },
+                    "eventName": {},
+                    "product": {},
+                    "sources": {
+                      "type": "array"
+                    },
+                    "destinations": {
+                      "type": "array"
+                    },
+                    "artificats": {
+                      "type": "array"
+                    },
+                    "port": {},
+                    "outcome": {},
+                    "time": {
+                      "type": "string"
+                    },
+                    "deviceEventClassId": {},
+                    "fields": {
+                      "type": "array"
+                    }
+                  }
+                }
+              },
+              "entityCards": {
+                "type": "array"
+              },
+              "productFamilies": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "isHighlight": {
+                      "type": "boolean"
+                    },
+                    "groupName": {
+                      "type": "string"
+                    },
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "originalName": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "name": {
+                "type": "string"
+              },
+              "product": {},
+              "startTimeUnixTimeInMs": {
+                "type": "integer"
+              },
+              "apiSlaExpiration": {
+                "type": "object",
+                "properties": {
+                  "slaExpirationTime": {},
+                  "criticalExpirationTime": {},
+                  "expirationStatus": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "isManualAlert": {
+                "type": "boolean"
+              },
+              "priority": {
+                "type": "integer"
+              },
+              "id": {
+                "type": "integer"
+              },
+              "creationTimeUnixTimeInMs": {
+                "type": "integer"
+              },
+              "modificationTimeUnixTimeInMs": {
+                "type": "integer"
+              },
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "identifier": {
+                    "type": "string"
+                  },
+                  "detectionTime": {
+                    "type": "string"
+                  },
+                  "alertName": {
+                    "type": "string"
+                  },
+                  "ruleGenerator": {
+                    "type": "string"
+                  },
+                  "alertGroupIdentifier": {
+                    "type": "string"
+                  },
+                  "isManualAlert": {
+                    "type": "string"
+                  },
+                  "priority": {
+                    "type": "string"
+                  },
+                  "endTime": {
+                    "type": "string"
+                  },
+                  "startTime": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "caseRecommendations": {
+          "type": "object",
+          "properties": {
+            "similarCases": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "caseRecommendationOutcomeStatus": {
+                    "type": "integer"
+                  },
+                  "priority": {
+                    "type": "string"
+                  },
+                  "creationTime": {
+                    "type": "string"
+                  },
+                  "scorePercent": {
+                    "type": "integer"
+                  },
+                  "isClosed": {
+                    "type": "boolean"
+                  },
+                  "closedRootCause": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "closedComment": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  }
+                }
+              }
+            },
+            "relevantAnalysts": {
+              "type": "array"
+            },
+            "relevantTags": {
+              "type": "array"
+            }
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "caseId": {
+                "type": "integer"
+              },
+              "tag": {
+                "type": "string"
+              },
+              "priority": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "insights": {
+          "type": "array"
+        },
+        "productFamilies": {
+          "type": "array"
+        },
+        "summary": {
+          "type": "object",
+          "properties": {
+            "fields": {
+              "type": "array"
+            }
+          }
+        },
+        "entityCards": {
+          "type": "array"
+        },
+        "entities": {
+          "type": "array"
+        },
+        "description": {
+          "type": "string"
+        },
+        "canOpenIncident": {
+          "type": "boolean"
+        },
+        "hasIncident": {
+          "type": "boolean"
+        },
+        "title": {
+          "type": "string"
+        },
+        "isTouched": {
+          "type": "boolean"
+        },
+        "hasSuspiciousEntity": {
+          "type": "boolean"
+        },
+        "isMerged": {
+          "type": "boolean"
+        },
+        "isImportant": {
+          "type": "boolean"
+        },
+        "isIncident": {
+          "type": "boolean"
+        },
+        "hasWorkflow": {
+          "type": "boolean"
+        },
+        "environment": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "integer"
+        },
+        "stage": {
+          "type": "string"
+        },
+        "assignedUserName": {
+          "type": "string"
+        },
+        "apiSlaExpiration": {
+          "type": "object",
+          "properties": {
+            "slaExpirationTime": {},
+            "criticalExpirationTime": {},
+            "expirationStatus": {
+              "type": "integer"
+            }
+          }
+        },
+        "apiStageSlaExpiration": {
+          "type": "object",
+          "properties": {
+            "slaExpirationTime": {},
+            "criticalExpirationTime": {},
+            "expirationStatus": {
+              "type": "integer"
+            }
+          }
+        },
+        "status": {
+          "type": "integer"
+        },
+        "isTestCase": {
+          "type": "boolean"
+        },
+        "caseSource": {
+          "type": "string"
+        },
+        "isOverflowCase": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "creationTimeUnixTimeInMs": {
+          "type": "integer"
+        },
+        "modificationTimeUnixTimeInMs": {
+          "type": "integer"
+        },
+        "additionalProperties": {
+          "type": "object"
+        },
+        "siemplify_case_url": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "siemplify_incident_id": {
+          "type": "integer"
+        },
+        "siemplify_sync_attachments": {
+          "type": "boolean"
+        },
+        "siemplify_assigned_user": {},
+        "siemplify_environment": {},
+        "siemplify_alert_id": {},
+        "siemplify_sync_comments": {
+          "type": "boolean"
+        },
+        "siemplify_sync_artifacts": {
+          "type": "boolean"
+        },
+        "siemplify_case_id": {}
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

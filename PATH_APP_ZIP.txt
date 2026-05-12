@@ -1,0 +1,1 @@
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_exchange/main/2.0/app-fn_exchange-2.0.2-31269.zip

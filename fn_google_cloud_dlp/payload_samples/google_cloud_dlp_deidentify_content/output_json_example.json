@@ -1,0 +1,79 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "de_identified_text": "My email is ############################"
+  },
+  "raw": "{\"de_identified_text\": \"My email is ############################\"}",
+  "inputs": {
+    "gcp_dlp_info_types": [
+      {
+        "id": 63,
+        "name": "CREDIT_CARD_NUMBER"
+      },
+      {
+        "id": 64,
+        "name": "EMAIL_ADDRESS"
+      },
+      {
+        "id": 67,
+        "name": "FIRST_NAME"
+      },
+      {
+        "id": 73,
+        "name": "IBAN_CODE"
+      },
+      {
+        "id": 76,
+        "name": "IP_ADDRESS"
+      },
+      {
+        "id": 81,
+        "name": "LAST_NAME"
+      },
+      {
+        "id": 83,
+        "name": "MAC_ADDRESS"
+      },
+      {
+        "id": 89,
+        "name": "PHONE_NUMBER"
+      },
+      {
+        "id": 116,
+        "name": "DATE"
+      },
+      {
+        "id": 117,
+        "name": "DATE_OF_BIRTH"
+      },
+      {
+        "id": 119,
+        "name": "PERSON_NAME"
+      },
+      {
+        "id": 120,
+        "name": "AGE"
+      },
+      {
+        "id": 131,
+        "name": "DOMAIN_NAME"
+      },
+      {
+        "id": 142,
+        "name": "URL"
+      }
+    ],
+    "incident_id": 2103,
+    "gcp_artifact_input": "My email is johnsmith@gmail.com"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-google-cloud-dlp",
+    "package_version": "1.2.0",
+    "host": "christohersmbp2.cambridge.ibm.com",
+    "execution_time_ms": 26887,
+    "timestamp": "2022-06-22 13:11:53"
+  }
+}
