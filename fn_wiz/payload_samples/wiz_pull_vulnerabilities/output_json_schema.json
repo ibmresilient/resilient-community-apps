@@ -1,0 +1,270 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "response": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "portalUrl": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "CVEDescription": {
+                "type": "string"
+              },
+              "CVSSSeverity": {
+                "type": "string"
+              },
+              "score": {
+                "type": "number"
+              },
+              "exploitabilityScore": {
+                "type": "number"
+              },
+              "impactScore": {
+                "type": "number"
+              },
+              "dataSourceName": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "hasExploit": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "hasCisaKevExploit": {
+                "type": "boolean"
+              },
+              "status": {
+                "type": "string"
+              },
+              "vendorSeverity": {
+                "type": "string"
+              },
+              "firstDetectedAt": {
+                "type": "string"
+              },
+              "lastDetectedAt": {
+                "type": "string"
+              },
+              "resolvedAt": {},
+              "description": {
+                "type": "string"
+              },
+              "remediation": {
+                "type": "string"
+              },
+              "detailedName": {
+                "type": "string"
+              },
+              "version": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "fixedVersion": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "detectionMethod": {
+                "type": "string"
+              },
+              "link": {
+                "type": "string"
+              },
+              "locationPath": {},
+              "resolutionReason": {},
+              "epssSeverity": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "epssPercentile": {
+                "type": "number"
+              },
+              "epssProbability": {
+                "type": "number"
+              },
+              "validatedInRuntime": {},
+              "layerMetadata": {},
+              "projects": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "slug": {
+                      "type": "string"
+                    },
+                    "businessUnit": {
+                      "type": "string"
+                    },
+                    "riskProfile": {
+                      "type": "object",
+                      "properties": {
+                        "businessImpact": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "ignoreRules": {},
+              "vulnerableAsset": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "region": {
+                    "type": "string"
+                  },
+                  "providerUniqueId": {
+                    "type": "string"
+                  },
+                  "cloudProviderURL": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "cloudPlatform": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "subscriptionName": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "subscriptionExternalId": {
+                    "type": "string"
+                  },
+                  "subscriptionId": {
+                    "type": "string"
+                  },
+                  "tags": {
+                    "type": "object",
+                    "properties": {
+                      "Name": {
+                        "type": "string"
+                      },
+                      "io.cri-containerd.image": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "hasLimitedInternetExposure": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "hasWideInternetExposure": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ]
+                  },
+                  "isAccessibleFromVPN": {},
+                  "isAccessibleFromOtherVnets": {},
+                  "isAccessibleFromOtherSubscriptions": {},
+                  "operatingSystem": {
+                    "type": "string"
+                  },
+                  "ipAddresses": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "imageId": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "projects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "wiz_project_ids": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

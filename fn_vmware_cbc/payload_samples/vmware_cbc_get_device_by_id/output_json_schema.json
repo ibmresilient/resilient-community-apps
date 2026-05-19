@@ -1,0 +1,261 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "device": {
+          "type": "object",
+          "properties": {
+            "activation_code": {},
+            "activation_code_expiry_time": {
+              "type": "string"
+            },
+            "appliance_name": {},
+            "appliance_uuid": {},
+            "auto_scaling_group_name": {},
+            "av_ave_version": {},
+            "av_engine": {},
+            "av_last_scan_time": {},
+            "av_pack_version": {},
+            "av_product_version": {},
+            "av_vdf_version": {},
+            "cloud_provider_account_id": {},
+            "cloud_provider_resource_id": {},
+            "cluster_name": {},
+            "compliance_status": {
+              "type": "string"
+            },
+            "current_sensor_policy_name": {
+              "type": "string"
+            },
+            "datacenter_name": {},
+            "deployment_type": {
+              "type": "string"
+            },
+            "deregistered_time": {},
+            "device_meta_data_item_list": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key_name": {
+                    "type": "string"
+                  },
+                  "key_value": {
+                    "type": "string"
+                  },
+                  "position": {
+                    "type": "integer"
+                  }
+                }
+              }
+            },
+            "email": {
+              "type": "string"
+            },
+            "esx_host_name": {},
+            "esx_host_uuid": {},
+            "first_name": {},
+            "infrastructure_provider": {
+              "type": "string"
+            },
+            "last_contact_time": {
+              "type": "string"
+            },
+            "last_device_policy_changed_time": {},
+            "last_device_policy_requested_time": {
+              "type": "string"
+            },
+            "last_internal_ip_address": {
+              "type": "string"
+            },
+            "last_external_ip_address": {
+              "type": "string"
+            },
+            "last_location": {
+              "type": "string"
+            },
+            "last_policy_updated_time": {
+              "type": "string"
+            },
+            "last_name": {},
+            "last_reported_time": {
+              "type": "string"
+            },
+            "last_reset_time": {},
+            "last_shutdown_time": {
+              "type": "string"
+            },
+            "login_user_name": {
+              "type": "string"
+            },
+            "mac_address": {
+              "type": "string"
+            },
+            "middle_name": {},
+            "name": {
+              "type": "string"
+            },
+            "nsx_distributed_firewall_policy": {},
+            "organization_name": {
+              "type": "string"
+            },
+            "os": {
+              "type": "string"
+            },
+            "os_version": {
+              "type": "string"
+            },
+            "policy_name": {
+              "type": "string"
+            },
+            "registered_time": {
+              "type": "string"
+            },
+            "scan_last_action_time": {},
+            "scan_last_complete_time": {},
+            "scan_status": {},
+            "sensor_kit_type": {
+              "type": "string"
+            },
+            "sensor_version": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "sensor_gateway_url": {},
+            "sensor_gateway_uuid": {},
+            "target_priority": {
+              "type": "string"
+            },
+            "uninstall_code": {
+              "type": "string"
+            },
+            "vcenter_host_url": {},
+            "vcenter_name": {},
+            "vcenter_uuid": {},
+            "virtual_private_cloud_id": {},
+            "virtualization_provider": {
+              "type": "string"
+            },
+            "vm_ip": {},
+            "vm_uuid": {},
+            "vm_name": {},
+            "vulnerability_severity": {
+              "type": "string"
+            },
+            "vdi_provider": {
+              "type": "string"
+            },
+            "windows_platform": {},
+            "sensor_states": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "cloud_provider_tags": {
+              "type": "array"
+            },
+            "av_status": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "av_update_servers": {},
+            "vulnerability_score": {
+              "type": "number"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "ad_group_id": {
+              "type": "integer"
+            },
+            "organization_id": {
+              "type": "integer"
+            },
+            "policy_id": {
+              "type": "integer"
+            },
+            "device_owner_id": {
+              "type": "integer"
+            },
+            "golden_device_id": {},
+            "vdi_base_device": {},
+            "passive_mode": {
+              "type": "boolean"
+            },
+            "nsx_enabled": {},
+            "golden_device": {},
+            "base_device": {},
+            "av_master": {
+              "type": "boolean"
+            },
+            "virtual_machine": {
+              "type": "boolean"
+            },
+            "sensor_out_of_date": {
+              "type": "boolean"
+            },
+            "sensor_pending_update": {
+              "type": "boolean"
+            },
+            "policy_override": {
+              "type": "boolean"
+            },
+            "quarantined": {
+              "type": "boolean"
+            },
+            "asset_group": {
+              "type": "array"
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "vmware_cbc_device_id": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

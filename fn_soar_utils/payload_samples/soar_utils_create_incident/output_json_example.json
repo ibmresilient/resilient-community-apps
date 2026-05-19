@@ -1,0 +1,266 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "dtm": {},
+    "cm": {
+      "unassigneds": [],
+      "total": 0,
+      "geo_counts": {}
+    },
+    "regulators": {
+      "ids": []
+    },
+    "hipaa": {
+      "hipaa_adverse": null,
+      "hipaa_misused": null,
+      "hipaa_acquired": null,
+      "hipaa_additional_misuse": null,
+      "hipaa_breach": null,
+      "hipaa_adverse_comment": null,
+      "hipaa_misused_comment": null,
+      "hipaa_acquired_comment": null,
+      "hipaa_additional_misuse_comment": null,
+      "hipaa_breach_comment": null
+    },
+    "tasks": null,
+    "artifacts": null,
+    "name": "Create Incident",
+    "description": "Testing",
+    "phase_id": 1000,
+    "inc_training": false,
+    "vers": 2,
+    "addr": null,
+    "city": null,
+    "creator": null,
+    "creator_principal": {
+      "id": 6,
+      "type": "apikey",
+      "name": "0228e00e-2c47-43e6-a736-550f104c94ea",
+      "display_name": "Chris' Integration Server v43"
+    },
+    "exposure_type_id": 1,
+    "incident_type_ids": [],
+    "reporter": null,
+    "state": null,
+    "country": null,
+    "zip": null,
+    "workspace": 1,
+    "exposure": 0,
+    "org_handle": 201,
+    "members": [],
+    "negative_pr_likely": null,
+    "perms": {
+      "read": true,
+      "write": true,
+      "comment": true,
+      "assign": true,
+      "close": true,
+      "change_members": true,
+      "attach_file": true,
+      "read_attachments": true,
+      "delete_attachments": true,
+      "create_milestones": true,
+      "list_milestones": true,
+      "create_artifacts": true,
+      "list_artifacts": true,
+      "delete": true,
+      "change_workspace": true
+    },
+    "confirmed": false,
+    "task_changes": {
+      "added": [],
+      "removed": []
+    },
+    "assessment": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<assessment>\n    <rollups/>\n    <optional>There are 1 required and 0 optional tasks from 1 regulators.</optional>\n</assessment>\n",
+    "data_compromised": null,
+    "draft": false,
+    "properties": {
+      "sdlp_policy_name": null,
+      "sdlp_policy_group_name": null,
+      "sdlp_policy_id": null,
+      "sdlp_incident_status": null,
+      "sdlp_incident_url": null,
+      "internal_customizations_field": null,
+      "sdlp_incident_id": null,
+      "sdlp_policy_group_id": null
+    },
+    "resolution_id": null,
+    "resolution_summary": null,
+    "pii": {
+      "data_compromised": null,
+      "determined_date": 1621110044000,
+      "harmstatus_id": 2,
+      "data_encrypted": null,
+      "data_contained": null,
+      "impact_likely": null,
+      "ny_impact_likely": null,
+      "or_impact_likely": null,
+      "wa_impact_likely": null,
+      "dc_impact_likely": null,
+      "data_source_ids": [],
+      "data_format": null,
+      "assessment": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<assessment>\n    <rollups/>\n    <optional>There are 1 required and 0 optional tasks from 1 regulators.</optional>\n</assessment>\n",
+      "exposure": 0,
+      "gdpr_harm_risk": null,
+      "gdpr_lawful_data_processing_categories": [],
+      "alberta_health_risk_assessment": null,
+      "california_health_risk_assessment": null,
+      "new_zealand_risk_assessment": null,
+      "singapore_risk_assessment": null
+    },
+    "gdpr": {
+      "gdpr_breach_circumstances": [],
+      "gdpr_breach_type": null,
+      "gdpr_personal_data": null,
+      "gdpr_identification": null,
+      "gdpr_consequences": null,
+      "gdpr_final_assessment": null,
+      "gdpr_breach_type_comment": null,
+      "gdpr_personal_data_comment": null,
+      "gdpr_identification_comment": null,
+      "gdpr_consequences_comment": null,
+      "gdpr_final_assessment_comment": null,
+      "gdpr_subsequent_notification": null
+    },
+    "regulator_risk": {},
+    "inc_last_modified_date": 1663297953098,
+    "comments": null,
+    "actions": [
+      {
+        "id": 69,
+        "name": "Timer Epoch",
+        "enabled": true
+      },
+      {
+        "id": 70,
+        "name": "Timer in Parallel",
+        "enabled": true
+      },
+      {
+        "id": 72,
+        "name": "Symantec DLP: Get DLP Notes",
+        "enabled": false
+      },
+      {
+        "id": 37,
+        "name": "Example: Archive Incident Slack Channel",
+        "enabled": true
+      },
+      {
+        "id": 42,
+        "name": "Example: Post Incident to Slack",
+        "enabled": true
+      },
+      {
+        "id": 75,
+        "name": "Symantec DLP: Update DLP Incident",
+        "enabled": false
+      },
+      {
+        "id": 78,
+        "name": "Symantec DLP: Upload Binaries as Artifact",
+        "enabled": false
+      },
+      {
+        "id": 79,
+        "name": "Symantec DLP: Write DLP Incident Details to Note",
+        "enabled": false
+      },
+      {
+        "id": 81,
+        "name": "Example: Close Incident",
+        "enabled": true
+      },
+      {
+        "id": 82,
+        "name": "Example: Create Incident",
+        "enabled": true
+      },
+      {
+        "id": 83,
+        "name": "Example: Search Incidents",
+        "enabled": true
+      },
+      {
+        "id": 55,
+        "name": "Example: Get Incident Contact Info",
+        "enabled": true
+      },
+      {
+        "id": 88,
+        "name": "Example: SOAR Utilities Close Incident",
+        "enabled": true
+      },
+      {
+        "id": 89,
+        "name": "Example: SOAR Utilities Create Incident",
+        "enabled": true
+      },
+      {
+        "id": 91,
+        "name": "Example: SOAR Utilities Get Incident Contact Info",
+        "enabled": true
+      },
+      {
+        "id": 63,
+        "name": "Example: Timer Epoch",
+        "enabled": true
+      },
+      {
+        "id": 64,
+        "name": "Example: Timers in Parallel",
+        "enabled": true
+      },
+      {
+        "id": 93,
+        "name": "Example: SOAR Utilities Search Incidents",
+        "enabled": true
+      }
+    ],
+    "playbooks": [
+      {
+        "playbook_handle": 1,
+        "display_name": "TImer"
+      }
+    ],
+    "timer_field_summarized_incident_data": [],
+    "admin_id": null,
+    "creator_id": 6,
+    "crimestatus_id": 1,
+    "employee_involved": null,
+    "end_date": null,
+    "exposure_dept_id": null,
+    "exposure_individual_name": null,
+    "exposure_vendor_id": null,
+    "jurisdiction_name": null,
+    "jurisdiction_reg_id": null,
+    "start_date": null,
+    "inc_start": null,
+    "org_id": 201,
+    "is_scenario": false,
+    "hard_liability": 0,
+    "nist_attack_vectors": [],
+    "id": 2114,
+    "sequence_code": null,
+    "discovered_date": 1621110044000,
+    "due_date": null,
+    "create_date": 1663297952673,
+    "owner_id": 3,
+    "severity_code": null,
+    "plan_status": "A"
+  },
+  "raw": "{\"dtm\": {}, \"cm\": {\"unassigneds\": [], \"total\": 0, \"geo_counts\": {}}, \"regulators\": {\"ids\": []}, \"hipaa\": {\"hipaa_adverse\": null, \"hipaa_misused\": null, \"hipaa_acquired\": null, \"hipaa_additional_misuse\": null, \"hipaa_breach\": null, \"hipaa_adverse_comment\": null, \"hipaa_misused_comment\": null, \"hipaa_acquired_comment\": null, \"hipaa_additional_misuse_comment\": null, \"hipaa_breach_comment\": null}, \"tasks\": null, \"artifacts\": null, \"name\": \"Create Incident\", \"description\": \"Testing\", \"phase_id\": 1000, \"inc_training\": false, \"vers\": 2, \"addr\": null, \"city\": null, \"creator\": null, \"creator_principal\": {\"id\": 6, \"type\": \"apikey\", \"name\": \"0228e00e-2c47-43e6-a736-550f104c94ea\", \"display_name\": \"Chris' Integration Server v43\"}, \"exposure_type_id\": 1, \"incident_type_ids\": [], \"reporter\": null, \"state\": null, \"country\": null, \"zip\": null, \"workspace\": 1, \"exposure\": 0, \"org_handle\": 201, \"members\": [], \"negative_pr_likely\": null, \"perms\": {\"read\": true, \"write\": true, \"comment\": true, \"assign\": true, \"close\": true, \"change_members\": true, \"attach_file\": true, \"read_attachments\": true, \"delete_attachments\": true, \"create_milestones\": true, \"list_milestones\": true, \"create_artifacts\": true, \"list_artifacts\": true, \"delete\": true, \"change_workspace\": true}, \"confirmed\": false, \"task_changes\": {\"added\": [], \"removed\": []}, \"assessment\": \"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\" standalone=\\\"yes\\\"?>\\n<assessment>\\n    <rollups/>\\n    <optional>There are 1 required and 0 optional tasks from 1 regulators.</optional>\\n</assessment>\\n\", \"data_compromised\": null, \"draft\": false, \"properties\": {\"sdlp_policy_name\": null, \"sdlp_policy_group_name\": null, \"sdlp_policy_id\": null, \"sdlp_incident_status\": null, \"sdlp_incident_url\": null, \"internal_customizations_field\": null, \"sdlp_incident_id\": null, \"sdlp_policy_group_id\": null}, \"resolution_id\": null, \"resolution_summary\": null, \"pii\": {\"data_compromised\": null, \"determined_date\": 1621110044000, \"harmstatus_id\": 2, \"data_encrypted\": null, \"data_contained\": null, \"impact_likely\": null, \"ny_impact_likely\": null, \"or_impact_likely\": null, \"wa_impact_likely\": null, \"dc_impact_likely\": null, \"data_source_ids\": [], \"data_format\": null, \"assessment\": \"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\" standalone=\\\"yes\\\"?>\\n<assessment>\\n    <rollups/>\\n    <optional>There are 1 required and 0 optional tasks from 1 regulators.</optional>\\n</assessment>\\n\", \"exposure\": 0, \"gdpr_harm_risk\": null, \"gdpr_lawful_data_processing_categories\": [], \"alberta_health_risk_assessment\": null, \"california_health_risk_assessment\": null, \"new_zealand_risk_assessment\": null, \"singapore_risk_assessment\": null}, \"gdpr\": {\"gdpr_breach_circumstances\": [], \"gdpr_breach_type\": null, \"gdpr_personal_data\": null, \"gdpr_identification\": null, \"gdpr_consequences\": null, \"gdpr_final_assessment\": null, \"gdpr_breach_type_comment\": null, \"gdpr_personal_data_comment\": null, \"gdpr_identification_comment\": null, \"gdpr_consequences_comment\": null, \"gdpr_final_assessment_comment\": null, \"gdpr_subsequent_notification\": null}, \"regulator_risk\": {}, \"inc_last_modified_date\": 1663297953098, \"comments\": null, \"actions\": [{\"id\": 69, \"name\": \"Timer Epoch\", \"enabled\": true}, {\"id\": 70, \"name\": \"Timer in Parallel\", \"enabled\": true}, {\"id\": 72, \"name\": \"Symantec DLP: Get DLP Notes\", \"enabled\": false}, {\"id\": 37, \"name\": \"Example: Archive Incident Slack Channel\", \"enabled\": true}, {\"id\": 42, \"name\": \"Example: Post Incident to Slack\", \"enabled\": true}, {\"id\": 75, \"name\": \"Symantec DLP: Update DLP Incident\", \"enabled\": false}, {\"id\": 78, \"name\": \"Symantec DLP: Upload Binaries as Artifact\", \"enabled\": false}, {\"id\": 79, \"name\": \"Symantec DLP: Write DLP Incident Details to Note\", \"enabled\": false}, {\"id\": 81, \"name\": \"Example: Close Incident\", \"enabled\": true}, {\"id\": 82, \"name\": \"Example: Create Incident\", \"enabled\": true}, {\"id\": 83, \"name\": \"Example: Search Incidents\", \"enabled\": true}, {\"id\": 55, \"name\": \"Example: Get Incident Contact Info\", \"enabled\": true}, {\"id\": 88, \"name\": \"Example: SOAR Utilities Close Incident\", \"enabled\": true}, {\"id\": 89, \"name\": \"Example: SOAR Utilities Create Incident\", \"enabled\": true}, {\"id\": 91, \"name\": \"Example: SOAR Utilities Get Incident Contact Info\", \"enabled\": true}, {\"id\": 63, \"name\": \"Example: Timer Epoch\", \"enabled\": true}, {\"id\": 64, \"name\": \"Example: Timers in Parallel\", \"enabled\": true}, {\"id\": 93, \"name\": \"Example: SOAR Utilities Search Incidents\", \"enabled\": true}], \"playbooks\": [{\"playbook_handle\": 1, \"display_name\": \"TImer\"}], \"timer_field_summarized_incident_data\": [], \"admin_id\": null, \"creator_id\": 6, \"crimestatus_id\": 1, \"employee_involved\": null, \"end_date\": null, \"exposure_dept_id\": null, \"exposure_individual_name\": null, \"exposure_vendor_id\": null, \"jurisdiction_name\": null, \"jurisdiction_reg_id\": null, \"start_date\": null, \"inc_start\": null, \"org_id\": 201, \"is_scenario\": false, \"hard_liability\": 0, \"nist_attack_vectors\": [], \"id\": 2114, \"sequence_code\": null, \"discovered_date\": 1621110044000, \"due_date\": null, \"create_date\": 1663297952673, \"owner_id\": 3, \"severity_code\": null, \"plan_status\": \"A\"}",
+  "inputs": {
+    "soar_utils_create_fields": "{\"name\":\"Create Incident\",\"description\":\"Testing\",\"discovered_date\":1621110044000}"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-soar-utils",
+    "package_version": "1.0.0",
+    "host": "Christophers-MacBook-Pro-2.local",
+    "execution_time_ms": 1705,
+    "timestamp": "2022-09-15 23:12:33"
+  }
+}
