@@ -21,9 +21,14 @@ Bidirectional synchronization is now supported.
 <br><ul><a target='blank' href='https://ideas.ibm.com/'>Enhancement Requests</a></ul>""",
     install_requires=[
         'cachetools',
+        'cryptography >= 46.0.5',
+        'jinja2 >= 3.1.6',
+        'jwcrypto >= 1.5.7',
+        'pyopenssl >= 26',
         'rc_data_feed >= 3.2.0',
         'resilient',
-        'resilient-lib'
+        'resilient-lib >= 51.0.8',
+        'urllib3 >= 2.6.3'
     ],
     extras_require={
         'postgres': ['pyodbc']

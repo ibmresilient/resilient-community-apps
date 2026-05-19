@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.
+# (c) Copyright IBM Corp. 2010, 2026. All Rights Reserved.
 # pragma pylint: disable=unused-argument, line-too-long
 
 import io
@@ -698,7 +698,8 @@ class Resilient(object):
         else:
             try:
                 response = write_file_attachment(self.rest_client, payload['name'], file_handle, sync_inc_id,
-                                                 task_id=dst_task_id, content_type=payload['content_type'])
+                                                 task_id=dst_task_id, content_type=payload['content_type'],
+                                                 description=payload.get('description', None))
             except Exception as err:
                 LOG.error("Unable to create attachment for file: %s", payload['name'])
                 LOG.error(payload)
