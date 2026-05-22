@@ -365,6 +365,7 @@ def test_renew_tokens():
         assert method == "post"
         assert url == "www.token_url.com"
         assert headers == {
+            'Authorization': 'Basic Y2xpZW50aWQxMTIyMzM6c2VjcmV0MTIz',
             'content_type': 'application/ibm',
             'header_key1': 'header_value1',
             'header_key2': 'header_value2'}

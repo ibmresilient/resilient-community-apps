@@ -4,6 +4,7 @@
 import jwt
 import logging, json
 import shutil, os, time
+import base64
 
 from resilient_lib import IntegrationError
 from resilient_lib import write_to_tmp_file
@@ -416,7 +417,7 @@ class OAuth2Authorization():
 
     def fetch_renew_tokens(self, token_url:str, client_id:str, token_value:str=None, auth_type:str=None,
         client_secret:str=None, grant_type:str=None, redirect_uri:str=None, scope:str=None,
-        content_type:dict=DEFAULT_AUTH_CONTENT_TYPE, additional_headers:dict={},
+        content_type:str=DEFAULT_AUTH_CONTENT_TYPE, additional_headers:dict={},
         additional_attributes:dict={}) -> dict:
         """
         Retrieves or extends access tokens through a POST request to the designated token_url. In addition
@@ -454,6 +455,14 @@ class OAuth2Authorization():
 
         data = {
             CLIENT_ID : client_id}
+
+        # Add HTTP Basic Authentication header (RFC 6749 Section 2.3.1)
+        if client_id and client_secret:
+            # Encode credentials as base64(client_id:client_secret)
+            credentials = f"{client_id}:{client_secret}"
+            encoded_credentials = base64.b64encode(credentials.encode('utf-8')).decode('utf-8')
+            headers[AUTHORIZATION_KEY] = f"Basic {encoded_credentials}"
+            LOG.info("Added HTTP Basic Authorization header for OAuth 2.0 client authentication (RFC 6749 Section 2.3.1)")
 
         # AUTH_TYPE (optional)
         if token_value:

@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_rest_api",
     display_name="REST API Functions for SOAR",
-    version="1.3.1", 
+    version="1.3.2",
     license="MIT",
     author="IBM SOAR",
     author_email="",
@@ -36,7 +36,7 @@ setup(
         "resilient-circuits >= 51.0.0.0",
         "PyJWT"
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.11',
     packages=find_packages(),
     include_package_data=True,
     platforms="any",
