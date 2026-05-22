@@ -1,0 +1,78 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "b3763ac5-6319-496b-b404-6c5000418a81_4c4831e9-2ed7-a44a-e530-c784cc7c2ddc": [
+      {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/b9ce5c65-0b04-27bf-c4af-c5926008a5d3",
+        "name": "b9ce5c65-0b04-27bf-c4af-c5926008a5d3",
+        "type": "Microsoft.SecurityInsights/entities",
+        "kind": "Ip",
+        "properties": {
+          "address": "80.66.76.30",
+          "friendlyName": "80.66.76.30"
+        },
+        "resilient_artifact_type": "IP Address",
+        "resilient_artifact_value": "80.66.76.30"
+      },
+      {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/8e6ffdf6-05ab-b16e-aaa7-c3465af09c46",
+        "name": "8e6ffdf6-05ab-b16e-aaa7-c3465af09c46",
+        "type": "Microsoft.SecurityInsights/entities",
+        "kind": "AzureResource",
+        "properties": {
+          "resourceId": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/DemoAssets/providers/Microsoft.Compute/virtualMachines/PAMSqlSv",
+          "subscriptionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+          "additionalData": {
+            "ResourceType": "Virtual Machine",
+            "ResourceName": "PAMSqlSv"
+          },
+          "friendlyName": "PAMSqlSv"
+        },
+        "resilient_artifact_type": "String",
+        "resilient_artifact_value": "PAMSqlSv"
+      },
+      {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/eda45dbc-9011-cfbc-4e9b-4fd97d44f069",
+        "name": "eda45dbc-9011-cfbc-4e9b-4fd97d44f069",
+        "type": "Microsoft.SecurityInsights/entities",
+        "kind": "Host",
+        "properties": {
+          "hostName": "PAMSqlSv",
+          "azureID": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/DemoAssets/providers/Microsoft.Compute/virtualMachines/PAMSqlSv",
+          "omsAgentID": "7db452ea-1cae-4079-94a5-85dc76156e96",
+          "friendlyName": "PAMSqlSv"
+        },
+        "resilient_artifact_type": "System Name",
+        "resilient_artifact_value": "PAMSqlSv"
+      },
+      {
+        "id": "/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/7cc5b89b-7a07-55eb-cfb1-a8a8afd5c67e",
+        "name": "7cc5b89b-7a07-55eb-cfb1-a8a8afd5c67e",
+        "type": "Microsoft.SecurityInsights/entities",
+        "kind": "Account",
+        "properties": {
+          "accountName": "sa",
+          "friendlyName": "sa"
+        },
+        "resilient_artifact_type": "User Account",
+        "resilient_artifact_value": "sa"
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "sentinel_incident_id": "b3763ac5-6319-496b-b404-6c5000418a81",
+    "sentinel_profile": null,
+    "sentinel_label": "label1"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-microsoft-sentinel",
+    "package_version": "2.1.0",
+    "host": "local",
+    "execution_time_ms": 2788,
+    "timestamp": "2024-04-10 14:08:00"
+  }
+}

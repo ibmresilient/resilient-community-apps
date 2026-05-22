@@ -1,0 +1,194 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "description": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "created_at": {
+                "type": "string"
+              },
+              "updated_at": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              },
+              "teams": {
+                "type": "array"
+              },
+              "alert_creation": {
+                "type": "string"
+              },
+              "addons": {
+                "type": "array"
+              },
+              "scheduled_actions": {
+                "type": "array"
+              },
+              "support_hours": {},
+              "last_incident_timestamp": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "escalation_policy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "summary": {
+                    "type": "string"
+                  },
+                  "self": {
+                    "type": "string"
+                  },
+                  "html_url": {
+                    "type": "string"
+                  }
+                }
+              },
+              "incident_urgency_rule": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "urgency": {
+                    "type": "string"
+                  }
+                }
+              },
+              "acknowledgement_timeout": {},
+              "auto_resolve_timeout": {},
+              "alert_grouping": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "alert_grouping_timeout": {},
+              "alert_grouping_parameters": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "config": {},
+                  "is_global_configuration": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "integrations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "summary": {
+                      "type": "string"
+                    },
+                    "self": {
+                      "type": "string"
+                    },
+                    "html_url": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "response_play": {},
+              "type": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "self": {
+                "type": "string"
+              },
+              "html_url": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "limit": {
+          "type": "integer"
+        },
+        "offset": {
+          "type": "integer"
+        },
+        "total": {},
+        "more": {
+          "type": "boolean"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object"
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
