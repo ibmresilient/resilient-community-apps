@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "meta": {
+          "type": "object",
+          "properties": {
+            "timestamp": {
+              "type": "string"
+            },
+            "serverid": {
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            },
+            "requestid": {
+              "type": "string"
+            },
+            "timestamp_modified": {
+              "type": "integer"
+            }
+          }
+        },
+        "results": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string"
+            },
+            "in_database": {
+              "type": "boolean"
+            },
+            "phish_id": {
+              "type": "integer"
+            },
+            "phish_detail_page": {
+              "type": "string"
+            },
+            "verified": {
+              "type": "boolean"
+            },
+            "verified_at": {},
+            "valid": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "phish_tank_check_url": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

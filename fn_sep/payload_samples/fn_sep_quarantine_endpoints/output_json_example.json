@@ -1,0 +1,24 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "commandID_group": "89637CF1D7*******22C81C4389301B",
+    "commandID_computer": "1CA9D4F37*******A9D93D09402E3D3"
+  },
+  "raw": null,
+  "inputs": {
+    "sep_group_ids": "E5E684A6092E*******46E84BB6F35BBC",
+    "sep_undo": false,
+    "sep_hardwarekey": "8DACE2559C*******09CC0BF71D973BB7",
+    "sep_computer_ids": "01ECF4E80*******E4D52E45C3ABE4D"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.2.0",
+    "host": "my.app.host",
+    "execution_time_ms": 1016,
+    "timestamp": "2024-08-21 08:40:30"
+  }
+}
