@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="search" title="Search" href="../search.html">
+<link rel="search" title="Search" href="../search.html"><link rel="prev" title="URLScan IO Threat Searcher" href="../rc-cts-urlscanio/README.html">
         <link rel="prefetch" href="../_static/IBM_Security_Light.png" as="image">
         <link rel="prefetch" href="../_static/IBM_Security_Dark.png" as="image">
 
@@ -219,7 +219,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../docs/python_api.html">IBM SOAR Python Documentation</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">All Apps</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../fn_bitsight_cyber_insurance/README.html">BitSight Cyber Insurance</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_algosec/README.html">AlgoSec</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_abuseipdb/README.html">AbuseIPDB</a></li>
@@ -357,6 +357,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../rc-cts-passivetotal/README.html">RiskIQ PassiveTotal</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rc-cts-shadowserver/README.html">ShadowServer Threat Service</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../rc-cts-urlscanio/README.html">URLScan IO Threat Searcher</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">IBM SOAR Email Approval Process Content Pack</a></li>
 </ul>
 
 </div>
@@ -393,7 +394,7 @@
         <article role="main" id="furo-main-content">
           <section id="ibm-soar-email-approval-process-content-pack">
 <h1>IBM SOAR Email Approval Process Content Pack<a class="headerlink" href="#ibm-soar-email-approval-process-content-pack" title="Link to this heading">¶</a></h1>
-<p>This content package consists of rules, workflows, scripts and a datatable for an out-of-the-box email approval process. For customers who require a manual approval process before taking remediation actions, this content pack will support outbound emails sent to recipients with a request for action approval. The reply is then parsed to update the associated case task with the response.</p>
+<p>This content package consists of rules, playbooks, scripts and a datatable for an out-of-the-box email approval process. For customers who require a manual approval process before taking remediation actions, this content pack will support outbound emails sent to recipients with a request for action approval. The reply is then parsed to update the associated case task with the response.</p>
 <p><img alt="screenshot: email main" src="../_images/email_main.png" /></p>
 <section id="history">
 <h2>History<a class="headerlink" href="#history" title="Link to this heading">¶</a></h2>
@@ -406,80 +407,17 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-right"><p>1.0.1</p></td>
-<td class="text-right"><p>2/2023</p></td>
+<tr class="row-even"><td class="text-right"><p>1.0.2</p></td>
+<td class="text-right"><p>05/2026</p></td>
+<td class="text-right"><p>Migrated workflows to playbooks, added support for multi-recipient email approval functionality, added Gmail client compatibility (handles quoted text and split msg-id lines), bug resolutions</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>1.0.1</p></td>
+<td class="text-right"><p>02/2023</p></td>
 <td class="text-right"><p>fixes for v47</p></td>
 </tr>
-<tr class="row-odd"><td class="text-right"><p>1.0.0</p></td>
+<tr class="row-even"><td class="text-right"><p>1.0.0</p></td>
 <td class="text-right"><p>10/2022</p></td>
 <td class="text-right"><p>Initial release</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="key-features">
-<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>Out-of-the-box experience blending outbound and inbound email capabilities.</p></li>
-<li><p>Secure email through embedded one-way hash.</p></li>
-<li><p>Optional time-based expiration.</p></li>
-<li><p>History of approvals and replies retained in a datatable.</p></li>
-<li><p>Flexible template for email message body.</p></li>
-<li><p>Flexibility for use in other business processes using playbooks.</p></li>
-</ul>
-</section>
-<section id="what-s-included">
-<h2>What’s Included<a class="headerlink" href="#what-s-included" title="Link to this heading">¶</a></h2>
-<p>This package consists of the following components:</p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head text-left"><p>Type</p></th>
-<th class="head text-left"><p>Name</p></th>
-<th class="head text-left"><p>Description</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-left"><p>Script</p></td>
-<td class="text-left"><p>Email Approval Pre Process Artifact</p></td>
-<td class="text-left"><p>Collect and format data used by the Email Approval Process. It uses the <code class="docutils literal notranslate"><span class="pre">email_approval</span></code> workspace or playbook property. This script relies on the ‘create custom task’ function from <code class="docutils literal notranslate"><span class="pre">IBM</span> <span class="pre">SOAR</span> <span class="pre">Task</span> <span class="pre">Utils</span></code> to precede it.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>Script</p></td>
-<td class="text-left"><p>Email Approval Pre Process Task</p></td>
-<td class="text-left"><p>Collect and format data used by the Email Approval Process. Uses the <code class="docutils literal notranslate"><span class="pre">email_approval</span></code> workflow or playbook property.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>Script</p></td>
-<td class="text-left"><p>Email Approval Process Response</p></td>
-<td class="text-left"><p>Parse email approval emails and make updates to the cooresponding incident and task.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>Rule</p></td>
-<td class="text-left"><p>Email Approval Process: Artifact</p></td>
-<td class="text-left"><p>Create an email approval for actions on an artifact.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>Rule</p></td>
-<td class="text-left"><p>Email Approval Process: Task</p></td>
-<td class="text-left"><p>Create an email approval for actions on a task.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>Rule</p></td>
-<td class="text-left"><p>Process Email Approval Response</p></td>
-<td class="text-left"><p>See script: Email Approval Process Response.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>Rule</p></td>
-<td class="text-left"><p>Complete Email Approval Process</p></td>
-<td class="text-left"><p>Process an incoming approval email associated with a given task.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>Workflow</p></td>
-<td class="text-left"><p>Email Approval Process: Artifact</p></td>
-<td class="text-left"><p>See rule: Email Approval Process: Artifact.</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>Workflow</p></td>
-<td class="text-left"><p>Email Approval Process: Artifact</p></td>
-<td class="text-left"><p>See rule: Email Approval Process: Task.</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>Datatable</p></td>
-<td class="text-left"><p>Email Approval Process</p></td>
-<td class="text-left"><p>Retention of approval emails with the status of the response.</p></td>
 </tr>
 </tbody>
 </table>
@@ -492,22 +430,709 @@
 <li><p>IBM SOAR Task Helper Functions (https://exchange.xforce.ibmcloud.com/hub?q=task&amp;br=Resilient)</p></li>
 <li><p>Outbound Email for SOAR (version 2.0 or greater) (https://exchange.xforce.ibmcloud.com/hub/extension/caafba4e4f6d130e7db30ed4d5e53504)</p></li>
 </ul>
-<p>In addition to the above SOAR apps, the SOAR inbound email capability needs to be configured with an appropriate email user account and folder used specifically for email approval.</p>
+<p>In addition to the above SOAR apps, the SOAR inbound email capability needs to be configured with an appropriate email user account and folder used specifically for email approval. Use the same email address configured in Outbound Email for the inbound email connection so that all replies are processed for email approvals.</p>
 <p><img alt="screenshot: inbound email" src="../_images/inbound_email.png" /></p>
 </section>
-<section id="installation-and-configuration">
-<h2>Installation and Configuration<a class="headerlink" href="#installation-and-configuration" title="Link to this heading">¶</a></h2>
-<p>It may be useful to place the <code class="docutils literal notranslate"><span class="pre">Email</span> <span class="pre">Approval</span> <span class="pre">Process</span></code> datatable within a tab, such as the existing <code class="docutils literal notranslate"><span class="pre">Email</span></code> tab. This table serves as an audit of the email approval process and shows the sequence of communication.</p>
-<p><img alt="screenshot: layouts" src="../_images/layouts1.png" /></p>
+<section id="key-features">
+<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Out-of-the-box experience blending outbound and inbound email capabilities.</p></li>
+<li><p>Secure email through embedded one-way hash.</p></li>
+<li><p>Optional time-based expiration.</p></li>
+<li><p>History of approvals and replies retained in a datatable.</p></li>
+<li><p>Flexible template for email message body.</p></li>
+<li><p>Flexibility for use in other business processes using playbooks.</p></li>
+</ul>
 </section>
+<section id="script-email-approval-pre-process-artifact">
+<h2>Script - Email Approval Pre Process Artifact<a class="headerlink" href="#script-email-approval-pre-process-artifact" title="Link to this heading">¶</a></h2>
+<p>Collect and format data used by the Email Approval Process. Uses the ‘email_approval’ workspace property.</p>
+<p>This script relies on the ‘create custom task’ function from fn_task_utils to precede it</p>
+<p><strong>Object:</strong> artifact</p>
+<details><summary>Script Text:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># (c) Copyright IBM Corp. 2010, 2026. All Rights Reserved.</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="c1"># get the task_creation property. This script requires the &#39;create custom task&#39; function to previously run</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">dialog_inputs</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span>
+  <span class="n">task_info</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">task_creation</span>
+<span class="k">except</span><span class="p">:</span>
+  <span class="n">dialog_inputs</span> <span class="o">=</span> <span class="kc">None</span>
+  <span class="n">task_info</span> <span class="o">=</span> <span class="kc">None</span>
+  
+<span class="k">if</span> <span class="ow">not</span> <span class="n">dialog_inputs</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email_approval_to&#39;</span><span class="p">):</span>
+  <span class="k">try</span><span class="p">:</span>
+    <span class="n">dialog_inputs</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span>
+    <span class="n">task_info</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">task_creation</span>
+  <span class="k">except</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+<span class="n">task_id</span> <span class="o">=</span> <span class="n">task_info</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;task&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
+<span class="n">task_name</span> <span class="o">=</span> <span class="n">task_info</span><span class="p">[</span><span class="s1">&#39;inputs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;task_name&#39;</span><span class="p">)</span>
+
+<span class="n">MESSAGE_ID_DOMAIN</span> <span class="o">=</span> <span class="s2">&quot;QRADARSOAR.IBM.COM&quot;</span>
+<span class="n">SUBJECT_PREFIX</span> <span class="o">=</span> <span class="s2">&quot;IBM SOAR Approval Requested&quot;</span>
+<span class="c1"># check for any combination of upper/lowercase http/https/news/telnet/file. Characters repeated for readability</span>
+<span class="n">DEFANG_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(https|http|ftps|ftp|mailto|news|file|mailto):&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">)</span>
+
+<span class="n">current_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># generate a message-id</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_msg_hash</span><span class="p">(</span><span class="n">expiration</span><span class="p">,</span> <span class="n">incident_id</span><span class="p">,</span> <span class="n">incident_create_date</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">()</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">expiration</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">incident_id</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">incident_create_date</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+
+    <span class="n">uuid_hash</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uuid_hash</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">12</span><span class="p">],</span> <span class="n">uuid_hash</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">24</span><span class="p">],</span> <span class="n">uuid_hash</span><span class="p">[</span><span class="mi">24</span><span class="p">:</span><span class="mi">36</span><span class="p">],</span> <span class="n">uuid_hash</span><span class="p">[</span><span class="mi">36</span><span class="p">:</span><span class="mi">48</span><span class="p">],</span> <span class="n">uuid_hash</span><span class="p">[</span><span class="mi">48</span><span class="p">:])</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_msg_id</span><span class="p">(</span><span class="n">msg_hash</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="n">MESSAGE_ID_DOMAIN</span><span class="p">):</span>
+  <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">@</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg_hash</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
+
+<span class="n">msg_content</span> <span class="o">=</span> <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">email_approval_details</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;br&gt;&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">email_approval_details</span> <span class="ow">and</span>  <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">email_approval_details</span><span class="o">.</span><span class="n">content</span> <span class="k">else</span> <span class="kc">None</span>
+
+<span class="n">expiration_ts</span> <span class="o">=</span> <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">email_approval_expiration</span> <span class="k">if</span> <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email_approval_expiration&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
+<span class="c1"># confirm dates in the future</span>
+<span class="k">if</span> <span class="n">expiration_ts</span> <span class="ow">and</span> <span class="n">expiration_ts</span> <span class="o">&lt;</span> <span class="n">current_time</span><span class="p">:</span>
+    <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;Expiration date is in the past&quot;</span><span class="p">)</span>
+
+<span class="n">expiration</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S %Z&#39;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">(</span><span class="n">expiration_ts</span><span class="o">/</span><span class="mi">1000</span><span class="p">))</span> <span class="k">if</span> <span class="n">expiration_ts</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="n">msg_hash</span> <span class="o">=</span> <span class="n">generate_msg_hash</span><span class="p">(</span><span class="n">expiration_ts</span><span class="p">,</span>
+                             <span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                             <span class="n">incident</span><span class="o">.</span><span class="n">create_date</span><span class="p">,</span>
+                             <span class="n">task_id</span>
+                             <span class="p">)</span>
+<span class="n">msg_id</span> <span class="o">=</span> <span class="n">create_msg_id</span><span class="p">(</span><span class="n">msg_hash</span><span class="p">)</span>
+<span class="c1"># defang the artifact if needed</span>
+<span class="n">artifact_value</span> <span class="o">=</span> <span class="n">DEFANG_PATTERN</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;x_\1_x:&quot;</span><span class="p">,</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="n">body</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">body</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">##- Please type your reply &quot;approved&quot; or &quot;denied&quot; above this line. Add additional detail on separate line(s), as necessary.  -##</span>
+<span class="s2">&lt;br&gt;&lt;br&gt;</span>
+<span class="s2">Approval is requested to perform an action on artifact: &#39;</span><span class="si">{</span><span class="n">artifact_value</span><span class="si">}</span><span class="s2">&#39;.</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">expiration_ts</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">body</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This approval will expire on: </span><span class="si">{</span><span class="n">expiration</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="n">body</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;</span>
+<span class="s2">Additional detail follows:</span>
+<span class="s2">&lt;br&gt;</span>
+<span class="si">{</span><span class="n">msg_content</span><span class="si">}</span>
+<span class="s2">&lt;br&gt;&lt;br&gt;</span>
+<span class="s2">##- retain this data -##</span>
+<span class="s2">&lt;br&gt;</span>
+<span class="s2">msg-id: </span><span class="si">{</span><span class="n">msg_hash</span><span class="si">}</span><span class="s2">&lt;br&gt;</span>
+<span class="s2">incident </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (&lt;a target=&#39;_blank&#39; href=&#39;</span><span class="se">{{{{</span><span class="s2"> template_helper.generate_incident_url(</span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">) </span><span class="se">}}}}</span><span class="s2">&#39;&gt;link&lt;/a&gt;)</span>
+<span class="s2">&lt;br&gt;</span>
+<span class="s2">task </span><span class="si">{</span><span class="n">task_id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">task_name</span><span class="si">}</span><span class="s2"> (&lt;a target=&#39;_blank&#39; href=&#39;</span><span class="se">{{{{</span><span class="s2"> template_helper.generate_task_url(</span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">task_id</span><span class="si">}</span><span class="s2">) </span><span class="se">}}}}</span><span class="s2">&#39;&gt;link&lt;/a&gt;)</span>
+<span class="s2">&lt;br&gt;</span>
+<span class="s2">artifact: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">artifact_value</span><span class="si">}</span>
+<span class="s2">&lt;br&gt;</span>
+<span class="s2">expiration </span><span class="si">{</span><span class="n">expiration_ts</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">expiration</span><span class="si">}</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+<span class="c1"># have the approval details</span>
+<span class="n">details</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;ts&quot;</span><span class="p">:</span> <span class="n">current_time</span><span class="p">,</span>
+  <span class="s2">&quot;expiration&quot;</span><span class="p">:</span> <span class="n">expiration</span><span class="p">,</span>
+  <span class="s2">&quot;expiration_ts&quot;</span><span class="p">:</span> <span class="n">expiration_ts</span><span class="p">,</span>
+  <span class="s2">&quot;msg_hash&quot;</span><span class="p">:</span> <span class="n">msg_hash</span><span class="p">,</span>
+  <span class="s2">&quot;msg_id&quot;</span><span class="p">:</span> <span class="n">msg_id</span><span class="p">,</span>
+  <span class="s2">&quot;to&quot;</span><span class="p">:</span> <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">email_approval_to</span><span class="o">.</span><span class="n">content</span><span class="p">,</span>
+  <span class="s2">&quot;from&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="c1"># change as necessary</span>
+  <span class="s2">&quot;cc&quot;</span><span class="p">:</span> <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email_approval_cc&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+  <span class="s2">&quot;bcc&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="c1"># change as necessary</span>
+  <span class="s2">&quot;subject&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">SUBJECT_PREFIX</span><span class="si">}</span><span class="s2"> for Task: </span><span class="si">{</span><span class="n">task_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">body</span><span class="p">),</span>
+  <span class="s2">&quot;importance&quot;</span><span class="p">:</span> <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email_approval_importance&#39;</span><span class="p">),</span>
+  <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">task_id</span><span class="p">,</span>
+  <span class="s2">&quot;task_name&quot;</span><span class="p">:</span> <span class="n">task_name</span>
+<span class="p">}</span>
+
+<span class="c1"># add to property for function processing</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">workflow</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s2">&quot;email_approval&quot;</span><span class="p">,</span> <span class="n">details</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+  <span class="k">pass</span>
+
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">playbook</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s2">&quot;email_approval&quot;</span><span class="p">,</span> <span class="n">details</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+  <span class="k">pass</span>
+
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="script-email-approval-pre-process-task">
+<h2>Script - Email Approval Pre Process Task<a class="headerlink" href="#script-email-approval-pre-process-task" title="Link to this heading">¶</a></h2>
+<p>Collect and format data used by the Email Approval Process. Uses the ‘email_approval’ workspace property.</p>
+<p><strong>Object:</strong> task</p>
+<details><summary>Script Text:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># (c) Copyright IBM Corp. 2010, 2026. All Rights Reserved.</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">dialog_inputs</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span>
+<span class="k">except</span><span class="p">:</span>
+  <span class="n">dialog_inputs</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">dialog_inputs</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email_approval_to&#39;</span><span class="p">):</span>
+  <span class="k">try</span><span class="p">:</span>
+    <span class="n">dialog_inputs</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span>
+  <span class="k">except</span><span class="p">:</span>
+    <span class="k">pass</span>
+  
+
+<span class="n">MESSAGE_ID_DOMAIN</span> <span class="o">=</span> <span class="s2">&quot;QRADARSOAR.IBM.COM&quot;</span>
+<span class="n">SUBJECT_PREFIX</span> <span class="o">=</span> <span class="s2">&quot;IBM SOAR Approval Requested&quot;</span>
+
+<span class="n">current_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># generate a message-id</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_msg_hash</span><span class="p">(</span><span class="n">expiration</span><span class="p">,</span> <span class="n">incident_id</span><span class="p">,</span> <span class="n">incident_create_date</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">()</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">expiration</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">incident_id</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">incident_create_date</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+
+    <span class="n">uuid_hash</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uuid_hash</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">12</span><span class="p">],</span> <span class="n">uuid_hash</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">24</span><span class="p">],</span> <span class="n">uuid_hash</span><span class="p">[</span><span class="mi">24</span><span class="p">:</span><span class="mi">36</span><span class="p">],</span> <span class="n">uuid_hash</span><span class="p">[</span><span class="mi">36</span><span class="p">:</span><span class="mi">48</span><span class="p">],</span> <span class="n">uuid_hash</span><span class="p">[</span><span class="mi">48</span><span class="p">:])</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">create_msg_id</span><span class="p">(</span><span class="n">msg_hash</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="n">MESSAGE_ID_DOMAIN</span><span class="p">):</span>
+  <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">@</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg_hash</span><span class="p">,</span> <span class="n">domain</span><span class="p">)</span>
+
+<span class="n">msg_content</span> <span class="o">=</span> <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">email_approval_details</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&lt;br&gt;&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">email_approval_details</span> <span class="ow">and</span>  <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">email_approval_details</span><span class="o">.</span><span class="n">content</span> <span class="k">else</span> <span class="kc">None</span>
+
+<span class="n">expiration_ts</span> <span class="o">=</span> <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">email_approval_expiration</span> <span class="k">if</span> <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email_approval_expiration&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
+<span class="c1"># confirm dates in the future</span>
+<span class="k">if</span> <span class="n">expiration_ts</span> <span class="ow">and</span> <span class="n">expiration_ts</span> <span class="o">&lt;</span> <span class="n">current_time</span><span class="p">:</span>
+    <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;Expiration date is in the past&quot;</span><span class="p">)</span>
+
+<span class="n">expiration</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S %Z&#39;</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">(</span><span class="n">expiration_ts</span><span class="o">/</span><span class="mi">1000</span><span class="p">))</span> <span class="k">if</span> <span class="n">expiration_ts</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="n">msg_hash</span> <span class="o">=</span> <span class="n">generate_msg_hash</span><span class="p">(</span><span class="n">expiration_ts</span><span class="p">,</span>
+                             <span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                             <span class="n">incident</span><span class="o">.</span><span class="n">create_date</span><span class="p">,</span>
+                             <span class="n">task</span><span class="o">.</span><span class="n">id</span>
+                             <span class="p">)</span>
+<span class="n">msg_id</span> <span class="o">=</span> <span class="n">create_msg_id</span><span class="p">(</span><span class="n">msg_hash</span><span class="p">)</span>
+
+<span class="n">body</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">body</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">##- Please type your reply &quot;approved&quot; or &quot;denied&quot; above this line. Add additional detail on separate line(s), as necessary.  -##</span>
+<span class="s2">&lt;br&gt;&lt;br&gt;</span>
+<span class="s2">Approval is requested to perform this activity.</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">expiration_ts</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">body</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This approval will expire on: </span><span class="si">{</span><span class="n">expiration</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+<span class="n">body</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;</span>
+<span class="s2">Additional detail follows:</span>
+<span class="s2">&lt;br&gt;</span>
+<span class="si">{</span><span class="n">msg_content</span><span class="si">}</span>
+<span class="s2">&lt;br&gt;&lt;br&gt;</span>
+<span class="s2">##- retain this data -##</span>
+<span class="s2">&lt;br&gt;</span>
+<span class="s2">msg-id: </span><span class="si">{</span><span class="n">msg_hash</span><span class="si">}</span>
+<span class="s2">&lt;br&gt;</span>
+<span class="s2">incident </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (&lt;a target=&#39;_blank&#39; href=&#39;</span><span class="se">{{{{</span><span class="s2"> template_helper.generate_incident_url(</span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">) </span><span class="se">}}}}</span><span class="s2">&#39;&gt;link&lt;/a&gt;)</span>
+<span class="s2">&lt;br&gt;</span>
+<span class="s2">task </span><span class="si">{</span><span class="n">task</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">task</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (&lt;a target=&#39;_blank&#39; href=&#39;</span><span class="se">{{{{</span><span class="s2"> template_helper.generate_task_url(</span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">task</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">) </span><span class="se">}}}}</span><span class="s2">&#39;&gt;link&lt;/a&gt;)</span>
+<span class="s2">&lt;br&gt;</span>
+<span class="s2">expiration </span><span class="si">{</span><span class="n">expiration_ts</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">expiration</span><span class="si">}</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+<span class="c1"># have the approval details</span>
+<span class="n">details</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">&quot;ts&quot;</span><span class="p">:</span> <span class="n">current_time</span><span class="p">,</span>
+  <span class="s2">&quot;expiration&quot;</span><span class="p">:</span> <span class="n">expiration</span><span class="p">,</span>
+  <span class="s2">&quot;expiration_ts&quot;</span><span class="p">:</span> <span class="n">expiration_ts</span><span class="p">,</span>
+  <span class="s2">&quot;msg_hash&quot;</span><span class="p">:</span> <span class="n">msg_hash</span><span class="p">,</span>
+  <span class="s2">&quot;msg_id&quot;</span><span class="p">:</span> <span class="n">msg_id</span><span class="p">,</span>
+  <span class="s2">&quot;to&quot;</span><span class="p">:</span> <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">email_approval_to</span><span class="o">.</span><span class="n">content</span><span class="p">,</span>
+  <span class="s2">&quot;from&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="c1"># change as necessary</span>
+  <span class="s2">&quot;cc&quot;</span><span class="p">:</span> <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email_approval_cc&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+  <span class="s2">&quot;bcc&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="c1"># change as necessary</span>
+  <span class="s2">&quot;subject&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">SUBJECT_PREFIX</span><span class="si">}</span><span class="s2"> for Task: </span><span class="si">{</span><span class="n">task</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">body</span><span class="p">),</span>
+  <span class="s2">&quot;importance&quot;</span><span class="p">:</span> <span class="n">dialog_inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;email_approval_importance&#39;</span><span class="p">,</span> <span class="s1">&#39;normal&#39;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># add to property for function processing</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">workflow</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s2">&quot;email_approval&quot;</span><span class="p">,</span> <span class="n">details</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+  <span class="k">pass</span>
+
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">playbook</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s2">&quot;email_approval&quot;</span><span class="p">,</span> <span class="n">details</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+  <span class="k">pass</span>
+
+<span class="c1"># updates to task</span>
+<span class="n">task</span><span class="o">.</span><span class="n">due_date</span> <span class="o">=</span> <span class="n">expiration_ts</span> <span class="k">if</span> <span class="n">expiration_ts</span> <span class="k">else</span> <span class="n">task</span><span class="o">.</span><span class="n">due_date</span>
+<span class="n">task</span><span class="o">.</span><span class="n">owner_id</span> <span class="o">=</span> <span class="n">principal</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">task</span><span class="o">.</span><span class="n">owner_id</span> <span class="k">else</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="script-email-approval-process-response">
+<h2>Script - Email Approval Process Response<a class="headerlink" href="#script-email-approval-process-response" title="Link to this heading">¶</a></h2>
+<p>Parse email approval emails and make updates to cooresponding incidents and tasks</p>
+<p><strong>Object:</strong> emailmessage</p>
+<details><summary>Script Text:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">email.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">parsedate_to_datetime</span>
+
+<span class="n">SUBJECT_PREFIX</span> <span class="o">=</span> <span class="s2">&quot;IBM SOAR Approval Requested&quot;</span>
+<span class="c1"># pattern used to find and extract the email message-id</span>
+<span class="n">MESSAGE_PATTERN</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;([^&lt;&gt;]+)&quot;</span><span class="p">)</span>
+
+<span class="n">ID_PATTERN_LIST</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;msg-id&#39;</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;msg-id: ([a-zA-z0-9-]*)&quot;</span><span class="p">),</span>
+  <span class="s1">&#39;inc-id&#39;</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;incident (\d*):&quot;</span><span class="p">),</span>
+  <span class="s1">&#39;task-id&#39;</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;task (\d*):&quot;</span><span class="p">),</span>
+  <span class="s1">&#39;task-name&#39;</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;task \d*: (.*)$&quot;</span><span class="p">),</span>
+  <span class="s1">&#39;expiration-ts&#39;</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;expiration (\d*):&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">APPROVE_LIST</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;yes&#39;</span><span class="p">,</span> <span class="s1">&#39;ok&#39;</span><span class="p">,</span> <span class="s1">&#39;okay&#39;</span><span class="p">,</span> <span class="s1">&#39;approve&#39;</span><span class="p">,</span> <span class="s1">&#39;approved&#39;</span><span class="p">,</span> <span class="s1">&#39;allow&#39;</span><span class="p">,</span> <span class="s1">&#39;proceed&#39;</span><span class="p">,</span> <span class="s1">&#39;continue&#39;</span><span class="p">,</span> <span class="s1">&#39;accept&#39;</span><span class="p">]</span>
+<span class="n">DENY_LIST</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;no&#39;</span><span class="p">,</span> <span class="s1">&#39;disapprove&#39;</span><span class="p">,</span> <span class="s1">&#39;reject&#39;</span><span class="p">,</span> <span class="s1">&#39;rejected&#39;</span><span class="p">,</span> <span class="s1">&#39;deny&#39;</span><span class="p">,</span> <span class="s1">&#39;denied&#39;</span><span class="p">,</span> <span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="s1">&#39;pause&#39;</span><span class="p">,</span> <span class="s1">&#39;defer&#39;</span><span class="p">,</span> <span class="s1">&#39;deferred&#39;</span><span class="p">]</span>
+<span class="n">STRIP_RESPONSE</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(\w*)&#39;</span><span class="p">)</span> <span class="c1"># pattern to strip white space and special characters like &#39;.&#39;</span>
+
+<span class="c1"># delimeter for sections within the approval message</span>
+<span class="n">RETAIN_COMMENTS</span> <span class="o">=</span> <span class="s2">&quot;##- retain&quot;</span>
+<span class="n">ORIGINAL_EMAIL</span> <span class="o">=</span> <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^&gt; &quot;</span><span class="p">),</span> 
+                  <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^On &quot;</span><span class="p">),</span> 
+                  <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;wrote:&quot;</span><span class="p">,</span> 
+                  <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">),</span> 
+                  <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;From:&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">),</span>
+                  <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^____&quot;</span><span class="p">)</span>
+                 <span class="p">]</span> <span class="c1"># characters associated with the start of the original message</span>
+
+<span class="c1"># F U N C T I O N S</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_msg_hash</span><span class="p">(</span><span class="n">expiration_ts</span><span class="p">,</span> <span class="n">incident_id</span><span class="p">,</span> <span class="n">incident_create_date</span><span class="p">,</span> <span class="n">task_id</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">()</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">expiration_ts</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">incident_id</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">incident_create_date</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+
+    <span class="n">uuid_hash</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">-</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uuid_hash</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">12</span><span class="p">],</span> <span class="n">uuid_hash</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">24</span><span class="p">],</span> <span class="n">uuid_hash</span><span class="p">[</span><span class="mi">24</span><span class="p">:</span><span class="mi">36</span><span class="p">],</span> <span class="n">uuid_hash</span><span class="p">[</span><span class="mi">36</span><span class="p">:</span><span class="mi">48</span><span class="p">],</span> <span class="n">uuid_hash</span><span class="p">[</span><span class="mi">48</span><span class="p">:])</span>
+    
+<span class="k">def</span><span class="w"> </span><span class="nf">handle_list</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+  <span class="c1"># convert a list to comma separate list, if neccessary</span>
+  <span class="k">if</span> <span class="n">value</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+  <span class="k">return</span> <span class="n">value</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_content</span><span class="p">():</span>
+  <span class="c1"># return all content found in the email messagew</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  approved</span>
+<span class="sd">  msg1</span>
+<span class="sd">  msg2</span>
+<span class="sd">  ##- Please type your reply &quot;approved&quot; or &quot;denied&quot; above this line. Add additional detail on separate line(s), as necessary.  -##</span>
+<span class="sd">  </span>
+<span class="sd">  Approval is requested to perform this activity. Additional detail follows:</span>
+<span class="sd">  checkpoint fw</span>
+<span class="sd">  ip ban</span>
+<span class="sd">  </span>
+<span class="sd">  ##- retain this data -##</span>
+<span class="sd">  msg-id: d9ef3d54103f-03cb756ce84b-805eab0bff8c-8030b0796977-a47d83a5f0c391d4</span>
+<span class="sd">  incident 2142: Incident generated from email &quot;Approval Requested for Task: Remote wipe/lock&quot; via mailbox outlook (&lt;a target=&#39;_blank&#39; href=&#39;https://9.30.55.116:443/#incidents/2142?orgId=201&#39;&gt;link&lt;/a&gt;)</span>
+<span class="sd">  task 1066: Interview key individuals (&lt;a target=&#39;_blank&#39; href=&#39;https://9.30.55.116:443/#incidents/2142?orgId=201&amp;amp;taskId=1066&amp;amp;tabName=details&#39;&gt;link&lt;/a&gt;)</span>
+<span class="sd">  expiration 123456789: 2022-08-29 12:00:00 IST</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="n">emailmessage</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">content</span>
+
+  <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Email message has no content!&quot;</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_response</span><span class="p">(</span><span class="n">content</span><span class="p">):</span>
+  <span class="c1"># parse the message body to collect:</span>
+  <span class="c1">#  - the response</span>
+  <span class="c1">#  - any comments</span>
+  <span class="c1">#  - msg-id, incident-id, task-id</span>
+  
+  <span class="n">id_list_response</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">comments</span> <span class="o">=</span> <span class="p">[]</span>
+  <span class="n">response</span> <span class="o">=</span> <span class="kc">None</span>
+
+  <span class="c1"># sections are separators between user response and information about the incident</span>
+  <span class="n">retain_section</span> <span class="o">=</span> <span class="kc">False</span>
+  <span class="n">original_msg</span> <span class="o">=</span> <span class="kc">False</span>
+  <span class="n">incomplete_msg_id</span> <span class="o">=</span> <span class="kc">False</span>
+  <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
+    <span class="c1"># find the section where all the incident data is retained</span>
+    <span class="k">if</span> <span class="n">RETAIN_COMMENTS</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+      <span class="n">retain_section</span> <span class="o">=</span> <span class="kc">True</span>
+      <span class="k">continue</span>
+      
+    <span class="k">if</span> <span class="n">retain_section</span><span class="p">:</span>
+      <span class="c1"># Strip Gmail quote prefix (&gt;) if present</span>
+      <span class="n">cleaned_line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+      <span class="k">if</span> <span class="n">cleaned_line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">):</span>
+        <span class="n">cleaned_line</span> <span class="o">=</span> <span class="n">cleaned_line</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>  <span class="c1"># Remove &quot;&gt; &quot; prefix</span>
+      <span class="k">elif</span> <span class="n">cleaned_line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;&gt;&quot;</span><span class="p">):</span>
+        <span class="n">cleaned_line</span> <span class="o">=</span> <span class="n">cleaned_line</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>  <span class="c1"># Remove &quot;&gt;&quot; prefix</span>
+      
+      <span class="c1"># Check for incomplete msg-id line</span>
+      <span class="k">if</span> <span class="n">cleaned_line</span> <span class="o">==</span> <span class="s2">&quot;msg-id:&quot;</span><span class="p">:</span>
+        <span class="n">incomplete_msg_id</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">continue</span>
+      <span class="k">if</span> <span class="n">incomplete_msg_id</span><span class="p">:</span>
+        <span class="n">cleaned_line</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;msg-id: </span><span class="si">{</span><span class="n">cleaned_line</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">incomplete_msg_id</span> <span class="o">=</span> <span class="kc">False</span>
+      
+      <span class="c1"># Process with regex patterns</span>
+      <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">ptrn</span> <span class="ow">in</span> <span class="n">ID_PATTERN_LIST</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">ptrn</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">cleaned_line</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+          <span class="n">id_list_response</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+      <span class="k">continue</span>
+    <span class="c1"># parse the approval response and comments</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">retain_section</span> <span class="ow">and</span> <span class="n">response</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+      <span class="k">if</span> <span class="s2">&quot;&lt;br&gt;&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">original_msg</span><span class="p">:</span>
+        <span class="c1"># make sure we haven&#39;t started looking through the original email</span>
+        <span class="k">for</span> <span class="n">matcher</span> <span class="ow">in</span> <span class="n">ORIGINAL_EMAIL</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">matcher</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="p">):</span>
+                <span class="n">original_msg</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+            
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">original_msg</span><span class="p">:</span>
+          <span class="n">comments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">retain_section</span> <span class="ow">and</span> <span class="n">response</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">match</span> <span class="o">=</span> <span class="n">STRIP_RESPONSE</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>
+      <span class="n">reply</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">match</span> <span class="k">else</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+      <span class="c1"># find approval response</span>
+      <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">reply</span> <span class="ow">in</span> <span class="n">APPROVE_LIST</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="kc">True</span>
+      <span class="k">elif</span> <span class="nb">bool</span><span class="p">(</span><span class="n">reply</span> <span class="ow">in</span> <span class="n">DENY_LIST</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="kc">False</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;extraneous: </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+  <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;response </span><span class="si">{</span><span class="n">response</span><span class="si">}</span><span class="s2"> id_list_response </span><span class="si">{</span><span class="n">id_list_response</span><span class="si">}</span><span class="s2"> comments </span><span class="si">{</span><span class="n">comments</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">response</span><span class="p">,</span> <span class="n">id_list_response</span><span class="p">,</span> <span class="n">comments</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">find_incident</span><span class="p">(</span><span class="n">inc_id</span><span class="p">):</span>
+  <span class="c1"># find the cooresponding incident</span>
+  <span class="n">query_builder</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">inc_id</span><span class="p">))</span>
+  <span class="n">query_builder</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">incident</span><span class="o">.</span><span class="n">plan_status</span><span class="p">,</span> <span class="s2">&quot;Active&quot;</span><span class="p">)</span>
+  <span class="n">query</span> <span class="o">=</span> <span class="n">query_builder</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+  <span class="n">incidents</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">findIncidents</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">incidents</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+  <span class="k">return</span> <span class="n">incidents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">is_valid_msg_id</span><span class="p">(</span><span class="n">incident</span><span class="p">,</span> <span class="n">id_list_response</span><span class="p">):</span>
+  <span class="c1"># confirm if the msg-id matches the incident</span>
+  <span class="n">confirm_msg_id</span> <span class="o">=</span> <span class="n">generate_msg_hash</span><span class="p">(</span><span class="n">id_list_response</span><span class="p">[</span><span class="s1">&#39;expiration-ts&#39;</span><span class="p">],</span>
+                                     <span class="n">id_list_response</span><span class="p">[</span><span class="s1">&#39;inc-id&#39;</span><span class="p">],</span>
+                                     <span class="n">incident</span><span class="o">.</span><span class="n">create_date</span><span class="p">,</span>
+                                     <span class="n">id_list_response</span><span class="p">[</span><span class="s1">&#39;task-id&#39;</span><span class="p">]</span>
+                                     <span class="p">)</span>
+
+  <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">id_list_response</span><span class="p">[</span><span class="s1">&#39;msg-id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">confirm_msg_id</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_attachments</span><span class="p">(</span><span class="n">attachments</span><span class="p">):</span>
+  <span class="k">return</span> <span class="p">[</span><span class="n">attachment</span><span class="o">.</span><span class="n">suggested_filename</span> <span class="k">for</span> <span class="n">attachment</span> <span class="ow">in</span> <span class="n">attachments</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_msg_sent_date</span><span class="p">(</span><span class="n">msg_date</span><span class="p">):</span>
+  <span class="c1"># Date: Sat, 27 Aug 2022 20:30:30 +0000 (UTC)</span>
+  <span class="n">dt</span> <span class="o">=</span> <span class="n">parsedate_to_datetime</span><span class="p">(</span><span class="n">msg_date</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Date: &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+  <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">dt</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+  
+<span class="k">def</span><span class="w"> </span><span class="nf">get_expiration_ts</span><span class="p">(</span><span class="n">expiration</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">expiration</span> <span class="o">!=</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">expiration</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S %Z&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dt</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">dt</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span>
+        
+    <span class="k">return</span> <span class="mi">0</span>
+  
+
+<span class="c1"># S T A R T</span>
+<span class="c1"># bail if subject doesn&#39;t match</span>
+<span class="k">if</span> <span class="n">SUBJECT_PREFIX</span> <span class="ow">in</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">subject</span><span class="p">:</span>
+
+  <span class="c1"># loop through the message, starting at the 2nd comment section</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">get_content</span><span class="p">()</span>
+  
+  <span class="c1"># collect all the data</span>
+  <span class="n">response</span><span class="p">,</span> <span class="n">id_list_response</span><span class="p">,</span> <span class="n">comments</span> <span class="o">=</span> <span class="n">get_response</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+  
+  <span class="k">if</span> <span class="n">response</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;No response was recognized&quot;</span><span class="p">)</span>
+  
+  <span class="c1"># do not continue if all ids are not found</span>
+  <span class="k">if</span> <span class="n">id_list_response</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">!=</span> <span class="n">ID_PATTERN_LIST</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;This does not appear to be an approval email&quot;</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">emailmessage</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">id_list_response</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="k">else</span><span class="p">:</span>
+    <span class="c1"># get the expiration timeframe in millisec</span>
+    <span class="c1">#id_list_response[&#39;expiration-ts&#39;] = get_expiration_ts(id_list_response[&#39;expiration&#39;])</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Finding incident </span><span class="si">{</span><span class="n">id_list_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inc-id&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># find the cooresponding incident</span>
+    <span class="n">found_incident</span> <span class="o">=</span> <span class="n">find_incident</span><span class="p">(</span><span class="n">id_list_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inc-id&#39;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">found_incident</span><span class="p">:</span>
+      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unable to locate incident: </span><span class="si">{</span><span class="n">id_list_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inc-id&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># this populates the incident object</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Associating approval with incident: </span><span class="si">{</span><span class="n">id_list_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inc-id&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">emailmessage</span><span class="o">.</span><span class="n">associateWithIncident</span><span class="p">(</span><span class="n">found_incident</span><span class="p">)</span>
+    
+    <span class="c1"># determine if msg id is the same</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_valid_msg_id</span><span class="p">(</span><span class="n">incident</span><span class="p">,</span> <span class="n">id_list_response</span><span class="p">):</span>
+      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;msg-id mismatch for incident: </span><span class="si">{</span><span class="n">id_list_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inc-id&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">id_list_response</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      
+    <span class="c1"># store the email in the email approval table</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s1">&#39;email_approval_process&#39;</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">emailmessage</span><span class="o">.</span><span class="n">sent_date</span><span class="p">)</span>
+     <span class="c1"># determine if the expiration value has expired</span>
+    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">id_list_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;expiration-ts&#39;</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">id_list_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;expiration-ts&#39;</span><span class="p">))</span> <span class="o">&lt;</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">):</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Expired&#39;</span>
+    <span class="k">elif</span> <span class="n">response</span><span class="p">:</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Approved&#39;</span>
+    <span class="k">elif</span> <span class="n">response</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Unknown&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Denied&#39;</span>
+
+    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;recipients&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;To: </span><span class="si">{</span><span class="n">emailmessage</span><span class="o">.</span><span class="n">to</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;address&#39;</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">From: </span><span class="si">{</span><span class="n">emailmessage</span><span class="o">.</span><span class="n">sender</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;address&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;comments&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">comments</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;message_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">id_list_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;msg-id&#39;</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;expiration&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">id_list_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;expiration-ts&#39;</span><span class="p">))</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;task_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">id_list_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;task-id&#39;</span><span class="p">))</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;task_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">id_list_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;task-name&#39;</span><span class="p">)</span>
+
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="script-save-outbound-email-results">
+<h2>Script - Save Outbound Email Results<a class="headerlink" href="#script-save-outbound-email-results" title="Link to this heading">¶</a></h2>
+<p>Save outbound email results in the Email Conversations datatable</p>
+<p><strong>Object:</strong> incident</p>
+<details><summary>Script Text:</summary>
+<p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">e_results</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">outbound_email_results</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">e_results</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">if</span> <span class="n">e_results</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>  
+        <span class="n">e_results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">outbound_email_results</span>
+    <span class="k">except</span><span class="p">:</span>  
+        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;unable to read outbound_email_results property from Workflow or Playbook&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">e_results</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;outbound_email_results was found but contains no data (None)&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">e_results</span><span class="p">:</span>
+  <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s1">&#39;email_conversations&#39;</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;success&quot;</span> <span class="k">if</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;failure: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">))</span>
+  
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;date_sent&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;outbound&quot;</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;recipients&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="s2">&quot;To: </span><span class="si">{}</span><span class="s2">&lt;br&gt;Cc: </span><span class="si">{}</span><span class="s2">&lt;br&gt;Bcc: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_to&#39;</span><span class="p">),</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_cc&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_bcc&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)))</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;from&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_from&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_from&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_from&#39;</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;subject&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_subject&#39;</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;body&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_body&#39;</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;attachments&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_attachments&#39;</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;importance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_importance&#39;</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;in_reply_to&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_in_reply_to&#39;</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;message_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">e_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail_message_id&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;workflow/playbook properties &#39;outbound_email_results&#39; not found&quot;</span><span class="p">)</span>
+  
+</pre></div>
+</div>
+</p>
+</details>
+</section>
+<hr class="docutils" />
+<section id="playbooks">
+<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Activation Type</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Status</p></th>
+<th class="head"><p>Condition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Complete Email Approval Process</p></td>
+<td><p>Process an incoming approval email associated with a given task.</p></td>
+<td><p>Automatic</p></td>
+<td><p>email_approval_process</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">email_approval_process.status</span> <span class="pre">in</span> <span class="pre">['Approved',</span> <span class="pre">'Denied',</span> <span class="pre">'Expired',</span> <span class="pre">'Unknown']</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Email Approval Process: Artifact</p></td>
+<td><p>Create a task to track the request on this artifact. Send information about the created task and artifact to recipient(s) and track the email for the response.</p></td>
+<td><p>Manual</p></td>
+<td><p>artifact</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Email Approval Process: Task</p></td>
+<td><p>Send information about the task to recipient(s) and track the email for the response.</p></td>
+<td><p>Manual</p></td>
+<td><p>task</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="data-table-email-approval-process">
+<h2>Data Table - Email Approval Process<a class="headerlink" href="#data-table-email-approval-process" title="Link to this heading">¶</a></h2>
+<p><img alt="screenshot: dt-email-approval-process" src="../_images/email_main.png" /> <!-- ::CHANGE_ME:: --></p>
+<section id="api-name">
+<h3>API Name:<a class="headerlink" href="#api-name" title="Link to this heading">¶</a></h3>
+<p>email_approval_process</p>
+</section>
+<section id="columns">
+<h3>Columns:<a class="headerlink" href="#columns" title="Link to this heading">¶</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Column Name</p></th>
+<th class="head"><p>API Access Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Tooltip</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Comments</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">comments</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Date</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">date</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">datetimepicker</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Expiration</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">expiration</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">datetimepicker</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Message Id</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">message_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Recipients</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">recipients</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">textarea</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Status</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">status</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-even"><td><p>Task Id</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">task_id</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+<tr class="row-odd"><td><p>Task Name</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">task_name</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
+<td><p>-</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="rules">
+<h2>Rules<a class="headerlink" href="#rules" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rule Name</p></th>
+<th class="head"><p>Object</p></th>
+<th class="head"><p>Script Triggered</p></th>
+<th class="head"><p>Condition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Process Email Approval Response</p></td>
+<td><p>emailmessage</p></td>
+<td><p>Email Approval Process Response</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">object_added</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="custom-layouts">
+<h2>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">¶</a></h2>
+<ul>
+<li><p>Import the Data Tables and Custom Fields like the screenshot below:
+It may be useful to place the <code class="docutils literal notranslate"><span class="pre">Email</span> <span class="pre">Approval</span> <span class="pre">Process</span></code> datatable within a tab, such as the existing <code class="docutils literal notranslate"><span class="pre">Email</span></code> tab. This table serves as an audit of the email approval process and shows the sequence of communication.</p>
+<p><img alt="screenshot: layouts" src="../_images/layouts1.png" /></p>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
 <section id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <p>Before installing, verify that your environment meets the following prerequisites:</p>
 <ul class="simple">
-<li><p>IBM SOAR platform is version 43.1 or later, or Cloud Pak for Security (CP4S) 1.8 or later.</p></li>
+<li><p>IBM SOAR platform is version 51.0.7.0.20620 or later, or Cloud Pak for Security (CP4S) 1.10 or later.</p></li>
 <li><p>You have a IBM SOAR account to use for the installation. This can be any account that has the permission to view and modify administrator and customization settings.</p></li>
 </ul>
-<p><strong>Important:</strong> Repeatedly importing the <strong>EmailApprovalContentPack.res</strong> file will overwrite any changes you have made to the associated scripts, workflows and rules. To avoid this issue, make new scripts, workflows, rules, etc. with copied data.</p>
+<p><strong>Important:</strong> Repeatedly importing the <strong>EmailApprovalContentPack.res</strong> file will overwrite any changes you have made to the associated scripts, playbooks and rules. To avoid this issue, make new scripts, playbooks, rules, etc. with copied data.</p>
 <ol class="arabic simple">
 <li><p>Log on to the IBM SOAR platform using a suitable account.</p></li>
 <li><p>Navigate to <strong>Administrator Settings</strong>. For CP4S, navigate to Application Settings, Case Management, <strong>Permissions and access</strong>.</p></li>
@@ -541,7 +1166,7 @@
 <li><p>The email response is parsed and captured in the Email Approval Process datatable and as a note to the newly created task.</p></li>
 </ul>
 <p><img alt="screenshot: artifact inputs" src="../_images/artifact_inputs.png" />
-<img alt="screenshot: artifact workflow" src="../_images/artifact_workflow.png" /></p>
+<img alt="screenshot: artifact playbook" src="../_images/artifact_playbook.png" /></p>
 </section>
 <section id="task-process">
 <h3>Task Process<a class="headerlink" href="#task-process" title="Link to this heading">¶</a></h3>
@@ -552,8 +1177,8 @@
 <li><p>The email message is copied to the Email Conversations and Email Approval datatables.</p></li>
 <li><p>The email response is parsed and captured in the Email Approval Process datatable and as a note to the corresponding task.</p></li>
 </ul>
-<p><img alt="screenshot: artifact inputs" src="../_images/task_inputs.png" />
-<img alt="screenshot: artifact workflow" src="../_images/task_workflow.png" /></p>
+<p><img alt="screenshot: task inputs" src="../_images/task_inputs.png" />
+<img alt="screenshot: task playbook" src="../_images/task_playbook.png" /></p>
 </section>
 <section id="email-message">
 <h3>Email Message<a class="headerlink" href="#email-message" title="Link to this heading">¶</a></h3>
@@ -578,50 +1203,16 @@
 </div>
 </section>
 </section>
-<section id="playbooks">
-<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">Email</span> <span class="pre">Approval</span> <span class="pre">Pre</span> <span class="pre">Process</span> <span class="pre">Artifact</span></code> and <code class="docutils literal notranslate"><span class="pre">Email</span> <span class="pre">Approval</span> <span class="pre">Pre</span> <span class="pre">Process</span> <span class="pre">Task</span></code> scripts can be reused in your own workflows and playbooks. Each rely on activity fields (or Playbook Activation form fields) in place as follows:</p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head text-left"><p>Field</p></th>
-<th class="head text-left"><p>Type</p></th>
-<th class="head text-left"><p>Addl. Information</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-left"><p>email_approval_to</p></td>
-<td class="text-left"><p>Text</p></td>
-<td class="text-left"><p>Recipient To</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>email_approval_cc</p></td>
-<td class="text-left"><p>Text</p></td>
-<td class="text-left"><p>Receipient Cc list</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>email_approval_details</p></td>
-<td class="text-left"><p>Text Area</p></td>
-<td class="text-left"><p>Any additional approval text</p></td>
-</tr>
-<tr class="row-odd"><td class="text-left"><p>email_approval_expiration</p></td>
-<td class="text-left"><p>Date Time Picker</p></td>
-<td class="text-left"><p>Must be in the future</p></td>
-</tr>
-<tr class="row-even"><td class="text-left"><p>email_approval_importance</p></td>
-<td class="text-left"><p>Select</p></td>
-<td class="text-left"><p>‘low’, ‘normal’, ‘high’</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>The following playbook shows a recreation of the same logic used in the <code class="docutils literal notranslate"><span class="pre">Email</span> <span class="pre">Approval</span> <span class="pre">Pre</span> <span class="pre">Process</span> <span class="pre">Task</span></code> rule. It also shows the playbook properties used.</p>
-<p><img alt="screenshot: email content" src="../_images/playbook_usage.png" /></p>
-</section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">¶</a></h2>
 <p>The majority of issues encountered are associated with the parsing the reply message and identifying it with the originating SOAR case and task. The parsing logic identifies the response, ‘approved’ or ‘denied’ or any configured synonym, and the SOAR identifiers which refer back to the SOAR case and task. Below is a sample email response.</p>
 <p>All message details are needed to accept the response email: msg-id, incident, task, and expiration are found in the <code class="docutils literal notranslate"><span class="pre">##-</span> <span class="pre">retain</span> <span class="pre">this</span> <span class="pre">data</span> <span class="pre">-##</span></code> section.</p>
 <p><img alt="screenshot: approval email" src="../_images/approval_email.png" /></p>
 <p>Script failures can be found within the SOAR platform at <code class="docutils literal notranslate"><span class="pre">/var/log/resilient-scripting/resilient-scripting.log</span></code>.</p>
+<section id="for-support">
+<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
+<p>This is a IBM Community provided app. Please search the Community <a class="reference external" href="https://ibm.biz/soarcommunity">ibm.biz/soarcommunity</a> for assistance.</p>
+</section>
 </section>
 </section>
 
@@ -631,7 +1222,17 @@
         
         <div class="related-pages">
           
-          
+          <a class="prev-page" href="../rc-cts-urlscanio/README.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">URLScan IO Threat Searcher</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -664,10 +1265,20 @@
             <ul>
 <li><a class="reference internal" href="#">IBM SOAR Email Approval Process Content Pack</a><ul>
 <li><a class="reference internal" href="#history">History</a></li>
-<li><a class="reference internal" href="#key-features">Key Features</a></li>
-<li><a class="reference internal" href="#what-s-included">What’s Included</a></li>
 <li><a class="reference internal" href="#requirements">Requirements</a></li>
-<li><a class="reference internal" href="#installation-and-configuration">Installation and Configuration</a></li>
+<li><a class="reference internal" href="#key-features">Key Features</a></li>
+<li><a class="reference internal" href="#script-email-approval-pre-process-artifact">Script - Email Approval Pre Process Artifact</a></li>
+<li><a class="reference internal" href="#script-email-approval-pre-process-task">Script - Email Approval Pre Process Task</a></li>
+<li><a class="reference internal" href="#script-email-approval-process-response">Script - Email Approval Process Response</a></li>
+<li><a class="reference internal" href="#script-save-outbound-email-results">Script - Save Outbound Email Results</a></li>
+<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
+<li><a class="reference internal" href="#data-table-email-approval-process">Data Table - Email Approval Process</a><ul>
+<li><a class="reference internal" href="#api-name">API Name:</a></li>
+<li><a class="reference internal" href="#columns">Columns:</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rules">Rules</a></li>
+<li><a class="reference internal" href="#custom-layouts">Custom Layouts</a></li>
 <li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#operation">Operation</a><ul>
 <li><a class="reference internal" href="#artifact-process">Artifact Process</a></li>
@@ -680,8 +1291,10 @@
 <li><a class="reference internal" href="#approval-adjectives">Approval Adjectives</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
-<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+<li><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li><a class="reference internal" href="#for-support">For Support</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
