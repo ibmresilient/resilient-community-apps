@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "object",
+          "properties": {
+            "values": {
+              "type": "array"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            },
+            "result_code": {
+              "type": "integer"
+            },
+            "result_type": {
+              "type": "string"
+            },
+            "result_desc": {
+              "type": "string"
+            },
+            "sub_keys": {
+              "type": "array"
+            },
+            "files": {
+              "type": "array"
+            },
+            "status": {
+              "type": "string"
+            },
+            "input": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "object": {
+                  "type": "integer"
+                }
+              }
+            },
+            "create_time": {
+              "type": "string"
+            },
+            "finish_time": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "vmware_cbc_device_id": {
+          "type": "string"
+        },
+        "vmware_cbc_process_id": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

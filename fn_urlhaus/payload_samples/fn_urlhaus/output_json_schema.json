@@ -1,0 +1,155 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "query_status": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "urlhaus_reference": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "url_status": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "date_added": {
+          "type": "string"
+        },
+        "last_online": {},
+        "threat": {
+          "type": "string"
+        },
+        "blacklists": {
+          "type": "object",
+          "properties": {
+            "spamhaus_dbl": {
+              "type": "string"
+            },
+            "surbl": {
+              "type": "string"
+            }
+          }
+        },
+        "reporter": {
+          "type": "string"
+        },
+        "larted": {
+          "type": "string"
+        },
+        "takedown_time_seconds": {},
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "payloads": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "firstseen": {
+                "type": "string"
+              },
+              "filename": {},
+              "file_type": {
+                "type": "string"
+              },
+              "response_size": {
+                "type": "string"
+              },
+              "response_md5": {
+                "type": "string"
+              },
+              "response_sha256": {
+                "type": "string"
+              },
+              "urlhaus_download": {
+                "type": "string"
+              },
+              "signature": {},
+              "virustotal": {
+                "type": "object",
+                "properties": {
+                  "result": {
+                    "type": "string"
+                  },
+                  "percent": {
+                    "type": "string"
+                  },
+                  "link": {
+                    "type": "string"
+                  }
+                }
+              },
+              "imphash": {},
+              "ssdeep": {
+                "type": "string"
+              },
+              "tlsh": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "urlhaus_artifact_type": {
+          "type": "string"
+        },
+        "urlhaus_artifact_value": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
