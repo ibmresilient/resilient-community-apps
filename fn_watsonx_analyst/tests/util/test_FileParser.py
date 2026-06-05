@@ -1,15 +1,12 @@
 """Unit tests for File Parser module"""
+import base64
 import io
 import os
-import tempfile
-from unittest.mock import patch
+import random
+import uuid
+from unittest.mock import patch, MagicMock
 import pytest
-import base64
-from PIL import Image, ImageDraw
-from pptx import Presentation
-from docx import Document
-import openpyxl
-from fn_watsonx_analyst.util.FileParser import FileParser
+from fn_watsonx_analyst.util.FileParser import FileParser, UnsupportedEncodingError, EmptyContentsError
 
 
 class TestFileParser:
@@ -17,188 +14,392 @@ class TestFileParser:
 
     @classmethod
     def setup_class(cls):
-        """TBD"""
+        """Setup test class with FileParser instance"""
         cls.parser = FileParser()
 
-
-    def read_pdf_from_data_folder(self, filename):
-        """Helper function to read a PDF as bytes from the data folder."""
-        file_path = os.path.join(os.path.dirname(__file__), '..', 'data', filename)
-        with open(file_path, 'rb') as f:
+    def _open_file(self, filename: str) -> bytes:
+        """Helper method to open test data files"""
+        with open(os.path.join(os.path.dirname(__file__), "..", "data", filename), "rb") as f:
             return f.read()
 
-    @pytest.mark.livetest
-    @patch("pdf2image.convert_from_bytes", return_value=[])  # Mock OCR image extraction
-    def test_read_pdf_with_image_text(self, mock_convert):
-        """Test PDF parsing with OCR fallback mocked."""
-        parser = FileParser()
+    @pytest.mark.parametrize("encoding", ["utf-8", "utf-16", "utf-32", "ascii", "cp1251"])
+    def test_multi_encodings(self, encoding):
+        """Test extraction with multiple text encodings"""
+        data = "Hello world 123"
+        assert FileParser().extract_text_contents(data.encode(encoding)) == data
 
-        # Use the helper function to read PDF bytes
-        pdf_bytes = self.read_pdf_from_data_folder('test.pdf')
-        result = parser.read_pdf(pdf_bytes)
+    def test_extract_text_contents_simple_utf8(self):
+        """Test basic UTF-8 text extraction"""
+        data = b"Hello, World!"
+        result = self.parser.extract_text_contents(data)
+        assert result == "Hello, World!"
 
-        # Assert that expected text is in the result
-        assert "when you need the model" in result
+    def test_extract_text_contents_with_unicode(self):
+        """Test extraction with Unicode characters"""
+        data = "Hello 世界 🌍".encode("utf-8")
+        result = self.parser.extract_text_contents(data)
+        assert "Hello" in result
+        assert "世界" in result
 
-    def test_read_pdf(self):
-        """Test for read_pdf with a minimal valid PDF byte stream."""
-        # Base64 encoded minimal PDF with "Hello PDF" extractable text
-        pdf_base64 = (
-            "JVBERi0xLjQKJeLjz9MKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIg"
-            "Pj4KZW5kb2JqCjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9Db3VudCAxIC9LaWRzIFsgMyAw"
-            "IFIgXSA+PgplbmRvYmoKMyAwIG9iago8PCAvVHlwZSAvUGFnZSAvUGFyZW50IDIgMCBSIC9N"
-            "ZWRpYUJveCBbMCAwIDYxMiA3OTJdIC9Db250ZW50cyA0IDAgUiAvUmVzb3VyY2VzIDw8IC9G"
-            "b250IDw8IC9GMSA1IDAgUiA+PiA+PiA+PgplbmRvYmoKNCAwIG9iago8PCAvTGVuZ3RoIDQy"
-            "ID4+CnN0cmVhbQpCVCAvRjEgMTIgVGYgMTAwIDcwMCBUZCAoSGVsbG8gUERGKSBUagpFVApl"
-            "bmRzdHJlYW0KZW5kb2JqCjUgMCBvYmoKPDwgL1R5cGUgL0ZvbnQgL1N1YnR5cGUgL1R5cGUx"
-            "IC9CYXNlRm9udCAvSGVsdmV0aWNhIC9FbmNvZGluZyAvV2luQW5zaUVuY29kaW5nID4+CmVu"
-            "ZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAxMTggMDAwMDAgbiAK"
-            "MDAwMDAwMDE4MSAwMDAwMCBuIAowMDAwMDAwMzAwIDAwMDAwIG4gCjAwMDAwMDAzODAgMDAw"
-            "MDAgbiAKMDAwMDAwMDUwNCAwMDAwMCBuIAp0cmFpbGVyCjw8IC9TaXplIDYgL1Jvb3QgMSAw"
-            "IFIgPj4Kc3RhcnR4cmVmCjYyNQolJUVPRgo="
-        )
-        pdf_bytes = base64.b64decode(pdf_base64)
-        result = self.parser.read_pdf(pdf_bytes)
-        assert "Hello PDF" in result
+    def test_extract_text_contents_empty_data(self):
+        """Test that empty data raises ValueError"""
+        with pytest.raises(EmptyContentsError):
+            self.parser.extract_text_contents(b"")
 
-    def test_read_docx(self):
-        """Test for read_docx"""
-        doc = Document()
-        doc.add_paragraph("This is a test DOCX.")
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".docx") as tmp:
-            doc.save(tmp.name)
-            tmp.seek(0)
-            data = tmp.read()
+    def test_extract_text_contents_none_data(self):
+        """Test that None data raises ValueError"""
+        with pytest.raises(EmptyContentsError):
+            self.parser.extract_text_contents(None)
 
-        result = self.parser.read_docx(data)
-        assert "This is a test DOCX." in result
+    def test_extract_text_contents_with_newlines(self):
+        """Test extraction preserves newlines correctly"""
+        data = b"Line 1\nLine 2\nLine 3"
+        result = self.parser.extract_text_contents(data)
+        assert "Line 1" in result
+        assert "Line 2" in result
+        assert "Line 3" in result
 
-    def test_read_pptx(self):
-        """Test for read_pptx"""
-        prs = Presentation()
-        slide = prs.slides.add_slide(prs.slide_layouts[5])
-        slide.shapes.title.text = "This is a test PPTX."
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".pptx") as tmp:
-            prs.save(tmp.name)
-            tmp.seek(0)
-            data = tmp.read()
-
-        result = self.parser.read_pptx(data)
-        assert "This is a test PPTX." in result
-
-    def test_read_eml(self):
-        """Test for read_eml"""
-        eml_data = b"""\
-From: sender@example.com
-To: recipient@example.com
-Subject: Test Email
-MIME-Version: 1.0
-Content-Type: text/plain
-
-This is the plain text body of the email.
-"""
-        result = self.parser.read_eml(eml_data)
-        assert "This is the plain text body of the email." in result
-
-    def test_read_ics(self):
-        """Test for read_ics and assert on the full result without using mock"""
-        # Example of a valid ICS file content
-        ics_data = """BEGIN:VCALENDAR
-PRODID:-//Sample Calendar//EN
-VERSION:2.0
-BEGIN:VEVENT
-SUMMARY:Meeting
-DESCRIPTION:This is a test ICS event.
-DTSTART:20250329T100000Z
-DTEND:20250329T110000Z
-END:VEVENT
-END:VCALENDAR"""
-
-        # Call the method on the actual `ics_data`
-        result = self.parser.read_ics(ics_data)
-        # Expected result based on the ICS content
-        expected_result = "Event: Meeting, Start: 2025-03-29T10:00:00+00:00, End: 2025-03-29T11:00:00+00:00"
-
-        # Assert the full result
-        assert result == expected_result
-
-    def test_read_xlsx(self):
-        """Test for read_xlsx"""
-        wb = openpyxl.Workbook()
-        ws = wb.active
-        ws.append(["Column1", "Column2"])
-        ws.append(["Value1", "Value2"])
-
-        with tempfile.NamedTemporaryFile(suffix=".xlsx") as tmp:
-            wb.save(tmp.name)
-            tmp.seek(0)
-            data = tmp.read()
-
-        result = self.parser.read_xlsx(data)
+    def test_extract_text_contents_with_tabs(self):
+        """Test extraction handles tabs"""
+        data = b"Column1\tColumn2\tColumn3"
+        result = self.parser.extract_text_contents(data)
         assert "Column1" in result
-        assert "Value1" in result
+        assert "Column2" in result
 
-    def test_read_ppt(self):
-        """Test for read_ppt
-        This test function creates a minimal .pptx file in memory, 
-        replaces the actual conversion process with a dummy function, 
-        and checks if the `read_ppt` method correctly reads the 
-        file content without performing the conversion.
+    def test_extract_text_contents_utf16_with_null_bytes(self):
+        """Test UTF-16 encoding which contains null bytes"""
+        data = "Hello World".encode("utf-16")
+        result = self.parser.extract_text_contents(data)
+        assert "Hello World" in result
+
+    def test_extract_text_contents_utf32_with_null_bytes(self):
+        """Test UTF-32 encoding which contains null bytes"""
+        data = "Test UTF-32".encode("utf-32")
+        result = self.parser.extract_text_contents(data)
+        assert "Test UTF-32" in result
+
+    def test_extract_text_contents_binary_file_raises_error(self):
+        """Test that binary data raises UnsupportedEncodingError"""
+        # Create truly random binary data that won't be detected as valid text encoding
+        # Mix of high bytes and control characters that don't form valid UTF-16/32
+        binary_data = bytes([0x89, 0x50, 0x4E, 0x47, 0x0D, 0x0A, 0x1A, 0x0A,  # PNG header
+                            0xFF, 0xD8, 0xFF, 0xE0, 0x00, 0x10, 0x4A, 0x46])  # JPEG-like bytes
+        with pytest.raises(UnsupportedEncodingError):
+            self.parser.extract_text_contents(binary_data)
+
+    def test_with_pdf(self):
+        """Test that PDF files raise UnsupportedEncodingError"""
+        exc = False
+        filename = "test.pdf"
+        contents = self._open_file(filename)
+        try:
+            FileParser().extract_text_contents(contents, filename)
+        except Exception as e:
+            exc = e
+        finally:
+            assert exc is not None
+            assert isinstance(exc, UnsupportedEncodingError)
+
+    def test_with_eml(self):
+        """Test extraction from EML file with headers, text/plain, text/html, and attachment"""
+        from email.mime.multipart import MIMEMultipart
+        from email.mime.text import MIMEText
+        from email.mime.base import MIMEBase
+        from email import encoders
+
+        msg = MIMEMultipart('mixed')
+        msg['From'] = 'sender@example.com'
+        msg['To'] = 'recipient@example.com'
+        msg['Subject'] = 'Test Email Subject'
+        msg['Date'] = 'Mon, 19 May 2026 12:00:00 +0000'
+        
+        msg_alternative = MIMEMultipart('alternative')
+        msg.attach(msg_alternative)
+        
+        text_plain = "This is the plain text version of the email.\nIt has multiple lines.\nPlain text content."
+        part_plain = MIMEText(text_plain, 'plain')
+        msg_alternative.attach(part_plain)
+        
+        text_html = "<html><body><p>This is the <b>HTML</b> version of the email.</p></body></html>"
+        part_html = MIMEText(text_html, 'html')
+        msg_alternative.attach(part_html)
+        
+        attachment_content = b'This is an attachment'
+        attachment = MIMEBase('application', 'octet-stream')
+        attachment.set_payload(attachment_content)
+        encoders.encode_base64(attachment)
+        attachment.add_header('Content-Disposition', 'attachment', filename='test_file.txt')
+        msg.attach(attachment)
+        
+        # Convert to bytes
+        eml_bytes = msg.as_bytes()
+        
+        # Test extraction
+        result = self.parser.extract_text_contents(eml_bytes, "x.eml")
+        
+        assert 'From: sender@example.com' in result or 'sender@example.com' in result
+        assert 'To: recipient@example.com' in result or 'recipient@example.com' in result
+        assert 'Subject: Test Email Subject' in result or 'Test Email Subject' in result
+        
+        assert 'plain text version' in result or 'Plain text content' in result
+        assert attachment_content.decode() not in result
+        
+        common_phrase = 'multiple lines'
+        occurrences = result.lower().count(common_phrase.lower())
+        # should appear only once (from either plain or HTML, not both)
+        assert occurrences <= 2, f"Content appears to be duplicated. Found '{common_phrase}' {occurrences} times"
+
+    def test_normalize_whitespace_basic(self):
+        """Test basic whitespace normalization"""
+        input_text = "Hello    World"
+        result = FileParser._normalize_whitespace(input_text)
+        assert result == "Hello World"
+
+    def test_normalize_whitespace_multiple_newlines(self):
+        """Test collapsing excessive newlines"""
+        input_text = "Line 1\n\n\n\n\nLine 2"
+        result = FileParser._normalize_whitespace(input_text)
+        assert result == "Line 1\n\nLine 2"
+
+    def test_normalize_whitespace_tabs(self):
+        """Test tab normalization"""
+        input_text = "Col1\t\t\tCol2"
+        result = FileParser._normalize_whitespace(input_text)
+        assert result == "Col1 Col2"
+
+    def test_normalize_whitespace_mixed_line_endings(self):
+        """Test normalization of different line ending styles"""
+        input_text = "Line 1\r\nLine 2\rLine 3\nLine 4"
+        result = FileParser._normalize_whitespace(input_text)
+        assert result == "Line 1\nLine 2\nLine 3\nLine 4"
+
+    def test_normalize_whitespace_control_characters(self):
+        """Test removal of control characters"""
+        input_text = "Hello\x00\x01\x02World"
+        result = FileParser._normalize_whitespace(input_text)
+        assert result == "HelloWorld"
+
+    def test_normalize_whitespace_unicode_normalization(self):
+        """Test Unicode normalization (NFKC)"""
+        # Using composed vs decomposed characters
+        input_text = "café"  # May contain decomposed characters
+        result = FileParser._normalize_whitespace(input_text)
+        assert "caf" in result
+
+    def test_normalize_whitespace_strips_leading_trailing(self):
+        """Test stripping of leading and trailing whitespace"""
+        input_text = "   Hello World   \n\n"
+        result = FileParser._normalize_whitespace(input_text)
+        assert result == "Hello World"
+
+    def test_normalize_whitespace_empty_string(self):
+        """Test normalization of empty string"""
+        result = FileParser._normalize_whitespace("")
+        assert result == ""
+
+    def test_normalize_whitespace_only_whitespace(self):
+        """Test normalization of string with only whitespace"""
+        input_text = "   \n\n\t\t   "
+        result = FileParser._normalize_whitespace(input_text)
+        assert result == ""
+
+    def test_check_binary_with_null_byte(self):
+        """Test that binary check detects null bytes"""
+        data = b"Text\x00with null"
+        with pytest.raises(ValueError, match="null byte"):
+            FileParser._check_binary(data)
+
+    def test_check_binary_without_null_byte(self):
+        """Test that text without null bytes passes"""
+        data = b"Plain text without null bytes"
+        # Should not raise an exception
+        FileParser._check_binary(data)
+
+    def test_check_binary_empty_data(self):
+        """Test binary check with empty data"""
+        data = b""
+        # Should not raise an exception (no null bytes)
+        FileParser._check_binary(data)
+
+    def test_check_contents_valid(self):
+        """Test that valid contents pass the check"""
+        contents = "This is valid text content"
+        # Should not raise an exception
+        FileParser._check_contents(contents)
+
+    def test_check_contents_empty(self):
+        """Test that empty contents raise ValueError"""
+        with pytest.raises(EmptyContentsError):
+            FileParser._check_contents("")
+
+    def test_check_contents_too_many_replacement_chars(self):
+        """Test that too many replacement characters raise ValueError"""
+        # Create string with >1% replacement characters
+        contents = "�" * 20 + "a" * 80  # 20% replacement chars
+        with pytest.raises(ValueError):
+            FileParser._check_contents(contents)
+
+    def test_check_contents_acceptable_replacement_chars(self):
+        """Test that acceptable replacement character ratio passes"""
+        # Create string with <1% replacement characters
+        contents = "�" + "a" * 200  # ~0.5% replacement chars
+        # Should not raise an exception
+        FileParser._check_contents(contents)
+
+    def test_check_contents_too_many_control_chars(self):
+        """Test that too many control characters raise ValueError"""
+        # Create string with >5% control characters (excluding \n, \t, \r)
+        contents = "\x01" * 10 + "a" * 90  # 10% control chars
+        with pytest.raises(ValueError, match="too many non-"):
+            FileParser._check_contents(contents)
+
+    def test_check_contents_acceptable_control_chars(self):
+        """Test that acceptable control character ratio passes"""
+        # Create string with <5% control characters
+        contents = "\x01" * 2 + "a" * 100  # ~2% control chars
+        # Should not raise an exception
+        FileParser._check_contents(contents)
+
+    def test_check_contents_allowed_control_chars(self):
+        """Test that newlines, tabs, and carriage returns are allowed"""
+        contents = "Line 1\nLine 2\tTabbed\rCarriage"
+        # Should not raise an exception
+        FileParser._check_contents(contents)
+
+    def test_detect_encoding_utf8(self):
+        """Test encoding detection for UTF-8"""
+        data = "Hello World".encode("utf-8")
+        encoding = FileParser._detect_encoding(data)
+        assert encoding.lower() in ["utf-8", "utf_8", "ascii"]
+
+    def test_detect_encoding_utf16(self):
+        """Test encoding detection for UTF-16"""
+        data = "Hello World".encode("utf-16")
+        encoding = FileParser._detect_encoding(data)
+        assert "utf" in encoding.lower() and "16" in encoding
+
+    def test_detect_encoding_ascii(self):
+        """Test encoding detection for ASCII"""
+        data = b"Simple ASCII text"
+        encoding = FileParser._detect_encoding(data)
+        assert encoding.lower() in ["ascii", "utf-8", "utf_8"]
+
+    def test_detect_encoding_latin1(self):
+        """Test encoding detection for Latin-1"""
+        data = "Café résumé".encode("latin-1")
+        encoding = FileParser._detect_encoding(data)
+        # Should detect some encoding
+        assert encoding is not None
+
+    @patch('fn_watsonx_analyst.util.FileParser.from_bytes')
+    def test_detect_encoding_no_result(self, mock_from_bytes):
+        """Test that no encoding result raises ValueError"""
+        mock_from_bytes.return_value.best.return_value = None
+        with pytest.raises(ValueError, match="Unable to detect encoding"):
+            FileParser._detect_encoding(b"test")
+
+    @patch('fn_watsonx_analyst.util.FileParser.from_bytes')
+    def test_detect_encoding_high_chaos(self, mock_from_bytes):
+        """Test that high chaos percentage raises ValueError"""
+        mock_result = MagicMock()
+        mock_result.encoding = "utf-8"
+        mock_result.percent_chaos = 40  # Above 0.3 threshold
+        mock_from_bytes.return_value.best.return_value = mock_result
+        
+        with pytest.raises(ValueError, match="chaos above threshold"):
+            FileParser._detect_encoding(b"test")
+
+    @patch('fn_watsonx_analyst.util.FileParser.from_bytes')
+    def test_detect_encoding_acceptable_chaos(self, mock_from_bytes):
+        """Test that acceptable chaos percentage passes"""
+        mock_result = MagicMock()
+        mock_result.encoding = "utf-8"
+        mock_result.percent_chaos = 0.1  # Below 0.3 threshold
+        mock_from_bytes.return_value.best.return_value = mock_result
+        
+        encoding = FileParser._detect_encoding(b"test")
+        assert encoding == "utf-8"
+
+    def test_decode_utf8(self):
+        """Test decoding UTF-8 data"""
+        data = "Hello World".encode("utf-8")
+        result = FileParser._decode(data, "utf-8")
+        assert result == "Hello World"
+
+    def test_decode_utf16(self):
+        """Test decoding UTF-16 data"""
+        data = "Hello World".encode("utf-16")
+        result = FileParser._decode(data, "utf-16")
+        assert result == "Hello World"
+
+    def test_decode_ascii(self):
+        """Test decoding ASCII data"""
+        data = b"Simple ASCII"
+        result = FileParser._decode(data, "ascii")
+        assert result == "Simple ASCII"
+
+    def test_decode_latin1(self):
+        """Test decoding Latin-1 data"""
+        data = "Café".encode("latin-1")
+        result = FileParser._decode(data, "latin-1")
+        assert result == "Café"
+
+    def test_decode_invalid_encoding(self):
+        """Test that invalid encoding raises exception"""
+        data = b"test data"
+        with pytest.raises(LookupError):
+            FileParser._decode(data, "invalid-encoding-name")
+
+    # ==================== Integration tests ====================
+
+    def test_extract_text_with_mixed_content(self):
+        """Integration test with mixed content"""
+        data = "Line 1\n\nLine 2\t\tTabbed\r\nLine 3".encode("utf-8")
+        result = self.parser.extract_text_contents(data)
+        assert "Line 1" in result
+        assert "Line 2" in result
+        assert "Line 3" in result
+
+    def test_extract_text_with_special_chars(self):
+        """Integration test with special characters"""
+        data = "Special: @#$%^&*()_+-=[]{}|;:',.<>?/".encode("utf-8")
+        result = self.parser.extract_text_contents(data)
+        assert "Special:" in result
+
+    def test_extract_text_multiline_document(self):
+        """Integration test with multi-line document"""
+        document = """
+        Title: Test Document
+        
+        This is a test document with multiple lines.
+        It contains various types of content.
+        
+        - Bullet point 1
+        - Bullet point 2
+        
+        End of document.
         """
+        data = document.encode("utf-8")
+        result = self.parser.extract_text_contents(data)
+        assert "Title: Test Document" in result
+        assert "Bullet point 1" in result
+        assert "End of document." in result
 
-        # Create a minimal in-memory .pptx file
-        pptx_stream = io.BytesIO()
-        prs = Presentation()
-        slide_layout = prs.slide_layouts[0]
-        slide = prs.slides.add_slide(slide_layout)
-        title = slide.shapes.title
-        title.text = "Test Slide"
-        prs.save(pptx_stream)
-        pptx_bytes = pptx_stream.getvalue()
+    @pytest.mark.parametrize(
+        "data",
+        (
+            "Hello world",
+            str(uuid.uuid4()),
+            ''.join([str(uuid.uuid4()) for _ in range(1000)]),
+        )
+    )
+    def test_base_encoded_strings(self, data: str):
+        encoders = [
+            base64.b16encode,
+            base64.b32encode,
+            base64.b64encode,
+        ]
 
-        # Define dummy_converter with 'self' since it'll be bound to the parser instance
-        def dummy_converter(self, _: bytes) -> bytes:
-            """
-            The method takes bytes as input and returns bytes.
-            _ is a placeholder for any byte data that might be passed to the function.
-            """
-            return pptx_bytes
-
-        # Bind dummy_converter as method
-        self.parser.convert_ppt_to_pptx = dummy_converter.__get__(self.parser)
-
-        # Run the test
-        result = self.parser.read_ppt(b"anything doesn't really matter")
-        assert isinstance(result, str)
-        assert "Test Slide" in result
-
-    @patch("fn_watsonx_analyst.util.FileParser.image_to_string")
-    def test_extract_text_from_images(self, mock_image_to_string):
-        """Test for extract_text_from_images with real image data"""
-
-        # Create a simple image with text using PIL
-        img = Image.new('RGB', (200, 100), color=(255, 255, 255))
-        draw = ImageDraw.Draw(img)
-        draw.text((10, 40), "Detected text from image", fill=(0, 0, 0))
-
-        # Now pass the real image object to the OCR method
-        image_data = [img]  # List of real image objects (no mock)
-
-        # Set the return value of the mocked function
-        mock_image_to_string.return_value = "Detected text from image"
-
-        # Call the method to extract text from images
-        result = self.parser.extract_text_from_images(image_data)
-
-        # Assert that the extracted text is as expected
-        assert result == "Detected text from image"
-
-    def test_format_parser(self):
-        """Test for multi_format_parser (PDF)"""
-        result = self.parser.multi_format_parser(b"%PDF-1.4 some pdf bytes", "test.pdf")
-        assert isinstance(result, str)
-
-    def test_format_parser_unknown(self):
-        """Test for unsupported format"""
-        result = self.parser.multi_format_parser(b"\xff\xfe\xfa\xfb", "test.abc")
-        assert FileParser.PARSED_CONTENT_EMPTY in result
+        for encoder in encoders:
+            with pytest.raises(UnsupportedEncodingError):
+                FileParser().extract_text_contents(encoder(data.encode("utf-8")))

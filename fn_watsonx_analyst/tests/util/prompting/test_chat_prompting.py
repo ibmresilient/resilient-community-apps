@@ -127,7 +127,7 @@ class TestChatPrompting:
     def test_get_system_prompt_metadata_summary(self):
         """Test getting system prompt for metadata summary."""
         chat_prompting = ChatPrompting()
-        prompt = chat_prompting.get_system_prompt(AiResponsePurpose.ARITFACT_META_SUMMARY, "en")
+        prompt = chat_prompting.get_system_prompt(AiResponsePurpose.ARTIFACT_META_SUMMARY, "en")
         assert isinstance(prompt, str)
         assert len(prompt) > 0
 
@@ -158,7 +158,7 @@ class TestChatPrompting:
     def test_get_user_prompt_metadata_summary(self):
         """Test getting user prompt for metadata summary."""
         chat_prompting = ChatPrompting()
-        prompt = chat_prompting.get_user_prompt(AiResponsePurpose.ARITFACT_META_SUMMARY, "en")
+        prompt = chat_prompting.get_user_prompt(AiResponsePurpose.ARTIFACT_META_SUMMARY, "en")
         assert isinstance(prompt, str)
 
     def test_get_user_prompt_returns_empty_for_conversation(self):
@@ -464,7 +464,7 @@ class TestChatPrompting:
             AiResponsePurpose.NOTE_CONVERSATION,
             AiResponsePurpose.ARTIFACT_CONVERSATION,
             AiResponsePurpose.ARTIFACT_SUMMARY,
-            AiResponsePurpose.ARITFACT_META_SUMMARY,
+            AiResponsePurpose.ARTIFACT_META_SUMMARY,
             AiResponsePurpose.INCIDENT_SUMMARY
         ]
         
@@ -479,7 +479,7 @@ class TestChatPrompting:
                     query="Test query",
                     context="Context"
                 )
-            elif purpose in [AiResponsePurpose.ARTIFACT_SUMMARY, AiResponsePurpose.ARITFACT_META_SUMMARY]:
+            elif purpose in [AiResponsePurpose.ARTIFACT_SUMMARY, AiResponsePurpose.ARTIFACT_META_SUMMARY]:
                 messages = chat_prompting.build_chat_messages(
                     purpose=purpose,
                     query=None,

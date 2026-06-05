@@ -8,6 +8,8 @@
 import json
 from typing import Any, Optional, Union
 
+from fn_watsonx_analyst.types import Attachment
+from fn_watsonx_analyst.util import FileParser
 from resilient_circuits import (
     AppFunctionComponent,
     app_function,
@@ -113,7 +115,6 @@ def scan_artifact_or_attachment(
             return _scan_attachment(inc_id, att_id, task_id)
         else:
             raise ValueError("Either artifact or attachment ID must be provided")
-            
     except Exception:
         log.exception("Failed to generate scan summary")
         raise
@@ -125,81 +126,35 @@ def _scan_artifact(inc_id: int, art_id: int) -> AIResponse:
         RestUrls.ARTIFACT_DETAILS, inc_id=inc_id, art_id=art_id
     )
     obj_name = artifact.get("value", "Unknown")
-    
+
+    artifact_parse_msg: str | None = None
+
     # Determine if it's a file artifact or metadata artifact
     if artifact["attachment"]:
         app_state.get().purpose = AiResponsePurpose.ARTIFACT_SUMMARY
-        response = ArtifactSummaryGenerator(inc_id, artifact, None).generate()  # type: ignore
+        try:
+            response = ArtifactSummaryGenerator(inc_id, artifact, None).generate()  # type: ignore
+        except ValueError as e:
+            artifact_parse_msg = e.msg
+            response = _scan_metadata_artifact(inc_id, artifact)
     else:
-        response = _scan_metadata_artifact(inc_id, artifact, obj_name)
+        response = _scan_metadata_artifact(inc_id, artifact)
 
-    prefix = f"Artifact name: {obj_name}\n\n"
+    prefix = f"Artifact name: {obj_name}\n"
+    if artifact["attachment"] and artifact_parse_msg:
+        prefix += artifact_parse_msg + "\n"
+    prefix += "\n"
+
     response["generated_text"] = prefix + response["generated_text"]
     response["raw_output"] = prefix + response["raw_output"]
 
     return response
 
 
-def _scan_metadata_artifact(inc_id: int, artifact: Any, obj_name: str) -> AIResponse:
-    """Scan a metadata artifact (IP, URL, domain, hash, etc.)."""
-    app_state.get().purpose = AiResponsePurpose.ARITFACT_META_SUMMARY
-    
-    # Get incident context
-    context_helper = ContextHelper(inc_id)
-    inc_data = context_helper.get_incident_data()
-    
-    # Cleanse and resolve data
-    inc_data, _, art_data, _, _ = context_helper.cleanse_data(
-        inc_data, None, [artifact], None, None  # type: ignore
-    )
-    inc_data["artifacts"] = art_data  # type: ignore
-    resolved = context_helper.resolve_type_ids({"incident": inc_data})  # type: ignore
-    inc_data = resolved["incident"]  # type: ignore
-    art_data = inc_data["artifacts"][0]  # type: ignore
-    del inc_data["artifacts"]  # type: ignore
-    
-    # Chunk the data to fit model context limits
-    chunker = Chunking()
-    model_id = app_state.get().model_id
-    
-    art_chunks = chunker.split_data_into_token_chunks(
-        json.dumps(art_data), max_tokens=350
-    )
-    inc_chunks = chunker.split_data_into_token_chunks(
-        json.dumps(inc_data), max_tokens=350
-    )
-
-    # Clamp artifact chunks to 50% of model capacity
-    art_chunks = chunker.clamped_chunks_for_model(art_chunks, model_id, 0.5)
-    
-    # Retrieve relevant incident chunks (20% of model capacity)
-    inc_query = f"Information related to artifact {obj_name} of type {artifact['type']}."
-    inc_chunks = chunker.retrieve_relevant_chunks_watsonx(
-        inc_query, inc_chunks, None, 0.2
-    )
-
-    # Prepare data for user prompt substitution
-    art_data_str = chr(10).join(art_chunks)
-    inc_data_str = chr(10).join(inc_chunks)
-
-    # Build chat messages and get response
-    chat_prompting = ChatPrompting()
-    chat_messages = chat_prompting.build_chat_messages(
-        purpose=AiResponsePurpose.ARITFACT_META_SUMMARY,
-        query="",
-        context="",  # No longer using context parameter
-        previous_messages=None,
-        art_data=art_data_str,
-        inc_data=inc_data_str
-    )
-
-    return ResponseHelper().text_chat_to_ai_response(WatsonxClient().chat(chat_messages))
-
-
 def _scan_attachment(inc_id: int, att_id: int, task_id: Optional[int]) -> AIResponse:
     """Scan an attachment."""
     app_state.get().purpose = AiResponsePurpose.ARTIFACT_SUMMARY
-    
+
     # Fetch attachment details
     attachment: Any
     if task_id:
@@ -215,14 +170,95 @@ def _scan_attachment(inc_id: int, att_id: int, task_id: Optional[int]) -> AIResp
             inc_id=inc_id,
             attach_id=att_id,
         )
-    
+
     obj_name = attachment.get("name", attachment.get("value", "Unknown"))
-    
-    response = ArtifactSummaryGenerator(inc_id, None, attachment).generate()  # type: ignore
-    
+    attachment_parse_msg: str | None = None
+
+    try:
+        response = ArtifactSummaryGenerator(inc_id, None, attachment).generate()  # type: ignore
+    except ValueError as e:
+        attachment_parse_msg = e.msg
+        response = _scan_metadata_attachment(inc_id, attachment)
+
     prefix = f"Attachment name: {obj_name}\n\n"
+    if attachment_parse_msg:
+        prefix += attachment_parse_msg+ "\n"
+    prefix += "\n"
+
     response["generated_text"] = prefix + response['generated_text']
     response["raw_output"] = prefix + response['raw_output']
-    
+
     return response
+
+
+def _scan_metadata_artifact(inc_id: int, artifact: Any) -> AIResponse:
+    """Scan a metadata artifact (IP, URL, domain, hash, etc.)."""
+    # Get incident context
+    context_helper = ContextHelper(inc_id)
+    inc_data = context_helper.get_incident_data()
+    
+    # Cleanse and resolve data
+    inc_data, _, art_data, _, _ = context_helper.cleanse_data(
+        inc_data, None, [artifact], None, None  # type: ignore
+    )
+    inc_data["artifacts"] = art_data  # type: ignore
+    resolved = context_helper.resolve_type_ids({"incident": inc_data})  # type: ignore
+    inc_data = resolved["incident"]  # type: ignore
+    art_data: dict = inc_data["artifacts"][0]  # type: ignore
+    del inc_data["artifacts"]  # type: ignore
+
+    return _scan_metadata_ioc(inc_data, art_data, art_data["value"], art_data["type"])
+
+def _scan_metadata_attachment(inc_id: int, attachment: Attachment) -> AIResponse:
+    context_helper = ContextHelper(inc_id)
+    inc_data = context_helper.get_incident_data()
+
+    inc_data, _, _, att_data, _ = context_helper.cleanse_data(
+        inc_data, None, None, [attachment], None
+    )
+
+    att_data: Attachment = att_data[0]
+
+    return _scan_metadata_ioc(inc_data, att_data, att_data["name"], att_data["content_type"])
+
+
+def _scan_metadata_ioc(inc_data: dict, ioc_data: dict, ioc_name: str, ioc_type: str) -> AIResponse:
+    app_state.get().purpose = AiResponsePurpose.ARTIFACT_META_SUMMARY
+
+    # Chunk the data to fit model context limits
+    chunker = Chunking()
+    model_id = app_state.get().model_id
+    
+    art_chunks = chunker.split_data_into_token_chunks(
+        json.dumps(ioc_data), max_tokens=350
+    )
+    inc_chunks = chunker.split_data_into_token_chunks(
+        json.dumps(inc_data), max_tokens=350
+    )
+
+    # Clamp artifact chunks to 50% of model capacity
+    art_chunks = chunker.clamped_chunks_for_model(art_chunks, model_id, 0.5)
+    
+    # Retrieve relevant incident chunks (20% of model capacity)
+    inc_query = f"Information related to artifact {ioc_name} of type {ioc_type}"
+    inc_chunks = chunker.retrieve_relevant_chunks_watsonx(
+        inc_query, inc_chunks, None, 0.2
+    )
+
+    # Prepare data for user prompt substitution
+    art_data_str = chr(10).join(art_chunks)
+    inc_data_str = chr(10).join(inc_chunks)
+
+    # Build chat messages and get response
+    chat_prompting = ChatPrompting()
+    chat_messages = chat_prompting.build_chat_messages(
+        purpose=AiResponsePurpose.ARTIFACT_META_SUMMARY,
+        query="",
+        previous_messages=None,
+        art_data=art_data_str,
+        inc_data=inc_data_str
+    )
+
+    return ResponseHelper().text_chat_to_ai_response(WatsonxClient().chat(chat_messages))
+
 

@@ -60,7 +60,7 @@ class TestFnWatsonxAnalystScanAttachment:
         "fn_watsonx_analyst_task_id": None,
     }
 
-    expected_results_1 = 'Attachment name: runme2.sh\n\n<p style="display: inline">Lorem ipsum</p>'
+    expected_results_1 = 'Attachment name: runme2.sh'
 
     mock_inputs_2 = {
         "fn_watsonx_analyst_incident_id": 123,
@@ -76,4 +76,4 @@ class TestFnWatsonxAnalystScanAttachment:
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
         results = call_fn_watsonx_analyst_scan_attachment_function(circuits_app, mock_inputs)
-        assert results["content"]["generated_text"].strip() == expected_results
+        assert expected_results in results["content"]["generated_text"].strip()

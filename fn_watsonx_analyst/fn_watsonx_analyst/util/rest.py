@@ -214,13 +214,7 @@ class RestHelper:
                         res_client.headers["Accept"] = (
                             "application/json"  # reset headers
                         )
-                        try:
-                            return data.decode("utf-8")
-                        except:
-                            log.warning(
-                                "Unknown encoding for artifact/attachment contents."
-                            )
-                            return data
+                        return data
                 return res_client.get(url.value[1].format(**kwargs))
 
             case "POST":

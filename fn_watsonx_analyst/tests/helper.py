@@ -3,6 +3,7 @@
 # pylint: disable=line-too-long
 
 """Helper for tests"""
+import os
 from typing import List
 
 import copy
@@ -526,6 +527,44 @@ def mock_do_request(_self, uri, **kwargs):
                         "user_fname": "Resilient",
                         "user_lname": "Sysadmin",
                         "text": '<div class="soar-rte-content"><p>@watsonx what can you tell me about [malicious-ip]?</p></div>',
+                        "create_date": 1732115801922,
+                        "modify_date": 1732115801922,
+                        "children": [],
+                        "mentioned_users": [],
+                        "is_deleted": False,
+                        "modify_user": {
+                            "id": 34,
+                            "first_name": "Resilient",
+                            "last_name": "Sysadmin",
+                        },
+                        "actions": [],
+                        "playbooks": [],
+                        "inc_id": 2414,
+                        "inc_name": "asdf",
+                        "task_id": None,
+                        "task_name": None,
+                        "task_custom": None,
+                        "task_members": None,
+                        "task_at_id": None,
+                        "inc_owner": 34,
+                        "user_name": "Resilient Sysadmin",
+                        "modify_principal": {
+                            "id": 34,
+                            "type": "user",
+                            "name": "thomas@example.com",
+                            "display_name": "Resilient Sysadmin",
+                        },
+                        "comment_perms": None,
+                    }
+                case 7:
+                    return {
+                        "type": "incident",
+                        "id": 6,
+                        "parent_id": None,
+                        "user_id": 34,
+                        "user_fname": "Resilient",
+                        "user_lname": "Sysadmin",
+                        "text": '<div class="soar-rte-content"><p>@watsonx what can you tell me about [file.txt]?</p></div>',
                         "create_date": 1732115801922,
                         "modify_date": 1732115801922,
                         "children": [],
@@ -1184,18 +1223,21 @@ def mock_do_request(_self, uri, **kwargs):
             if "art_id" in kwargs:
                 match kwargs.get("art_id", None):
                     case 1412:
-                        return " "
+                        with open(os.path.join(os.path.dirname(__file__), "data", "image.png"), 'rb') as f:
+                            return f.read()
+                    case 1420:
+                        return b" "
             else:
 
                 match kwargs.get("att_id", None):
                     case 322:
-                        return "test 123"
+                        return b"test 123"
 
-            return "Lorem ipsum"
+            return b"Lorem ipsum"
 
         case RestUrls.ARTIFACT_BY_NAME:
             match kwargs.get("obj_name", None):
-                case "image.png":
+               case "image.png":
                     return [
                         {
                             "id": 1412,
@@ -1345,7 +1387,7 @@ def mock_do_request(_self, uri, **kwargs):
                             ],
                         }
                     ]
-                case "malicious-ip":
+               case "malicious-ip":
                     return [
                         {
                             "id": 1500,
@@ -1405,6 +1447,157 @@ def mock_do_request(_self, uri, **kwargs):
                             "ip": {"source": None, "destination": None},
                         }
                     ]
+               case "file.txt":
+                    return [
+                        {
+                            "id": 1420,
+                            "type": 16,
+                            "value": "file.txt",
+                            "description": None,
+                            "attachment": {
+                                "type": "artifact",
+                                "id": 111,
+                                "uuid": "964f158a-5fc7-4f21-b58b-94edbe369ca8",
+                                "name": "image.png",
+                                "content_type": "image/png",
+                                "created": 1732119882733,
+                                "creator_id": 34,
+                                "size": 122,
+                                "actions": [],
+                                "playbooks": [],
+                                "task_id": None,
+                                "task_name": None,
+                                "task_custom": None,
+                                "task_members": None,
+                                "task_at_id": None,
+                                "reconciliation_status": "matched",
+                                "vers": 3,
+                                "inc_id": 2414,
+                                "inc_name": "asdf",
+                                "inc_owner": 34,
+                            },
+                            "parent_id": None,
+                            "creator": {
+                                "id": 34,
+                                "fname": "Resilient",
+                                "lname": "Sysadmin",
+                                "display_name": "Resilient Sysadmin",
+                                "status": "A",
+                                "email": "thomas@example.com",
+                                "locked": False,
+                                "password_changed": False,
+                                "is_external": False,
+                                "ui_theme": "verydarkmode",
+                                "is_ldap": False,
+                                "is_saml": False,
+                            },
+                            "inc_id": 2414,
+                            "inc_name": "asdf",
+                            "inc_owner": 34,
+                            "hits": [],
+                            "created": 1732119882637,
+                            "last_modified_time": 1732119882742,
+                            "last_modified_by": {
+                                "id": 34,
+                                "type": "user",
+                                "name": "thomas@example.com",
+                                "display_name": "Resilient Sysadmin",
+                            },
+                            "pending_sources": [],
+                            "perms": {"read": True, "write": False, "delete": False},
+                            "properties": None,
+                            "actions": [],
+                            "playbooks": [],
+                            "hash": "d18ee8ed43f39efc8a84a838c71b114ac0bb17547e53a868b7589dbea2e03fa9",
+                            "relating": True,
+                            "creator_principal": {
+                                "id": 34,
+                                "type": "user",
+                                "name": "thomas@example.com",
+                                "display_name": "Resilient Sysadmin",
+                            },
+                            "related_incident_count": 3,
+                            "pending_scan_result": False,
+                            "global_info": {
+                                "id": 759,
+                                "type": 16,
+                                "value": "runme2.sh",
+                                "description": None,
+                                "creator": {
+                                    "id": 34,
+                                    "type": "user",
+                                    "name": "thomas@example.com",
+                                    "display_name": "Resilient Sysadmin",
+                                },
+                                "created": 1730307123575,
+                                "last_modified_by": {
+                                    "id": 0,
+                                    "type": "system",
+                                    "name": "System User",
+                                    "display_name": "System User",
+                                },
+                                "last_modified_time": 1730307123576,
+                                "related_incident_count": 4,
+                                "last_related_inc_id": 2414,
+                                "last_related_inc_owner_handle": 34,
+                                "first_related_inc_id": 2350,
+                                "first_related_inc_owner_handle": 34,
+                                "perms": {"write": False},
+                                "first_associated_time": 1730307123575,
+                                "last_associated_time": 1732119882637,
+                                "properties": None,
+                                "tags": [],
+                                "version": 0,
+                                "scan_option": "unsupported",
+                                "relating_incidents": True,
+                                "hit_threat_sources": [],
+                                "relating": True,
+                                "last_scan_hits": [],
+                                "summary": None,
+                            },
+                            "ip": {"source": None, "destination": None},
+                            "global_artifact": [
+                                {
+                                    "id": 759,
+                                    "type": 16,
+                                    "value": "runme2.sh",
+                                    "description": None,
+                                    "creator": {
+                                        "id": 34,
+                                        "type": "user",
+                                        "name": "thomas@example.com",
+                                        "display_name": "Resilient Sysadmin",
+                                    },
+                                    "created": 1730307123575,
+                                    "last_modified_by": {
+                                        "id": 0,
+                                        "type": "system",
+                                        "name": "System User",
+                                        "display_name": "System User",
+                                    },
+                                    "last_modified_time": 1730307123576,
+                                    "related_incident_count": 4,
+                                    "last_related_inc_id": 2414,
+                                    "last_related_inc_owner_handle": 34,
+                                    "first_related_inc_id": 2350,
+                                    "first_related_inc_owner_handle": 34,
+                                    "perms": {"write": False},
+                                    "first_associated_time": 1730307123575,
+                                    "last_associated_time": 1732119882637,
+                                    "properties": None,
+                                    "tags": [],
+                                    "version": 0,
+                                    "scan_option": "unsupported",
+                                    "relating_incidents": True,
+                                    "hit_threat_sources": [],
+                                    "relating": True,
+                                    "last_scan_hits": [],
+                                    "summary": None,
+                                }
+                            ],
+                        }
+                    ]
+
             return [
                 {
                     "id": 1411,

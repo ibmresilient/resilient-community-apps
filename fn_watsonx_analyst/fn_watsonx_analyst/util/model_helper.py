@@ -6,7 +6,7 @@ from fn_watsonx_analyst.config import ModelConfig, load_model_config
 class ModelHelper:
 
     EMBEDDING_MODEL_COST = 0.1
-    DEFAULT_EMBEDDING_MODEL = "ibm/slate-125m-english-rtrvr-v2"
+    DEFAULT_EMBEDDING_MODEL = "ibm/granite-embedding-278m-multilingual"
 
     @staticmethod
     def get_embedding_model(opts: dict | None) -> str:
@@ -31,7 +31,7 @@ class ModelHelper:
 
     @staticmethod
     def max_output_tokens_for_model(model_id: str) -> int:
-        return ModelHelper.get_model_config(model_id)["max_output_tokens"]
+        return 8000 # watsonx.ai quietly deprecated announcing this...
 
     def get_model_cost(self, model_id: str) -> Tuple[float, float, float]:
         """

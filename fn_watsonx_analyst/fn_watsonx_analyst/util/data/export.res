@@ -239,15 +239,6 @@
           "default": false,
           "enabled": true,
           "hidden": false,
-          "label": "meta-llama/llama-3-2-11b-vision-instruct",
-          "properties": null,
-          "uuid": "56d723e9-6612-4518-b942-545ac5fccb1a",
-          "value": 3067
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
           "label": "meta-llama/llama-3-3-70b-instruct",
           "properties": null,
           "uuid": "c49da377-ca16-42d4-91f0-1e3e914a42cb",
@@ -270,24 +261,6 @@
           "properties": null,
           "uuid": "f88c299d-6ff3-42c2-a231-8af23536d2f8",
           "value": 3072
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "mistralai/mistral-medium-2505",
-          "properties": null,
-          "uuid": "a8c51c44-e67e-467a-b9fe-33faa966059c",
-          "value": 3071
-        },
-        {
-          "default": false,
-          "enabled": true,
-          "hidden": false,
-          "label": "mistral-large-2512",
-          "properties": null,
-          "uuid": "a4f1c82a-46c6-4c9d-bc16-b90928bab0a2",
-          "value": 3078
         },
         {
           "default": false,

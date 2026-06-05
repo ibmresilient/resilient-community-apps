@@ -5,7 +5,7 @@
 from unittest.mock import patch
 import concurrent
 import pytest
-from fn_watsonx_analyst.util.FileParser import FileParser
+from fn_watsonx_analyst.util.FileParser import FileParser, METADATA_USED_INSTEAD, EMPTY_CONTENTS, CONTENT_TYPE_INVALID
 from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose
 from tests import helper
 from resilient_circuits.util import get_config_data, get_function_definition
@@ -96,7 +96,7 @@ class TestFnWatsonxConverseViaNotes:
         "fn_watsonx_analyst_data_config": "default",
     }
 
-    artifact_expected_results_4 = FileParser.PARSED_CONTENT_EMPTY
+    artifact_expected_results_4 = CONTENT_TYPE_INVALID
     artifact_expected_results = "Artifact conversation"
     artifact_expected_results_5 = "Lorem ipsum"
 
@@ -115,6 +115,14 @@ class TestFnWatsonxConverseViaNotes:
     }
 
     metadata_artifact_expected_results = AiResponsePurpose.ARTIFACT_META_CONVERSATION.value
+
+    mock_inputs_7 = {
+        "fn_watsonx_analyst_note_id": 7,
+        "fn_watsonx_analyst_model_id": "mistralai/mistral-small-3-1-24b-instruct-2503",
+        "fn_watsonx_analyst_incident_id": 123,
+        "fn_watsonx_analyst_data_config": "default",
+    }
+
 
     @pytest.mark.parametrize(
         "mock_inputs, expected_results",
@@ -138,12 +146,14 @@ class TestFnWatsonxConverseViaNotes:
         )
         assert results["content"]["raw_output"] == self.artifact_expected_results
 
-    def test_empty_artifact_content(self, circuits_app):
+    def test_unsupported_artifact_content(self, circuits_app):
         """test to test empty artifact"""
         results = call_fn_watsonx_analyst_converse_via_notes_function(
             circuits_app, self.mock_inputs_4
         )
-        assert results["content"]["raw_output"] == self.artifact_expected_results_4
+
+        assert CONTENT_TYPE_INVALID in results["content"]["generated_text"]
+        assert METADATA_USED_INSTEAD in results["content"]["generated_text"]
 
     @pytest.mark.parametrize(
         "mock_inputs, expected_results", [(mock_inputs_2, artifact_expected_results)]
@@ -184,3 +194,8 @@ class TestFnWatsonxConverseViaNotes:
         assert results["content"].get("tag") is not None
         model_tag = results["content"]["tag"]
         assert self.metadata_artifact_expected_results in str(model_tag)
+
+    def test_empty_file_contents(self, circuits_app):
+        results = call_fn_watsonx_analyst_converse_via_notes_function(circuits_app, self.mock_inputs_7)
+        assert EMPTY_CONTENTS in results["content"]["generated_text"]
+        assert METADATA_USED_INSTEAD in results["content"]["generated_text"]

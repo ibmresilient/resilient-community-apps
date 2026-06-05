@@ -132,9 +132,9 @@ class FunctionComponent(AppFunctionComponent):
         app_state.get().res_client = self.rest_client()
         app_state.get().purpose = AiResponsePurpose.TEXT_GENERATION
 
-        prompt = getattr(fn_inputs, "fn_watsonx_analyst_prompt", None)
+        prompt = getattr(fn_inputs, "fn_watsonx_analyst_prompt", None) or ""
         system_prompt = getattr(fn_inputs, "fn_watsonx_analyst_system_prompt", None) or ""
-        arguments = getattr(fn_inputs, "fn_watsonx_analyst_arguments", None)
+        arguments = getattr(fn_inputs, "fn_watsonx_analyst_arguments", None) or ""
 
         try:
             # Build user message from prompt with argument substitution

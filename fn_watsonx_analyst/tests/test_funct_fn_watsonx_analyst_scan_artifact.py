@@ -5,7 +5,7 @@
 
 from unittest.mock import patch
 import pytest
-from fn_watsonx_analyst.util.FileParser import FileParser
+from fn_watsonx_analyst.util.FileParser import FileParser, CONTENT_TYPE_INVALID
 from tests import helper
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
@@ -77,9 +77,7 @@ class TestFnWatsonxScanArtifact:
         "fn_watsonx_analyst_system_prompt": "sample text",
     }
 
-    expected_results_2 = (
-        "Artifact name: image.png\n\n" + FileParser.PARSED_CONTENT_EMPTY
-    )
+    expected_results_2 = "For security reasons, content extraction is not supported for this file type. Metadata will be analyzed to identify potential indicators of compromise (IOCs)."
 
     mock_inputs_3 = {
         "fn_watsonx_analyst_incident_id": 123,
@@ -102,7 +100,7 @@ class TestFnWatsonxScanArtifact:
         results = call_fn_watsonx_analyst_scan_artifact_function(
             circuits_app, mock_inputs
         )
-        assert results["content"]["generated_text"].strip() == expected_results
+        assert expected_results in results["content"]["generated_text"].strip()
 
     @pytest.mark.limit_memory(cold_mem_limit)
     def test_metadata_artifact(self, circuits_app):

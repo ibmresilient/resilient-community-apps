@@ -9,7 +9,7 @@ class AiResponsePurpose(Enum):
     ARTIFACT_SUMMARY = "Artifact Summary"
     NOTE_CONVERSATION = "Note Conversation"
     ARTIFACT_CONVERSATION = "Artifact Conversation"
-    ARITFACT_META_SUMMARY = "Artifact Metadata Summary"
+    ARTIFACT_META_SUMMARY = "Artifact Metadata Summary"
     ARTIFACT_META_CONVERSATION = "Artifact Metadata Conversation"
     INCIDENT_SUMMARY = "Incident Summary"
     TEXT_GENERATION = "Text Generation"

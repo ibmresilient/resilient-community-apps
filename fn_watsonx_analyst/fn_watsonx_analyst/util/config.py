@@ -32,7 +32,7 @@ render_markdown=true
 # https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/fm-models-embed.html?context=wx#embed
 # to find models that can "vectorize text from API" and have input size greater than or equal to 512 tokens
 
-#embedding_model=ibm/slate-125m-english-rtrvr-v2
+#embedding_model=ibm/granite-embedding-278m-multilingual
 
 [watsonx_property_labels]
 # Note: don't use quotes around values.

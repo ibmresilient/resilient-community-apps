@@ -18,28 +18,10 @@ COPY ./fn_watsonx_analyst/config/ /opt/app-root/src/fn_watsonx_analyst/config/
 
 USER 0
 
+RUN dnf -y remove httpd httpd-core httpd-devel httpd-filesystem httpd mod_md
+
 # Update system
 RUN yum -y update
-
-# Install tesseract and its dependencies and clean cache
-RUN yum -vy install \
-      https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/tesseract-tessdata-doc-4.1.0-3.el9.noarch.rpm && \
-    yum -vy install \
-      https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/leptonica-1.80.0-4.el9.1.x86_64.rpm && \
-    yum -vy install \
-      https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/tesseract-langpack-eng-4.1.0-3.el9.noarch.rpm \
-      https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/tesseract-4.1.1-7.el9.x86_64.rpm
-
-
-# Install LibreOffice and LibreOffice Impress while ignoring broken dependencies,
-# then clean cache. (Consider using rpm --nodeps if you really want to ignore dependencies.)
-RUN yum -vy install \
-      https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/libreoffice-7.1.8.1-14.el9.x86_64.rpm \
-      https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/libreoffice-impress-7.1.8.1-14.el9.x86_64.rpm \
-      --skip-broken
-
-# Install Poppler tools here
-RUN yum -vy install poppler poppler-utils
 
 RUN yum clean all && rm -rf /var/cache/yum
 
@@ -56,4 +38,3 @@ COPY entrypoint.sh /opt/${APPLICATION}/entrypoint.sh
 USER 1001
 
 ENTRYPOINT sh /opt/$APPLICATION/entrypoint.sh
-

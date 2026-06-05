@@ -128,7 +128,7 @@ class ChatPrompting:
             key = "artifact_qna"
         elif purpose == AiResponsePurpose.ARTIFACT_SUMMARY:
             key = "contents_summary"
-        elif purpose == AiResponsePurpose.ARITFACT_META_SUMMARY:
+        elif purpose == AiResponsePurpose.ARTIFACT_META_SUMMARY:
             key = "metadata_summary"
         elif purpose == AiResponsePurpose.ARTIFACT_META_CONVERSATION:
             key = "metadata_conversation"
@@ -160,7 +160,7 @@ class ChatPrompting:
         # Map purpose to prompt key
         if purpose == AiResponsePurpose.ARTIFACT_SUMMARY:
             key = "contents_summary"
-        elif purpose == AiResponsePurpose.ARITFACT_META_SUMMARY:
+        elif purpose == AiResponsePurpose.ARTIFACT_META_SUMMARY:
             key = "metadata_summary"
         elif purpose == AiResponsePurpose.ARTIFACT_META_CONVERSATION:
             key = "metadata_conversation"

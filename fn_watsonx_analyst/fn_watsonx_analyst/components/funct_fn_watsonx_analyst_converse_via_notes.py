@@ -17,6 +17,7 @@ from resilient_circuits import (
 
 from fn_watsonx_analyst.types import Note, MessagePayload
 from fn_watsonx_analyst.types.watsonx_responses import WatsonxChatResponse
+from fn_watsonx_analyst.util.chunking.chunking import Chunking
 from fn_watsonx_analyst.util.response_helper import ResponseHelper
 from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose
 from fn_watsonx_analyst.util.ContextHelper import ContextHelper
@@ -38,6 +39,7 @@ class FunctionComponent(AppFunctionComponent):
     """Component that implements function 'fn_watsonx_analyst_converse_via_notes'"""
 
     ART_BRACKETS = re.compile(r"\[(.*)\]")
+    artifact_parse_msg: str | None = None
 
     def __init__(self, opts):
         super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
@@ -74,12 +76,7 @@ class FunctionComponent(AppFunctionComponent):
 
         # Process context (artifacts/attachments or incident data)
         context, purpose, error_msg = self._process_context(target_note, inc_id)
-        
-        # If there's an error (e.g., empty artifact/attachment), return immediately
-        if error_msg:
-            yield FunctionResult(ResponseHelper().error_response(error_msg))
-            return
-        
+
         # At this point, context and purpose should not be None
         if context is None or purpose is None:
             yield FunctionError(
@@ -93,9 +90,12 @@ class FunctionComponent(AppFunctionComponent):
         )
 
         if chat_response:
-            yield FunctionResult(
-                ResponseHelper().text_chat_to_ai_response(chat_response)
-            )
+            if self.artifact_parse_msg and app_state.get().purpose == AiResponsePurpose.ARTIFACT_META_CONVERSATION:
+                chat_response["choices"][0]["message"]["content"] = (self.artifact_parse_msg + "\n\n" +
+                                                                     chat_response["choices"][0]["message"]["content"])
+            output = ResponseHelper().text_chat_to_ai_response(chat_response)
+
+            yield FunctionResult(output)
         else:
             yield FunctionError(
                 ResponseHelper().error_response("No response received from watsonx")
@@ -210,8 +210,6 @@ class FunctionComponent(AppFunctionComponent):
             artifact_results = artifact_results if isinstance(artifact_results, list) else []
             attachment_results = attachment_results if isinstance(attachment_results, list) else []
 
-            metadata_artifact_results = list(filter(lambda x: x.get("attachment", None) is None, artifact_results))
-
             if not artifact_results and not attachment_results:
                 log.warning("No artifact or attachment found for %s", obj_name)
                 continue
@@ -220,30 +218,37 @@ class FunctionComponent(AppFunctionComponent):
             contents = self._get_artifact_contents(
                 artifact_results, obj_name, inc_id
             ) or self._get_attachment_contents(attachment_results, obj_name, inc_id)
+            
+            parsed_content = None
 
-            # if a metadata artifact:
-            if not contents and metadata_artifact_results:
-                return metadata_artifact_results[0], AiResponsePurpose.ARTIFACT_META_CONVERSATION, None
+            if contents:
+                # Parse the file contents
+                try:
+                    parsed_content = self._parse_file_contents(contents, obj_name)
+                except ValueError as e:
+                    self.artifact_parse_msg = e.msg
+                    parsed_content = None
 
-            # If no contents found, continue to next match or fallback
-            if not contents:
+            # if content couldn't be extracted, fall back to metadata
+            if not parsed_content:
+                chunker = Chunking()
+
+                data = None
+                matching_artifact = next((art for art in artifact_results if art.get("value") == obj_name), None)
+                if matching_artifact:
+                    data = matching_artifact
+
+                if not data:
+                    matching_attachment = next((att for att in attachment_results if att.get("name") == obj_name), None)
+                    if matching_attachment:
+                        data = matching_attachment
+                
+                if data:
+                    return (chunker.clamped_chunks_for_model(chunker.split_json_to_chunks(data), app_state.get().model_id, 0.6), 
+                            AiResponsePurpose.ARTIFACT_META_CONVERSATION, None)
                 continue
-
-            # Parse the file contents
-            parsed_content = self._parse_file_contents(contents, obj_name)
-            if parsed_content == FileParser.PARSED_CONTENT_EMPTY: # send error message
-                return None, None, parsed_content
-            
-            # Check if parsed content is empty
-            if not parsed_content or not parsed_content.strip():
-                error_msg = f"The artifact or attachment '{obj_name}' could not be parsed or has no readable content."
-                log.warning(error_msg)
-                return None, None, error_msg
-            
             return parsed_content, AiResponsePurpose.ARTIFACT_CONVERSATION, None
-        
         return None, None, None
-
 
     def _extract_object_name(self, raw_name: str) -> str:
         """Extract and clean object name from HTML."""
@@ -260,9 +265,10 @@ class FunctionComponent(AppFunctionComponent):
         """Get contents from matching artifact."""
         for art in artifact_results:
             if art.get("value") == obj_name and art.get("attachment") is not None:
-                contents: str = RestHelper().do_request(
+                contents = RestHelper().do_request(
                     RestUrls.ARTIFACT_CONTENTS, inc_id=inc_id, art_id=art["id"]
                 ) # type: ignore
+
                 return contents
         return None
 
@@ -288,16 +294,13 @@ class FunctionComponent(AppFunctionComponent):
                 return contents
         return None
 
-    def _parse_file_contents(self, contents: str | bytes, obj_name: str) -> Optional[str]:
+    def _parse_file_contents(self, contents: bytes, obj_name: str) -> Optional[str]:
         """Parse file contents using FileParser."""
-        try:
-            parser = FileParser()
-            parsed = parser.multi_format_parser(data=contents, object_name=obj_name)
-
-            return parsed.strip()
-        except ValueError as e:
-            log.error("Error parsing file %s: %s", obj_name, e)
-            return None
+        raw_contents = FileParser().extract_text_contents(contents, obj_name)
+        chunker = Chunking()
+        return chunker.clamped_chunks_for_model(
+            chunker.split_data_into_token_chunks(raw_contents), app_state.get().model_id, 0.6
+        )
 
     def _get_chat_response_with_retry(
         self,
@@ -325,7 +328,6 @@ class FunctionComponent(AppFunctionComponent):
             log.error("Chat response failed: %s", e)
             raise
 
-
 def get_chat_response(
     context: str | dict,
     purpose: AiResponsePurpose,
@@ -348,7 +350,7 @@ def get_chat_response(
         chat_prompting = ChatPrompting()
         
         # For artifact conversations, pass file contents as format kwarg for system prompt
-        if purpose == AiResponsePurpose.ARTIFACT_CONVERSATION and isinstance(context, str):
+        if purpose == AiResponsePurpose.ARTIFACT_CONVERSATION:
             chat_messages = chat_prompting.build_chat_messages(
                 purpose=purpose,
                 query=query,

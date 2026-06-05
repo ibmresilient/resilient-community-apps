@@ -61,11 +61,6 @@ class ArtifactSummaryGenerator:
     def generate(self) -> AIResponse:
         data = self.__get_contents()
 
-        # Guard clause to avoid LLM call if content is empty or failed to parse
-        if data == FileParser.PARSED_CONTENT_EMPTY:
-            response = ResponseHelper()
-            return response.error_response(data)
-
         chunker = Chunking()
         model_context_limit = chunker.max_tokens_for_model(self.model_id)
         chunk_size = 0.5 * model_context_limit
@@ -170,10 +165,5 @@ class ArtifactSummaryGenerator:
             raise ValueError("Please provide a valid artifact or attachment")
 
         parser_instance = FileParser()
-        object_name = (
-            self.artifact["value"] if self.artifact else self.attachment["name"]
-        )
-        contents = parser_instance.multi_format_parser(
-            data=contents, object_name=object_name
-        )
-        return contents
+        object_name = self.artifact["value"] if self.artifact else self.attachment["name"]
+        return parser_instance.extract_text_contents(contents, object_name)
