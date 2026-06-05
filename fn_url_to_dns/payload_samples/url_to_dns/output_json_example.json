@@ -1,0 +1,20 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "dns": ""
+  },
+  "raw": "",
+  "inputs": {
+    "urltodns_url": "www.google.com"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-url-to-dns",
+    "package_version": "1.1.1",
+    "host": "my.app.host",
+    "execution_time_ms": 2,
+    "timestamp": "2025-03-25 18:04:23"
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string"
+        },
+        "job_parameters": {
+          "type": "object",
+          "properties": {
+            "job_parameters": {
+              "type": "object",
+              "properties": {
+                "request": {
+                  "type": "object",
+                  "properties": {
+                    "criteria": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "determination": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "userWorkflowDto": {
+                  "type": "object",
+                  "properties": {
+                    "change_timestamp": {
+                      "type": "string"
+                    },
+                    "changed_by_type": {
+                      "type": "string"
+                    },
+                    "changed_by": {
+                      "type": "string"
+                    },
+                    "closure_reason": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "connector_id": {
+          "type": "string"
+        },
+        "org_key": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "progress": {
+          "type": "object",
+          "properties": {
+            "num_total": {
+              "type": "integer"
+            },
+            "num_completed": {
+              "type": "integer"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        },
+        "create_time": {
+          "type": "string"
+        },
+        "last_update_time": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "vmware_cbc_status": {
+          "type": "string"
+        },
+        "vmware_cbc_determination": {
+          "type": "string"
+        },
+        "vmware_cbc_closure_reason": {},
+        "vmware_cbc_alert_id": {
+          "type": "string"
+        },
+        "vmware_cbc_note_text": {}
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

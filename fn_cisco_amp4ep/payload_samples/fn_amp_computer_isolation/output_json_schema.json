@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "response": {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string"
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "links": {
+                  "type": "object",
+                  "properties": {
+                    "self": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "data": {
+              "type": "object",
+              "properties": {
+                "available": {
+                  "type": "boolean"
+                },
+                "status": {
+                  "type": "string"
+                },
+                "unlock_code": {
+                  "type": "string"
+                },
+                "comment": {},
+                "isolated_by": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "amp_comment": {},
+        "amp_computer_isolation": {
+          "type": "string"
+        },
+        "amp_conn_guid": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
