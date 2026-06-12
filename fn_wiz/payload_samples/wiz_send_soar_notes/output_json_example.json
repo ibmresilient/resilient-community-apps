@@ -1,0 +1,28 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "response": {
+      "id": "dec4dad8-abcdefg",
+      "note": "",
+      "status": "OPEN",
+      "dueAt": null,
+      "resolutionReason": null
+    },
+    "message": "Successfully updated issue."
+  },
+  "raw": null,
+  "inputs": {
+    "wiz_issue_id": "dec4dad8-abcdefg",
+    "wiz_soar_note": "<div class=\"soar-rte-content\"><p>test</p></div>"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-wiz",
+    "package_version": "1.0.1982",
+    "host": "e35c5a28-abcdefg",
+    "execution_time_ms": 2034,
+    "timestamp": "2024-04-15 11:58:17"
+  }
+}

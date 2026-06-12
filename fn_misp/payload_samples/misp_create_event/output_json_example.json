@@ -1,0 +1,63 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "Event": {
+      "id": "11",
+      "orgc_id": "1",
+      "org_id": "1",
+      "date": "2023-12-06",
+      "threat_level_id": "1",
+      "info": "tester",
+      "published": false,
+      "uuid": "f6b6cba4-aaaa-aaaa-aaaa-3b40ace9067c",
+      "attribute_count": "0",
+      "analysis": "2",
+      "timestamp": "1701876293",
+      "distribution": "0",
+      "proposal_email_lock": false,
+      "locked": false,
+      "publish_timestamp": "0",
+      "sharing_group_id": "0",
+      "disable_correlation": false,
+      "extends_uuid": "",
+      "protected": null,
+      "event_creator_email": "admin@admin.test",
+      "Org": {
+        "id": "1",
+        "name": "ORGNAME",
+        "uuid": "40e5d872-aaaa-aaaa-aaaa-9d234710c5e5",
+        "local": true
+      },
+      "Orgc": {
+        "id": "1",
+        "name": "ORGNAME",
+        "uuid": "40e5d872-aaaa-aaaa-aaaa-9d234710c5e5",
+        "local": true
+      },
+      "Attribute": [],
+      "ShadowAttribute": [],
+      "RelatedEvent": [],
+      "Galaxy": [],
+      "Object": [],
+      "EventReport": [],
+      "CryptographicKey": []
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "misp_distribution": 0,
+    "misp_event_name": "tester",
+    "misp_threat_level": 1,
+    "misp_analysis_level": 2
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-misp",
+    "package_version": "3.0.2",
+    "host": "local",
+    "execution_time_ms": 500,
+    "timestamp": "2023-12-06 10:24:53"
+  }
+}

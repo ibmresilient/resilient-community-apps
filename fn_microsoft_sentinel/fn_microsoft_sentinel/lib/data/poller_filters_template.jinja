@@ -1,0 +1,40 @@
+{
+  {# JINJA template for filtering Sentinel Incidents. #}
+  {# If the value equals true then it passed the filter. #}
+  {# To add a filter for a property add an if else to that property where it equals true if it passes the filter. #}
+  "title": true,
+  {# Example filter for title that will filter out Sentinel incidents that do not have the string "TEST-" in the title:
+  "title": {% if "TEST-" in title %} true {% else %} false {% endif %}
+  #}
+  "description": true,
+  {# If the severity of the Sentinel incident is High, or, Medium, or Low then the Sentinel incident will pass this filter. #}
+  "severity": {% if severity in ["High", "Medium", "Low"] %} true {% else %} false {% endif %},
+  {# If the status of the Sentinel incident is either New or Active than the Sentinel incident will pass this filter. #}
+  "status": {% if status in ["New", "Active"] %} true {% else %} false {% endif %},
+  "email": true,
+  "assignedTo": true,
+  {# Example filter for assignedTo that will test if the Sentinel incident is assigned to a user in the given list:
+  "assignedTo": {% if assignedTo in ["Test User", "sys admin"] %} true {% else %} false {% endif %}
+  #}
+  "userPrincipalName": true,
+  {# labels are equal to Tags on Sentinel #}
+  "labels": true,
+  {# Example of filtering labels for a specific labelName:
+  "labels": false,
+  {% set present = false %}
+  {% for tag in labels %}
+    {% if tag.labelName == "tech3" %}
+      "labels": true,
+    {% endif %}
+  {% endfor %}
+  #}
+  {# If the alertsCount of the Sentinel incident is 0 or greater then the Sentinel incident will pass this filter. #}
+  "alertsCount": {% if alertsCount >= 0 %} true {% else %} false {% endif %},
+  "bookmarksCount": true,
+  "commentsCount": true,
+  "alertProductNames": true,
+  {# If the tactics property of the Sentinel incident is equal to PreAttack, or InitialAccess or blank then the Sentinel incident will pass this filter. #}
+  "tactics": {% if "PreAttack" in tactics or "InitialAccess" in tactics or tactics == [] %} true {% else %} false {% endif %},
+  "relatedAnalyticRuleIds": true,
+  "providerName": true
+}

@@ -1,0 +1,157 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "deletedDateTime": {},
+        "classification": {},
+        "createdDateTime": {
+          "type": "string"
+        },
+        "creationOptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "expirationDateTime": {},
+        "groupTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isAssignableToRole": {},
+        "mail": {
+          "type": "string"
+        },
+        "mailEnabled": {
+          "type": "boolean"
+        },
+        "mailNickname": {
+          "type": "string"
+        },
+        "membershipRule": {},
+        "membershipRuleProcessingState": {},
+        "onPremisesDomainName": {},
+        "onPremisesLastSyncDateTime": {},
+        "onPremisesNetBiosName": {},
+        "onPremisesSamAccountName": {},
+        "onPremisesSecurityIdentifier": {},
+        "onPremisesSyncEnabled": {},
+        "preferredDataLocation": {},
+        "preferredLanguage": {},
+        "proxyAddresses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "renewedDateTime": {
+          "type": "string"
+        },
+        "resourceBehaviorOptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceProvisioningOptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "securityEnabled": {
+          "type": "boolean"
+        },
+        "securityIdentifier": {
+          "type": "string"
+        },
+        "theme": {},
+        "uniqueName": {},
+        "visibility": {
+          "type": "string"
+        },
+        "onPremisesProvisioningErrors": {
+          "type": "array"
+        },
+        "serviceProvisioningErrors": {
+          "type": "array"
+        },
+        "status_code": {
+          "type": "integer"
+        },
+        "teamsEnabled": {
+          "type": "boolean"
+        },
+        "unfoundUsers": {}
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "ms_team_name": {
+          "type": "string"
+        },
+        "incident_id": {
+          "type": "integer"
+        },
+        "ms_owners_list": {
+          "type": "string"
+        },
+        "add_members_from": {
+          "type": "string"
+        },
+        "ms_description": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

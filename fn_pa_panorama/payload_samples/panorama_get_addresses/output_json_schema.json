@@ -1,0 +1,101 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "@status": {
+          "type": "string"
+        },
+        "@code": {
+          "type": "string"
+        },
+        "result": {
+          "type": "object",
+          "properties": {
+            "@total-count": {
+              "type": "string"
+            },
+            "@count": {
+              "type": "string"
+            },
+            "entry": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "@name": {
+                    "type": "string"
+                  },
+                  "@location": {
+                    "type": "string"
+                  },
+                  "@vsys": {
+                    "type": "string"
+                  },
+                  "ip-netmask": {
+                    "type": "string"
+                  },
+                  "fqdn": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "panorama_location": {
+          "type": "string"
+        },
+        "panorama_vsys": {
+          "type": "string"
+        },
+        "panorama_label": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
