@@ -406,14 +406,14 @@
 </li>
 <li><p><a class="reference internal" href="#requirements"><span class="xref myst">Requirements</span></a></p>
 <ul>
-<li><p><a class="reference internal" href="#watsonxai-subscription-and-project"><span class="xref myst">Watsonx.ai Subscription and Project</span></a></p>
+<li><p><a class="reference internal" href="#watsonx-ai-subscription-and-project"><span class="xref myst">Watsonx.ai Subscription and Project</span></a></p>
 <ul>
-<li><p><a class="reference internal" href="#watsonxai-project-id"><span class="xref myst">Watsonx.ai Project ID</span></a></p></li>
+<li><p><a class="reference internal" href="#watsonx-ai-project-id"><span class="xref myst">Watsonx.ai Project ID</span></a></p></li>
 <li><p><a class="reference internal" href="#ibm-cloud-iam-api-key"><span class="xref myst">IBM Cloud IAM API Key</span></a></p></li>
-<li><p><a class="reference internal" href="#watsonxai-endpoint-url"><span class="xref myst">Watsonx.ai Endpoint URL</span></a></p></li>
+<li><p><a class="reference internal" href="#watsonx-ai-endpoint-url"><span class="xref myst">Watsonx.ai Endpoint URL</span></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#watsonxai-free-credits"><span class="xref myst">Watsonx.ai Free Credits</span></a></p></li>
+<li><p><a class="reference internal" href="#watsonx-ai-free-credits"><span class="xref myst">Watsonx.ai Free Credits</span></a></p></li>
 <li><p><a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR platform</span></a></p></li>
 <li><p><a class="reference internal" href="#cloud-pak-for-security"><span class="xref myst">Cloud Pak for Security</span></a></p></li>
 <li><p><a class="reference internal" href="#proxy-server"><span class="xref myst">Proxy Server</span></a></p></li>
@@ -465,12 +465,12 @@
 </li>
 <li><p><a class="reference internal" href="#soar-customizations"><span class="xref myst">SOAR Customizations</span></a></p>
 <ul>
-<li><p><a class="reference internal" href="#function---watsonxai-converse-via-notes"><span class="xref myst">Function - watsonx.ai Converse via Notes</span></a></p></li>
-<li><p><a class="reference internal" href="#function---watsonxai-scan-artifact"><span class="xref myst">Function - watsonx.ai Scan Artifact</span></a></p></li>
-<li><p><a class="reference internal" href="#function---watsonxai-scan-attachment"><span class="xref myst">Function - watsonx.ai Scan Attachment</span></a></p></li>
-<li><p><a class="reference internal" href="#function---watsonxai-text-generation"><span class="xref myst">Function - watsonx.ai Text Generation</span></a></p></li>
-<li><p><a class="reference internal" href="#script---watsonxai-add-artifact-report-to-notes"><span class="xref myst">Script - watsonx.ai Add Artifact Report to Notes</span></a></p></li>
-<li><p><a class="reference internal" href="#script---watsonxai-respond-to-note"><span class="xref myst">Script - watsonx.ai Respond to note</span></a></p></li>
+<li><p><a class="reference internal" href="#function-watsonx-ai-converse-via-notes"><span class="xref myst">Function - watsonx.ai Converse via Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#function-watsonx-ai-scan-artifact"><span class="xref myst">Function - watsonx.ai Scan Artifact</span></a></p></li>
+<li><p><a class="reference internal" href="#function-watsonx-ai-scan-attachment"><span class="xref myst">Function - watsonx.ai Scan Attachment</span></a></p></li>
+<li><p><a class="reference internal" href="#function-watsonx-ai-text-generation"><span class="xref myst">Function - watsonx.ai Text Generation</span></a></p></li>
+<li><p><a class="reference internal" href="#script-watsonx-ai-add-artifact-report-to-notes"><span class="xref myst">Script - watsonx.ai Add Artifact Report to Notes</span></a></p></li>
+<li><p><a class="reference internal" href="#script-watsonx-ai-respond-to-note"><span class="xref myst">Script - watsonx.ai Respond to note</span></a></p></li>
 <li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
 <li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
 <ul>
@@ -484,10 +484,6 @@
 <hr class="docutils" />
 <section id="release-notes">
 <h2>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h2>
-<!--
-  Specify all changes in this release. Do not remove the release
-  notes of a previous release
--->
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -497,35 +493,39 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.2.2</p></td>
+<tr class="row-even"><td><p>1.2.3</p></td>
+<td><p>06/2026</p></td>
+<td><p>Updated model list, improved security safeguards by limiting text extraction from binary file types.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.2.2</p></td>
 <td><p>02/2026</p></td>
 <td><p>Support for new chat models (e.g., IBM’s granite-4-h-small, openai’s gpt-oss, etc.). Embedding model now configurable. Fix for mistral models outputing [INST]. Workspace names will be known to the assistant in incident Q&amp;A, and incident summary.</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.2.1</p></td>
+<tr class="row-even"><td><p>1.2.1</p></td>
 <td><p>01/2026</p></td>
 <td><p>Data payload config can control individual incident properties. Fix for failing to extract contents from plaintext files.</p></td>
 </tr>
-<tr class="row-even"><td><p>1.2.0</p></td>
+<tr class="row-odd"><td><p>1.2.0</p></td>
 <td><p>06/2025</p></td>
 <td><p>Incident summary playbook, support for artifact/attachment scans on images and non-file artifacts, token usage &amp; estimated cost (in USD cents) in all scans and summaries, data ingestion optimisation and user-customization feature, japanese language inclusion and prompt optimisations.</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1.1</p></td>
+<tr class="row-even"><td><p>1.1.1</p></td>
 <td><p>06/2025</p></td>
 <td><p>Updated model list, rich text whitespace fixes, playbook execution API fixes, improved stability in generating embeddings, minor change to scan playbooks’ activation form.</p></td>
 </tr>
-<tr class="row-even"><td><p>1.1.0</p></td>
+<tr class="row-odd"><td><p>1.1.0</p></td>
 <td><p>02/2025</p></td>
 <td><p>Semantic context retrieval (embeddings), multilingual prompts, artifact scans can handle more file types, attachment scanning (equivalent to artifact scan), organization type ID resolution<a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.2</p></td>
+<tr class="row-even"><td><p>1.0.2</p></td>
 <td><p>12/2024</p></td>
 <td><p>Rich text output, request ID in logs, and a data processing fix for incidents with larger data.</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.1</p></td>
+<tr class="row-odd"><td><p>1.0.1</p></td>
 <td><p>12/2024</p></td>
 <td><p>Bugfix for SOAR versions &lt;= 51.0.2.1 and &gt;= 51.0.4.1 for Note Conversation Function.</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.0</p></td>
+<tr class="row-even"><td><p>1.0.0</p></td>
 <td><p>12/2024</p></td>
 <td><p>Initial “<strong>Early Access</strong>” release. Uses watsonx.ai SaaS Version <code class="docutils literal notranslate"><span class="pre">2023-05-29</span></code></p></td>
 </tr>
@@ -571,11 +571,7 @@
 <li><p>Artifact and attachment analysis:</p>
 <ul>
 <li><p>Use playbooks to quickly generate a report on an artifact or attachment, as a preliminary assessment.</p></li>
-<li><p>Supported file types include: any plaintext file, <code class="docutils literal notranslate"><span class="pre">pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">docx</span></code>, <code class="docutils literal notranslate"><span class="pre">xlsx</span></code>, <code class="docutils literal notranslate"><span class="pre">pptx</span></code>, <code class="docutils literal notranslate"><span class="pre">png</span></code>, <code class="docutils literal notranslate"><span class="pre">jpg</span></code>, <code class="docutils literal notranslate"><span class="pre">gif</span></code>and <code class="docutils literal notranslate"><span class="pre">eml</span></code>.</p>
-<ul>
-<li><p><strong>Note</strong>: Image files will be converted to text using OCR.</p></li>
-</ul>
-</li>
+<li><p>Supported file types include: any plaintext file and <code class="docutils literal notranslate"><span class="pre">.eml</span></code> files.</p></li>
 </ul>
 </li>
 <li><p>Text generation:</p>
@@ -787,12 +783,12 @@ Additional package dependencies may exist for each of these packages:</p>
 <tr class="row-odd"><td><p><strong>watsonx_endpoint</strong></p></td>
 <td><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">https://us-south.ml.cloud.ibm.com</span></code></p></td>
-<td><p>The watsonx.ai API URL - see <a class="reference internal" href="#watsonxai-endpoint-url"><span class="xref myst">watsonx.ai Endpoint URL</span></a>.</p></td>
+<td><p>The watsonx.ai API URL - see <a class="reference internal" href="#watsonx-ai-endpoint-url"><span class="xref myst">watsonx.ai Endpoint URL</span></a>.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>watsonx_project_id</strong></p></td>
 <td><p>Yes</p></td>
 <td><p>0123-4567-89ab-cdef</p></td>
-<td><p>The watsonx.ai project id - see <a class="reference internal" href="#watsonxai-endpoint-url"><span class="xref myst">watsonx.ai Project ID</span></a>.</p></td>
+<td><p>The watsonx.ai project id - see <a class="reference internal" href="#watsonx-ai-project-id"><span class="xref myst">watsonx.ai Project ID</span></a>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>render_markdown</strong></p></td>
 <td><p>No</p></td>
@@ -812,7 +808,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <tr class="row-even"><td><p><strong>embedding_model</strong></p></td>
 <td><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">ibm/granite-278m-multilingual-embedding</span></code></p></td>
-<td><p>Watsonx model to generate embeddings. [See options](https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/fm-models-embed.html?context=wx#ibm-provided</p></td>
+<td><p>Watsonx model to generate embeddings. <a class="reference external" href="https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/fm-models-embed.html?context=wx#ibm-provided">See options</a></p></td>
 </tr>
 </tbody>
 </table>
@@ -844,7 +840,6 @@ Additional package dependencies may exist for each of these packages:</p>
 <li><p>For attachments, and artifacts with an attached file, the file’s  content will be included.</p></li>
 <li><p>Examples of supported file types can be checked in the <a class="reference internal" href="#what-file-formats-can-be-scanned"><span class="xref myst">What file formats can be scanned?</span></a></p></li>
 <li><p>E.g., <code class="docutils literal notranslate"><span class="pre">&#64;watsonx</span> <span class="pre">does</span> <span class="pre">the</span> <span class="pre">artifact</span> <span class="pre">[123.sh]</span> <span class="pre">seem</span> <span class="pre">like</span> <span class="pre">it</span> <span class="pre">could</span> <span class="pre">be</span> <span class="pre">used</span> <span class="pre">maliciuously?</span></code>.</p></li>
-<li><p>E.g., <code class="docutils literal notranslate"><span class="pre">&#64;watsonx</span> <span class="pre">respond</span> <span class="pre">with</span> <span class="pre">the</span> <span class="pre">text</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">attachment</span> <span class="pre">[incident_overview.png].</span></code>.</p></li>
 </ul>
 </li>
 </ul>
@@ -860,16 +855,11 @@ Additional package dependencies may exist for each of these packages:</p>
 <section id="what-file-formats-can-be-scanned">
 <h3>What file formats can be scanned?<a class="headerlink" href="#what-file-formats-can-be-scanned" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>The app supports plaintext to be extracted from text-based documents (utf-8 and ascii) as well as extracting OCR text from images.</p>
-<ul>
-<li><p>This means that any non-text information from an image is disregarded, and if text is not clear, it may not be extracted.</p></li>
-</ul>
-</li>
+<li><p>The app supports text to be extracted from only plain text-based documents (utf-8 and ascii).</p></li>
 </ul>
 <p>Examples of supported file formats include:</p>
 <ul class="simple">
-<li><p>Document formats: <code class="docutils literal notranslate"><span class="pre">pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">docx</span></code>, <code class="docutils literal notranslate"><span class="pre">xlsx</span></code>, <code class="docutils literal notranslate"><span class="pre">pptx</span></code> and <code class="docutils literal notranslate"><span class="pre">eml</span></code>.</p></li>
-<li><p>Image formats: <code class="docutils literal notranslate"><span class="pre">png</span></code>, <code class="docutils literal notranslate"><span class="pre">jpg</span></code>.</p></li>
+<li><p>Document formats: <code class="docutils literal notranslate"><span class="pre">md</span></code>, <code class="docutils literal notranslate"><span class="pre">txt</span></code>, <code class="docutils literal notranslate"><span class="pre">rtf</span></code>, and <code class="docutils literal notranslate"><span class="pre">eml</span></code>.</p></li>
 <li><p>Any plaintext file with standard text encoding: ascii &amp; utf-8.</p></li>
 </ul>
 </section>
@@ -916,12 +906,9 @@ Additional package dependencies may exist for each of these packages:</p>
 <li><p>Model list:</p>
 <ul>
 <li><p>ibm/granite-4-h-small</p></li>
-<li><p>meta-llama/llama-3-2-11b-vision-instruct</p></li>
 <li><p>meta-llama/llama-3-3-70b-instruct</p></li>
 <li><p>meta-llama/llama-4-maverick-17b-128e-instruct-fp8</p></li>
 <li><p>mistralai/mistral-small-3-1-24b-instruct-2503</p></li>
-<li><p>mistralai/mistral-medium-2505</p></li>
-<li><p>mistralai/mistral-large-2512</p></li>
 <li><p>openai/gpt-oss-120b</p></li>
 </ul>
 </li>
