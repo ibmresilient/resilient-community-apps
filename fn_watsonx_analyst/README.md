@@ -6,11 +6,11 @@
   - [Overview](#overview)
     - [Key Features](#key-features)
   - [Requirements](#requirements)
-    - [Watsonx.ai Subscription and Project](#watsonxai-subscription-and-project)
-      - [Watsonx.ai Project ID](#watsonxai-project-id)
+    - [Watsonx.ai Subscription and Project](#watsonx-ai-subscription-and-project)
+      - [Watsonx.ai Project ID](#watsonx-ai-project-id)
       - [IBM Cloud IAM API Key](#ibm-cloud-iam-api-key)
-      - [Watsonx.ai Endpoint URL](#watsonxai-endpoint-url)
-    - [Watsonx.ai Free Credits](#watsonxai-free-credits)
+      - [Watsonx.ai Endpoint URL](#watsonx-ai-endpoint-url)
+    - [Watsonx.ai Free Credits](#watsonx-ai-free-credits)
     - [SOAR platform](#soar-platform)
     - [Cloud Pak for Security](#cloud-pak-for-security)
     - [Proxy Server](#proxy-server)
@@ -36,12 +36,12 @@
   - [Creating the override config](#creating-the-override-config)
   - [Setting up the dropdown](#setting-up-the-dropdown)
 - [SOAR Customizations](#soar-customizations)
-  - [Function - watsonx.ai Converse via Notes](#function---watsonxai-converse-via-notes)
-  - [Function - watsonx.ai Scan Artifact](#function---watsonxai-scan-artifact)
-  - [Function - watsonx.ai Scan Attachment](#function---watsonxai-scan-attachment)
-  - [Function - watsonx.ai Text Generation](#function---watsonxai-text-generation)
-  - [Script - watsonx.ai Add Artifact Report to Notes](#script---watsonxai-add-artifact-report-to-notes)
-  - [Script - watsonx.ai Respond to note](#script---watsonxai-respond-to-note)
+  - [Function - watsonx.ai Converse via Notes](#function-watsonx-ai-converse-via-notes)
+  - [Function - watsonx.ai Scan Artifact](#function-watsonx-ai-scan-artifact)
+  - [Function - watsonx.ai Scan Attachment](#function-watsonx-ai-scan-attachment)
+  - [Function - watsonx.ai Text Generation](#function-watsonx-ai-text-generation)
+  - [Script - watsonx.ai Add Artifact Report to Notes](#script-watsonx-ai-add-artifact-report-to-notes)
+  - [Script - watsonx.ai Respond to note](#script-watsonx-ai-respond-to-note)
   - [Playbooks](#playbooks)
   - [Troubleshooting \& Support](#troubleshooting--support)
     - [For Support](#for-support)
@@ -50,13 +50,10 @@
 ---
 
 ## Release Notes
-<!--
-  Specify all changes in this release. Do not remove the release
-  notes of a previous release
--->
 
 | Version | Date    | Notes                                                                                                                                                                                             |
 |---------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 1.2.3   | 06/2026 | Updated model list, improved security safeguards by limiting text extraction from binary file types.                                                                                       |
 | 1.2.2   | 02/2026 | Support for new chat models (e.g., IBM's granite-4-h-small, openai's gpt-oss, etc.). Embedding model now configurable. Fix for mistral models outputing [INST]. Workspace names will be known to the assistant in incident Q&A, and incident summary. |  
 | 1.2.1   | 01/2026 | Data payload config can control individual incident properties. Fix for failing to extract contents from plaintext files.                                                                         |
 | 1.2.0   | 06/2025 | Incident summary playbook, support for artifact/attachment scans on images and non-file artifacts, token usage & estimated cost (in USD cents) in all scans and summaries, data ingestion optimisation and user-customization feature, japanese language inclusion and prompt optimisations. |
@@ -90,8 +87,7 @@
     - **Note**: This is just an estimation based off the understood pricing at time of release of each app version. To get actual token usage and billing information, navigate to the billing page in watsonx.ai or IBM Cloud.
 - Artifact and attachment analysis: 
   - Use playbooks to quickly generate a report on an artifact or attachment, as a preliminary assessment.
-  - Supported file types include: any plaintext file, `pdf`, `docx`, `xlsx`, `pptx`, `png`, `jpg`, `gif`and `eml`.
-    - **Note**: Image files will be converted to text using OCR.
+  - Supported file types include: any plaintext file and `.eml` files.
  - Text generation: 
    - Use watsonx.ai to generate text based on a given prompt in a function.
 - Incident Summarization: ask watsonx.ai to generate a summary of the incident.
@@ -254,12 +250,12 @@ The following table provides the settings you need to configure the app. These s
 | Config                 | Required | Example                                  | Description                                                                                                               |
 |------------------------|----------|------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
 | **watsonx_api_key**    | Yes      | 0123-4567-89ab-cdef                      | Your watsonx.ai API key - see [IBM Cloud IAM API Key](#ibm-cloud-iam-api-key). **This should be saved as an App Secret.** |
-| **watsonx_endpoint**   | Yes      | `https://us-south.ml.cloud.ibm.com`      | The watsonx.ai API URL - see [watsonx.ai Endpoint URL](#watsonxai-endpoint-url).                                          |
-| **watsonx_project_id** | Yes      | 0123-4567-89ab-cdef                      | The watsonx.ai project id - see [watsonx.ai Project ID](#watsonxai-endpoint-url).                                         |
+| **watsonx_endpoint**   | Yes      | `https://us-south.ml.cloud.ibm.com`      | The watsonx.ai API URL - see [watsonx.ai Endpoint URL](#watsonx-ai-endpoint-url).                                          |
+| **watsonx_project_id** | Yes      | 0123-4567-89ab-cdef                      | The watsonx.ai project id - see [watsonx.ai Project ID](#watsonx-ai-project-id).                                         |
 | **render_markdown**    | No       | `true` or `false`                        | Set to `false` to disable rendering of markdown in incident notes.                                                        |
 | **default_language**   | No       | `en`, `fr`, `de`, `pt`, `es` or `ja`     | Language used for scans and summaries, and is used as the fallback language if prompt's language can't be detected.       |
 | **local_embeddings**   | No       | `true`, `false`                          | Use local (App host/integration server) compute resources to generate embeddings instead of watsonx.ai. Only recommended for integration servers that have >6GB of memory. |
-| **embedding_model**    | No       | `ibm/granite-278m-multilingual-embedding` | Watsonx model to generate embeddings. [See options](https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/fm-models-embed.html?context=wx#ibm-provided|
+| **embedding_model**    | No       | `ibm/granite-278m-multilingual-embedding` | Watsonx model to generate embeddings. [See options](https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/fm-models-embed.html?context=wx#ibm-provided)|
 
 **Note**: The watsonx embedding model needs to support at least 500 input tokens (`sentence-transformers/all-minilm-l6-v2` will not work)
 
@@ -285,7 +281,6 @@ The *watsonx.ai Note Conversation* playbook allows for incident, artifact, and a
     - For attachments, and artifacts with an attached file, the file's  content will be included.
     - Examples of supported file types can be checked in the [What file formats can be scanned?](#what-file-formats-can-be-scanned)
     - E.g., `@watsonx does the artifact [123.sh] seem like it could be used maliciuously?`.
-    - E.g., `@watsonx respond with the text in the attachment [incident_overview.png].`.
 
 ## Artifact and Attachment Scan
 
@@ -297,12 +292,10 @@ The *watsonx.ai Scan Artifact* and *watsonx.ai Scan Attachment* playbooks summar
 **This scan is not intended to replace Threat Intelligence sources for performing malware file hash scans**. It's intended use is to be a utility to quickly summarize and assess natural language, and/or code in a document.
 
 #### What file formats can be scanned?
-- The app supports plaintext to be extracted from text-based documents (utf-8 and ascii) as well as extracting OCR text from images.
-  - This means that any non-text information from an image is disregarded, and if text is not clear, it may not be extracted.
+- The app supports text to be extracted from only plain text-based documents (utf-8 and ascii).
 
 Examples of supported file formats include:
-- Document formats: `pdf`, `docx`, `xlsx`, `pptx` and `eml`.
-- Image formats: `png`, `jpg`.
+- Document formats: `md`, `txt`, `rtf`, and `eml`.
 - Any plaintext file with standard text encoding: ascii & utf-8.
 
 ## Text Generation
@@ -340,12 +333,9 @@ The *watsonx.ai Summarize Incident* playbooks summarizes the whole incident base
 - Certain topics and use-cases like task-related questions may be better suited for a different model.
 - Model list:
   - ibm/granite-4-h-small
-  - meta-llama/llama-3-2-11b-vision-instruct
   - meta-llama/llama-3-3-70b-instruct
   - meta-llama/llama-4-maverick-17b-128e-instruct-fp8
   - mistralai/mistral-small-3-1-24b-instruct-2503
-  - mistralai/mistral-medium-2505
-  - mistralai/mistral-large-2512
   - openai/gpt-oss-120b
 
 
