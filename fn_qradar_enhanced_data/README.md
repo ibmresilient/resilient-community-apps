@@ -45,6 +45,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.5.3 | 06/2026 | Updated SOAR platform version to 51.0.8.0.20726. Removed support for Python 3.9. |
 | 2.5.2 | 08/2025 | Fixed bug in QRadar Enhanced Data Poller and QRadar Enhanced Data Refresh playbook|
 | 2.5.1 | 11/2024 | Fixed bug in QRadar Enhanced Data Playbook. |
 | 2.5.0 | 06/2024 | Create more artifacts from QRadar offense top events. Convert rules/workflows to playbooks. |
@@ -108,11 +109,11 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `51.0.4.0.10288`.
+* SOAR platform >= `51.0.8.0.20726`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `51.0.4.0.10288`.
+* SOAR platform >= `51.0.8.0.20726`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -146,7 +147,7 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Python 3.9, 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
+Python 3.11 and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
 Additional package dependencies may exist for each of these packages:
 * resilient_circuits>=51.0.0
 
