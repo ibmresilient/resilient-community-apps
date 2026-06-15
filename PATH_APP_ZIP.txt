@@ -1,0 +1,1 @@
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_qradar_enhanced_data/main/2.5/app-fn_qradar_enhanced_data-2.5.3-35390.zip
