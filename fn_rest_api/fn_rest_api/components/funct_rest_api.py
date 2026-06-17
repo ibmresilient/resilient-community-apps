@@ -4,6 +4,7 @@
 
 """AppFunction implementation """
 import json
+import base64
 from logging import getLogger
 
 from requests.exceptions import HTTPError
@@ -351,6 +352,17 @@ class FunctionComponent(AppFunctionComponent):
         except:
             response_json = None
 
+        # Format text content to return a base64 downloaded file instead of broken bytes
+        text_body = response.text
+        try:
+            yield self.status_message("Attempting to convert text response")
+            content_type = response.headers.get("Content-Type", "")
+            
+            if content_type == "application/octet-stream":
+                text_body = base64.b64encode(response.content).decode("utf-8")
+        except Exception as e:
+            LOG.error(e)
+        
         # Formatting response
         results = {
             "ok"                : response.ok,
@@ -361,7 +373,7 @@ class FunctionComponent(AppFunctionComponent):
             "headers"           : dedup_dict(response.headers),
             "elapsed"           : int(response.elapsed.total_seconds() * 1000.0),
             "apparent_encoding" : response.apparent_encoding,
-            "text"              : response.text,
+            "text"              : text_body,
             "json"              : response_json,
             "links"             : response.links}
 
