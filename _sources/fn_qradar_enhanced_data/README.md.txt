@@ -45,6 +45,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.5.4 | 06/2026 | Updated app.config documentation to clarify that clear_datatables setting applies to functions, not the poller directly. |
 | 2.5.3 | 06/2026 | Updated SOAR platform version to 51.0.8.0.20726. Removed support for Python 3.9. |
 | 2.5.2 | 08/2025 | Fixed bug in QRadar Enhanced Data Poller and QRadar Enhanced Data Refresh playbook|
 | 2.5.1 | 11/2024 | Fixed bug in QRadar Enhanced Data Playbook. |
@@ -176,7 +177,7 @@ The following table provides the settings you need to configure the app. These s
 | **search_timeout** | No | `300` | *Timeout for the AQL search to be specified in seconds* |
 | **polling_interval** | No | `600` | *Time in seconds to wait between each poller run* |
 | **polling_lookback** | No | `60` | *Time in minutes to look back* |
-| **clear_datatables** | No | `True` | *Boolean to clear or not clear content of data tables in incident when poller is run* |
+| **clear_datatables** | No | `True` | *If true, data tables are cleared before being repopulated by functions like qradar_top_events. Applies to both manual function calls and automatic executions triggered by playbooks/rules* |
 | **sync_notes** | Yes | `True` | *Boolean if true then notes that are added to QRadar offenses will be added to their linked SOAR incidents*|
 | **empty_query_max** | No | `5` | *New to 2.3. Attempt the AQL queries up to the number of times specified. Default is no retries (1)* |
 | **empty_query_wait_secs** | No | `60` | *New to 2.3. Number of seconds to pause before attempting the next AQL query. Default is 0* |
