@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v51.0.5.0.1475
+# Generated with resilient-sdk v51.0.8.0.30103
 
 """Generate the SOAR customizations required for fn_urlscanio"""
 
@@ -40,7 +40,9 @@ def codegen_reload_data():
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [],
+        "playbooks": [
+            u"example_urlscanio"
+        ]
     }
 
 
@@ -49,7 +51,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 51.0.0.0.9339
+    IBM SOAR Platform Version: 51.0.8.0.20726
 
     Contents:
     - Message Destinations:
@@ -57,6 +59,8 @@ def customization_data(client=None):
     - Functions:
         - urlscanio
     - Workflows:
+        - example_urlscanio
+    - Playbooks:
         - example_urlscanio
     - Rules:
         - Example: urlscan.io

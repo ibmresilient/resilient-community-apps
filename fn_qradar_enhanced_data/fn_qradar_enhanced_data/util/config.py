@@ -17,7 +17,8 @@ def config_section_data():
 polling_interval=0
 # Amount of time in minutes to look back for changes
 polling_lookback=60
-# If true then data tables given in the workflows will be cleared when incident is updated by poller
+# If true, data tables will be cleared before being repopulated by functions (e.g., qradar_top_events).
+# This applies to both manual function calls and automatic executions triggered by playbooks/rules.
 clear_datatables=True
 # If sync_notes under [fn_qradar_integration:edm_global_settings] is configured, then sync_notes
 #  that are configured under the individual QRadar servers will be ignored

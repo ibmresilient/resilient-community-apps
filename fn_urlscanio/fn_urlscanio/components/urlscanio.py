@@ -95,20 +95,20 @@ class FunctionComponent(ResilientComponent):
                         yield RuntimeError("Timeout: report was not ready after {} seconds".format(self.timeout))
                     urlscanio_result_url = u"{}/result/{}".format(self.urlscanio_report_url, uuid)
 
-                    urlscanio_get = req_common.execute_call_v2("GET", urlscanio_result_url, self.timeout, callback=report_callback)
+                    urlscanio_get = req_common.execute_call_v2("GET", urlscanio_result_url, headers=urlscanio_headers, timeout=self.timeout, callback=report_callback)
                     if urlscanio_get.status_code == 200:
                         # Report is done
                         break
 
                 # get the full report json - usually a big blob
                 urlscanio_report_url = u"{}/result/{}/".format(self.urlscanio_report_url, uuid)
-                urlscanio_report_get = req_common.execute_call_v2("GET", urlscanio_report_url, self.timeout)
+                urlscanio_report_get = req_common.execute_call_v2("GET", urlscanio_report_url, headers=urlscanio_headers, timeout=self.timeout)
                 urlscanio_report_json = urlscanio_report_get.json()
                 yield StatusMessage("Downloaded report from {}".format(urlscanio_report_url))
 
                 # Grab the PNG screenshot.  Return as a base64 string so it can be passed to another function as needed
                 urlscanio_png_url = u"{}/{}.png".format(self.urlscanio_screenshot_url, uuid)
-                urlscanio_png_get = req_common.execute_call_v2("GET", urlscanio_png_url, self.timeout, callback=report_callback)
+                urlscanio_png_get = req_common.execute_call_v2("GET", urlscanio_png_url, headers=urlscanio_headers, timeout=self.timeout, callback=report_callback)
                 if urlscanio_png_get.status_code == 404:
                     urlscanio_png_b64 = None
                     yield StatusMessage("No Screenshot Available")
