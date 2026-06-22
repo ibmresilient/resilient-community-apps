@@ -1,0 +1,170 @@
+{
+  "value": {
+    "UID": null,
+    "ArgumentType": "domain",
+    "Command": "mx",
+    "IsTransitioned": false,
+    "CommandArgument": "gmail.com",
+    "TimeRecorded": "2025-03-25T05:50:38.9819851-05:00",
+    "ReportingNameServer": "ns1.google.com",
+    "TimeToComplete": "305",
+    "RelatedIP": null,
+    "ResourceRecordType": 15,
+    "IsEmptySubDomain": false,
+    "SPF_Subaction_Detail": null,
+    "Records": null,
+    "IsEndpoint": false,
+    "HasSubscriptions": false,
+    "AlertgroupSubscriptionId": null,
+    "Failed": [],
+    "Warnings": [
+      {
+        "ID": 197,
+        "Name": "DMARC Policy Not Enabled",
+        "Info": "DMARC Quarantine/Reject policy not enabled",
+        "Url": "https://mxtoolbox.com/Problem/mx/DMARC-Policy-Not-Enabled?page=prob_mx&showlogin=1&hidetoc=1&action=mx:gmail.com",
+        "PublicDescription": null,
+        "IsExcludedByUser": false
+      }
+    ],
+    "Passed": [
+      {
+        "***": 441,
+        "Name": "DMARC Record Published",
+        "Info": "DMARC Record found",
+        "Url": "https://mxtoolbox.com/Problem/mx/DMARC-Record-Published?page=prob_mx&showlogin=1&hidetoc=1&action=mx:gmail.com",
+        "PublicDescription": null,
+        "IsExcludedByUser": false
+      },
+      {
+        "ID": 506,
+        "Name": "DNS Record Published",
+        "Info": "DNS Record found",
+        "Url": "https://mxtoolbox.com/Problem/mx/DNS-Record-Published?page=prob_mx&showlogin=1&hidetoc=1&action=mx:gmail.com",
+        "PublicDescription": null,
+        "IsExcludedByUser": false
+      }
+    ],
+    "Timeouts": [],
+    "Errors": [],
+    "IsError": false,
+    "Information": [
+      {
+        "Pref": "5",
+        "Hostname": "gmail-smtp-in.l.google.com",
+        "IP Address": "172.253.62.27",
+        "TTL": "60 min",
+        "Asn": "[{\"asname\":\"Google LLC\", \"asn\":\"15169\"}]",
+        "IsIpV6": "False"
+      },
+      {
+        "Pref": "5",
+        "Hostname": "gmail-smtp-in.l.google.com",
+        "IP Address": "2607:f8b0:4004:c07::1b",
+        "TTL": "60 min",
+        "Asn": "[]",
+        "IsIpV6": "True"
+      },
+      {
+        "Pref": "10",
+        "Hostname": "alt1.gmail-smtp-in.l.google.com",
+        "IP Address": "209.85.202.27",
+        "TTL": "60 min",
+        "Asn": "[{\"asname\":\"Google LLC\", \"asn\":\"15169\"}]",
+        "IsIpV6": "False"
+      },
+      {
+        "Pref": "10",
+        "Hostname": "alt1.gmail-smtp-in.l.google.com",
+        "IP Address": "2a00:1450:400b:c00::1b",
+        "TTL": "60 min",
+        "Asn": "[]",
+        "IsIpV6": "True"
+      },
+      {
+        "Pref": "20",
+        "Hostname": "alt2.gmail-smtp-in.l.google.com",
+        "IP Address": "64.233.184.27",
+        "TTL": "60 min",
+        "Asn": "[{\"asname\":\"Google LLC\", \"asn\":\"15169\"}]",
+        "IsIpV6": "False"
+      },
+      {
+        "Pref": "20",
+        "Hostname": "alt2.gmail-smtp-in.l.google.com",
+        "IP Address": "2a00:1450:400c:c0b::1a",
+        "TTL": "60 min",
+        "Asn": "[]",
+        "IsIpV6": "True"
+      },
+      {
+        "Pref": "30",
+        "Hostname": "alt3.gmail-smtp-in.l.google.com",
+        "IP Address": "142.250.27.26",
+        "TTL": "60 min",
+        "Asn": "[{\"asname\":\"Google LLC\", \"asn\":\"15169\"}]",
+        "IsIpV6": "False"
+      },
+      {
+        "Pref": "30",
+        "Hostname": "alt3.gmail-smtp-in.l.google.com",
+        "IP Address": "2a00:1450:4025:401::1b",
+        "TTL": "60 min",
+        "Asn": "[]",
+        "IsIpV6": "True"
+      },
+      {
+        "Pref": "40",
+        "Hostname": "alt4.gmail-smtp-in.l.google.com",
+        "IP Address": "142.250.153.27",
+        "TTL": "60 min",
+        "Asn": "[{\"asname\":\"Google LLC\", \"asn\":\"15169\"}]",
+        "IsIpV6": "False"
+      },
+      {
+        "Pref": "40",
+        "Hostname": "alt4.gmail-smtp-in.l.google.com",
+        "IP Address": "2a00:1450:4013:c16::1b",
+        "TTL": "60 min",
+        "Asn": "[]",
+        "IsIpV6": "True"
+      }
+    ],
+    "MultiInformation": [],
+    "Transcript": [
+      {
+        "Transcript": "- - - mx:gmail.com\r\n\r\n&emsp; 1 g.gtld-servers.net 192.42.93.30 NON-AUTH 66 ms Received 4 Referrals , rcode=NO_ERROR &emsp; gmail.com.\t172800\tIN\tNS\tns2.google.com,gmail.com.\t172800\tIN\tNS\tns1.google.com,gmail.com.\t172800\tIN\tNS\tns3.google.com,gmail.com.\t172800\tIN\tNS\tns4.google.com,\r\n&emsp; 2 ns1.google.com 216.239.32.10 AUTH 16 ms Received 5 Answers , rcode=NO_ERROR &emsp; gmail.com.\t3600\tIN\tMX\t40 alt4.gmail-smtp-in.l.google.com,gmail.com.\t3600\tIN\tMX\t10 alt1.gmail-smtp-in.l.google.com,gmail.com.\t3600\tIN\tMX\t30 alt3.gmail-smtp-in.l.google.com,gmail.com.\t3600\tIN\tMX\t20 alt2.gmail-smtp-in.l.google.com,gmail.com.\t3600\tIN\tMX\t5 gmail-smtp-in.l.google.com,\r\nLookupServer 305ms\r\n"
+      }
+    ],
+    "MxRep": 0,
+    "EmailServiceProvider": "Google",
+    "DnsServiceProvider": null,
+    "DnsServiceProviderIdentifier": null,
+    "RelatedLookups": [
+      {
+        "Name": "dns lookup",
+        "URL": "https://mxtoolbox.com/api/v1/lookup/a/gmail.com",
+        "Command": "a",
+        "CommandArgument": "gmail.com"
+      },
+      {
+        "Name": "dns check",
+        "URL": "https://mxtoolbox.com/api/v1/lookup/dns/gmail.com",
+        "Command": "dns",
+        "CommandArgument": "gmail.com"
+      },
+      {
+        "Name": "spf lookup",
+        "URL": "https://mxtoolbox.com/api/v1/lookup/spf/gmail.com",
+        "Command": "spf",
+        "CommandArgument": "gmail.com"
+      },
+      {
+        "Name": "dns propagation",
+        "URL": "https://mxtoolbox.com/api/v1/lookup/mx/gmail.com:all",
+        "Command": "mx",
+        "CommandArgument": "gmail.com:all"
+      }
+    ]
+  }
+}

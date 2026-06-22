@@ -1,0 +1,23 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "errorCode": "410",
+    "appErrorCode": "",
+    "errorMessage": "Fingerprint list with ID Blacklist2 do not exist"
+  },
+  "raw": "{\"errorCode\": \"410\", \"appErrorCode\": \"\", \"errorMessage\": \"Fingerprint list with ID Blacklist2 do not exist\"}",
+  "inputs": {
+    "sep_domainid": "6E70F043092E5BB93F74FD57C083F99E",
+    "sep_fingerprintlist_name": "Blacklist2"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 995,
+    "timestamp": "2024-07-15 08:30:24"
+  }
+}

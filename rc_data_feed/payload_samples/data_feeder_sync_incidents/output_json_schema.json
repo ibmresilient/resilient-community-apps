@@ -1,0 +1,87 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "version": {
+        "type": "string"
+      },
+      "success": {
+        "type": "boolean"
+      },
+      "reason": {
+        "type": "null"
+      },
+      "content": {
+        "type": "object",
+        "properties": {
+          "num_of_sync_incidents": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "num_of_sync_incidents"
+        ]
+      },
+      "raw": {
+        "type": "string"
+      },
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "df_max_incident_id": {
+            "type": "integer"
+          },
+          "df_min_incident_id": {
+            "type": "integer"
+          },
+          "df_query_api_method": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "df_max_incident_id",
+          "df_min_incident_id",
+          "df_query_api_method"
+        ]
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "package": {
+            "type": "string"
+          },
+          "package_version": {
+            "type": "string"
+          },
+          "host": {
+            "type": "string"
+          },
+          "execution_time_ms": {
+            "type": "integer"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "version",
+          "package",
+          "package_version",
+          "host",
+          "execution_time_ms",
+          "timestamp"
+        ]
+      }
+    },
+    "required": [
+      "version",
+      "success",
+      "reason",
+      "content",
+      "inputs",
+      "metrics"
+    ]
+  }
