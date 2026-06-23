@@ -1,1 +1,1 @@
-https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_qradar_enhanced_data/main/2.5/app-fn_qradar_enhanced_data-2.5.4-35932.zip
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_mitre_integration/main/2.2/app-fn_mitre_integration-2.2.2-36049.zip
