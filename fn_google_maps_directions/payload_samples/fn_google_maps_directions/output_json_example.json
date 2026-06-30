@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "inputs": {
+    "google_maps_origin": "Chicago",
+    "google_maps_destination": "Boston"
+  },
+  "directions_link": "https://www.google.com/maps/dir/?api=1&origin=Chicago&destination=Boston"
+}

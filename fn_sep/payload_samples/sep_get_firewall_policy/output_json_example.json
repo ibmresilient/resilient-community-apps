@@ -1,0 +1,3638 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "sources": null,
+    "configuration": {
+      "enforced_rules": [
+        {
+          "uid": "AF6C0B7F092E*******F6AAAA6A9091C",
+          "name": "Block IPv6",
+          "severity": 3,
+          "action": "BLOCK",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ether_type_id": 34525
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC040**************FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": false
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "93B197*******7B99073C27A4A7FB",
+          "name": "Block IPv6 over IPv4 (Teredo)",
+          "severity": 3,
+          "action": "BLOCK",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 3544,
+                  "end": null,
+                  "location": "REMOTE"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC040*******30FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "C15FF9A50*******3C0D2ECA39FB09D",
+          "name": "Block IPv6 over IPv4 (ISATAP)",
+          "severity": 3,
+          "action": "BLOCK",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "protocol_ids": [
+                41
+              ],
+              "ip_fragmented_only": false
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC04009*******0FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "3FA24409*******7C4962ECE67CBF",
+          "name": "Allow ICMPv6",
+          "severity": 3,
+          "action": "ALLOW",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "protocol_ids": [
+                58
+              ],
+              "icmp_types": [
+                135,
+                136,
+                148,
+                149
+              ],
+              "icmp_type_ranges": [
+                {
+                  "start": 1,
+                  "end": 4
+                },
+                {
+                  "start": 128,
+                  "end": 132
+                },
+                {
+                  "start": 141,
+                  "end": 143
+                },
+                {
+                  "start": 151,
+                  "end": 153
+                }
+              ],
+              "icmp_codes": [
+                135,
+                136,
+                148,
+                149
+              ],
+              "icmp_code_ranges": [
+                {
+                  "start": 1,
+                  "end": 4
+                },
+                {
+                  "start": 128,
+                  "end": 132
+                },
+                {
+                  "start": 141,
+                  "end": 143
+                },
+                {
+                  "start": 151,
+                  "end": 153
+                }
+              ]
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC04*******30FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "06DBD8D4092*******0F9F0BD7C1EBD",
+          "name": "Block SNMP",
+          "severity": 3,
+          "action": "BLOCK",
+          "connections": [
+            {
+              "enabled": true,
+              "svc_name": "SNMP Management",
+              "svc_uid": "CE856BE3*******42D34F3BD620DD",
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 161,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 162,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 10161,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 10162,
+                  "end": null,
+                  "location": "REMOTE"
+                }
+              ],
+              "protocol_ids": [
+                6
+              ]
+            },
+            {
+              "enabled": true,
+              "svc_name": "SNMP Management",
+              "svc_uid": "CE856BE3092E*******D34F3BD620DD",
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 161,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 162,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 10161,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 10162,
+                  "end": null,
+                  "location": "REMOTE"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            },
+            {
+              "enabled": true,
+              "svc_name": "SNMP Client",
+              "svc_uid": "EF333F34092E5BB96FBAC8682039FA34",
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 161,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 162,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 10161,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 10162,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                6
+              ]
+            },
+            {
+              "enabled": true,
+              "svc_name": "SNMP Client",
+              "svc_uid": "EF333F3409*******AC8682039FA34",
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 161,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 162,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 10161,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 10162,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC040092E*******DDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": false
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "033A04EE09*******5E670ACDEA46E7",
+          "name": "Allow fragmented packets",
+          "severity": 3,
+          "action": "ALLOW",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ip_fragmented_only": true
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC040*******30FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "D6C2BB7E*******171F2482999EF",
+          "name": "Allow wireless EAPOL",
+          "severity": 3,
+          "action": "ALLOW",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ether_type_id": 34958
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC040*******30FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "0EBEEDC50*******53BF4F111AC78C",
+          "name": "Allow USB over IEEE802",
+          "severity": 3,
+          "action": "ALLOW",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ether_type_id": 35118
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC040*******0FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        }
+      ],
+      "baseline_rules": [
+        {
+          "uid": "69FF496F09*******4E898D1E4D224D28",
+          "name": "Allow Local File Sharing to private IP addresses",
+          "severity": 3,
+          "action": "ALLOW",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 139,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 445,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                6
+              ]
+            },
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 137,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 138,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 139,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 445,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            }
+          ],
+          "hosts": [
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "10.0.0.0",
+                "ip_end": "10.255.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "172.16.0.0",
+                "ip_end": "172.31.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "192.168.0.0",
+                "ip_end": "192.168.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "169.254.0.0",
+                "ip_end": "169.254.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "fc00::",
+                "ip_end": "fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "fe80::",
+                "ip_end": "febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+              }
+            }
+          ],
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC04*******930FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "0F37D0BB*******0B7A03EDE1B3DB2C",
+          "name": "Block Local File Sharing",
+          "severity": 3,
+          "action": "BLOCK",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 139,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 445,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                6
+              ]
+            },
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 137,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 138,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 139,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 445,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC0400*******30FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 1,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "98E6DD8D*******4F3948010B0EEAC9",
+          "name": "Allow Bootp",
+          "severity": 3,
+          "action": "ALLOW",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 68,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 67,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC040*******30FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "0E2B7C47092*******9071E9F20B71B5",
+          "name": "Allow UPnP Discovery from private IP addresses",
+          "severity": 3,
+          "action": "ALLOW",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 1900,
+                  "end": null,
+                  "location": "DST"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            }
+          ],
+          "hosts": [
+            {
+              "location": "SRC",
+              "ip_range": {
+                "ip_start": "10.0.0.0",
+                "ip_end": "10.255.255.255"
+              }
+            },
+            {
+              "location": "SRC",
+              "ip_range": {
+                "ip_start": "172.16.0.0",
+                "ip_end": "172.31.255.255"
+              }
+            },
+            {
+              "location": "SRC",
+              "ip_range": {
+                "ip_start": "192.168.0.0",
+                "ip_end": "192.168.255.255"
+              }
+            },
+            {
+              "location": "SRC",
+              "ip_range": {
+                "ip_start": "169.254.0.0",
+                "ip_end": "169.254.255.255"
+              }
+            },
+            {
+              "location": "SRC",
+              "ip_range": {
+                "ip_start": "fc00::",
+                "ip_end": "fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+              }
+            },
+            {
+              "location": "SRC",
+              "ip_range": {
+                "ip_start": "fe80::",
+                "ip_end": "febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+              }
+            }
+          ],
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC0*******B930FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "0BC3E9F0*******9669E0FD237C8578E",
+          "name": "Block UPnP Discovery",
+          "severity": 3,
+          "action": "BLOCK",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 1900,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC04*******930FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 1,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "A6037EFE092E5BB936343F3A4F976490",
+          "name": "Allow Web Service requests from private IP addresses",
+          "severity": 3,
+          "action": "ALLOW",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 5357,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 5358,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                6
+              ]
+            },
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 5357,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 5358,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            }
+          ],
+          "hosts": [
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "10.0.0.0",
+                "ip_end": "10.255.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "172.16.0.0",
+                "ip_end": "172.31.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "192.168.0.0",
+                "ip_end": "192.168.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "169.254.0.0",
+                "ip_end": "169.254.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "fc00::",
+                "ip_end": "fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "fe80::",
+                "ip_end": "febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+              }
+            }
+          ],
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC04*******30FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "D0B6ED57*******92AD7E416CEC5B38E",
+          "name": "Block Web Service requests",
+          "severity": 3,
+          "action": "BLOCK",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 5357,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 5358,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                6
+              ]
+            },
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 5357,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 5358,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC040*******30FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 1,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "E232F5CA092*******039267C0E0589",
+          "name": "Allow LLMNR from private IP addresses",
+          "severity": 3,
+          "action": "ALLOW",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 5355,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            }
+          ],
+          "hosts": [
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "10.0.0.0",
+                "ip_end": "10.255.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "172.16.0.0",
+                "ip_end": "172.31.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "192.168.0.0",
+                "ip_end": "192.168.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "169.254.0.0",
+                "ip_end": "169.254.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "fc00::",
+                "ip_end": "fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "fe80::",
+                "ip_end": "febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+              }
+            }
+          ],
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC04009*******DDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "F39698A8*******5A33C08E4E132B",
+          "name": "Block LLMNR",
+          "severity": 3,
+          "action": "BLOCK",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 5355,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            }
+          ],
+          "hosts": [
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "0.0.0.1",
+                "ip_end": "255.255.255.255"
+              }
+            }
+          ],
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC0400*******30FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 1,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "989BB854*******3FABBA6EDC80EC8E",
+          "name": "Allow LLMNR from ipv6 traffic",
+          "severity": 3,
+          "action": "ALLOW",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 5355,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "EAD641B3092*******21F06F1DF3BC0",
+          "name": "Allow Web Services Discovery from private IP addresses",
+          "severity": 3,
+          "action": "ALLOW",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 3702,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            }
+          ],
+          "hosts": [
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "10.0.0.0",
+                "ip_end": "10.255.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "172.16.0.0",
+                "ip_end": "172.31.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "192.168.0.0",
+                "ip_end": "192.168.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "169.254.0.0",
+                "ip_end": "169.254.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "fc00::",
+                "ip_end": "fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "fe80::",
+                "ip_end": "febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+              }
+            }
+          ],
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC0400*******0FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "D2A71E10*******B9148778DE794E7D5B",
+          "name": "Block Web Services Discovery",
+          "severity": 3,
+          "action": "BLOCK",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 3702,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC04009*******FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 1,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "7D3F912709*******66A3276D4C51F7F",
+          "name": "Allow SSDP from private IP addresses",
+          "severity": 3,
+          "action": "ALLOW",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 2869,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                6
+              ]
+            }
+          ],
+          "hosts": [
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "10.0.0.0",
+                "ip_end": "10.255.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "172.16.0.0",
+                "ip_end": "172.31.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "192.168.0.0",
+                "ip_end": "192.168.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "169.254.0.0",
+                "ip_end": "169.254.255.255"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "fc00::",
+                "ip_end": "fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+              }
+            },
+            {
+              "location": "REMOTE",
+              "ip_range": {
+                "ip_start": "fe80::",
+                "ip_end": "febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+              }
+            }
+          ],
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC0400*******0FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "3923089209*******AF518273836C33",
+          "name": "Block SSDP",
+          "severity": 3,
+          "action": "BLOCK",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 2869,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                6
+              ]
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC0400*******FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 1,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "73E8BCB409*******38013D7530FA8804",
+          "name": "Allow ping, pong and tracert",
+          "severity": 3,
+          "action": "ALLOW",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 1,
+              "protocol_ids": [
+                1
+              ],
+              "icmp_types": [
+                0
+              ]
+            },
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "protocol_ids": [
+                1
+              ],
+              "icmp_types": [
+                8
+              ]
+            },
+            {
+              "enabled": true,
+              "direction_id": 1,
+              "protocol_ids": [
+                1
+              ],
+              "icmp_types": [
+                11
+              ]
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "E30F6208092E5BB96C448A07BA9C4A95",
+          "name": "Allow all applications",
+          "severity": 3,
+          "action": "ALLOW",
+          "connections": null,
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC040*******B930FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": [
+            {
+              "name": "*"
+            }
+          ],
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "ADB2292C0*******93065667F4A40BFF9",
+          "name": "Allow VPN",
+          "severity": 4,
+          "action": "ALLOW",
+          "connections": [
+            {
+              "enabled": true,
+              "svc_name": "VPN --- PPTP",
+              "svc_uid": "C8013082*******BB93CFA886C25C48A04",
+              "direction_id": 2,
+              "ports": [
+                {
+                  "start": 1723,
+                  "end": null,
+                  "location": "REMOTE"
+                }
+              ],
+              "protocol_ids": [
+                6
+              ]
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- PPTP",
+              "svc_uid": "C801308*******B93CFA886C25C48A04",
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 500,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 1701,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 4500,
+                  "end": null,
+                  "location": "REMOTE"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- PPTP",
+              "svc_uid": "C8013082*******3CFA886C25C48A04",
+              "direction_id": 0,
+              "protocol_ids": [
+                47,
+                50
+              ],
+              "ip_fragmented_only": false
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- Check Point",
+              "svc_uid": "FF34EE4A*******92609F4E71C39D814",
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 1032,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 1033,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                6
+              ]
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- Check Point",
+              "svc_uid": "FF34EE4A0*******609F4E71C39D814",
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 256,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 264,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 18231,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 18234,
+                  "end": null,
+                  "location": "REMOTE"
+                }
+              ],
+              "protocol_ids": [
+                6
+              ]
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- Check Point",
+              "svc_uid": "FF34EE4A092*******609F4E71C39D814",
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 1266,
+                  "end": null,
+                  "location": "LOCAL"
+                },
+                {
+                  "start": 1368,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- Check Point",
+              "svc_uid": "FF34EE4A09*******609F4E71C39D814",
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 18231,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 18234,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 500,
+                  "end": null,
+                  "location": "REMOTE"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- Check Point",
+              "svc_uid": "FF34EE4A092E5BB92609F4E71C39D814",
+              "direction_id": 0,
+              "protocol_ids": [
+                50
+              ],
+              "ip_fragmented_only": false
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- Check Point",
+              "svc_uid": "FF34EE4A09*******92609F4E71C39D814",
+              "direction_id": 0,
+              "protocol_ids": [
+                17
+              ],
+              "ip_fragmented_only": true
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- NetScreen",
+              "svc_uid": "5D7E9B3809*******68DCBE0FDFE2A339",
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 62516,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 500,
+                  "end": null,
+                  "location": "REMOTE"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- NetScreen",
+              "svc_uid": "5D7E9B38*******68DCBE0FDFE2A339",
+              "direction_id": 0,
+              "protocol_ids": [
+                50
+              ],
+              "ip_fragmented_only": false
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- Cisco 5000",
+              "svc_uid": "50F33FE00*******DA9DB7BFD3A2E41",
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 1029,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 500,
+                  "end": null,
+                  "location": "REMOTE"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- Cisco 5000",
+              "svc_uid": "50F33FE00*******5DA9DB7BFD3A2E41",
+              "direction_id": 0,
+              "protocol_ids": [
+                50
+              ],
+              "ip_fragmented_only": false
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- Cisco 3000",
+              "svc_uid": "EF3159B9*******B94CDFCE3DB8806921",
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 500,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 10000,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 62514,
+                  "end": 62524,
+                  "location": "REMOTE"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- Cisco 3000",
+              "svc_uid": "EF3159B9092E5BB94CDFCE3DB8806921",
+              "direction_id": 0,
+              "protocol_ids": [
+                50
+              ],
+              "ip_fragmented_only": false
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- Nortel",
+              "svc_uid": "B8C0FD37*******C6760F6E662A23D",
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 8282,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                6
+              ]
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- Nortel",
+              "svc_uid": "B8C0FD370*******6C6760F6E662A23D",
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 17,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 586,
+                  "end": null,
+                  "location": "REMOTE"
+                }
+              ],
+              "protocol_ids": [
+                6
+              ]
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- Nortel",
+              "svc_uid": "B8C0FD37*******6C6760F6E662A23D",
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 500,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 8121,
+                  "end": null,
+                  "location": "REMOTE"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- Nortel",
+              "svc_uid": "B8C0FD37*******B96C6760F6E662A23D",
+              "direction_id": 0,
+              "protocol_ids": [
+                50
+              ],
+              "ip_fragmented_only": false
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- Aventail",
+              "svc_uid": "5A6BBF3709*******24BD0656C5EDC154",
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 443,
+                  "end": null,
+                  "location": "REMOTE"
+                },
+                {
+                  "start": 1080,
+                  "end": null,
+                  "location": "REMOTE"
+                }
+              ],
+              "protocol_ids": [
+                6
+              ]
+            },
+            {
+              "enabled": true,
+              "svc_name": "VPN --- Aventail",
+              "svc_uid": "5A6BBF370*******924BD0656C5EDC154",
+              "direction_id": 0,
+              "protocol_ids": [
+                50
+              ],
+              "ip_fragmented_only": false
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC04009*******30FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "E7E472140*******2AB2B3A0E2776740",
+          "name": "Allow Veritas Protocol",
+          "severity": 4,
+          "action": "ALLOW",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ether_type_id": 51966
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC04009*******0FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "E764F25C092*******F2A93E70D04A8C",
+          "name": "Allow IGMP traffic",
+          "severity": 4,
+          "action": "ALLOW",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "protocol_ids": [
+                2
+              ],
+              "ip_fragmented_only": false
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC040092*******0FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "65AFBD1C0*******9643C123950557886",
+          "name": "Allow Bonjour traffic",
+          "severity": 3,
+          "action": "ALLOW",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 5353,
+                  "end": null,
+                  "location": "LOCAL"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            },
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ports": [
+                {
+                  "start": 5353,
+                  "end": null,
+                  "location": "REMOTE"
+                }
+              ],
+              "protocol_ids": [
+                17
+              ]
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC040092E5BB930FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "6A35F99F*******B95DDD5B2960C09319",
+          "name": "Block broadcast and multicast traffic and don't log",
+          "severity": 1,
+          "action": "BLOCK",
+          "connections": null,
+          "hosts": [
+            {
+              "location": "LOCAL",
+              "mac": "FF-FF-FF-FF-FF-FF"
+            },
+            {
+              "location": "LOCAL",
+              "ip_range": {
+                "ip_start": "224.0.0.0",
+                "ip_end": "239.255.255.255"
+              }
+            }
+          ],
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC040092*******0FDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "0B2AE82F092*******629101355BF16B",
+          "name": "Block all other IP traffic and log",
+          "severity": 1,
+          "action": "BLOCK",
+          "connections": [
+            {
+              "enabled": true,
+              "direction_id": 0,
+              "ip_fragmented_only": false
+            }
+          ],
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC04009vFDDC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 1,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        },
+        {
+          "uid": "604C4BAA092E5BB9343DAC446707079F",
+          "name": "Block all other traffic and don't log",
+          "severity": 1,
+          "action": "BLOCK",
+          "connections": null,
+          "hosts": null,
+          "adapters": [
+            {
+              "enabled": true,
+              "name": "All Adapters",
+              "uid": "88FCC040092E5*******DC8EEE3946B6",
+              "type": "ANY"
+            }
+          ],
+          "applications": null,
+          "rulestate": {
+            "enabled": true
+          },
+          "desc": null,
+          "log_action": 0,
+          "packet_capture": false,
+          "email_alert": false,
+          "screen_saver": "ANY",
+          "time_slots": null
+        }
+      ],
+      "ignore_parent_rules": null,
+      "smart_dhcp": true,
+      "smart_dns": true,
+      "smart_wins": true,
+      "token_ring_traffic": false,
+      "netbios_protection": false,
+      "reverse_dns": false,
+      "port_scan": true,
+      "dos": false,
+      "antimac_spoofing": false,
+      "autoblock": true,
+      "autoblock_duration": 600,
+      "stealth_web": false,
+      "antiIP_spoofing": false,
+      "hide_os": false,
+      "windows_firewall": "DISABLE_ONCE",
+      "windows_firewall_notification": false,
+      "endpoint_notification": {
+        "enabled": false,
+        "endpoint_notification_message": null,
+        "ask_enabled": false,
+        "endpoint_notification_ask_message": null
+      },
+      "p2p_auth": {
+        "enabled": false,
+        "excludeHosts": null,
+        "max_auth_attempts": null,
+        "time_between_auth_attempts": null,
+        "time_before_re_auth": null,
+        "time_for_remote_blocked": null,
+        "session_timeout": null,
+        "hosts": null
+      },
+      "mac": {
+        "enforced_rules": [
+          {
+            "uid": "A7132944092*******1799542349877DC4",
+            "name": "Block IPv6 over IPv4 (Teredo)",
+            "severity": 3,
+            "action": "BLOCK",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 3544,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "438C14D80*******93B8797FC3D2836C4",
+            "name": "Allow ICMPv6",
+            "severity": 3,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "protocol_ids": [
+                  58
+                ],
+                "icmp_types": [
+                  135,
+                  136,
+                  148,
+                  149
+                ],
+                "icmp_type_ranges": [
+                  {
+                    "start": 1,
+                    "end": 4
+                  },
+                  {
+                    "start": 128,
+                    "end": 132
+                  },
+                  {
+                    "start": 141,
+                    "end": 143
+                  },
+                  {
+                    "start": 151,
+                    "end": 153
+                  }
+                ],
+                "icmp_codes": [
+                  135,
+                  136,
+                  148,
+                  149
+                ],
+                "icmp_code_ranges": [
+                  {
+                    "start": 1,
+                    "end": 4
+                  },
+                  {
+                    "start": 128,
+                    "end": 132
+                  },
+                  {
+                    "start": 141,
+                    "end": 143
+                  },
+                  {
+                    "start": 151,
+                    "end": 153
+                  }
+                ]
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "AB6FDFDC0*******493E327E03CFE785",
+            "name": "Allow Mac Discovery from local computers",
+            "severity": 3,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 5353,
+                    "end": null,
+                    "location": "LOCAL"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              }
+            ],
+            "hosts": [
+              {
+                "location": "DST",
+                "ip_range": {
+                  "ip_start": "224.0.0.0",
+                  "ip_end": "239.255.255.255"
+                }
+              },
+              {
+                "location": "DST",
+                "ipv6_subnet": "FF00::/12"
+              }
+            ],
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "6EBCC33E*******68E1C4FF9C750796",
+            "name": "Block Mac Discovery from external computers",
+            "severity": 3,
+            "action": "BLOCK",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 5353,
+                    "end": null,
+                    "location": "LOCAL"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 1,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "7212F8B*******415DE41EB43D4459",
+            "name": "Allow outgoing ichat requests",
+            "severity": 3,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 2,
+                "ports": [
+                  {
+                    "start": 1900,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              },
+              {
+                "enabled": true,
+                "direction_id": 2,
+                "ports": [
+                  {
+                    "start": 5223,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  6
+                ]
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "94238995*******8B654265950A7E",
+            "name": "Allow outgoing NTP requests",
+            "severity": 3,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 2,
+                "ports": [
+                  {
+                    "start": 123,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          }
+        ],
+        "baseline_rules": [
+          {
+            "uid": "53DACF1E09*******7BE4F2910F0F6A",
+            "name": "Allow Local File Sharing to private IP addresses",
+            "severity": 3,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 137,
+                    "end": null,
+                    "location": "REMOTE"
+                  },
+                  {
+                    "start": 138,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              },
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 20,
+                    "end": null,
+                    "location": "LOCAL"
+                  },
+                  {
+                    "start": 21,
+                    "end": null,
+                    "location": "LOCAL"
+                  },
+                  {
+                    "start": 22,
+                    "end": null,
+                    "location": "LOCAL"
+                  },
+                  {
+                    "start": 139,
+                    "end": null,
+                    "location": "LOCAL"
+                  },
+                  {
+                    "start": 445,
+                    "end": null,
+                    "location": "LOCAL"
+                  }
+                ],
+                "protocol_ids": [
+                  6
+                ]
+              },
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 137,
+                    "end": null,
+                    "location": "LOCAL"
+                  },
+                  {
+                    "start": 138,
+                    "end": null,
+                    "location": "LOCAL"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              },
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 445,
+                    "end": null,
+                    "location": "REMOTE"
+                  },
+                  {
+                    "start": 548,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  6
+                ]
+              }
+            ],
+            "hosts": [
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "10.0.0.0",
+                  "ip_end": "10.255.255.255"
+                }
+              },
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "172.16.0.0",
+                  "ip_end": "172.31.255.255"
+                }
+              },
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "192.168.0.0",
+                  "ip_end": "192.168.255.255"
+                }
+              },
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "169.254.0.0",
+                  "ip_end": "169.254.255.255"
+                }
+              },
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "fc00::",
+                  "ip_end": "fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+                }
+              },
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "fe80::",
+                  "ip_end": "febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+                }
+              }
+            ],
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "77A0113409*******F7828DF8D14642D",
+            "name": "Block Local File Sharing to external computers",
+            "severity": 3,
+            "action": "BLOCK",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 445,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  6
+                ]
+              },
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 20,
+                    "end": null,
+                    "location": "LOCAL"
+                  },
+                  {
+                    "start": 21,
+                    "end": null,
+                    "location": "LOCAL"
+                  },
+                  {
+                    "start": 22,
+                    "end": null,
+                    "location": "LOCAL"
+                  },
+                  {
+                    "start": 139,
+                    "end": null,
+                    "location": "LOCAL"
+                  },
+                  {
+                    "start": 445,
+                    "end": null,
+                    "location": "LOCAL"
+                  }
+                ],
+                "protocol_ids": [
+                  6
+                ]
+              },
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 137,
+                    "end": null,
+                    "location": "LOCAL"
+                  },
+                  {
+                    "start": 138,
+                    "end": null,
+                    "location": "LOCAL"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              },
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 137,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 1,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "9507DAE4*******47007D3306BB8DC",
+            "name": "Allow Bootp",
+            "severity": 3,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 68,
+                    "end": null,
+                    "location": "LOCAL"
+                  },
+                  {
+                    "start": 67,
+                    "end": null,
+                    "location": "LOCAL"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "294E17C90v*******AAFDCFC6AF01270",
+            "name": "Allow UPnP Discovery from private IP addresses",
+            "severity": 3,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 1900,
+                    "end": null,
+                    "location": "DST"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              }
+            ],
+            "hosts": [
+              {
+                "location": "SRC",
+                "ip_range": {
+                  "ip_start": "10.0.0.0",
+                  "ip_end": "10.255.255.255"
+                }
+              },
+              {
+                "location": "SRC",
+                "ip_range": {
+                  "ip_start": "172.16.0.0",
+                  "ip_end": "172.31.255.255"
+                }
+              },
+              {
+                "location": "SRC",
+                "ip_range": {
+                  "ip_start": "192.168.0.0",
+                  "ip_end": "192.168.255.255"
+                }
+              },
+              {
+                "location": "SRC",
+                "ip_range": {
+                  "ip_start": "169.254.0.0",
+                  "ip_end": "169.254.255.255"
+                }
+              },
+              {
+                "location": "SRC",
+                "ip_range": {
+                  "ip_start": "fc00::0",
+                  "ip_end": "fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+                }
+              },
+              {
+                "location": "SRC",
+                "ip_range": {
+                  "ip_start": "fe80::0",
+                  "ip_end": "febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+                }
+              }
+            ],
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "05942D1E092E5BB96DD96AA5199D35BC",
+            "name": "Block UPnP Discovery",
+            "severity": 3,
+            "action": "BLOCK",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 1900,
+                    "end": null,
+                    "location": "LOCAL"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 1,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "F829FB4A092E5BB92B1F80E5388C0870",
+            "name": "Allow SSDP from private IP addresses",
+            "severity": 3,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 2869,
+                    "end": null,
+                    "location": "LOCAL"
+                  }
+                ],
+                "protocol_ids": [
+                  6
+                ]
+              }
+            ],
+            "hosts": [
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "10.0.0.0",
+                  "ip_end": "10.255.255.255"
+                }
+              },
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "172.16.0.0",
+                  "ip_end": "172.31.255.255"
+                }
+              },
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "192.168.0.0",
+                  "ip_end": "192.168.255.255"
+                }
+              },
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "169.254.0.0",
+                  "ip_end": "169.254.255.255"
+                }
+              },
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "fc00::0",
+                  "ip_end": "fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+                }
+              },
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "fe80::0",
+                  "ip_end": "febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+                }
+              }
+            ],
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "DF25F5400*******62A1555998460F41",
+            "name": "Block SSDP",
+            "severity": 3,
+            "action": "BLOCK",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 2869,
+                    "end": null,
+                    "location": "LOCAL"
+                  }
+                ],
+                "protocol_ids": [
+                  6
+                ]
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 1,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "19B6E3980*******A30E07E951FE96B",
+            "name": "Allow ping, pong and tracert",
+            "severity": 3,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 1,
+                "protocol_ids": [
+                  1
+                ],
+                "icmp_types": [
+                  0
+                ]
+              },
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "protocol_ids": [
+                  1
+                ],
+                "icmp_types": [
+                  8
+                ]
+              },
+              {
+                "enabled": true,
+                "direction_id": 1,
+                "protocol_ids": [
+                  1
+                ],
+                "icmp_types": [
+                  11
+                ]
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "16357E1D092E5BB95B84BECA70D06182",
+            "name": "Allow VPN",
+            "severity": 4,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "svc_name": "VPN --- NetScreen",
+                "svc_uid": "5D7E9B3809*******968DCBE0FDFE2A339",
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 62516,
+                    "end": null,
+                    "location": "REMOTE"
+                  },
+                  {
+                    "start": 500,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              },
+              {
+                "enabled": true,
+                "svc_name": "VPN --- NetScreen",
+                "svc_uid": "5D7E9B38*******B968DCBE0FDFE2A339",
+                "direction_id": 0,
+                "protocol_ids": [
+                  50
+                ],
+                "ip_fragmented_only": false
+              },
+              {
+                "enabled": true,
+                "svc_name": "VPN --- Cisco 5000",
+                "svc_uid": "50F33FE00*******5DA9DB7BFD3A2E41",
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 1029,
+                    "end": null,
+                    "location": "REMOTE"
+                  },
+                  {
+                    "start": 500,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              },
+              {
+                "enabled": true,
+                "svc_name": "VPN --- Cisco 5000",
+                "svc_uid": "50F33FE009*******DA9DB7BFD3A2E41",
+                "direction_id": 0,
+                "protocol_ids": [
+                  50
+                ],
+                "ip_fragmented_only": false
+              },
+              {
+                "enabled": true,
+                "svc_name": "VPN --- Cisco 3000",
+                "svc_uid": "EF3159B90*******CDFCE3DB8806921",
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 500,
+                    "end": null,
+                    "location": "REMOTE"
+                  },
+                  {
+                    "start": 10000,
+                    "end": null,
+                    "location": "REMOTE"
+                  },
+                  {
+                    "start": 62514,
+                    "end": 62524,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              },
+              {
+                "enabled": true,
+                "svc_name": "VPN --- Cisco 3000",
+                "svc_uid": "EF3159B9092E5BB94CDFCE3DB8806921",
+                "direction_id": 0,
+                "protocol_ids": [
+                  50
+                ],
+                "ip_fragmented_only": false
+              },
+              {
+                "enabled": true,
+                "svc_name": "VPN --- OS X",
+                "svc_uid": "7889F07C092*******66B39A1E88630C",
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 1723,
+                    "end": null,
+                    "location": "LOCAL"
+                  }
+                ],
+                "protocol_ids": [
+                  6
+                ]
+              },
+              {
+                "enabled": true,
+                "svc_name": "VPN --- OS X",
+                "svc_uid": "7889F07C092*******B39A1E88630C",
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 1723,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  6
+                ]
+              },
+              {
+                "enabled": true,
+                "svc_name": "VPN --- OS X",
+                "svc_uid": "7889F07C0*******6B39A1E88630C",
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 500,
+                    "end": null,
+                    "location": "LOCAL"
+                  },
+                  {
+                    "start": 1701,
+                    "end": null,
+                    "location": "LOCAL"
+                  },
+                  {
+                    "start": 4500,
+                    "end": null,
+                    "location": "LOCAL"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              },
+              {
+                "enabled": true,
+                "svc_name": "VPN --- OS X",
+                "svc_uid": "7889F07C0*******A66B39A1E88630C",
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 500,
+                    "end": null,
+                    "location": "REMOTE"
+                  },
+                  {
+                    "start": 1701,
+                    "end": null,
+                    "location": "REMOTE"
+                  },
+                  {
+                    "start": 4500,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "C0AFE4200*******59800472B588D8",
+            "name": "Allow IGMP traffic",
+            "severity": 4,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "protocol_ids": [
+                  2
+                ],
+                "ip_fragmented_only": false
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "8A7C6BF00*******7C19F9DF273312A7",
+            "name": "Allow outgoing web traffic",
+            "severity": 4,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 2,
+                "ports": [
+                  {
+                    "start": 80,
+                    "end": null,
+                    "location": "REMOTE"
+                  },
+                  {
+                    "start": 443,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  6
+                ]
+              },
+              {
+                "enabled": true,
+                "direction_id": 2,
+                "ports": [
+                  {
+                    "start": 80,
+                    "end": null,
+                    "location": "REMOTE"
+                  },
+                  {
+                    "start": 443,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "884D30DA09*******0DC6EBC4A3E9B5B",
+            "name": "Block broadcast and multicast traffic and don't log",
+            "severity": 1,
+            "action": "BLOCK",
+            "connections": null,
+            "hosts": [
+              {
+                "location": "LOCAL",
+                "ip": "255.255.255.255"
+              },
+              {
+                "location": "LOCAL",
+                "ip_range": {
+                  "ip_start": "224.0.0.0",
+                  "ip_end": "239.255.255.255"
+                }
+              }
+            ],
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "5D857B08*******44D3BD774298986",
+            "name": "Allow Airport",
+            "severity": 3,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 192,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": false
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "711DC18009*******59A6ACFC5861CEAB",
+            "name": "Allow Kerberos",
+            "severity": 3,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 88,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  17
+                ]
+              },
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 88,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  6
+                ]
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": false
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "6347504*******970FE9EACAB21EFB1",
+            "name": "Allow outgoing DLP",
+            "severity": 3,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 2,
+                "ports": [
+                  {
+                    "start": 10443,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  6
+                ]
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": false
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "109E0CD9092E5BB9566624F7E9BF266F",
+            "name": "Allow outgoing RDP",
+            "severity": 3,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 2,
+                "ports": [
+                  {
+                    "start": 3283,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  6
+                ]
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": false
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "2F9653*******BB900FBB64BA54B9C2B",
+            "name": "Allow outgoing JAMF",
+            "severity": 3,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 2,
+                "ports": [
+                  {
+                    "start": 8443,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  6
+                ]
+              }
+            ],
+            "hosts": [
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "10.0.0.0",
+                  "ip_end": "10.255.255.255"
+                }
+              },
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "172.16.0.0",
+                  "ip_end": "172.31.255.255"
+                }
+              },
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "192.168.0.0",
+                  "ip_end": "192.168.255.255"
+                }
+              },
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "169.254.0.0",
+                  "ip_end": "169.254.255.255"
+                }
+              },
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "fc00::0",
+                  "ip_end": "fdff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+                }
+              },
+              {
+                "location": "REMOTE",
+                "ip_range": {
+                  "ip_start": "fe80::0",
+                  "ip_end": "febf:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+                }
+              }
+            ],
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": false
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "E3F78964*******92FE6B57EC76E8C07",
+            "name": "Allow LDAP",
+            "severity": 3,
+            "action": "ALLOW",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ports": [
+                  {
+                    "start": 389,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  6
+                ]
+              },
+              {
+                "enabled": true,
+                "direction_id": 2,
+                "ports": [
+                  {
+                    "start": 3268,
+                    "end": null,
+                    "location": "REMOTE"
+                  }
+                ],
+                "protocol_ids": [
+                  6
+                ]
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": false
+            },
+            "desc": null,
+            "log_action": 0,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          },
+          {
+            "uid": "45488FD509*******045BBC3330D499EA",
+            "name": "Block all other IP traffic and log",
+            "severity": 1,
+            "action": "BLOCK",
+            "connections": [
+              {
+                "enabled": true,
+                "direction_id": 0,
+                "ip_fragmented_only": false
+              }
+            ],
+            "hosts": null,
+            "adapters": null,
+            "applications": null,
+            "rulestate": {
+              "enabled": true
+            },
+            "desc": null,
+            "log_action": 1,
+            "packet_capture": false,
+            "email_alert": false,
+            "screen_saver": "ANY",
+            "time_slots": null
+          }
+        ],
+        "ignore_parent_rules": null,
+        "smart_dhcp": true,
+        "smart_dns": true,
+        "port_scan": true,
+        "dos": false,
+        "antimac_spoofing": false,
+        "autoblock": true,
+        "autoblock_duration": 600,
+        "endpoint_notification": {
+          "enabled": false,
+          "endpoint_notification_message": null,
+          "ask_enabled": null,
+          "endpoint_notification_ask_message": null
+        }
+      }
+    },
+    "enabled": true,
+    "desc": "Created automatically during product installation.",
+    "name": "Firewall policy",
+    "lastmodifiedtime": 1719408684497
+  },
+  "raw": null,
+  "inputs": {
+    "sep_firewall_id": "7231E52309*******F329A371754A877"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 1791,
+    "timestamp": "2024-07-10 10:46:04"
+  }
+}
