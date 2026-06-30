@@ -1,0 +1,24 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "responseCode": "200",
+      "responseMessage": "OK"
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "sep_groupid": "23899461092E5BB937223FCF3A0605E3",
+    "sep_hardwarekey": "8DACE2559C1C951E09CC0BF71D973BB7"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 883,
+    "timestamp": "2024-07-18 10:48:55"
+  }
+}

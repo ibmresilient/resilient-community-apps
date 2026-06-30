@@ -1,0 +1,1 @@
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_mitre_integration/main/2.2/app-fn_mitre_integration-2.2.2-37097.zip
