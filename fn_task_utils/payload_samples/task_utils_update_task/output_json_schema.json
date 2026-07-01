@@ -1,0 +1,240 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "task_id": {
+          "type": "integer"
+        },
+        "task": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "inc_id": {
+              "type": "integer"
+            },
+            "inc_owner_id": {
+              "type": "integer"
+            },
+            "due_date": {},
+            "required": {
+              "type": "boolean"
+            },
+            "owner_id": {},
+            "user_notes": {},
+            "status": {
+              "type": "string"
+            },
+            "frozen": {
+              "type": "boolean"
+            },
+            "owner_fname": {},
+            "owner_lname": {},
+            "init_date": {
+              "type": "integer"
+            },
+            "active": {
+              "type": "boolean"
+            },
+            "src_name": {},
+            "inc_name": {
+              "type": "string"
+            },
+            "instr_text": {
+              "type": "string"
+            },
+            "instructions": {
+              "type": "string"
+            },
+            "form": {},
+            "members": {},
+            "perms": {
+              "type": "object",
+              "properties": {
+                "read": {
+                  "type": "boolean"
+                },
+                "write": {
+                  "type": "boolean"
+                },
+                "comment": {
+                  "type": "boolean"
+                },
+                "assign": {
+                  "type": "boolean"
+                },
+                "close": {
+                  "type": "boolean"
+                },
+                "change_members": {
+                  "type": "boolean"
+                },
+                "attach_file": {
+                  "type": "boolean"
+                },
+                "read_attachments": {
+                  "type": "boolean"
+                },
+                "delete_attachments": {
+                  "type": "boolean"
+                },
+                "change_header": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "notes": {
+              "type": "array"
+            },
+            "closed_date": {},
+            "actions": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "enabled": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "playbooks": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "playbook_handle": {
+                    "type": "integer"
+                  },
+                  "display_name": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "phase_id": {
+              "type": "integer"
+            },
+            "category_id": {},
+            "notes_count": {
+              "type": "integer"
+            },
+            "attachments_count": {
+              "type": "integer"
+            },
+            "task_layout": {
+              "type": "array"
+            },
+            "auto_deactivate": {
+              "type": "boolean"
+            },
+            "creator_principal": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "display_name": {
+                  "type": "string"
+                }
+              }
+            },
+            "timeframe_name": {},
+            "regs": {
+              "type": "object"
+            },
+            "custom": {
+              "type": "boolean"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "inc_training": {
+              "type": "boolean"
+            },
+            "cat_name": {
+              "type": "string"
+            },
+            "description": {},
+            "at_id": {},
+            "private": {}
+          }
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "task_name": {
+          "type": "string"
+        },
+        "task_utils_payload": {
+          "type": "object",
+          "properties": {
+            "format": {
+              "type": "string"
+            },
+            "content": {
+              "type": "string"
+            }
+          }
+        },
+        "incident_id": {
+          "type": "integer"
+        },
+        "task_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
