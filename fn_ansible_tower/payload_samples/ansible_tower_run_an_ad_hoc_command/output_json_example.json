@@ -1,0 +1,114 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": 7,
+    "type": "ad_hoc_command",
+    "url": "/api/v2/ad_hoc_commands/7/",
+    "related": {
+      "created_by": "/api/v2/users/1/",
+      "modified_by": "/api/v2/users/1/",
+      "stdout": "/api/v2/ad_hoc_commands/7/stdout/",
+      "inventory": "/api/v2/inventories/1/",
+      "credential": "/api/v2/credentials/3/",
+      "events": "/api/v2/ad_hoc_commands/7/events/",
+      "activity_stream": "/api/v2/ad_hoc_commands/7/activity_stream/",
+      "notifications": "/api/v2/ad_hoc_commands/7/notifications/",
+      "cancel": "/api/v2/ad_hoc_commands/7/cancel/",
+      "relaunch": "/api/v2/ad_hoc_commands/7/relaunch/"
+    },
+    "summary_fields": {
+      "inventory": {
+        "id": 1,
+        "name": "Demo Inventory",
+        "description": "",
+        "has_active_failures": true,
+        "total_hosts": 3,
+        "hosts_with_active_failures": 2,
+        "total_groups": 0,
+        "has_inventory_sources": false,
+        "total_inventory_sources": 0,
+        "inventory_sources_with_failures": 0,
+        "organization_id": 1,
+        "kind": ""
+      },
+      "credential": {
+        "id": 3,
+        "name": "fyre",
+        "description": "",
+        "kind": "ssh",
+        "cloud": false,
+        "kubernetes": false,
+        "credential_type_id": 1
+      },
+      "created_by": {
+        "id": 1,
+        "username": "admin",
+        "first_name": "",
+        "last_name": ""
+      },
+      "modified_by": {
+        "id": 1,
+        "username": "admin",
+        "first_name": "",
+        "last_name": ""
+      },
+      "user_capabilities": {
+        "delete": true,
+        "start": true
+      }
+    },
+    "created": "2024-10-29T20:30:48.900258Z",
+    "modified": "2024-10-29T20:30:48.994513Z",
+    "name": "ping",
+    "launch_type": "manual",
+    "status": "new",
+    "execution_environment": null,
+    "failed": false,
+    "started": null,
+    "finished": null,
+    "canceled_on": null,
+    "elapsed": 0.0,
+    "job_explanation": "",
+    "execution_node": "",
+    "controller_node": "",
+    "launched_by": {
+      "id": 1,
+      "name": "admin",
+      "type": "user",
+      "url": "/api/v2/users/1/"
+    },
+    "work_unit_id": null,
+    "job_type": "run",
+    "inventory": 1,
+    "limit": "9.30.253.145",
+    "credential": 3,
+    "module_name": "ping",
+    "module_args": "data=\"here\"",
+    "forks": 0,
+    "verbosity": 0,
+    "extra_vars": "",
+    "become_enabled": false,
+    "diff_mode": false
+  },
+  "raw": "{\"id\": 7, \"type\": \"ad_hoc_command\", \"url\": \"/api/v2/ad_hoc_commands/7/\", \"related\": {\"created_by\": \"/api/v2/users/1/\", \"modified_by\": \"/api/v2/users/1/\", \"stdout\": \"/api/v2/ad_hoc_commands/7/stdout/\", \"inventory\": \"/api/v2/inventories/1/\", \"credential\": \"/api/v2/credentials/3/\", \"events\": \"/api/v2/ad_hoc_commands/7/events/\", \"activity_stream\": \"/api/v2/ad_hoc_commands/7/activity_stream/\", \"notifications\": \"/api/v2/ad_hoc_commands/7/notifications/\", \"cancel\": \"/api/v2/ad_hoc_commands/7/cancel/\", \"relaunch\": \"/api/v2/ad_hoc_commands/7/relaunch/\"}, \"summary_fields\": {\"inventory\": {\"id\": 1, \"name\": \"Demo Inventory\", \"description\": \"\", \"has_active_failures\": true, \"total_hosts\": 3, \"hosts_with_active_failures\": 2, \"total_groups\": 0, \"has_inventory_sources\": false, \"total_inventory_sources\": 0, \"inventory_sources_with_failures\": 0, \"organization_id\": 1, \"kind\": \"\"}, \"credential\": {\"id\": 3, \"name\": \"fyre\", \"description\": \"\", \"kind\": \"ssh\", \"cloud\": false, \"kubernetes\": false, \"credential_type_id\": 1}, \"created_by\": {\"id\": 1, \"username\": \"admin\", \"first_name\": \"\", \"last_name\": \"\"}, \"modified_by\": {\"id\": 1, \"username\": \"admin\", \"first_name\": \"\", \"last_name\": \"\"}, \"user_capabilities\": {\"delete\": true, \"start\": true}}, \"created\": \"2024-10-29T20:30:48.900258Z\", \"modified\": \"2024-10-29T20:30:48.994513Z\", \"name\": \"ping\", \"launch_type\": \"manual\", \"status\": \"new\", \"execution_environment\": null, \"failed\": false, \"started\": null, \"finished\": null, \"canceled_on\": null, \"elapsed\": 0.0, \"job_explanation\": \"\", \"execution_node\": \"\", \"controller_node\": \"\", \"launched_by\": {\"id\": 1, \"name\": \"admin\", \"type\": \"user\", \"url\": \"/api/v2/users/1/\"}, \"work_unit_id\": null, \"job_type\": \"run\", \"inventory\": 1, \"limit\": \"9.30.253.145\", \"credential\": 3, \"module_name\": \"ping\", \"module_args\": \"data=\\\"here\\\"\", \"forks\": 0, \"verbosity\": 0, \"extra_vars\": \"\", \"become_enabled\": false, \"diff_mode\": false}",
+  "inputs": {
+    "tower_arguments": "data=\"here\"",
+    "tower_hosts": "9.30.253.145",
+    "tower_inventory": 1,
+    "tower_credential": 3,
+    "tower_module": {
+      "id": 990,
+      "name": "ping"
+    }
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ansible-tower",
+    "package_version": "1.0.4",
+    "host": "my.app.host",
+    "execution_time_ms": 1429,
+    "timestamp": "2024-10-29 20:30:49"
+  }
+}

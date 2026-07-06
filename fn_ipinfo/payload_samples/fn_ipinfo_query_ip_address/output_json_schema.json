@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "ipinfo_query_ip": {
+          "type": "string"
+        }
+      }
+    },
+    "query_result": {
+      "type": "object",
+      "properties": {
+        "ip": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "loc": {
+          "type": "string"
+        },
+        "org": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        },
+        "country_name": {
+          "type": "string"
+        },
+        "isEU": {
+          "type": "boolean"
+        },
+        "country_flag_url": {
+          "type": "string"
+        },
+        "country_flag": {
+          "type": "object",
+          "properties": {
+            "emoji": {
+              "type": "string"
+            },
+            "unicode": {
+              "type": "string"
+            }
+          }
+        },
+        "country_currency": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "symbol": {
+              "type": "string"
+            }
+          }
+        },
+        "continent": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        "latitude": {
+          "type": "string"
+        },
+        "longitude": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

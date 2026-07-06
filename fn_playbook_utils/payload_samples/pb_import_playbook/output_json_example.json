@@ -1,0 +1,90 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "app_installations": [],
+    "create_date": 1670531754434,
+    "filename": "export.resz",
+    "id": 29,
+    "install_date": 1670531755495,
+    "install_principal": {
+      "display_name": "Resilient Sysadmin",
+      "id": 8,
+      "name": "a@example.com",
+      "type": "user"
+    },
+    "items": [],
+    "messages": [
+      {
+        "text": "The following objects do not contain any data and, therefore, can be safely deleted. Object Type: Incident Fields. Objects: 'ReaQta Alert ID', 'ReaQta Alert Link', 'ReaQta Endpoint ID', 'ReaQta Groups', 'ReaQta Hive', 'ReaQta Impact', 'ReaQta Machine Info', 'ReaQta Tags', 'ReaQta Trigger Condition', 'Reaqta Endpoint Link'. Any reference to these objects, as when used in a Condition, will also be removed.",
+        "type": "WARN"
+      },
+      {
+        "text": "The following objects do not contain any data and, therefore, can be safely deleted. Object Type: Data Tables. Objects: 'CVE Searched Data', 'Defender Indicators', 'LDAP Query results', 'Playbook Usage', 'QR Assets', 'QR Categories', 'QR Destination IPs (First 10)', 'QR Events (First 10 Events)', 'QR Flows', 'QR Source IPs (First 10)', 'QR Triggered Rules', 'QRadar Advisor analysis results', 'QRadar Offense Events', 'QRadar Reference Sets', 'QRadar Reference Table Queried Rows', 'QRadar Reference Tables', 'ReaQta Process List', 'ReaQta Trigger Events', 'SQL query results', 'Slack Conversations', 'Symantec SEP - EOC scan results', 'Symantec SEP - Endpoint details', 'Symantec SEP - Endpoint status summary', 'Symantec SEP - Fingerprint lists', 'Symantec SEP - Groups', 'Symantec SEP - Non-compliant Endpoints status details', 'Watson Search with Local Context results'. Any reference to these objects, as when used in a Condition, will also be removed.",
+        "type": "WARN"
+      },
+      {
+        "text": "The following objects do not contain any data and, therefore, can be safely deleted. Object Type: Phases. Objects: 'Custom'. Any reference to these objects, as when used in a Condition, will also be removed.",
+        "type": "WARN"
+      }
+    ],
+    "playbook": {
+      "activation_type": "manual",
+      "create_date": 1670358847912,
+      "creator_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "deployment_id": "playbook_8dd7415a_fb33_4144_ba51_491356741607",
+      "description": {
+        "format": "text",
+        "content": null
+      },
+      "display_name": "Sample Playbook",
+      "has_logical_errors": false,
+      "id": 211,
+      "is_deleted": false,
+      "is_locked": false,
+      "last_modified_principal": {
+        "display_name": "Resilient Sysadmin",
+        "id": 8,
+        "name": "a@example.com",
+        "type": "user"
+      },
+      "last_modified_time": 1670358848570,
+      "name": "sample_playbook",
+      "object_type": "incident",
+      "status": "draft",
+      "tag": {
+        "display_name": "Playbook_8dd7415a-fb33-4144-ba51-491356741607",
+        "id": 250,
+        "name": "playbook_8dd7415a_fb33_4144_ba51_491356741607",
+        "type": "playbook",
+        "uuid": "72ef5e10-3b89-4dd3-b23e-bcd90285ec6b"
+      },
+      "tags": [],
+      "type": "default",
+      "uuid": "8dd7415a-fb33-4144-ba51-491356741607",
+      "version": 3
+    },
+    "playbook_display_name": "Sample Playbook",
+    "playbook_name": "sample_playbook",
+    "status": "ACCEPTED"
+  },
+  "raw": null,
+  "inputs": {
+    "pbm_body": "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",
+    "pbm_base64_content": true
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-playbook-utils",
+    "package_version": "1.1.0",
+    "host": "localhost",
+    "execution_time_ms": 5522,
+    "timestamp": "2022-12-08 15:35:59"
+  }
+}

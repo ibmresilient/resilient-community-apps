@@ -1,0 +1,62 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": "ok",
+  "content": {
+    "query_status": "ok",
+    "id": "3183014",
+    "urlhaus_reference": "https://urlhaus.abuse.ch/url/3183014/",
+    "url": "http://94.156.65.232/arm6.nn",
+    "url_status": "online",
+    "host": "94.156.65.232",
+    "date_added": "2024-09-20 15:28:09 UTC",
+    "last_online": null,
+    "threat": "malware_download",
+    "blacklists": {
+      "spamhaus_dbl": "not listed",
+      "surbl": "not listed"
+    },
+    "reporter": "Try0",
+    "larted": "true",
+    "takedown_time_seconds": null,
+    "tags": [
+      "elf",
+      "GorillaBotnet",
+      "mirai",
+      "ua-wget"
+    ],
+    "payloads": [
+      {
+        "firstseen": "2024-09-20",
+        "filename": null,
+        "file_type": "elf",
+        "response_size": "128210",
+        "response_md5": "",
+        "response_sha256": "", 
+        "urlhaus_download": "https://urlhaus-api.abuse.ch/v1/download/81c775f9540a66fded643fe4ec53dbbf35742bd3b069d95d689da313fc9b80a9/",
+        "signature": null,
+        "virustotal": {
+          "result": "31 / 65",
+          "percent": "47.69",
+          "link": "https://www.virustotal.com/gui/file/81c775f9540a66fded643fe4ec53dbbf35742bd3b069d95d689da313fc9b80a9/detection/f-81c775f"
+        },
+        "imphash": null,
+        "ssdeep": "3072:Ymv6Z16i0qNNCXVak5C3fPzfDtudHm0WPZQk:9v6ZeECFa1jfMdHYPZT",
+        "tlsh": "T10FC33A0269528A13C1C617B9BAAF415D3722AB78C3DB3315D9147FB42F827DE0E3B6"
+      }
+    ]
+  },
+  "raw": "",
+  "inputs": {
+    "urlhaus_artifact_type": "URL",
+    "urlhaus_artifact_value": "http://94.156.65.232/arm6.nn"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-urlhaus",
+    "package_version": "1.0.3",
+    "host": "97472623-103e-44d1-a1da-c1d6296cbf8e-669f5f5bfc-sg65t",
+    "execution_time_ms": 599,
+    "timestamp": "2024-09-20 15:38:27"
+  }
+}

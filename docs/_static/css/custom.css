@@ -1,0 +1,19 @@
+/* This allows the "TOC" list on the landing page to be multi-column so that it isn't so crazy long */
+div .toctree-wrapper {
+    column-count: 2;
+    margin: 10px;
+}
+div .toctree-wrapper > ul { margin: 0; }
+ul .toctree-l1 {
+    margin: 0;
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid-column;
+}
+section#ibm-security-qradar-soar-apps .caption {
+    line-height: 0px;
+    margin-top: 0px;
+}
+section#ibm-security-qradar-soar-apps span.caption-text {
+    display: none;
+}
