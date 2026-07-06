@@ -32,6 +32,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.2.2 | 06/2026 | Bug fix for Comment Sync playbook: add condition to prevent re-syncing error notes back to Sentinel |
 | 2.2.1 | 04/2026 | Bug Fix for jinja2 template conflict |
 | 2.2.0 | 02/2025 | <ul><li>Add custom incident field: sentinel_incident_last_update to track updates from sentinel</li><li>Add app.config setting: clear_datatable=True|False in order to clear the Alert and Entities data table each time the contents are refreshed</li><li>Update all default jinja templates to escape double quotes.</li></ul> |
 | 2.1.3 | 12/2024 | Bug fix for Sentinel URL entities. |
@@ -852,7 +853,7 @@ None
 ## Playbooks
 | Playbook Name | Description | Activation Type | Object | Status | Condition | 
 | ------------- | ----------- | --------------- | ------ | ------ | --------- | 
-| Sentinel: Comment Sync - Example (PB) | Sync an Incident note to a Sentinel Incident comment. | Automatic | note | `enabled` | `incident.properties.sentinel_incident_number has_a_value AND note.text not_contains From Sentinel AND object_added AND (incident.properties.sentinel_profile has_a_value OR incident.properties.sentinel_label has_a_value)` | 
+| Sentinel: Comment Sync - Example (PB) | Sync an Incident note to a Sentinel Incident comment. | Automatic | note | `enabled` | `incident.properties.sentinel_incident_number has_a_value AND note.text not_contains From Sentinel AND object_added AND note.text not_contains Sentinel Comment Sync failed with reason AND (incident.properties.sentinel_profile has_a_value OR incident.properties.sentinel_label has_a_value)` | 
 | Sentinel: Get Incident Alerts - Example (PB) | Get alerts for a Sentinel Incident. | Manual | incident | `enabled` | `incident.properties.sentinel_incident_number has_a_value AND (incident.properties.sentinel_profile has_a_value OR incident.properties.sentinel_label has_a_value)` | 
 | Sentinel: Get Incident Comments - Example (PB) | Get Sentinel incident comments. | Manual | incident | `enabled` | `incident.properties.sentinel_incident_number has_a_value AND (incident.properties.sentinel_profile has_a_value OR incident.properties.sentinel_label has_a_value)` | 
 | Sentinel: Get Incident Entities - Example (PB) | Get Entities for a Sentinel Incident. | Manual | incident | `enabled` | `incident.properties.sentinel_incident_number has_a_value AND (incident.properties.sentinel_profile has_a_value OR incident.properties.sentinel_label has_a_value)` | 
@@ -921,7 +922,7 @@ sentinel_incident_entities
 | Sentinel Incident Classification Comment | `sentinel_incident_classification_comment` | `text` | `properties` | - | - |
 | Sentinel Incident Classification Reason | `sentinel_incident_classification_reason` | `text` | `properties` | - | - |
 | Sentinel Incident Last Modified Time UTC | `sentinel_incident_last_modified_time_utc` | `date time` | `properties` | - | - |
-| sentinel Incident Last Update | `sentinel_incident_last_update` | `date time` | `properties` | - | - |
+| Sentinel Incident Last Update | `sentinel_incident_last_update` | `date time` | `properties` | - | - |
 | Sentinel Incident ID | `sentinel_incident_id` | `text` | `properties` | - | - |
 | Sentinel Incident Labels | `sentinel_incident_labels` | `text` | `properties` | - | - |
 | Sentinel Incident Number | `sentinel_incident_number` | `text` | `properties` | - | - |
