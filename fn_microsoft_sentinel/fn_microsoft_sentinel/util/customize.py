@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2010, 2025. All Rights Reserved.
-# Generated with resilient-sdk v51.0.5.0.1475
+# (c) Copyright IBM Corp. 2010, 2026. All Rights Reserved.
+# # Generated with resilient-sdk v51.0.8.0.30103
 
 """Generate the SOAR customizations required for fn_microsoft_sentinel"""
 
@@ -74,7 +74,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 51.0.0.0.9339
+    IBM SOAR Platform Version: 51.0.8.0.20726
 
     Contents:
     - Message Destinations:
@@ -100,6 +100,7 @@ def customization_data(client=None):
         - sentinel_incident_id
         - sentinel_incident_labels
         - sentinel_incident_last_modified_time_utc
+        - sentinel_incident_last_update
         - sentinel_incident_number
         - sentinel_incident_status
         - sentinel_incident_tactics
