@@ -5,7 +5,7 @@
   "automatic_tasks": [],
   "case_matching_profiles": [],
   "connectors": null,
-  "export_date": 1780569994782,
+  "export_date": 1785493757221,
   "export_format_version": 2,
   "export_notes": null,
   "export_type": null,
@@ -20,7 +20,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param2",
       "hide_notification": false,
-      "id": 436,
+      "id": 1345,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -51,7 +51,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param3",
       "hide_notification": false,
-      "id": 437,
+      "id": 1346,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -82,7 +82,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_offense_id",
       "hide_notification": false,
-      "id": 438,
+      "id": 1347,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -113,7 +113,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param6",
       "hide_notification": false,
-      "id": 439,
+      "id": 1348,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -144,7 +144,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param4",
       "hide_notification": false,
-      "id": 440,
+      "id": 1349,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -175,7 +175,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_note",
       "hide_notification": false,
-      "id": 441,
+      "id": 1350,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -207,7 +207,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param1",
       "hide_notification": false,
-      "id": 442,
+      "id": 1351,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -238,7 +238,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_query_type",
       "hide_notification": false,
-      "id": 443,
+      "id": 1352,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -269,7 +269,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_query",
       "hide_notification": false,
-      "id": 444,
+      "id": 1353,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -285,7 +285,7 @@
       "tags": [],
       "templates": [
         {
-          "id": 1,
+          "id": 21,
           "name": "search ip address",
           "template": {
             "content": "SELECT %param1% FROM events WHERE sourceip=\u0027%param2%\u0027 LAST %param3% MINUTES",
@@ -294,7 +294,7 @@
           "uuid": "dcbdb7c8-2068-4e97-8127-57131cbdccbf"
         },
         {
-          "id": 2,
+          "id": 22,
           "name": "search events for username",
           "template": {
             "content": "SELECT %param1% FROM events WHERE username=%param2% LAST %param3% MINUTES",
@@ -303,7 +303,7 @@
           "uuid": "34fa3300-c28c-4346-8d3b-745a1afa75dc"
         },
         {
-          "id": 3,
+          "id": 23,
           "name": "search events for offense_id",
           "template": {
             "content": "SELECT %param1% FROM events WHERE INOFFENSE(%param2%) LAST %param3% MINUTES",
@@ -328,7 +328,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_search_param5",
       "hide_notification": false,
-      "id": 445,
+      "id": 1354,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -359,7 +359,7 @@
       "deprecated": false,
       "export_key": "__function/soar_table_name",
       "hide_notification": false,
-      "id": 446,
+      "id": 1355,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -390,7 +390,7 @@
       "deprecated": false,
       "export_key": "__function/qradar_label",
       "hide_notification": false,
-      "id": 447,
+      "id": 1356,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -421,7 +421,7 @@
       "deprecated": false,
       "export_key": "__function/soar_incident_id",
       "hide_notification": false,
-      "id": 448,
+      "id": 1357,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -452,7 +452,7 @@
       "deprecated": false,
       "export_key": "incident/qr_offense_status",
       "hide_notification": false,
-      "id": 344,
+      "id": 1254,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -483,7 +483,7 @@
       "deprecated": false,
       "export_key": "incident/qr_offense_last_updated_time",
       "hide_notification": false,
-      "id": 345,
+      "id": 1255,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -514,7 +514,7 @@
       "deprecated": false,
       "export_key": "incident/qr_flow_count",
       "hide_notification": false,
-      "id": 346,
+      "id": 1256,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -545,7 +545,7 @@
       "deprecated": false,
       "export_key": "incident/qradar_id",
       "hide_notification": false,
-      "id": 347,
+      "id": 1257,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -577,7 +577,7 @@
       "deprecated": false,
       "export_key": "incident/qr_offense_index_type",
       "hide_notification": false,
-      "id": 348,
+      "id": 1258,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -608,7 +608,7 @@
       "deprecated": false,
       "export_key": "incident/qr_assigned",
       "hide_notification": false,
-      "id": 349,
+      "id": 1259,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -639,7 +639,7 @@
       "deprecated": false,
       "export_key": "incident/qr_source_ip_count",
       "hide_notification": false,
-      "id": 350,
+      "id": 1260,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -670,7 +670,7 @@
       "deprecated": false,
       "export_key": "incident/qr_credibility",
       "hide_notification": false,
-      "id": 351,
+      "id": 1261,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -701,7 +701,7 @@
       "deprecated": false,
       "export_key": "incident/qr_relevance",
       "hide_notification": false,
-      "id": 352,
+      "id": 1262,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -732,7 +732,7 @@
       "deprecated": false,
       "export_key": "incident/qr_offense_index_value",
       "hide_notification": false,
-      "id": 353,
+      "id": 1263,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -763,7 +763,7 @@
       "deprecated": false,
       "export_key": "incident/qr_offense_start_time",
       "hide_notification": false,
-      "id": 354,
+      "id": 1264,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -794,7 +794,7 @@
       "deprecated": false,
       "export_key": "incident/qr_severity",
       "hide_notification": false,
-      "id": 355,
+      "id": 1265,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -825,7 +825,7 @@
       "deprecated": false,
       "export_key": "incident/qr_last_updated_time",
       "hide_notification": false,
-      "id": 356,
+      "id": 1266,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
@@ -856,7 +856,7 @@
       "deprecated": false,
       "export_key": "incident/qradar_destination",
       "hide_notification": false,
-      "id": 357,
+      "id": 1267,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -887,7 +887,7 @@
       "deprecated": false,
       "export_key": "incident/qr_event_count",
       "hide_notification": false,
-      "id": 358,
+      "id": 1268,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -918,7 +918,7 @@
       "deprecated": false,
       "export_key": "incident/qr_offense_domain",
       "hide_notification": false,
-      "id": 359,
+      "id": 1269,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -949,7 +949,7 @@
       "deprecated": false,
       "export_key": "incident/qr_destination_ip_count",
       "hide_notification": false,
-      "id": 360,
+      "id": 1270,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -980,7 +980,7 @@
       "deprecated": false,
       "export_key": "incident/qr_offense_source",
       "hide_notification": false,
-      "id": 361,
+      "id": 1271,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -1011,7 +1011,7 @@
       "deprecated": false,
       "export_key": "incident/qr_magnitude",
       "hide_notification": false,
-      "id": 362,
+      "id": 1272,
       "input_type": "textarea",
       "internal": false,
       "is_tracked": false,
@@ -1046,7 +1046,7 @@
   ],
   "functions": [
     {
-      "created_date": 1780569677613,
+      "created_date": 1785493727474,
       "description": {
         "content": "Create a note on the linked QRadar offense.",
         "format": "text"
@@ -1054,14 +1054,14 @@
       "destination_handle": "fn_qradar_enhanced_data",
       "display_name": "QRadar Create Note",
       "export_key": "qradar_create_note",
-      "id": 1,
+      "id": 189,
       "last_modified_by": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569677613,
+      "last_modified_time": 1785493727474,
       "name": "qradar_create_note",
       "output_description": {
         "content": null,
@@ -1101,7 +1101,7 @@
       "workflows": []
     },
     {
-      "created_date": 1780569677673,
+      "created_date": 1785493727626,
       "description": {
         "content": "Get the MITRE Tactics and Techniques in relation to the rules that were fired to cause the offense in QRadar.",
         "format": "text"
@@ -1109,14 +1109,14 @@
       "destination_handle": "fn_qradar_enhanced_data",
       "display_name": "QRadar Get Offense MITRE Reference",
       "export_key": "qradar_get_offense_mitre_reference",
-      "id": 2,
+      "id": 190,
       "last_modified_by": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569677673,
+      "last_modified_time": 1785493727626,
       "name": "qradar_get_offense_mitre_reference",
       "output_description": {
         "content": null,
@@ -1164,7 +1164,7 @@
       "workflows": []
     },
     {
-      "created_date": 1780569677731,
+      "created_date": 1785493727734,
       "description": {
         "content": "Fetch QRadar Offense Details",
         "format": "text"
@@ -1172,14 +1172,14 @@
       "destination_handle": "fn_qradar_enhanced_data",
       "display_name": "QRadar Offense Summary",
       "export_key": "qradar_offense_summary",
-      "id": 3,
+      "id": 191,
       "last_modified_by": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569677731,
+      "last_modified_time": 1785493727734,
       "name": "qradar_offense_summary",
       "output_description": {
         "content": null,
@@ -1235,7 +1235,7 @@
       "workflows": []
     },
     {
-      "created_date": 1780569677770,
+      "created_date": 1785493727848,
       "description": {
         "content": "Search QRadar Top events for the given Offense ID",
         "format": "text"
@@ -1243,14 +1243,14 @@
       "destination_handle": "fn_qradar_enhanced_data",
       "display_name": "QRadar Top Events",
       "export_key": "qradar_top_events",
-      "id": 4,
+      "id": 192,
       "last_modified_by": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569677770,
+      "last_modified_time": 1785493727848,
       "name": "qradar_top_events",
       "output_description": {
         "content": null,
@@ -1356,7 +1356,7 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 1,
+  "id": 34,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [
@@ -1597,7 +1597,7 @@
   ],
   "incident_types": [
     {
-      "create_date": 1780569992873,
+      "create_date": 1785493755408,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1606,7 +1606,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1780569992873,
+      "update_date": 1785493755408,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1614,16 +1614,16 @@
   "locale": null,
   "message_destinations": [
     {
-      "api_keys": [
-        "2683b631-db4a-4209-baaf-2ee08660fbeb"
-      ],
+      "api_keys": [],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "fn_qradar_enhanced_data",
       "name": "fn_qradar_enhanced_data",
       "programmatic_name": "fn_qradar_enhanced_data",
       "tags": [],
-      "users": [],
+      "users": [
+        "admin@example.com"
+      ],
       "uuid": "2aafea6c-1710-4b20-98a7-3b495b210d44"
     }
   ],
@@ -1637,12 +1637,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8f357d68_b01e_4d26_b47a_d7ce1099a461\" isExecutable=\"true\" name=\"playbook_8f357d68_b01e_4d26_b47a_d7ce1099a461\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0z4owrm\u003c/outgoing\u003e\u003c/startEvent\u003e\u003csequenceFlow id=\"Flow_0z4owrm\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_3\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_19nh03c\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Create Artifact from Assets info PB\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"2e3b5849-dd9f-447b-8e7e-6352f03400e0\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0z4owrm\u003c/incoming\u003e\u003coutgoing\u003eFlow_19nh03c\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_19nh03c\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8f357d68_b01e_4d26_b47a_d7ce1099a461\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_19nh03c\" id=\"Flow_19nh03c_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"344\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0z4owrm\" id=\"Flow_0z4owrm_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"344\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569678139,
+      "create_date": 1785493728749,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_8f357d68_b01e_4d26_b47a_d7ce1099a461",
       "description": {
@@ -1667,7 +1667,7 @@
             "deprecated": false,
             "export_key": "playbook_8f357d68_b01e_4d26_b47a_d7ce1099a461/select_to_create_artifact_from_asset_info",
             "hide_notification": false,
-            "id": 449,
+            "id": 1358,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
@@ -1684,7 +1684,7 @@
             "templates": [],
             "text": "Select to create artifact from asset info",
             "tooltip": "",
-            "type_id": 1008,
+            "type_id": 1068,
             "uuid": "3d376bf5-4fe5-410f-8376-08379db4999f",
             "values": [
               {
@@ -1694,7 +1694,7 @@
                 "label": "Name",
                 "properties": null,
                 "uuid": "c17f6366-5726-4128-ba18-ba7590605346",
-                "value": 1201
+                "value": 17601
               },
               {
                 "default": false,
@@ -1703,7 +1703,7 @@
                 "label": "IP Address",
                 "properties": null,
                 "uuid": "abf8cd25-fe8d-47f4-be11-c12e2dd808cb",
-                "value": 1251
+                "value": 17651
               }
             ]
           }
@@ -1728,27 +1728,27 @@
         "uuid": "e8727f01-77e3-4228-b29e-6e07f13e96f2"
       },
       "has_logical_errors": false,
-      "id": 1,
+      "id": 56,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569678872,
+      "last_modified_time": 1785493729627,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1780569678236,
+          "created_date": 1785493728936,
           "description": "",
           "enabled": false,
           "export_key": "Create Artifact from Assets info PB",
-          "id": 3,
+          "id": 73,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569678236,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493728936,
           "name": "Create Artifact from Assets info PB",
           "object_type": "qr_assets",
           "playbook_handle": "create_artifact_from_assets_info_pb",
@@ -1777,22 +1777,22 @@
       "name": "create_artifact_from_assets_info_pb",
       "object_type": "qr_assets",
       "playbook_change_log_info": {
-        "change_log_id": 1,
+        "change_log_id": 153,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569678659,
+        "create_date": 1785493729348,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_8f357d68-b01e-4d26-b47a-d7ce1099a461",
-        "id": 1,
+        "id": 60,
         "name": "playbook_8f357d68_b01e_4d26_b47a_d7ce1099a461",
         "type": "playbook",
         "uuid": "247d7e65-e0a4-436f-8936-1538d214f1de"
@@ -1808,12 +1808,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_609015b6_02d6_4051_ae3d_db5d28d4ed54\" isExecutable=\"true\" name=\"playbook_609015b6_02d6_4051_ae3d_db5d28d4ed54\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1xe132a\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_1\" name=\"Create Artifact from Destination IP info PB\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"c5c66c31-6c93-4b9d-a7e9-d59355ea4222\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1xe132a\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ukkslb\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1xe132a\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1ukkslb\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1ukkslb\" sourceRef=\"ScriptTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_609015b6_02d6_4051_ae3d_db5d28d4ed54\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ukkslb\" id=\"Flow_1ukkslb_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"354\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1xe132a\" id=\"Flow_1xe132a_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1\" id=\"ScriptTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"354\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569678852,
+      "create_date": 1785493729587,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_609015b6_02d6_4051_ae3d_db5d28d4ed54",
       "description": {
@@ -1838,7 +1838,7 @@
             "deprecated": false,
             "export_key": "playbook_609015b6_02d6_4051_ae3d_db5d28d4ed54/select_to_create_artifact_from_destination_info",
             "hide_notification": false,
-            "id": 450,
+            "id": 1359,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
@@ -1855,7 +1855,7 @@
             "templates": [],
             "text": "Select to create artifact from destination info",
             "tooltip": "",
-            "type_id": 1009,
+            "type_id": 1069,
             "uuid": "721a9b42-c589-4b3c-b532-877649d6780b",
             "values": [
               {
@@ -1865,7 +1865,7 @@
                 "label": "Destination IP",
                 "properties": null,
                 "uuid": "72a9b7bc-f6ef-44ad-82b3-5ed136689bda",
-                "value": 1301
+                "value": 17701
               }
             ]
           }
@@ -1890,27 +1890,27 @@
         "uuid": "6bb7a75b-e93f-4f89-9f6f-8496fd448ab4"
       },
       "has_logical_errors": false,
-      "id": 2,
+      "id": 57,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569679341,
+      "last_modified_time": 1785493730471,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1780569678950,
+          "created_date": 1785493729793,
           "description": "",
           "enabled": false,
           "export_key": "Create Artifact from Destination IP info PB",
-          "id": 4,
+          "id": 74,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569678950,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493729793,
           "name": "Create Artifact from Destination IP info PB",
           "object_type": "qr_top_destination_ips",
           "playbook_handle": "create_artifact_from_destination_ip_info_pb",
@@ -1939,22 +1939,22 @@
       "name": "create_artifact_from_destination_ip_info_pb",
       "object_type": "qr_top_destination_ips",
       "playbook_change_log_info": {
-        "change_log_id": 2,
+        "change_log_id": 154,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569679204,
+        "create_date": 1785493730183,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_609015b6-02d6-4051-ae3d-db5d28d4ed54",
-        "id": 2,
+        "id": 61,
         "name": "playbook_609015b6_02d6_4051_ae3d_db5d28d4ed54",
         "type": "playbook",
         "uuid": "065ddef4-7104-4afc-bdff-e6650bc6af98"
@@ -1970,12 +1970,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_92e5c6a7_db11_47e1_a8db_81a9a54ab50c\" isExecutable=\"true\" name=\"playbook_92e5c6a7_db11_47e1_a8db_81a9a54ab50c\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1s8h9p6\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_1\" name=\"Create Artifact from Events info PB\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"51eb78a0-7e9a-489b-9471-a0ba2fe71582\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1s8h9p6\u003c/incoming\u003e\u003coutgoing\u003eFlow_0y0526u\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1s8h9p6\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0y0526u\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0y0526u\" sourceRef=\"ScriptTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_92e5c6a7_db11_47e1_a8db_81a9a54ab50c\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0y0526u\" id=\"Flow_0y0526u_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"394\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1s8h9p6\" id=\"Flow_1s8h9p6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1\" id=\"ScriptTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"394\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569679323,
+      "create_date": 1785493730428,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_92e5c6a7_db11_47e1_a8db_81a9a54ab50c",
       "description": {
@@ -2000,7 +2000,7 @@
             "deprecated": false,
             "export_key": "playbook_92e5c6a7_db11_47e1_a8db_81a9a54ab50c/select_to_create_artifact_from_events_info",
             "hide_notification": false,
-            "id": 451,
+            "id": 1360,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
@@ -2018,7 +2018,7 @@
             "templates": [],
             "text": "Select to create artifact from events info",
             "tooltip": "",
-            "type_id": 1010,
+            "type_id": 1070,
             "uuid": "34a37d1d-415b-4b20-9cc5-6d0561080fbf",
             "values": [
               {
@@ -2028,7 +2028,7 @@
                 "label": "Source IP",
                 "properties": null,
                 "uuid": "8114dd45-623e-4567-8465-a7bde651f91e",
-                "value": 1351
+                "value": 17751
               },
               {
                 "default": false,
@@ -2037,7 +2037,7 @@
                 "label": "Destination IP",
                 "properties": null,
                 "uuid": "20cc3400-6676-4570-94ae-c9fa282a56d8",
-                "value": 1401
+                "value": 17801
               },
               {
                 "default": false,
@@ -2046,7 +2046,7 @@
                 "label": "Username",
                 "properties": null,
                 "uuid": "ba5a2b37-066c-4444-bc22-ebb06fd0322d",
-                "value": 1451
+                "value": 17851
               }
             ]
           }
@@ -2071,27 +2071,27 @@
         "uuid": "f23ff144-8166-4441-8bda-d9d19b241095"
       },
       "has_logical_errors": false,
-      "id": 3,
+      "id": 58,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569679805,
+      "last_modified_time": 1785493731294,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1780569679408,
+          "created_date": 1785493730633,
           "description": "",
           "enabled": false,
           "export_key": "Create Artifact from Events info PB",
-          "id": 5,
+          "id": 75,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569679408,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493730633,
           "name": "Create Artifact from Events info PB",
           "object_type": "qr_offense_top_events",
           "playbook_handle": "create_artifact_from_events_info_pb",
@@ -2120,22 +2120,22 @@
       "name": "create_artifact_from_events_info_pb",
       "object_type": "qr_offense_top_events",
       "playbook_change_log_info": {
-        "change_log_id": 3,
+        "change_log_id": 155,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569679664,
+        "create_date": 1785493731024,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_92e5c6a7-db11-47e1-a8db-81a9a54ab50c",
-        "id": 3,
+        "id": 62,
         "name": "playbook_92e5c6a7_db11_47e1_a8db_81a9a54ab50c",
         "type": "playbook",
         "uuid": "b6378186-5813-4c78-97cc-4efb558e85b2"
@@ -2151,12 +2151,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_1fecf133_3ace_4cc1_b18c_5c33892511fd\" isExecutable=\"true\" name=\"playbook_1fecf133_3ace_4cc1_b18c_5c33892511fd\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1cksz18\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_1\" name=\"Create Artifact from Source IP info PB\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"6f06944e-0bbc-4e82-bf7b-1e3bb7ea5968\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1cksz18\u003c/incoming\u003e\u003coutgoing\u003eFlow_0h36vny\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1cksz18\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0h36vny\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0h36vny\" sourceRef=\"ScriptTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_1fecf133_3ace_4cc1_b18c_5c33892511fd\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1cksz18\" id=\"Flow_1cksz18_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0h36vny\" id=\"Flow_0h36vny_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"344\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1\" id=\"ScriptTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"344\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569679784,
+      "create_date": 1785493731255,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_1fecf133_3ace_4cc1_b18c_5c33892511fd",
       "description": {
@@ -2181,7 +2181,7 @@
             "deprecated": false,
             "export_key": "playbook_1fecf133_3ace_4cc1_b18c_5c33892511fd/select_to_create_artifact_from_source_info",
             "hide_notification": false,
-            "id": 452,
+            "id": 1361,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
@@ -2198,7 +2198,7 @@
             "templates": [],
             "text": "Select to create artifact from source info",
             "tooltip": "",
-            "type_id": 1011,
+            "type_id": 1071,
             "uuid": "040e09c9-0059-4dcb-b113-a8fa5a56f1c7",
             "values": [
               {
@@ -2208,7 +2208,7 @@
                 "label": "Source IP",
                 "properties": null,
                 "uuid": "a3e5c0f4-e207-424d-93e9-83e57e1276ca",
-                "value": 1501
+                "value": 17901
               },
               {
                 "default": false,
@@ -2217,7 +2217,7 @@
                 "label": "MAC",
                 "properties": null,
                 "uuid": "a25009fd-1a01-4d92-a1e2-862467ba0c6c",
-                "value": 1551
+                "value": 17951
               }
             ]
           }
@@ -2242,27 +2242,27 @@
         "uuid": "cb0c38c2-cd20-43de-894a-a864ff86b23a"
       },
       "has_logical_errors": false,
-      "id": 4,
+      "id": 59,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569680303,
+      "last_modified_time": 1785493732137,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1780569679881,
+          "created_date": 1785493731454,
           "description": "",
           "enabled": false,
           "export_key": "Create Artifact from Source IP info PB",
-          "id": 6,
+          "id": 76,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569679881,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493731454,
           "name": "Create Artifact from Source IP info PB",
           "object_type": "qr_top_source_ips",
           "playbook_handle": "create_artifact_from_source_ip_info_pb",
@@ -2291,22 +2291,22 @@
       "name": "create_artifact_from_source_ip_info_pb",
       "object_type": "qr_top_source_ips",
       "playbook_change_log_info": {
-        "change_log_id": 4,
+        "change_log_id": 156,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569680151,
+        "create_date": 1785493731865,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_1fecf133-3ace-4cc1-b18c-5c33892511fd",
-        "id": 4,
+        "id": 63,
         "name": "playbook_1fecf133_3ace_4cc1_b18c_5c33892511fd",
         "type": "playbook",
         "uuid": "de49b3e9-b037-415d-8d5b-bda2190e8365"
@@ -2322,12 +2322,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2d820c89_e1a6_47b9_86f9_20bf55ff1179\" isExecutable=\"true\" name=\"playbook_2d820c89_e1a6_47b9_86f9_20bf55ff1179\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0vmkv1a\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_1\" name=\"Create Artifact from Flows info PB\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"41cfe9e2-e24f-4c90-b40c-bb4c47160a48\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0vmkv1a\u003c/incoming\u003e\u003coutgoing\u003eFlow_09nwlym\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0vmkv1a\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_09nwlym\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_09nwlym\" sourceRef=\"ScriptTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2d820c89_e1a6_47b9_86f9_20bf55ff1179\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0vmkv1a\" id=\"Flow_0vmkv1a_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09nwlym\" id=\"Flow_09nwlym_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"364\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1\" id=\"ScriptTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"364\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569680282,
+      "create_date": 1785493732097,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_2d820c89_e1a6_47b9_86f9_20bf55ff1179",
       "description": {
@@ -2352,7 +2352,7 @@
             "deprecated": false,
             "export_key": "playbook_2d820c89_e1a6_47b9_86f9_20bf55ff1179/select_to_create_artifact_from_flows_info",
             "hide_notification": false,
-            "id": 453,
+            "id": 1362,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
@@ -2370,7 +2370,7 @@
             "templates": [],
             "text": "Select to create artifact from flows info",
             "tooltip": "",
-            "type_id": 1012,
+            "type_id": 1072,
             "uuid": "3f61927d-bb23-4e3a-9764-e9d4ed8e54c7",
             "values": [
               {
@@ -2380,7 +2380,7 @@
                 "label": "Source IP",
                 "properties": null,
                 "uuid": "c7fe827f-1e93-4f06-8b6b-597f0ac7d4dd",
-                "value": 1601
+                "value": 18001
               },
               {
                 "default": false,
@@ -2389,7 +2389,7 @@
                 "label": "Source Port",
                 "properties": null,
                 "uuid": "c0a79680-662a-4802-b92d-4c9516428d24",
-                "value": 1651
+                "value": 18051
               },
               {
                 "default": false,
@@ -2398,7 +2398,7 @@
                 "label": "Destination IP",
                 "properties": null,
                 "uuid": "f5e2cf28-1892-48fc-a178-599654d5b200",
-                "value": 1701
+                "value": 18101
               },
               {
                 "default": false,
@@ -2407,7 +2407,7 @@
                 "label": "Destination Port",
                 "properties": null,
                 "uuid": "bc210807-69df-49c3-9333-ea86362dbb16",
-                "value": 1751
+                "value": 18151
               }
             ]
           }
@@ -2432,27 +2432,27 @@
         "uuid": "735fbe78-62e2-4d99-a77b-44d8036bf8e8"
       },
       "has_logical_errors": false,
-      "id": 5,
+      "id": 60,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569680757,
+      "last_modified_time": 1785493733009,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1780569680378,
+          "created_date": 1785493732305,
           "description": "",
           "enabled": false,
           "export_key": "Create Artifact from Flows info PB",
-          "id": 7,
+          "id": 77,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569680378,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493732305,
           "name": "Create Artifact from Flows info PB",
           "object_type": "qr_flows",
           "playbook_handle": "create_artifacts_from_flows_info_pb",
@@ -2481,22 +2481,22 @@
       "name": "create_artifacts_from_flows_info_pb",
       "object_type": "qr_flows",
       "playbook_change_log_info": {
-        "change_log_id": 5,
+        "change_log_id": 157,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569680613,
+        "create_date": 1785493732739,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_2d820c89-e1a6-47b9-86f9-20bf55ff1179",
-        "id": 5,
+        "id": 64,
         "name": "playbook_2d820c89_e1a6_47b9_86f9_20bf55ff1179",
         "type": "playbook",
         "uuid": "2a0495e2-1151-4bae-9936-01ea6594ceec"
@@ -2512,12 +2512,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_15cdb367_4f7e_4fb7_bd8d_d58fe4d3a683\" isExecutable=\"true\" name=\"playbook_15cdb367_4f7e_4fb7_bd8d_d58fe4d3a683\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0rzigwb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_offense_id = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"offenserules\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_triggered_rules\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"rules_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rzigwb\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vs868k\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0rzigwb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Example of fetching contributing rules for Offense\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"1284c670-0874-49f6-820b-a03590e4eb1a\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1vs868k\u003c/incoming\u003e\u003coutgoing\u003eFlow_1nz6rrc\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1vs868k\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cextensionElements\u003e\u003cresilient:endEvent\u003e{\"script\":\"results = playbook.functions.results.rules_result\\nif results.get(\\\"success\\\"):\\n  playbook.results = {\\\"success\\\": True}\\nelse:\\n  playbook.results = {\\\"success\\\": False}\",\"script_language\":\"python3\"}\u003c/resilient:endEvent\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1nz6rrc\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1nz6rrc\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_15cdb367_4f7e_4fb7_bd8d_d58fe4d3a683\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1nz6rrc\" id=\"Flow_1nz6rrc_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vs868k\" id=\"Flow_1vs868k_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rzigwb\" id=\"Flow_0rzigwb_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"136.73329999999999\" x=\"662\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569680737,
+      "create_date": 1785493732967,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_15cdb367_4f7e_4fb7_bd8d_d58fe4d3a683",
       "description": {
@@ -2552,27 +2552,27 @@
         "uuid": "011cb519-2a67-4e6f-9b82-e801e084855b"
       },
       "has_logical_errors": false,
-      "id": 6,
+      "id": 61,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569681223,
+      "last_modified_time": 1785493733714,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1780569680814,
+          "created_date": 1785493733111,
           "description": "",
           "enabled": false,
           "export_key": "Example of fetching contributing rules for Offense",
-          "id": 8,
+          "id": 78,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569680814,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493733111,
           "name": "Example of fetching contributing rules for Offense",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_fetching_contributing_rules_for_offense",
@@ -2585,16 +2585,16 @@
       "name": "subplaybook_example_of_fetching_contributing_rules_for_offense",
       "object_type": "incident",
       "playbook_change_log_info": {
-        "change_log_id": 6,
+        "change_log_id": 158,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569681090,
+        "create_date": 1785493733520,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "enabled",
@@ -2610,7 +2610,7 @@
       },
       "tag": {
         "display_name": "Playbook_15cdb367-4f7e-4fb7-bd8d-d58fe4d3a683",
-        "id": 6,
+        "id": 65,
         "name": "playbook_15cdb367_4f7e_4fb7_bd8d_d58fe4d3a683",
         "type": "playbook",
         "uuid": "3d7fd62b-4843-4aa3-a472-6754ce65cc47"
@@ -2626,12 +2626,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_74bc42a0_f254_483c_933a_3af988578a5b\" isExecutable=\"true\" name=\"playbook_74bc42a0_f254_483c_933a_3af988578a5b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0rxvtqb\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query_type = \\\"offenseassets\\\"\\ninputs.qradar_offense_id = incident.properties.qradar_id\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_assets\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"asset_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0rxvtqb\u003c/incoming\u003e\u003coutgoing\u003eFlow_0k74puk\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0rxvtqb\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Example of searching and returning Assets information\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"bb0b466c-8efd-41ad-aff8-47b108aa0d51\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0k74puk\u003c/incoming\u003e\u003coutgoing\u003eFlow_0dsr6d0\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0k74puk\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cextensionElements\u003e\u003cresilient:endEvent\u003e{\"script\":\"results = playbook.functions.results.asset_result\\nif results.get(\\\"success\\\"):\\n  playbook.results = {\\\"success\\\": True}\\nelse:\\n  playbook.results = {\\\"success\\\": False}\",\"script_language\":\"python3\"}\u003c/resilient:endEvent\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0dsr6d0\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0dsr6d0\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_74bc42a0_f254_483c_933a_3af988578a5b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0dsr6d0\" id=\"Flow_0dsr6d0_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"452\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0k74puk\" id=\"Flow_0k74puk_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"368\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0rxvtqb\" id=\"Flow_0rxvtqb_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"136.73329999999999\" x=\"662\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"368\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569681234,
+      "create_date": 1785493733733,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_74bc42a0_f254_483c_933a_3af988578a5b",
       "description": {
@@ -2666,27 +2666,27 @@
         "uuid": "8d9d56ce-c5e7-4b7f-b115-5e2fdbae1aa3"
       },
       "has_logical_errors": false,
-      "id": 7,
+      "id": 62,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569681715,
+      "last_modified_time": 1785493734502,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1780569681303,
+          "created_date": 1785493733875,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Assets information",
-          "id": 9,
+          "id": 79,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569681303,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493733875,
           "name": "Example of searching and returning Assets information",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_and_returning_assets_information",
@@ -2699,16 +2699,16 @@
       "name": "subplaybook_example_of_searching_and_returning_assets_information",
       "object_type": "incident",
       "playbook_change_log_info": {
-        "change_log_id": 7,
+        "change_log_id": 159,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569681560,
+        "create_date": 1785493734303,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "enabled",
@@ -2724,7 +2724,7 @@
       },
       "tag": {
         "display_name": "Playbook_74bc42a0-f254-483c-933a-3af988578a5b",
-        "id": 7,
+        "id": 66,
         "name": "playbook_74bc42a0_f254_483c_933a_3af988578a5b",
         "type": "playbook",
         "uuid": "c50c9c75-fec4-4a24-9d3c-770a6ec35404"
@@ -2740,12 +2740,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_6d8976e3_5771_4a6a_8619_65e29c94eed9\" isExecutable=\"true\" name=\"playbook_6d8976e3_5771_4a6a_8619_65e29c94eed9\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1kz4h5r\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0u21q6n\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query = \\\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60\\\"\\ninputs.qradar_search_param1 = \\\"CATEGORYNAME(category) as categoryname,magnitude as magnitude,SUM(eventcount) as eventcount,max(starttime) as eventtime,UNIQUECOUNT(sourceip) as sourceipcount,UNIQUECOUNT(destinationip) as destinationipcount\\\"\\ninputs.qradar_search_param2 = \\\"WHERE INOFFENSE(%param3%)\\\"\\ninputs.qradar_search_param4 = \\\"GROUP BY category,magnitude\\\"\\ninputs.qradar_search_param5 = \\\"ORDER BY max(starttime) DESC\\\"\\ninputs.qradar_search_param6 = \\\"LIMIT 10\\\"\\ninputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"categories\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_categories\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"categories_events_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1kz4h5r\u003c/incoming\u003e\u003coutgoing\u003eFlow_0vxphlt\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query = \\\"SELECT %param1% FROM flows %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60\\\"\\ninputs.qradar_search_param1 = \\\"CATEGORYNAME(category) as categoryname,COUNT(*) as flowcount,max(lastpackettime) as lastpackettime,UNIQUECOUNT(sourceip) as sourceipcount,UNIQUECOUNT(destinationip) as destinationipcount\\\"\\ninputs.qradar_search_param2 = \\\"WHERE INOFFENSE(%param3%)\\\"\\ninputs.qradar_search_param4 = \\\"GROUP BY category\\\"\\ninputs.qradar_search_param5 = \\\"ORDER BY lastpackettime DESC\\\"\\ninputs.qradar_search_param6 = \\\"LIMIT 10\\\"\\ninputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"categories\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_table_name = \\\"qr_categories\\\"\\ninputs.soar_incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"categories_flows_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0u21q6n\u003c/incoming\u003e\u003coutgoing\u003eFlow_03g44tq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1kz4h5r\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0u21q6n\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Example of searching and returning Categories Events\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"d250ebff-fae8-4513-ba26-6fa9951e2923\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0vxphlt\u003c/incoming\u003e\u003coutgoing\u003eFlow_0p6itp5\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0vxphlt\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Example of searching and returning Categories Flows\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"a19a08f5-df64-4578-86af-84fa9dca6755\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_03g44tq\u003c/incoming\u003e\u003coutgoing\u003eFlow_0e75ukj\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_03g44tq\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_4\"/\u003e\u003cendEvent id=\"EndPoint_5\" resilient:documentation=\"End point\"\u003e\u003cextensionElements\u003e\u003cresilient:endEvent\u003e{\"script\":\"cat_events = playbook.functions.results.categories_events_result\\ncat_flows = playbook.functions.results.categories_flows_result\\nif cat_events.get(\\\"success\\\") and cat_flows.get(\\\"success\\\"):\\n  playbook.results = {\\\"success\\\": True}\\nelse:\\n  playbook.results = {\\\"success\\\": False}\",\"script_language\":\"python3\"}\u003c/resilient:endEvent\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1iubvai\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0p6itp5\" sourceRef=\"ScriptTask_3\" targetRef=\"CollectionPoint_6\"/\u003e\u003csequenceFlow id=\"Flow_0e75ukj\" sourceRef=\"ScriptTask_4\" targetRef=\"CollectionPoint_6\"/\u003e\u003cparallelGateway id=\"CollectionPoint_6\" resilient:documentation=\"Wait point\"\u003e\u003cincoming\u003eFlow_0e75ukj\u003c/incoming\u003e\u003cincoming\u003eFlow_0p6itp5\u003c/incoming\u003e\u003coutgoing\u003eFlow_1iubvai\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"Flow_1iubvai\" sourceRef=\"CollectionPoint_6\" targetRef=\"EndPoint_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_6d8976e3_5771_4a6a_8619_65e29c94eed9\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1iubvai\" id=\"Flow_1iubvai_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"536\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"564\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0e75ukj\" id=\"Flow_0e75ukj_di\"\u003e\u003comgdi:waypoint x=\"870\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"870\" y=\"443\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"443\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0p6itp5\" id=\"Flow_0p6itp5_di\"\u003e\u003comgdi:waypoint x=\"610\" y=\"412\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"443\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"443\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03g44tq\" id=\"Flow_03g44tq_di\"\u003e\u003comgdi:waypoint x=\"870\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"870\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0vxphlt\" id=\"Flow_0vxphlt_di\"\u003e\u003comgdi:waypoint x=\"610\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"328\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0u21q6n\" id=\"Flow_0u21q6n_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"870\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"870\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1kz4h5r\" id=\"Flow_1kz4h5r_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"610\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"136.73329999999999\" x=\"662\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"512\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"772\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"512\" y=\"327.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"772\" y=\"327.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_5\" id=\"EndPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"564\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CollectionPoint_6\" id=\"CollectionPoint_6_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"137.13330000000002\" x=\"661\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569681724,
+      "create_date": 1785493734516,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_6d8976e3_5771_4a6a_8619_65e29c94eed9",
       "description": {
@@ -2780,27 +2780,27 @@
         "uuid": "ebe4c9cd-6f44-41f5-896f-c5fc46a64999"
       },
       "has_logical_errors": false,
-      "id": 8,
+      "id": 63,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569682309,
+      "last_modified_time": 1785493735292,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1780569681799,
+          "created_date": 1785493734660,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Categories Events",
-          "id": 10,
+          "id": 80,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569681799,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493734660,
           "name": "Example of searching and returning Categories Events",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_and_returning_categories",
@@ -2811,14 +2811,14 @@
         },
         {
           "actions": [],
-          "created_date": 1780569681823,
+          "created_date": 1785493734702,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Categories Flows",
-          "id": 11,
+          "id": 81,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569681823,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493734702,
           "name": "Example of searching and returning Categories Flows",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_and_returning_categories",
@@ -2831,16 +2831,16 @@
       "name": "subplaybook_example_of_searching_and_returning_categories",
       "object_type": "incident",
       "playbook_change_log_info": {
-        "change_log_id": 8,
+        "change_log_id": 160,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569682139,
+        "create_date": 1785493735090,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "enabled",
@@ -2856,7 +2856,7 @@
       },
       "tag": {
         "display_name": "Playbook_6d8976e3-5771-4a6a-8619-65e29c94eed9",
-        "id": 8,
+        "id": 67,
         "name": "playbook_6d8976e3_5771_4a6a_8619_65e29c94eed9",
         "type": "playbook",
         "uuid": "77f0a8b2-4c45-40c7-88bc-9150692a56e4"
@@ -2872,12 +2872,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_81555e02_228c_4202_8a10_bc394439ee7e\" isExecutable=\"true\" name=\"playbook_81555e02_228c_4202_8a10_bc394439ee7e\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1e9m9kh\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1nzsuss\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query = \\\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60\\\"\\ninputs.qradar_search_param1 = \\\"destinationip as destinationip,UNIQUECOUNT(category) as categorycount,SUM(eventcount) as eventcount,max(starttime)\\\"\\ninputs.qradar_search_param2 = \\\"WHERE INOFFENSE(%param3%)\\\"\\ninputs.qradar_search_param4 = \\\"GROUP BY destinationip\\\"\\ninputs.qradar_search_param5 = \\\"ORDER BY max(starttime) DESC\\\"\\ninputs.qradar_search_param6 = \\\"LIMIT 10\\\"\\ninputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"destinationip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_destination_ips\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"ip_info_events\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1e9m9kh\u003c/incoming\u003e\u003coutgoing\u003eFlow_1lvgfmd\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query = \\\"SELECT %param1% FROM flows %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60\\\"\\ninputs.qradar_search_param1 = \\\"destinationip as destinationip,UNIQUECOUNT(category) as categorycount,COUNT(*) as flowcount,max(lastpackettime)\\\"\\ninputs.qradar_search_param2 = \\\"WHERE INOFFENSE(%param3%)\\\"\\ninputs.qradar_search_param4 = \\\"GROUP BY destinationip\\\"\\ninputs.qradar_search_param5 = \\\"ORDER BY max(lastpackettime) DESC\\\"\\ninputs.qradar_search_param6 = \\\"LIMIT 10\\\"\\ninputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"destinationip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_destination_ips\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"ip_info_flows\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1nzsuss\u003c/incoming\u003e\u003coutgoing\u003eFlow_00as3zm\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1e9m9kh\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1nzsuss\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Example of searching and returning Destination IPs information Events\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"aedaf4a3-0d54-4e18-aeaa-d944e6c7dd9c\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1lvgfmd\u003c/incoming\u003e\u003coutgoing\u003eFlow_1yqidn1\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1lvgfmd\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Example of searching and returning Destination IPs information Flows\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"f0b59612-50d8-4966-a8e7-731f555cb2bd\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_00as3zm\u003c/incoming\u003e\u003coutgoing\u003eFlow_0d4zuxa\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_00as3zm\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_4\"/\u003e\u003cendEvent id=\"EndPoint_5\" resilient:documentation=\"End point\"\u003e\u003cextensionElements\u003e\u003cresilient:endEvent\u003e{\"script\":\"ip_events = playbook.functions.results.ip_info_events\\nip_flows = playbook.functions.results.ip_info_flows\\nif ip_flows.get(\\\"success\\\") and ip_events.get(\\\"success\\\"):\\n  playbook.results = {\\\"success\\\": True}\\nelse:\\n  playbook.results = {\\\"success\\\": False}\",\"script_language\":\"python3\"}\u003c/resilient:endEvent\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1myaml9\u003c/incoming\u003e\u003c/endEvent\u003e\u003cparallelGateway id=\"CollectionPoint_6\" resilient:documentation=\"Wait point\"\u003e\u003cincoming\u003eFlow_1yqidn1\u003c/incoming\u003e\u003cincoming\u003eFlow_0d4zuxa\u003c/incoming\u003e\u003coutgoing\u003eFlow_1myaml9\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"Flow_1yqidn1\" sourceRef=\"ScriptTask_3\" targetRef=\"CollectionPoint_6\"/\u003e\u003csequenceFlow id=\"Flow_0d4zuxa\" sourceRef=\"ScriptTask_4\" targetRef=\"CollectionPoint_6\"/\u003e\u003csequenceFlow id=\"Flow_1myaml9\" sourceRef=\"CollectionPoint_6\" targetRef=\"EndPoint_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_81555e02_228c_4202_8a10_bc394439ee7e\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1myaml9\" id=\"Flow_1myaml9_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"566\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"594\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0d4zuxa\" id=\"Flow_0d4zuxa_di\"\u003e\u003comgdi:waypoint x=\"792\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1yqidn1\" id=\"Flow_1yqidn1_di\"\u003e\u003comgdi:waypoint x=\"668\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"514\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_00as3zm\" id=\"Flow_00as3zm_di\"\u003e\u003comgdi:waypoint x=\"890\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"890\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1lvgfmd\" id=\"Flow_1lvgfmd_di\"\u003e\u003comgdi:waypoint x=\"570\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"570\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1nzsuss\" id=\"Flow_1nzsuss_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"890\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"890\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1e9m9kh\" id=\"Flow_1e9m9kh_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"570\" y=\"153\"/\u003e\u003comgdi:waypoint x=\"570\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"136.73329999999999\" x=\"662\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"472\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"792\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"472\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"792\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_5\" id=\"EndPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"594\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CollectionPoint_6\" id=\"CollectionPoint_6_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"137.13330000000002\" x=\"661\" y=\"514\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569682318,
+      "create_date": 1785493735309,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_81555e02_228c_4202_8a10_bc394439ee7e",
       "description": {
@@ -2912,27 +2912,27 @@
         "uuid": "eeffa75c-39e9-4570-be32-11752149a4a7"
       },
       "has_logical_errors": false,
-      "id": 9,
+      "id": 64,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569682774,
+      "last_modified_time": 1785493736125,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1780569682380,
+          "created_date": 1785493735455,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Destination IPs information Events",
-          "id": 12,
+          "id": 82,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569682380,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493735455,
           "name": "Example of searching and returning Destination IPs information Events",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_and_returning_destination_ips_information",
@@ -2943,14 +2943,14 @@
         },
         {
           "actions": [],
-          "created_date": 1780569682399,
+          "created_date": 1785493735501,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Destination IPs information Flows",
-          "id": 13,
+          "id": 83,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569682399,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493735501,
           "name": "Example of searching and returning Destination IPs information Flows",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_and_returning_destination_ips_information",
@@ -2963,16 +2963,16 @@
       "name": "subplaybook_example_of_searching_and_returning_destination_ips_information",
       "object_type": "incident",
       "playbook_change_log_info": {
-        "change_log_id": 9,
+        "change_log_id": 161,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569682664,
+        "create_date": 1785493735911,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "enabled",
@@ -2988,7 +2988,7 @@
       },
       "tag": {
         "display_name": "Playbook_81555e02-228c-4202-8a10-bc394439ee7e",
-        "id": 9,
+        "id": 68,
         "name": "playbook_81555e02_228c_4202_8a10_bc394439ee7e",
         "type": "playbook",
         "uuid": "c064a604-ea38-436a-9ead-c0e935a96198"
@@ -3004,12 +3004,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_0ea4bce1_8d8a_4c8b_a6a7_fcc61b01e055\" isExecutable=\"true\" name=\"playbook_0ea4bce1_8d8a_4c8b_a6a7_fcc61b01e055\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1md6klr\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0raux16\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query = \\\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60\\\"\\ninputs.qradar_search_param1 = \\\"sourceip as sourceip,SUM(eventcount) as eventcount,UNIQUECOUNT(category) as categorycount,UNIQUECOUNT(username) as usernamecount,max(starttime)\\\"\\ninputs.qradar_search_param2 = \\\"WHERE INOFFENSE(%param3%)\\\"\\ninputs.qradar_search_param4 = \\\"GROUP BY sourceip\\\"\\ninputs.qradar_search_param5 = \\\"ORDER BY max(starttime) DESC\\\"\\ninputs.qradar_search_param6 = \\\"LIMIT 10\\\"\\ninputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"sourceip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_source_ips\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"ip_events\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1md6klr\u003c/incoming\u003e\u003coutgoing\u003eFlow_0xsd95l\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query = \\\"SELECT %param1% FROM flows %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60\\\"\\ninputs.qradar_search_param1 = \\\"sourceip as sourceip,COUNT(*) as flowcount,UNIQUECOUNT(category) as categorycount,max(lastpackettime)\\\"\\ninputs.qradar_search_param2 = \\\"WHERE INOFFENSE(%param3%)\\\"\\ninputs.qradar_search_param4 = \\\"GROUP BY sourceip\\\"\\ninputs.qradar_search_param5 = \\\"ORDER BY max(lastpackettime) DESC\\\"\\ninputs.qradar_search_param6 = \\\"LIMIT 10\\\"\\ninputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"sourceip\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_top_source_ips\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"ip_flows\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0raux16\u003c/incoming\u003e\u003coutgoing\u003eFlow_0qm3ox6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1md6klr\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0raux16\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_2\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Example of searching and returning Source IPs information Events\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"eccc97e8-850a-4575-8007-e52231c20967\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xsd95l\u003c/incoming\u003e\u003coutgoing\u003eFlow_1dnjsha\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0xsd95l\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"Example of searching and returning Source IPs information Flows\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3e0ef2eb-39f4-4678-a2a6-5b41c0907fae\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0qm3ox6\u003c/incoming\u003e\u003coutgoing\u003eFlow_0tl5t3e\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0qm3ox6\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_4\"/\u003e\u003cparallelGateway id=\"CollectionPoint_5\" resilient:documentation=\"Wait point\"\u003e\u003cincoming\u003eFlow_1dnjsha\u003c/incoming\u003e\u003cincoming\u003eFlow_0tl5t3e\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ytbef9\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"Flow_1dnjsha\" sourceRef=\"ScriptTask_3\" targetRef=\"CollectionPoint_5\"/\u003e\u003cendEvent id=\"EndPoint_6\" resilient:documentation=\"End point\"\u003e\u003cextensionElements\u003e\u003cresilient:endEvent\u003e{\"script\":\"ip_event = playbook.functions.results.ip_events\\nip_flow = playbook.functions.results.ip_flows\\nif ip_flow.get(\\\"success\\\") and ip_event.get(\\\"success\\\"):\\n  playbook.results = {\\\"success\\\": True}\\nelse:\\n  playbook.results = {\\\"success\\\": False}\",\"script_language\":\"python3\"}\u003c/resilient:endEvent\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ytbef9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1ytbef9\" sourceRef=\"CollectionPoint_5\" targetRef=\"EndPoint_6\"/\u003e\u003csequenceFlow id=\"Flow_0tl5t3e\" sourceRef=\"ScriptTask_4\" targetRef=\"CollectionPoint_5\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_0ea4bce1_8d8a_4c8b_a6a7_fcc61b01e055\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0tl5t3e\" id=\"Flow_0tl5t3e_di\"\u003e\u003comgdi:waypoint x=\"782\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ytbef9\" id=\"Flow_1ytbef9_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"536\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"604\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1dnjsha\" id=\"Flow_1dnjsha_di\"\u003e\u003comgdi:waypoint x=\"658\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"380\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qm3ox6\" id=\"Flow_0qm3ox6_di\"\u003e\u003comgdi:waypoint x=\"880\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"880\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xsd95l\" id=\"Flow_0xsd95l_di\"\u003e\u003comgdi:waypoint x=\"560\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"338\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0raux16\" id=\"Flow_0raux16_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"880\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"880\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1md6klr\" id=\"Flow_1md6klr_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"148\"/\u003e\u003comgdi:waypoint x=\"560\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"136.73329999999999\" x=\"662\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"782\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"462\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"782\" y=\"338\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CollectionPoint_5\" id=\"CollectionPoint_5_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"137.13330000000002\" x=\"661\" y=\"484\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_6\" id=\"EndPoint_6_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"604\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569682782,
+      "create_date": 1785493736205,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_0ea4bce1_8d8a_4c8b_a6a7_fcc61b01e055",
       "description": {
@@ -3044,27 +3044,27 @@
         "uuid": "26c811fc-2328-49a3-8437-3b6dfd940bc3"
       },
       "has_logical_errors": false,
-      "id": 10,
+      "id": 65,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569683227,
+      "last_modified_time": 1785493737060,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1780569682844,
+          "created_date": 1785493736397,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Source IPs information Events",
-          "id": 14,
+          "id": 84,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569682844,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493736397,
           "name": "Example of searching and returning Source IPs information Events",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_and_returning_source_ips_information",
@@ -3075,14 +3075,14 @@
         },
         {
           "actions": [],
-          "created_date": 1780569682863,
+          "created_date": 1785493736438,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Source IPs information Flows",
-          "id": 15,
+          "id": 85,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569682863,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493736438,
           "name": "Example of searching and returning Source IPs information Flows",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_and_returning_source_ips_information",
@@ -3095,16 +3095,16 @@
       "name": "subplaybook_example_of_searching_and_returning_source_ips_information",
       "object_type": "incident",
       "playbook_change_log_info": {
-        "change_log_id": 10,
+        "change_log_id": 162,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569683115,
+        "create_date": 1785493736868,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "enabled",
@@ -3120,7 +3120,7 @@
       },
       "tag": {
         "display_name": "Playbook_0ea4bce1-8d8a-4c8b-a6a7-fcc61b01e055",
-        "id": 10,
+        "id": 69,
         "name": "playbook_0ea4bce1_8d8a_4c8b_a6a7_fcc61b01e055",
         "type": "playbook",
         "uuid": "4bc2a36e-94a7-43a6-a60d-6a2c0a26e2da"
@@ -3136,12 +3136,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_6b337d24_fec4_4983_b755_95372c280f41\" isExecutable=\"true\" name=\"playbook_6b337d24_fec4_4983_b755_95372c280f41\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_07h9hx7\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query = \\\"SELECT %param1% FROM flows %param2% %param4% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60\\\"\\ninputs.qradar_search_param1 = \\\"APPLICATIONNAME(applicationid) as \u0027Application\u0027, sourceip, sourceport, destinationip, destinationport, PROTOCOLNAME(protocolid) as \u0027Protocol\u0027, firstpackettime AS \u0027FirstPacketTime\u0027, sourcebytes, sourcepackets, destinationbytes, destinationpackets\\\"\\ninputs.qradar_search_param2 = \\\"WHERE INOFFENSE(%param3%)\\\"\\ninputs.qradar_search_param4 = \\\"LIMIT 10\\\"\\ninputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"flows\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_flows\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"flows_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_07h9hx7\u003c/incoming\u003e\u003coutgoing\u003eFlow_1y82wf6\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_07h9hx7\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Example of searching QRadar Flows using offense id\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"4dd9795a-5f33-4cb6-86d6-09d7711b67c6\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1y82wf6\u003c/incoming\u003e\u003coutgoing\u003eFlow_01uqsz8\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1y82wf6\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cextensionElements\u003e\u003cresilient:endEvent\u003e{\"script\":\"result = playbook.functions.results.flows_result\\nif result.get(\\\"success\\\"):\\n  playbook.results = {\\\"success\\\": True}\\nelse:\\n  playbook.results = {\\\"success\\\": False}\",\"script_language\":\"python3\"}\u003c/resilient:endEvent\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_01uqsz8\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_01uqsz8\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_6b337d24_fec4_4983_b755_95372c280f41\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_01uqsz8\" id=\"Flow_01uqsz8_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"464\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1y82wf6\" id=\"Flow_1y82wf6_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07h9hx7\" id=\"Flow_07h9hx7_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"136.73329999999999\" x=\"662\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"464\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569683235,
+      "create_date": 1785493737071,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_6b337d24_fec4_4983_b755_95372c280f41",
       "description": {
@@ -3176,27 +3176,27 @@
         "uuid": "93d1c97c-9f88-4313-94f8-b155b8d9af31"
       },
       "has_logical_errors": false,
-      "id": 11,
+      "id": 66,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569683728,
+      "last_modified_time": 1785493737783,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1780569683304,
+          "created_date": 1785493737204,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching QRadar Flows using offense id",
-          "id": 16,
+          "id": 86,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569683304,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493737204,
           "name": "Example of searching QRadar Flows using offense id",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_qradar_flows_using_offense_id",
@@ -3209,16 +3209,16 @@
       "name": "subplaybook_example_of_searching_qradar_flows_using_offense_id",
       "object_type": "incident",
       "playbook_change_log_info": {
-        "change_log_id": 11,
+        "change_log_id": 163,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569683630,
+        "create_date": 1785493737587,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "enabled",
@@ -3234,7 +3234,7 @@
       },
       "tag": {
         "display_name": "Playbook_6b337d24-fec4-4983-b755-95372c280f41",
-        "id": 11,
+        "id": 70,
         "name": "playbook_6b337d24_fec4_4983_b755_95372c280f41",
         "type": "playbook",
         "uuid": "d50c1973-d42c-4b79-9ce3-3ce1ce266a26"
@@ -3250,12 +3250,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_17b16e52_e57e_4c19_b018_45a246aedcee\" isExecutable=\"true\" name=\"playbook_17b16e52_e57e_4c19_b018_45a246aedcee\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1rl5xew\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Top Events\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d8e63812-0b58-4ca1-991a-49255f3dd04e\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_query = \\\"SELECT %param1% FROM events %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60\\\"\\ninputs.qradar_search_param1 = \u0027QIDNAME(qid) as event_name,categoryname(category) as category_name,logsourcename(logsourceid) as logsourcename,username,magnitude,destinationip,sourceip,eventcount,starttime as event_time, \\\"EC File Hash\\\", \\\"EC File Path\\\", \\\"EC Filename\\\", \\\"EC IMP Hash\\\", \\\"EC MD5 Hash\\\", \\\"EC ParentCommandLine\\\", \\\"EC Process CommandLine\\\", \\\"EC SHA1 Hash\\\", \\\"EC SHA256 Hash\\\", \\\"File Hash\\\", \\\"MD5 Hash\\\", \\\"SHA1 Hash\\\", \\\"SHA256 Hash\\\"\u0027\\ninputs.qradar_search_param2 = \\\"WHERE INOFFENSE(%param3%)\\\"\\ninputs.qradar_search_param5 = \\\"ORDER BY starttime\\\"\\ninputs.qradar_search_param6 = \\\"LIMIT 10\\\"\\ninputs.qradar_search_param3 = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"topevents\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qr_offense_top_events\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"top_events\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1rl5xew\u003c/incoming\u003e\u003coutgoing\u003eFlow_16s8zue\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1rl5xew\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Example of searching QRadar Top Events using offense id\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"900b6b22-8bca-477e-b35a-353596f91c1b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_16s8zue\u003c/incoming\u003e\u003coutgoing\u003eFlow_0jwrwa7\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_16s8zue\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cextensionElements\u003e\u003cresilient:endEvent\u003e{\"script\":\"result = playbook.functions.results.top_events\\nif result.get(\\\"success\\\"):\\n  playbook.results = {\\\"success\\\": True, \\\"events\\\": result.get(\\\"content\\\", {}).get(\\\"events\\\", [])}\\nelse:\\n  playbook.results = {\\\"success\\\": False}\",\"script_language\":\"python3\"}\u003c/resilient:endEvent\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0jwrwa7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0jwrwa7\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_17b16e52_e57e_4c19_b018_45a246aedcee\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0jwrwa7\" id=\"Flow_0jwrwa7_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"454\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_16s8zue\" id=\"Flow_16s8zue_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1rl5xew\" id=\"Flow_1rl5xew_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"136.73329999999999\" x=\"662\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"454\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569683736,
+      "create_date": 1785493737796,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_17b16e52_e57e_4c19_b018_45a246aedcee",
       "description": {
@@ -3280,7 +3280,7 @@
             "deprecated": false,
             "export_key": "playbook_17b16e52_e57e_4c19_b018_45a246aedcee/create_extra_artifacts",
             "hide_notification": false,
-            "id": 454,
+            "id": 1363,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
@@ -3297,7 +3297,7 @@
             "templates": [],
             "text": "Create extra artifacts",
             "tooltip": "Default to False. If True will create artifacts from Top Event data",
-            "type_id": 1019,
+            "type_id": 1079,
             "uuid": "47e1f5df-1b0f-45a0-a0ab-a381e102c615",
             "values": []
           }
@@ -3322,27 +3322,27 @@
         "uuid": "29803cde-178a-4245-90f1-f754def92fbf"
       },
       "has_logical_errors": false,
-      "id": 12,
+      "id": 67,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569684192,
+      "last_modified_time": 1785493738695,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1780569683821,
+          "created_date": 1785493737997,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching QRadar Top Events using offense id",
-          "id": 17,
+          "id": 87,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569683821,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493737997,
           "name": "Example of searching QRadar Top Events using offense id",
           "object_type": "incident",
           "playbook_handle": "subplaybook_example_of_searching_qradar_top_events_using_offense_id",
@@ -3355,16 +3355,16 @@
       "name": "subplaybook_example_of_searching_qradar_top_events_using_offense_id",
       "object_type": "incident",
       "playbook_change_log_info": {
-        "change_log_id": 12,
+        "change_log_id": 164,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569684044,
+        "create_date": 1785493738417,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "enabled",
@@ -3389,7 +3389,7 @@
       },
       "tag": {
         "display_name": "Playbook_17b16e52-e57e-4c19-b018-45a246aedcee",
-        "id": 12,
+        "id": 71,
         "name": "playbook_17b16e52_e57e_4c19_b018_45a246aedcee",
         "type": "playbook",
         "uuid": "20a6beb7-0bba-4e84-8422-7b4bad48c9ed"
@@ -3433,12 +3433,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_0f2b0cd5_7d03_439d_ad69_3d7b2ecb7e67\" isExecutable=\"true\" name=\"playbook_0f2b0cd5_7d03_439d_ad69_3d7b2ecb7e67\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0oemhms\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Create Note\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d5aadb23-eaf0-4c95-835b-3534e98ce268\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_label = incident.properties.qradar_destination\\ninputs.qradar_offense_id = incident.properties.qradar_id\\ninputs.qradar_note = note.text\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"created_note\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0oemhms\u003c/incoming\u003e\u003coutgoing\u003eFlow_1fuxomq\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0oemhms\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1fuxomq\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1fuxomq\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_0f2b0cd5_7d03_439d_ad69_3d7b2ecb7e67\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0oemhms\" id=\"Flow_0oemhms_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1fuxomq\" id=\"Flow_1fuxomq_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"354\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"162.5667\" x=\"640\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"354\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569684173,
+      "create_date": 1785493738656,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_0f2b0cd5_7d03_439d_ad69_3d7b2ecb7e67",
       "description": {
@@ -3473,36 +3473,36 @@
         "uuid": "919ef069-aad9-46a4-b975-dd2a7db1d64e"
       },
       "has_logical_errors": false,
-      "id": 13,
+      "id": 68,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569684488,
+      "last_modified_time": 1785493739192,
       "local_scripts": [],
       "name": "qradar_create_note",
       "object_type": "note",
       "playbook_change_log_info": {
-        "change_log_id": 13,
+        "change_log_id": 165,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569684396,
+        "create_date": 1785493739042,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "disabled",
       "tag": {
         "display_name": "Playbook_0f2b0cd5-7d03-439d-ad69-3d7b2ecb7e67",
-        "id": 13,
+        "id": 72,
         "name": "playbook_0f2b0cd5_7d03_439d_ad69_3d7b2ecb7e67",
         "type": "playbook",
         "uuid": "15a7d426-585b-477b-a26b-c6ada1986562"
@@ -3518,12 +3518,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_fd2f3d93_4196_4a7d_bd01_603bec3bd4bc\" isExecutable=\"true\" name=\"playbook_fd2f3d93_4196_4a7d_bd01_603bec3bd4bc\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0gy5l46\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Offense Summary\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"0aee36de-8719-4154-a1e7-6455f065bb94\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_offense_id = incident.properties.qradar_id\\ninputs.qradar_query_type = \\\"offensesummary\\\"\\ninputs.qradar_label = incident.properties.qradar_destination\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"offense_sum\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0gy5l46\u003c/incoming\u003e\u003coutgoing\u003eFlow_03t7t48\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0gy5l46\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"QRadar Offense Summary\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"896629ee-bb65-4fb1-9a8b-42056bd48730\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_03t7t48\u003c/incoming\u003e\u003coutgoing\u003eFlow_0k52sfk\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_03t7t48\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cextensionElements\u003e\u003cresilient:endEvent\u003e{\"script\":\"result = playbook.functions.results.offense_sum\\nif result.get(\\\"success\\\"):\\n  playbook.results = {\\\"success\\\": True}\\nelse:\\n  playbook.results = {\\\"success\\\": False}\",\"script_language\":\"python3\"}\u003c/resilient:endEvent\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0k52sfk\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0k52sfk\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_fd2f3d93_4196_4a7d_bd01_603bec3bd4bc\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0k52sfk\" id=\"Flow_0k52sfk_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"432\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"524\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03t7t48\" id=\"Flow_03t7t48_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"272\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"348\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0gy5l46\" id=\"Flow_0gy5l46_di\"\u003e\u003comgdi:waypoint x=\"730\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"730\" y=\"188\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"136.73329999999999\" x=\"662\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"188\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"632\" y=\"348\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"664\" y=\"524\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569684496,
+      "create_date": 1785493739205,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_fd2f3d93_4196_4a7d_bd01_603bec3bd4bc",
       "description": {
@@ -3558,27 +3558,27 @@
         "uuid": "cfe5dba3-3cd8-4b37-a2d9-adf7be9da1a6"
       },
       "has_logical_errors": false,
-      "id": 14,
+      "id": 69,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569684956,
+      "last_modified_time": 1785493739974,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1780569684562,
+          "created_date": 1785493739349,
           "description": "",
           "enabled": false,
           "export_key": "QRadar Offense Summary",
-          "id": 18,
+          "id": 88,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569684562,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493739349,
           "name": "QRadar Offense Summary",
           "object_type": "incident",
           "playbook_handle": "subplaybook_qradar_offense_summary",
@@ -3591,16 +3591,16 @@
       "name": "subplaybook_qradar_offense_summary",
       "object_type": "incident",
       "playbook_change_log_info": {
-        "change_log_id": 14,
+        "change_log_id": 166,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569684836,
+        "create_date": 1785493739764,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "enabled",
@@ -3616,7 +3616,7 @@
       },
       "tag": {
         "display_name": "Playbook_fd2f3d93-4196-4a7d-bd01-603bec3bd4bc",
-        "id": 14,
+        "id": 73,
         "name": "playbook_fd2f3d93_4196_4a7d_bd01_603bec3bd4bc",
         "type": "playbook",
         "uuid": "94156553-c75d-4188-9a02-c6dd8eb28459"
@@ -3660,12 +3660,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_f2aa7df1_5524_4927_9511_327bc5b5d293\" isExecutable=\"true\" name=\"playbook_f2aa7df1_5524_4927_9511_327bc5b5d293\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0tere45\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1ug3ws9\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1owrcrp\u003c/outgoing\u003e\u003coutgoing\u003eFlow_13fo83w\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1bdxbid\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0946o6n\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1uuvx4g\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1lrwxts\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cscriptTask id=\"ScriptTask_1\" name=\"Set Incident Last Updated Time\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"e93008f7-1249-46a8-8d7e-75c0dc862f4f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_047n2ld\u003c/incoming\u003e\u003coutgoing\u003eFlow_0hmqrec\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003ccallActivity calledElement=\"playbook_6d8976e3_5771_4a6a_8619_65e29c94eed9\" id=\"CallActivity_8\" name=\"Example of searching and returning Categories\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Categories\" uuid=\"6d8976e3-5771-4a6a-8619-65e29c94eed9\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"category_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ug3ws9\u003c/incoming\u003e\u003coutgoing\u003eFlow_0b6kdam\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_15cdb367_4f7e_4fb7_bd8d_d58fe4d3a683\" id=\"CallActivity_9\" name=\"Example of fetching contributing rules for Offense\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of fetching contributing rules for Offense\" uuid=\"15cdb367-4f7e-4fb7-bd8d-d58fe4d3a683\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"rule_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0946o6n\u003c/incoming\u003e\u003coutgoing\u003eFlow_14xoj1q\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_74bc42a0_f254_483c_933a_3af988578a5b\" id=\"CallActivity_11\" name=\"Example of searching and returning Assets information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Assets information\" uuid=\"74bc42a0-f254-483c-933a-3af988578a5b\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"asset_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0tere45\u003c/incoming\u003e\u003coutgoing\u003eFlow_1p4bxrq\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_81555e02_228c_4202_8a10_bc394439ee7e\" id=\"CallActivity_12\" name=\"Example of searching and returning Destination IPs information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Destination IPs information\" uuid=\"81555e02-228c-4202-8a10-bc394439ee7e\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"dest_ip_info\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1uuvx4g\u003c/incoming\u003e\u003coutgoing\u003eFlow_05o2gd7\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_0ea4bce1_8d8a_4c8b_a6a7_fcc61b01e055\" id=\"CallActivity_13\" name=\"Example of searching and returning Source IPs information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Source IPs information\" uuid=\"0ea4bce1-8d8a-4c8b-a6a7-fcc61b01e055\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"source_ip_info\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1owrcrp\u003c/incoming\u003e\u003coutgoing\u003eFlow_14p0u08\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_6b337d24_fec4_4983_b755_95372c280f41\" id=\"CallActivity_14\" name=\"Example of searching QRadar Flows using offense id\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching QRadar Flows using offense id\" uuid=\"6b337d24-fec4-4983-b755-95372c280f41\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"flow_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_13fo83w\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ruxs41\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_17b16e52_e57e_4c19_b018_45a246aedcee\" id=\"CallActivity_15\" name=\"Example of searching QRadar Top Events using offense id\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching QRadar Top Events using offense id\" uuid=\"17b16e52-e57e-4c19-b018-45a246aedcee\"\u003e{\"inputs\":{\"47e1f5df-1b0f-45a0-a0ab-a381e102c615\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":false}}},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"events_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1lrwxts\u003c/incoming\u003e\u003coutgoing\u003eFlow_105ur8e\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_fd2f3d93_4196_4a7d_bd01_603bec3bd4bc\" id=\"CallActivity_16\" name=\"QRadar Offense Summary\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"QRadar Offense Summary\" uuid=\"fd2f3d93-4196-4a7d-bd01-603bec3bd4bc\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"offense_sum\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1bdxbid\u003c/incoming\u003e\u003coutgoing\u003eFlow_09tm8w0\u003c/outgoing\u003e\u003c/callActivity\u003e\u003cparallelGateway id=\"CollectionPoint_17\" resilient:documentation=\"Wait point\"\u003e\u003cincoming\u003eFlow_1p4bxrq\u003c/incoming\u003e\u003cincoming\u003eFlow_14xoj1q\u003c/incoming\u003e\u003cincoming\u003eFlow_0b6kdam\u003c/incoming\u003e\u003cincoming\u003eFlow_14p0u08\u003c/incoming\u003e\u003cincoming\u003eFlow_0ruxs41\u003c/incoming\u003e\u003cincoming\u003eFlow_09tm8w0\u003c/incoming\u003e\u003cincoming\u003eFlow_05o2gd7\u003c/incoming\u003e\u003cincoming\u003eFlow_105ur8e\u003c/incoming\u003e\u003coutgoing\u003eFlow_047n2ld\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"Flow_1p4bxrq\" sourceRef=\"CallActivity_11\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_14xoj1q\" sourceRef=\"CallActivity_9\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_0b6kdam\" sourceRef=\"CallActivity_8\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_14p0u08\" sourceRef=\"CallActivity_13\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_0ruxs41\" sourceRef=\"CallActivity_14\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_09tm8w0\" sourceRef=\"CallActivity_16\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_05o2gd7\" sourceRef=\"CallActivity_12\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_105ur8e\" sourceRef=\"CallActivity_15\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_047n2ld\" sourceRef=\"CollectionPoint_17\" targetRef=\"ScriptTask_1\"/\u003e\u003cendEvent id=\"EndPoint_18\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0hmqrec\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0hmqrec\" sourceRef=\"ScriptTask_1\" targetRef=\"EndPoint_18\"/\u003e\u003csequenceFlow id=\"Flow_0tere45\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_11\"/\u003e\u003csequenceFlow id=\"Flow_1ug3ws9\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_8\"/\u003e\u003csequenceFlow id=\"Flow_1owrcrp\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_13\"/\u003e\u003csequenceFlow id=\"Flow_13fo83w\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_14\"/\u003e\u003csequenceFlow id=\"Flow_1bdxbid\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_16\"/\u003e\u003csequenceFlow id=\"Flow_0946o6n\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_9\"/\u003e\u003csequenceFlow id=\"Flow_1uuvx4g\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_12\"/\u003e\u003csequenceFlow id=\"Flow_1lrwxts\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_15\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_f2aa7df1_5524_4927_9511_327bc5b5d293\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1p4bxrq\" id=\"Flow_1p4bxrq_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"574\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14xoj1q\" id=\"Flow_14xoj1q_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"652\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0b6kdam\" id=\"Flow_0b6kdam_di\"\u003e\u003comgdi:waypoint x=\"920\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"789\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_14p0u08\" id=\"Flow_14p0u08_di\"\u003e\u003comgdi:waypoint x=\"1120\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"789\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ruxs41\" id=\"Flow_0ruxs41_di\"\u003e\u003comgdi:waypoint x=\"1320\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1320\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"789\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09tm8w0\" id=\"Flow_09tm8w0_di\"\u003e\u003comgdi:waypoint x=\"1520\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"789\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05o2gd7\" id=\"Flow_05o2gd7_di\"\u003e\u003comgdi:waypoint x=\"320\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"652\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_105ur8e\" id=\"Flow_105ur8e_di\"\u003e\u003comgdi:waypoint x=\"120\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"652\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_047n2ld\" id=\"Flow_047n2ld_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"626\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"708\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0hmqrec\" id=\"Flow_0hmqrec_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"792\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"884\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0tere45\" id=\"Flow_0tere45_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"96\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"209\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"209\"/\u003e\u003comgdi:waypoint x=\"720\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ug3ws9\" id=\"Flow_1ug3ws9_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1owrcrp\" id=\"Flow_1owrcrp_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_13fo83w\" id=\"Flow_13fo83w_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"1310\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"1310\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1bdxbid\" id=\"Flow_1bdxbid_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0946o6n\" id=\"Flow_0946o6n_di\"\u003e\u003comgdi:waypoint x=\"627\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1uuvx4g\" id=\"Flow_1uuvx4g_di\"\u003e\u003comgdi:waypoint x=\"627\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1lrwxts\" id=\"Flow_1lrwxts_di\"\u003e\u003comgdi:waypoint x=\"627\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"70\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_8\" id=\"CallActivity_8_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"822\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_9\" id=\"CallActivity_9_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"422\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_12\" id=\"CallActivity_12_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"222\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_13\" id=\"CallActivity_13_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1022\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_14\" id=\"CallActivity_14_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1222\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_15\" id=\"CallActivity_15_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"22\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_16\" id=\"CallActivity_16_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1422\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_1\" id=\"ScriptTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"708\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CollectionPoint_17\" id=\"CollectionPoint_17_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"137.13330000000002\" x=\"652\" y=\"574\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_11\" id=\"CallActivity_11_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"623\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_18\" id=\"EndPoint_18_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"884\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"44\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569684965,
+      "create_date": 1785493739990,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_f2aa7df1_5524_4927_9511_327bc5b5d293",
       "description": {
@@ -3700,27 +3700,27 @@
         "uuid": "5443807d-590a-4a48-b1fc-a3885c8ef6db"
       },
       "has_logical_errors": false,
-      "id": 15,
+      "id": 70,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569685618,
+      "last_modified_time": 1785493741032,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1780569685052,
+          "created_date": 1785493740154,
           "description": "",
           "enabled": false,
           "export_key": "Example of fetching contributing rules for Offense",
-          "id": 19,
+          "id": 89,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569685052,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493740154,
           "name": "Example of fetching contributing rules for Offense",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_pb",
@@ -3731,14 +3731,14 @@
         },
         {
           "actions": [],
-          "created_date": 1780569685078,
+          "created_date": 1785493740207,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Assets information",
-          "id": 20,
+          "id": 90,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569685078,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493740207,
           "name": "Example of searching and returning Assets information",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_pb",
@@ -3749,14 +3749,14 @@
         },
         {
           "actions": [],
-          "created_date": 1780569685108,
+          "created_date": 1785493740263,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Categories Events",
-          "id": 21,
+          "id": 91,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569685108,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493740263,
           "name": "Example of searching and returning Categories Events",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_pb",
@@ -3767,14 +3767,14 @@
         },
         {
           "actions": [],
-          "created_date": 1780569685138,
+          "created_date": 1785493740320,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Categories Flows",
-          "id": 22,
+          "id": 92,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569685138,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493740320,
           "name": "Example of searching and returning Categories Flows",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_pb",
@@ -3787,22 +3787,22 @@
       "name": "qradar_enhanced_data_pb",
       "object_type": "incident",
       "playbook_change_log_info": {
-        "change_log_id": 15,
+        "change_log_id": 167,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569685500,
+        "create_date": 1785493740871,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "disabled",
       "tag": {
         "display_name": "Playbook_f2aa7df1-5524-4927-9511-327bc5b5d293",
-        "id": 15,
+        "id": 74,
         "name": "playbook_f2aa7df1_5524_4927_9511_327bc5b5d293",
         "type": "playbook",
         "uuid": "d8a940bc-d89b-472c-87b2-85781ecbb265"
@@ -3846,12 +3846,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ea22a0cb_b81e_429f_8cb0_2b391250ac8a\" isExecutable=\"true\" name=\"playbook_ea22a0cb_b81e_429f_8cb0_2b391250ac8a\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_17trg9o\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1ydnvpa\u003c/outgoing\u003e\u003coutgoing\u003eFlow_13k7fsi\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0kks5mg\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1cpslke\u003c/outgoing\u003e\u003coutgoing\u003eFlow_17kupc9\u003c/outgoing\u003e\u003coutgoing\u003eFlow_06u7ufw\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0dx6gsy\u003c/outgoing\u003e\u003c/startEvent\u003e\u003ccallActivity calledElement=\"playbook_6d8976e3_5771_4a6a_8619_65e29c94eed9\" id=\"CallActivity_8\" name=\"Example of searching and returning Categories\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Categories\" uuid=\"6d8976e3-5771-4a6a-8619-65e29c94eed9\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"category_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1cpslke\u003c/incoming\u003e\u003coutgoing\u003eFlow_17xayzs\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_15cdb367_4f7e_4fb7_bd8d_d58fe4d3a683\" id=\"CallActivity_9\" name=\"Example of fetching contributing rules for Offense\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of fetching contributing rules for Offense\" uuid=\"15cdb367-4f7e-4fb7-bd8d-d58fe4d3a683\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"rule_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_13k7fsi\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hbv6vt\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_74bc42a0_f254_483c_933a_3af988578a5b\" id=\"CallActivity_11\" name=\"Example of searching and returning Assets information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Assets information\" uuid=\"74bc42a0-f254-483c-933a-3af988578a5b\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"asset_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0kks5mg\u003c/incoming\u003e\u003coutgoing\u003eFlow_1s99kgv\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_81555e02_228c_4202_8a10_bc394439ee7e\" id=\"CallActivity_12\" name=\"Example of searching and returning Destination IPs information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Destination IPs information\" uuid=\"81555e02-228c-4202-8a10-bc394439ee7e\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"dest_ip_info\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ydnvpa\u003c/incoming\u003e\u003coutgoing\u003eFlow_1nwy40a\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_0ea4bce1_8d8a_4c8b_a6a7_fcc61b01e055\" id=\"CallActivity_13\" name=\"Example of searching and returning Source IPs information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Source IPs information\" uuid=\"0ea4bce1-8d8a-4c8b-a6a7-fcc61b01e055\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"source_ip_info\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_17kupc9\u003c/incoming\u003e\u003coutgoing\u003eFlow_03dalxl\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_6b337d24_fec4_4983_b755_95372c280f41\" id=\"CallActivity_14\" name=\"Example of searching QRadar Flows using offense id\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching QRadar Flows using offense id\" uuid=\"6b337d24-fec4-4983-b755-95372c280f41\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"flow_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_06u7ufw\u003c/incoming\u003e\u003coutgoing\u003eFlow_1hmbmji\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_17b16e52_e57e_4c19_b018_45a246aedcee\" id=\"CallActivity_15\" name=\"Example of searching QRadar Top Events using offense id\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching QRadar Top Events using offense id\" uuid=\"17b16e52-e57e-4c19-b018-45a246aedcee\"\u003e{\"inputs\":{\"47e1f5df-1b0f-45a0-a0ab-a381e102c615\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":false}}},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"events_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_17trg9o\u003c/incoming\u003e\u003coutgoing\u003eFlow_0hhvyb1\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_fd2f3d93_4196_4a7d_bd01_603bec3bd4bc\" id=\"CallActivity_16\" name=\"QRadar Offense Summary\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"QRadar Offense Summary\" uuid=\"fd2f3d93-4196-4a7d-bd01-603bec3bd4bc\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"offense_sum\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0dx6gsy\u003c/incoming\u003e\u003coutgoing\u003eFlow_18a3qfp\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_17trg9o\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_15\"/\u003e\u003csequenceFlow id=\"Flow_1ydnvpa\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_12\"/\u003e\u003csequenceFlow id=\"Flow_13k7fsi\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_9\"/\u003e\u003csequenceFlow id=\"Flow_0kks5mg\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_11\"/\u003e\u003csequenceFlow id=\"Flow_1cpslke\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_8\"/\u003e\u003csequenceFlow id=\"Flow_17kupc9\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_13\"/\u003e\u003csequenceFlow id=\"Flow_06u7ufw\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_14\"/\u003e\u003csequenceFlow id=\"Flow_0dx6gsy\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_16\"/\u003e\u003cparallelGateway id=\"CollectionPoint_17\" resilient:documentation=\"Wait point\"\u003e\u003cincoming\u003eFlow_0hhvyb1\u003c/incoming\u003e\u003cincoming\u003eFlow_1nwy40a\u003c/incoming\u003e\u003cincoming\u003eFlow_1hbv6vt\u003c/incoming\u003e\u003cincoming\u003eFlow_1s99kgv\u003c/incoming\u003e\u003cincoming\u003eFlow_17xayzs\u003c/incoming\u003e\u003cincoming\u003eFlow_03dalxl\u003c/incoming\u003e\u003cincoming\u003eFlow_1hmbmji\u003c/incoming\u003e\u003cincoming\u003eFlow_18a3qfp\u003c/incoming\u003e\u003coutgoing\u003eFlow_1u6h4rj\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"Flow_0hhvyb1\" sourceRef=\"CallActivity_15\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_1nwy40a\" sourceRef=\"CallActivity_12\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_1hbv6vt\" sourceRef=\"CallActivity_9\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_1s99kgv\" sourceRef=\"CallActivity_11\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_17xayzs\" sourceRef=\"CallActivity_8\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_03dalxl\" sourceRef=\"CallActivity_13\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_1hmbmji\" sourceRef=\"CallActivity_14\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_18a3qfp\" sourceRef=\"CallActivity_16\" targetRef=\"CollectionPoint_17\"/\u003e\u003cendEvent id=\"EndPoint_18\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1u6h4rj\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1u6h4rj\" sourceRef=\"CollectionPoint_17\" targetRef=\"EndPoint_18\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ea22a0cb_b81e_429f_8cb0_2b391250ac8a\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0dx6gsy\" id=\"Flow_0dx6gsy_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_06u7ufw\" id=\"Flow_06u7ufw_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1320\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1320\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17kupc9\" id=\"Flow_17kupc9_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1cpslke\" id=\"Flow_1cpslke_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0kks5mg\" id=\"Flow_0kks5mg_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"66\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_13k7fsi\" id=\"Flow_13k7fsi_di\"\u003e\u003comgdi:waypoint x=\"627\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ydnvpa\" id=\"Flow_1ydnvpa_di\"\u003e\u003comgdi:waypoint x=\"627\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17trg9o\" id=\"Flow_17trg9o_di\"\u003e\u003comgdi:waypoint x=\"627\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0hhvyb1\" id=\"Flow_0hhvyb1_di\"\u003e\u003comgdi:waypoint x=\"120\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"652\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1nwy40a\" id=\"Flow_1nwy40a_di\"\u003e\u003comgdi:waypoint x=\"320\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"652\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hbv6vt\" id=\"Flow_1hbv6vt_di\"\u003e\u003comgdi:waypoint x=\"520\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"652\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1s99kgv\" id=\"Flow_1s99kgv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"574\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17xayzs\" id=\"Flow_17xayzs_di\"\u003e\u003comgdi:waypoint x=\"920\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"789\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_03dalxl\" id=\"Flow_03dalxl_di\"\u003e\u003comgdi:waypoint x=\"1120\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"789\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1hmbmji\" id=\"Flow_1hmbmji_di\"\u003e\u003comgdi:waypoint x=\"1320\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1320\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"789\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_18a3qfp\" id=\"Flow_18a3qfp_di\"\u003e\u003comgdi:waypoint x=\"1520\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"600\"/\u003e\u003comgdi:waypoint x=\"789\" y=\"600\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1u6h4rj\" id=\"Flow_1u6h4rj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"626\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"724\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"14\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_8\" id=\"CallActivity_8_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"822\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_9\" id=\"CallActivity_9_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"422\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_11\" id=\"CallActivity_11_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"623\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_12\" id=\"CallActivity_12_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"222\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_13\" id=\"CallActivity_13_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1022\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_14\" id=\"CallActivity_14_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1222\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_15\" id=\"CallActivity_15_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"22\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_16\" id=\"CallActivity_16_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1422\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CollectionPoint_17\" id=\"CollectionPoint_17_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"137.203125\" x=\"652\" y=\"573.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_18\" id=\"EndPoint_18_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"655\" y=\"723.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569685633,
+      "create_date": 1785493741048,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_ea22a0cb_b81e_429f_8cb0_2b391250ac8a",
       "description": {
@@ -3886,27 +3886,27 @@
         "uuid": "1941fea1-a7a4-47d9-8066-851aed04e3ef"
       },
       "has_logical_errors": false,
-      "id": 16,
+      "id": 71,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569686210,
+      "last_modified_time": 1785493741964,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1780569685720,
+          "created_date": 1785493741203,
           "description": "",
           "enabled": false,
           "export_key": "Example of fetching contributing rules for Offense",
-          "id": 23,
+          "id": 93,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569685720,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493741203,
           "name": "Example of fetching contributing rules for Offense",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_poller_pb",
@@ -3917,14 +3917,14 @@
         },
         {
           "actions": [],
-          "created_date": 1780569685745,
+          "created_date": 1785493741248,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Assets information",
-          "id": 24,
+          "id": 94,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569685745,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493741248,
           "name": "Example of searching and returning Assets information",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_poller_pb",
@@ -3935,14 +3935,14 @@
         },
         {
           "actions": [],
-          "created_date": 1780569685775,
+          "created_date": 1785493741301,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Categories Events",
-          "id": 25,
+          "id": 95,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569685775,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493741301,
           "name": "Example of searching and returning Categories Events",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_poller_pb",
@@ -3953,14 +3953,14 @@
         },
         {
           "actions": [],
-          "created_date": 1780569685803,
+          "created_date": 1785493741351,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Categories Flows",
-          "id": 26,
+          "id": 96,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569685803,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493741351,
           "name": "Example of searching and returning Categories Flows",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_poller_pb",
@@ -3973,22 +3973,22 @@
       "name": "qradar_enhanced_data_poller_pb",
       "object_type": "incident",
       "playbook_change_log_info": {
-        "change_log_id": 16,
+        "change_log_id": 168,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569686139,
+        "create_date": 1785493741850,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "disabled",
       "tag": {
         "display_name": "Playbook_ea22a0cb-b81e-429f-8cb0-2b391250ac8a",
-        "id": 16,
+        "id": 75,
         "name": "playbook_ea22a0cb_b81e_429f_8cb0_2b391250ac8a",
         "type": "playbook",
         "uuid": "fcf6204d-b09d-4cab-8430-00dc82a09224"
@@ -4004,12 +4004,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:camunda=\"http://camunda.org/schema/1.0/bpmn\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_97afb768_e2d6_4fc6_b25b_5745661215c0\" isExecutable=\"true\" name=\"playbook_97afb768_e2d6_4fc6_b25b_5745661215c0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_154wj3c\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1a91zx0\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1wi2r7c\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0e0qro3\u003c/outgoing\u003e\u003coutgoing\u003eFlow_0mufpsw\u003c/outgoing\u003e\u003coutgoing\u003eFlow_07z3adg\u003c/outgoing\u003e\u003coutgoing\u003eFlow_11nkv3p\u003c/outgoing\u003e\u003coutgoing\u003eFlow_1nek7xe\u003c/outgoing\u003e\u003c/startEvent\u003e\u003ccallActivity calledElement=\"playbook_6d8976e3_5771_4a6a_8619_65e29c94eed9\" id=\"CallActivity_8\" name=\"Example of searching and returning Categories\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Categories\" uuid=\"6d8976e3-5771-4a6a-8619-65e29c94eed9\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"category_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0mufpsw\u003c/incoming\u003e\u003coutgoing\u003eFlow_1yu283g\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_15cdb367_4f7e_4fb7_bd8d_d58fe4d3a683\" id=\"CallActivity_9\" name=\"Example of fetching contributing rules for Offense\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of fetching contributing rules for Offense\" uuid=\"15cdb367-4f7e-4fb7-bd8d-d58fe4d3a683\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"rule_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1wi2r7c\u003c/incoming\u003e\u003coutgoing\u003eFlow_1orep1n\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_74bc42a0_f254_483c_933a_3af988578a5b\" id=\"CallActivity_11\" name=\"Example of searching and returning Assets information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Assets information\" uuid=\"74bc42a0-f254-483c-933a-3af988578a5b\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"asset_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0e0qro3\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vul5t0\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_81555e02_228c_4202_8a10_bc394439ee7e\" id=\"CallActivity_12\" name=\"Example of searching and returning Destination IPs information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Destination IPs information\" uuid=\"81555e02-228c-4202-8a10-bc394439ee7e\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"dest_ip_info\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1a91zx0\u003c/incoming\u003e\u003coutgoing\u003eFlow_0il2fnc\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_0ea4bce1_8d8a_4c8b_a6a7_fcc61b01e055\" id=\"CallActivity_13\" name=\"Example of searching and returning Source IPs information\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching and returning Source IPs information\" uuid=\"0ea4bce1-8d8a-4c8b-a6a7-fcc61b01e055\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"source_ip_info\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_07z3adg\u003c/incoming\u003e\u003coutgoing\u003eFlow_17l0e9k\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_6b337d24_fec4_4983_b755_95372c280f41\" id=\"CallActivity_14\" name=\"Example of searching QRadar Flows using offense id\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching QRadar Flows using offense id\" uuid=\"6b337d24-fec4-4983-b755-95372c280f41\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"flow_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_11nkv3p\u003c/incoming\u003e\u003coutgoing\u003eFlow_17e4y6z\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_17b16e52_e57e_4c19_b018_45a246aedcee\" id=\"CallActivity_15\" name=\"Example of searching QRadar Top Events using offense id\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"Example of searching QRadar Top Events using offense id\" uuid=\"17b16e52-e57e-4c19-b018-45a246aedcee\"\u003e{\"inputs\":{\"47e1f5df-1b0f-45a0-a0ab-a381e102c615\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":false}}},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"events_result\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_154wj3c\u003c/incoming\u003e\u003coutgoing\u003eFlow_0gkn7f7\u003c/outgoing\u003e\u003c/callActivity\u003e\u003ccallActivity calledElement=\"playbook_fd2f3d93_4196_4a7d_bd01_603bec3bd4bc\" id=\"CallActivity_16\" name=\"QRadar Offense Summary\" resilient:type=\"sub-playbook\"\u003e\u003cextensionElements\u003e\u003cresilient:sub-playbook name=\"QRadar Offense Summary\" uuid=\"fd2f3d93-4196-4a7d-bd01-603bec3bd4bc\"\u003e{\"inputs\":{},\"pre_processing_script\":null,\"pre_processing_script_language\":null,\"result_name\":\"offense_sum\"}\u003c/resilient:sub-playbook\u003e\u003ccamunda:in source=\"RESILIENT_CONTEXT\" target=\"RESILIENT_CONTEXT\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1nek7xe\u003c/incoming\u003e\u003coutgoing\u003eFlow_12fbssx\u003c/outgoing\u003e\u003c/callActivity\u003e\u003csequenceFlow id=\"Flow_154wj3c\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_15\"/\u003e\u003csequenceFlow id=\"Flow_1a91zx0\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_12\"/\u003e\u003csequenceFlow id=\"Flow_1wi2r7c\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_9\"/\u003e\u003csequenceFlow id=\"Flow_0e0qro3\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_11\"/\u003e\u003csequenceFlow id=\"Flow_0mufpsw\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_8\"/\u003e\u003csequenceFlow id=\"Flow_07z3adg\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_13\"/\u003e\u003csequenceFlow id=\"Flow_11nkv3p\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_14\"/\u003e\u003csequenceFlow id=\"Flow_1nek7xe\" sourceRef=\"StartEvent_155asxm\" targetRef=\"CallActivity_16\"/\u003e\u003cparallelGateway id=\"CollectionPoint_17\" resilient:documentation=\"Wait point\"\u003e\u003cincoming\u003eFlow_0gkn7f7\u003c/incoming\u003e\u003cincoming\u003eFlow_0il2fnc\u003c/incoming\u003e\u003cincoming\u003eFlow_1orep1n\u003c/incoming\u003e\u003cincoming\u003eFlow_1vul5t0\u003c/incoming\u003e\u003cincoming\u003eFlow_1yu283g\u003c/incoming\u003e\u003cincoming\u003eFlow_17l0e9k\u003c/incoming\u003e\u003cincoming\u003eFlow_17e4y6z\u003c/incoming\u003e\u003cincoming\u003eFlow_12fbssx\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ilbapr\u003c/outgoing\u003e\u003c/parallelGateway\u003e\u003csequenceFlow id=\"Flow_0gkn7f7\" sourceRef=\"CallActivity_15\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_0il2fnc\" sourceRef=\"CallActivity_12\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_1orep1n\" sourceRef=\"CallActivity_9\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_1vul5t0\" sourceRef=\"CallActivity_11\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_1yu283g\" sourceRef=\"CallActivity_8\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_17l0e9k\" sourceRef=\"CallActivity_13\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_17e4y6z\" sourceRef=\"CallActivity_14\" targetRef=\"CollectionPoint_17\"/\u003e\u003csequenceFlow id=\"Flow_12fbssx\" sourceRef=\"CallActivity_16\" targetRef=\"CollectionPoint_17\"/\u003e\u003cendEvent id=\"EndPoint_18\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0ilbapr\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0ilbapr\" sourceRef=\"CollectionPoint_17\" targetRef=\"EndPoint_18\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_97afb768_e2d6_4fc6_b25b_5745661215c0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1nek7xe\" id=\"Flow_1nek7xe_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_11nkv3p\" id=\"Flow_11nkv3p_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1320\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1320\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_07z3adg\" id=\"Flow_07z3adg_di\"\u003e\u003comgdi:waypoint x=\"814\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"1120\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0mufpsw\" id=\"Flow_0mufpsw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"66\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"194\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"194\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0e0qro3\" id=\"Flow_0e0qro3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"66\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1wi2r7c\" id=\"Flow_1wi2r7c_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"66\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"194\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"194\"/\u003e\u003comgdi:waypoint x=\"520\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1a91zx0\" id=\"Flow_1a91zx0_di\"\u003e\u003comgdi:waypoint x=\"627\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_154wj3c\" id=\"Flow_154wj3c_di\"\u003e\u003comgdi:waypoint x=\"627\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"40\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"322\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0gkn7f7\" id=\"Flow_0gkn7f7_di\"\u003e\u003comgdi:waypoint x=\"120\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"120\" y=\"580\"/\u003e\u003comgdi:waypoint x=\"652\" y=\"580\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0il2fnc\" id=\"Flow_0il2fnc_di\"\u003e\u003comgdi:waypoint x=\"320\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"320\" y=\"580\"/\u003e\u003comgdi:waypoint x=\"652\" y=\"580\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1orep1n\" id=\"Flow_1orep1n_di\"\u003e\u003comgdi:waypoint x=\"500\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"500\" y=\"580\"/\u003e\u003comgdi:waypoint x=\"652\" y=\"580\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vul5t0\" id=\"Flow_1vul5t0_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1yu283g\" id=\"Flow_1yu283g_di\"\u003e\u003comgdi:waypoint x=\"920\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"920\" y=\"580\"/\u003e\u003comgdi:waypoint x=\"789\" y=\"580\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17l0e9k\" id=\"Flow_17l0e9k_di\"\u003e\u003comgdi:waypoint x=\"1130\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1130\" y=\"580\"/\u003e\u003comgdi:waypoint x=\"789\" y=\"580\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_17e4y6z\" id=\"Flow_17e4y6z_di\"\u003e\u003comgdi:waypoint x=\"1320\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1320\" y=\"580\"/\u003e\u003comgdi:waypoint x=\"789\" y=\"580\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_12fbssx\" id=\"Flow_12fbssx_di\"\u003e\u003comgdi:waypoint x=\"1520\" y=\"439\"/\u003e\u003comgdi:waypoint x=\"1520\" y=\"580\"/\u003e\u003comgdi:waypoint x=\"789\" y=\"580\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ilbapr\" id=\"Flow_0ilbapr_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"606\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"674\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"14\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_8\" id=\"CallActivity_8_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"822\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_9\" id=\"CallActivity_9_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"422\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_11\" id=\"CallActivity_11_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"623\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_12\" id=\"CallActivity_12_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"222\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_13\" id=\"CallActivity_13_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1022\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_14\" id=\"CallActivity_14_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1222\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_15\" id=\"CallActivity_15_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"22\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CallActivity_16\" id=\"CallActivity_16_di\"\u003e\u003comgdc:Bounds height=\"117\" width=\"196\" x=\"1422\" y=\"322\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"CollectionPoint_17\" id=\"CollectionPoint_17_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"137.20652\" x=\"652.25\" y=\"554.4103240966797\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_18\" id=\"EndPoint_18_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.220112\" x=\"655.25\" y=\"674.4103240966797\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569686217,
+      "create_date": 1785493741977,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_97afb768_e2d6_4fc6_b25b_5745661215c0",
       "description": {
@@ -4044,27 +4044,27 @@
         "uuid": "3625d5a3-1071-40a0-a972-c8f22b347a7e"
       },
       "has_logical_errors": false,
-      "id": 17,
+      "id": 72,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569686720,
+      "last_modified_time": 1785493742906,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1780569686281,
+          "created_date": 1785493742130,
           "description": "",
           "enabled": false,
           "export_key": "Example of fetching contributing rules for Offense",
-          "id": 27,
+          "id": 97,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569686281,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493742130,
           "name": "Example of fetching contributing rules for Offense",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_refresh_pb",
@@ -4075,14 +4075,14 @@
         },
         {
           "actions": [],
-          "created_date": 1780569686304,
+          "created_date": 1785493742175,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Assets information",
-          "id": 28,
+          "id": 98,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569686304,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493742175,
           "name": "Example of searching and returning Assets information",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_refresh_pb",
@@ -4093,14 +4093,14 @@
         },
         {
           "actions": [],
-          "created_date": 1780569686329,
+          "created_date": 1785493742228,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Categories Events",
-          "id": 29,
+          "id": 99,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569686329,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493742228,
           "name": "Example of searching and returning Categories Events",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_refresh_pb",
@@ -4111,14 +4111,14 @@
         },
         {
           "actions": [],
-          "created_date": 1780569686354,
+          "created_date": 1785493742277,
           "description": "",
           "enabled": false,
           "export_key": "Example of searching and returning Categories Flows",
-          "id": 30,
+          "id": 100,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569686354,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493742277,
           "name": "Example of searching and returning Categories Flows",
           "object_type": "incident",
           "playbook_handle": "qradar_enhanced_data_refresh_pb",
@@ -4153,22 +4153,22 @@
       "name": "qradar_enhanced_data_refresh_pb",
       "object_type": "incident",
       "playbook_change_log_info": {
-        "change_log_id": 17,
+        "change_log_id": 169,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569686651,
+        "create_date": 1785493742780,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_97afb768-e2d6-4fc6-b25b-5745661215c0",
-        "id": 17,
+        "id": 76,
         "name": "playbook_97afb768_e2d6_4fc6_b25b_5745661215c0",
         "type": "playbook",
         "uuid": "6dd99e51-697d-4913-986a-edaf21428177"
@@ -4184,12 +4184,12 @@
         "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_b37b226b_96da_46f4_9a3a_612fd163a60f\" isExecutable=\"true\" name=\"playbook_b37b226b_96da_46f4_9a3a_612fd163a60f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0xbvn9v\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"QRadar Get Offense MITRE Reference\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c72d73d8-29de-4166-875e-427e3add0859\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.qradar_offense_id = incident.properties.qradar_id\\ninputs.qradar_label = incident.properties.qradar_destination\\ninputs.soar_incident_id = incident.id\\ninputs.soar_table_name = \\\"qradar_rules_and_mitre_tactics_and_techniques\\\"\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"mitre_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0xbvn9v\u003c/incoming\u003e\u003coutgoing\u003eFlow_1lwt5p9\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0xbvn9v\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"Post-process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"ed3e5055-1172-4b64-a2f4-11fcd73a7ba6\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1lwt5p9\u003c/incoming\u003e\u003coutgoing\u003eFlow_0b5w7u9\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1lwt5p9\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0b5w7u9\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0b5w7u9\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_b37b226b_96da_46f4_9a3a_612fd163a60f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0b5w7u9\" id=\"Flow_0b5w7u9_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"392\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"434\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1lwt5p9\" id=\"Flow_1lwt5p9_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"308\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0xbvn9v\" id=\"Flow_0xbvn9v_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"308\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"434\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780569686726,
+      "create_date": 1785493742921,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_b37b226b_96da_46f4_9a3a_612fd163a60f",
       "description": {
@@ -4224,27 +4224,27 @@
         "uuid": "273277e0-d4d5-43e0-9583-c85db65683e7"
       },
       "has_logical_errors": false,
-      "id": 18,
+      "id": 73,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780569687146,
+      "last_modified_time": 1785493743714,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1780569686789,
+          "created_date": 1785493743077,
           "description": "",
           "enabled": false,
           "export_key": "Post-process",
-          "id": 31,
+          "id": 101,
           "language": "python3",
-          "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "last_modified_time": 1780569686789,
+          "last_modified_by": "admin@example.com",
+          "last_modified_time": 1785493743077,
           "name": "Post-process",
           "object_type": "incident",
           "playbook_handle": "qradar_get_qradar_rule_mitre_reference",
@@ -4272,22 +4272,22 @@
       "name": "qradar_get_qradar_rule_mitre_reference",
       "object_type": "incident",
       "playbook_change_log_info": {
-        "change_log_id": 18,
+        "change_log_id": 170,
         "change_log_items": [],
         "change_number": 1,
         "change_number_prefix": "70c0f76c-52a9-4ada-a237-e26596d4cbd3",
-        "create_date": 1780569687038,
+        "create_date": 1785493743511,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_b37b226b-96da-46f4-9a3a-612fd163a60f",
-        "id": 18,
+        "id": 77,
         "name": "playbook_b37b226b_96da_46f4_9a3a_612fd163a60f",
         "type": "playbook",
         "uuid": "0842e195-3bfa-4cae-a518-2d03dae7d543"
@@ -4303,14 +4303,14 @@
   "scripts": [
     {
       "actions": [],
-      "created_date": 1780569676906,
+      "created_date": 1785493726049,
       "description": "qr_last_updated_time will be set to equal create_date for the incident on incident creation. qr_last_updated_time will be set to equal current time when manual refresh rule is run.",
       "enabled": false,
       "export_key": "Set Incident Last Updated Time",
-      "id": 2,
+      "id": 72,
       "language": "python3",
-      "last_modified_by": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-      "last_modified_time": 1780569676906,
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1785493726049,
       "name": "Set Incident Last Updated Time",
       "object_type": "incident",
       "playbook_handle": null,
@@ -4321,14 +4321,14 @@
     }
   ],
   "server_version": {
-    "build_number": 20726,
+    "build_number": 20732,
     "f": 0,
     "m": 8,
     "major": 0,
     "minor": 0,
     "r": 0,
     "v": 51,
-    "version": "51.0.8.0.20726"
+    "version": "51.0.8.0.20732"
   },
   "tags": [],
   "task_order": [],
@@ -4349,7 +4349,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/mitre_tactic",
           "hide_notification": false,
-          "id": 364,
+          "id": 1273,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4368,7 +4368,7 @@
           "templates": [],
           "text": "MITRE Tactic",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1060,
           "uuid": "0cde50a2-cec3-4686-b931-db09c5cc9c27",
           "values": [],
           "width": 50
@@ -4383,7 +4383,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/mitre_tactic_id",
           "hide_notification": false,
-          "id": 365,
+          "id": 1274,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4402,7 +4402,7 @@
           "templates": [],
           "text": "MITRE Tactic ID",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1060,
           "uuid": "76455b2d-2229-4861-b69b-610548615025",
           "values": [],
           "width": 50
@@ -4417,7 +4417,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/mitre_technique",
           "hide_notification": false,
-          "id": 366,
+          "id": 1275,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4436,7 +4436,7 @@
           "templates": [],
           "text": "MITRE Technique",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1060,
           "uuid": "249003bb-ce9b-4811-9c82-38b8fa00a8b6",
           "values": [],
           "width": 78
@@ -4451,7 +4451,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/mitre_technique_id",
           "hide_notification": false,
-          "id": 367,
+          "id": 1276,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4470,7 +4470,7 @@
           "templates": [],
           "text": "MITRE Technique ID",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1060,
           "uuid": "71386a2f-010b-497b-854b-c4f6a1a701b9",
           "values": [],
           "width": 78
@@ -4485,7 +4485,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/rule_id",
           "hide_notification": false,
-          "id": 368,
+          "id": 1277,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4504,7 +4504,7 @@
           "templates": [],
           "text": "Rule ID",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1060,
           "uuid": "853fde37-417b-434a-9351-faf84f1665bf",
           "values": [],
           "width": 34
@@ -4519,7 +4519,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/rule_identifier",
           "hide_notification": false,
-          "id": 369,
+          "id": 1278,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4538,7 +4538,7 @@
           "templates": [],
           "text": "Rule Identifier",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1060,
           "uuid": "182b592a-c169-49e7-9d43-d6aa215f479a",
           "values": [],
           "width": 73
@@ -4553,7 +4553,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/rule_name",
           "hide_notification": false,
-          "id": 370,
+          "id": 1279,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4572,7 +4572,7 @@
           "templates": [],
           "text": "Rule Name",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1060,
           "uuid": "46247059-8d98-4ed5-974d-6a39e50fe14b",
           "values": [],
           "width": 44
@@ -4587,7 +4587,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/tactic_confidence_level",
           "hide_notification": false,
-          "id": 371,
+          "id": 1280,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4606,7 +4606,7 @@
           "templates": [],
           "text": "Tactic Confidence Level",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1060,
           "uuid": "69932faf-d86d-4b87-afc5-01008b09b417",
           "values": [],
           "width": 86
@@ -4621,7 +4621,7 @@
           "deprecated": false,
           "export_key": "qradar_rules_and_mitre_tactics_and_techniques/technique_confidence_level",
           "hide_notification": false,
-          "id": 372,
+          "id": 1281,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -4640,7 +4640,7 @@
           "templates": [],
           "text": "Technique Confidence Level",
           "tooltip": "",
-          "type_id": 1000,
+          "type_id": 1060,
           "uuid": "a1c065c6-3cab-4580-9079-a40368e2f952",
           "values": [],
           "width": 86
@@ -4680,7 +4680,7 @@
           "deprecated": false,
           "export_key": "qr_assets/aggregated_cvss",
           "hide_notification": false,
-          "id": 373,
+          "id": 1282,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4698,7 +4698,7 @@
           "templates": [],
           "text": "Aggregated CVSS",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1061,
           "uuid": "be15635a-30b4-4691-bc27-e329350abc30",
           "values": [],
           "width": 126
@@ -4713,7 +4713,7 @@
           "deprecated": false,
           "export_key": "qr_assets/asset_id",
           "hide_notification": false,
-          "id": 374,
+          "id": 1283,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4731,7 +4731,7 @@
           "templates": [],
           "text": "ID",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1061,
           "uuid": "70698b55-f7b6-4f60-94a2-1498a289d946",
           "values": [],
           "width": 45
@@ -4746,7 +4746,7 @@
           "deprecated": false,
           "export_key": "qr_assets/asset_name",
           "hide_notification": false,
-          "id": 375,
+          "id": 1284,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4764,7 +4764,7 @@
           "templates": [],
           "text": "Name",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1061,
           "uuid": "b8fe29dc-e586-41c8-8e94-b37b79039c9a",
           "values": [],
           "width": 79
@@ -4779,7 +4779,7 @@
           "deprecated": false,
           "export_key": "qr_assets/ip_address",
           "hide_notification": false,
-          "id": 376,
+          "id": 1285,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4797,7 +4797,7 @@
           "templates": [],
           "text": "IP Address",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1061,
           "uuid": "0b010be5-cc51-45c0-b9c0-35ede0fc3824",
           "values": [],
           "width": 86
@@ -4812,7 +4812,7 @@
           "deprecated": false,
           "export_key": "qr_assets/last_user",
           "hide_notification": false,
-          "id": 377,
+          "id": 1286,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4830,7 +4830,7 @@
           "templates": [],
           "text": "Last User",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1061,
           "uuid": "9847f9a2-6558-4317-b587-7e66237fe75e",
           "values": [],
           "width": 76
@@ -4845,7 +4845,7 @@
           "deprecated": false,
           "export_key": "qr_assets/last_user_seen",
           "hide_notification": false,
-          "id": 378,
+          "id": 1287,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -4863,7 +4863,7 @@
           "templates": [],
           "text": "Last User Seen",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1061,
           "uuid": "145809c5-d9b0-416c-9e96-a165d1166e05",
           "values": [],
           "width": 38
@@ -4878,7 +4878,7 @@
           "deprecated": false,
           "export_key": "qr_assets/operating_system",
           "hide_notification": false,
-          "id": 379,
+          "id": 1288,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4896,7 +4896,7 @@
           "templates": [],
           "text": "OS ID",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1061,
           "uuid": "917685ae-7b50-4644-a874-eda876771767",
           "values": [],
           "width": 134
@@ -4911,7 +4911,7 @@
           "deprecated": false,
           "export_key": "qr_assets/reported_time",
           "hide_notification": false,
-          "id": 380,
+          "id": 1289,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -4929,7 +4929,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1061,
           "uuid": "b938fb36-8494-4c31-a27c-74b9f1afb125",
           "values": [],
           "width": 70
@@ -4944,7 +4944,7 @@
           "deprecated": false,
           "export_key": "qr_assets/vulnerabilities",
           "hide_notification": false,
-          "id": 381,
+          "id": 1290,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -4962,7 +4962,7 @@
           "templates": [],
           "text": "Vulnerabilities",
           "tooltip": "",
-          "type_id": 1001,
+          "type_id": 1061,
           "uuid": "4ebea1ce-5d34-4c32-9db4-9a4c290a8e73",
           "values": [],
           "width": 112
@@ -5002,7 +5002,7 @@
           "deprecated": false,
           "export_key": "qr_categories/category_name",
           "hide_notification": false,
-          "id": 382,
+          "id": 1291,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5020,7 +5020,7 @@
           "templates": [],
           "text": "Category Name",
           "tooltip": "",
-          "type_id": 1002,
+          "type_id": 1062,
           "uuid": "d9477e59-fdf3-4df0-8037-a51da1407d7b",
           "values": [],
           "width": 133
@@ -5035,7 +5035,7 @@
           "deprecated": false,
           "export_key": "qr_categories/destinationip_count",
           "hide_notification": false,
-          "id": 383,
+          "id": 1292,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5053,7 +5053,7 @@
           "templates": [],
           "text": "Destination IP",
           "tooltip": "",
-          "type_id": 1002,
+          "type_id": 1062,
           "uuid": "9495b67a-31ff-4543-8bb3-613bf92c7fa3",
           "values": [],
           "width": 107
@@ -5068,7 +5068,7 @@
           "deprecated": false,
           "export_key": "qr_categories/event_count",
           "hide_notification": false,
-          "id": 384,
+          "id": 1293,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5086,7 +5086,7 @@
           "templates": [],
           "text": "Event Count",
           "tooltip": "",
-          "type_id": 1002,
+          "type_id": 1062,
           "uuid": "0dd8491f-4b7f-4fbc-b7c1-c0c466141dc0",
           "values": [],
           "width": 92
@@ -5101,7 +5101,7 @@
           "deprecated": false,
           "export_key": "qr_categories/event_time",
           "hide_notification": false,
-          "id": 385,
+          "id": 1294,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -5119,7 +5119,7 @@
           "templates": [],
           "text": "Event Time",
           "tooltip": "",
-          "type_id": 1002,
+          "type_id": 1062,
           "uuid": "19531e88-f976-4068-9b60-7e957bf0315b",
           "values": [],
           "width": 116
@@ -5134,7 +5134,7 @@
           "deprecated": false,
           "export_key": "qr_categories/flow_count",
           "hide_notification": false,
-          "id": 386,
+          "id": 1295,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5152,7 +5152,7 @@
           "templates": [],
           "text": "Flow Count",
           "tooltip": "",
-          "type_id": 1002,
+          "type_id": 1062,
           "uuid": "ed9161b6-f730-4778-8e43-cd1ba49aa14f",
           "values": [],
           "width": 45
@@ -5167,7 +5167,7 @@
           "deprecated": false,
           "export_key": "qr_categories/last_packet_time",
           "hide_notification": false,
-          "id": 387,
+          "id": 1296,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -5185,7 +5185,7 @@
           "templates": [],
           "text": "Last Packet Time",
           "tooltip": "",
-          "type_id": 1002,
+          "type_id": 1062,
           "uuid": "7242842a-0ed7-45bd-9801-dbe328b0126b",
           "values": [],
           "width": 52
@@ -5200,7 +5200,7 @@
           "deprecated": false,
           "export_key": "qr_categories/magnitude",
           "hide_notification": false,
-          "id": 388,
+          "id": 1297,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5218,7 +5218,7 @@
           "templates": [],
           "text": "Magnitude",
           "tooltip": "",
-          "type_id": 1002,
+          "type_id": 1062,
           "uuid": "98724adf-ef07-4acf-b9fd-da6cf3e827d0",
           "values": [],
           "width": 89
@@ -5233,7 +5233,7 @@
           "deprecated": false,
           "export_key": "qr_categories/reported_time",
           "hide_notification": false,
-          "id": 389,
+          "id": 1298,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -5251,7 +5251,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1002,
+          "type_id": 1062,
           "uuid": "e80372ea-904d-48e7-b50f-cd1608dead47",
           "values": [],
           "width": 70
@@ -5266,7 +5266,7 @@
           "deprecated": false,
           "export_key": "qr_categories/sourceip_count",
           "hide_notification": false,
-          "id": 390,
+          "id": 1299,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5284,7 +5284,7 @@
           "templates": [],
           "text": "Source IP",
           "tooltip": "",
-          "type_id": 1002,
+          "type_id": 1062,
           "uuid": "44d3f83f-597c-4ecd-ab72-0d57269f591d",
           "values": [],
           "width": 94
@@ -5324,7 +5324,7 @@
           "deprecated": false,
           "export_key": "qr_flows/application",
           "hide_notification": false,
-          "id": 391,
+          "id": 1300,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5342,7 +5342,7 @@
           "templates": [],
           "text": "Application",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1063,
           "uuid": "55ebd534-30f5-472c-8692-7bd9a5a849d3",
           "values": [],
           "width": 88
@@ -5357,7 +5357,7 @@
           "deprecated": false,
           "export_key": "qr_flows/destination_bytes",
           "hide_notification": false,
-          "id": 392,
+          "id": 1301,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -5375,7 +5375,7 @@
           "templates": [],
           "text": "Destination Bytes",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1063,
           "uuid": "d70568fe-21f6-4008-bab3-0f3fb1e89cf4",
           "values": [],
           "width": 88
@@ -5390,7 +5390,7 @@
           "deprecated": false,
           "export_key": "qr_flows/destination_ip",
           "hide_notification": false,
-          "id": 393,
+          "id": 1302,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5408,7 +5408,7 @@
           "templates": [],
           "text": "Destination IP",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1063,
           "uuid": "e9e41246-f362-418a-a0f1-e7e0d80e3572",
           "values": [],
           "width": 88
@@ -5423,7 +5423,7 @@
           "deprecated": false,
           "export_key": "qr_flows/destination_packets",
           "hide_notification": false,
-          "id": 394,
+          "id": 1303,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -5441,7 +5441,7 @@
           "templates": [],
           "text": "Destination Packets",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1063,
           "uuid": "d7ca79dc-840d-4e0d-8be0-bb45c8be4494",
           "values": [],
           "width": 88
@@ -5456,7 +5456,7 @@
           "deprecated": false,
           "export_key": "qr_flows/destination_port",
           "hide_notification": false,
-          "id": 395,
+          "id": 1304,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5474,7 +5474,7 @@
           "templates": [],
           "text": "Destination Port",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1063,
           "uuid": "367cd2f3-1f57-48ad-b06e-ec6d6d884b8e",
           "values": [],
           "width": 88
@@ -5489,7 +5489,7 @@
           "deprecated": false,
           "export_key": "qr_flows/first_packet_time",
           "hide_notification": false,
-          "id": 396,
+          "id": 1305,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -5507,7 +5507,7 @@
           "templates": [],
           "text": "First Packet Time",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1063,
           "uuid": "fbeaa822-58b2-4ffd-b56a-3309acb865cf",
           "values": [],
           "width": 52
@@ -5522,7 +5522,7 @@
           "deprecated": false,
           "export_key": "qr_flows/protocol",
           "hide_notification": false,
-          "id": 397,
+          "id": 1306,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5540,7 +5540,7 @@
           "templates": [],
           "text": "Protocol",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1063,
           "uuid": "942b9607-fe2c-400e-971d-982f64d00dd4",
           "values": [],
           "width": 64
@@ -5555,7 +5555,7 @@
           "deprecated": false,
           "export_key": "qr_flows/reported_time",
           "hide_notification": false,
-          "id": 398,
+          "id": 1307,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -5573,7 +5573,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1063,
           "uuid": "8120eaab-790e-4c45-80c4-95135d737818",
           "values": [],
           "width": 70
@@ -5588,7 +5588,7 @@
           "deprecated": false,
           "export_key": "qr_flows/source_bytes",
           "hide_notification": false,
-          "id": 399,
+          "id": 1308,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -5606,7 +5606,7 @@
           "templates": [],
           "text": "Source Bytes",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1063,
           "uuid": "e6db7fbe-9a3e-416a-96af-b7637634519d",
           "values": [],
           "width": 53
@@ -5621,7 +5621,7 @@
           "deprecated": false,
           "export_key": "qr_flows/source_ip",
           "hide_notification": false,
-          "id": 400,
+          "id": 1309,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5639,7 +5639,7 @@
           "templates": [],
           "text": "Source IP",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1063,
           "uuid": "a949ff96-e8d1-470f-b2ec-1e6168d32165",
           "values": [],
           "width": 53
@@ -5654,7 +5654,7 @@
           "deprecated": false,
           "export_key": "qr_flows/source_packets",
           "hide_notification": false,
-          "id": 401,
+          "id": 1310,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -5672,7 +5672,7 @@
           "templates": [],
           "text": "Source Packets",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1063,
           "uuid": "ddc62352-55d4-4d7d-adeb-9b7283b2448f",
           "values": [],
           "width": 60
@@ -5687,7 +5687,7 @@
           "deprecated": false,
           "export_key": "qr_flows/source_port",
           "hide_notification": false,
-          "id": 402,
+          "id": 1311,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5705,7 +5705,7 @@
           "templates": [],
           "text": "Source Port",
           "tooltip": "",
-          "type_id": 1003,
+          "type_id": 1063,
           "uuid": "c90c239d-e1da-4429-a32a-9323fc3ca16d",
           "values": [],
           "width": 53
@@ -5745,7 +5745,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/category",
           "hide_notification": false,
-          "id": 403,
+          "id": 1312,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5764,7 +5764,7 @@
           "templates": [],
           "text": "Category",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1064,
           "uuid": "2ab36024-0e8a-4962-8f2f-f05b4b62fcdf",
           "values": [],
           "width": 142
@@ -5779,7 +5779,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/destination_ip",
           "hide_notification": false,
-          "id": 404,
+          "id": 1313,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5798,7 +5798,7 @@
           "templates": [],
           "text": "Destination IP",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1064,
           "uuid": "c335a25f-91a9-4119-8a72-affe0ee09528",
           "values": [],
           "width": 155
@@ -5813,7 +5813,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/event_count",
           "hide_notification": false,
-          "id": 405,
+          "id": 1314,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5832,7 +5832,7 @@
           "templates": [],
           "text": "Event Count",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1064,
           "uuid": "8eeb2a3b-50c8-42e7-907a-1ba44901bc61",
           "values": [],
           "width": 93
@@ -5847,7 +5847,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/event_name",
           "hide_notification": false,
-          "id": 406,
+          "id": 1315,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5866,7 +5866,7 @@
           "templates": [],
           "text": "Event Name",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1064,
           "uuid": "c45d91a0-373b-4386-8866-cf61558e782e",
           "values": [],
           "width": 248
@@ -5881,7 +5881,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/event_time",
           "hide_notification": false,
-          "id": 407,
+          "id": 1316,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -5900,7 +5900,7 @@
           "templates": [],
           "text": "Event Time",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1064,
           "uuid": "d0a29a03-f140-495f-94c8-e86cc0d4b8c5",
           "values": [],
           "width": 85
@@ -5915,7 +5915,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/log_source",
           "hide_notification": false,
-          "id": 408,
+          "id": 1317,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -5934,7 +5934,7 @@
           "templates": [],
           "text": "Log Source",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1064,
           "uuid": "c3b2de7d-16b0-4db3-9c57-8cf9c5968e62",
           "values": [],
           "width": 228
@@ -5949,7 +5949,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/magnitude",
           "hide_notification": false,
-          "id": 409,
+          "id": 1318,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -5968,7 +5968,7 @@
           "templates": [],
           "text": "Magnitude",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1064,
           "uuid": "cfb099aa-be4c-4e58-9dbe-6526957ee3a4",
           "values": [],
           "width": 81
@@ -5983,7 +5983,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/reported_time",
           "hide_notification": false,
-          "id": 410,
+          "id": 1319,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -6002,7 +6002,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1064,
           "uuid": "09f90681-325f-45e3-b1b2-6d0fa3b7312d",
           "values": [],
           "width": 112
@@ -6017,7 +6017,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/source_ip",
           "hide_notification": false,
-          "id": 411,
+          "id": 1320,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6036,7 +6036,7 @@
           "templates": [],
           "text": "Source IP",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1064,
           "uuid": "7ff661a9-2b89-4f5b-bc55-e91df4aeaea3",
           "values": [],
           "width": 146
@@ -6051,7 +6051,7 @@
           "deprecated": false,
           "export_key": "qr_offense_top_events/username",
           "hide_notification": false,
-          "id": 412,
+          "id": 1321,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6070,7 +6070,7 @@
           "templates": [],
           "text": "Username",
           "tooltip": "",
-          "type_id": 1004,
+          "type_id": 1064,
           "uuid": "670ee674-e080-44ae-876c-4991fdaf2e27",
           "values": [],
           "width": 105
@@ -6110,7 +6110,7 @@
           "deprecated": false,
           "export_key": "qr_top_destination_ips/category_count",
           "hide_notification": false,
-          "id": 413,
+          "id": 1322,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6128,7 +6128,7 @@
           "templates": [],
           "text": "Category Count",
           "tooltip": "",
-          "type_id": 1005,
+          "type_id": 1065,
           "uuid": "d7fe1951-6136-46b2-8389-62525ada5c40",
           "values": [],
           "width": 108
@@ -6143,7 +6143,7 @@
           "deprecated": false,
           "export_key": "qr_top_destination_ips/destination_ip",
           "hide_notification": false,
-          "id": 414,
+          "id": 1323,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6161,7 +6161,7 @@
           "templates": [],
           "text": "Destination IP",
           "tooltip": "",
-          "type_id": 1005,
+          "type_id": 1065,
           "uuid": "2bb02d45-dd54-4d55-be57-c96bf74dda27",
           "values": [],
           "width": 122
@@ -6176,7 +6176,7 @@
           "deprecated": false,
           "export_key": "qr_top_destination_ips/event_count",
           "hide_notification": false,
-          "id": 415,
+          "id": 1324,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6194,7 +6194,7 @@
           "templates": [],
           "text": "Event Count",
           "tooltip": "",
-          "type_id": 1005,
+          "type_id": 1065,
           "uuid": "7bbc0dcc-82a7-4907-82b1-1e6f6cedcf73",
           "values": [],
           "width": 82
@@ -6209,7 +6209,7 @@
           "deprecated": false,
           "export_key": "qr_top_destination_ips/flow_count",
           "hide_notification": false,
-          "id": 416,
+          "id": 1325,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6227,7 +6227,7 @@
           "templates": [],
           "text": "Flow Count",
           "tooltip": "",
-          "type_id": 1005,
+          "type_id": 1065,
           "uuid": "312615da-c065-4a0b-9e59-d3ac344fb32e",
           "values": [],
           "width": 374
@@ -6242,7 +6242,7 @@
           "deprecated": false,
           "export_key": "qr_top_destination_ips/reported_time",
           "hide_notification": false,
-          "id": 417,
+          "id": 1326,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -6260,7 +6260,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1005,
+          "type_id": 1065,
           "uuid": "ae412689-6c07-47ab-8750-03c468692882",
           "values": [],
           "width": 70
@@ -6300,7 +6300,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/category_count",
           "hide_notification": false,
-          "id": 418,
+          "id": 1327,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6318,7 +6318,7 @@
           "templates": [],
           "text": "Category Count",
           "tooltip": "",
-          "type_id": 1006,
+          "type_id": 1066,
           "uuid": "ec8d00a0-ab2b-4f08-bdf3-717c5b1ba908",
           "values": [],
           "width": 109
@@ -6333,7 +6333,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/domain",
           "hide_notification": false,
-          "id": 419,
+          "id": 1328,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6351,7 +6351,7 @@
           "templates": [],
           "text": "Domain",
           "tooltip": "",
-          "type_id": 1006,
+          "type_id": 1066,
           "uuid": "2d51d52d-ad65-4263-909e-68242d4befd1",
           "values": [],
           "width": 78
@@ -6366,7 +6366,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/event_count",
           "hide_notification": false,
-          "id": 420,
+          "id": 1329,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6384,7 +6384,7 @@
           "templates": [],
           "text": "Event Count",
           "tooltip": "",
-          "type_id": 1006,
+          "type_id": 1066,
           "uuid": "7a6917ee-041e-45a8-a6f3-4d9fa7d46621",
           "values": [],
           "width": 106
@@ -6399,7 +6399,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/flow_count",
           "hide_notification": false,
-          "id": 421,
+          "id": 1330,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6417,7 +6417,7 @@
           "templates": [],
           "text": "Flow Count",
           "tooltip": "",
-          "type_id": 1006,
+          "type_id": 1066,
           "uuid": "d6aa26ad-5d57-4aa3-9c5d-84d4a9fc48f8",
           "values": [],
           "width": 45
@@ -6432,7 +6432,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/mac",
           "hide_notification": false,
-          "id": 422,
+          "id": 1331,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6450,7 +6450,7 @@
           "templates": [],
           "text": "MAC",
           "tooltip": "",
-          "type_id": 1006,
+          "type_id": 1066,
           "uuid": "ad4d32ee-0900-41d0-a86c-95b82d8f8cdf",
           "values": [],
           "width": 77
@@ -6465,7 +6465,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/network",
           "hide_notification": false,
-          "id": 423,
+          "id": 1332,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6483,7 +6483,7 @@
           "templates": [],
           "text": "Network",
           "tooltip": "",
-          "type_id": 1006,
+          "type_id": 1066,
           "uuid": "899cf2a4-c347-46bc-8b00-a3721c537def",
           "values": [],
           "width": 65
@@ -6498,7 +6498,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/reported_time",
           "hide_notification": false,
-          "id": 424,
+          "id": 1333,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -6516,7 +6516,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1006,
+          "type_id": 1066,
           "uuid": "95e4152a-c0ee-4827-a055-f29144ad1a62",
           "values": [],
           "width": 70
@@ -6531,7 +6531,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/source_ip",
           "hide_notification": false,
-          "id": 425,
+          "id": 1334,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6549,7 +6549,7 @@
           "templates": [],
           "text": "Source IP",
           "tooltip": "",
-          "type_id": 1006,
+          "type_id": 1066,
           "uuid": "8e61b967-7937-4038-ae97-1d3682735173",
           "values": [],
           "width": 113
@@ -6564,7 +6564,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/usernames",
           "hide_notification": false,
-          "id": 426,
+          "id": 1335,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6582,7 +6582,7 @@
           "templates": [],
           "text": "Usernames",
           "tooltip": "",
-          "type_id": 1006,
+          "type_id": 1066,
           "uuid": "3d8c9e6c-c5c9-48c6-84d5-b3a8905e3a03",
           "values": [],
           "width": 99
@@ -6597,7 +6597,7 @@
           "deprecated": false,
           "export_key": "qr_top_source_ips/vulnerability_count",
           "hide_notification": false,
-          "id": 427,
+          "id": 1336,
           "input_type": "number",
           "internal": false,
           "is_tracked": false,
@@ -6615,7 +6615,7 @@
           "templates": [],
           "text": "Vulnerability Count",
           "tooltip": "",
-          "type_id": 1006,
+          "type_id": 1066,
           "uuid": "a6f51997-4742-4093-b7f6-a2f7650076f4",
           "values": [],
           "width": 131
@@ -6655,7 +6655,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/date_created",
           "hide_notification": false,
-          "id": 428,
+          "id": 1337,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -6673,7 +6673,7 @@
           "templates": [],
           "text": "Date Created",
           "tooltip": "",
-          "type_id": 1007,
+          "type_id": 1067,
           "uuid": "10916f01-0d40-49d4-aa23-ee292a881abd",
           "values": [],
           "width": 60
@@ -6688,7 +6688,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/enabled",
           "hide_notification": false,
-          "id": 429,
+          "id": 1338,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6706,7 +6706,7 @@
           "templates": [],
           "text": "Enabled",
           "tooltip": "",
-          "type_id": 1007,
+          "type_id": 1067,
           "uuid": "51cd6776-43b2-4845-bcdb-aea84ffccd18",
           "values": [],
           "width": 62
@@ -6721,7 +6721,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/last_modified",
           "hide_notification": false,
-          "id": 430,
+          "id": 1339,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -6739,7 +6739,7 @@
           "templates": [],
           "text": "Last Modified",
           "tooltip": "",
-          "type_id": 1007,
+          "type_id": 1067,
           "uuid": "f1bac767-7798-4572-a86b-2f0bc0a851a1",
           "values": [],
           "width": 67
@@ -6754,7 +6754,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/reported_time",
           "hide_notification": false,
-          "id": 431,
+          "id": 1340,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
@@ -6772,7 +6772,7 @@
           "templates": [],
           "text": "Reported Time",
           "tooltip": "",
-          "type_id": 1007,
+          "type_id": 1067,
           "uuid": "bd13ffd1-b303-4b86-9eef-b8a44702cd80",
           "values": [],
           "width": 70
@@ -6787,7 +6787,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/response",
           "hide_notification": false,
-          "id": 432,
+          "id": 1341,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6805,7 +6805,7 @@
           "templates": [],
           "text": "Response",
           "tooltip": "",
-          "type_id": 1007,
+          "type_id": 1067,
           "uuid": "34ff5942-6417-424e-bbdb-a6fa3f32774e",
           "values": [],
           "width": 74
@@ -6820,7 +6820,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/rule_group",
           "hide_notification": false,
-          "id": 433,
+          "id": 1342,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6838,7 +6838,7 @@
           "templates": [],
           "text": "Rule Group",
           "tooltip": "",
-          "type_id": 1007,
+          "type_id": 1067,
           "uuid": "71634383-1e15-4f00-9f74-adeb79d5f1e9",
           "values": [],
           "width": 47
@@ -6853,7 +6853,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/rule_name",
           "hide_notification": false,
-          "id": 434,
+          "id": 1343,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
@@ -6871,7 +6871,7 @@
           "templates": [],
           "text": "Rule Name",
           "tooltip": "",
-          "type_id": 1007,
+          "type_id": 1067,
           "uuid": "c516c54d-af5f-47f5-a82f-16d0ac196323",
           "values": [],
           "width": 286
@@ -6886,7 +6886,7 @@
           "deprecated": false,
           "export_key": "qr_triggered_rules/rule_type",
           "hide_notification": false,
-          "id": 435,
+          "id": 1344,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
@@ -6904,7 +6904,7 @@
           "templates": [],
           "text": "Rule Type",
           "tooltip": "",
-          "type_id": 1007,
+          "type_id": 1067,
           "uuid": "2cc90f9c-3579-48d0-8445-e93090d0e48a",
           "values": [],
           "width": 71

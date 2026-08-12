@@ -1,1 +1,1 @@
-https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_microsoft_sentinel/main/2.2/app-fn_microsoft_sentinel-2.2.2-37721.zip
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_qradar_enhanced_data/main/2.5/app-fn_qradar_enhanced_data-2.5.5-41280.zip
