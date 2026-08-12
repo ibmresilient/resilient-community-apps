@@ -17,7 +17,7 @@
       ],
       "enabled": true,
       "export_key": "Example: urlscan.io",
-      "id": 32,
+      "id": 87,
       "logic_type": "all",
       "message_destinations": [],
       "name": "Example: urlscan.io",
@@ -36,7 +36,7 @@
   "automatic_tasks": [],
   "case_matching_profiles": [],
   "connectors": null,
-  "export_date": 1781081748683,
+  "export_date": 1785490996285,
   "export_format_version": 2,
   "export_notes": null,
   "export_type": null,
@@ -51,7 +51,7 @@
       "deprecated": false,
       "export_key": "__function/urlscanio_referer",
       "hide_notification": false,
-      "id": 455,
+      "id": 1203,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -82,7 +82,7 @@
       "deprecated": false,
       "export_key": "__function/incident_id",
       "hide_notification": false,
-      "id": 456,
+      "id": 928,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
@@ -114,7 +114,7 @@
       "deprecated": false,
       "export_key": "__function/urlscanio_public",
       "hide_notification": false,
-      "id": 457,
+      "id": 1204,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
@@ -145,7 +145,7 @@
       "deprecated": false,
       "export_key": "__function/urlscanio_url",
       "hide_notification": false,
-      "id": 458,
+      "id": 1205,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -176,7 +176,7 @@
       "deprecated": false,
       "export_key": "__function/urlscanio_useragent",
       "hide_notification": false,
-      "id": 459,
+      "id": 1206,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
@@ -211,7 +211,7 @@
   ],
   "functions": [
     {
-      "created_date": 1780859619143,
+      "created_date": 1785490982850,
       "description": {
         "content": "Analyze a URL with urlscan.io",
         "format": "text"
@@ -219,14 +219,14 @@
       "destination_handle": "urlscanio",
       "display_name": "Scan with urlscan.io",
       "export_key": "urlscanio",
-      "id": 5,
+      "id": 178,
       "last_modified_by": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1780859619143,
+      "last_modified_time": 1785490982850,
       "name": "urlscanio",
       "output_description": {
         "content": null,
@@ -286,20 +286,20 @@
           "programmatic_name": "example_urlscanio",
           "tags": [],
           "uuid": null,
-          "workflow_id": 19
+          "workflow_id": 68
         }
       ]
     }
   ],
   "geos": null,
   "groups": null,
-  "id": 3,
+  "id": 32,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1781081747120,
+      "create_date": 1785490994726,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -308,7 +308,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1781081747120,
+      "update_date": 1785490994726,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -316,16 +316,16 @@
   "locale": null,
   "message_destinations": [
     {
-      "api_keys": [
-        "2683b631-db4a-4209-baaf-2ee08660fbeb"
-      ],
+      "api_keys": [],
       "destination_type": 0,
       "expect_ack": true,
       "export_key": "urlscanio",
       "name": "urlscan.io",
       "programmatic_name": "urlscanio",
       "tags": [],
-      "users": [],
+      "users": [
+        "admin@example.com"
+      ],
       "uuid": "9c4e0143-d84b-4fd2-be43-e52eeb1e1e08"
     }
   ],
@@ -336,15 +336,15 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 3,
+        "content_version": 1,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_60ef90bb_4aad_4ce6_90df_a7431e41c0eb\" isExecutable=\"true\" name=\"playbook_60ef90bb_4aad_4ce6_90df_a7431e41c0eb\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_09ung60\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Scan with urlscan.io\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d19c1f00-b4f1-4480-b8a3-7bdd19143041\"\u003e{\"inputs\":{},\"pre_processing_script\":\"# This is an artifact workflow; \\n# The URL to scan is the artifact value\\ninputs.urlscanio_url = artifact.value\\n\\n# Set the incident id\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"urlscanio\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_09ung60\u003c/incoming\u003e\u003coutgoing\u003eFlow_0ui22co\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_09ung60\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0ui22co\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0ui22co\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_60ef90bb_4aad_4ce6_90df_a7431e41c0eb\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_09ung60\" id=\"Flow_09ung60_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"168\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0ui22co\" id=\"Flow_0ui22co_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"252\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"304\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"168\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"304\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1780859620079,
+      "create_date": 1785490983964,
       "creator_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
       "deployment_id": "playbook_60ef90bb_4aad_4ce6_90df_a7431e41c0eb",
       "description": {
@@ -379,16 +379,16 @@
         "uuid": "ea82a80c-8086-4e53-b40b-674eac3210c4"
       },
       "has_logical_errors": false,
-      "id": 19,
+      "id": 41,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
-        "display_name": "aaa",
+        "display_name": "admin example",
         "id": 4,
-        "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-        "type": "apikey"
+        "name": "admin@example.com",
+        "type": "user"
       },
-      "last_modified_time": 1781017803244,
+      "last_modified_time": 1785490984535,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -411,22 +411,22 @@
       "name": "example_urlscanio",
       "object_type": "artifact",
       "playbook_change_log_info": {
-        "change_log_id": 47,
+        "change_log_id": 138,
         "change_log_items": [],
         "change_number": 4,
         "change_number_prefix": "74629734-7afa-4a41-94f6-4be073d1997f",
-        "create_date": 1781017803054,
+        "create_date": 1785490984315,
         "modified_principal": {
-          "display_name": "aaa",
+          "display_name": "admin example",
           "id": 4,
-          "name": "2683b631-db4a-4209-baaf-2ee08660fbeb",
-          "type": "apikey"
+          "name": "admin@example.com",
+          "type": "user"
         }
       },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_60ef90bb-4aad-4ce6-90df-a7431e41c0eb",
-        "id": 19,
+        "id": 45,
         "name": "playbook_60ef90bb_4aad_4ce6_90df_a7431e41c0eb",
         "type": "playbook",
         "uuid": "7796b85d-26a6-49bc-8c62-d8475517de25"
@@ -434,21 +434,21 @@
       "tags": [],
       "type": "default",
       "uuid": "60ef90bb-4aad-4ce6-90df-a7431e41c0eb",
-      "version": 6
+      "version": 4
     }
   ],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 20726,
+    "build_number": 20732,
     "f": 0,
     "m": 8,
     "major": 0,
     "minor": 0,
     "r": 0,
     "v": 51,
-    "version": "51.0.8.0.20726"
+    "version": "51.0.8.0.20732"
   },
   "tags": [],
   "task_order": [],
@@ -458,21 +458,21 @@
     {
       "actions": [],
       "content": {
-        "version": 4,
+        "version": 1,
         "workflow_id": "example_urlscanio",
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"example_urlscanio\" isExecutable=\"true\" name=\"Example: urlscan.io\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eSequenceFlow_0wcctos\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_0m3chvd\" name=\"Scan with urlscan.io\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"d19c1f00-b4f1-4480-b8a3-7bdd19143041\"\u003e{\"inputs\":{\"ee9263c1-432a-41a8-8bbd-6917d35fb3ac\":{\"input_type\":\"static\",\"static_input\":{\"boolean_value\":false,\"multiselect_value\":[]}}},\"post_processing_script\":\"# The result contains,\\n# {\\n#   \\\"png_url\\\": the URL of the screenshot image\\n#   \\\"png_base64content\\\": the base64-encoded screenshot (PNG)\\n#   \\\"report_url\\\": the URL of the JSON report_url\\n#   \\\"report\\\": the JSON report, which will contain lots of detail of the page analysis (see urlscan.io for details).\\n# }\\n#\\n# In this case, the file is already attached to the incident.  Nothing to do here.\\n\",\"post_processing_script_language\":\"python3\",\"pre_processing_script\":\"# This is an artifact workflow; \\n# The URL to scan is the artifact value\\ninputs.urlscanio_url = artifact.value\\n\\n# Set the incident id\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"urlscanio\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eSequenceFlow_0wcctos\u003c/incoming\u003e\u003coutgoing\u003eSequenceFlow_0oivuzv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"SequenceFlow_0wcctos\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_0m3chvd\"/\u003e\u003cendEvent id=\"EndEvent_0rbv6vt\"\u003e\u003cincoming\u003eSequenceFlow_0oivuzv\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"SequenceFlow_0oivuzv\" sourceRef=\"ServiceTask_0m3chvd\" targetRef=\"EndEvent_0rbv6vt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_1kxxiyt\"\u003e\u003ctext\u003eRun for a URL artifact\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_1seuj48\" sourceRef=\"StartEvent_155asxm\" targetRef=\"TextAnnotation_1kxxiyt\"/\u003e\u003ctextAnnotation id=\"TextAnnotation_0wbrg5r\"\u003e\u003ctext\u003eScan the URL\u003c/text\u003e\u003c/textAnnotation\u003e\u003cassociation id=\"Association_0pw8z8e\" sourceRef=\"ServiceTask_0m3chvd\" targetRef=\"TextAnnotation_0wbrg5r\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"undefined\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"160\" y=\"185\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"155\" y=\"220\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_1kxxiyt\" id=\"TextAnnotation_1kxxiyt_di\"\u003e\u003comgdc:Bounds height=\"42\" width=\"100\" x=\"160\" y=\"85\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_1seuj48\" id=\"Association_1seuj48_di\"\u003e\u003comgdi:waypoint x=\"180\" y=\"185\"/\u003e\u003comgdi:waypoint x=\"200\" y=\"127\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_0m3chvd\" id=\"ServiceTask_0m3chvd_di\"\u003e\u003comgdc:Bounds height=\"80\" width=\"100\" x=\"279\" y=\"163\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0wcctos\" id=\"SequenceFlow_0wcctos_di\"\u003e\u003comgdi:waypoint x=\"196\" y=\"203\"/\u003e\u003comgdi:waypoint x=\"279\" y=\"203\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"237.5\" y=\"181.5\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"TextAnnotation_0wbrg5r\" id=\"TextAnnotation_0wbrg5r_di\"\u003e\u003comgdc:Bounds height=\"30\" width=\"100\" x=\"379\" y=\"83\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Association_0pw8z8e\" id=\"Association_0pw8z8e_di\"\u003e\u003comgdi:waypoint x=\"367\" y=\"163\"/\u003e\u003comgdi:waypoint x=\"415\" y=\"113\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndEvent_0rbv6vt\" id=\"EndEvent_0rbv6vt_di\"\u003e\u003comgdc:Bounds height=\"36\" width=\"36\" x=\"450\" y=\"185\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"468\" y=\"224\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"SequenceFlow_0oivuzv\" id=\"SequenceFlow_0oivuzv_di\"\u003e\u003comgdi:waypoint x=\"379\" y=\"203\"/\u003e\u003comgdi:waypoint x=\"450\" y=\"203\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"13\" width=\"0\" x=\"414.5\" y=\"181\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNEdge\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "content_version": 4,
+      "content_version": 1,
       "description": "",
       "export_key": "example_urlscanio",
-      "last_modified_by": "admin@co3sys.com",
-      "last_modified_time": 1781081494432,
+      "last_modified_by": "admin@example.com",
+      "last_modified_time": 1785490983405,
       "name": "Example: urlscan.io",
       "object_type": "artifact",
       "programmatic_name": "example_urlscanio",
       "tags": [],
       "uuid": "c253fa8f-56c8-45e9-84be-c16cf4b65b36",
-      "workflow_id": 19
+      "workflow_id": 68
     }
   ],
   "workspaces": []

@@ -23,6 +23,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 1.2.1 | 07/2026 | Respin docker image to Python 3.12 base image to resolve CVEs. |
 | 1.2.0 | 05/2026 | Add playbook with aim to replace workflow in future release. Add auth headers to all GET requests in line with API usage changes with urlscan.io. |
 | 1.1.6 | 04/2025 | Converted example workflows to python3 |
 | 1.1.5 | 06/2021 | Bug fix error for non existing url |
