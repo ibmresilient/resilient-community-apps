@@ -1,0 +1,22 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "status_code": 202
+  },
+  "raw": null,
+  "inputs": {
+    "teams_channel": "demoChannel",
+    "incident_id": 2716,
+    "teams_payload": "{\"contentType\": \"application/vnd.microsoft.card.adaptive\", \"content\": {\"$schema\": \"http://adaptivecards.io/schemas/adaptive-card.json\", \"type\": \"AdaptiveCard\", \"version\": \"1.4\", \"body\": [{\"type\": \"TextBlock\", \"text\": \"SOAR Incident 2716\", \"wrap\": true, \"weight\": \"bolder\", \"size\": \"Default\", \"color\": \"Attention\", \"style\": \"Default\", \"isVisible\": true}, {\"type\": \"FactSet\", \"facts\": [{\"title\": \"Title\", \"value\": \"Sentinel Incident 5585 - Suspicious authentication activity\"}, {\"title\": \"Description\", \"value\": \"Although none of them succeeded, some of them used accounts were recognized by the host. This resembles a dictionary attack, in which an attacker performs numerous authentication attempts using a dictionary of predefined account names and passwords in order to find valid credentials to access the host. This indicates that some of your host account names might exist in a well-known account name dictionary.\"}, {\"title\": \"Owner\", \"value\": \"Default Group\"}, {\"title\": \"Types\", \"value\": \"\"}, {\"title\": \"NIST Attack Vectors\", \"value\": \"\"}, {\"title\": \"Create Date\", \"value\": \"Thu Aug 15 11:16:12 2024\"}, {\"title\": \"Date Occurred\", \"value\": \"Thu Aug 15 10:07:40 2024\"}, {\"title\": \"Discovered Date\", \"value\": \"Thu Aug 15 11:15:56 2024\"}, {\"title\": \"Confirmed\", \"value\": false}, {\"title\": \"Severity\", \"value\": \"Medium\"}], \"separator\": false, \"isVisible\": true}, {\"type\": \"TextBlock\", \"text\": \"send to demoChannel\", \"wrap\": true, \"weight\": \"Default\", \"size\": \"Default\", \"color\": \"Default\", \"style\": \"Default\", \"isVisible\": true}], \"actions\": []}}"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-teams",
+    "package_version": "3.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 1100,
+    "timestamp": "2024-08-15 11:49:54"
+  }
+}

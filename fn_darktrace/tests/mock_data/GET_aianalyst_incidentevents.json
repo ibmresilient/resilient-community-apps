@@ -1,0 +1,147 @@
+[
+  {
+    "summariser": "AdminConnSummary",
+    "acknowledged": false,
+    "pinned": true,
+    "createdAt": 1628002089240,
+    "attackPhases": 5,
+    "title": "Extensive Unusual SSH Connections",
+    "id": "04a3f36e-4u8w-v9dh-x6lb-894778cf9633",
+    "children": [
+      "04a3f36e-4u8w-v9dh-x6lb-894778cf9633"
+    ],
+    "category": "critical",
+    "currentGroup": "g04a3f36e-4u8w-v9dh-x6lb-894778cf9633",
+    "groupCategory": "critical",
+    "groupScore": 72.9174234,
+    "groupPreviousGroups": null,
+    "activityId": "da39a3ee",
+    "groupingIds": [
+      "268d2b8c"
+    ],
+    "groupByActivity": false,
+    "userTriggered": false,
+    "externalTriggered": false,
+    "aiaScore": 98,
+    "summary": "The device 10.1.2.3 was observed making unusual internal SSH connections to a wide range of devices.\n\nThough this behaviour could be the result of legitimate remote access or administration, it could also be a sign of attempted lateral movement by a compromised machine.\n\nConsequently, if this activity was not expected, the security team may wish to investigate further.",
+    "periods": [
+      {
+        "start": 1627985298683,
+        "end": 1628000141220
+      }
+    ],
+    "breachDevices": [
+      {
+        "identifier": null,
+        "hostname": null,
+        "ip": "10.1.2.3",
+        "mac": null,
+        "subnet": "VPN",
+        "did": 10,
+        "sid": 12
+      }
+    ],
+    "relatedBreaches": [
+      {
+        "modelName": "Unusual Activity / Unusual Activity from Re-Activated Device",
+        "pbid": 1234,
+        "threatScore": 37,
+        "timestamp": 1627997157000
+      }
+    ],
+    "details": [
+      [
+        {
+          "header": "Breaching Device",
+          "contents": [
+            {
+              "key": null,
+              "type": "device",
+              "values": [
+                {
+                  "identifier": null,
+                  "hostname": null,
+                  "ip": "10.1.2.3",
+                  "mac": null,
+                  "subnet": "VPN",
+                  "did": 10,
+                  "sid": 12
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      [
+        {
+          "header": "SSH Activity",
+          "contents": [
+            {
+              "key": "Time",
+              "type": "timestampRange",
+              "values": [
+                {
+                  "start": 1627985298683,
+                  "end": 1628000141220
+                }
+              ]
+            },
+            {
+              "key": "Number of unique IPs",
+              "type": "integer",
+              "values": 16
+            },
+            {
+              "key": "Targeted IP ranges include",
+              "type": "device",
+              "values": [
+                {
+                  "identifier": null,
+                  "hostname": null,
+                  "ip": "10.11.12.0/24",
+                  "mac": null,
+                  "subnet": null,
+                  "did": null,
+                  "sid": null
+                },
+                {
+                  "identifier": null,
+                  "hostname": null,
+                  "ip": "10.11.13.0/24",
+                  "mac": null,
+                  "subnet": null,
+                  "did": null,
+                  "sid": null
+                },
+                {
+                  "identifier": null,
+                  "hostname": null,
+                  "ip": "10.11.14.0/24",
+                  "mac": null,
+                  "subnet": null,
+                  "did": null,
+                  "sid": null
+                }
+              ]
+            },
+            {
+              "key": "Destination port",
+              "type": "integer",
+              "values": 22
+            },
+            {
+              "key": "Connection count",
+              "type": "integer",
+              "values": 40
+            },
+            {
+              "key": "Percentage successful",
+              "type": "percentage",
+              "values": 100
+            }
+          ]
+        }
+      ]
+    ]
+  }
+]

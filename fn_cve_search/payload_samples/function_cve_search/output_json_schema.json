@@ -1,0 +1,587 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "api_call": {
+      "type": "string"
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "fkie_nvd": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "sourceIdentifier": {
+                      "type": "string"
+                    },
+                    "published": {
+                      "type": "string"
+                    },
+                    "lastModified": {
+                      "type": "string"
+                    },
+                    "vulnStatus": {
+                      "type": "string"
+                    },
+                    "cveTags": {
+                      "type": "array"
+                    },
+                    "descriptions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "lang": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "metrics": {
+                      "type": "object",
+                      "properties": {
+                        "cvssMetricV2": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "source": {
+                                "type": "string"
+                              },
+                              "type": {
+                                "type": "string"
+                              },
+                              "cvssData": {
+                                "type": "object",
+                                "properties": {
+                                  "version": {
+                                    "type": "string"
+                                  },
+                                  "vectorString": {
+                                    "type": "string"
+                                  },
+                                  "baseScore": {
+                                    "type": "number"
+                                  },
+                                  "accessVector": {
+                                    "type": "string"
+                                  },
+                                  "accessComplexity": {
+                                    "type": "string"
+                                  },
+                                  "authentication": {
+                                    "type": "string"
+                                  },
+                                  "confidentialityImpact": {
+                                    "type": "string"
+                                  },
+                                  "integrityImpact": {
+                                    "type": "string"
+                                  },
+                                  "availabilityImpact": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "baseSeverity": {
+                                "type": "string"
+                              },
+                              "exploitabilityScore": {
+                                "type": "number"
+                              },
+                              "impactScore": {
+                                "type": "number"
+                              },
+                              "acInsufInfo": {
+                                "type": "boolean"
+                              },
+                              "obtainAllPrivilege": {
+                                "type": "boolean"
+                              },
+                              "obtainUserPrivilege": {
+                                "type": "boolean"
+                              },
+                              "obtainOtherPrivilege": {
+                                "type": "boolean"
+                              },
+                              "userInteractionRequired": {
+                                "type": "boolean"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "weaknesses": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "source": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "lang": {
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "configurations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "nodes": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "operator": {
+                                  "type": "string"
+                                },
+                                "negate": {
+                                  "type": "boolean"
+                                },
+                                "cpeMatch": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "vulnerable": {
+                                        "type": "boolean"
+                                      },
+                                      "criteria": {
+                                        "type": "string"
+                                      },
+                                      "versionEndIncluding": {
+                                        "type": "string"
+                                      },
+                                      "matchCriteriaId": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "references": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "url": {
+                            "type": "string"
+                          },
+                          "source": {
+                            "type": "string"
+                          },
+                          "tags": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "cvelistv5": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "containers": {
+                      "type": "object",
+                      "properties": {
+                        "cna": {
+                          "type": "object",
+                          "properties": {
+                            "affected": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "product": {
+                                    "type": "string"
+                                  },
+                                  "vendor": {
+                                    "type": "string"
+                                  },
+                                  "versions": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "status": {
+                                          "type": "string"
+                                        },
+                                        "version": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "descriptions": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "lang": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "problemTypes": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "descriptions": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "description": {
+                                          "type": "string"
+                                        },
+                                        "lang": {
+                                          "type": "string"
+                                        },
+                                        "type": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "providerMetadata": {
+                              "type": "object",
+                              "properties": {
+                                "dateUpdated": {
+                                  "type": "string"
+                                },
+                                "orgId": {
+                                  "type": "string"
+                                },
+                                "shortName": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "references": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string"
+                                  },
+                                  "tags": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "url": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "x_legacyV4Record": {
+                              "type": "object",
+                              "properties": {
+                                "CVE_data_meta": {
+                                  "type": "object",
+                                  "properties": {
+                                    "ASSIGNER": {
+                                      "type": "string"
+                                    },
+                                    "ID": {
+                                      "type": "string"
+                                    },
+                                    "STATE": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "affects": {
+                                  "type": "object",
+                                  "properties": {
+                                    "vendor": {
+                                      "type": "object",
+                                      "properties": {
+                                        "vendor_data": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "object",
+                                            "properties": {
+                                              "product": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "product_data": {
+                                                    "type": "array",
+                                                    "items": {
+                                                      "type": "object",
+                                                      "properties": {
+                                                        "product_name": {
+                                                          "type": "string"
+                                                        },
+                                                        "version": {
+                                                          "type": "object",
+                                                          "properties": {
+                                                            "version_data": {
+                                                              "type": "array",
+                                                              "items": {
+                                                                "type": "object",
+                                                                "properties": {
+                                                                  "version_value": {
+                                                                    "type": "string"
+                                                                  }
+                                                                }
+                                                              }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              },
+                                              "vendor_name": {
+                                                "type": "string"
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "data_format": {
+                                  "type": "string"
+                                },
+                                "data_type": {
+                                  "type": "string"
+                                },
+                                "data_version": {
+                                  "type": "string"
+                                },
+                                "description": {
+                                  "type": "object",
+                                  "properties": {
+                                    "description_data": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "lang": {
+                                            "type": "string"
+                                          },
+                                          "value": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "problemtype": {
+                                  "type": "object",
+                                  "properties": {
+                                    "problemtype_data": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "description": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "lang": {
+                                                  "type": "string"
+                                                },
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "references": {
+                                  "type": "object",
+                                  "properties": {
+                                    "reference_data": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "name": {
+                                            "type": "string"
+                                          },
+                                          "refsource": {
+                                            "type": "string"
+                                          },
+                                          "url": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "datePublic": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "adp": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "providerMetadata": {
+                                "type": "object",
+                                "properties": {
+                                  "orgId": {
+                                    "type": "string"
+                                  },
+                                  "shortName": {
+                                    "type": "string"
+                                  },
+                                  "dateUpdated": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "title": {
+                                "type": "string"
+                              },
+                              "references": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "name": {
+                                      "type": "string"
+                                    },
+                                    "tags": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "url": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "cveMetadata": {
+                      "type": "object",
+                      "properties": {
+                        "assignerOrgId": {
+                          "type": "string"
+                        },
+                        "assignerShortName": {
+                          "type": "string"
+                        },
+                        "cveId": {
+                          "type": "string"
+                        },
+                        "datePublished": {
+                          "type": "string"
+                        },
+                        "dateReserved": {
+                          "type": "string"
+                        },
+                        "dateUpdated": {
+                          "type": "string"
+                        },
+                        "state": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "dataType": {
+                      "type": "string"
+                    },
+                    "dataVersion": {
+                      "type": "string"
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

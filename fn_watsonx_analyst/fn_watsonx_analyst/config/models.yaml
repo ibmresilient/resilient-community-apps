@@ -1,0 +1,24 @@
+- name: ibm/granite-4-h-small
+  context_length: 131072
+  input_cost: 0.06
+  output_cost: 0.25
+
+- name: meta-llama/llama-3-3-70b-instruct
+  context_length: 131072
+  input_cost: 0.71
+  output_cost: 0.71
+
+- name: meta-llama/llama-4-maverick-17b-128e-instruct-fp8
+  context_length: 131072
+  input_cost: 0.35
+  output_cost: 1.4
+
+- name: mistralai/mistral-small-3-1-24b-instruct-2503
+  context_length: 128000
+  input_cost: 0.1
+  output_cost: 0.3
+
+- name: openai/gpt-oss-120b
+  context_length: 131072
+  input_cost: 0.15
+  output_cost: 0.6

@@ -1,0 +1,37 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "rrn": "rrn:investigation:us2:eeeee222-cccc-dddc-8fc9-f9e19e19e1:investigation:2B9B9B9B9B9",
+    "organization_id": "e4463fba-cd64-427c-8fc9-f9e1983f24e1",
+    "title": "investigation 4",
+    "source": "USER",
+    "status": "INVESTIGATING",
+    "priority": "LOW",
+    "last_accessed": "2023-12-11T15:31:41.564Z",
+    "created_time": "2023-11-28T20:09:36.546Z",
+    "disposition": "UNDECIDED",
+    "assignee": {
+      "name": "Admin User",
+      "email": "admin@example.com"
+    },
+    "first_alert_time": null,
+    "latest_alert_time": null,
+    "responsibility": null
+  },
+  "raw": null,
+  "inputs": {
+    "rapid7_insight_idr_priority": "LOW",
+    "rapid7_insight_idr_incident_id": 2220,
+    "rapid7_insight_idr_rrn": "rrn:investigation:us2:eeeee222-cccc-dddc-8fc9-f9e19e19e1:investigation:2B9B9B9B9B9"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-rapid7-insight-idr",
+    "package_version": "1.0.0",
+    "host": "mylaptop.local",
+    "execution_time_ms": 21848,
+    "timestamp": "2023-12-11 10:31:47"
+  }
+}

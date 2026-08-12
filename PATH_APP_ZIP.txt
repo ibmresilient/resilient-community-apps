@@ -1,0 +1,1 @@
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_urlscanio/main/1.2/app-fn_urlscanio-1.2.1-41282.zip

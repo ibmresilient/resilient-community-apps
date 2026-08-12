@@ -1,0 +1,29 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "content": "1c943a98887754f364fafaa1da3ac56e0e0875a9",
+    "commit": "4be6f56fdd37c9d3aa054a15cdfcb091bb16fa4d",
+    "Last-Modified": "",
+    "ETag": "\"9683de062b98f63f5d1be56538a01e923115c78102ab71d6442579998228ad7b\""
+  },
+  "raw": null,
+  "inputs": {
+    "github_ref": "sample_branch",
+    "github_owner": "test-owner",
+    "github_commit_message": "sample",
+    "github_committer": "A Example:a@example.com",
+    "github_file_contents": "a\nb\nc",
+    "github_file_path": "sample_file",
+    "github_repo": "personal"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-github",
+    "package_version": "1.0.0",
+    "host": "host",
+    "execution_time_ms": 2152,
+    "timestamp": "2022-12-03 11:31:18"
+  }
+}
