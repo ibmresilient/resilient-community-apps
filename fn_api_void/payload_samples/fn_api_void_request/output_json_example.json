@@ -1,0 +1,536 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "data": {
+      "report": {
+        "ip": "45.127.5.20",
+        "version": "v4",
+        "blacklists": {
+          "engines": {
+            "0": {
+              "engine": "0spam",
+              "detected": false,
+              "reference": "https://0spam.org/",
+              "elapsed": "0.00"
+            },
+            "12": {
+              "engine": "APEWS-L2",
+              "detected": false,
+              "reference": "http://www.apews.org/",
+              "elapsed": "0.00"
+            },
+            "13": {
+              "engine": "AZORult Tracker",
+              "detected": false,
+              "reference": "https://azorult-tracker.net/",
+              "elapsed": "0.00"
+            },
+            "10": {
+              "engine": "Anti-Attacks BL",
+              "detected": false,
+              "reference": "https://www.anti-attacks.com/",
+              "elapsed": "0.00"
+            },
+            "11": {
+              "engine": "AntiSpam_by_CleanTalk",
+              "detected": false,
+              "reference": "https://cleantalk.org/",
+              "elapsed": "0.00"
+            },
+            "14": {
+              "engine": "Backscatterer",
+              "detected": false,
+              "reference": "https://www.backscatterer.org/",
+              "elapsed": "0.00"
+            },
+            "1": {
+              "engine": "Barracuda_Reputation_BL",
+              "detected": false,
+              "reference": "https://barracudacentral.org/lookups",
+              "elapsed": "0.00"
+            },
+            "15": {
+              "engine": "BitNinja",
+              "detected": false,
+              "reference": "https://bitninja.com/",
+              "elapsed": "0.00"
+            },
+            "17": {
+              "engine": "BlockList_de",
+              "detected": false,
+              "reference": "https://www.blocklist.de/",
+              "elapsed": "0.00"
+            },
+            "2": {
+              "engine": "BlockedServersRBL",
+              "detected": false,
+              "reference": "https://www.blockedservers.com/",
+              "elapsed": "0.00"
+            },
+            "16": {
+              "engine": "Blocking_rocks",
+              "detected": false,
+              "reference": "https://blocking.rocks/",
+              "elapsed": "0.00"
+            },
+            "18": {
+              "engine": "Blocklist.net.ua",
+              "detected": false,
+              "reference": "https://blocklist.net.ua/",
+              "elapsed": "0.00"
+            },
+            "19": {
+              "engine": "Botscout (Last Caught)",
+              "detected": false,
+              "reference": "https://botscout.com/",
+              "elapsed": "0.00"
+            },
+            "20": {
+              "engine": "Botvrij.eu",
+              "detected": false,
+              "reference": "https://botvrij.eu/",
+              "elapsed": "0.00"
+            },
+            "21": {
+              "engine": "Brute Force Blocker",
+              "detected": false,
+              "reference": "https://danger.rulez.sk/index.php/bruteforceblocker/",
+              "elapsed": "0.00"
+            },
+            "22": {
+              "engine": "C-APT-ure",
+              "detected": false,
+              "reference": "https://c-apt-ure.blogspot.com/",
+              "elapsed": "0.00"
+            },
+            "24": {
+              "engine": "CI Army List",
+              "detected": false,
+              "reference": "https://cinsscore.com/#list",
+              "elapsed": "0.00"
+            },
+            "25": {
+              "engine": "CRDF",
+              "detected": false,
+              "reference": "https://threatcenter.crdf.fr/check.html",
+              "elapsed": "0.00"
+            },
+            "27": {
+              "engine": "CSpace Hostings IP BL",
+              "detected": false,
+              "reference": "https://cspacehostings.com/",
+              "elapsed": "0.00"
+            },
+            "23": {
+              "engine": "Charles Haley",
+              "detected": false,
+              "reference": "https://charles.the-haleys.org/",
+              "elapsed": "0.00"
+            },
+            "26": {
+              "engine": "CruzIT Blocklist",
+              "detected": false,
+              "reference": "https://www.cruzit.com/",
+              "elapsed": "0.00"
+            },
+            "28": {
+              "engine": "Darklist.de",
+              "detected": false,
+              "reference": "https://www.darklist.de/",
+              "elapsed": "0.00"
+            },
+            "29": {
+              "engine": "Dataplane.org",
+              "detected": false,
+              "reference": "https://dataplane.org/",
+              "elapsed": "0.00"
+            },
+            "3": {
+              "engine": "EFnet_RBL",
+              "detected": false,
+              "reference": "https://rbl.efnetrbl.org/multicheck.php",
+              "elapsed": "0.00"
+            },
+            "30": {
+              "engine": "ELLIO IP Feed",
+              "detected": false,
+              "reference": "https://ellio.tech/",
+              "elapsed": "0.00"
+            },
+            "31": {
+              "engine": "Etnetera BL",
+              "detected": false,
+              "reference": "https://security.etnetera.cz/",
+              "elapsed": "0.00"
+            },
+            "33": {
+              "engine": "FSpamList",
+              "detected": false,
+              "reference": "https://fspamlist.com/",
+              "elapsed": "0.00"
+            },
+            "32": {
+              "engine": "Feodo Tracker",
+              "detected": false,
+              "reference": "https://feodotracker.abuse.ch/",
+              "elapsed": "0.00"
+            },
+            "34": {
+              "engine": "GPF DNS Block List",
+              "detected": false,
+              "reference": "https://www.gpf-comics.com/dnsbl/export.php",
+              "elapsed": "0.00"
+            },
+            "35": {
+              "engine": "GreenSnow Blocklist",
+              "detected": false,
+              "reference": "https://greensnow.co/",
+              "elapsed": "0.00"
+            },
+            "36": {
+              "engine": "HoneyDB",
+              "detected": false,
+              "reference": "https://honeydb.io/",
+              "elapsed": "0.00"
+            },
+            "4": {
+              "engine": "IBM_Cobion",
+              "detected": false,
+              "reference": "https://filterdb.iss.net/dnsblinfo/",
+              "elapsed": "0.00"
+            },
+            "38": {
+              "engine": "IPSpamList",
+              "detected": false,
+              "reference": "https://www.ipspamlist.com/ip-lookup/",
+              "elapsed": "0.00"
+            },
+            "39": {
+              "engine": "IPsum",
+              "detected": false,
+              "reference": "https://github.com/stamparm/ipsum",
+              "elapsed": "0.00"
+            },
+            "40": {
+              "engine": "ISX.fr DNSBL",
+              "detected": false,
+              "reference": "https://bl.isx.fr/",
+              "elapsed": "0.00"
+            },
+            "37": {
+              "engine": "InterServer IP List",
+              "detected": false,
+              "reference": "https://sigs.interserver.net/",
+              "elapsed": "0.00"
+            },
+            "41": {
+              "engine": "JamesBrine IP List",
+              "detected": false,
+              "reference": "https://jamesbrine.com.au/",
+              "elapsed": "0.00"
+            },
+            "5": {
+              "engine": "JustSpam_org",
+              "detected": false,
+              "reference": "http://www.justspam.org/",
+              "elapsed": "0.00"
+            },
+            "6": {
+              "engine": "Known Scanning Service",
+              "detected": false,
+              "reference": "https://www.novirusthanks.org/",
+              "elapsed": "0.00"
+            },
+            "42": {
+              "engine": "LAPPS Grid Blacklist",
+              "detected": false,
+              "reference": "https://lappsgrid.org/",
+              "elapsed": "0.00"
+            },
+            "43": {
+              "engine": "Liquid Binary",
+              "detected": false,
+              "reference": "https://liquidbinary.com/",
+              "elapsed": "0.00"
+            },
+            "44": {
+              "engine": "M4lwhere Intel",
+              "detected": false,
+              "reference": "https://m4lwhere.org/",
+              "elapsed": "0.00"
+            },
+            "45": {
+              "engine": "Mark Smith Blocked IPs",
+              "detected": false,
+              "reference": "https://www.marksmith.it/",
+              "elapsed": "0.00"
+            },
+            "46": {
+              "engine": "Mirai Tracker",
+              "detected": false,
+              "reference": "https://mirai.security.gives/index.php",
+              "elapsed": "0.00"
+            },
+            "47": {
+              "engine": "Myip.ms Blacklist",
+              "detected": false,
+              "reference": "https://myip.ms/browse/blacklist",
+              "elapsed": "0.00"
+            },
+            "48": {
+              "engine": "NEU SSH Black list",
+              "detected": false,
+              "reference": "http://antivirus.neu.edu.cn/scan/",
+              "elapsed": "0.00"
+            },
+            "50": {
+              "engine": "NOC_RUB_DE",
+              "detected": false,
+              "reference": "https://noc.rub.de/web/",
+              "elapsed": "0.00"
+            },
+            "54": {
+              "engine": "NUBI Bad IPs",
+              "detected": false,
+              "reference": "https://www.nubi-network.com/",
+              "elapsed": "0.00"
+            },
+            "49": {
+              "engine": "Nginx Bad Bot Blocker",
+              "detected": false,
+              "reference": "https://github.com/mitchellkrogza/nginx-ultimate-bad-bot-blocker",
+              "elapsed": "0.00"
+            },
+            "51": {
+              "engine": "NoIntegrity BL",
+              "detected": false,
+              "reference": "https://www.nointegrity.org/",
+              "elapsed": "0.00"
+            },
+            "53": {
+              "engine": "NoVirusThanks",
+              "detected": false,
+              "reference": "https://www.novirusthanks.com/",
+              "elapsed": "0.00"
+            },
+            "52": {
+              "engine": "NordSpam",
+              "detected": false,
+              "reference": "https://www.nordspam.com/",
+              "elapsed": "0.00"
+            },
+            "55": {
+              "engine": "OpenPhish",
+              "detected": false,
+              "reference": "https://www.openphish.com/",
+              "elapsed": "0.00"
+            },
+            "59": {
+              "engine": "PSBL",
+              "detected": false,
+              "reference": "https://psbl.org/",
+              "elapsed": "0.00"
+            },
+            "56": {
+              "engine": "Peter-s NUUG IP BL",
+              "detected": false,
+              "reference": "https://home.nuug.no/~peter/",
+              "elapsed": "0.00"
+            },
+            "57": {
+              "engine": "PhishTank",
+              "detected": false,
+              "reference": "https://www.phishtank.com/",
+              "elapsed": "0.00"
+            },
+            "58": {
+              "engine": "PlonkatronixBL",
+              "detected": false,
+              "reference": "https://plonkatronix.com/",
+              "elapsed": "0.00"
+            },
+            "62": {
+              "engine": "RJM Blocklist",
+              "detected": false,
+              "reference": "https://rjmblocklist.com/",
+              "elapsed": "0.00"
+            },
+            "7": {
+              "engine": "RealtimeBLACKLIST",
+              "detected": false,
+              "reference": "https://realtimeblacklist.com/",
+              "elapsed": "0.00"
+            },
+            "60": {
+              "engine": "Redstout Threat IP list",
+              "detected": false,
+              "reference": "https://www.redstout.com/index.html",
+              "elapsed": "0.00"
+            },
+            "61": {
+              "engine": "Ring-u NOC",
+              "detected": false,
+              "reference": "https://portal.ring-u.com/portal/portal.php",
+              "elapsed": "0.00"
+            },
+            "63": {
+              "engine": "Rutgers Drop List",
+              "detected": false,
+              "reference": "https://www.rutgers.edu/",
+              "elapsed": "0.00"
+            },
+            "8": {
+              "engine": "S5hbl",
+              "detected": false,
+              "reference": "https://www.usenix.org.uk/content/rbl.html",
+              "elapsed": "0.00"
+            },
+            "65": {
+              "engine": "SSL Blacklist",
+              "detected": false,
+              "reference": "https://sslbl.abuse.ch/",
+              "elapsed": "0.00"
+            },
+            "64": {
+              "engine": "Sblam",
+              "detected": false,
+              "reference": "https://sblam.com/",
+              "elapsed": "0.00"
+            },
+            "9": {
+              "engine": "SpamCop",
+              "detected": false,
+              "reference": "https://www.spamcop.net/",
+              "elapsed": "0.00"
+            },
+            "66": {
+              "engine": "Talos IP Blacklist",
+              "detected": false,
+              "reference": "https://www.talosintelligence.com/",
+              "elapsed": "0.00"
+            },
+            "69": {
+              "engine": "Threat Sourcing",
+              "detected": false,
+              "reference": "https://www.threatsourcing.com/",
+              "elapsed": "0.00"
+            },
+            "67": {
+              "engine": "ThreatLog",
+              "detected": false,
+              "reference": "https://www.threatlog.com/",
+              "elapsed": "0.00"
+            },
+            "68": {
+              "engine": "Threatview",
+              "detected": false,
+              "reference": "https://threatview.io/",
+              "elapsed": "0.00"
+            },
+            "70": {
+              "engine": "TweetFeed",
+              "detected": false,
+              "reference": "https://github.com/0xDanielLopez/TweetFeed",
+              "elapsed": "0.00"
+            },
+            "71": {
+              "engine": "UCEPROTECT Level 1",
+              "detected": false,
+              "reference": "https://www.uceprotect.net/en/index.php",
+              "elapsed": "0.00"
+            },
+            "72": {
+              "engine": "URLhaus",
+              "detected": false,
+              "reference": "https://urlhaus.abuse.ch/",
+              "elapsed": "0.00"
+            },
+            "73": {
+              "engine": "USTC IP BL",
+              "detected": false,
+              "reference": "http://blackip.ustc.edu.cn/",
+              "elapsed": "0.00"
+            },
+            "76": {
+              "engine": "VXVault",
+              "detected": false,
+              "reference": "http://vxvault.net/ViriList.php",
+              "elapsed": "0.00"
+            },
+            "74": {
+              "engine": "ViriBack C2 Tracker",
+              "detected": false,
+              "reference": "https://tracker.viriback.com/",
+              "elapsed": "0.00"
+            },
+            "75": {
+              "engine": "VoIP Blacklist",
+              "detected": false,
+              "reference": "https://www.voipbl.org/",
+              "elapsed": "0.00"
+            },
+            "77": {
+              "engine": "ZeroDot1 Miner IPs",
+              "detected": false,
+              "reference": "https://zerodot1.gitlab.io/CoinBlockerListsWeb/index.html",
+              "elapsed": "0.00"
+            }
+          },
+          "detections": 0,
+          "engines_count": 78,
+          "detection_rate": "0%",
+          "scantime": "0.01"
+        },
+        "information": {
+          "reverse_dns": "exabytes-61086073.mschosting.org",
+          "is_eu": false,
+          "continent_code": "AS",
+          "continent_name": "Asia",
+          "country_code": "MY",
+          "country_name": "Malaysia",
+          "country_currency": "MYR",
+          "country_calling_code": "60",
+          "region_name": "Pulau Pinang",
+          "***": "George Town",
+          "latitude": 5.41146,
+          "longitude": 100.33543,
+          "isp": "Exabytes Cloud Sdn.Bhd.",
+          "asn": "AS46015"
+        },
+        "anonymity": {
+          "is_proxy": false,
+          "is_webproxy": false,
+          "is_vpn": false,
+          "is_hosting": true,
+          "is_tor": false
+        },
+        "risk_score": {
+          "result": 0
+        }
+      }
+    },
+    "credits_remained": 23.56,
+    "estimated_queries": "294",
+    "elapsed_time": "0.53",
+    "success": true
+  },
+  "raw": "",
+  "inputs": {
+    "api_void_request_type": {
+      "id": 3553,
+      "name": "IP Reputation"
+    },
+    "api_void_artifact_type": "IP Address",
+    "api_void_artifact_value": "45.127.5.20"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-api-void",
+    "package_version": "1.0.1",
+    "host": "my.app.host",
+    "execution_time_ms": 316,
+    "timestamp": "2025-04-02 12:37:31"
+  }
+}

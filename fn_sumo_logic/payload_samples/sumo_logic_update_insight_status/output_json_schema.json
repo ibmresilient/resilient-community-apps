@@ -1,0 +1,513 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "readableId": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "timestamp": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            },
+            "assignedTo": {},
+            "teamAssignedTo": {},
+            "created": {
+              "type": "string"
+            },
+            "closed": {},
+            "closedBy": {},
+            "severity": {
+              "type": "string"
+            },
+            "confidence": {
+              "type": "number"
+            },
+            "assignee": {},
+            "status": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "displayName": {
+                  "type": "string"
+                }
+              }
+            },
+            "resolution": {},
+            "subResolution": {},
+            "entity": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "entityType": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "hostname": {},
+                "macAddress": {},
+                "sensorZone": {
+                  "type": "string"
+                }
+              }
+            },
+            "signals": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "stage": {
+                    "type": "string"
+                  },
+                  "created": {
+                    "type": "string"
+                  },
+                  "timestamp": {
+                    "type": "string"
+                  },
+                  "severity": {
+                    "type": "integer"
+                  },
+                  "recordCount": {
+                    "type": "integer"
+                  },
+                  "recordTypes": {
+                    "type": "array"
+                  },
+                  "contentType": {
+                    "type": "string"
+                  },
+                  "allRecords": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "baseImage": {
+                          "type": "string"
+                        },
+                        "bro_dns_answers": {
+                          "type": "array"
+                        },
+                        "bro_file_bytes": {
+                          "type": "object"
+                        },
+                        "bro_file_connUids": {
+                          "type": "array"
+                        },
+                        "bro_flow_service": {
+                          "type": "array"
+                        },
+                        "bro_ftp_pendingCommands": {
+                          "type": "array"
+                        },
+                        "bro_http_cookieVars": {
+                          "type": "array"
+                        },
+                        "bro_http_origFuids": {
+                          "type": "array"
+                        },
+                        "bro_http_origMimeTypes": {
+                          "type": "array"
+                        },
+                        "bro_http_request_headers": {
+                          "type": "object"
+                        },
+                        "bro_http_request_proxied": {
+                          "type": "array"
+                        },
+                        "bro_http_response_headers": {
+                          "type": "object"
+                        },
+                        "bro_http_response_respFuids": {
+                          "type": "array"
+                        },
+                        "bro_http_response_respMimeTypes": {
+                          "type": "array"
+                        },
+                        "bro_http_tags": {
+                          "type": "array"
+                        },
+                        "bro_http_uriVars": {
+                          "type": "array"
+                        },
+                        "bro_kerberos_clientCert": {
+                          "type": "object"
+                        },
+                        "bro_kerberos_serverCert": {
+                          "type": "object"
+                        },
+                        "bro_sip_headers": {
+                          "type": "object"
+                        },
+                        "bro_sip_requestPath": {
+                          "type": "array"
+                        },
+                        "bro_sip_responsePath": {
+                          "type": "array"
+                        },
+                        "bro_ssl_certChainFuids": {
+                          "type": "array"
+                        },
+                        "bro_ssl_clientCertChainFuids": {
+                          "type": "array"
+                        },
+                        "cseSignal": {
+                          "type": "object"
+                        },
+                        "day": {
+                          "type": "integer"
+                        },
+                        "device_hostname": {
+                          "type": "string"
+                        },
+                        "device_hostname_raw": {
+                          "type": "string"
+                        },
+                        "dstDevice_hostname": {
+                          "type": "string"
+                        },
+                        "dstDevice_hostname_raw": {
+                          "type": "string"
+                        },
+                        "fieldTags": {
+                          "type": "object"
+                        },
+                        "fields": {
+                          "type": "object",
+                          "properties": {
+                            "syslog_process": {
+                              "type": "string"
+                            },
+                            "event_id": {
+                              "type": "string"
+                            },
+                            "syslog_hostname": {
+                              "type": "string"
+                            },
+                            "syslog_timestamp": {
+                              "type": "string"
+                            },
+                            "syslog_process_id": {
+                              "type": "string"
+                            },
+                            "source_port": {
+                              "type": "string"
+                            },
+                            "ssh_version": {
+                              "type": "string"
+                            },
+                            "syslog_message": {
+                              "type": "string"
+                            },
+                            "user": {
+                              "type": "string"
+                            },
+                            "source_ip": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "friendlyName": {
+                          "type": "string"
+                        },
+                        "hour": {
+                          "type": "integer"
+                        },
+                        "http_requestHeaders": {
+                          "type": "object"
+                        },
+                        "listMatches": {
+                          "type": "array"
+                        },
+                        "matchedItems": {
+                          "type": "array"
+                        },
+                        "metadata_deviceEventId": {
+                          "type": "string"
+                        },
+                        "metadata_mapperName": {
+                          "type": "string"
+                        },
+                        "metadata_mapperUid": {
+                          "type": "string"
+                        },
+                        "metadata_orgId": {
+                          "type": "string"
+                        },
+                        "metadata_parseTime": {
+                          "type": "integer"
+                        },
+                        "metadata_parser": {
+                          "type": "string"
+                        },
+                        "metadata_product": {
+                          "type": "string"
+                        },
+                        "metadata_productGuid": {
+                          "type": "string"
+                        },
+                        "metadata_receiptTime": {
+                          "type": "integer"
+                        },
+                        "metadata_schemaVersion": {
+                          "type": "integer"
+                        },
+                        "metadata_sensorId": {
+                          "type": "string"
+                        },
+                        "metadata_sensorInformation": {
+                          "type": "object"
+                        },
+                        "metadata_sensorZone": {
+                          "type": "string"
+                        },
+                        "metadata_sourceBlockId": {
+                          "type": "string"
+                        },
+                        "metadata_sourceCategory": {
+                          "type": "string"
+                        },
+                        "metadata_sourceMessageId": {
+                          "type": "string"
+                        },
+                        "metadata_vendor": {
+                          "type": "string"
+                        },
+                        "month": {
+                          "type": "integer"
+                        },
+                        "normalizedAction": {
+                          "type": "string"
+                        },
+                        "objectClassification": {
+                          "type": "string"
+                        },
+                        "objectType": {
+                          "type": "string"
+                        },
+                        "pid": {
+                          "type": "integer"
+                        },
+                        "srcDevice_ip": {
+                          "type": "string"
+                        },
+                        "srcDevice_ip_ipv4IntValue": {
+                          "type": "integer"
+                        },
+                        "srcDevice_ip_isInternal": {
+                          "type": "boolean"
+                        },
+                        "srcDevice_ip_version": {
+                          "type": "integer"
+                        },
+                        "srcPort": {
+                          "type": "integer"
+                        },
+                        "success": {
+                          "type": "boolean"
+                        },
+                        "timestamp": {
+                          "type": "integer"
+                        },
+                        "uid": {
+                          "type": "string"
+                        },
+                        "user_username": {
+                          "type": "string"
+                        },
+                        "user_username_raw": {
+                          "type": "string"
+                        },
+                        "year": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "ruleId": {
+                    "type": "string"
+                  },
+                  "tags": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "entity": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "entityType": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      },
+                      "hostname": {},
+                      "macAddress": {},
+                      "sensorZone": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "artifacts": {
+                    "type": "array"
+                  },
+                  "recordSearchDetails": {
+                    "type": "object",
+                    "properties": {
+                      "query": {
+                        "type": "string"
+                      },
+                      "queryStartTime": {
+                        "type": "string"
+                      },
+                      "queryEndTime": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "involvedEntities": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "entityType": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  },
+                  "hostname": {
+                    "type": [
+                      "null",
+                      "string"
+                    ]
+                  },
+                  "macAddress": {},
+                  "sensorZone": {}
+                }
+              }
+            },
+            "artifacts": {
+              "type": "array"
+            },
+            "lastUpdated": {
+              "type": "string"
+            },
+            "lastUpdatedBy": {},
+            "orgId": {
+              "type": "string"
+            },
+            "timeToDetection": {
+              "type": "number"
+            },
+            "timeToResponse": {
+              "type": "number"
+            },
+            "timeToRemediation": {},
+            "tags": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "errors": {
+          "type": "array"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "sumo_logic_insight_id": {
+          "type": "string"
+        },
+        "sumo_logic_insight_resolution": {},
+        "sumo_logic_insight_status": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

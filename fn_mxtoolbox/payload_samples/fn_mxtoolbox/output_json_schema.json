@@ -1,0 +1,180 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "value": {
+      "type": "object",
+      "properties": {
+        "UID": {},
+        "ArgumentType": {
+          "type": "string"
+        },
+        "Command": {
+          "type": "string"
+        },
+        "IsTransitioned": {
+          "type": "boolean"
+        },
+        "CommandArgument": {
+          "type": "string"
+        },
+        "TimeRecorded": {
+          "type": "string"
+        },
+        "ReportingNameServer": {
+          "type": "string"
+        },
+        "TimeToComplete": {
+          "type": "string"
+        },
+        "RelatedIP": {},
+        "ResourceRecordType": {
+          "type": "integer"
+        },
+        "IsEmptySubDomain": {
+          "type": "boolean"
+        },
+        "SPF_Subaction_Detail": {},
+        "Records": {},
+        "IsEndpoint": {
+          "type": "boolean"
+        },
+        "HasSubscriptions": {
+          "type": "boolean"
+        },
+        "AlertgroupSubscriptionId": {},
+        "Failed": {
+          "type": "array"
+        },
+        "Warnings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "ID": {
+                "type": "integer"
+              },
+              "Name": {
+                "type": "string"
+              },
+              "Info": {
+                "type": "string"
+              },
+              "Url": {
+                "type": "string"
+              },
+              "PublicDescription": {},
+              "IsExcludedByUser": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "Passed": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "***": {
+                "type": "integer"
+              },
+              "Name": {
+                "type": "string"
+              },
+              "Info": {
+                "type": "string"
+              },
+              "Url": {
+                "type": "string"
+              },
+              "PublicDescription": {},
+              "IsExcludedByUser": {
+                "type": "boolean"
+              },
+              "ID": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "Timeouts": {
+          "type": "array"
+        },
+        "Errors": {
+          "type": "array"
+        },
+        "IsError": {
+          "type": "boolean"
+        },
+        "Information": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Pref": {
+                "type": "string"
+              },
+              "Hostname": {
+                "type": "string"
+              },
+              "IP Address": {
+                "type": "string"
+              },
+              "TTL": {
+                "type": "string"
+              },
+              "Asn": {
+                "type": "string"
+              },
+              "IsIpV6": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "MultiInformation": {
+          "type": "array"
+        },
+        "Transcript": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Transcript": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "MxRep": {
+          "type": "integer"
+        },
+        "EmailServiceProvider": {
+          "type": "string"
+        },
+        "DnsServiceProvider": {},
+        "DnsServiceProviderIdentifier": {},
+        "RelatedLookups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "Name": {
+                "type": "string"
+              },
+              "URL": {
+                "type": "string"
+              },
+              "Command": {
+                "type": "string"
+              },
+              "CommandArgument": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

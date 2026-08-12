@@ -1,0 +1,97 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "version": {
+        "type": "string"
+      },
+      "success": {
+        "type": "boolean"
+      },
+      "reason": {
+        "type": "null"
+      },
+      "content": {
+        "type": "object",
+        "properties": {
+          "ip": {
+            "type": "string"
+          },
+          "noise": {
+            "type": "boolean"
+          },
+          "riot": {
+            "type": "boolean"
+          },
+          "classification": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "last_seen": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "required": ["ip"]
+      },
+      "raw": {
+        "type": "string"
+      },
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "greynoise_value": {
+            "type": "string"
+          },
+          "greynoise_type": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "greynoise_value",
+          "greynoise_type"
+        ]
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "package": {
+            "type": "string"
+          },
+          "package_version": {
+            "type": "string"
+          },
+          "host": {
+            "type": "string"
+          },
+          "execution_time_ms": {
+            "type": "integer"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        },
+        "required": ["version"]
+      }
+    },
+    "required": [
+      "version",
+      "success",
+      "reason",
+      "content",
+      "inputs",
+      "metrics"
+    ]
+  }
+  
+  

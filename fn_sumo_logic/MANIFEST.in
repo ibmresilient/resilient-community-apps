@@ -1,0 +1,15 @@
+include README.md
+include Dockerfile
+include apikey_permissions.txt
+recursive-include fn_sumo_logic/util *
+recursive-include fn_sumo_logic/lib *
+recursive-include fn_sumo_logic/poller *
+include fn_sumo_logic/LICENSE
+include doc/*.md
+include doc/screenshots/*
+include icons/*.png
+recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
+
+global-exclude *.bak

@@ -1,0 +1,11 @@
+{
+    {# JINJA template for updating a Defender alert #}
+    "properties": {
+        "severity": "{{ severity_code|string|resilient_substitute('{"4": "Low", "5": "Medium", "6": "High"}') }}",
+        "status": "{{ status }}",
+        "classification": "{{ classification }}",
+        "determination": "{{ determination }}",
+        "assignedTo": "{{ assignedTo }}",
+        "comment": "{{ comment }}"
+    }
+}

@@ -1,0 +1,181 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "mitre_software": [
+      {
+        "technique": "T1071",
+        "name": "Hildegard",
+        "id": "S0601",
+        "ref": "https://attack.mitre.org/software/S0601",
+        "description": "<a href=\"https://attack.mitre.org/software/S0601\">Hildegard</a> is malware that targets misconfigured kubelets for initial access and runs cryptocurrency miner operations. The malware was first observed in January 2021. The TeamTNT activity group is believed to be behind <a href=\"https://attack.mitre.org/software/S0601\">Hildegard</a>. (Citation: Unit 42 Hildegard Malware)",
+        "platforms": [
+          "Linux",
+          "Containers",
+          "IaaS"
+        ],
+        "type": "malware"
+      },
+      {
+        "technique": "T1071",
+        "name": "NETEAGLE",
+        "id": "S0034",
+        "ref": "https://attack.mitre.org/software/S0034",
+        "description": "<a href=\"https://attack.mitre.org/software/S0034\">NETEAGLE</a> is a backdoor developed by <a href=\"https://attack.mitre.org/groups/G0013\">APT30</a> with compile dates as early as 2008. It has two main variants known as \u201cScout\u201d and \u201cNorton.\u201d (Citation: FireEye APT30)",
+        "platforms": [
+          "Windows"
+        ],
+        "type": "malware"
+      },
+      {
+        "technique": "T1071",
+        "name": "Nightdoor",
+        "id": "S1147",
+        "ref": "https://attack.mitre.org/software/S1147",
+        "description": "<a href=\"https://attack.mitre.org/software/S1147\">Nightdoor</a> is a backdoor exclusively associated with <a href=\"https://attack.mitre.org/groups/G1034\">Daggerfly</a> operations. <a href=\"https://attack.mitre.org/software/S1147\">Nightdoor</a> uses common libraries with <a href=\"https://attack.mitre.org/software/S1146\">MgBot</a> and <a href=\"https://attack.mitre.org/software/S1016\">MacMa</a>, linking these malware families together.(Citation: ESET EvasivePanda 2024)(Citation: Symantec Daggerfly 2024)",
+        "platforms": [
+          "Windows"
+        ],
+        "type": "malware"
+      },
+      {
+        "technique": "T1071",
+        "name": "Lucifer",
+        "id": "S0532",
+        "ref": "https://attack.mitre.org/software/S0532",
+        "description": "<a href=\"https://attack.mitre.org/software/S0532\">Lucifer</a> is a crypto miner and DDoS hybrid malware that leverages well-known exploits to spread laterally on Windows platforms.(Citation: Unit 42 Lucifer June 2020)",
+        "platforms": [
+          "Windows"
+        ],
+        "type": "malware"
+      },
+      {
+        "technique": "T1071",
+        "name": "Raspberry Robin",
+        "id": "S1130",
+        "ref": "https://attack.mitre.org/software/S1130",
+        "description": "<a href=\"https://attack.mitre.org/software/S1130\">Raspberry Robin</a> is initial access malware first identified in September 2021, and active through early 2024. The malware is notable for spreading via infected USB devices containing a malicious LNK object that, on execution, retrieves remote hosted payloads for installation. <a href=\"https://attack.mitre.org/software/S1130\">Raspberry Robin</a> has been widely used against various industries and geographies, and as a precursor to information stealer, ransomware, and other payloads such as <a href=\"https://attack.mitre.org/software/S1124\">SocGholish</a>, <a href=\"https://attack.mitre.org/software/S0154\">Cobalt Strike</a>, <a href=\"https://attack.mitre.org/software/S0483\">IcedID</a>, and <a href=\"https://attack.mitre.org/software/S1039\">Bumblebee</a>.(Citation: TrendMicro RaspberryRobin 2022)(Citation: RedCanary RaspberryRobin 2022)(Citation: HP RaspberryRobin 2024) The DLL componenet in the <a href=\"https://attack.mitre.org/software/S1130\">Raspberry Robin</a> infection chain is also referred to as \"Roshtyak.\"(Citation: Avast RaspberryRobin 2022) The name \"Raspberry Robin\" is used to refer to both the malware as well as the threat actor associated with its use, although the Raspberry Robin operators are also tracked as <tt>Storm-0856</tt> by some vendors.(Citation: Microsoft RaspberryRobin 2022)",
+        "platforms": [
+          "Windows"
+        ],
+        "type": "malware"
+      },
+      {
+        "technique": "T1071",
+        "name": "Exaramel for Windows",
+        "id": "S0343",
+        "ref": "https://attack.mitre.org/software/S0343",
+        "description": "<a href=\"https://attack.mitre.org/software/S0343\">Exaramel for Windows</a> is a backdoor used for targeting Windows systems. The Linux version is tracked separately under <a href=\"https://attack.mitre.org/software/S0401\">Exaramel for Linux</a>.(Citation: ESET TeleBots Oct 2018)",
+        "platforms": [
+          "Windows"
+        ],
+        "type": "malware"
+      },
+      {
+        "technique": "T1071",
+        "name": "Cobalt Strike",
+        "id": "S0154",
+        "ref": "https://attack.mitre.org/software/S0154",
+        "description": "<a href=\"https://attack.mitre.org/software/S0154\">Cobalt Strike</a> is a commercial, full-featured, remote access tool that bills itself as \u201cadversary simulation software designed to execute targeted attacks and emulate the post-exploitation actions of advanced threat actors\u201d. Cobalt Strike\u2019s interactive post-exploit capabilities cover the full range of ATT&CK tactics, all executed within a single, integrated system.(Citation: cobaltstrike manual)\n\nIn addition to its own capabilities, <a href=\"https://attack.mitre.org/software/S0154\">Cobalt Strike</a> leverages the capabilities of other well-known tools such as Metasploit and <a href=\"https://attack.mitre.org/software/S0002\">Mimikatz</a>.(Citation: cobaltstrike manual)",
+        "platforms": [
+          "Windows",
+          "Linux",
+          "macOS"
+        ],
+        "type": "malware"
+      },
+      {
+        "technique": "T1071",
+        "name": "Clambling",
+        "id": "S0660",
+        "ref": "https://attack.mitre.org/software/S0660",
+        "description": "<a href=\"https://attack.mitre.org/software/S0660\">Clambling</a> is a modular backdoor written in C++ that has been used by <a href=\"https://attack.mitre.org/groups/G0027\">Threat Group-3390</a> since at least 2017.(Citation: Trend Micro DRBControl February 2020)",
+        "platforms": [
+          "Windows"
+        ],
+        "type": "malware"
+      },
+      {
+        "technique": "T1071",
+        "name": "QUIETEXIT",
+        "id": "S1084",
+        "ref": "https://attack.mitre.org/software/S1084",
+        "description": "<a href=\"https://attack.mitre.org/software/S1084\">QUIETEXIT</a> is a novel backdoor, based on the open-source Dropbear SSH client-server software, that has been used by <a href=\"https://attack.mitre.org/groups/G0016\">APT29</a> since at least 2021. <a href=\"https://attack.mitre.org/groups/G0016\">APT29</a> has deployed <a href=\"https://attack.mitre.org/software/S1084\">QUIETEXIT</a> on opaque network appliances that typically don't support antivirus or endpoint detection and response tools within a victim environment.(Citation: Mandiant APT29 Eye Spy Email Nov 22)",
+        "platforms": [
+          "Network"
+        ],
+        "type": "malware"
+      },
+      {
+        "technique": "T1071",
+        "name": "Siloscape",
+        "id": "S0623",
+        "ref": "https://attack.mitre.org/software/S0623",
+        "description": "<a href=\"https://attack.mitre.org/software/S0623\">Siloscape</a> is malware that targets Kubernetes clusters through Windows containers. <a href=\"https://attack.mitre.org/software/S0623\">Siloscape</a> was first observed in March 2021.(Citation: Unit 42 Siloscape Jun 2021)",
+        "platforms": [
+          "Windows",
+          "Containers"
+        ],
+        "type": "malware"
+      },
+      {
+        "technique": "T1071",
+        "name": "Duqu",
+        "id": "S0038",
+        "ref": "https://attack.mitre.org/software/S0038",
+        "description": "<a href=\"https://attack.mitre.org/software/S0038\">Duqu</a> is a malware platform that uses a modular approach to extend functionality after deployment within a target network. (Citation: Symantec W32.Duqu)",
+        "platforms": [
+          "Windows"
+        ],
+        "type": "malware"
+      },
+      {
+        "technique": "T1437",
+        "name": "DoubleAgent",
+        "id": "S0550",
+        "ref": "https://attack.mitre.org/software/S0550",
+        "description": "<a href=\"https://attack.mitre.org/software/S0550\">DoubleAgent</a> is a family of RAT malware dating back to 2013, known to target groups with contentious relationships with the Chinese government.(Citation: Lookout Uyghur Campaign)",
+        "platforms": [
+          "Android"
+        ],
+        "type": "malware"
+      },
+      {
+        "technique": "T1437",
+        "name": "ANDROIDOS_ANSERVER.A",
+        "id": "S0310",
+        "ref": "https://attack.mitre.org/software/S0310",
+        "description": "<a href=\"https://attack.mitre.org/software/S0310\">ANDROIDOS_ANSERVER.A</a> is Android malware that is unique because it uses encrypted content within a blog site for command and control. (Citation: TrendMicro-Anserver)",
+        "platforms": [
+          "Android"
+        ],
+        "type": "malware"
+      },
+      {
+        "technique": "T1437",
+        "name": "Drinik",
+        "id": "S1054",
+        "ref": "https://attack.mitre.org/software/S1054",
+        "description": "<a href=\"https://attack.mitre.org/software/S1054\">Drinik</a> is an evolving Android banking trojan that was observed targeting customers of around 27 banks in India in August 2021. Initially seen as an SMS stealer in 2016, <a href=\"https://attack.mitre.org/software/S1054\">Drinik</a> resurfaced as a banking trojan with more advanced capabilities included in subsequent versions between September 2021 and August 2022.(Citation: cyble_drinik_1022)",
+        "platforms": [
+          "Android"
+        ],
+        "type": "malware"
+      }
+    ]
+  },
+  "raw": "",
+  "inputs": {
+    "mitre_technique_name": "Application Layer Protocol",
+    "mitre_technique_id": null
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mitre-integration",
+    "package_version": "2.2.0",
+    "host": "my.app.host",
+    "execution_time_ms": 162959,
+    "timestamp": "2025-01-16 08:20:19"
+  }
+}

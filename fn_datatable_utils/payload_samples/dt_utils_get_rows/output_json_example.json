@@ -1,0 +1,26 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "rows": []
+  },
+  "raw": null,
+  "inputs": {
+    "dt_utils_sort_direction": "ASC",
+    "incident_id": 2101,
+    "dt_utils_datatable_api_name": "dt_utils_test_data_table",
+    "dt_utils_search_value": "2",
+    "dt_utils_sort_by": null,
+    "dt_utils_search_column": "dt_col_name",
+    "dt_utils_max_rows": 0
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-datatable-utils",
+    "package_version": "2.0.0",
+    "host": "dummy",
+    "execution_time_ms": 59,
+    "timestamp": "2023-06-06 01:07:54"
+  }
+}

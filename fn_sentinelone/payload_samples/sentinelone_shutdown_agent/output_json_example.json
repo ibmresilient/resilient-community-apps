@@ -1,0 +1,22 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "data": {
+      "affected": 0
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "sentinelone_agent_id": "1275282318251495460"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "host": "myHost",
+    "execution_time_ms": 3426,
+    "timestamp": "2021-12-13 11:23:17"
+  }
+}

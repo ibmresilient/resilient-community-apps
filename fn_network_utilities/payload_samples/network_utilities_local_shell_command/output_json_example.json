@@ -1,0 +1,29 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "commandline": "traceroute -m 15 \"0.0.0.0\"",
+    "start": 1677190301863,
+    "end": 1677190302277,
+    "elapsed": 413,
+    "exitcode": -2,
+    "stdout": "",
+    "stderr": "traceroute to 0.0.0.0 (0.0.0.0), 15 hops max, 52 byte packets\n",
+    "stdout_json": null,
+    "stderr_json": null
+  },
+  "raw": null,
+  "inputs": {
+    "network_utilities_shell_command": "traceroute",
+    "network_utilities_shell_params": "0.0.0.0"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-network-utilities",
+    "package_version": "1.0.0",
+    "host": "My Host",
+    "execution_time_ms": 416,
+    "timestamp": "2023-02-23 17:11:42"
+  }
+}
