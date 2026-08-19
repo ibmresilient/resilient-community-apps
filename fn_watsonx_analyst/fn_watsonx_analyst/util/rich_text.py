@@ -16,7 +16,7 @@ class RichTextHelper:
     """Converts markdown to HTML"""
 
     code_block_style = (
-        "font-family: monospace; background-color: black; color: white; padding: 5px;"
+        "font-family: monospace; background-color: #9991; color: white; padding: 5px;"
     )
     code_inline_style = (
         f"{code_block_style} display: inline; padding: 1px; font-style: normal;"
@@ -78,11 +78,17 @@ class RichTextHelper:
                 for p in soup.find_all('p'):
                     p.attrs['style'] = 'display: inline'
 
+                list_style = 'margin-left: 2em;'
+                for list_type in ['ul', 'ol']:
+                    for lst in soup.findAll(list_type):
+                        lst.attrs['style'] = list_style
+                        if list_type == 'ul':
+                            lst.attrs['style'] += 'list-style-type: square'
+
                 text = str(soup)
                 text = RichTextHelper.construct_blockquotes(text)
             except:
                 pass # ignore error - not an issue if blockquotes aren't styled
-
             text = RichTextHelper.sanitize(text, config["allowed_tags"])
             return text
         except:

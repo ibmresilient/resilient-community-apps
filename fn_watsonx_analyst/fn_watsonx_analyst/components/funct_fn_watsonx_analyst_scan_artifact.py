@@ -17,6 +17,7 @@ from resilient_circuits import (
     FunctionError,
 )
 
+from fn_watsonx_analyst.watsonx_app_function import WatsonxAppFunction
 from fn_watsonx_analyst.types.ai_response import AIResponse
 from fn_watsonx_analyst.util.ArtifactSummaryGenerator import ArtifactSummaryGenerator
 from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose
@@ -30,17 +31,13 @@ from fn_watsonx_analyst.util.rest import RestHelper, RestUrls
 from fn_watsonx_analyst.util.logging_helper import create_logger, generate_request_id
 from fn_watsonx_analyst.util.state_manager import app_state
 
-PACKAGE_NAME = "fn_watsonx_analyst"
 FN_NAME = "fn_watsonx_analyst_scan_artifact"
 
 log = create_logger(__name__)
 
 
-class FunctionComponent(AppFunctionComponent):
+class FunctionComponent(WatsonxAppFunction):
     """Component that implements function 'fn_watsonx_analyst_scan_artifact'"""
-
-    def __init__(self, opts):
-        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -54,24 +51,23 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.fn_watsonx_analyst_model_id_override
             -   fn_inputs.fn_watsonx_analyst_incident_id
         """
-        _ = generate_request_id()
-
-        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
+        yield self.setup(fn_inputs, AiResponsePurpose.ARTIFACT_SUMMARY, FN_NAME)
 
         inc_id = getattr(fn_inputs, "fn_watsonx_analyst_incident_id", None)
         art_id = getattr(fn_inputs, "fn_watsonx_analyst_artifact_id", None)
-
-        app_state.get().reset()
-
-        app_state.get().set_model(
-            getattr(fn_inputs, "fn_watsonx_analyst_model_id", None)
-        )
-        app_state.get().opts = self.opts
-        app_state.get().res_client = self.rest_client()
-
         err_msg = "Unable to generate artifact summary. "
+
         try:
             results = scan_artifact_or_attachment(inc_id, art_id, None)
+
+            if self.ai_fields_present():
+                log.debug(f"Setting ai insights for artifact ID: {art_id}")
+                ai_artifact_insights = json.dumps(results)
+                helper = RestHelper()
+                artifact = helper.do_request(RestUrls.ARTIFACT_DETAILS, inc_id=inc_id, art_id=art_id)
+                artifact["ai_artifact_insights"] = ai_artifact_insights
+                helper.do_request(RestUrls.UPDATE_ARTIFACT, inc_id=inc_id, art_id=art_id, body=artifact)
+                ResponseHelper.set_insights_added(results)
 
             yield FunctionResult(results)
             return

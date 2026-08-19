@@ -249,7 +249,7 @@ class TestWatsonxClientModels:
                 ]
             }
             
-            assert client.get_available_models() == True
+            assert client.get_available_models() is not None
 
     def test_get_available_models_empty_response(self):
         """Test handling empty model list response"""
@@ -258,7 +258,7 @@ class TestWatsonxClientModels:
         
         with patch.object(client.wx_client.foundation_models, 'get_model_specs') as mock_specs:
             mock_specs.return_value = None
-            assert client.get_available_models() == False
+            assert client.get_available_models() == None
 
     def test_get_available_models_missing_resources(self):
         """Test handling response without resources key"""
@@ -267,7 +267,7 @@ class TestWatsonxClientModels:
         
         with patch.object(client.wx_client.foundation_models, 'get_model_specs') as mock_specs:
             mock_specs.return_value = {"data": []}
-            assert client.get_available_models() == False
+            assert client.get_available_models() == None
 
 
 class TestWatsonxClientExceptionHandling:

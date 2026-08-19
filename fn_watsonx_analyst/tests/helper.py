@@ -18,6 +18,7 @@ from fn_watsonx_analyst.types.ai_response import AIResponse
 
 from fn_watsonx_analyst.util.state_manager import app_state
 
+updated_insights = None
 
 def generate_app_state(
     purpose: AiResponsePurpose = AiResponsePurpose.NOTE_CONVERSATION,
@@ -261,7 +262,7 @@ class modelInference:
                 "prompt_tokens": 200,
                 "completion_tokens": 1000
             },
-            "system": {},
+            "system": {"warnings": {}}
         }
 
 
@@ -272,39 +273,6 @@ class mock_watsonx_client:
     def set(self, *args, **kwargs):
         """Mock the set method that watsonx APIClient uses"""
         pass
-
-# def mock_chat(        
-#     _self,
-#     messages: Sequence[MessagePayload],
-#     temperature: float = 1.0,
-#     max_tokens: int | None = None
-# ) -> WatsonxChatResponse | None:
-    
-#     return {
-#         "id": "asdf",
-#         "object": "asdf",
-
-#         "model_id": "mistralai/mistral-small-3-1-24b-instruct-2503",
-#         "model": "mistralai/mistral-small-3-1-24b-instruct-2503",
-
-
-#         "choices" : [
-#             {
-#                 "finish_reason" : "stop",
-#                 "index": 0,
-#                 "message": {
-#                     "content" : "Lorem ipsum",
-#                     "role" : "assistant"
-#                 }
-#             }
-#         ],
-
-#         "created": 1234567890,
-#         "created_at": "123456789",
-
-#         "usage": {},
-#         "system": {},
-#     }
 
 
 def mock_get_api_key(_self, _res_client):
@@ -2626,6 +2594,252 @@ def mock_do_request(_self, uri, **kwargs):
                     ],
                 },
             ]
+        case RestUrls.LATEST_PLAYBOOK_EXECUTION:
+            # Returns list of playbook executions matching the playbook name
+            obj_name = kwargs.get("obj_name", "").lower()
+            
+            if obj_name == "test_mixed_playbook":
+                return [
+                    {
+                        "id": 2405,
+                        "playbook": {
+                            "id": 158,
+                            "display_name": "test_mixed_playbook",
+                            "version": 8
+                        },
+                        "status": "completed",
+                        "object": {
+                            "object_id": 123,
+                            "object_name": "Test Incident",
+                            "type_name": "incident"
+                        },
+                        "last_activity_by": {
+                            "display_name": "Resilient Sysadmin"
+                        }
+                    }
+                ]
+            elif obj_name == "running playbook":
+                return [
+                    {
+                        "id": 2406,
+                        "playbook": {
+                            "id": 159,
+                            "display_name": "Running Playbook",
+                            "version": 1,
+                            "type": "playbook",
+                        },
+                        "status": "running",
+                        "object": {
+                            "object_id": 456,
+                            "object_name": "Test Incident 2",
+                            "type_name": "incident"
+                        },
+                        "last_activity_by": {
+                            "display_name": "Resilient Sysadmin"
+                        }
+                    }
+                ]
+            else:
+                # No executions found for this playbook name
+                return []
+
+        case RestUrls.SPECIFIC_PLAYBOOK_EXECUTION:
+            # Returns list with specific playbook execution by ID
+            pb_exec_id = kwargs.get("obj_name", None)
+            
+            if pb_exec_id == 2405:
+                return [
+                    {
+                        "id": 2405,
+                        "playbook": {
+                            "id": 158,
+                            "display_name": "test_mixed_playbook",
+                            "version": 8
+                        },
+                        "status": "completed",
+                        "object": {
+                            "object_id": 123,
+                            "object_name": "Test Incident",
+                            "type_name": "incident"
+                        },
+                        "last_activity_by": {
+                            "display_name": "Resilient Sysadmin"
+                        }
+                    }
+                ]
+            elif pb_exec_id == 2406:
+                return [
+                    {
+                        "id": 2406,
+                        "playbook": {
+                            "id": 159,
+                            "display_name": "Running Playbook",
+                            "version": 1
+                        },
+                        "status": "running",
+                        "object": {
+                            "object_id": 456,
+                            "object_name": "Test Incident 2",
+                            "type_name": "incident"
+                        },
+                        "last_activity_by": {
+                            "display_name": "Resilient Sysadmin"
+                        }
+                    }
+                ]
+            else:
+                return []
+
+        case RestUrls.PLAYBOOK_BY_NAME:
+            # Returns list of playbooks matching the display name
+            obj_name = kwargs.get("obj_name", "")
+            
+            if obj_name == "test_mixed_playbook":
+                return [
+                    {
+                        "id": 158,
+                        "display_name": "test_mixed_playbook",
+                        "version": 8,
+                        "activation_type": "manual",
+                        "type": "playbook"
+                    }
+                ]
+            elif obj_name == "Running Playbook":
+                return [
+                    {
+                        "id": 159,
+                        "display_name": "Running Playbook",
+                        "version": 1,
+                        "activation_type": "manual",
+                        "type": "playbook"
+                    }
+                ]
+            else:
+                # No playbook found with this name
+                return []
+
+        case RestUrls.PLAYBOOK_DETAILS:
+            import json
+            
+            playbook_id = kwargs.get("playbook_id", None)
+            
+            if playbook_id == 158:  # test_mixed_playbook
+                # Load the complex playbook JSON
+                json_path = os.path.join(os.path.dirname(__file__), "data", "complex_playbook.json")
+                with open(json_path, 'r') as f:
+                    playbook_data = json.load(f)
+                
+                # Add required fields for the test
+                playbook_data["id"] = 158
+                playbook_data["display_name"] = "test_mixed_playbook"
+                return playbook_data
+            elif playbook_id == 159:  # Running Playbook
+                return {
+                    "id": 159,
+                    "display_name": "Running Playbook",
+                    "description": "Test running playbook",
+                    "version": 1,
+                    "object_type": 0,  # incident
+                    "activation_type": "manual",
+                    "content": {
+                        "xml": '<?xml version="1.0" encoding="UTF-8"?><definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"><process id="test"><startEvent id="start"><outgoing>flow1</outgoing></startEvent><userTask id="task1" name="Pending Task"><incoming>flow1</incoming><outgoing>flow2</outgoing></userTask><endEvent id="end"><incoming>flow2</incoming></endEvent><sequenceFlow id="flow1" sourceRef="start" targetRef="task1"/><sequenceFlow id="flow2" sourceRef="task1" targetRef="end"/></process></definitions>'
+                    },
+                    "type": "playbook",
+                    "manual_settings": {
+                        "activation_conditions": {
+                            "conditions": [],
+                            "logic_type": "all"
+                        }
+                    }
+                }
+            else:
+                # Fallback for unknown playbook IDs
+                return None
+
+        case RestUrls.PLAYBOOK_EXECUTION_ACTIVITIES:
+            execution_id = kwargs.get("execution_id", None)
+            
+            if execution_id == 2405:  # Complex playbook execution (completed)
+                return {
+                    "activity_status": [
+                        {
+                            "activity_ref": {
+                                "node_display_name": "Initial Triage",
+                                "activity_type": "user_task"
+                            },
+                            "status": "complete",
+                            "start_time": 1732120154932,
+                            "messages": [
+                                {
+                                    "create_date": 1732120155000,
+                                    "text": "Task completed by user",
+                                    "type": 1
+                                }
+                            ]
+                        },
+                        {
+                            "activity_ref": {
+                                "node_display_name": "Timer",
+                                "activity_type": "function"
+                            },
+                            "status": "complete",
+                            "start_time": 1732120156000,
+                            "messages": [
+                                {
+                                    "create_date": 1732120156500,
+                                    "text": "Function executed successfully",
+                                    "type": 1
+                                }
+                            ]
+                        },
+                        {
+                            "activity_ref": {
+                                "node_display_name": "Set address",
+                                "activity_type": "script"
+                            },
+                            "status": "complete",
+                            "start_time": 1732120157000,
+                            "messages": []
+                        },
+                        {
+                            "activity_ref": {
+                                "node_display_name": "Invoke Watsonx",
+                                "activity_type": "sub_playbook"
+                            },
+                            "status": "complete",
+                            "start_time": 1732120158000,
+                            "messages": [
+                                {
+                                    "create_date": 1732120159000,
+                                    "text": "Sub-playbook completed",
+                                    "type": 1
+                                }
+                            ]
+                        }
+                    ]
+                }
+            elif execution_id == 2406:  # Running playbook execution
+                return {
+                    "activity_status": [
+                        {
+                            "activity_ref": {
+                                "node_display_name": "Pending Task",
+                                "activity_type": "user_task"
+                            },
+                            "status": "pending",
+                            "start_time": 1732120154932,
+                            "messages": []
+                        }
+                    ]
+                }
+            else:
+                return {"activity_status": []}
+
+        case RestUrls.SET_PLAYBOOK_EXECUTION_AI_SUMMARY:
+            # Mock endpoint for setting AI summary on playbook execution
+            # Just return success, no actual storage needed in tests
+            return {"success": True}
+
         case _:
             return {}
 
@@ -2640,7 +2854,7 @@ def mock_text_generation(
     _max_new_tokens: int = 900,
     _timeout=25 * 1000,
     _enable_moderation=True,
-) -> AIResponse:
+) -> WatsonxTextGenerationResponse:
     """Returns a deepcopy of the predefined output example"""
     output = copy.deepcopy(sample_output)
 

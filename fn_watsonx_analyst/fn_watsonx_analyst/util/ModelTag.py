@@ -2,8 +2,7 @@ from typing import Union
 from datetime import datetime
 from enum import Enum
 
-import pkg_resources
-
+from importlib.metadata import version
 
 class AiResponsePurpose(Enum):
     ARTIFACT_SUMMARY = "Artifact Summary"
@@ -13,6 +12,7 @@ class AiResponsePurpose(Enum):
     ARTIFACT_META_CONVERSATION = "Artifact Metadata Conversation"
     INCIDENT_SUMMARY = "Incident Summary"
     TEXT_GENERATION = "Text Generation"
+    PLAYBOOK_EXECUTION_SUMMARY = "Playbook Execution Summary"
 
     def __eq__(self, other):
         return self.value == other.value
@@ -24,7 +24,7 @@ class ModelTag:
     created_at: str
     purpose: AiResponsePurpose
     request_id: str
-    app_version: str = pkg_resources.require("fn_watsonx_analyst")[0].version
+    app_version: str = version("fn_watsonx_analyst")
     input_tokens: int
     output_tokens: int
     embedding_tokens: int
@@ -70,7 +70,7 @@ class ModelTag:
             self.estimated_cost = self.UNKNOWN
 
     def _get_name(self) -> str:
-        return f"watsonx.ai for SOAR Analysts v{self.app_version}"
+        return f"IBM QRadar SOAR Response Assistant v{self.app_version}"
 
     def __repr__(self) -> str:
         return f"""<div style="white-space: nowrap; display: table-row; height:48px; border: 1px solid #4589ff;">

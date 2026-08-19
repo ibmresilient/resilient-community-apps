@@ -25,11 +25,10 @@ RUN yum -y update
 
 RUN yum clean all && rm -rf /var/cache/yum
 
-# Install the CPU version of pytorch
-RUN pip install torch --index-url https://download.pytorch.org/whl/cpu
-
-# Install Python package for the application
-RUN pip install /tmp/packages/${APPLICATION}-*.tar.gz
+RUN python3 -m ensurepip --upgrade && \
+    python3 -m pip install torch --index-url https://download.pytorch.org/whl/cpu && \
+    python3 -m pip install /tmp/packages/${APPLICATION}-*.tar.gz && \
+    python3 -m pip uninstall -y pip setuptools
 
 # Set up the application directory and copy entrypoint script
 RUN mkdir -p /opt/${APPLICATION}

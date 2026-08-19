@@ -1,9 +1,11 @@
 import json
-from typing import List, Sequence
+from typing import List, Sequence, TypeVar, Type
 
 from ibm_watsonx_ai import APIClient, Credentials
 from ibm_watsonx_ai.foundation_models import ModelInference, Embeddings
 from ibm_watsonx_ai.foundation_models.schema import TextChatParameters
+
+from pydantic import BaseModel
 
 from fn_watsonx_analyst.types import MessagePayload, MessageRole
 from fn_watsonx_analyst.types.watsonx_responses import WatsonxChatResponse
@@ -24,9 +26,19 @@ from fn_watsonx_analyst.util.errors import (
 from fn_watsonx_analyst.util.retry import retry_with_backoff
 from fn_watsonx_analyst.util.logging_helper import create_logger
 from fn_watsonx_analyst.util.state_manager import app_state
+from fn_watsonx_analyst.util.util import base_model_to_structured_output
 
 log = create_logger(__name__)
 
+T = TypeVar("T", bound="StructuredOutputBase")
+
+class StructuredOutputBase(BaseModel):
+    """Extension of the Model class to provide a sample method to give a sample data for the given model"""
+    @classmethod
+    def sample(cls: Type[T]) -> T:
+        if not hasattr(cls, "SAMPLE_DATA"):
+            raise NotImplementedError(f"{cls.__name__} has no sample_data defined")
+        return cls.model_validate(cls.SAMPLE_DATA)
 
 class WatsonxClient:
     """
@@ -60,11 +72,9 @@ class WatsonxClient:
         Returns:
             Configuration value
             
-        Raises:
-            ValueError: If configuration key is not found
         """
         config = self.opts.get("fn_watsonx_analyst", {})
-        value = config.get(key)
+        value = config.get(key, None)
         if not value:
             log.debug(f"Configuration key '{key}' not found or empty")
             return None
@@ -88,7 +98,9 @@ class WatsonxClient:
         self,
         messages: Sequence[MessagePayload],
         temperature: float = 1.0,
-        max_tokens: int | None = None
+        max_tokens: int | None = None,
+        # response_format: TextChatResponseFormat = None
+        response_format: Type[StructuredOutputBase] = None
     ) -> WatsonxChatResponse:
         """
         Send a chat request to watsonx.ai.
@@ -112,7 +124,8 @@ class WatsonxClient:
             # Set up chat parameters
             params = TextChatParameters(
                 temperature=temperature,
-                max_tokens=max_tokens or ModelHelper.max_output_tokens_for_model(self.model_id)
+                max_tokens=max_tokens or ModelHelper.max_output_tokens_for_model(self.model_id),
+                response_format=base_model_to_structured_output(response_format)
             )
 
             # Create model inference instance
@@ -120,7 +133,8 @@ class WatsonxClient:
                 model_id=self.model_id,
                 api_client=self.wx_client,
                 params=params,
-                project_id=self.project_id
+                project_id=self.project_id,
+                response_format=response_format
             )
 
             # Execute chat - convert to list of dicts for SDK
@@ -128,7 +142,7 @@ class WatsonxClient:
             response: WatsonxChatResponse = model.chat(messages_list) # type: ignore
             if "system" in response and "warnings" in response["system"]:
                 log.warning(f"Warning from watsonx.ai: {json.dumps(response['system']['warnings'], indent=2)}")
-            
+
             # Update token counts in app state
             if 'usage' in response:
                 usage = response['usage']
@@ -173,12 +187,12 @@ class WatsonxClient:
         if len(texts) > 1000:
             log.warning(f"Truncating {len(texts)} texts to 1000 for embedding")
             texts = texts[:1000]
-        
+
         # Determine if using local embeddings
         if use_local is None:
             local_config = self._get_config_value('local_embeddings')
             use_local = local_config not in (None, "False", "false", "", "0")
-        
+
         if use_local:
             return self._generate_local_embeddings(texts)
         else:
@@ -187,12 +201,13 @@ class WatsonxClient:
     def _generate_local_embeddings(self, texts: List[str]) -> List[list]:
         """Generate embeddings using local sentence transformer model."""
         try:
+            # pylint: disable=import-outside-toplevel
             from sentence_transformers import SentenceTransformer
-            
+
             log.debug("Using local sentence transformer for embeddings")
             model = SentenceTransformer('all-MiniLM-L6-v2')
             embeddings = model.encode(texts)
-            
+
             # Convert to list of lists
             if hasattr(embeddings, 'tolist'):
                 result = embeddings.tolist()
@@ -210,18 +225,18 @@ class WatsonxClient:
     def _generate_watsonx_embeddings(self, texts: List[str]) -> List[list]:
         """Generate embeddings using watsonx.ai API."""
         try:
-            embedding_model = ModelHelper.get_embedding_model(self.opts)
-            log.debug(f"Using {embedding_model} on watsonx.ai for embeddings")
-            
+            model = ModelHelper.get_embedding_model(self.opts)
+            log.debug(f"Using {model} on watsonx.ai for embeddings")
+
             embedding_model = Embeddings(
-                model_id="ibm/slate-125m-english-rtrvr-v2", # TODO make configurable
+                model_id=model,
                 api_client=self.wx_client,
                 project_id=self.project_id
             )
 
             results = embedding_model.generate(texts)
             if "input_token_count" in results:
-                app_state.get().increment_embedding_tokens((results["input_token_count"])) # TODO count embedding tokens
+                app_state.get().increment_embedding_tokens((results["input_token_count"]))
             else:
                 log.warning("Did not receive token usage from watsonx.")
             embeddings = []
@@ -236,7 +251,7 @@ class WatsonxClient:
         """Interrogate watsonx api about project id - if project id is invalid, return False"""
         if not self.project_id:
             return False
-        
+
         try:
             self.wx_client.projects.get_details(self.project_id)
             return True
@@ -260,13 +275,13 @@ class WatsonxClient:
 
             if not model_specs or "resources" not in model_specs:
                 raise WatsonxUnparseableResponseException()
-            
+
             models = [resource["model_id"] for resource in model_specs["resources"]]
             log.debug(f"Retrieved {len(models)} available models")
-            return True
+            return models
 
         except Exception:
-            return False
+            return None
 
     def _handle_exception(self, exception: Exception) -> None:
         """
@@ -282,7 +297,7 @@ class WatsonxClient:
 
         if isinstance(exception, WatsonxUnparseableResponseException):
             raise exception
-        
+
         # Token limit errors
         if "token" in error_msg and "limit" in error_msg:
             raise WatsonxTokenLimitExceededException() from exception

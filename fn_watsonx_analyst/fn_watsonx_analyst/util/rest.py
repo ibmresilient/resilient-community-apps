@@ -48,6 +48,7 @@ class RestUrls(Enum):
     GET_GLOBAL_ARTIFACT = ["GET", "/artifacts/{art_id}"]
 
     INCIDENT_DETAILS = ["GET", "/incidents/{inc_id}"]
+    UPDATE_INCIDENT = ["PUT", "/incidents/{inc_id}"]
     TASK_TREE = ["GET", "/incidents/{inc_id}/tasktree"]
 
     GET_NOTE = ["GET", "/incidents/{inc_id}/comments/{note_id}"]
@@ -70,6 +71,21 @@ class RestUrls(Enum):
         "/playbooks/execution/query_paged?include_activity_error_msg=false",
     ]
 
+    SPECIFIC_PLAYBOOK_EXECUTION = ["POST", "SPECIFIC"] # special cases! - uses same URL as PLAYBOOK_EXECUTIONS but with different req body
+    LATEST_PLAYBOOK_EXECUTION = ["POST", "LATEST"]
+
+    PLAYBOOK_EXECUTION_ACTIVITIES = [
+        "POST",
+        "/playbooks/execution/{execution_id}/activities"
+    ]
+
+    SET_PLAYBOOK_EXECUTION_AI_SUMMARY = ["PUT", "/playbooks/execution/{execution_id}/ai_summary"]
+
+    PLAYBOOK_DETAILS = ["GET", "/playbooks/{playbook_id}"]
+    PLAYBOOK_BY_NAME = ["POST", "/playbooks/query_paged"]
+    UPDATE_PLAYBOOK = ["PUT", "/playbooks/{playbook_id}"]
+    GET_PLAYBOOKS_PAGED = ["POST", "/playbooks/query_paged?"]
+
     ATTACHMENT_BY_NAME = [
         "POST",
         "/incidents/{inc_id}/attachments/query?exclude_mismatch=false&include_tasks=true",
@@ -81,6 +97,8 @@ class RestUrls(Enum):
         "/incidents/{inc_id}/attachments/{attach_id}/contents",
     ]
 
+    UPDATE_ATTACHMENT_AI_INSIGHTS = ["PUT", "/incidents/{inc_id}/edit_attachment_ai_insights"]
+
     TASK_ATTACHMENT_DETAILS = ["GET", "/tasks/{task_id}/attachments/{attach_id}"]
     TASK_ATTACHMENT_CONTENTS = [
         "GET",
@@ -89,6 +107,13 @@ class RestUrls(Enum):
 
     GET_ATTACHMENTS = ["GET", "/incidents/{inc_id}/attachments?exclude_mismatch=true"]
     GET_TYPES = ["GET", "/types/{type}/fields"]
+    GET_INCIDENT_TYPES = ["GET", "/incident_types"]
+
+    GET_PLAYBOOK_SCRIPTS = ["POST", "/scripts/query_paged?return_level=partial"]
+    GET_PLAYBOOK_SCRIPT = ["GET", "/scripts/{script_id}"]
+
+    STORE_AI_PROVIDER_CONFIG = ["PUT", "/ai/config"]
+    TEST_AI_PROVIDER_CONFIG = ["POST", "/ai/config/test"]
 
 
 class RestHelper:
@@ -105,6 +130,11 @@ class RestHelper:
         self, url: RestUrls, inc_id: int | None = None, length: int = 100, obj_name: str | None = None, user_ids: List[int] | None = None
     ):
         match url:
+            case RestUrls.SET_PLAYBOOK_EXECUTION_AI_SUMMARY:
+                return {
+                    "ai_summary": obj_name
+                }
+
             case RestUrls.SEARCH_PRINCIPALS:
                 return {
                     "filters": [
@@ -145,6 +175,87 @@ class RestHelper:
                         }
                     ],
                 }
+
+            case RestUrls.LATEST_PLAYBOOK_EXECUTION:
+                return {
+                    "sorts": [
+                        {"field_name": "start_time", "type": "desc"},
+                    ],
+                    "filters": [
+                        {
+                            "conditions": [
+                                {
+                                    "method": "equals",
+                                    "field_name": "incident_id",
+                                    "value": inc_id,
+                                },
+                                {
+                                    "method": "equals",
+                                    "field_name": "playbook_type",
+                                    "value": "default",
+                                },
+                                {
+                                    "method": "equals",
+                                    "field_name": "playbook_name",
+                                    "value": obj_name
+                                }
+                            ]
+                        }
+                    ],
+                    "start": 0,
+                    "length": 1,
+                }
+
+            case RestUrls.SPECIFIC_PLAYBOOK_EXECUTION:
+                return {
+                    "sorts": [
+                        {"field_name": "start_time", "type": "desc"},
+                    ],
+                    "filters": [
+                        {
+                            "conditions": [
+                                {
+                                    "method": "equals",
+                                    "field_name": "incident_id",
+                                    "value": inc_id,
+                                },
+                                {
+                                    "method": "equals",
+                                    "field_name": "id",
+                                    "value": obj_name
+                                }
+                            ]
+                        }
+                    ]
+                }
+
+            case RestUrls.GET_PLAYBOOKS_PAGED:
+                return {
+                    "sorts": [],
+                    "filters": [],
+                    "start": 0,
+                    "length": length,
+                }
+
+            case RestUrls.PLAYBOOK_BY_NAME:
+                return {
+                    "query": '',
+                    "filters": [
+                        {
+                            "conditions": [
+                                {
+                                    "method": "equals",
+                                    "field_name": "display_name",
+                                    "value": obj_name,
+                                }
+                            ]
+                        }
+                    ],
+                    "sorts": [{"field_name": "display_name", "type": "asc"}],
+                    "start": 0,
+                    "length": length,
+                }
+
 
             case RestUrls.PLAYBOOK_EXECUTIONS:
                 return {
@@ -192,6 +303,16 @@ class RestHelper:
                     "filters": [{"conditions": []}],
                 }
 
+            case RestUrls.GET_PLAYBOOK_SCRIPTS:
+                return {
+                    "sorts": [],
+                    "filters": [],
+                    "start": 0,
+                    "length": length,
+                }
+            case _:
+                return None
+
     def do_request(self, url: RestUrls, **kwargs) -> dict:
         """
         Given the RestUrl enum value, perform the operation, using kwargs as query params.
@@ -222,28 +343,38 @@ class RestHelper:
 
                 match url:
                     case (
-                        RestUrls.PLAYBOOK_EXECUTIONS
+                        RestUrls.LATEST_PLAYBOOK_EXECUTION
+                        | RestUrls.SPECIFIC_PLAYBOOK_EXECUTION
+                        | RestUrls.PLAYBOOK_EXECUTIONS
                         | RestUrls.PLAYBOOK_EXECUTIONS_1
                         | RestUrls.PLAYBOOK_EXECUTIONS_2
                         | RestUrls.PLAYBOOK_EXECUTIONS_3
                     ):
+                        paged_query_root = RestUrls.PLAYBOOK_EXECUTIONS
+                        if url is RestUrls.LATEST_PLAYBOOK_EXECUTION:
+                            paged_query_root = RestUrls.LATEST_PLAYBOOK_EXECUTION
+                        elif url is RestUrls.SPECIFIC_PLAYBOOK_EXECUTION:
+                            paged_query_root = RestUrls.SPECIFIC_PLAYBOOK_EXECUTION
+
                         for i, option in enumerate(self.playbook_exec_group):
                             args = {}
                             if kwargs.get("happy_path"):
                                 args = kwargs
+                            body = self.__get_paged_query(
+                                paged_query_root,
+                                kwargs.get("inc_id", None),
+                                length,
+                                kwargs.get("art_name",
+                                    kwargs.get("obj_name", None)),
+                            )
                             try:
                                 result = res_client.post(
                                     option.value[1].format(**kwargs),
-                                    self.__get_paged_query(
-                                        RestUrls.PLAYBOOK_EXECUTIONS,
-                                        kwargs.get("inc_id", None),
-                                        length,
-                                        kwargs.get("art_name", None),
-                                    ),
+                                    body,
                                     skip_retry=[500],
                                     **args,
-                                )["data"]
-                                return result
+                                )
+                                return result["data"]
                             except:
                                 log.warning(
                                     "Failed to get playbook executions using API %s.%s",
@@ -263,6 +394,8 @@ class RestHelper:
                         | RestUrls.GET_ARTIFACTS
                         | RestUrls.INC_ART_ID
                         | RestUrls.ATTACHMENT_BY_NAME
+                        | RestUrls.PLAYBOOK_BY_NAME
+                        | RestUrls.GET_PLAYBOOK_SCRIPTS
                     ):
                         try:
                             res = res_client.post(
@@ -276,9 +409,10 @@ class RestHelper:
                                 ),
                             )
 
-                            if url == RestUrls.ATTACHMENT_BY_NAME:
+                            if url is RestUrls.ATTACHMENT_BY_NAME:
                                 return res.get("attachments", [])
-                            else:
+
+                            if "data" in res:
                                 return res.get("data", [])
 
                             return res
@@ -288,7 +422,7 @@ class RestHelper:
                             )
                             # raise Exception("Error fetching %s data from SOAR.", url.name) from e
 
-                return res_client.post(url.value[1].format(**kwargs))
+                return res_client.post(url.value[1].format(**kwargs), kwargs.get("payload", {}))
             case "PUT":
                 return res_client.put(url.value[1].format(**kwargs), kwargs["body"])
             case "PATCH":

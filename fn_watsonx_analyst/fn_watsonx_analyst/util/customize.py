@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # <<PUT YOUR COPYRIGHT TEXT HERE>>
-# Generated with resilient-sdk v51.0.2.2.1096
+# Generated with resilient-sdk v51.0.8.0.30103
 
 """Generate the SOAR customizations required for fn_watsonx_analyst"""
 
@@ -30,6 +30,7 @@ def codegen_reload_data():
             u"fn_watsonx_analyst_scan_artifact",
             u"fn_watsonx_analyst_scan_attachment",
             u"fn_watsonx_analyst_summarize_incident",
+            u"fn_watsonx_analyst_summarize_playbook_execution",
             u"fn_watsonx_analyst_text_generation"
         ],
         "workflows": [],
@@ -49,6 +50,7 @@ def codegen_reload_data():
             u"fn_watsonx_analyst_scan_artifact",
             u"fn_watsonx_analyst_scan_attachment",
             u"fn_watsonx_analyst_summarize_incident"
+            u"fn_watsonx_analyst_summarize_playbook_execution"
         ]
     }
 
@@ -58,7 +60,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 51.0.0.0.9339
+    IBM SOAR Platform Version: 51.0.11.0.0
 
     Contents:
     - Message Destinations:
@@ -68,6 +70,7 @@ def customization_data(client=None):
         - fn_watsonx_analyst_scan_artifact
         - fn_watsonx_analyst_scan_attachment
         - fn_watsonx_analyst_summarize_incident
+        - fn_watsonx_analyst_summarize_playbook_execution
         - fn_watsonx_analyst_text_generation
     - Playbooks:
         - fn_watsonx_analyst_note_conversation

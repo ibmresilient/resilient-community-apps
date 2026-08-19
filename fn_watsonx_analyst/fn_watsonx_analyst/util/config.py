@@ -15,6 +15,7 @@ def config_section_data():
 watsonx_api_key=$WATSONX_API_KEY
 watsonx_project_id=$WATSONX_PROJECT_ID
 watsonx_endpoint=$WATSONX_ENDPOINT
+watsonx_model=openai/gpt-oss-120b
 
 # options: en, fr, de, pt, es
 # Options:

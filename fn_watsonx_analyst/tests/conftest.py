@@ -1,11 +1,12 @@
-from typing import List
+from typing import List, Type
 import pytest
 from unittest.mock import MagicMock
 
+from fn_watsonx_analyst.types.playbook_execution_schemas import PlaybookAnalysis
 from fn_watsonx_analyst.types.watsonx_responses import WatsonxChatResponse
 from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose
 from fn_watsonx_analyst.util.state_manager import app_state
-
+from fn_watsonx_analyst.util.watsonx_client import StructuredOutputBase
 
 class MockAPIClient:
 
@@ -19,14 +20,21 @@ class MockAPIClient:
         pass
 
 class MockModelInference:
-    def __init__(_self, model_id: str, api_client: object, params: object, project_id: str):
-        pass
+    sample_output: str = None
 
-    def chat(_self, messages: list[dict[str, str]]) -> WatsonxChatResponse:
+    def __init__(self, model_id: str, api_client: object, params: object, project_id: str, response_format: Type[StructuredOutputBase] = None):
+        if response_format:
+            self.sample_output = response_format.sample().model_dump_json()
+
+    def chat(self, messages: list[dict[str, str]]) -> WatsonxChatResponse:
+
         msg = "Lorem ipsum"
-            # special case for artifact qna
+
         if app_state.get().purpose == AiResponsePurpose.ARTIFACT_CONVERSATION:
             msg = "Artifact conversation"
+        
+        if self.sample_output:
+            msg = self.sample_output
 
         return {
             "id": "asdf",
@@ -34,7 +42,6 @@ class MockModelInference:
 
             "model_id": "mistralai/mistral-small-3-1-24b-instruct-2503",
             "model": "mistralai/mistral-small-3-1-24b-instruct-2503",
-
 
             "choices" : [
                 {
@@ -60,7 +67,7 @@ class MockModelInference:
 class MockEmbeddings:
     def __init__(self, **kwargs):
         pass
-    def embed_documents(_self, texts: List[str], use_local: bool | None = None) -> List[list]:
+    def embed_documents(self, texts: List[str], use_local: bool | None = None) -> List[list]:
         return [[-1, 2, 3]]
     def generate(self, inputs: List[str]) -> dict:
         return {

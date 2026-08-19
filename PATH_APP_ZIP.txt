@@ -1,1 +1,1 @@
-https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_urlscanio/main/1.2/app-fn_urlscanio-1.2.1-41282.zip
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_watsonx_analyst/main/2.0/app-fn_watsonx_analyst-2.0.0-42126.zip

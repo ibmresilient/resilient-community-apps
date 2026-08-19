@@ -14,7 +14,7 @@ read_all_incidents
 #create_incident
 #delete_all_incidents
 #download_incident_emails
-#edit_all_incidents_fields
+edit_all_incidents_fields
 #edit_all_incidents_owner
 #edit_all_incidents_members
 #edit_all_incidents_status
@@ -24,7 +24,7 @@ read_all_incidents
 ## Tasks Permissions
 #edit_task_header
 read_incident_public_task
-#edit_incident_public_task_fields
+edit_incident_public_task_fields
 #edit_incident_public_task_member
 #edit_all_public_task_notes
 #read_all_private_tasks
@@ -34,7 +34,7 @@ read_incident_public_task
 #
 ## Playbook Permissions
 read_playbook
-#edit_playbook
+edit_playbook
 #create_playbook
 #delete_playbook
 #
@@ -46,7 +46,7 @@ read_workspace
 #read_layouts
 #edit_layouts
 #delete_layouts
-#read_script
+read_script
 #edit_script
 #create_script
 #delete_script
@@ -72,3 +72,5 @@ read_function
 #create_global_artifacts
 #edit_global_artifacts
 #delete_global_artifacts
+
+manage_ai_config

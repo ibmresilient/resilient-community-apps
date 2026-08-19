@@ -8,7 +8,9 @@ import pytest
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 
+from fn_watsonx_analyst.util.rest import RestUrls
 from tests import helper
+from tests.utils import were_ai_fields_updated
 
 PACKAGE_NAME = "fn_watsonx_analyst"
 FUNCTION_NAME = "fn_watsonx_analyst_scan_attachment"
@@ -76,4 +78,32 @@ class TestFnWatsonxAnalystScanAttachment:
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
         results = call_fn_watsonx_analyst_scan_attachment_function(circuits_app, mock_inputs)
-        assert expected_results in results["content"]["generated_text"].strip()
+        assert expected_results in results["content"]["generated_text"].strip() 
+
+
+    @pytest.mark.parametrize(
+        "ai_fields_present",
+        [True, False]
+    )
+    def test_ai_fields_updated(self, circuits_app, ai_fields_present):
+        call_tracker = []
+
+        def tracking_mock(self, uri, **kwargs):
+            call_tracker.append((uri, kwargs))
+            return helper.mock_do_request(self, uri, **kwargs)
+
+        with patch("fn_watsonx_analyst.util.rest.RestHelper.do_request", tracking_mock):
+            with patch("fn_watsonx_analyst.watsonx_app_function.WatsonxAppFunction.ai_fields_present", return_value=ai_fields_present):
+                results = call_fn_watsonx_analyst_scan_attachment_function(circuits_app, self.mock_inputs_1)
+
+                assert results["content"]["metadata"]["soar_insights_added"] == ai_fields_present
+
+                obj = were_ai_fields_updated(
+                    call_tracker, RestUrls.UPDATE_ATTACHMENT_AI_INSIGHTS, None, 
+                    "incident_attachment_id", "attach_ai_insights"
+                )
+
+                if ai_fields_present:
+                    assert obj is not None
+                else:
+                    assert obj is None

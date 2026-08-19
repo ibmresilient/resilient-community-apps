@@ -36,7 +36,7 @@ class ChatPrompting:
         """Get the default language from configuration."""
         try:
             return app_state.get().opts["fn_watsonx_analyst"]["default_language"]
-        except Exception:
+        except:
             logger.warning("Error getting default language. Using 'en'.")
             return "en"
 
@@ -60,19 +60,19 @@ class ChatPrompting:
             lang, prob = identifier.classify(text)
 
             logger.debug("Detected '%s' language with confidence %d%%", lang, int(prob * 100))
-            
+
             if prob >= confidence_threshold:
                 return lang
 
             logger.debug("Using fallback language: %s", self.default_language)
             return self.default_language
-            
+
         except Exception as e:
             logger.exception("Error during language detection: %s", e)
             return self.default_language
 
     def _get_prompt_text(
-        self, 
+        self,
         prompt_type: Literal["system_prompts", "user_prompts", "misc", "prompt_grounding"],
         key: str,
         locale: str
@@ -132,17 +132,19 @@ class ChatPrompting:
             key = "metadata_summary"
         elif purpose == AiResponsePurpose.ARTIFACT_META_CONVERSATION:
             key = "metadata_conversation"
+        elif purpose == AiResponsePurpose.PLAYBOOK_EXECUTION_SUMMARY:
+            key = "playbook_execution_summary"
         else:
             key = "default_prompt"
         prompt = self._get_prompt_text("system_prompts", key, locale)
-        
+
         # Format with any provided kwargs
         if kwargs:
             try:
                 prompt = prompt.format(**kwargs)
             except KeyError as e:
                 logger.warning("Missing format key in system prompt: %s", e)
-        
+
         return prompt
 
     def get_user_prompt(self, purpose: AiResponsePurpose, locale: str, **kwargs) -> str:
@@ -164,18 +166,20 @@ class ChatPrompting:
             key = "metadata_summary"
         elif purpose == AiResponsePurpose.ARTIFACT_META_CONVERSATION:
             key = "metadata_conversation"
+        elif purpose == AiResponsePurpose.PLAYBOOK_EXECUTION_SUMMARY:
+            key = "playbook_execution_summary"
         else:
             return ""
-        
+
         prompt = self._get_prompt_text("user_prompts", key, locale)
-        
+
         # Format with any provided kwargs
         if kwargs:
             try:
                 prompt = prompt.format(**kwargs)
             except KeyError as e:
                 logger.warning("Missing format key in user prompt: %s", e)
-        
+
         return prompt
 
     def get_help_text(self, locale: str) -> str:
@@ -203,7 +207,6 @@ class ChatPrompting:
         previous_messages: List[MessagePayload] | None = None,
         locale: str | None = None,
         include_relevant_prompts: bool = True,
-        max_context_tokens: int = 800,
         **format_kwargs
     ) -> List[MessagePayload]:
         """
@@ -235,7 +238,7 @@ class ChatPrompting:
 
             # Build system message
             system_content_parts = []
-            
+
             # Add main system prompt
             system_prompt = self.get_system_prompt(purpose, locale, **format_kwargs)
             if system_prompt:
@@ -339,14 +342,14 @@ class ChatPrompting:
             List of MessagePayload objects
         """
         messages: List[MessagePayload] = []
-        
+
         if system_prompt:
             messages.append({"role": "system", "content": system_prompt})
-        
+
         if previous_messages:
             messages.extend(previous_messages)
-        
+
         if user_message:
             messages.append({"role": "user", "content": user_message})
-        
+
         return messages

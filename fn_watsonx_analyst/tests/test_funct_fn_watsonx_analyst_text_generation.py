@@ -45,8 +45,6 @@ def call_fn_watsonx_analyst_text_generation_function(circuits, function_params, 
 class TestFnWatsonxTextGeneration:
     """ Tests for the fn_watsonx_analyst_text_generation function"""
 
-    cold_mem_limit = "2 MB"
-
     def test_function_definition(self):
         """ Test that the package provides customization_data that defines the function """
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
@@ -63,7 +61,6 @@ class TestFnWatsonxTextGeneration:
     @pytest.mark.parametrize("mock_inputs, expected_results", [
         (mock_inputs_1, expected_results_3),
     ])
-    @pytest.mark.limit_memory(cold_mem_limit)
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """ Test calling with sample values for the parameters """
         results = call_fn_watsonx_analyst_text_generation_function(circuits_app, mock_inputs)

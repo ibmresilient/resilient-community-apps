@@ -1,4 +1,3 @@
-from typing import Dict, Union
 from fn_watsonx_analyst.types.ai_response import AIResponse
 from fn_watsonx_analyst.types.watsonx_responses import WatsonxTextGenerationResponse, WatsonxChatResponse
 from fn_watsonx_analyst.util.model_helper import ModelHelper
@@ -24,6 +23,12 @@ class ResponseHelper:
         self.request_id = request_id_var.get() or ""
         self.request_context = app_state.get()
 
+    @staticmethod
+    def set_insights_added(response: AIResponse) -> AIResponse:
+        if response["metadata"]:
+            response["metadata"]["soar_insights_added"] = True
+        return response
+
     def estimate_invocation_cost(
         self,
         model_id: str,
@@ -44,7 +49,7 @@ class ResponseHelper:
             cost += (embedding_tokens / mil) * embedding_cost
             cost += (input_tokens / mil) * input_cost
             cost += (output_tokens / mil) * output_cost
-        return cost  # leave as zero if no cost information in config
+        return cost # leave as zero if no cost information in config
 
     def error_response(self, error_text: str) -> AIResponse:
         model_id = self.request_context.model_id
@@ -74,6 +79,7 @@ class ResponseHelper:
             "raw_output": error_text,
             "tag": str(response_tag),
             "metadata": {
+                "soar_insights_added": False,
                 "model_id": model_id,
                 "estimated_cost": estimated_cost,
                 "input_tokens": self.request_context.input_tokens,
@@ -86,7 +92,6 @@ class ResponseHelper:
     def text_chat_to_ai_response(
             self, chat_response: WatsonxChatResponse
     ) -> AIResponse:
-        
         # Normal Watsonx response handling
         generation_result = chat_response["choices"][0]
         model_id = chat_response["model_id"]
@@ -128,6 +133,7 @@ class ResponseHelper:
             "tag": str(response_tag),
             "metadata": {
                 "model_id": model_id,
+                "soar_insights_added": False,
                 "created_at": chat_response["created_at"],
                 "estimated_cost": estimated_cost,
                 "input_tokens": self.request_context.input_tokens,
@@ -180,6 +186,7 @@ class ResponseHelper:
             "tag": str(response_tag),
             "metadata": {
                 "model_id": model_id,
+                "soar_insights_added": False,
                 "created_at": text_generation["created_at"],
                 "estimated_cost": estimated_cost,
                 "input_tokens": self.request_context.input_tokens,

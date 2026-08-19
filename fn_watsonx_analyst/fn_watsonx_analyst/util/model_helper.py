@@ -18,6 +18,11 @@ class ModelHelper:
 
     @staticmethod
     @cache
+    def get_default_model() -> ModelConfig:
+        return load_model_config()[0]
+
+    @staticmethod
+    @cache
     def get_model_config(model_id: str) -> ModelConfig:
         config = load_model_config()
         for model in config:

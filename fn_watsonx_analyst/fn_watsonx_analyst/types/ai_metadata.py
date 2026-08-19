@@ -6,6 +6,7 @@ class AIMetadata(TypedDict):
 
     model_id: str
     estimated_cost: float
+    soar_insights_added: bool
 
     created_at: str
     stop_reason: str

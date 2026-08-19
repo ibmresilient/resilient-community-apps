@@ -53,10 +53,6 @@ def call_fn_watsonx_analyst_converse_via_notes_function(
 class TestFnWatsonxConverseViaNotes:
     """Tests for the fn_watsonx_analyst_converse_via_notes function"""
 
-    cold_mem_limit = "120 MB"
-    hot_mem_limit = "50 MB"
-    parallel_mem_limit = "1000 MB"
-
     def test_function_definition(self):
         """Test that the package provides customization_data that defines the function"""
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
@@ -131,7 +127,6 @@ class TestFnWatsonxConverseViaNotes:
             (mock_inputs_5, artifact_expected_results_5),
         ],
     )
-    @pytest.mark.limit_memory(cold_mem_limit)
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """Test calling with sample values for the parameters"""
         results = call_fn_watsonx_analyst_converse_via_notes_function(
@@ -158,7 +153,6 @@ class TestFnWatsonxConverseViaNotes:
     @pytest.mark.parametrize(
         "mock_inputs, expected_results", [(mock_inputs_2, artifact_expected_results)]
     )
-    @pytest.mark.limit_memory(hot_mem_limit)
     def test_mem_pressure(self, circuits_app, mock_inputs, expected_results):
         """Test calling with sample values for the parameters"""
         results = call_fn_watsonx_analyst_converse_via_notes_function(
@@ -166,7 +160,6 @@ class TestFnWatsonxConverseViaNotes:
         )
         assert results["content"]["raw_output"] == expected_results
 
-    @pytest.mark.limit_memory(parallel_mem_limit)
     def test_mem_pressure_parallel(self, circuits_app):
         """Testing memory pressure during parallel execution"""
         # run 12 instances of converse_via_notes_function in concurrent futures

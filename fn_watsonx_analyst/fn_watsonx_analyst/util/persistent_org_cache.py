@@ -3,16 +3,14 @@ import time
 import os
 from typing import Literal
 
-import requests
 from resilient import SimpleClient
 
 from fn_watsonx_analyst.util.logging_helper import create_logger
 
-CacheObj = Literal["org", "watsonx_key"]
+CacheObj = Literal["org"]
 
 log = create_logger(__name__)
 
-ACCESS_TOKEN_ENDPOINT = "https://iam.cloud.ibm.com/identity/token"
 class PersistentCache:
     def __init__(self, cache_obj: CacheObj = "org"):
         if cache_obj == "org":
@@ -26,7 +24,6 @@ class PersistentCache:
         self,
         res_client: SimpleClient,
         cache_obj: CacheObj = "org",
-        watsonx_api_key: str = None,
     ) -> dict:
         """
         Fetches Org JSON data from SOAR API
@@ -42,25 +39,9 @@ class PersistentCache:
                 return res_client.get("", timeout=120)
             except Exception as e:
                 log.exception(e)
-        else:
-            headers = {"Content-Type": "application/x-www-form-urlencoded"}
-            try:
-                url = ACCESS_TOKEN_ENDPOINT
-                headers = {"Content-Type": "application/x-www-form-urlencoded"}
-                data = {
-                    "grant_type": "urn:ibm:params:oauth:grant-type:apikey",
-                    "apikey": watsonx_api_key,
-                }
-
-                req = requests.post(url, headers=headers, data=data)
-
-                return req.json()
-            except Exception as e:
-                log.error("Failed to get access token")
-                log.exception(e)
 
     def get_data(
-        self, res_client: SimpleClient, cache_obj: CacheObj, watsonx_api_key: str = None
+        self, res_client: SimpleClient, cache_obj: CacheObj
     ) -> dict:
         """
         Attempts to fetch Org data from cache, otherwise fetches it from SOAR API
@@ -72,7 +53,7 @@ class PersistentCache:
                 org_data (dict): Org JSON data in a Python dictionary
         """
         if os.path.exists(self.cache_file):
-            with open(self.cache_file, "r") as f:
+            with open(self.cache_file, "r", encoding="utf-8") as f:
                 try:
                     cache = json.load(f)
                     cache_timestamp = cache.get("timestamp", 0)
@@ -83,7 +64,7 @@ class PersistentCache:
                 except:
                     log.debug("Invalid cache for %s", cache_obj)
 
-        data = self.fetch_data(res_client, cache_obj, watsonx_api_key)
+        data = self.fetch_data(res_client, cache_obj)
         self._save_to_cache(data, cache_obj)
         return data
 

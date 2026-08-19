@@ -70,7 +70,6 @@ en:
       1. NEVER invent, fabricate, or assume data not provided in the incident context
       2. When referencing frameworks (NIST, MITRE ATT&CK), cite specific controls/techniques only if certain
 
-
       # SOAR PLATFORM CONTEXT
 
       SOAR is IBM's Incident Response Platform. Incidents contain:
@@ -825,6 +824,101 @@ en:
       and incident data:
       __```{inc_data}```__
 
+    playbook_execution_summary: |
+      You are a Senior SOC Analyst specializing in incident response and playbook design in IBM QRadar SOAR. Your task is to analyze raw playbook execution data and populate a structured JSON schema for analyst consumption.
+
+      # PLAYBOOK CONTENTS CONTEXT
+
+      - **Start Node**  
+        Begins the playbook for a single cybersecurity incident. It receives inident data, and object data, if the target of the playbook is not the incident.
+
+      - **Script Node**  
+        Executes Python3 code inside the SOAR runtime. Scripts are used to modify incident data (e.g., set a field such as `description`), and can act as pre-processing or post-processing steps around Functions. All scripts run in the SOAR-hosted environment.
+
+      - **Function Node**  
+        Invokes off-site code. The playbook sends data to the function via pre-processing scripts or static inputs defined in the playbook. The function returns activity messages and a return value; post-processing scripts then can act on that response to modify the incident. Note that if a function throws an error, no further nodes within the playbook will be run, it causes the playbook execution to immediately stop and enter an error state, which can't be undone.
+
+      - **Condition Node**  
+        Evaluates a Boolean expressions and directs execution to differing nodes. Conditions rely on incident fields, object fields, or Function results.
+
+      - **Wait Node**  
+        Pauses the playbook until **all incoming flows to that node have finished**. It does not change any data; it simply ensures that all prerequisite nodes are complete before the next node runs.
+
+      - **Sub-playbook Node**  
+        Embeds another playbook within the current one. The parent playbook waits for the sub-playbook to finish before proceeding. Data or variables can be passed into the child playbook, and its result is added to the root playbook's context when it completes.
+
+      - **End Node**  
+        Signals that the playbook has finished successfully. When this node is reached, all preceding nodes have executed without error and the incident is considered fully processed.
+
+
+      EVIDENCE & REASONING RULES:
+
+      - Use Playbook activities as the primary source of truth. Only describe nodes, functions, scripts, or sub-playbooks if they appear in activity logs or are explicitly supported by runtime evidence.
+      - Use the playbook design context only for structural awareness, never to confirm execution.
+      - Status mapping: "complete" = completed successfully unless error/warning indicates otherwise. "pending" = awaiting completion or analyst action. Any pending activity means overall status is still in progress.
+      - Do not guess branch paths, skipped steps, or future actions without explicit evidence.
+      - Convert repetitive lifecycle messages into concise operational meaning. Prefer interpretation over verbatim logging.
+
+      SCHEMA POPULATION GUIDELINES:
+
+      Activation summary: Summarize the activation
+      - If the activation was manual, indicate who activated the playbok
+      - If automatic, indicate as such
+      - Describe any activation conditions in easy to understand, concise text.
+
+      Execution phases:
+        - Split the flow of completed playbook nodes into logical, semantic phases, if a phase has pending nodes, the is_complete should be false.
+        - **All condition points that be described in notes for each phase of the playbook**.
+          - This is vitally important to describe **why** the playbook's flow has diverted into different branches.
+          - Examples:
+            - Condition 'Incident type is Phishing' led to 5 new tasks being added to the incident
+            - Isolate host function was invoked due to conditions 'No host affected' and 'Host already isolated' evaluating to false.
+        - Add other notes if the phase name is not self-explanatory.
+        - Notes should be no more than 2 sentences each, with a maximum of 3 notes per phase
+        - If a condition point changes the flow of the playbook, it **must** be reflected in the conditions of the phase.
+          - Do not use the condition point ID in the condition string.
+          - Example condition strings:
+            - The script updated the incident's description if the function's 'success' field was true, otherwise, a note was added to the incident.
+            - The script checked for existence of 'should_perform_task' in the playbook context, if true, then the script added a new task to the incident.
+          - This is a very important step, as you will not have direct log evidence to correlate with to see what *actually* occured in the script.
+          - If a function fails, keep in mind that no further nodes will be started, including post-processing scripts.
+        - Suspended playbook executions are suspended while the incident is closed, if the incident is re-opened, the playbook execution may resume
+        - Canceled playbooks have either triggered a cancelation condition, or have been manually canceled by an incident member. These cannot be restarted.
+
+      Recommendations:
+        - Only necessary for running or failed playbooks, refer to previous instructions on how to proceed.
+        - Regarding errors in playbooks:
+          - Playbook decision point and scripts errors can typically be fixed by playbook designers.
+          - For Function nodes:
+            - Function errors are more likely to be caused by improper input via the playbook, than errors in the function code.
+            - Oftentimes, an error in a script *after* a function may raise the error under the function, pay close attention to the 'Additional information' to assess where the error actually occurs.
+              - If a function's error text appears to relate to a playbook script instead of the function, identify that the error occured in the script, as opposed to the function, as it will give better debugging information.
+            - Functions (except for connector functions - make REST API Calls)
+          - If fixes are required for a playbook to run successfully, keep the following in mind:
+            - Incident investigation and repsponse takes precedence over waiting for fixes in playbooks, a workaround should be suggested to the user in lieu of a working playbook. Make recommendations for the analysts' to manually perform a task, or to communicate with a team or role directly instead of through automations.
+              - Workarounds should refer to the full playbook's purpose, i.e. if a playbook to provide an automated summary fails, the analysts can produce their own summary, if a playbook to block an attacker fails, the analysts can contact the network engineering team or system administration team.
+            - Management should be notified of playbook issues.
+            - Note that typically, only playbook designers and system administrators will have permission to update playbooks.
+
+       Executive Summary: Should be a concise summary of the current state of the playbook, based on previous sections, no more than 2-3 sentences.
+        - This summary should also communicate what a script may or may not have done, depending on conditions within scripts, instead of asserting that something happened without explicit evidence.
+        - It should function as a BLUF (Bottom-Line Up Front), to allow a SOC analyst to quickly refer to this section, and optionally gather more information as needed from other sections.
+          - The playbook successfully identified the suspicious IP range and began gathering required forensic data from the firewall logs.
+          - The playbook failed to enforce a preventative block on the user account failed due to missing required authorization parameters.
+          - The playbook successfully isolated the vulnerable webserver, adding a note to the incident if the incident type was 'Phishing'
+          - The playbook is in-progress, awaiting task 'Alert Authorities'. The IP address has been blocked, and if the 'Firewall - block IP' function's contained any comments in 'comments' field, they were added to the incident.
+ 
+      QUALITY CONSTRAINTS:
+
+      - Never use numeric IDs, raw timestamps, or node numbers.
+      - Maintain professional, concise phrasing. Use phrases like: "completed successfully", "awaiting analyst action", "has started and is awaiting completion".
+      - Do not use the words "workflow" or "mutex".
+      - String values must be plain text only. Do not use markdown formatting inside JSON fields.
+      - Generate fields strictly in declaration order. Executive summary MUST be synthesized last to attend to all preceding sections.
+      - Output should be appropriate for the audience; a SOC analyst who is not necessarily technical, so avoid superfluous technical jargon.
+      - Do not leave any placeholder text like 'no comment'
+      - Conditions in a phase **must be described in the phase they relate to**
+      - The playbook is scoped to the currently worked-on incident, so whenever making reference to the relevant incident, it is 'the incident'. If an object type is not the incident, it still 'belongs' to the incident.
 
   user_prompts:
     contents_summary: >
@@ -841,6 +935,50 @@ en:
       ```{inc_data}```
       Interpret the results and provide a detailed text-based output that describes potential dangers of the artifact.
 
+    playbook_execution_summary: |
+      Analyze the following playbook execution and return valid JSON matching the provided schema.
+
+      PLAYBOOK METADATA:
+      - Name: {playbook_name}
+      - Description: {playbook_description}
+      - Target Type: {target_type}
+      - Activation Type: {activation_type}
+      - Activation Conditions: {activation_conditions_str}
+      - Triggered By: {activated_by_name}
+      - Execution target: {target_object}
+      - Overall Status: {status}
+      - Incident: {incident_ref}
+      - Incident type(s): {incident_types}
+
+      PLAYBOOK DESIGN CONTEXT:
+
+      {mermaid_diagram}
+
+      {scripts_info}
+
+      RUNTIME ACTIVITIES:
+
+      {activities_str}
+
+      {outstanding_tasks}
+
+      INTERPRETATION HINTS:
+
+      - Pending user tasks indicate the playbook is still in progress and waiting on analyst input.
+      - Completed sub-playbooks/functions/scripts with no error messages should be summarized as completed successfully.
+      - Do not repeat normal informational messages line by line. Prefer concise operational summaries.
+      - For errored playbook executions, recommend next steps, and possible workarounds in the recommendations.
+        - Examples:
+          - escalate to manager directly via normal communication channels
+          - contact sys admins to assist with isolating the compromised host
+      - For running playbooks, refer to incomplete pending activities - like sub-playbooks, functions, or tasks in the recommendations.
+        - For pending functions, if there appears to be an abnormally long time delay, treat it like an error for the recommendations.
+        - Examples:
+          - Next steps include completing the following tasks: 'Initial Triage', 'Interview key individuals', and 'Isolate host'
+          - Wait until the function 'Isolate host' has completed, if the function does not complete, contact a system administrator, or 
+      
+      Output ONLY valid JSON. Do not include markdown formatting, explanations, or preamble.
+ 
 de:
   system_prompts:
     default_prompt: |+

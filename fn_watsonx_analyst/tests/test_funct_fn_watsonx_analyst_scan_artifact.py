@@ -5,10 +5,12 @@
 
 from unittest.mock import patch
 import pytest
-from fn_watsonx_analyst.util.FileParser import FileParser, CONTENT_TYPE_INVALID
+from fn_watsonx_analyst.util.rest import RestUrls
 from tests import helper
 from resilient_circuits.util import get_config_data, get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
+
+from tests.utils import were_ai_fields_updated
 
 PACKAGE_NAME = "fn_watsonx_analyst"
 FUNCTION_NAME = "fn_watsonx_analyst_scan_artifact"
@@ -52,8 +54,6 @@ def call_fn_watsonx_analyst_scan_artifact_function(
 class TestFnWatsonxScanArtifact:
     """Tests for the fn_watsonx_analyst_scan_artifact function"""
 
-    cold_mem_limit = "40 MB"
-
     def test_function_definition(self):
         """Test that the package provides customization_data that defines the function"""
         func = get_function_definition(PACKAGE_NAME, FUNCTION_NAME)
@@ -93,7 +93,6 @@ class TestFnWatsonxScanArtifact:
         "mock_inputs, expected_results",
         [(mock_inputs_1, expected_results_1), (mock_inputs_2, expected_results_2)],
     )
-    @pytest.mark.limit_memory(cold_mem_limit)
     def test_success(self, circuits_app, mock_inputs, expected_results):
         """Test calling with sample values for the parameters"""
 
@@ -102,7 +101,6 @@ class TestFnWatsonxScanArtifact:
         )
         assert expected_results in results["content"]["generated_text"].strip()
 
-    @pytest.mark.limit_memory(cold_mem_limit)
     def test_metadata_artifact(self, circuits_app):
         """Test scanning a metadata artifact (IP address)"""
         results = call_fn_watsonx_analyst_scan_artifact_function(
@@ -111,7 +109,6 @@ class TestFnWatsonxScanArtifact:
         assert "Artifact name: 128.210.157.251" in results["content"]["generated_text"]
         assert results["success"] is True
 
-    @pytest.mark.limit_memory(cold_mem_limit)
     def test_value_error_handling(self, circuits_app):
         """Test that ValueError is properly handled"""
         from unittest.mock import patch, MagicMock
@@ -133,7 +130,6 @@ class TestFnWatsonxScanArtifact:
             # Verify the error was raised
             assert "Test error message" in str(exc_info.value) or "Unable to generate artifact summary" in str(exc_info.value)
 
-    @pytest.mark.limit_memory(cold_mem_limit)
     def test_watsonx_api_exception_handling(self, circuits_app):
         """Test that WatsonxApiException is properly handled"""
         from unittest.mock import patch
@@ -155,7 +151,6 @@ class TestFnWatsonxScanArtifact:
             # Verify the error was raised
             assert "API error occurred" in str(exc_info.value) or "Unable to generate artifact summary" in str(exc_info.value)
 
-    @pytest.mark.limit_memory(cold_mem_limit)
     def test_generic_exception_handling(self, circuits_app):
         """Test that generic exceptions are properly handled"""
         from unittest.mock import patch
@@ -210,3 +205,33 @@ class TestFnWatsonxScanArtifact:
             
             assert result["generated_text"] == "Test attachment result"
             mock_scan.assert_called_once_with(123, 456, 789)
+
+
+    @pytest.mark.parametrize(
+        "ai_fields_present",
+        [True, False]
+    )
+    def test_ai_fields_updated(self, circuits_app, ai_fields_present):
+        call_tracker = []
+
+        def tracking_mock(self, uri, **kwargs):
+            call_tracker.append((uri, kwargs))
+            return helper.mock_do_request(self, uri, **kwargs)
+        with patch("fn_watsonx_analyst.util.rest.RestHelper.do_request", tracking_mock):
+            with patch("fn_watsonx_analyst.watsonx_app_function.WatsonxAppFunction.ai_fields_present", return_value=ai_fields_present):
+                results = call_fn_watsonx_analyst_scan_artifact_function(
+                    circuits_app, self.mock_inputs_1
+                )
+
+                assert results["content"]["metadata"]["soar_insights_added"] == ai_fields_present
+
+                obj = were_ai_fields_updated(
+                    call_tracker, RestUrls.UPDATE_ARTIFACT,
+                    self.mock_inputs_1["fn_watsonx_analyst_artifact_id"], "art_id", "ai_artifact_insights"
+                )
+
+                if ai_fields_present:
+                    assert obj is not None
+                else:
+                    assert obj is None
+

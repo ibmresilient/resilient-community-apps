@@ -9,4 +9,4 @@ class AIResponse(TypedDict):
     generated_text: str
     raw_output: str
     tag: str
-    metadata: Optional[AIMetadata]
+    metadata: AIMetadata

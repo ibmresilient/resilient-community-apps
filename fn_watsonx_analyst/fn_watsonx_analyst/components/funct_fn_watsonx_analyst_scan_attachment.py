@@ -3,9 +3,9 @@
 # Generated with resilient-sdk v51.0.2.2.1096
 
 """AppFunction implementation"""
+import json
 
 from resilient_circuits import (
-    AppFunctionComponent,
     app_function,
     FunctionResult,
     FunctionError,
@@ -14,21 +14,21 @@ from resilient_circuits import (
 from fn_watsonx_analyst.components.funct_fn_watsonx_analyst_scan_artifact import (
     scan_artifact_or_attachment,
 )
+from fn_watsonx_analyst.types.attachment import Attachment
+from fn_watsonx_analyst.util.response_helper import ResponseHelper
+from fn_watsonx_analyst.watsonx_app_function import WatsonxAppFunction
+from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose
 from fn_watsonx_analyst.util.errors import WatsonxApiException
-from fn_watsonx_analyst.util.logging_helper import create_logger, generate_request_id
-from fn_watsonx_analyst.util.state_manager import app_state
+from fn_watsonx_analyst.util.logging_helper import create_logger
+from fn_watsonx_analyst.util.rest import RestHelper, RestUrls
 
-PACKAGE_NAME = "fn_watsonx_analyst"
 FN_NAME = "fn_watsonx_analyst_scan_attachment"
 
 log = create_logger(__name__)
 
 
-class FunctionComponent(AppFunctionComponent):
+class FunctionComponent(WatsonxAppFunction):
     """Component that implements function 'fn_watsonx_analyst_scan_attachment'"""
-
-    def __init__(self, opts):
-        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -41,26 +41,42 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_watsonx_analyst_task_id
         """
 
-        _ = generate_request_id()
-        yield self.status_message(f"Starting App Function: '{FN_NAME}'")
+        yield self.setup(fn_inputs, AiResponsePurpose.ARTIFACT_SUMMARY, FN_NAME)
 
         inc_id = getattr(fn_inputs, "fn_watsonx_analyst_incident_id", None)
         att_id = getattr(fn_inputs, "fn_watsonx_analyst_attachment_id", None)
         task_id = getattr(fn_inputs, "fn_watsonx_analyst_task_id", None)
-
-        app_state.get().reset()
-
-        app_state.get().set_model(
-            getattr(fn_inputs, "fn_watsonx_analyst_model_id", None)
-        )
-        app_state.get().opts = self.opts
-        app_state.get().res_client = self.rest_client()
 
         err_msg = "Unable to generate attachment summary. "
         try:
             results = scan_artifact_or_attachment(
                 inc_id, None, att_id, task_id
             )
+
+            if self.ai_fields_present():
+                log.debug(f"Setting ai insights for attachment ID: {att_id}")
+                ai_attachment_insights = json.dumps(results)
+
+                helper = RestHelper()
+                attachment: Attachment
+                inc_attach_id = None
+                task_attach_id = None
+
+                if not task_id:
+                    attachment = helper.do_request(RestUrls.ATTACHMENT_DETAILS, inc_id=inc_id, attach_id=att_id)
+                    inc_attach_id = attachment["id"]
+                else:
+                    attachment = helper.do_request(RestUrls.TASK_ATTACHMENT_DETAILS, task_id=task_id, attach_id=att_id)
+                    task_attach_id = attachment["id"]
+
+                update_body = {
+                    "incident_attachment_id": inc_attach_id,
+                    "task_attachment_id": task_attach_id,
+                    "attach_ai_insights": ai_attachment_insights
+                }
+
+                helper.do_request(RestUrls.UPDATE_ATTACHMENT_AI_INSIGHTS, inc_id=inc_id, body=update_body)
+                results = ResponseHelper.set_insights_added(results)
 
             yield FunctionResult(results)
             return

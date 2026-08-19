@@ -3,35 +3,54 @@
 # Generated with resilient-sdk v51.0.2.0.974
 
 """AppFunction implementation"""
+import json
+from typing import ClassVar, List, Tuple
 
-from typing import List, Tuple
-
-from resilient_circuits import AppFunctionComponent, app_function, FunctionResult, FunctionError
+from resilient_circuits import app_function, FunctionResult, FunctionError
 from resilient_lib import IntegrationError, validate_fields
 
-from fn_watsonx_analyst.types import incident
+from fn_watsonx_analyst.watsonx_app_function import WatsonxAppFunction
 from fn_watsonx_analyst.util.response_helper import ResponseHelper
-from fn_watsonx_analyst.util.logging_helper import create_logger, generate_request_id
+from fn_watsonx_analyst.util.logging_helper import create_logger
 from fn_watsonx_analyst.config import load_summarization_config
 from fn_watsonx_analyst.util.ContextHelper import ContextHelper
 from fn_watsonx_analyst.util.ModelTag import AiResponsePurpose
 from fn_watsonx_analyst.util.chunking.chunking import Chunking
 from fn_watsonx_analyst.util.chat_prompting import ChatPrompting
-from fn_watsonx_analyst.util.watsonx_client import WatsonxClient
+from fn_watsonx_analyst.util.rest import RestHelper, RestUrls
+from fn_watsonx_analyst.util.watsonx_client import StructuredOutputBase, WatsonxClient
 from fn_watsonx_analyst.types.ai_response import AIResponse
 
 from fn_watsonx_analyst.util.state_manager import app_state
 
-PACKAGE_NAME = "fn_watsonx_analyst"
 FN_NAME = "fn_watsonx_analyst_summarize_incident"
 
 log = create_logger(__name__)
 
-class FunctionComponent(AppFunctionComponent):
-    """Component that implements function 'fn_watsonx_analyst_summarize_incident'"""
+class IncidentTechSummarySchema(StructuredOutputBase):
+    artifact_analysis: str
+    mitigation_actions: str
+    technical_overview: str
 
-    def __init__(self, opts):
-        super(FunctionComponent, self).__init__(opts, PACKAGE_NAME)
+    SAMPLE_DATA: ClassVar[dict] = {
+        "artifact_analysis": "Lorem ipsum",
+        "mitigation_actions": "Lorem ipsum",
+        "technical_overview": "Lorem ipsum",
+    }
+
+class IncidentExecSummarySchema(StructuredOutputBase):
+    attack_summary: str
+    defense_summary: str
+    situation_summary: str
+
+    SAMPLE_DATA: ClassVar[dict] = {
+        "attack_summary": "Lorem ipsum",
+        "defense_summary": "Lorem ipsum",
+        "situation_summary": "Lorem ipsum",
+    }
+
+class FunctionComponent(WatsonxAppFunction):
+    """Component that implements function 'fn_watsonx_analyst_summarize_incident'"""
 
     @app_function(FN_NAME)
     def _app_function(self, fn_inputs):
@@ -43,10 +62,7 @@ class FunctionComponent(AppFunctionComponent):
             -   fn_inputs.fn_watsonx_analyst_incident_id
             -   fn_inputs.fn_watsonx_analyst_data_config
         """
-        _ = generate_request_id()
         try:
-            yield self.status_message(f"Starting App Function: '{FN_NAME}'")
-
             # Validate required inputs
             validate_fields([
                 "fn_watsonx_analyst_summary_type",
@@ -58,12 +74,7 @@ class FunctionComponent(AppFunctionComponent):
             summary_type = fn_inputs.fn_watsonx_analyst_summary_type
             inc_id = fn_inputs.fn_watsonx_analyst_incident_id
 
-            app_state.get().reset()
-
-            app_state.get().res_client = self.rest_client()
-            app_state.get().set_model(fn_inputs.fn_watsonx_analyst_model_id)
-            app_state.get().opts = self.opts
-            app_state.get().purpose = AiResponsePurpose.INCIDENT_SUMMARY
+            yield self.setup(fn_inputs, AiResponsePurpose.INCIDENT_SUMMARY, FN_NAME)
             app_state.get().data_config = fn_inputs.fn_watsonx_analyst_data_config
 
             # 1. Load incident context as JSON
@@ -82,31 +93,32 @@ class FunctionComponent(AppFunctionComponent):
             summary_type_lower = summary_type.lower()
             summary_types_config = config.get("summary_types", {})
             if summary_type_lower not in summary_types_config:
-                raise ValueError(f"Unknown summary type '{summary_type}'. Available types: {', '.join(summary_types_config.keys())}")
+                raise ValueError(
+                    f"Unknown summary type '{summary_type}'. Available types: {', '.join(summary_types_config.keys())}")
 
             # Assemble context and user message
             context = " ".join(chunks)
-            
+
             system_prompt_parts = []
-            
+
             # Add relevant fields info if present
             if config.get("relevant_fields_info"):
                 system_prompt_parts.append(config["relevant_fields_info"])
-            
+
             # Add the main system prompt for the summary type
             system_prompt_parts.append(summary_types_config[summary_type_lower]["system_prompt"])
-            
+
             system_prompt = "\n\n".join(system_prompt_parts)
-            
+
             # Build user message with help text and context
             user_message_parts = []
-            
+
             if config.get("help_user_text"):
                 user_message_parts.append(config["help_user_text"])
-            
+
             user_message_parts.append(f"Provide a {summary_type} summary of this incident.")
             user_message_parts.append(f"\nIncident Data:\n{context}")
-            
+ 
             user_message = "\n\n".join(user_message_parts)
 
             # 4. Build chat messages using ChatPrompting
@@ -116,8 +128,11 @@ class FunctionComponent(AppFunctionComponent):
                 user_message=user_message
             )
 
+            response_format = IncidentTechSummarySchema if summary_type == "technical" \
+                else IncidentExecSummarySchema
+
             # 5. Generate summary via WatsonX using chat API
-            response = WatsonxClient().chat(messages)
+            response = WatsonxClient().chat(messages, response_format=response_format)
 
             # 6. Prepend Incident name, Incident types, and Incident severity to the summary
             incident_name = incident_payload.get('incident', {}).get('name', 'Unknown')
@@ -165,11 +180,11 @@ class FunctionComponent(AppFunctionComponent):
                 for tasktree in traverse_tasktree(tasktree):
                     if len(tasktree) > 0:
                         output.append('\n')
-                    
+
                     if complete_tasks:
-                        output.append('\n#### Completed tasks:')
+                        output.append('\n**Completed tasks**:')
                     else:
-                        output.append('\n#### Incomplete tasks:')
+                        output.append('\n**Incomplete tasks**:')
                     complete_tasks = not complete_tasks
 
                     def add_phase(phase: dict, indent=0):
@@ -189,16 +204,49 @@ class FunctionComponent(AppFunctionComponent):
 
                 postfix = '\n'.join(output)
             else:
-                prefix = f"**Executive Summary**: {incident_name}\n\n**Incident Type(s)**: {', '.join(incident_types)}\n\n**Incident Severity**: {incident_severity}\n"
-            
+                prefix = f"""**Executive Summary**:
+{incident_name}
+
+**Incident Type(s)**: {', '.join(incident_types)}
+
+**Incident Severity**: {incident_severity}
+"""
+
             # Modify the chat response content
-            response['choices'][0]['message']['content'] = prefix + '<br>' + response['choices'][0]['message']['content'] + '\n' + postfix
+            inc_analysis = response_format.model_validate_json(response["choices"][0]["message"]["content"])
+
+            if response_format == IncidentTechSummarySchema:
+                data = {
+                    'Technical overview': inc_analysis.technical_overview,
+                    'Artifact analysis': inc_analysis.artifact_analysis,
+                    'Mitigation actions': inc_analysis.mitigation_actions
+                }
+            else:
+                data = {
+                    'Situation summary': inc_analysis.situation_summary,
+                    'Attack summary': inc_analysis.attack_summary,
+                    'Defense summary': inc_analysis.defense_summary
+                }
+
+            output = prefix + '\n' + '\n'.join([f"\n#### {key}\n\n{val}" for key, val in data.items()]) + '\n' + postfix
+            response['choices'][0]['message']['content'] = output
+
 
             # 7. Respond using chat response handler
             result: AIResponse = ResponseHelper().text_chat_to_ai_response(
                 response
             )
-            
+
+            if self.ai_fields_present():
+                log.debug(f"Setting ai insights for incident ID: {inc_id}")
+                summ_key = "ai_exec_summary" if summary_type_lower == "executive" else "ai_tech_summary"
+
+                helper = RestHelper()
+                inc = helper.do_request(RestUrls.INCIDENT_DETAILS, inc_id=inc_id)
+                inc[summ_key] = json.dumps(result)
+                helper.do_request(RestUrls.UPDATE_INCIDENT, inc_id=inc_id, body=inc)
+                result = ResponseHelper.set_insights_added(result)
+
             yield self.status_message(f"Finished running App Function: '{FN_NAME}'")
             yield FunctionResult(result)
 
