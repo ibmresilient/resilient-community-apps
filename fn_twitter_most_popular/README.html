@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -503,16 +503,16 @@
 <span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="n">success</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
   <span class="n">inputs</span> <span class="p">:{</span>
-    <span class="n">twitter_search_tweet_string</span><span class="p">:</span> <span class="s1">&#39;{&quot;hashtags&quot;:[ &quot;Malware&quot;, &quot;Ransomware&quot;, &quot;Phishing&quot;]}&#39;</span><span class="p">,</span>
+    <span class="n">twitter_search_tweet_string</span><span class="p">:</span> <span class="s1">'{"hashtags":[ "Malware", "Ransomware", "Phishing"]}'</span><span class="p">,</span>
     <span class="n">twitter_search_tweet_count</span><span class="p">:</span> <span class="mi">10</span>
   <span class="p">}</span>
   <span class="n">tweets</span><span class="p">:</span> <span class="p">{</span>
     <span class="n">statuses</span><span class="p">:</span> <span class="p">[{</span>
-      <span class="n">text</span><span class="p">:</span> <span class="s2">&quot;Hello World&quot;</span><span class="p">,</span>
-      <span class="n">id_str</span><span class="p">:</span> <span class="s2">&quot;123&quot;</span><span class="p">,</span>
+      <span class="n">text</span><span class="p">:</span> <span class="s2">"Hello World"</span><span class="p">,</span>
+      <span class="n">id_str</span><span class="p">:</span> <span class="s2">"123"</span><span class="p">,</span>
       <span class="n">entities</span><span class="p">:</span> <span class="p">{</span>
           <span class="n">urls</span><span class="p">:[{</span>
-            <span class="n">url</span> <span class="p">:</span> <span class="s2">&quot;https://twitter.com/i/web/status/123&quot;</span>
+            <span class="n">url</span> <span class="p">:</span> <span class="s2">"https://twitter.com/i/web/status/123"</span>
           <span class="p">}]</span>
         <span class="p">},</span>
         <span class="o">...</span><span class="n">OtherAttributes</span>
@@ -535,17 +535,17 @@
 <p>This example <strong>adds a Note to the Incident.</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="c1">#Prepare the start of the note text</span>
-<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;Twitter search:</span>
+<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt;Twitter search:</span>
 <span class="s2">              Successful : </span><span class="si">{0}</span>
-<span class="s2">              &lt;b&gt;Searched Tags:&lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;True&quot;</span> <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">True</span> <span class="k">else</span> <span class="kc">False</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;inputs&quot;</span><span class="p">][</span><span class="s2">&quot;twitter_search_tweet_string&quot;</span><span class="p">])</span>
+<span class="s2">              &lt;b&gt;Searched Tags:&lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"True"</span> <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">"success"</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">True</span> <span class="k">else</span> <span class="kc">False</span><span class="p">,</span> <span class="n">results</span><span class="p">[</span><span class="s2">"inputs"</span><span class="p">][</span><span class="s2">"twitter_search_tweet_string"</span><span class="p">])</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">):</span>
   <span class="c1"># For each returned tweet add the text and URL of the tweet to the noteText</span>
-  <span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">tweets</span><span class="p">[</span><span class="s2">&quot;statuses&quot;</span><span class="p">]:</span>
-    <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;br&gt;Tweet Text: &lt;br&gt;&lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
-<span class="s2">    &lt;b&gt;Tweet URL&lt;/b&gt; :&lt;a&gt;</span><span class="si">{1}</span><span class="s2">&lt;/a&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">],</span><span class="n">tweet</span><span class="p">[</span><span class="s2">&quot;entities&quot;</span><span class="p">][</span><span class="s2">&quot;urls&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;url&quot;</span><span class="p">])</span>
+  <span class="k">for</span> <span class="n">tweet</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">tweets</span><span class="p">[</span><span class="s2">"statuses"</span><span class="p">]:</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt;&lt;br&gt;Tweet Text: &lt;br&gt;&lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
+<span class="s2">    &lt;b&gt;Tweet URL&lt;/b&gt; :&lt;a&gt;</span><span class="si">{1}</span><span class="s2">&lt;/a&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tweet</span><span class="p">[</span><span class="s2">"text"</span><span class="p">],</span><span class="n">tweet</span><span class="p">[</span><span class="s2">"entities"</span><span class="p">][</span><span class="s2">"urls"</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">"url"</span><span class="p">])</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;No Results found&lt;/b&gt;&quot;&quot;&quot;</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">"""&lt;b&gt;No Results found&lt;/b&gt;"""</span>
 <span class="c1"># Now add the note to our incident</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 </pre></div>

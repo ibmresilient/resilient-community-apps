@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -691,35 +691,35 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;changeRequestId&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
-      <span class="s2">&quot;redirectUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://1.2.3.4/FireFlow/Ticket/Display.html?id=11&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"changeRequestId"</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+      <span class="s2">"redirectUrl"</span><span class="p">:</span> <span class="s2">"https://1.2.3.4/FireFlow/Ticket/Display.html?id=11"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;messages&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Success&quot;</span>
+    <span class="s2">"messages"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"Success"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;algosec_destination&quot;</span><span class="p">:</span> <span class="s2">&quot;any, 1.1.1.1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;algosec_service&quot;</span><span class="p">:</span> <span class="s2">&quot;any&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;algosec_source&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1, any&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;algosec_traffic_change_action&quot;</span><span class="p">:</span> <span class="s2">&quot;Drop&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;algosec_traffic_change_request_description&quot;</span><span class="p">:</span> <span class="s2">&quot;Isolation Request initiated by the IBM SOAR Integration.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;algosec_traffic_change_request_subject&quot;</span><span class="p">:</span> <span class="s2">&quot;IBM SOAR Isolation Request for 1.1.1.1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;algosec_traffic_change_template&quot;</span><span class="p">:</span> <span class="s2">&quot;Basic Change Traffic Request&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"algosec_destination"</span><span class="p">:</span> <span class="s2">"any, 1.1.1.1"</span><span class="p">,</span>
+    <span class="s2">"algosec_service"</span><span class="p">:</span> <span class="s2">"any"</span><span class="p">,</span>
+    <span class="s2">"algosec_source"</span><span class="p">:</span> <span class="s2">"1.1.1.1, any"</span><span class="p">,</span>
+    <span class="s2">"algosec_traffic_change_action"</span><span class="p">:</span> <span class="s2">"Drop"</span><span class="p">,</span>
+    <span class="s2">"algosec_traffic_change_request_description"</span><span class="p">:</span> <span class="s2">"Isolation Request initiated by the IBM SOAR Integration."</span><span class="p">,</span>
+    <span class="s2">"algosec_traffic_change_request_subject"</span><span class="p">:</span> <span class="s2">"IBM SOAR Isolation Request for 1.1.1.1"</span><span class="p">,</span>
+    <span class="s2">"algosec_traffic_change_template"</span><span class="p">:</span> <span class="s2">"Basic Change Traffic Request"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">9129</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-algosec&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-08-02 09:26:21&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">9129</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-algosec"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-08-02 09:26:21"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -727,13 +727,13 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">algosec_source</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">, any&quot;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_traffic_change_action</span> <span class="o">=</span> <span class="s2">&quot;Drop&quot;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_destination</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;any, </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_service</span> <span class="o">=</span> <span class="s2">&quot;any&quot;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_traffic_change_request_description</span> <span class="o">=</span> <span class="s2">&quot;Isolation Request initiated by the IBM SOAR Integration.&quot;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_traffic_change_request_subject</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;IBM SOAR Isolation Request for </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_traffic_change_template</span> <span class="o">=</span> <span class="s2">&quot;Basic Change Traffic Request&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">algosec_source</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">, any"</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_traffic_change_action</span> <span class="o">=</span> <span class="s2">"Drop"</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_destination</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"any, </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_service</span> <span class="o">=</span> <span class="s2">"any"</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_traffic_change_request_description</span> <span class="o">=</span> <span class="s2">"Isolation Request initiated by the IBM SOAR Integration."</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_traffic_change_request_subject</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"IBM SOAR Isolation Request for </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_traffic_change_template</span> <span class="o">=</span> <span class="s2">"Basic Change Traffic Request"</span>
 </pre></div>
 </div>
 </p>
@@ -743,22 +743,22 @@ Additional package dependencies may exist for each of these packages:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 <span class="c1"># Results from the traffic change request call</span>
 <span class="n">change_request</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">isolate_host_results</span>
-<span class="n">request_data</span> <span class="o">=</span> <span class="n">change_request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">request_data</span> <span class="o">=</span> <span class="n">change_request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="p">{})</span>
 <span class="c1"># Results from getting the traffic change request details</span>
 <span class="n">request_details</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">change_request_details</span>
-<span class="n">details_data</span> <span class="o">=</span> <span class="n">request_details</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">details_data</span> <span class="o">=</span> <span class="n">request_details</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="p">{})</span>
 
-<span class="k">if</span> <span class="n">change_request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+<span class="k">if</span> <span class="n">change_request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
   <span class="c1"># Add Row</span>
-  <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;algosec_isolation_requests&quot;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;traffic_change_request_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">request_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;changeRequestId&quot;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;hostname&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;traffic_change_request_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">request_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;redirectUrl&quot;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;traffic_change_request_body&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">details_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fields&quot;</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;traffic_change_request_original_traffic&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">details_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;originalTraffic&quot;</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;traffic_change_request_planned_traffic&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">details_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;plannedTraffic&quot;</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+  <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"algosec_isolation_requests"</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'traffic_change_request_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">request_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"changeRequestId"</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'hostname'</span><span class="p">]</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'traffic_change_request_url'</span><span class="p">]</span> <span class="o">=</span> <span class="n">request_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"redirectUrl"</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'traffic_change_request_body'</span><span class="p">]</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">details_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"fields"</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'traffic_change_request_original_traffic'</span><span class="p">]</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">details_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"originalTraffic"</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'traffic_change_request_planned_traffic'</span><span class="p">]</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">details_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"plannedTraffic"</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Isolate Host from Network on host </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> failed with reason: </span><span class="si">{</span><span class="n">change_request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Isolate Host from Network on host </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> failed with reason: </span><span class="si">{</span><span class="n">change_request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">,</span><span class="w"> </span><span class="s1">''</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -799,198 +799,198 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;fields&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"fields"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Owner&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;admin</span><span class="se">\u003c</span><span class="s2">admin@example.com</span><span class="se">\u003e</span><span class="s2">&quot;</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Owner"</span><span class="p">,</span>
+          <span class="s2">"values"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"admin</span><span class="se">\u003c</span><span class="s2">admin@example.com</span><span class="se">\u003e</span><span class="s2">"</span>
           <span class="p">]</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Workflow&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;Basic&quot;</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Workflow"</span><span class="p">,</span>
+          <span class="s2">"values"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"Basic"</span>
           <span class="p">]</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Creator&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;admin</span><span class="se">\u003c</span><span class="s2">admin@example.com</span><span class="se">\u003e</span><span class="s2">&quot;</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Creator"</span><span class="p">,</span>
+          <span class="s2">"values"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"admin</span><span class="se">\u003c</span><span class="s2">admin@example.com</span><span class="se">\u003e</span><span class="s2">"</span>
           <span class="p">]</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Subject&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;IBM SOAR Isolation Request for 1.1.1.1&quot;</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Subject"</span><span class="p">,</span>
+          <span class="s2">"values"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"IBM SOAR Isolation Request for 1.1.1.1"</span>
           <span class="p">]</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Ticket Template Name&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;Basic Change Traffic Request&quot;</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Ticket Template Name"</span><span class="p">,</span>
+          <span class="s2">"values"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"Basic Change Traffic Request"</span>
           <span class="p">]</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Change Request Description&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;Isolation Request initiated by the IBM SOAR Integration.&quot;</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Change Request Description"</span><span class="p">,</span>
+          <span class="s2">"values"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"Isolation Request initiated by the IBM SOAR Integration."</span>
           <span class="p">]</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;LastUpdated&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;2024-08-02 09:26:26&quot;</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"LastUpdated"</span><span class="p">,</span>
+          <span class="s2">"values"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"2024-08-02 09:26:26"</span>
           <span class="p">]</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Requestor&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;admin</span><span class="se">\u003c</span><span class="s2">admin@example.com</span><span class="se">\u003e</span><span class="s2">&quot;</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Requestor"</span><span class="p">,</span>
+          <span class="s2">"values"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"admin</span><span class="se">\u003c</span><span class="s2">admin@example.com</span><span class="se">\u003e</span><span class="s2">"</span>
           <span class="p">]</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Form Type&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;Traffic Change&quot;</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Form Type"</span><span class="p">,</span>
+          <span class="s2">"values"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"Traffic Change"</span>
           <span class="p">]</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;status&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;open&quot;</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"status"</span><span class="p">,</span>
+          <span class="s2">"values"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"open"</span>
           <span class="p">]</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
-      <span class="s2">&quot;originalTraffic&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+      <span class="s2">"originalTraffic"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Drop&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;application&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"Drop"</span><span class="p">,</span>
+          <span class="s2">"application"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"items"</span><span class="p">:</span> <span class="p">[</span>
               <span class="p">{</span>
-                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;any&quot;</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"any"</span>
               <span class="p">}</span>
             <span class="p">]</span>
           <span class="p">},</span>
-          <span class="s2">&quot;destination&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"destination"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"items"</span><span class="p">:</span> <span class="p">[</span>
               <span class="p">{</span>
-                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;any&quot;</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"any"</span>
               <span class="p">},</span>
               <span class="p">{</span>
-                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"1.1.1.1"</span>
               <span class="p">}</span>
             <span class="p">]</span>
           <span class="p">},</span>
-          <span class="s2">&quot;fields&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"fields"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Requested URL Category&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s2">&quot;any&quot;</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Requested URL Category"</span><span class="p">,</span>
+              <span class="s2">"values"</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">"any"</span>
               <span class="p">]</span>
             <span class="p">}</span>
           <span class="p">],</span>
-          <span class="s2">&quot;service&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"service"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"items"</span><span class="p">:</span> <span class="p">[</span>
               <span class="p">{</span>
-                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;any&quot;</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"any"</span>
               <span class="p">}</span>
             <span class="p">]</span>
           <span class="p">},</span>
-          <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"source"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"items"</span><span class="p">:</span> <span class="p">[</span>
               <span class="p">{</span>
-                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"1.1.1.1"</span>
               <span class="p">},</span>
               <span class="p">{</span>
-                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;any&quot;</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"any"</span>
               <span class="p">}</span>
             <span class="p">]</span>
           <span class="p">},</span>
-          <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"user"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"items"</span><span class="p">:</span> <span class="p">[</span>
               <span class="p">{</span>
-                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;any&quot;</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"any"</span>
               <span class="p">}</span>
             <span class="p">]</span>
           <span class="p">}</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;plannedTraffic&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"plannedTraffic"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;Drop&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;application&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"Drop"</span><span class="p">,</span>
+          <span class="s2">"application"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"items"</span><span class="p">:</span> <span class="p">[</span>
               <span class="p">{</span>
-                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;any&quot;</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"any"</span>
               <span class="p">}</span>
             <span class="p">]</span>
           <span class="p">},</span>
-          <span class="s2">&quot;destination&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"destination"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"items"</span><span class="p">:</span> <span class="p">[</span>
               <span class="p">{</span>
-                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;any&quot;</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"any"</span>
               <span class="p">},</span>
               <span class="p">{</span>
-                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"1.1.1.1"</span>
               <span class="p">}</span>
             <span class="p">]</span>
           <span class="p">},</span>
-          <span class="s2">&quot;fields&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"fields"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Change URL Category&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">[</span>
-                <span class="s2">&quot;any&quot;</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Change URL Category"</span><span class="p">,</span>
+              <span class="s2">"values"</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">"any"</span>
               <span class="p">]</span>
             <span class="p">}</span>
           <span class="p">],</span>
-          <span class="s2">&quot;service&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"service"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"items"</span><span class="p">:</span> <span class="p">[</span>
               <span class="p">{</span>
-                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"*"</span>
               <span class="p">}</span>
             <span class="p">]</span>
           <span class="p">},</span>
-          <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"source"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"items"</span><span class="p">:</span> <span class="p">[</span>
               <span class="p">{</span>
-                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"1.1.1.1"</span>
               <span class="p">},</span>
               <span class="p">{</span>
-                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;any&quot;</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"any"</span>
               <span class="p">}</span>
             <span class="p">]</span>
           <span class="p">},</span>
-          <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;items&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"user"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"items"</span><span class="p">:</span> <span class="p">[</span>
               <span class="p">{</span>
-                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;any&quot;</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"any"</span>
               <span class="p">}</span>
             <span class="p">]</span>
           <span class="p">}</span>
         <span class="p">}</span>
       <span class="p">]</span>
     <span class="p">},</span>
-    <span class="s2">&quot;messages&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Success&quot;</span>
+    <span class="s2">"messages"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"Success"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;algosec_change_request_id&quot;</span><span class="p">:</span> <span class="mi">11</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"algosec_change_request_id"</span><span class="p">:</span> <span class="mi">11</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">8305</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-algosec&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-08-02 09:26:31&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">8305</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-algosec"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-08-02 09:26:31"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -998,8 +998,8 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">isolate_host_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">{})</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_change_request_id</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;changeRequestId&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">isolate_host_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_change_request_id</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"changeRequestId"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1009,22 +1009,22 @@ Additional package dependencies may exist for each of these packages:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 <span class="c1"># Results from the traffic change request call</span>
 <span class="n">change_request</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">isolate_host_results</span>
-<span class="n">request_data</span> <span class="o">=</span> <span class="n">change_request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">request_data</span> <span class="o">=</span> <span class="n">change_request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="p">{})</span>
 <span class="c1"># Results from getting the traffic change request details</span>
 <span class="n">request_details</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">change_request_details</span>
-<span class="n">details_data</span> <span class="o">=</span> <span class="n">request_details</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">details_data</span> <span class="o">=</span> <span class="n">request_details</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="p">{})</span>
 
-<span class="k">if</span> <span class="n">change_request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+<span class="k">if</span> <span class="n">change_request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
   <span class="c1"># Add Row</span>
-  <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;algosec_isolation_requests&quot;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;traffic_change_request_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">request_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;changeRequestId&quot;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;hostname&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;traffic_change_request_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">request_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;redirectUrl&quot;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;traffic_change_request_body&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">details_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fields&quot;</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;traffic_change_request_original_traffic&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">details_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;originalTraffic&quot;</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;traffic_change_request_planned_traffic&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">details_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;plannedTraffic&quot;</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+  <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"algosec_isolation_requests"</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'traffic_change_request_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">request_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"changeRequestId"</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'hostname'</span><span class="p">]</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'traffic_change_request_url'</span><span class="p">]</span> <span class="o">=</span> <span class="n">request_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"redirectUrl"</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'traffic_change_request_body'</span><span class="p">]</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">details_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"fields"</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'traffic_change_request_original_traffic'</span><span class="p">]</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">details_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"originalTraffic"</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'traffic_change_request_planned_traffic'</span><span class="p">]</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">details_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"plannedTraffic"</span><span class="p">,</span> <span class="p">{}),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Isolate Host from Network on host </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> failed with reason: </span><span class="si">{</span><span class="n">change_request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Isolate Host from Network on host </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> failed with reason: </span><span class="si">{</span><span class="n">change_request</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">,</span><span class="w"> </span><span class="s1">''</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1107,34 +1107,34 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;queryResult&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"queryResult"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;finalResult&quot;</span><span class="p">:</span> <span class="s2">&quot;Not routed&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;fipResult&quot;</span><span class="p">:</span> <span class="s2">&quot;Unreachable&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;queryDescription&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.3.5=</span><span class="se">\u003e</span><span class="s2">8.8.8.8:any:any:any&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;queryHTMLPath&quot;</span><span class="p">:</span> <span class="s2">&quot;https://aglosec/fa/query/results/#/work/ALL_FIREWALLS_query-1722608134438/&quot;</span>
+        <span class="s2">"finalResult"</span><span class="p">:</span> <span class="s2">"Not routed"</span><span class="p">,</span>
+        <span class="s2">"fipResult"</span><span class="p">:</span> <span class="s2">"Unreachable"</span><span class="p">,</span>
+        <span class="s2">"queryDescription"</span><span class="p">:</span> <span class="s2">"1.2.3.5=</span><span class="se">\u003e</span><span class="s2">8.8.8.8:any:any:any"</span><span class="p">,</span>
+        <span class="s2">"queryHTMLPath"</span><span class="p">:</span> <span class="s2">"https://aglosec/fa/query/results/#/work/ALL_FIREWALLS_query-1722608134438/"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;queryUIResult&quot;</span><span class="p">:</span> <span class="s2">&quot;https://aglosec/fa/query/results/#/work/ALL_FIREWALLS_query-1722608134438/&quot;</span>
+    <span class="s2">"queryUIResult"</span><span class="p">:</span> <span class="s2">"https://aglosec/fa/query/results/#/work/ALL_FIREWALLS_query-1722608134438/"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;algosec_destination&quot;</span><span class="p">:</span> <span class="s2">&quot;8.8.8.8&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;algosec_service&quot;</span><span class="p">:</span> <span class="s2">&quot;any&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;algosec_source&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.3.5&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"algosec_destination"</span><span class="p">:</span> <span class="s2">"8.8.8.8"</span><span class="p">,</span>
+    <span class="s2">"algosec_service"</span><span class="p">:</span> <span class="s2">"any"</span><span class="p">,</span>
+    <span class="s2">"algosec_source"</span><span class="p">:</span> <span class="s2">"1.2.3.5"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">9827</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-algosec&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-08-02 09:59:19&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">9827</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-algosec"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-08-02 09:59:19"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1143,8 +1143,8 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">algosec_source</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_destination</span> <span class="o">=</span> <span class="s2">&quot;8.8.8.8&quot;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_service</span> <span class="o">=</span> <span class="s2">&quot;any&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_destination</span> <span class="o">=</span> <span class="s2">"8.8.8.8"</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">algosec_service</span> <span class="o">=</span> <span class="s2">"any"</span>
 </pre></div>
 </div>
 </p>
@@ -1152,18 +1152,18 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">inet_check_output</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
 
 <span class="c1"># Processing if the function is a success</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="k">for</span> <span class="n">queryResult</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;queryResult&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">queryResult</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"queryResult"</span><span class="p">,</span> <span class="p">[]):</span>
     <span class="c1"># Add Row</span>
-    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;algosec_internet_connectivity_queries&quot;</span><span class="p">)</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"algosec_internet_connectivity_queries"</span><span class="p">)</span>
     <span class="n">row</span><span class="o">.</span><span class="n">artifact_ip</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
-    <span class="n">row</span><span class="o">.</span><span class="n">query_description</span> <span class="o">=</span> <span class="n">queryResult</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;queryDescription&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="o">.</span><span class="n">traffic_simulation_fip_results</span> <span class="o">=</span> <span class="n">queryResult</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fipResult&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="o">.</span><span class="n">traffic_simulation_final_results</span> <span class="o">=</span> <span class="n">queryResult</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;finalResult&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="o">.</span><span class="n">query_html_path</span> <span class="o">=</span> <span class="n">queryResult</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;queryHTMLPath&quot;</span><span class="p">)</span>
+    <span class="n">row</span><span class="o">.</span><span class="n">query_description</span> <span class="o">=</span> <span class="n">queryResult</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"queryDescription"</span><span class="p">)</span>
+    <span class="n">row</span><span class="o">.</span><span class="n">traffic_simulation_fip_results</span> <span class="o">=</span> <span class="n">queryResult</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"fipResult"</span><span class="p">)</span>
+    <span class="n">row</span><span class="o">.</span><span class="n">traffic_simulation_final_results</span> <span class="o">=</span> <span class="n">queryResult</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"finalResult"</span><span class="p">)</span>
+    <span class="n">row</span><span class="o">.</span><span class="n">query_html_path</span> <span class="o">=</span> <span class="n">queryResult</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"queryHTMLPath"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>

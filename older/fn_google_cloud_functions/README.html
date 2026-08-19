@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -483,12 +483,12 @@ This function takes the base64 result from the previous function and saves it in
 </section>
 <section id="function-utilities-base64-to-attachment">
 <h3>Function: Utilities: Base64 to Attachment<a class="headerlink" href="#function-utilities-base64-to-attachment" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sandbox_screenshot</span><span class="p">[</span><span class="s2">&quot;input_url&quot;</span><span class="p">]</span>
-<span class="n">attachment_desc</span> <span class="o">=</span> <span class="s2">&quot;GCP Sandbox Screenshot of </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sandbox_screenshot</span><span class="p">[</span><span class="s2">"input_url"</span><span class="p">]</span>
+<span class="n">attachment_desc</span> <span class="o">=</span> <span class="s2">"GCP Sandbox Screenshot of </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">file_name</span> <span class="o">=</span> <span class="n">attachment_desc</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">base64content</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sandbox_screenshot</span><span class="p">[</span><span class="s2">&quot;base64Screenshot&quot;</span><span class="p">]</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">base64content</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">sandbox_screenshot</span><span class="p">[</span><span class="s2">"base64Screenshot"</span><span class="p">]</span>
 </pre></div>
 </div>
 </section>
@@ -499,8 +499,8 @@ This function takes the base64 result from the previous function and saves it in
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="p">:</span> <span class="p">{</span>
   <span class="n">success</span><span class="p">:</span> <span class="kc">True</span>
   <span class="n">inputs</span><span class="p">:</span> <span class="p">{</span>
-   <span class="s2">&quot;input_url&quot;</span><span class="p">:</span> <span class="n">google</span><span class="o">.</span><span class="n">com</span><span class="p">,</span>
-   <span class="s2">&quot;input_full_url&quot;</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">google</span><span class="o">.</span><span class="n">com</span>
+   <span class="s2">"input_url"</span><span class="p">:</span> <span class="n">google</span><span class="o">.</span><span class="n">com</span><span class="p">,</span>
+   <span class="s2">"input_full_url"</span><span class="p">:</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">google</span><span class="o">.</span><span class="n">com</span>
    <span class="p">},</span>
   <span class="n">base64Screenshot</span><span class="p">:</span> <span class="n">cmFuZG9t</span><span class="o">......</span>
 <span class="p">}</span>

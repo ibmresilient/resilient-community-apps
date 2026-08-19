@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -652,1011 +652,1011 @@ key to use these functions.</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-   <span class="s2">&quot;response&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;plus_code&quot;</span><span class="p">:{</span>
-         <span class="s2">&quot;compound_code&quot;</span><span class="p">:</span><span class="s2">&quot;9VWH+4CG Somerville, MA, USA&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;global_code&quot;</span><span class="p">:</span><span class="s2">&quot;87JC9VWH+4CG&quot;</span>
+   <span class="s2">"response"</span><span class="p">:{</span>
+      <span class="s2">"plus_code"</span><span class="p">:{</span>
+         <span class="s2">"compound_code"</span><span class="p">:</span><span class="s2">"9VWH+4CG Somerville, MA, USA"</span><span class="p">,</span>
+         <span class="s2">"global_code"</span><span class="p">:</span><span class="s2">"87JC9VWH+4CG"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;results&quot;</span><span class="p">:[</span>
+      <span class="s2">"results"</span><span class="p">:[</span>
          <span class="p">{</span>
-            <span class="s2">&quot;address_components&quot;</span><span class="p">:[</span>
+            <span class="s2">"address_components"</span><span class="p">:[</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;243&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;243&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;street_number&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"243"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"243"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"street_number"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Elm Street&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Elm St&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;route&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Elm Street"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Elm St"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"route"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Davis Square&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Davis Square&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;neighborhood&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Davis Square"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Davis Square"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"neighborhood"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;locality&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"locality"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_2&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_2"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Massachusetts&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;MA&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_1&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Massachusetts"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"MA"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_1"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;United States&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;US&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;country&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"US"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"country"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;02144&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;02144&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;postal_code&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"02144"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"02144"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"postal_code"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;2934&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;2934&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;postal_code_suffix&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"2934"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"2934"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"postal_code_suffix"</span>
                   <span class="p">]</span>
                <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;formatted_address&quot;</span><span class="p">:</span><span class="s2">&quot;243 Elm St, Somerville, MA 02144, USA&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;geometry&quot;</span><span class="p">:{</span>
-               <span class="s2">&quot;bounds&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3953643</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12145699999999</span>
+            <span class="s2">"formatted_address"</span><span class="p">:</span><span class="s2">"243 Elm St, Somerville, MA 02144, USA"</span><span class="p">,</span>
+            <span class="s2">"geometry"</span><span class="p">:{</span>
+               <span class="s2">"bounds"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3953643</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12145699999999</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3952205</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1217045</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3952205</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1217045</span>
                   <span class="p">}</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3952882</span><span class="p">,</span>
-                  <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1216188</span>
+               <span class="s2">"location"</span><span class="p">:{</span>
+                  <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3952882</span><span class="p">,</span>
+                  <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1216188</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location_type&quot;</span><span class="p">:</span><span class="s2">&quot;ROOFTOP&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;viewport&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3966413802915</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1202317697085</span>
+               <span class="s2">"location_type"</span><span class="p">:</span><span class="s2">"ROOFTOP"</span><span class="p">,</span>
+               <span class="s2">"viewport"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3966413802915</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1202317697085</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3939434197085</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1229297302915</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3939434197085</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1229297302915</span>
                   <span class="p">}</span>
                <span class="p">}</span>
             <span class="p">},</span>
-            <span class="s2">&quot;navigation_points&quot;</span><span class="p">:[</span>
+            <span class="s2">"navigation_points"</span><span class="p">:[</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;location&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">42.3952427</span><span class="p">,</span>
-                     <span class="s2">&quot;longitude&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1217017</span>
+                  <span class="s2">"location"</span><span class="p">:{</span>
+                     <span class="s2">"latitude"</span><span class="p">:</span><span class="mf">42.3952427</span><span class="p">,</span>
+                     <span class="s2">"longitude"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1217017</span>
                   <span class="p">}</span>
                <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;place_id&quot;</span><span class="p">:</span><span class="s2">&quot;*****344kR5ucMhQgMoT4&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-               <span class="s2">&quot;street_address&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;subpremise&quot;</span>
+            <span class="s2">"place_id"</span><span class="p">:</span><span class="s2">"*****344kR5ucMhQgMoT4"</span><span class="p">,</span>
+            <span class="s2">"types"</span><span class="p">:[</span>
+               <span class="s2">"street_address"</span><span class="p">,</span>
+               <span class="s2">"subpremise"</span>
             <span class="p">]</span>
          <span class="p">},</span>
          <span class="p">{</span>
-            <span class="s2">&quot;address_components&quot;</span><span class="p">:[</span>
+            <span class="s2">"address_components"</span><span class="p">:[</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;241&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;241&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;street_number&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"241"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"241"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"street_number"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Elm Street&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Elm St&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;route&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Elm Street"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Elm St"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"route"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Davis Square&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Davis Square&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;neighborhood&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Davis Square"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Davis Square"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"neighborhood"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;locality&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"locality"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_2&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_2"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Massachusetts&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;MA&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_1&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Massachusetts"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"MA"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_1"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;United States&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;US&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;country&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"US"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"country"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;02144&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;02144&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;postal_code&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"02144"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"02144"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"postal_code"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;2934&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;2934&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;postal_code_suffix&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"2934"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"2934"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"postal_code_suffix"</span>
                   <span class="p">]</span>
                <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;formatted_address&quot;</span><span class="p">:</span><span class="s2">&quot;241 Elm St, Somerville, MA 02144, USA&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;geometry&quot;</span><span class="p">:{</span>
-               <span class="s2">&quot;location&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3952803</span><span class="p">,</span>
-                  <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12157239999999</span>
+            <span class="s2">"formatted_address"</span><span class="p">:</span><span class="s2">"241 Elm St, Somerville, MA 02144, USA"</span><span class="p">,</span>
+            <span class="s2">"geometry"</span><span class="p">:{</span>
+               <span class="s2">"location"</span><span class="p">:{</span>
+                  <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3952803</span><span class="p">,</span>
+                  <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12157239999999</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location_type&quot;</span><span class="p">:</span><span class="s2">&quot;ROOFTOP&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;viewport&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3966292802915</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12022341970848</span>
+               <span class="s2">"location_type"</span><span class="p">:</span><span class="s2">"ROOFTOP"</span><span class="p">,</span>
+               <span class="s2">"viewport"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3966292802915</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12022341970848</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3939313197085</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1229213802915</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3939313197085</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1229213802915</span>
                   <span class="p">}</span>
                <span class="p">}</span>
             <span class="p">},</span>
-            <span class="s2">&quot;navigation_points&quot;</span><span class="p">:[</span>
+            <span class="s2">"navigation_points"</span><span class="p">:[</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;location&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">42.39519</span><span class="p">,</span>
-                     <span class="s2">&quot;longitude&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1216663</span>
+                  <span class="s2">"location"</span><span class="p">:{</span>
+                     <span class="s2">"latitude"</span><span class="p">:</span><span class="mf">42.39519</span><span class="p">,</span>
+                     <span class="s2">"longitude"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1216663</span>
                   <span class="p">}</span>
                <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;place_id&quot;</span><span class="p">:</span><span class="s2">&quot;*****ohh344kRpjyg7MtlCzw&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-               <span class="s2">&quot;premise&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;street_address&quot;</span>
+            <span class="s2">"place_id"</span><span class="p">:</span><span class="s2">"*****ohh344kRpjyg7MtlCzw"</span><span class="p">,</span>
+            <span class="s2">"types"</span><span class="p">:[</span>
+               <span class="s2">"premise"</span><span class="p">,</span>
+               <span class="s2">"street_address"</span>
             <span class="p">]</span>
          <span class="p">},</span>
          <span class="p">{</span>
-            <span class="s2">&quot;address_components&quot;</span><span class="p">:[</span>
+            <span class="s2">"address_components"</span><span class="p">:[</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;243&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;243&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;street_number&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"243"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"243"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"street_number"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Elm Street&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Elm St&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;route&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Elm Street"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Elm St"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"route"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Davis Square&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Davis Square&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;neighborhood&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Davis Square"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Davis Square"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"neighborhood"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;locality&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"locality"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_2&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_2"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Massachusetts&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;MA&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_1&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Massachusetts"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"MA"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_1"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;United States&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;US&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;country&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"US"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"country"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;02144&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;02144&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;postal_code&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"02144"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"02144"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"postal_code"</span>
                   <span class="p">]</span>
                <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;formatted_address&quot;</span><span class="p">:</span><span class="s2">&quot;243 Elm St, Somerville, MA 02144, USA&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;geometry&quot;</span><span class="p">:{</span>
-               <span class="s2">&quot;location&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3952882</span><span class="p">,</span>
-                  <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1216188</span>
+            <span class="s2">"formatted_address"</span><span class="p">:</span><span class="s2">"243 Elm St, Somerville, MA 02144, USA"</span><span class="p">,</span>
+            <span class="s2">"geometry"</span><span class="p">:{</span>
+               <span class="s2">"location"</span><span class="p">:{</span>
+                  <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3952882</span><span class="p">,</span>
+                  <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1216188</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location_type&quot;</span><span class="p">:</span><span class="s2">&quot;ROOFTOP&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;viewport&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3966371802915</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1202698197085</span>
+               <span class="s2">"location_type"</span><span class="p">:</span><span class="s2">"ROOFTOP"</span><span class="p">,</span>
+               <span class="s2">"viewport"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3966371802915</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1202698197085</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3939392197085</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1229677802915</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3939392197085</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1229677802915</span>
                   <span class="p">}</span>
                <span class="p">}</span>
             <span class="p">},</span>
-            <span class="s2">&quot;navigation_points&quot;</span><span class="p">:[</span>
+            <span class="s2">"navigation_points"</span><span class="p">:[</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;location&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">42.3949065</span><span class="p">,</span>
-                     <span class="s2">&quot;longitude&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1215183</span>
+                  <span class="s2">"location"</span><span class="p">:{</span>
+                     <span class="s2">"latitude"</span><span class="p">:</span><span class="mf">42.3949065</span><span class="p">,</span>
+                     <span class="s2">"longitude"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1215183</span>
                   <span class="p">}</span>
                <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;place_id&quot;</span><span class="p">:</span><span class="s2">&quot;****hh344kRK08Akv-bsfU&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;plus_code&quot;</span><span class="p">:{</span>
-               <span class="s2">&quot;compound_code&quot;</span><span class="p">:</span><span class="s2">&quot;9VWH+49 Somerville, MA, USA&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;global_code&quot;</span><span class="p">:</span><span class="s2">&quot;87JC9VWH+49&quot;</span>
+            <span class="s2">"place_id"</span><span class="p">:</span><span class="s2">"****hh344kRK08Akv-bsfU"</span><span class="p">,</span>
+            <span class="s2">"plus_code"</span><span class="p">:{</span>
+               <span class="s2">"compound_code"</span><span class="p">:</span><span class="s2">"9VWH+49 Somerville, MA, USA"</span><span class="p">,</span>
+               <span class="s2">"global_code"</span><span class="p">:</span><span class="s2">"87JC9VWH+49"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-               <span class="s2">&quot;establishment&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;food&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;point_of_interest&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;restaurant&quot;</span>
+            <span class="s2">"types"</span><span class="p">:[</span>
+               <span class="s2">"establishment"</span><span class="p">,</span>
+               <span class="s2">"food"</span><span class="p">,</span>
+               <span class="s2">"point_of_interest"</span><span class="p">,</span>
+               <span class="s2">"restaurant"</span>
             <span class="p">]</span>
          <span class="p">},</span>
          <span class="p">{</span>
-            <span class="s2">&quot;address_components&quot;</span><span class="p">:[</span>
+            <span class="s2">"address_components"</span><span class="p">:[</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;242&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;242&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;street_number&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"242"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"242"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"street_number"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Elm Street&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Elm St&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;route&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Elm Street"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Elm St"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"route"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Davis Square&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Davis Square&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;neighborhood&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Davis Square"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Davis Square"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"neighborhood"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;locality&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"locality"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_2&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_2"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Massachusetts&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;MA&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_1&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Massachusetts"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"MA"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_1"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;United States&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;US&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;country&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"US"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"country"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;02144&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;02144&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;postal_code&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"02144"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"02144"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"postal_code"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;2935&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;2935&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;postal_code_suffix&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"2935"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"2935"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"postal_code_suffix"</span>
                   <span class="p">]</span>
                <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;formatted_address&quot;</span><span class="p">:</span><span class="s2">&quot;242 Elm St, Somerville, MA 02144, USA&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;geometry&quot;</span><span class="p">:{</span>
-               <span class="s2">&quot;location&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3951979</span><span class="p">,</span>
-                  <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1217668</span>
+            <span class="s2">"formatted_address"</span><span class="p">:</span><span class="s2">"242 Elm St, Somerville, MA 02144, USA"</span><span class="p">,</span>
+            <span class="s2">"geometry"</span><span class="p">:{</span>
+               <span class="s2">"location"</span><span class="p">:{</span>
+                  <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3951979</span><span class="p">,</span>
+                  <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1217668</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location_type&quot;</span><span class="p">:</span><span class="s2">&quot;RANGE_INTERPOLATED&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;viewport&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3965468802915</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1204178197085</span>
+               <span class="s2">"location_type"</span><span class="p">:</span><span class="s2">"RANGE_INTERPOLATED"</span><span class="p">,</span>
+               <span class="s2">"viewport"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3965468802915</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1204178197085</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3938489197085</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12311578029151</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3938489197085</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12311578029151</span>
                   <span class="p">}</span>
                <span class="p">}</span>
             <span class="p">},</span>
-            <span class="s2">&quot;place_id&quot;</span><span class="p">:</span><span class="s2">&quot;****CBTb21lcnZpbGxlLCBNQSAwMjE0NCwgVVNBIhsSGQoUChIJYz6smRh344kRDFdGTS9hu9AQ8gE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-               <span class="s2">&quot;street_address&quot;</span>
+            <span class="s2">"place_id"</span><span class="p">:</span><span class="s2">"****CBTb21lcnZpbGxlLCBNQSAwMjE0NCwgVVNBIhsSGQoUChIJYz6smRh344kRDFdGTS9hu9AQ8gE"</span><span class="p">,</span>
+            <span class="s2">"types"</span><span class="p">:[</span>
+               <span class="s2">"street_address"</span>
             <span class="p">]</span>
          <span class="p">},</span>
          <span class="p">{</span>
-            <span class="s2">&quot;address_components&quot;</span><span class="p">:[</span>
+            <span class="s2">"address_components"</span><span class="p">:[</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;9VWH+4C&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;9VWH+4C&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;plus_code&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"9VWH+4C"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"9VWH+4C"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"plus_code"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;locality&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"locality"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_2&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_2"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Massachusetts&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;MA&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_1&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Massachusetts"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"MA"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_1"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;United States&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;US&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;country&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"US"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"country"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;formatted_address&quot;</span><span class="p">:</span><span class="s2">&quot;9VWH+4C Somerville, MA, USA&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;geometry&quot;</span><span class="p">:{</span>
-               <span class="s2">&quot;bounds&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.395375</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12137500000001</span>
+            <span class="s2">"formatted_address"</span><span class="p">:</span><span class="s2">"9VWH+4C Somerville, MA, USA"</span><span class="p">,</span>
+            <span class="s2">"geometry"</span><span class="p">:{</span>
+               <span class="s2">"bounds"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.395375</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12137500000001</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.39525</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1215</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.39525</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1215</span>
                   <span class="p">}</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3953171</span><span class="p">,</span>
-                  <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1214282</span>
+               <span class="s2">"location"</span><span class="p">:{</span>
+                  <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3953171</span><span class="p">,</span>
+                  <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1214282</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location_type&quot;</span><span class="p">:</span><span class="s2">&quot;GEOMETRIC_CENTER&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;viewport&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3966614802915</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12008851970849</span>
+               <span class="s2">"location_type"</span><span class="p">:</span><span class="s2">"GEOMETRIC_CENTER"</span><span class="p">,</span>
+               <span class="s2">"viewport"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3966614802915</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12008851970849</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3939635197085</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12278648029151</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3939635197085</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12278648029151</span>
                   <span class="p">}</span>
                <span class="p">}</span>
             <span class="p">},</span>
-            <span class="s2">&quot;place_id&quot;</span><span class="p">:</span><span class="s2">&quot;***JkyRUAR-vPIesXHUcA&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;plus_code&quot;</span><span class="p">:{</span>
-               <span class="s2">&quot;compound_code&quot;</span><span class="p">:</span><span class="s2">&quot;9VWH+4C Somerville, MA, USA&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;global_code&quot;</span><span class="p">:</span><span class="s2">&quot;87JC9VWH+4C&quot;</span>
+            <span class="s2">"place_id"</span><span class="p">:</span><span class="s2">"***JkyRUAR-vPIesXHUcA"</span><span class="p">,</span>
+            <span class="s2">"plus_code"</span><span class="p">:{</span>
+               <span class="s2">"compound_code"</span><span class="p">:</span><span class="s2">"9VWH+4C Somerville, MA, USA"</span><span class="p">,</span>
+               <span class="s2">"global_code"</span><span class="p">:</span><span class="s2">"87JC9VWH+4C"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-               <span class="s2">&quot;plus_code&quot;</span>
+            <span class="s2">"types"</span><span class="p">:[</span>
+               <span class="s2">"plus_code"</span>
             <span class="p">]</span>
          <span class="p">},</span>
          <span class="p">{</span>
-            <span class="s2">&quot;address_components&quot;</span><span class="p">:[</span>
+            <span class="s2">"address_components"</span><span class="p">:[</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;244-240&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;244-240&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;street_number&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"244-240"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"244-240"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"street_number"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Elm Street&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Elm St&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;route&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Elm Street"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Elm St"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"route"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Davis Square&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Davis Square&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;neighborhood&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Davis Square"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Davis Square"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"neighborhood"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;locality&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"locality"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_2&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_2"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Massachusetts&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;MA&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_1&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Massachusetts"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"MA"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_1"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;United States&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;US&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;country&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"US"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"country"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;02144&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;02144&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;postal_code&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"02144"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"02144"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"postal_code"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;2935&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;2935&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;postal_code_suffix&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"2935"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"2935"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"postal_code_suffix"</span>
                   <span class="p">]</span>
                <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;formatted_address&quot;</span><span class="p">:</span><span class="s2">&quot;244-240 Elm St, Somerville, MA 02144, USA&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;geometry&quot;</span><span class="p">:{</span>
-               <span class="s2">&quot;bounds&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3953471</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1217104</span>
+            <span class="s2">"formatted_address"</span><span class="p">:</span><span class="s2">"244-240 Elm St, Somerville, MA 02144, USA"</span><span class="p">,</span>
+            <span class="s2">"geometry"</span><span class="p">:{</span>
+               <span class="s2">"bounds"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3953471</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1217104</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.395114</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1218672</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.395114</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1218672</span>
                   <span class="p">}</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3952306</span><span class="p">,</span>
-                  <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12178879999999</span>
+               <span class="s2">"location"</span><span class="p">:{</span>
+                  <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3952306</span><span class="p">,</span>
+                  <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12178879999999</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location_type&quot;</span><span class="p">:</span><span class="s2">&quot;GEOMETRIC_CENTER&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;viewport&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3965795302915</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12043981970851</span>
+               <span class="s2">"location_type"</span><span class="p">:</span><span class="s2">"GEOMETRIC_CENTER"</span><span class="p">,</span>
+               <span class="s2">"viewport"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3965795302915</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12043981970851</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3938815697085</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12313778029151</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3938815697085</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.12313778029151</span>
                   <span class="p">}</span>
                <span class="p">}</span>
             <span class="p">},</span>
-            <span class="s2">&quot;place_id&quot;</span><span class="p">:</span><span class="s2">&quot;***44kRDFdGTS9hu9A&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-               <span class="s2">&quot;route&quot;</span>
+            <span class="s2">"place_id"</span><span class="p">:</span><span class="s2">"***44kRDFdGTS9hu9A"</span><span class="p">,</span>
+            <span class="s2">"types"</span><span class="p">:[</span>
+               <span class="s2">"route"</span>
             <span class="p">]</span>
          <span class="p">},</span>
          <span class="p">{</span>
-            <span class="s2">&quot;address_components&quot;</span><span class="p">:[</span>
+            <span class="s2">"address_components"</span><span class="p">:[</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Davis Square&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Davis Square&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;neighborhood&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Davis Square"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Davis Square"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"neighborhood"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;locality&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"locality"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_2&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_2"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Massachusetts&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;MA&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_1&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Massachusetts"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"MA"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_1"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;United States&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;US&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;country&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"US"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"country"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;formatted_address&quot;</span><span class="p">:</span><span class="s2">&quot;Davis Square, Somerville, MA, USA&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;geometry&quot;</span><span class="p">:{</span>
-               <span class="s2">&quot;bounds&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3998219</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1168818</span>
+            <span class="s2">"formatted_address"</span><span class="p">:</span><span class="s2">"Davis Square, Somerville, MA, USA"</span><span class="p">,</span>
+            <span class="s2">"geometry"</span><span class="p">:{</span>
+               <span class="s2">"bounds"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3998219</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1168818</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.391296</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.127597</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.391296</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.127597</span>
                   <span class="p">}</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3967172</span><span class="p">,</span>
-                  <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1223151</span>
+               <span class="s2">"location"</span><span class="p">:{</span>
+                  <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3967172</span><span class="p">,</span>
+                  <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1223151</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location_type&quot;</span><span class="p">:</span><span class="s2">&quot;APPROXIMATE&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;viewport&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3998219</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1168818</span>
+               <span class="s2">"location_type"</span><span class="p">:</span><span class="s2">"APPROXIMATE"</span><span class="p">,</span>
+               <span class="s2">"viewport"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3998219</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1168818</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.391296</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.127597</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.391296</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.127597</span>
                   <span class="p">}</span>
                <span class="p">}</span>
             <span class="p">},</span>
-            <span class="s2">&quot;place_id&quot;</span><span class="p">:</span><span class="s2">&quot;****6Bh344kRUrVbHX8CkaM&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-               <span class="s2">&quot;neighborhood&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;political&quot;</span>
+            <span class="s2">"place_id"</span><span class="p">:</span><span class="s2">"****6Bh344kRUrVbHX8CkaM"</span><span class="p">,</span>
+            <span class="s2">"types"</span><span class="p">:[</span>
+               <span class="s2">"neighborhood"</span><span class="p">,</span>
+               <span class="s2">"political"</span>
             <span class="p">]</span>
          <span class="p">},</span>
          <span class="p">{</span>
-            <span class="s2">&quot;address_components&quot;</span><span class="p">:[</span>
+            <span class="s2">"address_components"</span><span class="p">:[</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;02144&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;02144&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;postal_code&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"02144"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"02144"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"postal_code"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;West Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;West Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;neighborhood&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"West Somerville"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"West Somerville"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"neighborhood"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;locality&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"locality"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_2&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_2"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Massachusetts&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;MA&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_1&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Massachusetts"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"MA"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_1"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;United States&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;US&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;country&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"US"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"country"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;formatted_address&quot;</span><span class="p">:</span><span class="s2">&quot;West Somerville, MA 02144, USA&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;geometry&quot;</span><span class="p">:{</span>
-               <span class="s2">&quot;bounds&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.418112</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.10402189999999</span>
+            <span class="s2">"formatted_address"</span><span class="p">:</span><span class="s2">"West Somerville, MA 02144, USA"</span><span class="p">,</span>
+            <span class="s2">"geometry"</span><span class="p">:{</span>
+               <span class="s2">"bounds"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.418112</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.10402189999999</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.388034</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.135403</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.388034</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.135403</span>
                   <span class="p">}</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3991718</span><span class="p">,</span>
-                  <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1240559</span>
+               <span class="s2">"location"</span><span class="p">:{</span>
+                  <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3991718</span><span class="p">,</span>
+                  <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1240559</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location_type&quot;</span><span class="p">:</span><span class="s2">&quot;APPROXIMATE&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;viewport&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.418112</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.10402189999999</span>
+               <span class="s2">"location_type"</span><span class="p">:</span><span class="s2">"APPROXIMATE"</span><span class="p">,</span>
+               <span class="s2">"viewport"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.418112</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.10402189999999</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.388034</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.135403</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.388034</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.135403</span>
                   <span class="p">}</span>
                <span class="p">}</span>
             <span class="p">},</span>
-            <span class="s2">&quot;place_id&quot;</span><span class="p">:</span><span class="s2">&quot;*****qt9244kRfiKFU_1K9eA&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;postcode_localities&quot;</span><span class="p">:[</span>
-               <span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;West Somerville&quot;</span>
+            <span class="s2">"place_id"</span><span class="p">:</span><span class="s2">"*****qt9244kRfiKFU_1K9eA"</span><span class="p">,</span>
+            <span class="s2">"postcode_localities"</span><span class="p">:[</span>
+               <span class="s2">"Somerville"</span><span class="p">,</span>
+               <span class="s2">"West Somerville"</span>
             <span class="p">],</span>
-            <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-               <span class="s2">&quot;postal_code&quot;</span>
+            <span class="s2">"types"</span><span class="p">:[</span>
+               <span class="s2">"postal_code"</span>
             <span class="p">]</span>
          <span class="p">},</span>
          <span class="p">{</span>
-            <span class="s2">&quot;address_components&quot;</span><span class="p">:[</span>
+            <span class="s2">"address_components"</span><span class="p">:[</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;locality&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Somerville"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"locality"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_2&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_2"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Massachusetts&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;MA&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_1&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Massachusetts"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"MA"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_1"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;United States&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;US&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;country&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"US"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"country"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;formatted_address&quot;</span><span class="p">:</span><span class="s2">&quot;Somerville, MA, USA&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;geometry&quot;</span><span class="p">:{</span>
-               <span class="s2">&quot;bounds&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.4181351</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.072689</span>
+            <span class="s2">"formatted_address"</span><span class="p">:</span><span class="s2">"Somerville, MA, USA"</span><span class="p">,</span>
+            <span class="s2">"geometry"</span><span class="p">:{</span>
+               <span class="s2">"bounds"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.4181351</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.072689</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.37252609999999</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1346351</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.37252609999999</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1346351</span>
                   <span class="p">}</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.3875968</span><span class="p">,</span>
-                  <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.0994968</span>
+               <span class="s2">"location"</span><span class="p">:{</span>
+                  <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.3875968</span><span class="p">,</span>
+                  <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.0994968</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location_type&quot;</span><span class="p">:</span><span class="s2">&quot;APPROXIMATE&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;viewport&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.4181351</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.072689</span>
+               <span class="s2">"location_type"</span><span class="p">:</span><span class="s2">"APPROXIMATE"</span><span class="p">,</span>
+               <span class="s2">"viewport"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.4181351</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.072689</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.37252609999999</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1346351</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.37252609999999</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.1346351</span>
                   <span class="p">}</span>
                <span class="p">}</span>
             <span class="p">},</span>
-            <span class="s2">&quot;place_id&quot;</span><span class="p">:</span><span class="s2">&quot;****eyl344kRA3v52Jl3kHo&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-               <span class="s2">&quot;locality&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;political&quot;</span>
+            <span class="s2">"place_id"</span><span class="p">:</span><span class="s2">"****eyl344kRA3v52Jl3kHo"</span><span class="p">,</span>
+            <span class="s2">"types"</span><span class="p">:[</span>
+               <span class="s2">"locality"</span><span class="p">,</span>
+               <span class="s2">"political"</span>
             <span class="p">]</span>
          <span class="p">},</span>
          <span class="p">{</span>
-            <span class="s2">&quot;address_components&quot;</span><span class="p">:[</span>
+            <span class="s2">"address_components"</span><span class="p">:[</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_2&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"Middlesex County"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_2"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Massachusetts&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;MA&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_1&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Massachusetts"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"MA"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_1"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;United States&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;US&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;country&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"US"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"country"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;formatted_address&quot;</span><span class="p">:</span><span class="s2">&quot;Middlesex County, MA, USA&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;geometry&quot;</span><span class="p">:{</span>
-               <span class="s2">&quot;bounds&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.7365541</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.020377</span>
+            <span class="s2">"formatted_address"</span><span class="p">:</span><span class="s2">"Middlesex County, MA, USA"</span><span class="p">,</span>
+            <span class="s2">"geometry"</span><span class="p">:{</span>
+               <span class="s2">"bounds"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.7365541</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.020377</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.1567819</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.89877299999999</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.1567819</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.89877299999999</span>
                   <span class="p">}</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.467206</span><span class="p">,</span>
-                  <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.2874209</span>
+               <span class="s2">"location"</span><span class="p">:{</span>
+                  <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.467206</span><span class="p">,</span>
+                  <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.2874209</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location_type&quot;</span><span class="p">:</span><span class="s2">&quot;APPROXIMATE&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;viewport&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.7365541</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.020377</span>
+               <span class="s2">"location_type"</span><span class="p">:</span><span class="s2">"APPROXIMATE"</span><span class="p">,</span>
+               <span class="s2">"viewport"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.7365541</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.020377</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.1567819</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.89877299999999</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.1567819</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.89877299999999</span>
                   <span class="p">}</span>
                <span class="p">}</span>
             <span class="p">},</span>
-            <span class="s2">&quot;navigation_points&quot;</span><span class="p">:[</span>
+            <span class="s2">"navigation_points"</span><span class="p">:[</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;location&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;latitude&quot;</span><span class="p">:</span><span class="mf">42.4658094</span><span class="p">,</span>
-                     <span class="s2">&quot;longitude&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.2888888</span>
+                  <span class="s2">"location"</span><span class="p">:{</span>
+                     <span class="s2">"latitude"</span><span class="p">:</span><span class="mf">42.4658094</span><span class="p">,</span>
+                     <span class="s2">"longitude"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.2888888</span>
                   <span class="p">}</span>
                <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;place_id&quot;</span><span class="p">:</span><span class="s2">&quot;****e4L5IkRCLDyk1MVcOI&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-               <span class="s2">&quot;administrative_area_level_2&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;political&quot;</span>
+            <span class="s2">"place_id"</span><span class="p">:</span><span class="s2">"****e4L5IkRCLDyk1MVcOI"</span><span class="p">,</span>
+            <span class="s2">"types"</span><span class="p">:[</span>
+               <span class="s2">"administrative_area_level_2"</span><span class="p">,</span>
+               <span class="s2">"political"</span>
             <span class="p">]</span>
          <span class="p">},</span>
          <span class="p">{</span>
-            <span class="s2">&quot;address_components&quot;</span><span class="p">:[</span>
+            <span class="s2">"address_components"</span><span class="p">:[</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;Massachusetts&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;MA&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;administrative_area_level_1&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"Massachusetts"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"MA"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"administrative_area_level_1"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">},</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;United States&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;US&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;country&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"US"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"country"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;formatted_address&quot;</span><span class="p">:</span><span class="s2">&quot;Massachusetts, USA&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;geometry&quot;</span><span class="p">:{</span>
-               <span class="s2">&quot;bounds&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.886778</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">69.85886099999999</span>
+            <span class="s2">"formatted_address"</span><span class="p">:</span><span class="s2">"Massachusetts, USA"</span><span class="p">,</span>
+            <span class="s2">"geometry"</span><span class="p">:{</span>
+               <span class="s2">"bounds"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.886778</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">69.85886099999999</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">41.18705300000001</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">73.5082101</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">41.18705300000001</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">73.5082101</span>
                   <span class="p">}</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.4072107</span><span class="p">,</span>
-                  <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">71.3824374</span>
+               <span class="s2">"location"</span><span class="p">:{</span>
+                  <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.4072107</span><span class="p">,</span>
+                  <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">71.3824374</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location_type&quot;</span><span class="p">:</span><span class="s2">&quot;APPROXIMATE&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;viewport&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">42.886778</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">69.85886099999999</span>
+               <span class="s2">"location_type"</span><span class="p">:</span><span class="s2">"APPROXIMATE"</span><span class="p">,</span>
+               <span class="s2">"viewport"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">42.886778</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">69.85886099999999</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">41.18705300000001</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">73.5082101</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">41.18705300000001</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">73.5082101</span>
                   <span class="p">}</span>
                <span class="p">}</span>
             <span class="p">},</span>
-            <span class="s2">&quot;place_id&quot;</span><span class="p">:</span><span class="s2">&quot;****1l44kRHA2DVTbQxkU&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-               <span class="s2">&quot;administrative_area_level_1&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;political&quot;</span>
+            <span class="s2">"place_id"</span><span class="p">:</span><span class="s2">"****1l44kRHA2DVTbQxkU"</span><span class="p">,</span>
+            <span class="s2">"types"</span><span class="p">:[</span>
+               <span class="s2">"administrative_area_level_1"</span><span class="p">,</span>
+               <span class="s2">"political"</span>
             <span class="p">]</span>
          <span class="p">},</span>
          <span class="p">{</span>
-            <span class="s2">&quot;address_components&quot;</span><span class="p">:[</span>
+            <span class="s2">"address_components"</span><span class="p">:[</span>
                <span class="p">{</span>
-                  <span class="s2">&quot;long_name&quot;</span><span class="p">:</span><span class="s2">&quot;United States&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;short_name&quot;</span><span class="p">:</span><span class="s2">&quot;US&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-                     <span class="s2">&quot;country&quot;</span><span class="p">,</span>
-                     <span class="s2">&quot;political&quot;</span>
+                  <span class="s2">"long_name"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span>
+                  <span class="s2">"short_name"</span><span class="p">:</span><span class="s2">"US"</span><span class="p">,</span>
+                  <span class="s2">"types"</span><span class="p">:[</span>
+                     <span class="s2">"country"</span><span class="p">,</span>
+                     <span class="s2">"political"</span>
                   <span class="p">]</span>
                <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;formatted_address&quot;</span><span class="p">:</span><span class="s2">&quot;United States&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;geometry&quot;</span><span class="p">:{</span>
-               <span class="s2">&quot;bounds&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">74.071038</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">66.885417</span>
+            <span class="s2">"formatted_address"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span>
+            <span class="s2">"geometry"</span><span class="p">:{</span>
+               <span class="s2">"bounds"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">74.071038</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">66.885417</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">18.7763</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="mf">166.9999999</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">18.7763</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="mf">166.9999999</span>
                   <span class="p">}</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">38.7945952</span><span class="p">,</span>
-                  <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">106.5348379</span>
+               <span class="s2">"location"</span><span class="p">:{</span>
+                  <span class="s2">"lat"</span><span class="p">:</span><span class="mf">38.7945952</span><span class="p">,</span>
+                  <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">106.5348379</span>
                <span class="p">},</span>
-               <span class="s2">&quot;location_type&quot;</span><span class="p">:</span><span class="s2">&quot;APPROXIMATE&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;viewport&quot;</span><span class="p">:{</span>
-                  <span class="s2">&quot;northeast&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">74.071038</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="o">-</span><span class="mf">66.885417</span>
+               <span class="s2">"location_type"</span><span class="p">:</span><span class="s2">"APPROXIMATE"</span><span class="p">,</span>
+               <span class="s2">"viewport"</span><span class="p">:{</span>
+                  <span class="s2">"northeast"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">74.071038</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="o">-</span><span class="mf">66.885417</span>
                   <span class="p">},</span>
-                  <span class="s2">&quot;southwest&quot;</span><span class="p">:{</span>
-                     <span class="s2">&quot;lat&quot;</span><span class="p">:</span><span class="mf">18.7763</span><span class="p">,</span>
-                     <span class="s2">&quot;lng&quot;</span><span class="p">:</span><span class="mf">166.9999999</span>
+                  <span class="s2">"southwest"</span><span class="p">:{</span>
+                     <span class="s2">"lat"</span><span class="p">:</span><span class="mf">18.7763</span><span class="p">,</span>
+                     <span class="s2">"lng"</span><span class="p">:</span><span class="mf">166.9999999</span>
                   <span class="p">}</span>
                <span class="p">}</span>
             <span class="p">},</span>
-            <span class="s2">&quot;place_id&quot;</span><span class="p">:</span><span class="s2">&quot;****IS16lQRQrfeQ5K5Oxw&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;types&quot;</span><span class="p">:[</span>
-               <span class="s2">&quot;country&quot;</span><span class="p">,</span>
-               <span class="s2">&quot;political&quot;</span>
+            <span class="s2">"place_id"</span><span class="p">:</span><span class="s2">"****IS16lQRQrfeQ5K5Oxw"</span><span class="p">,</span>
+            <span class="s2">"types"</span><span class="p">:[</span>
+               <span class="s2">"country"</span><span class="p">,</span>
+               <span class="s2">"political"</span>
             <span class="p">]</span>
          <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;status&quot;</span><span class="p">:</span><span class="s2">&quot;OK&quot;</span>
+      <span class="s2">"status"</span><span class="p">:</span><span class="s2">"OK"</span>
    <span class="p">},</span>
-   <span class="s2">&quot;status&quot;</span><span class="p">:</span><span class="n">true</span>
+   <span class="s2">"status"</span><span class="p">:</span><span class="n">true</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1672,8 +1672,8 @@ key to use these functions.</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># build note</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">):</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="s2">&quot;&lt;div&gt;Artifact: </span><span class="si">{}</span><span class="s2">&lt;/div&gt;&lt;div&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;results&#39;</span><span class="p">,</span> <span class="p">[{}])[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;formatted_address&#39;</span><span class="p">))))</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'response'</span><span class="p">)</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'response'</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'results'</span><span class="p">):</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="s2">"&lt;div&gt;Artifact: </span><span class="si">{}</span><span class="s2">&lt;/div&gt;&lt;div&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'response'</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'results'</span><span class="p">,</span> <span class="p">[{}])[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'formatted_address'</span><span class="p">))))</span>
 </pre></div>
 </div>
 </p>

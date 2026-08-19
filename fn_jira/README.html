@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -834,27 +834,27 @@ The Jira issues are found when running the Jira search using the filters given i
 <details><summary>soar_create_case_template.jinja</summary>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
 <span class="x">  </span><span class="c">{# JINJA template for creating a new SOAR incident from an endpoint #}</span>
-<span class="x">  &quot;name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">&quot;summary&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">  &quot;description&quot;: </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">renderedFields</span><span class="o">[</span><span class="s2">&quot;description&quot;</span><span class="o">]</span> <span class="k">is</span> <span class="nf">none</span> <span class="cp">%}</span><span class="x"> null </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x"> &quot;</span><span class="cp">{{</span> <span class="nv">renderedFields</span><span class="o">[</span><span class="s2">&quot;description&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot; </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x">,</span>
-<span class="x">  &quot;severity_code&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">&quot;priority&quot;</span><span class="o">][</span><span class="s2">&quot;name&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">  &quot;create_date&quot;: </span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">&quot;created&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">,</span>
-<span class="x">  &quot;discovered_date&quot;: </span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">&quot;created&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">,</span>
-<span class="x">  &quot;plan_status&quot;: &quot;A&quot;,</span>
+<span class="x">  "name": "</span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">"summary"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">  "description": </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">renderedFields</span><span class="o">[</span><span class="s2">"description"</span><span class="o">]</span> <span class="k">is</span> <span class="nf">none</span> <span class="cp">%}</span><span class="x"> null </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x"> "</span><span class="cp">{{</span> <span class="nv">renderedFields</span><span class="o">[</span><span class="s2">"description"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">" </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x">,</span>
+<span class="x">  "severity_code": "</span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">"priority"</span><span class="o">][</span><span class="s2">"name"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">  "create_date": </span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">"created"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  "discovered_date": </span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">"created"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  "plan_status": "A",</span>
 <span class="x">  </span><span class="c">{# specify your custom fields for your endpoint solution #}</span>
-<span class="x">  &quot;properties&quot;: {</span>
-<span class="x">    &quot;jira_internal_url&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">internal_url</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;jira_issue_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">key</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;jira_server&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">jira_server</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;jira_url&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">url</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;jira_project_key&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">&quot;project&quot;</span><span class="o">][</span><span class="s2">&quot;key&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;jira_issue_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">&quot;status&quot;</span><span class="o">][</span><span class="s2">&quot;name&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;jira_issue_type&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">&quot;issuetype&quot;</span><span class="o">][</span><span class="s2">&quot;name&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;jira_linked_to_incident&quot;: true</span>
+<span class="x">  "properties": {</span>
+<span class="x">    "jira_internal_url": "</span><span class="cp">{{</span> <span class="nv">internal_url</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "jira_issue_id": "</span><span class="cp">{{</span> <span class="nv">key</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "jira_server": "</span><span class="cp">{{</span> <span class="nv">jira_server</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "jira_url": "</span><span class="cp">{{</span> <span class="nv">url</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "jira_project_key": "</span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">"project"</span><span class="o">][</span><span class="s2">"key"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "jira_issue_status": "</span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">"status"</span><span class="o">][</span><span class="s2">"name"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "jira_issue_type": "</span><span class="cp">{{</span> <span class="nv">fields</span><span class="o">[</span><span class="s2">"issuetype"</span><span class="o">][</span><span class="s2">"name"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "jira_linked_to_incident": true</span>
 <span class="x">  },</span>
 <span class="x">  </span><span class="c">{# add comments as necessary #}</span>
-<span class="x">  &quot;comments&quot;: [</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">note</span> <span class="k">in</span> <span class="nv">renderedFields</span><span class="o">[</span><span class="s2">&quot;comment&quot;</span><span class="o">]</span> <span class="cp">%}</span>
-<span class="x">      { &quot;text&quot;: { &quot;format&quot;: &quot;html&quot;, &quot;content&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">note</span> <span class="cp">}}</span><span class="x">&quot; }, &quot;type&quot;: &quot;incident&quot; }</span>
+<span class="x">  "comments": [</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">for</span> <span class="nv">note</span> <span class="k">in</span> <span class="nv">renderedFields</span><span class="o">[</span><span class="s2">"comment"</span><span class="o">]</span> <span class="cp">%}</span>
+<span class="x">      { "text": { "format": "html", "content": "</span><span class="cp">{{</span> <span class="nv">note</span> <span class="cp">}}</span><span class="x">" }, "type": "incident" }</span>
 <span class="x">      </span><span class="cp">{%</span> <span class="k">if</span> <span class="k">not</span> <span class="nb">loop</span><span class="nv">.last</span> <span class="cp">%}</span>
 <span class="x">        ,</span>
 <span class="x">      </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
@@ -867,32 +867,32 @@ The Jira issues are found when running the Jira search using the filters given i
 <details><summary>soar_update_case_template.jinja</summary>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
 <span class="x">  </span><span class="c">{# JINJA template for updating a new SOAR incident from an endpoint #}</span>
-<span class="x">  &quot;version&quot;: </span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;vers&quot;</span><span class="o">]</span> <span class="o">+</span> <span class="m">1</span> <span class="cp">}}</span><span class="x">,</span>
-<span class="x">  &quot;changes&quot;: [</span>
+<span class="x">  "version": </span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">"vers"</span><span class="o">]</span> <span class="o">+</span> <span class="m">1</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  "changes": [</span>
 <span class="x">      {</span>
-<span class="x">        &quot;old_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;severity_code&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
-<span class="x">        &quot;new_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">&quot;fields&quot;</span><span class="o">][</span><span class="s2">&quot;priority&quot;</span><span class="o">][</span><span class="s2">&quot;name&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
-<span class="x">        &quot;field&quot;: {&quot;name&quot;: &quot;severity_code&quot;}</span>
+<span class="x">        "old_value": {"text": "</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">"severity_code"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">"},</span>
+<span class="x">        "new_value": {"text": "</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">"fields"</span><span class="o">][</span><span class="s2">"priority"</span><span class="o">][</span><span class="s2">"name"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">"},</span>
+<span class="x">        "field": {"name": "severity_code"}</span>
 <span class="x">      },</span>
 <span class="x">      {</span>
-<span class="x">        &quot;old_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;properties&quot;</span><span class="o">][</span><span class="s2">&quot;jira_issue_id&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
-<span class="x">        &quot;new_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">&quot;key&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
-<span class="x">        &quot;field&quot;: {&quot;name&quot;: &quot;jira_issue_id&quot;}</span>
+<span class="x">        "old_value": {"text": "</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">"properties"</span><span class="o">][</span><span class="s2">"jira_issue_id"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">"},</span>
+<span class="x">        "new_value": {"text": "</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">"key"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">"},</span>
+<span class="x">        "field": {"name": "jira_issue_id"}</span>
 <span class="x">      },</span>
 <span class="x">      {</span>
-<span class="x">        &quot;old_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;properties&quot;</span><span class="o">][</span><span class="s2">&quot;jira_server&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
-<span class="x">        &quot;new_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">&quot;jira_server&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
-<span class="x">        &quot;field&quot;: {&quot;name&quot;: &quot;jira_server&quot;}</span>
+<span class="x">        "old_value": {"text": "</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">"properties"</span><span class="o">][</span><span class="s2">"jira_server"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">"},</span>
+<span class="x">        "new_value": {"text": "</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">"jira_server"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">"},</span>
+<span class="x">        "field": {"name": "jira_server"}</span>
 <span class="x">      },</span>
 <span class="x">      {</span>
-<span class="x">        &quot;old_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;properties&quot;</span><span class="o">][</span><span class="s2">&quot;jira_project_key&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
-<span class="x">        &quot;new_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">&quot;fields&quot;</span><span class="o">][</span><span class="s2">&quot;project&quot;</span><span class="o">][</span><span class="s2">&quot;key&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
-<span class="x">        &quot;field&quot;: {&quot;name&quot;: &quot;jira_project_key&quot;}</span>
+<span class="x">        "old_value": {"text": "</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">"properties"</span><span class="o">][</span><span class="s2">"jira_project_key"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">"},</span>
+<span class="x">        "new_value": {"text": "</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">"fields"</span><span class="o">][</span><span class="s2">"project"</span><span class="o">][</span><span class="s2">"key"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">"},</span>
+<span class="x">        "field": {"name": "jira_project_key"}</span>
 <span class="x">      },</span>
 <span class="x">      {</span>
-<span class="x">        &quot;old_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;properties&quot;</span><span class="o">][</span><span class="s2">&quot;jira_issue_status&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
-<span class="x">        &quot;new_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">&quot;fields&quot;</span><span class="o">][</span><span class="s2">&quot;status&quot;</span><span class="o">][</span><span class="s2">&quot;name&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
-<span class="x">        &quot;field&quot;: {&quot;name&quot;: &quot;jira_issue_status&quot;}</span>
+<span class="x">        "old_value": {"text": "</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">"properties"</span><span class="o">][</span><span class="s2">"jira_issue_status"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">"},</span>
+<span class="x">        "new_value": {"text": "</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">"fields"</span><span class="o">][</span><span class="s2">"status"</span><span class="o">][</span><span class="s2">"name"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">"},</span>
+<span class="x">        "field": {"name": "jira_issue_status"}</span>
 <span class="x">      }</span>
 <span class="x">  ]</span>
 <span class="x">}</span>
@@ -902,33 +902,33 @@ The Jira issues are found when running the Jira search using the filters given i
 <details><summary>soar_close_case_template.jinja</summary>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
 <span class="x">  </span><span class="c">{# JINJA template for closing a SOAR incident using endpoint data #}</span>
-<span class="x">  &quot;version&quot;: </span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;vers&quot;</span><span class="o">]</span> <span class="o">+</span> <span class="m">1</span> <span class="cp">}}</span><span class="x">,</span>
-<span class="x">  &quot;changes&quot;: [</span>
+<span class="x">  "version": </span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">"vers"</span><span class="o">]</span> <span class="o">+</span> <span class="m">1</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  "changes": [</span>
 <span class="x">    {</span>
-<span class="x">      &quot;old_value&quot;: {&quot;text&quot;: null},</span>
-<span class="x">      &quot;new_value&quot;: {&quot;text&quot;: &quot;Resolved&quot;},</span>
-<span class="x">      &quot;field&quot;: {&quot;name&quot;: &quot;resolution_id&quot;}</span>
+<span class="x">      "old_value": {"text": null},</span>
+<span class="x">      "new_value": {"text": "Resolved"},</span>
+<span class="x">      "field": {"name": "resolution_id"}</span>
 <span class="x">    },</span>
 <span class="x">    {</span>
-<span class="x">      &quot;old_value&quot;: {&quot;text&quot;: null},</span>
-<span class="x">      &quot;new_value&quot;: {&quot;text&quot;: &quot;Closed by Jira&quot;},</span>
-<span class="x">      &quot;field&quot;: {&quot;name&quot;: &quot;resolution_summary&quot;}</span>
+<span class="x">      "old_value": {"text": null},</span>
+<span class="x">      "new_value": {"text": "Closed by Jira"},</span>
+<span class="x">      "field": {"name": "resolution_summary"}</span>
 <span class="x">    },</span>
 <span class="x">    {</span>
-<span class="x">      &quot;old_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;properties&quot;</span><span class="o">][</span><span class="s2">&quot;jira_issue_status&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
-<span class="x">      &quot;new_value&quot;: {&quot;text&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">&quot;fields&quot;</span><span class="o">][</span><span class="s2">&quot;status&quot;</span><span class="o">][</span><span class="s2">&quot;name&quot;</span><span class="o">]</span> <span class="cp">}}</span><span class="x">&quot;},</span>
-<span class="x">      &quot;field&quot;: {&quot;name&quot;: &quot;jira_issue_status&quot;}</span>
+<span class="x">      "old_value": {"text": "</span><span class="cp">{{</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">"properties"</span><span class="o">][</span><span class="s2">"jira_issue_status"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">"},</span>
+<span class="x">      "new_value": {"text": "</span><span class="cp">{{</span> <span class="nv">jira</span><span class="o">[</span><span class="s2">"fields"</span><span class="o">][</span><span class="s2">"status"</span><span class="o">][</span><span class="s2">"name"</span><span class="o">]</span> <span class="cp">}}</span><span class="x">"},</span>
+<span class="x">      "field": {"name": "jira_issue_status"}</span>
 <span class="x">    },</span>
 <span class="x">    {</span>
-<span class="x">      &quot;old_value&quot;: {&quot;text&quot;: &quot;A&quot;},</span>
-<span class="x">      &quot;new_value&quot;: {&quot;text&quot;: &quot;C&quot;},</span>
-<span class="x">      &quot;field&quot;: {&quot;name&quot;: &quot;plan_status&quot;}</span>
+<span class="x">      "old_value": {"text": "A"},</span>
+<span class="x">      "new_value": {"text": "C"},</span>
+<span class="x">      "field": {"name": "plan_status"}</span>
 <span class="x">    },</span>
 <span class="x">    </span><span class="c">{# The following is required for the automation playbook, Jira Close Issue, to not run when the poller closes a SOAR incident. #}</span>
 <span class="x">    {</span>
-<span class="x">      &quot;old_value&quot;: {&quot;boolean&quot;: </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;properties&quot;</span><span class="o">][</span><span class="s2">&quot;jira_issue_closed_on_jira&quot;</span><span class="o">]</span> <span class="k">is</span> <span class="nf">none</span> <span class="cp">%}</span><span class="x"> null </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">&quot;properties&quot;</span><span class="o">][</span><span class="s2">&quot;jira_issue_closed_on_jira&quot;</span><span class="o">]</span> <span class="k">is</span> <span class="nf">False</span> <span class="cp">%}</span><span class="x"> false </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x"> true </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x">},</span>
-<span class="x">      &quot;new_value&quot;: {&quot;boolean&quot;: true},</span>
-<span class="x">      &quot;field&quot;: {&quot;name&quot;: &quot;jira_issue_closed_on_jira&quot;}</span>
+<span class="x">      "old_value": {"boolean": </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">"properties"</span><span class="o">][</span><span class="s2">"jira_issue_closed_on_jira"</span><span class="o">]</span> <span class="k">is</span> <span class="nf">none</span> <span class="cp">%}</span><span class="x"> null </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">soar</span><span class="o">[</span><span class="s2">"properties"</span><span class="o">][</span><span class="s2">"jira_issue_closed_on_jira"</span><span class="o">]</span> <span class="k">is</span> <span class="nf">False</span> <span class="cp">%}</span><span class="x"> false </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x"> true </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x">},</span>
+<span class="x">      "new_value": {"boolean": true},</span>
+<span class="x">      "field": {"name": "jira_issue_closed_on_jira"}</span>
 <span class="x">    }</span>
 <span class="x">  ]</span>
 <span class="x">}</span>
@@ -1006,64 +1006,64 @@ See example workflow for configuration of function pre-processor and post-proces
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;accountId&quot;</span><span class="p">:</span> <span class="s2">&quot;123456&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;accountType&quot;</span><span class="p">:</span> <span class="s2">&quot;atlassian&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;avatarUrls&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;16x16&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;24x24&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;32x32&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;48x48&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"author"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"accountId"</span><span class="p">:</span> <span class="s2">"123456"</span><span class="p">,</span>
+      <span class="s2">"accountType"</span><span class="p">:</span> <span class="s2">"atlassian"</span><span class="p">,</span>
+      <span class="s2">"active"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"avatarUrls"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"16x16"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span><span class="p">,</span>
+        <span class="s2">"24x24"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span><span class="p">,</span>
+        <span class="s2">"32x32"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span><span class="p">,</span>
+        <span class="s2">"48x48"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;emailAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/user?accountId=123456&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;timeZone&quot;</span><span class="p">:</span> <span class="s2">&quot;America/New_York&quot;</span>
+      <span class="s2">"displayName"</span><span class="p">:</span> <span class="s2">"test"</span><span class="p">,</span>
+      <span class="s2">"emailAddress"</span><span class="p">:</span> <span class="s2">"test@example.com"</span><span class="p">,</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/user?accountId=123456"</span><span class="p">,</span>
+      <span class="s2">"timeZone"</span><span class="p">:</span> <span class="s2">"America/New_York"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="s2">&quot;404 error is thrown&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-01-31T09:52:58.464-0500&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;10350&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;jira_url&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\&quot;</span><span class="s2">https://example.com/browse/JRA-45</span><span class="se">\&quot;\u003e</span><span class="s2">JRA-45</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;jsdPublic&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/issue/10055/comment/10350&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;updateAuthor&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;accountId&quot;</span><span class="p">:</span> <span class="s2">&quot;123456&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;accountType&quot;</span><span class="p">:</span> <span class="s2">&quot;atlassian&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;avatarUrls&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;16x16&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;24x24&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;32x32&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;48x48&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span>
+    <span class="s2">"body"</span><span class="p">:</span> <span class="s2">"404 error is thrown"</span><span class="p">,</span>
+    <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2023-01-31T09:52:58.464-0500"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"10350"</span><span class="p">,</span>
+    <span class="s2">"jira_url"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\"</span><span class="s2">https://example.com/browse/JRA-45</span><span class="se">\"\u003e</span><span class="s2">JRA-45</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"jsdPublic"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/issue/10055/comment/10350"</span><span class="p">,</span>
+    <span class="s2">"updateAuthor"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"accountId"</span><span class="p">:</span> <span class="s2">"123456"</span><span class="p">,</span>
+      <span class="s2">"accountType"</span><span class="p">:</span> <span class="s2">"atlassian"</span><span class="p">,</span>
+      <span class="s2">"active"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"avatarUrls"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"16x16"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span><span class="p">,</span>
+        <span class="s2">"24x24"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span><span class="p">,</span>
+        <span class="s2">"32x32"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span><span class="p">,</span>
+        <span class="s2">"48x48"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;emailAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/user?accountId=123456&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;timeZone&quot;</span><span class="p">:</span> <span class="s2">&quot;America/New_York&quot;</span>
+      <span class="s2">"displayName"</span><span class="p">:</span> <span class="s2">"test"</span><span class="p">,</span>
+      <span class="s2">"emailAddress"</span><span class="p">:</span> <span class="s2">"test@example.com"</span><span class="p">,</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/user?accountId=123456"</span><span class="p">,</span>
+      <span class="s2">"timeZone"</span><span class="p">:</span> <span class="s2">"America/New_York"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-01-31T09:52:58.464-0500&quot;</span>
+    <span class="s2">"updated"</span><span class="p">:</span> <span class="s2">"2023-01-31T09:52:58.464-0500"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2230</span><span class="p">,</span>
-    <span class="s2">&quot;jira_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\&quot;</span><span class="s2">rte</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e</span><span class="s2">404 error is thrown</span><span class="se">\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;jira_issue_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;jira_label&quot;</span><span class="p">:</span> <span class="s2">&quot;my-server&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="mi">214</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2230</span><span class="p">,</span>
+    <span class="s2">"jira_comment"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\"</span><span class="s2">rte</span><span class="se">\"\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e</span><span class="s2">404 error is thrown</span><span class="se">\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"jira_issue_id"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"jira_label"</span><span class="p">:</span> <span class="s2">"my-server"</span><span class="p">,</span>
+    <span class="s2">"task_id"</span><span class="p">:</span> <span class="mi">214</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">599</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-jira&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-01-31 09:52:58&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">599</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-jira"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"3.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-01-31 09:52:58"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1071,9 +1071,9 @@ See example workflow for configuration of function pre-processor and post-proces
 </details>
 <details><summary>Example Pre-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;task&quot;</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"task"</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">id</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">jira_issue_id</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="c1"># leave empty for tasks</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">jira_issue_id</span> <span class="o">=</span> <span class="s2">""</span> <span class="c1"># leave empty for tasks</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">jira_issue_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_issue_id</span>
 
@@ -1144,11 +1144,11 @@ See example workflow for configuration of function pre-processor and post-proces
 <li><p>jira_fields example:</p></li>
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="s2">&quot;ENG&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;issuetype&quot;</span><span class="p">:</span> <span class="s2">&quot;BUG&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Low&quot;</span><span class="p">},</span>
-  <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;IBM SOAR: Review artifact &#39;1.2.3.4&#39;&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Created from IBM SOAR&quot;</span>
+  <span class="s2">"project"</span><span class="p">:</span> <span class="s2">"ENG"</span><span class="p">,</span>
+  <span class="s2">"issuetype"</span><span class="p">:</span> <span class="s2">"BUG"</span><span class="p">,</span>
+  <span class="s2">"priority"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Low"</span><span class="p">},</span>
+  <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"IBM SOAR: Review artifact '1.2.3.4'"</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Created from IBM SOAR"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1163,224 +1163,224 @@ See example workflow for configuration of function pre-processor and post-proces
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;issue&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;expand&quot;</span><span class="p">:</span> <span class="s2">&quot;renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;fields&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;aggregateprogress&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;progress&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;total&quot;</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"issue"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"expand"</span><span class="p">:</span> <span class="s2">"renderedFields,names,schema,operations,editmeta,changelog,versionedRepresentations,customfield_10010.requestTypePractice"</span><span class="p">,</span>
+      <span class="s2">"fields"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"aggregateprogress"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"progress"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"total"</span><span class="p">:</span> <span class="mi">0</span>
         <span class="p">},</span>
-        <span class="s2">&quot;aggregatetimeestimate&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;aggregatetimeoriginalestimate&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;aggregatetimespent&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;assignee&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;accountId&quot;</span><span class="p">:</span> <span class="s2">&quot;123456&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;accountType&quot;</span><span class="p">:</span> <span class="s2">&quot;atlassian&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-          <span class="s2">&quot;avatarUrls&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;16x16&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;24x24&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;32x32&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;48x48&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span>
+        <span class="s2">"aggregatetimeestimate"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"aggregatetimeoriginalestimate"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"aggregatetimespent"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"assignee"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"accountId"</span><span class="p">:</span> <span class="s2">"123456"</span><span class="p">,</span>
+          <span class="s2">"accountType"</span><span class="p">:</span> <span class="s2">"atlassian"</span><span class="p">,</span>
+          <span class="s2">"active"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">"avatarUrls"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"16x16"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span><span class="p">,</span>
+            <span class="s2">"24x24"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span><span class="p">,</span>
+            <span class="s2">"32x32"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span><span class="p">,</span>
+            <span class="s2">"48x48"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;emailAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/user?accountId=123456&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;timeZone&quot;</span><span class="p">:</span> <span class="s2">&quot;America/New_York&quot;</span>
+          <span class="s2">"displayName"</span><span class="p">:</span> <span class="s2">"test"</span><span class="p">,</span>
+          <span class="s2">"emailAddress"</span><span class="p">:</span> <span class="s2">"test@example.com"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/user?accountId=123456"</span><span class="p">,</span>
+          <span class="s2">"timeZone"</span><span class="p">:</span> <span class="s2">"America/New_York"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;attachment&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;comments&quot;</span><span class="p">:</span> <span class="p">[],</span>
-          <span class="s2">&quot;maxResults&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/issue/10058/comment&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;startAt&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;total&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="s2">"attachment"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"comment"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"comments"</span><span class="p">:</span> <span class="p">[],</span>
+          <span class="s2">"maxResults"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/issue/10058/comment"</span><span class="p">,</span>
+          <span class="s2">"startAt"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"total"</span><span class="p">:</span> <span class="mi">0</span>
         <span class="p">},</span>
-        <span class="s2">&quot;components&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-01-31T12:57:59.000-0500&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;accountId&quot;</span><span class="p">:</span> <span class="s2">&quot;123456&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;accountType&quot;</span><span class="p">:</span> <span class="s2">&quot;atlassian&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-          <span class="s2">&quot;avatarUrls&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;16x16&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;24x24&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;32x32&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;48x48&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span>
+        <span class="s2">"components"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2023-01-31T12:57:59.000-0500"</span><span class="p">,</span>
+        <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"accountId"</span><span class="p">:</span> <span class="s2">"123456"</span><span class="p">,</span>
+          <span class="s2">"accountType"</span><span class="p">:</span> <span class="s2">"atlassian"</span><span class="p">,</span>
+          <span class="s2">"active"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">"avatarUrls"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"16x16"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span><span class="p">,</span>
+            <span class="s2">"24x24"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span><span class="p">,</span>
+            <span class="s2">"32x32"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span><span class="p">,</span>
+            <span class="s2">"48x48"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;emailAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/user?accountId=123456&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;timeZone&quot;</span><span class="p">:</span> <span class="s2">&quot;America/New_York&quot;</span>
+          <span class="s2">"displayName"</span><span class="p">:</span> <span class="s2">"test"</span><span class="p">,</span>
+          <span class="s2">"emailAddress"</span><span class="p">:</span> <span class="s2">"test@example.com"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/user?accountId=123456"</span><span class="p">,</span>
+          <span class="s2">"timeZone"</span><span class="p">:</span> <span class="s2">"America/New_York"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;customfield_10001&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10002&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10003&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10004&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10005&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10006&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10007&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10008&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10009&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10010&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10014&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10015&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10016&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10017&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10018&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;hasEpicLinkFieldDependency&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-          <span class="s2">&quot;nonEditableReason&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;The Parent Link is only available to Jira Premium users.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;PLUGIN_LICENSE_ERROR&quot;</span>
+        <span class="s2">"customfield_10001"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10002"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10003"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10004"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10005"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10006"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10007"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10008"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10009"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10010"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10014"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10015"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10016"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10017"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10018"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"hasEpicLinkFieldDependency"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">"nonEditableReason"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"The Parent Link is only available to Jira Premium users."</span><span class="p">,</span>
+            <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">"PLUGIN_LICENSE_ERROR"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;showField&quot;</span><span class="p">:</span> <span class="n">false</span>
+          <span class="s2">"showField"</span><span class="p">:</span> <span class="n">false</span>
         <span class="p">},</span>
-        <span class="s2">&quot;customfield_10019&quot;</span><span class="p">:</span> <span class="s2">&quot;0|i0000v:&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10020&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10021&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10022&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10023&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10024&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10025&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10026&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10027&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10028&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10029&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10030&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10031&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;customfield_10035&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;IBM SOAR Link: https://test.com:443/#incidents/2231</span><span class="se">\n\n</span><span class="s2">Created in IBM SOAR&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;duedate&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;environment&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;fixVersions&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;issuelinks&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;issuerestriction&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;issuerestrictions&quot;</span><span class="p">:</span> <span class="p">{},</span>
-          <span class="s2">&quot;shouldDisplay&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="s2">"customfield_10019"</span><span class="p">:</span> <span class="s2">"0|i0000v:"</span><span class="p">,</span>
+        <span class="s2">"customfield_10020"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10021"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10022"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10023"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10024"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10025"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10026"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10027"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10028"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10029"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10030"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10031"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"customfield_10035"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"IBM SOAR Link: https://test.com:443/#incidents/2231</span><span class="se">\n\n</span><span class="s2">Created in IBM SOAR"</span><span class="p">,</span>
+        <span class="s2">"duedate"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"environment"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"fixVersions"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"issuelinks"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"issuerestriction"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"issuerestrictions"</span><span class="p">:</span> <span class="p">{},</span>
+          <span class="s2">"shouldDisplay"</span><span class="p">:</span> <span class="n">true</span>
         <span class="p">},</span>
-        <span class="s2">&quot;issuetype&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;avatarId&quot;</span><span class="p">:</span> <span class="mi">10315</span><span class="p">,</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Stories track functionality or features expressed as user goals.&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;entityId&quot;</span><span class="p">:</span> <span class="s2">&quot;28f65659-c37e-43ad-a17f-1d00d8d6d9ac&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;hierarchyLevel&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;iconUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;10007&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Story&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/issuetype/10007&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;subtask&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="s2">"issuetype"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"avatarId"</span><span class="p">:</span> <span class="mi">10315</span><span class="p">,</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Stories track functionality or features expressed as user goals."</span><span class="p">,</span>
+          <span class="s2">"entityId"</span><span class="p">:</span> <span class="s2">"28f65659-c37e-43ad-a17f-1d00d8d6d9ac"</span><span class="p">,</span>
+          <span class="s2">"hierarchyLevel"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"iconUrl"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/universal_avatar/view/type/issuetype/avatar/10315?size=medium"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"10007"</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Story"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/issuetype/10007"</span><span class="p">,</span>
+          <span class="s2">"subtask"</span><span class="p">:</span> <span class="n">false</span>
         <span class="p">},</span>
-        <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;lastViewed&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;iconUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/images/icons/priorities/low.svg&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Low&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/priority/4&quot;</span>
+        <span class="s2">"labels"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"lastViewed"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"priority"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"iconUrl"</span><span class="p">:</span> <span class="s2">"https://example.com/images/icons/priorities/low.svg"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"4"</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Low"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/priority/4"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;progress&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;progress&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;total&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="s2">"progress"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"progress"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"total"</span><span class="p">:</span> <span class="mi">0</span>
         <span class="p">},</span>
-        <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;avatarUrls&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;16x16&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=xsmall&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;24x24&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=small&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;32x32&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=medium&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;48x48&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419&quot;</span>
+        <span class="s2">"project"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"avatarUrls"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"16x16"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=xsmall"</span><span class="p">,</span>
+            <span class="s2">"24x24"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=small"</span><span class="p">,</span>
+            <span class="s2">"32x32"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419?size=medium"</span><span class="p">,</span>
+            <span class="s2">"48x48"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/universal_avatar/view/type/project/avatar/10419"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;10001&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;JRA&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Test Project&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;projectTypeKey&quot;</span><span class="p">:</span> <span class="s2">&quot;software&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/project/10001&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;simplified&quot;</span><span class="p">:</span> <span class="n">true</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"10001"</span><span class="p">,</span>
+          <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"JRA"</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Test Project"</span><span class="p">,</span>
+          <span class="s2">"projectTypeKey"</span><span class="p">:</span> <span class="s2">"software"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/project/10001"</span><span class="p">,</span>
+          <span class="s2">"simplified"</span><span class="p">:</span> <span class="n">true</span>
         <span class="p">},</span>
-        <span class="s2">&quot;reporter&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;accountId&quot;</span><span class="p">:</span> <span class="s2">&quot;123456&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;accountType&quot;</span><span class="p">:</span> <span class="s2">&quot;atlassian&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-          <span class="s2">&quot;avatarUrls&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;16x16&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;24x24&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;32x32&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;48x48&quot;</span><span class="p">:</span> <span class="s2">&quot;https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png&quot;</span>
+        <span class="s2">"reporter"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"accountId"</span><span class="p">:</span> <span class="s2">"123456"</span><span class="p">,</span>
+          <span class="s2">"accountType"</span><span class="p">:</span> <span class="s2">"atlassian"</span><span class="p">,</span>
+          <span class="s2">"active"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">"avatarUrls"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"16x16"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span><span class="p">,</span>
+            <span class="s2">"24x24"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span><span class="p">,</span>
+            <span class="s2">"32x32"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span><span class="p">,</span>
+            <span class="s2">"48x48"</span><span class="p">:</span> <span class="s2">"https://secure.gravatar.com/avatar/2cfc976767db44422e9281fb012845a2?d=https%3A</span><span class="si">%2F%2F</span><span class="s2">avatar-management--avatars.us-west-2.prod.public.atl-paas.net</span><span class="si">%2F</span><span class="s2">initials</span><span class="si">%2F</span><span class="s2">R-1.png"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;displayName&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;emailAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;test@example.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/user?accountId=123456&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;timeZone&quot;</span><span class="p">:</span> <span class="s2">&quot;America/New_York&quot;</span>
+          <span class="s2">"displayName"</span><span class="p">:</span> <span class="s2">"test"</span><span class="p">,</span>
+          <span class="s2">"emailAddress"</span><span class="p">:</span> <span class="s2">"test@example.com"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/user?accountId=123456"</span><span class="p">,</span>
+          <span class="s2">"timeZone"</span><span class="p">:</span> <span class="s2">"America/New_York"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;resolution&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;resolutiondate&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;security&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;iconUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;10003&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;To Do&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/status/10003&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;statusCategory&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;colorName&quot;</span><span class="p">:</span> <span class="s2">&quot;blue-gray&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;new&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;To Do&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/statuscategory/2&quot;</span>
+        <span class="s2">"resolution"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"resolutiondate"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"security"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+          <span class="s2">"iconUrl"</span><span class="p">:</span> <span class="s2">"https://example.com/"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"10003"</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"To Do"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/status/10003"</span><span class="p">,</span>
+          <span class="s2">"statusCategory"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"colorName"</span><span class="p">:</span> <span class="s2">"blue-gray"</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"new"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"To Do"</span><span class="p">,</span>
+            <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/statuscategory/2"</span>
           <span class="p">}</span>
         <span class="p">},</span>
-        <span class="s2">&quot;statuscategorychangedate&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-01-31T12:57:59.508-0500&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;subtasks&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;IBM SOAR: h&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timeestimate&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;timeoriginalestimate&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;timespent&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;timetracking&quot;</span><span class="p">:</span> <span class="p">{},</span>
-        <span class="s2">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-01-31T12:57:59.000-0500&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;versions&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;votes&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;hasVoted&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/issue/JRA-47/votes&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;votes&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="s2">"statuscategorychangedate"</span><span class="p">:</span> <span class="s2">"2023-01-31T12:57:59.508-0500"</span><span class="p">,</span>
+        <span class="s2">"subtasks"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"IBM SOAR: h"</span><span class="p">,</span>
+        <span class="s2">"timeestimate"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"timeoriginalestimate"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"timespent"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"timetracking"</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s2">"updated"</span><span class="p">:</span> <span class="s2">"2023-01-31T12:57:59.000-0500"</span><span class="p">,</span>
+        <span class="s2">"versions"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"votes"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"hasVoted"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/issue/JRA-47/votes"</span><span class="p">,</span>
+          <span class="s2">"votes"</span><span class="p">:</span> <span class="mi">0</span>
         <span class="p">},</span>
-        <span class="s2">&quot;watches&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;isWatching&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/issue/JRA-47/watchers&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;watchCount&quot;</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="s2">"watches"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"isWatching"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/issue/JRA-47/watchers"</span><span class="p">,</span>
+          <span class="s2">"watchCount"</span><span class="p">:</span> <span class="mi">1</span>
         <span class="p">},</span>
-        <span class="s2">&quot;worklog&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;maxResults&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-          <span class="s2">&quot;startAt&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;total&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;worklogs&quot;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="s2">"worklog"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"maxResults"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+          <span class="s2">"startAt"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"total"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"worklogs"</span><span class="p">:</span> <span class="p">[]</span>
         <span class="p">},</span>
-        <span class="s2">&quot;workratio&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="s2">"workratio"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span>
       <span class="p">},</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;10058&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;JRA-47&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/issue/10058&quot;</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"10058"</span><span class="p">,</span>
+      <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"JRA-47"</span><span class="p">,</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/issue/10058"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;issue_key&quot;</span><span class="p">:</span> <span class="s2">&quot;JRA-47&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;issue_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/browse/JRA-47&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;issue_url_internal&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com/rest/api/2/issue/10058&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;jira_dt_name&quot;</span><span class="p">:</span> <span class="s2">&quot;jira_task_references&quot;</span>
+    <span class="s2">"issue_key"</span><span class="p">:</span> <span class="s2">"JRA-47"</span><span class="p">,</span>
+    <span class="s2">"issue_url"</span><span class="p">:</span> <span class="s2">"https://example.com/browse/JRA-47"</span><span class="p">,</span>
+    <span class="s2">"issue_url_internal"</span><span class="p">:</span> <span class="s2">"https://example.com/rest/api/2/issue/10058"</span><span class="p">,</span>
+    <span class="s2">"jira_dt_name"</span><span class="p">:</span> <span class="s2">"jira_task_references"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2231</span><span class="p">,</span>
-    <span class="s2">&quot;jira_fields&quot;</span><span class="p">:</span> <span class="s2">&quot;{ </span><span class="se">\&quot;</span><span class="s2">summary</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">IBM SOAR: h</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">issuetype</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">Story</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">project</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">JRA</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">description</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">Created in IBM SOAR</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">priority</span><span class="se">\&quot;</span><span class="s2">:{ </span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">Low</span><span class="se">\&quot;</span><span class="s2"> } }&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;jira_label&quot;</span><span class="p">:</span> <span class="s2">&quot;my-server&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2231</span><span class="p">,</span>
+    <span class="s2">"jira_fields"</span><span class="p">:</span> <span class="s2">"{ </span><span class="se">\"</span><span class="s2">summary</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">IBM SOAR: h</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">issuetype</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Story</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">project</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">JRA</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Created in IBM SOAR</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">priority</span><span class="se">\"</span><span class="s2">:{ </span><span class="se">\"</span><span class="s2">name</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Low</span><span class="se">\"</span><span class="s2"> } }"</span><span class="p">,</span>
+    <span class="s2">"jira_label"</span><span class="p">:</span> <span class="s2">"my-server"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1748</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-jira&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-01-31 12:57:59&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1748</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-jira"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"3.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-01-31 12:57:59"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1390,14 +1390,14 @@ See example workflow for configuration of function pre-processor and post-proces
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Jira Open Issue [Incident] pre-processing script</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">list_to_json_str</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
-<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">  </span><span class="sd">"""</span>
 <span class="sd">  Function that converts a list into a JSON string.</span>
 <span class="sd">  Supports types: basestring, unicode, bool, int, list and dicts.</span>
 <span class="sd">  If the value is None, it sets it to False.</span>
-<span class="sd">  &quot;&quot;&quot;</span>
-  <span class="n">list_as_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-  <span class="n">json_entry</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">,&#39;</span>
-  <span class="n">json_entry_str</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;,&#39;</span>
+<span class="sd">  """</span>
+  <span class="n">list_as_str</span> <span class="o">=</span> <span class="s1">''</span>
+  <span class="n">json_entry</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">'</span><span class="si">{0}</span><span class="s1">,'</span>
+  <span class="n">json_entry_str</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">'"</span><span class="si">{0}</span><span class="s1">",'</span>
 
   <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">l</span><span class="p">:</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
@@ -1410,29 +1410,29 @@ See example workflow for configuration of function pre-processor and post-proces
       <span class="n">list_as_str</span> <span class="o">+=</span> <span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dict_to_json_str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-      <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">n&quot;</span><span class="p">)</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">'"'</span><span class="p">,</span> <span class="sa">u</span><span class="s1">'</span><span class="se">\\</span><span class="s1">"'</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">n"</span><span class="p">)</span>
       <span class="n">list_as_str</span> <span class="o">+=</span> <span class="n">json_entry_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
 
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-      <span class="n">list_as_str</span> <span class="o">+=</span> <span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;true&#39;</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="s1">&#39;false&#39;</span><span class="p">)</span>
+      <span class="n">list_as_str</span> <span class="o">+=</span> <span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">'true'</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="s1">'false'</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
       <span class="n">list_as_str</span> <span class="o">+=</span> <span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
     <span class="k">else</span><span class="p">:</span>
-      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s1">&#39;list_to_json_str does not support this type: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s1">'list_to_json_str does not support this type: </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
 
-  <span class="k">return</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;[&#39;</span><span class="p">,</span> <span class="n">list_as_str</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="sa">u</span><span class="s1">&#39;]&#39;</span><span class="p">)</span>
+  <span class="k">return</span> <span class="sa">u</span><span class="s1">'</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="sa">u</span><span class="s1">'['</span><span class="p">,</span> <span class="n">list_as_str</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="sa">u</span><span class="s1">']'</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">dict_to_json_str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
-<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">  </span><span class="sd">"""</span>
 <span class="sd">  Function that converts a dictionary into a JSON string.</span>
 <span class="sd">  Supports types: basestring, unicode, bool, int, list and nested dicts.</span>
 <span class="sd">  If the value is None, it sets it to False.</span>
-<span class="sd">  &quot;&quot;&quot;</span>
+<span class="sd">  """</span>
 
-  <span class="n">json_entry</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;:</span><span class="si">{1}</span><span class="s1">&#39;</span>
-  <span class="n">json_entry_str</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;:&quot;</span><span class="si">{1}</span><span class="s1">&quot;&#39;</span>
+  <span class="n">json_entry</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">'"</span><span class="si">{0}</span><span class="s1">":</span><span class="si">{1}</span><span class="s1">'</span>
+  <span class="n">json_entry_str</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">'"</span><span class="si">{0}</span><span class="s1">":"</span><span class="si">{1}</span><span class="s1">"'</span>
   <span class="n">entries</span> <span class="o">=</span> <span class="p">[]</span>
 
   <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
@@ -1449,19 +1449,19 @@ See example workflow for configuration of function pre-processor and post-proces
       <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">dict_to_json_str</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
 
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-      <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">n&quot;</span><span class="p">)</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">'"'</span><span class="p">,</span> <span class="sa">u</span><span class="s1">'</span><span class="se">\\</span><span class="s1">"'</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">n"</span><span class="p">)</span>
       <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
 
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-      <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s1">&#39;true&#39;</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="s1">&#39;false&#39;</span><span class="p">))</span>
+      <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="s1">'true'</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="s1">'false'</span><span class="p">))</span>
 
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
       <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">value</span><span class="p">))</span>
 
     <span class="k">else</span><span class="p">:</span>
-      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s1">&#39;dict_to_json_str does not support this type: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s1">'dict_to_json_str does not support this type: </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
 
-  <span class="k">return</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;{&#39;</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">entries</span><span class="p">),</span> <span class="sa">u</span><span class="s1">&#39;}&#39;</span><span class="p">)</span>
+  <span class="k">return</span> <span class="sa">u</span><span class="s1">'</span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1"> </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="sa">u</span><span class="s1">'{'</span><span class="p">,</span> <span class="s1">','</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">entries</span><span class="p">),</span> <span class="sa">u</span><span class="s1">'}'</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">jira_label</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">jira_label</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">jira_label</span>
@@ -1472,16 +1472,16 @@ See example workflow for configuration of function pre-processor and post-proces
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 
 <span class="c1"># A map for JIRA priorities</span>
-<span class="n">priority_map</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;Lowest&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Lowest&quot;</span><span class="p">},</span> <span class="s2">&quot;Low&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Low&quot;</span><span class="p">},</span> <span class="s2">&quot;Medium&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Medium&quot;</span><span class="p">},</span> <span class="s2">&quot;High&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;High&quot;</span><span class="p">},</span> <span class="s2">&quot;Highest&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Highest&quot;</span><span class="p">}</span> <span class="p">}</span>
-<span class="n">jira_priority</span> <span class="o">=</span> <span class="n">priority_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Low&quot;</span><span class="p">})</span>
+<span class="n">priority_map</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">"Lowest"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Lowest"</span><span class="p">},</span> <span class="s2">"Low"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Low"</span><span class="p">},</span> <span class="s2">"Medium"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Medium"</span><span class="p">},</span> <span class="s2">"High"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"High"</span><span class="p">},</span> <span class="s2">"Highest"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Highest"</span><span class="p">}</span> <span class="p">}</span>
+<span class="n">jira_priority</span> <span class="o">=</span> <span class="n">priority_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="p">,</span> <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Low"</span><span class="p">})</span>
 
 <span class="c1"># Define JIRA fields here</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">jira_fields</span> <span class="o">=</span> <span class="n">dict_to_json_str</span><span class="p">({</span>
-  <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">jira_project_id</span><span class="p">,</span>
-  <span class="s2">&quot;issuetype&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">jira_issue_type</span><span class="p">,</span>
-  <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="n">jira_priority</span><span class="p">,</span>
-  <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="sa">u</span><span class="s2">&quot;IBM SOAR: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
-  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">incident</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span> <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;Created in IBM SOAR&quot;</span>
+  <span class="s2">"project"</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">jira_project_id</span><span class="p">,</span>
+  <span class="s2">"issuetype"</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">jira_issue_type</span><span class="p">,</span>
+  <span class="s2">"priority"</span><span class="p">:</span> <span class="n">jira_priority</span><span class="p">,</span>
+  <span class="s2">"summary"</span><span class="p">:</span> <span class="sa">u</span><span class="s2">"IBM SOAR: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+  <span class="s2">"description"</span><span class="p">:</span> <span class="n">incident</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span> <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">)</span> <span class="k">else</span> <span class="s2">"Created in IBM SOAR"</span>
 <span class="p">})</span>
 </pre></div>
 </div>
@@ -1490,15 +1490,15 @@ See example workflow for configuration of function pre-processor and post-proces
 <details><summary>Example Post-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">create_result</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">create_result</span>
-<span class="k">if</span> <span class="n">create_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">results_content</span> <span class="o">=</span> <span class="n">create_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
-  <span class="n">issue_key</span> <span class="o">=</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;issue_key&quot;</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_url</span> <span class="o">=</span> <span class="s2">&quot;&lt;a href=&#39;</span><span class="si">{}</span><span class="s2">&#39; target=&#39;blank&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;issue_url&quot;</span><span class="p">),</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;issue_key&quot;</span><span class="p">))</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_internal_url</span> <span class="o">=</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;issue_url_internal&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">create_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">results_content</span> <span class="o">=</span> <span class="n">create_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="n">issue_key</span> <span class="o">=</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"issue_key"</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_url</span> <span class="o">=</span> <span class="s2">"&lt;a href='</span><span class="si">{}</span><span class="s2">' target='blank'&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"issue_url"</span><span class="p">),</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"issue_key"</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_internal_url</span> <span class="o">=</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"issue_url_internal"</span><span class="p">)</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_issue_id</span> <span class="o">=</span> <span class="n">issue_key</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_server</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">jira_label</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_project_key</span> <span class="o">=</span> <span class="n">issue_key</span><span class="p">[:</span><span class="n">issue_key</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)]</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_issue_status</span> <span class="o">=</span> <span class="s2">&quot;To Do&quot;</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_project_key</span> <span class="o">=</span> <span class="n">issue_key</span><span class="p">[:</span><span class="n">issue_key</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s2">"-"</span><span class="p">)]</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_issue_status</span> <span class="o">=</span> <span class="s2">"To Do"</span>
 </pre></div>
 </div>
 </p>
@@ -1565,25 +1565,25 @@ See example workflow for configuration of function pre-processor and post-proces
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;jira_issue_id&quot;</span><span class="p">:</span> <span class="s2">&quot;JRA-239&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;jira_transition_id&quot;</span><span class="p">:</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;jira_fields&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">customfield_10041</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">value</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Resolved</span><span class="se">\&quot;</span><span class="s2">}}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;jira_label&quot;</span><span class="p">:</span> <span class="s2">&quot;my-server&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;jira_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Closed in IBM SOAR</span><span class="se">\n\n</span><span class="s2">Resolution: Done</span><span class="se">\n</span><span class="s2">&quot;</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"Done"</span><span class="p">,</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"jira_issue_id"</span><span class="p">:</span> <span class="s2">"JRA-239"</span><span class="p">,</span>
+    <span class="s2">"jira_transition_id"</span><span class="p">:</span> <span class="s2">"Done"</span><span class="p">,</span>
+    <span class="s2">"jira_fields"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">customfield_10041</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\"</span><span class="s2">value</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Resolved</span><span class="se">\"</span><span class="s2">}}"</span><span class="p">,</span>
+    <span class="s2">"jira_label"</span><span class="p">:</span> <span class="s2">"my-server"</span><span class="p">,</span>
+    <span class="s2">"jira_comment"</span><span class="p">:</span> <span class="s2">"Closed in IBM SOAR</span><span class="se">\n\n</span><span class="s2">Resolution: Done</span><span class="se">\n</span><span class="s2">"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-jira&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.0.3&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2387</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-25 15:31:42&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-jira"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"3.0.3"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">2387</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-09-25 15:31:42"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1594,13 +1594,13 @@ See example workflow for configuration of function pre-processor and post-proces
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Jira Transition Issue pre-processing script</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">dict_to_json_str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
-<span class="w">  </span><span class="sd">&quot;&quot;&quot;Function that converts a dictionary into a JSON string.</span>
+<span class="w">  </span><span class="sd">"""Function that converts a dictionary into a JSON string.</span>
 <span class="sd">     Supports types: str, bool, int and nested dicts.</span>
 <span class="sd">     Does not support lists.</span>
-<span class="sd">     If the value is None, it sets it to False.&quot;&quot;&quot;</span>
+<span class="sd">     If the value is None, it sets it to False."""</span>
 
-  <span class="n">json_entry</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;:</span><span class="si">{1}</span><span class="s1">&#39;</span>
-  <span class="n">json_entry_str</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;:&quot;</span><span class="si">{1}</span><span class="s1">&quot;&#39;</span>
+  <span class="n">json_entry</span> <span class="o">=</span> <span class="s1">'"</span><span class="si">{0}</span><span class="s1">":</span><span class="si">{1}</span><span class="s1">'</span>
+  <span class="n">json_entry_str</span> <span class="o">=</span> <span class="s1">'"</span><span class="si">{0}</span><span class="s1">":"</span><span class="si">{1}</span><span class="s1">"'</span>
   <span class="n">entries</span> <span class="o">=</span> <span class="p">[]</span>
 
   <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
@@ -1611,14 +1611,14 @@ See example workflow for configuration of function pre-processor and post-proces
       <span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s1">&#39;dict_to_json_str does not support Python Lists&#39;</span><span class="p">)</span>
+      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s1">'dict_to_json_str does not support Python Lists'</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-      <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'"'</span><span class="p">,</span> <span class="s1">'</span><span class="se">\\</span><span class="s1">"'</span><span class="p">)</span>
       <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
 
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-      <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="s1">&#39;false&#39;</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="s1">'true'</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="s1">'false'</span>
       <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
 
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
@@ -1628,14 +1628,14 @@ See example workflow for configuration of function pre-processor and post-proces
       <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">dict_to_json_str</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
 
     <span class="k">else</span><span class="p">:</span>
-      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;dict_to_json_str does not support this type: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"dict_to_json_str does not support this type: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
 
-  <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;{&quot;</span><span class="p">,</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">entries</span><span class="p">),</span> <span class="s2">&quot;}&quot;</span><span class="p">)</span>
+  <span class="k">return</span> <span class="s1">'</span><span class="si">{}{}{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"{"</span><span class="p">,</span> <span class="s2">","</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">entries</span><span class="p">),</span> <span class="s2">"}"</span><span class="p">)</span>
 
 <span class="n">inputs</span><span class="o">.</span><span class="n">jira_label</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_server</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">jira_issue_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_issue_id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">jira_transition_id</span> <span class="o">=</span> <span class="s2">&quot;Done&quot;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">jira_comment</span> <span class="o">=</span> <span class="s2">&quot;Closed in IBM SOAR</span><span class="se">\n\n</span><span class="s2">Resolution: </span><span class="si">{}</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">resolution_id</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">resolution_summary</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">jira_transition_id</span> <span class="o">=</span> <span class="s2">"Done"</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">jira_comment</span> <span class="o">=</span> <span class="s2">"Closed in IBM SOAR</span><span class="se">\n\n</span><span class="s2">Resolution: </span><span class="si">{}</span><span class="se">\n</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">resolution_id</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">resolution_summary</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
 <span class="c1"># Define JIRA fields here</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">jira_fields</span> <span class="o">=</span> <span class="n">dict_to_json_str</span><span class="p">({})</span>
@@ -1645,7 +1645,7 @@ See example workflow for configuration of function pre-processor and post-proces
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_issue_status</span> <span class="o">=</span> <span class="s2">&quot;Done&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">jira_issue_status</span> <span class="o">=</span> <span class="s2">"Done"</span>
 </pre></div>
 </div>
 </p>
@@ -1854,7 +1854,7 @@ See example workflow for configuration of function pre-processor and post-proces
 <span class="c1"># Path to certificate. False to disable certificate verification.</span>
 <span class="n">verify_cert</span><span class="o">=</span><span class="kc">True</span>
 <span class="c1"># Search filters for Jira issue to sync with SOAR cases.</span>
-<span class="n">poller_filters</span><span class="o">=</span> <span class="n">priority</span> <span class="ow">in</span> <span class="p">(</span><span class="n">high</span><span class="p">,</span> <span class="n">medium</span><span class="p">,</span> <span class="n">low</span><span class="p">)</span> <span class="ow">and</span> <span class="n">status</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;to do&#39;</span><span class="p">,</span> <span class="s1">&#39;in progress&#39;</span><span class="p">,</span> <span class="n">done</span><span class="p">)</span> <span class="ow">and</span> <span class="n">project</span> <span class="ow">in</span> <span class="p">(</span><span class="n">project_name1</span><span class="p">,</span> <span class="n">project_name2</span><span class="p">)</span>
+<span class="n">poller_filters</span><span class="o">=</span> <span class="n">priority</span> <span class="ow">in</span> <span class="p">(</span><span class="n">high</span><span class="p">,</span> <span class="n">medium</span><span class="p">,</span> <span class="n">low</span><span class="p">)</span> <span class="ow">and</span> <span class="n">status</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'to do'</span><span class="p">,</span> <span class="s1">'in progress'</span><span class="p">,</span> <span class="n">done</span><span class="p">)</span> <span class="ow">and</span> <span class="n">project</span> <span class="ow">in</span> <span class="p">(</span><span class="n">project_name1</span><span class="p">,</span> <span class="n">project_name2</span><span class="p">)</span>
 <span class="c1"># Max number of issues that can be returned from Jira issue search</span>
 <span class="n">max_issues_returned</span> <span class="o">=</span> <span class="mi">50</span>
 <span class="c1"># Proxies to use</span>
@@ -1862,7 +1862,7 @@ See example workflow for configuration of function pre-processor and post-proces
 <span class="c1"># OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.</span>
 <span class="c1"># If templates under [fn_jira:global_settings] are configured, then templates</span>
 <span class="c1">#  that are configured under the individual Jira servers are ignored.</span>
-<span class="c1"># See documentation section &quot;Templates for SOAR Cases&quot; for more details</span>
+<span class="c1"># See documentation section "Templates for SOAR Cases" for more details</span>
 <span class="c1">#soar_create_case_template=</span>
 <span class="c1">#soar_update_case_template=</span>
 <span class="c1">#soar_update_task_template=</span>
@@ -1893,7 +1893,7 @@ See example workflow for configuration of function pre-processor and post-proces
 <span class="c1"># Path to certificate. False to disable certificate verification.</span>
 <span class="n">verify_cert</span><span class="o">=</span><span class="kc">False</span>
 <span class="c1"># Search filters for Jira issue to sync with SOAR cases.</span>
-<span class="n">poller_filters</span><span class="o">=</span> <span class="n">priority</span> <span class="ow">in</span> <span class="p">(</span><span class="n">high</span><span class="p">,</span> <span class="n">medium</span><span class="p">,</span> <span class="n">low</span><span class="p">)</span> <span class="ow">and</span> <span class="n">status</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;to do&#39;</span><span class="p">,</span> <span class="s1">&#39;in progress&#39;</span><span class="p">,</span> <span class="n">done</span><span class="p">)</span> <span class="ow">and</span> <span class="n">project</span> <span class="ow">in</span> <span class="p">(</span><span class="n">project_name1</span><span class="p">,</span> <span class="n">project_name2</span><span class="p">)</span>
+<span class="n">poller_filters</span><span class="o">=</span> <span class="n">priority</span> <span class="ow">in</span> <span class="p">(</span><span class="n">high</span><span class="p">,</span> <span class="n">medium</span><span class="p">,</span> <span class="n">low</span><span class="p">)</span> <span class="ow">and</span> <span class="n">status</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'to do'</span><span class="p">,</span> <span class="s1">'in progress'</span><span class="p">,</span> <span class="n">done</span><span class="p">)</span> <span class="ow">and</span> <span class="n">project</span> <span class="ow">in</span> <span class="p">(</span><span class="n">project_name1</span><span class="p">,</span> <span class="n">project_name2</span><span class="p">)</span>
 <span class="c1"># Max number of issues that can be returned from Jira issue search</span>
 <span class="n">max_issues_returned</span> <span class="o">=</span> <span class="mi">50</span>
 <span class="c1"># Proxies to use</span>
@@ -1901,7 +1901,7 @@ See example workflow for configuration of function pre-processor and post-proces
 <span class="c1"># OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.</span>
 <span class="c1"># If templates under [fn_jira:global_settings] are configured, then templates</span>
 <span class="c1">#  that are configured under the individual Jira servers are ignored.</span>
-<span class="c1"># See documentation section &quot;Templates for SOAR Cases&quot; for more details</span>
+<span class="c1"># See documentation section "Templates for SOAR Cases" for more details</span>
 <span class="c1">#soar_create_case_template=</span>
 <span class="c1">#soar_update_case_template=</span>
 <span class="c1">#soar_update_task_template=</span>
@@ -1932,7 +1932,7 @@ The following must be added to the app.config for the poller to run:</p>
 <span class="c1"># Search filters for Jira issue to sync with SOAR cases.</span>
 <span class="c1"># If poller_filters under [fn_jira:global_settings] is configured, then poller_filters</span>
 <span class="c1">#  that are configured under the individual Jira servers are ignored</span>
-<span class="c1">#poller_filters= priority in (high, medium, low) and status in (&#39;to do&#39;, &#39;in progress&#39;, done) and project in (project_name1, project_name2)</span>
+<span class="c1">#poller_filters= priority in (high, medium, low) and status in ('to do', 'in progress', done) and project in (project_name1, project_name2)</span>
 <span class="c1"># Max number of issues that can be returned from Jira issue search.</span>
 <span class="c1"># If max_issues_returned [fn_jira:global_settings] is configured, then max_issues_returned</span>
 <span class="c1">#  that are configured under the individual Jira servers are ignored.</span>
@@ -1944,7 +1944,7 @@ The following must be added to the app.config for the poller to run:</p>
 <span class="c1"># OPTIONAL: override value for templates used for creating/updating/closing SOAR cases.</span>
 <span class="c1"># If templates under [fn_jira:global_settings] are configured, then templates</span>
 <span class="c1">#  that are configured under the individual Jira servers are ignored.</span>
-<span class="c1"># See documentation section &quot;Templates for SOAR Cases&quot; for more details</span>
+<span class="c1"># See documentation section "Templates for SOAR Cases" for more details</span>
 <span class="c1">#soar_create_case_template=</span>
 <span class="c1">#soar_update_case_template=</span>
 <span class="c1">#soar_update_task_template=</span>
@@ -1953,7 +1953,7 @@ The following must be added to the app.config for the poller to run:</p>
 </div>
 <p>The following settings can be either configure under <code class="docutils literal notranslate"><span class="pre">[fn_jira:global_settings]</span></code> or under each individual Jira server:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Search filters for Jira issue to sync with SOAR cases.</span>
-<span class="n">poller_filters</span><span class="o">=</span> <span class="n">priority</span> <span class="ow">in</span> <span class="p">(</span><span class="n">high</span><span class="p">,</span> <span class="n">medium</span><span class="p">,</span> <span class="n">low</span><span class="p">)</span> <span class="ow">and</span> <span class="n">status</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;to do&#39;</span><span class="p">,</span> <span class="s1">&#39;in progress&#39;</span><span class="p">,</span> <span class="n">done</span><span class="p">)</span> <span class="ow">and</span> <span class="n">project</span> <span class="ow">in</span> <span class="p">(</span><span class="n">project_name1</span><span class="p">,</span> <span class="n">project_name2</span><span class="p">)</span>
+<span class="n">poller_filters</span><span class="o">=</span> <span class="n">priority</span> <span class="ow">in</span> <span class="p">(</span><span class="n">high</span><span class="p">,</span> <span class="n">medium</span><span class="p">,</span> <span class="n">low</span><span class="p">)</span> <span class="ow">and</span> <span class="n">status</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">'to do'</span><span class="p">,</span> <span class="s1">'in progress'</span><span class="p">,</span> <span class="n">done</span><span class="p">)</span> <span class="ow">and</span> <span class="n">project</span> <span class="ow">in</span> <span class="p">(</span><span class="n">project_name1</span><span class="p">,</span> <span class="n">project_name2</span><span class="p">)</span>
 <span class="c1"># Max number of issues that can be returned from Jira issue search</span>
 <span class="n">max_issues_returned</span> <span class="o">=</span> <span class="mi">50</span>
 </pre></div>

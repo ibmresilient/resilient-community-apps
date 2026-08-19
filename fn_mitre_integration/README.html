@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -757,7 +757,7 @@ In case both are provided, the ID values take precedence as names are not guaran
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The priority order of inputs is:</span>
 <span class="c1"># 1. Values entered in the Activity Field pop-up</span>
 <span class="c1"># 2. Values in the Input Fields added to the layout</span>
-<span class="c1"># 3. Inputs in the function&#39;s workflow</span>
+<span class="c1"># 3. Inputs in the function's workflow</span>
 
 <span class="n">activity_field_given</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_technique_id</span> <span class="ow">or</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_technique_name</span>
 <span class="n">incident_properties_given</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_technique_name</span> <span class="ow">or</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_technique_id</span>
@@ -774,29 +774,29 @@ In case both are provided, the ID values take precedence as names are not guaran
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
 <span class="sd">Data returned as a part of ResultPayload:</span>
 <span class="sd">        {</span>
-<span class="sd">            &quot;technique&quot;: &quot;T0042&quot;,</span>
-<span class="sd">            &quot;name&quot;: &quot;Wet Bandits&quot;,</span>
-<span class="sd">            &quot;id&quot;: &quot;G0032&quot;,</span>
-<span class="sd">            &quot;ref&quot;: &quot;url to MITRE&quot;,</span>
-<span class="sd">            &quot;description&quot;: &quot;lorem ipsum&quot;,</span>
-<span class="sd">            &quot;aliases&quot;: [&quot;name 1&quot;, &quot;name 2&quot;]</span>
+<span class="sd">            "technique": "T0042",</span>
+<span class="sd">            "name": "Wet Bandits",</span>
+<span class="sd">            "id": "G0032",</span>
+<span class="sd">            "ref": "url to MITRE",</span>
+<span class="sd">            "description": "lorem ipsum",</span>
+<span class="sd">            "aliases": ["name 1", "name 2"]</span>
 <span class="sd">        }</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="n">groups_mitre</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;mitre_groups&quot;</span><span class="p">]</span>
+<span class="sd">"""</span>
+<span class="n">groups_mitre</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"mitre_groups"</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups_mitre</span><span class="p">:</span>
-  <span class="n">group_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;mitre_attack_groups&quot;</span><span class="p">)</span>
-  <span class="n">group_row</span><span class="p">[</span><span class="s2">&quot;groups_technique&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s2">&quot;technique&quot;</span><span class="p">]</span>
+  <span class="n">group_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"mitre_attack_groups"</span><span class="p">)</span>
+  <span class="n">group_row</span><span class="p">[</span><span class="s2">"groups_technique"</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s2">"technique"</span><span class="p">]</span>
 
-  <span class="n">ref</span> <span class="o">=</span> <span class="s1">&#39;&lt;a href=&quot;</span><span class="si">{}</span><span class="s1">&quot;&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">])</span> <span class="o">+</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&lt;/a&gt; &#39;</span>
-  <span class="n">group_row</span><span class="p">[</span><span class="s2">&quot;groups_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]))</span>
-  <span class="n">group_row</span><span class="p">[</span><span class="s2">&quot;groups_id&quot;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]))</span>
+  <span class="n">ref</span> <span class="o">=</span> <span class="s1">'&lt;a href="</span><span class="si">{}</span><span class="s1">"&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">"ref"</span><span class="p">])</span> <span class="o">+</span><span class="s1">'</span><span class="si">{}</span><span class="s1">&lt;/a&gt; '</span>
+  <span class="n">group_row</span><span class="p">[</span><span class="s2">"groups_name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]))</span>
+  <span class="n">group_row</span><span class="p">[</span><span class="s2">"groups_id"</span><span class="p">]</span>   <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]))</span>
 
-  <span class="n">group_row</span><span class="p">[</span><span class="s2">&quot;groups_aliases&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">&quot;aliases&quot;</span><span class="p">])</span>
-  <span class="n">group_row</span><span class="p">[</span><span class="s2">&quot;groups_description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">])</span>
+  <span class="n">group_row</span><span class="p">[</span><span class="s2">"groups_aliases"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">","</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">"aliases"</span><span class="p">])</span>
+  <span class="n">group_row</span><span class="p">[</span><span class="s2">"groups_description"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">"description"</span><span class="p">])</span>
 </pre></div>
 </div>
 </p>
@@ -863,7 +863,7 @@ In case both are provided, the ID values take precedence as names are not guaran
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The priority order of inputs is:</span>
 <span class="c1"># 1. Values entered in the Activity Field pop-up</span>
 <span class="c1"># 2. Values in the Input Fields added to the layout</span>
-<span class="c1"># 3. Inputs in the function&#39;s workflow</span>
+<span class="c1"># 3. Inputs in the function's workflow</span>
 
 <span class="n">activity_field_given</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_technique_id</span> <span class="ow">or</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_technique_name</span>
 <span class="n">incident_properties_given</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_technique_name</span> <span class="ow">or</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_technique_id</span>
@@ -880,29 +880,29 @@ In case both are provided, the ID values take precedence as names are not guaran
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
 <span class="sd">Data returned as a part of ResultPayload:</span>
 <span class="sd">        {</span>
-<span class="sd">            &quot;technique&quot;: &quot;T0042&quot;,</span>
-<span class="sd">            &quot;name&quot;: &quot;Wet Bandits&quot;,</span>
-<span class="sd">            &quot;id&quot;: &quot;G0032&quot;,</span>
-<span class="sd">            &quot;ref&quot;: &quot;url to MITRE&quot;,</span>
-<span class="sd">            &quot;description&quot;: &quot;lorem ipsum&quot;,</span>
-<span class="sd">            &quot;aliases&quot;: [&quot;name 1&quot;, &quot;name 2&quot;]</span>
+<span class="sd">            "technique": "T0042",</span>
+<span class="sd">            "name": "Wet Bandits",</span>
+<span class="sd">            "id": "G0032",</span>
+<span class="sd">            "ref": "url to MITRE",</span>
+<span class="sd">            "description": "lorem ipsum",</span>
+<span class="sd">            "aliases": ["name 1", "name 2"]</span>
 <span class="sd">        }</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="n">groups_mitre</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;mitre_groups&quot;</span><span class="p">]</span>
+<span class="sd">"""</span>
+<span class="n">groups_mitre</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"mitre_groups"</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups_mitre</span><span class="p">:</span>
-  <span class="n">group_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;mitre_attack_groups&quot;</span><span class="p">)</span>
-  <span class="n">group_row</span><span class="p">[</span><span class="s2">&quot;groups_technique&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s2">&quot;technique&quot;</span><span class="p">]</span>
+  <span class="n">group_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"mitre_attack_groups"</span><span class="p">)</span>
+  <span class="n">group_row</span><span class="p">[</span><span class="s2">"groups_technique"</span><span class="p">]</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s2">"technique"</span><span class="p">]</span>
 
-  <span class="n">ref</span> <span class="o">=</span> <span class="s1">&#39;&lt;a href=&quot;</span><span class="si">{}</span><span class="s1">&quot;&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">])</span> <span class="o">+</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&lt;/a&gt; &#39;</span>
-  <span class="n">group_row</span><span class="p">[</span><span class="s2">&quot;groups_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]))</span>
-  <span class="n">group_row</span><span class="p">[</span><span class="s2">&quot;groups_id&quot;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]))</span>
+  <span class="n">ref</span> <span class="o">=</span> <span class="s1">'&lt;a href="</span><span class="si">{}</span><span class="s1">"&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">"ref"</span><span class="p">])</span> <span class="o">+</span><span class="s1">'</span><span class="si">{}</span><span class="s1">&lt;/a&gt; '</span>
+  <span class="n">group_row</span><span class="p">[</span><span class="s2">"groups_name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]))</span>
+  <span class="n">group_row</span><span class="p">[</span><span class="s2">"groups_id"</span><span class="p">]</span>   <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]))</span>
 
-  <span class="n">group_row</span><span class="p">[</span><span class="s2">&quot;groups_aliases&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">&quot;aliases&quot;</span><span class="p">])</span>
-  <span class="n">group_row</span><span class="p">[</span><span class="s2">&quot;groups_description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">])</span>
+  <span class="n">group_row</span><span class="p">[</span><span class="s2">"groups_aliases"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">","</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">"aliases"</span><span class="p">])</span>
+  <span class="n">group_row</span><span class="p">[</span><span class="s2">"groups_description"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">group</span><span class="p">[</span><span class="s2">"description"</span><span class="p">])</span>
 </pre></div>
 </div>
 </p>
@@ -969,7 +969,7 @@ In case both are provided, the ID values take precedence as names are not guaran
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The priority order of inputs is:</span>
 <span class="c1"># 1. Values entered in the Activity Field pop-up</span>
 <span class="c1"># 2. Values in the Input Fields added to the layout</span>
-<span class="c1"># 3. Inputs in the function&#39;s workflow</span>
+<span class="c1"># 3. Inputs in the function's workflow</span>
 
 <span class="n">activity_field_given</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_tactic_name</span> <span class="ow">or</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_tactic_id</span>
 <span class="n">incident_propery_given</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_tactic_id</span> <span class="ow">or</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_tactic_name</span>
@@ -986,61 +986,61 @@ In case both are provided, the ID values take precedence as names are not guaran
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Example of data returned in ResultPayload&#39;s content</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">""" Example of data returned in ResultPayload's content</span>
 <span class="sd">{</span>
-<span class="sd">  &quot;mitre_tactics&quot;: [</span>
+<span class="sd">  "mitre_tactics": [</span>
 <span class="sd">    {</span>
 
-<span class="sd">      &quot;name&quot;: String,</span>
-<span class="sd">      &quot;id&quot;: String,</span>
-<span class="sd">      &quot;ref&quot;: &quot;String&quot;,</span>
-<span class="sd">      &quot;collection&quot;: &quot;String&quot;,</span>
-<span class="sd">      &quot;mitre_techniques&quot;: [</span>
+<span class="sd">      "name": String,</span>
+<span class="sd">      "id": String,</span>
+<span class="sd">      "ref": "String",</span>
+<span class="sd">      "collection": "String",</span>
+<span class="sd">      "mitre_techniques": [</span>
 <span class="sd">        {</span>
-<span class="sd">          &quot;name&quot;: &quot;String&quot;,</span>
-<span class="sd">          &quot;description&quot;: &quot;String&quot;,</span>
-<span class="sd">          &quot;external_references&quot;: [{&quot;url&quot;: &quot;String&quot;}],</span>
-<span class="sd">          &quot;x_mitre_detection&quot;: &quot;String&quot;,</span>
-<span class="sd">          &quot;id&quot;: &quot;String&quot;,</span>
-<span class="sd">          &quot;collection&quot;: &quot;String&quot;</span>
+<span class="sd">          "name": "String",</span>
+<span class="sd">          "description": "String",</span>
+<span class="sd">          "external_references": [{"url": "String"}],</span>
+<span class="sd">          "x_mitre_detection": "String",</span>
+<span class="sd">          "id": "String",</span>
+<span class="sd">          "collection": "String"</span>
 <span class="sd">        }</span>
 <span class="sd">      ]</span>
 <span class="sd">    }</span>
 <span class="sd">  ]</span>
 <span class="sd">}</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
-<span class="n">tactics</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;mitre_tactics&quot;</span><span class="p">]</span>
+<span class="n">tactics</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"mitre_tactics"</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">tactic</span> <span class="ow">in</span> <span class="n">tactics</span><span class="p">:</span>
   <span class="c1">#</span>
   <span class="c1"># MITRE ATTACK of Incident Datatable</span>
   <span class="c1">#</span>
-  <span class="n">tactic_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;mitre_attack_of_incident&quot;</span><span class="p">)</span>
-  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span>
-  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">&quot;attack_tactic&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
-  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">&quot;tactic_code&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
-  <span class="n">url_html</span> <span class="o">=</span> <span class="s1">&#39;&lt;a href=&quot;&#39;</span> <span class="o">+</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&quot;&gt;&#39;</span> <span class="o">+</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;/a&gt;&lt;br&gt;&#39;</span>
-  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">&quot;reference&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">url_html</span><span class="p">)</span>
-  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">&quot;confidence&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span>
+  <span class="n">tactic_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"mitre_attack_of_incident"</span><span class="p">)</span>
+  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">"collection"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"collection"</span><span class="p">]</span>
+  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">"attack_tactic"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">"tactic_code"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span>
+  <span class="n">url_html</span> <span class="o">=</span> <span class="s1">'&lt;a href="'</span> <span class="o">+</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"ref"</span><span class="p">]</span> <span class="o">+</span> <span class="s1">'"&gt;'</span> <span class="o">+</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"ref"</span><span class="p">]</span> <span class="o">+</span> <span class="s1">'&lt;/a&gt;&lt;br&gt;'</span>
+  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">"reference"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">url_html</span><span class="p">)</span>
+  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">"confidence"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">" "</span>
   <span class="c1">#</span>
   <span class="c1"># MITRE ATT&amp;CK techniques Datatable</span>
   <span class="c1">#</span>
-  <span class="n">techs</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;mitre_techniques&quot;</span><span class="p">]</span>
+  <span class="n">techs</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"mitre_techniques"</span><span class="p">]</span>
   <span class="k">for</span> <span class="n">att_tech</span> <span class="ow">in</span> <span class="n">techs</span><span class="p">:</span>
-    <span class="n">tech_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;mitre_attack_techniques&quot;</span><span class="p">)</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;tactic&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+    <span class="n">tech_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"mitre_attack_techniques"</span><span class="p">)</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"collection"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"collection"</span><span class="p">]</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"tactic"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
 
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;technique_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;technique_description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">att_tech</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">])</span>
-    <span class="n">refs</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">&quot;external_references&quot;</span><span class="p">]</span>
-    <span class="n">ref_html</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"technique_name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"technique_description"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">att_tech</span><span class="p">[</span><span class="s2">"description"</span><span class="p">])</span>
+    <span class="n">refs</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">"external_references"</span><span class="p">]</span>
+    <span class="n">ref_html</span> <span class="o">=</span> <span class="s2">""</span>
     <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="n">refs</span><span class="p">:</span>
-      <span class="n">url</span> <span class="o">=</span> <span class="n">ref</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span>
+      <span class="n">url</span> <span class="o">=</span> <span class="n">ref</span><span class="p">[</span><span class="s2">"url"</span><span class="p">]</span>
 
-      <span class="n">https_str</span> <span class="o">=</span> <span class="s2">&quot;https://&quot;</span>
-      <span class="n">http_str</span> <span class="o">=</span> <span class="s2">&quot;http://&quot;</span>
+      <span class="n">https_str</span> <span class="o">=</span> <span class="s2">"https://"</span>
+      <span class="n">http_str</span> <span class="o">=</span> <span class="s2">"http://"</span>
 
       <span class="n">start_pos</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">https_str</span><span class="p">)</span>
 
@@ -1054,19 +1054,19 @@ In case both are provided, the ID values take precedence as names are not guaran
         <span class="k">else</span><span class="p">:</span>
           <span class="n">start_pos</span> <span class="o">=</span> <span class="mi">0</span>
 
-      <span class="n">end_pos</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">start_pos</span><span class="p">)</span>
+      <span class="n">end_pos</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="n">start_pos</span><span class="p">)</span>
       <span class="k">if</span> <span class="n">end_pos</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="c1"># We don&#39;t know how to extract</span>
+        <span class="c1"># We don't know how to extract</span>
         <span class="n">display_str</span> <span class="o">=</span> <span class="n">url</span>
       <span class="k">elif</span> <span class="n">end_pos</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
         <span class="n">display_str</span> <span class="o">=</span> <span class="n">url</span><span class="p">[</span><span class="n">start_pos</span><span class="p">:]</span>
       <span class="k">else</span><span class="p">:</span>
         <span class="n">display_str</span> <span class="o">=</span> <span class="n">url</span><span class="p">[</span><span class="n">start_pos</span><span class="p">:</span><span class="n">end_pos</span><span class="p">]</span>
 
-      <span class="n">ref_html</span> <span class="o">=</span> <span class="n">ref_html</span> <span class="o">+</span> <span class="s1">&#39;&lt;a href=&quot;&#39;</span> <span class="o">+</span> <span class="n">ref</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&quot;&gt;&#39;</span> <span class="o">+</span> <span class="n">display_str</span> <span class="o">+</span> <span class="s1">&#39;&lt;/a&gt;&lt;br&gt;&#39;</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;references&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref_html</span><span class="p">)</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;detection&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">att_tech</span><span class="p">[</span><span class="s2">&quot;x_mitre_detection&quot;</span><span class="p">])</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;technique_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+      <span class="n">ref_html</span> <span class="o">=</span> <span class="n">ref_html</span> <span class="o">+</span> <span class="s1">'&lt;a href="'</span> <span class="o">+</span> <span class="n">ref</span><span class="p">[</span><span class="s2">"url"</span><span class="p">]</span> <span class="o">+</span> <span class="s1">'"&gt;'</span> <span class="o">+</span> <span class="n">display_str</span> <span class="o">+</span> <span class="s1">'&lt;/a&gt;&lt;br&gt;'</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"references"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref_html</span><span class="p">)</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"detection"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">att_tech</span><span class="p">[</span><span class="s2">"x_mitre_detection"</span><span class="p">])</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"technique_id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span>
 
 
 </pre></div>
@@ -1145,59 +1145,59 @@ In case both ID and name are provided, the ID value takes precedence as names ar
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; An example of returned data in ResultPayload. Whether it&#39;s queried by id or name a list will be returned.</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">""" An example of returned data in ResultPayload. Whether it's queried by id or name a list will be returned.</span>
 <span class="sd">{</span>
-<span class="sd">  &quot;mitre_techniques&quot;: [</span>
+<span class="sd">  "mitre_techniques": [</span>
 <span class="sd">    {</span>
-<span class="sd">      &quot;name&quot;: &quot;String&quot;,</span>
-<span class="sd">      &quot;description&quot;: &quot;String&quot;,</span>
-<span class="sd">      &quot;external_references&quot;: [{&quot;url&quot;: &quot;String&quot;}],</span>
-<span class="sd">      &quot;x_mitre_detection&quot;: &quot;String&quot;,</span>
-<span class="sd">      &quot;id&quot;: &quot;String&quot;,</span>
-<span class="sd">      &quot;collection&quot;: &quot;String&quot;,</span>
-<span class="sd">      &quot;tactic&quot;: &quot;String&quot;,</span>
-<span class="sd">      &quot;mitre_mitigations&quot;: [</span>
+<span class="sd">      "name": "String",</span>
+<span class="sd">      "description": "String",</span>
+<span class="sd">      "external_references": [{"url": "String"}],</span>
+<span class="sd">      "x_mitre_detection": "String",</span>
+<span class="sd">      "id": "String",</span>
+<span class="sd">      "collection": "String",</span>
+<span class="sd">      "tactic": "String",</span>
+<span class="sd">      "mitre_mitigations": [</span>
 <span class="sd">        {</span>
-<span class="sd">          &quot;name&quot;: &quot;String&quot;,</span>
-<span class="sd">          &quot;description&quot;: &quot;String&quot;,</span>
-<span class="sd">          &quot;id&quot;: &quot;String&quot;,</span>
-<span class="sd">          &quot;collection&quot;: &quot;String&quot;</span>
+<span class="sd">          "name": "String",</span>
+<span class="sd">          "description": "String",</span>
+<span class="sd">          "id": "String",</span>
+<span class="sd">          "collection": "String"</span>
 <span class="sd">        }</span>
 <span class="sd">      ]</span>
 <span class="sd">    }</span>
 <span class="sd">  ]</span>
 <span class="sd">}</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
-<span class="n">techniques</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;mitre_techniques&quot;</span><span class="p">]</span>
+<span class="n">techniques</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"mitre_techniques"</span><span class="p">]</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">techniques</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
   <span class="n">techniques</span> <span class="o">=</span> <span class="p">[</span><span class="n">techniques</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">technique</span> <span class="ow">in</span> <span class="n">techniques</span><span class="p">:</span>
-  <span class="n">task_title</span> <span class="o">=</span> <span class="s2">&quot;MITRE ATT&amp;CK Technique: &quot;</span> <span class="o">+</span> <span class="n">technique</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+  <span class="n">task_title</span> <span class="o">=</span> <span class="s2">"MITRE ATT&amp;CK Technique: "</span> <span class="o">+</span> <span class="n">technique</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
 
-  <span class="n">mitigations</span> <span class="o">=</span> <span class="n">technique</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mitre_mitigations&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">mitigations</span> <span class="o">=</span> <span class="n">technique</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mitre_mitigations"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
   <span class="k">if</span> <span class="ow">not</span> <span class="n">mitigations</span><span class="p">:</span>
-    <span class="n">mitigation_text</span> <span class="o">=</span> <span class="s2">&quot;No mitigations found&quot;</span>
+    <span class="n">mitigation_text</span> <span class="o">=</span> <span class="s2">"No mitigations found"</span>
   <span class="k">else</span><span class="p">:</span>
     <span class="n">mitigation_text</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">mitigation</span> <span class="ow">in</span> <span class="n">mitigations</span><span class="p">:</span>
-      <span class="n">mitigation_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&quot;&quot;</span>
+      <span class="n">mitigation_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">"""</span>
 <span class="s2">      &lt;h3&gt;</span><span class="si">{0}</span><span class="s2">&lt;/h3&gt;</span>
 <span class="s2">      &lt;p&gt;</span><span class="si">{1}</span><span class="s2">&lt;/p&gt;</span>
-<span class="s2">      &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mitigation</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">mitigation</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">]))</span>
-    <span class="n">mitigation_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mitigation_text</span><span class="p">)</span>
+<span class="s2">      """</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mitigation</span><span class="p">[</span><span class="s2">"name"</span><span class="p">],</span> <span class="n">mitigation</span><span class="p">[</span><span class="s2">"description"</span><span class="p">]))</span>
+    <span class="n">mitigation_text</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mitigation_text</span><span class="p">)</span>
 
-  <span class="n">task_summary</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;&quot;&quot;</span>
+  <span class="n">task_summary</span><span class="o">=</span><span class="sa">u</span><span class="s2">"""</span>
 <span class="s2">  &lt;h1&gt; Description &lt;/h1&gt;</span>
 <span class="s2">  </span><span class="si">{des}</span>
 <span class="s2">  &lt;h1&gt; Detection &lt;/h1&gt;</span>
 <span class="s2">  </span><span class="si">{det}</span>
 <span class="s2">  &lt;h1&gt; Mitigation &lt;/h1&gt;</span>
 <span class="s2">  </span><span class="si">{miti}</span>
-<span class="s2">  &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">des</span><span class="o">=</span><span class="n">technique</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">det</span><span class="o">=</span><span class="n">technique</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;x_mitre_detection&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">miti</span><span class="o">=</span><span class="n">mitigation_text</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addTask</span><span class="p">(</span><span class="n">task_title</span><span class="p">,</span> <span class="s2">&quot;Detect/Analyze&quot;</span><span class="p">,</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">task_summary</span><span class="p">))</span>
+<span class="s2">  """</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">des</span><span class="o">=</span><span class="n">technique</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">,</span> <span class="s2">""</span><span class="p">),</span> <span class="n">det</span><span class="o">=</span><span class="n">technique</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"x_mitre_detection"</span><span class="p">,</span> <span class="s2">""</span><span class="p">),</span> <span class="n">miti</span><span class="o">=</span><span class="n">mitigation_text</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addTask</span><span class="p">(</span><span class="n">task_title</span><span class="p">,</span> <span class="s2">"Detect/Analyze"</span><span class="p">,</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">task_summary</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>
@@ -1264,7 +1264,7 @@ In case both are provided, the ID values take precedence as names are not guaran
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The priority order of inputs is:</span>
 <span class="c1"># 1. Values entered in the Activity Field pop-up</span>
 <span class="c1"># 2. Values in the Input Fields added to the layout</span>
-<span class="c1"># 3. Inputs in the function&#39;s workflow</span>
+<span class="c1"># 3. Inputs in the function's workflow</span>
 
 <span class="n">activity_field_given</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_technique_id</span> <span class="ow">or</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_technique_name</span>
 <span class="n">incident_properties_given</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_technique_name</span> <span class="ow">or</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_technique_id</span>
@@ -1281,32 +1281,32 @@ In case both are provided, the ID values take precedence as names are not guaran
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
 <span class="sd">Data returned as a part of ResultPayload:</span>
 <span class="sd">        {</span>
-<span class="sd">            &quot;technique&quot;: &quot;STIX ID of the technique&quot;,</span>
-<span class="sd">            &quot;name&quot;: &quot;Software&#39;s name&quot;,</span>
-<span class="sd">            &quot;id&quot;: &quot;Software&#39;s id&quot;,</span>
-<span class="sd">            &quot;ref&quot;: &quot;URL of software on MITRE&#39;s website&quot;,</span>
-<span class="sd">            &quot;description&quot;: &quot;description of the website&quot;,</span>
-<span class="sd">            &quot;platforms&quot;: &quot;platforms the software runs on&quot;,</span>
-<span class="sd">            &quot;type&quot;: &quot;Type - &#39;malware&#39; or &#39;tool&#39;&quot;</span>
+<span class="sd">            "technique": "STIX ID of the technique",</span>
+<span class="sd">            "name": "Software's name",</span>
+<span class="sd">            "id": "Software's id",</span>
+<span class="sd">            "ref": "URL of software on MITRE's website",</span>
+<span class="sd">            "description": "description of the website",</span>
+<span class="sd">            "platforms": "platforms the software runs on",</span>
+<span class="sd">            "type": "Type - 'malware' or 'tool'"</span>
 <span class="sd">        }</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="n">software</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;mitre_software&quot;</span><span class="p">]</span>
+<span class="sd">"""</span>
+<span class="n">software</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"mitre_software"</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">soft</span> <span class="ow">in</span> <span class="n">software</span><span class="p">:</span>
-  <span class="n">soft_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;mitre_attack_software&quot;</span><span class="p">)</span>
-  <span class="n">soft_row</span><span class="p">[</span><span class="s2">&quot;software_technique&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">soft</span><span class="p">[</span><span class="s2">&quot;technique&quot;</span><span class="p">]</span>
+  <span class="n">soft_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"mitre_attack_software"</span><span class="p">)</span>
+  <span class="n">soft_row</span><span class="p">[</span><span class="s2">"software_technique"</span><span class="p">]</span> <span class="o">=</span> <span class="n">soft</span><span class="p">[</span><span class="s2">"technique"</span><span class="p">]</span>
 
-  <span class="n">ref</span> <span class="o">=</span> <span class="s1">&#39;&lt;a href=&quot;</span><span class="si">{}</span><span class="s1">&quot;&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">soft</span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">])</span> <span class="o">+</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">&lt;/a&gt; &#39;</span>
-  <span class="n">soft_row</span><span class="p">[</span><span class="s2">&quot;software_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">soft</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]))</span>
-  <span class="n">soft_row</span><span class="p">[</span><span class="s2">&quot;software_id&quot;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">soft</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]))</span>
+  <span class="n">ref</span> <span class="o">=</span> <span class="s1">'&lt;a href="</span><span class="si">{}</span><span class="s1">"&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">soft</span><span class="p">[</span><span class="s2">"ref"</span><span class="p">])</span> <span class="o">+</span><span class="s1">'</span><span class="si">{}</span><span class="s1">&lt;/a&gt; '</span>
+  <span class="n">soft_row</span><span class="p">[</span><span class="s2">"software_name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">soft</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]))</span>
+  <span class="n">soft_row</span><span class="p">[</span><span class="s2">"software_id"</span><span class="p">]</span>   <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">soft</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]))</span>
 
-  <span class="n">soft_row</span><span class="p">[</span><span class="s2">&quot;software_description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">soft</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">])</span>
-  <span class="n">soft_row</span><span class="p">[</span><span class="s2">&quot;software_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">soft</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span>
-  <span class="n">soft_row</span><span class="p">[</span><span class="s2">&quot;software_platform&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">soft</span><span class="p">[</span><span class="s2">&quot;platforms&quot;</span><span class="p">])</span>
-  <span class="n">soft_row</span><span class="p">[</span><span class="s2">&quot;software_description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">soft</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">])</span>
+  <span class="n">soft_row</span><span class="p">[</span><span class="s2">"software_description"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">soft</span><span class="p">[</span><span class="s2">"description"</span><span class="p">])</span>
+  <span class="n">soft_row</span><span class="p">[</span><span class="s2">"software_type"</span><span class="p">]</span> <span class="o">=</span> <span class="n">soft</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span>
+  <span class="n">soft_row</span><span class="p">[</span><span class="s2">"software_platform"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">","</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">soft</span><span class="p">[</span><span class="s2">"platforms"</span><span class="p">])</span>
+  <span class="n">soft_row</span><span class="p">[</span><span class="s2">"software_description"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">soft</span><span class="p">[</span><span class="s2">"description"</span><span class="p">])</span>
 </pre></div>
 </div>
 </p>

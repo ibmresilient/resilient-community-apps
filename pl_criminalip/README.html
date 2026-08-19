@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -767,25 +767,25 @@
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">URL_BASE</span> <span class="o">=</span> <span class="s2">&quot;https://api.criminalip.io&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">URL_BASE</span> <span class="o">=</span> <span class="s2">"https://api.criminalip.io"</span>
 
 <span class="n">URL_LOOKUP</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;Data&quot;</span><span class="p">:</span> <span class="s2">&quot;v1/ip/data&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Summary&quot;</span><span class="p">:</span> <span class="s2">&quot;/v1/ip/summary&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;VPN&quot;</span><span class="p">:</span> <span class="s2">&quot;v1/ip/vpn&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Hosting&quot;</span><span class="p">:</span> <span class="s2">&quot;v1/ip/hosting&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Malicious Info&quot;</span><span class="p">:</span> <span class="s2">&quot;v1/feature/ip/malicious-info&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Privacy Threat&quot;</span><span class="p">:</span> <span class="s2">&quot;v1/feature/ip/privacy-threat&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Is Safe DNS Server&quot;</span><span class="p">:</span> <span class="s2">&quot;v1/feature/ip/is_safe_dns_server&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Suspicious Info&quot;</span><span class="p">:</span> <span class="s2">&quot;v1/feature/ip/suspicious-info&quot;</span>
+  <span class="s2">"Data"</span><span class="p">:</span> <span class="s2">"v1/ip/data"</span><span class="p">,</span>
+  <span class="s2">"Summary"</span><span class="p">:</span> <span class="s2">"/v1/ip/summary"</span><span class="p">,</span>
+  <span class="s2">"VPN"</span><span class="p">:</span> <span class="s2">"v1/ip/vpn"</span><span class="p">,</span>
+  <span class="s2">"Hosting"</span><span class="p">:</span> <span class="s2">"v1/ip/hosting"</span><span class="p">,</span>
+  <span class="s2">"Malicious Info"</span><span class="p">:</span> <span class="s2">"v1/feature/ip/malicious-info"</span><span class="p">,</span>
+  <span class="s2">"Privacy Threat"</span><span class="p">:</span> <span class="s2">"v1/feature/ip/privacy-threat"</span><span class="p">,</span>
+  <span class="s2">"Is Safe DNS Server"</span><span class="p">:</span> <span class="s2">"v1/feature/ip/is_safe_dns_server"</span><span class="p">,</span>
+  <span class="s2">"Suspicious Info"</span><span class="p">:</span> <span class="s2">"v1/feature/ip/suspicious-info"</span>
 <span class="p">}</span>
 
 <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_verify</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_method</span> <span class="o">=</span> <span class="s2">&quot;GET&quot;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_headers</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="se">{{</span><span class="s1">&quot;x-api-key&quot;:&quot;</span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">criminalip_api_key</span><span class="si">}</span><span class="s1">&quot;</span><span class="se">}}</span><span class="s1">&#39;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_method</span> <span class="o">=</span> <span class="s2">"GET"</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_headers</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="se">{{</span><span class="s1">"x-api-key":"</span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">criminalip_api_key</span><span class="si">}</span><span class="s1">"</span><span class="se">}}</span><span class="s1">'</span>
 
-<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">URL_BASE</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">URL_LOOKUP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Malicious Info&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_query_parameters</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="se">{{</span><span class="s1">&quot;ip&quot;:&quot;</span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">criminalip_ip_address</span><span class="si">}</span><span class="s1">&quot;,&quot;full&quot;:true</span><span class="se">}}</span><span class="s1">&#39;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">URL_BASE</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">URL_LOOKUP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'Malicious Info'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_query_parameters</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="se">{{</span><span class="s1">"ip":"</span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">criminalip_ip_address</span><span class="si">}</span><span class="s1">","full":true</span><span class="se">}}</span><span class="s1">'</span>
 
 </pre></div>
 </div>
@@ -829,7 +829,7 @@
 <details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">settings</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">scan_properties</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">timer_time</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wait_sec&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">s&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">timer_time</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'wait_sec'</span><span class="p">)</span><span class="si">}</span><span class="s2">s"</span>
 </pre></div>
 </div>
 </p>

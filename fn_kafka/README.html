@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -775,24 +775,24 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;null&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;kafka_broker_label&quot;</span><span class="p">:</span> <span class="s2">&quot;brokerA&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;kafka_message&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">my test incident</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">description</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">this is from SOAR</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">status</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">A</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">severity_code</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">High</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">discovered_date</span><span class="se">\&quot;</span><span class="s2">: 1708705700642, </span><span class="se">\&quot;</span><span class="s2">start_date</span><span class="se">\&quot;</span><span class="s2">: 1708705700642}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;kafka_key&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;kafka_topic&quot;</span><span class="p">:</span> <span class="s2">&quot;quickstart-events&quot;</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"null"</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"kafka_broker_label"</span><span class="p">:</span> <span class="s2">"brokerA"</span><span class="p">,</span>
+    <span class="s2">"kafka_message"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">my test incident</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">this is from SOAR</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">status</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">A</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">severity_code</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">High</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">discovered_date</span><span class="se">\"</span><span class="s2">: 1708705700642, </span><span class="se">\"</span><span class="s2">start_date</span><span class="se">\"</span><span class="s2">: 1708705700642}"</span><span class="p">,</span>
+    <span class="s2">"kafka_key"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"kafka_topic"</span><span class="p">:</span> <span class="s2">"quickstart-events"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-kafka&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.2&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;PMBP.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">559</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-05-07 15:32:32&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-kafka"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.2"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"PMBP.local"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">559</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-05-07 15:32:32"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -804,7 +804,7 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">kafka_broker_label</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">kafka_broker_label</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">kafka_topic</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">kafka_topic</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">kafka_key</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">kafka_key</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">kafka_message</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">kafka_message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">kafka_message</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">kafka_message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -814,9 +814,9 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">kafka_send_results</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Kafka: Send (PB):&lt;/b&gt; Unable to send message to broker </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">kafka_broker_label</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"&lt;b&gt;Kafka: Send (PB):&lt;/b&gt; Unable to send message to broker </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">kafka_broker_label</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Kafka: Send (PB):&lt;/b&gt; Sent message to broker </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">kafka_broker_label</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">kafka_message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"&lt;b&gt;Kafka: Send (PB):&lt;/b&gt; Sent message to broker </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">kafka_broker_label</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">kafka_message</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'content'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -839,35 +839,35 @@ See the <code class="docutils literal notranslate"><span class="pre">template_di
 <p>This is an example template:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="p">{</span><span class="c1"># JINJA template for creating a new IBM SOAR incident #}</span>
-  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Kafka Incident - {{ title|e }}&quot;</span><span class="p">,</span>
-<span class="p">{</span><span class="c1"># use the filter resilient_datetimeformat to convert values for resilient&#39;s Epoch timestamp #}</span>
-  <span class="s2">&quot;discovered_date&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">createdTimeUtc</span><span class="o">|</span><span class="n">resilient_datetimeformat</span> <span class="p">}},</span>
-  <span class="s2">&quot;create_date&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">firstActivityTimeUtc</span><span class="o">|</span><span class="n">resilient_datetimeformat</span> <span class="p">}},</span>
-  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ description|e }}&quot;</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Kafka Incident - {{ title|e }}"</span><span class="p">,</span>
+<span class="p">{</span><span class="c1"># use the filter resilient_datetimeformat to convert values for resilient's Epoch timestamp #}</span>
+  <span class="s2">"discovered_date"</span><span class="p">:</span> <span class="p">{{</span> <span class="n">createdTimeUtc</span><span class="o">|</span><span class="n">resilient_datetimeformat</span> <span class="p">}},</span>
+  <span class="s2">"create_date"</span><span class="p">:</span> <span class="p">{{</span> <span class="n">firstActivityTimeUtc</span><span class="o">|</span><span class="n">resilient_datetimeformat</span> <span class="p">}},</span>
+  <span class="s2">"description"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"format"</span><span class="p">:</span> <span class="s2">"text"</span><span class="p">,</span>
+    <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"{{ description|e }}"</span>
   <span class="p">},</span>
-<span class="p">{</span><span class="c1"># use the filter resilient_substitute to convert values for resilient&#39;s [N]ew and [A]ctive</span>
-   <span class="n">ex</span><span class="o">.</span> <span class="n">status</span> <span class="o">|</span><span class="n">resilient_substitute</span><span class="p">(</span><span class="s1">&#39;{&quot;New&quot;: &quot;N&quot;, &quot;Active&quot;: &quot;A&quot;}&#39;</span><span class="p">)</span> <span class="c1">#}</span>
-  <span class="s2">&quot;plan_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ status }}&quot;</span><span class="p">,</span>
-<span class="p">{</span><span class="c1"># use the filter resilient_substitute to convert values for resilient&#39;s Low, Medium, High</span>
-   <span class="n">ex</span><span class="o">.</span> <span class="n">severity</span> <span class="o">|</span><span class="n">resilient_substitute</span><span class="p">(</span><span class="s1">&#39;{&quot;Informational&quot;: &quot;Low&quot;, &quot;Critical&quot;: &quot;High&quot;}&#39;</span><span class="p">)</span> <span class="c1">#}</span>
-  <span class="s2">&quot;severity_code&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ severity }}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;custom_int&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">custom_int</span> <span class="p">}}</span>
+<span class="p">{</span><span class="c1"># use the filter resilient_substitute to convert values for resilient's [N]ew and [A]ctive</span>
+   <span class="n">ex</span><span class="o">.</span> <span class="n">status</span> <span class="o">|</span><span class="n">resilient_substitute</span><span class="p">(</span><span class="s1">'{"New": "N", "Active": "A"}'</span><span class="p">)</span> <span class="c1">#}</span>
+  <span class="s2">"plan_status"</span><span class="p">:</span> <span class="s2">"{{ status }}"</span><span class="p">,</span>
+<span class="p">{</span><span class="c1"># use the filter resilient_substitute to convert values for resilient's Low, Medium, High</span>
+   <span class="n">ex</span><span class="o">.</span> <span class="n">severity</span> <span class="o">|</span><span class="n">resilient_substitute</span><span class="p">(</span><span class="s1">'{"Informational": "Low", "Critical": "High"}'</span><span class="p">)</span> <span class="c1">#}</span>
+  <span class="s2">"severity_code"</span><span class="p">:</span> <span class="s2">"{{ severity }}"</span><span class="p">,</span>
+  <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"custom_int"</span><span class="p">:</span> <span class="p">{{</span> <span class="n">custom_int</span> <span class="p">}}</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>The following json formatted Kafka message would create a new incident.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;incident title&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;createdTimeUtc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-03-28T14:45:02&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;firstActivityTimeUtc&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-03-28T14:45:02&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;description field&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;severity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;High&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;custom_int&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">  </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"incident title"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"createdTimeUtc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-28T14:45:02"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"firstActivityTimeUtc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-03-28T14:45:02"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"description field"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"severity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"High"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"custom_int"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -876,17 +876,17 @@ See the <code class="docutils literal notranslate"><span class="pre">template_di
 <p>You may use one topic for creating and/or updating incidents and another for closing an incident. When closing or updating an incident, include the incident ID as the Kafka message key, <code class="docutils literal notranslate"><span class="pre">kafka_key</span></code>.</p>
 <p>The following update template illustrates closing an incident:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="p">{</span><span class="c1"># include additional &quot;required on close&quot; fields #}</span>
-  <span class="s2">&quot;plan_status&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;resolution_id&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ status|resilient_substitute(&#39;{&quot;</span><span class="n">truepositive</span><span class="s2">&quot;: &quot;</span><span class="n">Resolved</span><span class="s2">&quot;, &quot;</span><span class="n">falsepositive</span><span class="s2">&quot;: &quot;</span><span class="n">Not</span> <span class="n">an</span> <span class="n">Issue</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;resolution_summary&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ description|e }}&quot;</span>
+  <span class="p">{</span><span class="c1"># include additional "required on close" fields #}</span>
+  <span class="s2">"plan_status"</span><span class="p">:</span> <span class="s2">"C"</span><span class="p">,</span>
+  <span class="s2">"resolution_id"</span><span class="p">:</span> <span class="s2">"{{ status|resilient_substitute('{"</span><span class="n">truepositive</span><span class="s2">": "</span><span class="n">Resolved</span><span class="s2">", "</span><span class="n">falsepositive</span><span class="s2">": "</span><span class="n">Not</span> <span class="n">an</span> <span class="n">Issue</span><span class="s2">"}') }}"</span><span class="p">,</span>
+  <span class="s2">"resolution_summary"</span><span class="p">:</span> <span class="s2">"{{ description|e }}"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>This payload corresponds with this template mapping:</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;truepositive&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;closed by Kafka&quot;</span>
+<span class="w">  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"truepositive"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"closed by Kafka"</span>
 <span class="p">}</span>
 </pre></div>
 </div>

@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -872,41 +872,41 @@ SOAR Comments with Sentinel.</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;etag&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">1f017068-0000-0100-0000-6616d57f0000</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/b3763ac5-6319-496b-b404-6c5000418a81/Comments/42acd50c-f765-11ee-ab89-fa89897771d8&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;42acd50c-f765-11ee-ab89-fa89897771d8&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Comment created from external application - MS Sentinel&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;objectId&quot;</span><span class="p">:</span> <span class="s2">&quot;fb5360be-0c6a-4260-ae69-9b07dd735441&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;userPrincipalName&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"etag"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\"</span><span class="s2">1f017068-0000-0100-0000-6616d57f0000</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/b3763ac5-6319-496b-b404-6c5000418a81/Comments/42acd50c-f765-11ee-ab89-fa89897771d8"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"42acd50c-f765-11ee-ab89-fa89897771d8"</span><span class="p">,</span>
+    <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"author"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"email"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Comment created from external application - MS Sentinel"</span><span class="p">,</span>
+        <span class="s2">"objectId"</span><span class="p">:</span> <span class="s2">"fb5360be-0c6a-4260-ae69-9b07dd735441"</span><span class="p">,</span>
+        <span class="s2">"userPrincipalName"</span><span class="p">:</span> <span class="n">null</span>
       <span class="p">},</span>
-      <span class="s2">&quot;createdTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T18:07:59.058255Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;lastModifiedTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T18:07:59.058255Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;From IBM SOAR:</span><span class="se">\n</span><span class="s2">hello&quot;</span>
+      <span class="s2">"createdTimeUtc"</span><span class="p">:</span> <span class="s2">"2024-04-10T18:07:59.058255Z"</span><span class="p">,</span>
+      <span class="s2">"lastModifiedTimeUtc"</span><span class="p">:</span> <span class="s2">"2024-04-10T18:07:59.058255Z"</span><span class="p">,</span>
+      <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"From IBM SOAR:</span><span class="se">\n</span><span class="s2">hello"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft.SecurityInsights/Incidents/Comments&quot;</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Microsoft.SecurityInsights/Incidents/Comments"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;sentinel_incident_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;b3763ac5-6319-496b-b404-6c5000418a81&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_label&quot;</span><span class="p">:</span> <span class="s2">&quot;label1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"sentinel_incident_comment"</span><span class="p">:</span> <span class="s2">"hello"</span><span class="p">,</span>
+    <span class="s2">"sentinel_incident_id"</span><span class="p">:</span> <span class="s2">"b3763ac5-6319-496b-b404-6c5000418a81"</span><span class="p">,</span>
+    <span class="s2">"sentinel_label"</span><span class="p">:</span> <span class="s2">"label1"</span><span class="p">,</span>
+    <span class="s2">"sentinel_profile"</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1497</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-microsoft-sentinel&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10 14:07:59&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1497</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-microsoft-sentinel"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.1.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-04-10 14:07:59"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -930,12 +930,12 @@ SOAR Comments with Sentinel.</p>
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">comment_results</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
   <span class="c1"># Get the current time</span>
   <span class="n">dt_now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-  <span class="c1"># note.text = f&quot;&lt;b&gt;Sent to Sentinel at {dt_now}&lt;/b&gt;&lt;br&gt;{str(note.text.content)}&quot;</span>
+  <span class="c1"># note.text = f"&lt;b&gt;Sent to Sentinel at {dt_now}&lt;/b&gt;&lt;br&gt;{str(note.text.content)}"</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sentinel Comment Sync failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sentinel Comment Sync failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -988,85 +988,85 @@ SOAR Comments with Sentinel.</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"value"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Entities/4c4831e9-2ed7-a44a-e530-c784cc7c2ddc&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;SecurityAlert&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;4c4831e9-2ed7-a44a-e530-c784cc7c2ddc&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;additionalData&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;AlertMessageEnqueueTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T15:29:49.911Z&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;MTP_Classification&quot;</span><span class="p">:</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;OriginalProductComponentName&quot;</span><span class="p">:</span> <span class="s2">&quot;Databases&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;OriginalProductName&quot;</span><span class="p">:</span> <span class="s2">&quot;Azure Security Center&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;StoreAlertPublisher&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">Succeeded</span><span class="se">\&quot;</span><span class="s2">:true,</span><span class="se">\&quot;</span><span class="s2">Reason</span><span class="se">\&quot;</span><span class="s2">:null,</span><span class="se">\&quot;</span><span class="s2">PublishTime</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">2024-04-10T15:29:41.6565662Z</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;effectiveSubscriptionId&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Entities/4c4831e9-2ed7-a44a-e530-c784cc7c2ddc"</span><span class="p">,</span>
+        <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"SecurityAlert"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"4c4831e9-2ed7-a44a-e530-c784cc7c2ddc"</span><span class="p">,</span>
+        <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"additionalData"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"AlertMessageEnqueueTime"</span><span class="p">:</span> <span class="s2">"2024-04-10T15:29:49.911Z"</span><span class="p">,</span>
+            <span class="s2">"MTP_Classification"</span><span class="p">:</span> <span class="s2">"Unknown"</span><span class="p">,</span>
+            <span class="s2">"OriginalProductComponentName"</span><span class="p">:</span> <span class="s2">"Databases"</span><span class="p">,</span>
+            <span class="s2">"OriginalProductName"</span><span class="p">:</span> <span class="s2">"Azure Security Center"</span><span class="p">,</span>
+            <span class="s2">"StoreAlertPublisher"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">Succeeded</span><span class="se">\"</span><span class="s2">:true,</span><span class="se">\"</span><span class="s2">Reason</span><span class="se">\"</span><span class="s2">:null,</span><span class="se">\"</span><span class="s2">PublishTime</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">2024-04-10T15:29:41.6565662Z</span><span class="se">\"</span><span class="s2">}"</span><span class="p">,</span>
+            <span class="s2">"effectiveSubscriptionId"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;alertDisplayName&quot;</span><span class="p">:</span> <span class="s2">&quot;Suspected brute-force attack attempt&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;alertLink&quot;</span><span class="p">:</span> <span class="s2">&quot;https://portal.azure.com/#blade/Microsoft_Azure_Security_AzureDefenderForData/AlertBlade/alertId/2516895378499999999_c01aa88b-4520-4c62-a80d-c61f3dfaf47e/subscriptionId/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroup/DemoAssets/referencedFrom/alertDeepLink/location/centralus&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;alertType&quot;</span><span class="p">:</span> <span class="s2">&quot;SQL.VM_BruteForce&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;compromisedEntity&quot;</span><span class="p">:</span> <span class="s2">&quot;PAMSqlSv&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;confidenceLevel&quot;</span><span class="p">:</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Brute-force attack is a common attack technique for finding valid credentials to the database. By submitting many users/passwords combinations, an attacker can guess a correct one.</span><span class="se">\r\n</span><span class="s2">Once obtained, an attacker can have full access to the database. While this specific alert doesn</span><span class="se">\u0027</span><span class="s2">t indicate a successful brute-force, it is advised to take safety measures to protect your resource against this attack.</span><span class="se">\r\n</span><span class="s2">To investigate this suspected brute-force attempt, review it</span><span class="se">\u0027</span><span class="s2">s origin (based on the application name and IP/Location), and try to find out whether it</span><span class="se">\u0027</span><span class="s2">s recognized to you, or suspicious.</span><span class="se">\r\n</span><span class="s2">If you believe this to be an attack on your database, use firewall rules to limit the access to your resource, and make sure you use strong passwords and not well known user names.</span><span class="se">\r\n</span><span class="s2">Also, consider using only AAD authentication to further enhance your security posture.</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;endTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T15:29:10Z&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;friendlyName&quot;</span><span class="p">:</span> <span class="s2">&quot;Suspected brute-force attack attempt&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;processingEndTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T15:29:40.734843Z&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;productComponentName&quot;</span><span class="p">:</span> <span class="s2">&quot;Databases&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;productName&quot;</span><span class="p">:</span> <span class="s2">&quot;Azure Security Center&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;providerAlertId&quot;</span><span class="p">:</span> <span class="s2">&quot;2516895378499999999_c01aa88b-4520-4c62-a80d-c61f3dfaf47e&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;remediationSteps&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;* Apply [workflow automation](https://go.microsoft.com/fwlink/?linkid=2174808) to block future attacks.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;* Consider [blocking the IP address](https://go.microsoft.com/fwlink/?linkid=2099055) of the attacking client and hardening your firewall.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;* When possible, use [Windows authentication](https://go.microsoft.com/fwlink/?linkid=2129121) and disable SQL Server authentication.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;* Use [strong passwords](https://go.microsoft.com/fwlink/?linkid=2099068) and avoid reusing them across multiple databases.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;* If applicable, disable default and well known application/database accounts such as SA.&quot;</span>
+          <span class="s2">"alertDisplayName"</span><span class="p">:</span> <span class="s2">"Suspected brute-force attack attempt"</span><span class="p">,</span>
+          <span class="s2">"alertLink"</span><span class="p">:</span> <span class="s2">"https://portal.azure.com/#blade/Microsoft_Azure_Security_AzureDefenderForData/AlertBlade/alertId/2516895378499999999_c01aa88b-4520-4c62-a80d-c61f3dfaf47e/subscriptionId/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroup/DemoAssets/referencedFrom/alertDeepLink/location/centralus"</span><span class="p">,</span>
+          <span class="s2">"alertType"</span><span class="p">:</span> <span class="s2">"SQL.VM_BruteForce"</span><span class="p">,</span>
+          <span class="s2">"compromisedEntity"</span><span class="p">:</span> <span class="s2">"PAMSqlSv"</span><span class="p">,</span>
+          <span class="s2">"confidenceLevel"</span><span class="p">:</span> <span class="s2">"Unknown"</span><span class="p">,</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Brute-force attack is a common attack technique for finding valid credentials to the database. By submitting many users/passwords combinations, an attacker can guess a correct one.</span><span class="se">\r\n</span><span class="s2">Once obtained, an attacker can have full access to the database. While this specific alert doesn</span><span class="se">\u0027</span><span class="s2">t indicate a successful brute-force, it is advised to take safety measures to protect your resource against this attack.</span><span class="se">\r\n</span><span class="s2">To investigate this suspected brute-force attempt, review it</span><span class="se">\u0027</span><span class="s2">s origin (based on the application name and IP/Location), and try to find out whether it</span><span class="se">\u0027</span><span class="s2">s recognized to you, or suspicious.</span><span class="se">\r\n</span><span class="s2">If you believe this to be an attack on your database, use firewall rules to limit the access to your resource, and make sure you use strong passwords and not well known user names.</span><span class="se">\r\n</span><span class="s2">Also, consider using only AAD authentication to further enhance your security posture.</span><span class="se">\r\n</span><span class="s2">"</span><span class="p">,</span>
+          <span class="s2">"endTimeUtc"</span><span class="p">:</span> <span class="s2">"2024-04-10T15:29:10Z"</span><span class="p">,</span>
+          <span class="s2">"friendlyName"</span><span class="p">:</span> <span class="s2">"Suspected brute-force attack attempt"</span><span class="p">,</span>
+          <span class="s2">"processingEndTime"</span><span class="p">:</span> <span class="s2">"2024-04-10T15:29:40.734843Z"</span><span class="p">,</span>
+          <span class="s2">"productComponentName"</span><span class="p">:</span> <span class="s2">"Databases"</span><span class="p">,</span>
+          <span class="s2">"productName"</span><span class="p">:</span> <span class="s2">"Azure Security Center"</span><span class="p">,</span>
+          <span class="s2">"providerAlertId"</span><span class="p">:</span> <span class="s2">"2516895378499999999_c01aa88b-4520-4c62-a80d-c61f3dfaf47e"</span><span class="p">,</span>
+          <span class="s2">"remediationSteps"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"* Apply [workflow automation](https://go.microsoft.com/fwlink/?linkid=2174808) to block future attacks."</span><span class="p">,</span>
+            <span class="s2">"* Consider [blocking the IP address](https://go.microsoft.com/fwlink/?linkid=2099055) of the attacking client and hardening your firewall."</span><span class="p">,</span>
+            <span class="s2">"* When possible, use [Windows authentication](https://go.microsoft.com/fwlink/?linkid=2129121) and disable SQL Server authentication."</span><span class="p">,</span>
+            <span class="s2">"* Use [strong passwords](https://go.microsoft.com/fwlink/?linkid=2099068) and avoid reusing them across multiple databases."</span><span class="p">,</span>
+            <span class="s2">"* If applicable, disable default and well known application/database accounts such as SA."</span>
           <span class="p">],</span>
-          <span class="s2">&quot;resourceIdentifiers&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"resourceIdentifiers"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="s2">&quot;resourceId&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/DemoAssets/providers/Microsoft.Compute/virtualMachines/PAMSqlSv&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;AzureResource&quot;</span>
+              <span class="s2">"resourceId"</span><span class="p">:</span> <span class="s2">"/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/DemoAssets/providers/Microsoft.Compute/virtualMachines/PAMSqlSv"</span><span class="p">,</span>
+              <span class="s2">"subscriptionId"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span><span class="p">,</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"AzureResource"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;agentId&quot;</span><span class="p">:</span> <span class="s2">&quot;7db452ea-1cae-4079-94a5-85dc76156e96&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;LogAnalytics&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;workspaceId&quot;</span><span class="p">:</span> <span class="s2">&quot;c6c712b0-dc3d-4408-945a-4bde1db6579b&quot;</span>
+              <span class="s2">"agentId"</span><span class="p">:</span> <span class="s2">"7db452ea-1cae-4079-94a5-85dc76156e96"</span><span class="p">,</span>
+              <span class="s2">"subscriptionId"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span><span class="p">,</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"LogAnalytics"</span><span class="p">,</span>
+              <span class="s2">"workspaceId"</span><span class="p">:</span> <span class="s2">"c6c712b0-dc3d-4408-945a-4bde1db6579b"</span>
             <span class="p">}</span>
           <span class="p">],</span>
-          <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;startTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T15:29:10Z&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;New&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;systemAlertId&quot;</span><span class="p">:</span> <span class="s2">&quot;4c4831e9-2ed7-a44a-e530-c784cc7c2ddc&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;tactics&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;PreAttack&quot;</span>
+          <span class="s2">"severity"</span><span class="p">:</span> <span class="s2">"High"</span><span class="p">,</span>
+          <span class="s2">"startTimeUtc"</span><span class="p">:</span> <span class="s2">"2024-04-10T15:29:10Z"</span><span class="p">,</span>
+          <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"New"</span><span class="p">,</span>
+          <span class="s2">"systemAlertId"</span><span class="p">:</span> <span class="s2">"4c4831e9-2ed7-a44a-e530-c784cc7c2ddc"</span><span class="p">,</span>
+          <span class="s2">"tactics"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"PreAttack"</span>
           <span class="p">],</span>
-          <span class="s2">&quot;timeGenerated&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T15:29:49.9010714Z&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;timeGenerated_ms&quot;</span><span class="p">:</span> <span class="mi">1712762989000</span><span class="p">,</span>
-          <span class="s2">&quot;vendorName&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft&quot;</span>
+          <span class="s2">"timeGenerated"</span><span class="p">:</span> <span class="s2">"2024-04-10T15:29:49.9010714Z"</span><span class="p">,</span>
+          <span class="s2">"timeGenerated_ms"</span><span class="p">:</span> <span class="mi">1712762989000</span><span class="p">,</span>
+          <span class="s2">"vendorName"</span><span class="p">:</span> <span class="s2">"Microsoft"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft.SecurityInsights/Entities&quot;</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Microsoft.SecurityInsights/Entities"</span>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;b3763ac5-6319-496b-b404-6c5000418a81&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_label&quot;</span><span class="p">:</span> <span class="s2">&quot;label1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"sentinel_incident_id"</span><span class="p">:</span> <span class="s2">"b3763ac5-6319-496b-b404-6c5000418a81"</span><span class="p">,</span>
+    <span class="s2">"sentinel_label"</span><span class="p">:</span> <span class="s2">"label1"</span><span class="p">,</span>
+    <span class="s2">"sentinel_profile"</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">883</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-microsoft-sentinel&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10 14:07:28&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">883</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-microsoft-sentinel"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.1.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-04-10 14:07:28"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1089,28 +1089,28 @@ SOAR Comments with Sentinel.</p>
 
 <span class="n">current_dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">alerts_results</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">):</span>
-  <span class="k">for</span> <span class="n">alert</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">):</span>
-    <span class="n">properties</span> <span class="o">=</span> <span class="n">alert</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">,</span> <span class="p">{})</span>
-    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;sentinel_incident_alerts&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;report_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_dt</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;alert_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;timeGenerated_ms&#39;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;alert_name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;alertDisplayName&#39;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;alert_description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;alert_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;alertType&#39;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;alert_status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;alert_severity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;severity&#39;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;alert_confidence_level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;confidenceLevel&#39;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;alert_tactics&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tactics&#39;</span><span class="p">,</span> <span class="p">[]))</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;alert_compromised_entity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;compromisedEntity&#39;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;alert_remediation_steps&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createPlainText</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;remediationSteps&#39;</span><span class="p">,</span> <span class="p">[])))</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;alert_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;systemAlertId&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;alertLink&#39;</span><span class="p">):</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;alert_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;a target=&#39;blank&#39; href=&#39;</span><span class="si">{</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;alertLink&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&gt;Alert Link&lt;/a&gt;&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'success'</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">alert</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'content'</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'value'</span><span class="p">):</span>
+    <span class="n">properties</span> <span class="o">=</span> <span class="n">alert</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'properties'</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"sentinel_incident_alerts"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'report_date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_dt</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'alert_date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'timeGenerated_ms'</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'alert_name'</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'alertDisplayName'</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'alert_description'</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'description'</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'alert_type'</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'alertType'</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'alert_status'</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'status'</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'alert_severity'</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'severity'</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'alert_confidence_level'</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'confidenceLevel'</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'alert_tactics'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">","</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'tactics'</span><span class="p">,</span> <span class="p">[]))</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'alert_compromised_entity'</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'compromisedEntity'</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'alert_remediation_steps'</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createPlainText</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'remediationSteps'</span><span class="p">,</span> <span class="p">[])))</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'alert_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'systemAlertId'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'alertLink'</span><span class="p">):</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'alert_url'</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="sa">f</span><span class="s2">"&lt;a target='blank' href='</span><span class="si">{</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'alertLink'</span><span class="p">)</span><span class="si">}</span><span class="s2">'&gt;Alert Link&lt;/a&gt;"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;alert_url&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;a target=&#39;blank&#39; href=&#39;https://security.microsoft.com/alerts/</span><span class="si">{</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;systemAlertId&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&gt;Alert Link&lt;/a&gt;&quot;</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'alert_url'</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="sa">f</span><span class="s2">"&lt;a target='blank' href='https://security.microsoft.com/alerts/</span><span class="si">{</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'systemAlertId'</span><span class="p">)</span><span class="si">}</span><span class="s2">'&gt;Alert Link&lt;/a&gt;"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sentinel Incident Sync failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sentinel Incident Sync failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1169,45 +1169,45 @@ SOAR Comments with Sentinel.</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"value"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;etag&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">1f016d66-0000-0100-0000-6616d56e0000</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/b3763ac5-6319-496b-b404-6c5000418a81/Comments/aebab623-5e91-43a7-b7a6-541548fc738f&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;aebab623-5e91-43a7-b7a6-541548fc738f&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;author&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;example@microsoft.com&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;objectId&quot;</span><span class="p">:</span> <span class="s2">&quot;43dd7b73-6a70-475e-88c3-609a9f30b514&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;userPrincipalName&quot;</span><span class="p">:</span> <span class="s2">&quot;example@microsoft.com&quot;</span>
+        <span class="s2">"etag"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\"</span><span class="s2">1f016d66-0000-0100-0000-6616d56e0000</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/b3763ac5-6319-496b-b404-6c5000418a81/Comments/aebab623-5e91-43a7-b7a6-541548fc738f"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"aebab623-5e91-43a7-b7a6-541548fc738f"</span><span class="p">,</span>
+        <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"author"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"example@microsoft.com"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"John Doe"</span><span class="p">,</span>
+            <span class="s2">"objectId"</span><span class="p">:</span> <span class="s2">"43dd7b73-6a70-475e-88c3-609a9f30b514"</span><span class="p">,</span>
+            <span class="s2">"userPrincipalName"</span><span class="p">:</span> <span class="s2">"example@microsoft.com"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;createdTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T18:07:42.5540333Z&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;lastModifiedTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T18:07:42.5540333Z&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span>
+          <span class="s2">"createdTimeUtc"</span><span class="p">:</span> <span class="s2">"2024-04-10T18:07:42.5540333Z"</span><span class="p">,</span>
+          <span class="s2">"lastModifiedTimeUtc"</span><span class="p">:</span> <span class="s2">"2024-04-10T18:07:42.5540333Z"</span><span class="p">,</span>
+          <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"hello"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft.SecurityInsights/Incidents/Comments&quot;</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Microsoft.SecurityInsights/Incidents/Comments"</span>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2121</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;b3763ac5-6319-496b-b404-6c5000418a81&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_label&quot;</span><span class="p">:</span> <span class="s2">&quot;label1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2121</span><span class="p">,</span>
+    <span class="s2">"sentinel_incident_id"</span><span class="p">:</span> <span class="s2">"b3763ac5-6319-496b-b404-6c5000418a81"</span><span class="p">,</span>
+    <span class="s2">"sentinel_label"</span><span class="p">:</span> <span class="s2">"label1"</span><span class="p">,</span>
+    <span class="s2">"sentinel_profile"</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1044</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-microsoft-sentinel&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10 14:07:55&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1044</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-microsoft-sentinel"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.1.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-04-10 14:07:55"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1228,11 +1228,11 @@ SOAR Comments with Sentinel.</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">comment_results</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="k">for</span> <span class="n">comment</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">):</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">comment</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;message&#39;</span><span class="p">)))</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">comment</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'value'</span><span class="p">):</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">comment</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'properties'</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'message'</span><span class="p">)))</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sentinel Get Incident Comments failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sentinel Get Incident Comments failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1285,82 +1285,82 @@ SOAR Comments with Sentinel.</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;b3763ac5-6319-496b-b404-6c5000418a81_4c4831e9-2ed7-a44a-e530-c784cc7c2ddc&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"b3763ac5-6319-496b-b404-6c5000418a81_4c4831e9-2ed7-a44a-e530-c784cc7c2ddc"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/b9ce5c65-0b04-27bf-c4af-c5926008a5d3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;Ip&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;b9ce5c65-0b04-27bf-c4af-c5926008a5d3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;80.66.76.30&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;friendlyName&quot;</span><span class="p">:</span> <span class="s2">&quot;80.66.76.30&quot;</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/b9ce5c65-0b04-27bf-c4af-c5926008a5d3"</span><span class="p">,</span>
+        <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"Ip"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"b9ce5c65-0b04-27bf-c4af-c5926008a5d3"</span><span class="p">,</span>
+        <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"80.66.76.30"</span><span class="p">,</span>
+          <span class="s2">"friendlyName"</span><span class="p">:</span> <span class="s2">"80.66.76.30"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;resilient_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;resilient_artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;80.66.76.30&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft.SecurityInsights/entities&quot;</span>
+        <span class="s2">"resilient_artifact_type"</span><span class="p">:</span> <span class="s2">"IP Address"</span><span class="p">,</span>
+        <span class="s2">"resilient_artifact_value"</span><span class="p">:</span> <span class="s2">"80.66.76.30"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Microsoft.SecurityInsights/entities"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/8e6ffdf6-05ab-b16e-aaa7-c3465af09c46&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;AzureResource&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;8e6ffdf6-05ab-b16e-aaa7-c3465af09c46&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;additionalData&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;ResourceName&quot;</span><span class="p">:</span> <span class="s2">&quot;PAMSqlSv&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ResourceType&quot;</span><span class="p">:</span> <span class="s2">&quot;Virtual Machine&quot;</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/8e6ffdf6-05ab-b16e-aaa7-c3465af09c46"</span><span class="p">,</span>
+        <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"AzureResource"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"8e6ffdf6-05ab-b16e-aaa7-c3465af09c46"</span><span class="p">,</span>
+        <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"additionalData"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"ResourceName"</span><span class="p">:</span> <span class="s2">"PAMSqlSv"</span><span class="p">,</span>
+            <span class="s2">"ResourceType"</span><span class="p">:</span> <span class="s2">"Virtual Machine"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;friendlyName&quot;</span><span class="p">:</span> <span class="s2">&quot;PAMSqlSv&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;resourceId&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/DemoAssets/providers/Microsoft.Compute/virtualMachines/PAMSqlSv&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span>
+          <span class="s2">"friendlyName"</span><span class="p">:</span> <span class="s2">"PAMSqlSv"</span><span class="p">,</span>
+          <span class="s2">"resourceId"</span><span class="p">:</span> <span class="s2">"/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/DemoAssets/providers/Microsoft.Compute/virtualMachines/PAMSqlSv"</span><span class="p">,</span>
+          <span class="s2">"subscriptionId"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;resilient_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;String&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;resilient_artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;PAMSqlSv&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft.SecurityInsights/entities&quot;</span>
+        <span class="s2">"resilient_artifact_type"</span><span class="p">:</span> <span class="s2">"String"</span><span class="p">,</span>
+        <span class="s2">"resilient_artifact_value"</span><span class="p">:</span> <span class="s2">"PAMSqlSv"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Microsoft.SecurityInsights/entities"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/eda45dbc-9011-cfbc-4e9b-4fd97d44f069&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;Host&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;eda45dbc-9011-cfbc-4e9b-4fd97d44f069&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;azureID&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/DemoAssets/providers/Microsoft.Compute/virtualMachines/PAMSqlSv&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;friendlyName&quot;</span><span class="p">:</span> <span class="s2">&quot;PAMSqlSv&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;hostName&quot;</span><span class="p">:</span> <span class="s2">&quot;PAMSqlSv&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;omsAgentID&quot;</span><span class="p">:</span> <span class="s2">&quot;7db452ea-1cae-4079-94a5-85dc76156e96&quot;</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/eda45dbc-9011-cfbc-4e9b-4fd97d44f069"</span><span class="p">,</span>
+        <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"Host"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"eda45dbc-9011-cfbc-4e9b-4fd97d44f069"</span><span class="p">,</span>
+        <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"azureID"</span><span class="p">:</span> <span class="s2">"/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/DemoAssets/providers/Microsoft.Compute/virtualMachines/PAMSqlSv"</span><span class="p">,</span>
+          <span class="s2">"friendlyName"</span><span class="p">:</span> <span class="s2">"PAMSqlSv"</span><span class="p">,</span>
+          <span class="s2">"hostName"</span><span class="p">:</span> <span class="s2">"PAMSqlSv"</span><span class="p">,</span>
+          <span class="s2">"omsAgentID"</span><span class="p">:</span> <span class="s2">"7db452ea-1cae-4079-94a5-85dc76156e96"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;resilient_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;System Name&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;resilient_artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;PAMSqlSv&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft.SecurityInsights/entities&quot;</span>
+        <span class="s2">"resilient_artifact_type"</span><span class="p">:</span> <span class="s2">"System Name"</span><span class="p">,</span>
+        <span class="s2">"resilient_artifact_value"</span><span class="p">:</span> <span class="s2">"PAMSqlSv"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Microsoft.SecurityInsights/entities"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/7cc5b89b-7a07-55eb-cfb1-a8a8afd5c67e&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;Account&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;7cc5b89b-7a07-55eb-cfb1-a8a8afd5c67e&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;accountName&quot;</span><span class="p">:</span> <span class="s2">&quot;sa&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;friendlyName&quot;</span><span class="p">:</span> <span class="s2">&quot;sa&quot;</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/entities/7cc5b89b-7a07-55eb-cfb1-a8a8afd5c67e"</span><span class="p">,</span>
+        <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"Account"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"7cc5b89b-7a07-55eb-cfb1-a8a8afd5c67e"</span><span class="p">,</span>
+        <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"accountName"</span><span class="p">:</span> <span class="s2">"sa"</span><span class="p">,</span>
+          <span class="s2">"friendlyName"</span><span class="p">:</span> <span class="s2">"sa"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;resilient_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;User Account&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;resilient_artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;sa&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft.SecurityInsights/entities&quot;</span>
+        <span class="s2">"resilient_artifact_type"</span><span class="p">:</span> <span class="s2">"User Account"</span><span class="p">,</span>
+        <span class="s2">"resilient_artifact_value"</span><span class="p">:</span> <span class="s2">"sa"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Microsoft.SecurityInsights/entities"</span>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;b3763ac5-6319-496b-b404-6c5000418a81&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_label&quot;</span><span class="p">:</span> <span class="s2">&quot;label1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"sentinel_incident_id"</span><span class="p">:</span> <span class="s2">"b3763ac5-6319-496b-b404-6c5000418a81"</span><span class="p">,</span>
+    <span class="s2">"sentinel_label"</span><span class="p">:</span> <span class="s2">"label1"</span><span class="p">,</span>
+    <span class="s2">"sentinel_profile"</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2788</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-microsoft-sentinel&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10 14:08:00&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">2788</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-microsoft-sentinel"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.1.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-04-10 14:08:00"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1383,24 +1383,24 @@ SOAR Comments with Sentinel.</p>
 <span class="n">current_dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">entities_results</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="k">for</span> <span class="n">alert</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-    <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">alert</span><span class="p">):</span>
-      <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;sentinel_incident_entities&quot;</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;report_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_dt</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;alert_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">alert</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;entity_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;entity_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kind&#39;</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;entity_value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;friendlyName&#39;</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;entity_properties&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="k">for</span> <span class="n">alert</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">alert</span><span class="p">):</span>
+      <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"sentinel_incident_entities"</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'report_date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_dt</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'alert_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">alert</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'entity_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'entity_type'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'kind'</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'entity_value'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'properties'</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'friendlyName'</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'entity_properties'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"&lt;br&gt;"</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">"&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'properties'</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
       <span class="c1"># Create an artifact</span>
-      <span class="n">desc</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;created from Sentinel entity: </span><span class="si">{</span><span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
-      <span class="k">if</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;azureID&#39;</span><span class="p">):</span>
-        <span class="n">desc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;properties&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;azureID&#39;</span><span class="p">))</span>
-      <span class="k">if</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;resilient_artifact_type&#39;</span><span class="p">):</span>
-        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;resilient_artifact_type&#39;</span><span class="p">),</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;resilient_artifact_value&#39;</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">desc</span><span class="p">))</span>
+      <span class="n">desc</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"created from Sentinel entity: </span><span class="si">{</span><span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span>
+      <span class="k">if</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'properties'</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'azureID'</span><span class="p">):</span>
+        <span class="n">desc</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'properties'</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'azureID'</span><span class="p">))</span>
+      <span class="k">if</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'resilient_artifact_type'</span><span class="p">):</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'resilient_artifact_type'</span><span class="p">),</span> <span class="n">entity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'resilient_artifact_value'</span><span class="p">),</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">desc</span><span class="p">))</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Sentinel Incident Sync failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Sentinel Incident Sync failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1459,74 +1459,74 @@ SOAR Comments with Sentinel.</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;etag&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">1f01df97-0000-0100-0000-6616d7020000</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/b3763ac5-6319-496b-b404-6c5000418a81&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;b3763ac5-6319-496b-b404-6c5000418a81&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;additionalData&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;alertProductNames&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;Azure Security Center&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"etag"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\"</span><span class="s2">1f01df97-0000-0100-0000-6616d7020000</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/b3763ac5-6319-496b-b404-6c5000418a81"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"b3763ac5-6319-496b-b404-6c5000418a81"</span><span class="p">,</span>
+    <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"additionalData"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"alertProductNames"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"Azure Security Center"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;alertsCount&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;bookmarksCount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;commentsCount&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="s2">&quot;tactics&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;PreAttack&quot;</span>
+        <span class="s2">"alertsCount"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"bookmarksCount"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"commentsCount"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">"tactics"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"PreAttack"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;techniques&quot;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="s2">"techniques"</span><span class="p">:</span> <span class="p">[]</span>
       <span class="p">},</span>
-      <span class="s2">&quot;createdTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T15:29:50.0960914Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Brute-force attack is a common attack technique for finding valid credentials to the database. By submitting many users/passwords combinations, an attacker can guess a correct one.</span><span class="se">\u00a0</span><span class="s2"> Once obtained, an attacker can have full access to the database. While this specific alert doesn</span><span class="se">\u0027</span><span class="s2">t indicate a successful brute-force, it is advised to take safety measures to protect your resource against this attack.</span><span class="se">\u00a0</span><span class="s2"> To investigate this suspected brute-force attempt, review it</span><span class="se">\u0027</span><span class="s2">s origin (based on the application name and IP/Location), and try to find out whether it</span><span class="se">\u0027</span><span class="s2">s recognized to you, or suspicious.</span><span class="se">\u00a0</span><span class="s2"> If you believe this to be an attack on your database, use firewall rules to limit the access to your resource, and make sure you use strong passwords and not well known user names.</span><span class="se">\u00a0</span><span class="s2"> Also, consider using only AAD authentication to further enhance your security posture.</span><span class="se">\u00a0</span><span class="s2">&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;incidentNumber&quot;</span><span class="p">:</span> <span class="mi">4609</span><span class="p">,</span>
-      <span class="s2">&quot;incidentUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://portal.azure.com/#asset/Microsoft_Azure_Security_Insights/Incident/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/b3763ac5-6319-496b-b404-6c5000418a81&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"createdTimeUtc"</span><span class="p">:</span> <span class="s2">"2024-04-10T15:29:50.0960914Z"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Brute-force attack is a common attack technique for finding valid credentials to the database. By submitting many users/passwords combinations, an attacker can guess a correct one.</span><span class="se">\u00a0</span><span class="s2"> Once obtained, an attacker can have full access to the database. While this specific alert doesn</span><span class="se">\u0027</span><span class="s2">t indicate a successful brute-force, it is advised to take safety measures to protect your resource against this attack.</span><span class="se">\u00a0</span><span class="s2"> To investigate this suspected brute-force attempt, review it</span><span class="se">\u0027</span><span class="s2">s origin (based on the application name and IP/Location), and try to find out whether it</span><span class="se">\u0027</span><span class="s2">s recognized to you, or suspicious.</span><span class="se">\u00a0</span><span class="s2"> If you believe this to be an attack on your database, use firewall rules to limit the access to your resource, and make sure you use strong passwords and not well known user names.</span><span class="se">\u00a0</span><span class="s2"> Also, consider using only AAD authentication to further enhance your security posture.</span><span class="se">\u00a0</span><span class="s2">"</span><span class="p">,</span>
+      <span class="s2">"incidentNumber"</span><span class="p">:</span> <span class="mi">4609</span><span class="p">,</span>
+      <span class="s2">"incidentUrl"</span><span class="p">:</span> <span class="s2">"https://portal.azure.com/#asset/Microsoft_Azure_Security_Insights/Incident/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/Incidents/b3763ac5-6319-496b-b404-6c5000418a81"</span><span class="p">,</span>
+      <span class="s2">"labels"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;labelName&quot;</span><span class="p">:</span> <span class="s2">&quot;test tag&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;labelType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
+          <span class="s2">"labelName"</span><span class="p">:</span> <span class="s2">"test tag"</span><span class="p">,</span>
+          <span class="s2">"labelType"</span><span class="p">:</span> <span class="s2">"User"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;labelName&quot;</span><span class="p">:</span> <span class="s2">&quot;another label&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;labelType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
+          <span class="s2">"labelName"</span><span class="p">:</span> <span class="s2">"another label"</span><span class="p">,</span>
+          <span class="s2">"labelType"</span><span class="p">:</span> <span class="s2">"User"</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;lastModifiedTimeUtc&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10T18:14:26.8445378Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;assignedTo&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;objectId&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;ownerType&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;userPrincipalName&quot;</span><span class="p">:</span> <span class="n">null</span>
+      <span class="s2">"lastModifiedTimeUtc"</span><span class="p">:</span> <span class="s2">"2024-04-10T18:14:26.8445378Z"</span><span class="p">,</span>
+      <span class="s2">"owner"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"assignedTo"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"email"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"objectId"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"ownerType"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"userPrincipalName"</span><span class="p">:</span> <span class="n">null</span>
       <span class="p">},</span>
-      <span class="s2">&quot;providerIncidentId&quot;</span><span class="p">:</span> <span class="s2">&quot;4609&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;providerName&quot;</span><span class="p">:</span> <span class="s2">&quot;Azure Sentinel&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;relatedAnalyticRuleIds&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/alertRules/14fefa89-3cdd-429f-923b-b524aa8c65c3&quot;</span>
+      <span class="s2">"providerIncidentId"</span><span class="p">:</span> <span class="s2">"4609"</span><span class="p">,</span>
+      <span class="s2">"providerName"</span><span class="p">:</span> <span class="s2">"Azure Sentinel"</span><span class="p">,</span>
+      <span class="s2">"relatedAnalyticRuleIds"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"/subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/demoassets/providers/Microsoft.OperationalInsights/workspaces/AzureSentinelDemo/providers/Microsoft.SecurityInsights/alertRules/14fefa89-3cdd-429f-923b-b524aa8c65c3"</span>
       <span class="p">],</span>
-      <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Active&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Suspected brute-force attack attempt&quot;</span>
+      <span class="s2">"severity"</span><span class="p">:</span> <span class="s2">"High"</span><span class="p">,</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"Active"</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Suspected brute-force attack attempt"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft.SecurityInsights/Incidents&quot;</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Microsoft.SecurityInsights/Incidents"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2121</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;b3763ac5-6319-496b-b404-6c5000418a81&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_label&quot;</span><span class="p">:</span> <span class="s2">&quot;label1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2121</span><span class="p">,</span>
+    <span class="s2">"sentinel_incident_id"</span><span class="p">:</span> <span class="s2">"b3763ac5-6319-496b-b404-6c5000418a81"</span><span class="p">,</span>
+    <span class="s2">"sentinel_label"</span><span class="p">:</span> <span class="s2">"label1"</span><span class="p">,</span>
+    <span class="s2">"sentinel_profile"</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2209</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-microsoft-sentinel&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-10 14:14:26&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">2209</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-microsoft-sentinel"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.1.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-04-10 14:14:26"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1894,8 +1894,8 @@ does not include. Or, remove the <code class="docutils literal notranslate"><spa
 <p>In addition, the <code class="docutils literal notranslate"><span class="pre">incident_creation_template</span></code> and <code class="docutils literal notranslate"><span class="pre">incident_update_template</span></code> includes the following
 mapping:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="p">{</span><span class="c1"># if Sentinel users are different than SOAR users, consider using a mapping table using soar_substitute: #}</span>
-  <span class="p">{</span><span class="c1"># {{ properties.owner.assignedTo|soar_substitute(&#39;{&quot;sentinel_user1@co.com&quot;: &quot;soar_user1@ent.com&quot;, &quot;sentinel_user2@co.com&quot;: &quot;soar_user2@ent.com&quot;}&#39;) }} #}</span>
-  <span class="s2">&quot;owner_id&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.owner.assignedTo }}&quot;</span><span class="p">,</span>
+  <span class="p">{</span><span class="c1"># {{ properties.owner.assignedTo|soar_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com"}') }} #}</span>
+  <span class="s2">"owner_id"</span><span class="p">:</span> <span class="s2">"{{ properties.owner.assignedTo }}"</span><span class="p">,</span>
 </pre></div>
 </div>
 <p>If your Sentinel login users differ from SOAR users, modify the <code class="docutils literal notranslate"><span class="pre">owner_id</span></code> mapping to use a substitution map as indicated in the jinja comment.</p>
@@ -1903,57 +1903,57 @@ mapping:</p>
 <h3>incident_create_template.jinja<a class="headerlink" href="#incident-create-template-jinja" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="p">{</span><span class="c1"># JINJA template for creating a new SOAR incident from a Sentinel incident. #}</span>
-  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Sentinel Incident {{ properties.incidentNumber|e }} - {{ properties.title|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;discovered_date&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">createdTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}},</span>
-  <span class="s2">&quot;start_date&quot;</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">firstActivityTimeUtc</span> <span class="o">%</span><span class="p">}</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">firstActivityTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}}</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">createdTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}}</span> <span class="p">{</span><span class="o">%</span><span class="n">endif</span> <span class="o">%</span><span class="p">},</span>
+  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Sentinel Incident {{ properties.incidentNumber|e }} - {{ properties.title|replace('"</span><span class="s1">', '</span>\\<span class="s2">"') }}"</span><span class="p">,</span>
+  <span class="s2">"discovered_date"</span><span class="p">:</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">createdTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}},</span>
+  <span class="s2">"start_date"</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">firstActivityTimeUtc</span> <span class="o">%</span><span class="p">}</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">firstActivityTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}}</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">createdTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}}</span> <span class="p">{</span><span class="o">%</span><span class="n">endif</span> <span class="o">%</span><span class="p">},</span>
   <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">description</span> <span class="o">%</span><span class="p">}</span>
-    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.description|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"format"</span><span class="p">:</span> <span class="s2">"text"</span><span class="p">,</span>
+      <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"{{ properties.description|replace('"</span><span class="s1">', '</span>\\<span class="s2">"') }}"</span>
     <span class="p">},</span>
   <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
   <span class="p">{</span><span class="c1"># if Sentinel users are different than SOAR users, consider using a mapping table using soar_substitute: #}</span>
-  <span class="p">{</span><span class="c1"># &quot;owner_id&quot;: &quot;{{ properties.owner.userPrincipalName|soar_substitute(&#39;{&quot;sentinel_user1@co.com&quot;: &quot;soar_user1@ent.com&quot;, &quot;sentinel_user2@co.com&quot;: &quot;soar_user2@ent.com&quot;, &quot;DEFAULT&quot;: &quot;default_user@ent.com&quot; }&#39;) }}&quot;, #}</span>
-  <span class="s2">&quot;plan_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.status|soar_substitute(&#39;{&quot;</span><span class="n">Closed</span><span class="s2">&quot;: &quot;</span><span class="n">C</span><span class="s2">&quot;, &quot;</span><span class="n">Active</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;, &quot;</span><span class="n">New</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;severity_code&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.severity|soar_substitute(&#39;{&quot;</span><span class="n">Informational</span><span class="s2">&quot;: &quot;</span><span class="n">Low</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;sentinel_incident_number&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ name|e }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.incidentNumber }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.status }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_last_modified_time_utc&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">lastModifiedTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}},</span>
-    <span class="s2">&quot;sentinel_incident_url&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;a target=&#39;blank&#39; href=&#39;{{ properties.incidentUrl }}&#39;&gt;Sentinel Incident&lt;/a&gt;&quot;</span>
+  <span class="p">{</span><span class="c1"># "owner_id": "{{ properties.owner.userPrincipalName|soar_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}</span>
+  <span class="s2">"plan_status"</span><span class="p">:</span> <span class="s2">"{{ properties.status|soar_substitute('{"</span><span class="n">Closed</span><span class="s2">": "</span><span class="n">C</span><span class="s2">", "</span><span class="n">Active</span><span class="s2">": "</span><span class="n">A</span><span class="s2">", "</span><span class="n">New</span><span class="s2">": "</span><span class="n">A</span><span class="s2">"}') }}"</span><span class="p">,</span>
+  <span class="s2">"severity_code"</span><span class="p">:</span> <span class="s2">"{{ properties.severity|soar_substitute('{"</span><span class="n">Informational</span><span class="s2">": "</span><span class="n">Low</span><span class="s2">"}') }}"</span><span class="p">,</span>
+  <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"sentinel_incident_number"</span><span class="p">:</span> <span class="s2">"{{ name|e }}"</span><span class="p">,</span>
+    <span class="s2">"sentinel_incident_id"</span><span class="p">:</span> <span class="s2">"{{ properties.incidentNumber }}"</span><span class="p">,</span>
+    <span class="s2">"sentinel_incident_status"</span><span class="p">:</span> <span class="s2">"{{ properties.status }}"</span><span class="p">,</span>
+    <span class="s2">"sentinel_incident_last_modified_time_utc"</span><span class="p">:</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">lastModifiedTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}},</span>
+    <span class="s2">"sentinel_incident_url"</span><span class="p">:</span> <span class="s2">"&lt;a target='blank' href='{{ properties.incidentUrl }}'&gt;Sentinel Incident&lt;/a&gt;"</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classification</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classification }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_classification"</span><span class="p">:</span> <span class="s2">"{{ properties.classification }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classificationReason</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationReason }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_classification_reason"</span><span class="p">:</span> <span class="s2">"{{ properties.classificationReason }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classificationComment</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationComment|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_classification_comment"</span><span class="p">:</span> <span class="s2">"{{ properties.classificationComment|replace('"</span><span class="s1">', '</span>\\<span class="s2">"') }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">owner</span><span class="o">.</span><span class="n">assignedTo</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_assigned_to&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.owner.assignedTo }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_assigned_to"</span><span class="p">:</span> <span class="s2">"{{ properties.owner.assignedTo }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">labels</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_labels&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.labels | map(attribute=&#39;labelName&#39;) | join(&#39;,&#39;) | replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) | replace(&#39;</span><span class="se">\\</span><span class="s2">&#39;, &#39;</span><span class="se">\\\\</span><span class="s2">&#39;) }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_labels"</span><span class="p">:</span> <span class="s2">"{{ properties.labels | map(attribute='labelName') | join(',') | replace('"</span><span class="s1">', '</span>\\<span class="s2">"') | replace('</span><span class="se">\\</span><span class="s2">', '</span><span class="se">\\\\</span><span class="s2">') }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">additionalData</span><span class="o">.</span><span class="n">tactics</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_tactics&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.additionalData.tactics|join(&#39; &#39;) }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_tactics"</span><span class="p">:</span> <span class="s2">"{{ properties.additionalData.tactics|join(' ') }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">soar_profile</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ soar_profile }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_profile"</span><span class="p">:</span> <span class="s2">"{{ soar_profile }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">resilient_profile</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_profile&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ resilient_profile }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_profile"</span><span class="p">:</span> <span class="s2">"{{ resilient_profile }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">soar_label</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_label&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ soar_label }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_label"</span><span class="p">:</span> <span class="s2">"{{ soar_label }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
   <span class="p">}</span>
-  <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;Closed&quot;</span> <span class="o">%</span><span class="p">}</span>
+  <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s2">"Closed"</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">,</span>
-    <span class="s2">&quot;resolution_id&quot;</span><span class="p">:</span> <span class="s2">&quot;Resolved&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;resolution_summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Closed by Sentinel&quot;</span>
+    <span class="s2">"resolution_id"</span><span class="p">:</span> <span class="s2">"Resolved"</span><span class="p">,</span>
+    <span class="s2">"resolution_summary"</span><span class="p">:</span> <span class="s2">"Closed by Sentinel"</span>
   <span class="p">{</span><span class="o">%</span><span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1964,35 +1964,35 @@ mapping:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="p">{</span><span class="c1"># JINJA template for updating a new SOAR incident from a Sentinel incident. #}</span>
   <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">description</span> <span class="o">%</span><span class="p">}</span>
-    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.description|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"format"</span><span class="p">:</span> <span class="s2">"text"</span><span class="p">,</span>
+      <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"{{ properties.description|replace('"</span><span class="s1">', '</span>\\<span class="s2">"') }}"</span>
     <span class="p">},</span>
   <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
   <span class="p">{</span><span class="c1"># if Sentinel users are different than SOAR users, consider using a mapping table using soar_substitute: #}</span>
-  <span class="p">{</span><span class="c1"># &quot;owner_id&quot;: &quot;{{ properties.owner.userPrincipalName|soar_substitute(&#39;{&quot;sentinel_user1@co.com&quot;: &quot;soar_user1@ent.com&quot;, &quot;sentinel_user2@co.com&quot;: &quot;soar_user2@ent.com&quot;, &quot;DEFAULT&quot;: &quot;default_user@ent.com&quot; }&#39;) }}&quot;, #}</span>
-  <span class="s2">&quot;plan_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.status|soar_substitute(&#39;{&quot;</span><span class="n">Closed</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;, &quot;</span><span class="n">Active</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;, &quot;</span><span class="n">New</span><span class="s2">&quot;: &quot;</span><span class="n">A</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;severity_code&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.severity|soar_substitute(&#39;{&quot;</span><span class="n">Informational</span><span class="s2">&quot;: &quot;</span><span class="n">Low</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;sentinel_incident_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.status }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sentinel_incident_last_modified_time_utc&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">lastModifiedTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}}</span>
+  <span class="p">{</span><span class="c1"># "owner_id": "{{ properties.owner.userPrincipalName|soar_substitute('{"sentinel_user1@co.com": "soar_user1@ent.com", "sentinel_user2@co.com": "soar_user2@ent.com", "DEFAULT": "default_user@ent.com" }') }}", #}</span>
+  <span class="s2">"plan_status"</span><span class="p">:</span> <span class="s2">"{{ properties.status|soar_substitute('{"</span><span class="n">Closed</span><span class="s2">": "</span><span class="n">A</span><span class="s2">", "</span><span class="n">Active</span><span class="s2">": "</span><span class="n">A</span><span class="s2">", "</span><span class="n">New</span><span class="s2">": "</span><span class="n">A</span><span class="s2">"}') }}"</span><span class="p">,</span>
+  <span class="s2">"severity_code"</span><span class="p">:</span> <span class="s2">"{{ properties.severity|soar_substitute('{"</span><span class="n">Informational</span><span class="s2">": "</span><span class="n">Low</span><span class="s2">"}') }}"</span><span class="p">,</span>
+  <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"sentinel_incident_status"</span><span class="p">:</span> <span class="s2">"{{ properties.status }}"</span><span class="p">,</span>
+    <span class="s2">"sentinel_incident_last_modified_time_utc"</span><span class="p">:</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">lastModifiedTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classification</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classification }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_classification"</span><span class="p">:</span> <span class="s2">"{{ properties.classification }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classificationReason</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationReason }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_classification_reason"</span><span class="p">:</span> <span class="s2">"{{ properties.classificationReason }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classificationComment</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationComment|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_classification_comment"</span><span class="p">:</span> <span class="s2">"{{ properties.classificationComment|replace('"</span><span class="s1">', '</span>\\<span class="s2">"') }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">owner</span><span class="o">.</span><span class="n">assignedTo</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_assigned_to&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.owner.assignedTo }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_assigned_to"</span><span class="p">:</span> <span class="s2">"{{ properties.owner.assignedTo }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">labels</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_labels&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.labels | map(attribute=&#39;labelName&#39;) | join(&#39;,&#39;) | replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) | replace(&#39;</span><span class="se">\\</span><span class="s2">&#39;, &#39;</span><span class="se">\\\\</span><span class="s2">&#39;) }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_labels"</span><span class="p">:</span> <span class="s2">"{{ properties.labels | map(attribute='labelName') | join(',') | replace('"</span><span class="s1">', '</span>\\<span class="s2">"') | replace('</span><span class="se">\\</span><span class="s2">', '</span><span class="se">\\\\</span><span class="s2">') }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">additionalData</span><span class="o">.</span><span class="n">tactics</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_tactics&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.additionalData.tactics|join(&#39; &#39;) }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_tactics"</span><span class="p">:</span> <span class="s2">"{{ properties.additionalData.tactics|join(' ') }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -2003,29 +2003,29 @@ mapping:</p>
 <h3>incident_close_template.jinja<a class="headerlink" href="#incident-close-template-jinja" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="p">{</span><span class="c1"># JINJA template for closing a new SOAR incident from a Sentinel incident. #}</span>
-  <span class="s2">&quot;plan_status&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;resolution_id&quot;</span><span class="p">:</span> <span class="s2">&quot;Resolved&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;resolution_summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Closed by Sentinel&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;sentinel_incident_last_modified_time_utc&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">lastModifiedTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}},</span>
-    <span class="s2">&quot;sentinel_incident_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.status }}&quot;</span>
+  <span class="s2">"plan_status"</span><span class="p">:</span> <span class="s2">"C"</span><span class="p">,</span>
+  <span class="s2">"resolution_id"</span><span class="p">:</span> <span class="s2">"Resolved"</span><span class="p">,</span>
+  <span class="s2">"resolution_summary"</span><span class="p">:</span> <span class="s2">"Closed by Sentinel"</span><span class="p">,</span>
+  <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"sentinel_incident_last_modified_time_utc"</span><span class="p">:</span> <span class="p">{{</span> <span class="n">properties</span><span class="o">.</span><span class="n">lastModifiedTimeUtc</span><span class="o">|</span><span class="n">soar_datetimeformat</span> <span class="p">}},</span>
+    <span class="s2">"sentinel_incident_status"</span><span class="p">:</span> <span class="s2">"{{ properties.status }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classification</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classification }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_classification"</span><span class="p">:</span> <span class="s2">"{{ properties.classification }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classificationReason</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationReason }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_classification_reason"</span><span class="p">:</span> <span class="s2">"{{ properties.classificationReason }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">classificationComment</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_classification_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.classificationComment|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_classification_comment"</span><span class="p">:</span> <span class="s2">"{{ properties.classificationComment|replace('"</span><span class="s1">', '</span>\\<span class="s2">"') }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">owner</span><span class="o">.</span><span class="n">assignedTo</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_assigned_to&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.owner.assignedTo }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_assigned_to"</span><span class="p">:</span> <span class="s2">"{{ properties.owner.assignedTo }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">labels</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_labels&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.labels | map(attribute=&#39;labelName&#39;) | join(&#39;,&#39;) | replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) | replace(&#39;</span><span class="se">\\</span><span class="s2">&#39;, &#39;</span><span class="se">\\\\</span><span class="s2">&#39;) }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_labels"</span><span class="p">:</span> <span class="s2">"{{ properties.labels | map(attribute='labelName') | join(',') | replace('"</span><span class="s1">', '</span>\\<span class="s2">"') | replace('</span><span class="se">\\</span><span class="s2">', '</span><span class="se">\\\\</span><span class="s2">') }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">additionalData</span><span class="o">.</span><span class="n">tactics</span> <span class="o">%</span><span class="p">}</span>
-      <span class="p">,</span><span class="s2">&quot;sentinel_incident_tactics&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.additionalData.tactics|join(&#39; &#39;) }}&quot;</span>
+      <span class="p">,</span><span class="s2">"sentinel_incident_tactics"</span><span class="p">:</span> <span class="s2">"{{ properties.additionalData.tactics|join(' ') }}"</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -2036,22 +2036,22 @@ mapping:</p>
 <h3>sentinel_close_incident_template.jinja<a class="headerlink" href="#sentinel-close-incident-template-jinja" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="p">{</span><span class="c1"># JINJA template for closing a new Sentinel incident from a SOAR incident. #}</span>
-    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ name|soar_splitpart(1)|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ severity_code|string|soar_substitute(&#39;{&quot;</span><span class="n">Low</span><span class="s2">&quot;: &quot;</span><span class="n">Low</span><span class="s2">&quot;, &quot;</span><span class="n">Medium</span><span class="s2">&quot;: &quot;</span><span class="n">Medium</span><span class="s2">&quot;, &quot;</span><span class="n">High</span><span class="s2">&quot;: &quot;</span><span class="n">High</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Closed&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ resolution_id|string|soar_substitute(&#39;{&quot;</span><span class="n">Unresolved</span><span class="s2">&quot;: &quot;</span><span class="n">Undetermined</span><span class="s2">&quot;, &quot;</span><span class="n">Duplicate</span><span class="s2">&quot;: &quot;</span><span class="n">FalsePositive</span><span class="s2">&quot;, &quot;</span><span class="n">Not</span> <span class="n">an</span> <span class="n">Issue</span><span class="s2">&quot;: &quot;</span><span class="n">BenignPositive</span><span class="s2">&quot;, &quot;</span><span class="n">Resolved</span><span class="s2">&quot;: &quot;</span><span class="n">TruePositive</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;classificationReason&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ resolution_id|string|soar_substitute(&#39;{&quot;</span><span class="n">Unresolved</span><span class="s2">&quot;: &quot;&quot;, &quot;</span><span class="n">Duplicate</span><span class="s2">&quot;: &quot;</span><span class="n">InaccurateData</span><span class="s2">&quot;, &quot;</span><span class="n">Not</span> <span class="n">an</span> <span class="n">Issue</span><span class="s2">&quot;: &quot;</span><span class="n">SuspiciousButExpected</span><span class="s2">&quot;, &quot;</span><span class="n">Resolved</span><span class="s2">&quot;: &quot;</span><span class="n">SuspiciousActivity</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;classificationComment&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ resolution_summary|striptags|safe }}&quot;</span>
+    <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"{{ name|soar_splitpart(1)|replace('"</span><span class="s1">', '</span>\\<span class="s2">"') }}"</span><span class="p">,</span>
+        <span class="s2">"severity"</span><span class="p">:</span> <span class="s2">"{{ severity_code|string|soar_substitute('{"</span><span class="n">Low</span><span class="s2">": "</span><span class="n">Low</span><span class="s2">", "</span><span class="n">Medium</span><span class="s2">": "</span><span class="n">Medium</span><span class="s2">", "</span><span class="n">High</span><span class="s2">": "</span><span class="n">High</span><span class="s2">"}') }}"</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"Closed"</span><span class="p">,</span>
+        <span class="s2">"classification"</span><span class="p">:</span> <span class="s2">"{{ resolution_id|string|soar_substitute('{"</span><span class="n">Unresolved</span><span class="s2">": "</span><span class="n">Undetermined</span><span class="s2">", "</span><span class="n">Duplicate</span><span class="s2">": "</span><span class="n">FalsePositive</span><span class="s2">", "</span><span class="n">Not</span> <span class="n">an</span> <span class="n">Issue</span><span class="s2">": "</span><span class="n">BenignPositive</span><span class="s2">", "</span><span class="n">Resolved</span><span class="s2">": "</span><span class="n">TruePositive</span><span class="s2">"}') }}"</span><span class="p">,</span>
+        <span class="s2">"classificationReason"</span><span class="p">:</span> <span class="s2">"{{ resolution_id|string|soar_substitute('{"</span><span class="n">Unresolved</span><span class="s2">": "", "</span><span class="n">Duplicate</span><span class="s2">": "</span><span class="n">InaccurateData</span><span class="s2">", "</span><span class="n">Not</span> <span class="n">an</span> <span class="n">Issue</span><span class="s2">": "</span><span class="n">SuspiciousButExpected</span><span class="s2">", "</span><span class="n">Resolved</span><span class="s2">": "</span><span class="n">SuspiciousActivity</span><span class="s2">"}') }}"</span><span class="p">,</span>
+        <span class="s2">"classificationComment"</span><span class="p">:</span> <span class="s2">"{{ resolution_summary|striptags|safe }}"</span>
         <span class="p">{</span><span class="c1"># modify as necessary #}</span>
         <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_labels</span> <span class="o">%</span><span class="p">}</span>
-            <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">label_list</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_labels</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
-            <span class="p">,</span><span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">label_list</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_labels</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
+            <span class="p">,</span><span class="s2">"labels"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">label_list</span> <span class="o">%</span><span class="p">}</span>
                 <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">label</span> <span class="o">%</span><span class="p">}</span>
                 <span class="p">{</span>
-                    <span class="s2">&quot;labelName&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">label</span> <span class="o">|</span> <span class="n">trim</span> <span class="o">|</span> <span class="n">json</span> <span class="p">}},</span>
-                    <span class="s2">&quot;labelType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
+                    <span class="s2">"labelName"</span><span class="p">:</span> <span class="p">{{</span> <span class="n">label</span> <span class="o">|</span> <span class="n">trim</span> <span class="o">|</span> <span class="n">json</span> <span class="p">}},</span>
+                    <span class="s2">"labelType"</span><span class="p">:</span> <span class="s2">"User"</span>
                 <span class="p">}</span>
                 <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
             <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">loop</span><span class="o">.</span><span class="n">last</span> <span class="o">%</span><span class="p">},{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
@@ -2067,21 +2067,21 @@ mapping:</p>
 <h3>sentinel_update_incident_template.jinja<a class="headerlink" href="#sentinel-update-incident-template-jinja" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="p">{</span><span class="c1"># JINJA template for updating a new Sentinel incident from a SOAR incident. #}</span>
-    <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ name|soar_splitpart(1)|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;) }}&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ severity_code|string|soar_substitute(&#39;{&quot;</span><span class="n">Low</span><span class="s2">&quot;: &quot;</span><span class="n">Low</span><span class="s2">&quot;, &quot;</span><span class="n">Medium</span><span class="s2">&quot;: &quot;</span><span class="n">Medium</span><span class="s2">&quot;, &quot;</span><span class="n">High</span><span class="s2">&quot;: &quot;</span><span class="n">High</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ properties.sentinel_incident_status }}&quot;</span>
+    <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"{{ name|soar_splitpart(1)|replace('"</span><span class="s1">', '</span>\\<span class="s2">"') }}"</span><span class="p">,</span>
+        <span class="s2">"severity"</span><span class="p">:</span> <span class="s2">"{{ severity_code|string|soar_substitute('{"</span><span class="n">Low</span><span class="s2">": "</span><span class="n">Low</span><span class="s2">", "</span><span class="n">Medium</span><span class="s2">": "</span><span class="n">Medium</span><span class="s2">", "</span><span class="n">High</span><span class="s2">": "</span><span class="n">High</span><span class="s2">"}') }}"</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"{{ properties.sentinel_incident_status }}"</span>
         <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">description</span> <span class="o">%</span><span class="p">}</span>
-            <span class="p">,</span><span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ description|replace(&#39;&quot;</span><span class="s1">&#39;, &#39;</span>\\<span class="s2">&quot;&#39;)|striptags|safe }}&quot;</span>
+            <span class="p">,</span><span class="s2">"description"</span><span class="p">:</span> <span class="s2">"{{ description|replace('"</span><span class="s1">', '</span>\\<span class="s2">"')|striptags|safe }}"</span>
         <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
         <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_labels</span> <span class="o">%</span><span class="p">}</span>
-            <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">label_list</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_labels</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
-            <span class="p">,</span><span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">label_list</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">sentinel_incident_labels</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)</span> <span class="o">-%</span><span class="p">}</span>
+            <span class="p">,</span><span class="s2">"labels"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">label_list</span> <span class="o">%</span><span class="p">}</span>
                 <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">label</span> <span class="o">%</span><span class="p">}</span>
                 <span class="p">{</span>
-                    <span class="s2">&quot;labelName&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">label</span> <span class="o">|</span> <span class="n">trim</span> <span class="o">|</span> <span class="n">json</span> <span class="p">}},</span>
-                    <span class="s2">&quot;labelType&quot;</span><span class="p">:</span> <span class="s2">&quot;User&quot;</span>
+                    <span class="s2">"labelName"</span><span class="p">:</span> <span class="p">{{</span> <span class="n">label</span> <span class="o">|</span> <span class="n">trim</span> <span class="o">|</span> <span class="n">json</span> <span class="p">}},</span>
+                    <span class="s2">"labelType"</span><span class="p">:</span> <span class="s2">"User"</span>
                 <span class="p">}</span>
                 <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
             <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">loop</span><span class="o">.</span><span class="n">last</span> <span class="o">%</span><span class="p">},{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
@@ -2106,41 +2106,41 @@ that are commented out. The example template shows all Sentinel incident propert
   <span class="p">{</span><span class="c1"># JINJA template for filtering Sentinel Incidents. #}</span>
   <span class="p">{</span><span class="c1"># If the value equals true then it passed the filter. #}</span>
   <span class="p">{</span><span class="c1"># To add a filter for a property add an if else to that property where it equals true if it passes the filter. #}</span>
-  <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="p">{</span><span class="c1"># Example filter for title that will filter out Sentinel incidents that do not have the string &quot;TEST-&quot; in the title:</span>
-  <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="s2">&quot;TEST-&quot;</span> <span class="ow">in</span> <span class="n">title</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+  <span class="s2">"title"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="p">{</span><span class="c1"># Example filter for title that will filter out Sentinel incidents that do not have the string "TEST-" in the title:</span>
+  <span class="s2">"title"</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="s2">"TEST-"</span> <span class="ow">in</span> <span class="n">title</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
   <span class="c1">#}</span>
-  <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"description"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
   <span class="p">{</span><span class="c1"># If the severity of the Sentinel incident is High, or, Medium, or Low then the Sentinel incident will pass this filter. #}</span>
-  <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">severity</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;High&quot;</span><span class="p">,</span> <span class="s2">&quot;Medium&quot;</span><span class="p">,</span> <span class="s2">&quot;Low&quot;</span><span class="p">]</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">},</span>
+  <span class="s2">"severity"</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">severity</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"High"</span><span class="p">,</span> <span class="s2">"Medium"</span><span class="p">,</span> <span class="s2">"Low"</span><span class="p">]</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">},</span>
   <span class="p">{</span><span class="c1"># If the status of the Sentinel incident is either New or Active than the Sentinel incident will pass this filter. #}</span>
-  <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">status</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;New&quot;</span><span class="p">,</span> <span class="s2">&quot;Active&quot;</span><span class="p">]</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">},</span>
-  <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;assignedTo&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"status"</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">status</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"New"</span><span class="p">,</span> <span class="s2">"Active"</span><span class="p">]</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">},</span>
+  <span class="s2">"email"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"assignedTo"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
   <span class="p">{</span><span class="c1"># Example filter for assignedTo that will test if the Sentinel incident is assigned to a user in the given list:</span>
-  <span class="s2">&quot;assignedTo&quot;</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">assignedTo</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Test User&quot;</span><span class="p">,</span> <span class="s2">&quot;sys admin&quot;</span><span class="p">]</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
+  <span class="s2">"assignedTo"</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">assignedTo</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"Test User"</span><span class="p">,</span> <span class="s2">"sys admin"</span><span class="p">]</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
   <span class="c1">#}</span>
-  <span class="s2">&quot;userPrincipalName&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"userPrincipalName"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
   <span class="p">{</span><span class="c1"># labels are equal to Tags on Sentinel #}</span>
-  <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"labels"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
   <span class="p">{</span><span class="c1"># Example of filtering labels for a specific labelName:</span>
-  <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+  <span class="s2">"labels"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
   <span class="p">{</span><span class="o">%</span> <span class="nb">set</span> <span class="n">present</span> <span class="o">=</span> <span class="n">false</span> <span class="o">%</span><span class="p">}</span>
   <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">labels</span> <span class="o">%</span><span class="p">}</span>
-    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">tag</span><span class="o">.</span><span class="n">labelName</span> <span class="o">==</span> <span class="s2">&quot;tech3&quot;</span> <span class="o">%</span><span class="p">}</span>
-      <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">tag</span><span class="o">.</span><span class="n">labelName</span> <span class="o">==</span> <span class="s2">"tech3"</span> <span class="o">%</span><span class="p">}</span>
+      <span class="s2">"labels"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
   <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
   <span class="c1">#}</span>
   <span class="p">{</span><span class="c1"># If the alertsCount of the Sentinel incident is 0 or greater then the Sentinel incident will pass this filter. #}</span>
-  <span class="s2">&quot;alertsCount&quot;</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">alertsCount</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">},</span>
-  <span class="s2">&quot;bookmarksCount&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;commentsCount&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;alertProductNames&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"alertsCount"</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">alertsCount</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">},</span>
+  <span class="s2">"bookmarksCount"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"commentsCount"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"alertProductNames"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
   <span class="p">{</span><span class="c1"># If the tactics property of the Sentinel incident is equal to PreAttack, or InitialAccess or blank then the Sentinel incident will pass this filter. #}</span>
-  <span class="s2">&quot;tactics&quot;</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="s2">&quot;PreAttack&quot;</span> <span class="ow">in</span> <span class="n">tactics</span> <span class="ow">or</span> <span class="s2">&quot;InitialAccess&quot;</span> <span class="ow">in</span> <span class="n">tactics</span> <span class="ow">or</span> <span class="n">tactics</span> <span class="o">==</span> <span class="p">[]</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">},</span>
-  <span class="s2">&quot;relatedAnalyticRuleIds&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;providerName&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="s2">"tactics"</span><span class="p">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="s2">"PreAttack"</span> <span class="ow">in</span> <span class="n">tactics</span> <span class="ow">or</span> <span class="s2">"InitialAccess"</span> <span class="ow">in</span> <span class="n">tactics</span> <span class="ow">or</span> <span class="n">tactics</span> <span class="o">==</span> <span class="p">[]</span> <span class="o">%</span><span class="p">}</span> <span class="n">true</span> <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span> <span class="n">false</span> <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">},</span>
+  <span class="s2">"relatedAnalyticRuleIds"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"providerName"</span><span class="p">:</span> <span class="n">true</span>
 <span class="p">}</span>
 </pre></div>
 </div>

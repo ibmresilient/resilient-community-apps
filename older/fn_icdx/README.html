@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -690,28 +690,28 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-   <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;success&quot;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
-   <span class="s2">&quot;reason&quot;</span><span class="p">:</span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;content&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;result_set&quot;</span><span class="p">:</span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;num_of_results&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;execution_time&quot;</span><span class="p">:</span><span class="mi">1601631906772</span>
+   <span class="s2">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span>
+   <span class="s2">"success"</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
+   <span class="s2">"reason"</span><span class="p">:</span><span class="s2">"None"</span><span class="p">,</span>
+   <span class="s2">"content"</span><span class="p">:{</span>
+      <span class="s2">"result_set"</span><span class="p">:</span><span class="s2">"None"</span><span class="p">,</span>
+      <span class="s2">"num_of_results"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"execution_time"</span><span class="p">:</span><span class="mi">1601631906772</span>
    <span class="p">},</span>
-   <span class="s2">&quot;raw&quot;</span><span class="p">:</span><span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">result_set</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">num_of_results</span><span class="se">\&quot;</span><span class="s2">: 0, </span><span class="se">\&quot;</span><span class="s2">execution_time</span><span class="se">\&quot;</span><span class="s2">: 1601631906772}&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;inputs&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;icdx_search_request&quot;</span><span class="p">:{</span>
-         <span class="s2">&quot;format&quot;</span><span class="p">:</span><span class="s2">&quot;text&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;content&quot;</span><span class="p">:</span><span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">from</span><span class="se">\&quot;</span><span class="s2">:[</span><span class="se">\&quot;</span><span class="s2">default</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">dedicated/d900b5f0-aa0d-11e9-e053-000000000001</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">dedicated/13547310-aec6-11e9-eb82-000000000002</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">dedicated/3c7b5bd0-1f21-11e9-fa8e-000000000001</span><span class="se">\&quot;</span><span class="s2">],</span><span class="se">\&quot;</span><span class="s2">start</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">-7d</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">filter</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">type = </span><span class="se">\\</span><span class="s2">&#39;NETWORK_EVENT</span><span class="se">\\</span><span class="s2">&#39;</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">Query_Title</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">Search for available archives, then search for NETWORK_EVENTs, limited to all available archives except system.</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">limit</span><span class="se">\&quot;</span><span class="s2">:5,</span><span class="se">\&quot;</span><span class="s2">where</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">severity_id &gt;= 3</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">id</span><span class="se">\&quot;</span><span class="s2">:1}&quot;</span>
+   <span class="s2">"raw"</span><span class="p">:</span><span class="s2">"{</span><span class="se">\"</span><span class="s2">result_set</span><span class="se">\"</span><span class="s2">: null, </span><span class="se">\"</span><span class="s2">num_of_results</span><span class="se">\"</span><span class="s2">: 0, </span><span class="se">\"</span><span class="s2">execution_time</span><span class="se">\"</span><span class="s2">: 1601631906772}"</span><span class="p">,</span>
+   <span class="s2">"inputs"</span><span class="p">:{</span>
+      <span class="s2">"icdx_search_request"</span><span class="p">:{</span>
+         <span class="s2">"format"</span><span class="p">:</span><span class="s2">"text"</span><span class="p">,</span>
+         <span class="s2">"content"</span><span class="p">:</span><span class="s2">"{</span><span class="se">\"</span><span class="s2">from</span><span class="se">\"</span><span class="s2">:[</span><span class="se">\"</span><span class="s2">default</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">dedicated/d900b5f0-aa0d-11e9-e053-000000000001</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">dedicated/13547310-aec6-11e9-eb82-000000000002</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">dedicated/3c7b5bd0-1f21-11e9-fa8e-000000000001</span><span class="se">\"</span><span class="s2">],</span><span class="se">\"</span><span class="s2">start</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">-7d</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">filter</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">type = </span><span class="se">\\</span><span class="s2">'NETWORK_EVENT</span><span class="se">\\</span><span class="s2">'</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">Query_Title</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Search for available archives, then search for NETWORK_EVENTs, limited to all available archives except system.</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">limit</span><span class="se">\"</span><span class="s2">:5,</span><span class="se">\"</span><span class="s2">where</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">severity_id &gt;= 3</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">id</span><span class="se">\"</span><span class="s2">:1}"</span>
       <span class="p">}</span>
    <span class="p">},</span>
-   <span class="s2">&quot;metrics&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package&quot;</span><span class="p">:</span><span class="s2">&quot;fn-icdx&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package_version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0.1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;host&quot;</span><span class="p">:</span><span class="s2">&quot;RG-MBP-18.local&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span><span class="mi">1889</span><span class="p">,</span>
-      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span><span class="s2">&quot;2020-10-02 10:45:06&quot;</span>
+   <span class="s2">"metrics"</span><span class="p">:{</span>
+      <span class="s2">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span>
+      <span class="s2">"package"</span><span class="p">:</span><span class="s2">"fn-icdx"</span><span class="p">,</span>
+      <span class="s2">"package_version"</span><span class="p">:</span><span class="s2">"1.0.1"</span><span class="p">,</span>
+      <span class="s2">"host"</span><span class="p">:</span><span class="s2">"RG-MBP-18.local"</span><span class="p">,</span>
+      <span class="s2">"execution_time_ms"</span><span class="p">:</span><span class="mi">1889</span><span class="p">,</span>
+      <span class="s2">"timestamp"</span><span class="p">:</span><span class="s2">"2020-10-02 10:45:06"</span>
    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -724,47 +724,47 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="c1">### Define pre-processing functions ###</span>
 <span class="c1">#######################################</span>
 <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
-   <span class="s2">&quot;Query_Title&quot;</span><span class="p">:</span> <span class="s2">&quot;Search for available archives, then search for NETWORK_EVENTs, limited to all available archives except system.&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;id&quot;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-   <span class="s2">&quot;start&quot;</span>  <span class="p">:</span> <span class="s2">&quot;-7d&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;where&quot;</span>  <span class="p">:</span> <span class="s2">&quot;severity_id &gt;= 3&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;filter&quot;</span><span class="p">:</span> <span class="s2">&quot;type = &#39;NETWORK_EVENT&#39;&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;limit&quot;</span>  <span class="p">:</span> <span class="mi">5</span>
+   <span class="s2">"Query_Title"</span><span class="p">:</span> <span class="s2">"Search for available archives, then search for NETWORK_EVENTs, limited to all available archives except system."</span><span class="p">,</span>
+   <span class="s2">"id"</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="s2">"start"</span>  <span class="p">:</span> <span class="s2">"-7d"</span><span class="p">,</span>
+   <span class="s2">"where"</span>  <span class="p">:</span> <span class="s2">"severity_id &gt;= 3"</span><span class="p">,</span>
+   <span class="s2">"filter"</span><span class="p">:</span> <span class="s2">"type = 'NETWORK_EVENT'"</span><span class="p">,</span>
+   <span class="s2">"limit"</span>  <span class="p">:</span> <span class="mi">5</span>
    <span class="p">}</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">dict_to_json_str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
-<span class="w">  </span><span class="sd">&quot;&quot;&quot;Function that converts a dictionary into a JSON stringself.</span>
+<span class="w">  </span><span class="sd">"""Function that converts a dictionary into a JSON stringself.</span>
 <span class="sd">     Supports basestring, bool and int.</span>
-<span class="sd">     If the value is None, it sets it to False&quot;&quot;&quot;</span>
+<span class="sd">     If the value is None, it sets it to False"""</span>
 
-  <span class="n">json_str</span> <span class="o">=</span> <span class="s1">&#39;&quot;{ </span><span class="si">{0}</span><span class="s1"> }&quot;&#39;</span>
-  <span class="n">json_entry</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;:</span><span class="si">{1}</span><span class="s1">&#39;</span>
-  <span class="n">json_entry_str</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;:&quot;</span><span class="si">{1}</span><span class="s1">&quot;&#39;</span>
-  <span class="n">list_str</span> <span class="o">=</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;:[</span><span class="si">{1}</span><span class="s1">]&#39;</span>
+  <span class="n">json_str</span> <span class="o">=</span> <span class="s1">'"{ </span><span class="si">{0}</span><span class="s1"> }"'</span>
+  <span class="n">json_entry</span> <span class="o">=</span> <span class="s1">'"</span><span class="si">{0}</span><span class="s1">":</span><span class="si">{1}</span><span class="s1">'</span>
+  <span class="n">json_entry_str</span> <span class="o">=</span> <span class="s1">'"</span><span class="si">{0}</span><span class="s1">":"</span><span class="si">{1}</span><span class="s1">"'</span>
+  <span class="n">list_str</span> <span class="o">=</span> <span class="s1">'"</span><span class="si">{0}</span><span class="s1">":[</span><span class="si">{1}</span><span class="s1">]'</span>
   <span class="n">entries</span> <span class="o">=</span> <span class="p">[]</span> 
   
   <span class="c1"># Grab the available archives from the previous function </span>
-  <span class="n">archives_to_search</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">archive_search</span><span class="p">[</span><span class="s2">&quot;archives&quot;</span><span class="p">]</span>
+  <span class="n">archives_to_search</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">archive_search</span><span class="p">[</span><span class="s2">"archives"</span><span class="p">]</span>
 <span class="w">  </span>
-<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">  </span><span class="sd">"""</span>
 <span class="sd">  </span>
 <span class="sd">    Here we take the result of the previous function -- a list of available archives_to_search</span>
 <span class="sd">    A comma separated string of archives is prepared and then appended to our payload</span>
 <span class="sd">    </span>
 <span class="sd">    In the below example, we exclude the system archive by adding every other archive to our payload</span>
 <span class="sd">  </span>
-<span class="sd">    Replace &#39;system&#39; with any archives you DONT want to be searched</span>
-<span class="sd">  &quot;&quot;&quot;</span>
-  <span class="n">list_builder_str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="sd">    Replace 'system' with any archives you DONT want to be searched</span>
+<span class="sd">  """</span>
+  <span class="n">list_builder_str</span> <span class="o">=</span> <span class="s1">''</span>
   <span class="k">for</span> <span class="n">archive</span> <span class="ow">in</span> <span class="n">archives_to_search</span><span class="p">:</span>
-    <span class="c1"># If the archive isin&#39;t the system archive</span>
-    <span class="k">if</span> <span class="n">archive</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;system&quot;</span><span class="p">:</span>
+    <span class="c1"># If the archive isin't the system archive</span>
+    <span class="k">if</span> <span class="n">archive</span><span class="p">[</span><span class="s2">"path"</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">"system"</span><span class="p">:</span>
       <span class="c1"># Append to the list of archives we will search</span>
-      <span class="n">list_builder_str</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;,&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">archive</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">])</span>
+      <span class="n">list_builder_str</span> <span class="o">+=</span> <span class="s1">'"</span><span class="si">{0}</span><span class="s1">",'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">archive</span><span class="p">[</span><span class="s2">"path"</span><span class="p">])</span>
           
   <span class="c1"># Finally prepare our CSV string to be appended to the payload      </span>
-  <span class="k">if</span> <span class="n">list_builder_str</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">):</span>
+  <span class="k">if</span> <span class="n">list_builder_str</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">','</span><span class="p">):</span>
     <span class="n">list_builder_str</span> <span class="o">=</span> <span class="n">list_builder_str</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-  <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">list_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;from&quot;</span><span class="p">,</span> <span class="n">list_builder_str</span><span class="p">))</span>
+  <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">list_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"from"</span><span class="p">,</span> <span class="n">list_builder_str</span><span class="p">))</span>
   
   <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
     <span class="n">key</span> <span class="o">=</span> <span class="n">entry</span>
@@ -778,13 +778,13 @@ Additional package dependencies may exist for each of these packages:</p>
       <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
     
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-      <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span> <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="kc">True</span> <span class="k">else</span> <span class="s1">&#39;false&#39;</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="s1">'true'</span> <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="kc">True</span> <span class="k">else</span> <span class="s1">'false'</span>
       <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
     
     <span class="k">else</span><span class="p">:</span>
       <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
   
-  <span class="k">return</span> <span class="s1">&#39;{&#39;</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span>
+  <span class="k">return</span> <span class="s1">'{'</span> <span class="o">+</span> <span class="s1">','</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">entries</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'}'</span>
   
   
 <span class="n">inputs</span><span class="o">.</span><span class="n">icdx_search_request</span> <span class="o">=</span> <span class="n">dict_to_json_str</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
@@ -795,53 +795,53 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
 <span class="sd">Example of the return data for this workflow</span>
 <span class="sd">results = {</span>
-<span class="sd">            &quot;success&quot;: True or False</span>
-<span class="sd">            &quot;result_set&quot;: [{</span>
+<span class="sd">            "success": True or False</span>
+<span class="sd">            "result_set": [{</span>
 <span class="sd">              Object containing ICDx event data</span>
 <span class="sd">            }],</span>
-<span class="sd">            &quot;num_of_results&quot;: How many results returned (INT),</span>
-<span class="sd">            &quot;execution_time&quot;: The time the function was executed</span>
+<span class="sd">            "num_of_results": How many results returned (INT),</span>
+<span class="sd">            "execution_time": The time the function was executed</span>
 <span class="sd">          }</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;b&gt;Search Request executed on ICDx :&lt;/b&gt;&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
+<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt;&lt;b&gt;Search Request executed on ICDx :&lt;/b&gt;"""</span>
 
-<span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;Number of results found: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
-<span class="s2">               &lt;br&gt;Results are being inserted into the ICDX Event Datatable&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">num_of_results</span><span class="p">)</span>
+<span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt;Number of results found: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
+<span class="s2">               &lt;br&gt;Results are being inserted into the ICDX Event Datatable"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">num_of_results</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;Query_Title&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;br&gt;A Query_Title attribute was provided with the input payload. </span>
-<span class="s2">                &lt;br&gt;Query Title: &lt;b&gt;</span><span class="si">{0}</span><span class="s2"> &lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;Query_Title&quot;</span><span class="p">])</span>
-  <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;where&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
-    <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; Where Condition: &lt;b&gt;</span><span class="si">{0}</span><span class="s2"> &lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;where&quot;</span><span class="p">])</span> 
-  <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;filter&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
-    <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; Filter Condition: &lt;b&gt;</span><span class="si">{0}</span><span class="s2"> &lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;filter&quot;</span><span class="p">])</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"icdx_search_request"</span><span class="p">][</span><span class="s2">"Query_Title"</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt;&lt;br&gt;A Query_Title attribute was provided with the input payload. </span>
+<span class="s2">                &lt;br&gt;Query Title: &lt;b&gt;</span><span class="si">{0}</span><span class="s2"> &lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"icdx_search_request"</span><span class="p">][</span><span class="s2">"Query_Title"</span><span class="p">])</span>
+  <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"icdx_search_request"</span><span class="p">][</span><span class="s2">"where"</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">''</span><span class="p">):</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt; Where Condition: &lt;b&gt;</span><span class="si">{0}</span><span class="s2"> &lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"icdx_search_request"</span><span class="p">][</span><span class="s2">"where"</span><span class="p">])</span> 
+  <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"icdx_search_request"</span><span class="p">][</span><span class="s2">"filter"</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="s1">''</span><span class="p">):</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt; Filter Condition: &lt;b&gt;</span><span class="si">{0}</span><span class="s2"> &lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"icdx_search_request"</span><span class="p">][</span><span class="s2">"filter"</span><span class="p">])</span>
                 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">num_of_results</span> <span class="o">&gt;=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;hard_limit&quot;</span><span class="p">]:</span>
-  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;br&gt;Query resulted in </span><span class="si">{0}</span><span class="s2"> matching events. ICDx Event Requests are batched with a configurable limit of </span><span class="si">{1}</span><span class="s2">.</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">num_of_results</span> <span class="o">&gt;=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"icdx_search_request"</span><span class="p">][</span><span class="s2">"hard_limit"</span><span class="p">]:</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt;&lt;br&gt;Query resulted in </span><span class="si">{0}</span><span class="s2"> matching events. ICDx Event Requests are batched with a configurable limit of </span><span class="si">{1}</span><span class="s2">.</span>
 <span class="s2">              &lt;br&gt; To access any results after the </span><span class="si">{1}</span><span class="s2">th returned result, please review the app.config parameter `icdx_search_limit` and update where necessary. </span>
-<span class="s2">              &lt;br&gt; The Last UUID appears to be &lt;b&gt;</span><span class="si">{2}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;limit&quot;</span><span class="p">],</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_search_request&quot;</span><span class="p">][</span><span class="s2">&quot;hard_limit&quot;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">result_set</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;uuid&quot;</span><span class="p">])</span>
+<span class="s2">              &lt;br&gt; The Last UUID appears to be &lt;b&gt;</span><span class="si">{2}</span><span class="s2">&lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"icdx_search_request"</span><span class="p">][</span><span class="s2">"limit"</span><span class="p">],</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"icdx_search_request"</span><span class="p">][</span><span class="s2">"hard_limit"</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">result_set</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">"uuid"</span><span class="p">])</span>
 
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">result_set</span><span class="p">:</span>
   <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">result_set</span><span class="p">:</span>
     <span class="c1"># Now have a handle on each event; Prepare DataTable</span>
-    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;icdx_events&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;icdx_uuid&quot;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;uuid&#39;</span><span class="p">]</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;icdx_severity_id&quot;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;severity_id&#39;</span><span class="p">]</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;icdx_device_name&quot;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;device_name&#39;</span><span class="p">]</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;icdx_device_ip&quot;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;device_ip&#39;</span><span class="p">]</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"icdx_events"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"icdx_uuid"</span><span class="p">]</span>  <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">'uuid'</span><span class="p">]</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"icdx_severity_id"</span><span class="p">]</span>  <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">'severity_id'</span><span class="p">]</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"icdx_device_name"</span><span class="p">]</span>  <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">'device_name'</span><span class="p">]</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"icdx_device_ip"</span><span class="p">]</span>  <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">'device_ip'</span><span class="p">]</span>
     
     <span class="k">try</span><span class="p">:</span>
-      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;icdx_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">"icdx_type"</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s1">'type'</span><span class="p">]</span>
     <span class="k">except</span><span class="p">:</span>
-      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;icdx_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;No Type&quot;&quot;&quot;</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">"icdx_type"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""No Type"""</span>
       
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;execution_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">execution_time</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"execution_time"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">execution_time</span>
     
 </pre></div>
 </div>
@@ -872,44 +872,44 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-   <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;success&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span>
-   <span class="s2">&quot;reason&quot;</span><span class="p">:</span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;content&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;archives&quot;</span><span class="p">:[</span>
+   <span class="s2">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span>
+   <span class="s2">"success"</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span>
+   <span class="s2">"reason"</span><span class="p">:</span><span class="s2">"None"</span><span class="p">,</span>
+   <span class="s2">"content"</span><span class="p">:{</span>
+      <span class="s2">"archives"</span><span class="p">:[</span>
          <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;System Archive&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;path&quot;</span><span class="p">:</span><span class="s2">&quot;system&quot;</span>
+            <span class="s2">"name"</span><span class="p">:</span><span class="s2">"System Archive"</span><span class="p">,</span>
+            <span class="s2">"path"</span><span class="p">:</span><span class="s2">"system"</span>
          <span class="p">},</span>
          <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;Default Archive&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;path&quot;</span><span class="p">:</span><span class="s2">&quot;default&quot;</span>
+            <span class="s2">"name"</span><span class="p">:</span><span class="s2">"Default Archive"</span><span class="p">,</span>
+            <span class="s2">"path"</span><span class="p">:</span><span class="s2">"default"</span>
          <span class="p">},</span>
          <span class="p">{</span>
-            <span class="s2">&quot;path&quot;</span><span class="p">:</span><span class="s2">&quot;dedicated/d900b5f0-aa0d-11e9-e053-000000000001&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;uuid&quot;</span><span class="p">:</span><span class="s2">&quot;d900b5f0-aa0d-11e9-e053-000000000001&quot;</span>
+            <span class="s2">"path"</span><span class="p">:</span><span class="s2">"dedicated/d900b5f0-aa0d-11e9-e053-000000000001"</span><span class="p">,</span>
+            <span class="s2">"uuid"</span><span class="p">:</span><span class="s2">"d900b5f0-aa0d-11e9-e053-000000000001"</span>
          <span class="p">},</span>
          <span class="p">{</span>
-            <span class="s2">&quot;path&quot;</span><span class="p">:</span><span class="s2">&quot;dedicated/13547310-aec6-11e9-eb82-000000000002&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;uuid&quot;</span><span class="p">:</span><span class="s2">&quot;13547310-aec6-11e9-eb82-000000000002&quot;</span>
+            <span class="s2">"path"</span><span class="p">:</span><span class="s2">"dedicated/13547310-aec6-11e9-eb82-000000000002"</span><span class="p">,</span>
+            <span class="s2">"uuid"</span><span class="p">:</span><span class="s2">"13547310-aec6-11e9-eb82-000000000002"</span>
          <span class="p">},</span>
          <span class="p">{</span>
-            <span class="s2">&quot;path&quot;</span><span class="p">:</span><span class="s2">&quot;dedicated/3c7b5bd0-1f21-11e9-fa8e-000000000001&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;uuid&quot;</span><span class="p">:</span><span class="s2">&quot;3c7b5bd0-1f21-11e9-fa8e-000000000001&quot;</span>
+            <span class="s2">"path"</span><span class="p">:</span><span class="s2">"dedicated/3c7b5bd0-1f21-11e9-fa8e-000000000001"</span><span class="p">,</span>
+            <span class="s2">"uuid"</span><span class="p">:</span><span class="s2">"3c7b5bd0-1f21-11e9-fa8e-000000000001"</span>
          <span class="p">}</span>
       <span class="p">]</span>
    <span class="p">},</span>
-   <span class="s2">&quot;raw&quot;</span><span class="p">:</span><span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">archives</span><span class="se">\&quot;</span><span class="s2">: [{</span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">System Archive</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">path</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">system</span><span class="se">\&quot;</span><span class="s2">}, {</span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Default Archive</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">path</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">default</span><span class="se">\&quot;</span><span class="s2">}, {</span><span class="se">\&quot;</span><span class="s2">path</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">dedicated/d900b5f0-aa0d-11e9-e053-000000000001</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">uuid</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">d900b5f0-aa0d-11e9-e053-000000000001</span><span class="se">\&quot;</span><span class="s2">}, {</span><span class="se">\&quot;</span><span class="s2">path</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">dedicated/13547310-aec6-11e9-eb82-000000000002</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">uuid</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">13547310-aec6-11e9-eb82-000000000002</span><span class="se">\&quot;</span><span class="s2">}, {</span><span class="se">\&quot;</span><span class="s2">path</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">dedicated/3c7b5bd0-1f21-11e9-fa8e-000000000001</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">uuid</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">3c7b5bd0-1f21-11e9-fa8e-000000000001</span><span class="se">\&quot;</span><span class="s2">}]}&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;inputs&quot;</span><span class="p">:{</span>
+   <span class="s2">"raw"</span><span class="p">:</span><span class="s2">"{</span><span class="se">\"</span><span class="s2">archives</span><span class="se">\"</span><span class="s2">: [{</span><span class="se">\"</span><span class="s2">name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">System Archive</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">path</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">system</span><span class="se">\"</span><span class="s2">}, {</span><span class="se">\"</span><span class="s2">name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Default Archive</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">path</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">default</span><span class="se">\"</span><span class="s2">}, {</span><span class="se">\"</span><span class="s2">path</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">dedicated/d900b5f0-aa0d-11e9-e053-000000000001</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">uuid</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">d900b5f0-aa0d-11e9-e053-000000000001</span><span class="se">\"</span><span class="s2">}, {</span><span class="se">\"</span><span class="s2">path</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">dedicated/13547310-aec6-11e9-eb82-000000000002</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">uuid</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">13547310-aec6-11e9-eb82-000000000002</span><span class="se">\"</span><span class="s2">}, {</span><span class="se">\"</span><span class="s2">path</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">dedicated/3c7b5bd0-1f21-11e9-fa8e-000000000001</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">uuid</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">3c7b5bd0-1f21-11e9-fa8e-000000000001</span><span class="se">\"</span><span class="s2">}]}"</span><span class="p">,</span>
+   <span class="s2">"inputs"</span><span class="p">:{</span>
       
    <span class="p">},</span>
-   <span class="s2">&quot;metrics&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package&quot;</span><span class="p">:</span><span class="s2">&quot;fn-icdx&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package_version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0.1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;host&quot;</span><span class="p">:</span><span class="s2">&quot;RG-MBP-18.local&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span><span class="mi">1874</span><span class="p">,</span>
-      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span><span class="s2">&quot;2020-10-02 14:48:23&quot;</span>
+   <span class="s2">"metrics"</span><span class="p">:{</span>
+      <span class="s2">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span>
+      <span class="s2">"package"</span><span class="p">:</span><span class="s2">"fn-icdx"</span><span class="p">,</span>
+      <span class="s2">"package_version"</span><span class="p">:</span><span class="s2">"1.0.1"</span><span class="p">,</span>
+      <span class="s2">"host"</span><span class="p">:</span><span class="s2">"RG-MBP-18.local"</span><span class="p">,</span>
+      <span class="s2">"execution_time_ms"</span><span class="p">:</span><span class="mi">1874</span><span class="p">,</span>
+      <span class="s2">"timestamp"</span><span class="p">:</span><span class="s2">"2020-10-02 14:48:23"</span>
    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -925,16 +925,16 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
 <span class="sd">results = {</span>
-<span class="sd">            &quot;success&quot;: True or False,</span>
-<span class="sd">            &quot;archives&quot;: List of available archives or None</span>
+<span class="sd">            "success": True or False,</span>
+<span class="sd">            "archives": List of available archives or None</span>
 <span class="sd">          }</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;Found &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt; archives available for searching&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">archives</span><span class="p">))</span>
+<span class="sd">"""</span>
+<span class="n">noteText</span> <span class="o">=</span> <span class="s2">"""&lt;br&gt;Found &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt; archives available for searching"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">archives</span><span class="p">))</span>
 
 <span class="k">for</span> <span class="n">archive</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">archives</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt; Archive Name: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt; with path: </span><span class="si">{1}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">archive</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">archive</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">])</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"""&lt;br&gt; Archive Name: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt; with path: </span><span class="si">{1}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">archive</span><span class="p">[</span><span class="s2">"name"</span><span class="p">],</span> <span class="n">archive</span><span class="p">[</span><span class="s2">"path"</span><span class="p">])</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 
@@ -975,64 +975,64 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-   <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;success&quot;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span>
-   <span class="s2">&quot;reason&quot;</span><span class="p">:</span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;content&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;event&quot;</span><span class="p">:{</span>
-         <span class="s2">&quot;user_name&quot;</span><span class="p">:</span><span class="s2">&quot;admin&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;session_uid&quot;</span><span class="p">:</span><span class="s2">&quot;hz73OQByQay0mAGlHJz4iw&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;feature_uid&quot;</span><span class="p">:</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;uuid&quot;</span><span class="p">:</span><span class="s2">&quot;85c62850-0490-11eb-c000-000000000000&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;  feature_type&quot;</span><span class="p">:</span><span class="s2">&quot;system&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;device_name&quot;</span><span class="p">:</span><span class="s2">&quot;integration-icdx-ubuntu-2&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;subfeature_name&quot;</span><span class="p">:</span><span class="s2">&quot;com.symantec.platform.identity.audit.AuditLogger&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;status_id&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
-         <span class="s2">&quot;category_id&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span>
-         <span class="s2">&quot;id&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
-         <span class="s2">&quot;feature_path&quot;</span><span class="p">:</span><span class="s2">&quot;system/id_epmp_dx&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;device_time&quot;</span><span class="p">:</span><span class="mi">1601630433109</span><span class="p">,</span>
-         <span class="s2">&quot;feature_name&quot;</span><span class="p">:</span><span class="s2">&quot;Identity Service&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;x-epmp-sampled&quot;</span><span class="p">:</span><span class="s2">&quot;0&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;device_os_name&quot;</span><span class="p">:</span><span class="s2">&quot;Linux&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;log_name&quot;</span><span class="p">:</span><span class="s2">&quot;system&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;type_id&quot;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span>
-         <span class="s2">&quot;device_os_ver&quot;</span><span class="p">:</span><span class="s2">&quot;4.4.0-131-generic&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;log_level&quot;</span><span class="p">:</span><span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;device_os_bits&quot;</span><span class="p">:</span><span class="s2">&quot;amd64&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;message&quot;</span><span class="p">:</span><span class="s2">&quot;Successful login of admin&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;product_name&quot;</span><span class="p">:</span><span class="s2">&quot;Symantec Integrated Cyber Defense Exchange&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;log_time&quot;</span><span class="p">:</span><span class="s2">&quot;2020-10-02T05:20:33.109-04:00&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;device_ip&quot;</span><span class="p">:</span><span class="s2">&quot;9.70.194.66&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;event_id&quot;</span><span class="p">:</span><span class="mi">20001</span><span class="p">,</span>
-         <span class="s2">&quot;x-epmp-traceId&quot;</span><span class="p">:</span><span class="s2">&quot;048******eca2f19&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;x-epmp-spanId&quot;</span><span class="p">:</span><span class="s2">&quot;048******eca2f19&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;time&quot;</span><span class="p">:</span><span class="s2">&quot;2020-10-02T05:20:33.109-04:00&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;severity_id&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
-         <span class="s2">&quot;status_thread_name&quot;</span><span class="p">:</span><span class="s2">&quot;SimpleAsyncTaskExecutor-2&quot;</span>
+   <span class="s2">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span>
+   <span class="s2">"success"</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span>
+   <span class="s2">"reason"</span><span class="p">:</span><span class="s2">"None"</span><span class="p">,</span>
+   <span class="s2">"content"</span><span class="p">:{</span>
+      <span class="s2">"event"</span><span class="p">:{</span>
+         <span class="s2">"user_name"</span><span class="p">:</span><span class="s2">"admin"</span><span class="p">,</span>
+         <span class="s2">"session_uid"</span><span class="p">:</span><span class="s2">"hz73OQByQay0mAGlHJz4iw"</span><span class="p">,</span>
+         <span class="s2">"feature_uid"</span><span class="p">:</span><span class="s2">"default"</span><span class="p">,</span>
+         <span class="s2">"uuid"</span><span class="p">:</span><span class="s2">"85c62850-0490-11eb-c000-000000000000"</span><span class="p">,</span>
+         <span class="s2">"  feature_type"</span><span class="p">:</span><span class="s2">"system"</span><span class="p">,</span>
+         <span class="s2">"device_name"</span><span class="p">:</span><span class="s2">"integration-icdx-ubuntu-2"</span><span class="p">,</span>
+         <span class="s2">"subfeature_name"</span><span class="p">:</span><span class="s2">"com.symantec.platform.identity.audit.AuditLogger"</span><span class="p">,</span>
+         <span class="s2">"status_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+         <span class="s2">"category_id"</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span>
+         <span class="s2">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+         <span class="s2">"feature_path"</span><span class="p">:</span><span class="s2">"system/id_epmp_dx"</span><span class="p">,</span>
+         <span class="s2">"device_time"</span><span class="p">:</span><span class="mi">1601630433109</span><span class="p">,</span>
+         <span class="s2">"feature_name"</span><span class="p">:</span><span class="s2">"Identity Service"</span><span class="p">,</span>
+         <span class="s2">"x-epmp-sampled"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span>
+         <span class="s2">"device_os_name"</span><span class="p">:</span><span class="s2">"Linux"</span><span class="p">,</span>
+         <span class="s2">"log_name"</span><span class="p">:</span><span class="s2">"system"</span><span class="p">,</span>
+         <span class="s2">"type_id"</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span>
+         <span class="s2">"device_os_ver"</span><span class="p">:</span><span class="s2">"4.4.0-131-generic"</span><span class="p">,</span>
+         <span class="s2">"log_level"</span><span class="p">:</span><span class="s2">"INFO"</span><span class="p">,</span>
+         <span class="s2">"device_os_bits"</span><span class="p">:</span><span class="s2">"amd64"</span><span class="p">,</span>
+         <span class="s2">"message"</span><span class="p">:</span><span class="s2">"Successful login of admin"</span><span class="p">,</span>
+         <span class="s2">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span>
+         <span class="s2">"product_name"</span><span class="p">:</span><span class="s2">"Symantec Integrated Cyber Defense Exchange"</span><span class="p">,</span>
+         <span class="s2">"log_time"</span><span class="p">:</span><span class="s2">"2020-10-02T05:20:33.109-04:00"</span><span class="p">,</span>
+         <span class="s2">"device_ip"</span><span class="p">:</span><span class="s2">"9.70.194.66"</span><span class="p">,</span>
+         <span class="s2">"event_id"</span><span class="p">:</span><span class="mi">20001</span><span class="p">,</span>
+         <span class="s2">"x-epmp-traceId"</span><span class="p">:</span><span class="s2">"048******eca2f19"</span><span class="p">,</span>
+         <span class="s2">"x-epmp-spanId"</span><span class="p">:</span><span class="s2">"048******eca2f19"</span><span class="p">,</span>
+         <span class="s2">"time"</span><span class="p">:</span><span class="s2">"2020-10-02T05:20:33.109-04:00"</span><span class="p">,</span>
+         <span class="s2">"severity_id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+         <span class="s2">"status_thread_name"</span><span class="p">:</span><span class="s2">"SimpleAsyncTaskExecutor-2"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;artifacts&quot;</span><span class="p">:{</span>
+      <span class="s2">"artifacts"</span><span class="p">:{</span>
          
       <span class="p">},</span>
-      <span class="s2">&quot;artifact_keys_as_list&quot;</span><span class="p">:[</span>
+      <span class="s2">"artifact_keys_as_list"</span><span class="p">:[</span>
          
       <span class="p">],</span>
-      <span class="s2">&quot;artifact_values_as_list&quot;</span><span class="p">:[</span>
+      <span class="s2">"artifact_values_as_list"</span><span class="p">:[</span>
          
       <span class="p">]</span>
    <span class="p">},</span>
-   <span class="s2">&quot;raw&quot;</span><span class="p">:</span><span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">event</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">user_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">admin</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">session_uid</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">hz73OQByQay0mAGlHJz4iw</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">feature_uid</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">default</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">uuid</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">85c62850-0490-11eb-c000-000000000000</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">  feature_type</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">system</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">device_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">integration-icdx-ubuntu-2</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">subfeature_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">com.symantec.platform.identity.audit.AuditLogger</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">status_id</span><span class="se">\&quot;</span><span class="s2">: 1, </span><span class="se">\&quot;</span><span class="s2">category_id</span><span class="se">\&quot;</span><span class="s2">: 4, </span><span class="se">\&quot;</span><span class="s2">id</span><span class="se">\&quot;</span><span class="s2">: 1, </span><span class="se">\&quot;</span><span class="s2">feature_path</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">system/id_epmp_dx</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">device_time</span><span class="se">\&quot;</span><span class="s2">: 1601630433109, </span><span class="se">\&quot;</span><span class="s2">feature_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Identity Service</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">x-epmp-sampled</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">0</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">device_os_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Linux</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">log_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">system</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">type_id</span><span class="se">\&quot;</span><span class="s2">: 20, </span><span class="se">\&quot;</span><span class="s2">device_os_ver</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">4.4.0-131-generic</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">log_level</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">INFO</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">device_os_bits</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">amd64</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">message</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Successful login of admin</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">version</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">1.0</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">product_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Symantec Integrated Cyber Defense Exchange</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">log_time</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">2020-10-02T05:20:33.109-04:00</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">device_ip</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">9.70.194.66</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">event_id</span><span class="se">\&quot;</span><span class="s2">: 20001, </span><span class="se">\&quot;</span><span class="s2">x-epmp-traceId</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">0482fb724eca2f19</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">x-epmp-spanId</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">0482fb724eca2f19</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">time</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">2020-10-02T05:20:33.109-04:00</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">severity_id</span><span class="se">\&quot;</span><span class="s2">: 1, </span><span class="se">\&quot;</span><span class="s2">status_thread_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">SimpleAsyncTaskExecutor-2</span><span class="se">\&quot;</span><span class="s2">}, </span><span class="se">\&quot;</span><span class="s2">artifacts</span><span class="se">\&quot;</span><span class="s2">: </span><span class="si">{}</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">artifact_keys_as_list</span><span class="se">\&quot;</span><span class="s2">: [], </span><span class="se">\&quot;</span><span class="s2">artifact_values_as_list</span><span class="se">\&quot;</span><span class="s2">: []}&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;inputs&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;icdx_uuid&quot;</span><span class="p">:</span><span class="s2">&quot;85c62850-0490-11eb-c000-000000000000&quot;</span>
+   <span class="s2">"raw"</span><span class="p">:</span><span class="s2">"{</span><span class="se">\"</span><span class="s2">event</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\"</span><span class="s2">user_name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">admin</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">session_uid</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">hz73OQByQay0mAGlHJz4iw</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">feature_uid</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">default</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">uuid</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">85c62850-0490-11eb-c000-000000000000</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">  feature_type</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">system</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">device_name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">integration-icdx-ubuntu-2</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">subfeature_name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">com.symantec.platform.identity.audit.AuditLogger</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">status_id</span><span class="se">\"</span><span class="s2">: 1, </span><span class="se">\"</span><span class="s2">category_id</span><span class="se">\"</span><span class="s2">: 4, </span><span class="se">\"</span><span class="s2">id</span><span class="se">\"</span><span class="s2">: 1, </span><span class="se">\"</span><span class="s2">feature_path</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">system/id_epmp_dx</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">device_time</span><span class="se">\"</span><span class="s2">: 1601630433109, </span><span class="se">\"</span><span class="s2">feature_name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Identity Service</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">x-epmp-sampled</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">0</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">device_os_name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Linux</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">log_name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">system</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">type_id</span><span class="se">\"</span><span class="s2">: 20, </span><span class="se">\"</span><span class="s2">device_os_ver</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">4.4.0-131-generic</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">log_level</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">INFO</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">device_os_bits</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">amd64</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">message</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Successful login of admin</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">version</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">1.0</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">product_name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Symantec Integrated Cyber Defense Exchange</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">log_time</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">2020-10-02T05:20:33.109-04:00</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">device_ip</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">9.70.194.66</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">event_id</span><span class="se">\"</span><span class="s2">: 20001, </span><span class="se">\"</span><span class="s2">x-epmp-traceId</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">0482fb724eca2f19</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">x-epmp-spanId</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">0482fb724eca2f19</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">time</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">2020-10-02T05:20:33.109-04:00</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">severity_id</span><span class="se">\"</span><span class="s2">: 1, </span><span class="se">\"</span><span class="s2">status_thread_name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">SimpleAsyncTaskExecutor-2</span><span class="se">\"</span><span class="s2">}, </span><span class="se">\"</span><span class="s2">artifacts</span><span class="se">\"</span><span class="s2">: </span><span class="si">{}</span><span class="s2">, </span><span class="se">\"</span><span class="s2">artifact_keys_as_list</span><span class="se">\"</span><span class="s2">: [], </span><span class="se">\"</span><span class="s2">artifact_values_as_list</span><span class="se">\"</span><span class="s2">: []}"</span><span class="p">,</span>
+   <span class="s2">"inputs"</span><span class="p">:{</span>
+      <span class="s2">"icdx_uuid"</span><span class="p">:</span><span class="s2">"85c62850-0490-11eb-c000-000000000000"</span>
    <span class="p">},</span>
-   <span class="s2">&quot;metrics&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package&quot;</span><span class="p">:</span><span class="s2">&quot;fn-icdx&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package_version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0.1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;host&quot;</span><span class="p">:</span><span class="s2">&quot;RG-MBP-18.local&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span><span class="mi">1851</span><span class="p">,</span>
-      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span><span class="s2">&quot;2020-10-02 14:47:25&quot;</span>
+   <span class="s2">"metrics"</span><span class="p">:{</span>
+      <span class="s2">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span>
+      <span class="s2">"package"</span><span class="p">:</span><span class="s2">"fn-icdx"</span><span class="p">,</span>
+      <span class="s2">"package_version"</span><span class="p">:</span><span class="s2">"1.0.1"</span><span class="p">,</span>
+      <span class="s2">"host"</span><span class="p">:</span><span class="s2">"RG-MBP-18.local"</span><span class="p">,</span>
+      <span class="s2">"execution_time_ms"</span><span class="p">:</span><span class="mi">1851</span><span class="p">,</span>
+      <span class="s2">"timestamp"</span><span class="p">:</span><span class="s2">"2020-10-02 14:47:25"</span>
    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1049,70 +1049,70 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
 <span class="sd">Example of return data </span>
 
 <span class="sd">results = {</span>
-<span class="sd">            &quot;inputs&quot;:{</span>
-<span class="sd">                &quot;icdx_uuid&quot;: The UUID we ran the request with</span>
+<span class="sd">            "inputs":{</span>
+<span class="sd">                "icdx_uuid": The UUID we ran the request with</span>
 <span class="sd">            },</span>
-<span class="sd">            &quot;success&quot;: True or False,</span>
-<span class="sd">            &quot;event&quot;:  {</span>
+<span class="sd">            "success": True or False,</span>
+<span class="sd">            "event":  {</span>
 <span class="sd">              Object containing the ICDx Event data</span>
 <span class="sd">            },</span>
-<span class="sd">            &quot;artifacts&quot;: {</span>
+<span class="sd">            "artifacts": {</span>
 <span class="sd">              Object containing the artifacts we parsed from the event. </span>
 <span class="sd">              Structure is name_of_artifact:artifact_data</span>
 <span class="sd">            },</span>
-<span class="sd">            &quot;artifact_keys_as_list&quot;: [</span>
+<span class="sd">            "artifact_keys_as_list": [</span>
 <span class="sd">              List containing the types of artifacts we parsed from the event.</span>
 <span class="sd">            ],</span>
-<span class="sd">            &quot;artifact_values_as_list&quot;: [</span>
+<span class="sd">            "artifact_values_as_list": [</span>
 <span class="sd">              List containing the artifact data we parsed from the event.</span>
 <span class="sd">            ]</span>
 <span class="sd">          }</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="c1"># Add a note detailing what happened</span>
-<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;b&gt;Get Event request executed on ICDx :&lt;/b&gt;</span>
-<span class="s2">                &lt;br&gt;UUID Provided: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_uuid&quot;</span><span class="p">])</span>
+<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt;&lt;b&gt;Get Event request executed on ICDx :&lt;/b&gt;</span>
+<span class="s2">                &lt;br&gt;UUID Provided: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"icdx_uuid"</span><span class="p">])</span>
                 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;Query successful and found an event with matching UUID.&quot;&quot;&quot;</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt;Query successful and found an event with matching UUID."""</span>
                   
-  <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">event</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; Type of Event : &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">])</span>
+  <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">event</span><span class="p">[</span><span class="s1">'type'</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt; Type of Event : &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">event</span><span class="p">[</span><span class="s2">"type"</span><span class="p">])</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; Event Type ID : &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;type_id&quot;</span><span class="p">])</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt; Event Type ID : &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">event</span><span class="p">[</span><span class="s2">"type_id"</span><span class="p">])</span>
     
-  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; Event was gathered from the &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt; archive&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">event</span><span class="p">[</span><span class="s2">&quot;log_name&quot;</span><span class="p">])</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt; Event was gathered from the &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt; archive"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">event</span><span class="p">[</span><span class="s2">"log_name"</span><span class="p">])</span>
   <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">artifact_keys_as_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;Artifacts generated from Event: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;[&#39;</span><span class="si">{}</span><span class="s2">&#39;]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;&#39;, &#39;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">artifact_keys_as_list</span><span class="p">)))</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"""&lt;br&gt;Artifacts generated from Event: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"['</span><span class="si">{}</span><span class="s2">']"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"', '"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">artifact_keys_as_list</span><span class="p">)))</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;b&gt;No artifacts generated from Event.&lt;/b&gt;&quot;&quot;&quot;</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"""&lt;br&gt;&lt;b&gt;No artifacts generated from Event.&lt;/b&gt;"""</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;Query did not find a corresponding event or an exception occured. </span>
-<span class="s2">  Check the action status for more information&quot;&quot;&quot;</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt;Query did not find a corresponding event or an exception occured. </span>
+<span class="s2">  Check the action status for more information"""</span>
   
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>  
 
 
 <span class="c1"># First save the UUID as an artifact, exposing it to artifact level workflows </span>
-<span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s1">&#39;String&#39;</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_uuid&quot;</span><span class="p">],</span> <span class="s1">&#39;Escalated from ICDx Event with UUID </span><span class="si">{}</span><span class="s1">. Gathered from the ICDx Utilities Integration&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_uuid&quot;</span><span class="p">]))</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s1">'String'</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"icdx_uuid"</span><span class="p">],</span> <span class="s1">'Escalated from ICDx Event with UUID </span><span class="si">{}</span><span class="s1">. Gathered from the ICDx Utilities Integration'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"icdx_uuid"</span><span class="p">]))</span>
 
-<span class="sd">&quot;&quot;&quot; Will only work in v31 upwards</span>
+<span class="sd">""" Will only work in v31 upwards</span>
 <span class="sd">if results.artifacts not None:</span>
 <span class="sd">  for artifact_type, artifact_values in results.artifacts.items():</span>
 <span class="sd">    for artifact_value in artifact_values:</span>
-<span class="sd">      incident.addArtifact(artifact_type, artifact_value, &#39;Escalated from ICDx Event with UUID {}. Gathered from the ICDx Utilities Integration&#39;.format(results.inputs[&quot;icdx_uuid&quot;]))</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">      incident.addArtifact(artifact_type, artifact_value, 'Escalated from ICDx Event with UUID {}. Gathered from the ICDx Utilities Integration'.format(results.inputs["icdx_uuid"]))</span>
+<span class="sd">"""</span>
 
 <span class="c1"># Parse over the keys and values and add them as artifacts</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">artifact_keys_as_list</span> <span class="o">!=</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">artifact_values_as_list</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
   <span class="k">for</span> <span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_values</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">artifact_keys_as_list</span><span class="p">,</span><span class="n">results</span><span class="o">.</span><span class="n">artifact_values_as_list</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">artifact_value</span> <span class="ow">in</span> <span class="n">artifact_values</span><span class="p">:</span>
-      <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="s1">&#39;Escalated from ICDx Event with UUID </span><span class="si">{}</span><span class="s1">. Gathered from the ICDx Utilities Integration&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;icdx_uuid&quot;</span><span class="p">]))</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">artifact_value</span><span class="p">,</span> <span class="s1">'Escalated from ICDx Event with UUID </span><span class="si">{}</span><span class="s1">. Gathered from the ICDx Utilities Integration'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"icdx_uuid"</span><span class="p">]))</span>
 
 </pre></div>
 </div>

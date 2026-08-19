@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -467,40 +467,40 @@
 <h2>Function Output:<a class="headerlink" href="#function-output" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;whois_query&#39;</span><span class="p">:</span> <span class="s1">&#39;https://www.ibm.com&#39;</span><span class="p">},</span>
-    <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s1">&#39;domain_details&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;creation_date&#39;</span><span class="p">:</span> <span class="s1">&#39;03/19/1986&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;expiration_date&#39;</span><span class="p">:</span> <span class="s1">&#39;03/20/2019&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;last_updated&#39;</span><span class="p">:</span> <span class="s1">&#39;09/18/2018&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;ibm.com&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;name_servers&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ns1-206.akam.net&#39;</span><span class="p">,</span>
-                                     <span class="s1">&#39;usc3.akam.net&#39;</span><span class="p">,</span>
-                                     <span class="s1">&#39;eur5.akam.net&#39;</span><span class="p">,</span>
-                                     <span class="s1">&#39;asia3.akam.net&#39;</span><span class="p">,</span>
-                                     <span class="s1">&#39;usc2.akam.net&#39;</span><span class="p">,</span>
-                                     <span class="s1">&#39;usw2.akam.net&#39;</span><span class="p">,</span>
-                                     <span class="s1">&#39;ns1-99.akam.net&#39;</span><span class="p">,</span>
-                                     <span class="s1">&#39;eur2.akam.net&#39;</span><span class="p">],</span>
-                    <span class="s1">&#39;registrar&#39;</span><span class="p">:</span> <span class="s1">&#39;CSC Corporate Domains, Inc.&#39;</span><span class="p">},</span>
-    <span class="s1">&#39;domain_details_keys&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;registrar&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;creation_date&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;expiration_date&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;last_updated&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;name_servers&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;domain_details_values&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ibm.com&#39;</span><span class="p">,</span>
-                           <span class="s1">&#39;CSC Corporate Domains, Inc.&#39;</span><span class="p">,</span>
-                           <span class="s1">&#39;03/19/1986&#39;</span><span class="p">,</span>
-                           <span class="s1">&#39;03/20/2019&#39;</span><span class="p">,</span>
-                           <span class="s1">&#39;09/18/2018&#39;</span><span class="p">,</span>
-                           <span class="p">[</span><span class="s1">&#39;ns1-206.akam.net&#39;</span><span class="p">,</span>
-                            <span class="s1">&#39;usc3.akam.net&#39;</span><span class="p">,</span>
-                            <span class="s1">&#39;eur5.akam.net&#39;</span><span class="p">,</span>
-                            <span class="s1">&#39;asia3.akam.net&#39;</span><span class="p">,</span>
-                            <span class="s1">&#39;usc2.akam.net&#39;</span><span class="p">,</span>
-                            <span class="s1">&#39;usw2.akam.net&#39;</span><span class="p">,</span>
-                            <span class="s1">&#39;ns1-99.akam.net&#39;</span><span class="p">,</span>
-                            <span class="s1">&#39;eur2.akam.net&#39;</span><span class="p">]]</span>
+    <span class="s1">'inputs'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'whois_query'</span><span class="p">:</span> <span class="s1">'https://www.ibm.com'</span><span class="p">},</span>
+    <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">'domain_details'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'creation_date'</span><span class="p">:</span> <span class="s1">'03/19/1986'</span><span class="p">,</span>
+                    <span class="s1">'expiration_date'</span><span class="p">:</span> <span class="s1">'03/20/2019'</span><span class="p">,</span>
+                    <span class="s1">'last_updated'</span><span class="p">:</span> <span class="s1">'09/18/2018'</span><span class="p">,</span>
+                    <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'ibm.com'</span><span class="p">,</span>
+                    <span class="s1">'name_servers'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'ns1-206.akam.net'</span><span class="p">,</span>
+                                     <span class="s1">'usc3.akam.net'</span><span class="p">,</span>
+                                     <span class="s1">'eur5.akam.net'</span><span class="p">,</span>
+                                     <span class="s1">'asia3.akam.net'</span><span class="p">,</span>
+                                     <span class="s1">'usc2.akam.net'</span><span class="p">,</span>
+                                     <span class="s1">'usw2.akam.net'</span><span class="p">,</span>
+                                     <span class="s1">'ns1-99.akam.net'</span><span class="p">,</span>
+                                     <span class="s1">'eur2.akam.net'</span><span class="p">],</span>
+                    <span class="s1">'registrar'</span><span class="p">:</span> <span class="s1">'CSC Corporate Domains, Inc.'</span><span class="p">},</span>
+    <span class="s1">'domain_details_keys'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'name'</span><span class="p">,</span>
+                         <span class="s1">'registrar'</span><span class="p">,</span>
+                         <span class="s1">'creation_date'</span><span class="p">,</span>
+                         <span class="s1">'expiration_date'</span><span class="p">,</span>
+                         <span class="s1">'last_updated'</span><span class="p">,</span>
+                         <span class="s1">'name_servers'</span><span class="p">],</span>
+    <span class="s1">'domain_details_values'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'ibm.com'</span><span class="p">,</span>
+                           <span class="s1">'CSC Corporate Domains, Inc.'</span><span class="p">,</span>
+                           <span class="s1">'03/19/1986'</span><span class="p">,</span>
+                           <span class="s1">'03/20/2019'</span><span class="p">,</span>
+                           <span class="s1">'09/18/2018'</span><span class="p">,</span>
+                           <span class="p">[</span><span class="s1">'ns1-206.akam.net'</span><span class="p">,</span>
+                            <span class="s1">'usc3.akam.net'</span><span class="p">,</span>
+                            <span class="s1">'eur5.akam.net'</span><span class="p">,</span>
+                            <span class="s1">'asia3.akam.net'</span><span class="p">,</span>
+                            <span class="s1">'usc2.akam.net'</span><span class="p">,</span>
+                            <span class="s1">'usw2.akam.net'</span><span class="p">,</span>
+                            <span class="s1">'ns1-99.akam.net'</span><span class="p">,</span>
+                            <span class="s1">'eur2.akam.net'</span><span class="p">]]</span>
  <span class="p">}</span>
 
 </pre></div>
@@ -515,26 +515,26 @@
 <section id="post-process-script">
 <h2>Post-Process Script:<a class="headerlink" href="#post-process-script" title="Link to this heading">¶</a></h2>
 <p>This example <strong>adds a Note to the Incident.</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">expand_list</span><span class="p">(</span><span class="n">list_value</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;, &quot;</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">expand_list</span><span class="p">(</span><span class="n">list_value</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">", "</span><span class="p">):</span>
   <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">list_value</span>
   <span class="k">else</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">list_value</span><span class="p">)</span>
 
 
-<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]:</span>
+<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">"success"</span><span class="p">]:</span>
   <span class="c1"># We have results</span>
-  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Whois Query ran against input &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;br&gt; Results found: &lt;br&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;whois_query&quot;</span><span class="p">])</span>
+  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">"""Whois Query ran against input &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;br&gt; Results found: &lt;br&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"whois_query"</span><span class="p">])</span>
 
   <span class="k">for</span> <span class="n">keyval</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">domain_details_keys</span><span class="p">,</span><span class="n">results</span><span class="o">.</span><span class="n">domain_details_values</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">keyval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]:</span>
-      <span class="n">expanded_list</span> <span class="o">=</span> <span class="n">expand_list</span><span class="p">(</span><span class="n">keyval</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;&lt;br&gt;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">keyval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'status'</span><span class="p">]:</span>
+      <span class="n">expanded_list</span> <span class="o">=</span> <span class="n">expand_list</span><span class="p">(</span><span class="n">keyval</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">separator</span><span class="o">=</span><span class="s2">"&lt;br&gt;"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
       <span class="n">expanded_list</span> <span class="o">=</span> <span class="n">expand_list</span><span class="p">(</span><span class="n">keyval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
-    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;b&gt; </span><span class="si">{0}</span><span class="s2">&lt;/b&gt; : </span><span class="si">{1}</span><span class="s2"> &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">keyval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">capitalize</span><span class="p">(),</span> <span class="n">expanded_list</span><span class="p">)</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"""&lt;br&gt;&lt;b&gt; </span><span class="si">{0}</span><span class="s2">&lt;/b&gt; : </span><span class="si">{1}</span><span class="s2"> """</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">keyval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">capitalize</span><span class="p">(),</span> <span class="n">expanded_list</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Whois Query ran against input &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;br&gt; No results found&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;whois_query&quot;</span><span class="p">])</span>
+  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">"""Whois Query ran against input &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;br&gt; No results found"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"whois_query"</span><span class="p">])</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 </pre></div>
 </div>

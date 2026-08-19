@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -442,155 +442,155 @@ and process the data differently. A sample note in the description field is:</p>
 </pre></div>
 </div>
 <p>This is produced by the following post-processing script:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;CategorizationResult&#39;</span><span class="p">][</span><span class="s1">&#39;categorization&#39;</span><span class="p">][</span><span class="s1">&#39;categorization&#39;</span><span class="p">],</span><span class="nb">list</span><span class="p">):</span>
-  <span class="n">categorization_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">categorization</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">categorization</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;CategorizationResult&#39;</span><span class="p">][</span><span class="s1">&#39;categorization&#39;</span><span class="p">][</span><span class="s1">&#39;categorization&#39;</span><span class="p">]]</span>
-  <span class="n">categorization_name</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">categorization_list</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">'CategorizationResult'</span><span class="p">][</span><span class="s1">'categorization'</span><span class="p">][</span><span class="s1">'categorization'</span><span class="p">],</span><span class="nb">list</span><span class="p">):</span>
+  <span class="n">categorization_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">categorization</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span> <span class="k">for</span> <span class="n">categorization</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">'CategorizationResult'</span><span class="p">][</span><span class="s1">'categorization'</span><span class="p">][</span><span class="s1">'categorization'</span><span class="p">]]</span>
+  <span class="n">categorization_name</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">categorization_list</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">categorization_name</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;CategorizationResult&#39;</span><span class="p">][</span><span class="s1">&#39;categorization&#39;</span><span class="p">][</span><span class="s1">&#39;categorization&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+  <span class="n">categorization_name</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">'CategorizationResult'</span><span class="p">][</span><span class="s1">'categorization'</span><span class="p">][</span><span class="s1">'categorization'</span><span class="p">][</span><span class="s1">'name'</span><span class="p">]</span>
   
-<span class="n">existing_description</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+<span class="n">existing_description</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span><span class="o">+</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span> <span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="k">else</span> <span class="s2">""</span>
 
-<span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">Bluecoat Categorization: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">existing_description</span><span class="p">,</span> <span class="n">categorization_name</span><span class="p">)</span>
+<span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{}</span><span class="s2">Bluecoat Categorization: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">existing_description</span><span class="p">,</span> <span class="n">categorization_name</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Below is a sample result from the function returning multiple categorizations:</p>
 <section id="sample-results">
 <h3>Sample results<a class="headerlink" href="#sample-results" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="sa">u</span><span class="s1">&#39;incident_id&#39;</span><span class="p">:</span> <span class="mi">2104</span><span class="p">,</span>
-    <span class="sa">u</span><span class="s1">&#39;artifact_value&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;http://avts.vn/hejxjrzjys/3978861743009/OCRjH-YuO_VcE-MgR/&#39;</span>
+  <span class="s1">'inputs'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="sa">u</span><span class="s1">'incident_id'</span><span class="p">:</span> <span class="mi">2104</span><span class="p">,</span>
+    <span class="sa">u</span><span class="s1">'artifact_value'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'http://avts.vn/hejxjrzjys/3978861743009/OCRjH-YuO_VcE-MgR/'</span>
   <span class="p">},</span>
-  <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="s1">&#39;fn-bluecoat-site-review&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2019-03-25 19:28:28&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;package_version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;marks-mbp.cambridge.ibm.com&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;execution_time_ms&#39;</span><span class="p">:</span> <span class="mi">139</span>
+  <span class="s1">'metrics'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'package'</span><span class="p">:</span> <span class="s1">'fn-bluecoat-site-review'</span><span class="p">,</span>
+    <span class="s1">'timestamp'</span><span class="p">:</span> <span class="s1">'2019-03-25 19:28:28'</span><span class="p">,</span>
+    <span class="s1">'package_version'</span><span class="p">:</span> <span class="s1">'1.0.0'</span><span class="p">,</span>
+    <span class="s1">'host'</span><span class="p">:</span> <span class="s1">'marks-mbp.cambridge.ibm.com'</span><span class="p">,</span>
+    <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+    <span class="s1">'execution_time_ms'</span><span class="p">:</span> <span class="mi">139</span>
   <span class="p">},</span>
-  <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-  <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="sa">u</span><span class="s1">&#39;CategorizationResult&#39;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="sa">u</span><span class="s1">&#39;categorization&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="sa">u</span><span class="s1">&#39;categorization&#39;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+  <span class="s1">'content'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="sa">u</span><span class="s1">'CategorizationResult'</span><span class="p">:</span> <span class="p">{</span>
+      <span class="sa">u</span><span class="s1">'categorization'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="sa">u</span><span class="s1">'categorization'</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="sa">u</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;92&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Suspicious&#39;</span>
+            <span class="sa">u</span><span class="s1">'num'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'92'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'name'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'Suspicious'</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="sa">u</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;101&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Spam&#39;</span>
+            <span class="sa">u</span><span class="s1">'num'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'101'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'name'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'Spam'</span>
           <span class="p">}</span>
         <span class="p">]</span>
       <span class="p">},</span>
-      <span class="sa">u</span><span class="s1">&#39;locked&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;false&#39;</span><span class="p">,</span>
-      <span class="sa">u</span><span class="s1">&#39;translatedCategories&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="sa">u</span><span class="s1">&#39;fr&#39;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="sa">u</span><span class="s1">'locked'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'false'</span><span class="p">,</span>
+      <span class="sa">u</span><span class="s1">'translatedCategories'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="sa">u</span><span class="s1">'fr'</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="sa">u</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;92&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Suspect (Suspicious)&#39;</span>
+            <span class="sa">u</span><span class="s1">'num'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'92'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'name'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'Suspect (Suspicious)'</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="sa">u</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;101&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Spam (Spam)&#39;</span>
+            <span class="sa">u</span><span class="s1">'num'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'101'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'name'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'Spam (Spam)'</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="sa">u</span><span class="s1">&#39;de&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="sa">u</span><span class="s1">'de'</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="sa">u</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;92&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Verd</span><span class="se">\xe4</span><span class="s1">chtig (Suspicious)&#39;</span>
+            <span class="sa">u</span><span class="s1">'num'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'92'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'name'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'Verd</span><span class="se">\xe4</span><span class="s1">chtig (Suspicious)'</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="sa">u</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;101&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Spam (Spam)&#39;</span>
+            <span class="sa">u</span><span class="s1">'num'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'101'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'name'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'Spam (Spam)'</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="sa">u</span><span class="s1">&#39;zh&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="sa">u</span><span class="s1">'zh'</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="sa">u</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;92&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\u53ef\u7591</span><span class="s1"> (Suspicious)&#39;</span>
+            <span class="sa">u</span><span class="s1">'num'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'92'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'name'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'</span><span class="se">\u53ef\u7591</span><span class="s1"> (Suspicious)'</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="sa">u</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;101&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\u5783\u573e\u90ae\u4ef6</span><span class="s1"> (Spam)&#39;</span>
+            <span class="sa">u</span><span class="s1">'num'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'101'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'name'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'</span><span class="se">\u5783\u573e\u90ae\u4ef6</span><span class="s1"> (Spam)'</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="sa">u</span><span class="s1">&#39;zh_TW&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="sa">u</span><span class="s1">'zh_TW'</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="sa">u</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;92&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\u53ef\u7591</span><span class="s1"> (Suspicious)&#39;</span>
+            <span class="sa">u</span><span class="s1">'num'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'92'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'name'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'</span><span class="se">\u53ef\u7591</span><span class="s1"> (Suspicious)'</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="sa">u</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;101&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\u5783\u573e\u90f5\u4ef6</span><span class="s1"> (Spam)&#39;</span>
+            <span class="sa">u</span><span class="s1">'num'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'101'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'name'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'</span><span class="se">\u5783\u573e\u90f5\u4ef6</span><span class="s1"> (Spam)'</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="sa">u</span><span class="s1">&#39;en&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="sa">u</span><span class="s1">'en'</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="sa">u</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;92&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Suspicious&#39;</span>
+            <span class="sa">u</span><span class="s1">'num'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'92'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'name'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'Suspicious'</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="sa">u</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;101&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Spam&#39;</span>
+            <span class="sa">u</span><span class="s1">'num'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'101'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'name'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'Spam'</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="sa">u</span><span class="s1">&#39;ja&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="sa">u</span><span class="s1">'ja'</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="sa">u</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;92&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\u7591\u308f\u3057\u3044</span><span class="s1"> (Suspicious)&#39;</span>
+            <span class="sa">u</span><span class="s1">'num'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'92'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'name'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'</span><span class="se">\u7591\u308f\u3057\u3044</span><span class="s1"> (Suspicious)'</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="sa">u</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;101&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\u30b9\u30d1\u30e0</span><span class="s1"> (Spam)&#39;</span>
+            <span class="sa">u</span><span class="s1">'num'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'101'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'name'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'</span><span class="se">\u30b9\u30d1\u30e0</span><span class="s1"> (Spam)'</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="sa">u</span><span class="s1">&#39;es&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="sa">u</span><span class="s1">'es'</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="sa">u</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;92&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Sospechoso (Suspicious)&#39;</span>
+            <span class="sa">u</span><span class="s1">'num'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'92'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'name'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'Sospechoso (Suspicious)'</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="sa">u</span><span class="s1">&#39;num&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;101&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Spam (Spam)&#39;</span>
+            <span class="sa">u</span><span class="s1">'num'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'101'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'name'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'Spam (Spam)'</span>
           <span class="p">}</span>
         <span class="p">]</span>
       <span class="p">},</span>
-      <span class="sa">u</span><span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;http://avts.vn/hejxjrzjys/3978861743009/OCRjH-YuO_VcE-MgR/&#39;</span><span class="p">,</span>
-      <span class="sa">u</span><span class="s1">&#39;rateDate&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s2">&quot;Last Time Rated/Reviewed: &gt; {{days}} days {{legacy}}The URL submitted for review was rated more than {{days}} days ago.  The default setting for Symantec SG clients to download rating changes is once a day.  There is no need to show ratings older than this. Since Symantec&#39;s desktop client K9 and certain OEM partners update differently, ratings may differ from those of a Symantec SG as well as those present on the Site Review Tool.&quot;</span><span class="p">,</span>
-      <span class="sa">u</span><span class="s1">&#39;followedUrl&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-      <span class="sa">u</span><span class="s1">&#39;lockedSpecialNote&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-      <span class="sa">u</span><span class="s1">&#39;threatriskLevelEn&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-      <span class="sa">u</span><span class="s1">&#39;linkable&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;false&#39;</span><span class="p">,</span>
-      <span class="sa">u</span><span class="s1">&#39;resolvedDetail&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="sa">u</span><span class="s1">&#39;resolveEnabled&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;true&#39;</span><span class="p">,</span>
-        <span class="sa">u</span><span class="s1">&#39;ipAddress&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;103.28.36.58&#39;</span>
+      <span class="sa">u</span><span class="s1">'url'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'http://avts.vn/hejxjrzjys/3978861743009/OCRjH-YuO_VcE-MgR/'</span><span class="p">,</span>
+      <span class="sa">u</span><span class="s1">'rateDate'</span><span class="p">:</span> <span class="sa">u</span><span class="s2">"Last Time Rated/Reviewed: &gt; {{days}} days {{legacy}}The URL submitted for review was rated more than {{days}} days ago.  The default setting for Symantec SG clients to download rating changes is once a day.  There is no need to show ratings older than this. Since Symantec's desktop client K9 and certain OEM partners update differently, ratings may differ from those of a Symantec SG as well as those present on the Site Review Tool."</span><span class="p">,</span>
+      <span class="sa">u</span><span class="s1">'followedUrl'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="sa">u</span><span class="s1">'lockedSpecialNote'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="sa">u</span><span class="s1">'threatriskLevelEn'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="sa">u</span><span class="s1">'linkable'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'false'</span><span class="p">,</span>
+      <span class="sa">u</span><span class="s1">'resolvedDetail'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="sa">u</span><span class="s1">'resolveEnabled'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'true'</span><span class="p">,</span>
+        <span class="sa">u</span><span class="s1">'ipAddress'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'103.28.36.58'</span>
       <span class="p">},</span>
-      <span class="sa">u</span><span class="s1">&#39;securityCategoryIds&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="sa">u</span><span class="s1">&#39;securityCategoryIds&#39;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="sa">u</span><span class="s1">&#39;43&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;102&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;44&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;92&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;18&#39;</span>
+      <span class="sa">u</span><span class="s1">'securityCategoryIds'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="sa">u</span><span class="s1">'securityCategoryIds'</span><span class="p">:</span> <span class="p">[</span>
+          <span class="sa">u</span><span class="s1">'43'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'102'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'44'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'92'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'18'</span>
         <span class="p">]</span>
       <span class="p">},</span>
-      <span class="sa">u</span><span class="s1">&#39;multipleMessage&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-      <span class="sa">u</span><span class="s1">&#39;suggestion&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-      <span class="sa">u</span><span class="s1">&#39;securityCategory&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;true&#39;</span><span class="p">,</span>
-      <span class="sa">u</span><span class="s1">&#39;ratingDtsCutoff&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;7&#39;</span><span class="p">,</span>
-      <span class="sa">u</span><span class="s1">&#39;multiple&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;false&#39;</span><span class="p">,</span>
-      <span class="sa">u</span><span class="s1">&#39;unrated&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;false&#39;</span><span class="p">,</span>
-      <span class="sa">u</span><span class="s1">&#39;curTrackingId&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;478710&#39;</span><span class="p">,</span>
-      <span class="sa">u</span><span class="s1">&#39;ratingDts&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;OLDER&#39;</span><span class="p">,</span>
-      <span class="sa">u</span><span class="s1">&#39;lockedMessage&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-      <span class="sa">u</span><span class="s1">&#39;threatriskLevel&#39;</span><span class="p">:</span> <span class="kc">None</span>
+      <span class="sa">u</span><span class="s1">'multipleMessage'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="sa">u</span><span class="s1">'suggestion'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="sa">u</span><span class="s1">'securityCategory'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'true'</span><span class="p">,</span>
+      <span class="sa">u</span><span class="s1">'ratingDtsCutoff'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'7'</span><span class="p">,</span>
+      <span class="sa">u</span><span class="s1">'multiple'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'false'</span><span class="p">,</span>
+      <span class="sa">u</span><span class="s1">'unrated'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'false'</span><span class="p">,</span>
+      <span class="sa">u</span><span class="s1">'curTrackingId'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'478710'</span><span class="p">,</span>
+      <span class="sa">u</span><span class="s1">'ratingDts'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'OLDER'</span><span class="p">,</span>
+      <span class="sa">u</span><span class="s1">'lockedMessage'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="sa">u</span><span class="s1">'threatriskLevel'</span><span class="p">:</span> <span class="kc">None</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="s1">&#39;{&quot;CategorizationResult&quot;: {&quot;categorization&quot;: {&quot;categorization&quot;: [{&quot;num&quot;: &quot;92&quot;, &quot;name&quot;: &quot;Suspicious&quot;}, {&quot;num&quot;: &quot;101&quot;, &quot;name&quot;: &quot;Spam&quot;}]}, &quot;locked&quot;: &quot;false&quot;, &quot;translatedCategories&quot;: {&quot;fr&quot;: [{&quot;num&quot;: &quot;92&quot;, &quot;name&quot;: &quot;Suspect (Suspicious)&quot;}, {&quot;num&quot;: &quot;101&quot;, &quot;name&quot;: &quot;Spam (Spam)&quot;}], &quot;de&quot;: [{&quot;num&quot;: &quot;92&quot;, &quot;name&quot;: &quot;Verd</span><span class="se">\\</span><span class="s1">u00e4chtig (Suspicious)&quot;}, {&quot;num&quot;: &quot;101&quot;, &quot;name&quot;: &quot;Spam (Spam)&quot;}], &quot;zh&quot;: [{&quot;num&quot;: &quot;92&quot;, &quot;name&quot;: &quot;</span><span class="se">\\</span><span class="s1">u53ef</span><span class="se">\\</span><span class="s1">u7591 (Suspicious)&quot;}, {&quot;num&quot;: &quot;101&quot;, &quot;name&quot;: &quot;</span><span class="se">\\</span><span class="s1">u5783</span><span class="se">\\</span><span class="s1">u573e</span><span class="se">\\</span><span class="s1">u90ae</span><span class="se">\\</span><span class="s1">u4ef6 (Spam)&quot;}], &quot;zh_TW&quot;: [{&quot;num&quot;: &quot;92&quot;, &quot;name&quot;: &quot;</span><span class="se">\\</span><span class="s1">u53ef</span><span class="se">\\</span><span class="s1">u7591 (Suspicious)&quot;}, {&quot;num&quot;: &quot;101&quot;, &quot;name&quot;: &quot;</span><span class="se">\\</span><span class="s1">u5783</span><span class="se">\\</span><span class="s1">u573e</span><span class="se">\\</span><span class="s1">u90f5</span><span class="se">\\</span><span class="s1">u4ef6 (Spam)&quot;}], &quot;en&quot;: [{&quot;num&quot;: &quot;92&quot;, &quot;name&quot;: &quot;Suspicious&quot;}, {&quot;num&quot;: &quot;101&quot;, &quot;name&quot;: &quot;Spam&quot;}], &quot;ja&quot;: [{&quot;num&quot;: &quot;92&quot;, &quot;name&quot;: &quot;</span><span class="se">\\</span><span class="s1">u7591</span><span class="se">\\</span><span class="s1">u308f</span><span class="se">\\</span><span class="s1">u3057</span><span class="se">\\</span><span class="s1">u3044 (Suspicious)&quot;}, {&quot;num&quot;: &quot;101&quot;, &quot;name&quot;: &quot;</span><span class="se">\\</span><span class="s1">u30b9</span><span class="se">\\</span><span class="s1">u30d1</span><span class="se">\\</span><span class="s1">u30e0 (Spam)&quot;}], &quot;es&quot;: [{&quot;num&quot;: &quot;92&quot;, &quot;name&quot;: &quot;Sospechoso (Suspicious)&quot;}, {&quot;num&quot;: &quot;101&quot;, &quot;name&quot;: &quot;Spam (Spam)&quot;}]}, &quot;url&quot;: &quot;http://avts.vn/hejxjrzjys/3978861743009/OCRjH-YuO_VcE-MgR/&quot;, &quot;rateDate&quot;: &quot;Last Time Rated/Reviewed: &gt; {{days}} days {{legacy}}The URL submitted for review was rated more than {{days}} days ago.  The default setting for Symantec SG clients to download rating changes is once a day.  There is no need to show ratings older than this. Since Symantec</span><span class="se">\&#39;</span><span class="s1">s desktop client K9 and certain OEM partners update differently, ratings may differ from those of a Symantec SG as well as those present on the Site Review Tool.&quot;, &quot;followedUrl&quot;: null, &quot;lockedSpecialNote&quot;: null, &quot;threatriskLevelEn&quot;: null, &quot;linkable&quot;: &quot;false&quot;, &quot;resolvedDetail&quot;: {&quot;resolveEnabled&quot;: &quot;true&quot;, &quot;ipAddress&quot;: &quot;103.28.36.58&quot;}, &quot;securityCategoryIds&quot;: {&quot;securityCategoryIds&quot;: [&quot;43&quot;, &quot;102&quot;, &quot;44&quot;, &quot;92&quot;, &quot;18&quot;]}, &quot;multipleMessage&quot;: null, &quot;suggestion&quot;: null, &quot;securityCategory&quot;: &quot;true&quot;, &quot;ratingDtsCutoff&quot;: &quot;7&quot;, &quot;multiple&quot;: &quot;false&quot;, &quot;unrated&quot;: &quot;false&quot;, &quot;curTrackingId&quot;: &quot;478710&quot;, &quot;ratingDts&quot;: &quot;OLDER&quot;, &quot;lockedMessage&quot;: null, &quot;threatriskLevel&quot;: null}}&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span>
+  <span class="s1">'raw'</span><span class="p">:</span> <span class="s1">'{"CategorizationResult": {"categorization": {"categorization": [{"num": "92", "name": "Suspicious"}, {"num": "101", "name": "Spam"}]}, "locked": "false", "translatedCategories": {"fr": [{"num": "92", "name": "Suspect (Suspicious)"}, {"num": "101", "name": "Spam (Spam)"}], "de": [{"num": "92", "name": "Verd</span><span class="se">\\</span><span class="s1">u00e4chtig (Suspicious)"}, {"num": "101", "name": "Spam (Spam)"}], "zh": [{"num": "92", "name": "</span><span class="se">\\</span><span class="s1">u53ef</span><span class="se">\\</span><span class="s1">u7591 (Suspicious)"}, {"num": "101", "name": "</span><span class="se">\\</span><span class="s1">u5783</span><span class="se">\\</span><span class="s1">u573e</span><span class="se">\\</span><span class="s1">u90ae</span><span class="se">\\</span><span class="s1">u4ef6 (Spam)"}], "zh_TW": [{"num": "92", "name": "</span><span class="se">\\</span><span class="s1">u53ef</span><span class="se">\\</span><span class="s1">u7591 (Suspicious)"}, {"num": "101", "name": "</span><span class="se">\\</span><span class="s1">u5783</span><span class="se">\\</span><span class="s1">u573e</span><span class="se">\\</span><span class="s1">u90f5</span><span class="se">\\</span><span class="s1">u4ef6 (Spam)"}], "en": [{"num": "92", "name": "Suspicious"}, {"num": "101", "name": "Spam"}], "ja": [{"num": "92", "name": "</span><span class="se">\\</span><span class="s1">u7591</span><span class="se">\\</span><span class="s1">u308f</span><span class="se">\\</span><span class="s1">u3057</span><span class="se">\\</span><span class="s1">u3044 (Suspicious)"}, {"num": "101", "name": "</span><span class="se">\\</span><span class="s1">u30b9</span><span class="se">\\</span><span class="s1">u30d1</span><span class="se">\\</span><span class="s1">u30e0 (Spam)"}], "es": [{"num": "92", "name": "Sospechoso (Suspicious)"}, {"num": "101", "name": "Spam (Spam)"}]}, "url": "http://avts.vn/hejxjrzjys/3978861743009/OCRjH-YuO_VcE-MgR/", "rateDate": "Last Time Rated/Reviewed: &gt; {{days}} days {{legacy}}The URL submitted for review was rated more than {{days}} days ago.  The default setting for Symantec SG clients to download rating changes is once a day.  There is no need to show ratings older than this. Since Symantec</span><span class="se">\'</span><span class="s1">s desktop client K9 and certain OEM partners update differently, ratings may differ from those of a Symantec SG as well as those present on the Site Review Tool.", "followedUrl": null, "lockedSpecialNote": null, "threatriskLevelEn": null, "linkable": "false", "resolvedDetail": {"resolveEnabled": "true", "ipAddress": "103.28.36.58"}, "securityCategoryIds": {"securityCategoryIds": ["43", "102", "44", "92", "18"]}, "multipleMessage": null, "suggestion": null, "securityCategory": "true", "ratingDtsCutoff": "7", "multiple": "false", "unrated": "false", "curTrackingId": "478710", "ratingDts": "OLDER", "lockedMessage": null, "threatriskLevel": null}}'</span><span class="p">,</span>
+  <span class="s1">'reason'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span>
 <span class="p">}</span>
 </pre></div>
 </div>

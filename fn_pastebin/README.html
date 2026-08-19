@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -655,15 +655,15 @@
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-  <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;pastebin_code&#39;</span><span class="p">:</span> <span class="s1">&#39; example code here &#39;</span><span class="p">,</span>
-    <span class="s1">&#39;pastebin_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Example Name&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;pastebin_format&#39;</span><span class="p">:</span> <span class="s1">&#39;python&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;pastebin_privacy&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s1">&#39;pastebin_expiration&#39;</span><span class="p">:</span> <span class="s1">&#39;1H&#39;</span>
+  <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+  <span class="s1">'inputs'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'pastebin_code'</span><span class="p">:</span> <span class="s1">' example code here '</span><span class="p">,</span>
+    <span class="s1">'pastebin_name'</span><span class="p">:</span> <span class="s1">'Example Name'</span><span class="p">,</span>
+    <span class="s1">'pastebin_format'</span><span class="p">:</span> <span class="s1">'python'</span><span class="p">,</span>
+    <span class="s1">'pastebin_privacy'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s1">'pastebin_expiration'</span><span class="p">:</span> <span class="s1">'1H'</span>
   <span class="p">},</span>
-  <span class="s1">&#39;pastebin_link&#39;</span><span class="p">:</span> <span class="s1">&#39;https://pastebin.com/v3LqfKMx&#39;</span>
+  <span class="s1">'pastebin_link'</span><span class="p">:</span> <span class="s1">'https://pastebin.com/v3LqfKMx'</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -672,19 +672,19 @@
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is the text that will be written inside your paste</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">pastebin_code</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot; example code here &quot;&quot;&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">pastebin_code</span> <span class="o">=</span> <span class="s2">""" example code here """</span>
 
 <span class="c1"># This will be the name / title of your paste</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">pastebin_name</span> <span class="o">=</span> <span class="s2">&quot;Example Name&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">pastebin_name</span> <span class="o">=</span> <span class="s2">"Example Name"</span>
 
 <span class="c1"># This will be the syntax highlighting value. Format codes, see here: https://pastebin.com/api</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">pastebin_format</span> <span class="o">=</span> <span class="s2">&quot;python&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">pastebin_format</span> <span class="o">=</span> <span class="s2">"python"</span>
 
 <span class="c1"># This makes a paste public, unlisted or private. (Public = 0, Unlisted = 1, Private = 2)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">pastebin_privacy</span> <span class="o">=</span> <span class="mi">2</span>
 
 <span class="c1"># This sets the expiration date of your paste. Expiration codes, see here: https://pastebin.com/api</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">pastebin_expiration</span> <span class="o">=</span> <span class="s2">&quot;1H&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">pastebin_expiration</span> <span class="o">=</span> <span class="s2">"1H"</span>
 </pre></div>
 </div>
 </p>
@@ -692,9 +692,9 @@
 <details><summary>Example Post-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">):</span>
-  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;b&gt;Pastebin Created&lt;/b&gt;</span>
+  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">"""&lt;br&gt;&lt;b&gt;Pastebin Created&lt;/b&gt;</span>
 <span class="s2">                &lt;b&gt;Name:&lt;/b&gt; </span><span class="si">{0}</span>
-<span class="s2">                &lt;b&gt;Link:&lt;/b&gt; &lt;a href=&#39;</span><span class="si">{1}</span><span class="s2">&#39;&gt;</span><span class="si">{1}</span><span class="s2">&lt;/a&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pastebin_name&#39;</span><span class="p">),</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pastebin_link&#39;</span><span class="p">))</span>
+<span class="s2">                &lt;b&gt;Link:&lt;/b&gt; &lt;a href='</span><span class="si">{1}</span><span class="s2">'&gt;</span><span class="si">{1}</span><span class="s2">&lt;/a&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'pastebin_name'</span><span class="p">),</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'pastebin_link'</span><span class="p">))</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 </pre></div>
 </div>

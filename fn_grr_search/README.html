@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -436,62 +436,62 @@
 <section id="function-output">
 <h2>Function Output:<a class="headerlink" href="#function-output" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;grr_search_type&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;ip&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;grr_search_value&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span>
-    <span class="s1">&#39;agents&#39;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s1">'grr_search_type'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'ip'</span><span class="p">,</span>
+    <span class="s1">'grr_search_value'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'127.0.0.1'</span><span class="p">,</span>
+    <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="s1">'agents'</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-            <span class="sa">u</span><span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;1538997200410715&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;agentInfo&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="sa">u</span><span class="s1">&#39;buildTime&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;2018-06-28 09:10:40&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;clientDescription&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;grr linux amd64&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;clientName&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;grr&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;clientVersion&#39;</span><span class="p">:</span> <span class="mi">3232</span>
+            <span class="sa">u</span><span class="s1">'age'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'1538997200410715'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'agentInfo'</span><span class="p">:</span> <span class="p">{</span>
+                <span class="sa">u</span><span class="s1">'buildTime'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'2018-06-28 09:10:40'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'clientDescription'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'grr linux amd64'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'clientName'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'grr'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'clientVersion'</span><span class="p">:</span> <span class="mi">3232</span>
             <span class="p">},</span>
-            <span class="sa">u</span><span class="s1">&#39;clientId&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;C.ddc30808cf5d06d3&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;firstSeenAt&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;1538497879090708&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;fleetspeakEnabled&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;hardwareInfo&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="sa">u</span><span class="s1">&#39;biosReleaseDate&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;05/19/2017&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;biosRevision&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;4.6&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;biosRomSize&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;64 kB&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;biosVendor&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Phoenix Technologies LTD&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;biosVersion&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;6.00&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;serialNumber&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;VMware-56 4d f0 c8... 77 7e 65&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;systemFamily&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Not Specified&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;systemManufacturer&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;VMware&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;systemProductName&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;VMware Virtual Platform&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;systemSkuNumber&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Not Specified&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;systemUuid&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;xxxx&#39;</span>
+            <span class="sa">u</span><span class="s1">'clientId'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'C.ddc30808cf5d06d3'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'firstSeenAt'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'1538497879090708'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'fleetspeakEnabled'</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'hardwareInfo'</span><span class="p">:</span> <span class="p">{</span>
+                <span class="sa">u</span><span class="s1">'biosReleaseDate'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'05/19/2017'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'biosRevision'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'4.6'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'biosRomSize'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'64 kB'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'biosVendor'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'Phoenix Technologies LTD'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'biosVersion'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'6.00'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'serialNumber'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'VMware-56 4d f0 c8... 77 7e 65'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'systemFamily'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'Not Specified'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'systemManufacturer'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'VMware'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'systemProductName'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'VMware Virtual Platform'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'systemSkuNumber'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'Not Specified'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'systemUuid'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'xxxx'</span>
             <span class="p">},</span>
-            <span class="sa">u</span><span class="s1">&#39;interfaces&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="o">...</span><span class="p">}],</span>
-            <span class="sa">u</span><span class="s1">&#39;knowledgeBase&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="sa">u</span><span class="s1">&#39;fqdn&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;localhost.localdomain&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;os&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Linux&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;osMajorVersion&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;osMinorVersion&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;osRelease&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;RedHat&#39;</span>
+            <span class="sa">u</span><span class="s1">'interfaces'</span><span class="p">:</span> <span class="p">[{</span><span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="p">{</span><span class="o">...</span><span class="p">}],</span>
+            <span class="sa">u</span><span class="s1">'knowledgeBase'</span><span class="p">:</span> <span class="p">{</span>
+                <span class="sa">u</span><span class="s1">'fqdn'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'localhost.localdomain'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'os'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'Linux'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'osMajorVersion'</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'osMinorVersion'</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'osRelease'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'RedHat'</span>
             <span class="p">},</span>
-            <span class="sa">u</span><span class="s1">&#39;lastBootedAt&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;1538996573000000&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;lastClock&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;1539009155388036&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;lastSeenAt&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;1539009155394278&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;memorySize&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;8653881344&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;osInfo&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="sa">u</span><span class="s1">&#39;fqdn&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;localhost.localdomain&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;kernel&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;3.10.0-862.14.4.el7.x86_64&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;machine&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;x86_64&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;release&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;RedHat&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;system&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;Linux&#39;</span><span class="p">,</span>
-                <span class="sa">u</span><span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;7.5&#39;</span>
+            <span class="sa">u</span><span class="s1">'lastBootedAt'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'1538996573000000'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'lastClock'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'1539009155388036'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'lastSeenAt'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'1539009155394278'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'memorySize'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'8653881344'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'osInfo'</span><span class="p">:</span> <span class="p">{</span>
+                <span class="sa">u</span><span class="s1">'fqdn'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'localhost.localdomain'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'kernel'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'3.10.0-862.14.4.el7.x86_64'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'machine'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'x86_64'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'release'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'RedHat'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'system'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'Linux'</span><span class="p">,</span>
+                <span class="sa">u</span><span class="s1">'version'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'7.5'</span>
             <span class="p">},</span>
-            <span class="sa">u</span><span class="s1">&#39;urn&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;aff4:/C.ddc30808cf5d06d3&#39;</span><span class="p">,</span>
-            <span class="sa">u</span><span class="s1">&#39;volumes&#39;</span><span class="p">:[</span>
+            <span class="sa">u</span><span class="s1">'urn'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'aff4:/C.ddc30808cf5d06d3'</span><span class="p">,</span>
+            <span class="sa">u</span><span class="s1">'volumes'</span><span class="p">:[</span>
                 <span class="p">{</span>
-                    <span class="sa">u</span><span class="s1">&#39;actualAvailableAllocationUnits&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;21684382&#39;</span><span class="p">,</span>
-                    <span class="sa">u</span><span class="s1">&#39;bytesPerSector&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;4096&#39;</span><span class="p">,</span>
-                    <span class="sa">u</span><span class="s1">&#39;sectorsPerAllocationUnit&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;1&#39;</span><span class="p">,</span>
-                    <span class="sa">u</span><span class="s1">&#39;totalAllocationUnits&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;24093702&#39;</span><span class="p">,</span>
-                    <span class="sa">u</span><span class="s1">&#39;unixvolume&#39;</span><span class="p">:</span> <span class="p">{</span><span class="sa">u</span><span class="s1">&#39;mountPoint&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;/&#39;</span><span class="p">}</span>
+                    <span class="sa">u</span><span class="s1">'actualAvailableAllocationUnits'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'21684382'</span><span class="p">,</span>
+                    <span class="sa">u</span><span class="s1">'bytesPerSector'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'4096'</span><span class="p">,</span>
+                    <span class="sa">u</span><span class="s1">'sectorsPerAllocationUnit'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'1'</span><span class="p">,</span>
+                    <span class="sa">u</span><span class="s1">'totalAllocationUnits'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'24093702'</span><span class="p">,</span>
+                    <span class="sa">u</span><span class="s1">'unixvolume'</span><span class="p">:</span> <span class="p">{</span><span class="sa">u</span><span class="s1">'mountPoint'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'/'</span><span class="p">}</span>
                 <span class="p">}</span>
             <span class="p">]</span>
         <span class="p">}</span>
@@ -514,24 +514,24 @@
 <p>This example loops the found agents and <strong>adds Notes to the Incident.</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
   <span class="c1"># Loop all found agents</span>
-  <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;agents&quot;</span><span class="p">]:</span>
+  <span class="k">for</span> <span class="n">agent</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">"agents"</span><span class="p">]:</span>
 
-    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;i style=&quot;color:#00af08&quot;&gt;GRR Agent Found:&lt;/i&gt;</span>
+    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"""&lt;i style="color:#00af08"&gt;GRR Agent Found:&lt;/i&gt;</span>
 <span class="s2">              &lt;br&gt;&lt;b&gt;System Product Name:&lt;/b&gt; </span><span class="si">{0}</span>
 <span class="s2">              &lt;br&gt;&lt;b&gt;System UUID:&lt;/b&gt; </span><span class="si">{1}</span>
 <span class="s2">              &lt;br&gt;&lt;b&gt;System Manufacturer:&lt;/b&gt; </span><span class="si">{2}</span>
 <span class="s2">              &lt;br&gt;&lt;b&gt;Release:&lt;/b&gt; </span><span class="si">{3}</span>
 <span class="s2">              &lt;br&gt;&lt;b&gt;Machine:&lt;/b&gt; </span><span class="si">{4}</span>
-<span class="s2">              &lt;br&gt;&lt;b&gt;Version:&lt;/b&gt; </span><span class="si">{5}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">agent</span><span class="p">[</span><span class="s2">&quot;hardwareInfo&quot;</span><span class="p">][</span><span class="s2">&quot;systemProductName&quot;</span><span class="p">],</span>
-                                            <span class="n">agent</span><span class="p">[</span><span class="s2">&quot;hardwareInfo&quot;</span><span class="p">][</span><span class="s2">&quot;systemUuid&quot;</span><span class="p">],</span>
-                                            <span class="n">agent</span><span class="p">[</span><span class="s2">&quot;hardwareInfo&quot;</span><span class="p">][</span><span class="s2">&quot;systemManufacturer&quot;</span><span class="p">],</span>
-                                            <span class="n">agent</span><span class="p">[</span><span class="s2">&quot;osInfo&quot;</span><span class="p">][</span><span class="s2">&quot;release&quot;</span><span class="p">],</span>
-                                            <span class="n">agent</span><span class="p">[</span><span class="s2">&quot;osInfo&quot;</span><span class="p">][</span><span class="s2">&quot;machine&quot;</span><span class="p">],</span>
-                                            <span class="n">agent</span><span class="p">[</span><span class="s2">&quot;osInfo&quot;</span><span class="p">][</span><span class="s2">&quot;version&quot;</span><span class="p">])</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;Version:&lt;/b&gt; </span><span class="si">{5}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">agent</span><span class="p">[</span><span class="s2">"hardwareInfo"</span><span class="p">][</span><span class="s2">"systemProductName"</span><span class="p">],</span>
+                                            <span class="n">agent</span><span class="p">[</span><span class="s2">"hardwareInfo"</span><span class="p">][</span><span class="s2">"systemUuid"</span><span class="p">],</span>
+                                            <span class="n">agent</span><span class="p">[</span><span class="s2">"hardwareInfo"</span><span class="p">][</span><span class="s2">"systemManufacturer"</span><span class="p">],</span>
+                                            <span class="n">agent</span><span class="p">[</span><span class="s2">"osInfo"</span><span class="p">][</span><span class="s2">"release"</span><span class="p">],</span>
+                                            <span class="n">agent</span><span class="p">[</span><span class="s2">"osInfo"</span><span class="p">][</span><span class="s2">"machine"</span><span class="p">],</span>
+                                            <span class="n">agent</span><span class="p">[</span><span class="s2">"osInfo"</span><span class="p">][</span><span class="s2">"version"</span><span class="p">])</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
 
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> system not found in GRR&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">grr_search_value</span><span class="p">)</span>
+  <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{0}</span><span class="s2"> system not found in GRR"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">grr_search_value</span><span class="p">)</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createPlainText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
 </pre></div>
 </div>

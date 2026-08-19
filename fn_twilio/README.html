@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -516,21 +516,21 @@ The parameter twilio_src_address should be set to the Twilio number you wish to 
 <section id="function-output">
 <h3>Function Output<a class="headerlink" href="#function-output" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s1">&#39;twilio_status&#39;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s1">'twilio_status'</span><span class="p">:</span> <span class="p">[</span>
   <span class="p">{</span>
-    <span class="s1">&#39;phone_number&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;+1234&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;error_message&#39;</span><span class="p">:</span> <span class="s2">&quot;Unable to create record: The &#39;To&#39; number  is not a valid phone number.&quot;</span><span class="p">,</span>
-    <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">False</span>
+    <span class="s1">'phone_number'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'+1234'</span><span class="p">,</span>
+    <span class="s1">'error_message'</span><span class="p">:</span> <span class="s2">"Unable to create record: The 'To' number  is not a valid phone number."</span><span class="p">,</span>
+    <span class="s1">'success'</span><span class="p">:</span> <span class="kc">False</span>
     <span class="p">},{</span>
-    <span class="s1">&#39;phone_number&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;+353834463164&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="s1">'phone_number'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'+353834463164'</span><span class="p">,</span>
+    <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span>
     <span class="p">}</span>
   <span class="p">],</span>
-  <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;twilio_sms_message&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;An incident test (2096) with Low priority may require your attention&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;twilio_sms_destination&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;1234,353834463164&#39;</span>
+  <span class="s1">'inputs'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'twilio_sms_message'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'An incident test (2096) with Low priority may require your attention'</span><span class="p">,</span>
+    <span class="s1">'twilio_sms_destination'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'1234,353834463164'</span>
     <span class="p">}</span>
-  <span class="p">,</span> <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span>
+  <span class="p">,</span> <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -540,7 +540,7 @@ The parameter twilio_src_address should be set to the Twilio number you wish to 
 <p>The following is an example of setup of each parameter using a simple workflow pre-processing script.
 The message can be customised to suit your own use case.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">twilio_sms_destination</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">twilio_sms_destination</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">twilio_sms_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;An incident </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">) with </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="si">}</span><span class="s1"> priority may require your attention&#39;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">twilio_sms_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'An incident </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">) with </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="si">}</span><span class="s1"> priority may require your attention'</span>
 </pre></div>
 </div>
 </section>
@@ -550,28 +550,28 @@ The message can be customised to suit your own use case.</p>
 Below is an example post process script which adds a note for each destination.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
-<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;twilio_status&quot;</span><span class="p">]:</span>
-  <span class="k">if</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;b&gt;Twilio SMS Message:&lt;/b&gt; </span><span class="si">{0}</span>
-<span class="s2">              &lt;/br&gt;&lt;b&gt;sent to:&lt;/b&gt; </span><span class="si">{1}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;twilio_sms_message&quot;</span><span class="p">),</span>
-                                            <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;phone_number&quot;</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">"twilio_status"</span><span class="p">]:</span>
+  <span class="k">if</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"""&lt;b&gt;Twilio SMS Message:&lt;/b&gt; </span><span class="si">{0}</span>
+<span class="s2">              &lt;/br&gt;&lt;b&gt;sent to:&lt;/b&gt; </span><span class="si">{1}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"twilio_sms_message"</span><span class="p">),</span>
+                                            <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"phone_number"</span><span class="p">))</span>
 
     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;b&gt;Unable to send Twilio SMS Message:&lt;/b&gt; </span><span class="si">{0}</span>
-<span class="s2">              &lt;/br&gt;&lt;b&gt; to:&lt;/b&gt; </span><span class="si">{1}</span><span class="s2"> (</span><span class="si">{2}</span><span class="s2">)&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;twilio_sms_message&quot;</span><span class="p">),</span>
-                                            <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;phone_number&quot;</span><span class="p">),</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;error_message&quot;</span><span class="p">))</span>
+    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"""&lt;b&gt;Unable to send Twilio SMS Message:&lt;/b&gt; </span><span class="si">{0}</span>
+<span class="s2">              &lt;/br&gt;&lt;b&gt; to:&lt;/b&gt; </span><span class="si">{1}</span><span class="s2"> (</span><span class="si">{2}</span><span class="s2">)"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"twilio_sms_message"</span><span class="p">),</span>
+                                            <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"phone_number"</span><span class="p">),</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"error_message"</span><span class="p">))</span>
 
     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
 
-  <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;twilio_sms_log&quot;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;row_created&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/%m/%y %H:%M:%S&#39;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;Failed&quot;</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;message_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;messaging_service_sid&quot;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;date_created&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;date_created_ts&quot;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;msg_body&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;message_body&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;error_message&quot;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;phone_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;phone_number&quot;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;direction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;direction&quot;</span><span class="p">)</span>
+  <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"twilio_sms_log"</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'row_created'</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'</span><span class="si">%d</span><span class="s1">/%m/%y %H:%M:%S'</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"status"</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">"Failed"</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'message_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"messaging_service_sid"</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'date_created'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"date_created_ts"</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'msg_body'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"message_body"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"error_message"</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'phone_number'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"phone_number"</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">"direction"</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"direction"</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -622,33 +622,33 @@ Below is an example post process script which adds a note for each destination.<
 <section id="id2">
 <h3>Function Output<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-  <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+  <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+  <span class="s1">'reason'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s1">'content'</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s1">&#39;phone_number&#39;</span><span class="p">:</span> <span class="s1">&#39;+19788354530&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;messaging_service_sid&#39;</span><span class="p">:</span> <span class="s1">&#39;SMe9584a564764db7c4d24f612d6928b18&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;date_created&#39;</span><span class="p">:</span> <span class="s1">&#39;2020-01-25 18:05:47+00:00&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;direction&#39;</span><span class="p">:</span> <span class="s1">&#39;inbound&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;message_body&#39;</span><span class="p">:</span> <span class="s1">&#39;Acknowledged&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;received&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;error_message&#39;</span><span class="p">:</span> <span class="kc">None</span>
+      <span class="s1">'phone_number'</span><span class="p">:</span> <span class="s1">'+19788354530'</span><span class="p">,</span>
+      <span class="s1">'messaging_service_sid'</span><span class="p">:</span> <span class="s1">'SMe9584a564764db7c4d24f612d6928b18'</span><span class="p">,</span>
+      <span class="s1">'date_created'</span><span class="p">:</span> <span class="s1">'2020-01-25 18:05:47+00:00'</span><span class="p">,</span>
+      <span class="s1">'direction'</span><span class="p">:</span> <span class="s1">'inbound'</span><span class="p">,</span>
+      <span class="s1">'message_body'</span><span class="p">:</span> <span class="s1">'Acknowledged'</span><span class="p">,</span>
+      <span class="s1">'status'</span><span class="p">:</span> <span class="s1">'received'</span><span class="p">,</span>
+      <span class="s1">'error_message'</span><span class="p">:</span> <span class="kc">None</span>
     <span class="p">}</span>
   <span class="p">],</span>
-  <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="s1">&#39;[{&quot;phone_number&quot;: &quot;+19788354530&quot;, &quot;messaging_service_sid&quot;: &quot;SMe9584a564764db7c4d24f612d6928b18&quot;, &quot;date_created&quot;: &quot;2020-01-25 18:05:47+00:00&quot;, &quot;direction&quot;: &quot;inbound&quot;, &quot;message_body&quot;: &quot;Acknowledged&quot;, &quot;status&quot;: &quot;received&quot;, &quot;error_message&quot;: null}]&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;twilio_wait_timeout&#39;</span><span class="p">:</span> <span class="s1">&#39;60s&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;twilio_after_date&#39;</span><span class="p">:</span> <span class="s1">&#39;2020-01-25 14:59:51+00:00&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;twilio_phone_number&#39;</span><span class="p">:</span> <span class="s1">&#39;+19788354530&#39;</span>
+  <span class="s1">'raw'</span><span class="p">:</span> <span class="s1">'[{"phone_number": "+19788354530", "messaging_service_sid": "SMe9584a564764db7c4d24f612d6928b18", "date_created": "2020-01-25 18:05:47+00:00", "direction": "inbound", "message_body": "Acknowledged", "status": "received", "error_message": null}]'</span><span class="p">,</span>
+  <span class="s1">'inputs'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'twilio_wait_timeout'</span><span class="p">:</span> <span class="s1">'60s'</span><span class="p">,</span>
+    <span class="s1">'twilio_after_date'</span><span class="p">:</span> <span class="s1">'2020-01-25 14:59:51+00:00'</span><span class="p">,</span>
+    <span class="s1">'twilio_phone_number'</span><span class="p">:</span> <span class="s1">'+19788354530'</span>
   <span class="p">},</span>
-  <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;package_version&#39;</span><span class="p">:</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;Marks-MacBook-Pro.local&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;execution_time_ms&#39;</span><span class="p">:</span> <span class="mi">941</span><span class="p">,</span>
-    <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2020-01-29 13:01:09&#39;</span>
+  <span class="s1">'metrics'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+    <span class="s1">'package'</span><span class="p">:</span> <span class="s1">'unknown'</span><span class="p">,</span>
+    <span class="s1">'package_version'</span><span class="p">:</span> <span class="s1">'unknown'</span><span class="p">,</span>
+    <span class="s1">'host'</span><span class="p">:</span> <span class="s1">'Marks-MacBook-Pro.local'</span><span class="p">,</span>
+    <span class="s1">'execution_time_ms'</span><span class="p">:</span> <span class="mi">941</span><span class="p">,</span>
+    <span class="s1">'timestamp'</span><span class="p">:</span> <span class="s1">'2020-01-29 13:01:09'</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -659,8 +659,8 @@ Below is an example post process script which adds a note for each destination.<
 <p>The following is an example of setup of each parameter using a simple workflow pre-processing script.
 The message can be customised to suit your own use case.</p>
 <p>From a datatable row:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">twilio_phone_number</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;phone_number&#39;</span><span class="p">]</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">twilio_date_sent</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;date_created&#39;</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">twilio_phone_number</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'phone_number'</span><span class="p">]</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">twilio_date_sent</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'date_created'</span><span class="p">]</span>
 </pre></div>
 </div>
 </section>
@@ -671,16 +671,16 @@ The message can be customised to suit your own use case.</p>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
   <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
-    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;twilio_sms_log&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;row_created&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/%m/%y %H:%M:%S&#39;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;message_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;messaging_service_sid&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;date_created&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;date_created_ts&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;msg_body&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;message_body&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;phone_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;phone_number&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;direction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;direction&quot;</span><span class="p">)</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"twilio_sms_log"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'row_created'</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'</span><span class="si">%d</span><span class="s1">/%m/%y %H:%M:%S'</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"status"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'message_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"messaging_service_sid"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'date_created'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"date_created_ts"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'msg_body'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"message_body"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'phone_number'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"phone_number"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"direction"</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"direction"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Twilio Received Messages failed: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Twilio Received Messages failed: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
 </pre></div>
 </div>
 </section>
@@ -732,33 +732,33 @@ The message can be customised to suit your own use case.</p>
 <section id="id6">
 <h3>Function Output<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-  <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+  <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+  <span class="s1">'reason'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s1">'content'</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s1">&#39;phone_number&#39;</span><span class="p">:</span> <span class="s1">&#39;+19788354530&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;messaging_service_sid&#39;</span><span class="p">:</span> <span class="s1">&#39;SMe9584a564764db7c4d24f612d6928b18&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;date_created&#39;</span><span class="p">:</span> <span class="s1">&#39;2020-01-25 18:05:47+00:00&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;direction&#39;</span><span class="p">:</span> <span class="s1">&#39;inbound&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;message_body&#39;</span><span class="p">:</span> <span class="s1">&#39;Acknowledged&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;received&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;error_message&#39;</span><span class="p">:</span> <span class="kc">None</span>
+      <span class="s1">'phone_number'</span><span class="p">:</span> <span class="s1">'+19788354530'</span><span class="p">,</span>
+      <span class="s1">'messaging_service_sid'</span><span class="p">:</span> <span class="s1">'SMe9584a564764db7c4d24f612d6928b18'</span><span class="p">,</span>
+      <span class="s1">'date_created'</span><span class="p">:</span> <span class="s1">'2020-01-25 18:05:47+00:00'</span><span class="p">,</span>
+      <span class="s1">'direction'</span><span class="p">:</span> <span class="s1">'inbound'</span><span class="p">,</span>
+      <span class="s1">'message_body'</span><span class="p">:</span> <span class="s1">'Acknowledged'</span><span class="p">,</span>
+      <span class="s1">'status'</span><span class="p">:</span> <span class="s1">'received'</span><span class="p">,</span>
+      <span class="s1">'error_message'</span><span class="p">:</span> <span class="kc">None</span>
     <span class="p">}</span>
   <span class="p">],</span>
-  <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="s1">&#39;[{&quot;phone_number&quot;: &quot;+19788354530&quot;, &quot;messaging_service_sid&quot;: &quot;SMe9584a564764db7c4d24f612d6928b18&quot;, &quot;date_created&quot;: &quot;2020-01-25 18:05:47+00:00&quot;, &quot;direction&quot;: &quot;inbound&quot;, &quot;message_body&quot;: &quot;Acknowledged&quot;, &quot;status&quot;: &quot;received&quot;, &quot;error_message&quot;: null}]&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;twilio_wait_timeout&#39;</span><span class="p">:</span> <span class="s1">&#39;60s&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;twilio_after_date&#39;</span><span class="p">:</span> <span class="s1">&#39;2020-01-25 14:59:51+00:00&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;twilio_phone_number&#39;</span><span class="p">:</span> <span class="s1">&#39;+19788354530&#39;</span>
+  <span class="s1">'raw'</span><span class="p">:</span> <span class="s1">'[{"phone_number": "+19788354530", "messaging_service_sid": "SMe9584a564764db7c4d24f612d6928b18", "date_created": "2020-01-25 18:05:47+00:00", "direction": "inbound", "message_body": "Acknowledged", "status": "received", "error_message": null}]'</span><span class="p">,</span>
+  <span class="s1">'inputs'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'twilio_wait_timeout'</span><span class="p">:</span> <span class="s1">'60s'</span><span class="p">,</span>
+    <span class="s1">'twilio_after_date'</span><span class="p">:</span> <span class="s1">'2020-01-25 14:59:51+00:00'</span><span class="p">,</span>
+    <span class="s1">'twilio_phone_number'</span><span class="p">:</span> <span class="s1">'+19788354530'</span>
   <span class="p">},</span>
-  <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;package_version&#39;</span><span class="p">:</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;Marks-MacBook-Pro.local&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;execution_time_ms&#39;</span><span class="p">:</span> <span class="mi">941</span><span class="p">,</span>
-    <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2020-01-29 13:01:09&#39;</span>
+  <span class="s1">'metrics'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+    <span class="s1">'package'</span><span class="p">:</span> <span class="s1">'unknown'</span><span class="p">,</span>
+    <span class="s1">'package_version'</span><span class="p">:</span> <span class="s1">'unknown'</span><span class="p">,</span>
+    <span class="s1">'host'</span><span class="p">:</span> <span class="s1">'Marks-MacBook-Pro.local'</span><span class="p">,</span>
+    <span class="s1">'execution_time_ms'</span><span class="p">:</span> <span class="mi">941</span><span class="p">,</span>
+    <span class="s1">'timestamp'</span><span class="p">:</span> <span class="s1">'2020-01-29 13:01:09'</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -782,16 +782,16 @@ The message can be customised to suit your own use case.</p>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
   <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
-    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;twilio_sms_log&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;row_created&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/%m/%y %H:%M:%S&#39;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;message_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;messaging_service_sid&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;date_created&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;date_created_ts&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;msg_body&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;message_body&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;phone_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;phone_number&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;direction&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;direction&quot;</span><span class="p">)</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"twilio_sms_log"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'row_created'</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'</span><span class="si">%d</span><span class="s1">/%m/%y %H:%M:%S'</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"status"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'message_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"messaging_service_sid"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'date_created'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"date_created_ts"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'msg_body'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"message_body"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'phone_number'</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"phone_number"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"direction"</span><span class="p">]</span> <span class="o">=</span> <span class="n">entry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"direction"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Twilio Received Messages failed: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Twilio Received Messages failed: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
 </pre></div>
 </div>
 </section>

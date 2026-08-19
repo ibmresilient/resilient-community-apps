@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -714,36 +714,36 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;pager&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;queryValue&quot;</span><span class="p">:</span> <span class="s2">&quot;45.146.165.37&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;queryType&quot;</span><span class="p">:</span> <span class="s2">&quot;ip&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;firstSeen&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;lastSeen&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;totalRecords&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;results&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;classification&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;primaryDomain&quot;</span><span class="p">:</span> <span class="s2">&quot;45.146.165.37.null&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;subdomains&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;tags_hits_str&quot;</span><span class="p">:</span> <span class="s2">&quot;ransomeware, compromised&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;report_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://community.riskiq.com/search/45.146.165.37&quot;</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"pager"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"queryValue"</span><span class="p">:</span> <span class="s2">"45.146.165.37"</span><span class="p">,</span>
+    <span class="s2">"queryType"</span><span class="p">:</span> <span class="s2">"ip"</span><span class="p">,</span>
+    <span class="s2">"firstSeen"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"lastSeen"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"totalRecords"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"results"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"classification"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"primaryDomain"</span><span class="p">:</span> <span class="s2">"45.146.165.37.null"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"subdomains"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"tags_hits_str"</span><span class="p">:</span> <span class="s2">"ransomeware, compromised"</span><span class="p">,</span>
+    <span class="s2">"report_url"</span><span class="p">:</span> <span class="s2">"https://community.riskiq.com/search/45.146.165.37"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;passivetotal_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;passivetotal_artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;45.146.165.37&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"passivetotal_artifact_type"</span><span class="p">:</span> <span class="s2">"IP Address"</span><span class="p">,</span>
+    <span class="s2">"passivetotal_artifact_value"</span><span class="p">:</span> <span class="s2">"45.146.165.37"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-passivetotal&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;My Host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2086</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-03-16 13:16:50&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-passivetotal"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"My Host"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">2086</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-03-16 13:16:50"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -763,62 +763,62 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
   <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
     <span class="n">data</span> <span class="o">=</span><span class="n">results</span><span class="o">.</span><span class="n">content</span>
-    <span class="n">pdns_hit_number</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;totalRecords&quot;</span><span class="p">]</span>
-    <span class="n">pdns_first_seen</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;firstSeen&quot;</span><span class="p">]</span>
-    <span class="n">pdns_last_seen</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;lastSeen&quot;</span><span class="p">]</span>
-    <span class="n">subdomain_hits</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;subdomains&quot;</span><span class="p">]</span>
+    <span class="n">pdns_hit_number</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"totalRecords"</span><span class="p">]</span>
+    <span class="n">pdns_first_seen</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"firstSeen"</span><span class="p">]</span>
+    <span class="n">pdns_last_seen</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"lastSeen"</span><span class="p">]</span>
+    <span class="n">subdomain_hits</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"subdomains"</span><span class="p">]</span>
     <span class="n">subdomain_hits_number</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">subdomain_hits</span><span class="p">)</span> <span class="k">if</span> <span class="n">subdomain_hits</span> <span class="k">else</span> <span class="kc">None</span>
-    <span class="n">first_ten_subdomains</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">subdomain_hits</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span> <span class="k">if</span> <span class="n">subdomain_hits</span> <span class="k">else</span> <span class="kc">None</span>
-    <span class="n">tags_hits</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;tags_hits_str&quot;</span><span class="p">]</span>
-    <span class="n">classification_hit</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;classification&quot;</span><span class="p">]</span>
-    <span class="n">report_url</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;report_url&quot;</span><span class="p">]</span>
+    <span class="n">first_ten_subdomains</span> <span class="o">=</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">subdomain_hits</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span> <span class="k">if</span> <span class="n">subdomain_hits</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">tags_hits</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"tags_hits_str"</span><span class="p">]</span>
+    <span class="n">classification_hit</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"classification"</span><span class="p">]</span>
+    <span class="n">report_url</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"report_url"</span><span class="p">]</span>
 
 
     <span class="n">hit</span> <span class="o">=</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Number of Passive DNS Records&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;number&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pdns_hit_number</span><span class="p">)</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Number of Passive DNS Records"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"number"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pdns_hit_number</span><span class="p">)</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;First Seen&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pdns_first_seen</span><span class="p">)</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"First Seen"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pdns_first_seen</span><span class="p">)</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Last Seen&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pdns_last_seen</span><span class="p">)</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Last Seen"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">pdns_last_seen</span><span class="p">)</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Subdomains - All&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;number&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subdomain_hits_number</span><span class="p">)</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Subdomains - All"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"number"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">subdomain_hits_number</span><span class="p">)</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Subdomains - First ten Hostnames&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">first_ten_subdomains</span><span class="p">)</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Subdomains - First ten Hostnames"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">first_ten_subdomains</span><span class="p">)</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Tags&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tags_hits</span><span class="p">)</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Tags"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tags_hits</span><span class="p">)</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Classification&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">classification_hit</span><span class="p">)</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Classification"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">classification_hit</span><span class="p">)</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Report Link&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;uri&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">report_url</span><span class="p">)</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Report Link"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"uri"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">report_url</span><span class="p">)</span>
           <span class="p">}</span>
           <span class="p">]</span>
-    <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="s2">&quot;PassiveTotal Function hits added&quot;</span><span class="p">,</span> <span class="n">hit</span><span class="p">)</span>
+    <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="s2">"PassiveTotal Function hits added"</span><span class="p">,</span> <span class="n">hit</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;PassiveTotal Query failed: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"PassiveTotal Query failed: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>

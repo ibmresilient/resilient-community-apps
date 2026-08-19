@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -411,8 +411,8 @@
 <li><p>Once installed, the DXL client must be provisioned. Click <a class="reference external" href="https://opendxl.github.io/opendxl-client-python/pydoc/provisioningoverview.html">here</a> for more info on provisioning.</p></li>
 <li><p>Use the following commands to register this custom threat service with Resilient and test it:</p></li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">sudo</span> <span class="n">resutil</span> <span class="n">threatserviceedit</span> <span class="o">-</span><span class="n">name</span> <span class="s2">&quot;McAfee TIE Searcher&quot;</span> <span class="o">-</span><span class="n">resturl</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">9000</span><span class="o">/</span><span class="n">cts</span><span class="o">/</span><span class="n">mcafee_tie_searcher</span>
-    <span class="n">sudo</span> <span class="n">resutil</span> <span class="n">threatservicetest</span> <span class="o">-</span><span class="n">name</span> <span class="s2">&quot;McAfee TIE Searcher&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">sudo</span> <span class="n">resutil</span> <span class="n">threatserviceedit</span> <span class="o">-</span><span class="n">name</span> <span class="s2">"McAfee TIE Searcher"</span> <span class="o">-</span><span class="n">resturl</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">9000</span><span class="o">/</span><span class="n">cts</span><span class="o">/</span><span class="n">mcafee_tie_searcher</span>
+    <span class="n">sudo</span> <span class="n">resutil</span> <span class="n">threatservicetest</span> <span class="o">-</span><span class="n">name</span> <span class="s2">"McAfee TIE Searcher"</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="5">

@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -673,250 +673,250 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;closed&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"closed"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;Request ID&quot;</span><span class="p">:</span> <span class="s2">&quot;INC000000005009|INC000000005009&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Submitter&quot;</span><span class="p">:</span> <span class="s2">&quot;Ian_Agent&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Submit Date&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-13T11:46:13.000+0000&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Assignee Login ID&quot;</span><span class="p">:</span> <span class="s2">&quot;Agent&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Last Modified By&quot;</span><span class="p">:</span> <span class="s2">&quot;Ian_Agent&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Last Modified Date&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-13T11:47:25.000+0000&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Status&quot;</span><span class="p">:</span> <span class="s2">&quot;Resolved&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Assignee Groups&quot;</span><span class="p">:</span> <span class="s2">&quot;1000000005;&#39;Ian_Agent&#39;;&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;InstanceId&quot;</span><span class="p">:</span> <span class="s2">&quot;AGGI8NI7JMR52ASAX0BBSAX0BB0EN3&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Record ID&quot;</span><span class="p">:</span> <span class="s2">&quot;AGGI8NI7JMR52ASAX0BBSAX0BB0EN3|AGGI8NI7JMR52ASAX0BBSAX0BB0EN3&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Vendor Assignee Groups&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Vendor Assignee Groups_parent&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Assignee Groups_parent&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Product Categorization Tier 1&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Product Categorization Tier 2&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Product Categorization Tier 3&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Department&quot;</span><span class="p">:</span> <span class="s2">&quot;Customer Service&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Site Group&quot;</span><span class="p">:</span> <span class="s2">&quot;Amsterdam&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Region&quot;</span><span class="p">:</span> <span class="s2">&quot;Europe&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Product Name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Manufacturer&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Product Model/Version&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Site&quot;</span><span class="p">:</span> <span class="s2">&quot;Amsterdam Support Center&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;SRAttachment&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Created_By&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;MaxRetries&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_Command&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;AccessMode&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_WorklogDetails&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_Char02&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_FormName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;AppInstanceServer&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;SRInstanceID&quot;</span><span class="p">:</span> <span class="s2">&quot;NA&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;zTmpEventGUID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;AppInterfaceForm&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Entry ID&quot;</span><span class="p">:</span> <span class="s2">&quot;INC000000005009&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_Activity_Type&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_Summary&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_Details&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_Secure_Log&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_View_Access&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z2AF_Act_Attachment_1&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Protocol&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;AppLogin&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;AppPassword&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;PortNumber&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;SRMS Registry Instance ID&quot;</span><span class="p">:</span> <span class="s2">&quot;SR0011439CCAD4ec8UQwCkOLAQlQAA&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;SRMSAOIGuid&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;SRID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;TemplateID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_CommunicationSource&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_ActivityDate_tab&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Last _Assigned_Date&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_AssociationDescription&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Component_ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;mc_ueid&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;cell_name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;policy_name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;status_incident&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;status_reason2&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;root_component_id_list&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;root_incident_id_list&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Impact_OR_Root&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;bOrphanedRoot&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;use_case&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Needs Attention&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;ClientLocale&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;ServiceCI&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;HPD_CI&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;ServiceCI_ReconID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;HPD_CI_ReconID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_CI_FormName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Previous_ServiceCI_ReconID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Previous_HPD_CI_ReconID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_SR_Instanceid&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Corporate ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;KMSGUID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;HPD_CI_FormName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_InterfaceAction&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_WorkInfoSubmitter&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Login ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Customer Login ID&quot;</span><span class="p">:</span> <span class="s2">&quot;Ian_Agent&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;AttachmentSourceFormName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;AttachmentSourceGUID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_ConfirmGroup&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_CreatedFromBackEndSynchWI&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;InfrastructureEventType&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;policy_type&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Chat Session ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Modified Chat Session ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Auto Open Session&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;TimeOfEvent&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-13T11:46:13.000+0000&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;FirstWIPDate&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;LastWIPDate&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Broker Vendor Name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;NeedsAttentionCCS_Setting&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;RequestCreatedFromDWP&quot;</span><span class="p">:</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;DWP_SRID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;DWP_SRInstanceID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_COG_AutoSuppGrpPredRule&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;COG_CognSuppGrpComp&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;COG_CognSuppGrpOrg&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;COG_CognSuppGrpName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;COG_CognSuppGrpID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D_COG_SuppGrpWorkInfoTag&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Description&quot;</span><span class="p">:</span> <span class="s2">&quot;IBM SOAR Case 4035: testing richard 436&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Company&quot;</span><span class="p">:</span> <span class="s2">&quot;Calbro Services&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Country&quot;</span><span class="p">:</span> <span class="s2">&quot;Netherlands&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;State Province&quot;</span><span class="p">:</span> <span class="s2">&quot;Amsterdam&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;City&quot;</span><span class="p">:</span> <span class="s2">&quot;Schiphol-Rijk&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Organization&quot;</span><span class="p">:</span> <span class="s2">&quot;Information Technology&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Assigned Support Organization&quot;</span><span class="p">:</span> <span class="s2">&quot;IT Support&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Last Name&quot;</span><span class="p">:</span> <span class="s2">&quot;Agent&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;First Name&quot;</span><span class="p">:</span> <span class="s2">&quot;Ian&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Middle Initial&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Contact Client Type&quot;</span><span class="p">:</span> <span class="s2">&quot;Office-Based Employee&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;VIP&quot;</span><span class="p">:</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Contact Sensitivity&quot;</span><span class="p">:</span> <span class="s2">&quot;Standard&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Desk Location&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Mail Station&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Street&quot;</span><span class="p">:</span> <span class="s2">&quot;Boeing Avenue 245&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Zip/Postal Code&quot;</span><span class="p">:</span> <span class="s2">&quot;1119 PD&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Internet E-mail&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Corporate ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Phone Number&quot;</span><span class="p">:</span> <span class="s2">&quot;###&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;z1D Char01&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Categorization Tier 1&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Categorization Tier 2&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Categorization Tier 3&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D Char02&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D Char03&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D Char04&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Site ID&quot;</span><span class="p">:</span> <span class="s2">&quot;STE_SOLN0002844&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;z1D Action&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D Integer01&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Assigned Group ID&quot;</span><span class="p">:</span> <span class="s2">&quot;SGP000000000011&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Person ID&quot;</span><span class="p">:</span> <span class="s2">&quot;PPL000000000118&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Contact Company&quot;</span><span class="p">:</span> <span class="s2">&quot;Calbro Services&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Service Type&quot;</span><span class="p">:</span> <span class="s2">&quot;Infrastructure Event&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;z1D Integer02&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Status_Reason&quot;</span><span class="p">:</span> <span class="s2">&quot;No Further Action Required&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Detailed Decription&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello World&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Resolution&quot;</span><span class="p">:</span> <span class="s2">&quot;something here </span><span class="se">\n</span><span class="s2">Closed from IBM SOAR&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Incident Number&quot;</span><span class="p">:</span> <span class="s2">&quot;INC000000018070&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Urgency&quot;</span><span class="p">:</span> <span class="s2">&quot;2-High&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Impact&quot;</span><span class="p">:</span> <span class="s2">&quot;4-Minor/Localized&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Priority&quot;</span><span class="p">:</span> <span class="s2">&quot;Medium&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Priority Weight&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
-          <span class="s2">&quot;Reported Source&quot;</span><span class="p">:</span> <span class="s2">&quot;Walk In&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Assigned Group&quot;</span><span class="p">:</span> <span class="s2">&quot;Service Desk&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Assignee&quot;</span><span class="p">:</span> <span class="s2">&quot;Hap Agent&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Assigned Support Company&quot;</span><span class="p">:</span> <span class="s2">&quot;Calbro Services&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Assigned Group Shift Name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Assigned Group Shift ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Owner Support Organization&quot;</span><span class="p">:</span> <span class="s2">&quot;IT Support&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Number of Attachments&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Vendor Name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Owner Group&quot;</span><span class="p">:</span> <span class="s2">&quot;Service Desk&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Owner Support Company&quot;</span><span class="p">:</span> <span class="s2">&quot;Calbro Services&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Owner Group ID&quot;</span><span class="p">:</span> <span class="s2">&quot;SGP000000000011&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Reported Date&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-13T11:46:13.000+0000&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Responded Date&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-13T11:46:13.000+0000&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Last Acknowledged Date&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Last Resolved Date&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-13T11:47:24.000+0000&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Closed Date&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Vendor Ticket Number&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D Permission Group ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D Permission Group List&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D Modify All Flag-V&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Resolution Category&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Internet E-mail&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Vendor Organization&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Vendor Group&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Vendor Group ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;z1D Char27&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Total Transfers&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">&quot;Resolution Method&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Resolution Category Tier 2&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Resolution Category Tier 3&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Closure Product Category Tier1&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Closure Product Category Tier2&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Closure Product Category Tier3&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Closure Product Name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Closure Product Model/Version&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Closure Manufacturer&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Estimated Resolution Date&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Required Resolution DateTime&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Company&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Last Name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact First Name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Middle Initial&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Phone Number&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Organization&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Department&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Region&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Site Group&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Site&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Person ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Street&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Country&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact State/Province&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact City&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Zip/Postal Code&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Time Zone&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Desk Location&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Mail Station&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Location Details&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Site ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Country Code&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Area Code&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Local Number&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;Direct Contact Extension&quot;</span><span class="p">:</span> <span class="n">null</span>
+        <span class="s2">"values"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"Request ID"</span><span class="p">:</span> <span class="s2">"INC000000005009|INC000000005009"</span><span class="p">,</span>
+          <span class="s2">"Submitter"</span><span class="p">:</span> <span class="s2">"Ian_Agent"</span><span class="p">,</span>
+          <span class="s2">"Submit Date"</span><span class="p">:</span> <span class="s2">"2023-09-13T11:46:13.000+0000"</span><span class="p">,</span>
+          <span class="s2">"Assignee Login ID"</span><span class="p">:</span> <span class="s2">"Agent"</span><span class="p">,</span>
+          <span class="s2">"Last Modified By"</span><span class="p">:</span> <span class="s2">"Ian_Agent"</span><span class="p">,</span>
+          <span class="s2">"Last Modified Date"</span><span class="p">:</span> <span class="s2">"2023-09-13T11:47:25.000+0000"</span><span class="p">,</span>
+          <span class="s2">"Status"</span><span class="p">:</span> <span class="s2">"Resolved"</span><span class="p">,</span>
+          <span class="s2">"Assignee Groups"</span><span class="p">:</span> <span class="s2">"1000000005;'Ian_Agent';"</span><span class="p">,</span>
+          <span class="s2">"InstanceId"</span><span class="p">:</span> <span class="s2">"AGGI8NI7JMR52ASAX0BBSAX0BB0EN3"</span><span class="p">,</span>
+          <span class="s2">"Record ID"</span><span class="p">:</span> <span class="s2">"AGGI8NI7JMR52ASAX0BBSAX0BB0EN3|AGGI8NI7JMR52ASAX0BBSAX0BB0EN3"</span><span class="p">,</span>
+          <span class="s2">"Vendor Assignee Groups"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Vendor Assignee Groups_parent"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Assignee Groups_parent"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+          <span class="s2">"Product Categorization Tier 1"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Product Categorization Tier 2"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Product Categorization Tier 3"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Department"</span><span class="p">:</span> <span class="s2">"Customer Service"</span><span class="p">,</span>
+          <span class="s2">"Site Group"</span><span class="p">:</span> <span class="s2">"Amsterdam"</span><span class="p">,</span>
+          <span class="s2">"Region"</span><span class="p">:</span> <span class="s2">"Europe"</span><span class="p">,</span>
+          <span class="s2">"Product Name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Manufacturer"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Product Model/Version"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Site"</span><span class="p">:</span> <span class="s2">"Amsterdam Support Center"</span><span class="p">,</span>
+          <span class="s2">"SRAttachment"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Created_By"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"MaxRetries"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_Command"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"AccessMode"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_WorklogDetails"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_Char02"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_FormName"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"AppInstanceServer"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"SRInstanceID"</span><span class="p">:</span> <span class="s2">"NA"</span><span class="p">,</span>
+          <span class="s2">"zTmpEventGUID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"AppInterfaceForm"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Entry ID"</span><span class="p">:</span> <span class="s2">"INC000000005009"</span><span class="p">,</span>
+          <span class="s2">"z1D_Activity_Type"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_Summary"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_Details"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_Secure_Log"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_View_Access"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z2AF_Act_Attachment_1"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Protocol"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"AppLogin"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"AppPassword"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"PortNumber"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"SRMS Registry Instance ID"</span><span class="p">:</span> <span class="s2">"SR0011439CCAD4ec8UQwCkOLAQlQAA"</span><span class="p">,</span>
+          <span class="s2">"SRMSAOIGuid"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"SRID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"TemplateID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_CommunicationSource"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_ActivityDate_tab"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Last _Assigned_Date"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_AssociationDescription"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Component_ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"mc_ueid"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"cell_name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"policy_name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"status_incident"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"status_reason2"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"root_component_id_list"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"root_incident_id_list"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Impact_OR_Root"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"bOrphanedRoot"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"use_case"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Needs Attention"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"ClientLocale"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"ServiceCI"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"HPD_CI"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"ServiceCI_ReconID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"HPD_CI_ReconID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_CI_FormName"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Previous_ServiceCI_ReconID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Previous_HPD_CI_ReconID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_SR_Instanceid"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Corporate ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"KMSGUID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"HPD_CI_FormName"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_InterfaceAction"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_WorkInfoSubmitter"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Login ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Customer Login ID"</span><span class="p">:</span> <span class="s2">"Ian_Agent"</span><span class="p">,</span>
+          <span class="s2">"AttachmentSourceFormName"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"AttachmentSourceGUID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_ConfirmGroup"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_CreatedFromBackEndSynchWI"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"InfrastructureEventType"</span><span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+          <span class="s2">"policy_type"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Chat Session ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Modified Chat Session ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Auto Open Session"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"TimeOfEvent"</span><span class="p">:</span> <span class="s2">"2023-09-13T11:46:13.000+0000"</span><span class="p">,</span>
+          <span class="s2">"FirstWIPDate"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"LastWIPDate"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Broker Vendor Name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"NeedsAttentionCCS_Setting"</span><span class="p">:</span> <span class="s2">"false"</span><span class="p">,</span>
+          <span class="s2">"RequestCreatedFromDWP"</span><span class="p">:</span> <span class="s2">"No"</span><span class="p">,</span>
+          <span class="s2">"DWP_SRID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"DWP_SRInstanceID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_COG_AutoSuppGrpPredRule"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"COG_CognSuppGrpComp"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"COG_CognSuppGrpOrg"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"COG_CognSuppGrpName"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"COG_CognSuppGrpID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D_COG_SuppGrpWorkInfoTag"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Description"</span><span class="p">:</span> <span class="s2">"IBM SOAR Case 4035: testing richard 436"</span><span class="p">,</span>
+          <span class="s2">"Company"</span><span class="p">:</span> <span class="s2">"Calbro Services"</span><span class="p">,</span>
+          <span class="s2">"Country"</span><span class="p">:</span> <span class="s2">"Netherlands"</span><span class="p">,</span>
+          <span class="s2">"State Province"</span><span class="p">:</span> <span class="s2">"Amsterdam"</span><span class="p">,</span>
+          <span class="s2">"City"</span><span class="p">:</span> <span class="s2">"Schiphol-Rijk"</span><span class="p">,</span>
+          <span class="s2">"Organization"</span><span class="p">:</span> <span class="s2">"Information Technology"</span><span class="p">,</span>
+          <span class="s2">"Assigned Support Organization"</span><span class="p">:</span> <span class="s2">"IT Support"</span><span class="p">,</span>
+          <span class="s2">"Last Name"</span><span class="p">:</span> <span class="s2">"Agent"</span><span class="p">,</span>
+          <span class="s2">"First Name"</span><span class="p">:</span> <span class="s2">"Ian"</span><span class="p">,</span>
+          <span class="s2">"Middle Initial"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Contact Client Type"</span><span class="p">:</span> <span class="s2">"Office-Based Employee"</span><span class="p">,</span>
+          <span class="s2">"VIP"</span><span class="p">:</span> <span class="s2">"No"</span><span class="p">,</span>
+          <span class="s2">"Contact Sensitivity"</span><span class="p">:</span> <span class="s2">"Standard"</span><span class="p">,</span>
+          <span class="s2">"Desk Location"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Mail Station"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Street"</span><span class="p">:</span> <span class="s2">"Boeing Avenue 245"</span><span class="p">,</span>
+          <span class="s2">"Zip/Postal Code"</span><span class="p">:</span> <span class="s2">"1119 PD"</span><span class="p">,</span>
+          <span class="s2">"Internet E-mail"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Corporate ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Phone Number"</span><span class="p">:</span> <span class="s2">"###"</span><span class="p">,</span>
+          <span class="s2">"z1D Char01"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Categorization Tier 1"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Categorization Tier 2"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Categorization Tier 3"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D Char02"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D Char03"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D Char04"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Site ID"</span><span class="p">:</span> <span class="s2">"STE_SOLN0002844"</span><span class="p">,</span>
+          <span class="s2">"z1D Action"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D Integer01"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Assigned Group ID"</span><span class="p">:</span> <span class="s2">"SGP000000000011"</span><span class="p">,</span>
+          <span class="s2">"Person ID"</span><span class="p">:</span> <span class="s2">"PPL000000000118"</span><span class="p">,</span>
+          <span class="s2">"Contact Company"</span><span class="p">:</span> <span class="s2">"Calbro Services"</span><span class="p">,</span>
+          <span class="s2">"Service Type"</span><span class="p">:</span> <span class="s2">"Infrastructure Event"</span><span class="p">,</span>
+          <span class="s2">"z1D Integer02"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Status_Reason"</span><span class="p">:</span> <span class="s2">"No Further Action Required"</span><span class="p">,</span>
+          <span class="s2">"Detailed Decription"</span><span class="p">:</span> <span class="s2">"Hello World"</span><span class="p">,</span>
+          <span class="s2">"Resolution"</span><span class="p">:</span> <span class="s2">"something here </span><span class="se">\n</span><span class="s2">Closed from IBM SOAR"</span><span class="p">,</span>
+          <span class="s2">"Incident Number"</span><span class="p">:</span> <span class="s2">"INC000000018070"</span><span class="p">,</span>
+          <span class="s2">"Urgency"</span><span class="p">:</span> <span class="s2">"2-High"</span><span class="p">,</span>
+          <span class="s2">"Impact"</span><span class="p">:</span> <span class="s2">"4-Minor/Localized"</span><span class="p">,</span>
+          <span class="s2">"Priority"</span><span class="p">:</span> <span class="s2">"Medium"</span><span class="p">,</span>
+          <span class="s2">"Priority Weight"</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+          <span class="s2">"Reported Source"</span><span class="p">:</span> <span class="s2">"Walk In"</span><span class="p">,</span>
+          <span class="s2">"Assigned Group"</span><span class="p">:</span> <span class="s2">"Service Desk"</span><span class="p">,</span>
+          <span class="s2">"Assignee"</span><span class="p">:</span> <span class="s2">"Hap Agent"</span><span class="p">,</span>
+          <span class="s2">"Assigned Support Company"</span><span class="p">:</span> <span class="s2">"Calbro Services"</span><span class="p">,</span>
+          <span class="s2">"Assigned Group Shift Name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Assigned Group Shift ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Owner Support Organization"</span><span class="p">:</span> <span class="s2">"IT Support"</span><span class="p">,</span>
+          <span class="s2">"Number of Attachments"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Vendor Name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Owner Group"</span><span class="p">:</span> <span class="s2">"Service Desk"</span><span class="p">,</span>
+          <span class="s2">"Owner Support Company"</span><span class="p">:</span> <span class="s2">"Calbro Services"</span><span class="p">,</span>
+          <span class="s2">"Owner Group ID"</span><span class="p">:</span> <span class="s2">"SGP000000000011"</span><span class="p">,</span>
+          <span class="s2">"Reported Date"</span><span class="p">:</span> <span class="s2">"2023-09-13T11:46:13.000+0000"</span><span class="p">,</span>
+          <span class="s2">"Responded Date"</span><span class="p">:</span> <span class="s2">"2023-09-13T11:46:13.000+0000"</span><span class="p">,</span>
+          <span class="s2">"Last Acknowledged Date"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Last Resolved Date"</span><span class="p">:</span> <span class="s2">"2023-09-13T11:47:24.000+0000"</span><span class="p">,</span>
+          <span class="s2">"Closed Date"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Vendor Ticket Number"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D Permission Group ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D Permission Group List"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D Modify All Flag-V"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Resolution Category"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Internet E-mail"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Vendor Organization"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Vendor Group"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Vendor Group ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"z1D Char27"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Total Transfers"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">"Resolution Method"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Resolution Category Tier 2"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Resolution Category Tier 3"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Closure Product Category Tier1"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Closure Product Category Tier2"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Closure Product Category Tier3"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Closure Product Name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Closure Product Model/Version"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Closure Manufacturer"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Estimated Resolution Date"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Required Resolution DateTime"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Company"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Last Name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact First Name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Middle Initial"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Phone Number"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Organization"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Department"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Region"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Site Group"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Site"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Person ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Street"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Country"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact State/Province"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact City"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Zip/Postal Code"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Time Zone"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Desk Location"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Mail Station"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Location Details"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Site ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Country Code"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Area Code"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Local Number"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"Direct Contact Extension"</span><span class="p">:</span> <span class="n">null</span>
         <span class="p">},</span>
-        <span class="s2">&quot;_links&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"_links"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;https://helix.com/api/arsys/v1/entry/HPD:IncidentInterface/INC000000005009%7CINC000000005009&quot;</span>
+              <span class="s2">"href"</span><span class="p">:</span> <span class="s2">"https://helix.com/api/arsys/v1/entry/HPD:IncidentInterface/INC000000005009%7CINC000000005009"</span>
             <span class="p">}</span>
           <span class="p">]</span>
         <span class="p">}</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;skipped&quot;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="s2">"skipped"</span><span class="p">:</span> <span class="p">[]</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">4035</span><span class="p">,</span>
-    <span class="s2">&quot;helix_payload&quot;</span><span class="p">:</span> <span class="s2">&quot;{&#39;Status_Reason&#39;: &#39;No Further Action Required&#39;, &#39;Status&#39;: &#39;Resolved&#39;, &#39;Resolution&#39;: &#39;&lt;div class=</span><span class="se">\&quot;</span><span class="s2">rte</span><span class="se">\&quot;</span><span class="s2">&gt;&lt;div&gt;something here&lt;/div&gt;&lt;/div&gt;</span><span class="se">\\</span><span class="s2">nClosed from IBM SOAR&#39;}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;bmc_helix_request_id&quot;</span><span class="p">:</span> <span class="s2">&quot;INC000000005009|INC000000005009&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">4035</span><span class="p">,</span>
+    <span class="s2">"helix_payload"</span><span class="p">:</span> <span class="s2">"{'Status_Reason': 'No Further Action Required', 'Status': 'Resolved', 'Resolution': '&lt;div class=</span><span class="se">\"</span><span class="s2">rte</span><span class="se">\"</span><span class="s2">&gt;&lt;div&gt;something here&lt;/div&gt;&lt;/div&gt;</span><span class="se">\\</span><span class="s2">nClosed from IBM SOAR'}"</span><span class="p">,</span>
+    <span class="s2">"bmc_helix_request_id"</span><span class="p">:</span> <span class="s2">"INC000000005009|INC000000005009"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-bmc-helix&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">19449</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-13 07:47:25&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-bmc-helix"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">19449</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-09-13 07:47:25"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -930,11 +930,11 @@ Additional package dependencies may exist for each of these packages:</p>
 
 <span class="c1"># Use this section to add key, value pairs to send to Helix</span>
 <span class="c1"># These values will be added/updated on the target Helix incident,</span>
-<span class="c1"># so they must conform with the &quot;HPD:IncidentInterface_Create&quot; schema</span>
+<span class="c1"># so they must conform with the "HPD:IncidentInterface_Create" schema</span>
 <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;Status_Reason&quot;</span><span class="p">:</span> <span class="s2">&quot;No Further Action Required&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Status&quot;</span><span class="p">:</span> <span class="s2">&quot;Resolved&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Resolution&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">resolution_summary</span><span class="o">.</span><span class="n">content</span><span class="si">}</span><span class="se">\n</span><span class="s2">Closed from IBM SOAR&quot;</span>
+  <span class="s2">"Status_Reason"</span><span class="p">:</span> <span class="s2">"No Further Action Required"</span><span class="p">,</span>
+  <span class="s2">"Status"</span><span class="p">:</span> <span class="s2">"Resolved"</span><span class="p">,</span>
+  <span class="s2">"Resolution"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">resolution_summary</span><span class="o">.</span><span class="n">content</span><span class="si">}</span><span class="se">\n</span><span class="s2">Closed from IBM SOAR"</span>
 <span class="p">}</span>
 
 <span class="n">inputs</span><span class="o">.</span><span class="n">helix_payload</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
@@ -945,28 +945,28 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Post-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">closed_incident</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
-<span class="n">closed</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;closed&quot;</span><span class="p">)</span>
-<span class="n">skipped</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;skipped&quot;</span><span class="p">)</span>
-<span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&lt;h5&gt;Helix Close Incident:&lt;/h5&gt;&quot;</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">closed</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"closed"</span><span class="p">)</span>
+<span class="n">skipped</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"skipped"</span><span class="p">)</span>
+<span class="n">noteText</span> <span class="o">=</span> <span class="s2">"&lt;h5&gt;Helix Close Incident:&lt;/h5&gt;"</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
   <span class="k">if</span> <span class="n">closed</span><span class="p">:</span>
-    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;The following incidents were matched in Helix and successfully closed:&lt;/p&gt;&quot;</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"&lt;p&gt;The following incidents were matched in Helix and successfully closed:&lt;/p&gt;"</span>
     <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">closed</span><span class="p">:</span>
-      <span class="n">item_values</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;values&quot;</span><span class="p">,</span> <span class="p">{})</span>
-      <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;p&gt;    Incident Number </span><span class="si">{</span><span class="n">item_values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Incident Number&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">, Request ID: </span><span class="si">{</span><span class="n">item_values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Request ID&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/p&gt;&quot;</span>
+      <span class="n">item_values</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"values"</span><span class="p">,</span> <span class="p">{})</span>
+      <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"&lt;p&gt;    Incident Number </span><span class="si">{</span><span class="n">item_values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'Incident Number'</span><span class="p">)</span><span class="si">}</span><span class="s2">, Request ID: </span><span class="si">{</span><span class="n">item_values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'Request ID'</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/p&gt;"</span>
   <span class="k">if</span> <span class="n">skipped</span><span class="p">:</span>
-    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;The following incidents were not able to be closed. Common reasons include that the incident has been previously closed, &quot;</span> \
-    <span class="s2">&quot;the incident has been deleted, or the payload sent to Helix was incomplete according to the requirements of your specific system:&lt;/p&gt;&quot;</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"&lt;p&gt;The following incidents were not able to be closed. Common reasons include that the incident has been previously closed, "</span> \
+    <span class="s2">"the incident has been deleted, or the payload sent to Helix was incomplete according to the requirements of your specific system:&lt;/p&gt;"</span>
     <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">skipped</span><span class="p">:</span>
-      <span class="n">item_values</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;values&quot;</span><span class="p">,</span> <span class="p">{})</span>
-      <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;p&gt;    Incident Number </span><span class="si">{</span><span class="n">item_values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Incident Number&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">, Request ID: </span><span class="si">{</span><span class="n">item_values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Request ID&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/p&gt;&quot;</span>
+      <span class="n">item_values</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"values"</span><span class="p">,</span> <span class="p">{})</span>
+      <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"&lt;p&gt;    Incident Number </span><span class="si">{</span><span class="n">item_values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'Incident Number'</span><span class="p">)</span><span class="si">}</span><span class="s2">, Request ID: </span><span class="si">{</span><span class="n">item_values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'Request ID'</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/p&gt;"</span>
 <span class="k">elif</span> <span class="ow">not</span> <span class="n">closed</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">skipped</span><span class="p">:</span>
   <span class="c1"># no sync to helix, just exit</span>
   <span class="n">noteText</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;p&gt;Function failed to complete. Reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/p&gt;&quot;</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"&lt;p&gt;Function failed to complete. Reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/p&gt;"</span>
 
 <span class="k">if</span> <span class="n">noteText</span><span class="p">:</span>
   <span class="n">richText</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">)</span>
@@ -995,7 +995,7 @@ For example, the payload sent to BMC Helix by the integration could indicate a S
 Please note that the user has the ability to customize what values appear in the dropdown menu for each activity field. This action will likely be necessary if not taking advantage of the BMC Helix’s templating functionality via this integration. Activity fields can be modified within the Customization Settings of the platform.</p>
 <p><strong>Additional Data</strong></p>
 <p>Finally, the Additional Data activity field allows the mapping of any other values to the BMC Helix form not covered in the above activity fields, including custom defined fields. The fields must be provided as a Python-like dictionary. For example:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">&quot;Short Description&quot;</span><span class="p">:</span> <span class="s2">&quot;example incident text&quot;</span><span class="p">,</span> <span class="s2">&quot;my_custom_field&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s2">"Short Description"</span><span class="p">:</span> <span class="s2">"example incident text"</span><span class="p">,</span> <span class="s2">"my_custom_field"</span><span class="p">:</span> <span class="mi">1</span><span class="p">}</span>
 </pre></div>
 </div>
 <p>The keys provided in this dictionary string must match the API names of fields in the <code class="docutils literal notranslate"><span class="pre">HPD:IncidentInterface</span></code> form. To retrieve the schema for this form on the BMC Helix server, send an HTTPS OPTIONS request to <code class="docutils literal notranslate"><span class="pre">https://serverName/api/arsys/v1/entry/HPD:IncidentInterface_Create</span></code>. This is the endpoint used to create BMC Helix incidents over the API, and thus the response will indicate which fields are available to map and any value restrictions.</p>
@@ -1047,238 +1047,238 @@ Please note that the user has the ability to customize what values appear in the
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;values&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;Request ID&quot;</span><span class="p">:</span> <span class="s2">&quot;INC000000005009|INC000000005009&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Submitter&quot;</span><span class="p">:</span> <span class="s2">&quot;Ian_Agent&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Submit Date&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-13T11:46:13.000+0000&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Assignee Login ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Last Modified By&quot;</span><span class="p">:</span> <span class="s2">&quot;Ian_Agent&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Last Modified Date&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-13T11:46:13.000+0000&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Status&quot;</span><span class="p">:</span> <span class="s2">&quot;Assigned&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Assignee Groups&quot;</span><span class="p">:</span> <span class="s2">&quot;1000000005;&#39;Ian_Agent&#39;;&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;InstanceId&quot;</span><span class="p">:</span> <span class="s2">&quot;AGGI8NI7JMR52ASAX0BBSAX0BB0EN3&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Record ID&quot;</span><span class="p">:</span> <span class="s2">&quot;AGGI8NI7JMR52ASAX0BBSAX0BB0EN3|AGGI8NI7JMR52ASAX0BBSAX0BB0EN3&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Vendor Assignee Groups&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Vendor Assignee Groups_parent&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Assignee Groups_parent&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Product Categorization Tier 1&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Product Categorization Tier 2&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Product Categorization Tier 3&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Department&quot;</span><span class="p">:</span> <span class="s2">&quot;Customer Service&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Site Group&quot;</span><span class="p">:</span> <span class="s2">&quot;Amsterdam&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Region&quot;</span><span class="p">:</span> <span class="s2">&quot;Europe&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Product Name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Manufacturer&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Product Model/Version&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Site&quot;</span><span class="p">:</span> <span class="s2">&quot;Amsterdam Support Center&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;SRAttachment&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Created_By&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;MaxRetries&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_Command&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;AccessMode&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_WorklogDetails&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_Char02&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_FormName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;AppInstanceServer&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;SRInstanceID&quot;</span><span class="p">:</span> <span class="s2">&quot;NA&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;zTmpEventGUID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;AppInterfaceForm&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Entry ID&quot;</span><span class="p">:</span> <span class="s2">&quot;INC000000005009&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_Activity_Type&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_Summary&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_Details&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_Secure_Log&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_View_Access&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z2AF_Act_Attachment_1&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Protocol&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;AppLogin&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;AppPassword&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;PortNumber&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;SRMS Registry Instance ID&quot;</span><span class="p">:</span> <span class="s2">&quot;SR0011439CCAD4ec8UQwCkOLAQlQAA&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;SRMSAOIGuid&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;SRID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;TemplateID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_CommunicationSource&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_ActivityDate_tab&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Last _Assigned_Date&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_AssociationDescription&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Component_ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;mc_ueid&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;cell_name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;policy_name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;status_incident&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;status_reason2&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;root_component_id_list&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;root_incident_id_list&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Impact_OR_Root&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;bOrphanedRoot&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;use_case&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Needs Attention&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;ClientLocale&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;ServiceCI&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;HPD_CI&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;ServiceCI_ReconID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;HPD_CI_ReconID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_CI_FormName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Previous_ServiceCI_ReconID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Previous_HPD_CI_ReconID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_SR_Instanceid&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Corporate ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;KMSGUID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;HPD_CI_FormName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_InterfaceAction&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_WorkInfoSubmitter&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Login ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Customer Login ID&quot;</span><span class="p">:</span> <span class="s2">&quot;Ian_Agent&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;AttachmentSourceFormName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;AttachmentSourceGUID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_ConfirmGroup&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_CreatedFromBackEndSynchWI&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;InfrastructureEventType&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;policy_type&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Chat Session ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Modified Chat Session ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Auto Open Session&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;TimeOfEvent&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-13T11:46:13.000+0000&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;FirstWIPDate&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;LastWIPDate&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Broker Vendor Name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;NeedsAttentionCCS_Setting&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;RequestCreatedFromDWP&quot;</span><span class="p">:</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;DWP_SRID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;DWP_SRInstanceID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_COG_AutoSuppGrpPredRule&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;COG_CognSuppGrpComp&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;COG_CognSuppGrpOrg&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;COG_CognSuppGrpName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;COG_CognSuppGrpID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D_COG_SuppGrpWorkInfoTag&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Description&quot;</span><span class="p">:</span> <span class="s2">&quot;IBM SOAR Case 4035: testing richard 436&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Company&quot;</span><span class="p">:</span> <span class="s2">&quot;Calbro Services&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Country&quot;</span><span class="p">:</span> <span class="s2">&quot;Netherlands&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;State Province&quot;</span><span class="p">:</span> <span class="s2">&quot;Amsterdam&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;City&quot;</span><span class="p">:</span> <span class="s2">&quot;Schiphol-Rijk&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Organization&quot;</span><span class="p">:</span> <span class="s2">&quot;Information Technology&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Assigned Support Organization&quot;</span><span class="p">:</span> <span class="s2">&quot;IT Support&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Last Name&quot;</span><span class="p">:</span> <span class="s2">&quot;Agent&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;First Name&quot;</span><span class="p">:</span> <span class="s2">&quot;Ian&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Middle Initial&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Contact Client Type&quot;</span><span class="p">:</span> <span class="s2">&quot;Office-Based Employee&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;VIP&quot;</span><span class="p">:</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Contact Sensitivity&quot;</span><span class="p">:</span> <span class="s2">&quot;Standard&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Desk Location&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Mail Station&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Street&quot;</span><span class="p">:</span> <span class="s2">&quot;Boeing Avenue 245&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Zip/Postal Code&quot;</span><span class="p">:</span> <span class="s2">&quot;1119 PD&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Internet E-mail&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Corporate ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Phone Number&quot;</span><span class="p">:</span> <span class="s2">&quot;###&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;z1D Char01&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Categorization Tier 1&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Categorization Tier 2&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Categorization Tier 3&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D Char02&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D Char03&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D Char04&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Site ID&quot;</span><span class="p">:</span> <span class="s2">&quot;STE_SOLN0002844&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;z1D Action&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D Integer01&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Assigned Group ID&quot;</span><span class="p">:</span> <span class="s2">&quot;SGP000000000011&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Person ID&quot;</span><span class="p">:</span> <span class="s2">&quot;PPL000000000118&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Contact Company&quot;</span><span class="p">:</span> <span class="s2">&quot;Calbro Services&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Service Type&quot;</span><span class="p">:</span> <span class="s2">&quot;Infrastructure Event&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;z1D Integer02&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Status_Reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Detailed Decription&quot;</span><span class="p">:</span> <span class="s2">&quot;Hello World&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Resolution&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Incident Number&quot;</span><span class="p">:</span> <span class="s2">&quot;INC000000018070&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Urgency&quot;</span><span class="p">:</span> <span class="s2">&quot;2-High&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Impact&quot;</span><span class="p">:</span> <span class="s2">&quot;4-Minor/Localized&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Priority&quot;</span><span class="p">:</span> <span class="s2">&quot;Medium&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Priority Weight&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
-      <span class="s2">&quot;Reported Source&quot;</span><span class="p">:</span> <span class="s2">&quot;Walk In&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Assigned Group&quot;</span><span class="p">:</span> <span class="s2">&quot;Service Desk&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Assignee&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Assigned Support Company&quot;</span><span class="p">:</span> <span class="s2">&quot;Calbro Services&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Assigned Group Shift Name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Assigned Group Shift ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Owner Support Organization&quot;</span><span class="p">:</span> <span class="s2">&quot;IT Support&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Number of Attachments&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Vendor Name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Owner Group&quot;</span><span class="p">:</span> <span class="s2">&quot;Service Desk&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Owner Support Company&quot;</span><span class="p">:</span> <span class="s2">&quot;Calbro Services&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Owner Group ID&quot;</span><span class="p">:</span> <span class="s2">&quot;SGP000000000011&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Reported Date&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-13T11:46:13.000+0000&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Responded Date&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-13T11:46:13.000+0000&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Last Acknowledged Date&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Last Resolved Date&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Closed Date&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Vendor Ticket Number&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D Permission Group ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D Permission Group List&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D Modify All Flag-V&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Resolution Category&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Internet E-mail&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Vendor Organization&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Vendor Group&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Vendor Group ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;z1D Char27&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Total Transfers&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;Resolution Method&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Resolution Category Tier 2&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Resolution Category Tier 3&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Closure Product Category Tier1&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Closure Product Category Tier2&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Closure Product Category Tier3&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Closure Product Name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Closure Product Model/Version&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Closure Manufacturer&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Estimated Resolution Date&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Required Resolution DateTime&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Company&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Last Name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact First Name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Middle Initial&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Phone Number&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Organization&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Department&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Region&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Site Group&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Site&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Person ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Street&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Country&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact State/Province&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact City&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Zip/Postal Code&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Time Zone&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Desk Location&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Mail Station&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Location Details&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Site ID&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Country Code&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Area Code&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Local Number&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;Direct Contact Extension&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"values"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"Request ID"</span><span class="p">:</span> <span class="s2">"INC000000005009|INC000000005009"</span><span class="p">,</span>
+      <span class="s2">"Submitter"</span><span class="p">:</span> <span class="s2">"Ian_Agent"</span><span class="p">,</span>
+      <span class="s2">"Submit Date"</span><span class="p">:</span> <span class="s2">"2023-09-13T11:46:13.000+0000"</span><span class="p">,</span>
+      <span class="s2">"Assignee Login ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Last Modified By"</span><span class="p">:</span> <span class="s2">"Ian_Agent"</span><span class="p">,</span>
+      <span class="s2">"Last Modified Date"</span><span class="p">:</span> <span class="s2">"2023-09-13T11:46:13.000+0000"</span><span class="p">,</span>
+      <span class="s2">"Status"</span><span class="p">:</span> <span class="s2">"Assigned"</span><span class="p">,</span>
+      <span class="s2">"Assignee Groups"</span><span class="p">:</span> <span class="s2">"1000000005;'Ian_Agent';"</span><span class="p">,</span>
+      <span class="s2">"InstanceId"</span><span class="p">:</span> <span class="s2">"AGGI8NI7JMR52ASAX0BBSAX0BB0EN3"</span><span class="p">,</span>
+      <span class="s2">"Record ID"</span><span class="p">:</span> <span class="s2">"AGGI8NI7JMR52ASAX0BBSAX0BB0EN3|AGGI8NI7JMR52ASAX0BBSAX0BB0EN3"</span><span class="p">,</span>
+      <span class="s2">"Vendor Assignee Groups"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Vendor Assignee Groups_parent"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Assignee Groups_parent"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"Product Categorization Tier 1"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Product Categorization Tier 2"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Product Categorization Tier 3"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Department"</span><span class="p">:</span> <span class="s2">"Customer Service"</span><span class="p">,</span>
+      <span class="s2">"Site Group"</span><span class="p">:</span> <span class="s2">"Amsterdam"</span><span class="p">,</span>
+      <span class="s2">"Region"</span><span class="p">:</span> <span class="s2">"Europe"</span><span class="p">,</span>
+      <span class="s2">"Product Name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Manufacturer"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Product Model/Version"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Site"</span><span class="p">:</span> <span class="s2">"Amsterdam Support Center"</span><span class="p">,</span>
+      <span class="s2">"SRAttachment"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Created_By"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"MaxRetries"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_Command"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"AccessMode"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_WorklogDetails"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_Char02"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_FormName"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"AppInstanceServer"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"SRInstanceID"</span><span class="p">:</span> <span class="s2">"NA"</span><span class="p">,</span>
+      <span class="s2">"zTmpEventGUID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"AppInterfaceForm"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Entry ID"</span><span class="p">:</span> <span class="s2">"INC000000005009"</span><span class="p">,</span>
+      <span class="s2">"z1D_Activity_Type"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_Summary"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_Details"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_Secure_Log"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_View_Access"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z2AF_Act_Attachment_1"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Protocol"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"AppLogin"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"AppPassword"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"PortNumber"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"SRMS Registry Instance ID"</span><span class="p">:</span> <span class="s2">"SR0011439CCAD4ec8UQwCkOLAQlQAA"</span><span class="p">,</span>
+      <span class="s2">"SRMSAOIGuid"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"SRID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"TemplateID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_CommunicationSource"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_ActivityDate_tab"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Last _Assigned_Date"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_AssociationDescription"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Component_ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"mc_ueid"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"cell_name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"policy_name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"status_incident"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"status_reason2"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"root_component_id_list"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"root_incident_id_list"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Impact_OR_Root"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"bOrphanedRoot"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"use_case"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Needs Attention"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"ClientLocale"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"ServiceCI"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"HPD_CI"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"ServiceCI_ReconID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"HPD_CI_ReconID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_CI_FormName"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Previous_ServiceCI_ReconID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Previous_HPD_CI_ReconID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_SR_Instanceid"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Corporate ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"KMSGUID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"HPD_CI_FormName"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_InterfaceAction"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_WorkInfoSubmitter"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Login ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Customer Login ID"</span><span class="p">:</span> <span class="s2">"Ian_Agent"</span><span class="p">,</span>
+      <span class="s2">"AttachmentSourceFormName"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"AttachmentSourceGUID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_ConfirmGroup"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_CreatedFromBackEndSynchWI"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"InfrastructureEventType"</span><span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+      <span class="s2">"policy_type"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Chat Session ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Modified Chat Session ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Auto Open Session"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"TimeOfEvent"</span><span class="p">:</span> <span class="s2">"2023-09-13T11:46:13.000+0000"</span><span class="p">,</span>
+      <span class="s2">"FirstWIPDate"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"LastWIPDate"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Broker Vendor Name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"NeedsAttentionCCS_Setting"</span><span class="p">:</span> <span class="s2">"false"</span><span class="p">,</span>
+      <span class="s2">"RequestCreatedFromDWP"</span><span class="p">:</span> <span class="s2">"No"</span><span class="p">,</span>
+      <span class="s2">"DWP_SRID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"DWP_SRInstanceID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_COG_AutoSuppGrpPredRule"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"COG_CognSuppGrpComp"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"COG_CognSuppGrpOrg"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"COG_CognSuppGrpName"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"COG_CognSuppGrpID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D_COG_SuppGrpWorkInfoTag"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Description"</span><span class="p">:</span> <span class="s2">"IBM SOAR Case 4035: testing richard 436"</span><span class="p">,</span>
+      <span class="s2">"Company"</span><span class="p">:</span> <span class="s2">"Calbro Services"</span><span class="p">,</span>
+      <span class="s2">"Country"</span><span class="p">:</span> <span class="s2">"Netherlands"</span><span class="p">,</span>
+      <span class="s2">"State Province"</span><span class="p">:</span> <span class="s2">"Amsterdam"</span><span class="p">,</span>
+      <span class="s2">"City"</span><span class="p">:</span> <span class="s2">"Schiphol-Rijk"</span><span class="p">,</span>
+      <span class="s2">"Organization"</span><span class="p">:</span> <span class="s2">"Information Technology"</span><span class="p">,</span>
+      <span class="s2">"Assigned Support Organization"</span><span class="p">:</span> <span class="s2">"IT Support"</span><span class="p">,</span>
+      <span class="s2">"Last Name"</span><span class="p">:</span> <span class="s2">"Agent"</span><span class="p">,</span>
+      <span class="s2">"First Name"</span><span class="p">:</span> <span class="s2">"Ian"</span><span class="p">,</span>
+      <span class="s2">"Middle Initial"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Contact Client Type"</span><span class="p">:</span> <span class="s2">"Office-Based Employee"</span><span class="p">,</span>
+      <span class="s2">"VIP"</span><span class="p">:</span> <span class="s2">"No"</span><span class="p">,</span>
+      <span class="s2">"Contact Sensitivity"</span><span class="p">:</span> <span class="s2">"Standard"</span><span class="p">,</span>
+      <span class="s2">"Desk Location"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Mail Station"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Street"</span><span class="p">:</span> <span class="s2">"Boeing Avenue 245"</span><span class="p">,</span>
+      <span class="s2">"Zip/Postal Code"</span><span class="p">:</span> <span class="s2">"1119 PD"</span><span class="p">,</span>
+      <span class="s2">"Internet E-mail"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Corporate ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Phone Number"</span><span class="p">:</span> <span class="s2">"###"</span><span class="p">,</span>
+      <span class="s2">"z1D Char01"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Categorization Tier 1"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Categorization Tier 2"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Categorization Tier 3"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D Char02"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D Char03"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D Char04"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Site ID"</span><span class="p">:</span> <span class="s2">"STE_SOLN0002844"</span><span class="p">,</span>
+      <span class="s2">"z1D Action"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D Integer01"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Assigned Group ID"</span><span class="p">:</span> <span class="s2">"SGP000000000011"</span><span class="p">,</span>
+      <span class="s2">"Person ID"</span><span class="p">:</span> <span class="s2">"PPL000000000118"</span><span class="p">,</span>
+      <span class="s2">"Contact Company"</span><span class="p">:</span> <span class="s2">"Calbro Services"</span><span class="p">,</span>
+      <span class="s2">"Service Type"</span><span class="p">:</span> <span class="s2">"Infrastructure Event"</span><span class="p">,</span>
+      <span class="s2">"z1D Integer02"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Status_Reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Detailed Decription"</span><span class="p">:</span> <span class="s2">"Hello World"</span><span class="p">,</span>
+      <span class="s2">"Resolution"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Incident Number"</span><span class="p">:</span> <span class="s2">"INC000000018070"</span><span class="p">,</span>
+      <span class="s2">"Urgency"</span><span class="p">:</span> <span class="s2">"2-High"</span><span class="p">,</span>
+      <span class="s2">"Impact"</span><span class="p">:</span> <span class="s2">"4-Minor/Localized"</span><span class="p">,</span>
+      <span class="s2">"Priority"</span><span class="p">:</span> <span class="s2">"Medium"</span><span class="p">,</span>
+      <span class="s2">"Priority Weight"</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+      <span class="s2">"Reported Source"</span><span class="p">:</span> <span class="s2">"Walk In"</span><span class="p">,</span>
+      <span class="s2">"Assigned Group"</span><span class="p">:</span> <span class="s2">"Service Desk"</span><span class="p">,</span>
+      <span class="s2">"Assignee"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Assigned Support Company"</span><span class="p">:</span> <span class="s2">"Calbro Services"</span><span class="p">,</span>
+      <span class="s2">"Assigned Group Shift Name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Assigned Group Shift ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Owner Support Organization"</span><span class="p">:</span> <span class="s2">"IT Support"</span><span class="p">,</span>
+      <span class="s2">"Number of Attachments"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Vendor Name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Owner Group"</span><span class="p">:</span> <span class="s2">"Service Desk"</span><span class="p">,</span>
+      <span class="s2">"Owner Support Company"</span><span class="p">:</span> <span class="s2">"Calbro Services"</span><span class="p">,</span>
+      <span class="s2">"Owner Group ID"</span><span class="p">:</span> <span class="s2">"SGP000000000011"</span><span class="p">,</span>
+      <span class="s2">"Reported Date"</span><span class="p">:</span> <span class="s2">"2023-09-13T11:46:13.000+0000"</span><span class="p">,</span>
+      <span class="s2">"Responded Date"</span><span class="p">:</span> <span class="s2">"2023-09-13T11:46:13.000+0000"</span><span class="p">,</span>
+      <span class="s2">"Last Acknowledged Date"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Last Resolved Date"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Closed Date"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Vendor Ticket Number"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D Permission Group ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D Permission Group List"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D Modify All Flag-V"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Resolution Category"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Internet E-mail"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Vendor Organization"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Vendor Group"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Vendor Group ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"z1D Char27"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Total Transfers"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"Resolution Method"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Resolution Category Tier 2"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Resolution Category Tier 3"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Closure Product Category Tier1"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Closure Product Category Tier2"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Closure Product Category Tier3"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Closure Product Name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Closure Product Model/Version"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Closure Manufacturer"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Estimated Resolution Date"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Required Resolution DateTime"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Company"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Last Name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact First Name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Middle Initial"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Phone Number"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Organization"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Department"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Region"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Site Group"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Site"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Person ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Street"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Country"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact State/Province"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact City"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Zip/Postal Code"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Time Zone"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Desk Location"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Mail Station"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Location Details"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Site ID"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Country Code"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Area Code"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Local Number"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"Direct Contact Extension"</span><span class="p">:</span> <span class="n">null</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">4035</span><span class="p">,</span>
-    <span class="s2">&quot;helix_payload&quot;</span><span class="p">:</span> <span class="s2">&quot;{&#39;First_Name&#39;: &#39;Ian&#39;, &#39;Last_Name&#39;: &#39;Agent&#39;, &#39;Impact&#39;: &#39;4-Minor/Localized&#39;, &#39;Urgency&#39;: &#39;2-High&#39;, &#39;Service_Type&#39;: &#39;Infrastructure Event&#39;, &#39;Status&#39;: &#39;New&#39;, &#39;Reported Source&#39;: &#39;Walk In&#39;, &#39;Assigned Support Organization&#39;: &#39;SOC&#39;, &#39;Detailed_Decription&#39;: &#39;Hello World&#39;}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;helix_incident_name&quot;</span><span class="p">:</span> <span class="s2">&quot;testing richard 436&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">4035</span><span class="p">,</span>
+    <span class="s2">"helix_payload"</span><span class="p">:</span> <span class="s2">"{'First_Name': 'Ian', 'Last_Name': 'Agent', 'Impact': '4-Minor/Localized', 'Urgency': '2-High', 'Service_Type': 'Infrastructure Event', 'Status': 'New', 'Reported Source': 'Walk In', 'Assigned Support Organization': 'SOC', 'Detailed_Decription': 'Hello World'}"</span><span class="p">,</span>
+    <span class="s2">"helix_incident_name"</span><span class="p">:</span> <span class="s2">"testing richard 436"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-bmc-helix&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">872</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-13 07:46:13&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-bmc-helix"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">872</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-09-13 07:46:13"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1288,21 +1288,21 @@ Please note that the user has the ability to customize what values appear in the
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;First_Name&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_customer_first_name</span><span class="p">,</span>
-  <span class="s2">&quot;Last_Name&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_customer_last_name</span><span class="p">,</span>
-  <span class="s2">&quot;Impact&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_impact</span><span class="p">,</span>
-  <span class="s2">&quot;Urgency&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_urgency</span><span class="p">,</span>
-  <span class="s2">&quot;Service_Type&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_incident_type</span><span class="p">,</span>
-  <span class="s2">&quot;Status&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_status</span><span class="p">,</span>
-  <span class="s2">&quot;Reported Source&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_reported_source</span><span class="p">,</span>
-  <span class="s2">&quot;Assigned Support Organization&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_support_group</span>
+  <span class="s2">"First_Name"</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_customer_first_name</span><span class="p">,</span>
+  <span class="s2">"Last_Name"</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_customer_last_name</span><span class="p">,</span>
+  <span class="s2">"Impact"</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_impact</span><span class="p">,</span>
+  <span class="s2">"Urgency"</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_urgency</span><span class="p">,</span>
+  <span class="s2">"Service_Type"</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_incident_type</span><span class="p">,</span>
+  <span class="s2">"Status"</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_status</span><span class="p">,</span>
+  <span class="s2">"Reported Source"</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_reported_source</span><span class="p">,</span>
+  <span class="s2">"Assigned Support Organization"</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_support_group</span>
 <span class="p">}</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;bmc_helix_additional_data&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
-  <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;additional_data&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_additional_data</span><span class="o">.</span><span class="n">content</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;bmc_helix_description&quot;</span><span class="p">):</span>
-  <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;Detailed_Decription&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_description</span> <span class="c1"># Detailed_Decription has to be spelled this way for the Helix API</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;bmc_helix_template&quot;</span><span class="p">):</span>
-  <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;ApplyTemplate&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_template</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"bmc_helix_additional_data"</span><span class="p">)</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
+  <span class="n">payload</span><span class="p">[</span><span class="s2">"additional_data"</span><span class="p">]</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_additional_data</span><span class="o">.</span><span class="n">content</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"bmc_helix_description"</span><span class="p">):</span>
+  <span class="n">payload</span><span class="p">[</span><span class="s2">"Detailed_Decription"</span><span class="p">]</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_description</span> <span class="c1"># Detailed_Decription has to be spelled this way for the Helix API</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"bmc_helix_template"</span><span class="p">):</span>
+  <span class="n">payload</span><span class="p">[</span><span class="s2">"ApplyTemplate"</span><span class="p">]</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">bmc_helix_template</span>
 
 <span class="c1"># set inputs</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
@@ -1317,22 +1317,22 @@ Please note that the user has the ability to customize what values appear in the
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">created_incident</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">values</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;values&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">values</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"values"</span><span class="p">,</span> <span class="p">{})</span>
 
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_request_id</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Request ID&quot;</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_status</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Status&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_request_id</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Request ID"</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_status</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Status"</span><span class="p">)</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_created_date</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_assigned_to</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Assignee&quot;</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_incident_number</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Incident Number&quot;</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_description</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Description&quot;</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_company</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Company&quot;</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_organization</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Organization&quot;</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_assigned_support_organization</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Assigned Support Organization&quot;</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_urgency</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Urgency&quot;</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_impact</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Impact&quot;</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_priority</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Priority&quot;</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Helix incident </span><span class="si">{</span><span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Incident Number&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> was successfully created from SOAR incident </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_assigned_to</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Assignee"</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_incident_number</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Incident Number"</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_description</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Description"</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_company</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Company"</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_organization</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Organization"</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_assigned_support_organization</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Assigned Support Organization"</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_urgency</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Urgency"</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_impact</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Impact"</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">bmc_helix_priority</span> <span class="o">=</span> <span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Priority"</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Helix incident </span><span class="si">{</span><span class="n">values</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'Incident Number'</span><span class="p">)</span><span class="si">}</span><span class="s2"> was successfully created from SOAR incident </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>

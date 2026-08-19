@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -573,8 +573,8 @@
 <ul>
 <li><p>The payload from the function will contain the JSON from the CVE API Call and the name of the API Call</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="c1">#JSON returned from CVE API Call,</span>
-    <span class="s2">&quot;api_call&quot;</span><span class="p">:</span> <span class="c1">#&quot;last&quot;/&quot;browse&quot;/&quot;search&quot;/&quot;cve&quot;/&quot;db&quot;</span>
+    <span class="s2">"content"</span><span class="p">:</span> <span class="c1">#JSON returned from CVE API Call,</span>
+    <span class="s2">"api_call"</span><span class="p">:</span> <span class="c1">#"last"/"browse"/"search"/"cve"/"db"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -593,7 +593,7 @@
 <li><p>CVE Browse</p></li>
 </ul>
 <p>This example sets the <code class="docutils literal notranslate"><span class="pre">cve_browse_criteria</span></code>, <code class="docutils literal notranslate"><span class="pre">cve_vendor</span></code> inputs to the entered vendor name</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">cve_browse_criteria</span> <span class="o">=</span> <span class="s1">&#39;browse&#39;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">cve_browse_criteria</span> <span class="o">=</span> <span class="s1">'browse'</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">cve_vendor</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cve_vendor</span>
 </pre></div>
 </div>
@@ -626,38 +626,38 @@ and</p></li>
 <h3>CVE Search<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#globals</span>
 <span class="n">ENTRY_TO_DATATABLE_MAP</span> <span class="o">=</span> <span class="p">{</span>
-     <span class="s2">&quot;cve&quot;</span><span class="p">:</span> <span class="s2">&quot;cve_id&quot;</span><span class="p">,</span>
-     <span class="s2">&quot;pubdte&quot;</span><span class="p">:</span> <span class="s2">&quot;published_date&quot;</span><span class="p">,</span>
-     <span class="s2">&quot;sum&quot;</span><span class="p">:</span> <span class="s2">&quot;summary&quot;</span><span class="p">,</span>
-     <span class="s2">&quot;ref&quot;</span><span class="p">:</span> <span class="s2">&quot;references&quot;</span><span class="p">,</span>
-     <span class="s2">&quot;vc&quot;</span><span class="p">:</span> <span class="s2">&quot;vulnerability_configuration&quot;</span><span class="p">,</span>
-     <span class="s2">&quot;vc2&quot;</span><span class="p">:</span> <span class="s2">&quot;vulnerable_configuration_cpe_2_2&quot;</span>
+     <span class="s2">"cve"</span><span class="p">:</span> <span class="s2">"cve_id"</span><span class="p">,</span>
+     <span class="s2">"pubdte"</span><span class="p">:</span> <span class="s2">"published_date"</span><span class="p">,</span>
+     <span class="s2">"sum"</span><span class="p">:</span> <span class="s2">"summary"</span><span class="p">,</span>
+     <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"references"</span><span class="p">,</span>
+     <span class="s2">"vc"</span><span class="p">:</span> <span class="s2">"vulnerability_configuration"</span><span class="p">,</span>
+     <span class="s2">"vc2"</span><span class="p">:</span> <span class="s2">"vulnerable_configuration_cpe_2_2"</span>
 <span class="p">}</span>
 
-<span class="n">api_call_type</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;api_call&#39;</span><span class="p">]</span>
-<span class="n">output_data</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span>
-<span class="n">api_call_type_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;p&gt;&lt;b&gt;api call type :&lt;/b&gt; </span><span class="si">{}</span><span class="s2">&lt;/p&gt;&quot;</span>
-<span class="n">browse_rich_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;p&gt;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&amp;ensp:&amp;ensp&lt;/b&gt;</span><span class="si">{}</span><span class="s2">&amp;ensp&amp;ensp&lt;/p&gt;&quot;</span>
-<span class="n">rich_text_tmp</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">api_call_type</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">'api_call'</span><span class="p">]</span>
+<span class="n">output_data</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">'content'</span><span class="p">]</span>
+<span class="n">api_call_type_text</span> <span class="o">=</span> <span class="s2">"&lt;p&gt;&lt;b&gt;api call type :&lt;/b&gt; </span><span class="si">{}</span><span class="s2">&lt;/p&gt;"</span>
+<span class="n">browse_rich_text</span> <span class="o">=</span> <span class="s2">"&lt;p&gt;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&amp;ensp:&amp;ensp&lt;/b&gt;</span><span class="si">{}</span><span class="s2">&amp;ensp&amp;ensp&lt;/p&gt;"</span>
+<span class="n">rich_text_tmp</span> <span class="o">=</span> <span class="s2">""</span>
 
 <span class="c1">#Adding data to table</span>
-<span class="n">ref_link_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">ref_link_text</span> <span class="o">=</span> <span class="s2">""</span>
 <span class="k">if</span> <span class="n">output_data</span><span class="p">:</span>
      <span class="k">for</span> <span class="n">dict_element</span> <span class="ow">in</span> <span class="n">output_data</span><span class="p">:</span>
-          <span class="n">rich_text_tmp</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-          <span class="n">table_row_object</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;cve_data&quot;</span><span class="p">)</span>
+          <span class="n">rich_text_tmp</span> <span class="o">=</span> <span class="s2">""</span>
+          <span class="n">table_row_object</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"cve_data"</span><span class="p">)</span>
           <span class="k">for</span> <span class="n">key_data</span><span class="p">,</span><span class="n">value_data</span> <span class="ow">in</span> <span class="n">dict_element</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-               <span class="k">if</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">&#39;Published&#39;</span><span class="p">:</span>
-                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">&quot;pubdte&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value_data</span><span class="p">)</span>
-               <span class="k">elif</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span>
-                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">&quot;cve&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value_data</span>
-               <span class="k">elif</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">&#39;summary&#39;</span><span class="p">:</span>
-                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">&quot;sum&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value_data</span>
-               <span class="k">elif</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">&#39;references&#39;</span><span class="p">:</span>
+               <span class="k">if</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">'Published'</span><span class="p">:</span>
+                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">"pubdte"</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value_data</span><span class="p">)</span>
+               <span class="k">elif</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">'id'</span><span class="p">:</span>
+                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">"cve"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value_data</span>
+               <span class="k">elif</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">'summary'</span><span class="p">:</span>
+                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">"sum"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">value_data</span>
+               <span class="k">elif</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">'references'</span><span class="p">:</span>
                     <span class="k">for</span> <span class="n">link_url</span> <span class="ow">in</span> <span class="n">value_data</span><span class="p">:</span>
-                         <span class="n">ref_link_text</span> <span class="o">+=</span> <span class="s1">&#39;&lt;p&gt;&lt;a href=&quot;</span><span class="si">{0}</span><span class="s1">&quot;&gt;</span><span class="si">{0}</span><span class="s1">&lt;/a&gt;&lt;/p&gt;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link_url</span><span class="p">)</span>
-                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">ref_link_text</span>
-               <span class="k">elif</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">&#39;vulnerable_configuration&#39;</span><span class="p">:</span>
+                         <span class="n">ref_link_text</span> <span class="o">+=</span> <span class="s1">'&lt;p&gt;&lt;a href="</span><span class="si">{0}</span><span class="s1">"&gt;</span><span class="si">{0}</span><span class="s1">&lt;/a&gt;&lt;/p&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link_url</span><span class="p">)</span>
+                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">"ref"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">ref_link_text</span>
+               <span class="k">elif</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">'vulnerable_configuration'</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">value_data</span><span class="p">:</span>
                          <span class="k">for</span> <span class="n">vc_collection</span> <span class="ow">in</span> <span class="n">value_data</span><span class="p">:</span>
                               <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">vc_collection</span><span class="p">,</span><span class="nb">dict</span><span class="p">):</span>
@@ -665,33 +665,33 @@ and</p></li>
                                         <span class="n">text</span> <span class="o">=</span> <span class="n">browse_rich_text</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key_data</span><span class="p">,</span><span class="n">value_data</span><span class="p">)</span>
                                         <span class="n">rich_text_tmp</span> <span class="o">+=</span> <span class="n">text</span>
                               <span class="k">else</span><span class="p">:</span>
-                                   <span class="n">rich_text_tmp</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;</span><span class="si">{}</span><span class="s2">&lt;/p&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vc_collection</span><span class="p">)</span>
+                                   <span class="n">rich_text_tmp</span> <span class="o">+=</span> <span class="s2">"&lt;p&gt;</span><span class="si">{}</span><span class="s2">&lt;/p&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vc_collection</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
-                         <span class="n">rich_text_tmp</span> <span class="o">=</span> <span class="s2">&quot;No Data&quot;</span>
-                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">&quot;vc&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">rich_text_tmp</span>
-               <span class="k">elif</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">&#39;vulnerable_configuration_cpe_2_2&#39;</span><span class="p">:</span>
-                    <span class="n">rich_text_tmp_2</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                         <span class="n">rich_text_tmp</span> <span class="o">=</span> <span class="s2">"No Data"</span>
+                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">"vc"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">rich_text_tmp</span>
+               <span class="k">elif</span> <span class="n">key_data</span> <span class="o">==</span> <span class="s1">'vulnerable_configuration_cpe_2_2'</span><span class="p">:</span>
+                    <span class="n">rich_text_tmp_2</span> <span class="o">=</span> <span class="s1">''</span>
                     <span class="k">if</span> <span class="n">value_data</span><span class="p">:</span>
                          <span class="k">for</span> <span class="n">vc_collection</span> <span class="ow">in</span> <span class="n">value_data</span><span class="p">:</span>
-                              <span class="n">rich_text_tmp_2</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;</span><span class="si">{}</span><span class="s2">&lt;/p&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vc_collection</span><span class="p">)</span>
+                              <span class="n">rich_text_tmp_2</span> <span class="o">+=</span> <span class="s2">"&lt;p&gt;</span><span class="si">{}</span><span class="s2">&lt;/p&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">vc_collection</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
-                         <span class="n">rich_text_tmp_2</span> <span class="o">=</span> <span class="s2">&quot;No Data&quot;</span>
-                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">&quot;vc2&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">rich_text_tmp_2</span>
+                         <span class="n">rich_text_tmp_2</span> <span class="o">=</span> <span class="s2">"No Data"</span>
+                    <span class="n">table_row_object</span><span class="p">[</span><span class="n">ENTRY_TO_DATATABLE_MAP</span><span class="p">[</span><span class="s2">"vc2"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">rich_text_tmp_2</span>
 <span class="k">else</span><span class="p">:</span>
-     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;No data returned from CVE Search</span><span class="se">\n\n</span><span class="s2">CVE-ID: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Vendor: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Product: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cve_id</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cve_vendor</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cve_product</span><span class="p">))</span>
+     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">u</span><span class="s2">"No data returned from CVE Search</span><span class="se">\n\n</span><span class="s2">CVE-ID: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Vendor: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Product: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cve_id</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cve_vendor</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cve_product</span><span class="p">))</span>
 </pre></div>
 </div>
 <ul class="simple">
 <li><p>CVE Browse</p></li>
 </ul>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">api_call_type</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;api_call&#39;</span><span class="p">]</span>
-<span class="n">output_data</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span>
-<span class="n">api_call_type_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;p&gt;&lt;b&gt;api call type :&lt;/b&gt; </span><span class="si">{}</span><span class="s2">&lt;/p&gt;&lt;p&gt;&lt;b&gt;vendor :&lt;/b&gt; </span><span class="si">{}</span><span class="s2"> &lt;/p&gt;&quot;</span>
-<span class="n">browse_rich_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;p&gt;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&amp;ensp:&amp;ensp&lt;/b&gt;</span><span class="si">{}</span><span class="s2">&amp;ensp&amp;ensp&lt;/p&gt;&quot;</span>
-<span class="n">rich_text_tmp</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">api_call_type</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">'api_call'</span><span class="p">]</span>
+<span class="n">output_data</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">'content'</span><span class="p">]</span>
+<span class="n">api_call_type_text</span> <span class="o">=</span> <span class="s2">"&lt;p&gt;&lt;b&gt;api call type :&lt;/b&gt; </span><span class="si">{}</span><span class="s2">&lt;/p&gt;&lt;p&gt;&lt;b&gt;vendor :&lt;/b&gt; </span><span class="si">{}</span><span class="s2"> &lt;/p&gt;"</span>
+<span class="n">browse_rich_text</span> <span class="o">=</span> <span class="s2">"&lt;p&gt;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&amp;ensp:&amp;ensp&lt;/b&gt;</span><span class="si">{}</span><span class="s2">&amp;ensp&amp;ensp&lt;/p&gt;"</span>
+<span class="n">rich_text_tmp</span> <span class="o">=</span> <span class="s2">""</span>
 <span class="c1">#Adding Browse data and Database information Notes Section</span>
 <span class="n">api_call_type_text</span> <span class="o">=</span> <span class="n">api_call_type_text</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">api_call_type</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cve_vendor</span><span class="p">)</span>
-<span class="n">browse_rich_text_final</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">browse_rich_text_final</span> <span class="o">=</span> <span class="s2">""</span>
 
 <span class="k">if</span> <span class="n">output_data</span><span class="p">:</span>
      <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">output_data</span><span class="p">:</span>
@@ -700,7 +700,7 @@ and</p></li>
                <span class="n">api_call_type_text</span> <span class="o">+=</span> <span class="n">text</span>
      <span class="n">browse_rich_text_final</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">api_call_type_text</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-     <span class="n">browse_rich_text_final</span> <span class="o">=</span> <span class="s1">&#39;No searched data returned&#39;</span>
+     <span class="n">browse_rich_text_final</span> <span class="o">=</span> <span class="s1">'No searched data returned'</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">browse_rich_text_final</span><span class="p">)</span>
 </pre></div>
 </div>

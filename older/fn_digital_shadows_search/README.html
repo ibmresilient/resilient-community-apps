@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -449,271 +449,271 @@
 <section id="function-output">
 <h2>Function Output:<a class="headerlink" href="#function-output" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
 
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;ds_search_value&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.0.1&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"ds_search_value"</span><span class="p">:</span> <span class="s2">"192.168.0.1"</span>
   <span class="p">},</span>
 
-  <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://portal-digitalshadows.com/search?q=52.58.78.16&amp;view=List&quot;</span><span class="p">,</span>
+  <span class="s2">"link"</span><span class="p">:</span> <span class="s2">"https://portal-digitalshadows.com/search?q=52.58.78.16&amp;view=List"</span><span class="p">,</span>
 
-  <span class="s2">&quot;href&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;a href=https://portal-digitalshadows.com/search?q=52.58.78.16&amp;view=List&gt;Link&lt;/a&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">"href"</span><span class="p">:</span> <span class="s2">"&lt;a href=https://portal-digitalshadows.com/search?q=52.58.78.16&amp;view=List&gt;Link&lt;/a&gt;"</span><span class="p">,</span>
 
-  <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[{</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;WEBROOT_IP&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;entity&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;reputationScore&quot;</span><span class="p">:</span> <span class="mi">87</span><span class="p">,</span>
-      <span class="s2">&quot;ipReputationHistory&quot;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-11-17T01:10:02.000Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;reputation&quot;</span><span class="p">:</span> <span class="mi">86</span>
+  <span class="s2">"data"</span><span class="p">:</span> <span class="p">[{</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"WEBROOT_IP"</span><span class="p">,</span>
+    <span class="s2">"entity"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"reputationScore"</span><span class="p">:</span> <span class="mi">87</span><span class="p">,</span>
+      <span class="s2">"ipReputationHistory"</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2017-11-17T01:10:02.000Z"</span><span class="p">,</span>
+        <span class="s2">"reputation"</span><span class="p">:</span> <span class="mi">86</span>
       <span class="p">},</span> <span class="p">{</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-11-11T18:59:00.000Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;reputation&quot;</span><span class="p">:</span> <span class="mi">80</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2017-11-11T18:59:00.000Z"</span><span class="p">,</span>
+        <span class="s2">"reputation"</span><span class="p">:</span> <span class="mi">80</span>
       <span class="p">},</span> <span class="p">{</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-11-10T18:59:00.000Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;reputation&quot;</span><span class="p">:</span> <span class="mi">5</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2017-11-10T18:59:00.000Z"</span><span class="p">,</span>
+        <span class="s2">"reputation"</span><span class="p">:</span> <span class="mi">5</span>
       <span class="p">}],</span>
-      <span class="s2">&quot;currentlyClassifiedAsThreat&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-      <span class="s2">&quot;ipGeoInfo&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="s2">&quot;sample string&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;sample string&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="s2">&quot;sample string&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;sld&quot;</span><span class="p">:</span> <span class="s2">&quot;sample string&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;sample string&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;carrier&quot;</span><span class="p">:</span> <span class="s2">&quot;sample string&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;tld&quot;</span><span class="p">:</span> <span class="s2">&quot;sample string&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="s2">&quot;sample string&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;organization&quot;</span><span class="p">:</span> <span class="s2">&quot;sample string&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;asn&quot;</span><span class="p">:</span> <span class="s2">&quot;sample string&quot;</span>
+      <span class="s2">"currentlyClassifiedAsThreat"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+      <span class="s2">"ipGeoInfo"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"city"</span><span class="p">:</span> <span class="s2">"sample string"</span><span class="p">,</span>
+        <span class="s2">"country"</span><span class="p">:</span> <span class="s2">"sample string"</span><span class="p">,</span>
+        <span class="s2">"region"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"longitude"</span><span class="p">:</span> <span class="s2">"sample string"</span><span class="p">,</span>
+        <span class="s2">"sld"</span><span class="p">:</span> <span class="s2">"sample string"</span><span class="p">,</span>
+        <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"sample string"</span><span class="p">,</span>
+        <span class="s2">"carrier"</span><span class="p">:</span> <span class="s2">"sample string"</span><span class="p">,</span>
+        <span class="s2">"tld"</span><span class="p">:</span> <span class="s2">"sample string"</span><span class="p">,</span>
+        <span class="s2">"latitude"</span><span class="p">:</span> <span class="s2">"sample string"</span><span class="p">,</span>
+        <span class="s2">"organization"</span><span class="p">:</span> <span class="s2">"sample string"</span><span class="p">,</span>
+        <span class="s2">"asn"</span><span class="p">:</span> <span class="s2">"sample string"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;threatCategories&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;ipIncidentHistory&quot;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="s2">&quot;scanDetails&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;durationSeconds&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;threatType&quot;</span><span class="p">:</span> <span class="s2">&quot;Mobile Threats&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;numOfConnectedLowRepApps&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="s2">&quot;eventDescription&quot;</span><span class="p">:</span> <span class="s2">&quot;IP is associated with a malicious mobile app&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;eventType&quot;</span><span class="p">:</span> <span class="s2">&quot;Malicious Mobile Activity&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;numberOfAttempts&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;observed&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-11-07T01:15:11.000Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;applications&quot;</span><span class="p">:</span> <span class="p">[{</span>
-          <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;Adware&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Downloads more apps and adware&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;appName&quot;</span><span class="p">:</span> <span class="s2">&quot;sample string&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;requestedPermissions&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;sample string&quot;</span><span class="p">,</span> <span class="s2">&quot;sample string&quot;</span><span class="p">],</span>
-          <span class="s2">&quot;packageName&quot;</span><span class="p">:</span> <span class="s2">&quot;sample string&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;md5Hash&quot;</span><span class="p">:</span> <span class="s2">&quot;sample string&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;reputationCategory&quot;</span><span class="p">:</span> <span class="s2">&quot;Malicious&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;firstSeen&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-06-10T10:37:42.000Z&quot;</span>
+      <span class="s2">"threatCategories"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"ipIncidentHistory"</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="s2">"scanDetails"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"durationSeconds"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"threatType"</span><span class="p">:</span> <span class="s2">"Mobile Threats"</span><span class="p">,</span>
+        <span class="s2">"numOfConnectedLowRepApps"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">"eventDescription"</span><span class="p">:</span> <span class="s2">"IP is associated with a malicious mobile app"</span><span class="p">,</span>
+        <span class="s2">"eventType"</span><span class="p">:</span> <span class="s2">"Malicious Mobile Activity"</span><span class="p">,</span>
+        <span class="s2">"numberOfAttempts"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"observed"</span><span class="p">:</span> <span class="s2">"2017-11-07T01:15:11.000Z"</span><span class="p">,</span>
+        <span class="s2">"applications"</span><span class="p">:</span> <span class="p">[{</span>
+          <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"Adware"</span><span class="p">,</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Downloads more apps and adware"</span><span class="p">,</span>
+          <span class="s2">"appName"</span><span class="p">:</span> <span class="s2">"sample string"</span><span class="p">,</span>
+          <span class="s2">"requestedPermissions"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"sample string"</span><span class="p">,</span> <span class="s2">"sample string"</span><span class="p">],</span>
+          <span class="s2">"packageName"</span><span class="p">:</span> <span class="s2">"sample string"</span><span class="p">,</span>
+          <span class="s2">"md5Hash"</span><span class="p">:</span> <span class="s2">"sample string"</span><span class="p">,</span>
+          <span class="s2">"reputationCategory"</span><span class="p">:</span> <span class="s2">"Malicious"</span><span class="p">,</span>
+          <span class="s2">"firstSeen"</span><span class="p">:</span> <span class="s2">"2017-06-10T10:37:42.000Z"</span>
         <span class="p">}],</span>
-        <span class="s2">&quot;attackDetails&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;hostingPhishUrls&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;startDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-11-07T00:44:12.000Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;classifiedAsThreat&quot;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="s2">"attackDetails"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"hostingPhishUrls"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"startDateTime"</span><span class="p">:</span> <span class="s2">"2017-11-07T00:44:12.000Z"</span><span class="p">,</span>
+        <span class="s2">"classifiedAsThreat"</span><span class="p">:</span> <span class="kc">True</span>
       <span class="p">}],</span>
-      <span class="s2">&quot;updatedDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-11-17T01:10:02.000Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;ipThreatHistory&quot;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-11-11T04:52:39.000Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;classifiedAsThreat&quot;</span><span class="p">:</span> <span class="kc">False</span>
+      <span class="s2">"updatedDateTime"</span><span class="p">:</span> <span class="s2">"2017-11-17T01:10:02.000Z"</span><span class="p">,</span>
+      <span class="s2">"ipThreatHistory"</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2017-11-11T04:52:39.000Z"</span><span class="p">,</span>
+        <span class="s2">"classifiedAsThreat"</span><span class="p">:</span> <span class="kc">False</span>
       <span class="p">},</span> <span class="p">{</span>
-        <span class="s2">&quot;threatTypes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;phishing&quot;</span><span class="p">,</span> <span class="s2">&quot;proxy&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-11-10T19:00:13.000Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;classifiedAsThreat&quot;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="s2">"threatTypes"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"phishing"</span><span class="p">,</span> <span class="s2">"proxy"</span><span class="p">],</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2017-11-10T19:00:13.000Z"</span><span class="p">,</span>
+        <span class="s2">"classifiedAsThreat"</span><span class="p">:</span> <span class="kc">True</span>
       <span class="p">},</span> <span class="p">{</span>
-        <span class="s2">&quot;threatTypes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;phishing&quot;</span><span class="p">,</span> <span class="s2">&quot;proxy&quot;</span><span class="p">,</span> <span class="s2">&quot;mobile threats&quot;</span><span class="p">],</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-11-03T01:35:11.000Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;classifiedAsThreat&quot;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="s2">"threatTypes"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"phishing"</span><span class="p">,</span> <span class="s2">"proxy"</span><span class="p">,</span> <span class="s2">"mobile threats"</span><span class="p">],</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2017-11-03T01:35:11.000Z"</span><span class="p">,</span>
+        <span class="s2">"classifiedAsThreat"</span><span class="p">:</span> <span class="kc">True</span>
       <span class="p">}],</span>
-      <span class="s2">&quot;ipAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.0.1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;asn&quot;</span><span class="p">:</span> <span class="mi">16509</span>
+      <span class="s2">"ipAddress"</span><span class="p">:</span> <span class="s2">"192.168.0.1"</span><span class="p">,</span>
+      <span class="s2">"asn"</span><span class="p">:</span> <span class="mi">16509</span>
     <span class="p">}</span>
   <span class="p">},</span> <span class="p">{</span>
-    <span class="s2">&quot;snippet&quot;</span><span class="p">:</span> <span class="s2">&quot;Metadata match (page text)</span><span class="se">\n</span><span class="s2"> .se (&lt;em&gt;192.168.0.1&lt;/em&gt; AT-88-Z US):</span><span class="se">\n\n\n\n\n\n</span><span class="s2">Figure 3. SMTP header details of wave 2</span><span class="se">\n\n</span><span class="s2">In this case the fake&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sortDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-10-18T13:24:43.288Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;SHARED_INCIDENT&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;entity&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;restrictedContent&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-      <span class="s2">&quot;verified&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-10-18T13:03:15.731Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;LOW&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;closedSource&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-      <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-10-18T15:56:58.705Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-      <span class="s2">&quot;occurred&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-10-16T23:00:00.000Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;published&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-10-18T13:24:43.858Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;indicatorOfCompromiseCount&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
-      <span class="s2">&quot;scope&quot;</span><span class="p">:</span> <span class="s2">&quot;GLOBAL&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;entitySummary&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;screenshot&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;thumbnail&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span>
+    <span class="s2">"snippet"</span><span class="p">:</span> <span class="s2">"Metadata match (page text)</span><span class="se">\n</span><span class="s2"> .se (&lt;em&gt;192.168.0.1&lt;/em&gt; AT-88-Z US):</span><span class="se">\n\n\n\n\n\n</span><span class="s2">Figure 3. SMTP header details of wave 2</span><span class="se">\n\n</span><span class="s2">In this case the fake"</span><span class="p">,</span>
+    <span class="s2">"sortDate"</span><span class="p">:</span> <span class="s2">"2018-10-18T13:24:43.288Z"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"SHARED_INCIDENT"</span><span class="p">,</span>
+    <span class="s2">"entity"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"restrictedContent"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+      <span class="s2">"verified"</span><span class="p">:</span> <span class="s2">"2018-10-18T13:03:15.731Z"</span><span class="p">,</span>
+      <span class="s2">"severity"</span><span class="p">:</span> <span class="s2">"LOW"</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+      <span class="s2">"closedSource"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+      <span class="s2">"modified"</span><span class="p">:</span> <span class="s2">"2018-10-18T15:56:58.705Z"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+      <span class="s2">"version"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+      <span class="s2">"occurred"</span><span class="p">:</span> <span class="s2">"2018-10-16T23:00:00.000Z"</span><span class="p">,</span>
+      <span class="s2">"published"</span><span class="p">:</span> <span class="s2">"2018-10-18T13:24:43.858Z"</span><span class="p">,</span>
+      <span class="s2">"indicatorOfCompromiseCount"</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+      <span class="s2">"scope"</span><span class="p">:</span> <span class="s2">"GLOBAL"</span><span class="p">,</span>
+      <span class="s2">"entitySummary"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"domain"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+        <span class="s2">"screenshot"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"link"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+          <span class="s2">"thumbnail"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"link"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"sample text"</span>
           <span class="p">}</span>
         <span class="p">},</span>
-        <span class="s2">&quot;contentRemoved&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="s2">&quot;summaryText&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;screenshotId&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;sourceDate&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;screenshotThumbnailId&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;WEB_PAGE&quot;</span>
+        <span class="s2">"contentRemoved"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">"summaryText"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+        <span class="s2">"screenshotId"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+        <span class="s2">"source"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+        <span class="s2">"sourceDate"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+        <span class="s2">"screenshotThumbnailId"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"WEB_PAGE"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;CYBER_THREAT&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">45756395</span><span class="p">,</span>
-      <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;TARGET_SECTORS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1090</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Industrial Goods &amp; Services&quot;</span>
+      <span class="s2">"score"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"CYBER_THREAT"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">45756395</span><span class="p">,</span>
+      <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"TARGET_SECTORS"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1090</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Industrial Goods &amp; Services"</span>
       <span class="p">},</span> <span class="p">{</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;INTENDED_EFFECTS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">418</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Unauthorised Access&quot;</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"INTENDED_EFFECTS"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">418</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Unauthorised Access"</span>
       <span class="p">}],</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"sample text"</span>
     <span class="p">}</span>
   <span class="p">},</span> <span class="p">{</span>
-    <span class="s2">&quot;snippet&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sortDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-05-21T17:20:39.415Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;WEB_PAGE&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;entity&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;siteCategories&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;UNCATEGORISED&quot;</span><span class="p">],</span>
-      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;observableCounts&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;sha1&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;exceededMaximum&quot;</span><span class="p">:</span> <span class="kc">False</span>
+    <span class="s2">"snippet"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+    <span class="s2">"sortDate"</span><span class="p">:</span> <span class="s2">"2018-05-21T17:20:39.415Z"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"WEB_PAGE"</span><span class="p">,</span>
+    <span class="s2">"entity"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"siteCategories"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"UNCATEGORISED"</span><span class="p">],</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+      <span class="s2">"observableCounts"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"sha1"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"exceededMaximum"</span><span class="p">:</span> <span class="kc">False</span>
         <span class="p">},</span>
-        <span class="s2">&quot;cve&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;exceededMaximum&quot;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="s2">"cve"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"exceededMaximum"</span><span class="p">:</span> <span class="kc">False</span>
         <span class="p">},</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">61</span><span class="p">,</span>
-          <span class="s2">&quot;exceededMaximum&quot;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">61</span><span class="p">,</span>
+          <span class="s2">"exceededMaximum"</span><span class="p">:</span> <span class="kc">False</span>
         <span class="p">},</span>
-        <span class="s2">&quot;ipV4&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-          <span class="s2">&quot;exceededMaximum&quot;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="s2">"ipV4"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">"exceededMaximum"</span><span class="p">:</span> <span class="kc">False</span>
         <span class="p">},</span>
-        <span class="s2">&quot;sha256&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;exceededMaximum&quot;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="s2">"sha256"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"exceededMaximum"</span><span class="p">:</span> <span class="kc">False</span>
         <span class="p">},</span>
-        <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">&quot;exceededMaximum&quot;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="s2">"email"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">"exceededMaximum"</span><span class="p">:</span> <span class="kc">False</span>
         <span class="p">},</span>
-        <span class="s2">&quot;md5&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;exceededMaximum&quot;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="s2">"md5"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"exceededMaximum"</span><span class="p">:</span> <span class="kc">False</span>
         <span class="p">}</span>
       <span class="p">},</span>
-      <span class="s2">&quot;screenshotId&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;discovered&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;screenshotThumbnailId&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span>
+      <span class="s2">"screenshotId"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+      <span class="s2">"discovered"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+      <span class="s2">"source"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+      <span class="s2">"screenshotThumbnailId"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"sample text"</span>
     <span class="p">}</span>
   <span class="p">},</span> <span class="p">{</span>
-    <span class="s2">&quot;snippet&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sortDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-01-07T07:44:22.000Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;PASTE&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;entity&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;screenshotThumbnail&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span>
+    <span class="s2">"snippet"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+    <span class="s2">"sortDate"</span><span class="p">:</span> <span class="s2">"2018-01-07T07:44:22.000Z"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"PASTE"</span><span class="p">,</span>
+    <span class="s2">"entity"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"screenshotThumbnail"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"link"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"sample text"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;screenshot&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span>
+      <span class="s2">"screenshot"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"link"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"sample text"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;pasted&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-01-07T07:44:22.000Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;observableCounts&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;sha1&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;exceededMaximum&quot;</span><span class="p">:</span> <span class="kc">False</span>
+      <span class="s2">"pasted"</span><span class="p">:</span> <span class="s2">"2018-01-07T07:44:22.000Z"</span><span class="p">,</span>
+      <span class="s2">"observableCounts"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"sha1"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"exceededMaximum"</span><span class="p">:</span> <span class="kc">False</span>
         <span class="p">},</span>
-        <span class="s2">&quot;cve&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;exceededMaximum&quot;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="s2">"cve"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"exceededMaximum"</span><span class="p">:</span> <span class="kc">False</span>
         <span class="p">},</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-          <span class="s2">&quot;exceededMaximum&quot;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+          <span class="s2">"exceededMaximum"</span><span class="p">:</span> <span class="kc">True</span>
         <span class="p">},</span>
-        <span class="s2">&quot;ipV4&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span>
-          <span class="s2">&quot;exceededMaximum&quot;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="s2">"ipV4"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">90</span><span class="p">,</span>
+          <span class="s2">"exceededMaximum"</span><span class="p">:</span> <span class="kc">False</span>
         <span class="p">},</span>
-        <span class="s2">&quot;sha256&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;exceededMaximum&quot;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="s2">"sha256"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"exceededMaximum"</span><span class="p">:</span> <span class="kc">False</span>
         <span class="p">},</span>
-        <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;exceededMaximum&quot;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="s2">"email"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"exceededMaximum"</span><span class="p">:</span> <span class="kc">False</span>
         <span class="p">},</span>
-        <span class="s2">&quot;md5&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;exceededMaximum&quot;</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="s2">"md5"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"exceededMaximum"</span><span class="p">:</span> <span class="kc">False</span>
         <span class="p">}</span>
       <span class="p">},</span>
-      <span class="s2">&quot;uri&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span>
+      <span class="s2">"uri"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"sample text"</span>
     <span class="p">}</span>
   <span class="p">},</span> <span class="p">{</span>
-    <span class="s2">&quot;snippet&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sortDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-01-09T17:09:55.963Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;CLIENT_INCIDENT&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;entity&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;takedownRequestCount&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-      <span class="s2">&quot;subType&quot;</span><span class="p">:</span> <span class="s2">&quot;PHISHING_ATTEMPT&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;alerted&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-01-12T15:21:45.352Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;entitySummary&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;blinkbox.nu&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;screenshot&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;thumbnail&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span>
+    <span class="s2">"snippet"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+    <span class="s2">"sortDate"</span><span class="p">:</span> <span class="s2">"2018-01-09T17:09:55.963Z"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"CLIENT_INCIDENT"</span><span class="p">,</span>
+    <span class="s2">"entity"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"takedownRequestCount"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"version"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+      <span class="s2">"subType"</span><span class="p">:</span> <span class="s2">"PHISHING_ATTEMPT"</span><span class="p">,</span>
+      <span class="s2">"alerted"</span><span class="p">:</span> <span class="s2">"2018-01-12T15:21:45.352Z"</span><span class="p">,</span>
+      <span class="s2">"entitySummary"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"domain"</span><span class="p">:</span> <span class="s2">"blinkbox.nu"</span><span class="p">,</span>
+        <span class="s2">"screenshot"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"link"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+          <span class="s2">"thumbnail"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"link"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"sample text"</span>
           <span class="p">}</span>
         <span class="p">},</span>
-        <span class="s2">&quot;screenshotId&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;sourceDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-01-09T17:09:55.975Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;screenshotThumbnailId&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;DOMAIN&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;originalDomains&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;sample text&quot;</span><span class="p">]</span>
+        <span class="s2">"screenshotId"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+        <span class="s2">"source"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+        <span class="s2">"sourceDate"</span><span class="p">:</span> <span class="s2">"2018-01-09T17:09:55.975Z"</span><span class="p">,</span>
+        <span class="s2">"screenshotThumbnailId"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"DOMAIN"</span><span class="p">,</span>
+        <span class="s2">"originalDomains"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"sample text"</span><span class="p">]</span>
       <span class="p">},</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">2108222</span><span class="p">,</span>
-      <span class="s2">&quot;verified&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-01-11T15:49:37.486Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;MEDIUM&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Parked domain xxx identified</span><span class="se">\r\n</span><span class="s2">&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;review&quot;</span><span class="p">:</span> <span class="p">{},</span>
-      <span class="s2">&quot;closedSource&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-      <span class="s2">&quot;mitigation&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;scope&quot;</span><span class="p">:</span> <span class="s2">&quot;ORGANIZATION&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;BRAND_PROTECTION&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;BRAND_PROTECTION&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">332</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Phishing Attempt&quot;</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2108222</span><span class="p">,</span>
+      <span class="s2">"verified"</span><span class="p">:</span> <span class="s2">"2018-01-11T15:49:37.486Z"</span><span class="p">,</span>
+      <span class="s2">"severity"</span><span class="p">:</span> <span class="s2">"MEDIUM"</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Parked domain xxx identified</span><span class="se">\r\n</span><span class="s2">"</span><span class="p">,</span>
+      <span class="s2">"review"</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="s2">"closedSource"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+      <span class="s2">"mitigation"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+      <span class="s2">"scope"</span><span class="p">:</span> <span class="s2">"ORGANIZATION"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"BRAND_PROTECTION"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+      <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"BRAND_PROTECTION"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">332</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Phishing Attempt"</span>
       <span class="p">}],</span>
-      <span class="s2">&quot;occurred&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-01-09T17:09:55.975Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;impactDescription&quot;</span><span class="p">:</span> <span class="s2">&quot;sample text&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-01-15T12:06:02.798Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;published&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-01-12T15:21:45.352Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;restrictedContent&quot;</span><span class="p">:</span> <span class="kc">False</span>
+      <span class="s2">"occurred"</span><span class="p">:</span> <span class="s2">"2018-01-09T17:09:55.975Z"</span><span class="p">,</span>
+      <span class="s2">"score"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"impactDescription"</span><span class="p">:</span> <span class="s2">"sample text"</span><span class="p">,</span>
+      <span class="s2">"modified"</span><span class="p">:</span> <span class="s2">"2018-01-15T12:06:02.798Z"</span><span class="p">,</span>
+      <span class="s2">"published"</span><span class="p">:</span> <span class="s2">"2018-01-12T15:21:45.352Z"</span><span class="p">,</span>
+      <span class="s2">"restrictedContent"</span><span class="p">:</span> <span class="kc">False</span>
     <span class="p">}</span>
   <span class="p">}]</span>
 <span class="p">}</span>
@@ -734,7 +734,7 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># If function succeeds</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
 
-  <span class="n">DS_DATATABLE_API_NAME</span> <span class="o">=</span> <span class="s2">&quot;ds_search_results&quot;</span>
+  <span class="n">DS_DATATABLE_API_NAME</span> <span class="o">=</span> <span class="s2">"ds_search_results"</span>
 
   <span class="c1"># Initialise num_of_each_type dict</span>
   <span class="n">num_of_each_type</span> <span class="o">=</span> <span class="p">{}</span>
@@ -759,9 +759,9 @@
     <span class="n">row_count</span> <span class="o">=</span> <span class="n">num_of_each_type</span><span class="p">[</span><span class="n">entry</span><span class="p">]</span>
 
     <span class="c1"># Set values of row cells</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;search_query&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ds_search_value</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row_type</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row_count</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"search_query"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ds_search_value</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">=</span> <span class="n">row_type</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"count"</span><span class="p">]</span> <span class="o">=</span> <span class="n">row_count</span>
 </pre></div>
 </div>
 </section>

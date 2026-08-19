@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -654,10 +654,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;translated text&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
-    <span class="s2">&quot;language&quot;</span><span class="p">:</span> <span class="s1">&#39;fr&#39;</span><span class="p">,</span>
-    <span class="s2">&quot;source_lang&quot;</span><span class="p">:</span> <span class="s1">&#39;en&#39;</span>
+    <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"translated text"</span><span class="p">,</span>
+    <span class="s2">"confidence"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+    <span class="s2">"language"</span><span class="p">:</span> <span class="s1">'fr'</span><span class="p">,</span>
+    <span class="s2">"source_lang"</span><span class="p">:</span> <span class="s1">'en'</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -672,7 +672,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Translated by Watson: </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">results</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Translated by Watson: </span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="n">results</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>

@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -791,7 +791,7 @@ Where:</p>
 If more than one filter is needed, separate each tuple with a comma. Enclose string values in quotes.
 <p>
 Here is an polling filter example that adds or updates targets that have a "target_temptation" greater or equal to 50 AND whose status is "Needs Investigation", "Needs Resolution", "Needs Review", or "None":
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>polling_filters=(&quot;target_temptation&quot;,&quot;greater_or_equal&quot;,50),(&quot;status&quot;,&quot;equal&quot;,[&quot;Needs Investigation&quot;,&quot;Needs Resolution&quot;,&quot;Needs Review&quot;,&quot;None&quot;])
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>polling_filters=("target_temptation","greater_or_equal",50),("status","equal",["Needs Investigation","Needs Resolution","Needs Review","None"])
 </pre></div>
 </div>
 <p>The list of Randori supported JQuery <code class="docutils literal notranslate"><span class="pre">operators</span></code>:</p>
@@ -877,28 +877,28 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;hints&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"hints"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2640</span><span class="p">,</span>
-    <span class="s2">&quot;randori_data_table_name&quot;</span><span class="p">:</span> <span class="s2">&quot;randori_detections_dt&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2640</span><span class="p">,</span>
+    <span class="s2">"randori_data_table_name"</span><span class="p">:</span> <span class="s2">"randori_detections_dt"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">10072</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;MacBook-Pro.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-randori&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-11-07 08:18:51&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">10072</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"MacBook-Pro.local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-randori"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-11-07 08:18:51"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -907,7 +907,7 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">randori_data_table_name</span> <span class="o">=</span> <span class="s2">&quot;randori_detections_dt&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">randori_data_table_name</span> <span class="o">=</span> <span class="s2">"randori_detections_dt"</span>
 </pre></div>
 </div>
 </p>
@@ -918,18 +918,18 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">calendar</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">soar_datetimeformat</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">date_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S&quot;</span><span class="p">,</span> <span class="n">split_at</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom jinja filter to convert UTC dates to epoch format</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">soar_datetimeformat</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">date_format</span><span class="o">=</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S"</span><span class="p">,</span> <span class="n">split_at</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Custom jinja filter to convert UTC dates to epoch format</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        value ([str]): [jinja provided field value]</span>
-<span class="sd">        date_format (str, optional): [conversion format]. Defaults to &quot;%Y-%m-%dT%H:%M:%S&quot;.</span>
+<span class="sd">        date_format (str, optional): [conversion format]. Defaults to "%Y-%m-%dT%H:%M:%S".</span>
 <span class="sd">        split_at (str, optional): [character to split the date field to scope the date field.]</span>
-<span class="sd">            examples: split_at=&#39;.&#39; to remove milliseconds for &quot;2021-10-22T20:53:53.913Z&quot;,</span>
-<span class="sd">                      split_at=&#39;+&#39; tp remove tz information &quot;2021-10-22T20:53:53+00:00&quot;,</span>
+<span class="sd">            examples: split_at='.' to remove milliseconds for "2021-10-22T20:53:53.913Z",</span>
+<span class="sd">                      split_at='+' tp remove tz information "2021-10-22T20:53:53+00:00",</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        [int]: [epoch value of datetime, in milliseconds]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">value</span>
 
@@ -943,23 +943,23 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <span class="n">detection_data</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">detection_data</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">detection_data</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Randori: Unable to update Detections data table - error getting detections data.&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Randori: Unable to update Detections data table - error getting detections data."</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="n">clear_table_output</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">clear_table_output</span>
   <span class="k">if</span> <span class="ow">not</span> <span class="n">clear_table_output</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Randori: ERROR - Unable to clear the Detections data table before updating it.&quot;</span><span class="p">)</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">detection_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
-  <span class="n">detection_list</span> <span class="o">=</span> <span class="n">detection_data</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;detection_list&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Randori: ERROR - Unable to clear the Detections data table before updating it."</span><span class="p">)</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">detection_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="n">detection_list</span> <span class="o">=</span> <span class="n">detection_data</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"detection_list"</span><span class="p">,</span> <span class="p">[])</span>
   <span class="k">for</span> <span class="n">detection</span> <span class="ow">in</span> <span class="n">detection_list</span><span class="p">:</span>
-    <span class="n">detection_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;randori_detections_dt&quot;</span><span class="p">)</span>
-    <span class="n">detection_row</span><span class="p">[</span><span class="s1">&#39;randori_dt_date_added&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-    <span class="n">detection_row</span><span class="p">[</span><span class="s1">&#39;randori_dt_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">)</span>
-    <span class="n">detection_row</span><span class="p">[</span><span class="s1">&#39;randori_dt_port&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;port&quot;</span><span class="p">)</span>
-    <span class="n">detection_row</span><span class="p">[</span><span class="s1">&#39;randori_dt_ip&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ip&quot;</span><span class="p">)</span>
-    <span class="n">detection_row</span><span class="p">[</span><span class="s1">&#39;randori_dt_hostname&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hostname&quot;</span><span class="p">)</span>
-    <span class="n">detection_row</span><span class="p">[</span><span class="s1">&#39;randori_dt_first_seen&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">soar_datetimeformat</span><span class="p">(</span><span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;first_seen&quot;</span><span class="p">),</span> <span class="n">split_at</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
-    <span class="n">detection_row</span><span class="p">[</span><span class="s1">&#39;randori_dt_last_seen&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">soar_datetimeformat</span><span class="p">(</span><span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;last_seen&quot;</span><span class="p">),</span> <span class="n">split_at</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Randori: manual playbook updated Detections data table with </span><span class="si">{}</span><span class="s2"> detections&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">detection_list</span><span class="p">)))</span>
+    <span class="n">detection_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"randori_detections_dt"</span><span class="p">)</span>
+    <span class="n">detection_row</span><span class="p">[</span><span class="s1">'randori_dt_date_added'</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="n">detection_row</span><span class="p">[</span><span class="s1">'randori_dt_path'</span><span class="p">]</span> <span class="o">=</span> <span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"path"</span><span class="p">)</span>
+    <span class="n">detection_row</span><span class="p">[</span><span class="s1">'randori_dt_port'</span><span class="p">]</span> <span class="o">=</span> <span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"port"</span><span class="p">)</span>
+    <span class="n">detection_row</span><span class="p">[</span><span class="s1">'randori_dt_ip'</span><span class="p">]</span> <span class="o">=</span> <span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ip"</span><span class="p">)</span>
+    <span class="n">detection_row</span><span class="p">[</span><span class="s1">'randori_dt_hostname'</span><span class="p">]</span> <span class="o">=</span> <span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hostname"</span><span class="p">)</span>
+    <span class="n">detection_row</span><span class="p">[</span><span class="s1">'randori_dt_first_seen'</span><span class="p">]</span> <span class="o">=</span> <span class="n">soar_datetimeformat</span><span class="p">(</span><span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"first_seen"</span><span class="p">),</span> <span class="n">split_at</span><span class="o">=</span><span class="s1">'.'</span><span class="p">)</span>
+    <span class="n">detection_row</span><span class="p">[</span><span class="s1">'randori_dt_last_seen'</span><span class="p">]</span> <span class="o">=</span> <span class="n">soar_datetimeformat</span><span class="p">(</span><span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"last_seen"</span><span class="p">),</span> <span class="n">split_at</span><span class="o">=</span><span class="s1">'.'</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Randori: manual playbook updated Detections data table with </span><span class="si">{}</span><span class="s2"> detections"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">detection_list</span><span class="p">)))</span>
 </pre></div>
 </div>
 </p>
@@ -1000,135 +1000,135 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;detection_list&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"detection_list"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;affiliation_state&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;applicability&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="s2">&quot;attack_note&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;authority&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;authority_distance&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;authority_override&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;authorization_state&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;banners_uuid&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;cert_uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;0caabe31-4ede-4e24-9507-f9ebc106951f&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;characteristic_tags&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;DefaultPage&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;NoCSS&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;OldCopyright&quot;</span>
+        <span class="s2">"affiliation_state"</span><span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+        <span class="s2">"applicability"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"attack_note"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"authority"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"authority_distance"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"authority_override"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"authorization_state"</span><span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+        <span class="s2">"banners_uuid"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"cert_uuid"</span><span class="p">:</span> <span class="s2">"0caabe31-4ede-4e24-9507-f9ebc106951f"</span><span class="p">,</span>
+        <span class="s2">"characteristic_tags"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"DefaultPage"</span><span class="p">,</span>
+          <span class="s2">"NoCSS"</span><span class="p">,</span>
+          <span class="s2">"OldCopyright"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;characteristics_count&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
-        <span class="s2">&quot;cpe&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;cpe_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.3&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;edition&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;language&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;other&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;part&quot;</span><span class="p">:</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;product&quot;</span><span class="p">:</span> <span class="s2">&quot;tomcat&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;str&quot;</span><span class="p">:</span> <span class="s2">&quot;cpe:2.3:a:apache:tomcat:7.0.76:*:*:*:*:*:*:*&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;sw_edition&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;target_hw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;target_sw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;update&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;apache&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;7.0.76&quot;</span>
+        <span class="s2">"characteristics_count"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"confidence"</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
+        <span class="s2">"cpe"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"cpe_version"</span><span class="p">:</span> <span class="s2">"2.3"</span><span class="p">,</span>
+          <span class="s2">"edition"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"language"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"other"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"part"</span><span class="p">:</span> <span class="s2">"a"</span><span class="p">,</span>
+          <span class="s2">"product"</span><span class="p">:</span> <span class="s2">"tomcat"</span><span class="p">,</span>
+          <span class="s2">"str"</span><span class="p">:</span> <span class="s2">"cpe:2.3:a:apache:tomcat:7.0.76:*:*:*:*:*:*:*"</span><span class="p">,</span>
+          <span class="s2">"sw_edition"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"target_hw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"target_sw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"update"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"apache"</span><span class="p">,</span>
+          <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"7.0.76"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;criticality&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Apache Tomcat, often referred to as Tomcat Server, is an open-source Java Servlet Container developed by the Apache Software Foundation.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;detection_criteria&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;http&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;ferrari.demo.webernets.online&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">1.1</span>
+        <span class="s2">"criticality"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"deleted"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Apache Tomcat, often referred to as Tomcat Server, is an open-source Java Servlet Container developed by the Apache Software Foundation."</span><span class="p">,</span>
+        <span class="s2">"detection_criteria"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"http"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"ferrari.demo.webernets.online"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"GET"</span><span class="p">,</span>
+            <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/"</span><span class="p">,</span>
+            <span class="s2">"version"</span><span class="p">:</span> <span class="mf">1.1</span>
           <span class="p">},</span>
-          <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;34.149.126.94&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">4</span>
+          <span class="s2">"ip"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"34.149.126.94"</span><span class="p">,</span>
+            <span class="s2">"version"</span><span class="p">:</span> <span class="mi">4</span>
           <span class="p">},</span>
-          <span class="s2">&quot;tcp&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">443</span>
+          <span class="s2">"tcp"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"port"</span><span class="p">:</span> <span class="mi">443</span>
           <span class="p">},</span>
-          <span class="s2">&quot;tls&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">3.3</span>
+          <span class="s2">"tls"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"version"</span><span class="p">:</span> <span class="mf">3.3</span>
           <span class="p">}</span>
         <span class="p">},</span>
-        <span class="s2">&quot;detection_relevance&quot;</span><span class="p">:</span> <span class="mi">1130</span><span class="p">,</span>
-        <span class="s2">&quot;enumerability&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="s2">&quot;exploitability&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-        <span class="s2">&quot;first_seen&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-07-07T02:05:22.741389+00:00&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;headers_uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;047cf2ed-c1ff-4bbf-9501-8e0b6b736093&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="s2">&quot;ferrari.demo.webernets.online&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;hostname_id&quot;</span><span class="p">:</span> <span class="s2">&quot;82ca6db1-344b-4d12-a7db-5e229e3630d1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;f814e5ef-76d9-41c1-b6e8-52b5c0daeb16,5dbcb688-8591-4574-ad18-6cbc27a1941c&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;impact_score&quot;</span><span class="p">:</span> <span class="s2">&quot;Medium&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="s2">&quot;34.149.126.94&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ip_id&quot;</span><span class="p">:</span> <span class="s2">&quot;5b3beaa8-d24c-4861-97de-27dc3b5f9bf2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ip_str&quot;</span><span class="p">:</span> <span class="s2">&quot;34.149.126.94&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;last_seen&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-10-31T11:22:49.122136+00:00&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;lens_id&quot;</span><span class="p">:</span> <span class="s2">&quot;08a90512-fb94-4766-9cc7-7a945e934638&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;lens_view&quot;</span><span class="p">:</span> <span class="s2">&quot;public&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Tomcat&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;org_id&quot;</span><span class="p">:</span> <span class="s2">&quot;923af5dd-50ce-4d80-a55f-707dfe08411e&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;perspective&quot;</span><span class="p">:</span> <span class="s2">&quot;00000000-0000-0000-0000-000000000000&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;perspective_name&quot;</span><span class="p">:</span> <span class="s2">&quot;PUBLIC&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;poc_email&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;poc_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
-        <span class="s2">&quot;post_exploit&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="s2">&quot;priority_impact_factor&quot;</span><span class="p">:</span> <span class="mf">0.084375</span><span class="p">,</span>
-        <span class="s2">&quot;priority_score&quot;</span><span class="p">:</span> <span class="mf">135.0</span><span class="p">,</span>
-        <span class="s2">&quot;priority_status_factor&quot;</span><span class="p">:</span> <span class="mf">0.1125</span><span class="p">,</span>
-        <span class="s2">&quot;priority_tags_factor&quot;</span><span class="p">:</span> <span class="mf">0.253125</span><span class="p">,</span>
-        <span class="s2">&quot;private_weakness&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;protocol&quot;</span><span class="p">:</span> <span class="s2">&quot;tcp&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;public_weakness&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-        <span class="s2">&quot;randori_notes&quot;</span><span class="p">:</span> <span class="s2">&quot;This version of Apache Tomcat has multiple medium and high risk vulnerabilities associated with it including potential remote code execution risks as described in CVE-2020-9484, CVE-2020-1938, and CVE-2019-0232. Apache Tomcat may be vulnerable to the Log4j 2 Remote Code Execution vulnerabilities - CVE-2021-44228 CVE-2021-45046 CVE-2021-45105 CVE-2021-44832 - https://logging.apache.org/log4j/2.x/security.html. Proof-of-Concept exploit code is available for these CVEs. Tomcat does not include Log4J 2 by default, but can be configured to optionally use Log4J 2. Users should check their Log4J 2 configuration and apply mitigations as described in either the above article or per their vendor guidance.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;reference&quot;</span><span class="p">:</span> <span class="s2">&quot;http://tomcat.apache.org&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;research&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="s2">&quot;screenshot_uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;5afc7cfb-9ab8-4231-a296-909eb7d918e2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;service_id&quot;</span><span class="p">:</span> <span class="s2">&quot;15d7435d-3469-450f-8ef9-f9e12dde6f68&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Needs Investigation&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;target_confidence&quot;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
-        <span class="s2">&quot;target_first_seen&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-07-07T07:18:22.029485+00:00&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;target_id&quot;</span><span class="p">:</span> <span class="s2">&quot;5dbcb688-8591-4574-ad18-6cbc27a1941c&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;target_last_seen&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-10-31T11:32:10.769721+00:00&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;target_num_detections&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;target_temptation&quot;</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span>
-        <span class="s2">&quot;tech_category&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;App Servers&quot;</span>
+        <span class="s2">"detection_relevance"</span><span class="p">:</span> <span class="mi">1130</span><span class="p">,</span>
+        <span class="s2">"enumerability"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"exploitability"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">"first_seen"</span><span class="p">:</span> <span class="s2">"2022-07-07T02:05:22.741389+00:00"</span><span class="p">,</span>
+        <span class="s2">"headers_uuid"</span><span class="p">:</span> <span class="s2">"047cf2ed-c1ff-4bbf-9501-8e0b6b736093"</span><span class="p">,</span>
+        <span class="s2">"hostname"</span><span class="p">:</span> <span class="s2">"ferrari.demo.webernets.online"</span><span class="p">,</span>
+        <span class="s2">"hostname_id"</span><span class="p">:</span> <span class="s2">"82ca6db1-344b-4d12-a7db-5e229e3630d1"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"f814e5ef-76d9-41c1-b6e8-52b5c0daeb16,5dbcb688-8591-4574-ad18-6cbc27a1941c"</span><span class="p">,</span>
+        <span class="s2">"impact_score"</span><span class="p">:</span> <span class="s2">"Medium"</span><span class="p">,</span>
+        <span class="s2">"ip"</span><span class="p">:</span> <span class="s2">"34.149.126.94"</span><span class="p">,</span>
+        <span class="s2">"ip_id"</span><span class="p">:</span> <span class="s2">"5b3beaa8-d24c-4861-97de-27dc3b5f9bf2"</span><span class="p">,</span>
+        <span class="s2">"ip_str"</span><span class="p">:</span> <span class="s2">"34.149.126.94"</span><span class="p">,</span>
+        <span class="s2">"last_seen"</span><span class="p">:</span> <span class="s2">"2022-10-31T11:22:49.122136+00:00"</span><span class="p">,</span>
+        <span class="s2">"lens_id"</span><span class="p">:</span> <span class="s2">"08a90512-fb94-4766-9cc7-7a945e934638"</span><span class="p">,</span>
+        <span class="s2">"lens_view"</span><span class="p">:</span> <span class="s2">"public"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Tomcat"</span><span class="p">,</span>
+        <span class="s2">"org_id"</span><span class="p">:</span> <span class="s2">"923af5dd-50ce-4d80-a55f-707dfe08411e"</span><span class="p">,</span>
+        <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/"</span><span class="p">,</span>
+        <span class="s2">"perspective"</span><span class="p">:</span> <span class="s2">"00000000-0000-0000-0000-000000000000"</span><span class="p">,</span>
+        <span class="s2">"perspective_name"</span><span class="p">:</span> <span class="s2">"PUBLIC"</span><span class="p">,</span>
+        <span class="s2">"poc_email"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"poc_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"port"</span><span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
+        <span class="s2">"post_exploit"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"priority_impact_factor"</span><span class="p">:</span> <span class="mf">0.084375</span><span class="p">,</span>
+        <span class="s2">"priority_score"</span><span class="p">:</span> <span class="mf">135.0</span><span class="p">,</span>
+        <span class="s2">"priority_status_factor"</span><span class="p">:</span> <span class="mf">0.1125</span><span class="p">,</span>
+        <span class="s2">"priority_tags_factor"</span><span class="p">:</span> <span class="mf">0.253125</span><span class="p">,</span>
+        <span class="s2">"private_weakness"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"protocol"</span><span class="p">:</span> <span class="s2">"tcp"</span><span class="p">,</span>
+        <span class="s2">"public_weakness"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">"randori_notes"</span><span class="p">:</span> <span class="s2">"This version of Apache Tomcat has multiple medium and high risk vulnerabilities associated with it including potential remote code execution risks as described in CVE-2020-9484, CVE-2020-1938, and CVE-2019-0232. Apache Tomcat may be vulnerable to the Log4j 2 Remote Code Execution vulnerabilities - CVE-2021-44228 CVE-2021-45046 CVE-2021-45105 CVE-2021-44832 - https://logging.apache.org/log4j/2.x/security.html. Proof-of-Concept exploit code is available for these CVEs. Tomcat does not include Log4J 2 by default, but can be configured to optionally use Log4J 2. Users should check their Log4J 2 configuration and apply mitigations as described in either the above article or per their vendor guidance."</span><span class="p">,</span>
+        <span class="s2">"reference"</span><span class="p">:</span> <span class="s2">"http://tomcat.apache.org"</span><span class="p">,</span>
+        <span class="s2">"research"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"screenshot_uuid"</span><span class="p">:</span> <span class="s2">"5afc7cfb-9ab8-4231-a296-909eb7d918e2"</span><span class="p">,</span>
+        <span class="s2">"service_id"</span><span class="p">:</span> <span class="s2">"15d7435d-3469-450f-8ef9-f9e12dde6f68"</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"Needs Investigation"</span><span class="p">,</span>
+        <span class="s2">"target_confidence"</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
+        <span class="s2">"target_first_seen"</span><span class="p">:</span> <span class="s2">"2022-07-07T07:18:22.029485+00:00"</span><span class="p">,</span>
+        <span class="s2">"target_id"</span><span class="p">:</span> <span class="s2">"5dbcb688-8591-4574-ad18-6cbc27a1941c"</span><span class="p">,</span>
+        <span class="s2">"target_last_seen"</span><span class="p">:</span> <span class="s2">"2022-10-31T11:32:10.769721+00:00"</span><span class="p">,</span>
+        <span class="s2">"target_num_detections"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"target_temptation"</span><span class="p">:</span> <span class="mi">45</span><span class="p">,</span>
+        <span class="s2">"tech_category"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"App Servers"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;temptation_last_modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-03-31T18:10:37.913851+00:00&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;thumbnail_uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;50adc897-252f-4388-89bb-7ef034b68320&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;user_tags&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;Google&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Unknown - By Qualys&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Unknown - By Tenable&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Wildcard Cert&quot;</span>
+        <span class="s2">"temptation_last_modified"</span><span class="p">:</span> <span class="s2">"2022-03-31T18:10:37.913851+00:00"</span><span class="p">,</span>
+        <span class="s2">"thumbnail_uuid"</span><span class="p">:</span> <span class="s2">"50adc897-252f-4388-89bb-7ef034b68320"</span><span class="p">,</span>
+        <span class="s2">"user_tags"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"Google"</span><span class="p">,</span>
+          <span class="s2">"Unknown - By Qualys"</span><span class="p">,</span>
+          <span class="s2">"Unknown - By Tenable"</span><span class="p">,</span>
+          <span class="s2">"Wildcard Cert"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Apache&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;7.0.76&quot;</span>
+        <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"Apache"</span><span class="p">,</span>
+        <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"7.0.76"</span>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;randori_target_id&quot;</span><span class="p">:</span> <span class="s2">&quot;5dbcb688-8591-4574-ad18-6cbc27a1941c&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"randori_target_id"</span><span class="p">:</span> <span class="s2">"5dbcb688-8591-4574-ad18-6cbc27a1941c"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">167</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;MacBook-Pro.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-randori&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-11-02 16:57:13&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">167</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"MacBook-Pro.local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-randori"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-11-02 16:57:13"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1147,18 +1147,18 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">calendar</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">soar_datetimeformat</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">date_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S&quot;</span><span class="p">,</span> <span class="n">split_at</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom jinja filter to convert UTC dates to epoch format</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">soar_datetimeformat</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">date_format</span><span class="o">=</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S"</span><span class="p">,</span> <span class="n">split_at</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Custom jinja filter to convert UTC dates to epoch format</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        value ([str]): [jinja provided field value]</span>
-<span class="sd">        date_format (str, optional): [conversion format]. Defaults to &quot;%Y-%m-%dT%H:%M:%S&quot;.</span>
+<span class="sd">        date_format (str, optional): [conversion format]. Defaults to "%Y-%m-%dT%H:%M:%S".</span>
 <span class="sd">        split_at (str, optional): [character to split the date field to scope the date field.]</span>
-<span class="sd">            examples: split_at=&#39;.&#39; to remove milliseconds for &quot;2021-10-22T20:53:53.913Z&quot;,</span>
-<span class="sd">                      split_at=&#39;+&#39; tp remove tz information &quot;2021-10-22T20:53:53+00:00&quot;,</span>
+<span class="sd">            examples: split_at='.' to remove milliseconds for "2021-10-22T20:53:53.913Z",</span>
+<span class="sd">                      split_at='+' tp remove tz information "2021-10-22T20:53:53+00:00",</span>
 <span class="sd">    Returns:</span>
 <span class="sd">        [int]: [epoch value of datetime, in milliseconds]</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">value</span>
 
@@ -1172,20 +1172,20 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <span class="n">detection_data</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">detection_data</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">detection_data</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Randori: Get Target Data: Unable to get target data from Randori&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Randori: Get Target Data: Unable to get target data from Randori"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">detection_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
-  <span class="n">detection_list</span> <span class="o">=</span> <span class="n">detection_data</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;detection_list&quot;</span><span class="p">,</span> <span class="p">[])</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">detection_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="n">detection_list</span> <span class="o">=</span> <span class="n">detection_data</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"detection_list"</span><span class="p">,</span> <span class="p">[])</span>
   <span class="k">for</span> <span class="n">detection</span> <span class="ow">in</span> <span class="n">detection_list</span><span class="p">:</span>
-    <span class="n">detection_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;randori_detections_dt&quot;</span><span class="p">)</span>
-    <span class="n">detection_row</span><span class="p">[</span><span class="s1">&#39;randori_dt_date_added&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-    <span class="n">detection_row</span><span class="p">[</span><span class="s1">&#39;randori_dt_path&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;path&quot;</span><span class="p">)</span>
-    <span class="n">detection_row</span><span class="p">[</span><span class="s1">&#39;randori_dt_port&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;port&quot;</span><span class="p">)</span>
-    <span class="n">detection_row</span><span class="p">[</span><span class="s1">&#39;randori_dt_ip&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ip&quot;</span><span class="p">)</span>
-    <span class="n">detection_row</span><span class="p">[</span><span class="s1">&#39;randori_dt_hostname&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hostname&quot;</span><span class="p">)</span>
-    <span class="n">detection_row</span><span class="p">[</span><span class="s1">&#39;randori_dt_first_seen&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">soar_datetimeformat</span><span class="p">(</span><span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;first_seen&quot;</span><span class="p">),</span> <span class="n">split_at</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
-    <span class="n">detection_row</span><span class="p">[</span><span class="s1">&#39;randori_dt_last_seen&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">soar_datetimeformat</span><span class="p">(</span><span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;last_seen&quot;</span><span class="p">),</span> <span class="n">split_at</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Randori: automatic playbook updated Detections data table with </span><span class="si">{}</span><span class="s2"> detections&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">detection_list</span><span class="p">)))</span>
+    <span class="n">detection_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"randori_detections_dt"</span><span class="p">)</span>
+    <span class="n">detection_row</span><span class="p">[</span><span class="s1">'randori_dt_date_added'</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="n">detection_row</span><span class="p">[</span><span class="s1">'randori_dt_path'</span><span class="p">]</span> <span class="o">=</span> <span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"path"</span><span class="p">)</span>
+    <span class="n">detection_row</span><span class="p">[</span><span class="s1">'randori_dt_port'</span><span class="p">]</span> <span class="o">=</span> <span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"port"</span><span class="p">)</span>
+    <span class="n">detection_row</span><span class="p">[</span><span class="s1">'randori_dt_ip'</span><span class="p">]</span> <span class="o">=</span> <span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ip"</span><span class="p">)</span>
+    <span class="n">detection_row</span><span class="p">[</span><span class="s1">'randori_dt_hostname'</span><span class="p">]</span> <span class="o">=</span> <span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hostname"</span><span class="p">)</span>
+    <span class="n">detection_row</span><span class="p">[</span><span class="s1">'randori_dt_first_seen'</span><span class="p">]</span> <span class="o">=</span> <span class="n">soar_datetimeformat</span><span class="p">(</span><span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"first_seen"</span><span class="p">),</span> <span class="n">split_at</span><span class="o">=</span><span class="s1">'.'</span><span class="p">)</span>
+    <span class="n">detection_row</span><span class="p">[</span><span class="s1">'randori_dt_last_seen'</span><span class="p">]</span> <span class="o">=</span> <span class="n">soar_datetimeformat</span><span class="p">(</span><span class="n">detection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"last_seen"</span><span class="p">),</span> <span class="n">split_at</span><span class="o">=</span><span class="s1">'.'</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Randori: automatic playbook updated Detections data table with </span><span class="si">{}</span><span class="s2"> detections"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">detection_list</span><span class="p">)))</span>
 </pre></div>
 </div>
 </p>
@@ -1226,106 +1226,106 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;edges&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;329a6ff4-4e2a-4932-b39c-32c5d847e3c0&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{},</span>
-          <span class="s2">&quot;dst&quot;</span><span class="p">:</span> <span class="s2">&quot;b4a3b681-c96b-49ba-a0d5-7a576996e703&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;329a6ff4-4e2a-4932-b39c-32c5d847e3c0&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="s2">&quot;f62ab0f7-954c-4205-a39d-5f170f6131b7&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Passive DNS Records&quot;</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"edges"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"329a6ff4-4e2a-4932-b39c-32c5d847e3c0"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"content"</span><span class="p">:</span> <span class="p">{},</span>
+          <span class="s2">"dst"</span><span class="p">:</span> <span class="s2">"b4a3b681-c96b-49ba-a0d5-7a576996e703"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"329a6ff4-4e2a-4932-b39c-32c5d847e3c0"</span><span class="p">,</span>
+          <span class="s2">"src"</span><span class="p">:</span> <span class="s2">"f62ab0f7-954c-4205-a39d-5f170f6131b7"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Passive DNS Records"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;4be17e67-cc0f-4e28-b39f-3844edb09b68&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{},</span>
-          <span class="s2">&quot;dst&quot;</span><span class="p">:</span> <span class="s2">&quot;afd6c37d-1280-48ac-bf2d-46ae4286c54b&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;4be17e67-cc0f-4e28-b39f-3844edb09b68&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="s2">&quot;4be17e67-cc0f-4e28-b39f-3844edb09b68&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Detection-Target connection&quot;</span>
+        <span class="s2">"4be17e67-cc0f-4e28-b39f-3844edb09b68"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"content"</span><span class="p">:</span> <span class="p">{},</span>
+          <span class="s2">"dst"</span><span class="p">:</span> <span class="s2">"afd6c37d-1280-48ac-bf2d-46ae4286c54b"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"4be17e67-cc0f-4e28-b39f-3844edb09b68"</span><span class="p">,</span>
+          <span class="s2">"src"</span><span class="p">:</span> <span class="s2">"4be17e67-cc0f-4e28-b39f-3844edb09b68"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Detection-Target connection"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;7d52abd6-f390-4f7b-8312-6367011b1d93&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{},</span>
-          <span class="s2">&quot;dst&quot;</span><span class="p">:</span> <span class="s2">&quot;a5f818c5-68c4-40ec-a574-60bfae787651&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;7d52abd6-f390-4f7b-8312-6367011b1d93&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="s2">&quot;b4a3b681-c96b-49ba-a0d5-7a576996e703&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;DNS Record&quot;</span>
+        <span class="s2">"7d52abd6-f390-4f7b-8312-6367011b1d93"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"content"</span><span class="p">:</span> <span class="p">{},</span>
+          <span class="s2">"dst"</span><span class="p">:</span> <span class="s2">"a5f818c5-68c4-40ec-a574-60bfae787651"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"7d52abd6-f390-4f7b-8312-6367011b1d93"</span><span class="p">,</span>
+          <span class="s2">"src"</span><span class="p">:</span> <span class="s2">"b4a3b681-c96b-49ba-a0d5-7a576996e703"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"DNS Record"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;be5f636f-1189-49ee-906c-2a5aff984283&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{},</span>
-          <span class="s2">&quot;dst&quot;</span><span class="p">:</span> <span class="s2">&quot;4be17e67-cc0f-4e28-b39f-3844edb09b68&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;be5f636f-1189-49ee-906c-2a5aff984283&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;src&quot;</span><span class="p">:</span> <span class="s2">&quot;a5f818c5-68c4-40ec-a574-60bfae787651&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Port Scan&quot;</span>
+        <span class="s2">"be5f636f-1189-49ee-906c-2a5aff984283"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"content"</span><span class="p">:</span> <span class="p">{},</span>
+          <span class="s2">"dst"</span><span class="p">:</span> <span class="s2">"4be17e67-cc0f-4e28-b39f-3844edb09b68"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"be5f636f-1189-49ee-906c-2a5aff984283"</span><span class="p">,</span>
+          <span class="s2">"src"</span><span class="p">:</span> <span class="s2">"a5f818c5-68c4-40ec-a574-60bfae787651"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Port Scan"</span>
         <span class="p">}</span>
       <span class="p">},</span>
-      <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;4be17e67-cc0f-4e28-b39f-3844edb09b68&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ip_str&quot;</span><span class="p">:</span> <span class="s2">&quot;52.90.36.58&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;port&quot;</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span>
-            <span class="s2">&quot;protocol&quot;</span><span class="p">:</span> <span class="s2">&quot;tcp&quot;</span>
+      <span class="s2">"nodes"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"4be17e67-cc0f-4e28-b39f-3844edb09b68"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"hostname"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"ip_str"</span><span class="p">:</span> <span class="s2">"52.90.36.58"</span><span class="p">,</span>
+            <span class="s2">"path"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"port"</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span>
+            <span class="s2">"protocol"</span><span class="p">:</span> <span class="s2">"tcp"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;4be17e67-cc0f-4e28-b39f-3844edb09b68&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;detection&quot;</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"4be17e67-cc0f-4e28-b39f-3844edb09b68"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"detection"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;a5f818c5-68c4-40ec-a574-60bfae787651&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;ip_str&quot;</span><span class="p">:</span> <span class="s2">&quot;52.90.36.58&quot;</span>
+        <span class="s2">"a5f818c5-68c4-40ec-a574-60bfae787651"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"ip_str"</span><span class="p">:</span> <span class="s2">"52.90.36.58"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;a5f818c5-68c4-40ec-a574-60bfae787651&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ip&quot;</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"a5f818c5-68c4-40ec-a574-60bfae787651"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"ip"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;afd6c37d-1280-48ac-bf2d-46ae4286c54b&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;telnetd&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Linux&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+        <span class="s2">"afd6c37d-1280-48ac-bf2d-46ae4286c54b"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"telnetd"</span><span class="p">,</span>
+            <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"Linux"</span><span class="p">,</span>
+            <span class="s2">"version"</span><span class="p">:</span> <span class="s2">""</span>
           <span class="p">},</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;afd6c37d-1280-48ac-bf2d-46ae4286c54b&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;target&quot;</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"afd6c37d-1280-48ac-bf2d-46ae4286c54b"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"target"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;b4a3b681-c96b-49ba-a0d5-7a576996e703&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="s2">&quot;telnet.webernets.online&quot;</span>
+        <span class="s2">"b4a3b681-c96b-49ba-a0d5-7a576996e703"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"hostname"</span><span class="p">:</span> <span class="s2">"telnet.webernets.online"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;b4a3b681-c96b-49ba-a0d5-7a576996e703&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;hostname&quot;</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"b4a3b681-c96b-49ba-a0d5-7a576996e703"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"hostname"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;f62ab0f7-954c-4205-a39d-5f170f6131b7&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="s2">&quot;webernets.online&quot;</span>
+        <span class="s2">"f62ab0f7-954c-4205-a39d-5f170f6131b7"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"hostname"</span><span class="p">:</span> <span class="s2">"webernets.online"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;f62ab0f7-954c-4205-a39d-5f170f6131b7&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;hostname&quot;</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"f62ab0f7-954c-4205-a39d-5f170f6131b7"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"hostname"</span>
         <span class="p">}</span>
       <span class="p">},</span>
-      <span class="s2">&quot;paths&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"paths"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">[</span>
-          <span class="s2">&quot;4be17e67-cc0f-4e28-b39f-3844edb09b68&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;be5f636f-1189-49ee-906c-2a5aff984283&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;7d52abd6-f390-4f7b-8312-6367011b1d93&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;329a6ff4-4e2a-4932-b39c-32c5d847e3c0&quot;</span>
+          <span class="s2">"4be17e67-cc0f-4e28-b39f-3844edb09b68"</span><span class="p">,</span>
+          <span class="s2">"be5f636f-1189-49ee-906c-2a5aff984283"</span><span class="p">,</span>
+          <span class="s2">"7d52abd6-f390-4f7b-8312-6367011b1d93"</span><span class="p">,</span>
+          <span class="s2">"329a6ff4-4e2a-4932-b39c-32c5d847e3c0"</span>
         <span class="p">]</span>
       <span class="p">]</span>
     <span class="p">},</span>
-    <span class="s2">&quot;base_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://app.randori.io/myorg&quot;</span>
+    <span class="s2">"base_url"</span><span class="p">:</span> <span class="s2">"https://app.randori.io/myorg"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;randori_target_id&quot;</span><span class="p">:</span> <span class="s2">&quot;afd6c37d-1280-48ac-bf2d-46ae4286c54b&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"randori_target_id"</span><span class="p">:</span> <span class="s2">"afd6c37d-1280-48ac-bf2d-46ae4286c54b"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-randori&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;MacBook-Pro.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">6479</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-11-09 18:42:30&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-randori"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"MacBook-Pro.local"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">6479</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-11-09 18:42:30"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1346,70 +1346,70 @@ Here is an polling filter example that adds or updates targets that have a "targ
 
 <span class="k">def</span><span class="w"> </span><span class="nf">add_node_to_dt</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">randori_base_url</span><span class="p">):</span>
   
-  <span class="n">content</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
 
-  <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;randori_discovery_path_dt&quot;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;randori_dt_date_added&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span> 
+  <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"randori_discovery_path_dt"</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">"randori_dt_date_added"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span> 
   
   <span class="c1"># For each node type formatting is different.</span>
-  <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;target&quot;</span><span class="p">:</span>
-    <span class="n">target_name</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
-    <span class="n">target_version</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;randori_dt_discovery_step&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_name</span><span class="p">,</span> <span class="n">target_version</span><span class="p">)</span>
-  <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;hostname&quot;</span><span class="p">:</span>
-    <span class="n">hostname</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hostname&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;randori_dt_discovery_step&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hostname</span><span class="p">)</span>
-    <span class="n">link</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">/hostnames/</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">randori_base_url</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">))</span>
-    <span class="n">ref_html</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;a href=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;View Details&lt;/a&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;randori_dt_link&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref_html</span><span class="p">)</span>
-  <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;ip&quot;</span><span class="p">:</span>
-    <span class="n">ip</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ip_str&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;randori_dt_discovery_step&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
-    <span class="n">link</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">/ips/</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">randori_base_url</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">))</span>
-    <span class="n">ref_html</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;a href=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;View Details&lt;/a&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;randori_dt_link&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref_html</span><span class="p">)</span>
-  <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;detection&quot;</span><span class="p">:</span>
-    <span class="n">hostname</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hostname&quot;</span><span class="p">)</span>
-    <span class="n">ip</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ip_str&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;randori_dt_discovery_step&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;detection: </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">ip</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"type"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"target"</span><span class="p">:</span>
+    <span class="n">target_name</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">)</span>
+    <span class="n">target_version</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"version"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"randori_dt_discovery_step"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_name</span><span class="p">,</span> <span class="n">target_version</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"type"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"hostname"</span><span class="p">:</span>
+    <span class="n">hostname</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hostname"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"randori_dt_discovery_step"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hostname</span><span class="p">)</span>
+    <span class="n">link</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{0}</span><span class="s2">/hostnames/</span><span class="si">{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">randori_base_url</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"id"</span><span class="p">))</span>
+    <span class="n">ref_html</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;a href='</span><span class="si">{0}</span><span class="s2">'&gt;View Details&lt;/a&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"randori_dt_link"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref_html</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"type"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"ip"</span><span class="p">:</span>
+    <span class="n">ip</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ip_str"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"randori_dt_discovery_step"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+    <span class="n">link</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{0}</span><span class="s2">/ips/</span><span class="si">{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">randori_base_url</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"id"</span><span class="p">))</span>
+    <span class="n">ref_html</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;a href='</span><span class="si">{0}</span><span class="s2">'&gt;View Details&lt;/a&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"randori_dt_link"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref_html</span><span class="p">)</span>
+  <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"type"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"detection"</span><span class="p">:</span>
+    <span class="n">hostname</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hostname"</span><span class="p">)</span>
+    <span class="n">ip</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ip_str"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"randori_dt_discovery_step"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"detection: </span><span class="si">{}</span><span class="s2"> </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">ip</span><span class="p">)</span>
 
     
 <span class="c1">#########################################################################################</span>
 <span class="n">paths_data</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">paths_data</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">paths_data</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Randori: Unable to get paths data to populate Discovery Path data table.&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Randori: Unable to get paths data to populate Discovery Path data table."</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
 
-  <span class="n">paths_data_content</span> <span class="o">=</span> <span class="n">paths_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
-  <span class="n">randori_base_url</span> <span class="o">=</span> <span class="n">paths_data_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;base_url&quot;</span><span class="p">)</span>
-  <span class="n">data</span> <span class="o">=</span> <span class="n">paths_data_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
-  <span class="n">edges</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;edges&quot;</span><span class="p">)</span>
-  <span class="n">nodes</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;nodes&quot;</span><span class="p">)</span>
-  <span class="n">paths_list_list</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;paths&quot;</span><span class="p">)</span>
+  <span class="n">paths_data_content</span> <span class="o">=</span> <span class="n">paths_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
+  <span class="n">randori_base_url</span> <span class="o">=</span> <span class="n">paths_data_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"base_url"</span><span class="p">)</span>
+  <span class="n">data</span> <span class="o">=</span> <span class="n">paths_data_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'data'</span><span class="p">)</span>
+  <span class="n">edges</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"edges"</span><span class="p">)</span>
+  <span class="n">nodes</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"nodes"</span><span class="p">)</span>
+  <span class="n">paths_list_list</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"paths"</span><span class="p">)</span>
 
   <span class="k">for</span> <span class="n">path_list</span> <span class="ow">in</span> <span class="n">paths_list_list</span><span class="p">:</span>
     <span class="n">edge</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">path_list</span><span class="p">:</span>
       <span class="n">edge</span> <span class="o">=</span> <span class="n">edges</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-      <span class="n">dst</span> <span class="o">=</span> <span class="n">edge</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;dst&quot;</span><span class="p">)</span>
+      <span class="n">dst</span> <span class="o">=</span> <span class="n">edge</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"dst"</span><span class="p">)</span>
       <span class="n">node</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dst</span><span class="p">)</span>
       
       <span class="c1"># Add node to the data table</span>
       <span class="n">add_node_to_dt</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">randori_base_url</span><span class="p">)</span>
   
       <span class="c1"># Add edge type to the data table</span>
-      <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;randori_discovery_path_dt&quot;</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;randori_dt_date_added&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span> 
-      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;randori_dt_discovery_step&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">edge</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;type&quot;</span><span class="p">))</span>
+      <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"randori_discovery_path_dt"</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">"randori_dt_date_added"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span> 
+      <span class="n">row</span><span class="p">[</span><span class="s2">"randori_dt_discovery_step"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">edge</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"type"</span><span class="p">))</span>
       
     <span class="k">if</span> <span class="n">edge</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
       <span class="c1"># Last node is the src</span>
-      <span class="n">src</span> <span class="o">=</span> <span class="n">edge</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;src&quot;</span><span class="p">)</span>
+      <span class="n">src</span> <span class="o">=</span> <span class="n">edge</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"src"</span><span class="p">)</span>
       <span class="n">node</span> <span class="o">=</span> <span class="n">nodes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
       <span class="n">add_node_to_dt</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">randori_base_url</span><span class="p">)</span>
   
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Randori: Discovery Path table refreshed.&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Randori: Discovery Path table refreshed."</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1450,87 +1450,87 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;affiliation_state&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;applicability&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-      <span class="s2">&quot;attack_note&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;authority&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;authority_distance&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;authority_override&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;authorization_state&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;characteristic_tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
-      <span class="s2">&quot;cpe&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;cpe_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;edition&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;language&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;other&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;part&quot;</span><span class="p">:</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;product&quot;</span><span class="p">:</span> <span class="s2">&quot;vcenter_server&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;str&quot;</span><span class="p">:</span> <span class="s2">&quot;cpe:2.3:a:vmware:vcenter_server:*:*:*:*:*:*:*:*&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;sw_edition&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;target_hw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;target_sw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;update&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;vmware&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"affiliation_state"</span><span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+      <span class="s2">"applicability"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="s2">"attack_note"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"authority"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"authority_distance"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"authority_override"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"authorization_state"</span><span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+      <span class="s2">"characteristic_tags"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"confidence"</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
+      <span class="s2">"cpe"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"cpe_version"</span><span class="p">:</span> <span class="s2">"2.3"</span><span class="p">,</span>
+        <span class="s2">"edition"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"language"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"other"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"part"</span><span class="p">:</span> <span class="s2">"a"</span><span class="p">,</span>
+        <span class="s2">"product"</span><span class="p">:</span> <span class="s2">"vcenter_server"</span><span class="p">,</span>
+        <span class="s2">"str"</span><span class="p">:</span> <span class="s2">"cpe:2.3:a:vmware:vcenter_server:*:*:*:*:*:*:*:*"</span><span class="p">,</span>
+        <span class="s2">"sw_edition"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"target_hw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"target_sw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"update"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"vmware"</span><span class="p">,</span>
+        <span class="s2">"version"</span><span class="p">:</span> <span class="n">null</span>
       <span class="p">},</span>
-      <span class="s2">&quot;criticality&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-      <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;VMware vCenter is the management component of VMware vSphere&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;enumerability&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;first_seen&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-09-10T07:49:26.858689+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;2755b843-9d38-457e-b4a3-3a8d27c47a9c&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;impact_score&quot;</span><span class="p">:</span> <span class="s2">&quot;Medium&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;last_seen&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-11-29T20:13:48.701719+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;lens_id&quot;</span><span class="p">:</span> <span class="s2">&quot;6e8476e5-ead9-4ca2-914c-3bc1732ca0fb&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;lens_view&quot;</span><span class="p">:</span> <span class="s2">&quot;public&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;vCenter&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;org_id&quot;</span><span class="p">:</span> <span class="s2">&quot;e0c553a8-88f1-4991-8970-f058a82542e8&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;perspective&quot;</span><span class="p">:</span> <span class="s2">&quot;00000000-0000-0000-0000-000000000000&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;perspective_name&quot;</span><span class="p">:</span> <span class="s2">&quot;PUBLIC&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;post_exploit&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-      <span class="s2">&quot;priority_impact_factor&quot;</span><span class="p">:</span> <span class="mf">0.02625</span><span class="p">,</span>
-      <span class="s2">&quot;priority_score&quot;</span><span class="p">:</span> <span class="mf">39.375</span><span class="p">,</span>
-      <span class="s2">&quot;priority_status_factor&quot;</span><span class="p">:</span> <span class="mf">0.065625</span><span class="p">,</span>
-      <span class="s2">&quot;priority_tags_factor&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
-      <span class="s2">&quot;private_weakness&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;public_weakness&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="s2">&quot;randori_notes&quot;</span><span class="p">:</span> <span class="s2">&quot;VMware vSphere (and associated services - vCenter) may be vulnerable to the Log4j 2 Remote Code Execution vulnerabilities - CVE-2021-44228 CVE-2021-45046 CVE-2021-45105 CVE-2021-44832 - https://logging.apache.org/log4j/2.x/security.html.  Proof-of-Concept exploit code is available for these CVEs. Users should check their Log4J 2 configuration and apply mitigations as described in either the above article or per their vendor guidance https://www.vmware.com/security/advisories/VMSA-2021-0028.html&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;reference&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;research&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-      <span class="s2">&quot;service_id&quot;</span><span class="p">:</span> <span class="s2">&quot;44096166-3213-43c9-8c0e-27945a7fd8ce&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Needs Investigation&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;target_temptation&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
-      <span class="s2">&quot;tech_category&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;Network Services&quot;</span>
+      <span class="s2">"criticality"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s2">"deleted"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"VMware vCenter is the management component of VMware vSphere"</span><span class="p">,</span>
+      <span class="s2">"enumerability"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"first_seen"</span><span class="p">:</span> <span class="s2">"2022-09-10T07:49:26.858689+00:00"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"2755b843-9d38-457e-b4a3-3a8d27c47a9c"</span><span class="p">,</span>
+      <span class="s2">"impact_score"</span><span class="p">:</span> <span class="s2">"Medium"</span><span class="p">,</span>
+      <span class="s2">"last_seen"</span><span class="p">:</span> <span class="s2">"2022-11-29T20:13:48.701719+00:00"</span><span class="p">,</span>
+      <span class="s2">"lens_id"</span><span class="p">:</span> <span class="s2">"6e8476e5-ead9-4ca2-914c-3bc1732ca0fb"</span><span class="p">,</span>
+      <span class="s2">"lens_view"</span><span class="p">:</span> <span class="s2">"public"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"vCenter"</span><span class="p">,</span>
+      <span class="s2">"org_id"</span><span class="p">:</span> <span class="s2">"e0c553a8-88f1-4991-8970-f058a82542e8"</span><span class="p">,</span>
+      <span class="s2">"perspective"</span><span class="p">:</span> <span class="s2">"00000000-0000-0000-0000-000000000000"</span><span class="p">,</span>
+      <span class="s2">"perspective_name"</span><span class="p">:</span> <span class="s2">"PUBLIC"</span><span class="p">,</span>
+      <span class="s2">"post_exploit"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s2">"priority_impact_factor"</span><span class="p">:</span> <span class="mf">0.02625</span><span class="p">,</span>
+      <span class="s2">"priority_score"</span><span class="p">:</span> <span class="mf">39.375</span><span class="p">,</span>
+      <span class="s2">"priority_status_factor"</span><span class="p">:</span> <span class="mf">0.065625</span><span class="p">,</span>
+      <span class="s2">"priority_tags_factor"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+      <span class="s2">"private_weakness"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"public_weakness"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">"randori_notes"</span><span class="p">:</span> <span class="s2">"VMware vSphere (and associated services - vCenter) may be vulnerable to the Log4j 2 Remote Code Execution vulnerabilities - CVE-2021-44228 CVE-2021-45046 CVE-2021-45105 CVE-2021-44832 - https://logging.apache.org/log4j/2.x/security.html.  Proof-of-Concept exploit code is available for these CVEs. Users should check their Log4J 2 configuration and apply mitigations as described in either the above article or per their vendor guidance https://www.vmware.com/security/advisories/VMSA-2021-0028.html"</span><span class="p">,</span>
+      <span class="s2">"reference"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"research"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+      <span class="s2">"service_id"</span><span class="p">:</span> <span class="s2">"44096166-3213-43c9-8c0e-27945a7fd8ce"</span><span class="p">,</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"Needs Investigation"</span><span class="p">,</span>
+      <span class="s2">"target_temptation"</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
+      <span class="s2">"tech_category"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"Network Services"</span>
       <span class="p">],</span>
-      <span class="s2">&quot;temptation_last_modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-04-07T20:59:44.451528+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;user_tags&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;Cert Expire 60&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Google&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Wildcard Cert&quot;</span>
+      <span class="s2">"temptation_last_modified"</span><span class="p">:</span> <span class="s2">"2022-04-07T20:59:44.451528+00:00"</span><span class="p">,</span>
+      <span class="s2">"user_tags"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"Cert Expire 60"</span><span class="p">,</span>
+        <span class="s2">"Google"</span><span class="p">,</span>
+        <span class="s2">"Wildcard Cert"</span>
       <span class="p">],</span>
-      <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;VMware&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+      <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"VMware"</span><span class="p">,</span>
+      <span class="s2">"version"</span><span class="p">:</span> <span class="s2">""</span>
     <span class="p">},</span>
-    <span class="s2">&quot;entity_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://app.randori.io/xxxx/targets/2755b843-9d38-457e-b4a3-3a8d27c47a9c&quot;</span>
+    <span class="s2">"entity_url"</span><span class="p">:</span> <span class="s2">"https://app.randori.io/xxxx/targets/2755b843-9d38-457e-b4a3-3a8d27c47a9c"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;randori_target_id&quot;</span><span class="p">:</span> <span class="s2">&quot;2755b843-9d38-457e-b4a3-3a8d27c47a9c&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"randori_target_id"</span><span class="p">:</span> <span class="s2">"2755b843-9d38-457e-b4a3-3a8d27c47a9c"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-randori&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;MacBook-Pro.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">29154</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-12-01 10:05:54&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-randori"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"MacBook-Pro.local"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">29154</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-12-01 10:05:54"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1548,57 +1548,57 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">map_temptation</span><span class="p">(</span><span class="n">temptation_score</span><span class="p">):</span>
   <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">temptation_score</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s2">&quot;In Review&quot;</span>
+    <span class="k">return</span> <span class="s2">"In Review"</span>
 
   <span class="k">if</span> <span class="n">temptation_score</span> <span class="o">&lt;=</span> <span class="mi">14</span><span class="p">:</span>
-    <span class="k">return</span> <span class="s2">&quot;Low&quot;</span>
+    <span class="k">return</span> <span class="s2">"Low"</span>
   <span class="k">elif</span> <span class="n">temptation_score</span> <span class="o">&gt;=</span> <span class="mi">15</span> <span class="ow">and</span> <span class="n">temptation_score</span> <span class="o">&lt;=</span> <span class="mi">29</span><span class="p">:</span>
-    <span class="k">return</span> <span class="s2">&quot;Medium&quot;</span>
+    <span class="k">return</span> <span class="s2">"Medium"</span>
   <span class="k">elif</span> <span class="n">temptation_score</span> <span class="o">&gt;=</span> <span class="mi">30</span> <span class="ow">and</span> <span class="n">temptation_score</span> <span class="o">&lt;=</span> <span class="mi">39</span><span class="p">:</span>
-    <span class="k">return</span> <span class="s2">&quot;High&quot;</span>
+    <span class="k">return</span> <span class="s2">"High"</span>
   <span class="k">elif</span> <span class="n">temptation_score</span> <span class="o">&gt;=</span> <span class="mi">40</span><span class="p">:</span>
-    <span class="k">return</span> <span class="s2">&quot;Critical&quot;</span>
+    <span class="k">return</span> <span class="s2">"Critical"</span>
 
 <span class="n">target_data</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">target_data</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">target_data</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Randori: Update custom fields: Unable to get target data to update custom fields.&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Randori: Update custom fields: Unable to get target data to update custom fields."</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">target_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
-  <span class="n">data</span> <span class="o">=</span> <span class="n">target_data</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">target_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="n">data</span> <span class="o">=</span> <span class="n">target_data</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="p">{})</span>
   <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
     <span class="c1"># Update custom fields with Randori target data</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_status</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_impact_score</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;impact_score&quot;</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_temptation</span> <span class="o">=</span> <span class="n">map_temptation</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;target_temptation&quot;</span><span class="p">))</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_name</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_vendor</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;vendor&quot;</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_version</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;version&quot;</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_authority</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;authority&quot;</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_affiliation_state</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;affiliation_state&quot;</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_perspective_name</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;perspective_name&quot;</span><span class="p">)</span>
-    <span class="n">entity_url</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;entity_url&quot;</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_status</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"status"</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_impact_score</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"impact_score"</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_temptation</span> <span class="o">=</span> <span class="n">map_temptation</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"target_temptation"</span><span class="p">))</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_name</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_vendor</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"vendor"</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_version</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"version"</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_authority</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"authority"</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_affiliation_state</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"affiliation_state"</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_perspective_name</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"perspective_name"</span><span class="p">)</span>
+    <span class="n">entity_url</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"entity_url"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">entity_url</span><span class="p">:</span>
-      <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_link</span> <span class="o">=</span> <span class="s2">&quot;&lt;a target=&#39;_blank&#39; href=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;Link&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">entity_url</span><span class="p">)</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_link</span> <span class="o">=</span> <span class="s2">"&lt;a target='_blank' href='</span><span class="si">{0}</span><span class="s2">'&gt;Link&lt;/a&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">entity_url</span><span class="p">)</span>
 
-    <span class="n">tech_category</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tech_category&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">tech_category</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tech_category"</span><span class="p">,</span> <span class="p">[])</span>
     <span class="k">if</span> <span class="n">tech_category</span><span class="p">:</span>
-      <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_tech_category</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tech_category</span><span class="p">)</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_tech_category</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tech_category</span><span class="p">)</span>
 
-    <span class="n">user_tags</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_tags&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">user_tags</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"user_tags"</span><span class="p">,</span> <span class="p">[])</span>
     <span class="k">if</span> <span class="n">user_tags</span><span class="p">:</span>
-      <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_user_tags</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">user_tags</span><span class="p">)</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_user_tags</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">user_tags</span><span class="p">)</span>
         
-    <span class="n">characteristic_tags</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;characteristic_tags&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">characteristic_tags</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"characteristic_tags"</span><span class="p">,</span> <span class="p">[])</span>
     <span class="k">if</span> <span class="n">user_tags</span><span class="p">:</span>
-      <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_characteristic_tags</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">characteristic_tags</span><span class="p">)</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_characteristic_tags</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">characteristic_tags</span><span class="p">)</span>
     
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Randori: Update Target Data in SOAR script updated custom fields in SOAR.&quot;</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Randori: Update Target Data in SOAR script updated custom fields in SOAR."</span><span class="p">)</span>
     
     <span class="c1"># Add Randori note</span>
-    <span class="n">randori_notes</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;randori_notes&quot;</span><span class="p">)</span>
+    <span class="n">randori_notes</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"randori_notes"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">randori_notes</span><span class="p">:</span>
-        <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Created by Randori:&lt;/b&gt;&lt;br&gt; </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">randori_notes</span><span class="p">)))</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="s2">"&lt;b&gt;Created by Randori:&lt;/b&gt;&lt;br&gt; </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">randori_notes</span><span class="p">)))</span>
 </pre></div>
 </div>
 </p>
@@ -1645,33 +1645,33 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Added note from Randori Target&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-11-02T17:37:25.576771+00:00&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;af217af0-b6d6-4659-86b0-5fc876eac7e8&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;is_author&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;is_bulk_applied&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;QRadar SOAR Development&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rel_id&quot;</span><span class="p">:</span> <span class="s2">&quot;16543836-9b71-4614-8c73-4a5b440a8c62&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;ACTIVE&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"action"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"comment"</span><span class="p">:</span> <span class="s2">"Added note from Randori Target"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2022-11-02T17:37:25.576771+00:00"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"af217af0-b6d6-4659-86b0-5fc876eac7e8"</span><span class="p">,</span>
+    <span class="s2">"is_author"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"is_bulk_applied"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"QRadar SOAR Development"</span><span class="p">,</span>
+    <span class="s2">"rel_id"</span><span class="p">:</span> <span class="s2">"16543836-9b71-4614-8c73-4a5b440a8c62"</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"ACTIVE"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;randori_comment_text&quot;</span><span class="p">:</span> <span class="s2">&quot;Added note from Randori Target&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;randori_target_id&quot;</span><span class="p">:</span> <span class="s2">&quot;5dbcb688-8591-4574-ad18-6cbc27a1941c&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"randori_comment_text"</span><span class="p">:</span> <span class="s2">"Added note from Randori Target"</span><span class="p">,</span>
+    <span class="s2">"randori_target_id"</span><span class="p">:</span> <span class="s2">"5dbcb688-8591-4574-ad18-6cbc27a1941c"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">10124</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;MacBook-Pro.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-randori&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-11-02 13:37:29&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">10124</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"MacBook-Pro.local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-randori"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-11-02 13:37:29"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1733,25 +1733,25 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"count"</span><span class="p">:</span> <span class="mi">0</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2675</span><span class="p">,</span>
-    <span class="s2">&quot;randori_target_id&quot;</span><span class="p">:</span> <span class="s2">&quot;80c039c4-625b-42fb-a8f1-3888db45d29e&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2675</span><span class="p">,</span>
+    <span class="s2">"randori_target_id"</span><span class="p">:</span> <span class="s2">"80c039c4-625b-42fb-a8f1-3888db45d29e"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">262</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;MacBook-Pro.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-randori&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-11-07 11:28:54&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">262</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"MacBook-Pro.local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-randori"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-11-07 11:28:54"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1775,7 +1775,7 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <span class="k">if</span> <span class="n">note_data</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
   <span class="c1"># Get the current time</span>
   <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-  <span class="n">note</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&lt;b&gt;Sent to Randori at </span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;br&gt;</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">now</span><span class="p">,</span> <span class="n">note</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+  <span class="n">note</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"&lt;b&gt;Sent to Randori at </span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;br&gt;</span><span class="si">{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">now</span><span class="p">,</span> <span class="n">note</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1830,26 +1830,26 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"count"</span><span class="p">:</span> <span class="mi">1</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;randori_note&quot;</span><span class="p">:</span> <span class="s2">&quot;from SOAR&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;randori_target_id&quot;</span><span class="p">:</span> <span class="s2">&quot;5dbcb688-8591-4574-ad18-6cbc27a1941c&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;randori_target_impact_score&quot;</span><span class="p">:</span> <span class="s2">&quot;Low&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"randori_note"</span><span class="p">:</span> <span class="s2">"from SOAR"</span><span class="p">,</span>
+    <span class="s2">"randori_target_id"</span><span class="p">:</span> <span class="s2">"5dbcb688-8591-4574-ad18-6cbc27a1941c"</span><span class="p">,</span>
+    <span class="s2">"randori_target_impact_score"</span><span class="p">:</span> <span class="s2">"Low"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">626</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;MacBook-Pro.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-randori&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-11-07 13:08:40&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">626</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"MacBook-Pro.local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-randori"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-11-07 13:08:40"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1869,10 +1869,10 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">target_impact_score</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">target_impact_score</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">target_impact_score</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Randori: ERROR: Unable to Update Target Impact Score to &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_impact_score</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">randori_target_impact_score</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Randori: ERROR: Unable to Update Target Impact Score to &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_impact_score</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">randori_target_impact_score</span><span class="p">))</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_impact_score</span> <span class="o">=</span> <span class="n">target_impact_score</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">randori_target_impact_score</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Randori: Updated Target Impact Score to &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt; in Randori&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_impact_score</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Randori: Updated Target Impact Score to &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt; in Randori"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_impact_score</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>
@@ -1927,26 +1927,26 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"count"</span><span class="p">:</span> <span class="mi">1</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;randori_note&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\&quot;</span><span class="s2">rte</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e</span><span class="s2">marking as resolved from SOAR</span><span class="se">\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;randori_target_id&quot;</span><span class="p">:</span> <span class="s2">&quot;5dbcb688-8591-4574-ad18-6cbc27a1941c&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;randori_target_status&quot;</span><span class="p">:</span> <span class="s2">&quot;Accepted&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"randori_note"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\"</span><span class="s2">rte</span><span class="se">\"\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e</span><span class="s2">marking as resolved from SOAR</span><span class="se">\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"randori_target_id"</span><span class="p">:</span> <span class="s2">"5dbcb688-8591-4574-ad18-6cbc27a1941c"</span><span class="p">,</span>
+    <span class="s2">"randori_target_status"</span><span class="p">:</span> <span class="s2">"Accepted"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">704</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;MacBook-Pro.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-randori&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-11-07 13:14:30&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">704</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"MacBook-Pro.local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-randori"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-11-07 13:14:30"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1966,10 +1966,10 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">target_status</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">target_status</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">target_status</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Randori: ERROR: Unable to Update Target Status to &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_status</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">randori_target_status</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Randori: ERROR: Unable to Update Target Status to &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_status</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">randori_target_status</span><span class="p">))</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_status</span> <span class="o">=</span> <span class="n">target_status</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">randori_target_status</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Randori: Updated Target Status to &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt; in Randori&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_status</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Randori: Updated Target Status to &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt; in Randori"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">randori_target_status</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>
@@ -2248,40 +2248,40 @@ Here is an polling filter example that adds or updates targets that have a "targ
   {# See https://ibmresilient.github.io/resilient-python-api/pages/resilient-lib/resilient-lib.html#module-resilient_lib.components.templates_common
      for details on available jinja methods. Examples for `soar_substitute` and more are included below.
   #}
-  &quot;name&quot;: &quot;Randori Target - {{ vendor }}, {{ name }} {{ version }}&quot;,
-  &quot;description&quot;: &quot;{{ description | replace(&#39;&quot;&#39;, &#39;\\&quot;&#39;) }}&quot;,
+  "name": "Randori Target - {{ vendor }}, {{ name }} {{ version }}",
+  "description": "{{ description | replace('"', '\\"') }}",
   {# start_date cannot be after discovered_date #}
   {% set start_date = first_seen if first_seen &lt;= target_first_seen else target_first_seen %}
-  &quot;discovered_date&quot;: {{ target_first_seen | soar_datetimeformat(split_at=&#39;.&#39;) }},
-  &quot;start_date&quot;: {{ start_date| soar_datetimeformat(split_at=&#39;.&#39;) }},
+  "discovered_date": {{ target_first_seen | soar_datetimeformat(split_at='.') }},
+  "start_date": {{ start_date| soar_datetimeformat(split_at='.') }},
   {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
-  &quot;plan_status&quot;: &quot;A&quot;,
+  "plan_status": "A",
   {% if priority_score &lt;= 20 %}
-    &quot;severity_code&quot;: &quot;Low&quot;,
+    "severity_code": "Low",
   {% elif priority_score &lt;= 29.98%}
-    &quot;severity_code&quot;: &quot;Medium&quot;,
+    "severity_code": "Medium",
   {% else %}
-    &quot;severity_code&quot;: &quot;High&quot;,
+    "severity_code": "High",
   {% endif %}
   {# specify your custom fields for your endpoint solution #}
-  &quot;properties&quot;: {
-    &quot;randori_target_id&quot;: &quot;{{ target_id }}&quot;,
+  "properties": {
+    "randori_target_id": "{{ target_id }}",
     {% if target_temptation is not none %}
         {% if target_temptation &lt;= 14 %}
-          &quot;randori_target_temptation&quot;: &quot;Low&quot;,
+          "randori_target_temptation": "Low",
         {% elif target_temptation &gt;= 15 and target_temptation &lt;= 29 %}
-          &quot;randori_target_temptation&quot;: &quot;Medium&quot;,
+          "randori_target_temptation": "Medium",
         {% elif target_temptation &gt;= 30 and target_temptation &lt;= 39 %}
-          &quot;randori_target_temptation&quot;: &quot;High&quot;,
+          "randori_target_temptation": "High",
         {% elif target_temptation &gt;= 40 %}
-          &quot;randori_target_temptation&quot;: &quot;Critical&quot;,
+          "randori_target_temptation": "Critical",
         {% endif %}
     {% else %}
-        &quot;randori_target_temptation&quot;: &quot;In Review&quot;,
+        "randori_target_temptation": "In Review",
     {% endif %}
 
-    &quot;randori_target_status&quot;: &quot;{{ status }}&quot;,
-    &quot;randori_target_link&quot;: &quot;&lt;a target=&#39;_blank&#39; href=&#39;{{ entity_url }}&#39;&gt;Link&lt;/a&gt;&quot;
+    "randori_target_status": "{{ status }}",
+    "randori_target_link": "&lt;a target='_blank' href='{{ entity_url }}'&gt;Link&lt;/a&gt;"
   }
 }
 </pre></div>
@@ -2292,13 +2292,13 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <p>When overriding the template in App Host, specify the file path as <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="p">{</span><span class="c1"># JINJA template for closing a SOAR case using endpoint data #}</span>
-  <span class="s2">&quot;plan_status&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;resolution_id&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ status | soar_substitute(&#39;{&quot;</span><span class="n">Accepted</span><span class="s2">&quot;: &quot;</span><span class="n">Not</span> <span class="n">an</span> <span class="n">Issue</span><span class="s2">&quot;, &quot;</span><span class="n">Mitigated</span><span class="s2">&quot;: &quot;</span><span class="n">Resolved</span><span class="s2">&quot;}&#39;) }}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;resolution_summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Closed by Randori, Target Status: {{ status }}&quot;</span>
-  <span class="p">{</span><span class="c1"># add additional fields based on your &#39;on close&#39; field requirements #}</span>
+  <span class="s2">"plan_status"</span><span class="p">:</span> <span class="s2">"C"</span><span class="p">,</span>
+  <span class="s2">"resolution_id"</span><span class="p">:</span> <span class="s2">"{{ status | soar_substitute('{"</span><span class="n">Accepted</span><span class="s2">": "</span><span class="n">Not</span> <span class="n">an</span> <span class="n">Issue</span><span class="s2">", "</span><span class="n">Mitigated</span><span class="s2">": "</span><span class="n">Resolved</span><span class="s2">"}') }}"</span><span class="p">,</span>
+  <span class="s2">"resolution_summary"</span><span class="p">:</span> <span class="s2">"Closed by Randori, Target Status: {{ status }}"</span>
+  <span class="p">{</span><span class="c1"># add additional fields based on your 'on close' field requirements #}</span>
   <span class="p">{</span><span class="c1">#</span>
-  <span class="p">,</span><span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;randori_target_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ status }}&quot;</span>
+  <span class="p">,</span><span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"randori_target_status"</span><span class="p">:</span> <span class="s2">"{{ status }}"</span>
   <span class="p">}</span>
   <span class="c1">#}</span>
 <span class="p">}</span>
@@ -2311,46 +2311,46 @@ Here is an polling filter example that adds or updates targets that have a "targ
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="p">{</span><span class="c1"># JINJA template for updating a new SOAR case from an endpoint #}</span>
   <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">priority_score</span> <span class="o">&lt;=</span> <span class="mi">20</span> <span class="o">%</span><span class="p">}</span>
-    <span class="s2">&quot;severity_code&quot;</span><span class="p">:</span> <span class="s2">&quot;Low&quot;</span><span class="p">,</span>
+    <span class="s2">"severity_code"</span><span class="p">:</span> <span class="s2">"Low"</span><span class="p">,</span>
   <span class="p">{</span><span class="o">%</span> <span class="k">elif</span> <span class="n">priority_score</span> <span class="o">&lt;=</span> <span class="mf">29.98</span><span class="o">%</span><span class="p">}</span>
-    <span class="s2">&quot;severity_code&quot;</span><span class="p">:</span> <span class="s2">&quot;Medium&quot;</span><span class="p">,</span>
+    <span class="s2">"severity_code"</span><span class="p">:</span> <span class="s2">"Medium"</span><span class="p">,</span>
   <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span>
-    <span class="s2">&quot;severity_code&quot;</span><span class="p">:</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span>
+    <span class="s2">"severity_code"</span><span class="p">:</span> <span class="s2">"High"</span><span class="p">,</span>
   <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
-  <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;randori_target_affiliation_state&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ affiliation_state }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;randori_target_authority&quot;</span><span class="p">:</span> <span class="p">{{</span> <span class="n">authority</span> <span class="o">|</span> <span class="n">lower</span> <span class="p">}},</span>
+  <span class="s2">"properties"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"randori_target_affiliation_state"</span><span class="p">:</span> <span class="s2">"{{ affiliation_state }}"</span><span class="p">,</span>
+    <span class="s2">"randori_target_authority"</span><span class="p">:</span> <span class="p">{{</span> <span class="n">authority</span> <span class="o">|</span> <span class="n">lower</span> <span class="p">}},</span>
 
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">target_temptation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">none</span> <span class="o">%</span><span class="p">}</span>
         <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">target_temptation</span> <span class="o">&lt;=</span> <span class="mi">14</span> <span class="o">%</span><span class="p">}</span>
-          <span class="s2">&quot;randori_target_temptation&quot;</span><span class="p">:</span> <span class="s2">&quot;Low&quot;</span><span class="p">,</span>
+          <span class="s2">"randori_target_temptation"</span><span class="p">:</span> <span class="s2">"Low"</span><span class="p">,</span>
         <span class="p">{</span><span class="o">%</span> <span class="k">elif</span> <span class="n">target_temptation</span> <span class="o">&gt;=</span> <span class="mi">15</span> <span class="ow">and</span> <span class="n">target_temptation</span> <span class="o">&lt;=</span> <span class="mi">29</span> <span class="o">%</span><span class="p">}</span>
-          <span class="s2">&quot;randori_target_temptation&quot;</span><span class="p">:</span> <span class="s2">&quot;Medium&quot;</span><span class="p">,</span>
+          <span class="s2">"randori_target_temptation"</span><span class="p">:</span> <span class="s2">"Medium"</span><span class="p">,</span>
         <span class="p">{</span><span class="o">%</span> <span class="k">elif</span> <span class="n">target_temptation</span> <span class="o">&gt;=</span> <span class="mi">30</span> <span class="ow">and</span> <span class="n">target_temptation</span> <span class="o">&lt;=</span> <span class="mi">39</span> <span class="o">%</span><span class="p">}</span>
-          <span class="s2">&quot;randori_target_temptation&quot;</span><span class="p">:</span> <span class="s2">&quot;High&quot;</span><span class="p">,</span>
+          <span class="s2">"randori_target_temptation"</span><span class="p">:</span> <span class="s2">"High"</span><span class="p">,</span>
         <span class="p">{</span><span class="o">%</span> <span class="k">elif</span> <span class="n">target_temptation</span> <span class="o">&gt;=</span> <span class="mi">40</span> <span class="o">%</span><span class="p">}</span>
-          <span class="s2">&quot;randori_target_temptation&quot;</span><span class="p">:</span> <span class="s2">&quot;Critical&quot;</span><span class="p">,</span>
+          <span class="s2">"randori_target_temptation"</span><span class="p">:</span> <span class="s2">"Critical"</span><span class="p">,</span>
         <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
     <span class="p">{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}</span>
-          <span class="s2">&quot;randori_target_temptation&quot;</span><span class="p">:</span> <span class="s2">&quot;In Review&quot;</span><span class="p">,</span>
+          <span class="s2">"randori_target_temptation"</span><span class="p">:</span> <span class="s2">"In Review"</span><span class="p">,</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
 
-    <span class="s2">&quot;randori_target_status&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ status }}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;randori_target_impact_score&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ impact_score }}&quot;</span><span class="p">,</span>
+    <span class="s2">"randori_target_status"</span><span class="p">:</span> <span class="s2">"{{ status }}"</span><span class="p">,</span>
+    <span class="s2">"randori_target_impact_score"</span><span class="p">:</span> <span class="s2">"{{ impact_score }}"</span><span class="p">,</span>
 
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">tech_category</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">none</span> <span class="o">%</span><span class="p">}</span>
-    <span class="s2">&quot;randori_target_tech_category&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ tech_category | join(&#39;, &#39;) }}&quot;</span><span class="p">,</span>
+    <span class="s2">"randori_target_tech_category"</span><span class="p">:</span> <span class="s2">"{{ tech_category | join(', ') }}"</span><span class="p">,</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
 
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">user_tags</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">none</span> <span class="o">%</span><span class="p">}</span>
-    <span class="s2">&quot;randori_target_user_tags&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ user_tags | join(&#39;, &#39;) }}&quot;</span><span class="p">,</span>
+    <span class="s2">"randori_target_user_tags"</span><span class="p">:</span> <span class="s2">"{{ user_tags | join(', ') }}"</span><span class="p">,</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
 
     <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="n">characteristic_tags</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">none</span> <span class="o">%</span><span class="p">}</span>
-    <span class="s2">&quot;randori_target_characteristic_tags&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ characteristic_tags | join(&#39;, &#39;) }}&quot;</span><span class="p">,</span>
+    <span class="s2">"randori_target_characteristic_tags"</span><span class="p">:</span> <span class="s2">"{{ characteristic_tags | join(', ') }}"</span><span class="p">,</span>
     <span class="p">{</span><span class="o">%</span> <span class="n">endif</span> <span class="o">%</span><span class="p">}</span>
 
-    <span class="s2">&quot;randori_target_perspective_name&quot;</span><span class="p">:</span> <span class="s2">&quot;{{ perspective_name }}&quot;</span>
+    <span class="s2">"randori_target_perspective_name"</span><span class="p">:</span> <span class="s2">"{{ perspective_name }}"</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>

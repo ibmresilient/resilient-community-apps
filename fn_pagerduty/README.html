@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -725,88 +725,88 @@
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;pd&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;acknowledgements&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;alert_counts&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;all&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;resolved&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;triggered&quot;</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="s2">"pd"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"acknowledgements"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"alert_counts"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"all"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"resolved"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"triggered"</span><span class="p">:</span> <span class="mi">0</span>
       <span class="p">},</span>
-      <span class="s2">&quot;alert_grouping&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;assigned_via&quot;</span><span class="p">:</span> <span class="s2">&quot;escalation_policy&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;assignments&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"alert_grouping"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"assigned_via"</span><span class="p">:</span> <span class="s2">"escalation_policy"</span><span class="p">,</span>
+      <span class="s2">"assignments"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;assignee&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://soar-hydra.pagerduty.com/users/PMTNPRV&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PMTNPRV&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/users/PMTNPRV&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Sami Amer&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user_reference&quot;</span>
+          <span class="s2">"assignee"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://soar-hydra.pagerduty.com/users/PMTNPRV"</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PMTNPRV"</span><span class="p">,</span>
+            <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/users/PMTNPRV"</span><span class="p">,</span>
+            <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Sami Amer"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user_reference"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;at&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-07-15T19:47:21Z&quot;</span>
+          <span class="s2">"at"</span><span class="p">:</span> <span class="s2">"2022-07-15T19:47:21Z"</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;basic_alert_grouping&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;details&quot;</span><span class="p">:</span> <span class="s2">&quot;https://murine1.fyre.ibm.com:443/#incidents/2100</span><span class="se">\n</span><span class="s2">&quot;</span>
+      <span class="s2">"basic_alert_grouping"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"body"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"details"</span><span class="p">:</span> <span class="s2">"https://murine1.fyre.ibm.com:443/#incidents/2100</span><span class="se">\n</span><span class="s2">"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-07-15T19:47:21Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient: pd_test&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;escalation_policy&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://soar-hydra.pagerduty.com/escalation_policies/PYAMD55&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PYAMD55&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/escalation_policies/PYAMD55&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Default&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;escalation_policy_reference&quot;</span>
+      <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2022-07-15T19:47:21Z"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Resilient: pd_test"</span><span class="p">,</span>
+      <span class="s2">"escalation_policy"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://soar-hydra.pagerduty.com/escalation_policies/PYAMD55"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PYAMD55"</span><span class="p">,</span>
+        <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/escalation_policies/PYAMD55"</span><span class="p">,</span>
+        <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Default"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"escalation_policy_reference"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;first_trigger_log_entry&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://soar-hydra.pagerduty.com/incidents/Q1I8E2P0CJSIIB/log_entries/R5OQSQS81S9AS5KS9FLX770IG4&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;R5OQSQS81S9AS5KS9FLX770IG4&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/log_entries/R5OQSQS81S9AS5KS9FLX770IG4&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Triggered through the website.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;trigger_log_entry_reference&quot;</span>
+      <span class="s2">"first_trigger_log_entry"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://soar-hydra.pagerduty.com/incidents/Q1I8E2P0CJSIIB/log_entries/R5OQSQS81S9AS5KS9FLX770IG4"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"R5OQSQS81S9AS5KS9FLX770IG4"</span><span class="p">,</span>
+        <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/log_entries/R5OQSQS81S9AS5KS9FLX770IG4"</span><span class="p">,</span>
+        <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Triggered through the website."</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"trigger_log_entry_reference"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://soar-hydra.pagerduty.com/incidents/Q1I8E2P0CJSIIB&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;Q1I8E2P0CJSIIB&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;impacted_services&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://soar-hydra.pagerduty.com/incidents/Q1I8E2P0CJSIIB"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"Q1I8E2P0CJSIIB"</span><span class="p">,</span>
+      <span class="s2">"impacted_services"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://soar-hydra.pagerduty.com/service-directory/PFA4BVU&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PFA4BVU&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/PFA4BVU&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;API Service&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;service_reference&quot;</span>
+          <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://soar-hydra.pagerduty.com/service-directory/PFA4BVU"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PFA4BVU"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/PFA4BVU"</span><span class="p">,</span>
+          <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"API Service"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"service_reference"</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;incident_key&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2100&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;incident_number&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-      <span class="s2">&quot;incidents_responders&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;is_mergeable&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;last_status_change_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-07-15T19:47:21Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;last_status_change_by&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://soar-hydra.pagerduty.com/service-directory/PFA4BVU&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PFA4BVU&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/PFA4BVU&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;API Service&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;service_reference&quot;</span>
+      <span class="s2">"incident_key"</span><span class="p">:</span> <span class="s2">"RES-2100"</span><span class="p">,</span>
+      <span class="s2">"incident_number"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+      <span class="s2">"incidents_responders"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"is_mergeable"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"last_status_change_at"</span><span class="p">:</span> <span class="s2">"2022-07-15T19:47:21Z"</span><span class="p">,</span>
+      <span class="s2">"last_status_change_by"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://soar-hydra.pagerduty.com/service-directory/PFA4BVU"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PFA4BVU"</span><span class="p">,</span>
+        <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/PFA4BVU"</span><span class="p">,</span>
+        <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"API Service"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"service_reference"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;pending_actions&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;responder_requests&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/incidents/Q1I8E2P0CJSIIB&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;service&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://soar-hydra.pagerduty.com/service-directory/PFA4BVU&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PFA4BVU&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/PFA4BVU&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;API Service&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;service_reference&quot;</span>
+      <span class="s2">"pending_actions"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"responder_requests"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/incidents/Q1I8E2P0CJSIIB"</span><span class="p">,</span>
+      <span class="s2">"service"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://soar-hydra.pagerduty.com/service-directory/PFA4BVU"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PFA4BVU"</span><span class="p">,</span>
+        <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/PFA4BVU"</span><span class="p">,</span>
+        <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"API Service"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"service_reference"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;triggered&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;subscriber_requests&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;[#8] Resilient: pd_test&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;teams&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient: pd_test&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;incident&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;urgency&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"triggered"</span><span class="p">,</span>
+      <span class="s2">"subscriber_requests"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"[#8] Resilient: pd_test"</span><span class="p">,</span>
+      <span class="s2">"teams"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Resilient: pd_test"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"incident"</span><span class="p">,</span>
+      <span class="s2">"urgency"</span><span class="p">:</span> <span class="s2">"high"</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -817,14 +817,14 @@
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">incidentID</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">pd_title</span> <span class="o">=</span> <span class="s2">&quot;SOAR: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">pd_incident_key</span> <span class="o">=</span> <span class="s1">&#39;RES-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">pd_title</span> <span class="o">=</span> <span class="s2">"SOAR: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">pd_incident_key</span> <span class="o">=</span> <span class="s1">'RES-'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 
-<span class="n">priority</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;Low&#39;</span><span class="p">:</span> <span class="s1">&#39;p3&#39;</span><span class="p">,</span> <span class="s1">&#39;Medium&#39;</span><span class="p">:</span> <span class="s1">&#39;p2&#39;</span><span class="p">,</span> <span class="s1">&#39;High&#39;</span><span class="p">:</span> <span class="s1">&#39;p1&#39;</span> <span class="p">}</span>
+<span class="n">priority</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">'Low'</span><span class="p">:</span> <span class="s1">'p3'</span><span class="p">,</span> <span class="s1">'Medium'</span><span class="p">:</span> <span class="s1">'p2'</span><span class="p">,</span> <span class="s1">'High'</span><span class="p">:</span> <span class="s1">'p1'</span> <span class="p">}</span>
 <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span> <span class="ow">in</span> <span class="n">priority</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">pd_priority</span> <span class="o">=</span> <span class="n">priority</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">pd_priority</span> <span class="o">=</span> <span class="s1">&#39;p4&#39;</span> <span class="c1"># lowest</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">pd_priority</span> <span class="o">=</span> <span class="s1">'p4'</span> <span class="c1"># lowest</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">incident</span><span class="o">.</span><span class="n">description</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">pd_description</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span>
@@ -835,8 +835,8 @@
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">pd_incident_id</span>  <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">pd</span><span class="p">[</span><span class="s1">&#39;incident&#39;</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-<span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">pd_incident_url</span> <span class="o">=</span> <span class="s2">&quot;&lt;a href=&#39;</span><span class="si">{}</span><span class="s2">&#39; target=&#39;blank&#39;&gt;Link&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">pd</span><span class="p">[</span><span class="s1">&#39;incident&#39;</span><span class="p">][</span><span class="s1">&#39;html_url&#39;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">pd_incident_id</span>  <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">pd</span><span class="p">[</span><span class="s1">'incident'</span><span class="p">][</span><span class="s1">'id'</span><span class="p">]</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">pd_incident_url</span> <span class="o">=</span> <span class="s2">"&lt;a href='</span><span class="si">{}</span><span class="s2">' target='blank'&gt;Link&lt;/a&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">pd</span><span class="p">[</span><span class="s1">'incident'</span><span class="p">][</span><span class="s1">'html_url'</span><span class="p">])</span>
 </pre></div>
 </div>
 </p>
@@ -883,19 +883,19 @@
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;channel&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;The PagerDuty website or APIs&quot;</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"channel"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"The PagerDuty website or APIs"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Test Note&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-07-15T15:48:12-04:00&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PNL36C8&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://soar-hydra.pagerduty.com/users/PMTNPRV&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PMTNPRV&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/users/PMTNPRV&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Sami Amer&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user_reference&quot;</span>
+    <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"Test Note"</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2022-07-15T15:48:12-04:00"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PNL36C8"</span><span class="p">,</span>
+    <span class="s2">"user"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://soar-hydra.pagerduty.com/users/PMTNPRV"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PMTNPRV"</span><span class="p">,</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/users/PMTNPRV"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Sami Amer"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user_reference"</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -973,74 +973,74 @@
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;incident&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;acknowledgements&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;alert_counts&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;all&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;resolved&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;triggered&quot;</span><span class="p">:</span> <span class="mi">0</span>
+  <span class="s2">"incident"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"acknowledgements"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"alert_counts"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"all"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"resolved"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"triggered"</span><span class="p">:</span> <span class="mi">0</span>
     <span class="p">},</span>
-    <span class="s2">&quot;alert_grouping&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;assigned_via&quot;</span><span class="p">:</span> <span class="s2">&quot;escalation_policy&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;assignments&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;basic_alert_grouping&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-07-15T19:47:21Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient: pd_test&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;escalation_policy&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://soar-hydra.pagerduty.com/escalation_policies/PYAMD55&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PYAMD55&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/escalation_policies/PYAMD55&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Default&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;escalation_policy_reference&quot;</span>
+    <span class="s2">"alert_grouping"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"assigned_via"</span><span class="p">:</span> <span class="s2">"escalation_policy"</span><span class="p">,</span>
+    <span class="s2">"assignments"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"basic_alert_grouping"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2022-07-15T19:47:21Z"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Resilient: pd_test"</span><span class="p">,</span>
+    <span class="s2">"escalation_policy"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://soar-hydra.pagerduty.com/escalation_policies/PYAMD55"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PYAMD55"</span><span class="p">,</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/escalation_policies/PYAMD55"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Default"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"escalation_policy_reference"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;first_trigger_log_entry&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://soar-hydra.pagerduty.com/incidents/Q1I8E2P0CJSIIB/log_entries/R5OQSQS81S9AS5KS9FLX770IG4&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;R5OQSQS81S9AS5KS9FLX770IG4&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/log_entries/R5OQSQS81S9AS5KS9FLX770IG4&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Triggered through the website.&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;trigger_log_entry_reference&quot;</span>
+    <span class="s2">"first_trigger_log_entry"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://soar-hydra.pagerduty.com/incidents/Q1I8E2P0CJSIIB/log_entries/R5OQSQS81S9AS5KS9FLX770IG4"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"R5OQSQS81S9AS5KS9FLX770IG4"</span><span class="p">,</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/log_entries/R5OQSQS81S9AS5KS9FLX770IG4"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Triggered through the website."</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"trigger_log_entry_reference"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://soar-hydra.pagerduty.com/incidents/Q1I8E2P0CJSIIB&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;Q1I8E2P0CJSIIB&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;impacted_services&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://soar-hydra.pagerduty.com/incidents/Q1I8E2P0CJSIIB"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"Q1I8E2P0CJSIIB"</span><span class="p">,</span>
+    <span class="s2">"impacted_services"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://soar-hydra.pagerduty.com/service-directory/PFA4BVU&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PFA4BVU&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/PFA4BVU&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;API Service&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;service_reference&quot;</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://soar-hydra.pagerduty.com/service-directory/PFA4BVU"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PFA4BVU"</span><span class="p">,</span>
+        <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/PFA4BVU"</span><span class="p">,</span>
+        <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"API Service"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"service_reference"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;incident_key&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2100&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;incident_number&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-    <span class="s2">&quot;incidents_responders&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;is_mergeable&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;last_status_change_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-07-15T19:55:22Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;last_status_change_by&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://soar-hydra.pagerduty.com/users/PMTNPRV&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PMTNPRV&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/users/PMTNPRV&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Sami Amer&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user_reference&quot;</span>
+    <span class="s2">"incident_key"</span><span class="p">:</span> <span class="s2">"RES-2100"</span><span class="p">,</span>
+    <span class="s2">"incident_number"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s2">"incidents_responders"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"is_mergeable"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"last_status_change_at"</span><span class="p">:</span> <span class="s2">"2022-07-15T19:55:22Z"</span><span class="p">,</span>
+    <span class="s2">"last_status_change_by"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://soar-hydra.pagerduty.com/users/PMTNPRV"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PMTNPRV"</span><span class="p">,</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/users/PMTNPRV"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Sami Amer"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user_reference"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;pending_actions&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;resolve_reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;responder_requests&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/incidents/Q1I8E2P0CJSIIB&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;service&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://soar-hydra.pagerduty.com/service-directory/PFA4BVU&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PFA4BVU&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/PFA4BVU&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;API Service&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;service_reference&quot;</span>
+    <span class="s2">"pending_actions"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"resolve_reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"responder_requests"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/incidents/Q1I8E2P0CJSIIB"</span><span class="p">,</span>
+    <span class="s2">"service"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://soar-hydra.pagerduty.com/service-directory/PFA4BVU"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PFA4BVU"</span><span class="p">,</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/PFA4BVU"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"API Service"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"service_reference"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;resolved&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;subscriber_requests&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;[#8] Resilient: pd_test&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;teams&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient: pd_test&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;incident&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;urgency&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"resolved"</span><span class="p">,</span>
+    <span class="s2">"subscriber_requests"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"[#8] Resilient: pd_test"</span><span class="p">,</span>
+    <span class="s2">"teams"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Resilient: pd_test"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"incident"</span><span class="p">,</span>
+    <span class="s2">"urgency"</span><span class="p">:</span> <span class="s2">"high"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1051,12 +1051,12 @@
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">pd_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">pd_incident_id</span>
 <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">resolution_id</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">pd_status</span> <span class="o">=</span> <span class="s1">&#39;resolved&#39;</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">pd_status</span> <span class="o">=</span> <span class="s1">'resolved'</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">pd_description</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">resolution_summary</span><span class="o">.</span><span class="n">content</span>
 <span class="c1">#else:</span>
-<span class="c1">#  inputs.pd_status = &#39;acknowledged&#39;</span>
+<span class="c1">#  inputs.pd_status = 'acknowledged'</span>
 
-<span class="n">priority</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;Low&#39;</span><span class="p">:</span> <span class="s1">&#39;p3&#39;</span><span class="p">,</span> <span class="s1">&#39;Medium&#39;</span><span class="p">:</span> <span class="s1">&#39;p2&#39;</span><span class="p">,</span> <span class="s1">&#39;High&#39;</span><span class="p">:</span> <span class="s1">&#39;p1&#39;</span> <span class="p">}</span>
+<span class="n">priority</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">'Low'</span><span class="p">:</span> <span class="s1">'p3'</span><span class="p">,</span> <span class="s1">'Medium'</span><span class="p">:</span> <span class="s1">'p2'</span><span class="p">,</span> <span class="s1">'High'</span><span class="p">:</span> <span class="s1">'p1'</span> <span class="p">}</span>
 <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span> <span class="ow">in</span> <span class="n">priority</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">pd_priority</span> <span class="o">=</span> <span class="n">priority</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="p">)</span>
 </pre></div>
@@ -1079,7 +1079,7 @@
 <details><summary>Inputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">pd_escalation_policy</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">pd_escalation_policy</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">pd_escalation_policy</span> <span class="o">=</span> <span class="s2">"default"</span>
 
 <span class="k">if</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">pd_description</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">pd_description</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">pd_description</span>
@@ -1102,12 +1102,12 @@ None
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">create_service</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">pd</span><span class="p">[</span><span class="s1">&#39;service&#39;</span><span class="p">]:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Service Created:&lt;a href=&#39;</span><span class="si">{}</span><span class="s2">&#39; target=&#39;blank&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt; &quot;</span> <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">pd</span><span class="p">[</span><span class="s1">&#39;service&#39;</span><span class="p">][</span><span class="s1">&#39;html_url&#39;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">pd</span><span class="p">[</span><span class="s1">&#39;service&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]))</span>
-<span class="k">elif</span> <span class="n">results</span><span class="o">.</span><span class="n">pd</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">]:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Create Service Failed : </span><span class="si">{}</span><span class="s2">&quot;</span> <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">pd</span><span class="p">[</span><span class="s1">&#39;error&#39;</span><span class="p">][</span><span class="s1">&#39;errors&#39;</span><span class="p">]))</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">pd</span><span class="p">[</span><span class="s1">'service'</span><span class="p">]:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Service Created:&lt;a href='</span><span class="si">{}</span><span class="s2">' target='blank'&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt; "</span> <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">pd</span><span class="p">[</span><span class="s1">'service'</span><span class="p">][</span><span class="s1">'html_url'</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">pd</span><span class="p">[</span><span class="s1">'service'</span><span class="p">][</span><span class="s1">'name'</span><span class="p">]))</span>
+<span class="k">elif</span> <span class="n">results</span><span class="o">.</span><span class="n">pd</span><span class="p">[</span><span class="s1">'error'</span><span class="p">]:</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Create Service Failed : </span><span class="si">{}</span><span class="s2">"</span> <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">pd</span><span class="p">[</span><span class="s1">'error'</span><span class="p">][</span><span class="s1">'errors'</span><span class="p">]))</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Create Service Failed&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Create Service Failed"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1148,96 +1148,96 @@ None
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;incidents&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"incidents"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">&quot;incident_number&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;TestService&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;TestService&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-24T06:53:30Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-24T07:32:29Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;acknowledged&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;incident_key&quot;</span><span class="p">:</span> <span class="s2">&quot;e9120574be8c45e1a92d1a0d34199b56&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;service&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;P94IRVL&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;service_reference&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;dummyTestService&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/P94IRVL&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/service-directory/P94IRVL&quot;</span>
+      <span class="s2">"incident_number"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"TestService"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"TestService"</span><span class="p">,</span>
+      <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2023-08-24T06:53:30Z"</span><span class="p">,</span>
+      <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2023-08-24T07:32:29Z"</span><span class="p">,</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"acknowledged"</span><span class="p">,</span>
+      <span class="s2">"incident_key"</span><span class="p">:</span> <span class="s2">"e9120574be8c45e1a92d1a0d34199b56"</span><span class="p">,</span>
+      <span class="s2">"service"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"P94IRVL"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"service_reference"</span><span class="p">,</span>
+        <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"dummyTestService"</span><span class="p">,</span>
+        <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/P94IRVL"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/service-directory/P94IRVL"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;assignments&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"assignments"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-24T06:53:30Z&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;assignee&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;P7V7SAJ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user_reference&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy Lee&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/users/P7V7SAJ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/users/P7V7SAJ&quot;</span>
+          <span class="s2">"at"</span><span class="p">:</span> <span class="s2">"2023-08-24T06:53:30Z"</span><span class="p">,</span>
+          <span class="s2">"assignee"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"P7V7SAJ"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user_reference"</span><span class="p">,</span>
+            <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"dummy Lee"</span><span class="p">,</span>
+            <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/users/P7V7SAJ"</span><span class="p">,</span>
+            <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/users/P7V7SAJ"</span>
           <span class="p">}</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;assigned_via&quot;</span><span class="p">:</span> <span class="s2">&quot;escalation_policy&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;last_status_change_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-24T07:32:28Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;resolved_at&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;first_trigger_log_entry&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;R2RPSI1N0M3C53904CK0QKVA18&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;trigger_log_entry_reference&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Triggered through the website.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/log_entries/R2RPSI1N0M3C53904CK0QKVA18&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/incidents/Q0JC5FKZB7QKWA/log_entries/R2RPSI1N0M3C53904CK0QKVA18&quot;</span>
+      <span class="s2">"assigned_via"</span><span class="p">:</span> <span class="s2">"escalation_policy"</span><span class="p">,</span>
+      <span class="s2">"last_status_change_at"</span><span class="p">:</span> <span class="s2">"2023-08-24T07:32:28Z"</span><span class="p">,</span>
+      <span class="s2">"resolved_at"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"first_trigger_log_entry"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"R2RPSI1N0M3C53904CK0QKVA18"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"trigger_log_entry_reference"</span><span class="p">,</span>
+        <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Triggered through the website."</span><span class="p">,</span>
+        <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/log_entries/R2RPSI1N0M3C53904CK0QKVA18"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/incidents/Q0JC5FKZB7QKWA/log_entries/R2RPSI1N0M3C53904CK0QKVA18"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;alert_counts&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;all&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;triggered&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;resolved&quot;</span><span class="p">:</span> <span class="mi">0</span>
+      <span class="s2">"alert_counts"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"all"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"triggered"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"resolved"</span><span class="p">:</span> <span class="mi">0</span>
       <span class="p">},</span>
-      <span class="s2">&quot;is_mergeable&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;escalation_policy&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PMV0LFG&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;escalation_policy_reference&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;dummyTestService-ep&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/escalation_policies/PMV0LFG&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/escalation_policies/PMV0LFG&quot;</span>
+      <span class="s2">"is_mergeable"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"escalation_policy"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PMV0LFG"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"escalation_policy_reference"</span><span class="p">,</span>
+        <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"dummyTestService-ep"</span><span class="p">,</span>
+        <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/escalation_policies/PMV0LFG"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/escalation_policies/PMV0LFG"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;teams&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;pending_actions&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;acknowledgements&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"teams"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"pending_actions"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"acknowledgements"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-24T07:32:28Z&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;acknowledger&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;P7V7SAJ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user_reference&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy Lee&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/users/P7V7SAJ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/users/P7V7SAJ&quot;</span>
+          <span class="s2">"at"</span><span class="p">:</span> <span class="s2">"2023-08-24T07:32:28Z"</span><span class="p">,</span>
+          <span class="s2">"acknowledger"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"P7V7SAJ"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user_reference"</span><span class="p">,</span>
+            <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"dummy Lee"</span><span class="p">,</span>
+            <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/users/P7V7SAJ"</span><span class="p">,</span>
+            <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/users/P7V7SAJ"</span>
           <span class="p">}</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;basic_alert_grouping&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;alert_grouping&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;last_status_change_by&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;P7V7SAJ&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user_reference&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy Lee&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/users/P7V7SAJ&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/users/P7V7SAJ&quot;</span>
+      <span class="s2">"basic_alert_grouping"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"alert_grouping"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"last_status_change_by"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"P7V7SAJ"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user_reference"</span><span class="p">,</span>
+        <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"dummy Lee"</span><span class="p">,</span>
+        <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/users/P7V7SAJ"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/users/P7V7SAJ"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;incidents_responders&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;responder_requests&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;subscriber_requests&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;urgency&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;Q0JC5FKZB7QKWA&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;incident&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;[#1] TestService&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/incidents/Q0JC5FKZB7QKWA&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/incidents/Q0JC5FKZB7QKWA&quot;</span>
+      <span class="s2">"priority"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"incidents_responders"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"responder_requests"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"subscriber_requests"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"urgency"</span><span class="p">:</span> <span class="s2">"high"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"Q0JC5FKZB7QKWA"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"incident"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"[#1] TestService"</span><span class="p">,</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/incidents/Q0JC5FKZB7QKWA"</span><span class="p">,</span>
+      <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/incidents/Q0JC5FKZB7QKWA"</span>
     <span class="p">}</span>
   <span class="p">],</span>
-  <span class="s2">&quot;limit&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
-  <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">&quot;total&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;more&quot;</span><span class="p">:</span> <span class="n">false</span>
+  <span class="s2">"limit"</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+  <span class="s2">"offset"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"total"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"more"</span><span class="p">:</span> <span class="n">false</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1256,10 +1256,10 @@ None
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">list_incidents</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;incidents&#39;</span><span class="p">]:</span>
+<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s1">'incidents'</span><span class="p">]:</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Get Incidents Failed (No Incidents returned)&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Get Incidents Failed (No Incidents returned)"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1280,272 +1280,272 @@ None
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;services&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"services"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;P94IRVL&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;dummyTestService&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-24T14:52:50+08:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-24T14:52:50+08:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;critical&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;teams&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;alert_creation&quot;</span><span class="p">:</span> <span class="s2">&quot;create_alerts_and_incidents&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;addons&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;scheduled_actions&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;support_hours&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;last_incident_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-11T11:31:14Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;escalation_policy&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PMV0LFG&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;escalation_policy_reference&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;dummyTestService-ep&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/escalation_policies/PMV0LFG&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/escalation_policies/PMV0LFG&quot;</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"P94IRVL"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"dummyTestService"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2023-08-24T14:52:50+08:00"</span><span class="p">,</span>
+      <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2023-08-24T14:52:50+08:00"</span><span class="p">,</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"critical"</span><span class="p">,</span>
+      <span class="s2">"teams"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"alert_creation"</span><span class="p">:</span> <span class="s2">"create_alerts_and_incidents"</span><span class="p">,</span>
+      <span class="s2">"addons"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"scheduled_actions"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"support_hours"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"last_incident_timestamp"</span><span class="p">:</span> <span class="s2">"2023-09-11T11:31:14Z"</span><span class="p">,</span>
+      <span class="s2">"escalation_policy"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PMV0LFG"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"escalation_policy_reference"</span><span class="p">,</span>
+        <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"dummyTestService-ep"</span><span class="p">,</span>
+        <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/escalation_policies/PMV0LFG"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/escalation_policies/PMV0LFG"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;incident_urgency_rule&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;constant&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;urgency&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span>
+      <span class="s2">"incident_urgency_rule"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"constant"</span><span class="p">,</span>
+        <span class="s2">"urgency"</span><span class="p">:</span> <span class="s2">"high"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;acknowledgement_timeout&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;auto_resolve_timeout&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;alert_grouping&quot;</span><span class="p">:</span> <span class="s2">&quot;intelligent&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;alert_grouping_timeout&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;alert_grouping_parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;intelligent&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;time_window&quot;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
-          <span class="s2">&quot;recommended_time_window&quot;</span><span class="p">:</span> <span class="mi">300</span>
+      <span class="s2">"acknowledgement_timeout"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"auto_resolve_timeout"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"alert_grouping"</span><span class="p">:</span> <span class="s2">"intelligent"</span><span class="p">,</span>
+      <span class="s2">"alert_grouping_timeout"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"alert_grouping_parameters"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"intelligent"</span><span class="p">,</span>
+        <span class="s2">"config"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"time_window"</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+          <span class="s2">"recommended_time_window"</span><span class="p">:</span> <span class="mi">300</span>
         <span class="p">}</span>
       <span class="p">},</span>
-      <span class="s2">&quot;integrations&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"integrations"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;P4WG9MK&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;generic_email_inbound_integration_reference&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/P94IRVL/integrations/P4WG9MK&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/P4WG9MK&quot;</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"P4WG9MK"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"generic_email_inbound_integration_reference"</span><span class="p">,</span>
+          <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Email"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/P94IRVL/integrations/P4WG9MK"</span><span class="p">,</span>
+          <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/P4WG9MK"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;P0KV9NX&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;events_api_v2_inbound_integration_reference&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Events API V2&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/P94IRVL/integrations/P0KV9NX&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/P0KV9NX&quot;</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"P0KV9NX"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"events_api_v2_inbound_integration_reference"</span><span class="p">,</span>
+          <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Events API V2"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/P94IRVL/integrations/P0KV9NX"</span><span class="p">,</span>
+          <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/P0KV9NX"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PJGE9XE&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;generic_events_api_inbound_integration_reference&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Prometheus&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/P94IRVL/integrations/PJGE9XE&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PJGE9XE&quot;</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PJGE9XE"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"generic_events_api_inbound_integration_reference"</span><span class="p">,</span>
+          <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Prometheus"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/P94IRVL/integrations/PJGE9XE"</span><span class="p">,</span>
+          <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PJGE9XE"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PG7T8IR&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;event_transformer_api_inbound_integration_reference&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Amazon CloudWatch&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/P94IRVL/integrations/PG7T8IR&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PG7T8IR&quot;</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PG7T8IR"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"event_transformer_api_inbound_integration_reference"</span><span class="p">,</span>
+          <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Amazon CloudWatch"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/P94IRVL/integrations/PG7T8IR"</span><span class="p">,</span>
+          <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PG7T8IR"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PCY5861&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;event_transformer_api_inbound_integration_reference&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Splunk&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/P94IRVL/integrations/PCY5861&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PCY5861&quot;</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PCY5861"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"event_transformer_api_inbound_integration_reference"</span><span class="p">,</span>
+          <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Splunk"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/P94IRVL/integrations/PCY5861"</span><span class="p">,</span>
+          <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PCY5861"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PYLH7TB&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;nagios_inbound_integration_reference&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Nagios&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/P94IRVL/integrations/PYLH7TB&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PYLH7TB&quot;</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PYLH7TB"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"nagios_inbound_integration_reference"</span><span class="p">,</span>
+          <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Nagios"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/P94IRVL/integrations/PYLH7TB"</span><span class="p">,</span>
+          <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PYLH7TB"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PVPW6EO&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;generic_events_api_inbound_integration_reference&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Zabbix&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/P94IRVL/integrations/PVPW6EO&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PVPW6EO&quot;</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PVPW6EO"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"generic_events_api_inbound_integration_reference"</span><span class="p">,</span>
+          <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Zabbix"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/P94IRVL/integrations/PVPW6EO"</span><span class="p">,</span>
+          <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PVPW6EO"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PRD861L&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;generic_events_api_inbound_integration_reference&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Datadog&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/P94IRVL/integrations/PRD861L&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PRD861L&quot;</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PRD861L"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"generic_events_api_inbound_integration_reference"</span><span class="p">,</span>
+          <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Datadog"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/P94IRVL/integrations/PRD861L"</span><span class="p">,</span>
+          <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PRD861L"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PO3K5PY&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;events_api_v2_inbound_integration_reference&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;SolarWinds Orion&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/P94IRVL/integrations/PO3K5PY&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PO3K5PY&quot;</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PO3K5PY"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"events_api_v2_inbound_integration_reference"</span><span class="p">,</span>
+          <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"SolarWinds Orion"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/P94IRVL/integrations/PO3K5PY"</span><span class="p">,</span>
+          <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/PO3K5PY"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;P7UZ4A8&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;generic_events_api_inbound_integration_reference&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;New Relic&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/P94IRVL/integrations/P7UZ4A8&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/P7UZ4A8&quot;</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"P7UZ4A8"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"generic_events_api_inbound_integration_reference"</span><span class="p">,</span>
+          <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"New Relic"</span><span class="p">,</span>
+          <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/P94IRVL/integrations/P7UZ4A8"</span><span class="p">,</span>
+          <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/services/P94IRVL/integrations/P7UZ4A8"</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;response_play&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;service&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;dummyTestService&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/P94IRVL&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/service-directory/P94IRVL&quot;</span>
+      <span class="s2">"response_play"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"service"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"dummyTestService"</span><span class="p">,</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/P94IRVL"</span><span class="p">,</span>
+      <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/service-directory/P94IRVL"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;P8WS4HA&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;dummyTestService2&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-08T22:47:55+08:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-08T22:47:55+08:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;teams&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;alert_creation&quot;</span><span class="p">:</span> <span class="s2">&quot;create_incidents&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;addons&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;scheduled_actions&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;support_hours&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;last_incident_timestamp&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;escalation_policy&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;P8021BT&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;escalation_policy_reference&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Default&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/escalation_policies/P8021BT&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/escalation_policies/P8021BT&quot;</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"P8WS4HA"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"dummyTestService2"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2023-09-08T22:47:55+08:00"</span><span class="p">,</span>
+      <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2023-09-08T22:47:55+08:00"</span><span class="p">,</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"active"</span><span class="p">,</span>
+      <span class="s2">"teams"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"alert_creation"</span><span class="p">:</span> <span class="s2">"create_incidents"</span><span class="p">,</span>
+      <span class="s2">"addons"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"scheduled_actions"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"support_hours"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"last_incident_timestamp"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"escalation_policy"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"P8021BT"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"escalation_policy_reference"</span><span class="p">,</span>
+        <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Default"</span><span class="p">,</span>
+        <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/escalation_policies/P8021BT"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/escalation_policies/P8021BT"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;incident_urgency_rule&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;constant&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;urgency&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span>
+      <span class="s2">"incident_urgency_rule"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"constant"</span><span class="p">,</span>
+        <span class="s2">"urgency"</span><span class="p">:</span> <span class="s2">"high"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;acknowledgement_timeout&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;auto_resolve_timeout&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;alert_grouping&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;alert_grouping_timeout&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;alert_grouping_parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="n">null</span>
+      <span class="s2">"acknowledgement_timeout"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"auto_resolve_timeout"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"alert_grouping"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"alert_grouping_timeout"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"alert_grouping_parameters"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"config"</span><span class="p">:</span> <span class="n">null</span>
       <span class="p">},</span>
-      <span class="s2">&quot;integrations&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;response_play&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;service&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;dummyTestService2&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/P8WS4HA&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/service-directory/P8WS4HA&quot;</span>
+      <span class="s2">"integrations"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"response_play"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"service"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"dummyTestService2"</span><span class="p">,</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/P8WS4HA"</span><span class="p">,</span>
+      <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/service-directory/P8WS4HA"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PK723D4&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;dummyTestService3&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;TestDes&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-08T22:48:49+08:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-08T22:48:49+08:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;teams&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;alert_creation&quot;</span><span class="p">:</span> <span class="s2">&quot;create_incidents&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;addons&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;scheduled_actions&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;support_hours&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;last_incident_timestamp&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;escalation_policy&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;P8021BT&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;escalation_policy_reference&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Default&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/escalation_policies/P8021BT&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/escalation_policies/P8021BT&quot;</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PK723D4"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"dummyTestService3"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"TestDes"</span><span class="p">,</span>
+      <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2023-09-08T22:48:49+08:00"</span><span class="p">,</span>
+      <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2023-09-08T22:48:49+08:00"</span><span class="p">,</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"active"</span><span class="p">,</span>
+      <span class="s2">"teams"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"alert_creation"</span><span class="p">:</span> <span class="s2">"create_incidents"</span><span class="p">,</span>
+      <span class="s2">"addons"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"scheduled_actions"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"support_hours"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"last_incident_timestamp"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"escalation_policy"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"P8021BT"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"escalation_policy_reference"</span><span class="p">,</span>
+        <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Default"</span><span class="p">,</span>
+        <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/escalation_policies/P8021BT"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/escalation_policies/P8021BT"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;incident_urgency_rule&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;constant&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;urgency&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span>
+      <span class="s2">"incident_urgency_rule"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"constant"</span><span class="p">,</span>
+        <span class="s2">"urgency"</span><span class="p">:</span> <span class="s2">"high"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;acknowledgement_timeout&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;auto_resolve_timeout&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;alert_grouping&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;alert_grouping_timeout&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;alert_grouping_parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="n">null</span>
+      <span class="s2">"acknowledgement_timeout"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"auto_resolve_timeout"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"alert_grouping"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"alert_grouping_timeout"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"alert_grouping_parameters"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"config"</span><span class="p">:</span> <span class="n">null</span>
       <span class="p">},</span>
-      <span class="s2">&quot;integrations&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;response_play&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;service&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;dummyTestService3&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/PK723D4&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/service-directory/PK723D4&quot;</span>
+      <span class="s2">"integrations"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"response_play"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"service"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"dummyTestService3"</span><span class="p">,</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/PK723D4"</span><span class="p">,</span>
+      <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/service-directory/PK723D4"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;PQNVIL9&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;My Web App&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;My cool web application that does things.&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-05T15:44:12+08:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-09-05T15:44:12+08:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;teams&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;alert_creation&quot;</span><span class="p">:</span> <span class="s2">&quot;create_alerts_and_incidents&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;addons&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;scheduled_actions&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"PQNVIL9"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"My Web App"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"My cool web application that does things."</span><span class="p">,</span>
+      <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2023-09-05T15:44:12+08:00"</span><span class="p">,</span>
+      <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2023-09-05T15:44:12+08:00"</span><span class="p">,</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"active"</span><span class="p">,</span>
+      <span class="s2">"teams"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"alert_creation"</span><span class="p">:</span> <span class="s2">"create_alerts_and_incidents"</span><span class="p">,</span>
+      <span class="s2">"addons"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"scheduled_actions"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;urgency_change&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;at&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;named_time&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;support_hours_start&quot;</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"urgency_change"</span><span class="p">,</span>
+          <span class="s2">"at"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"named_time"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"support_hours_start"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;to_urgency&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span>
+          <span class="s2">"to_urgency"</span><span class="p">:</span> <span class="s2">"high"</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;support_hours&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;fixed_time_per_day&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;time_zone&quot;</span><span class="p">:</span> <span class="s2">&quot;America/Lima&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;days_of_week&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"support_hours"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"fixed_time_per_day"</span><span class="p">,</span>
+        <span class="s2">"time_zone"</span><span class="p">:</span> <span class="s2">"America/Lima"</span><span class="p">,</span>
+        <span class="s2">"days_of_week"</span><span class="p">:</span> <span class="p">[</span>
           <span class="mi">1</span><span class="p">,</span>
           <span class="mi">2</span><span class="p">,</span>
           <span class="mi">3</span><span class="p">,</span>
           <span class="mi">4</span><span class="p">,</span>
           <span class="mi">5</span>
         <span class="p">],</span>
-        <span class="s2">&quot;start_time&quot;</span><span class="p">:</span> <span class="s2">&quot;09:00:00&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;end_time&quot;</span><span class="p">:</span> <span class="s2">&quot;17:00:00&quot;</span>
+        <span class="s2">"start_time"</span><span class="p">:</span> <span class="s2">"09:00:00"</span><span class="p">,</span>
+        <span class="s2">"end_time"</span><span class="p">:</span> <span class="s2">"17:00:00"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;last_incident_timestamp&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;escalation_policy&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;P8021BT&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;escalation_policy_reference&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Default&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/escalation_policies/P8021BT&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/escalation_policies/P8021BT&quot;</span>
+      <span class="s2">"last_incident_timestamp"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"escalation_policy"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"P8021BT"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"escalation_policy_reference"</span><span class="p">,</span>
+        <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Default"</span><span class="p">,</span>
+        <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/escalation_policies/P8021BT"</span><span class="p">,</span>
+        <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/escalation_policies/P8021BT"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;incident_urgency_rule&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;use_support_hours&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;during_support_hours&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;constant&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;urgency&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span>
+      <span class="s2">"incident_urgency_rule"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"use_support_hours"</span><span class="p">,</span>
+        <span class="s2">"during_support_hours"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"constant"</span><span class="p">,</span>
+          <span class="s2">"urgency"</span><span class="p">:</span> <span class="s2">"high"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;outside_support_hours&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;constant&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;urgency&quot;</span><span class="p">:</span> <span class="s2">&quot;low&quot;</span>
+        <span class="s2">"outside_support_hours"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"constant"</span><span class="p">,</span>
+          <span class="s2">"urgency"</span><span class="p">:</span> <span class="s2">"low"</span>
         <span class="p">}</span>
       <span class="p">},</span>
-      <span class="s2">&quot;acknowledgement_timeout&quot;</span><span class="p">:</span> <span class="mi">600</span><span class="p">,</span>
-      <span class="s2">&quot;auto_resolve_timeout&quot;</span><span class="p">:</span> <span class="mi">14400</span><span class="p">,</span>
-      <span class="s2">&quot;alert_grouping&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;alert_grouping_timeout&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="s2">&quot;alert_grouping_parameters&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;timeout&quot;</span><span class="p">:</span> <span class="mi">2</span>
+      <span class="s2">"acknowledgement_timeout"</span><span class="p">:</span> <span class="mi">600</span><span class="p">,</span>
+      <span class="s2">"auto_resolve_timeout"</span><span class="p">:</span> <span class="mi">14400</span><span class="p">,</span>
+      <span class="s2">"alert_grouping"</span><span class="p">:</span> <span class="s2">"time"</span><span class="p">,</span>
+      <span class="s2">"alert_grouping_timeout"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">"alert_grouping_parameters"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"time"</span><span class="p">,</span>
+        <span class="s2">"config"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"timeout"</span><span class="p">:</span> <span class="mi">2</span>
         <span class="p">}</span>
       <span class="p">},</span>
-      <span class="s2">&quot;integrations&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;response_play&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;service&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;My Web App&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://api.pagerduty.com/services/PQNVIL9&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;html_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://dev-resilient.pagerduty.com/service-directory/PQNVIL9&quot;</span>
+      <span class="s2">"integrations"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"response_play"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"service"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"My Web App"</span><span class="p">,</span>
+      <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://api.pagerduty.com/services/PQNVIL9"</span><span class="p">,</span>
+      <span class="s2">"html_url"</span><span class="p">:</span> <span class="s2">"https://dev-resilient.pagerduty.com/service-directory/PQNVIL9"</span>
     <span class="p">}</span>
   <span class="p">],</span>
-  <span class="s2">&quot;limit&quot;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
-  <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">&quot;total&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;more&quot;</span><span class="p">:</span> <span class="n">false</span>
+  <span class="s2">"limit"</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span>
+  <span class="s2">"offset"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"total"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"more"</span><span class="p">:</span> <span class="n">false</span>
 <span class="p">}</span>
 
 </pre></div>
@@ -1565,10 +1565,10 @@ None
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">list_incidents</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;incidents&#39;</span><span class="p">]:</span>
+<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s1">'incidents'</span><span class="p">]:</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Get Incidents Failed (No Incidents returned)&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Get Incidents Failed (No Incidents returned)"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1585,27 +1585,27 @@ None
 <details><summary>soar_create_case.jinja</summary>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
 <span class="x">  </span><span class="c">{# JINJA template for creating a new SOAR incident from a PagerDuty incident #}</span>
-<span class="x">  &quot;name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">title</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">  &quot;description&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">summary</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">(</span><span class="s1">&#39;&quot;&#39;</span><span class="o">,</span> <span class="s1">&#39;\\&quot;&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  "name": "</span><span class="cp">{{</span> <span class="nv">title</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">  "description": "</span><span class="cp">{{</span> <span class="nv">summary</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">(</span><span class="s1">'"'</span><span class="o">,</span> <span class="s1">'\\"'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">",</span>
 <span class="x">  </span><span class="c">{# start_date cannot be after discovered_date #}</span>
-<span class="x">  &quot;discovered_date&quot;: </span><span class="cp">{{</span> <span class="nv">created_at</span> <span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">date_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-%dT%H:%M:%SZ&quot;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
-<span class="x">  &quot;start_date&quot;: </span><span class="cp">{{</span> <span class="nv">created_at</span> <span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">date_format</span><span class="o">=</span><span class="s2">&quot;%Y-%m-%dT%H:%M:%SZ&quot;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  "discovered_date": </span><span class="cp">{{</span> <span class="nv">created_at</span> <span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">date_format</span><span class="o">=</span><span class="s2">"%Y-%m-%dT%H:%M:%SZ"</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  "start_date": </span><span class="cp">{{</span> <span class="nv">created_at</span> <span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">date_format</span><span class="o">=</span><span class="s2">"%Y-%m-%dT%H:%M:%SZ"</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
 <span class="x">  </span><span class="c">{# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}</span>
-<span class="x">  </span><span class="c">{# &quot;owner_id&quot;: &quot;{{ **assignedTo** |soar_substitute(&#39;{&quot;Automation&quot;: &quot;soar_user1@example.com&quot;, &quot;default_user@example.com&quot;: &quot;soar_user2@example.com&quot;, &quot;DEFAULT&quot;: &quot;default_user@example.com&quot; }&#39;) }}&quot;, #}</span>
-<span class="x">  &quot;plan_status&quot;: &quot;A&quot;,</span>
-<span class="x">  &quot;severity_code&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">urgency</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="s1">&#39;{&quot;high&quot;: &quot;High&quot;, &quot;low&quot;: &quot;Low&quot;}&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  </span><span class="c">{# "owner_id": "{{ **assignedTo** |soar_substitute('{"Automation": "soar_user1@example.com", "default_user@example.com": "soar_user2@example.com", "DEFAULT": "default_user@example.com" }') }}", #}</span>
+<span class="x">  "plan_status": "A",</span>
+<span class="x">  "severity_code": "</span><span class="cp">{{</span> <span class="nv">urgency</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="s1">'{"high": "High", "low": "Low"}'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">",</span>
 <span class="x">  </span><span class="c">{# specify your custom fields for your endpoint solution #}</span>
-<span class="x">  &quot;properties&quot;: {</span>
-<span class="x">    &quot;pd_incident_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">id</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;pd_incident_url&quot;: &quot;&lt;a target=&#39;_blank&#39; href=&#39;</span><span class="cp">{{</span> <span class="nv">html_url</span> <span class="cp">}}</span><span class="x">&#39;&gt;Link&lt;/a&gt;&quot;,</span>
-<span class="x">    &quot;pd_incident_service_name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">service.summary</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;pd_incident_service_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">service.id</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;pd_incident_key&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">incident_key</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;pd_incident_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;pd_incident_escalation_policy_name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">escalation_policy.summary</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;pd_incident_escalation_policy_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">escalation_policy.id</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">  "properties": {</span>
+<span class="x">    "pd_incident_id": "</span><span class="cp">{{</span> <span class="nv">id</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "pd_incident_url": "&lt;a target='_blank' href='</span><span class="cp">{{</span> <span class="nv">html_url</span> <span class="cp">}}</span><span class="x">'&gt;Link&lt;/a&gt;",</span>
+<span class="x">    "pd_incident_service_name": "</span><span class="cp">{{</span> <span class="nv">service.summary</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "pd_incident_service_id": "</span><span class="cp">{{</span> <span class="nv">service.id</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "pd_incident_key": "</span><span class="cp">{{</span> <span class="nv">incident_key</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "pd_incident_status": "</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "pd_incident_escalation_policy_name": "</span><span class="cp">{{</span> <span class="nv">escalation_policy.summary</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "pd_incident_escalation_policy_id": "</span><span class="cp">{{</span> <span class="nv">escalation_policy.id</span> <span class="cp">}}</span><span class="x">"</span>
 <span class="x">    </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">priority</span> <span class="cp">%}</span>
-<span class="x">      ,&quot;pd_incident_priority&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">priority.summary</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">      ,"pd_incident_priority": "</span><span class="cp">{{</span> <span class="nv">priority.summary</span> <span class="cp">}}</span><span class="x">"</span>
 <span class="x">    </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
 <span class="x">  }</span>
 <span class="x">}</span>
@@ -1616,20 +1616,20 @@ None
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
 <span class="x">  </span><span class="c">{# JINJA template for closing a SOAR incident using endpoint data #}</span>
 <span class="x">  </span><span class="c">{# modify to specify your specific **data** fields #}</span>
-<span class="x">  &quot;plan_status&quot;: &quot;C&quot;,</span>
-<span class="x">  &quot;resolution_id&quot;: &quot;Resolved&quot;,</span>
-<span class="x">  &quot;resolution_summary&quot;: </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">resolve_reason</span> <span class="cp">%}</span><span class="x"> &quot;Closed by PagerDuty, with resolution note </span><span class="cp">{{</span> <span class="nv">resolve_reason</span> <span class="cp">}}</span><span class="x">&quot; </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x"> &quot;Closed by PagerDuty&quot; </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x">,</span>
-<span class="x">  &quot;properties&quot;: {</span>
-<span class="x">    &quot;pd_incident_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">id</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;pd_incident_url&quot;: &quot;&lt;a target=&#39;_blank&#39; href=&#39;</span><span class="cp">{{</span> <span class="nv">html_url</span> <span class="cp">}}</span><span class="x">&#39;&gt;Link&lt;/a&gt;&quot;,</span>
-<span class="x">    &quot;pd_incident_service_name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">service.summary</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;pd_incident_service_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">service.id</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;pd_incident_key&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">incident_key</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;pd_incident_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;pd_incident_escalation_policy_name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">escalation_policy.summary</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;pd_incident_escalation_policy_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">escalation_policy.id</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">  "plan_status": "C",</span>
+<span class="x">  "resolution_id": "Resolved",</span>
+<span class="x">  "resolution_summary": </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">resolve_reason</span> <span class="cp">%}</span><span class="x"> "Closed by PagerDuty, with resolution note </span><span class="cp">{{</span> <span class="nv">resolve_reason</span> <span class="cp">}}</span><span class="x">" </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x"> "Closed by PagerDuty" </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x">,</span>
+<span class="x">  "properties": {</span>
+<span class="x">    "pd_incident_id": "</span><span class="cp">{{</span> <span class="nv">id</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "pd_incident_url": "&lt;a target='_blank' href='</span><span class="cp">{{</span> <span class="nv">html_url</span> <span class="cp">}}</span><span class="x">'&gt;Link&lt;/a&gt;",</span>
+<span class="x">    "pd_incident_service_name": "</span><span class="cp">{{</span> <span class="nv">service.summary</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "pd_incident_service_id": "</span><span class="cp">{{</span> <span class="nv">service.id</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "pd_incident_key": "</span><span class="cp">{{</span> <span class="nv">incident_key</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "pd_incident_status": "</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "pd_incident_escalation_policy_name": "</span><span class="cp">{{</span> <span class="nv">escalation_policy.summary</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "pd_incident_escalation_policy_id": "</span><span class="cp">{{</span> <span class="nv">escalation_policy.id</span> <span class="cp">}}</span><span class="x">"</span>
 <span class="x">    </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">priority</span> <span class="cp">%}</span>
-<span class="x">      ,&quot;pd_incident_priority&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">priority.summary</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">      ,"pd_incident_priority": "</span><span class="cp">{{</span> <span class="nv">priority.summary</span> <span class="cp">}}</span><span class="x">"</span>
 <span class="x">    </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
 <span class="x">  }</span>
 <span class="x">}</span>
@@ -1639,16 +1639,16 @@ None
 <details><summary>soar_update_case.jinja</summary>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
 <span class="x">  </span><span class="c">{# JINJA template for updating a SOAR incident from a PagerDuty incident #}</span>
-<span class="x">  &quot;severity_code&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">urgency</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="s1">&#39;{&quot;high&quot;: &quot;High&quot;, &quot;low&quot;: &quot;Low&quot;}&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  "severity_code": "</span><span class="cp">{{</span> <span class="nv">urgency</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="s1">'{"high": "High", "low": "Low"}'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">",</span>
 <span class="x">  </span><span class="c">{# specify your custom fields for your endpoint solution #}</span>
-<span class="x">  &quot;properties&quot;: {</span>
-<span class="x">    &quot;pd_incident_service_name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">service.summary</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;pd_incident_service_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">service.id</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;pd_incident_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;pd_incident_escalation_policy_name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">escalation_policy.summary</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;pd_incident_escalation_policy_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">escalation_policy.id</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">  "properties": {</span>
+<span class="x">    "pd_incident_service_name": "</span><span class="cp">{{</span> <span class="nv">service.summary</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "pd_incident_service_id": "</span><span class="cp">{{</span> <span class="nv">service.id</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "pd_incident_status": "</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "pd_incident_escalation_policy_name": "</span><span class="cp">{{</span> <span class="nv">escalation_policy.summary</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "pd_incident_escalation_policy_id": "</span><span class="cp">{{</span> <span class="nv">escalation_policy.id</span> <span class="cp">}}</span><span class="x">"</span>
 <span class="x">    </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">priority</span> <span class="cp">%}</span>
-<span class="x">      ,&quot;pd_incident_priority&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">priority.summary</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">      ,"pd_incident_priority": "</span><span class="cp">{{</span> <span class="nv">priority.summary</span> <span class="cp">}}</span><span class="x">"</span>
 <span class="x">    </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
 <span class="x">  }</span>
 <span class="x">}</span>

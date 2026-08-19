@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -665,9 +665,9 @@ Additional package dependencies may exist for each of these packages:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 
     <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_headers</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
-        <span class="s2">&quot;Content-Type&quot;</span>  <span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;X-Frooble&quot;</span>     <span class="p">:</span> <span class="s2">&quot;Baz&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Authorization&quot;</span> <span class="p">:</span> <span class="s2">&quot;bearer $</span><span class="si">{API_TOKEN}</span><span class="s2">&quot;</span>
+        <span class="s2">"Content-Type"</span>  <span class="p">:</span> <span class="s2">"application/json"</span><span class="p">,</span>
+        <span class="s2">"X-Frooble"</span>     <span class="p">:</span> <span class="s2">"Baz"</span><span class="p">,</span>
+        <span class="s2">"Authorization"</span> <span class="p">:</span> <span class="s2">"bearer $</span><span class="si">{API_TOKEN}</span><span class="s2">"</span>
       <span class="p">})</span>
 </pre></div>
 </div>
@@ -693,14 +693,14 @@ for such parameters using one of the methods described below.</p></li>
 or nested Key-value pairs.</p>
 <section id="id1">
 <h4>Example:  <!-- omit in toc --><a class="headerlink" href="#id1" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_body</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">   &quot;name&quot; : &quot;user1&quot;,</span>
-<span class="s2">   &quot;password&quot; : &quot;p@ssword1&quot;,</span>
-<span class="s2">   &quot;role&quot; : &quot;admin&quot;,</span>
-<span class="s2">   &quot;content&quot; : {</span>
-<span class="s2">    &quot;site_url&quot; : &quot;www.example.com&quot;,</span>
-<span class="s2">    &quot;users&quot; : [&quot;user1&quot;, &quot;user2&quot;] }</span>
-<span class="s2">  &quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_body</span> <span class="o">=</span> <span class="s2">"""</span>
+<span class="s2">   "name" : "user1",</span>
+<span class="s2">   "password" : "p@ssword1",</span>
+<span class="s2">   "role" : "admin",</span>
+<span class="s2">   "content" : {</span>
+<span class="s2">    "site_url" : "www.example.com",</span>
+<span class="s2">    "users" : ["user1", "user2"] }</span>
+<span class="s2">  """</span>
 </pre></div>
 </div>
 </section>
@@ -714,12 +714,12 @@ json package can be used to convert a python dict to a json string.</p>
 <h4>Example: <!-- omit in toc --><a class="headerlink" href="#id2" title="Link to this heading">¶</a></h4>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>   <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
    <span class="n">body</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;name&quot;</span>     <span class="p">:</span> <span class="s2">&quot;user1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;password&quot;</span> <span class="p">:</span> <span class="s2">&quot;p@ssword1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;role&quot;</span>     <span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;content&quot;</span>  <span class="p">:</span> <span class="p">{</span>
-       <span class="s2">&quot;site_url&quot;</span> <span class="p">:</span> <span class="s2">&quot;www.example.com&quot;</span><span class="p">,</span>
-       <span class="s2">&quot;users&quot;</span>    <span class="p">:</span> <span class="p">[</span><span class="s2">&quot;user1&quot;</span><span class="p">,</span> <span class="s2">&quot;user2&quot;</span><span class="p">]</span>
+    <span class="s2">"name"</span>     <span class="p">:</span> <span class="s2">"user1"</span><span class="p">,</span>
+    <span class="s2">"password"</span> <span class="p">:</span> <span class="s2">"p@ssword1"</span><span class="p">,</span>
+    <span class="s2">"role"</span>     <span class="p">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+    <span class="s2">"content"</span>  <span class="p">:</span> <span class="p">{</span>
+       <span class="s2">"site_url"</span> <span class="p">:</span> <span class="s2">"www.example.com"</span><span class="p">,</span>
+       <span class="s2">"users"</span>    <span class="p">:</span> <span class="p">[</span><span class="s2">"user1"</span><span class="p">,</span> <span class="s2">"user2"</span><span class="p">]</span>
        <span class="p">}</span>
    <span class="p">}</span>
 
@@ -740,17 +740,17 @@ backwards compatibility.</p>
 </section>
 <section id="id3">
 <h4>Example:  <!-- omit in toc --><a class="headerlink" href="#id3" title="Link to this heading">¶</a></h4>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>   <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_body</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>   <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_body</span> <span class="o">=</span> <span class="s2">"""</span>
 <span class="s2">   name : user1</span>
 <span class="s2">   password : p@ssword1</span>
 <span class="s2">   role : admin</span>
-<span class="s2">   &quot;&quot;&quot;</span>
+<span class="s2">   """</span>
 
-   <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_headers</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+   <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_headers</span> <span class="o">=</span> <span class="s2">"""</span>
 <span class="s2">   Content-Type: application/json</span>
 <span class="s2">   X-Frooble: Baz</span>
 <span class="s2">   Authorization: {{auth_header}}</span>
-<span class="s2">   &quot;&quot;&quot;</span>
+<span class="s2">   """</span>
 </pre></div>
 </div>
 </section>
@@ -848,10 +848,10 @@ is supposed to be provided by the user in the below field.
 
 Each part in multipart/form-data is expected to contain a content-disposition header where the disposition type
 is automatically set by the application, and a disposition name. This disposition name changes with regard to
-the endpoint that is being used and is to be set by the user. Default value : &quot;file&quot;
+the endpoint that is being used and is to be set by the user. Default value : "file"
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">attachment_form_field_name</span> <span class="o">=</span> <span class="s2">&quot;file&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">attachment_form_field_name</span> <span class="o">=</span> <span class="s2">"file"</span>
 
 <span class="c1"># sends file as multipart/form-data</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">send_file_as_body</span> <span class="o">=</span> <span class="kc">False</span>
@@ -892,10 +892,10 @@ the OAuth2 documentation specific to the service you are working with.</p>
 <h4>Method 1: Using CODE:<a class="headerlink" href="#method-1-using-code" title="Link to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span> The authorization server redirects the user back to address specified on the
  redirect URI with an authorization CODE. This CODE is a temporary token
- that represents the user&#39;s authorization and usually can be used only once.
+ that represents the user's authorization and usually can be used only once.
  This function exchanges the authorization code for an ACCESS_TOKEN (and
  possibly also a REFRESH_TOKEN depending on the endpoint). This requires making
- a request to the authorization server&#39;s token endpoint, providing the
+ a request to the authorization server's token endpoint, providing the
  authorization CODE, client ID, client secret, token URL and redirect URI.
 
  Note: These codes are generally one time use only.
@@ -941,8 +941,8 @@ in tandem with other authentication methods</p>
 <h4>1. Client Authentication Certificate (client_auth_cert)<a class="headerlink" href="#client-authentication-certificate-client-auth-cert" title="Link to this heading">¶</a></h4>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  A client authentication certificate, also known as a client certificate,
   is a digital certificate that is issued to the client (user or device) as
-  part of the mutual authentication process. It contains the client&#39;s public
-  key, identifying information (such as the client&#39;s name or ID), and is
+  part of the mutual authentication process. It contains the client's public
+  key, identifying information (such as the client's name or ID), and is
   signed by a trusted Certificate Authority (CA) or a self-signed certificate
   if it is a closed system.
 </pre></div>
@@ -950,7 +950,7 @@ in tandem with other authentication methods</p>
 </section>
 <section id="client-authentication-private-key-client-auth-key">
 <h4>2. Client Authentication Private Key (client_auth_key)<a class="headerlink" href="#client-authentication-private-key-client-auth-key" title="Link to this heading">¶</a></h4>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Private key is a cryptographic key that corresponds to the client&#39;s public
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Private key is a cryptographic key that corresponds to the client's public
   key in the client authentication certificate. The private key is securely
   stored by the client and kept confidential. During the SSL/TLS handshake,
   when the server sends a challenge to the client, the client uses its
@@ -981,7 +981,7 @@ When making an API call, the application should automatically generate the
 certificates using the pasted content and will securely discard them upon execution.
 All three inputs (client_auth_cert, client_auth_key and client_auth_pem) follow the
 same input format, as shown below.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="n">inputs</span><span class="o">.</span><span class="n">client_auth_cert</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="n">inputs</span><span class="o">.</span><span class="n">client_auth_cert</span> <span class="o">=</span> <span class="s2">"""</span>
 <span class="s2">      -----BEGIN CERTIFICATE-----</span>
 <span class="s2">      MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDFo8xuU+xgNo7G</span>
 <span class="s2">      9t6hyCRYC0imfYGlH8Huh6OrQ0qO6PnmV8GCGw4ZDHnhUqmS3xWhn5c3MWSXGS5E</span>
@@ -993,7 +993,7 @@ same input format, as shown below.</p>
 <span class="s2">      k76eXjwrXCwuR0dnwBEsgktWEL8tgCFL1KOACU6dLN2PvE1BOzz8gp1CySn0cpSQ</span>
 <span class="s2">      Y20A9hExGKyHns4hW5KgvA==</span>
 <span class="s2">      -----END CERTIFICATE-----</span>
-<span class="s2">      &quot;&quot;&quot;</span>
+<span class="s2">      """</span>
 </pre></div>
 </div>
 </section>
@@ -1255,66 +1255,66 @@ JWT based authentication can be performed in 2 ways:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;apparent_encoding&quot;</span><span class="p">:</span> <span class="s2">&quot;ascii&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;cookies&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;sails.sid&quot;</span><span class="p">:</span> <span class="s2">&quot;s%3AC3qSgEkPLbzV-xtRnnqe-p7zt80yQSTm.SJf3XOyooMFo0wQ8wiWfCzlgieNUBQGRNtSo%2BRSXw54&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"apparent_encoding"</span><span class="p">:</span> <span class="s2">"ascii"</span><span class="p">,</span>
+    <span class="s2">"cookies"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"sails.sid"</span><span class="p">:</span> <span class="s2">"s%3AC3qSgEkPLbzV-xtRnnqe-p7zt80yQSTm.SJf3XOyooMFo0wQ8wiWfCzlgieNUBQGRNtSo%2BRSXw54"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;elapsed&quot;</span><span class="p">:</span> <span class="mi">711</span><span class="p">,</span>
-    <span class="s2">&quot;headers&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;Connection&quot;</span><span class="p">:</span> <span class="s2">&quot;close&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Content-Length&quot;</span><span class="p">:</span> <span class="s2">&quot;486&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json; charset=utf-8&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;Date&quot;</span><span class="p">:</span> <span class="s2">&quot;Thu, 02 Mar 2023 23:47:12 GMT&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;ETag&quot;</span><span class="p">:</span> <span class="s2">&quot;W/</span><span class="se">\&quot;</span><span class="s2">1e6-/Slr9JmNLSHXgTt5sCvAphvtWyI</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;set-cookie&quot;</span><span class="p">:</span> <span class="s2">&quot;sails.sid=s%3AC3qSgEkPLbzV-xtRnnqe-p7zt80yQSTm.SJf3XOyooMFo0wQ8wiWfCzlgieNUBQGRNtSo%2BRSXw54; Path=/; HttpOnly&quot;</span>
+    <span class="s2">"elapsed"</span><span class="p">:</span> <span class="mi">711</span><span class="p">,</span>
+    <span class="s2">"headers"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"Connection"</span><span class="p">:</span> <span class="s2">"close"</span><span class="p">,</span>
+      <span class="s2">"Content-Length"</span><span class="p">:</span> <span class="s2">"486"</span><span class="p">,</span>
+      <span class="s2">"Content-Type"</span><span class="p">:</span> <span class="s2">"application/json; charset=utf-8"</span><span class="p">,</span>
+      <span class="s2">"Date"</span><span class="p">:</span> <span class="s2">"Thu, 02 Mar 2023 23:47:12 GMT"</span><span class="p">,</span>
+      <span class="s2">"ETag"</span><span class="p">:</span> <span class="s2">"W/</span><span class="se">\"</span><span class="s2">1e6-/Slr9JmNLSHXgTt5sCvAphvtWyI</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span>
+      <span class="s2">"set-cookie"</span><span class="p">:</span> <span class="s2">"sails.sid=s%3AC3qSgEkPLbzV-xtRnnqe-p7zt80yQSTm.SJf3XOyooMFo0wQ8wiWfCzlgieNUBQGRNtSo%2BRSXw54; Path=/; HttpOnly"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;json&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;8.8.8.8&quot;</span>
+    <span class="s2">"json"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"args"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"8.8.8.8"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;headers&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;accept&quot;</span><span class="p">:</span> <span class="s2">&quot;*/*&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;accept-encoding&quot;</span><span class="p">:</span> <span class="s2">&quot;gzip, deflate&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;content-length&quot;</span><span class="p">:</span> <span class="s2">&quot;18&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;content-type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;postman-echo.com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;user-agent&quot;</span><span class="p">:</span> <span class="s2">&quot;python-requests/2.28.1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;x-amzn-trace-id&quot;</span><span class="p">:</span> <span class="s2">&quot;Root=1-64013580-54708cb41d08344e2a8af58b&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;x-forwarded-port&quot;</span><span class="p">:</span> <span class="s2">&quot;443&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;x-forwarded-proto&quot;</span><span class="p">:</span> <span class="s2">&quot;https&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;x-frooble&quot;</span><span class="p">:</span> <span class="s2">&quot;Baz&quot;</span>
+      <span class="s2">"headers"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"accept"</span><span class="p">:</span> <span class="s2">"*/*"</span><span class="p">,</span>
+        <span class="s2">"accept-encoding"</span><span class="p">:</span> <span class="s2">"gzip, deflate"</span><span class="p">,</span>
+        <span class="s2">"authorization"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"content-length"</span><span class="p">:</span> <span class="s2">"18"</span><span class="p">,</span>
+        <span class="s2">"content-type"</span><span class="p">:</span> <span class="s2">"application/json"</span><span class="p">,</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"postman-echo.com"</span><span class="p">,</span>
+        <span class="s2">"user-agent"</span><span class="p">:</span> <span class="s2">"python-requests/2.28.1"</span><span class="p">,</span>
+        <span class="s2">"x-amzn-trace-id"</span><span class="p">:</span> <span class="s2">"Root=1-64013580-54708cb41d08344e2a8af58b"</span><span class="p">,</span>
+        <span class="s2">"x-forwarded-port"</span><span class="p">:</span> <span class="s2">"443"</span><span class="p">,</span>
+        <span class="s2">"x-forwarded-proto"</span><span class="p">:</span> <span class="s2">"https"</span><span class="p">,</span>
+        <span class="s2">"x-frooble"</span><span class="p">:</span> <span class="s2">"Baz"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://postman-echo.com/get&quot;</span>
+      <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://postman-echo.com/get"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">{},</span>
-    <span class="s2">&quot;ok&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;status_code&quot;</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
-    <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\n</span><span class="s2">  </span><span class="se">\&quot;</span><span class="s2">args</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">key</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">8.8.8.8</span><span class="se">\&quot;\n</span><span class="s2">  },</span><span class="se">\n</span><span class="s2">  </span><span class="se">\&quot;</span><span class="s2">headers</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">x-forwarded-proto</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">https</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">x-forwarded-port</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">443</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">host</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">postman-echo.com</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">x-amzn-trace-id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Root=1-64013580-54708cb41d08344e2a8af58b</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">content-length</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">18</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">user-agent</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">python-requests/2.28.1</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">accept-encoding</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">gzip, deflate</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">accept</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">*/*</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">content-type</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">application/json</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">x-frooble</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Baz</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">authorization</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;\&quot;\n</span><span class="s2">  },</span><span class="se">\n</span><span class="s2">  </span><span class="se">\&quot;</span><span class="s2">url</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">https://postman-echo.com/get</span><span class="se">\&quot;\n</span><span class="s2">}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://postman-echo.com/get&quot;</span>
+    <span class="s2">"links"</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s2">"ok"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">"OK"</span><span class="p">,</span>
+    <span class="s2">"status_code"</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\n</span><span class="s2">  </span><span class="se">\"</span><span class="s2">args</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\n</span><span class="s2">    </span><span class="se">\"</span><span class="s2">key</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">8.8.8.8</span><span class="se">\"\n</span><span class="s2">  },</span><span class="se">\n</span><span class="s2">  </span><span class="se">\"</span><span class="s2">headers</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\n</span><span class="s2">    </span><span class="se">\"</span><span class="s2">x-forwarded-proto</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">https</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\"</span><span class="s2">x-forwarded-port</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">443</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\"</span><span class="s2">host</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">postman-echo.com</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\"</span><span class="s2">x-amzn-trace-id</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Root=1-64013580-54708cb41d08344e2a8af58b</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\"</span><span class="s2">content-length</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">18</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\"</span><span class="s2">user-agent</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">python-requests/2.28.1</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\"</span><span class="s2">accept-encoding</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">gzip, deflate</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\"</span><span class="s2">accept</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">*/*</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\"</span><span class="s2">content-type</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">application/json</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\"</span><span class="s2">x-frooble</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Baz</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\"</span><span class="s2">authorization</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"\"\n</span><span class="s2">  },</span><span class="se">\n</span><span class="s2">  </span><span class="se">\"</span><span class="s2">url</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">https://postman-echo.com/get</span><span class="se">\"\n</span><span class="s2">}"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://postman-echo.com/get"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;rest_api_allowed_status_codes&quot;</span><span class="p">:</span> <span class="s2">&quot; 305,404,500&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rest_api_body&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">key</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">8.8.8.8</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rest_api_headers&quot;</span><span class="p">:</span> <span class="s2">&quot;Content-Type: application/json</span><span class="se">\n</span><span class="s2">X-Frooble: Baz</span><span class="se">\n</span><span class="s2">Authorization: {{auth_header}}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rest_api_method&quot;</span><span class="p">:</span> <span class="s2">&quot;GET&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rest_api_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://postman-echo.com/get&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rest_api_verify&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"rest_api_allowed_status_codes"</span><span class="p">:</span> <span class="s2">" 305,404,500"</span><span class="p">,</span>
+    <span class="s2">"rest_api_body"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">key</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">8.8.8.8</span><span class="se">\"</span><span class="s2">}"</span><span class="p">,</span>
+    <span class="s2">"rest_api_headers"</span><span class="p">:</span> <span class="s2">"Content-Type: application/json</span><span class="se">\n</span><span class="s2">X-Frooble: Baz</span><span class="se">\n</span><span class="s2">Authorization: {{auth_header}}"</span><span class="p">,</span>
+    <span class="s2">"rest_api_method"</span><span class="p">:</span> <span class="s2">"GET"</span><span class="p">,</span>
+    <span class="s2">"rest_api_url"</span><span class="p">:</span> <span class="s2">"https://postman-echo.com/get"</span><span class="p">,</span>
+    <span class="s2">"rest_api_verify"</span><span class="p">:</span> <span class="n">true</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">731</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;My Host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-rest-api&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-02 18:47:11&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">731</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"My Host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-rest-api"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-03-02 18:47:11"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1335,9 +1335,9 @@ JWT based authentication can be performed in 2 ways:</p>
 <span class="c1"># It also supports various authentication methods, including basic authentication, OAuth, API keys, and client side</span>
 <span class="c1"># authentication.</span>
 
-<span class="n">method</span>  <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">method</span>  <span class="o">=</span> <span class="s2">""</span>
 
-<span class="n">url</span>     <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">url</span>     <span class="o">=</span> <span class="s2">""</span>
 
 <span class="n">verify</span>  <span class="o">=</span> <span class="kc">True</span>
 
@@ -1357,18 +1357,18 @@ JWT based authentication can be performed in 2 ways:</p>
 
 <span class="n">retry_backoff</span> <span class="o">=</span> <span class="kc">None</span>
 
-<span class="n">allowed_status_code</span> <span class="o">=</span> <span class="s2">&quot;200, 201, 202&quot;</span>
+<span class="n">allowed_status_code</span> <span class="o">=</span> <span class="s2">"200, 201, 202"</span>
 
-<span class="n">REST_METHODS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;HEAD&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="s2">&quot;PUT&quot;</span><span class="p">,</span> <span class="s2">&quot;DELETE&quot;</span><span class="p">,</span> <span class="s2">&quot;OPTIONS&quot;</span><span class="p">,</span> <span class="s2">&quot;PATCH&quot;</span><span class="p">]</span>
+<span class="n">REST_METHODS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"GET"</span><span class="p">,</span> <span class="s2">"HEAD"</span><span class="p">,</span> <span class="s2">"POST"</span><span class="p">,</span> <span class="s2">"PUT"</span><span class="p">,</span> <span class="s2">"DELETE"</span><span class="p">,</span> <span class="s2">"OPTIONS"</span><span class="p">,</span> <span class="s2">"PATCH"</span><span class="p">]</span>
 
 
 <span class="c1"># Endpoint url</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_url</span>     <span class="o">=</span> <span class="n">url</span>
 
 <span class="c1"># Indicates whether to verify SSL certificates (boolean).</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_verify</span>  <span class="o">=</span> <span class="n">verify</span> <span class="k">if</span> <span class="n">verify</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="kc">True</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_verify</span>  <span class="o">=</span> <span class="n">verify</span> <span class="k">if</span> <span class="n">verify</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s1">''</span><span class="p">]</span> <span class="k">else</span> <span class="kc">True</span>
 
-<span class="c1"># REST methods: &quot;GET&quot;, &quot;HEAD&quot;, &quot;POST&quot;, &quot;PUT&quot;, &quot;DELETE&quot;, &quot;OPTIONS&quot; and &quot;PATCH&quot;. Defaults to GET method</span>
+<span class="c1"># REST methods: "GET", "HEAD", "POST", "PUT", "DELETE", "OPTIONS" and "PATCH". Defaults to GET method</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_method</span>  <span class="o">=</span> <span class="n">method</span> <span class="k">if</span> <span class="n">method</span> <span class="ow">and</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">REST_METHODS</span> <span class="k">else</span> <span class="n">REST_METHODS</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="c1"># Time in seconds to wait before timing-out request. Default: 60 seconds.</span>
@@ -1397,7 +1397,7 @@ JWT based authentication can be performed in 2 ways:</p>
 <span class="c1">#</span>
 <span class="c1">#    Example:</span>
 <span class="c1">#    --------</span>
-<span class="c1">#     inputs.rest_api_allowed_status_codes = &quot;305, 400, 404, 500&quot;</span>
+<span class="c1">#     inputs.rest_api_allowed_status_codes = "305, 400, 404, 500"</span>
 
 
 <span class="c1"># Status codes in a comma separated fashion, Anything less than a status code 300 is allowed by default</span>
@@ -1490,9 +1490,9 @@ JWT based authentication can be performed in 2 ways:</p>
 
 <span class="c1">#  Each part in multipart/form-data is expected to contain a content-disposition header where the disposition type</span>
 <span class="c1">#  is automatically set by the application, and a disposition name. This disposition name changes with regard to</span>
-<span class="c1">#  the endpoint that is being used and is to be set by the user. Default value : &quot;file&quot;</span>
+<span class="c1">#  the endpoint that is being used and is to be set by the user. Default value : "file"</span>
 
-<span class="n">inputs</span><span class="o">.</span><span class="n">attachment_form_field_name</span> <span class="o">=</span> <span class="s2">&quot;file&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">attachment_form_field_name</span> <span class="o">=</span> <span class="s2">"file"</span>
 
 <span class="c1"># sends file as multipart/form-data</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">send_file_as_body</span> <span class="o">=</span> <span class="kc">False</span>
@@ -1517,8 +1517,8 @@ JWT based authentication can be performed in 2 ways:</p>
 
 <span class="c1"># SECRETS can be directly substituted into input parameters, there by avoiding</span>
 <span class="c1"># the need to expose any sensitive information as plain text. This can be done by</span>
-<span class="c1"># creating a SECRET under the application&#39;s configuration tab and referencing the </span>
-<span class="c1"># same with a `$` sign followed by the SECRET&#39;s name enclosed within curly</span>
+<span class="c1"># creating a SECRET under the application's configuration tab and referencing the </span>
+<span class="c1"># same with a `$` sign followed by the SECRET's name enclosed within curly</span>
 <span class="c1"># brace. PAM Credentials can also be referenced it a similar fashion.</span>
 <span class="c1">#</span>
 <span class="c1">#    Format:</span>
@@ -1532,9 +1532,9 @@ JWT based authentication can be performed in 2 ways:</p>
 <span class="c1">#      import json</span>
 <span class="c1">#</span>
 <span class="c1">#      inputs.rest_api_headers = json.dumps({</span>
-<span class="c1">#        &quot;Content-Type&quot;  : &quot;application/json&quot;,</span>
-<span class="c1">#        &quot;X-Frooble&quot;     : &quot;Baz&quot;,</span>
-<span class="c1">#        &quot;Authorization&quot; : &quot;bearer ${API_TOKEN}&quot;</span>
+<span class="c1">#        "Content-Type"  : "application/json",</span>
+<span class="c1">#        "X-Frooble"     : "Baz",</span>
+<span class="c1">#        "Authorization" : "bearer ${API_TOKEN}"</span>
 <span class="c1">#      })</span>
 <span class="c1">#</span>
 
@@ -1566,18 +1566,18 @@ JWT based authentication can be performed in 2 ways:</p>
 <span class="c1">#</span>
 <span class="c1">#    Example:</span>
 <span class="c1">#    --------</span>
-<span class="c1">#      inputs.rest_api_body  = &quot;&quot;&quot;</span>
-<span class="c1">#      &quot;name&quot; : &quot;user1&quot;,</span>
-<span class="c1">#      &quot;password&quot; : &quot;p@ssword1&quot;,</span>
-<span class="c1">#      &quot;role&quot; : &quot;admin&quot;,</span>
-<span class="c1">#      &quot;content&quot; : { &quot;site_url&quot; : &quot;www.example.com&quot;, &quot;users&quot; : [&quot;user1&quot;, &quot;user2&quot;] }</span>
-<span class="c1">#      &quot;&quot;&quot;</span>
+<span class="c1">#      inputs.rest_api_body  = """</span>
+<span class="c1">#      "name" : "user1",</span>
+<span class="c1">#      "password" : "p@ssword1",</span>
+<span class="c1">#      "role" : "admin",</span>
+<span class="c1">#      "content" : { "site_url" : "www.example.com", "users" : ["user1", "user2"] }</span>
+<span class="c1">#      """</span>
 
 <span class="c1">#    Hint:</span>
 <span class="c1">#    -----</span>
 <span class="c1">#</span>
 <span class="c1">#    An easier way to feed inputs to the above mentioned fields would be using</span>
-<span class="c1">#    python dictionaries. While the inputs don&#39;t directly support dict, the in-built </span>
+<span class="c1">#    python dictionaries. While the inputs don't directly support dict, the in-built </span>
 <span class="c1">#    json package can be used to convert a python dict to json string.</span>
 <span class="c1">#</span>
 <span class="c1">#    Example:</span>
@@ -1585,12 +1585,12 @@ JWT based authentication can be performed in 2 ways:</p>
 <span class="c1">#      import json</span>
 <span class="c1">#     </span>
 <span class="c1">#      inputs.rest_api_body  = {</span>
-<span class="c1">#       &quot;name&quot;     : &quot;user1&quot;,</span>
-<span class="c1">#       &quot;password&quot; : &quot;p@ssword1&quot;,</span>
-<span class="c1">#       &quot;role&quot;     : &quot;admin&quot;,</span>
-<span class="c1">#       &quot;content&quot;  : { </span>
-<span class="c1">#          &quot;site_url&quot; : &quot;www.example.com&quot;,</span>
-<span class="c1">#          &quot;users&quot;    : [&quot;user1&quot;, &quot;user2&quot;]</span>
+<span class="c1">#       "name"     : "user1",</span>
+<span class="c1">#       "password" : "p@ssword1",</span>
+<span class="c1">#       "role"     : "admin",</span>
+<span class="c1">#       "content"  : { </span>
+<span class="c1">#          "site_url" : "www.example.com",</span>
+<span class="c1">#          "users"    : ["user1", "user2"]</span>
 <span class="c1">#          }</span>
 <span class="c1">#      }</span>
 <span class="c1">#</span>
@@ -1601,7 +1601,7 @@ JWT based authentication can be performed in 2 ways:</p>
 <span class="c1">#    ---------------------------</span>
 <span class="c1">#</span>
 <span class="c1">#    This format allows for specifying inputs as key-value pairs, separated</span>
-<span class="c1">#    by a new line. It let&#39;s us create quick and easy inputs that is properly</span>
+<span class="c1">#    by a new line. It let's us create quick and easy inputs that is properly</span>
 <span class="c1">#    formatted for the request. The primary purpose of this format is to retain</span>
 <span class="c1">#    backwards compatibility.</span>
 <span class="c1">#</span>
@@ -1610,13 +1610,13 @@ JWT based authentication can be performed in 2 ways:</p>
 <span class="c1">#</span>
 <span class="c1">#    Example:</span>
 <span class="c1">#    -------- </span>
-<span class="c1">#      inputs.rest_api_body = &quot;&quot;&quot;</span>
+<span class="c1">#      inputs.rest_api_body = """</span>
 <span class="c1">#      name : user1</span>
 <span class="c1">#      password : p@ssword1</span>
 <span class="c1">#      role : admin</span>
-<span class="c1">#      &quot;&quot;&quot;             </span>
+<span class="c1">#      """             </span>
 <span class="c1"># </span>
-<span class="c1">#      inputs.rest_api_headers = &quot;&quot;&quot;</span>
+<span class="c1">#      inputs.rest_api_headers = """</span>
 <span class="c1">#      Content-Type: application/json</span>
 <span class="c1">#      X-Frooble: Baz</span>
 <span class="c1">#      Authorization: {{auth_header}}</span>
@@ -1676,8 +1676,8 @@ JWT based authentication can be performed in 2 ways:</p>
 
 <span class="c1"># Method 2: CLIENT-CREDENTIALS</span>
 <span class="c1">#</span>
-<span class="c1">#     Client Credentials Flow doesn&#39;t involve user authentication, and it is suitable</span>
-<span class="c1">#     for scenarios where the client is a confidential client, meaning it can keep it&#39;s</span>
+<span class="c1">#     Client Credentials Flow doesn't involve user authentication, and it is suitable</span>
+<span class="c1">#     for scenarios where the client is a confidential client, meaning it can keep it's</span>
 <span class="c1">#     client credentials (client ID and client secret) secure.</span>
 <span class="c1">#</span>
 <span class="c1">#     Note: If the endpoint returns a `refresh-token` on successively completing the above flow,</span>
@@ -1690,10 +1690,10 @@ JWT based authentication can be performed in 2 ways:</p>
 <span class="c1">#</span>
 <span class="c1">#     The authorization server redirects the user back to address specified on the </span>
 <span class="c1">#     redirect URI with an authorization CODE. This CODE is a temporary token</span>
-<span class="c1">#     that represents the user&#39;s authorization and usually can be used only once.</span>
+<span class="c1">#     that represents the user's authorization and usually can be used only once.</span>
 <span class="c1">#     This function exchanges the authorization code for an ACCESS_TOKEN (and </span>
 <span class="c1">#     possibly also a REFRESH_TOKEN depending on the endpoint). This requires making</span>
-<span class="c1">#     a request to the authorization server&#39;s token endpoint, providing the </span>
+<span class="c1">#     a request to the authorization server's token endpoint, providing the </span>
 <span class="c1">#     authorization CODE, client ID, client secret, token URL and redirect URI.</span>
 <span class="c1">#</span>
 <span class="c1">#     Note: If the endpoint returns a `refresh-token` on successively completing the above flow,</span>
@@ -1724,7 +1724,7 @@ JWT based authentication can be performed in 2 ways:</p>
 <span class="c1"># Set of permissions granted by the resource owner (user) to the client application</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">oauth_scope</span>         <span class="o">=</span> <span class="kc">None</span>
 
-<span class="c1"># Provides information to the client application about the token&#39;s characteristics. </span>
+<span class="c1"># Provides information to the client application about the token's characteristics. </span>
 <span class="c1"># Examples: Bearer, JSON Web Tokens, MAC, SAML. Default : Bearer</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">oauth_token_type</span>    <span class="o">=</span> <span class="kc">None</span>
 
@@ -1761,14 +1761,14 @@ JWT based authentication can be performed in 2 ways:</p>
 <span class="c1">#</span>
 <span class="c1">#    A client authentication certificate, also known as a client certificate,</span>
 <span class="c1">#    is a digital certificate that is issued to the client (user or device) as</span>
-<span class="c1">#    part of the mutual authentication process. It contains the client&#39;s public</span>
-<span class="c1">#    key, identifying information (such as the client&#39;s name or ID), and is</span>
+<span class="c1">#    part of the mutual authentication process. It contains the client's public</span>
+<span class="c1">#    key, identifying information (such as the client's name or ID), and is</span>
 <span class="c1">#    signed by a trusted Certificate Authority (CA) or a self-signed certificate</span>
 <span class="c1">#    if it is a closed system.</span>
 
 <span class="c1"># 2. Client Authentication Private Key (client_auth_key):</span>
 <span class="c1">#</span>
-<span class="c1">#    Private key is a cryptographic key that corresponds to the client&#39;s public</span>
+<span class="c1">#    Private key is a cryptographic key that corresponds to the client's public</span>
 <span class="c1">#    key in the client authentication certificate. The private key is securely</span>
 <span class="c1">#    stored by the client and kept confidential. During the SSL/TLS handshake,</span>
 <span class="c1">#    when the server sends a challenge to the client, the client uses its </span>
@@ -1800,7 +1800,7 @@ JWT based authentication can be performed in 2 ways:</p>
 <span class="c1">#    All three inputs (client_auth_cert, client_auth_key and client_auth_pem) follow the</span>
 <span class="c1">#    same input format, as shown below.</span>
 <span class="c1">#</span>
-<span class="c1">#   inputs.client_auth_cert = &quot;&quot;&quot;</span>
+<span class="c1">#   inputs.client_auth_cert = """</span>
 <span class="c1">#       -----BEGIN CERTIFICATE-----</span>
 <span class="c1">#       MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDFo8xuU+xgNo7G</span>
 <span class="c1">#       9t6hyCRYC0imfYGlH8Huh6OrQ0qO6PnmV8GCGw4ZDHnhUqmS3xWhn5c3MWSXGS5E</span>
@@ -1810,7 +1810,7 @@ JWT based authentication can be performed in 2 ways:</p>
 <span class="c1">#       k76eXjwrXCwuR0dnwBEsgktWEL8tgCFL1KOACU6dLN2PvE1BOzz8gp1CySn0cpSQ</span>
 <span class="c1">#       Y20A9hExGKyHns4hW5KgvA==</span>
 <span class="c1">#       -----END CERTIFICATE-----</span>
-<span class="c1">#       &quot;&quot;&quot;</span>
+<span class="c1">#       """</span>
 
 <span class="c1"># .CSR file contents to be pasted. Requires client_auth_key to function. Content must be unencrypted.</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">client_auth_cert</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1853,7 +1853,7 @@ JWT based authentication can be performed in 2 ways:</p>
 <span class="c1"># key used for signing the JWT.</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">jwt_key</span>       <span class="o">=</span> <span class="kc">None</span>
 
-<span class="c1"># Encryption algorithm used for encoding the JWT. Defaults to &quot;HS256&quot; algorithm</span>
+<span class="c1"># Encryption algorithm used for encoding the JWT. Defaults to "HS256" algorithm</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">jwt_algorithm</span> <span class="o">=</span> <span class="kc">None</span>
 
 </pre></div>

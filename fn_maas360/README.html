@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -711,78 +711,78 @@
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;device&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;appComplianceState&quot;</span><span class="p">:</span> <span class="s2">&quot;In Compliance&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;customAssetNumber&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;deviceName&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_device@gmail.com-STV100-1&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;deviceOwner&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;deviceStatus&quot;</span><span class="p">:</span> <span class="s2">&quot;Active&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;deviceType&quot;</span><span class="p">:</span> <span class="s2">&quot;Smartphone&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;emailAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_device@gmail.com&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;encryptionStatus&quot;</span><span class="p">:</span> <span class="s2">&quot;Encryption Complete&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;firstRegisteredInEpochms&quot;</span><span class="p">:</span> <span class="mi">1549629133338</span><span class="p">,</span>
-            <span class="s2">&quot;imeiEsn&quot;</span><span class="p">:</span> <span class="mi">351623070066166</span><span class="p">,</span>
-            <span class="s2">&quot;installedDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-02-08T12:32:13&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;installedDateInEpochms&quot;</span><span class="p">:</span> <span class="mi">1549629133338</span><span class="p">,</span>
-            <span class="s2">&quot;isSupervisedDevice&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="s2">&quot;jailbreakStatus&quot;</span><span class="p">:</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;lastMdmRegisteredInEpochms&quot;</span><span class="p">:</span> <span class="mi">1549629133378</span><span class="p">,</span>
-            <span class="s2">&quot;lastRegisteredInEpochms&quot;</span><span class="p">:</span> <span class="mi">1549629133338</span><span class="p">,</span>
-            <span class="s2">&quot;lastReported&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-04-23T16:11:23&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;lastReportedInEpochms&quot;</span><span class="p">:</span> <span class="mi">1556035883843</span><span class="p">,</span>
-            <span class="s2">&quot;maas360DeviceID&quot;</span><span class="p">:</span> <span class="s2">&quot;Androiddeviceid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;maas360ManagedStatus&quot;</span><span class="p">:</span> <span class="s2">&quot;Enrolled&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mailboxDeviceId&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mailboxLastReported&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mailboxLastReportedInEpochms&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mailboxManaged&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;manufacturer&quot;</span><span class="p">:</span> <span class="s2">&quot;blackberry&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;mdmMailboxDeviceId&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;STV100-1&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;osName&quot;</span><span class="p">:</span> <span class="s2">&quot;Android 6.0.1 (MMB29M)&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;osServicePack&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;osVersion&quot;</span><span class="p">:</span> <span class="s2">&quot;6.0.1&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ownership&quot;</span><span class="p">:</span> <span class="s2">&quot;Corporate Owned&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;passcodeCompliance&quot;</span><span class="p">:</span> <span class="s2">&quot;Compliant&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;phoneNumber&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;platformName&quot;</span><span class="p">:</span> <span class="s2">&quot;Android&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;policyComplianceState&quot;</span><span class="p">:</span> <span class="s2">&quot;In Compliance&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ruleComplianceState&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;selectiveWipeStatus&quot;</span><span class="p">:</span> <span class="s2">&quot;N/a&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sourceID&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">&quot;testDevice&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-            <span class="s2">&quot;udid&quot;</span><span class="p">:</span> <span class="s2">&quot;Androiddeviceid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;unifiedTravelerDeviceId&quot;</span><span class="p">:</span> <span class="s2">&quot;Androiddeviceid&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;userDomain&quot;</span><span class="p">:</span> <span class="s2">&quot;gmail.com&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;dummy_device@gmail.com&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;wifiMacAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;a4:e4:b8:73:a1:93&quot;</span>
+    <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"device"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"appComplianceState"</span><span class="p">:</span> <span class="s2">"In Compliance"</span><span class="p">,</span>
+            <span class="s2">"customAssetNumber"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"deviceName"</span><span class="p">:</span> <span class="s2">"dummy_device@gmail.com-STV100-1"</span><span class="p">,</span>
+            <span class="s2">"deviceOwner"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"deviceStatus"</span><span class="p">:</span> <span class="s2">"Active"</span><span class="p">,</span>
+            <span class="s2">"deviceType"</span><span class="p">:</span> <span class="s2">"Smartphone"</span><span class="p">,</span>
+            <span class="s2">"emailAddress"</span><span class="p">:</span> <span class="s2">"dummy_device@gmail.com"</span><span class="p">,</span>
+            <span class="s2">"encryptionStatus"</span><span class="p">:</span> <span class="s2">"Encryption Complete"</span><span class="p">,</span>
+            <span class="s2">"firstRegisteredInEpochms"</span><span class="p">:</span> <span class="mi">1549629133338</span><span class="p">,</span>
+            <span class="s2">"imeiEsn"</span><span class="p">:</span> <span class="mi">351623070066166</span><span class="p">,</span>
+            <span class="s2">"installedDate"</span><span class="p">:</span> <span class="s2">"2019-02-08T12:32:13"</span><span class="p">,</span>
+            <span class="s2">"installedDateInEpochms"</span><span class="p">:</span> <span class="mi">1549629133338</span><span class="p">,</span>
+            <span class="s2">"isSupervisedDevice"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"jailbreakStatus"</span><span class="p">:</span> <span class="s2">"No"</span><span class="p">,</span>
+            <span class="s2">"lastMdmRegisteredInEpochms"</span><span class="p">:</span> <span class="mi">1549629133378</span><span class="p">,</span>
+            <span class="s2">"lastRegisteredInEpochms"</span><span class="p">:</span> <span class="mi">1549629133338</span><span class="p">,</span>
+            <span class="s2">"lastReported"</span><span class="p">:</span> <span class="s2">"2019-04-23T16:11:23"</span><span class="p">,</span>
+            <span class="s2">"lastReportedInEpochms"</span><span class="p">:</span> <span class="mi">1556035883843</span><span class="p">,</span>
+            <span class="s2">"maas360DeviceID"</span><span class="p">:</span> <span class="s2">"Androiddeviceid"</span><span class="p">,</span>
+            <span class="s2">"maas360ManagedStatus"</span><span class="p">:</span> <span class="s2">"Enrolled"</span><span class="p">,</span>
+            <span class="s2">"mailboxDeviceId"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"mailboxLastReported"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"mailboxLastReportedInEpochms"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"mailboxManaged"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"manufacturer"</span><span class="p">:</span> <span class="s2">"blackberry"</span><span class="p">,</span>
+            <span class="s2">"mdmMailboxDeviceId"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"STV100-1"</span><span class="p">,</span>
+            <span class="s2">"osName"</span><span class="p">:</span> <span class="s2">"Android 6.0.1 (MMB29M)"</span><span class="p">,</span>
+            <span class="s2">"osServicePack"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"osVersion"</span><span class="p">:</span> <span class="s2">"6.0.1"</span><span class="p">,</span>
+            <span class="s2">"ownership"</span><span class="p">:</span> <span class="s2">"Corporate Owned"</span><span class="p">,</span>
+            <span class="s2">"passcodeCompliance"</span><span class="p">:</span> <span class="s2">"Compliant"</span><span class="p">,</span>
+            <span class="s2">"phoneNumber"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"platformName"</span><span class="p">:</span> <span class="s2">"Android"</span><span class="p">,</span>
+            <span class="s2">"policyComplianceState"</span><span class="p">:</span> <span class="s2">"In Compliance"</span><span class="p">,</span>
+            <span class="s2">"ruleComplianceState"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"selectiveWipeStatus"</span><span class="p">:</span> <span class="s2">"N/a"</span><span class="p">,</span>
+            <span class="s2">"sourceID"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"testDevice"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"udid"</span><span class="p">:</span> <span class="s2">"Androiddeviceid"</span><span class="p">,</span>
+            <span class="s2">"unifiedTravelerDeviceId"</span><span class="p">:</span> <span class="s2">"Androiddeviceid"</span><span class="p">,</span>
+            <span class="s2">"userDomain"</span><span class="p">:</span> <span class="s2">"gmail.com"</span><span class="p">,</span>
+            <span class="s2">"username"</span><span class="p">:</span> <span class="s2">"dummy_device@gmail.com"</span><span class="p">,</span>
+            <span class="s2">"wifiMacAddress"</span><span class="p">:</span> <span class="s2">"a4:e4:b8:73:a1:93"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;pageNumber&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;pageSize&quot;</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="s2">"pageNumber"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"pageSize"</span><span class="p">:</span> <span class="mi">1</span>
     <span class="p">},</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;maas360_device_id&quot;</span><span class="p">:</span> <span class="s2">&quot;Androiddeviceid&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;maas360_email&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="s2">&quot;maas360_imei_meid&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="s2">&quot;maas360_partial_device_name&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="s2">&quot;maas360_partial_phone_no&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="s2">&quot;maas360_partial_username&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="s2">&quot;maas360_platform_name&quot;</span><span class="p">:</span> <span class="kc">None</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"maas360_device_id"</span><span class="p">:</span> <span class="s2">"Androiddeviceid"</span><span class="p">,</span>
+        <span class="s2">"maas360_email"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">"maas360_imei_meid"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">"maas360_partial_device_name"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">"maas360_partial_phone_no"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">"maas360_partial_username"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">"maas360_platform_name"</span><span class="p">:</span> <span class="kc">None</span>
     <span class="p">},</span>
-    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">9864</span><span class="p">,</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-maas360&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-05-13 13:21:40&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">9864</span><span class="p">,</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"host"</span><span class="p">,</span>
+        <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-maas360"</span><span class="p">,</span>
+        <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2019-05-13 13:21:40"</span><span class="p">,</span>
+        <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;raw_json_string&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"raw_json_string"</span><span class="p">,</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -807,37 +807,37 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">java.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">Date</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">add_row</span><span class="p">(</span><span class="n">device</span><span class="p">):</span>
-<span class="n">device_dt</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;maas360_device_dt&quot;</span><span class="p">)</span>
+<span class="n">device_dt</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"maas360_device_dt"</span><span class="p">)</span>
 <span class="n">device_dt</span><span class="o">.</span><span class="n">maas360_timestamp</span> <span class="o">=</span> <span class="n">Date</span><span class="p">()</span>
-<span class="n">device_dt</span><span class="o">.</span><span class="n">maas360_deviceid</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360DeviceID&quot;</span><span class="p">)</span>
-<span class="n">device_dt</span><span class="o">.</span><span class="n">maas360_devicename</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;deviceName&quot;</span><span class="p">)</span>
-<span class="n">device_dt</span><span class="o">.</span><span class="n">maas360_username</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;username&quot;</span><span class="p">)</span>
-<span class="n">device_dt</span><span class="o">.</span><span class="n">maas360_platformname</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;platformName&quot;</span><span class="p">)</span>
-<span class="n">device_dt</span><span class="o">.</span><span class="n">maas360_devicetype</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;deviceType&quot;</span><span class="p">)</span>
-<span class="n">device_dt</span><span class="o">.</span><span class="n">maas360_lastreported</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lastReported&quot;</span><span class="p">)</span>
-<span class="n">device_dt</span><span class="o">.</span><span class="n">maas360_devicestatus</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;deviceStatus&quot;</span><span class="p">)</span>
+<span class="n">device_dt</span><span class="o">.</span><span class="n">maas360_deviceid</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360DeviceID"</span><span class="p">)</span>
+<span class="n">device_dt</span><span class="o">.</span><span class="n">maas360_devicename</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"deviceName"</span><span class="p">)</span>
+<span class="n">device_dt</span><span class="o">.</span><span class="n">maas360_username</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"username"</span><span class="p">)</span>
+<span class="n">device_dt</span><span class="o">.</span><span class="n">maas360_platformname</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"platformName"</span><span class="p">)</span>
+<span class="n">device_dt</span><span class="o">.</span><span class="n">maas360_devicetype</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"deviceType"</span><span class="p">)</span>
+<span class="n">device_dt</span><span class="o">.</span><span class="n">maas360_lastreported</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lastReported"</span><span class="p">)</span>
+<span class="n">device_dt</span><span class="o">.</span><span class="n">maas360_devicestatus</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"deviceStatus"</span><span class="p">)</span>
 
 <span class="c1"># Print empty string instead of None</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">string_value</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="k">return</span> <span class="n">value</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+<span class="k">return</span> <span class="n">value</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">""</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">add_results_note</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">number_devices_found</span><span class="p">):</span>
-<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;</span><span class="si">{}</span><span class="s2"> device/s found in MaaS360 database with search parameters:</span>
-<span class="s2">  - partialDeviceName: &#39;</span><span class="si">{}</span><span class="s2">&#39;</span>
-<span class="s2">  - partialUsername: &#39;</span><span class="si">{}</span><span class="s2">&#39;</span>
-<span class="s2">  - partialPhoneNumber: &#39;</span><span class="si">{}</span><span class="s2">&#39;</span>
-<span class="s2">  - imeiMeid: &#39;</span><span class="si">{}</span><span class="s2">&#39;</span>
-<span class="s2">  - platformName: &#39;</span><span class="si">{}</span><span class="s2">&#39;</span>
-<span class="s2">  - maas360DeviceId: &#39;</span><span class="si">{}</span><span class="s2">&#39;</span>
-<span class="s2">  - email: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""</span><span class="si">{}</span><span class="s2"> device/s found in MaaS360 database with search parameters:</span>
+<span class="s2">  - partialDeviceName: '</span><span class="si">{}</span><span class="s2">'</span>
+<span class="s2">  - partialUsername: '</span><span class="si">{}</span><span class="s2">'</span>
+<span class="s2">  - partialPhoneNumber: '</span><span class="si">{}</span><span class="s2">'</span>
+<span class="s2">  - imeiMeid: '</span><span class="si">{}</span><span class="s2">'</span>
+<span class="s2">  - platformName: '</span><span class="si">{}</span><span class="s2">'</span>
+<span class="s2">  - maas360DeviceId: '</span><span class="si">{}</span><span class="s2">'</span>
+<span class="s2">  - email: '</span><span class="si">{}</span><span class="s2">'"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
     <span class="n">number_devices_found</span><span class="p">,</span>
-    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360_partial_device_name&quot;</span><span class="p">)),</span>
-    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360_partial_username&quot;</span><span class="p">)),</span>
-    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360_partial_phone_no&quot;</span><span class="p">)),</span>
-    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360_imei_meid&quot;</span><span class="p">)),</span>
-    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360_platform_name&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">))</span> <span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360_platform_name&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360_device_id&quot;</span><span class="p">)),</span>
-    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360_email&quot;</span><span class="p">))</span>
+    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360_partial_device_name"</span><span class="p">)),</span>
+    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360_partial_username"</span><span class="p">)),</span>
+    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360_partial_phone_no"</span><span class="p">)),</span>
+    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360_imei_meid"</span><span class="p">)),</span>
+    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360_platform_name"</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">))</span> <span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360_platform_name"</span><span class="p">)</span> <span class="k">else</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360_device_id"</span><span class="p">)),</span>
+    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360_email"</span><span class="p">))</span>
     <span class="p">)</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">noteText</span><span class="p">)</span>
 
@@ -845,18 +845,18 @@
 <span class="c1"># Mainline starts here #</span>
 <span class="c1">########################</span>
 
-<span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+<span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
 <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-  <span class="n">count</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span>
+  <span class="n">count</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"count"</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
     <span class="c1"># Add a row for each Device found</span>
-    <span class="n">devices_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;device&quot;</span><span class="p">)]</span> <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;device&quot;</span><span class="p">)</span>
+    <span class="n">devices_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"device"</span><span class="p">)]</span> <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"device"</span><span class="p">)</span>
     <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">device</span><span class="p">:</span> <span class="n">add_row</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">devices_list</span><span class="p">)</span>
 
 <span class="c1"># Write results to a Note</span>
-<span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">)</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"inputs"</span><span class="p">)</span>
 <span class="n">add_results_note</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">count</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -912,33 +912,33 @@
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;actionStatus&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The action was executed successfully on the device.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;latitude&quot;</span><span class="p">:</span> <span class="mf">25.005112</span><span class="p">,</span>
-        <span class="s2">&quot;locatedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-05-13 17:45:12.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;longitude&quot;</span><span class="p">:</span> <span class="mf">121.541535</span><span class="p">,</span>
-        <span class="s2">&quot;maas360DeviceID&quot;</span><span class="p">:</span> <span class="s2">&quot;deviceid&quot;</span>
+    <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"actionStatus"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"The action was executed successfully on the device."</span><span class="p">,</span>
+        <span class="s2">"latitude"</span><span class="p">:</span> <span class="mf">25.005112</span><span class="p">,</span>
+        <span class="s2">"locatedTime"</span><span class="p">:</span> <span class="s2">"2019-05-13 17:45:12.0"</span><span class="p">,</span>
+        <span class="s2">"longitude"</span><span class="p">:</span> <span class="mf">121.541535</span><span class="p">,</span>
+        <span class="s2">"maas360DeviceID"</span><span class="p">:</span> <span class="s2">"deviceid"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;maas360_action_type&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">202</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Locate Device&quot;</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"maas360_action_type"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">202</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Locate Device"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;maas360_device_id&quot;</span><span class="p">:</span> <span class="s2">&quot;deviceid&quot;</span>
+        <span class="s2">"maas360_device_id"</span><span class="p">:</span> <span class="s2">"deviceid"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">951</span><span class="p">,</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-maas360&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-05-13 15:18:51&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">951</span><span class="p">,</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"host"</span><span class="p">,</span>
+        <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-maas360"</span><span class="p">,</span>
+        <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2019-05-13 15:18:51"</span><span class="p">,</span>
+        <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;raw_json_string&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"raw_json_string"</span><span class="p">,</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -957,18 +957,18 @@
 <span class="c1"># Mainline starts here #</span>
 <span class="c1">########################</span>
 
-<span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-    <span class="n">latitude</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;latitude&quot;</span><span class="p">)</span>
-    <span class="n">longitude</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;longitude&quot;</span><span class="p">)</span>
-    <span class="n">device_id</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360DeviceID&quot;</span><span class="p">)</span>
+    <span class="n">latitude</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"latitude"</span><span class="p">)</span>
+    <span class="n">longitude</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"longitude"</span><span class="p">)</span>
+    <span class="n">device_id</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360DeviceID"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">latitude</span> <span class="ow">and</span> <span class="n">longitude</span><span class="p">:</span>
-      <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Current or last know location for Device ID </span><span class="si">{}</span><span class="s2"> is </span><span class="si">{}</span><span class="s2"> latitude, </span><span class="si">{}</span><span class="s2"> longitude.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device_id</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">)</span>
+      <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Current or last know location for Device ID </span><span class="si">{}</span><span class="s2"> is </span><span class="si">{}</span><span class="s2"> latitude, </span><span class="si">{}</span><span class="s2"> longitude."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device_id</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span> <span class="n">longitude</span><span class="p">)</span>
       <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">noteText</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-      <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;There is no current or last know location available for Device ID </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device_id</span><span class="p">)</span>
+      <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"There is no current or last know location available for Device ID </span><span class="si">{}</span><span class="s2">."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device_id</span><span class="p">)</span>
       <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">noteText</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -980,91 +980,91 @@
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;deviceSw&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"deviceSw"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-                <span class="s2">&quot;swAttrs&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">"swAttrs"</span><span class="p">:</span> <span class="p">[</span>
                     <span class="p">{</span>
-                        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;Application ID&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;com.fiberlink.maas360forios&quot;</span>
+                        <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"Application ID"</span><span class="p">,</span>
+                        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+                        <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"com.fiberlink.maas360forios"</span>
                     <span class="p">},</span>
                     <span class="p">{</span>
-                        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;Version&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mf">3.70.111</span>
+                        <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"Version"</span><span class="p">,</span>
+                        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+                        <span class="s2">"value"</span><span class="p">:</span> <span class="mf">3.70.111</span>
                     <span class="p">},</span>
                     <span class="p">{</span>
-                        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;AppDataSize&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mf">3.79</span>
+                        <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"AppDataSize"</span><span class="p">,</span>
+                        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+                        <span class="s2">"value"</span><span class="p">:</span> <span class="mf">3.79</span>
                     <span class="p">},</span>
                     <span class="p">{</span>
-                        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;File Size&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mf">175.18</span>
+                        <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"File Size"</span><span class="p">,</span>
+                        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+                        <span class="s2">"value"</span><span class="p">:</span> <span class="mf">175.18</span>
                     <span class="p">},</span>
                     <span class="p">{</span>
-                        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;Installed by MDM&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;Manage Status&quot;</span>
+                        <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"Installed by MDM"</span><span class="p">,</span>
+                        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+                        <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"Manage Status"</span>
                     <span class="p">}</span>
                 <span class="p">],</span>
-                <span class="s2">&quot;swName&quot;</span><span class="p">:</span> <span class="s2">&quot;MaaS360&quot;</span>
+                <span class="s2">"swName"</span><span class="p">:</span> <span class="s2">"MaaS360"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-                <span class="s2">&quot;swAttrs&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">"swAttrs"</span><span class="p">:</span> <span class="p">[</span>
                     <span class="p">{</span>
-                        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;Application ID&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;com.blackberry.ddt.bugreporter&quot;</span>
+                        <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"Application ID"</span><span class="p">,</span>
+                        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+                        <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"com.blackberry.ddt.bugreporter"</span>
                     <span class="p">},</span>
                     <span class="p">{</span>
-                        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;Version&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">1</span>
+                        <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"Version"</span><span class="p">,</span>
+                        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+                        <span class="s2">"value"</span><span class="p">:</span> <span class="mi">1</span>
                     <span class="p">},</span>
                     <span class="p">{</span>
-                        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;AppDataSize&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">0</span>
+                        <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"AppDataSize"</span><span class="p">,</span>
+                        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+                        <span class="s2">"value"</span><span class="p">:</span> <span class="mi">0</span>
                     <span class="p">},</span>
                     <span class="p">{</span>
-                        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;File Size&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">0</span>
+                        <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"File Size"</span><span class="p">,</span>
+                        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+                        <span class="s2">"value"</span><span class="p">:</span> <span class="mi">0</span>
                     <span class="p">},</span>
                     <span class="p">{</span>
-                        <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;Install Location&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-                        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;Internal&quot;</span>
+                        <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"Install Location"</span><span class="p">,</span>
+                        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+                        <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"Internal"</span>
                     <span class="p">}</span>
                 <span class="p">],</span>
-                <span class="s2">&quot;swName&quot;</span><span class="p">:</span> <span class="s2">&quot;BlackBerry Bug Reporter&quot;</span>
+                <span class="s2">"swName"</span><span class="p">:</span> <span class="s2">"BlackBerry Bug Reporter"</span>
             <span class="p">}</span>
         <span class="p">],</span>
-        <span class="s2">&quot;lastSoftwareDataRefreshDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-04-18T00:13:07&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;maas360DeviceID&quot;</span><span class="p">:</span> <span class="s2">&quot;deviceid&quot;</span>
+        <span class="s2">"lastSoftwareDataRefreshDate"</span><span class="p">:</span> <span class="s2">"2019-04-18T00:13:07"</span><span class="p">,</span>
+        <span class="s2">"maas360DeviceID"</span><span class="p">:</span> <span class="s2">"deviceid"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;maas360_action_type&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">201</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Get Software Installed&quot;</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"maas360_action_type"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">201</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Get Software Installed"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;maas360_device_id&quot;</span><span class="p">:</span> <span class="s2">&quot;deviceid&quot;</span>
+        <span class="s2">"maas360_device_id"</span><span class="p">:</span> <span class="s2">"deviceid"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">13019</span><span class="p">,</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-maas360&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-05-13 13:48:43&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">13019</span><span class="p">,</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"host"</span><span class="p">,</span>
+        <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-maas360"</span><span class="p">,</span>
+        <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2019-05-13 13:48:43"</span><span class="p">,</span>
+        <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;raw_json_string&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"raw_json_string"</span><span class="p">,</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1082,7 +1082,7 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">java.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">Date</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">add_row</span><span class="p">(</span><span class="n">device_id</span><span class="p">,</span> <span class="n">app_Name</span><span class="p">,</span> <span class="n">app_version</span><span class="p">,</span> <span class="n">app_id</span><span class="p">,</span> <span class="n">refresh_date</span><span class="p">):</span>
-  <span class="n">app_dt</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;maas360_installed_software_datatable&quot;</span><span class="p">)</span>
+  <span class="n">app_dt</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"maas360_installed_software_datatable"</span><span class="p">)</span>
   <span class="n">app_dt</span><span class="o">.</span><span class="n">maas360_app_timestamp</span> <span class="o">=</span> <span class="n">Date</span><span class="p">()</span>
   <span class="n">app_dt</span><span class="o">.</span><span class="n">maas360_app_device_id</span> <span class="o">=</span> <span class="n">device_id</span>
   <span class="n">app_dt</span><span class="o">.</span><span class="n">maas360_app_app_name</span> <span class="o">=</span> <span class="n">app_Name</span>
@@ -1094,37 +1094,37 @@
 <span class="c1"># Mainline starts here #</span>
 <span class="c1">########################</span>
 
-<span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-    <span class="n">device_id</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360DeviceID&quot;</span><span class="p">)</span>
-    <span class="n">refresh_date</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lastSoftwareDataRefreshDate&quot;</span><span class="p">)</span>
+    <span class="n">device_id</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360DeviceID"</span><span class="p">)</span>
+    <span class="n">refresh_date</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lastSoftwareDataRefreshDate"</span><span class="p">)</span>
 
     <span class="n">found_apps</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">apps</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;deviceSw&quot;</span><span class="p">)</span>
+    <span class="n">apps</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"deviceSw"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">apps</span><span class="p">:</span>
       <span class="k">for</span> <span class="n">app</span> <span class="ow">in</span> <span class="n">apps</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">app</span><span class="p">:</span>
-          <span class="n">app_Name</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;swName&quot;</span><span class="p">)</span>
-          <span class="n">app_attrs</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;swAttrs&quot;</span><span class="p">)</span>
+          <span class="n">app_Name</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"swName"</span><span class="p">)</span>
+          <span class="n">app_attrs</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"swAttrs"</span><span class="p">)</span>
           <span class="k">if</span> <span class="n">app_Name</span> <span class="ow">and</span> <span class="n">app_attrs</span><span class="p">:</span>
-            <span class="n">app_version_attr</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">att</span><span class="p">:</span> <span class="n">att</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Version&#39;</span><span class="p">,</span> <span class="n">app_attrs</span><span class="p">)</span>
-            <span class="c1"># filter returns a list [{u&#39;type&#39;: u&#39;string&#39;, u&#39;key&#39;: u&#39;Version&#39;, u&#39;value&#39;: u&#39;3.70.111&#39;}]</span>
-            <span class="n">app_version</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">app_version_attr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">))</span> <span class="k">if</span> <span class="n">app_version_attr</span> <span class="k">else</span> <span class="s2">&quot;N/A&quot;</span>
+            <span class="n">app_version_attr</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">att</span><span class="p">:</span> <span class="n">att</span><span class="p">[</span><span class="s2">"key"</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Version'</span><span class="p">,</span> <span class="n">app_attrs</span><span class="p">)</span>
+            <span class="c1"># filter returns a list [{u'type': u'string', u'key': u'Version', u'value': u'3.70.111'}]</span>
+            <span class="n">app_version</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">app_version_attr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"value"</span><span class="p">))</span> <span class="k">if</span> <span class="n">app_version_attr</span> <span class="k">else</span> <span class="s2">"N/A"</span>
 
-            <span class="n">app_app_id_attr</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">att</span><span class="p">:</span> <span class="n">att</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Application ID&#39;</span><span class="p">,</span> <span class="n">app_attrs</span><span class="p">)</span>
-            <span class="c1"># filter returns a list [{u&#39;type&#39;: u&#39;string&#39;, u&#39;key&#39;: u&#39;Application ID&#39;, u&#39;value&#39;: u&#39;com.fiberlink.maas360forios&#39;}]</span>
-            <span class="n">app_id</span> <span class="o">=</span> <span class="n">app_app_id_attr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">app_app_id_attr</span> <span class="k">else</span> <span class="s2">&quot;N/A&quot;</span>
+            <span class="n">app_app_id_attr</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">att</span><span class="p">:</span> <span class="n">att</span><span class="p">[</span><span class="s2">"key"</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Application ID'</span><span class="p">,</span> <span class="n">app_attrs</span><span class="p">)</span>
+            <span class="c1"># filter returns a list [{u'type': u'string', u'key': u'Application ID', u'value': u'com.fiberlink.maas360forios'}]</span>
+            <span class="n">app_id</span> <span class="o">=</span> <span class="n">app_app_id_attr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span> <span class="k">if</span> <span class="n">app_app_id_attr</span> <span class="k">else</span> <span class="s2">"N/A"</span>
 
             <span class="c1"># write results in the app datatable</span>
             <span class="n">add_row</span><span class="p">(</span><span class="n">device_id</span><span class="p">,</span> <span class="n">app_Name</span><span class="p">,</span> <span class="n">app_version</span><span class="p">,</span> <span class="n">app_id</span><span class="p">,</span> <span class="n">refresh_date</span><span class="p">)</span>
             <span class="n">found_apps</span> <span class="o">=</span> <span class="kc">True</span>
 
   <span class="k">if</span> <span class="n">found_apps</span><span class="p">:</span>
-    <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Installed software was found for the Device ID </span><span class="si">{}</span><span class="s2"> and saved in the MaaS360 Installed Software datatable&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device_id</span><span class="p">)</span>
+    <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Installed software was found for the Device ID </span><span class="si">{}</span><span class="s2"> and saved in the MaaS360 Installed Software datatable"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device_id</span><span class="p">)</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">noteText</span><span class="p">)</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;No installed software found for the Device ID </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device_id</span><span class="p">)</span>
+    <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"No installed software found for the Device ID </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">device_id</span><span class="p">)</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">noteText</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1136,31 +1136,31 @@
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;actionID&quot;</span><span class="p">:</span> <span class="mi">128294549</span><span class="p">,</span>
-        <span class="s2">&quot;actionStatus&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The action was executed successfully on the device.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;maas360DeviceID&quot;</span><span class="p">:</span> <span class="s2">&quot;deviceid&quot;</span>
+    <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"actionID"</span><span class="p">:</span> <span class="mi">128294549</span><span class="p">,</span>
+        <span class="s2">"actionStatus"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"The action was executed successfully on the device."</span><span class="p">,</span>
+        <span class="s2">"maas360DeviceID"</span><span class="p">:</span> <span class="s2">"deviceid"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;maas360_action_type&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">203</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Lock Device&quot;</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"maas360_action_type"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">203</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Lock Device"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;maas360_device_id&quot;</span><span class="p">:</span> <span class="s2">&quot;deviceid&quot;</span>
+        <span class="s2">"maas360_device_id"</span><span class="p">:</span> <span class="s2">"deviceid"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">558</span><span class="p">,</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-maas360&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-05-13 15:27:03&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">558</span><span class="p">,</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"host"</span><span class="p">,</span>
+        <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-maas360"</span><span class="p">,</span>
+        <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2019-05-13 15:27:03"</span><span class="p">,</span>
+        <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;raw_json_string&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"raw_json_string"</span><span class="p">,</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1179,10 +1179,10 @@
 <span class="c1"># Mainline starts here #</span>
 <span class="c1">########################</span>
 
-<span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-    <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Lock Device for Device ID: </span><span class="si">{}</span><span class="s2">. </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360DeviceID&quot;</span><span class="p">),</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">))</span>
+    <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Lock Device for Device ID: </span><span class="si">{}</span><span class="s2">. </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360DeviceID"</span><span class="p">),</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">))</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">noteText</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1194,31 +1194,31 @@
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;actionID&quot;</span><span class="p">:</span> <span class="mi">128294800</span><span class="p">,</span>
-        <span class="s2">&quot;actionStatus&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The action was executed successfully on the device.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;maas360DeviceID&quot;</span><span class="p">:</span> <span class="s2">&quot;deviceid&quot;</span>
+    <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"actionID"</span><span class="p">:</span> <span class="mi">128294800</span><span class="p">,</span>
+        <span class="s2">"actionStatus"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"The action was executed successfully on the device."</span><span class="p">,</span>
+        <span class="s2">"maas360DeviceID"</span><span class="p">:</span> <span class="s2">"deviceid"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;maas360_action_type&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">205</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Cancel Pending Wipe&quot;</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"maas360_action_type"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">205</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Cancel Pending Wipe"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;maas360_device_id&quot;</span><span class="p">:</span> <span class="s2">&quot;deviceid&quot;</span>
+        <span class="s2">"maas360_device_id"</span><span class="p">:</span> <span class="s2">"deviceid"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">915</span><span class="p">,</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-maas360&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-05-13 15:30:52&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">915</span><span class="p">,</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"host"</span><span class="p">,</span>
+        <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-maas360"</span><span class="p">,</span>
+        <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2019-05-13 15:30:52"</span><span class="p">,</span>
+        <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;raw_json_string&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"raw_json_string"</span><span class="p">,</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1237,10 +1237,10 @@
 <span class="c1"># Mainline starts here #</span>
 <span class="c1">########################</span>
 
-<span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-    <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Cancel Pending Wipe for Device ID: </span><span class="si">{}</span><span class="s2">. </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360DeviceID&quot;</span><span class="p">),</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">))</span>
+    <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Cancel Pending Wipe for Device ID: </span><span class="si">{}</span><span class="s2">. </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360DeviceID"</span><span class="p">),</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">))</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">noteText</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1304,35 +1304,35 @@
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Distribution stopped successfully.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Success&quot;</span>
+    <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Distribution stopped successfully."</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"Success"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;maas360_app_id&quot;</span><span class="p">:</span> <span class="s2">&quot;com.some.app&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;maas360_app_type&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;iOS Enterprise Application&quot;</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"maas360_app_id"</span><span class="p">:</span> <span class="s2">"com.some.app"</span><span class="p">,</span>
+        <span class="s2">"maas360_app_type"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">250</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"iOS Enterprise Application"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;maas360_device_group_id&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="s2">&quot;maas360_device_id&quot;</span><span class="p">:</span> <span class="s2">&quot; deviceid&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;maas360_target_devices&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">352</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Specific Device&quot;</span>
+        <span class="s2">"maas360_device_group_id"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">"maas360_device_id"</span><span class="p">:</span> <span class="s2">" deviceid"</span><span class="p">,</span>
+        <span class="s2">"maas360_target_devices"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">352</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Specific Device"</span>
         <span class="p">}</span>
     <span class="p">},</span>
-    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">11353</span><span class="p">,</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-maas360&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-05-16 10:23:59&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">11353</span><span class="p">,</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"host"</span><span class="p">,</span>
+        <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-maas360"</span><span class="p">,</span>
+        <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2019-05-16 10:23:59"</span><span class="p">,</span>
+        <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">status</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Success</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">description</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Distribution stopped successfully.</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">status</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Success</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Distribution stopped successfully.</span><span class="se">\"</span><span class="s2">}"</span><span class="p">,</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1354,21 +1354,21 @@
   <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print empty string instead of None</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">string_value</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="k">return</span> <span class="n">value</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+<span class="k">return</span> <span class="n">value</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">""</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">add_results_note</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">response_desc</span><span class="p">):</span>
-<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;Stop App Distribution - </span><span class="si">{}</span><span class="s2"> for input params:</span>
-<span class="s2">  - appId: &#39;</span><span class="si">{}</span><span class="s2">&#39;</span>
-<span class="s2">  - appType: &#39;</span><span class="si">{}</span><span class="s2">&#39;</span>
-<span class="s2">  - targetDevices: &#39;</span><span class="si">{}</span><span class="s2">&#39;</span>
-<span class="s2">  - deviceId: &#39;</span><span class="si">{}</span><span class="s2">&#39;</span>
-<span class="s2">  - deviceGroupId: &#39;</span><span class="si">{}</span><span class="s2">&#39;.&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""Stop App Distribution - </span><span class="si">{}</span><span class="s2"> for input params:</span>
+<span class="s2">  - appId: '</span><span class="si">{}</span><span class="s2">'</span>
+<span class="s2">  - appType: '</span><span class="si">{}</span><span class="s2">'</span>
+<span class="s2">  - targetDevices: '</span><span class="si">{}</span><span class="s2">'</span>
+<span class="s2">  - deviceId: '</span><span class="si">{}</span><span class="s2">'</span>
+<span class="s2">  - deviceGroupId: '</span><span class="si">{}</span><span class="s2">'."""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
     <span class="n">response_desc</span><span class="p">,</span>
-    <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360_app_id&quot;</span><span class="p">),</span>
-    <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360_app_type&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-    <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360_target_devices&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360_device_id&quot;</span><span class="p">)),</span>
-    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360_device_group_id&quot;</span><span class="p">))</span>
+    <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360_app_id"</span><span class="p">),</span>
+    <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360_app_type"</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360_target_devices"</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360_device_id"</span><span class="p">)),</span>
+    <span class="n">string_value</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360_device_group_id"</span><span class="p">))</span>
     <span class="p">)</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">noteText</span><span class="p">)</span>
 
@@ -1376,12 +1376,12 @@
 <span class="c1"># Mainline starts here #</span>
 <span class="c1">########################</span>
 
-<span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
   <span class="c1"># Write results to a Note</span>
-  <span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">)</span>
-  <span class="n">add_results_note</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">))</span>
+  <span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"inputs"</span><span class="p">)</span>
+  <span class="n">add_results_note</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">))</span>
 </pre></div>
 </div>
   </p>
@@ -1426,29 +1426,29 @@
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Application deleted successfully.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Success&quot;</span>
+    <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Application deleted successfully."</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"Success"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;maas360_app_id&quot;</span><span class="p">:</span> <span class="s2">&quot;com.some.app&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;maas360_app_type&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">251</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;iOS App Store Application&quot;</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"maas360_app_id"</span><span class="p">:</span> <span class="s2">"com.some.app"</span><span class="p">,</span>
+        <span class="s2">"maas360_app_type"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">251</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"iOS App Store Application"</span>
         <span class="p">}</span>
     <span class="p">},</span>
-    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">16402</span><span class="p">,</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;host&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-maas360&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-05-16 10:34:50&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">16402</span><span class="p">,</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"host"</span><span class="p">,</span>
+        <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-maas360"</span><span class="p">,</span>
+        <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2019-05-16 10:34:50"</span><span class="p">,</span>
+        <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">status</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Success</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">description</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Application deleted successfully.</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+    <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">status</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Success</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Application deleted successfully.</span><span class="se">\"</span><span class="s2">}"</span><span class="p">,</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1467,15 +1467,15 @@
   <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print empty string instead of None</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">string_value</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-<span class="k">return</span> <span class="n">value</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+<span class="k">return</span> <span class="n">value</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">""</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">add_results_note</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">response_desc</span><span class="p">):</span>
-<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;Delete App - </span><span class="si">{}</span><span class="s2"> for input params:</span>
-<span class="s2">  - appId: &#39;</span><span class="si">{}</span><span class="s2">&#39;</span>
-<span class="s2">  - appType: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""Delete App - </span><span class="si">{}</span><span class="s2"> for input params:</span>
+<span class="s2">  - appId: '</span><span class="si">{}</span><span class="s2">'</span>
+<span class="s2">  - appType: '</span><span class="si">{}</span><span class="s2">'"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
     <span class="n">response_desc</span><span class="p">,</span>
-    <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360_app_id&quot;</span><span class="p">),</span>
-    <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;maas360_app_type&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
+    <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360_app_id"</span><span class="p">),</span>
+    <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"maas360_app_type"</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
     <span class="p">)</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">noteText</span><span class="p">)</span>
 
@@ -1483,12 +1483,12 @@
 <span class="c1"># Mainline starts here #</span>
 <span class="c1">########################</span>
 
-<span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
   <span class="c1"># Write results to a Note</span>
-  <span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">)</span>
-  <span class="n">add_results_note</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">))</span>
+  <span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"inputs"</span><span class="p">)</span>
+  <span class="n">add_results_note</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">))</span>
 </pre></div>
 </div>
   </p>
@@ -1505,14 +1505,14 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an Artifact for MaaS360 Device ID value based on the selected MaaS360 Device datatable row.</span>
 
 <span class="c1"># Artifact description</span>
-<span class="n">artifact_description</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;Created by MaaS360 Basic Search results for Device Name &#39;</span><span class="si">{}</span><span class="s2">&#39;, Username &#39;</span><span class="si">{}</span><span class="s2">&#39;, Platform name &#39;</span><span class="si">{}</span><span class="s2">&#39;, Device Type &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="n">artifact_description</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""Created by MaaS360 Basic Search results for Device Name '</span><span class="si">{}</span><span class="s2">', Username '</span><span class="si">{}</span><span class="s2">', Platform name '</span><span class="si">{}</span><span class="s2">', Device Type '</span><span class="si">{}</span><span class="s2">'"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
   <span class="n">row</span><span class="o">.</span><span class="n">maas360_devicename</span><span class="p">,</span>
   <span class="n">row</span><span class="o">.</span><span class="n">maas360_username</span><span class="p">,</span>
   <span class="n">row</span><span class="o">.</span><span class="n">maas360_platformname</span><span class="p">,</span>
   <span class="n">row</span><span class="o">.</span><span class="n">maas360_devicetype</span><span class="p">)</span>
 
 <span class="c1"># Artifact type</span>
-<span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">&quot;maas360_device_id&quot;</span>
+<span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">"maas360_device_id"</span>
 
 <span class="c1"># Artifact value</span>
 <span class="n">artifact_value</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">maas360_deviceid</span>
@@ -1536,13 +1536,13 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an Artifact for MaaS360 App ID value based on the selected MaaS360 Installed Software datatable row.</span>
 
 <span class="c1"># Artifact description</span>
-<span class="n">artifact_description</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;Created by MaaS360 Get Software Installed results for Device ID &#39;</span><span class="si">{}</span><span class="s2">&#39;, App Name &#39;</span><span class="si">{}</span><span class="s2">&#39;, App Version &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="n">artifact_description</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""Created by MaaS360 Get Software Installed results for Device ID '</span><span class="si">{}</span><span class="s2">', App Name '</span><span class="si">{}</span><span class="s2">', App Version '</span><span class="si">{}</span><span class="s2">'"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
   <span class="n">row</span><span class="o">.</span><span class="n">maas360_app_device_id</span><span class="p">,</span>
   <span class="n">row</span><span class="o">.</span><span class="n">maas360_app_app_name</span><span class="p">,</span>
   <span class="n">row</span><span class="o">.</span><span class="n">maas360_app_app_version</span><span class="p">)</span>
 
 <span class="c1"># Artifact type</span>
-<span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">&quot;maas360_app_id&quot;</span>
+<span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">"maas360_app_id"</span>
 
 <span class="c1"># Artifact value</span>
 <span class="n">artifact_value</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">maas360_app_app_id</span>

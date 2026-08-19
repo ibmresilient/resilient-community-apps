@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -731,80 +731,80 @@ reputations can be set.</p>
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-  <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;hashes&#39;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s1">&#39;sha1&#39;</span><span class="p">:</span> <span class="s1">&#39;d5dd920be5bcfeb904e95da4b6d0ccca0727d692&#39;</span>
+  <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+  <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+  <span class="s1">'reason'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s1">'content'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'hashes'</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s1">'sha1'</span><span class="p">:</span> <span class="s1">'d5dd920be5bcfeb904e95da4b6d0ccca0727d692'</span>
     <span class="p">},</span>
-    <span class="s1">&#39;oldReputations&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'oldReputations'</span><span class="p">:</span> <span class="p">{</span>
       <span class="mi">3</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;createDate&#39;</span><span class="p">:</span> <span class="mi">1608652058</span><span class="p">,</span>
-        <span class="s1">&#39;providerId&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="s1">&#39;trustLevel&#39;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-        <span class="s1">&#39;attributes&#39;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s1">&#39;2101652&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;2123156&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;2098277&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;2102165&#39;</span><span class="p">:</span> <span class="s1">&#39;1608652058&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;2114965&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;2111893&#39;</span><span class="p">:</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;2139285&#39;</span><span class="p">:</span> <span class="s1">&#39;216172786408751223&#39;</span>
+        <span class="s1">'createDate'</span><span class="p">:</span> <span class="mi">1608652058</span><span class="p">,</span>
+        <span class="s1">'providerId'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s1">'trustLevel'</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="s1">'attributes'</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s1">'2101652'</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
+          <span class="s1">'2123156'</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
+          <span class="s1">'2098277'</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
+          <span class="s1">'2102165'</span><span class="p">:</span> <span class="s1">'1608652058'</span><span class="p">,</span>
+          <span class="s1">'2114965'</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
+          <span class="s1">'2111893'</span><span class="p">:</span> <span class="s1">'4'</span><span class="p">,</span>
+          <span class="s1">'2139285'</span><span class="p">:</span> <span class="s1">'216172786408751223'</span>
         <span class="p">}</span>
       <span class="p">},</span>
       <span class="mi">1</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;createDate&#39;</span><span class="p">:</span> <span class="mi">1608652105</span><span class="p">,</span>
-        <span class="s1">&#39;providerId&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s1">&#39;trustLevel&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s1">&#39;attributes&#39;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s1">&#39;2120340&#39;</span><span class="p">:</span> <span class="s1">&#39;2134902792&#39;</span>
+        <span class="s1">'createDate'</span><span class="p">:</span> <span class="mi">1608652105</span><span class="p">,</span>
+        <span class="s1">'providerId'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">'trustLevel'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">'attributes'</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s1">'2120340'</span><span class="p">:</span> <span class="s1">'2134902792'</span>
         <span class="p">}</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="s1">&#39;newReputations&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'newReputations'</span><span class="p">:</span> <span class="p">{</span>
       <span class="mi">3</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;createDate&#39;</span><span class="p">:</span> <span class="mi">1608652058</span><span class="p">,</span>
-        <span class="s1">&#39;providerId&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="s1">&#39;trustLevel&#39;</span><span class="p">:</span> <span class="mi">99</span><span class="p">,</span>
-        <span class="s1">&#39;attributes&#39;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s1">&#39;2101652&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;2123156&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;2098277&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;2102165&#39;</span><span class="p">:</span> <span class="s1">&#39;1608652058&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;2114965&#39;</span><span class="p">:</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;2111893&#39;</span><span class="p">:</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;2139285&#39;</span><span class="p">:</span> <span class="s1">&#39;216172786408751223&#39;</span>
+        <span class="s1">'createDate'</span><span class="p">:</span> <span class="mi">1608652058</span><span class="p">,</span>
+        <span class="s1">'providerId'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s1">'trustLevel'</span><span class="p">:</span> <span class="mi">99</span><span class="p">,</span>
+        <span class="s1">'attributes'</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s1">'2101652'</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
+          <span class="s1">'2123156'</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
+          <span class="s1">'2098277'</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
+          <span class="s1">'2102165'</span><span class="p">:</span> <span class="s1">'1608652058'</span><span class="p">,</span>
+          <span class="s1">'2114965'</span><span class="p">:</span> <span class="s1">'1'</span><span class="p">,</span>
+          <span class="s1">'2111893'</span><span class="p">:</span> <span class="s1">'4'</span><span class="p">,</span>
+          <span class="s1">'2139285'</span><span class="p">:</span> <span class="s1">'216172786408751223'</span>
         <span class="p">}</span>
       <span class="p">},</span>
       <span class="mi">1</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;createDate&#39;</span><span class="p">:</span> <span class="mi">1608652105</span><span class="p">,</span>
-        <span class="s1">&#39;providerId&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s1">&#39;trustLevel&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s1">&#39;attributes&#39;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s1">&#39;2120340&#39;</span><span class="p">:</span> <span class="s1">&#39;2134902792&#39;</span>
+        <span class="s1">'createDate'</span><span class="p">:</span> <span class="mi">1608652105</span><span class="p">,</span>
+        <span class="s1">'providerId'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">'trustLevel'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">'attributes'</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s1">'2120340'</span><span class="p">:</span> <span class="s1">'2134902792'</span>
         <span class="p">}</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="s1">&#39;updateTime&#39;</span><span class="p">:</span> <span class="mi">1608669082</span>
+    <span class="s1">'updateTime'</span><span class="p">:</span> <span class="mi">1608669082</span>
   <span class="p">},</span>
-  <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="s1">&#39;{&quot;hashes&quot;: {&quot;sha1&quot;: &quot;d5dd920be5bcfeb904e95da4b6d0ccca0727d692&quot;}, &quot;oldReputations&quot;: {&quot;3&quot;: {&quot;createDate&quot;: 1608652058, &quot;providerId&quot;: 3, &quot;trustLevel&quot;: 50, &quot;attributes&quot;: {&quot;2101652&quot;: &quot;1&quot;, &quot;2123156&quot;: &quot;0&quot;, &quot;2098277&quot;: &quot;0&quot;, &quot;2102165&quot;: &quot;1608652058&quot;, &quot;2114965&quot;: &quot;1&quot;, &quot;2111893&quot;: &quot;4&quot;, &quot;2139285&quot;: &quot;216172786408751223&quot;}}, &quot;1&quot;: {&quot;createDate&quot;: 1608652105, &quot;providerId&quot;: 1, &quot;trustLevel&quot;: 1, &quot;attributes&quot;: {&quot;2120340&quot;: &quot;2134902792&quot;}}}, &quot;newReputations&quot;: {&quot;3&quot;: {&quot;createDate&quot;: 1608652058, &quot;providerId&quot;: 3, &quot;trustLevel&quot;: 99, &quot;attributes&quot;: {&quot;2101652&quot;: &quot;1&quot;, &quot;2123156&quot;: &quot;0&quot;, &quot;2098277&quot;: &quot;0&quot;, &quot;2102165&quot;: &quot;1608652058&quot;, &quot;2114965&quot;: &quot;1&quot;, &quot;2111893&quot;: &quot;4&quot;, &quot;2139285&quot;: &quot;216172786408751223&quot;}}, &quot;1&quot;: {&quot;createDate&quot;: 1608652105, &quot;providerId&quot;: 1, &quot;trustLevel&quot;: 1, &quot;attributes&quot;: {&quot;2120340&quot;: &quot;2134902792&quot;}}}, &quot;updateTime&quot;: 1608669082}&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;mcafee_tie_hash_type&#39;</span><span class="p">:</span> <span class="s1">&#39;Malware SHA-1 Hash&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;mcafee_tie_hash&#39;</span><span class="p">:</span> <span class="s1">&#39;D5DD920BE5BCFEB904E95DA4B6D0CCCA0727D692&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;mcafee_tie_trust_level&#39;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">880</span><span class="p">,</span>
-      <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Known Trusted&#39;</span>
+  <span class="s1">'raw'</span><span class="p">:</span> <span class="s1">'{"hashes": {"sha1": "d5dd920be5bcfeb904e95da4b6d0ccca0727d692"}, "oldReputations": {"3": {"createDate": 1608652058, "providerId": 3, "trustLevel": 50, "attributes": {"2101652": "1", "2123156": "0", "2098277": "0", "2102165": "1608652058", "2114965": "1", "2111893": "4", "2139285": "216172786408751223"}}, "1": {"createDate": 1608652105, "providerId": 1, "trustLevel": 1, "attributes": {"2120340": "2134902792"}}}, "newReputations": {"3": {"createDate": 1608652058, "providerId": 3, "trustLevel": 99, "attributes": {"2101652": "1", "2123156": "0", "2098277": "0", "2102165": "1608652058", "2114965": "1", "2111893": "4", "2139285": "216172786408751223"}}, "1": {"createDate": 1608652105, "providerId": 1, "trustLevel": 1, "attributes": {"2120340": "2134902792"}}}, "updateTime": 1608669082}'</span><span class="p">,</span>
+  <span class="s1">'inputs'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'mcafee_tie_hash_type'</span><span class="p">:</span> <span class="s1">'Malware SHA-1 Hash'</span><span class="p">,</span>
+    <span class="s1">'mcafee_tie_hash'</span><span class="p">:</span> <span class="s1">'D5DD920BE5BCFEB904E95DA4B6D0CCCA0727D692'</span><span class="p">,</span>
+    <span class="s1">'mcafee_tie_trust_level'</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s1">'id'</span><span class="p">:</span> <span class="mi">880</span><span class="p">,</span>
+      <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Known Trusted'</span>
     <span class="p">},</span>
-    <span class="s1">&#39;mcafee_tie_comment&#39;</span><span class="p">:</span> <span class="kc">None</span>
+    <span class="s1">'mcafee_tie_comment'</span><span class="p">:</span> <span class="kc">None</span>
   <span class="p">},</span>
-  <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="s1">&#39;fn-mcafee-tie&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;package_version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.1.0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;Marks-MacBook-Pro.local&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;execution_time_ms&#39;</span><span class="p">:</span> <span class="mi">5048</span><span class="p">,</span>
-    <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2020-12-22 15:31:27&#39;</span>
+  <span class="s1">'metrics'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+    <span class="s1">'package'</span><span class="p">:</span> <span class="s1">'fn-mcafee-tie'</span><span class="p">,</span>
+    <span class="s1">'package_version'</span><span class="p">:</span> <span class="s1">'1.1.0'</span><span class="p">,</span>
+    <span class="s1">'host'</span><span class="p">:</span> <span class="s1">'Marks-MacBook-Pro.local'</span><span class="p">,</span>
+    <span class="s1">'execution_time_ms'</span><span class="p">:</span> <span class="mi">5048</span><span class="p">,</span>
+    <span class="s1">'timestamp'</span><span class="p">:</span> <span class="s1">'2020-12-22 15:31:27'</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -825,18 +825,18 @@ reputations can be set.</p>
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;McAfee TIE File Reputation: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Reputation Type: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Hash: </span><span class="si">{}</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">File Name: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Comment: </span><span class="si">{}</span><span class="s2">&quot;</span>\
-            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s1">&#39;mcafee_tie_trust_level&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
-                    <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s1">&#39;mcafee_tie_reputation_type&#39;</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">],</span>
-                    <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s1">&#39;mcafee_tie_hash&#39;</span><span class="p">],</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"McAfee TIE File Reputation: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Reputation Type: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Hash: </span><span class="si">{}</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">File Name: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Comment: </span><span class="si">{}</span><span class="s2">"</span>\
+            <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s1">'mcafee_tie_trust_level'</span><span class="p">][</span><span class="s1">'name'</span><span class="p">],</span>
+                    <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s1">'mcafee_tie_reputation_type'</span><span class="p">][</span><span class="s1">'name'</span><span class="p">],</span>
+                    <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s1">'mcafee_tie_hash'</span><span class="p">],</span>
                     <span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
-                    <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s1">&#39;mcafee_tie_filename&#39;</span><span class="p">],</span>
-                    <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s1">&#39;mcafee_tie_comment&#39;</span><span class="p">])</span>
+                    <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s1">'mcafee_tie_filename'</span><span class="p">],</span>
+                    <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s1">'mcafee_tie_comment'</span><span class="p">])</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Set reputation successful</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Set reputation successful</span><span class="se">\n</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Set reputation unsuccessful. An internal McAfee error has occurred.</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Set reputation unsuccessful. An internal McAfee error has occurred.</span><span class="se">\n</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>
@@ -893,40 +893,40 @@ mcafee_tie_hash: The value of the hash.</p>
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-  <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;mcafee_topic_name&#39;</span><span class="p">:</span> <span class="s1">&#39;/mcafee/event/epo/threat/response&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;mcafee_dxl_payload&#39;</span><span class="p">:</span> <span class="s1">&#39;{&quot;hashes&quot;: [{&quot;type&quot;: &quot;md5&quot;, &quot;value&quot;: &quot;Dk0TzJrwTMZLaPw4/goNrA==&quot;}], &quot;providerId&quot;: 3, &quot;trustLevel&quot;: 1}&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;mcafee_publish_method&#39;</span><span class="p">:</span> <span class="s1">&#39;Service&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;mcafee_wait_for_response&#39;</span><span class="p">:</span> <span class="s1">&#39;No&#39;</span>
+  <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+  <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+  <span class="s1">'reason'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s1">'content'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'mcafee_topic_name'</span><span class="p">:</span> <span class="s1">'/mcafee/event/epo/threat/response'</span><span class="p">,</span>
+    <span class="s1">'mcafee_dxl_payload'</span><span class="p">:</span> <span class="s1">'{"hashes": [{"type": "md5", "value": "Dk0TzJrwTMZLaPw4/goNrA=="}], "providerId": 3, "trustLevel": 1}'</span><span class="p">,</span>
+    <span class="s1">'mcafee_publish_method'</span><span class="p">:</span> <span class="s1">'Service'</span><span class="p">,</span>
+    <span class="s1">'mcafee_wait_for_response'</span><span class="p">:</span> <span class="s1">'No'</span>
   <span class="p">},</span>
-  <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="s1">&#39;{&quot;mcafee_topic_name&quot;: &quot;/mcafee/event/epo/threat/response&quot;, &quot;mcafee_dxl_payload&quot;: &quot;{</span><span class="se">\\</span><span class="s1">&quot;hashes</span><span class="se">\\</span><span class="s1">&quot;: [{</span><span class="se">\\</span><span class="s1">&quot;type</span><span class="se">\\</span><span class="s1">&quot;: </span><span class="se">\\</span><span class="s1">&quot;md5</span><span class="se">\\</span><span class="s1">&quot;, </span><span class="se">\\</span><span class="s1">&quot;value</span><span class="se">\\</span><span class="s1">&quot;: </span><span class="se">\\</span><span class="s1">&quot;Dk0TzJrwTMZLaPw4/goNrA==</span><span class="se">\\</span><span class="s1">&quot;}], </span><span class="se">\\</span><span class="s1">&quot;providerId</span><span class="se">\\</span><span class="s1">&quot;: 3, </span><span class="se">\\</span><span class="s1">&quot;trustLevel</span><span class="se">\\</span><span class="s1">&quot;: 1}&quot;, &quot;mcafee_publish_method&quot;: &quot;Service&quot;, &quot;mcafee_wait_for_response&quot;: &quot;No&quot;}&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;mcafee_publish_method&#39;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">205</span><span class="p">,</span>
-      <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Service&#39;</span>
+  <span class="s1">'raw'</span><span class="p">:</span> <span class="s1">'{"mcafee_topic_name": "/mcafee/event/epo/threat/response", "mcafee_dxl_payload": "{</span><span class="se">\\</span><span class="s1">"hashes</span><span class="se">\\</span><span class="s1">": [{</span><span class="se">\\</span><span class="s1">"type</span><span class="se">\\</span><span class="s1">": </span><span class="se">\\</span><span class="s1">"md5</span><span class="se">\\</span><span class="s1">", </span><span class="se">\\</span><span class="s1">"value</span><span class="se">\\</span><span class="s1">": </span><span class="se">\\</span><span class="s1">"Dk0TzJrwTMZLaPw4/goNrA==</span><span class="se">\\</span><span class="s1">"}], </span><span class="se">\\</span><span class="s1">"providerId</span><span class="se">\\</span><span class="s1">": 3, </span><span class="se">\\</span><span class="s1">"trustLevel</span><span class="se">\\</span><span class="s1">": 1}", "mcafee_publish_method": "Service", "mcafee_wait_for_response": "No"}'</span><span class="p">,</span>
+  <span class="s1">'inputs'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'mcafee_publish_method'</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s1">'id'</span><span class="p">:</span> <span class="mi">205</span><span class="p">,</span>
+      <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Service'</span>
     <span class="p">},</span>
-    <span class="s1">&#39;mcafee_topic_name&#39;</span><span class="p">:</span> <span class="s1">&#39;/mcafee/event/epo/threat/response&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;mcafee_dxl_payload&#39;</span><span class="p">:</span> <span class="s1">&#39;{&quot;hashes&quot;: [{&quot;type&quot;: &quot;md5&quot;, &quot;value&quot;: &quot;Dk0TzJrwTMZLaPw4/goNrA==&quot;}], &quot;providerId&quot;: 3, &quot;trustLevel&quot;: 1}&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;mcafee_wait_for_response&#39;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">203</span><span class="p">,</span>
-      <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;No&#39;</span>
+    <span class="s1">'mcafee_topic_name'</span><span class="p">:</span> <span class="s1">'/mcafee/event/epo/threat/response'</span><span class="p">,</span>
+    <span class="s1">'mcafee_dxl_payload'</span><span class="p">:</span> <span class="s1">'{"hashes": [{"type": "md5", "value": "Dk0TzJrwTMZLaPw4/goNrA=="}], "providerId": 3, "trustLevel": 1}'</span><span class="p">,</span>
+    <span class="s1">'mcafee_wait_for_response'</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s1">'id'</span><span class="p">:</span> <span class="mi">203</span><span class="p">,</span>
+      <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'No'</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="s1">&#39;fn-mcafee-opendxl&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;package_version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.2.0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;Marks-MacBook-Pro.local&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;execution_time_ms&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2020-12-22 15:31:49&#39;</span>
+  <span class="s1">'metrics'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+    <span class="s1">'package'</span><span class="p">:</span> <span class="s1">'fn-mcafee-opendxl'</span><span class="p">,</span>
+    <span class="s1">'package_version'</span><span class="p">:</span> <span class="s1">'1.2.0'</span><span class="p">,</span>
+    <span class="s1">'host'</span><span class="p">:</span> <span class="s1">'Marks-MacBook-Pro.local'</span><span class="p">,</span>
+    <span class="s1">'execution_time_ms'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s1">'timestamp'</span><span class="p">:</span> <span class="s1">'2020-12-22 15:31:49'</span>
   <span class="p">},</span>
-  <span class="s1">&#39;mcafee_topic_name&#39;</span><span class="p">:</span> <span class="s1">&#39;/mcafee/event/epo/threat/response&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;mcafee_dxl_payload&#39;</span><span class="p">:</span> <span class="s1">&#39;{&quot;hashes&quot;: [{&quot;type&quot;: &quot;md5&quot;, &quot;value&quot;: &quot;Dk0TzJrwTMZLaPw4/goNrA==&quot;}], &quot;providerId&quot;: 3, &quot;trustLevel&quot;: 1}&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;mcafee_publish_method&#39;</span><span class="p">:</span> <span class="s1">&#39;Service&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;mcafee_wait_for_response&#39;</span><span class="p">:</span> <span class="s1">&#39;No&#39;</span>
+  <span class="s1">'mcafee_topic_name'</span><span class="p">:</span> <span class="s1">'/mcafee/event/epo/threat/response'</span><span class="p">,</span>
+  <span class="s1">'mcafee_dxl_payload'</span><span class="p">:</span> <span class="s1">'{"hashes": [{"type": "md5", "value": "Dk0TzJrwTMZLaPw4/goNrA=="}], "providerId": 3, "trustLevel": 1}'</span><span class="p">,</span>
+  <span class="s1">'mcafee_publish_method'</span><span class="p">:</span> <span class="s1">'Service'</span><span class="p">,</span>
+  <span class="s1">'mcafee_wait_for_response'</span><span class="p">:</span> <span class="s1">'No'</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -934,17 +934,17 @@ mcafee_tie_hash: The value of the hash.</p>
 </details>
 <details><summary>Example Pre-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;Malware MD5 Hash&quot;</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_tie_hash_type</span> <span class="o">=</span> <span class="s2">&quot;md5&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"Malware MD5 Hash"</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_tie_hash_type</span> <span class="o">=</span> <span class="s2">"md5"</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_tie_hash</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
-<span class="k">elif</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;Malware SHA-1 Hash&quot;</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_tie_hash_type</span> <span class="o">=</span> <span class="s2">&quot;sha1&quot;</span>
+<span class="k">elif</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"Malware SHA-1 Hash"</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_tie_hash_type</span> <span class="o">=</span> <span class="s2">"sha1"</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_tie_hash</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
-<span class="k">elif</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;Malware SHA-256 Hash&quot;</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_tie_hash_type</span> <span class="o">=</span> <span class="s2">&quot;sha256&quot;</span>
+<span class="k">elif</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"Malware SHA-256 Hash"</span><span class="p">:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_tie_hash_type</span> <span class="o">=</span> <span class="s2">"sha256"</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_tie_hash</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;Artifact hash was not set correctly&quot;</span><span class="p">)</span>
+  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"Artifact hash was not set correctly"</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -952,61 +952,61 @@ mcafee_tie_hash: The value of the hash.</p>
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
 <span class="sd">Data returned will be in the following structure</span>
 
 
 <span class="sd">{</span>
-<span class="sd">   &quot;GTI&quot;:{</span>
-<span class="sd">      &quot;File Provider&quot;:&quot;GTI&quot;,</span>
-<span class="sd">      &quot;Attributes&quot;:{</span>
+<span class="sd">   "GTI":{</span>
+<span class="sd">      "File Provider":"GTI",</span>
+<span class="sd">      "Attributes":{</span>
 
 <span class="sd">      },</span>
-<span class="sd">      &quot;Create Date&quot;:&quot;2018-02-21 12:17:10&quot;,</span>
-<span class="sd">      &quot;Trust Level&quot;:&quot;Known Malicious&quot;</span>
+<span class="sd">      "Create Date":"2018-02-21 12:17:10",</span>
+<span class="sd">      "Trust Level":"Known Malicious"</span>
 <span class="sd">   },</span>
-<span class="sd">   &quot;ATD&quot;:{</span>
-<span class="sd">      &quot;File Provider&quot;:&quot;ATD&quot;,</span>
-<span class="sd">      &quot;Create Date&quot;:&quot;2018-03-14 11:53:09&quot;,</span>
-<span class="sd">      &quot;Trust Level&quot;:&quot;Most Likely Malicious&quot;</span>
+<span class="sd">   "ATD":{</span>
+<span class="sd">      "File Provider":"ATD",</span>
+<span class="sd">      "Create Date":"2018-03-14 11:53:09",</span>
+<span class="sd">      "Trust Level":"Most Likely Malicious"</span>
 <span class="sd">   },</span>
-<span class="sd">   &quot;MWG&quot;:{</span>
-<span class="sd">      &quot;File Provider&quot;:&quot;MWG&quot;,</span>
-<span class="sd">      &quot;Create Date&quot;:&quot;2018-03-14 11:53:55&quot;,</span>
-<span class="sd">      &quot;Trust Level&quot;:&quot;Most Likely Malicious&quot;</span>
+<span class="sd">   "MWG":{</span>
+<span class="sd">      "File Provider":"MWG",</span>
+<span class="sd">      "Create Date":"2018-03-14 11:53:55",</span>
+<span class="sd">      "Trust Level":"Most Likely Malicious"</span>
 <span class="sd">   },</span>
-<span class="sd">   &quot;Enterprise&quot;:{</span>
-<span class="sd">      &quot;File Provider&quot;:&quot;Enterprise&quot;,</span>
-<span class="sd">      &quot;Attributes&quot;:{</span>
-<span class="sd">         &quot;Average Local Rep&quot;:&quot;Most Likely Malicious&quot;,</span>
-<span class="sd">         &quot;First Contact&quot;:&quot;2018-02-21 12:17:10&quot;,</span>
-<span class="sd">         &quot;Min Local Rep&quot;:&quot;Most Likely Malicious&quot;,</span>
-<span class="sd">         &quot;Is Prevalent&quot;:&quot;0&quot;,</span>
-<span class="sd">         &quot;File Name Count&quot;:&quot;1&quot;,</span>
-<span class="sd">         &quot;Max Local Rep&quot;:&quot;Most Likely Malicious&quot;</span>
+<span class="sd">   "Enterprise":{</span>
+<span class="sd">      "File Provider":"Enterprise",</span>
+<span class="sd">      "Attributes":{</span>
+<span class="sd">         "Average Local Rep":"Most Likely Malicious",</span>
+<span class="sd">         "First Contact":"2018-02-21 12:17:10",</span>
+<span class="sd">         "Min Local Rep":"Most Likely Malicious",</span>
+<span class="sd">         "Is Prevalent":"0",</span>
+<span class="sd">         "File Name Count":"1",</span>
+<span class="sd">         "Max Local Rep":"Most Likely Malicious"</span>
 <span class="sd">      },</span>
-<span class="sd">      &quot;Create Date&quot;:&quot;2018-02-21 12:17:10&quot;,</span>
-<span class="sd">      &quot;Trust Level&quot;:&quot;Most Likely Malicious&quot;</span>
+<span class="sd">      "Create Date":"2018-02-21 12:17:10",</span>
+<span class="sd">      "Trust Level":"Most Likely Malicious"</span>
 <span class="sd">   }</span>
-<span class="sd">   &quot;system_list&quot;:[{</span>
-<span class="sd">     &quot;date&quot;: 1519233563,</span>
-<span class="sd">     &quot;agentGuid&quot;: {a00728ff-3187-46c1-97d2-8e0f26ea940b}</span>
+<span class="sd">   "system_list":[{</span>
+<span class="sd">     "date": 1519233563,</span>
+<span class="sd">     "agentGuid": {a00728ff-3187-46c1-97d2-8e0f26ea940b}</span>
 <span class="sd">   }]</span>
 <span class="sd">}</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Date</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">Date</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Enterprise&quot;</span><span class="p">):</span>
-    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;tie_results&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;results_date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Date</span><span class="p">())</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;hash_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;hash&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;ent_trust_level&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;Enterprise&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Trust Level&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;tie_create_date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;Enterprise&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Create Date&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;gti_trust_level&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;GTI&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Trust Level&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;atd_trust_level&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;ATD&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Trust Level&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;mwg_trust_level&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;MWG&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Trust Level&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Enterprise"</span><span class="p">):</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"tie_results"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'results_date'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Date</span><span class="p">())</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"hash_type"</span><span class="p">]</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"hash"</span><span class="p">]</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"ent_trust_level"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">"Enterprise"</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Trust Level"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"tie_create_date"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">"Enterprise"</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Create Date"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"gti_trust_level"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">"GTI"</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Trust Level"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"atd_trust_level"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">"ATD"</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Trust Level"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"mwg_trust_level"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">"MWG"</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Trust Level"</span><span class="p">)</span>
 
 </pre></div>
 </div>

@@ -8,7 +8,7 @@
         <link rel="prefetch" href="../_static/IBM_Security_Dark.png" as="image">
 
     <link rel="shortcut icon" href="../_static/IBM_Security_Shield.ico"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
-        <title>watsonx.ai for SOAR Analysts - QRadar SOAR Apps</title>
+        <title>IBM QRadar SOAR Response Assistant - QRadar SOAR Apps</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#data-selection">Data selection</a></li>
@@ -392,11 +392,11 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section id="watsonx-ai-for-soar-analysts">
-<h1>watsonx.ai for SOAR Analysts<a class="headerlink" href="#watsonx-ai-for-soar-analysts" title="Link to this heading">¶</a></h1>
+          <section id="ibm-qradar-soar-response-assistant">
+<h1>IBM QRadar SOAR Response Assistant<a class="headerlink" href="#ibm-qradar-soar-response-assistant" title="Link to this heading">¶</a></h1>
 <!-- TOC -->
 <ul class="simple">
-<li><p><a class="reference internal" href="#watsonxai-for-soar-analysts"><span class="xref myst">watsonx.ai for SOAR Analysts</span></a></p>
+<li><p><a class="reference internal" href="#ibm-qradar-soar-response-assistant"><span class="xref myst">IBM QRadar SOAR Response Assistant</span></a></p>
 <ul>
 <li><p><a class="reference internal" href="#release-notes"><span class="xref myst">Release Notes</span></a></p></li>
 <li><p><a class="reference internal" href="#overview"><span class="xref myst">Overview</span></a></p>
@@ -493,39 +493,43 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1.2.3</p></td>
+<tr class="row-even"><td><p>2.0.0</p></td>
+<td><p>08/2026</p></td>
+<td><p>Changed name to IBM QRadar SOAR Response Assistant. Now, compatibility is tied to minimum SOAR 51.0.11.0+. Playbooks do not add notes for summaries, conversation playbooks have been disabled. Test Configuration action saves configured watsonx API connection details to SOAR backend. Playbook Execution Summary feature has been added.</p></td>
+</tr>
+<tr class="row-odd"><td><p>1.2.3</p></td>
 <td><p>06/2026</p></td>
 <td><p>Updated model list, improved security safeguards by limiting text extraction from binary file types.</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.2.2</p></td>
+<tr class="row-even"><td><p>1.2.2</p></td>
 <td><p>02/2026</p></td>
 <td><p>Support for new chat models (e.g., IBM’s granite-4-h-small, openai’s gpt-oss, etc.). Embedding model now configurable. Fix for mistral models outputing [INST]. Workspace names will be known to the assistant in incident Q&amp;A, and incident summary.</p></td>
 </tr>
-<tr class="row-even"><td><p>1.2.1</p></td>
+<tr class="row-odd"><td><p>1.2.1</p></td>
 <td><p>01/2026</p></td>
 <td><p>Data payload config can control individual incident properties. Fix for failing to extract contents from plaintext files.</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.2.0</p></td>
+<tr class="row-even"><td><p>1.2.0</p></td>
 <td><p>06/2025</p></td>
 <td><p>Incident summary playbook, support for artifact/attachment scans on images and non-file artifacts, token usage &amp; estimated cost (in USD cents) in all scans and summaries, data ingestion optimisation and user-customization feature, japanese language inclusion and prompt optimisations.</p></td>
 </tr>
-<tr class="row-even"><td><p>1.1.1</p></td>
+<tr class="row-odd"><td><p>1.1.1</p></td>
 <td><p>06/2025</p></td>
 <td><p>Updated model list, rich text whitespace fixes, playbook execution API fixes, improved stability in generating embeddings, minor change to scan playbooks’ activation form.</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.1.0</p></td>
+<tr class="row-even"><td><p>1.1.0</p></td>
 <td><p>02/2025</p></td>
 <td><p>Semantic context retrieval (embeddings), multilingual prompts, artifact scans can handle more file types, attachment scanning (equivalent to artifact scan), organization type ID resolution<a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.2</p></td>
+<tr class="row-odd"><td><p>1.0.2</p></td>
 <td><p>12/2024</p></td>
 <td><p>Rich text output, request ID in logs, and a data processing fix for incidents with larger data.</p></td>
 </tr>
-<tr class="row-odd"><td><p>1.0.1</p></td>
+<tr class="row-even"><td><p>1.0.1</p></td>
 <td><p>12/2024</p></td>
 <td><p>Bugfix for SOAR versions &lt;= 51.0.2.1 and &gt;= 51.0.4.1 for Note Conversation Function.</p></td>
 </tr>
-<tr class="row-even"><td><p>1.0.0</p></td>
+<tr class="row-odd"><td><p>1.0.0</p></td>
 <td><p>12/2024</p></td>
 <td><p>Initial “<strong>Early Access</strong>” release. Uses watsonx.ai SaaS Version <code class="docutils literal notranslate"><span class="pre">2023-05-29</span></code></p></td>
 </tr>
@@ -536,51 +540,36 @@
 <hr class="docutils" />
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<p><strong>Leverage generative AI with watsonx.ai for artifact scanning, incident summarization and Q&amp;A, and generic watsonx.ai text generation.</strong></p>
+<p><strong>Leverage generative AI with watsonx.ai for artifact scanning, incident and playbook execution summarization</strong></p>
 <p><img alt="screenshot: main" src="../_images/main79.png" /></p>
 <section id="key-features">
 <h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>Q&amp;A: ask watsonx.ai questions about an incident, artifact, or attachment.</p>
+<!-- - Q&A: ask watsonx.ai questions about an incident, artifact, or attachment.
+  - Portions of relevant SOAR data will be used in the answer generation process.
+  - Prompts can be written in the following languages: English, French, German, Portuguese, Spanish, and Japanese.
+    - Responses will then be generated in the given language.
+  - The `watsonx.ai Retry Note Conversation` playbook makes it easy to execute the same query again without rewriting it.
+    - helpful in comparing results of two models for example.
+    - note: changing model in one playbook will not change it for the other. -->
 <ul>
-<li><p>Portions of relevant SOAR data will be used in the answer generation process.</p></li>
-<li><p>Prompts can be written in the following languages: English, French, German, Portuguese, Spanish, and Japanese.</p>
-<ul>
-<li><p>Responses will then be generated in the given language.</p></li>
-</ul>
-</li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">watsonx.ai</span> <span class="pre">Retry</span> <span class="pre">Note</span> <span class="pre">Conversation</span></code> playbook makes it easy to execute the same query again without rewriting it.</p>
-<ul>
-<li><p>helpful in comparing results of two models for example.</p></li>
-<li><p>note: changing model in one playbook will not change it for the other.</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Query cost estimation.</p>
-<ul>
-<li><p>The estimated cost (in USD cents) is shown in the AI content heading in notes.</p>
-<ul>
-<li><p>Its shown for QnA, scanned artifacts/attachments and summarization.</p></li>
-<li><p>example - <code class="docutils literal notranslate"><span class="pre">Generation</span> <span class="pre">tokens:</span> <span class="pre">78650,</span> <span class="pre">Embedding</span> <span class="pre">tokens:</span> <span class="pre">54829.</span> <span class="pre">Estimated</span> <span class="pre">cost:</span> <span class="pre">1.33479</span> <span class="pre">USD</span> <span class="pre">cents</span></code></p></li>
-<li><p><strong>Note</strong>: This is just an estimation based off the understood pricing at time of release of each app version. To get actual token usage and billing information, navigate to the billing page in watsonx.ai or IBM Cloud.</p></li>
-</ul>
-</li>
-</ul>
-</li>
 <li><p>Artifact and attachment analysis:</p>
-<ul>
+<ul class="simple">
 <li><p>Use playbooks to quickly generate a report on an artifact or attachment, as a preliminary assessment.</p></li>
 <li><p>Supported file types include: any plaintext file and <code class="docutils literal notranslate"><span class="pre">.eml</span></code> files.</p></li>
 </ul>
 </li>
+<li><p>Playbook Execution summary</p>
+<ul class="simple">
+<li><p>summarize the execution flow of an executed playbook, explain phases of the playbooks’ progress and why certain pathways were taken.</p></li>
+</ul>
+</li>
 <li><p>Text generation:</p>
-<ul>
+<ul class="simple">
 <li><p>Use watsonx.ai to generate text based on a given prompt in a function.</p></li>
 </ul>
 </li>
 <li><p>Incident Summarization: ask watsonx.ai to generate a summary of the incident.</p>
-<ul>
+<ul class="simple">
 <li><p>Uses Incident data to generate an AI Summary. Two types of summaries are generated:</p>
 <ul>
 <li><p>Executive Summary: Generates a high-level overview of a cybersecurity incident, detailing situation, attack, and defense in three sections for executive audiences.</p></li>
@@ -589,8 +578,14 @@
 </li>
 </ul>
 </li>
+<li><p>Query cost estimation.</p>
+<!-- - The estimated cost (in USD cents) is shown in the AI content heading in notes. 
+  - Its shown for QnA, scanned artifacts/attachments and summarization.
+  - example - `Generation tokens: 78650, Embedding tokens: 54829. Estimated cost: 1.33479 USD cents`
+  - **Note**: This is just an estimation based off the understood pricing at time of release of each app version. To get actual token usage and billing information, navigate to the billing page in watsonx.ai or IBM Cloud. -->
+</li>
 <li><p>Guardrails.</p>
-<ul>
+<ul class="simple">
 <li><p>We have now implemented guardrails to ensure that only queries related to the security domain are covered.</p></li>
 </ul>
 </li>
@@ -602,8 +597,8 @@
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
 <ul class="simple">
-<li><p>Either <a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR Platform</span></a> or <a class="reference internal" href="#qradar-suite"><span class="xref myst">IBM QRadar Suite</span></a> installed.</p></li>
-<li><p>A subscription to watsonx.ai.</p>
+<li><p><a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR Platform</span></a> version 51.0.11.0+ installed.</p></li>
+<li><p>A subscription to watsonx.ai with watsonx.ai Runtime Service.</p>
 <ul>
 <li><p>A watsonx.ai Project ID</p></li>
 <li><p>An IBM Cloud IAM API Key</p></li>
@@ -640,7 +635,7 @@
 </section>
 <section id="ibm-cloud-iam-api-key">
 <h4>IBM Cloud IAM API Key<a class="headerlink" href="#ibm-cloud-iam-api-key" title="Link to this heading">¶</a></h4>
-<p>To use watsonx.ai from the <em>watsonx.ai for SOAR</em> app, you’ll need an IBM Cloud IAM API Key. To generate an API key, click on the menu icon in the top left of the watsonx.ai dashboard and open <em>Access (IAM)</em> under the <em>Administration</em> menu.</p>
+<p>To use watsonx.ai from the app, you’ll need an IBM Cloud IAM API Key. To generate an API key, click on the menu icon in the top left of the watsonx.ai dashboard and open <em>Access (IAM)</em> under the <em>Administration</em> menu.</p>
 <p><img alt="screenshot: watsonx-api-1" src="../_images/watsonx-ai-03-key1.png" /></p>
 <p>The <em>Access IAM</em> dashboard will open…</p>
 <ol class="arabic simple">
@@ -671,57 +666,26 @@
 <p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.</p>
 <p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0.0.0</span></code>.</p></li>
+<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.11.0.0</span></code>.</p></li>
 <li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
 </ul>
-<p>If deploying to a SOAR platform with an integration server, the requirements are:</p>
-<ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.0.0.0</span></code>.</p></li>
-<li><p>The app is in the older integration format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file which contains a <code class="docutils literal notranslate"><span class="pre">tar.gz</span></code> file).</p></li>
-<li><p>Integration server is running <code class="docutils literal notranslate"><span class="pre">resilient-circuits&gt;=51.0.2.0.0</span></code>.</p></li>
-<li><p>If using an API key account, make sure the account provides the following minimum permissions:</p></li>
-</ul>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Name</p></th>
-<th class="head"><p>Permissions</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Org Data</p></td>
-<td><p>Read</p></td>
-</tr>
-<tr class="row-odd"><td><p>Function</p></td>
-<td><p>Read</p></td>
-</tr>
-<tr class="row-even"><td><p>Incident</p></td>
-<td><p>Read</p></td>
-</tr>
-<tr class="row-odd"><td><p>Playbook</p></td>
-<td><p>Read</p></td>
-</tr>
-</tbody>
-</table>
-</div>
 <p>Guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em>, <em>App Host Deployment Guide</em>, or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
 </section>
 <section id="cloud-pak-for-security">
 <h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
-<p>If you are deploying to IBM Cloud Pak for Security, the requirements are:</p>
-<ul class="simple">
-<li><p>IBM Cloud Pak for Security &gt;= <code class="docutils literal notranslate"><span class="pre">1.10.15</span></code>.</p></li>
-<li><p>Cloud Pak is configured with an Edge Gateway.</p></li>
-</ul>
+<p>Cloud Pak for Security is currently not supported.</p>
+<!-- If you are deploying to IBM Cloud Pak for Security, the requirements are:
+* IBM Cloud Pak for Security >= `1.10.15`.
+* Cloud Pak is configured with an Edge Gateway. -->
 <p>Guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
 </section>
 <section id="proxy-server">
 <h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">¶</a></h3>
-<p>The app <strong>does</strong> support a proxy server.</p>
+<p>The app <strong>does not</strong> support a proxy server.</p>
 </section>
 <section id="python-environment">
 <h3>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading">¶</a></h3>
-<p>Python 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
+<p>The app runs on Python 3.12.
 Additional package dependencies may exist for each of these packages:</p>
 <ul class="simple">
 <li><p>numpy==2.2.0</p></li>
@@ -733,22 +697,17 @@ Additional package dependencies may exist for each of these packages:</p>
 <li><p>markdown2==2.5.3</p></li>
 <li><p>python-docx==1.1.2</p></li>
 <li><p>jsonpath-ng==1.7.0</p></li>
-<li><p>pdf2image==1.17.0</p></li>
-<li><p>sentence-transformers==3.3.1</p></li>
-<li><p>python-pptx==1.0.2</p></li>
+<li><p>sentence-transformers==5.5.1</p></li>
 <li><p>nh3==0.2.19</p></li>
 <li><p>resilient-circuits&gt;=51.0.2.0.0</p></li>
 <li><p>scikit-learn==1.5.2</p></li>
 <li><p>beautifulsoup4==4.12.3</p></li>
-<li><p>pillow==11.1.0</p></li>
 <li><p>faiss-cpu==1.9.0</p></li>
-<li><p>pypdf==5.4.0</p></li>
-<li><p>ics==0.7.2</p></li>
 <li><p>pydantic==2.10.6</p></li>
-<li><p>pytesseract==0.3.13</p></li>
 <li><p>tiktoken==0.8.0</p></li>
 <li><p>bs4==0.0.2</p></li>
 <li><p>PyYAML==6.0.2</p></li>
+<li><p>ibm_watsonx_ai==1.5.1</p></li>
 </ul>
 </section>
 </section>
@@ -759,8 +718,8 @@ Additional package dependencies may exist for each of these packages:</p>
 <h3>Installing the App<a class="headerlink" href="#installing-the-app" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
-<li><p>To install or uninstall an App on <em>IBM Cloud Pak for Security</em>, see the documentation at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a> and follow the instructions above to navigate to Orchestration and Automation.</p></li>
 </ul>
+<!-- * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation. -->
 </section>
 <section id="app-configuration">
 <h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">¶</a></h3>
@@ -783,29 +742,34 @@ Additional package dependencies may exist for each of these packages:</p>
 <tr class="row-odd"><td><p><strong>watsonx_endpoint</strong></p></td>
 <td><p>Yes</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">https://us-south.ml.cloud.ibm.com</span></code></p></td>
-<td><p>The watsonx.ai API URL - see <a class="reference internal" href="#watsonx-ai-endpoint-url"><span class="xref myst">watsonx.ai Endpoint URL</span></a>.</p></td>
+<td><p>The watsonx.ai API URL - see <a class="reference internal" href="#watsonxai-endpoint-url"><span class="xref myst">watsonx.ai Endpoint URL</span></a>.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>watsonx_project_id</strong></p></td>
 <td><p>Yes</p></td>
 <td><p>0123-4567-89ab-cdef</p></td>
-<td><p>The watsonx.ai project id - see <a class="reference internal" href="#watsonx-ai-project-id"><span class="xref myst">watsonx.ai Project ID</span></a>.</p></td>
+<td><p>The watsonx.ai project id - see <a class="reference internal" href="#watsonxai-project-id"><span class="xref myst">watsonx.ai Project ID</span></a>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>render_markdown</strong></p></td>
+<tr class="row-odd"><td><p><strong>watsonx_model</strong></p></td>
+<td><p>No</p></td>
+<td><p>openai/gpt-oss-120b</p></td>
+<td><p>The watsonx.ai ready to use large language model to be used in the Agent chat in the Response Assistant UI.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>render_markdown</strong></p></td>
 <td><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
 <td><p>Set to <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable rendering of markdown in incident notes.</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>default_language</strong></p></td>
+<tr class="row-odd"><td><p><strong>default_language</strong></p></td>
 <td><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">en</span></code>, <code class="docutils literal notranslate"><span class="pre">fr</span></code>, <code class="docutils literal notranslate"><span class="pre">de</span></code>, <code class="docutils literal notranslate"><span class="pre">pt</span></code>, <code class="docutils literal notranslate"><span class="pre">es</span></code> or <code class="docutils literal notranslate"><span class="pre">ja</span></code></p></td>
 <td><p>Language used for scans and summaries, and is used as the fallback language if prompt’s language can’t be detected.</p></td>
 </tr>
-<tr class="row-odd"><td><p><strong>local_embeddings</strong></p></td>
+<tr class="row-even"><td><p><strong>local_embeddings</strong></p></td>
 <td><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
 <td><p>Use local (App host/integration server) compute resources to generate embeddings instead of watsonx.ai. Only recommended for integration servers that have &gt;6GB of memory.</p></td>
 </tr>
-<tr class="row-even"><td><p><strong>embedding_model</strong></p></td>
+<tr class="row-odd"><td><p><strong>embedding_model</strong></p></td>
 <td><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">ibm/granite-278m-multilingual-embedding</span></code></p></td>
 <td><p>Watsonx model to generate embeddings. <a class="reference external" href="https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/fm-models-embed.html?context=wx#ibm-provided">See options</a></p></td>
@@ -826,26 +790,20 @@ Additional package dependencies may exist for each of these packages:</p>
 <hr class="docutils" />
 <section id="app-usage">
 <h1>App usage<a class="headerlink" href="#app-usage" title="Link to this heading">¶</a></h1>
-<section id="note-conversation">
-<h2>Note Conversation<a class="headerlink" href="#note-conversation" title="Link to this heading">¶</a></h2>
-<p>The <em>watsonx.ai Note Conversation</em> playbook allows for incident, artifact, and attachment Q&amp;A</p>
-<p><img alt="" src="../_images/incident_qna.png" /></p>
-<ul class="simple">
-<li><p>This playbook is triggered when a note with the text <code class="docutils literal notranslate"><span class="pre">&#64;watsonx</span></code> is added to an incident.</p></li>
-<li><p>By default, this will be an incident Q&amp;A, where incident details, including artifact and attachment <strong>metadata</strong>, are included in context with the user’s prompt.</p>
-<ul>
-<li><p>Artifact or attachment Q&amp;A can be invoked by including the object’s name in square brackets.</p>
-<ul>
-<li><p>Instead of using incident data in context for generating a response, only relevant artifact/attachment data will be included.</p></li>
-<li><p>For attachments, and artifacts with an attached file, the file’s  content will be included.</p></li>
-<li><p>Examples of supported file types can be checked in the <a class="reference internal" href="#what-file-formats-can-be-scanned"><span class="xref myst">What file formats can be scanned?</span></a></p></li>
-<li><p>E.g., <code class="docutils literal notranslate"><span class="pre">&#64;watsonx</span> <span class="pre">does</span> <span class="pre">the</span> <span class="pre">artifact</span> <span class="pre">[123.sh]</span> <span class="pre">seem</span> <span class="pre">like</span> <span class="pre">it</span> <span class="pre">could</span> <span class="pre">be</span> <span class="pre">used</span> <span class="pre">maliciuously?</span></code>.</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</section>
+<!-- ## Note Conversation
+
+The *watsonx.ai Note Conversation* playbook allows for incident, artifact, and attachment Q&A
+
+![](doc/screenshots/incident_qna.png)
+
+- This playbook is triggered when a note with the text `@watsonx` is added to an incident.
+- By default, this will be an incident Q&A, where incident details, including artifact and attachment **metadata**, are included in context with the user's prompt.
+  - Artifact or attachment Q&A can be invoked by including the object's name in square brackets. 
+    - Instead of using incident data in context for generating a response, only relevant artifact/attachment data will be included.
+    - For attachments, and artifacts with an attached file, the file's  content will be included.
+    - Examples of supported file types can be checked in the [What file formats can be scanned?](#what-file-formats-can-be-scanned)
+    - E.g., `@watsonx does the artifact [123.sh] seem like it could be used maliciuously?`.
+    - E.g., `@watsonx respond with the text in the attachment [incident_overview.png].`. -->
 <section id="artifact-and-attachment-scan">
 <h2>Artifact and Attachment Scan<a class="headerlink" href="#artifact-and-attachment-scan" title="Link to this heading">¶</a></h2>
 <p><img alt="" src="../_images/scan_artifact_action.png" />
@@ -864,19 +822,12 @@ Additional package dependencies may exist for each of these packages:</p>
 </ul>
 </section>
 </section>
-<section id="text-generation">
-<h2>Text Generation<a class="headerlink" href="#text-generation" title="Link to this heading">¶</a></h2>
-<p>The <em>watsonx.ai Text Generation</em> function can be used to roll out your own genAI solutions using playbook logic.</p>
-<ul class="simple">
-<li><p>This function facilitates calls to the Text Generation (<code class="docutils literal notranslate"><span class="pre">/ml/v1/text/generation?version=2023-05-29</span></code>) watsonx.ai API endpoint.</p></li>
-<li><p>Playbook logic can act as a force multiplier to create sophisticated AI workflows to perform predefined tasks automatically.</p></li>
-</ul>
-</section>
 <section id="incident-summarization">
 <h2>Incident Summarization<a class="headerlink" href="#incident-summarization" title="Link to this heading">¶</a></h2>
-<p><img alt="" src="../_images/incident_summarizer_action.png" />
-<img alt="" src="../_images/incident_summarizer_selection.png" />
-<img alt="" src="../_images/incident_summarizer_result.png" /></p>
+<p><img alt="" src="../_images/incident_summarization.png" /></p>
+<!-- ![](doc/screenshots/incident_summarizer_action.png)
+![](doc/screenshots/incident_summarizer_selection.png)
+![](doc/screenshots/incident_summarizer_result.png) -->
 <p>The <em>watsonx.ai Summarize Incident</em> playbooks summarizes the whole incident based on selected summary type.</p>
 <p><strong>This scan is not intended to replace detailed analysis of the security incidents recorded in QRadar SOAR</strong>. It’s intended use is to be a utility to summarize and get a precise overview of the incident depending on user type.</p>
 <section id="what-type-of-summaries-are-available">
@@ -890,6 +841,22 @@ Additional package dependencies may exist for each of these packages:</p>
 </li>
 </ul>
 </section>
+</section>
+<section id="playbook-execution-summary">
+<h2>Playbook Execution Summary<a class="headerlink" href="#playbook-execution-summary" title="Link to this heading">¶</a></h2>
+<p><img alt="" src="../_images/exec_summary_large_result.png" /></p>
+<ul class="simple">
+<li><p>The flow of an executed playbook can be summarized, to show an analyst what paths the execution took, and describe certain conditions that changed the flow.</p></li>
+<li><p>Can help indicate why a playbook may have failed, and give recommendations for analyst actions to take to workaround failing playbooks.</p></li>
+</ul>
+</section>
+<section id="text-generation">
+<h2>Text Generation<a class="headerlink" href="#text-generation" title="Link to this heading">¶</a></h2>
+<p>The <em>watsonx.ai Text Generation</em> function can be used to roll out your own genAI solutions using playbook logic.</p>
+<ul class="simple">
+<li><p>This function facilitates calls to the Text Generation (<code class="docutils literal notranslate"><span class="pre">/ml/v1/text/generation?version=2023-05-29</span></code>) watsonx.ai API endpoint.</p></li>
+<li><p>Playbook logic can act as a force multiplier to create sophisticated AI workflows to perform predefined tasks automatically.</p></li>
+</ul>
 </section>
 </section>
 <hr class="docutils" />
@@ -913,58 +880,45 @@ Additional package dependencies may exist for each of these packages:</p>
 </ul>
 </li>
 </ul>
-</section>
-<section id="background-on-how-a-note-conversation-response-is-generated">
-<h2>Background on how a note conversation response is generated<a class="headerlink" href="#background-on-how-a-note-conversation-response-is-generated" title="Link to this heading">¶</a></h2>
-<ul class="simple">
-<li><p>As of version 1.1.0, semantic search is used to find the most relevant data to answer your question from a dataset.</p>
-<ul>
-<li><p>Embeddings (semantic representations of text) are generated for queried data.</p></li>
-<li><p>Then, the given prompt is embedded, and the distance between the meaning of your prompt and the meaning of each piece of embedded data is compared.</p></li>
-<li><p>Data that is considered close to the data you are asking for will then be added as context to a call to an LLM with your query.</p></li>
-</ul>
-</li>
-</ul>
+<!-- 
+### Background on how a note conversation response is generated
+
+- As of version 1.1.0, semantic search is used to find the most relevant data to answer your question from a dataset.
+  - Embeddings (semantic representations of text) are generated for queried data.
+  - Then, the given prompt is embedded, and the distance between the meaning of your prompt and the meaning of each piece of embedded data is compared.
+  - Data that is considered close to the data you are asking for will then be added as context to a call to an LLM with your query.
+ -->
 </section>
 <section id="prompting-guide">
 <h2>Prompting Guide<a class="headerlink" href="#prompting-guide" title="Link to this heading">¶</a></h2>
 <section id="response-quality">
 <h3>Response Quality<a class="headerlink" href="#response-quality" title="Link to this heading">¶</a></h3>
-<ul class="simple">
+<ul>
 <li><p>Quality of response can differ between LLMs specifically when the input context is larger than 4KB limit. There are some models that cannot exceed the limit of 4KB context size.</p></li>
 <li><p>Most of the Note Conversation answers are returned in about ~6 seconds. However, it’s also important to note that large artifacts would also take more time to process.</p></li>
 <li><p>Asking very specific and clearly defined questions can improve the quality of the generated responses. When querying LLMs, it’s essential to be as clear and specific as possible about the information or task you want the model to address. This will help the model to generate more accurate and relevant responses.</p>
-<ul>
+<ul class="simple">
 <li><p>For example, summarizing an incident for a CTO would be a different response than summarizing an incident for a Security analyst.</p></li>
 <li><p>Another example would be if you do not want to include some artifact types in your queries then it should be specifically mentioned.</p></li>
-<li><p>Another example would be finding names of libraries in a python artifact.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&#64;watsonx</span> <span class="pre">what</span> <span class="pre">python</span> <span class="pre">libraries</span> <span class="pre">have</span> <span class="pre">been</span> <span class="pre">imported</span> <span class="pre">in</span> <span class="pre">[artifact_name.py]?</span> <span class="pre">Do</span> <span class="pre">not</span> <span class="pre">share</span> <span class="pre">the</span> <span class="pre">code</span> <span class="pre">but</span> <span class="pre">only</span> <span class="pre">the</span> <span class="pre">names</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">libraries</span> <span class="pre">that</span> <span class="pre">have</span> <span class="pre">been</span> <span class="pre">imported.</span> <span class="pre">Do</span> <span class="pre">not</span> <span class="pre">share</span> <span class="pre">the</span> <span class="pre">methods</span> <span class="pre">or</span> <span class="pre">functions</span> <span class="pre">of</span> <span class="pre">those</span> <span class="pre">libraries.</span> <span class="pre">Generally,</span> <span class="pre">libraries</span> <span class="pre">are</span> <span class="pre">imported</span> <span class="pre">with</span> <span class="pre">the</span> <span class="pre">syntax</span> <span class="pre">```import</span> <span class="pre">&lt;library</span> <span class="pre">name&gt;</span></code></p></li>
 </ul>
+<!-- - Another example would be finding names of libraries in a python artifact. -->
+<!-- - `@watsonx what python libraries have been imported in [artifact_name.py]? Do not share the code but only the names of the libraries that have been imported. Do not share the methods or functions of those libraries. Generally, libraries are imported with the syntax ```import <library name>` -->
 </li>
 <li><p>If the initial results are unsatisfactory, consider refining your question.</p>
-<ul>
-<li><p>You can refine your query by continuing the conversation in replies.</p></li>
-</ul>
-</li>
-<li><p><img alt="" src="../_images/incident_qna_summary.png" /></p></li>
-</ul>
-</section>
-<section id="reply-chain-prompts">
-<h3>Reply chain prompts<a class="headerlink" href="#reply-chain-prompts" title="Link to this heading">¶</a></h3>
-<ul class="simple">
-<li><p>When querying watsonx in a reply note, previous (parent, grandparent, etc.) notes <strong>in the reply chain</strong> will be added to the context, which can help when getting more detail on specific topics.</p>
-<ul>
-<li><p>If the previous notes in the reply chain derail the conversation, you can start a new note conversation by creating a new “root” note.</p></li>
-</ul>
+<!-- - You can refine your query by continuing the conversation in replies. -->
 </li>
 </ul>
+<!-- - ![](doc/screenshots/incident_qna_summary.png) -->
+<!-- #### Reply chain prompts -->
+<!-- - When querying watsonx in a reply note, previous (parent, grandparent, etc.) notes **in the reply chain** will be added to the context, which can help when getting more detail on specific topics. -->
+  <!-- - If the previous notes in the reply chain derail the conversation, you can start a new note conversation by creating a new "root" note. -->
 </section>
 </section>
 </section>
 <hr class="docutils" />
 <section id="data-selection">
 <h1>Data selection<a class="headerlink" href="#data-selection" title="Link to this heading">¶</a></h1>
-<p>You can override the configuration for the data we send to watsonx. While we wouldn’t recommend stripping too much from the default configuration, as adding or removing data will likely impact the quality of responses.</p>
+<p>You can override the configuration for the data we send to watsonx for incident summaries. While we wouldn’t recommend stripping too much from the default configuration, as adding or removing data will likely impact the quality of responses.</p>
 <section id="custom-incident-properties">
 <h2>Custom incident properties<a class="headerlink" href="#custom-incident-properties" title="Link to this heading">¶</a></h2>
 <p>The default configuration allows all custom properties to be sent to watsonx, if you want to limit which properties are sent, you can do so by modifying the <code class="docutils literal notranslate"><span class="pre">properties</span></code> field in an override config below, remove the <code class="docutils literal notranslate"><span class="pre">&quot;*&quot;</span></code> item under properties, and specify each property key you want to keep.</p>
@@ -1015,7 +969,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inc_last_modified_date</span>
 <span class="w">  </span>
 <span class="w">  </span><span class="nt">properties</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;*&quot;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">"*"</span>
 
 <span class="nt">playbook_executions</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">allow_list</span><span class="p">:</span>
@@ -1049,7 +1003,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">properties</span>
 
 <span class="w">  </span><span class="nt">hit_block_list</span><span class="p">:</span>
-<span class="w">    </span><span class="c1"># block these bits of hit data, as they don&#39;t provide much use to LLM</span>
+<span class="w">    </span><span class="c1"># block these bits of hit data, as they don't provide much use to LLM</span>
 <span class="w">    </span><span class="c1"># feel free to experiment</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">resource</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scan_id</span>
@@ -1158,16 +1112,16 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;generated_text&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">Text from watsonx.ai</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-07-21T16:52:32.190Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;generated_token_count&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-    <span class="s2">&quot;input_token_count&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="s2">&quot;model_id&quot;</span><span class="p">:</span> <span class="s2">&quot;ibm/granite-3-2b-instruct&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;stop_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;EOS token&quot;</span>
+  <span class="s2">"generated_text"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">Text from watsonx.ai</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">"</span><span class="p">,</span>
+  <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2023-07-21T16:52:32.190Z"</span><span class="p">,</span>
+    <span class="s2">"generated_token_count"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s2">"input_token_count"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">"model_id"</span><span class="p">:</span> <span class="s2">"ibm/granite-3-2b-instruct"</span><span class="p">,</span>
+    <span class="s2">"stop_reason"</span><span class="p">:</span> <span class="s2">"EOS token"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw_output&quot;</span><span class="p">:</span> <span class="s2">&quot;Text from watsonx.ai&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;tag&quot;</span><span class="p">:</span> <span class="s2">&quot;HTML model tag to be prefixed before any AI-generated content&quot;</span>
+  <span class="s2">"raw_output"</span><span class="p">:</span> <span class="s2">"Text from watsonx.ai"</span><span class="p">,</span>
+  <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"HTML model tag to be prefixed before any AI-generated content"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1177,7 +1131,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_model_id</span> <span class="o">=</span> <span class="s2">&quot;ibm/granite-3-2b-instruct&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_model_id</span> <span class="o">=</span> <span class="s2">"ibm/granite-3-2b-instruct"</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_note_id</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">id</span>
 
 </pre></div>
@@ -1187,10 +1141,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;generated_text&quot;</span><span class="p">]</span>
-<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span>
+<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"generated_text"</span><span class="p">]</span>
+<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"tag"</span><span class="p">]</span>
 
-<span class="k">if</span> <span class="n">generated_text</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">generated_text</span> <span class="o">!=</span> <span class="s2">""</span><span class="p">:</span>
   <span class="n">note</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">tag</span> <span class="o">+</span> <span class="n">generated_text</span><span class="p">)</span>
 
 </pre></div>
@@ -1250,16 +1204,16 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;generated_text&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">Text from watsonx.ai</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-07-21T16:52:32.190Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;generated_token_count&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-    <span class="s2">&quot;input_token_count&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="s2">&quot;model_id&quot;</span><span class="p">:</span> <span class="s2">&quot;ibm/granite-3-2b-instruct&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;stop_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;EOS token&quot;</span>
+  <span class="s2">"generated_text"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">Text from watsonx.ai</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">"</span><span class="p">,</span>
+  <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2023-07-21T16:52:32.190Z"</span><span class="p">,</span>
+    <span class="s2">"generated_token_count"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s2">"input_token_count"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">"model_id"</span><span class="p">:</span> <span class="s2">"ibm/granite-3-2b-instruct"</span><span class="p">,</span>
+    <span class="s2">"stop_reason"</span><span class="p">:</span> <span class="s2">"EOS token"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw_output&quot;</span><span class="p">:</span> <span class="s2">&quot;Text from watsonx.ai&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;tag&quot;</span><span class="p">:</span> <span class="s2">&quot;HTML model tag to be prefixed before any AI-generated content&quot;</span>
+  <span class="s2">"raw_output"</span><span class="p">:</span> <span class="s2">"Text from watsonx.ai"</span><span class="p">,</span>
+  <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"HTML model tag to be prefixed before any AI-generated content"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1275,8 +1229,8 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;generated_text&quot;</span><span class="p">]</span>
-<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span>
+<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"generated_text"</span><span class="p">]</span>
+<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"tag"</span><span class="p">]</span>
 
 <span class="k">if</span> <span class="n">generated_text</span><span class="p">:</span>
   <span class="n">generated_text</span> <span class="o">=</span> <span class="n">generated_text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
@@ -1333,16 +1287,16 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;generated_text&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">Text from watsonx.ai</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-07-21T16:52:32.190Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;generated_token_count&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-    <span class="s2">&quot;input_token_count&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="s2">&quot;model_id&quot;</span><span class="p">:</span> <span class="s2">&quot;ibm/granite-3-2b-instruct&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;stop_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;EOS token&quot;</span>
+  <span class="s2">"generated_text"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">Text from watsonx.ai</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">"</span><span class="p">,</span>
+  <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2023-07-21T16:52:32.190Z"</span><span class="p">,</span>
+    <span class="s2">"generated_token_count"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s2">"input_token_count"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">"model_id"</span><span class="p">:</span> <span class="s2">"ibm/granite-3-2b-instruct"</span><span class="p">,</span>
+    <span class="s2">"stop_reason"</span><span class="p">:</span> <span class="s2">"EOS token"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw_output&quot;</span><span class="p">:</span> <span class="s2">&quot;Text from watsonx.ai&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;tag&quot;</span><span class="p">:</span> <span class="s2">&quot;HTML model tag to be prefixed before any AI-generated content&quot;</span>
+  <span class="s2">"raw_output"</span><span class="p">:</span> <span class="s2">"Text from watsonx.ai"</span><span class="p">,</span>
+  <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"HTML model tag to be prefixed before any AI-generated content"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1351,7 +1305,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_model_id</span> <span class="o">=</span> <span class="s2">&quot;ibm/granite-3-2b-instruct&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_model_id</span> <span class="o">=</span> <span class="s2">"ibm/granite-3-2b-instruct"</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_attachment_id</span> <span class="o">=</span> <span class="n">attachment</span><span class="o">.</span><span class="n">id</span>
 
@@ -1362,8 +1316,8 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;generated_text&quot;</span><span class="p">]</span>
-<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span>
+<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"generated_text"</span><span class="p">]</span>
+<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"tag"</span><span class="p">]</span>
 
 <span class="k">if</span> <span class="n">generated_text</span><span class="p">:</span>
   <span class="n">generated_text</span> <span class="o">=</span> <span class="n">generated_text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
@@ -1426,16 +1380,16 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;generated_text&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">Text from watsonx.ai</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-07-21T16:52:32.190Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;generated_token_count&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-    <span class="s2">&quot;input_token_count&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="s2">&quot;model_id&quot;</span><span class="p">:</span> <span class="s2">&quot;ibm/granite-3-2b-instruct&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;stop_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;EOS token&quot;</span>
+  <span class="s2">"generated_text"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">Text from watsonx.ai</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">"</span><span class="p">,</span>
+  <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2023-07-21T16:52:32.190Z"</span><span class="p">,</span>
+    <span class="s2">"generated_token_count"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s2">"input_token_count"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">"model_id"</span><span class="p">:</span> <span class="s2">"ibm/granite-3-2b-instruct"</span><span class="p">,</span>
+    <span class="s2">"stop_reason"</span><span class="p">:</span> <span class="s2">"EOS token"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw_output&quot;</span><span class="p">:</span> <span class="s2">&quot;Text from watsonx.ai&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;tag&quot;</span><span class="p">:</span> <span class="s2">&quot;HTML model tag to be prefixed before any AI-generated content&quot;</span>
+  <span class="s2">"raw_output"</span><span class="p">:</span> <span class="s2">"Text from watsonx.ai"</span><span class="p">,</span>
+  <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"HTML model tag to be prefixed before any AI-generated content"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1463,8 +1417,8 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Script Text:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;generated_text&quot;</span><span class="p">]</span>
-<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span>
+<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"generated_text"</span><span class="p">]</span>
+<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"tag"</span><span class="p">]</span>
 
 <span class="k">if</span> <span class="n">generated_text</span><span class="p">:</span>
   <span class="n">generated_text</span> <span class="o">=</span> <span class="n">generated_text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
@@ -1482,10 +1436,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Script Text:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;generated_text&quot;</span><span class="p">]</span>
-<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;tag&quot;</span><span class="p">]</span>
+<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"generated_text"</span><span class="p">]</span>
+<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"tag"</span><span class="p">]</span>
 
-<span class="k">if</span> <span class="n">generated_text</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">generated_text</span> <span class="o">!=</span> <span class="s2">""</span><span class="p">:</span>
   <span class="n">note</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">tag</span> <span class="o">+</span> <span class="n">generated_text</span><span class="p">)</span>
 
 </pre></div>
@@ -1628,7 +1582,7 @@ Additional package dependencies may exist for each of these packages:</p>
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">watsonx.ai for SOAR Analysts</a><ul>
+<li><a class="reference internal" href="#">IBM QRadar SOAR Response Assistant</a><ul>
 <li><a class="reference internal" href="#release-notes">Release Notes</a></li>
 <li><a class="reference internal" href="#overview">Overview</a><ul>
 <li><a class="reference internal" href="#key-features">Key Features</a></li>
@@ -1656,24 +1610,22 @@ Additional package dependencies may exist for each of these packages:</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#app-usage">App usage</a><ul>
-<li><a class="reference internal" href="#note-conversation">Note Conversation</a></li>
 <li><a class="reference internal" href="#artifact-and-attachment-scan">Artifact and Attachment Scan</a><ul>
 <li><a class="reference internal" href="#what-file-formats-can-be-scanned">What file formats can be scanned?</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#text-generation">Text Generation</a></li>
 <li><a class="reference internal" href="#incident-summarization">Incident Summarization</a><ul>
 <li><a class="reference internal" href="#what-type-of-summaries-are-available">What type of summaries are available?</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#playbook-execution-summary">Playbook Execution Summary</a></li>
+<li><a class="reference internal" href="#text-generation">Text Generation</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a><ul>
 <li><a class="reference internal" href="#model-quality">Model quality</a></li>
-<li><a class="reference internal" href="#background-on-how-a-note-conversation-response-is-generated">Background on how a note conversation response is generated</a></li>
 <li><a class="reference internal" href="#prompting-guide">Prompting Guide</a><ul>
 <li><a class="reference internal" href="#response-quality">Response Quality</a></li>
-<li><a class="reference internal" href="#reply-chain-prompts">Reply chain prompts</a></li>
 </ul>
 </li>
 </ul>

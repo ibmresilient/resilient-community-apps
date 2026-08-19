@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -741,39 +741,39 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;meta&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-06-25T08:53:11+00:00&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;serverid&quot;</span><span class="p">:</span> <span class="s2">&quot;df0ef05&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;timestamp_modified&quot;</span><span class="p">:</span> <span class="mi">1561452791000</span><span class="p">,</span>
-          <span class="s2">&quot;requestid&quot;</span><span class="p">:</span> <span class="s2">&quot;172.31.97.117.5d11e0f7b69ce3.54218678&quot;</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"meta"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+          <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2019-06-25T08:53:11+00:00"</span><span class="p">,</span>
+          <span class="s2">"serverid"</span><span class="p">:</span> <span class="s2">"df0ef05"</span><span class="p">,</span>
+          <span class="s2">"timestamp_modified"</span><span class="p">:</span> <span class="mi">1561452791000</span><span class="p">,</span>
+          <span class="s2">"requestid"</span><span class="p">:</span> <span class="s2">"172.31.97.117.5d11e0f7b69ce3.54218678"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;results&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;verified&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-          <span class="s2">&quot;verified_at_modified&quot;</span><span class="p">:</span> <span class="mi">1561452674000</span><span class="p">,</span>
-          <span class="s2">&quot;phish_detail_page&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.phishtank.com/phish_detail.php?phish_id=6093832&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;url&quot;&quot;: &quot;</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">barea</span><span class="o">-</span><span class="n">v02</span><span class="o">.</span><span class="n">ga</span><span class="o">/</span><span class="n">df</span><span class="o">/</span><span class="s2">&quot;,</span>
-          <span class="s2">&quot;verified_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-06-25T08:51:14+00:00&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;phish_id&quot;</span><span class="p">:</span> <span class="s2">&quot;6093832&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;valid&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-          <span class="s2">&quot;in_database&quot;</span><span class="p">:</span> <span class="kc">True</span>
+      <span class="s2">"results"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"verified"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+          <span class="s2">"verified_at_modified"</span><span class="p">:</span> <span class="mi">1561452674000</span><span class="p">,</span>
+          <span class="s2">"phish_detail_page"</span><span class="p">:</span> <span class="s2">"http://www.phishtank.com/phish_detail.php?phish_id=6093832"</span><span class="p">,</span>
+          <span class="s2">"url"": "</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">barea</span><span class="o">-</span><span class="n">v02</span><span class="o">.</span><span class="n">ga</span><span class="o">/</span><span class="n">df</span><span class="o">/</span><span class="s2">",</span>
+          <span class="s2">"verified_at"</span><span class="p">:</span> <span class="s2">"2019-06-25T08:51:14+00:00"</span><span class="p">,</span>
+          <span class="s2">"phish_id"</span><span class="p">:</span> <span class="s2">"6093832"</span><span class="p">,</span>
+          <span class="s2">"valid"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+          <span class="s2">"in_database"</span><span class="p">:</span> <span class="kc">True</span>
       <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;phish_tank_check_url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://barea-v02.ga/df/&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"phish_tank_check_url"</span><span class="p">:</span> <span class="s2">"http://barea-v02.ga/df/"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-phish-tank&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-06-25 09:53:11&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">192</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-phish-tank"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2019-06-25 09:53:11"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"localhost"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">192</span>
   <span class="p">},</span>
 <span class="p">}</span>
 </pre></div>
@@ -782,7 +782,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the url from the Artifact&#39;s Value</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the url from the Artifact's Value</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">phish_tank_check_url</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
 </pre></div>
 </div>
@@ -791,62 +791,62 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">append_artifact_description</span><span class="p">(</span><span class="n">the_artifact</span><span class="p">,</span> <span class="n">the_text</span><span class="p">):</span>
-<span class="w">  </span><span class="sd">&quot;&quot;&quot;Appends the_text to the_artifact.description safely</span>
-<span class="sd">  handling unicode&quot;&quot;&quot;</span>
+<span class="w">  </span><span class="sd">"""Appends the_text to the_artifact.description safely</span>
+<span class="sd">  handling unicode"""</span>
   
-  <span class="n">new_description</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+  <span class="n">new_description</span> <span class="o">=</span> <span class="s2">""</span>
   
   <span class="k">if</span> <span class="n">the_artifact</span><span class="o">.</span><span class="n">description</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">current_description</span> <span class="o">=</span> <span class="kc">None</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">current_description</span> <span class="o">=</span> <span class="n">the_artifact</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">current_description</span> <span class="o">=</span> <span class="n">the_artifact</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
   <span class="k">if</span> <span class="n">current_description</span><span class="p">:</span>
-    <span class="n">new_description</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&lt;br&gt;---&lt;br&gt;</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">current_description</span><span class="p">,</span> <span class="n">the_text</span><span class="p">)</span>
+    <span class="n">new_description</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{0}</span><span class="s2">&lt;br&gt;---&lt;br&gt;</span><span class="si">{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">current_description</span><span class="p">,</span> <span class="n">the_text</span><span class="p">)</span>
 
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">new_description</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">the_text</span><span class="p">)</span>
+    <span class="n">new_description</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">the_text</span><span class="p">)</span>
 
   <span class="n">the_artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">new_description</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
   
   <span class="c1"># Get the PhishTank Results</span>
-  <span class="n">phish_tank_results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;results&quot;</span><span class="p">,</span> <span class="p">{})</span>
-  <span class="n">url</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;url&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-  <span class="n">in_database</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;in_database&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-  <span class="n">is_verified</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;verified&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-  <span class="n">is_valid</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;valid&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+  <span class="n">phish_tank_results</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"results"</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="n">url</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"url"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+  <span class="n">in_database</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"in_database"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+  <span class="n">is_verified</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"verified"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+  <span class="n">is_valid</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"valid"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
   
-  <span class="c1"># Define the comment and msg to be appended to the Artifact&#39;s Description</span>
-  <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-  <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;b&gt;PhishTank Lookup&lt;/b&gt; has complete</span>
+  <span class="c1"># Define the comment and msg to be appended to the Artifact's Description</span>
+  <span class="n">comment</span> <span class="o">=</span> <span class="s2">""</span>
+  <span class="n">msg</span> <span class="o">=</span> <span class="s2">"""&lt;b&gt;PhishTank Lookup&lt;/b&gt; has complete</span>
 <span class="s2">            &lt;br&gt;&lt;b&gt;URL:&lt;/b&gt; </span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
-<span class="s2">            &lt;br&gt;&lt;b&gt;Found in Database:&lt;/b&gt; </span><span class="si">{1}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">in_database</span><span class="p">)</span>
+<span class="s2">            &lt;br&gt;&lt;b&gt;Found in Database:&lt;/b&gt; </span><span class="si">{1}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">in_database</span><span class="p">)</span>
 
   <span class="k">if</span> <span class="ow">not</span> <span class="n">in_database</span><span class="p">:</span>
-    <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;Nothing known about this url&quot;</span>
+    <span class="n">comment</span> <span class="o">=</span> <span class="s2">"Nothing known about this url"</span>
   
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">phish_id</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;phish_id&quot;</span><span class="p">)</span>
-    <span class="n">phish_detail_page_url</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;phish_detail_page&quot;</span><span class="p">)</span>
+    <span class="n">phish_id</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"phish_id"</span><span class="p">)</span>
+    <span class="n">phish_detail_page_url</span> <span class="o">=</span> <span class="n">phish_tank_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"phish_detail_page"</span><span class="p">)</span>
     
-    <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="si">{0}</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s2">"""</span><span class="si">{0}</span>
 <span class="s2">          &lt;br&gt;&lt;b&gt;Phish ID:&lt;/b&gt; </span><span class="si">{1}</span>
 <span class="s2">          &lt;br&gt;&lt;b&gt;Valid Phish:&lt;/b&gt; </span><span class="si">{2}</span>
 <span class="s2">          &lt;br&gt;&lt;b&gt;Verified:&lt;/b&gt; </span><span class="si">{3}</span>
-<span class="s2">          &lt;br&gt;&lt;b&gt;Link to PhishTank: &lt;a href=</span><span class="si">{4}</span><span class="s2">&gt;</span><span class="si">{4}</span><span class="s2">&lt;/a&gt;&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">phish_id</span><span class="p">,</span> <span class="s2">&quot;Yes&quot;</span> <span class="k">if</span> <span class="n">is_valid</span> <span class="k">else</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="s2">&quot;Yes&quot;</span> <span class="k">if</span> <span class="n">is_verified</span> <span class="k">else</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span> <span class="n">phish_detail_page_url</span><span class="p">)</span>
+<span class="s2">          &lt;br&gt;&lt;b&gt;Link to PhishTank: &lt;a href=</span><span class="si">{4}</span><span class="s2">&gt;</span><span class="si">{4}</span><span class="s2">&lt;/a&gt;&lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">phish_id</span><span class="p">,</span> <span class="s2">"Yes"</span> <span class="k">if</span> <span class="n">is_valid</span> <span class="k">else</span> <span class="s2">"No"</span><span class="p">,</span> <span class="s2">"Yes"</span> <span class="k">if</span> <span class="n">is_verified</span> <span class="k">else</span> <span class="s2">"No"</span><span class="p">,</span> <span class="n">phish_detail_page_url</span><span class="p">)</span>
     
     <span class="k">if</span> <span class="n">is_verified</span> <span class="ow">and</span> <span class="n">is_valid</span><span class="p">:</span>
-      <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;Verified: Is a phishing site&quot;</span>
+      <span class="n">comment</span> <span class="o">=</span> <span class="s2">"Verified: Is a phishing site"</span>
   
     <span class="k">elif</span> <span class="n">is_verified</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_valid</span><span class="p">:</span>
-      <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;This site is not a phishing site&quot;</span>
+      <span class="n">comment</span> <span class="o">=</span> <span class="s2">"This site is not a phishing site"</span>
       
     <span class="k">elif</span> <span class="ow">not</span> <span class="n">is_verified</span><span class="p">:</span>
-      <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;This url has not been verified&quot;</span>
+      <span class="n">comment</span> <span class="o">=</span> <span class="s2">"This url has not been verified"</span>
   
-  <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="si">{0}</span><span class="s2">&lt;br&gt;&lt;br&gt;&lt;b&gt;Comment:&lt;/b&gt; </span><span class="si">{1}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">comment</span><span class="p">)</span>
+  <span class="n">msg</span> <span class="o">=</span> <span class="s2">"""</span><span class="si">{0}</span><span class="s2">&lt;br&gt;&lt;br&gt;&lt;b&gt;Comment:&lt;/b&gt; </span><span class="si">{1}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">comment</span><span class="p">)</span>
   
   <span class="n">append_artifact_description</span><span class="p">(</span><span class="n">artifact</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>

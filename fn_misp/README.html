@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -675,47 +675,47 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;Attribute&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;Network activity&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;disable_correlation&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;distribution&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;event_id&quot;</span><span class="p">:</span> <span class="s2">&quot;11&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;first_seen&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;last_seen&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;object_id&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;object_relation&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;sharing_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1701876675&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;to_ids&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;hostname&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;faf1d0b6-aaaa-aaaa-aaaa-a7c8cfb0b6ba&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;google.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;value1&quot;</span><span class="p">:</span> <span class="s2">&quot;google.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;value2&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"Attribute"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"Network activity"</span><span class="p">,</span>
+      <span class="s2">"comment"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"deleted"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"disable_correlation"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"distribution"</span><span class="p">:</span> <span class="s2">"5"</span><span class="p">,</span>
+      <span class="s2">"event_id"</span><span class="p">:</span> <span class="s2">"11"</span><span class="p">,</span>
+      <span class="s2">"first_seen"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
+      <span class="s2">"last_seen"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"object_id"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+      <span class="s2">"object_relation"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"sharing_group_id"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+      <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1701876675"</span><span class="p">,</span>
+      <span class="s2">"to_ids"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"hostname"</span><span class="p">,</span>
+      <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"faf1d0b6-aaaa-aaaa-aaaa-a7c8cfb0b6ba"</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"google.com"</span><span class="p">,</span>
+      <span class="s2">"value1"</span><span class="p">:</span> <span class="s2">"google.com"</span><span class="p">,</span>
+      <span class="s2">"value2"</span><span class="p">:</span> <span class="s2">""</span>
     <span class="p">},</span>
-    <span class="s2">&quot;AttributeTag&quot;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="s2">"AttributeTag"</span><span class="p">:</span> <span class="p">[]</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;misp_attribute_type&quot;</span><span class="p">:</span> <span class="s2">&quot;hostname&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;misp_attribute_value&quot;</span><span class="p">:</span> <span class="s2">&quot;google.com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;misp_event_id&quot;</span><span class="p">:</span> <span class="mi">11</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"misp_attribute_type"</span><span class="p">:</span> <span class="s2">"hostname"</span><span class="p">,</span>
+    <span class="s2">"misp_attribute_value"</span><span class="p">:</span> <span class="s2">"google.com"</span><span class="p">,</span>
+    <span class="s2">"misp_event_id"</span><span class="p">:</span> <span class="mi">11</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">568</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-misp&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.0.2&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-06 10:31:15&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">568</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-misp"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"3.0.2"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-12-06 10:31:15"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -727,30 +727,30 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="n">inputs</span><span class="o">.</span><span class="n">misp_event_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">misp_event_id</span>
 
 <span class="n">resilient_to_misp_map</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;DNS Name&quot;</span><span class="p">:</span> <span class="s2">&quot;domain&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Email Attachment&quot;</span><span class="p">:</span> <span class="s2">&quot;email-attachment&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Email Body&quot;</span><span class="p">:</span> <span class="s2">&quot;email-body&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Email Recipient&quot;</span><span class="p">:</span> <span class="s2">&quot;email-dst&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Email Sender&quot;</span><span class="p">:</span> <span class="s2">&quot;email-src&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Email subject&quot;</span><span class="p">:</span> <span class="s2">&quot;email-subject&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;File Name&quot;</span><span class="p">:</span> <span class="s2">&quot;filename&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;DNS Name&quot;</span><span class="p">:</span> <span class="s2">&quot;hostname&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;MAC Address&quot;</span><span class="p">:</span> <span class="s2">&quot;mac-address&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Malware MD5 Hash&quot;</span><span class="p">:</span> <span class="s2">&quot;md5&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Port&quot;</span><span class="p">:</span> <span class="s2">&quot;port&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Malware SHA-1 Hash&quot;</span><span class="p">:</span> <span class="s2">&quot;sha1&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Malware SHA-256 Hash&quot;</span><span class="p">:</span> <span class="s2">&quot;sha256&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;URI Path&quot;</span><span class="p">:</span> <span class="s2">&quot;uri&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;URL&quot;</span><span class="p">:</span> <span class="s2">&quot;url&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Threat CVE ID&quot;</span><span class="p">:</span> <span class="s2">&quot;vulnerability&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;IP Address&quot;</span><span class="p">:</span> <span class="s2">&quot;ip-dst&quot;</span>
+  <span class="s2">"DNS Name"</span><span class="p">:</span> <span class="s2">"domain"</span><span class="p">,</span>
+  <span class="s2">"Email Attachment"</span><span class="p">:</span> <span class="s2">"email-attachment"</span><span class="p">,</span>
+  <span class="s2">"Email Body"</span><span class="p">:</span> <span class="s2">"email-body"</span><span class="p">,</span>
+  <span class="s2">"Email Recipient"</span><span class="p">:</span> <span class="s2">"email-dst"</span><span class="p">,</span>
+  <span class="s2">"Email Sender"</span><span class="p">:</span> <span class="s2">"email-src"</span><span class="p">,</span>
+  <span class="s2">"Email subject"</span><span class="p">:</span> <span class="s2">"email-subject"</span><span class="p">,</span>
+  <span class="s2">"File Name"</span><span class="p">:</span> <span class="s2">"filename"</span><span class="p">,</span>
+  <span class="s2">"DNS Name"</span><span class="p">:</span> <span class="s2">"hostname"</span><span class="p">,</span>
+  <span class="s2">"MAC Address"</span><span class="p">:</span> <span class="s2">"mac-address"</span><span class="p">,</span>
+  <span class="s2">"Malware MD5 Hash"</span><span class="p">:</span> <span class="s2">"md5"</span><span class="p">,</span>
+  <span class="s2">"Port"</span><span class="p">:</span> <span class="s2">"port"</span><span class="p">,</span>
+  <span class="s2">"Malware SHA-1 Hash"</span><span class="p">:</span> <span class="s2">"sha1"</span><span class="p">,</span>
+  <span class="s2">"Malware SHA-256 Hash"</span><span class="p">:</span> <span class="s2">"sha256"</span><span class="p">,</span>
+  <span class="s2">"URI Path"</span><span class="p">:</span> <span class="s2">"uri"</span><span class="p">,</span>
+  <span class="s2">"URL"</span><span class="p">:</span> <span class="s2">"url"</span><span class="p">,</span>
+  <span class="s2">"Threat CVE ID"</span><span class="p">:</span> <span class="s2">"vulnerability"</span><span class="p">,</span>
+  <span class="s2">"IP Address"</span><span class="p">:</span> <span class="s2">"ip-dst"</span>
 <span class="p">}</span>
 
 <span class="k">try</span><span class="p">:</span>
   <span class="n">misp_type</span> <span class="o">=</span> <span class="n">resilient_to_misp_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">misp_attribute_type</span> <span class="o">=</span> <span class="n">misp_type</span>
 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;You do not have this artifact type </span><span class="si">{}</span><span class="s2"> mapped to a type in MISP - Ask your Admin&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
+  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"You do not have this artifact type </span><span class="si">{}</span><span class="s2"> mapped to a type in MISP - Ask your Admin"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
   <span class="k">raise</span> <span class="n">e</span>
 </pre></div>
 </div>
@@ -759,10 +759,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">misp_attribute</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;errors&#39;</span><span class="p">):</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MISP failed to create attribute </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">Error: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;errors&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'errors'</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"MISP failed to create attribute </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">Error: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'content'</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'errors'</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'value'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MISP created attribute </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> with category </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Attribute&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"MISP created attribute </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> with category </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'content'</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'Attribute'</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'category'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -821,67 +821,67 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;Event&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;Attribute&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;CryptographicKey&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;EventReport&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;Galaxy&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;Object&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;Org&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;local&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ORGNAME&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;40e5d872-aaaa-aaaa-aaaa-9d234710c5e5&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"Event"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"Attribute"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"CryptographicKey"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"EventReport"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"Galaxy"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"Object"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"Org"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+        <span class="s2">"local"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"ORGNAME"</span><span class="p">,</span>
+        <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"40e5d872-aaaa-aaaa-aaaa-9d234710c5e5"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;Orgc&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;local&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ORGNAME&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;40e5d872-aaaa-aaaa-aaaa-9d234710c5e5&quot;</span>
+      <span class="s2">"Orgc"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+        <span class="s2">"local"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"ORGNAME"</span><span class="p">,</span>
+        <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"40e5d872-aaaa-aaaa-aaaa-9d234710c5e5"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;RelatedEvent&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;ShadowAttribute&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;analysis&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;attribute_count&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-06&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;disable_correlation&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;distribution&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;event_creator_email&quot;</span><span class="p">:</span> <span class="s2">&quot;admin@admin.test&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;extends_uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;11&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="s2">&quot;tester&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;locked&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;org_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;orgc_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;proposal_email_lock&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;protected&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;publish_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;published&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;sharing_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;threat_level_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1701876293&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;f6b6cba4-aaaa-aaaa-aaaa-3b40ace9067c&quot;</span>
+      <span class="s2">"RelatedEvent"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"ShadowAttribute"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"analysis"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+      <span class="s2">"attribute_count"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+      <span class="s2">"date"</span><span class="p">:</span> <span class="s2">"2023-12-06"</span><span class="p">,</span>
+      <span class="s2">"disable_correlation"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"distribution"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+      <span class="s2">"event_creator_email"</span><span class="p">:</span> <span class="s2">"admin@admin.test"</span><span class="p">,</span>
+      <span class="s2">"extends_uuid"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"11"</span><span class="p">,</span>
+      <span class="s2">"info"</span><span class="p">:</span> <span class="s2">"tester"</span><span class="p">,</span>
+      <span class="s2">"locked"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"org_id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+      <span class="s2">"orgc_id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+      <span class="s2">"proposal_email_lock"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"protected"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"publish_timestamp"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+      <span class="s2">"published"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"sharing_group_id"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+      <span class="s2">"threat_level_id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+      <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1701876293"</span><span class="p">,</span>
+      <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"f6b6cba4-aaaa-aaaa-aaaa-3b40ace9067c"</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;misp_analysis_level&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s2">&quot;misp_distribution&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;misp_event_name&quot;</span><span class="p">:</span> <span class="s2">&quot;tester&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;misp_threat_level&quot;</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"misp_analysis_level"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"misp_distribution"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"misp_event_name"</span><span class="p">:</span> <span class="s2">"tester"</span><span class="p">,</span>
+    <span class="s2">"misp_threat_level"</span><span class="p">:</span> <span class="mi">1</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-misp&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.0.2&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-06 10:24:53&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-misp"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"3.0.2"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-12-06 10:24:53"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -900,10 +900,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">misp_event</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">event_id</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Event&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">event_id</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"Event"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">misp_event_id</span> <span class="o">=</span> <span class="n">event_id</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Event created on MISP with ID: </span><span class="si">{</span><span class="n">event_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Event created on MISP with ID: </span><span class="si">{</span><span class="n">event_id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -944,33 +944,33 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;Sighting&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;attribute_id&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;date_sighting&quot;</span><span class="p">:</span> <span class="s2">&quot;1701877013&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;event_id&quot;</span><span class="p">:</span> <span class="s2">&quot;11&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;org_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;IBM QRadar SOAR&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;fbca0cd6-aaaa-aaaa-aaaa-1e7af7f99e15&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"Sighting"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"attribute_id"</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
+      <span class="s2">"date_sighting"</span><span class="p">:</span> <span class="s2">"1701877013"</span><span class="p">,</span>
+      <span class="s2">"event_id"</span><span class="p">:</span> <span class="s2">"11"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
+      <span class="s2">"org_id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+      <span class="s2">"source"</span><span class="p">:</span> <span class="s2">"IBM QRadar SOAR"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+      <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"fbca0cd6-aaaa-aaaa-aaaa-1e7af7f99e15"</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;misp_sighting&quot;</span><span class="p">:</span> <span class="s2">&quot;google.com&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"misp_sighting"</span><span class="p">:</span> <span class="s2">"google.com"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">479</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-misp&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.0.2&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-06 10:36:53&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">479</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-misp"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"3.0.2"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-12-06 10:36:53"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -986,10 +986,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">misp_sighting</span>
-<span class="n">existing_description</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+<span class="n">existing_description</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span><span class="o">+</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span> <span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="k">else</span> <span class="s2">""</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MISP Sighting </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> created with ID </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Sighting&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"MISP Sighting </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> created with ID </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'content'</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'Sighting'</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'id'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1048,26 +1048,26 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;misp_attribute_value&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;misp_tag_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Event&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;misp_tag_name&quot;</span><span class="p">:</span> <span class="s2">&quot;tlp:white&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;misp_event_id&quot;</span><span class="p">:</span> <span class="mi">12</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"misp_attribute_value"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"misp_tag_type"</span><span class="p">:</span> <span class="s2">"Event"</span><span class="p">,</span>
+    <span class="s2">"misp_tag_name"</span><span class="p">:</span> <span class="s2">"tlp:white"</span><span class="p">,</span>
+    <span class="s2">"misp_event_id"</span><span class="p">:</span> <span class="mi">12</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-misp&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.0.2&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">558</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-07 10:32:08&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-misp"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"3.0.2"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">558</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-12-07 10:32:08"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1076,8 +1076,8 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">misp_tag_type</span> <span class="o">=</span> <span class="s2">&quot;Event&quot;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">misp_tag_name</span> <span class="o">=</span> <span class="s2">&quot;tlp:white&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">misp_tag_type</span> <span class="o">=</span> <span class="s2">"Event"</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">misp_tag_name</span> <span class="o">=</span> <span class="s2">"tlp:white"</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">misp_event_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">misp_event_id</span>
 </pre></div>
 </div>
@@ -1086,8 +1086,8 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">tags</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tags </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;misp_tag_name&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> added to the MISP Event.&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tags </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'inputs'</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'misp_tag_name'</span><span class="p">)</span><span class="si">}</span><span class="s2"> added to the MISP Event."</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1128,143 +1128,143 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">&quot;Event&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;Attribute&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"Event"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"Attribute"</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="s2">&quot;Galaxy&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;ShadowAttribute&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;Network activity&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;disable_correlation&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;distribution&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;event_id&quot;</span><span class="p">:</span> <span class="s2">&quot;11&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;first_seen&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;last_seen&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-            <span class="s2">&quot;object_id&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;object_relation&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-            <span class="s2">&quot;sharing_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1701876329&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;to_ids&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ip-dst&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;c8769d55-aaaa-aaaa-aaaa-197ea851916f&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.3.4&quot;</span>
+            <span class="s2">"Galaxy"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"ShadowAttribute"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"Network activity"</span><span class="p">,</span>
+            <span class="s2">"comment"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"deleted"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"disable_correlation"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"distribution"</span><span class="p">:</span> <span class="s2">"5"</span><span class="p">,</span>
+            <span class="s2">"event_id"</span><span class="p">:</span> <span class="s2">"11"</span><span class="p">,</span>
+            <span class="s2">"first_seen"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+            <span class="s2">"last_seen"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">"object_id"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+            <span class="s2">"object_relation"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">"sharing_group_id"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+            <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1701876329"</span><span class="p">,</span>
+            <span class="s2">"to_ids"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"ip-dst"</span><span class="p">,</span>
+            <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"c8769d55-aaaa-aaaa-aaaa-197ea851916f"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"1.2.3.4"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;Galaxy&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;ShadowAttribute&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;Sighting&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"Galaxy"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"ShadowAttribute"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"Sighting"</span><span class="p">:</span> <span class="p">[</span>
               <span class="p">{</span>
-                <span class="s2">&quot;Organisation&quot;</span><span class="p">:</span> <span class="p">{</span>
-                  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ORGNAME&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;40e5d872-aaaa-aaaa-aaaa-9d234710c5e5&quot;</span>
+                <span class="s2">"Organisation"</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+                  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"ORGNAME"</span><span class="p">,</span>
+                  <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"40e5d872-aaaa-aaaa-aaaa-9d234710c5e5"</span>
                 <span class="p">},</span>
-                <span class="s2">&quot;attribute_id&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;attribute_uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;faf1d0b6-aaaa-aaaa-aaaa-a7c8cfb0b6ba&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;date_sighting&quot;</span><span class="p">:</span> <span class="s2">&quot;1701876712&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;event_id&quot;</span><span class="p">:</span> <span class="s2">&quot;11&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;org_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;IBM QRadar SOAR&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;52e6b38b-aaaa-aaaa-aaaa-fb9442f5411f&quot;</span>
+                <span class="s2">"attribute_id"</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
+                <span class="s2">"attribute_uuid"</span><span class="p">:</span> <span class="s2">"faf1d0b6-aaaa-aaaa-aaaa-a7c8cfb0b6ba"</span><span class="p">,</span>
+                <span class="s2">"date_sighting"</span><span class="p">:</span> <span class="s2">"1701876712"</span><span class="p">,</span>
+                <span class="s2">"event_id"</span><span class="p">:</span> <span class="s2">"11"</span><span class="p">,</span>
+                <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+                <span class="s2">"org_id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+                <span class="s2">"source"</span><span class="p">:</span> <span class="s2">"IBM QRadar SOAR"</span><span class="p">,</span>
+                <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+                <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"52e6b38b-aaaa-aaaa-aaaa-fb9442f5411f"</span>
               <span class="p">},</span>
               <span class="p">{</span>
-                <span class="s2">&quot;Organisation&quot;</span><span class="p">:</span> <span class="p">{</span>
-                  <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ORGNAME&quot;</span><span class="p">,</span>
-                  <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;40e5d872-aaaa-aaaa-aaaa-9d234710c5e5&quot;</span>
+                <span class="s2">"Organisation"</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+                  <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"ORGNAME"</span><span class="p">,</span>
+                  <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"40e5d872-aaaa-aaaa-aaaa-9d234710c5e5"</span>
                 <span class="p">},</span>
-                <span class="s2">&quot;attribute_id&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;attribute_uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;faf1d0b6-aaaa-aaaa-aaaa-a7c8cfb0b6ba&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;date_sighting&quot;</span><span class="p">:</span> <span class="s2">&quot;1701877013&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;event_id&quot;</span><span class="p">:</span> <span class="s2">&quot;11&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;org_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;IBM QRadar SOAR&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;fbca0cd6-3a47-40ed-9775-1e7af7f99e15&quot;</span>
+                <span class="s2">"attribute_id"</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
+                <span class="s2">"attribute_uuid"</span><span class="p">:</span> <span class="s2">"faf1d0b6-aaaa-aaaa-aaaa-a7c8cfb0b6ba"</span><span class="p">,</span>
+                <span class="s2">"date_sighting"</span><span class="p">:</span> <span class="s2">"1701877013"</span><span class="p">,</span>
+                <span class="s2">"event_id"</span><span class="p">:</span> <span class="s2">"11"</span><span class="p">,</span>
+                <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
+                <span class="s2">"org_id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+                <span class="s2">"source"</span><span class="p">:</span> <span class="s2">"IBM QRadar SOAR"</span><span class="p">,</span>
+                <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+                <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"fbca0cd6-3a47-40ed-9775-1e7af7f99e15"</span>
               <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;Network activity&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;deleted&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;disable_correlation&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;distribution&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;event_id&quot;</span><span class="p">:</span> <span class="s2">&quot;11&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;first_seen&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;last_seen&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-            <span class="s2">&quot;object_id&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;object_relation&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-            <span class="s2">&quot;sharing_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1701876675&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;to_ids&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;hostname&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;faf1d0b6-aaaa-aaaa-aaaa-a7c8cfb0b6ba&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;google.com&quot;</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"Network activity"</span><span class="p">,</span>
+            <span class="s2">"comment"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"deleted"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"disable_correlation"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"distribution"</span><span class="p">:</span> <span class="s2">"5"</span><span class="p">,</span>
+            <span class="s2">"event_id"</span><span class="p">:</span> <span class="s2">"11"</span><span class="p">,</span>
+            <span class="s2">"first_seen"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
+            <span class="s2">"last_seen"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">"object_id"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+            <span class="s2">"object_relation"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">"sharing_group_id"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+            <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1701876675"</span><span class="p">,</span>
+            <span class="s2">"to_ids"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"hostname"</span><span class="p">,</span>
+            <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"faf1d0b6-aaaa-aaaa-aaaa-a7c8cfb0b6ba"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"google.com"</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="s2">&quot;CryptographicKey&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;EventReport&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;Galaxy&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;Object&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;Org&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;local&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ORGNAME&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;40e5d872-aaaa-aaaa-aaaa-9d234710c5e5&quot;</span>
+        <span class="s2">"CryptographicKey"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"EventReport"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"Galaxy"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"Object"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"Org"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+          <span class="s2">"local"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"ORGNAME"</span><span class="p">,</span>
+          <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"40e5d872-aaaa-aaaa-aaaa-9d234710c5e5"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;Orgc&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;local&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ORGNAME&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;40e5d872-aaaa-aaaa-aaaa-9d234710c5e5&quot;</span>
+        <span class="s2">"Orgc"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+          <span class="s2">"local"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"ORGNAME"</span><span class="p">,</span>
+          <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"40e5d872-aaaa-aaaa-aaaa-9d234710c5e5"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;RelatedEvent&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;ShadowAttribute&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;analysis&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;attribute_count&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-06&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;disable_correlation&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;distribution&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;event_creator_email&quot;</span><span class="p">:</span> <span class="s2">&quot;admin@admin.test&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;extends_uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;11&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="s2">&quot;tester&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;locked&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;org_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;orgc_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;proposal_email_lock&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;protected&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;publish_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;published&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;sharing_group_id&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;threat_level_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1701876675&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;f6b6cba4-aaaa-aaaa-aaaa-3b40ace9067c&quot;</span>
+        <span class="s2">"RelatedEvent"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"ShadowAttribute"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"analysis"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+        <span class="s2">"attribute_count"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+        <span class="s2">"date"</span><span class="p">:</span> <span class="s2">"2023-12-06"</span><span class="p">,</span>
+        <span class="s2">"disable_correlation"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"distribution"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="s2">"event_creator_email"</span><span class="p">:</span> <span class="s2">"admin@admin.test"</span><span class="p">,</span>
+        <span class="s2">"extends_uuid"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"11"</span><span class="p">,</span>
+        <span class="s2">"info"</span><span class="p">:</span> <span class="s2">"tester"</span><span class="p">,</span>
+        <span class="s2">"locked"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"org_id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+        <span class="s2">"orgc_id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+        <span class="s2">"proposal_email_lock"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"protected"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"publish_timestamp"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="s2">"published"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"sharing_group_id"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="s2">"threat_level_id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1701876675"</span><span class="p">,</span>
+        <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"f6b6cba4-aaaa-aaaa-aaaa-3b40ace9067c"</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">],</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;misp_attribute_value&quot;</span><span class="p">:</span> <span class="s2">&quot;google.com&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"misp_attribute_value"</span><span class="p">:</span> <span class="s2">"google.com"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">503</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-misp&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.0.2&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-06 11:10:08&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">503</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-misp"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"3.0.2"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-12-06 11:10:08"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1281,13 +1281,13 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">misp_attributes</span>
 
-<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No attributes matching </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> found&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"No attributes matching </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> found"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="n">matched</span> <span class="o">=</span> <span class="p">[]</span>
-  <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{}):</span>
-    <span class="n">matched</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Event: </span><span class="si">{</span><span class="n">match</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Event&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">, ID: </span><span class="si">{</span><span class="n">match</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Event&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Attribute Search Matches:</span><span class="se">\n</span><span class="s2"> </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">matched</span><span class="p">)))</span>
+  <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{}):</span>
+    <span class="n">matched</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Event: </span><span class="si">{</span><span class="n">match</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'Event'</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'info'</span><span class="p">)</span><span class="si">}</span><span class="s2">, ID: </span><span class="si">{</span><span class="n">match</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'Event'</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'id'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Attribute Search Matches:</span><span class="se">\n</span><span class="s2"> </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">matched</span><span class="p">)))</span>
 </pre></div>
 </div>
 </p>
@@ -1328,38 +1328,38 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">&quot;Organisation&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ORGNAME&quot;</span>
+      <span class="s2">"Organisation"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"ORGNAME"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;Sighting&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;attribute_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;date_sighting&quot;</span><span class="p">:</span> <span class="s2">&quot;1701370203&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;event_id&quot;</span><span class="p">:</span> <span class="s2">&quot;10&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;org_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;IBM QRadar SOAR&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;ac38af87-aaaa-aaaa-aaaa-66e54faed53c&quot;</span>
+      <span class="s2">"Sighting"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"attribute_id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+        <span class="s2">"date_sighting"</span><span class="p">:</span> <span class="s2">"1701370203"</span><span class="p">,</span>
+        <span class="s2">"event_id"</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+        <span class="s2">"org_id"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+        <span class="s2">"source"</span><span class="p">:</span> <span class="s2">"IBM QRadar SOAR"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"ac38af87-aaaa-aaaa-aaaa-66e54faed53c"</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">],</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;misp_event_id&quot;</span><span class="p">:</span> <span class="mi">10</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"misp_event_id"</span><span class="p">:</span> <span class="mi">10</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">440</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-misp&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3.0.2&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-11-30 13:50:19&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">440</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-misp"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"3.0.2"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-11-30 13:50:19"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1375,8 +1375,8 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">misp_sighting</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Sightings for associated event.</span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})))</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Sightings for associated event.</span><span class="se">\n</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})))</span>
 </pre></div>
 </div>
 </p>

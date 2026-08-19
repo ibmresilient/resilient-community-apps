@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -801,7 +801,7 @@ file name as <code class="docutils literal notranslate"><span class="pre">tnsnam
 </li>
 <li><p>When creating the database user account which will access the defined database, provide the necessary permissions to allow full access to create tables, alter tables by adding columns, and full capability to insert, update and delete records.</p></li>
 <li><p>These are the permissions granted when creating a user to reference a SQLServer database:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">LOGIN</span> <span class="n">res_db</span> <span class="n">WITH</span> <span class="n">PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;*****’;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CREATE</span> <span class="n">LOGIN</span> <span class="n">res_db</span> <span class="n">WITH</span> <span class="n">PASSWORD</span> <span class="o">=</span> <span class="s1">'*****’;</span>
 <span class="n">CREATE</span> <span class="n">USER</span> <span class="n">res_db</span> <span class="n">FOR</span> <span class="n">LOGIN</span> <span class="n">res_db</span><span class="p">;</span>
 <span class="n">GRANT</span> <span class="n">UPDATE</span><span class="p">,</span><span class="n">INSERT</span><span class="p">,</span><span class="n">DELETE</span><span class="p">,</span><span class="n">SELECT</span><span class="p">,</span><span class="n">ALTER</span><span class="p">,</span><span class="n">CREATE</span> <span class="n">TABLE</span> <span class="n">TO</span> <span class="n">res_db</span><span class="p">;</span>
 </pre></div>
@@ -834,12 +834,12 @@ file name as <code class="docutils literal notranslate"><span class="pre">tnsnam
 <h4>Modify dialect encoding<a class="headerlink" href="#modify-dialect-encoding" title="Link to this heading">¶</a></h4>
 <p>Each SQL dialect modifies the database connection with the encoding used to read and write data. The configure_connection() function makes these changes and in all cases, sets the encoding to UTF-8. In some cases, the format of the encoding parameters may change between python environments and the following logic can be used to account for those different environments:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">configure_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">):</span>
-    <span class="n">connection</span><span class="o">.</span><span class="n">setdecoding</span><span class="p">(</span><span class="n">pyodbc</span><span class="o">.</span><span class="n">SQL_WCHAR</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>  <span class="c1">## pylint: disable=c-extension-no-member</span>
+    <span class="n">connection</span><span class="o">.</span><span class="n">setdecoding</span><span class="p">(</span><span class="n">pyodbc</span><span class="o">.</span><span class="n">SQL_WCHAR</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>  <span class="c1">## pylint: disable=c-extension-no-member</span>
     <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="o">.</span><span class="n">major</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span> <span class="c1">## to set encoding on python 2</span>
-        <span class="n">connection</span><span class="o">.</span><span class="n">setencoding</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
-        <span class="n">connection</span><span class="o">.</span><span class="n">setencoding</span><span class="p">(</span><span class="n">unicode</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">setencoding</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">setencoding</span><span class="p">(</span><span class="n">unicode</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span> <span class="c1">## an issue and try encoding without specifying fromtype</span>
-        <span class="n">connection</span><span class="o">.</span><span class="n">setencoding</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="n">connection</span><span class="o">.</span><span class="n">setencoding</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">'utf-8'</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -847,26 +847,26 @@ file name as <code class="docutils literal notranslate"><span class="pre">tnsnam
 <h4>Modify data type mapping<a class="headerlink" href="#modify-data-type-mapping" title="Link to this heading">¶</a></h4>
 <p>Each SQL dialect contains a mapping table to convert Resilient data types to your dialect’s datastore. See the function get_column_type() for how mapping is presently done.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_column_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_type</span><span class="p">):</span>  <span class="c1">## pylint: disable=no-self-use</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Gets the DB column type for the specified Resilient &#39;input type&#39;</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Gets the DB column type for the specified Resilient 'input type'</span>
 
 <span class="sd">    :param input_type: The Resilient input type value (e.g. datepicker,</span>
 <span class="sd">        boolean, number, text, text_area, etc.)</span>
 
 <span class="sd">    :returns The DB type to use for this dialect.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">type_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-        <span class="n">number</span><span class="o">=</span><span class="s1">&#39;BIGINT&#39;</span><span class="p">,</span>
-        <span class="n">datepicker</span><span class="o">=</span><span class="s1">&#39;DATE&#39;</span><span class="p">,</span>
-        <span class="n">datetimepicker</span><span class="o">=</span><span class="s1">&#39;TIMESTAMP&#39;</span><span class="p">,</span>
-        <span class="n">boolean</span><span class="o">=</span><span class="s1">&#39;BOOLEAN&#39;</span><span class="p">,</span>
-        <span class="n">blob</span><span class="o">=</span><span class="s1">&#39;blob&#39;</span>
+        <span class="n">number</span><span class="o">=</span><span class="s1">'BIGINT'</span><span class="p">,</span>
+        <span class="n">datepicker</span><span class="o">=</span><span class="s1">'DATE'</span><span class="p">,</span>
+        <span class="n">datetimepicker</span><span class="o">=</span><span class="s1">'TIMESTAMP'</span><span class="p">,</span>
+        <span class="n">boolean</span><span class="o">=</span><span class="s1">'BOOLEAN'</span><span class="p">,</span>
+        <span class="n">blob</span><span class="o">=</span><span class="s1">'blob'</span>
     <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">input_type</span> <span class="ow">in</span> <span class="n">type_dict</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">type_dict</span><span class="p">[</span><span class="n">input_type</span><span class="p">]</span>
 
-    <span class="k">return</span> <span class="s1">&#39;TEXT&#39;</span>
+    <span class="k">return</span> <span class="s1">'TEXT'</span>
 </pre></div>
 </div>
 <p>Text data types can be challenging for some databases based on the data length limits. In those cases, use a constant to define the limit and truncate your data using that value. Be aware that character limits do not account for Unicode characters which are double-byte. This means that a data limit of 64k characters actually translates to 32k Unicode characters.</p>
@@ -884,11 +884,11 @@ file name as <code class="docutils literal notranslate"><span class="pre">tnsnam
 <section id="modifying-dialect-reserved-words">
 <h4>Modifying dialect reserved words<a class="headerlink" href="#modifying-dialect-reserved-words" title="Link to this heading">¶</a></h4>
 <p>Each SQL Dialect contains reserved words which cannot be used in database table and column definitions. To ensure all data fields in Resilient can be stored, a list of reserve words is maintained. When a conflict is found the resulting table or column name has an underscore added to the name. From time to time, new database releases add to this reserved word list. Just add those words to an existing list:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>RESERVE_LIST = [&#39;all&#39;, &#39;analyse&#39;, &#39;analyze&#39;, &#39;and&#39;, &#39;any&#39;, &#39;array&#39;, &#39;as&#39;,
-                &#39;asc&#39;, &#39;asymmetric&#39;, &#39;both&#39;, &#39;case&#39;, &#39;cast&#39;,
-                &#39;check&#39;, &#39;collate&#39;, &#39;column&#39;, &#39;constraint&#39;, &#39;create&#39;,
-                &#39;current_date&#39;, &#39;current_role&#39;, &#39;current_time&#39;,
-                &#39;current_timestamp&#39;, &#39;current_user&#39;, &#39;default&#39;,
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>RESERVE_LIST = ['all', 'analyse', 'analyze', 'and', 'any', 'array', 'as',
+                'asc', 'asymmetric', 'both', 'case', 'cast',
+                'check', 'collate', 'column', 'constraint', 'create',
+                'current_date', 'current_role', 'current_time',
+                'current_timestamp', 'current_user', 'default',
                 …
                 ]
 </pre></div>

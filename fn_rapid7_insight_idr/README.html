@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -865,27 +865,27 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;rapid7_insight_idr_attachments&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;test.txt&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"rapid7_insight_idr_attachments"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"test.txt"</span>
     <span class="p">]</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;rapid7_insight_idr_incident_id&quot;</span><span class="p">:</span> <span class="mi">2228</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_rrn&quot;</span><span class="p">:</span> <span class="s2">&quot;rrn:investigation:us2:e4463fba-cd64-427c-8fc9-f9e1983f24e1:investigation:JSPDKLRG7UWY&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"rapid7_insight_idr_incident_id"</span><span class="p">:</span> <span class="mi">2228</span><span class="p">,</span>
+    <span class="s2">"rapid7_insight_idr_rrn"</span><span class="p">:</span> <span class="s2">"rrn:investigation:us2:e4463fba-cd64-427c-8fc9-f9e1983f24e1:investigation:JSPDKLRG7UWY"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">30025</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;mylaptop&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-rapid7-insight-idr&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-12 14:41:29&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">30025</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"mylaptop"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-rapid7-insight-idr"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-12-12 14:41:29"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -903,15 +903,15 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">add_attachments_results</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
   <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-    <span class="n">rapid7_attachments</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rapid7_insight_idr_attachments&quot;</span><span class="p">)</span>
-    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Get Attachments:&lt;/b&gt; added </span><span class="si">{}</span><span class="s2"> attachments to incident:&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rapid7_attachments</span><span class="p">))</span>
+    <span class="n">rapid7_attachments</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"rapid7_insight_idr_attachments"</span><span class="p">)</span>
+    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Rapid7 InsightIDR: Get Attachments:&lt;/b&gt; added </span><span class="si">{}</span><span class="s2"> attachments to incident:&lt;br&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rapid7_attachments</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">attachment_name</span> <span class="ow">in</span> <span class="n">rapid7_attachments</span><span class="p">:</span>
-      <span class="n">note_text</span> <span class="o">=</span> <span class="n">note_text</span> <span class="o">+</span> <span class="s2">&quot;&lt;br&gt;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attachment_name</span><span class="p">)</span>
+      <span class="n">note_text</span> <span class="o">=</span> <span class="n">note_text</span> <span class="o">+</span> <span class="s2">"&lt;br&gt;</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attachment_name</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Get Attachments&lt;/b&gt; failed to get &lt;b&gt;ALL&lt;/b&gt; attachments from Rapid7 InsightIDR. Retry later:&lt;br&gt; </span><span class="si">{0}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+  <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Rapid7 InsightIDR: Get Attachments&lt;/b&gt; failed to get &lt;b&gt;ALL&lt;/b&gt; attachments from Rapid7 InsightIDR. Retry later:&lt;br&gt; </span><span class="si">{0}</span><span class="s2">."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span>
 
 </pre></div>
@@ -961,44 +961,44 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;evidences&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"evidences"</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="s2">&quot;rrn&quot;</span><span class="p">:</span> <span class="s2">&quot;rrn:alerts:us2:e4463fba-cd64-427c-8fc9-f9e1983f24e1:evidence:1:fcd21bbeec66b34322c57b50478014ef&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">&quot;created_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-14T11:07:37.329397Z&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;updated_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-14T11:07:37.329397Z&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;evented_at&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-01-14T11:07:36.998Z&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;external_source&quot;</span><span class="p">:</span> <span class="s2">&quot;IDR ABA&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;event_type&quot;</span><span class="p">:</span> <span class="s2">&quot;raw&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">timestamp</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">2024-01-10T13:51:12.000Z</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">hostname</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">r7-test1</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">appname</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">sshd</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">source_data</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">Jan 10 08:51:12 r7-test1 sshd[19076]: error: maximum authentication attempts exceeded for root from 9.61.113.106 port 54336 ssh2 [preauth]</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">custom_data</span><span class="se">\&quot;</span><span class="s2">:{</span><span class="se">\&quot;</span><span class="s2">invalid-login</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">maximum authentication attempts exceeded for</span><span class="se">\&quot;</span><span class="s2">}}&quot;</span>
+            <span class="s2">"rrn"</span><span class="p">:</span> <span class="s2">"rrn:alerts:us2:e4463fba-cd64-427c-8fc9-f9e1983f24e1:evidence:1:fcd21bbeec66b34322c57b50478014ef"</span><span class="p">,</span>
+            <span class="s2">"version"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2024-01-14T11:07:37.329397Z"</span><span class="p">,</span>
+            <span class="s2">"updated_at"</span><span class="p">:</span> <span class="s2">"2024-01-14T11:07:37.329397Z"</span><span class="p">,</span>
+            <span class="s2">"evented_at"</span><span class="p">:</span> <span class="s2">"2024-01-14T11:07:36.998Z"</span><span class="p">,</span>
+            <span class="s2">"external_source"</span><span class="p">:</span> <span class="s2">"IDR ABA"</span><span class="p">,</span>
+            <span class="s2">"event_type"</span><span class="p">:</span> <span class="s2">"raw"</span><span class="p">,</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">timestamp</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">2024-01-10T13:51:12.000Z</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">hostname</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">r7-test1</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">appname</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">sshd</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">source_data</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Jan 10 08:51:12 r7-test1 sshd[19076]: error: maximum authentication attempts exceeded for root from 9.61.113.106 port 54336 ssh2 [preauth]</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">custom_data</span><span class="se">\"</span><span class="s2">:{</span><span class="se">\"</span><span class="s2">invalid-login</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">maximum authentication attempts exceeded for</span><span class="se">\"</span><span class="s2">}}"</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">&quot;items_in_index&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">&quot;total_items&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">&quot;is_last_index&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"index"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"size"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">"items_in_index"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">"total_items"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">"is_last_index"</span><span class="p">:</span> <span class="n">true</span>
         <span class="p">}</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;rapid7_insight_idr_alert_rrn&quot;</span><span class="p">:</span> <span class="s2">&quot;rrn:alerts:us2:e4463fba-cd64-427c-8fc9-f9e1983f24e1:alert:1:17c2b65f73ba0d975e9d24d446a9e91c&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;rapid7_insight_idr_rrn&quot;</span><span class="p">:</span> <span class="s2">&quot;rrn:investigation:us2:e4463fba-cd64-427c-8fc9-f9e1983f24e1:investigation:8V1AAAAAAA5F&quot;</span>
+    <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"rapid7_insight_idr_alert_rrn"</span><span class="p">:</span> <span class="s2">"rrn:alerts:us2:e4463fba-cd64-427c-8fc9-f9e1983f24e1:alert:1:17c2b65f73ba0d975e9d24d446a9e91c"</span><span class="p">,</span>
+      <span class="s2">"rapid7_insight_idr_rrn"</span><span class="p">:</span> <span class="s2">"rrn:investigation:us2:e4463fba-cd64-427c-8fc9-f9e1983f24e1:investigation:8V1AAAAAAA5F"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-rapid7-insight-idr&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;mylaptop&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">9332</span><span class="p">,</span>
-      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-02-12 13:57:09&quot;</span>
+    <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+      <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-rapid7-insight-idr"</span><span class="p">,</span>
+      <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+      <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"mylaptop"</span><span class="p">,</span>
+      <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">9332</span><span class="p">,</span>
+      <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-02-12 13:57:09"</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -1010,10 +1010,10 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_rrn</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_rrn</span>
 
-<span class="c1"># The &quot;User Behavior Analytics&quot; alert source uses the &quot;restricted&quot; InsightIDR endpoint</span>
+<span class="c1"># The "User Behavior Analytics" alert source uses the "restricted" InsightIDR endpoint</span>
 <span class="c1"># that uses the rrn of the investigation to get the alert evidence.  It does not have</span>
 <span class="c1"># an alert_rrn.</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_alert_rrn</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">r7_alert_source</span> <span class="o">==</span> <span class="s2">&quot;User Behavior Analytics&quot;</span> <span class="k">else</span> <span class="n">row</span><span class="o">.</span><span class="n">r7_alert_id</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_alert_rrn</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">r7_alert_source</span> <span class="o">==</span> <span class="s2">"User Behavior Analytics"</span> <span class="k">else</span> <span class="n">row</span><span class="o">.</span><span class="n">r7_alert_id</span>
 </pre></div>
 </div>
 </p>
@@ -1026,29 +1026,29 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 
 <span class="n">evidence_data</span> <span class="o">=</span> <span class="p">{}</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
-  <span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"inputs"</span><span class="p">,</span> <span class="p">{})</span>
   <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-    <span class="n">alert_data</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="n">alert_data</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="p">{})</span>
     <span class="k">if</span> <span class="n">alert_data</span><span class="p">:</span>
       <span class="c1"># evidences is defined only in the case of non-restricted endpoint</span>
-      <span class="n">evidences</span> <span class="o">=</span> <span class="n">alert_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;evidences&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+      <span class="n">evidences</span> <span class="o">=</span> <span class="n">alert_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"evidences"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
       <span class="k">if</span> <span class="n">evidences</span><span class="p">:</span>
         <span class="c1"># Only one alert is returned. Get the data to display in the note</span>
         <span class="n">evidence</span> <span class="o">=</span> <span class="n">evidences</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">data_string</span> <span class="o">=</span> <span class="n">evidence</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">data_string</span> <span class="o">=</span> <span class="n">evidence</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">data_string</span><span class="p">:</span>
           <span class="n">evidence_data</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">data_string</span><span class="p">)</span>
       <span class="k">else</span><span class="p">:</span>
         <span class="c1"># restricted endpoint results</span>
-        <span class="n">indicator_occurrences</span> <span class="o">=</span> <span class="n">alert_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;indicator_occurrences&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">indicator_occurrences</span> <span class="o">=</span> <span class="n">alert_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"indicator_occurrences"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">indicator_occurrences</span><span class="p">:</span>
-          <span class="n">evidence</span> <span class="o">=</span> <span class="n">indicator_occurrences</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;evidence&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+          <span class="n">evidence</span> <span class="o">=</span> <span class="n">indicator_occurrences</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"evidence"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
           <span class="k">if</span> <span class="n">evidence</span><span class="p">:</span>
-            <span class="n">details</span> <span class="o">=</span> <span class="n">evidence</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;details&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">details</span> <span class="o">=</span> <span class="n">evidence</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"details"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">details</span><span class="p">:</span>
-              <span class="n">data_string</span> <span class="o">=</span> <span class="n">details</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;logline&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+              <span class="n">data_string</span> <span class="o">=</span> <span class="n">details</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"logline"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
               <span class="k">if</span> <span class="n">data_string</span><span class="p">:</span>
                 <span class="n">evidence_data</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">data_string</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">evidence_data</span><span class="p">:</span>
@@ -1056,18 +1056,18 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
       <span class="n">row</span><span class="o">.</span><span class="n">r7_evidence</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">evidence_data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 
       <span class="c1"># Create artifacts from the evidence</span>
-      <span class="n">hostname</span> <span class="o">=</span> <span class="n">evidence_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hostname&quot;</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+      <span class="n">hostname</span> <span class="o">=</span> <span class="n">evidence_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hostname"</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
       <span class="k">if</span> <span class="n">hostname</span><span class="p">:</span>
-        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;System Name&quot;</span><span class="p">,</span> <span class="n">hostname</span><span class="p">,</span> <span class="s2">&quot;Evidence from Rapid7 InsightIDR&quot;</span><span class="p">)</span>
-      <span class="n">appname</span> <span class="o">=</span> <span class="n">evidence_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;appname&quot;</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">"System Name"</span><span class="p">,</span> <span class="n">hostname</span><span class="p">,</span> <span class="s2">"Evidence from Rapid7 InsightIDR"</span><span class="p">)</span>
+      <span class="n">appname</span> <span class="o">=</span> <span class="n">evidence_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"appname"</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span>
       <span class="k">if</span> <span class="n">appname</span><span class="p">:</span>
-        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;Service&quot;</span><span class="p">,</span> <span class="n">appname</span><span class="p">,</span> <span class="s2">&quot;Evidence from Rapid7 InsightIDR&quot;</span><span class="p">)</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">"Service"</span><span class="p">,</span> <span class="n">appname</span><span class="p">,</span> <span class="s2">"Evidence from Rapid7 InsightIDR"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-      <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Get Evidence:&lt;/b&gt; No evidence found </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)))</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"&lt;b&gt;Rapid7 InsightIDR: Get Evidence:&lt;/b&gt; No evidence found </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)))</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Get Evidence:&lt;/b&gt; No content found&quot;</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"&lt;b&gt;Rapid7 InsightIDR: Get Evidence:&lt;/b&gt; No content found"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Get Evidence: No evidence found </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"&lt;b&gt;Rapid7 InsightIDR: Get Evidence: No evidence found </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)))</span>
 </pre></div>
 </div>
 </p>
@@ -1108,42 +1108,42 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;alert_source&quot;</span><span class="p">:</span> <span class="s2">&quot;Attacker Behavior Analytics&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;alert_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Suspicious Authentication - Default Administrator Account Login From Public Internet&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;alert_type_description&quot;</span><span class="p">:</span> <span class="s2">&quot;Suspicious Authentication - Default Administrator Account Login From Public Internet&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-11-22T23:49:17.013Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;detection_rule_rrn&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;first_event_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-11-22T23:44:38.234Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;eeeeeeeeee-83c0-4953-bc40-aaaaaaaaaaaaa&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;latest_event_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-11-22T23:49:17.013Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Suspicious Authentication - Default Administrator Account Login From Public Internet&quot;</span>
+        <span class="s2">"alert_source"</span><span class="p">:</span> <span class="s2">"Attacker Behavior Analytics"</span><span class="p">,</span>
+        <span class="s2">"alert_type"</span><span class="p">:</span> <span class="s2">"Suspicious Authentication - Default Administrator Account Login From Public Internet"</span><span class="p">,</span>
+        <span class="s2">"alert_type_description"</span><span class="p">:</span> <span class="s2">"Suspicious Authentication - Default Administrator Account Login From Public Internet"</span><span class="p">,</span>
+        <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"2023-11-22T23:49:17.013Z"</span><span class="p">,</span>
+        <span class="s2">"detection_rule_rrn"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"first_event_time"</span><span class="p">:</span> <span class="s2">"2023-11-22T23:44:38.234Z"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"eeeeeeeeee-83c0-4953-bc40-aaaaaaaaaaaaa"</span><span class="p">,</span>
+        <span class="s2">"latest_event_time"</span><span class="p">:</span> <span class="s2">"2023-11-22T23:49:17.013Z"</span><span class="p">,</span>
+        <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Suspicious Authentication - Default Administrator Account Login From Public Internet"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-      <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-      <span class="s2">&quot;total_data&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;total_pages&quot;</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"index"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="s2">"size"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+      <span class="s2">"total_data"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"total_pages"</span><span class="p">:</span> <span class="mi">1</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;rapid7_insight_idr_rrn&quot;</span><span class="p">:</span> <span class="s2">&quot;rrn:investigation:usxx:xxxxxx-1234-4608-be60-xxxxxxxxx:investigation:ggggggggggg&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"rapid7_insight_idr_rrn"</span><span class="p">:</span> <span class="s2">"rrn:investigation:usxx:xxxxxx-1234-4608-be60-xxxxxxxxx:investigation:ggggggggggg"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">219</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;Pro.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-rapid7-insight-idr&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-04 15:32:42&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">219</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"Pro.local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-rapid7-insight-idr"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-12-04 15:32:42"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1162,29 +1162,29 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_alerts_results</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
   <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-    <span class="n">alert_list</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;alert_list&quot;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">alert_list</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"alert_list"</span><span class="p">,</span> <span class="p">[])</span>
     <span class="k">if</span> <span class="n">alert_list</span><span class="p">:</span>
       <span class="k">for</span> <span class="n">alert</span> <span class="ow">in</span> <span class="n">alert_list</span><span class="p">:</span>
-        <span class="n">alert_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;rapid7_insight_idr_alerts_dt&quot;</span><span class="p">)</span>
+        <span class="n">alert_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"rapid7_insight_idr_alerts_dt"</span><span class="p">)</span>
         <span class="n">alert_row</span><span class="o">.</span><span class="n">r7_query_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-        <span class="n">alert_row</span><span class="o">.</span><span class="n">r7_alert_id</span> <span class="o">=</span> <span class="n">alert</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
-        <span class="n">alert_row</span><span class="o">.</span><span class="n">r7_alert_source</span> <span class="o">=</span> <span class="n">alert</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;alert_source&quot;</span><span class="p">)</span>
-        <span class="n">alert_row</span><span class="o">.</span><span class="n">r7_alert_type</span> <span class="o">=</span> <span class="n">alert</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;alert_type&quot;</span><span class="p">)</span>
-        <span class="n">alert_row</span><span class="o">.</span><span class="n">r7_created_time</span> <span class="o">=</span> <span class="n">alert</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;created_time&quot;</span><span class="p">)</span>
-        <span class="n">detection_rule_rrn</span> <span class="o">=</span> <span class="n">alert</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;detection_rule_rrn&quot;</span><span class="p">)</span>
+        <span class="n">alert_row</span><span class="o">.</span><span class="n">r7_alert_id</span> <span class="o">=</span> <span class="n">alert</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span>
+        <span class="n">alert_row</span><span class="o">.</span><span class="n">r7_alert_source</span> <span class="o">=</span> <span class="n">alert</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"alert_source"</span><span class="p">)</span>
+        <span class="n">alert_row</span><span class="o">.</span><span class="n">r7_alert_type</span> <span class="o">=</span> <span class="n">alert</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"alert_type"</span><span class="p">)</span>
+        <span class="n">alert_row</span><span class="o">.</span><span class="n">r7_created_time</span> <span class="o">=</span> <span class="n">alert</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"created_time"</span><span class="p">)</span>
+        <span class="n">detection_rule_rrn</span> <span class="o">=</span> <span class="n">alert</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"detection_rule_rrn"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">detection_rule_rrn</span><span class="p">:</span>
-          <span class="n">alert_row</span><span class="o">.</span><span class="n">r7_detection_rrn</span> <span class="o">=</span> <span class="n">detection_rule_rrn</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rule_rrn&quot;</span><span class="p">)</span>
-          <span class="n">alert_row</span><span class="o">.</span><span class="n">r7_detection_rule</span> <span class="o">=</span> <span class="n">detection_rule_rrn</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rule_name&quot;</span><span class="p">)</span>
-      <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR Get Alerts:&lt;/b&gt; Added </span><span class="si">{0}</span><span class="s2"> alerts to the Alerts data table&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alert_list</span><span class="p">))</span>
+          <span class="n">alert_row</span><span class="o">.</span><span class="n">r7_detection_rrn</span> <span class="o">=</span> <span class="n">detection_rule_rrn</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"rule_rrn"</span><span class="p">)</span>
+          <span class="n">alert_row</span><span class="o">.</span><span class="n">r7_detection_rule</span> <span class="o">=</span> <span class="n">detection_rule_rrn</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"rule_name"</span><span class="p">)</span>
+      <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Rapid7 InsightIDR Get Alerts:&lt;/b&gt; Added </span><span class="si">{0}</span><span class="s2"> alerts to the Alerts data table"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alert_list</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
-     <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR Get Alerts:&lt;/b&gt; No alerts found.&quot;</span>
+     <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Rapid7 InsightIDR Get Alerts:&lt;/b&gt; No alerts found."</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR Get Alerts:&lt;/b&gt; No alerts found (no content).&quot;</span>
+    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Rapid7 InsightIDR Get Alerts:&lt;/b&gt; No alerts found (no content)."</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR Get Alerts:&lt;/b&gt; Failed function to get alerts. Reason = </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">))</span>
+  <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Rapid7 InsightIDR Get Alerts:&lt;/b&gt; Failed function to get alerts. Reason = </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">))</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span>
 </pre></div>
@@ -1233,25 +1233,25 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"count"</span><span class="p">:</span> <span class="mi">1</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;rapid7_insight_idr_incident_id&quot;</span><span class="p">:</span> <span class="mi">2195</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_rrn&quot;</span><span class="p">:</span> <span class="s2">&quot;rrn:investigation:us2:eeeeeeee-cccc-4c4c-8fc9-f9e19e19e1:investigation:AAAAAAAAAA&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"rapid7_insight_idr_incident_id"</span><span class="p">:</span> <span class="mi">2195</span><span class="p">,</span>
+    <span class="s2">"rapid7_insight_idr_rrn"</span><span class="p">:</span> <span class="s2">"rrn:investigation:us2:eeeeeeee-cccc-4c4c-8fc9-f9e19e19e1:investigation:AAAAAAAAAA"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">59301</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;mylaptop&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-rapid7-insight-idr&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-06 11:56:52&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">59301</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"mylaptop"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-rapid7-insight-idr"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-12-06 11:56:52"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1269,14 +1269,14 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_comments_results</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Get Comments&lt;/b&gt; playbook created </span><span class="si">{0}</span><span class="s2"> notes in SOAR&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">))</span>
+    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Rapid7 InsightIDR: Get Comments&lt;/b&gt; playbook created </span><span class="si">{0}</span><span class="s2"> notes in SOAR"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"count"</span><span class="p">))</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Get Comments&lt;/b&gt; function failed to get notes from Rapid7 InsightIDR&quot;</span>
+    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Rapid7 InsightIDR: Get Comments&lt;/b&gt; function failed to get notes from Rapid7 InsightIDR"</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Get Comments&lt;/b&gt; function failed to get notes from Rapid7 InsightIDR&quot;</span>
+  <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Rapid7 InsightIDR: Get Comments&lt;/b&gt; function failed to get notes from Rapid7 InsightIDR"</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span>
 </pre></div>
@@ -1319,39 +1319,39 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;rapid7_insight_idr_investigation&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;assignee&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-11-10T15:55:12.182Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;disposition&quot;</span><span class="p">:</span> <span class="s2">&quot;MALICIOUS&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;entity_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://us2.api.insight.rapid7.com/op/6E85858585854#/investigations/rrn:investigation:us2:eeeeeeee-cccc-4c4c-8fc9-f9e1983f24e1:investigation:AAAAAAAAAA&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;first_alert_time&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;last_accessed&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-01T22:41:02.993Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;latest_alert_time&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;organization_id&quot;</span><span class="p">:</span> <span class="s2">&quot;e4463fba-cd64-427c-8fc9-f9e1983f24e1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="s2">&quot;LOW&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;responsibility&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;rrn&quot;</span><span class="p">:</span> <span class="s2">&quot;rrn:investigation:us2:eeeeeeee-ccc4-4ccc-8eee-eeeeeeeeeeee:investigation:AAAAAAAAAA&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;USER&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;INVESTIGATING&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;1st investigation&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"rapid7_insight_idr_investigation"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"assignee"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"2023-11-10T15:55:12.182Z"</span><span class="p">,</span>
+      <span class="s2">"disposition"</span><span class="p">:</span> <span class="s2">"MALICIOUS"</span><span class="p">,</span>
+      <span class="s2">"entity_url"</span><span class="p">:</span> <span class="s2">"https://us2.api.insight.rapid7.com/op/6E85858585854#/investigations/rrn:investigation:us2:eeeeeeee-cccc-4c4c-8fc9-f9e1983f24e1:investigation:AAAAAAAAAA"</span><span class="p">,</span>
+      <span class="s2">"first_alert_time"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"last_accessed"</span><span class="p">:</span> <span class="s2">"2023-12-01T22:41:02.993Z"</span><span class="p">,</span>
+      <span class="s2">"latest_alert_time"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"organization_id"</span><span class="p">:</span> <span class="s2">"e4463fba-cd64-427c-8fc9-f9e1983f24e1"</span><span class="p">,</span>
+      <span class="s2">"priority"</span><span class="p">:</span> <span class="s2">"LOW"</span><span class="p">,</span>
+      <span class="s2">"responsibility"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"rrn"</span><span class="p">:</span> <span class="s2">"rrn:investigation:us2:eeeeeeee-ccc4-4ccc-8eee-eeeeeeeeeeee:investigation:AAAAAAAAAA"</span><span class="p">,</span>
+      <span class="s2">"source"</span><span class="p">:</span> <span class="s2">"USER"</span><span class="p">,</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"INVESTIGATING"</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"1st investigation"</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;rapid7_insight_idr_rrn&quot;</span><span class="p">:</span> <span class="s2">&quot;rrn:investigation:us12:cccccccc-cd64-427c-8fc9-f9e1983f24e1:investigation:3AAAAAAAAAA&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"rapid7_insight_idr_rrn"</span><span class="p">:</span> <span class="s2">"rrn:investigation:us12:cccccccc-cd64-427c-8fc9-f9e1983f24e1:investigation:3AAAAAAAAAA"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">229</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;Book-Pro.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-rapid7-insight-idr&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-04 10:24:18&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">229</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"Book-Pro.local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-rapid7-insight-idr"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-12-04 10:24:18"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1367,36 +1367,36 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DISPOSITION_MAPPING</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;MALICIOUS&quot;</span> <span class="p">:</span> <span class="s2">&quot;Malicious&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;BENIGN&quot;</span><span class="p">:</span> <span class="s2">&quot;Benign&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;UNKNOWN&quot;</span><span class="p">:</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;NOT_APPLICABLE&quot;</span> <span class="p">:</span> <span class="s2">&quot;Not Applicable&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;UNDECIDED&quot;</span><span class="p">:</span> <span class="s2">&quot;Undecided&quot;</span>
+  <span class="s2">"MALICIOUS"</span> <span class="p">:</span> <span class="s2">"Malicious"</span><span class="p">,</span>
+  <span class="s2">"BENIGN"</span><span class="p">:</span> <span class="s2">"Benign"</span><span class="p">,</span>
+  <span class="s2">"UNKNOWN"</span><span class="p">:</span> <span class="s2">"Unknown"</span><span class="p">,</span>
+  <span class="s2">"NOT_APPLICABLE"</span> <span class="p">:</span> <span class="s2">"Not Applicable"</span><span class="p">,</span>
+  <span class="s2">"UNDECIDED"</span><span class="p">:</span> <span class="s2">"Undecided"</span>
 <span class="p">}</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">rapid7_insight_idr_update_case_results</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Update Case Automatic:&lt;/b&gt; Unable to get case data to update custom fields.&quot;</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"&lt;b&gt;Rapid7 InsightIDR: Update Case Automatic:&lt;/b&gt; Unable to get case data to update custom fields."</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
     <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-        <span class="n">r7_case</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;rapid7_insight_idr_investigation&quot;</span><span class="p">)</span>
-        <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_disposition</span> <span class="o">=</span> <span class="n">DISPOSITION_MAPPING</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">r7_case</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;disposition&quot;</span><span class="p">))</span>
-        <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_responsibility</span> <span class="o">=</span> <span class="n">r7_case</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;responsibility&quot;</span><span class="p">)</span>
-        <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_source</span> <span class="o">=</span> <span class="n">r7_case</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
-        <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_status</span> <span class="o">=</span> <span class="n">r7_case</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
-        <span class="n">assignee</span> <span class="o">=</span> <span class="n">r7_case</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;assignee&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">r7_case</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"rapid7_insight_idr_investigation"</span><span class="p">)</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_disposition</span> <span class="o">=</span> <span class="n">DISPOSITION_MAPPING</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">r7_case</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"disposition"</span><span class="p">))</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_responsibility</span> <span class="o">=</span> <span class="n">r7_case</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"responsibility"</span><span class="p">)</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_source</span> <span class="o">=</span> <span class="n">r7_case</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"source"</span><span class="p">)</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_status</span> <span class="o">=</span> <span class="n">r7_case</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"status"</span><span class="p">)</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span>
+        <span class="n">assignee</span> <span class="o">=</span> <span class="n">r7_case</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"assignee"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">assignee</span><span class="p">:</span>
-            <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_assignee</span> <span class="o">=</span> <span class="n">assignee</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span>
-            <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_assignee_email</span> <span class="o">=</span> <span class="n">assignee</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;email&quot;</span><span class="p">)</span>
-        <span class="n">entity_url</span> <span class="o">=</span> <span class="n">r7_case</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;entity_url&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_assignee</span> <span class="o">=</span> <span class="n">assignee</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">)</span>
+            <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_assignee_email</span> <span class="o">=</span> <span class="n">assignee</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"email"</span><span class="p">)</span>
+        <span class="n">entity_url</span> <span class="o">=</span> <span class="n">r7_case</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"entity_url"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">entity_url</span><span class="p">:</span>
-            <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_link</span> <span class="o">=</span> <span class="s2">&quot;&lt;a target=&#39;_blank&#39; href=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;Investigation&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">entity_url</span><span class="p">)</span>
+            <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_link</span> <span class="o">=</span> <span class="s2">"&lt;a target='_blank' href='</span><span class="si">{0}</span><span class="s2">'&gt;Investigation&lt;/a&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">entity_url</span><span class="p">)</span>
 
-        <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Update Case Automatic:&lt;/b&gt; update of custom fields complete.&quot;</span><span class="p">)</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"&lt;b&gt;Rapid7 InsightIDR: Update Case Automatic:&lt;/b&gt; update of custom fields complete."</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Update Case Automatic:&lt;/b&gt; update of custom fields did NOT complete.&quot;</span><span class="p">)</span>
+        <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"&lt;b&gt;Rapid7 InsightIDR: Update Case Automatic:&lt;/b&gt; update of custom fields did NOT complete."</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1443,38 +1443,38 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-12T15:36:10.258Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;AdminUser&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;USER&quot;</span>
+        <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"2023-12-12T15:36:10.258Z"</span><span class="p">,</span>
+        <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"AdminUser"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"USER"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;file_name&quot;</span><span class="p">:</span> <span class="s2">&quot;test.txt&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;mime_type&quot;</span><span class="p">:</span> <span class="s2">&quot;text/plain&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;rrn&quot;</span><span class="p">:</span> <span class="s2">&quot;rrn:collaboration:us2:e4463fba-cd64-427c-8fc9-f9e1983f24e1:attachment:9JF5ST900Y1H&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;scan_status&quot;</span><span class="p">:</span> <span class="s2">&quot;CLEAN&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">40</span>
+        <span class="s2">"file_name"</span><span class="p">:</span> <span class="s2">"test.txt"</span><span class="p">,</span>
+        <span class="s2">"mime_type"</span><span class="p">:</span> <span class="s2">"text/plain"</span><span class="p">,</span>
+        <span class="s2">"rrn"</span><span class="p">:</span> <span class="s2">"rrn:collaboration:us2:e4463fba-cd64-427c-8fc9-f9e1983f24e1:attachment:9JF5ST900Y1H"</span><span class="p">,</span>
+        <span class="s2">"scan_status"</span><span class="p">:</span> <span class="s2">"CLEAN"</span><span class="p">,</span>
+        <span class="s2">"size"</span><span class="p">:</span> <span class="mi">40</span>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;rapid7_insight_idr_incident_id&quot;</span><span class="p">:</span> <span class="mi">2228</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_rrn&quot;</span><span class="p">:</span> <span class="s2">&quot;rrn:investigation:us2:e4463fba-cd64-427c-8fc9-f9e1983f24e1:investigation:JSPDKLRG7UWY&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"rapid7_insight_idr_incident_id"</span><span class="p">:</span> <span class="mi">2228</span><span class="p">,</span>
+    <span class="s2">"rapid7_insight_idr_rrn"</span><span class="p">:</span> <span class="s2">"rrn:investigation:us2:e4463fba-cd64-427c-8fc9-f9e1983f24e1:investigation:JSPDKLRG7UWY"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">6807</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;mylaptop&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-rapid7-insight-idr&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-12 11:34:29&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">6807</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"mylaptop"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-rapid7-insight-idr"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-12-12 11:34:29"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1493,24 +1493,24 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">list_attachments_results</span>
 
 <span class="c1"># Setup error note in case of failure</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)}</span>
-<span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: List attachments FAILED:&lt;/b&gt;&quot;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"error"</span><span class="p">:</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">)}</span>
+<span class="n">header</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Rapid7 InsightIDR: List attachments FAILED:&lt;/b&gt;"</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
   <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
-      <span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: List attachments:&lt;/b&gt;&quot;</span>
+      <span class="n">header</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Rapid7 InsightIDR: List attachments:&lt;/b&gt;"</span>
 
 <span class="n">json_note</span> <span class="o">=</span> <span class="p">{</span>
-              <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="n">header</span><span class="p">,</span>
-              <span class="s2">&quot;json&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
-              <span class="s2">&quot;sort&quot;</span><span class="p">:</span> <span class="kc">False</span>
+              <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.3"</span><span class="p">,</span>
+              <span class="s2">"header"</span><span class="p">:</span> <span class="n">header</span><span class="p">,</span>
+              <span class="s2">"json"</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
+              <span class="s2">"sort"</span><span class="p">:</span> <span class="kc">False</span>
             <span class="p">}</span>
 
-<span class="n">playbook</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s1">&#39;convert_json_to_rich_text&#39;</span><span class="p">,</span> <span class="n">json_note</span><span class="p">)</span>
+<span class="n">playbook</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s1">'convert_json_to_rich_text'</span><span class="p">,</span> <span class="n">json_note</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1557,34 +1557,34 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;attachments&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="s2">&quot;Created by IBM SOAR:  Admin closing as BENIGN from SOAR December 8, 2023&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-08T17:28:38.377Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Admin User&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;USER&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"attachments"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"body"</span><span class="p">:</span> <span class="s2">"Created by IBM SOAR:  Admin closing as BENIGN from SOAR December 8, 2023"</span><span class="p">,</span>
+    <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"2023-12-08T17:28:38.377Z"</span><span class="p">,</span>
+    <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Admin User"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"USER"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;rrn&quot;</span><span class="p">:</span> <span class="s2">&quot;rrn:collaboration:us2:eeeeeeeeee-c4c4-427c-8fc9-f9e1e1e1e1ee1:comment:CDNOQXKNAFN5&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="s2">&quot;rrn:investigation:us2:eeeeeeeee-c4c4-427c-8fc9-f9efe1e1e1e1e1:investigation:3XAAXAAXAAXAA&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;visibility&quot;</span><span class="p">:</span> <span class="s2">&quot;PUBLIC&quot;</span>
+    <span class="s2">"rrn"</span><span class="p">:</span> <span class="s2">"rrn:collaboration:us2:eeeeeeeeee-c4c4-427c-8fc9-f9e1e1e1e1ee1:comment:CDNOQXKNAFN5"</span><span class="p">,</span>
+    <span class="s2">"target"</span><span class="p">:</span> <span class="s2">"rrn:investigation:us2:eeeeeeeee-c4c4-427c-8fc9-f9efe1e1e1e1e1:investigation:3XAAXAAXAAXAA"</span><span class="p">,</span>
+    <span class="s2">"visibility"</span><span class="p">:</span> <span class="s2">"PUBLIC"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;rapid7_insight_idr_comment_text&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\&quot;</span><span class="s2">rte</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e</span><span class="s2">Admin User closing as BENIGN from SOAR December 8, 2023</span><span class="se">\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_rrn&quot;</span><span class="p">:</span> <span class="s2">&quot;rrn:investigation:us2:eeeeeeeee-c4c4-427c-8fc9-f9efe1e1e1e1e1:investigation:3XAAXAAXAAXAA&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"rapid7_insight_idr_comment_text"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\"</span><span class="s2">rte</span><span class="se">\"\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e</span><span class="s2">Admin User closing as BENIGN from SOAR December 8, 2023</span><span class="se">\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"rapid7_insight_idr_rrn"</span><span class="p">:</span> <span class="s2">"rrn:investigation:us2:eeeeeeeee-c4c4-427c-8fc9-f9efe1e1e1e1e1:investigation:3XAAXAAXAAXAA"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">263</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;laptop.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-rapid7-insight-idr&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-08 12:28:38&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">263</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"laptop.local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-rapid7-insight-idr"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-12-08 12:28:38"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1593,7 +1593,7 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_rrn</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_rrn</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_comment_text</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">resolution_summary</span><span class="o">.</span><span class="n">content</span> <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">resolution_summary</span><span class="o">.</span><span class="n">content</span> <span class="k">else</span> <span class="s2">&quot;Case </span><span class="si">{0}</span><span class="s2"> was closed in QRadar SOAR&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_comment_text</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">resolution_summary</span><span class="o">.</span><span class="n">content</span> <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">resolution_summary</span><span class="o">.</span><span class="n">content</span> <span class="k">else</span> <span class="s2">"Case </span><span class="si">{0}</span><span class="s2"> was closed in QRadar SOAR"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1602,7 +1602,7 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">post_comment_results</span>
 
-<span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;Rapid7 InsightIDR Automatic playbook &lt;b&gt;On close from SOAR case&lt;/b&gt; failed to post comment to Rapid7 InsightIDR: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="n">note_text</span> <span class="o">=</span> <span class="s2">"Rapid7 InsightIDR Automatic playbook &lt;b&gt;On close from SOAR case&lt;/b&gt; failed to post comment to Rapid7 InsightIDR: </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span>
 </pre></div>
@@ -1657,41 +1657,41 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;assignee&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;admin@example.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Admin User&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"assignee"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"admin@example.com"</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Admin User"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-11-28T20:09:36.546Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;disposition&quot;</span><span class="p">:</span> <span class="s2">&quot;UNDECIDED&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;first_alert_time&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;last_accessed&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-11T15:31:41.564Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;latest_alert_time&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;organization_id&quot;</span><span class="p">:</span> <span class="s2">&quot;e4463fba-cd64-427c-8fc9-f9e1983f24e1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="s2">&quot;LOW&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;responsibility&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;rrn&quot;</span><span class="p">:</span> <span class="s2">&quot;rrn:investigation:us2:eeeee222-cccc-dddc-8fc9-f9e19e19e1:investigation:2B9B9B9B9B9&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;USER&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;INVESTIGATING&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;investigation 4&quot;</span>
+    <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"2023-11-28T20:09:36.546Z"</span><span class="p">,</span>
+    <span class="s2">"disposition"</span><span class="p">:</span> <span class="s2">"UNDECIDED"</span><span class="p">,</span>
+    <span class="s2">"first_alert_time"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"last_accessed"</span><span class="p">:</span> <span class="s2">"2023-12-11T15:31:41.564Z"</span><span class="p">,</span>
+    <span class="s2">"latest_alert_time"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"organization_id"</span><span class="p">:</span> <span class="s2">"e4463fba-cd64-427c-8fc9-f9e1983f24e1"</span><span class="p">,</span>
+    <span class="s2">"priority"</span><span class="p">:</span> <span class="s2">"LOW"</span><span class="p">,</span>
+    <span class="s2">"responsibility"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"rrn"</span><span class="p">:</span> <span class="s2">"rrn:investigation:us2:eeeee222-cccc-dddc-8fc9-f9e19e19e1:investigation:2B9B9B9B9B9"</span><span class="p">,</span>
+    <span class="s2">"source"</span><span class="p">:</span> <span class="s2">"USER"</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"INVESTIGATING"</span><span class="p">,</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"investigation 4"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;rapid7_insight_idr_incident_id&quot;</span><span class="p">:</span> <span class="mi">2220</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_priority&quot;</span><span class="p">:</span> <span class="s2">&quot;LOW&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_rrn&quot;</span><span class="p">:</span> <span class="s2">&quot;rrn:investigation:us2:eeeee222-cccc-dddc-8fc9-f9e19e19e1:investigation:2B9B9B9B9B9&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"rapid7_insight_idr_incident_id"</span><span class="p">:</span> <span class="mi">2220</span><span class="p">,</span>
+    <span class="s2">"rapid7_insight_idr_priority"</span><span class="p">:</span> <span class="s2">"LOW"</span><span class="p">,</span>
+    <span class="s2">"rapid7_insight_idr_rrn"</span><span class="p">:</span> <span class="s2">"rrn:investigation:us2:eeeee222-cccc-dddc-8fc9-f9e19e19e1:investigation:2B9B9B9B9B9"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">21848</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;mylaptop.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-rapid7-insight-idr&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-11 10:31:47&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">21848</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"mylaptop.local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-rapid7-insight-idr"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-12-11 10:31:47"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1700,9 +1700,9 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">PRIORITY_MAPPING</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;Low&quot;</span><span class="p">:</span> <span class="s2">&quot;LOW&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Medium&quot;</span><span class="p">:</span> <span class="s2">&quot;MEDIUM&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;High&quot;</span><span class="p">:</span> <span class="s2">&quot;HIGH&quot;</span>
+  <span class="s2">"Low"</span><span class="p">:</span> <span class="s2">"LOW"</span><span class="p">,</span>
+  <span class="s2">"Medium"</span><span class="p">:</span> <span class="s2">"MEDIUM"</span><span class="p">,</span>
+  <span class="s2">"High"</span><span class="p">:</span> <span class="s2">"HIGH"</span>
 <span class="p">}</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_rrn</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_rrn</span>
@@ -1715,11 +1715,11 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">set_priority_results</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
   <span class="n">priority</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">priority</span>
-  <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Set Priority&lt;/b&gt; Automatic Playbook set:&lt;br&gt;   Priority: </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">priority</span><span class="p">)</span>
+  <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Rapid7 InsightIDR: Set Priority&lt;/b&gt; Automatic Playbook set:&lt;br&gt;   Priority: </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">priority</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Set Priority&lt;/b&gt; Automatic Playbook failed:&lt;br&gt;  </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
+  <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Rapid7 InsightIDR: Set Priority&lt;/b&gt; Automatic Playbook failed:&lt;br&gt;  </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">)</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span>
 </pre></div>
@@ -1780,41 +1780,41 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;assignee&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;created_time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-11-10T15:55:12.182Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;disposition&quot;</span><span class="p">:</span> <span class="s2">&quot;BENIGN&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;first_alert_time&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;last_accessed&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-08T17:30:12.959Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;latest_alert_time&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;organization_id&quot;</span><span class="p">:</span> <span class="s2">&quot;e4463fba-cd64-427c-8fc9-f9e1e1e1e1e1e1e1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="s2">&quot;LOW&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;responsibility&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;rrn&quot;</span><span class="p">:</span> <span class="s2">&quot;rrn:investigation:us2:eeeeeeeee-c4c4-427c-8fc9-f9efe1e1e1e1e1:investigation:3XAAXAAXAAXAA&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;USER&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;CLOSED&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Our 1st investigation&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"assignee"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"created_time"</span><span class="p">:</span> <span class="s2">"2023-11-10T15:55:12.182Z"</span><span class="p">,</span>
+    <span class="s2">"disposition"</span><span class="p">:</span> <span class="s2">"BENIGN"</span><span class="p">,</span>
+    <span class="s2">"first_alert_time"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"last_accessed"</span><span class="p">:</span> <span class="s2">"2023-12-08T17:30:12.959Z"</span><span class="p">,</span>
+    <span class="s2">"latest_alert_time"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"organization_id"</span><span class="p">:</span> <span class="s2">"e4463fba-cd64-427c-8fc9-f9e1e1e1e1e1e1e1"</span><span class="p">,</span>
+    <span class="s2">"priority"</span><span class="p">:</span> <span class="s2">"LOW"</span><span class="p">,</span>
+    <span class="s2">"responsibility"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"rrn"</span><span class="p">:</span> <span class="s2">"rrn:investigation:us2:eeeeeeeee-c4c4-427c-8fc9-f9efe1e1e1e1e1:investigation:3XAAXAAXAAXAA"</span><span class="p">,</span>
+    <span class="s2">"source"</span><span class="p">:</span> <span class="s2">"USER"</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"CLOSED"</span><span class="p">,</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Our 1st investigation"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;rapid7_insight_idr_disposition&quot;</span><span class="p">:</span> <span class="s2">&quot;BENIGN&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_incident_id&quot;</span><span class="p">:</span> <span class="mi">2211</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_rrn&quot;</span><span class="p">:</span> <span class="s2">&quot;rrn:investigation:us2:eeeeeeeee-c4c4-427c-8fc9-f9efe1e1e1e1e1:investigation:3XAAXAAXAAXAA&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_status&quot;</span><span class="p">:</span> <span class="s2">&quot;CLOSED&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_threat_command_close_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;ProblemSolved&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;rapid7_insight_idr_threat_command_free_text&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\&quot;</span><span class="s2">rte</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e</span><span class="s2">Admin User closing as BENIGN from SOAR December 8, 2023</span><span class="se">\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"rapid7_insight_idr_disposition"</span><span class="p">:</span> <span class="s2">"BENIGN"</span><span class="p">,</span>
+    <span class="s2">"rapid7_insight_idr_incident_id"</span><span class="p">:</span> <span class="mi">2211</span><span class="p">,</span>
+    <span class="s2">"rapid7_insight_idr_rrn"</span><span class="p">:</span> <span class="s2">"rrn:investigation:us2:eeeeeeeee-c4c4-427c-8fc9-f9efe1e1e1e1e1:investigation:3XAAXAAXAAXAA"</span><span class="p">,</span>
+    <span class="s2">"rapid7_insight_idr_status"</span><span class="p">:</span> <span class="s2">"CLOSED"</span><span class="p">,</span>
+    <span class="s2">"rapid7_insight_idr_threat_command_close_reason"</span><span class="p">:</span> <span class="s2">"ProblemSolved"</span><span class="p">,</span>
+    <span class="s2">"rapid7_insight_idr_threat_command_free_text"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\"</span><span class="s2">rte</span><span class="se">\"\u003e\u003c</span><span class="s2">div</span><span class="se">\u003e</span><span class="s2">Admin User closing as BENIGN from SOAR December 8, 2023</span><span class="se">\u003c</span><span class="s2">/div</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">93166</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;laptop.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-rapid7-insight-idr&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-12-08 12:30:12&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">93166</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"laptop.local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-rapid7-insight-idr"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-12-08 12:30:12"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1823,17 +1823,17 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">STATUS_MAPPING</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;Open&quot;</span><span class="p">:</span> <span class="s2">&quot;OPEN&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Investigating&quot;</span><span class="p">:</span> <span class="s2">&quot;INVESTIGATING&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Waiting&quot;</span><span class="p">:</span> <span class="s2">&quot;WAITING&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Closed&quot;</span><span class="p">:</span> <span class="s2">&quot;CLOSED&quot;</span>
+  <span class="s2">"Open"</span><span class="p">:</span> <span class="s2">"OPEN"</span><span class="p">,</span>
+  <span class="s2">"Investigating"</span><span class="p">:</span> <span class="s2">"INVESTIGATING"</span><span class="p">,</span>
+  <span class="s2">"Waiting"</span><span class="p">:</span> <span class="s2">"WAITING"</span><span class="p">,</span>
+  <span class="s2">"Closed"</span><span class="p">:</span> <span class="s2">"CLOSED"</span>
 <span class="p">}</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_rrn</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_rrn</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_status</span> <span class="o">=</span> <span class="n">STATUS_MAPPING</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_status</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_status</span> <span class="o">==</span> <span class="s2">&quot;CLOSED&quot;</span> <span class="ow">and</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_disposition</span> <span class="o">==</span> <span class="s2">&quot;Undecided&quot;</span><span class="p">:</span>
-  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;Rapid7 InsightIDR: Status can not be set to Closed with Disposition set to Undecided&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_status</span> <span class="o">==</span> <span class="s2">"CLOSED"</span> <span class="ow">and</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_disposition</span> <span class="o">==</span> <span class="s2">"Undecided"</span><span class="p">:</span>
+  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"Rapid7 InsightIDR: Status can not be set to Closed with Disposition set to Undecided"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_disposition</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_disposition</span>
 
@@ -1844,37 +1844,37 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">MAPPING_DISPOSITON_ON_CLOSE</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;Benign&quot;</span><span class="p">:</span> <span class="s2">&quot;Resolved&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Malicious&quot;</span><span class="p">:</span> <span class="s2">&quot;Resolved&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Unknown&quot;</span><span class="p">:</span> <span class="s2">&quot;Resolved&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Not Applicable&quot;</span><span class="p">:</span> <span class="s2">&quot;Not an Issue&quot;</span>
+  <span class="s2">"Benign"</span><span class="p">:</span> <span class="s2">"Resolved"</span><span class="p">,</span>
+  <span class="s2">"Malicious"</span><span class="p">:</span> <span class="s2">"Resolved"</span><span class="p">,</span>
+  <span class="s2">"Unknown"</span><span class="p">:</span> <span class="s2">"Resolved"</span><span class="p">,</span>
+  <span class="s2">"Not Applicable"</span><span class="p">:</span> <span class="s2">"Not an Issue"</span>
 <span class="p">}</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">set_status_results</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
   <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-    <span class="n">status</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"status"</span><span class="p">,</span> <span class="p">{})</span>
     <span class="n">input_status</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_status</span>
 
     <span class="k">if</span> <span class="n">status</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">input_status</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
         <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_status</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_status</span>
 
-    <span class="n">disposition</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;disposition&quot;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="n">disposition</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"disposition"</span><span class="p">,</span> <span class="p">{})</span>
     <span class="n">input_disposition</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_disposition</span>
     <span class="k">if</span> <span class="n">disposition</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">input_disposition</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
         <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_disposition</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">rapid7_insight_idr_disposition</span>
 
-    <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_status</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;closed&quot;</span><span class="p">:</span>
-      <span class="n">incident</span><span class="o">.</span><span class="n">plan_status</span> <span class="o">=</span> <span class="s2">&quot;C&quot;</span>
+    <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_status</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"closed"</span><span class="p">:</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">plan_status</span> <span class="o">=</span> <span class="s2">"C"</span>
       <span class="n">incident</span><span class="o">.</span><span class="n">resolution_id</span> <span class="o">=</span> <span class="n">MAPPING_DISPOSITON_ON_CLOSE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_disposition</span><span class="p">)</span>
-      <span class="n">incident</span><span class="o">.</span><span class="n">resolution_summary</span> <span class="o">=</span> <span class="s2">&quot;Case </span><span class="si">{0}</span><span class="s2"> Closed in SOAR&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">resolution_summary</span> <span class="o">=</span> <span class="s2">"Case </span><span class="si">{0}</span><span class="s2"> Closed in SOAR"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 
-    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Set Status and Disposition&lt;/b&gt; set:&lt;br&gt;   Status: </span><span class="si">{0}</span><span class="s2">&lt;br&gt;   Disposition: </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_status</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_disposition</span><span class="p">)</span>
+    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Rapid7 InsightIDR: Set Status and Disposition&lt;/b&gt; set:&lt;br&gt;   Status: </span><span class="si">{0}</span><span class="s2">&lt;br&gt;   Disposition: </span><span class="si">{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_status</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rapid7_insight_idr_disposition</span><span class="p">)</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Set Status and Disposition&lt;/b&gt; failed:&lt;br&gt;  </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
+    <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Rapid7 InsightIDR: Set Status and Disposition&lt;/b&gt; failed:&lt;br&gt;  </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Rapid7 InsightIDR: Set Status and Disposition&lt;/b&gt; failed:&lt;br&gt;  </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
+  <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Rapid7 InsightIDR: Set Status and Disposition&lt;/b&gt; failed:&lt;br&gt;  </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">)</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note_text</span><span class="p">)</span>
 </pre></div>
@@ -2148,30 +2148,30 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <span class="c">     for details on available jinja methods. Examples for `soar_substitute` and more are included below.</span>
 <span class="c">  #}</span>
 <span class="x">  </span><span class="c">{# modify to specify your specific **data** fields #}</span>
-<span class="x">  &quot;name&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">title</span> <span class="cp">}}</span><span class="x"> - Rapid7 InsightIDR Investigation&quot;,</span>
-<span class="x">  &quot;description&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">title</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">(</span><span class="s1">&#39;&quot;&#39;</span><span class="o">,</span> <span class="s1">&#39;\\&quot;&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  "name": "</span><span class="cp">{{</span> <span class="nv">title</span> <span class="cp">}}</span><span class="x"> - Rapid7 InsightIDR Investigation",</span>
+<span class="x">  "description": "</span><span class="cp">{{</span> <span class="nv">title</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">(</span><span class="s1">'"'</span><span class="o">,</span> <span class="s1">'\\"'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">",</span>
 <span class="x">  </span><span class="c">{# start_date cannot be after discovered_date #}</span>
 <span class="x">  </span><span class="c">{# {% set start_date = first_alert_time if **happenedAt** &lt;= **receivedAt** else **receivedAt** %} #}</span>
-<span class="x">  &quot;discovered_date&quot;: </span><span class="cp">{{</span> <span class="nv">created_time</span> <span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">split_at</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
-<span class="x">  &quot;start_date&quot;: </span><span class="cp">{{</span> <span class="nv">created_time</span> <span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">split_at</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  "discovered_date": </span><span class="cp">{{</span> <span class="nv">created_time</span> <span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">split_at</span><span class="o">=</span><span class="s1">'.'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  "start_date": </span><span class="cp">{{</span> <span class="nv">created_time</span> <span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">split_at</span><span class="o">=</span><span class="s1">'.'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
 <span class="x">  </span><span class="c">{# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}</span>
-<span class="x">  </span><span class="c">{# &quot;owner_id&quot;: &quot;{{ **assignedTo** |soar_substitute(&#39;{&quot;Automation&quot;: &quot;soar_user1@example.com&quot;, &quot;default_user@example.com&quot;: &quot;soar_user2@example.com&quot;, &quot;DEFAULT&quot;: &quot;default_user@example.com&quot; }&#39;) }}&quot;, #}</span>
-<span class="x">  &quot;plan_status&quot;: &quot;A&quot;,</span>
-<span class="x">  </span><span class="c">{#&quot;plan_status&quot;: &quot;{{ status|soar_substitute(&#39;{&quot;CLOSED&quot;: &quot;C&quot;, &quot;INVESTIGATING&quot;: &quot;A&quot;, &quot;OPEN&quot;: &quot;A&quot;, &quot;WAITING&quot;: &quot;A&quot;}&#39;) }}&quot;,#}</span>
-<span class="x">  </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">&quot;critical&quot;</span> <span class="cp">%}</span>
-<span class="x">    &quot;severity_code&quot;: &quot;High&quot;,</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">&quot;high&quot;</span> <span class="cp">%}</span>
-<span class="x">    &quot;severity_code&quot;: &quot;High&quot;,</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">&quot;medium&quot;</span> <span class="cp">%}</span>
-<span class="x">    &quot;severity_code&quot;: &quot;Medium&quot;,</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">&quot;low&quot;</span> <span class="cp">%}</span>
-<span class="x">    &quot;severity_code&quot;: &quot;Low&quot;,</span>
+<span class="x">  </span><span class="c">{# "owner_id": "{{ **assignedTo** |soar_substitute('{"Automation": "soar_user1@example.com", "default_user@example.com": "soar_user2@example.com", "DEFAULT": "default_user@example.com" }') }}", #}</span>
+<span class="x">  "plan_status": "A",</span>
+<span class="x">  </span><span class="c">{#"plan_status": "{{ status|soar_substitute('{"CLOSED": "C", "INVESTIGATING": "A", "OPEN": "A", "WAITING": "A"}') }}",#}</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">"critical"</span> <span class="cp">%}</span>
+<span class="x">    "severity_code": "High",</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">"high"</span> <span class="cp">%}</span>
+<span class="x">    "severity_code": "High",</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">"medium"</span> <span class="cp">%}</span>
+<span class="x">    "severity_code": "Medium",</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">"low"</span> <span class="cp">%}</span>
+<span class="x">    "severity_code": "Low",</span>
 <span class="x">    </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
-<span class="x">    &quot;severity_code&quot;: &quot;High&quot;,</span>
+<span class="x">    "severity_code": "High",</span>
 <span class="x">  </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
 <span class="x">  </span><span class="c">{# specify your custom fields for your endpoint solution #}</span>
-<span class="x">  &quot;properties&quot;: {</span>
-<span class="x">    &quot;rapid7_insight_idr_rrn&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">rrn</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">  "properties": {</span>
+<span class="x">    "rapid7_insight_idr_rrn": "</span><span class="cp">{{</span> <span class="nv">rrn</span> <span class="cp">}}</span><span class="x">"</span>
 <span class="x">  }</span>
 <span class="x">}</span>
 </pre></div>
@@ -2182,13 +2182,13 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <p>When overriding the template in App Host, specify the file path as <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code>.</p>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
 <span class="x">  </span><span class="c">{# JINJA template for closing a SOAR incident using endpoint data #}</span>
-<span class="x">  &quot;plan_status&quot;: &quot;C&quot;,</span>
-<span class="x">  &quot;resolution_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">disposition</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="s1">&#39;{&quot;BENIGN&quot;: &quot;Not an Issue&quot;, &quot;MALICIOUS&quot;: &quot;Resolved&quot;, &quot;UNDECIDED&quot;: &quot;Unresolved&quot;, &quot;UNKNOWN&quot;: &quot;Unresolved&quot;, &quot;NOT APPLICABLE&quot;: &quot;Not an Issue&quot;}&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">  &quot;resolution_summary&quot;: &quot;Closed by Rapid7 InsightIDR, Disposition: </span><span class="cp">{{</span> <span class="nv">disposition.replace</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">,</span> <span class="s1">&#39; &#39;</span><span class="o">)|</span><span class="nf">lower</span><span class="o">|</span><span class="nf">capitalize</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">  </span><span class="c">{# add additional fields based on your &#39;on close&#39; field requirements #}</span>
-<span class="x">  &quot;properties&quot;: {</span>
-<span class="x">    &quot;rapid7_insight_idr_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span><span class="o">|</span><span class="nf">lower</span><span class="o">|</span><span class="nf">capitalize</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;rapid7_insight_idr_disposition&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">disposition.replace</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">,</span> <span class="s1">&#39; &#39;</span><span class="o">)|</span><span class="nf">title</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">  "plan_status": "C",</span>
+<span class="x">  "resolution_id": "</span><span class="cp">{{</span> <span class="nv">disposition</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="s1">'{"BENIGN": "Not an Issue", "MALICIOUS": "Resolved", "UNDECIDED": "Unresolved", "UNKNOWN": "Unresolved", "NOT APPLICABLE": "Not an Issue"}'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">  "resolution_summary": "Closed by Rapid7 InsightIDR, Disposition: </span><span class="cp">{{</span> <span class="nv">disposition.replace</span><span class="o">(</span><span class="s1">'_'</span><span class="o">,</span> <span class="s1">' '</span><span class="o">)|</span><span class="nf">lower</span><span class="o">|</span><span class="nf">capitalize</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">  </span><span class="c">{# add additional fields based on your 'on close' field requirements #}</span>
+<span class="x">  "properties": {</span>
+<span class="x">    "rapid7_insight_idr_status": "</span><span class="cp">{{</span> <span class="nv">status</span><span class="o">|</span><span class="nf">lower</span><span class="o">|</span><span class="nf">capitalize</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "rapid7_insight_idr_disposition": "</span><span class="cp">{{</span> <span class="nv">disposition.replace</span><span class="o">(</span><span class="s1">'_'</span><span class="o">,</span> <span class="s1">' '</span><span class="o">)|</span><span class="nf">title</span> <span class="cp">}}</span><span class="x">"</span>
 <span class="x">  }</span>
 <span class="x">}</span>
 </pre></div>
@@ -2200,27 +2200,27 @@ Here is an polling filter example that adds or updates investigations in SOAR wh
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
 <span class="x">  </span><span class="c">{# JINJA template for updating a new SOAR incident from an endpoint #}</span>
 <span class="x">  </span><span class="c">{# modify to specify your specific **data** fields #}</span>
-<span class="x">  &quot;plan_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span><span class="o">|</span><span class="nf">soar_substitute</span><span class="o">(</span><span class="s1">&#39;{&quot;CLOSED&quot;: &quot;C&quot;, &quot;INVESTIGATING&quot;: &quot;A&quot;, &quot;OPEN&quot;: &quot;A&quot;, &quot;WAITING&quot;: &quot;A&quot;}&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">  </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">&quot;critical&quot;</span> <span class="cp">%}</span>
-<span class="x">    &quot;severity_code&quot;: &quot;High&quot;,</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">&quot;high&quot;</span> <span class="cp">%}</span>
-<span class="x">    &quot;severity_code&quot;: &quot;High&quot;,</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">&quot;medium&quot;</span> <span class="cp">%}</span>
-<span class="x">    &quot;severity_code&quot;: &quot;Medium&quot;,</span>
-<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">&quot;low&quot;</span> <span class="cp">%}</span>
-<span class="x">    &quot;severity_code&quot;: &quot;Low&quot;,</span>
+<span class="x">  "plan_status": "</span><span class="cp">{{</span> <span class="nv">status</span><span class="o">|</span><span class="nf">soar_substitute</span><span class="o">(</span><span class="s1">'{"CLOSED": "C", "INVESTIGATING": "A", "OPEN": "A", "WAITING": "A"}'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">"critical"</span> <span class="cp">%}</span>
+<span class="x">    "severity_code": "High",</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">"high"</span> <span class="cp">%}</span>
+<span class="x">    "severity_code": "High",</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">"medium"</span> <span class="cp">%}</span>
+<span class="x">    "severity_code": "Medium",</span>
+<span class="x">    </span><span class="cp">{%</span> <span class="k">elif</span> <span class="nv">priority</span><span class="o">|</span><span class="nf">lower</span> <span class="o">==</span> <span class="s2">"low"</span> <span class="cp">%}</span>
+<span class="x">    "severity_code": "Low",</span>
 <span class="x">    </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
-<span class="x">    &quot;severity_code&quot;: &quot;High&quot;,</span>
+<span class="x">    "severity_code": "High",</span>
 <span class="x">  </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
 <span class="x">  </span><span class="c">{# specify your custom fields for your endpoint solution #}</span>
-<span class="x">  &quot;properties&quot;: {</span>
-<span class="x">    &quot;rapid7_insight_idr_source&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">source</span><span class="o">|</span><span class="nf">lower</span><span class="o">|</span><span class="nf">capitalize</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;rapid7_insight_idr_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span><span class="o">|</span><span class="nf">lower</span><span class="o">|</span><span class="nf">capitalize</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;rapid7_insight_idr_assignee&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">assignee.name</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;rapid7_insight_idr_assignee_email&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">assignee.email</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;rapid7_insight_idr_disposition&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">disposition.replace</span><span class="o">(</span><span class="s1">&#39;_&#39;</span><span class="o">,</span> <span class="s1">&#39; &#39;</span><span class="o">)|</span><span class="nf">title</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;rapid7_insight_idr_responsibility&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">responsibility</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;rapid7_insight_idr_link&quot;: &quot;&lt;a target=&#39;_blank&#39; href=&#39;</span><span class="cp">{{</span> <span class="nv">entity_url</span> <span class="cp">}}</span><span class="x">&#39;&gt;Investigation&lt;/a&gt;&quot;</span>
+<span class="x">  "properties": {</span>
+<span class="x">    "rapid7_insight_idr_source": "</span><span class="cp">{{</span> <span class="nv">source</span><span class="o">|</span><span class="nf">lower</span><span class="o">|</span><span class="nf">capitalize</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "rapid7_insight_idr_status": "</span><span class="cp">{{</span> <span class="nv">status</span><span class="o">|</span><span class="nf">lower</span><span class="o">|</span><span class="nf">capitalize</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "rapid7_insight_idr_assignee": "</span><span class="cp">{{</span> <span class="nv">assignee.name</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "rapid7_insight_idr_assignee_email": "</span><span class="cp">{{</span> <span class="nv">assignee.email</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "rapid7_insight_idr_disposition": "</span><span class="cp">{{</span> <span class="nv">disposition.replace</span><span class="o">(</span><span class="s1">'_'</span><span class="o">,</span> <span class="s1">' '</span><span class="o">)|</span><span class="nf">title</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "rapid7_insight_idr_responsibility": "</span><span class="cp">{{</span> <span class="nv">responsibility</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "rapid7_insight_idr_link": "&lt;a target='_blank' href='</span><span class="cp">{{</span> <span class="nv">entity_url</span> <span class="cp">}}</span><span class="x">'&gt;Investigation&lt;/a&gt;"</span>
 <span class="x">  }</span>
 <span class="x">}</span>
 </pre></div>

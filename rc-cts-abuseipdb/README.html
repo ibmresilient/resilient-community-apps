@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -433,15 +433,15 @@ When upgrading from v1.0.0, change your app.config <code class="docutils literal
 <section id="setup">
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">¶</a></h2>
 <p>Install the threat service:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">resutil</span> <span class="n">threatserviceedit</span> <span class="o">-</span><span class="n">name</span> <span class="s2">&quot;AbuseIPDB&quot;</span> <span class="o">-</span><span class="n">resturl</span> <span class="o">&lt;</span><span class="n">resilient_circuits_url</span><span class="o">&gt;/</span><span class="n">cts</span><span class="o">/</span><span class="n">abuseipdb_threat_feed</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">resutil</span> <span class="n">threatserviceedit</span> <span class="o">-</span><span class="n">name</span> <span class="s2">"AbuseIPDB"</span> <span class="o">-</span><span class="n">resturl</span> <span class="o">&lt;</span><span class="n">resilient_circuits_url</span><span class="o">&gt;/</span><span class="n">cts</span><span class="o">/</span><span class="n">abuseipdb_threat_feed</span>
 </pre></div>
 </div>
 <p>To test the connection:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">resutil</span> <span class="n">threatservicetest</span> <span class="o">-</span><span class="n">name</span> <span class="s2">&quot;AbuseIPDB&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">resutil</span> <span class="n">threatservicetest</span> <span class="o">-</span><span class="n">name</span> <span class="s2">"AbuseIPDB"</span>
 </pre></div>
 </div>
 <p>To delete:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">resutil</span> <span class="n">threatservicedel</span> <span class="o">-</span><span class="n">name</span> <span class="s2">&quot;AbuseIPDB&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">resutil</span> <span class="n">threatservicedel</span> <span class="o">-</span><span class="n">name</span> <span class="s2">"AbuseIPDB"</span>
 </pre></div>
 </div>
 </section>

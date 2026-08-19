@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -452,18 +452,18 @@ To set the config values in the app.config file run <code class="docutils litera
 <p>The LDAP search requires 4 input parameters. The parameters are setup from a Resilient systems workflow on the Resilient console.
 The following are examples of setup of each parameter using a simple workflow pre-processing script. The %param% token
 will be replaced by the actual inputs.param value at time of execution.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_base</span> <span class="o">=</span> <span class="s2">&quot;dc=example,dc=com&quot;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_filter</span> <span class="o">=</span> <span class="s2">&quot;(&amp;(objectClass=person)(uid=</span><span class="si">%ld</span><span class="s2">ap_param%))&quot;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_attributes</span> <span class="o">=</span> <span class="s2">&quot;cn,sn,mail,telephoneNumber&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_base</span> <span class="o">=</span> <span class="s2">"dc=example,dc=com"</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_filter</span> <span class="o">=</span> <span class="s2">"(&amp;(objectClass=person)(uid=</span><span class="si">%ld</span><span class="s2">ap_param%))"</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">ldap_search_attributes</span> <span class="o">=</span> <span class="s2">"cn,sn,mail,telephoneNumber"</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">ldap_param</span> <span class="o">=</span>  <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
 </pre></div>
 </div>
 <p>The results returned to Resilient will be in JSON format and will consist of a list of
 entries where each entry has a ‘dn’ entry and a set of attributes</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;entries&quot;</span><span class="p">:</span> <span class="p">[</span>
-    <span class="p">{</span><span class="s2">&quot;dn&#39;: &quot;</span><span class="n">entry1_dn1_value</span><span class="s2">&quot;, &quot;</span><span class="n">entry1_attribute2</span><span class="s2">&quot;, &quot;</span><span class="n">entry1_attribute3</span><span class="s2">&quot;, ... },</span>
-    <span class="p">{</span><span class="s2">&quot;dn&quot;</span><span class="p">:</span> <span class="s2">&quot;entry2_dn2_value&quot;</span><span class="p">,</span> <span class="s2">&quot;entry2_attribute2&quot;</span><span class="p">,</span> <span class="s2">&quot;entry2_attribute3&quot;</span><span class="p">,</span> <span class="o">...</span> <span class="p">}</span>
+  <span class="s2">"entries"</span><span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">"dn': "</span><span class="n">entry1_dn1_value</span><span class="s2">", "</span><span class="n">entry1_attribute2</span><span class="s2">", "</span><span class="n">entry1_attribute3</span><span class="s2">", ... },</span>
+    <span class="p">{</span><span class="s2">"dn"</span><span class="p">:</span> <span class="s2">"entry2_dn2_value"</span><span class="p">,</span> <span class="s2">"entry2_attribute2"</span><span class="p">,</span> <span class="s2">"entry2_attribute3"</span><span class="p">,</span> <span class="o">...</span> <span class="p">}</span>
     <span class="o">...</span>
   <span class="p">]</span>
 <span class="p">}</span>

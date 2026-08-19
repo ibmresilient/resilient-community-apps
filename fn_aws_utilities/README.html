@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -649,21 +649,21 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;executionArn&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;stateMachineArn&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;RUNNING&#39;</span><span class="o">|</span><span class="s1">&#39;SUCCEEDED&#39;</span><span class="o">|</span><span class="s1">&#39;FAILED&#39;</span><span class="o">|</span><span class="s1">&#39;TIMED_OUT&#39;</span><span class="o">|</span><span class="s1">&#39;ABORTED&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;startDate&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s1">&#39;stopDate&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;inputDetails&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;included&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="o">|</span><span class="kc">False</span>
+    <span class="s1">'executionArn'</span><span class="p">:</span> <span class="s1">'string'</span><span class="p">,</span>
+    <span class="s1">'stateMachineArn'</span><span class="p">:</span> <span class="s1">'string'</span><span class="p">,</span>
+    <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'string'</span><span class="p">,</span>
+    <span class="s1">'status'</span><span class="p">:</span> <span class="s1">'RUNNING'</span><span class="o">|</span><span class="s1">'SUCCEEDED'</span><span class="o">|</span><span class="s1">'FAILED'</span><span class="o">|</span><span class="s1">'TIMED_OUT'</span><span class="o">|</span><span class="s1">'ABORTED'</span><span class="p">,</span>
+    <span class="s1">'startDate'</span><span class="p">:</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">'stopDate'</span><span class="p">:</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">'input'</span><span class="p">:</span> <span class="s1">'string'</span><span class="p">,</span>
+    <span class="s1">'inputDetails'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'included'</span><span class="p">:</span> <span class="kc">True</span><span class="o">|</span><span class="kc">False</span>
     <span class="p">},</span>
-    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;outputDetails&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;included&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="o">|</span><span class="kc">False</span>
+    <span class="s1">'output'</span><span class="p">:</span> <span class="s1">'string'</span><span class="p">,</span>
+    <span class="s1">'outputDetails'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'included'</span><span class="p">:</span> <span class="kc">True</span><span class="o">|</span><span class="kc">False</span>
     <span class="p">},</span>
-    <span class="s1">&#39;traceHeader&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span>
+    <span class="s1">'traceHeader'</span><span class="p">:</span> <span class="s1">'string'</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -671,7 +671,7 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Pre-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">state_machine_name</span> <span class="o">=</span> <span class="s2">&quot;Helloworld&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">state_machine_name</span> <span class="o">=</span> <span class="s2">"Helloworld"</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">state_machine_async</span> <span class="o">=</span> <span class="kc">False</span>
 </pre></div>
 </div>
@@ -679,8 +679,8 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">):</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Step Function (Synchronous) Result: </span><span class="se">\n\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"output"</span><span class="p">):</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="s2">"Step Function (Synchronous) Result: </span><span class="se">\n\t</span><span class="s2">"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"output"</span><span class="p">))</span>
   <span class="n">note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createPlainText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
 </pre></div>
@@ -726,7 +726,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;message_id&#39;</span><span class="p">:</span> <span class="s2">&quot;message_id_from_SNS_execution&quot;</span>
+    <span class="s1">'message_id'</span><span class="p">:</span> <span class="s2">"message_id_from_SNS_execution"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -740,16 +740,16 @@ Additional package dependencies may exist for each of these packages:</p>
   <span class="n">members</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">incident_members</span><span class="o">.</span><span class="n">members</span>
 
   <span class="k">if</span> <span class="n">owner</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">owner</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phone&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="n">owner</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phone&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-      <span class="n">numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">owner</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phone&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">owner</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'phone'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="n">owner</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'phone'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">''</span><span class="p">:</span>
+      <span class="n">numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">owner</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'phone'</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
 
   <span class="k">for</span> <span class="n">member</span> <span class="ow">in</span> <span class="n">members</span><span class="p">:</span>
-    <span class="n">number</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;phone&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">number</span> <span class="ow">and</span> <span class="n">number</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'phone'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">number</span> <span class="ow">and</span> <span class="n">number</span> <span class="o">!=</span> <span class="s1">''</span><span class="p">:</span>
       <span class="n">numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">number</span><span class="p">)</span>
 
-<span class="n">inputs</span><span class="o">.</span><span class="n">phone_numbers</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">msg_body</span> <span class="o">=</span> <span class="s2">&quot;[Example Workflow, Send SMS: Incident] New incident, &quot;</span> <span class="o">+</span> <span class="n">incident</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;, which you are a member of, has been created.&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">phone_numbers</span> <span class="o">=</span> <span class="s1">','</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">msg_body</span> <span class="o">=</span> <span class="s2">"[Example Workflow, Send SMS: Incident] New incident, "</span> <span class="o">+</span> <span class="n">incident</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">", which you are a member of, has been created."</span>
 </pre></div>
 </div>
 </p>
@@ -800,7 +800,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;response_payload&#39;</span><span class="p">:</span> <span class="s1">&#39;lambda_result&#39;</span>
+    <span class="s1">'response_payload'</span><span class="p">:</span> <span class="s1">'lambda_result'</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -808,16 +808,16 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Pre-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">lambda_function_name</span> <span class="o">=</span> <span class="s2">&quot;soar_example_python_addition&quot;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">lambda_payload</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">lambda_function_name</span> <span class="o">=</span> <span class="s2">"soar_example_python_addition"</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">lambda_payload</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">"x"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"y"</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span>
 </pre></div>
 </div>
 </p>
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;response_payload&quot;</span><span class="p">):</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Python Addition Result: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;response_payload&quot;</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"response_payload"</span><span class="p">):</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="s2">"Python Addition Result: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"response_payload"</span><span class="p">))</span>
   <span class="n">note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createPlainText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
 </pre></div>
@@ -857,21 +857,21 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;executionArn&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;stateMachineArn&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;RUNNING&#39;</span><span class="o">|</span><span class="s1">&#39;SUCCEEDED&#39;</span><span class="o">|</span><span class="s1">&#39;FAILED&#39;</span><span class="o">|</span><span class="s1">&#39;TIMED_OUT&#39;</span><span class="o">|</span><span class="s1">&#39;ABORTED&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;startDate&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s1">&#39;stopDate&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-    <span class="s1">&#39;input&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;inputDetails&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;included&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="o">|</span><span class="kc">False</span>
+    <span class="s1">'executionArn'</span><span class="p">:</span> <span class="s1">'string'</span><span class="p">,</span>
+    <span class="s1">'stateMachineArn'</span><span class="p">:</span> <span class="s1">'string'</span><span class="p">,</span>
+    <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'string'</span><span class="p">,</span>
+    <span class="s1">'status'</span><span class="p">:</span> <span class="s1">'RUNNING'</span><span class="o">|</span><span class="s1">'SUCCEEDED'</span><span class="o">|</span><span class="s1">'FAILED'</span><span class="o">|</span><span class="s1">'TIMED_OUT'</span><span class="o">|</span><span class="s1">'ABORTED'</span><span class="p">,</span>
+    <span class="s1">'startDate'</span><span class="p">:</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">'stopDate'</span><span class="p">:</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="s1">'input'</span><span class="p">:</span> <span class="s1">'string'</span><span class="p">,</span>
+    <span class="s1">'inputDetails'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'included'</span><span class="p">:</span> <span class="kc">True</span><span class="o">|</span><span class="kc">False</span>
     <span class="p">},</span>
-    <span class="s1">&#39;output&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;outputDetails&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;included&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="o">|</span><span class="kc">False</span>
+    <span class="s1">'output'</span><span class="p">:</span> <span class="s1">'string'</span><span class="p">,</span>
+    <span class="s1">'outputDetails'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'included'</span><span class="p">:</span> <span class="kc">True</span><span class="o">|</span><span class="kc">False</span>
     <span class="p">},</span>
-    <span class="s1">&#39;traceHeader&#39;</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span>
+    <span class="s1">'traceHeader'</span><span class="p">:</span> <span class="s1">'string'</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -887,8 +887,8 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">):</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Step Function (Asynchronous) Result: </span><span class="se">\n\t</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">results</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"output"</span><span class="p">):</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="s2">"Step Function (Asynchronous) Result: </span><span class="se">\n\t</span><span class="s2">"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"output"</span><span class="p">))</span>
   <span class="n">note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createPlainText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
 </pre></div>

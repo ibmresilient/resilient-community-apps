@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -710,39 +710,39 @@ including rerunning <code class="docutils literal notranslate"><span class="pre"
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-            <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+            <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">'reason'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">'content'</span><span class="p">:</span> <span class="p">[</span>
               <span class="p">{</span>
-                <span class="s1">&#39;indicator&#39;</span><span class="p">:</span> <span class="s1">&#39;1.2.3.4&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;tlp&#39;</span><span class="p">:</span> <span class="s1">&#39;TLP:AMBER&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;itype&#39;</span><span class="p">:</span> <span class="s1">&#39;mal_ip&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;severity&#39;</span><span class="p">:</span> <span class="s1">&#39;low&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;classification&#39;</span><span class="p">:</span> <span class="s1">&#39;public&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;detail&#39;</span><span class="p">:</span> <span class="s1">&#39;resilient&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;confidence&#39;</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
-                <span class="s1">&#39;actor&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;feed_name&#39;</span><span class="p">:</span> <span class="s1">&#39;import&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="s1">&#39;admin&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;feed_site_netloc&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;campaign&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;ip&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;anomali:indicator-86e0bfc8-df0f-4346-b9e9-63dce33f44ac&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;date_last&#39;</span><span class="p">:</span> <span class="s1">&#39;2020-08-12 10:05:58 AM&#39;</span>
+                <span class="s1">'indicator'</span><span class="p">:</span> <span class="s1">'1.2.3.4'</span><span class="p">,</span>
+                <span class="s1">'tlp'</span><span class="p">:</span> <span class="s1">'TLP:AMBER'</span><span class="p">,</span>
+                <span class="s1">'itype'</span><span class="p">:</span> <span class="s1">'mal_ip'</span><span class="p">,</span>
+                <span class="s1">'severity'</span><span class="p">:</span> <span class="s1">'low'</span><span class="p">,</span>
+                <span class="s1">'classification'</span><span class="p">:</span> <span class="s1">'public'</span><span class="p">,</span>
+                <span class="s1">'detail'</span><span class="p">:</span> <span class="s1">'resilient'</span><span class="p">,</span>
+                <span class="s1">'confidence'</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+                <span class="s1">'actor'</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span>
+                <span class="s1">'feed_name'</span><span class="p">:</span> <span class="s1">'import'</span><span class="p">,</span>
+                <span class="s1">'source'</span><span class="p">:</span> <span class="s1">'admin'</span><span class="p">,</span>
+                <span class="s1">'feed_site_netloc'</span><span class="p">:</span> <span class="s1">'localhost'</span><span class="p">,</span>
+                <span class="s1">'campaign'</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span>
+                <span class="s1">'type'</span><span class="p">:</span> <span class="s1">'ip'</span><span class="p">,</span>
+                <span class="s1">'id'</span><span class="p">:</span> <span class="s1">'anomali:indicator-86e0bfc8-df0f-4346-b9e9-63dce33f44ac'</span><span class="p">,</span>
+                <span class="s1">'date_last'</span><span class="p">:</span> <span class="s1">'2020-08-12 10:05:58 AM'</span>
               <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="s1">&#39;[{&quot;indicator&quot;: &quot;1.2.3.4&quot;, &quot;tlp&quot;: &quot;TLP:AMBER&quot;, &quot;itype&quot;: &quot;mal_ip&quot;, &quot;severity&quot;: &quot;low&quot;, &quot;classification&quot;: &quot;public&quot;, &quot;detail&quot;: &quot;resilient&quot;, &quot;confidence&quot;: 33, &quot;actor&quot;: &quot;&quot;, &quot;feed_name&quot;: &quot;import&quot;, &quot;source&quot;: &quot;admin&quot;, &quot;feed_site_netloc&quot;: &quot;localhost&quot;, &quot;campaign&quot;: &quot;&quot;, &quot;type&quot;: &quot;ip&quot;, &quot;id&quot;: &quot;anomali:indicator-86e0bfc8-df0f-4346-b9e9-63dce33f44ac&quot;, &quot;date_last&quot;: &quot;2020-08-12 10:05:58 AM&quot;}, {&quot;indicator&quot;: &quot;1.2.3.4&quot;, &quot;tlp&quot;: &quot;TLP:AMBER&quot;, &quot;itype&quot;: &quot;mal_ip&quot;, &quot;severity&quot;: &quot;low&quot;, &quot;classification&quot;: &quot;public&quot;, &quot;detail&quot;: &quot;resilient&quot;, &quot;confidence&quot;: 33, &quot;actor&quot;: &quot;&quot;, &quot;feed_name&quot;: &quot;import&quot;, &quot;source&quot;: &quot;admin&quot;, &quot;feed_site_netloc&quot;: &quot;localhost&quot;, &quot;campaign&quot;: &quot;&quot;, &quot;type&quot;: &quot;ip&quot;, &quot;id&quot;: &quot;anomali:indicator-191e13df-857f-4200-a9e3-1327fb9b4858&quot;, &quot;date_last&quot;: &quot;2020-08-12 10:03:52 AM&quot;}, {&quot;indicator&quot;: &quot;1.2.3.4&quot;, &quot;tlp&quot;: &quot;TLP:AMBER&quot;, &quot;itype&quot;: &quot;mal_ip&quot;, &quot;severity&quot;: &quot;low&quot;, &quot;classification&quot;: &quot;public&quot;, &quot;detail&quot;: &quot;resilient&quot;, &quot;confidence&quot;: 33, &quot;actor&quot;: &quot;&quot;, &quot;feed_name&quot;: &quot;import&quot;, &quot;source&quot;: &quot;admin&quot;, &quot;feed_site_netloc&quot;: &quot;localhost&quot;, &quot;campaign&quot;: &quot;&quot;, &quot;type&quot;: &quot;ip&quot;, &quot;id&quot;: &quot;anomali:indicator-d716bb4b-861c-4be4-bf64-02c9fc00ec23&quot;, &quot;date_last&quot;: &quot;2020-08-12 10:02:29 AM&quot;}]&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s1">&#39;staxx_indicator&#39;</span><span class="p">:</span> <span class="s1">&#39;1.2.3.4&#39;</span>
+            <span class="s1">'raw'</span><span class="p">:</span> <span class="s1">'[{"indicator": "1.2.3.4", "tlp": "TLP:AMBER", "itype": "mal_ip", "severity": "low", "classification": "public", "detail": "resilient", "confidence": 33, "actor": "", "feed_name": "import", "source": "admin", "feed_site_netloc": "localhost", "campaign": "", "type": "ip", "id": "anomali:indicator-86e0bfc8-df0f-4346-b9e9-63dce33f44ac", "date_last": "2020-08-12 10:05:58 AM"}, {"indicator": "1.2.3.4", "tlp": "TLP:AMBER", "itype": "mal_ip", "severity": "low", "classification": "public", "detail": "resilient", "confidence": 33, "actor": "", "feed_name": "import", "source": "admin", "feed_site_netloc": "localhost", "campaign": "", "type": "ip", "id": "anomali:indicator-191e13df-857f-4200-a9e3-1327fb9b4858", "date_last": "2020-08-12 10:03:52 AM"}, {"indicator": "1.2.3.4", "tlp": "TLP:AMBER", "itype": "mal_ip", "severity": "low", "classification": "public", "detail": "resilient", "confidence": 33, "actor": "", "feed_name": "import", "source": "admin", "feed_site_netloc": "localhost", "campaign": "", "type": "ip", "id": "anomali:indicator-d716bb4b-861c-4be4-bf64-02c9fc00ec23", "date_last": "2020-08-12 10:02:29 AM"}]'</span><span class="p">,</span>
+            <span class="s1">'inputs'</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s1">'staxx_indicator'</span><span class="p">:</span> <span class="s1">'1.2.3.4'</span>
             <span class="p">},</span>
-            <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-              <span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
-              <span class="s1">&#39;package_version&#39;</span><span class="p">:</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
-              <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;Marks-MacBook-Pro.local&#39;</span><span class="p">,</span>
-              <span class="s1">&#39;execution_time_ms&#39;</span><span class="p">:</span> <span class="mi">307</span><span class="p">,</span>
-              <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2020-08-12 10:27:25&#39;</span>
+            <span class="s1">'metrics'</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+              <span class="s1">'package'</span><span class="p">:</span> <span class="s1">'unknown'</span><span class="p">,</span>
+              <span class="s1">'package_version'</span><span class="p">:</span> <span class="s1">'unknown'</span><span class="p">,</span>
+              <span class="s1">'host'</span><span class="p">:</span> <span class="s1">'Marks-MacBook-Pro.local'</span><span class="p">,</span>
+              <span class="s1">'execution_time_ms'</span><span class="p">:</span> <span class="mi">307</span><span class="p">,</span>
+              <span class="s1">'timestamp'</span><span class="p">:</span> <span class="s1">'2020-08-12 10:27:25'</span>
             <span class="p">}</span>
           <span class="p">}</span>
 </pre></div>
@@ -759,21 +759,21 @@ including rerunning <code class="docutils literal notranslate"><span class="pre"
   </details>
   <details><summary>Example Post-Process Script:</summary>
   <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Artifact: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Staxx results:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Artifact: </span><span class="si">{}</span><span class="se">\n</span><span class="s2">Staxx results:</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 <span class="n">indicators</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
-<span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> No results found&quot;</span>
+<span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="sa">u</span><span class="s2">"</span><span class="se">\n</span><span class="s2"> No results found"</span>
 <span class="k">else</span><span class="p">:</span>
 <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
-  <span class="n">indicators</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+  <span class="n">indicators</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"""</span>
 <span class="s2">Date Updated: </span><span class="si">{}</span>
 <span class="s2">Confidence: </span><span class="si">{}</span>
 <span class="si">{}</span>
 <span class="s2">Type: </span><span class="si">{}</span>
 <span class="s2">Severity: </span><span class="si">{}</span>
-<span class="s2">Campaign: </span><span class="si">{}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;date_last&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;confidence&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tlp&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;itype&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;severity&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;campaign&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)))</span>
+<span class="s2">Campaign: </span><span class="si">{}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'date_last'</span><span class="p">,</span> <span class="s1">''</span><span class="p">),</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'confidence'</span><span class="p">,</span> <span class="s1">''</span><span class="p">),</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'tlp'</span><span class="p">,</span> <span class="s1">''</span><span class="p">),</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'itype'</span><span class="p">,</span> <span class="s1">''</span><span class="p">),</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'severity'</span><span class="p">,</span> <span class="s1">''</span><span class="p">),</span> <span class="n">item</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'campaign'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)))</span>
 
-<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">indicators</span><span class="p">))</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">indicators</span><span class="p">))</span>
 
 </pre></div>
 </div>
@@ -845,38 +845,38 @@ A confirming note is added to the incident.</p>
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-            <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="s1">&#39;Import intelligence job ID 20200812163012 &#39;</span><span class="p">,</span>
-            <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="s1">&#39;&quot;Import intelligence job ID 20200812163012 &quot;&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s1">&#39;staxx_confidence&#39;</span><span class="p">:</span> <span class="s1">&#39;34&#39;</span><span class="p">,</span>
-              <span class="s1">&#39;staxx_indicator_type&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">588</span><span class="p">,</span>
-                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;adware&#39;</span>
+            <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+            <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">'reason'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">'content'</span><span class="p">:</span> <span class="s1">'Import intelligence job ID 20200812163012 '</span><span class="p">,</span>
+            <span class="s1">'raw'</span><span class="p">:</span> <span class="s1">'"Import intelligence job ID 20200812163012 "'</span><span class="p">,</span>
+            <span class="s1">'inputs'</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s1">'staxx_confidence'</span><span class="p">:</span> <span class="s1">'34'</span><span class="p">,</span>
+              <span class="s1">'staxx_indicator_type'</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">'id'</span><span class="p">:</span> <span class="mi">588</span><span class="p">,</span>
+                <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'adware'</span>
               <span class="p">},</span>
-              <span class="s1">&#39;staxx_auto_approve&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">607</span><span class="p">,</span>
-                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;no&#39;</span>
+              <span class="s1">'staxx_auto_approve'</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">'id'</span><span class="p">:</span> <span class="mi">607</span><span class="p">,</span>
+                <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'no'</span>
               <span class="p">},</span>
-              <span class="s1">&#39;staxx_tlp&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">586</span><span class="p">,</span>
-                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;GREEN&#39;</span>
+              <span class="s1">'staxx_tlp'</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">'id'</span><span class="p">:</span> <span class="mi">586</span><span class="p">,</span>
+                <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'GREEN'</span>
               <span class="p">},</span>
-              <span class="s1">&#39;staxx_severity&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">580</span><span class="p">,</span>
-                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;low&#39;</span>
+              <span class="s1">'staxx_severity'</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">'id'</span><span class="p">:</span> <span class="mi">580</span><span class="p">,</span>
+                <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'low'</span>
               <span class="p">},</span>
-              <span class="s1">&#39;staxx_indicator&#39;</span><span class="p">:</span> <span class="s1">&#39;xcv.com&#39;</span>
+              <span class="s1">'staxx_indicator'</span><span class="p">:</span> <span class="s1">'xcv.com'</span>
             <span class="p">},</span>
-            <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-              <span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="s1">&#39;fn-anomali-staxx&#39;</span><span class="p">,</span>
-              <span class="s1">&#39;package_version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0.1&#39;</span><span class="p">,</span>
-              <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;Marks-MacBook-Pro.local&#39;</span><span class="p">,</span>
-              <span class="s1">&#39;execution_time_ms&#39;</span><span class="p">:</span> <span class="mi">1019</span><span class="p">,</span>
-              <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2020-08-12 16:30:14&#39;</span>
+            <span class="s1">'metrics'</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+              <span class="s1">'package'</span><span class="p">:</span> <span class="s1">'fn-anomali-staxx'</span><span class="p">,</span>
+              <span class="s1">'package_version'</span><span class="p">:</span> <span class="s1">'1.0.1'</span><span class="p">,</span>
+              <span class="s1">'host'</span><span class="p">:</span> <span class="s1">'Marks-MacBook-Pro.local'</span><span class="p">,</span>
+              <span class="s1">'execution_time_ms'</span><span class="p">:</span> <span class="mi">1019</span><span class="p">,</span>
+              <span class="s1">'timestamp'</span><span class="p">:</span> <span class="s1">'2020-08-12 16:30:14'</span>
             <span class="p">}</span>
           <span class="p">}</span>
 </pre></div>
@@ -900,14 +900,14 @@ A confirming note is added to the incident.</p>
   <details><summary>Example Post-Process Script:</summary>
   <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-<span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Artifact: </span><span class="si">{}</span><span class="s2"> import to Anomali Staxx failed: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">)</span>
+<span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Artifact: </span><span class="si">{}</span><span class="s2"> import to Anomali Staxx failed: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-<span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;Artifact: </span><span class="si">{}</span><span class="s2"> added to Anomali Staxx:</span>
+<span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""Artifact: </span><span class="si">{}</span><span class="s2"> added to Anomali Staxx:</span>
 
 <span class="s2">Confidence: </span><span class="si">{}</span>
 <span class="s2">Indicator Type: </span><span class="si">{}</span>
 <span class="s2">TLP: </span><span class="si">{}</span>
-<span class="s2">Severity: </span><span class="si">{}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">confidence_level</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">indicator_type</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">tlp_color</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">severity_level</span><span class="p">)</span>
+<span class="s2">Severity: </span><span class="si">{}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">confidence_level</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">indicator_type</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">tlp_color</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">severity_level</span><span class="p">)</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
 </pre></div>

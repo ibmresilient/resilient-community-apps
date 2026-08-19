@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -415,20 +415,20 @@
 <span class="n">sn_host</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">instance</span><span class="o">.</span><span class="n">service</span><span class="o">-</span><span class="n">now</span><span class="o">.</span><span class="n">com</span>
 <span class="n">sn_api_uri</span><span class="o">=/</span><span class="n">api</span><span class="o">/</span><span class="n">x_ibmrt_resilient</span><span class="o">/</span><span class="n">api</span>
 
-<span class="c1"># &#39;sn_table_name&#39;: Name of the table in ServiceNow to create a record with.</span>
-<span class="c1"># &#39;incident&#39; table and the &#39;sn_si_incident&#39; table are both supported</span>
+<span class="c1"># 'sn_table_name': Name of the table in ServiceNow to create a record with.</span>
+<span class="c1"># 'incident' table and the 'sn_si_incident' table are both supported</span>
 <span class="c1"># (NOTE: ServiceNow Security Incident Response module is required for sn_si_incident)</span>
 <span class="c1"># as of v2.3.0 this setting is no longer required. It is now only used in the playbooks</span>
 <span class="c1"># labeled [DEPRECATED]</span>
 <span class="n">sn_table_name</span><span class="o">=</span><span class="n">incident</span>
 
-<span class="c1"># Username + Password of ServiceNow Integrator user who has the the &quot;x_ibmrt_resilient.integrator&quot; role</span>
+<span class="c1"># Username + Password of ServiceNow Integrator user who has the the "x_ibmrt_resilient.integrator" role</span>
 <span class="n">sn_username</span><span class="o">=&lt;</span><span class="n">ServiceNow</span> <span class="n">Username</span><span class="o">&gt;</span>
 <span class="n">sn_password</span><span class="o">=&lt;</span><span class="n">ServiceNow</span> <span class="n">Password</span><span class="o">&gt;</span>
 
 <span class="c1"># (ONLY FOR CP4S with custom endpoint) Enter the custom cases-rest prefix of your CP4S instance</span>
 <span class="c1"># ex: if host is my-cases-rest.cp4s.ibmsecurity.com, cp4s_cases_prefix=my-cases-rest</span>
-<span class="c1"># If you don&#39;t have a custom cases rest endpoint there is no need to use this config value</span>
+<span class="c1"># If you don't have a custom cases rest endpoint there is no need to use this config value</span>
 <span class="c1">#cp4s_cases_prefix=&lt;CP4S Cases Rest Custom Prefix&gt;</span>
 
 <span class="c1"># OPTIONAL: render notes in rich, formatted text when sent to SNOW</span>
@@ -512,8 +512,8 @@ reflect the originating table name.</p>
 </ul>
 <p><strong>These defaults can be overwritten</strong> by passing values from them in the <code class="docutils literal notranslate"><span class="pre">sn_optional_fields</span></code> input. To do this you would extend the example input Script provided with the following:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_optional_fields</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">({</span>
-    <span class="s2">&quot;short_description&quot;</span><span class="p">:</span> <span class="s2">&quot;Custom Short Description&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Custom Long Description&quot;</span>
+    <span class="s2">"short_description"</span><span class="p">:</span> <span class="s2">"Custom Short Description"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Custom Long Description"</span>
 <span class="p">})</span>
 </pre></div>
 </div>
@@ -521,58 +521,58 @@ reflect the originating table name.</p>
 </details>
 <details><summary>Output:</summary>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
-      <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="mi">103</span><span class="p">,</span>
-      <span class="s2">&quot;sn_init_work_note&quot;</span><span class="p">:</span> <span class="s2">&quot;Record created from IBM SOAR Task ID: 103. Associated IBM SOAR Incident ID: 2117.</span><span class="se">\n\n</span><span class="s2">Sync task to SNOW&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;sn_optional_fields&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;short_description&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117-103: Sample task&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;assignment_group&quot;</span><span class="p">:</span> <span class="s2">&quot;12a586cd0bb23200ecfd818393673a30&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;caller_id&quot;</span><span class="p">:</span> <span class="n">false</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+      <span class="s2">"task_id"</span><span class="p">:</span> <span class="mi">103</span><span class="p">,</span>
+      <span class="s2">"sn_init_work_note"</span><span class="p">:</span> <span class="s2">"Record created from IBM SOAR Task ID: 103. Associated IBM SOAR Incident ID: 2117.</span><span class="se">\n\n</span><span class="s2">Sync task to SNOW"</span><span class="p">,</span>
+      <span class="s2">"sn_optional_fields"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"short_description"</span><span class="p">:</span> <span class="s2">"RES-2117-103: Sample task"</span><span class="p">,</span>
+        <span class="s2">"assignment_group"</span><span class="p">:</span> <span class="s2">"12a586cd0bb23200ecfd818393673a30"</span><span class="p">,</span>
+        <span class="s2">"caller_id"</span><span class="p">:</span> <span class="n">false</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
-    <span class="s2">&quot;res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117-103&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;res_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://9.30.213.40/#incidents/2117?task_id=103&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010025&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sn_sys_id&quot;</span><span class="p">:</span> <span class="s2">&quot;3294cbfa1b4d09103351ca2b234bcbfa&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sn_record_state&quot;</span><span class="p">:</span> <span class="s2">&quot;Analysis&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sn_record_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://xxxx.service-now.com/nav_to.do?uri=sn_si_incident.do?sysparm_query=number=SIR0010025&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sn_time_created&quot;</span><span class="p">:</span> <span class="mi">1642522089472</span>
+    <span class="s2">"row_id"</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
+    <span class="s2">"res_id"</span><span class="p">:</span> <span class="s2">"RES-2117-103"</span><span class="p">,</span>
+    <span class="s2">"res_link"</span><span class="p">:</span> <span class="s2">"https://9.30.213.40/#incidents/2117?task_id=103"</span><span class="p">,</span>
+    <span class="s2">"sn_ref_id"</span><span class="p">:</span> <span class="s2">"SIR0010025"</span><span class="p">,</span>
+    <span class="s2">"sn_sys_id"</span><span class="p">:</span> <span class="s2">"3294cbfa1b4d09103351ca2b234bcbfa"</span><span class="p">,</span>
+    <span class="s2">"sn_record_state"</span><span class="p">:</span> <span class="s2">"Analysis"</span><span class="p">,</span>
+    <span class="s2">"sn_record_link"</span><span class="p">:</span> <span class="s2">"https://xxxx.service-now.com/nav_to.do?uri=sn_si_incident.do?sysparm_query=number=SIR0010025"</span><span class="p">,</span>
+    <span class="s2">"sn_time_created"</span><span class="p">:</span> <span class="mi">1642522089472</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">: true, </span><span class="se">\&quot;</span><span class="s2">reason</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">inputs</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">incident_id</span><span class="se">\&quot;</span><span class="s2">: 2117, </span><span class="se">\&quot;</span><span class="s2">task_id</span><span class="se">\&quot;</span><span class="s2">: 103, </span><span class="se">\&quot;</span><span class="s2">sn_init_work_note</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Record created from IBM SOAR Task ID: 103. Associated IBM SOAR Incident ID: 2117.</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nSync task to SNOW</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_optional_fields</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">short_description</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">RES-2117-103: Sample task</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">assignment_group</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">12a586cd0bb23200ecfd818393673a30</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">caller_id</span><span class="se">\&quot;</span><span class="s2">: false}}, </span><span class="se">\&quot;</span><span class="s2">row_id</span><span class="se">\&quot;</span><span class="s2">: 29, </span><span class="se">\&quot;</span><span class="s2">res_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">RES-2117-103</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">res_link</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">https://9.30.213.40/#incidents/2117?task_id=103</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_ref_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">SIR0010025</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_sys_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">3294cbfa1b4d09103351ca2b234bcbfa</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_record_state</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Analysis</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_record_link</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">https://xxxx.service-now.com/nav_to.do?uri=sn_si_incident.do?sysparm_query=number=SIR0010025</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_time_created</span><span class="se">\&quot;</span><span class="s2">: 1642522089472}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
-    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="mi">103</span><span class="p">,</span>
-    <span class="s2">&quot;sn_init_work_note&quot;</span><span class="p">:</span> <span class="s2">&quot;Record created from IBM SOAR Task ID: 103. Associated IBM SOAR Incident ID: 2117.</span><span class="se">\n\n</span><span class="s2">Sync task to SNOW&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sn_optional_fields&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;short_description&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117-103: Sample task&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;assignment_group&quot;</span><span class="p">:</span> <span class="s2">&quot;12a586cd0bb23200ecfd818393673a30&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;caller_id&quot;</span><span class="p">:</span> <span class="n">false</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">success</span><span class="se">\"</span><span class="s2">: true, </span><span class="se">\"</span><span class="s2">reason</span><span class="se">\"</span><span class="s2">: null, </span><span class="se">\"</span><span class="s2">inputs</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\"</span><span class="s2">incident_id</span><span class="se">\"</span><span class="s2">: 2117, </span><span class="se">\"</span><span class="s2">task_id</span><span class="se">\"</span><span class="s2">: 103, </span><span class="se">\"</span><span class="s2">sn_init_work_note</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Record created from IBM SOAR Task ID: 103. Associated IBM SOAR Incident ID: 2117.</span><span class="se">\\</span><span class="s2">n</span><span class="se">\\</span><span class="s2">nSync task to SNOW</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">sn_optional_fields</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\"</span><span class="s2">short_description</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">RES-2117-103: Sample task</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">assignment_group</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">12a586cd0bb23200ecfd818393673a30</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">caller_id</span><span class="se">\"</span><span class="s2">: false}}, </span><span class="se">\"</span><span class="s2">row_id</span><span class="se">\"</span><span class="s2">: 29, </span><span class="se">\"</span><span class="s2">res_id</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">RES-2117-103</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">res_link</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">https://9.30.213.40/#incidents/2117?task_id=103</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">sn_ref_id</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">SIR0010025</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">sn_sys_id</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">3294cbfa1b4d09103351ca2b234bcbfa</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">sn_record_state</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Analysis</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">sn_record_link</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">https://xxxx.service-now.com/nav_to.do?uri=sn_si_incident.do?sysparm_query=number=SIR0010025</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">sn_time_created</span><span class="se">\"</span><span class="s2">: 1642522089472}"</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+    <span class="s2">"task_id"</span><span class="p">:</span> <span class="mi">103</span><span class="p">,</span>
+    <span class="s2">"sn_init_work_note"</span><span class="p">:</span> <span class="s2">"Record created from IBM SOAR Task ID: 103. Associated IBM SOAR Incident ID: 2117.</span><span class="se">\n\n</span><span class="s2">Sync task to SNOW"</span><span class="p">,</span>
+    <span class="s2">"sn_optional_fields"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"short_description"</span><span class="p">:</span> <span class="s2">"RES-2117-103: Sample task"</span><span class="p">,</span>
+      <span class="s2">"assignment_group"</span><span class="p">:</span> <span class="s2">"12a586cd0bb23200ecfd818393673a30"</span><span class="p">,</span>
+      <span class="s2">"caller_id"</span><span class="p">:</span> <span class="n">false</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-service-now&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;myhost&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1971-01-01 00:00:00&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-service-now"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.0.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"myhost"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1971-01-01 00:00:00"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
-  <span class="s2">&quot;res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117-103&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;res_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://9.30.213.40/#incidents/2117?task_id=103&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010025&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;sn_sys_id&quot;</span><span class="p">:</span> <span class="s2">&quot;3294cbfa1b4d09103351ca2b234bcbfa&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;sn_record_state&quot;</span><span class="p">:</span> <span class="s2">&quot;Analysis&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;sn_record_link&quot;</span><span class="p">:</span> <span class="s2">&quot;https://xxxx.service-now.com/nav_to.do?uri=sn_si_incident.do?sysparm_query=number=SIR0010025&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;sn_time_created&quot;</span><span class="p">:</span> <span class="mi">1642522089472</span>
+  <span class="s2">"row_id"</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
+  <span class="s2">"res_id"</span><span class="p">:</span> <span class="s2">"RES-2117-103"</span><span class="p">,</span>
+  <span class="s2">"res_link"</span><span class="p">:</span> <span class="s2">"https://9.30.213.40/#incidents/2117?task_id=103"</span><span class="p">,</span>
+  <span class="s2">"sn_ref_id"</span><span class="p">:</span> <span class="s2">"SIR0010025"</span><span class="p">,</span>
+  <span class="s2">"sn_sys_id"</span><span class="p">:</span> <span class="s2">"3294cbfa1b4d09103351ca2b234bcbfa"</span><span class="p">,</span>
+  <span class="s2">"sn_record_state"</span><span class="p">:</span> <span class="s2">"Analysis"</span><span class="p">,</span>
+  <span class="s2">"sn_record_link"</span><span class="p">:</span> <span class="s2">"https://xxxx.service-now.com/nav_to.do?uri=sn_si_incident.do?sysparm_query=number=SIR0010025"</span><span class="p">,</span>
+  <span class="s2">"sn_time_created"</span><span class="p">:</span> <span class="mi">1642522089472</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -583,8 +583,8 @@ reflect the originating table name.</p>
 <li><p>In the supplied example playbook, there are 3 Functions chained together, with this Function being the third.</p>
 <ul>
 <li><p>We use the output of the first and second functions here:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="s2">&quot;assignment_group&quot;</span><span class="p">:</span> <span class="n">playbooks</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">assignment_group</span><span class="o">.</span><span class="n">sys_id</span><span class="p">,</span>
-    <span class="s2">&quot;caller_id&quot;</span><span class="p">:</span> <span class="n">playbooks</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">caller_id</span><span class="o">.</span><span class="n">sys_id</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="s2">"assignment_group"</span><span class="p">:</span> <span class="n">playbooks</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">assignment_group</span><span class="o">.</span><span class="n">sys_id</span><span class="p">,</span>
+    <span class="s2">"caller_id"</span><span class="p">:</span> <span class="n">playbooks</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">caller_id</span><span class="o">.</span><span class="n">sys_id</span>
 </pre></div>
 </div>
 </li>
@@ -594,22 +594,22 @@ reflect the originating table name.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 <span class="c1"># Map IBM SOAR severity values to ServiceNow severity values</span>
 <span class="n">sn_severity_map</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;High&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">&quot;Medium&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="s2">&quot;Low&quot;</span><span class="p">:</span> <span class="mi">3</span>
+  <span class="s2">"High"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"Medium"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">"Low"</span><span class="p">:</span> <span class="mi">3</span>
 <span class="p">}</span>
 
 <span class="c1"># Default text of the initial note added to the ServiceNow Record</span>
-<span class="n">init_snow_note_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;Record created from a IBM SOAR Incident ID: </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">.</span>
+<span class="n">init_snow_note_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"""Record created from a IBM SOAR Incident ID: </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">.</span>
 <span class="s2">                          Severity: </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="si">}</span>
-<span class="s2">                          Incident Type(s): </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">incident_type_ids</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">                          Incident Type(s): </span><span class="si">{</span><span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">incident_type_ids</span><span class="p">)</span><span class="si">}</span><span class="s2">"""</span>
 
 <span class="c1"># If the user adds a comment when they invoke the rule, that comment gets concatenated here</span>
 <span class="n">initial_note</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;sn_initial_note&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">initial_note</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;sn_initial_note&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"sn_initial_note"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">initial_note</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"sn_initial_note"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">content</span>
 <span class="k">if</span> <span class="n">initial_note</span><span class="p">:</span>
-  <span class="n">init_snow_note_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">init_snow_note_text</span><span class="si">}</span><span class="se">\n\n</span><span class="si">{</span><span class="n">initial_note</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="n">init_snow_note_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">init_snow_note_text</span><span class="si">}</span><span class="se">\n\n</span><span class="si">{</span><span class="n">initial_note</span><span class="si">}</span><span class="s2">"</span>
 
 <span class="c1"># ID of this incident</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
@@ -622,17 +622,17 @@ reflect the originating table name.</p>
 <span class="n">urgency</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_urgency</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
 <span class="c1"># Any further information you want to send to ServiceNow. Each Key/Value pair is attached to the Request object and accessible in ServiceNow.</span>
-<span class="c1"># ServiceNow Example: setValue(&#39;assignment_group&#39;, request.body.data.sn_optional_fields.assignment_group)</span>
+<span class="c1"># ServiceNow Example: setValue('assignment_group', request.body.data.sn_optional_fields.assignment_group)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">sn_optional_fields</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">({</span>
-  <span class="s2">&quot;short_description&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;RES-</span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;impact&quot;</span><span class="p">:</span> <span class="n">impact</span><span class="p">,</span>
-  <span class="s2">&quot;urgency&quot;</span><span class="p">:</span> <span class="n">urgency</span><span class="p">,</span>
-  <span class="s2">&quot;assignment_group&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">assignment_group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sys_id&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;caller_id&quot;</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">caller_id</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sys_id&quot;</span><span class="p">)</span>
+  <span class="s2">"short_description"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"RES-</span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+  <span class="s2">"impact"</span><span class="p">:</span> <span class="n">impact</span><span class="p">,</span>
+  <span class="s2">"urgency"</span><span class="p">:</span> <span class="n">urgency</span><span class="p">,</span>
+  <span class="s2">"assignment_group"</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">assignment_group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sys_id"</span><span class="p">),</span>
+  <span class="s2">"caller_id"</span><span class="p">:</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">caller_id</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sys_id"</span><span class="p">)</span>
 <span class="p">})</span>
 
-<span class="c1"># This makes sure this creates this record in the &quot;incident&quot; table</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">sn_table_name</span> <span class="o">=</span> <span class="s2">&quot;incident&quot;</span>
+<span class="c1"># This makes sure this creates this record in the "incident" table</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_table_name</span> <span class="o">=</span> <span class="s2">"incident"</span>
 </pre></div>
 </div>
 </details>
@@ -641,15 +641,15 @@ reflect the originating table name.</p>
 <li><p>This example updates two Custom Incident Fields <strong>sn_snow_record_id</strong> and <strong>sn_snow_record_link</strong> then <strong>adds a Note to the Incident</strong></p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">create_record</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
   <span class="c1"># Set incident fields sn_snow_record_id, sn_snow_record_link, and sn_snow_table_name</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">sn_snow_record_id</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sn_ref_id&quot;</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">sn_snow_record_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;a href=&#39;</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_record_link&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&gt;Link&lt;/a&gt;&quot;&quot;&quot;</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">sn_snow_table_name</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sn_table_name&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">sn_snow_record_id</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sn_ref_id"</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">sn_snow_record_link</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"""&lt;a href='</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'sn_record_link'</span><span class="p">)</span><span class="si">}</span><span class="s2">'&gt;Link&lt;/a&gt;"""</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">sn_snow_table_name</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sn_table_name"</span><span class="p">)</span>
 
-  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;This Incident has been created in &lt;b&gt;ServiceNow&lt;/b&gt; with Urgency &#39;</span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_urgency</span><span class="si">}</span><span class="s2">&#39;in the </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_table_name&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> table.</span>
-<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt;  </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_ref_id&#39;</span><span class="p">)</span><span class="si">}</span>
-<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow Link:&lt;/b&gt; &lt;a href=&#39;</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_record_link&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&gt;</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_record_link&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/a&gt;&quot;&quot;&quot;</span>
+  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"""&lt;br&gt;This Incident has been created in &lt;b&gt;ServiceNow&lt;/b&gt; with Urgency '</span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_urgency</span><span class="si">}</span><span class="s2">'in the </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'sn_table_name'</span><span class="p">)</span><span class="si">}</span><span class="s2"> table.</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt;  </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'sn_ref_id'</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow Link:&lt;/b&gt; &lt;a href='</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'sn_record_link'</span><span class="p">)</span><span class="si">}</span><span class="s2">'&gt;</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'sn_record_link'</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/a&gt;"""</span>
 
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 </pre></div>
@@ -703,41 +703,41 @@ reflect the originating table name.</p>
 </details>
 <details><summary>Output:</summary>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
-      <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;sn_res_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;sn_update_fields&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+      <span class="s2">"task_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"sn_res_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"sn_update_fields"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"severity"</span><span class="p">:</span> <span class="mi">1</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010024&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sn_time_updated&quot;</span><span class="p">:</span> <span class="mi">1642522493078</span>
+    <span class="s2">"sn_ref_id"</span><span class="p">:</span> <span class="s2">"SIR0010024"</span><span class="p">,</span>
+    <span class="s2">"sn_time_updated"</span><span class="p">:</span> <span class="mi">1642522493078</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">: true, </span><span class="se">\&quot;</span><span class="s2">inputs</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">incident_id</span><span class="se">\&quot;</span><span class="s2">: 2117, </span><span class="se">\&quot;</span><span class="s2">task_id</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">sn_res_id</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">sn_update_fields</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">severity</span><span class="se">\&quot;</span><span class="s2">: 1}}, </span><span class="se">\&quot;</span><span class="s2">sn_ref_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">SIR0010024</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_time_updated</span><span class="se">\&quot;</span><span class="s2">: 1642522493078}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
-    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;sn_res_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;sn_update_fields&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">success</span><span class="se">\"</span><span class="s2">: true, </span><span class="se">\"</span><span class="s2">inputs</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\"</span><span class="s2">incident_id</span><span class="se">\"</span><span class="s2">: 2117, </span><span class="se">\"</span><span class="s2">task_id</span><span class="se">\"</span><span class="s2">: null, </span><span class="se">\"</span><span class="s2">sn_res_id</span><span class="se">\"</span><span class="s2">: null, </span><span class="se">\"</span><span class="s2">sn_update_fields</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\"</span><span class="s2">severity</span><span class="se">\"</span><span class="s2">: 1}}, </span><span class="se">\"</span><span class="s2">sn_ref_id</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">SIR0010024</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">sn_time_updated</span><span class="se">\"</span><span class="s2">: 1642522493078}"</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+    <span class="s2">"task_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"sn_res_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"sn_update_fields"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"severity"</span><span class="p">:</span> <span class="mi">1</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-service-now&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;myhost&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1971-01-01 00:00:00&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-service-now"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.0.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"myhost"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1971-01-01 00:00:00"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010024&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;sn_time_updated&quot;</span><span class="p">:</span> <span class="mi">1642522493078</span>
+  <span class="s2">"sn_ref_id"</span><span class="p">:</span> <span class="s2">"SIR0010024"</span><span class="p">,</span>
+  <span class="s2">"sn_time_updated"</span><span class="p">:</span> <span class="mi">1642522493078</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -746,9 +746,9 @@ reflect the originating table name.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 <span class="c1"># Map IBM SOAR severity values to ServiceNow severity values</span>
 <span class="n">sn_severity_map</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;High&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">&quot;Medium&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="s2">&quot;Low&quot;</span><span class="p">:</span> <span class="mi">3</span>
+  <span class="s2">"High"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"Medium"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">"Low"</span><span class="p">:</span> <span class="mi">3</span>
 <span class="p">}</span>
 
 <span class="c1"># Get the id of this incident</span>
@@ -756,7 +756,7 @@ reflect the originating table name.</p>
 
 <span class="c1"># List all the fields you want to update in the ServiceNow Record here with the ServiceNow field_name being the key</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">sn_update_fields</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">({</span>
-  <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="n">sn_severity_map</span><span class="p">[</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="p">],</span>
+  <span class="s2">"severity"</span><span class="p">:</span> <span class="n">sn_severity_map</span><span class="p">[</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="p">],</span>
 <span class="p">})</span>
 </pre></div>
 </div>
@@ -766,7 +766,7 @@ reflect the originating table name.</p>
 <li><p>This example <strong>adds a Note to the Incident</strong></p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add a Note to the Incident</span>
-<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The Severity of this Incident was updated to </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="si">}</span><span class="s2"> in IBM SOAR&quot;</span><span class="p">)</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The Severity of this Incident was updated to </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">severity_code</span><span class="si">}</span><span class="s2"> in IBM SOAR"</span><span class="p">)</span>
 </pre></div>
 </div>
 </details>
@@ -782,7 +782,7 @@ reflect the originating table name.</p>
 </li>
 <li><p>Modify the input script to map desired artifact values to SNOW record fields using the <code class="docutils literal notranslate"><span class="pre">sn_update_fields</span></code> parameter of the “SNOW: Update Record” function.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_update_fields</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">({</span>
-  <span class="s2">&quot;my_snow_column_name&quot;</span><span class="p">:</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span> <span class="c1"># When the artifact type is IP Address the value will be the IP</span>
+  <span class="s2">"my_snow_column_name"</span><span class="p">:</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span> <span class="c1"># When the artifact type is IP Address the value will be the IP</span>
 <span class="p">})</span>
 </pre></div>
 </div>
@@ -862,44 +862,44 @@ reflect the originating table name.</p>
 </details>
 <details><summary>Output:</summary>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
-      <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;sn_res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;sn_record_state&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-      <span class="s2">&quot;sn_close_notes&quot;</span><span class="p">:</span> <span class="s2">&quot;Closing&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;sn_close_code&quot;</span><span class="p">:</span> <span class="s2">&quot;Threat mitigated&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;sn_close_work_note&quot;</span><span class="p">:</span> <span class="s2">&quot;This record&#39;s state has be changed to [SIR] Review by IBM SOAR&quot;</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+      <span class="s2">"task_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"sn_res_id"</span><span class="p">:</span> <span class="s2">"RES-2117"</span><span class="p">,</span>
+      <span class="s2">"sn_record_state"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="s2">"sn_close_notes"</span><span class="p">:</span> <span class="s2">"Closing"</span><span class="p">,</span>
+      <span class="s2">"sn_close_code"</span><span class="p">:</span> <span class="s2">"Threat mitigated"</span><span class="p">,</span>
+      <span class="s2">"sn_close_work_note"</span><span class="p">:</span> <span class="s2">"This record's state has be changed to [SIR] Review by IBM SOAR"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010024&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sn_record_state&quot;</span><span class="p">:</span> <span class="s2">&quot;Review&quot;</span>
+    <span class="s2">"sn_ref_id"</span><span class="p">:</span> <span class="s2">"SIR0010024"</span><span class="p">,</span>
+    <span class="s2">"sn_record_state"</span><span class="p">:</span> <span class="s2">"Review"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">: true, </span><span class="se">\&quot;</span><span class="s2">reason</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">inputs</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">incident_id</span><span class="se">\&quot;</span><span class="s2">: 2117, </span><span class="se">\&quot;</span><span class="s2">task_id</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">sn_res_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">RES-2117</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_record_state</span><span class="se">\&quot;</span><span class="s2">: 100, </span><span class="se">\&quot;</span><span class="s2">sn_close_notes</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Closing</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_close_code</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Threat mitigated</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_close_work_note</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">This record&#39;s state has be changed to [SIR] Review by IBM SOAR</span><span class="se">\&quot;</span><span class="s2">}, </span><span class="se">\&quot;</span><span class="s2">sn_ref_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">SIR0010024</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_record_state</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Review</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
-    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;sn_res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sn_record_state&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="s2">&quot;sn_close_notes&quot;</span><span class="p">:</span> <span class="s2">&quot;Closing&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sn_close_code&quot;</span><span class="p">:</span> <span class="s2">&quot;Threat mitigated&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sn_close_work_note&quot;</span><span class="p">:</span> <span class="s2">&quot;This record&#39;s state has be changed to [SIR] Review by IBM SOAR&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">success</span><span class="se">\"</span><span class="s2">: true, </span><span class="se">\"</span><span class="s2">reason</span><span class="se">\"</span><span class="s2">: null, </span><span class="se">\"</span><span class="s2">inputs</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\"</span><span class="s2">incident_id</span><span class="se">\"</span><span class="s2">: 2117, </span><span class="se">\"</span><span class="s2">task_id</span><span class="se">\"</span><span class="s2">: null, </span><span class="se">\"</span><span class="s2">sn_res_id</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">RES-2117</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">sn_record_state</span><span class="se">\"</span><span class="s2">: 100, </span><span class="se">\"</span><span class="s2">sn_close_notes</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Closing</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">sn_close_code</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Threat mitigated</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">sn_close_work_note</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">This record's state has be changed to [SIR] Review by IBM SOAR</span><span class="se">\"</span><span class="s2">}, </span><span class="se">\"</span><span class="s2">sn_ref_id</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">SIR0010024</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">sn_record_state</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Review</span><span class="se">\"</span><span class="s2">}"</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+    <span class="s2">"task_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"sn_res_id"</span><span class="p">:</span> <span class="s2">"RES-2117"</span><span class="p">,</span>
+    <span class="s2">"sn_record_state"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="s2">"sn_close_notes"</span><span class="p">:</span> <span class="s2">"Closing"</span><span class="p">,</span>
+    <span class="s2">"sn_close_code"</span><span class="p">:</span> <span class="s2">"Threat mitigated"</span><span class="p">,</span>
+    <span class="s2">"sn_close_work_note"</span><span class="p">:</span> <span class="s2">"This record's state has be changed to [SIR] Review by IBM SOAR"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-service-now&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;myhost&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1971-01-01 00:00:00&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-service-now"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.0.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"myhost"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1971-01-01 00:00:00"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010024&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;sn_record_state&quot;</span><span class="p">:</span> <span class="s2">&quot;Review&quot;</span>
+  <span class="s2">"sn_ref_id"</span><span class="p">:</span> <span class="s2">"SIR0010024"</span><span class="p">,</span>
+  <span class="s2">"sn_record_state"</span><span class="p">:</span> <span class="s2">"Review"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -917,34 +917,34 @@ reflect the originating table name.</p>
 <span class="c1"># These codes are defined in ServiceNow and may be different for each ServiceNow configuration</span>
 <span class="c1"># Codes prepended with [SIR] are specific to Security Incident Response incidents</span>
 <span class="n">map_sn_record_states</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;New&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">&quot;In Progress&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-  <span class="s2">&quot;On Hold&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-  <span class="s2">&quot;Resolved&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-  <span class="s2">&quot;Closed&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-  <span class="s2">&quot;Canceled&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-  <span class="s2">&quot;Cancelled&quot;</span><span class="p">:</span> <span class="mi">8</span> <span class="c1"># servicenow has inconsistent spellings of this word...</span>
+  <span class="s2">"New"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"In Progress"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="s2">"On Hold"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="s2">"Resolved"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+  <span class="s2">"Closed"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+  <span class="s2">"Canceled"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="s2">"Cancelled"</span><span class="p">:</span> <span class="mi">8</span> <span class="c1"># servicenow has inconsistent spellings of this word...</span>
 <span class="p">}</span>
 
 <span class="c1"># ID of this incident</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 
 <span class="c1"># The state to change the record to</span>
-<span class="c1"># inputs.sn_record_state = map_sn_record_states[&quot;Closed&quot;]</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">sn_record_state</span> <span class="o">=</span> <span class="n">map_sn_record_states</span><span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;sn_record_state&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)]</span>
+<span class="c1"># inputs.sn_record_state = map_sn_record_states["Closed"]</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_record_state</span> <span class="o">=</span> <span class="n">map_sn_record_states</span><span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"sn_record_state"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)]</span>
 
 <span class="c1"># The resolution notes that are normally required when you close a ServiceNow record</span>
-<span class="c1"># inputs.sn_close_notes = &quot;This incident has been resolved in IBM SOAR. No further action required&quot;</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;sn_close_notes&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_notes</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;sn_close_notes&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="c1"># inputs.sn_close_notes = "This incident has been resolved in IBM SOAR. No further action required"</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"sn_close_notes"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_notes</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"sn_close_notes"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
-<span class="c1"># The ServiceNow &#39;close_code&#39; that you normally select when closing a ServiceNow record</span>
-<span class="c1"># inputs.sn_close_code = &quot;Solved (Permanently)&quot;</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;sn_close_code&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_code</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;sn_close_code&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="c1"># The ServiceNow 'close_code' that you normally select when closing a ServiceNow record</span>
+<span class="c1"># inputs.sn_close_code = "Solved (Permanently)"</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"sn_close_code"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_code</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"sn_close_code"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 <span class="c1"># Add a Work Note to the Record in ServiceNow</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_work_note</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;This record&#39;s state has been changed to </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_record_state</span><span class="si">}</span><span class="s2"> by IBM SOAR&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_close_work_note</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"This record's state has been changed to </span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_record_state</span><span class="si">}</span><span class="s2"> by IBM SOAR"</span>
 </pre></div>
 </div>
 </details>
@@ -953,15 +953,15 @@ reflect the originating table name.</p>
 <li><p>This example <strong>adds a Note to the Incident</strong> detailing why the Incident was closed or if the playbook <strong>fails</strong> to close the ServiceNow Record</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">close_record</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">note_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;This Incident has been updated in &lt;b&gt;ServiceNow&lt;/b&gt;</span>
-<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt; </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_ref_id&#39;</span><span class="p">)</span><span class="si">}</span>
-<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow Record State:&lt;/b&gt; </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_record_state&#39;</span><span class="p">)</span><span class="si">}</span>
-<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow Closing Notes:&lt;/b&gt; </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_close_notes&#39;</span><span class="p">)</span><span class="si">}</span>
-<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow Closing Code:&lt;/b&gt; </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;inputs&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_close_code&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">note_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"""&lt;br&gt;This Incident has been updated in &lt;b&gt;ServiceNow&lt;/b&gt;</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt; </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'sn_ref_id'</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow Record State:&lt;/b&gt; </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'sn_record_state'</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow Closing Notes:&lt;/b&gt; </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'inputs'</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'sn_close_notes'</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow Closing Code:&lt;/b&gt; </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'inputs'</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'sn_close_code'</span><span class="p">)</span><span class="si">}</span><span class="s2">"""</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">note_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;Failed to close this Incident in &lt;b&gt;ServiceNow&lt;/b&gt;</span>
-<span class="s2">              &lt;br&gt;&lt;b&gt;Reason:&lt;/b&gt; </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+  <span class="n">note_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"""&lt;br&gt;Failed to close this Incident in &lt;b&gt;ServiceNow&lt;/b&gt;</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;Reason:&lt;/b&gt; </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">)</span><span class="si">}</span><span class="s2">"""</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
 </pre></div>
@@ -1015,48 +1015,48 @@ reflect the originating table name.</p>
 </details>
 <details><summary>Output:</summary>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
-      <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;sn_note_text&quot;</span><span class="p">:</span> <span class="s2">&quot;The Business Impact of this Incident was updated to High in IBM SOAR&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;sn_note_type&quot;</span><span class="p">:</span> <span class="s2">&quot;work_note&quot;</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+      <span class="s2">"task_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"sn_note_text"</span><span class="p">:</span> <span class="s2">"The Business Impact of this Incident was updated to High in IBM SOAR"</span><span class="p">,</span>
+      <span class="s2">"sn_note_type"</span><span class="p">:</span> <span class="s2">"work_note"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010024&quot;</span>
+    <span class="s2">"res_id"</span><span class="p">:</span> <span class="s2">"RES-2117"</span><span class="p">,</span>
+    <span class="s2">"sn_ref_id"</span><span class="p">:</span> <span class="s2">"SIR0010024"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">: true, </span><span class="se">\&quot;</span><span class="s2">inputs</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">incident_id</span><span class="se">\&quot;</span><span class="s2">: 2117, </span><span class="se">\&quot;</span><span class="s2">task_id</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">sn_note_text</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">The Business Impact of this Incident was updated to High in IBM SOAR</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_note_type</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">work_note</span><span class="se">\&quot;</span><span class="s2">}, </span><span class="se">\&quot;</span><span class="s2">res_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">RES-2117</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_ref_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">SIR0010024</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
-    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;sn_note_text&quot;</span><span class="p">:</span> <span class="s2">&quot;The Business Impact of this Incident was updated to High in IBM SOAR&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sn_note_type&quot;</span><span class="p">:</span> <span class="s2">&quot;work_note&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">success</span><span class="se">\"</span><span class="s2">: true, </span><span class="se">\"</span><span class="s2">inputs</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\"</span><span class="s2">incident_id</span><span class="se">\"</span><span class="s2">: 2117, </span><span class="se">\"</span><span class="s2">task_id</span><span class="se">\"</span><span class="s2">: null, </span><span class="se">\"</span><span class="s2">sn_note_text</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">The Business Impact of this Incident was updated to High in IBM SOAR</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">sn_note_type</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">work_note</span><span class="se">\"</span><span class="s2">}, </span><span class="se">\"</span><span class="s2">res_id</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">RES-2117</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">sn_ref_id</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">SIR0010024</span><span class="se">\"</span><span class="s2">}"</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+    <span class="s2">"task_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"sn_note_text"</span><span class="p">:</span> <span class="s2">"The Business Impact of this Incident was updated to High in IBM SOAR"</span><span class="p">,</span>
+    <span class="s2">"sn_note_type"</span><span class="p">:</span> <span class="s2">"work_note"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-service-now&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;myhost&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1971-01-01 00:00:00&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-service-now"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.0.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"myhost"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1971-01-01 00:00:00"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010024&quot;</span>
+  <span class="s2">"res_id"</span><span class="p">:</span> <span class="s2">"RES-2117"</span><span class="p">,</span>
+  <span class="s2">"sn_ref_id"</span><span class="p">:</span> <span class="s2">"SIR0010024"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </details>
 <details><summary>Example input Script:</summary>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_note_type</span> <span class="o">=</span> <span class="s2">&quot;work_note&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">sn_note_type</span> <span class="o">=</span> <span class="s2">"work_note"</span>
 <span class="c1"># The id of this incident</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 
 <span class="c1"># If this is a task note, get the taskId</span>
-<span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;task&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">note</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">'task'</span><span class="p">:</span>
   <span class="c1"># Set the task_id</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">id</span>
 
@@ -1068,7 +1068,7 @@ reflect the originating table name.</p>
 <details><summary>Post-Processing Script:</summary>
 <p>This example prepends a timestamp to the SOAR Note to track when the Note was sent to ServiceNow.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
-<span class="n">note</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Sent to ServiceNow at </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;</span><span class="si">{</span><span class="n">note</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">content</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">note</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"&lt;b&gt;Sent to ServiceNow at </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="si">}</span><span class="s2">&lt;/b&gt;&lt;br&gt;</span><span class="si">{</span><span class="n">note</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">content</span><span class="si">}</span><span class="s2">"</span>
 </pre></div>
 </div>
 </details>
@@ -1114,39 +1114,39 @@ reflect the originating table name.</p>
 </details>
 <details><summary>Output:</summary>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;attachment_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
-      <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"attachment_id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+      <span class="s2">"task_id"</span><span class="p">:</span> <span class="n">null</span>
     <span class="p">},</span>
-    <span class="s2">&quot;res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010024&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;attachment_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sample_attachment.png&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sn_attachment_sys_id&quot;</span><span class="p">:</span> <span class="s2">&quot;ef44473e1b4d09103351ca2b234bcbc6&quot;</span>
+    <span class="s2">"res_id"</span><span class="p">:</span> <span class="s2">"RES-2117"</span><span class="p">,</span>
+    <span class="s2">"sn_ref_id"</span><span class="p">:</span> <span class="s2">"SIR0010024"</span><span class="p">,</span>
+    <span class="s2">"attachment_name"</span><span class="p">:</span> <span class="s2">"sample_attachment.png"</span><span class="p">,</span>
+    <span class="s2">"sn_attachment_sys_id"</span><span class="p">:</span> <span class="s2">"ef44473e1b4d09103351ca2b234bcbc6"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">: true, </span><span class="se">\&quot;</span><span class="s2">inputs</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">attachment_id</span><span class="se">\&quot;</span><span class="s2">: 2, </span><span class="se">\&quot;</span><span class="s2">incident_id</span><span class="se">\&quot;</span><span class="s2">: 2117, </span><span class="se">\&quot;</span><span class="s2">task_id</span><span class="se">\&quot;</span><span class="s2">: null}, </span><span class="se">\&quot;</span><span class="s2">res_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">RES-2117</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_ref_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">SIR0010024</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">attachment_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">sample_attachment.png</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_attachment_sys_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">ef44473e1b4d09103351ca2b234bcbc6</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;attachment_id&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
-    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">success</span><span class="se">\"</span><span class="s2">: true, </span><span class="se">\"</span><span class="s2">inputs</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\"</span><span class="s2">attachment_id</span><span class="se">\"</span><span class="s2">: 2, </span><span class="se">\"</span><span class="s2">incident_id</span><span class="se">\"</span><span class="s2">: 2117, </span><span class="se">\"</span><span class="s2">task_id</span><span class="se">\"</span><span class="s2">: null}, </span><span class="se">\"</span><span class="s2">res_id</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">RES-2117</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">sn_ref_id</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">SIR0010024</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">attachment_name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">sample_attachment.png</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">sn_attachment_sys_id</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">ef44473e1b4d09103351ca2b234bcbc6</span><span class="se">\"</span><span class="s2">}"</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"attachment_id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+    <span class="s2">"task_id"</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-service-now&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;myhost&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1971-01-01 00:00:00&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-service-now"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.0.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"myhost"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1971-01-01 00:00:00"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;sn_ref_id&quot;</span><span class="p">:</span> <span class="s2">&quot;SIR0010024&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;attachment_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sample_attachment.png&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;sn_attachment_sys_id&quot;</span><span class="p">:</span> <span class="s2">&quot;ef44473e1b4d09103351ca2b234bcbc6&quot;</span>
+  <span class="s2">"res_id"</span><span class="p">:</span> <span class="s2">"RES-2117"</span><span class="p">,</span>
+  <span class="s2">"sn_ref_id"</span><span class="p">:</span> <span class="s2">"SIR0010024"</span><span class="p">,</span>
+  <span class="s2">"attachment_name"</span><span class="p">:</span> <span class="s2">"sample_attachment.png"</span><span class="p">,</span>
+  <span class="s2">"sn_attachment_sys_id"</span><span class="p">:</span> <span class="s2">"ef44473e1b4d09103351ca2b234bcbc6"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1159,7 +1159,7 @@ reflect the originating table name.</p>
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 
 <span class="c1"># If this is a task attachment, get the taskId</span>
-<span class="k">if</span> <span class="n">attachment</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">&#39;task&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">attachment</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s1">'task'</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">task_id</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">id</span>
 </pre></div>
 </div>
@@ -1169,11 +1169,11 @@ reflect the originating table name.</p>
 <li><p>This example <strong>adds a Note to the Incident/Task</strong> detailing what attachment was sent to ServiceNow.</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">add_attachment</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
 
-  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;</span><span class="si">{</span><span class="n">principal</span><span class="o">.</span><span class="n">display_name</span><span class="si">}</span><span class="s2"> has added an attachment to &lt;b&gt;ServiceNow&lt;/b&gt;</span>
+  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"""&lt;br&gt;</span><span class="si">{</span><span class="n">principal</span><span class="o">.</span><span class="n">display_name</span><span class="si">}</span><span class="s2"> has added an attachment to &lt;b&gt;ServiceNow&lt;/b&gt;</span>
 <span class="s2">              &lt;br&gt;&lt;b&gt;Attachment Name:&lt;/b&gt;  </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">attachment_name</span><span class="si">}</span>
-<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt;  </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sn_ref_id&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">              &lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt;  </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'sn_ref_id'</span><span class="p">)</span><span class="si">}</span><span class="s2">"""</span>
 
   <span class="c1"># If this is a task attachment, add a note to the Task</span>
   <span class="k">if</span> <span class="n">task</span><span class="p">:</span>
@@ -1229,50 +1229,50 @@ reflect the originating table name.</p>
 </details>
 <details><summary>Output:</summary>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;sn_query_field&quot;</span><span class="p">:</span> <span class="s2">&quot;email&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;sn_table_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sys_user&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;sn_query_value&quot;</span><span class="p">:</span> <span class="s2">&quot;ibmresilient&quot;</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"sn_query_field"</span><span class="p">:</span> <span class="s2">"email"</span><span class="p">,</span>
+      <span class="s2">"sn_table_name"</span><span class="p">:</span> <span class="s2">"sys_user"</span><span class="p">,</span>
+      <span class="s2">"sn_query_value"</span><span class="p">:</span> <span class="s2">"ibmresilient"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;sys_id&quot;</span><span class="p">:</span> <span class="n">null</span>
+    <span class="s2">"sys_id"</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">: false, </span><span class="se">\&quot;</span><span class="s2">inputs</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">sn_query_field</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">email</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_table_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">sys_user</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">sn_query_value</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">ibmresilient</span><span class="se">\&quot;</span><span class="s2">}, </span><span class="se">\&quot;</span><span class="s2">sys_id</span><span class="se">\&quot;</span><span class="s2">: null}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;sn_query_field&quot;</span><span class="p">:</span> <span class="s2">&quot;email&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sn_table_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sys_user&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sn_query_value&quot;</span><span class="p">:</span> <span class="s2">&quot;ibmresilient&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">success</span><span class="se">\"</span><span class="s2">: false, </span><span class="se">\"</span><span class="s2">inputs</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\"</span><span class="s2">sn_query_field</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">email</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">sn_table_name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">sys_user</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">sn_query_value</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">ibmresilient</span><span class="se">\"</span><span class="s2">}, </span><span class="se">\"</span><span class="s2">sys_id</span><span class="se">\"</span><span class="s2">: null}"</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"sn_query_field"</span><span class="p">:</span> <span class="s2">"email"</span><span class="p">,</span>
+    <span class="s2">"sn_table_name"</span><span class="p">:</span> <span class="s2">"sys_user"</span><span class="p">,</span>
+    <span class="s2">"sn_query_value"</span><span class="p">:</span> <span class="s2">"ibmresilient"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-service-now&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;myhost&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1971-01-01 00:00:00&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-service-now"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.0.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"myhost"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1971-01-01 00:00:00"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;sys_id&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="s2">"sys_id"</span><span class="p">:</span> <span class="n">null</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </details>
 <details><summary>Example input Script:</summary>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The table in ServiceNow to query</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">sn_table_name</span> <span class="o">=</span> <span class="s2">&quot;sys_user_group&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_table_name</span> <span class="o">=</span> <span class="s2">"sys_user_group"</span>
 
 <span class="c1"># The name of the field/table column to query</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">sn_query_field</span> <span class="o">=</span> <span class="s2">&quot;name&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_query_field</span> <span class="o">=</span> <span class="s2">"name"</span>
 
 <span class="c1"># The value to equate the cell to</span>
 <span class="c1"># Get the group name from the Rule Activity Field with:</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">sn_query_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;sn_assignment_group&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sn_query_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"sn_assignment_group"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 <span class="c1">## OR Set group name statically with:</span>
-<span class="c1">## inputs.sn_query_value = &quot;IT Securities&quot;</span>
+<span class="c1">## inputs.sn_query_value = "IT Securities"</span>
 </pre></div>
 </div>
 </details>
@@ -1320,35 +1320,35 @@ reflect the originating table name.</p>
 </details>
 <details><summary>Output:</summary>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
-      <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;sn_resilient_status&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+      <span class="s2">"task_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"sn_resilient_status"</span><span class="p">:</span> <span class="s2">"C"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">28</span>
+    <span class="s2">"res_id"</span><span class="p">:</span> <span class="s2">"RES-2117"</span><span class="p">,</span>
+    <span class="s2">"row_id"</span><span class="p">:</span> <span class="mi">28</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2">: true, </span><span class="se">\&quot;</span><span class="s2">inputs</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">incident_id</span><span class="se">\&quot;</span><span class="s2">: 2117, </span><span class="se">\&quot;</span><span class="s2">task_id</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">sn_resilient_status</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">C</span><span class="se">\&quot;</span><span class="s2">}, </span><span class="se">\&quot;</span><span class="s2">res_id</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">RES-2117</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">row_id</span><span class="se">\&quot;</span><span class="s2">: 28}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
-    <span class="s2">&quot;task_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;sn_resilient_status&quot;</span><span class="p">:</span> <span class="s2">&quot;C&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">success</span><span class="se">\"</span><span class="s2">: true, </span><span class="se">\"</span><span class="s2">inputs</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\"</span><span class="s2">incident_id</span><span class="se">\"</span><span class="s2">: 2117, </span><span class="se">\"</span><span class="s2">task_id</span><span class="se">\"</span><span class="s2">: null, </span><span class="se">\"</span><span class="s2">sn_resilient_status</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">C</span><span class="se">\"</span><span class="s2">}, </span><span class="se">\"</span><span class="s2">res_id</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">RES-2117</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">row_id</span><span class="se">\"</span><span class="s2">: 28}"</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2117</span><span class="p">,</span>
+    <span class="s2">"task_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"sn_resilient_status"</span><span class="p">:</span> <span class="s2">"C"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-service-now&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;myhost&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;1971-01-01 00:00:00&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-service-now"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.0.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"myhost"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1485</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"1971-01-01 00:00:00"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;res_id&quot;</span><span class="p">:</span> <span class="s2">&quot;RES-2117&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;row_id&quot;</span><span class="p">:</span> <span class="mi">28</span>
+  <span class="s2">"res_id"</span><span class="p">:</span> <span class="s2">"RES-2117"</span><span class="p">,</span>
+  <span class="s2">"row_id"</span><span class="p">:</span> <span class="mi">28</span>
 <span class="p">}</span>
 </pre></div>
 </div>

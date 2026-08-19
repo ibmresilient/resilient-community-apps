@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -720,10 +720,10 @@ List any steps that are needed to configure the endpoint to use this app.
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;attendee_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://us05web.zoom.us/j/89922216709&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;attendee_url_with_pass&quot;</span><span class="p">:</span> <span class="s2">&quot;https://us05web.zoom.us/j/89922216709?pwd=UTlEYWRrbUV4SHBacStvQUkvcHVPQT09&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;date_created&quot;</span><span class="p">:</span> <span class="s2">&quot;03/27/2023 17:41:22&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;host_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://us05web.zoom.us/s/89922216709?zak=eyJ0eXAiOiJKV1QiLCJzdiI6IjAwMDAwMSIsInptX3NrbSI6InptX28ybSIsImFsZyI6IkhTMjU2In0.eyJhdWQiOiJjbGllbnRzbSIsInVpZCI6InhWdnpidFpjU29hVkVUSXE2VHhqSlEiLCJpc3MiOiJ3ZWIiLCJzayI6IjAiLCJzdHkiOjEwMCwid2NkIjoidXMwNSIsImNsdCI6MCwibW51bSI6Ijg5OTIyMjE2NzA5IiwiZXhwIjoxNjc5OTYwNDgzLCJpYXQiOjE2Nzk5NTMyODMsImFpZCI6IkxTVjJvSHZVU3Ftd0NmeVpTcXpPcWciLCJjaWQiOiIifQ.Ka_DeS7RecJbEj-jatJS90I7TSbXKY7PBcYXlCPfrCM&quot;</span>
+  <span class="s2">"attendee_url"</span><span class="p">:</span> <span class="s2">"https://us05web.zoom.us/j/89922216709"</span><span class="p">,</span>
+  <span class="s2">"attendee_url_with_pass"</span><span class="p">:</span> <span class="s2">"https://us05web.zoom.us/j/89922216709?pwd=UTlEYWRrbUV4SHBacStvQUkvcHVPQT09"</span><span class="p">,</span>
+  <span class="s2">"date_created"</span><span class="p">:</span> <span class="s2">"03/27/2023 17:41:22"</span><span class="p">,</span>
+  <span class="s2">"host_url"</span><span class="p">:</span> <span class="s2">"https://us05web.zoom.us/s/89922216709?zak=eyJ0eXAiOiJKV1QiLCJzdiI6IjAwMDAwMSIsInptX3NrbSI6InptX28ybSIsImFsZyI6IkhTMjU2In0.eyJhdWQiOiJjbGllbnRzbSIsInVpZCI6InhWdnpidFpjU29hVkVUSXE2VHhqSlEiLCJpc3MiOiJ3ZWIiLCJzayI6IjAiLCJzdHkiOjEwMCwid2NkIjoidXMwNSIsImNsdCI6MCwibW51bSI6Ijg5OTIyMjE2NzA5IiwiZXhwIjoxNjc5OTYwNDgzLCJpYXQiOjE2Nzk5NTMyODMsImFpZCI6IkxTVjJvSHZVU3Ftd0NmeVpTcXpPcWciLCJjaWQiOiIifQ.Ka_DeS7RecJbEj-jatJS90I7TSbXKY7PBcYXlCPfrCM"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -733,15 +733,15 @@ List any steps that are needed to configure the endpoint to use this app.
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">zoom_topic</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">zoom_topic</span>
 
-<span class="n">inputs</span><span class="o">.</span><span class="n">zoom_password</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="s1">&#39;zoom_password&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">zoom_password</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">zoom_password</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">zoom_password</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="s1">'zoom_password'</span><span class="p">)</span> <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">zoom_password</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">zoom_password</span>
 
 <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">zoom_agenda</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">zoom_agenda</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">zoom_agenda</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="s1">&#39;zoom_agenda&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">incident</span><span class="o">.</span><span class="n">description</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">incident</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+  <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="s1">'zoom_agenda'</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">incident</span><span class="o">.</span><span class="n">description</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">incident</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
     <span class="n">inputs</span><span class="o">.</span><span class="n">zoom_agenda</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span>
 
-<span class="n">inputs</span><span class="o">.</span><span class="n">zoom_record_meeting</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="s1">&#39;zoom_record_meeting&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">zoom_record_meeting</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">zoom_record_meeting</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">zoom_record_meeting</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="s1">'zoom_record_meeting'</span><span class="p">)</span> <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">zoom_record_meeting</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">zoom_record_meeting</span>
 
 
 </pre></div>
@@ -752,24 +752,24 @@ List any steps that are needed to configure the endpoint to use this app.
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># results:</span>
 <span class="c1"># {</span>
-<span class="c1">#   &quot;host_url&quot;: &quot;https://zoom.us/s/x?zak=x&quot;,</span>
-<span class="c1">#   &quot;attendee_url&quot;: &quot;https://zoom.us/j/x&quot;,</span>
-<span class="c1">#   &quot;date_created&quot;: &quot;01/01/1971 12:00:00&quot;,</span>
-<span class="c1">#   &quot;attendee_url_with_pass&quot;: &#39;https://us05web.zoom.us/j/89922216709?pwd=UTlEYWRrbUV4SHBacStvQUkvcHVPQT09&#39;</span>
+<span class="c1">#   "host_url": "https://zoom.us/s/x?zak=x",</span>
+<span class="c1">#   "attendee_url": "https://zoom.us/j/x",</span>
+<span class="c1">#   "date_created": "01/01/1971 12:00:00",</span>
+<span class="c1">#   "attendee_url_with_pass": 'https://us05web.zoom.us/j/89922216709?pwd=UTlEYWRrbUV4SHBacStvQUkvcHVPQT09'</span>
 <span class="c1"># }</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">host_url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">results</span><span class="o">.</span><span class="n">attendee_url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
   <span class="n">host_url</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">host_url</span>
   <span class="n">attendee_url</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">attendee_url</span>
 
   <span class="k">if</span> <span class="n">host_url</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">host_url</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">host_url</span> <span class="o">=</span> <span class="s2">""</span>
 
   <span class="k">if</span> <span class="n">attendee_url</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">attendee_url</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">attendee_url</span> <span class="o">=</span> <span class="s2">""</span>
 
-<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;b&gt;Zoom Meeting:&lt;/b&gt;</span>
-<span class="s2">          &lt;b&gt;Host URL:&lt;/b&gt; &lt;a href=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;</span><span class="si">{0}</span><span class="s2">&lt;/a&gt;</span>
-<span class="s2">          &lt;b&gt;Attendee URL:&lt;/b&gt; &lt;a href=&#39;</span><span class="si">{1}</span><span class="s2">&#39;&gt;</span><span class="si">{1}</span><span class="s2">&lt;/a&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">host_url</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">attendee_url</span><span class="p">)</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">"""&lt;b&gt;Zoom Meeting:&lt;/b&gt;</span>
+<span class="s2">          &lt;b&gt;Host URL:&lt;/b&gt; &lt;a href='</span><span class="si">{0}</span><span class="s2">'&gt;</span><span class="si">{0}</span><span class="s2">&lt;/a&gt;</span>
+<span class="s2">          &lt;b&gt;Attendee URL:&lt;/b&gt; &lt;a href='</span><span class="si">{1}</span><span class="s2">'&gt;</span><span class="si">{1}</span><span class="s2">&lt;/a&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">host_url</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">attendee_url</span><span class="p">)</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
 </pre></div>

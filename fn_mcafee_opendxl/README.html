@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -632,46 +632,46 @@ mcafee_wait_for_response: Specify whether or not to wait for the response. Uses 
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="p">{</span><span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-     <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-     <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mcafee_topic_name&#39;</span><span class="p">:</span> <span class="s1">&#39;/mcafee/service/epo/remote/epo1&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;mcafee_dxl_payload&#39;</span><span class="p">:</span> <span class="s1">&#39;{&quot;command&quot;: &quot;system.applyTag&quot;,</span>
-                                         <span class="s2">&quot;output&quot;</span><span class="p">:</span> <span class="s2">&quot;json&quot;</span><span class="p">,</span>
-                                         <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;names&quot;</span><span class="p">:</span> <span class="s2">&quot;10.0.2.15&quot;</span><span class="p">,</span> <span class="s2">&quot;tagName&quot;</span><span class="p">:</span> <span class="s2">&quot;Shut Down&quot;</span><span class="p">}}</span><span class="s1">&#39;,</span>
-                 <span class="s1">&#39;mcafee_publish_method&#39;</span><span class="p">:</span> <span class="s1">&#39;Service&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;mcafee_wait_for_response&#39;</span><span class="p">:</span> <span class="s1">&#39;Yes&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;response&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;_version&#39;</span><span class="p">:</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span>
-                              <span class="s1">&#39;_message_id&#39;</span><span class="p">:</span> <span class="s1">&#39;{eb976a7f-2051-43f7-bd13-0205630385a7}&#39;</span><span class="p">,</span>
-                              <span class="s1">&#39;_source_client_id&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-                              <span class="s1">&#39;_source_broker_id&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-                              <span class="s1">&#39;_destination_topic&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-                              <span class="s1">&#39;_payload&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-                              <span class="s1">&#39;_broker_ids&#39;</span><span class="p">:</span> <span class="p">[],</span>
-                              <span class="s1">&#39;_client_ids&#39;</span><span class="p">:</span> <span class="p">[],</span>
-                              <span class="s1">&#39;_other_fields&#39;</span><span class="p">:</span> <span class="p">{},</span>
-                              <span class="s1">&#39;_source_tenant_guid&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
-                              <span class="s1">&#39;_destination_tenant_guids&#39;</span><span class="p">:</span> <span class="p">[],</span>
-                              <span class="s1">&#39;_request&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                              <span class="s1">&#39;_request_message_id&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                              <span class="s1">&#39;_service_id&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">}},</span>
-        <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="s1">&#39;{&quot;mcafee_topic_name&quot;: &quot;/mcafee/service/epo/remote/epo1&quot;, &quot;mcafee_dxl_payload&quot;: &quot;{</span><span class="se">\\</span><span class="s1">&quot;command</span><span class="se">\\</span><span class="s1">&quot;: </span><span class="se">\\</span><span class="s1">&quot;system.applyTag</span><span class="se">\\</span><span class="s1">&quot;, </span><span class="se">\\</span><span class="s1">&quot;output</span><span class="se">\\</span><span class="s1">&quot;: </span><span class="se">\\</span><span class="s1">&quot;json</span><span class="se">\\</span><span class="s1">&quot;, </span><span class="se">\\</span><span class="s1">&quot;params</span><span class="se">\\</span><span class="s1">&quot;:       {</span><span class="se">\\</span><span class="s1">&quot;names</span><span class="se">\\</span><span class="s1">&quot;: </span><span class="se">\\</span><span class="s1">&quot;10.0.2.15</span><span class="se">\\</span><span class="s1">&quot;, </span><span class="se">\\</span><span class="s1">&quot;tagName</span><span class="se">\\</span><span class="s1">&quot;: </span><span class="se">\\</span><span class="s1">&quot;Shut Down</span><span class="se">\\</span><span class="s1">&quot;}}&quot;, &quot;mcafee_publish_method&quot;: &quot;Service&quot;, &quot;mcafee_wait_for_response&quot;: &quot;Yes&quot;, &quot;response&quot;: {&quot;_version&quot;: &quot;2&quot;, &quot;_message_id&quot;: &quot;{eb976a7f-2051-43f7-bd13-0205630385a7}&quot;, &quot;_source_client_id&quot;: &quot;&quot;, &quot;_source_broker_id&quot;: &quot;&quot;, &quot;_destination_topic&quot;: &quot;&quot;, &quot;_payload&quot;: &quot;&quot;, &quot;_broker_ids&quot;: [], &quot;_client_ids&quot;: [], &quot;_other_fields&quot;: </span><span class="si">{}</span><span class="s1">, &quot;_source_tenant_guid&quot;: &quot;&quot;, &quot;_destination_tenant_guids&quot;: [], &quot;_request&quot;: null, &quot;_request_message_id&quot;: null, &quot;_service_id&quot;: &quot;&quot;}}&#39;</span><span class="p">,</span>
+    <span class="p">{</span><span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+     <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+     <span class="s1">'reason'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+     <span class="s1">'content'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'mcafee_topic_name'</span><span class="p">:</span> <span class="s1">'/mcafee/service/epo/remote/epo1'</span><span class="p">,</span>
+                 <span class="s1">'mcafee_dxl_payload'</span><span class="p">:</span> <span class="s1">'{"command": "system.applyTag",</span>
+                                         <span class="s2">"output"</span><span class="p">:</span> <span class="s2">"json"</span><span class="p">,</span>
+                                         <span class="s2">"params"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"names"</span><span class="p">:</span> <span class="s2">"10.0.2.15"</span><span class="p">,</span> <span class="s2">"tagName"</span><span class="p">:</span> <span class="s2">"Shut Down"</span><span class="p">}}</span><span class="s1">',</span>
+                 <span class="s1">'mcafee_publish_method'</span><span class="p">:</span> <span class="s1">'Service'</span><span class="p">,</span>
+                 <span class="s1">'mcafee_wait_for_response'</span><span class="p">:</span> <span class="s1">'Yes'</span><span class="p">,</span>
+                 <span class="s1">'response'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'_version'</span><span class="p">:</span> <span class="s1">'2'</span><span class="p">,</span>
+                              <span class="s1">'_message_id'</span><span class="p">:</span> <span class="s1">'{eb976a7f-2051-43f7-bd13-0205630385a7}'</span><span class="p">,</span>
+                              <span class="s1">'_source_client_id'</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span>
+                              <span class="s1">'_source_broker_id'</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span>
+                              <span class="s1">'_destination_topic'</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span>
+                              <span class="s1">'_payload'</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span>
+                              <span class="s1">'_broker_ids'</span><span class="p">:</span> <span class="p">[],</span>
+                              <span class="s1">'_client_ids'</span><span class="p">:</span> <span class="p">[],</span>
+                              <span class="s1">'_other_fields'</span><span class="p">:</span> <span class="p">{},</span>
+                              <span class="s1">'_source_tenant_guid'</span><span class="p">:</span> <span class="s1">''</span><span class="p">,</span>
+                              <span class="s1">'_destination_tenant_guids'</span><span class="p">:</span> <span class="p">[],</span>
+                              <span class="s1">'_request'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                              <span class="s1">'_request_message_id'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                              <span class="s1">'_service_id'</span><span class="p">:</span> <span class="s1">''</span><span class="p">}},</span>
+        <span class="s1">'raw'</span><span class="p">:</span> <span class="s1">'{"mcafee_topic_name": "/mcafee/service/epo/remote/epo1", "mcafee_dxl_payload": "{</span><span class="se">\\</span><span class="s1">"command</span><span class="se">\\</span><span class="s1">": </span><span class="se">\\</span><span class="s1">"system.applyTag</span><span class="se">\\</span><span class="s1">", </span><span class="se">\\</span><span class="s1">"output</span><span class="se">\\</span><span class="s1">": </span><span class="se">\\</span><span class="s1">"json</span><span class="se">\\</span><span class="s1">", </span><span class="se">\\</span><span class="s1">"params</span><span class="se">\\</span><span class="s1">":       {</span><span class="se">\\</span><span class="s1">"names</span><span class="se">\\</span><span class="s1">": </span><span class="se">\\</span><span class="s1">"10.0.2.15</span><span class="se">\\</span><span class="s1">", </span><span class="se">\\</span><span class="s1">"tagName</span><span class="se">\\</span><span class="s1">": </span><span class="se">\\</span><span class="s1">"Shut Down</span><span class="se">\\</span><span class="s1">"}}", "mcafee_publish_method": "Service", "mcafee_wait_for_response": "Yes", "response": {"_version": "2", "_message_id": "{eb976a7f-2051-43f7-bd13-0205630385a7}", "_source_client_id": "", "_source_broker_id": "", "_destination_topic": "", "_payload": "", "_broker_ids": [], "_client_ids": [], "_other_fields": </span><span class="si">{}</span><span class="s1">, "_source_tenant_guid": "", "_destination_tenant_guids": [], "_request": null, "_request_message_id": null, "_service_id": ""}}'</span><span class="p">,</span>
 
-        <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mcafee_publish_method&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">305</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Service&#39;</span><span class="p">},</span>
-                   <span class="s1">&#39;mcafee_topic_name&#39;</span><span class="p">:</span> <span class="s1">&#39;/mcafee/service/epo/remote/epo1&#39;</span><span class="p">,</span>
-                   <span class="s1">&#39;mcafee_dxl_payload&#39;</span><span class="p">:</span> <span class="s1">&#39;{&quot;command&quot;: &quot;system.applyTag&quot;, &quot;output&quot;: &quot;json&quot;, &quot;params&quot;: {&quot;names&quot;: &quot;10.0.2.15&quot;, &quot;tagName&quot;: &quot;Shut Down&quot;}}&#39;</span><span class="p">,</span>
-                   <span class="s1">&#39;mcafee_wait_for_response&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">302</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Yes&#39;</span><span class="p">}},</span>
+        <span class="s1">'inputs'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'mcafee_publish_method'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'id'</span><span class="p">:</span> <span class="mi">305</span><span class="p">,</span> <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Service'</span><span class="p">},</span>
+                   <span class="s1">'mcafee_topic_name'</span><span class="p">:</span> <span class="s1">'/mcafee/service/epo/remote/epo1'</span><span class="p">,</span>
+                   <span class="s1">'mcafee_dxl_payload'</span><span class="p">:</span> <span class="s1">'{"command": "system.applyTag", "output": "json", "params": {"names": "10.0.2.15", "tagName": "Shut Down"}}'</span><span class="p">,</span>
+                   <span class="s1">'mcafee_wait_for_response'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'id'</span><span class="p">:</span> <span class="mi">302</span><span class="p">,</span> <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'Yes'</span><span class="p">}},</span>
 
-        <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="s1">&#39;fn-mcafee-opendxl&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;package_version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.2.0&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;MacBook-Pro.local&#39;</span><span class="p">,</span>
-                    <span class="s1">&#39;execution_time_ms&#39;</span><span class="p">:</span> <span class="mi">2534</span><span class="p">,</span>
-                    <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2020-10-20 17:34:14&#39;</span><span class="p">},</span>
-        <span class="s1">&#39;mcafee_topic_name&#39;</span><span class="p">:</span> <span class="s1">&#39;/mcafee/service/epo/remote/epo1&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;mcafee_dxl_payload&#39;</span><span class="p">:</span> <span class="s1">&#39;{&quot;command&quot;: &quot;system.applyTag&quot;, &quot;output&quot;: &quot;json&quot;, &quot;params&quot;: {&quot;names&quot;: &quot;10.0.2.15&quot;, &quot;tagName&quot;: &quot;Shut Down&quot;}}&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;mcafee_publish_method&#39;</span><span class="p">:</span> <span class="s1">&#39;Service&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;mcafee_wait_for_response&#39;</span><span class="p">:</span> <span class="s1">&#39;Yes&#39;</span><span class="p">}</span>
+        <span class="s1">'metrics'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+                    <span class="s1">'package'</span><span class="p">:</span> <span class="s1">'fn-mcafee-opendxl'</span><span class="p">,</span>
+                    <span class="s1">'package_version'</span><span class="p">:</span> <span class="s1">'1.2.0'</span><span class="p">,</span>
+                    <span class="s1">'host'</span><span class="p">:</span> <span class="s1">'MacBook-Pro.local'</span><span class="p">,</span>
+                    <span class="s1">'execution_time_ms'</span><span class="p">:</span> <span class="mi">2534</span><span class="p">,</span>
+                    <span class="s1">'timestamp'</span><span class="p">:</span> <span class="s1">'2020-10-20 17:34:14'</span><span class="p">},</span>
+        <span class="s1">'mcafee_topic_name'</span><span class="p">:</span> <span class="s1">'/mcafee/service/epo/remote/epo1'</span><span class="p">,</span>
+        <span class="s1">'mcafee_dxl_payload'</span><span class="p">:</span> <span class="s1">'{"command": "system.applyTag", "output": "json", "params": {"names": "10.0.2.15", "tagName": "Shut Down"}}'</span><span class="p">,</span>
+        <span class="s1">'mcafee_publish_method'</span><span class="p">:</span> <span class="s1">'Service'</span><span class="p">,</span>
+        <span class="s1">'mcafee_wait_for_response'</span><span class="p">:</span> <span class="s1">'Yes'</span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -681,11 +681,11 @@ mcafee_wait_for_response: Specify whether or not to wait for the response. Uses 
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Replaces trust level string with acceptable value to publish to topic</span>
 
-<span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_dxl_payload</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_dxl_payload</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">Known Malicious</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_dxl_payload</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_dxl_payload</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\"</span><span class="s2">Known Malicious</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"1"</span><span class="p">)</span>
 
-<span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_dxl_payload</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_dxl_payload</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">Most Likely Malicious</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;15&quot;</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_dxl_payload</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_dxl_payload</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\"</span><span class="s2">Most Likely Malicious</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"15"</span><span class="p">)</span>
 
-<span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_dxl_payload</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_dxl_payload</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">Might Be Malicious</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;30&quot;</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_dxl_payload</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">mcafee_dxl_payload</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"</span><span class="se">\"</span><span class="s2">Might Be Malicious</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span> <span class="s2">"30"</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -693,37 +693,37 @@ mcafee_wait_for_response: Specify whether or not to wait for the response. Uses 
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
 <span class="sd">Response returned provides the input values in the following format</span>
 <span class="sd">{</span>
-<span class="sd">  &quot;mcafee_topic_name&quot;: &quot;&lt;topic_name&gt;&quot;,</span>
-<span class="sd">  &quot;mcafee_dxl_payload&quot;: &quot;&lt;payload&gt;&quot;,</span>
-<span class="sd">  &quot;mcafee_publish_method&quot;: &quot;&lt;method&gt;&quot;,</span>
-<span class="sd">  &quot;mcafee_wait_for_response&quot;: &quot;&lt;wait for response&gt;&quot;</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">  "mcafee_topic_name": "&lt;topic_name&gt;",</span>
+<span class="sd">  "mcafee_dxl_payload": "&lt;payload&gt;",</span>
+<span class="sd">  "mcafee_publish_method": "&lt;method&gt;",</span>
+<span class="sd">  "mcafee_wait_for_response": "&lt;wait for response&gt;"</span>
+<span class="sd">"""</span>
 
-<span class="n">trust_level</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">trust_level</span> <span class="o">=</span> <span class="s2">""</span>
 
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mcafee_dxl_payload&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;30&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-  <span class="n">trust_level</span> <span class="o">=</span> <span class="s2">&quot;Might Be Malicious&quot;</span>
+<span class="k">if</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mcafee_dxl_payload"</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"30"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+  <span class="n">trust_level</span> <span class="o">=</span> <span class="s2">"Might Be Malicious"</span>
 
-<span class="k">elif</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mcafee_dxl_payload&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;15&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-  <span class="n">trust_level</span> <span class="o">=</span> <span class="s2">&quot;Most Likely Malicious&quot;</span>
+<span class="k">elif</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mcafee_dxl_payload"</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"15"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+  <span class="n">trust_level</span> <span class="o">=</span> <span class="s2">"Most Likely Malicious"</span>
 
-<span class="k">elif</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mcafee_dxl_payload&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-  <span class="n">trust_level</span> <span class="o">=</span> <span class="s2">&quot;Known Malicious&quot;</span>
+<span class="k">elif</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mcafee_dxl_payload"</span><span class="p">)</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"1"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+  <span class="n">trust_level</span> <span class="o">=</span> <span class="s2">"Known Malicious"</span>
 
 
 
-<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;The following was published to DXL:&lt;br&gt;</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">"""The following was published to DXL:&lt;br&gt;</span>
 <span class="s2">&lt;b&gt;Payload:&lt;/b&gt; </span><span class="si">{}</span><span class="s2">&lt;br&gt;</span>
 <span class="s2">&lt;b&gt;Topic:&lt;/b&gt; </span><span class="si">{}</span><span class="s2">&lt;br&gt;</span>
 <span class="s2">&lt;b&gt;Method:&lt;/b&gt; </span><span class="si">{}</span><span class="s2">&lt;br&gt;</span>
 
 <span class="s2">Setting Trust Level to </span><span class="si">{}</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mcafee_dxl_payload&quot;</span><span class="p">),</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mcafee_topic_name&quot;</span><span class="p">),</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mcafee_publish_method&quot;</span><span class="p">),</span> <span class="n">trust_level</span><span class="p">)</span>
+<span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mcafee_dxl_payload"</span><span class="p">),</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mcafee_topic_name"</span><span class="p">),</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mcafee_publish_method"</span><span class="p">),</span> <span class="n">trust_level</span><span class="p">)</span>
 
 <span class="n">noteText</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">noteText</span><span class="p">)</span>

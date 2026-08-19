@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -707,32 +707,32 @@ Note: Any Wiz issues that are marked as “resolved” in Wiz <em>before</em> th
 <details><summary>soar_create_case.jinja</summary>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
 <span class="x">  </span><span class="c">{# JINJA template for creating a new SOAR incident from an endpoint #}</span>
-<span class="x">  </span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">severity_mapping</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;{</span>
-<span class="s1">    &quot;INFORMATIONAL&quot;: &quot;Low&quot;, </span>
-<span class="s1">    &quot;LOW&quot;: &quot;Low&quot;, </span>
-<span class="s1">    &quot;MEDIUM&quot;: &quot;Medium&quot;, </span>
-<span class="s1">    &quot;HIGH&quot;: &quot;High&quot;,</span>
-<span class="s1">    &quot;CRITICAL&quot;: &quot;High&quot;</span>
-<span class="s1">  }&#39;&#39;&#39;</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">severity_mapping</span> <span class="o">=</span> <span class="s1">'''{</span>
+<span class="s1">    "INFORMATIONAL": "Low", </span>
+<span class="s1">    "LOW": "Low", </span>
+<span class="s1">    "MEDIUM": "Medium", </span>
+<span class="s1">    "HIGH": "High",</span>
+<span class="s1">    "CRITICAL": "High"</span>
+<span class="s1">  }'''</span>
   <span class="cp">%}</span>
-<span class="x">  &quot;name&quot;: &quot;Wiz Issue - </span><span class="cp">{{</span> <span class="nv">sourceRule.name</span> <span class="cp">}}</span><span class="x">: </span><span class="cp">{{</span> <span class="nv">id</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">  &quot;description&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">sourceRule.controlDescription</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">(</span><span class="s1">&#39;&quot;&#39;</span><span class="o">,</span> <span class="s1">&#39;\\&quot;&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">  &quot;discovered_date&quot;: </span><span class="cp">{{</span> <span class="nv">createdAt</span><span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">split_at</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
-<span class="x">  &quot;start_date&quot;: </span><span class="cp">{{</span> <span class="nv">createdAt</span><span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">split_at</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
-<span class="x">  &quot;plan_status&quot;: &quot;A&quot;,</span>
-<span class="x">  &quot;severity_code&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">severity</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="nv">severity_mapping</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">  &quot;properties&quot;: {</span>
-<span class="x">    &quot;wiz_issue_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">id</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;wiz_issue_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">    &quot;wiz_description&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">sourceRule.controlDescription</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">(</span><span class="s1">&#39;&quot;&#39;</span><span class="o">,</span> <span class="s1">&#39;\\&quot;&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">  "name": "Wiz Issue - </span><span class="cp">{{</span> <span class="nv">sourceRule.name</span> <span class="cp">}}</span><span class="x">: </span><span class="cp">{{</span> <span class="nv">id</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">  "description": "</span><span class="cp">{{</span> <span class="nv">sourceRule.controlDescription</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">(</span><span class="s1">'"'</span><span class="o">,</span> <span class="s1">'\\"'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">  "discovered_date": </span><span class="cp">{{</span> <span class="nv">createdAt</span><span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">split_at</span><span class="o">=</span><span class="s1">'.'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  "start_date": </span><span class="cp">{{</span> <span class="nv">createdAt</span><span class="o">|</span> <span class="nf">soar_datetimeformat</span><span class="o">(</span><span class="nv">split_at</span><span class="o">=</span><span class="s1">'.'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">,</span>
+<span class="x">  "plan_status": "A",</span>
+<span class="x">  "severity_code": "</span><span class="cp">{{</span> <span class="nv">severity</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="nv">severity_mapping</span><span class="o">)</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">  "properties": {</span>
+<span class="x">    "wiz_issue_id": "</span><span class="cp">{{</span> <span class="nv">id</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "wiz_issue_status": "</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">    "wiz_description": "</span><span class="cp">{{</span> <span class="nv">sourceRule.controlDescription</span> <span class="o">|</span> <span class="nf">replace</span><span class="o">(</span><span class="s1">'"'</span><span class="o">,</span> <span class="s1">'\\"'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">"</span>
 <span class="x">  },</span>
 
 <span class="x">  </span><span class="c">{# add comments as necessary #}</span>
-<span class="x">  &quot;comments&quot;: [</span>
+<span class="x">  "comments": [</span>
 <span class="x">    {</span>
-<span class="x">      &quot;text&quot;: {</span>
-<span class="x">        &quot;format&quot;: &quot;html&quot;,</span>
-<span class="x">        &quot;content&quot;: &quot;&lt;b&gt;Created by Wiz:&lt;/b&gt; </span><span class="cp">{{</span> <span class="nv">entity_url</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">      "text": {</span>
+<span class="x">        "format": "html",</span>
+<span class="x">        "content": "&lt;b&gt;Created by Wiz:&lt;/b&gt; </span><span class="cp">{{</span> <span class="nv">entity_url</span> <span class="cp">}}</span><span class="x">"</span>
 <span class="x">      }</span>
 <span class="x">    }</span>
 <span class="x">  ]</span>
@@ -743,18 +743,18 @@ Note: Any Wiz issues that are marked as “resolved” in Wiz <em>before</em> th
 <details><summary>soar_update_case.jinja</summary>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
 <span class="x">  </span><span class="c">{# JINJA template for updating a new SOAR incident from an endpoint #}</span>
-<span class="x">  </span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">severity_mapping</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;{</span>
-<span class="s1">    &quot;INFORMATIONAL&quot;: &quot;Low&quot;, </span>
-<span class="s1">    &quot;LOW&quot;: &quot;Low&quot;, </span>
-<span class="s1">    &quot;MEDIUM&quot;: &quot;Medium&quot;, </span>
-<span class="s1">    &quot;HIGH&quot;: &quot;High&quot;,</span>
-<span class="s1">    &quot;CRITICAL&quot;: &quot;High&quot;</span>
-<span class="s1">  }&#39;&#39;&#39;</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">severity_mapping</span> <span class="o">=</span> <span class="s1">'''{</span>
+<span class="s1">    "INFORMATIONAL": "Low", </span>
+<span class="s1">    "LOW": "Low", </span>
+<span class="s1">    "MEDIUM": "Medium", </span>
+<span class="s1">    "HIGH": "High",</span>
+<span class="s1">    "CRITICAL": "High"</span>
+<span class="s1">  }'''</span>
   <span class="cp">%}</span>
-<span class="x">  &quot;severity_code&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">severity</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="nv">severity_mapping</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
+<span class="x">  "severity_code": "</span><span class="cp">{{</span> <span class="nv">severity</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="nv">severity_mapping</span><span class="o">)</span> <span class="cp">}}</span><span class="x">",</span>
 <span class="x">  </span><span class="c">{# specify your custom fields for your endpoint solution #}</span>
-<span class="x">  &quot;properties&quot;: {</span>
-<span class="x">      &quot;wiz_issue_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">  "properties": {</span>
+<span class="x">      "wiz_issue_status": "</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">"</span>
 <span class="x">  }</span>
 <span class="x">}</span>
 </pre></div>
@@ -763,20 +763,20 @@ Note: Any Wiz issues that are marked as “resolved” in Wiz <em>before</em> th
 <details><summary>soar_close_case.jinja</summary>
 <div class="highlight-jinja notranslate"><div class="highlight"><pre><span></span><span class="x">{</span>
 <span class="x">  </span><span class="c">{# JINJA template for closing a SOAR incident using endpoint data #}</span>
-<span class="x">  </span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">resolution_mapping</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;{</span>
-<span class="s1">    &quot;RESOLVED&quot;: &quot;Resolved&quot;,</span>
-<span class="s1">    &quot;REJECTED&quot;: &quot;Unresolved&quot;</span>
-<span class="s1">  }&#39;&#39;&#39;</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">resolution_mapping</span> <span class="o">=</span> <span class="s1">'''{</span>
+<span class="s1">    "RESOLVED": "Resolved",</span>
+<span class="s1">    "REJECTED": "Unresolved"</span>
+<span class="s1">  }'''</span>
   <span class="cp">%}</span>
 
-<span class="x">  </span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">close_message</span> <span class="o">=</span> <span class="s2">&quot;Closed by Wiz: Issue status:&quot;</span> <span class="cp">%}</span>
+<span class="x">  </span><span class="cp">{%</span> <span class="k">set</span> <span class="nv">close_message</span> <span class="o">=</span> <span class="s2">"Closed by Wiz: Issue status:"</span> <span class="cp">%}</span>
 
-<span class="x">  &quot;plan_status&quot;: &quot;C&quot;,</span>
-<span class="x">  &quot;resolution_id&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="nv">resolution_mapping</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">  &quot;resolution_summary&quot;: &quot;</span><span class="cp">{{</span><span class="nv">close_message</span><span class="cp">}}</span><span class="x"> </span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">&quot;,</span>
-<span class="x">  </span><span class="c">{# add additional fields based on your &#39;on close&#39; field requirements #}</span>
-<span class="x">  &quot;properties&quot;: {</span>
-<span class="x">      &quot;wiz_issue_status&quot;: &quot;</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">&quot;</span>
+<span class="x">  "plan_status": "C",</span>
+<span class="x">  "resolution_id": "</span><span class="cp">{{</span> <span class="nv">status</span> <span class="o">|</span> <span class="nf">soar_substitute</span><span class="o">(</span><span class="nv">resolution_mapping</span><span class="o">)</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">  "resolution_summary": "</span><span class="cp">{{</span><span class="nv">close_message</span><span class="cp">}}</span><span class="x"> </span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">",</span>
+<span class="x">  </span><span class="c">{# add additional fields based on your 'on close' field requirements #}</span>
+<span class="x">  "properties": {</span>
+<span class="x">      "wiz_issue_status": "</span><span class="cp">{{</span> <span class="nv">status</span> <span class="cp">}}</span><span class="x">"</span>
 <span class="x">  }</span>
 <span class="x">}</span>
 </pre></div>
@@ -832,202 +832,202 @@ Note: Any Wiz issues that are marked as “resolved” in Wiz <em>before</em> th
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;projects&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;1234567-abcdefg1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;1234567-abcdefg2&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;1234567-abcdefg3&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"projects"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"1234567-abcdefg1"</span><span class="p">,</span>
+      <span class="s2">"1234567-abcdefg2"</span><span class="p">,</span>
+      <span class="s2">"1234567-abcdefg3"</span>
     <span class="p">],</span>
-    <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"response"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;CVEDescription&quot;</span><span class="p">:</span> <span class="s2">&quot;The software constructs all or part of an SQL command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended SQL command when it is sent to a downstream component.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CVSSSeverity&quot;</span><span class="p">:</span> <span class="s2">&quot;NONE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;dataSourceName&quot;</span><span class="p">:</span> <span class="s2">&quot;Wiz Demo&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The vulnerability `CWE-89`  was found in the  `GET /WebGoat/SqlInjectionMitigations/servers?column=id` with  severity of `Critical`.The vulnerability can be remediated by </span><span class="se">\u0027</span><span class="s2">use an Object-Relational Mapping (ORM) like Hibernate that safely handles database interaction`.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;detailedName&quot;</span><span class="p">:</span> <span class="s2">&quot;GET /WebGoat/SqlInjectionMitigations/servers?column=id&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;detectionMethod&quot;</span><span class="p">:</span> <span class="s2">&quot;EXTERNAL_NETWORK_SCAN&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;epssPercentile&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;epssProbability&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;epssSeverity&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;exploitabilityScore&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;firstDetectedAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T11:12:05.228481Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;fixedVersion&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;hasCisaKevExploit&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;hasExploit&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ignoreRules&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;impactScore&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;lastDetectedAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T11:12:05.228481Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;layerMetadata&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;https:/test/com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;locationPath&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;CWE-89&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;portalUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://app.wiz.io/explorer/vulnerability-findings#~(entity~(~</span><span class="se">\u0027</span><span class="s2">ID))&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;projects&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"CVEDescription"</span><span class="p">:</span> <span class="s2">"The software constructs all or part of an SQL command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended SQL command when it is sent to a downstream component."</span><span class="p">,</span>
+        <span class="s2">"CVSSSeverity"</span><span class="p">:</span> <span class="s2">"NONE"</span><span class="p">,</span>
+        <span class="s2">"dataSourceName"</span><span class="p">:</span> <span class="s2">"Wiz Demo"</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"The vulnerability `CWE-89`  was found in the  `GET /WebGoat/SqlInjectionMitigations/servers?column=id` with  severity of `Critical`.The vulnerability can be remediated by </span><span class="se">\u0027</span><span class="s2">use an Object-Relational Mapping (ORM) like Hibernate that safely handles database interaction`."</span><span class="p">,</span>
+        <span class="s2">"detailedName"</span><span class="p">:</span> <span class="s2">"GET /WebGoat/SqlInjectionMitigations/servers?column=id"</span><span class="p">,</span>
+        <span class="s2">"detectionMethod"</span><span class="p">:</span> <span class="s2">"EXTERNAL_NETWORK_SCAN"</span><span class="p">,</span>
+        <span class="s2">"epssPercentile"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"epssProbability"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"epssSeverity"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"exploitabilityScore"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"firstDetectedAt"</span><span class="p">:</span> <span class="s2">"2024-04-15T11:12:05.228481Z"</span><span class="p">,</span>
+        <span class="s2">"fixedVersion"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"hasCisaKevExploit"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"hasExploit"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1234567-abcdefg"</span><span class="p">,</span>
+        <span class="s2">"ignoreRules"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"impactScore"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"lastDetectedAt"</span><span class="p">:</span> <span class="s2">"2024-04-15T11:12:05.228481Z"</span><span class="p">,</span>
+        <span class="s2">"layerMetadata"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"link"</span><span class="p">:</span> <span class="s2">"https:/test/com"</span><span class="p">,</span>
+        <span class="s2">"locationPath"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"CWE-89"</span><span class="p">,</span>
+        <span class="s2">"portalUrl"</span><span class="p">:</span> <span class="s2">"https://app.wiz.io/explorer/vulnerability-findings#~(entity~(~</span><span class="se">\u0027</span><span class="s2">ID))"</span><span class="p">,</span>
+        <span class="s2">"projects"</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Project 2&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+            <span class="s2">"businessUnit"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1234567-abcdefg"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Project 2"</span><span class="p">,</span>
+            <span class="s2">"riskProfile"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"businessImpact"</span><span class="p">:</span> <span class="s2">"MBI"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project-2&quot;</span>
+            <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"project-2"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;Dev&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;project 4&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+            <span class="s2">"businessUnit"</span><span class="p">:</span> <span class="s2">"Dev"</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1234567-abcdefg"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"project 4"</span><span class="p">,</span>
+            <span class="s2">"riskProfile"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"businessImpact"</span><span class="p">:</span> <span class="s2">"MBI"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project-4&quot;</span>
+            <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"project-4"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;Dev&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Project1&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+            <span class="s2">"businessUnit"</span><span class="p">:</span> <span class="s2">"Dev"</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1234567-abcdefg"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Project1"</span><span class="p">,</span>
+            <span class="s2">"riskProfile"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"businessImpact"</span><span class="p">:</span> <span class="s2">"MBI"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project1&quot;</span>
+            <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"project1"</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="s2">&quot;remediation&quot;</span><span class="p">:</span> <span class="s2">&quot;The most effective method of stopping SQL injection attacks is to only use an Object-Relational Mapping (ORM) like Hibernate...&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;resolutionReason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;resolvedAt&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;OPEN&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;validatedInRuntime&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;vendorSeverity&quot;</span><span class="p">:</span> <span class="s2">&quot;CRITICAL&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;vulnerableAsset&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;cloudPlatform&quot;</span><span class="p">:</span> <span class="s2">&quot;AWS&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;cloudProviderURL&quot;</span><span class="p">:</span> <span class="s2">&quot;https://test-console.aws.amazon.com/ec2/v2/home?#instanceDetailsid=0&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;hasLimitedInternetExposure&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-          <span class="s2">&quot;hasWideInternetExposure&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;ipAddresses&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;1.1.1.1&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;2.2.2.2&quot;</span>
+        <span class="s2">"remediation"</span><span class="p">:</span> <span class="s2">"The most effective method of stopping SQL injection attacks is to only use an Object-Relational Mapping (ORM) like Hibernate..."</span><span class="p">,</span>
+        <span class="s2">"resolutionReason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"resolvedAt"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"score"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"OPEN"</span><span class="p">,</span>
+        <span class="s2">"validatedInRuntime"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"vendorSeverity"</span><span class="p">:</span> <span class="s2">"CRITICAL"</span><span class="p">,</span>
+        <span class="s2">"version"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"vulnerableAsset"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"cloudPlatform"</span><span class="p">:</span> <span class="s2">"AWS"</span><span class="p">,</span>
+          <span class="s2">"cloudProviderURL"</span><span class="p">:</span> <span class="s2">"https://test-console.aws.amazon.com/ec2/v2/home?#instanceDetailsid=0"</span><span class="p">,</span>
+          <span class="s2">"hasLimitedInternetExposure"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">"hasWideInternetExposure"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1234567-abcdefg"</span><span class="p">,</span>
+          <span class="s2">"ipAddresses"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"1.1.1.1"</span><span class="p">,</span>
+            <span class="s2">"2.2.2.2"</span>
           <span class="p">],</span>
-          <span class="s2">&quot;isAccessibleFromOtherSubscriptions&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;isAccessibleFromOtherVnets&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;isAccessibleFromVPN&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Demo vulns findings&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;operatingSystem&quot;</span><span class="p">:</span> <span class="s2">&quot;Linux&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;providerUniqueId&quot;</span><span class="p">:</span> <span class="s2">&quot;arn:aws:instance/abcedefg&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;us-east-2&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Active&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;subscriptionExternalId&quot;</span><span class="p">:</span> <span class="s2">&quot;998231069301&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="s2">&quot;abcdefg-12345&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;subscriptionName&quot;</span><span class="p">:</span> <span class="s2">&quot;wiz-integrations&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="s2">&quot;Demo vulns findings&quot;</span>
+          <span class="s2">"isAccessibleFromOtherSubscriptions"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"isAccessibleFromOtherVnets"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"isAccessibleFromVPN"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Demo vulns findings"</span><span class="p">,</span>
+          <span class="s2">"operatingSystem"</span><span class="p">:</span> <span class="s2">"Linux"</span><span class="p">,</span>
+          <span class="s2">"providerUniqueId"</span><span class="p">:</span> <span class="s2">"arn:aws:instance/abcedefg"</span><span class="p">,</span>
+          <span class="s2">"region"</span><span class="p">:</span> <span class="s2">"us-east-2"</span><span class="p">,</span>
+          <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"Active"</span><span class="p">,</span>
+          <span class="s2">"subscriptionExternalId"</span><span class="p">:</span> <span class="s2">"998231069301"</span><span class="p">,</span>
+          <span class="s2">"subscriptionId"</span><span class="p">:</span> <span class="s2">"abcdefg-12345"</span><span class="p">,</span>
+          <span class="s2">"subscriptionName"</span><span class="p">:</span> <span class="s2">"wiz-integrations"</span><span class="p">,</span>
+          <span class="s2">"tags"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"Name"</span><span class="p">:</span> <span class="s2">"Demo vulns findings"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;VIRTUAL_MACHINE&quot;</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"VIRTUAL_MACHINE"</span>
         <span class="p">}</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;CVEDescription&quot;</span><span class="p">:</span> <span class="s2">&quot;The software constructs all or part of an SQL command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended SQL command when it is sent to a downstream component.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;CVSSSeverity&quot;</span><span class="p">:</span> <span class="s2">&quot;NONE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;dataSourceName&quot;</span><span class="p">:</span> <span class="s2">&quot;Wiz Demo&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;The vulnerability `CWE-89`  was found in the  `GET /WebGoat/SqlInjectionMitigations/servers?column=id` with  severity of `Critical`.The vulnerability can be remediated by </span><span class="se">\u0027</span><span class="s2">use an Object-Relational Mapping (ORM) like Hibernate that safely handles database interaction`.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;detailedName&quot;</span><span class="p">:</span> <span class="s2">&quot;GET /WebGoat/SqlInjectionMitigations/servers?column=id&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;detectionMethod&quot;</span><span class="p">:</span> <span class="s2">&quot;EXTERNAL_NETWORK_SCAN&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;epssPercentile&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;epssProbability&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;epssSeverity&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;exploitabilityScore&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;firstDetectedAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T11:12:05.226955Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;fixedVersion&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;hasCisaKevExploit&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;hasExploit&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ignoreRules&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;impactScore&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;lastDetectedAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T11:12:05.226955Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;layerMetadata&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="s2">&quot;https:/test/com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;locationPath&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;CWE-89&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;portalUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;https://app.wiz.io/explorer/vulnerability-findings#~(entity~(~</span><span class="se">\u0027</span><span class="s2">ID))&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;projects&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"CVEDescription"</span><span class="p">:</span> <span class="s2">"The software constructs all or part of an SQL command using externally-influenced input from an upstream component, but it does not neutralize or incorrectly neutralizes special elements that could modify the intended SQL command when it is sent to a downstream component."</span><span class="p">,</span>
+        <span class="s2">"CVSSSeverity"</span><span class="p">:</span> <span class="s2">"NONE"</span><span class="p">,</span>
+        <span class="s2">"dataSourceName"</span><span class="p">:</span> <span class="s2">"Wiz Demo"</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"The vulnerability `CWE-89`  was found in the  `GET /WebGoat/SqlInjectionMitigations/servers?column=id` with  severity of `Critical`.The vulnerability can be remediated by </span><span class="se">\u0027</span><span class="s2">use an Object-Relational Mapping (ORM) like Hibernate that safely handles database interaction`."</span><span class="p">,</span>
+        <span class="s2">"detailedName"</span><span class="p">:</span> <span class="s2">"GET /WebGoat/SqlInjectionMitigations/servers?column=id"</span><span class="p">,</span>
+        <span class="s2">"detectionMethod"</span><span class="p">:</span> <span class="s2">"EXTERNAL_NETWORK_SCAN"</span><span class="p">,</span>
+        <span class="s2">"epssPercentile"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"epssProbability"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"epssSeverity"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"exploitabilityScore"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"firstDetectedAt"</span><span class="p">:</span> <span class="s2">"2024-04-15T11:12:05.226955Z"</span><span class="p">,</span>
+        <span class="s2">"fixedVersion"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"hasCisaKevExploit"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"hasExploit"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1234567-abcdefg"</span><span class="p">,</span>
+        <span class="s2">"ignoreRules"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"impactScore"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"lastDetectedAt"</span><span class="p">:</span> <span class="s2">"2024-04-15T11:12:05.226955Z"</span><span class="p">,</span>
+        <span class="s2">"layerMetadata"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"link"</span><span class="p">:</span> <span class="s2">"https:/test/com"</span><span class="p">,</span>
+        <span class="s2">"locationPath"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"CWE-89"</span><span class="p">,</span>
+        <span class="s2">"portalUrl"</span><span class="p">:</span> <span class="s2">"https://app.wiz.io/explorer/vulnerability-findings#~(entity~(~</span><span class="se">\u0027</span><span class="s2">ID))"</span><span class="p">,</span>
+        <span class="s2">"projects"</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Project 2&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+            <span class="s2">"businessUnit"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1234567-abcdefg"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Project 2"</span><span class="p">,</span>
+            <span class="s2">"riskProfile"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"businessImpact"</span><span class="p">:</span> <span class="s2">"MBI"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project-2&quot;</span>
+            <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"project-2"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;Dev&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;project 4&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+            <span class="s2">"businessUnit"</span><span class="p">:</span> <span class="s2">"Dev"</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1234567-abcdefg"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"project 4"</span><span class="p">,</span>
+            <span class="s2">"riskProfile"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"businessImpact"</span><span class="p">:</span> <span class="s2">"MBI"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project-4&quot;</span>
+            <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"project-4"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;Dev&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Project1&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+            <span class="s2">"businessUnit"</span><span class="p">:</span> <span class="s2">"Dev"</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1234567-abcdefg"</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Project1"</span><span class="p">,</span>
+            <span class="s2">"riskProfile"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"businessImpact"</span><span class="p">:</span> <span class="s2">"MBI"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project1&quot;</span>
+            <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"project1"</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="s2">&quot;remediation&quot;</span><span class="p">:</span> <span class="s2">&quot;The most effective method of stopping SQL injection attacks is to only use an Object-Relational Mapping (ORM) like Hibernate...&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;resolutionReason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;resolvedAt&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;OPEN&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;validatedInRuntime&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;vendorSeverity&quot;</span><span class="p">:</span> <span class="s2">&quot;CRITICAL&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;vulnerableAsset&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;cloudPlatform&quot;</span><span class="p">:</span> <span class="s2">&quot;AWS&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;cloudProviderURL&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;hasLimitedInternetExposure&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;hasWideInternetExposure&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567-abcdefg&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;imageId&quot;</span><span class="p">:</span> <span class="s2">&quot;sha256:7d1eabcdefg&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;isAccessibleFromOtherSubscriptions&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;isAccessibleFromOtherVnets&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;isAccessibleFromVPN&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;test-aws.amazonaws.com/eks/kube-proxy@sha256:7d1eabcdefg&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;providerUniqueId&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;us-east-1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;Active&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;subscriptionExternalId&quot;</span><span class="p">:</span> <span class="s2">&quot;6024000000000&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;subscriptionId&quot;</span><span class="p">:</span> <span class="s2">&quot;e644fdd8-abcdefg&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;subscriptionName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;io.cri-containerd.image&quot;</span><span class="p">:</span> <span class="s2">&quot;managed&quot;</span>
+        <span class="s2">"remediation"</span><span class="p">:</span> <span class="s2">"The most effective method of stopping SQL injection attacks is to only use an Object-Relational Mapping (ORM) like Hibernate..."</span><span class="p">,</span>
+        <span class="s2">"resolutionReason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"resolvedAt"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"score"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"OPEN"</span><span class="p">,</span>
+        <span class="s2">"validatedInRuntime"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"vendorSeverity"</span><span class="p">:</span> <span class="s2">"CRITICAL"</span><span class="p">,</span>
+        <span class="s2">"version"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"vulnerableAsset"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"cloudPlatform"</span><span class="p">:</span> <span class="s2">"AWS"</span><span class="p">,</span>
+          <span class="s2">"cloudProviderURL"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"hasLimitedInternetExposure"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"hasWideInternetExposure"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1234567-abcdefg"</span><span class="p">,</span>
+          <span class="s2">"imageId"</span><span class="p">:</span> <span class="s2">"sha256:7d1eabcdefg"</span><span class="p">,</span>
+          <span class="s2">"isAccessibleFromOtherSubscriptions"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"isAccessibleFromOtherVnets"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"isAccessibleFromVPN"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"test-aws.amazonaws.com/eks/kube-proxy@sha256:7d1eabcdefg"</span><span class="p">,</span>
+          <span class="s2">"providerUniqueId"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+          <span class="s2">"region"</span><span class="p">:</span> <span class="s2">"us-east-1"</span><span class="p">,</span>
+          <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"Active"</span><span class="p">,</span>
+          <span class="s2">"subscriptionExternalId"</span><span class="p">:</span> <span class="s2">"6024000000000"</span><span class="p">,</span>
+          <span class="s2">"subscriptionId"</span><span class="p">:</span> <span class="s2">"e644fdd8-abcdefg"</span><span class="p">,</span>
+          <span class="s2">"subscriptionName"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"tags"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"io.cri-containerd.image"</span><span class="p">:</span> <span class="s2">"managed"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;CONTAINER_IMAGE&quot;</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"CONTAINER_IMAGE"</span>
         <span class="p">}</span>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;wiz_project_ids&quot;</span><span class="p">:</span> <span class="s2">&quot;83b76efe-a7b6-5762-8a53-8e8f59e68bd8,af52828c-4eb1-5c4e-847c-ebc3a5ead531,d6ac50bb-aec0-52fc-80ab-bacd7b02f178&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"wiz_project_ids"</span><span class="p">:</span> <span class="s2">"83b76efe-a7b6-5762-8a53-8e8f59e68bd8,af52828c-4eb1-5c4e-847c-ebc3a5ead531,d6ac50bb-aec0-52fc-80ab-bacd7b02f178"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">3713</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;e35c5a28-689e-4f7f-b84e-4eced01ba15f-55b865fcb6-pnkfz&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-wiz&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1982&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15 11:57:40&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">3713</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"e35c5a28-689e-4f7f-b84e-4eced01ba15f-55b865fcb6-pnkfz"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-wiz"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.1982"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-04-15 11:57:40"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1035,19 +1035,19 @@ Note: Any Wiz issues that are marked as “resolved” in Wiz <em>before</em> th
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
 <span class="sd">Pull out project ids associated with the given issue. We can use this to query Wiz for vulnerabilities data.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">query_issue_results</span>
 
 <span class="n">project_ids</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; Unable to get issue data to retrieve projects.&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; Unable to get issue data to retrieve projects."</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">projects</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;response&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;projects&quot;</span><span class="p">,</span> <span class="p">[])</span>
+  <span class="n">projects</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"response"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"projects"</span><span class="p">,</span> <span class="p">[])</span>
   <span class="k">if</span> <span class="n">projects</span><span class="p">:</span>
-    <span class="n">inputs</span><span class="o">.</span><span class="n">wiz_project_ids</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">p</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">projects</span><span class="p">])</span>    
+    <span class="n">inputs</span><span class="o">.</span><span class="n">wiz_project_ids</span> <span class="o">=</span> <span class="s2">","</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">p</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">projects</span><span class="p">])</span>    
 <span class="c1"># OPTIONAL: Specify the maximum desired number of results, returns max of 50 results by default</span>
 <span class="c1"># inputs.wiz_num_results = </span>
 
@@ -1060,40 +1060,40 @@ Note: Any Wiz issues that are marked as “resolved” in Wiz <em>before</em> th
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_projects</span><span class="p">(</span><span class="n">vuln</span><span class="p">):</span>
-<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">  </span><span class="sd">"""</span>
 <span class="sd">  Get a string of the project names affected by this vulnerability </span>
 <span class="sd">  :param vuln (dict): vulnerability object</span>
-<span class="sd">  &quot;&quot;&quot;</span>
-  <span class="n">projects</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;projects&#39;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="sd">  """</span>
+  <span class="n">projects</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'projects'</span><span class="p">,</span> <span class="p">[])</span>
   <span class="k">if</span> <span class="n">projects</span><span class="p">:</span>
-    <span class="n">project_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">projects</span><span class="p">]</span>
-    <span class="k">return</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">project_names</span><span class="p">)</span>
+    <span class="n">project_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">projects</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">project_names</span><span class="p">)</span>
   
-  <span class="k">return</span> <span class="s2">&quot;-&quot;</span>
+  <span class="k">return</span> <span class="s2">"-"</span>
   
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">vulnerability_results</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; Unable to get vulnerability data to update Wiz Vulnerabilities data table: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; Unable to get vulnerability data to update Wiz Vulnerabilities data table: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'content'</span><span class="p">,</span> <span class="p">{})</span>
   <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-    <span class="n">vulnerabilities</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span> <span class="p">[])</span>
+    <span class="n">vulnerabilities</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'response'</span><span class="p">,</span> <span class="p">[])</span>
     <span class="k">for</span> <span class="n">vuln</span> <span class="ow">in</span> <span class="n">vulnerabilities</span><span class="p">:</span>
-      <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;wiz_vulnerabilities_table&quot;</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;date_added&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;vulnerability_description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;vulnerability_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;affected_projects&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_projects</span><span class="p">(</span><span class="n">vuln</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;vendor_severity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;vendorSeverity&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;remediation&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;remediation&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;vulnerable_asset_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;vulnerableAsset&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;vulnerable_asset_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;vulnerableAsset&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;vulnerable_asset_os&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;vulnerableAsset&#39;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;operatingSystem&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+      <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"wiz_vulnerabilities_table"</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">"date_added"</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S"</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">"vulnerability_description"</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'description'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">"vulnerability_name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">"affected_projects"</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_projects</span><span class="p">(</span><span class="n">vuln</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">"vendor_severity"</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'vendorSeverity'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">"remediation"</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'remediation'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">"vulnerable_asset_id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'vulnerableAsset'</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">"vulnerable_asset_type"</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'vulnerableAsset'</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'type'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">"vulnerable_asset_os"</span><span class="p">]</span> <span class="o">=</span> <span class="n">vuln</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'vulnerableAsset'</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'operatingSystem'</span><span class="p">,</span> <span class="s1">''</span><span class="p">)</span>
       
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; Added </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">vulnerabilities</span><span class="p">)</span><span class="si">}</span><span class="s2"> vulnerabilities to Wiz Vulnerabilities data table&quot;</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; Added </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">vulnerabilities</span><span class="p">)</span><span class="si">}</span><span class="s2"> vulnerabilities to Wiz Vulnerabilities data table"</span><span class="p">)</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; No content found to add to vulnerabilities data table&quot;</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; No content found to add to vulnerabilities data table"</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -1135,101 +1135,101 @@ Note: Any Wiz issues that are marked as “resolved” in Wiz <em>before</em> th
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;createdAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T10:16:14.443631Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;dueAt&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;entitySnapshot&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;cloudPlatform&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;cloudProviderURL&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;createdAt&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;externalId&quot;</span><span class="p">:</span> <span class="s2">&quot;vulnerability##592f0bdc-ab9b##&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;fa059989-abcdefg&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;CVE-2023-5528&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;nativeType&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;providerId&quot;</span><span class="p">:</span> <span class="s2">&quot;vulnerability##592f0bdc-ab9b##&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;resourceGroupExternalId&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;subscriptionExternalId&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;subscriptionName&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;subscriptionTags&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">{},</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;SECURITY_TOOL_FINDING&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"response"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"createdAt"</span><span class="p">:</span> <span class="s2">"2024-04-15T10:16:14.443631Z"</span><span class="p">,</span>
+      <span class="s2">"dueAt"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"entitySnapshot"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"cloudPlatform"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"cloudProviderURL"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"createdAt"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"externalId"</span><span class="p">:</span> <span class="s2">"vulnerability##592f0bdc-ab9b##"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"fa059989-abcdefg"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"CVE-2023-5528"</span><span class="p">,</span>
+        <span class="s2">"nativeType"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"providerId"</span><span class="p">:</span> <span class="s2">"vulnerability##592f0bdc-ab9b##"</span><span class="p">,</span>
+        <span class="s2">"region"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"resourceGroupExternalId"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"subscriptionExternalId"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"subscriptionName"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"subscriptionTags"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"tags"</span><span class="p">:</span> <span class="p">{},</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"SECURITY_TOOL_FINDING"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;dec4dad8-abcdefg&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"dec4dad8-abcdefg"</span><span class="p">,</span>
+      <span class="s2">"notes"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;createdAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T11:55:20.461314Z&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;serviceAccount&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ibm-soar&quot;</span>
+          <span class="s2">"createdAt"</span><span class="p">:</span> <span class="s2">"2024-04-15T11:55:20.461314Z"</span><span class="p">,</span>
+          <span class="s2">"serviceAccount"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"ibm-soar"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Note from SOAR: test note&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;updatedAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T11:55:20.46232Z&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="n">null</span>
+          <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"Note from SOAR: test note"</span><span class="p">,</span>
+          <span class="s2">"updatedAt"</span><span class="p">:</span> <span class="s2">"2024-04-15T11:55:20.46232Z"</span><span class="p">,</span>
+          <span class="s2">"user"</span><span class="p">:</span> <span class="n">null</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;projects&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"projects"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;83b76efe-abcdefg&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Project 2&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+          <span class="s2">"businessUnit"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"83b76efe-abcdefg"</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Project 2"</span><span class="p">,</span>
+          <span class="s2">"riskProfile"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"businessImpact"</span><span class="p">:</span> <span class="s2">"MBI"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project-2&quot;</span>
+          <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"project-2"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;Dev&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;af52828c-abcdefg&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;project 4&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+          <span class="s2">"businessUnit"</span><span class="p">:</span> <span class="s2">"Dev"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"af52828c-abcdefg"</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"project 4"</span><span class="p">,</span>
+          <span class="s2">"riskProfile"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"businessImpact"</span><span class="p">:</span> <span class="s2">"MBI"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project-4&quot;</span>
+          <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"project-4"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;businessUnit&quot;</span><span class="p">:</span> <span class="s2">&quot;Dev&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;d6ac50bb-abcdefg&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Project1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;riskProfile&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;businessImpact&quot;</span><span class="p">:</span> <span class="s2">&quot;MBI&quot;</span>
+          <span class="s2">"businessUnit"</span><span class="p">:</span> <span class="s2">"Dev"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"d6ac50bb-abcdefg"</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Project1"</span><span class="p">,</span>
+          <span class="s2">"riskProfile"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"businessImpact"</span><span class="p">:</span> <span class="s2">"MBI"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;slug&quot;</span><span class="p">:</span> <span class="s2">&quot;project1&quot;</span>
+          <span class="s2">"slug"</span><span class="p">:</span> <span class="s2">"project1"</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;resolvedAt&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;serviceTickets&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;INFORMATIONAL&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;sourceRule&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;__typename&quot;</span><span class="p">:</span> <span class="s2">&quot;Control&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;controlDescription&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;60873d6d-abcdefg&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;All Findings&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;resolutionRecommendation&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;securitySubCategories&quot;</span><span class="p">:</span> <span class="n">null</span>
+      <span class="s2">"resolvedAt"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"serviceTickets"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"severity"</span><span class="p">:</span> <span class="s2">"INFORMATIONAL"</span><span class="p">,</span>
+      <span class="s2">"sourceRule"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"__typename"</span><span class="p">:</span> <span class="s2">"Control"</span><span class="p">,</span>
+        <span class="s2">"controlDescription"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"60873d6d-abcdefg"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"All Findings"</span><span class="p">,</span>
+        <span class="s2">"resolutionRecommendation"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"securitySubCategories"</span><span class="p">:</span> <span class="n">null</span>
       <span class="p">},</span>
-      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;OPEN&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;statusChangedAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T10:14:50.891007Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;TOXIC_COMBINATION&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;updatedAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15T11:55:20.484648Z&quot;</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"OPEN"</span><span class="p">,</span>
+      <span class="s2">"statusChangedAt"</span><span class="p">:</span> <span class="s2">"2024-04-15T10:14:50.891007Z"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"TOXIC_COMBINATION"</span><span class="p">,</span>
+      <span class="s2">"updatedAt"</span><span class="p">:</span> <span class="s2">"2024-04-15T11:55:20.484648Z"</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;wiz_issue_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dec4dad8-abcdefg&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"wiz_issue_id"</span><span class="p">:</span> <span class="s2">"dec4dad8-abcdefg"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">668</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;e35c5a28-abcdefg&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-wiz&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1982&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15 11:57:34&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">668</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"e35c5a28-abcdefg"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-wiz"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.1982"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-04-15 11:57:34"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1246,15 +1246,15 @@ Note: Any Wiz issues that are marked as “resolved” in Wiz <em>before</em> th
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">query_issue_results</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; Unable to get issue data to update custom fields: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; Unable to get issue data to update custom fields: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">projects</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;response&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;projects&quot;</span><span class="p">,</span> <span class="p">[])</span>
+  <span class="n">projects</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"response"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"projects"</span><span class="p">,</span> <span class="p">[])</span>
   <span class="k">if</span> <span class="n">projects</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">projects</span><span class="p">:</span>
-      <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s1">&#39;Observed Data&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span> <span class="p">,</span> <span class="s1">&#39;Found project in Wiz&#39;</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; Added </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">projects</span><span class="p">)</span><span class="si">}</span><span class="s2"> projects as artifacts&quot;</span><span class="p">)</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s1">'Observed Data'</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'name'</span><span class="p">)</span> <span class="p">,</span> <span class="s1">'Found project in Wiz'</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; Added </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">projects</span><span class="p">)</span><span class="si">}</span><span class="s2"> projects as artifacts"</span><span class="p">)</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; No projects found in Wiz to add as artifacts&quot;</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"&lt;b&gt;Wiz: Populate Case:&lt;/b&gt; No projects found in Wiz to add as artifacts"</span><span class="p">)</span>
       
 </pre></div>
 </div>
@@ -1302,32 +1302,32 @@ Note: Any Wiz issues that are marked as “resolved” in Wiz <em>before</em> th
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Successfully updated issue.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;dueAt&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;dec4dad8-abcdefg&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;resolutionReason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;OPEN&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Successfully updated issue."</span><span class="p">,</span>
+    <span class="s2">"response"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"dueAt"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"dec4dad8-abcdefg"</span><span class="p">,</span>
+      <span class="s2">"note"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"resolutionReason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"OPEN"</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;wiz_issue_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dec4dad8-abcdefg&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;wiz_soar_note&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\&quot;</span><span class="s2">soar-rte-content</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">test</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"wiz_issue_id"</span><span class="p">:</span> <span class="s2">"dec4dad8-abcdefg"</span><span class="p">,</span>
+    <span class="s2">"wiz_soar_note"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">div class=</span><span class="se">\"</span><span class="s2">soar-rte-content</span><span class="se">\"\u003e\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">test</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e\u003c</span><span class="s2">/div</span><span class="se">\u003e</span><span class="s2">"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2034</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;e35c5a28-abcdefg&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-wiz&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1982&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15 11:58:17&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">2034</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"e35c5a28-abcdefg"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-wiz"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.1982"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-04-15 11:58:17"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1346,7 +1346,7 @@ Note: Any Wiz issues that are marked as “resolved” in Wiz <em>before</em> th
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">notes_result</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wiz: Sync Notes to Issue:&lt;/b&gt; Failed to add note to Wiz issue: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"&lt;b&gt;Wiz: Sync Notes to Issue:&lt;/b&gt; Failed to add note to Wiz issue: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1399,33 +1399,33 @@ Note: Any Wiz issues that are marked as “resolved” in Wiz <em>before</em> th
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Successfully updated issue.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;dueAt&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;dec4dad8-abcdefg&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;resolutionReason&quot;</span><span class="p">:</span> <span class="s2">&quot;WONT_FIX&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;REJECTED&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Successfully updated issue."</span><span class="p">,</span>
+    <span class="s2">"response"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"dueAt"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"dec4dad8-abcdefg"</span><span class="p">,</span>
+      <span class="s2">"note"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"resolutionReason"</span><span class="p">:</span> <span class="s2">"WONT_FIX"</span><span class="p">,</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"REJECTED"</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;wiz_issue_id&quot;</span><span class="p">:</span> <span class="s2">&quot;dec4dad8-abcdefg&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;wiz_resolution_reason&quot;</span><span class="p">:</span> <span class="s2">&quot;Not an Issue&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;wiz_resolution_summary&quot;</span><span class="p">:</span> <span class="s2">&quot;nan&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"wiz_issue_id"</span><span class="p">:</span> <span class="s2">"dec4dad8-abcdefg"</span><span class="p">,</span>
+    <span class="s2">"wiz_resolution_reason"</span><span class="p">:</span> <span class="s2">"Not an Issue"</span><span class="p">,</span>
+    <span class="s2">"wiz_resolution_summary"</span><span class="p">:</span> <span class="s2">"nan"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1383</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;e35c5a28-4eabcdefg&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-wiz&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1982&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-04-15 11:58:34&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1383</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"e35c5a28-4eabcdefg"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-wiz"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.1982"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-04-15 11:58:34"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1444,17 +1444,17 @@ Note: Any Wiz issues that are marked as “resolved” in Wiz <em>before</em> th
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">status_results</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wiz: Sync Status:&lt;/b&gt; Unable to sync issue status: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"&lt;b&gt;Wiz: Sync Status:&lt;/b&gt; Unable to sync issue status: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'content'</span><span class="p">,</span> <span class="p">{})</span>
   <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-    <span class="n">issue</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;response&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">issue</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'response'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">issue</span><span class="p">:</span>
-      <span class="n">new_status</span> <span class="o">=</span> <span class="s2">&quot;REJECTED&quot;</span>
+      <span class="n">new_status</span> <span class="o">=</span> <span class="s2">"REJECTED"</span>
       <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">wiz_issue_status</span> <span class="o">=</span> <span class="n">new_status</span>
-      <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Wiz: Sync Status:&lt;/b&gt; Successfully closed Wiz issue with status </span><span class="si">{</span><span class="n">new_status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"&lt;b&gt;Wiz: Sync Status:&lt;/b&gt; Successfully closed Wiz issue with status </span><span class="si">{</span><span class="n">new_status</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-      <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Wiz: Sync Status:&lt;/b&gt; Unable to sync issue status because Wiz Issue not found&quot;</span><span class="p">)</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"&lt;b&gt;Wiz: Sync Status:&lt;/b&gt; Unable to sync issue status because Wiz Issue not found"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>

@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -408,9 +408,9 @@ rc-cts</p>
 <li><p>Install this tar.gz package with <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p></li>
 <li><p>Use the following commands to register this custom threat service with Resilient and test it:</p></li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">sudo</span> <span class="n">resutil</span> <span class="n">threatserviceedit</span> <span class="o">-</span><span class="n">name</span> <span class="s2">&quot;Have I Been Pwned&quot;</span> <span class="o">-</span><span class="n">resturl</span> <span class="o">&lt;</span><span class="n">resilient_circuits_url</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">9000</span><span class="o">/</span><span class="n">cts</span><span class="o">/</span><span class="n">have_i_been_pwned_threat_service</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">sudo</span> <span class="n">resutil</span> <span class="n">threatserviceedit</span> <span class="o">-</span><span class="n">name</span> <span class="s2">"Have I Been Pwned"</span> <span class="o">-</span><span class="n">resturl</span> <span class="o">&lt;</span><span class="n">resilient_circuits_url</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">9000</span><span class="o">/</span><span class="n">cts</span><span class="o">/</span><span class="n">have_i_been_pwned_threat_service</span>
 
-    <span class="n">sudo</span> <span class="n">resutil</span> <span class="n">threatservicetest</span> <span class="o">-</span><span class="n">name</span> <span class="s2">&quot;Have I Been Pwned&quot;</span>
+    <span class="n">sudo</span> <span class="n">resutil</span> <span class="n">threatservicetest</span> <span class="o">-</span><span class="n">name</span> <span class="s2">"Have I Been Pwned"</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="4">

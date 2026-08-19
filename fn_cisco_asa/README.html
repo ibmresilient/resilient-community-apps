@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -868,40 +868,40 @@ hostname(config)# access-group my-internet-access in interface inside
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;firewall&quot;</span><span class="p">:</span> <span class="s2">&quot;firewall_1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;network_object_description&quot;</span><span class="p">:</span> <span class="s2">&quot;fqdn name&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;network_object_group&quot;</span><span class="p">:</span> <span class="s2">&quot;BLOCKLIST_IN&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;network_object_kind&quot;</span><span class="p">:</span> <span class="s2">&quot;IPv4FQDN&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;network_object_name&quot;</span><span class="p">:</span> <span class="s2">&quot;MyFqdn&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;network_object_value&quot;</span><span class="p">:</span> <span class="s2">&quot;www.fqdn.com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;Object Kind: IPv4FQDN, Object Value: www.fqdn.com, Object Name: MyFqdn, is added to Firewall: firewall_1, Group: BLOCKLIST_IN&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"firewall"</span><span class="p">:</span> <span class="s2">"firewall_1"</span><span class="p">,</span>
+    <span class="s2">"network_object_description"</span><span class="p">:</span> <span class="s2">"fqdn name"</span><span class="p">,</span>
+    <span class="s2">"network_object_group"</span><span class="p">:</span> <span class="s2">"BLOCKLIST_IN"</span><span class="p">,</span>
+    <span class="s2">"network_object_kind"</span><span class="p">:</span> <span class="s2">"IPv4FQDN"</span><span class="p">,</span>
+    <span class="s2">"network_object_name"</span><span class="p">:</span> <span class="s2">"MyFqdn"</span><span class="p">,</span>
+    <span class="s2">"network_object_value"</span><span class="p">:</span> <span class="s2">"www.fqdn.com"</span><span class="p">,</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">"Object Kind: IPv4FQDN, Object Value: www.fqdn.com, Object Name: MyFqdn, is added to Firewall: firewall_1, Group: BLOCKLIST_IN"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;cisco_asa_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;DNS Name&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;cisco_asa_end_range&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;cisco_asa_firewall&quot;</span><span class="p">:</span> <span class="s2">&quot;firewall_1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;cisco_asa_fqdn_ip_version&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">427</span><span class="p">,</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;IPv4FQDN&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"cisco_asa_artifact_type"</span><span class="p">:</span> <span class="s2">"DNS Name"</span><span class="p">,</span>
+    <span class="s2">"cisco_asa_end_range"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"cisco_asa_firewall"</span><span class="p">:</span> <span class="s2">"firewall_1"</span><span class="p">,</span>
+    <span class="s2">"cisco_asa_fqdn_ip_version"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">427</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"IPv4FQDN"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;cisco_asa_network_object_description&quot;</span><span class="p">:</span> <span class="s2">&quot;fqdn name&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;cisco_asa_network_object_group&quot;</span><span class="p">:</span> <span class="s2">&quot;BLOCKLIST_IN&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;cisco_asa_network_object_name&quot;</span><span class="p">:</span> <span class="s2">&quot;MyFqdn&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;cisco_asa_network_object_value&quot;</span><span class="p">:</span> <span class="s2">&quot;www.fqdn.com&quot;</span>
+    <span class="s2">"cisco_asa_network_object_description"</span><span class="p">:</span> <span class="s2">"fqdn name"</span><span class="p">,</span>
+    <span class="s2">"cisco_asa_network_object_group"</span><span class="p">:</span> <span class="s2">"BLOCKLIST_IN"</span><span class="p">,</span>
+    <span class="s2">"cisco_asa_network_object_name"</span><span class="p">:</span> <span class="s2">"MyFqdn"</span><span class="p">,</span>
+    <span class="s2">"cisco_asa_network_object_value"</span><span class="p">:</span> <span class="s2">"www.fqdn.com"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">696</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;My-MacBook-Pro.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-cisco-asa&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-24 12:30:41&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">696</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"My-MacBook-Pro.local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-cisco-asa"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-06-24 12:30:41"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">firewall</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">firewall_1</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">network_object_group</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">BLOCKLIST_IN</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">network_object_name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">MyFqdn</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">network_object_description</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">fqdn name</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">network_object_kind</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">IPv4FQDN</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">network_object_value</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">www.fqdn.com</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">reason</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Object Kind: IPv4FQDN, Object Value: www.fqdn.com, Object Name: MyFqdn, is added to Firewall: firewall_1, Group: BLOCKLIST_IN</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">firewall</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">firewall_1</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">network_object_group</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">BLOCKLIST_IN</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">network_object_name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">MyFqdn</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">network_object_description</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">fqdn name</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">network_object_kind</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">IPv4FQDN</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">network_object_value</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">www.fqdn.com</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">reason</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Object Kind: IPv4FQDN, Object Value: www.fqdn.com, Object Name: MyFqdn, is added to Firewall: firewall_1, Group: BLOCKLIST_IN</span><span class="se">\"</span><span class="s2">}"</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -912,8 +912,8 @@ hostname(config)# access-group my-internet-access in interface inside
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parse the firewall name and network object group from the colon separated string</span>
 <span class="n">firewall_group_pair</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">cisco_asa_firewall_network_object_group</span>
 
-<span class="c1"># Parse the firewall group pair, which is a string in &quot;firewall:network_object_group&quot; format</span>
-<span class="n">firewall_group_pair_list</span> <span class="o">=</span> <span class="n">firewall_group_pair</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+<span class="c1"># Parse the firewall group pair, which is a string in "firewall:network_object_group" format</span>
+<span class="n">firewall_group_pair_list</span> <span class="o">=</span> <span class="n">firewall_group_pair</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">cisco_asa_firewall</span> <span class="o">=</span> <span class="n">firewall_group_pair_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">cisco_asa_network_object_group</span> <span class="o">=</span> <span class="n">firewall_group_pair_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
@@ -941,17 +941,17 @@ hostname(config)# access-group my-internet-access in interface inside
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">add_artifact_results</span>
-<span class="n">success</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">)</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
-<span class="n">firewall</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;firewall&quot;</span><span class="p">)</span>
-<span class="n">network_object_group</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;network_object_group&quot;</span><span class="p">)</span>
-<span class="n">network_object_value</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;network_object_value&quot;</span><span class="p">)</span>
-<span class="n">network_object_name</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;network_object_name&quot;</span><span class="p">)</span>
-<span class="n">network_object_kind</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;network_object_kind&quot;</span><span class="p">)</span>
+<span class="n">success</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
+<span class="n">firewall</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"firewall"</span><span class="p">)</span>
+<span class="n">network_object_group</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"network_object_group"</span><span class="p">)</span>
+<span class="n">network_object_value</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"network_object_value"</span><span class="p">)</span>
+<span class="n">network_object_name</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"network_object_name"</span><span class="p">)</span>
+<span class="n">network_object_kind</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"network_object_kind"</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
-  <span class="n">network_object_description</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;network_object_description&quot;</span><span class="p">)</span>
+  <span class="n">network_object_description</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"network_object_description"</span><span class="p">)</span>
   <span class="c1"># Add network object as a row in the network Cisco ASA network objects data table</span>
-  <span class="n">network_object_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;cisco_asa_network_object_dt&quot;</span><span class="p">)</span>
+  <span class="n">network_object_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"cisco_asa_network_object_dt"</span><span class="p">)</span>
   <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_query_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
   <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_firewall</span> <span class="o">=</span> <span class="n">firewall</span>
   <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_group</span> <span class="o">=</span> <span class="n">network_object_group</span>
@@ -960,12 +960,12 @@ hostname(config)# access-group my-internet-access in interface inside
   <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_id</span> <span class="o">=</span> <span class="n">network_object_name</span>
   <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_description</span> <span class="o">=</span> <span class="n">network_object_description</span>  
   <span class="c1"># Update status field</span>
-  <span class="n">status_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;p style= &quot;color:</span><span class="si">{color}</span><span class="s2">&quot;&gt;</span><span class="si">{status}</span><span class="s2">&lt;/p&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s2">&quot;Active&quot;</span><span class="p">)</span>
+  <span class="n">status_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;p style= "color:</span><span class="si">{color}</span><span class="s2">"&gt;</span><span class="si">{status}</span><span class="s2">&lt;/p&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">"green"</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s2">"Active"</span><span class="p">)</span>
   <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_status</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">status_text</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="c1"># Artifact not added to the group so add a note with the reason.</span>
-  <span class="n">reason</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Cisco ASA Add Artifact to Network Object Group Results:</span><span class="se">\n</span><span class="s2">    Artifact value: </span><span class="si">{0}</span><span class="se">\n</span><span class="s2">    Object Name: </span><span class="si">{1}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">    Object Kind: </span><span class="si">{2}</span><span class="s2"> was not added to Firewall: </span><span class="si">{3}</span><span class="s2">, Network Object Group: </span><span class="si">{4}</span><span class="se">\n\n</span><span class="si">{5}</span><span class="s2">&quot;</span>
+  <span class="n">reason</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">)</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Cisco ASA Add Artifact to Network Object Group Results:</span><span class="se">\n</span><span class="s2">    Artifact value: </span><span class="si">{0}</span><span class="se">\n</span><span class="s2">    Object Name: </span><span class="si">{1}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">    Object Kind: </span><span class="si">{2}</span><span class="s2"> was not added to Firewall: </span><span class="si">{3}</span><span class="s2">, Network Object Group: </span><span class="si">{4}</span><span class="se">\n\n</span><span class="si">{5}</span><span class="s2">"</span>
   <span class="n">note</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">network_object_value</span><span class="p">,</span> <span class="n">network_object_name</span><span class="p">,</span> <span class="n">network_object_kind</span><span class="p">,</span> <span class="n">firewall</span><span class="p">,</span> <span class="n">network_object_group</span><span class="p">,</span> <span class="n">reason</span><span class="p">)</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createPlainText</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
 </pre></div>
@@ -1014,33 +1014,33 @@ hostname(config)# access-group my-internet-access in interface inside
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;fqdn name&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;IPv4FQDN&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;www.fqdn.com&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"fqdn name"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"IPv4FQDN"</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"www.fqdn.com"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;object#NetworkObj&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;MyFqdn&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;objectId&quot;</span><span class="p">:</span> <span class="s2">&quot;MyFqdn&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;selfLink&quot;</span><span class="p">:</span> <span class="s2">&quot;https://192.168.1.163/api/objects/networkobjects/MyFqdn&quot;</span>
+    <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"object#NetworkObj"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"MyFqdn"</span><span class="p">,</span>
+    <span class="s2">"objectId"</span><span class="p">:</span> <span class="s2">"MyFqdn"</span><span class="p">,</span>
+    <span class="s2">"selfLink"</span><span class="p">:</span> <span class="s2">"https://192.168.1.163/api/objects/networkobjects/MyFqdn"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;cisco_asa_firewall&quot;</span><span class="p">:</span> <span class="s2">&quot;firewall_1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;cisco_asa_network_object_id&quot;</span><span class="p">:</span> <span class="s2">&quot;MyFqdn&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"cisco_asa_firewall"</span><span class="p">:</span> <span class="s2">"firewall_1"</span><span class="p">,</span>
+    <span class="s2">"cisco_asa_network_object_id"</span><span class="p">:</span> <span class="s2">"MyFqdn"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">69</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;MacBook-Pro.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-cisco-asa&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-24 12:30:59&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">69</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"MacBook-Pro.local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-cisco-asa"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-06-24 12:30:59"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">kind</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">object#NetworkObj</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">selfLink</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">https://192.168.1.163/api/objects/networkobjects/MyFqdn</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">MyFqdn</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">host</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">kind</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">IPv4FQDN</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">value</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">www.fqdn.com</span><span class="se">\&quot;</span><span class="s2">}, </span><span class="se">\&quot;</span><span class="s2">description</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">fqdn name</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">objectId</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">MyFqdn</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">kind</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">object#NetworkObj</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">selfLink</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">https://192.168.1.163/api/objects/networkobjects/MyFqdn</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">MyFqdn</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">host</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\"</span><span class="s2">kind</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">IPv4FQDN</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">value</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">www.fqdn.com</span><span class="se">\"</span><span class="s2">}, </span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">fqdn name</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">objectId</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">MyFqdn</span><span class="se">\"</span><span class="s2">}"</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1059,18 +1059,18 @@ hostname(config)# access-group my-internet-access in interface inside
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Put the results json into a workflow property so we can call the </span>
 <span class="c1"># convert_json_to_rich_text script to print readable formatted json in an incident note.</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_details_results</span>
-<span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">)</span>
-<span class="n">firewall_id</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cisco_asa_firewall&quot;</span><span class="p">)</span>
-<span class="n">object_id</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cisco_asa_network_object_id&quot;</span><span class="p">)</span>
-<span class="n">header</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Cisco ASA Firewall: </span><span class="si">{0}</span><span class="s2"> Network Object ID </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">firewall_id</span><span class="p">,</span> <span class="n">object_id</span><span class="p">)</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"inputs"</span><span class="p">)</span>
+<span class="n">firewall_id</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"cisco_asa_firewall"</span><span class="p">)</span>
+<span class="n">object_id</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"cisco_asa_network_object_id"</span><span class="p">)</span>
+<span class="n">header</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Cisco ASA Firewall: </span><span class="si">{0}</span><span class="s2"> Network Object ID </span><span class="si">{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">firewall_id</span><span class="p">,</span> <span class="n">object_id</span><span class="p">)</span>
 
 <span class="n">json_note</span> <span class="o">=</span> <span class="p">{</span>
-              <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="n">header</span><span class="p">,</span> 
-              <span class="s2">&quot;json&quot;</span><span class="p">:</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">,</span>
-              <span class="s2">&quot;sort&quot;</span><span class="p">:</span> <span class="kc">False</span>
+              <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.3"</span><span class="p">,</span>
+              <span class="s2">"header"</span><span class="p">:</span> <span class="n">header</span><span class="p">,</span> 
+              <span class="s2">"json"</span><span class="p">:</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">,</span>
+              <span class="s2">"sort"</span><span class="p">:</span> <span class="kc">False</span>
             <span class="p">}</span>
-<span class="n">playbook</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s1">&#39;convert_json_to_rich_text&#39;</span><span class="p">,</span> <span class="n">json_note</span><span class="p">)</span>
+<span class="n">playbook</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s1">'convert_json_to_rich_text'</span><span class="p">,</span> <span class="n">json_note</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1117,38 +1117,38 @@ hostname(config)# access-group my-internet-access in interface inside
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;member_list&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"member_list"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;IPv4Address&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.10.1&quot;</span>
+        <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"IPv4Address"</span><span class="p">,</span>
+        <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"192.168.10.1"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;IPv4Address&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.10.2&quot;</span>
+        <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"IPv4Address"</span><span class="p">,</span>
+        <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"192.168.10.2"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;IPv4Address&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.10.3&quot;</span>
+        <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"IPv4Address"</span><span class="p">,</span>
+        <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"192.168.10.3"</span>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;cisco_asa_firewall&quot;</span><span class="p">:</span> <span class="s2">&quot;firewall_1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;cisco_asa_network_object_group&quot;</span><span class="p">:</span> <span class="s2">&quot;BLOCKLIST_IN&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"cisco_asa_firewall"</span><span class="p">:</span> <span class="s2">"firewall_1"</span><span class="p">,</span>
+    <span class="s2">"cisco_asa_network_object_group"</span><span class="p">:</span> <span class="s2">"BLOCKLIST_IN"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">551</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;MacBook-Pro.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-cisco-asa&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-24 12:23:40&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">551</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"MacBook-Pro.local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-cisco-asa"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-06-24 12:23:40"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">member_list</span><span class="se">\&quot;</span><span class="s2">: [{</span><span class="se">\&quot;</span><span class="s2">kind</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">IPv4Address</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">value</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">192.168.10.1</span><span class="se">\&quot;</span><span class="s2">}, {</span><span class="se">\&quot;</span><span class="s2">kind</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">IPv4Address</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">value</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">192.168.10.2</span><span class="se">\&quot;</span><span class="s2">}, {</span><span class="se">\&quot;</span><span class="s2">kind</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">IPv4Address</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">value</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">192.168.10.3</span><span class="se">\&quot;</span><span class="s2">}]}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">member_list</span><span class="se">\"</span><span class="s2">: [{</span><span class="se">\"</span><span class="s2">kind</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">IPv4Address</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">value</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">192.168.10.1</span><span class="se">\"</span><span class="s2">}, {</span><span class="se">\"</span><span class="s2">kind</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">IPv4Address</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">value</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">192.168.10.2</span><span class="se">\"</span><span class="s2">}, {</span><span class="se">\"</span><span class="s2">kind</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">IPv4Address</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">value</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">192.168.10.3</span><span class="se">\"</span><span class="s2">}]}"</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1159,8 +1159,8 @@ hostname(config)# access-group my-internet-access in interface inside
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the firewall network object group pair</span>
 <span class="n">firewall_group_pair</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">cisco_asa_firewall_network_object_group</span>
 
-<span class="c1"># Parse the firewall group pair, which is a string in &quot;firewall:network_object_group&quot; format</span>
-<span class="n">firewall_group_pair_list</span> <span class="o">=</span> <span class="n">firewall_group_pair</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+<span class="c1"># Parse the firewall group pair, which is a string in "firewall:network_object_group" format</span>
+<span class="n">firewall_group_pair_list</span> <span class="o">=</span> <span class="n">firewall_group_pair</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">cisco_asa_firewall</span> <span class="o">=</span> <span class="n">firewall_group_pair_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">cisco_asa_network_object_group</span> <span class="o">=</span> <span class="n">firewall_group_pair_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
@@ -1173,29 +1173,29 @@ hostname(config)# access-group my-internet-access in interface inside
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_network_objects_results</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
-<span class="n">member_list</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;member_list&quot;</span><span class="p">,</span> <span class="p">[])</span>
-<span class="n">firewall</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cisco_asa_firewall&quot;</span><span class="p">)</span>
-<span class="n">network_object_group</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cisco_asa_network_object_group&quot;</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">member_list</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"member_list"</span><span class="p">,</span> <span class="p">[])</span>
+<span class="n">firewall</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"cisco_asa_firewall"</span><span class="p">)</span>
+<span class="n">network_object_group</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"cisco_asa_network_object_group"</span><span class="p">)</span>
 
 <span class="c1"># Add each email as a row in the query results data table</span>
 <span class="k">for</span> <span class="n">network_object</span> <span class="ow">in</span> <span class="n">member_list</span><span class="p">:</span>
-  <span class="n">network_object_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;cisco_asa_network_object_dt&quot;</span><span class="p">)</span>
+  <span class="n">network_object_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"cisco_asa_network_object_dt"</span><span class="p">)</span>
   <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_query_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
   <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_firewall</span> <span class="o">=</span> <span class="n">firewall</span>
   <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_group</span> <span class="o">=</span> <span class="n">network_object_group</span>
 
-  <span class="k">if</span> <span class="n">network_object</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kind&quot;</span><span class="p">)</span>  <span class="o">==</span> <span class="s1">&#39;object#NetworkObj&#39;</span><span class="p">:</span>
-    <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_id</span> <span class="o">=</span> <span class="n">network_object</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;objectId&quot;</span><span class="p">)</span>
-    <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_description</span> <span class="o">=</span> <span class="n">network_object</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span>
-    <span class="n">host</span> <span class="o">=</span> <span class="n">network_object</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;host&quot;</span><span class="p">)</span>
-    <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_kind</span> <span class="o">=</span> <span class="n">host</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kind&quot;</span><span class="p">)</span>
-    <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_value</span> <span class="o">=</span> <span class="n">host</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">network_object</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"kind"</span><span class="p">)</span>  <span class="o">==</span> <span class="s1">'object#NetworkObj'</span><span class="p">:</span>
+    <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_id</span> <span class="o">=</span> <span class="n">network_object</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"objectId"</span><span class="p">)</span>
+    <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_description</span> <span class="o">=</span> <span class="n">network_object</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">)</span>
+    <span class="n">host</span> <span class="o">=</span> <span class="n">network_object</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"host"</span><span class="p">)</span>
+    <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_kind</span> <span class="o">=</span> <span class="n">host</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"kind"</span><span class="p">)</span>
+    <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_value</span> <span class="o">=</span> <span class="n">host</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_kind</span> <span class="o">=</span> <span class="n">network_object</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;kind&quot;</span><span class="p">)</span>
-    <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_value</span> <span class="o">=</span> <span class="n">network_object</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+    <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_kind</span> <span class="o">=</span> <span class="n">network_object</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"kind"</span><span class="p">)</span>
+    <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_value</span> <span class="o">=</span> <span class="n">network_object</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"value"</span><span class="p">)</span>
 
-  <span class="n">status_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;p style= &quot;color:</span><span class="si">{color}</span><span class="s2">&quot;&gt;</span><span class="si">{status}</span><span class="s2">&lt;/p&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s2">&quot;Active&quot;</span><span class="p">)</span>
+  <span class="n">status_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;p style= "color:</span><span class="si">{color}</span><span class="s2">"&gt;</span><span class="si">{status}</span><span class="s2">&lt;/p&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">"green"</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s2">"Active"</span><span class="p">)</span>
   <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_status</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">status_text</span><span class="p">)</span>
 
 </pre></div>
@@ -1262,26 +1262,26 @@ hostname(config)# access-group my-internet-access in interface inside
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Object Kind: IPv4Address, Object Value: 192.168.10.1, Object Name: None, is removed from Firewall: firewall_1, Group: BLOCKLIST_IN&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;cisco_asa_firewall&quot;</span><span class="p">:</span> <span class="s2">&quot;firewall_1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;cisco_asa_network_object_group&quot;</span><span class="p">:</span> <span class="s2">&quot;BLOCKLIST_IN&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;cisco_asa_network_object_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;cisco_asa_network_object_kind&quot;</span><span class="p">:</span> <span class="s2">&quot;IPv4Address&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;cisco_asa_network_object_value&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.10.1&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"Object Kind: IPv4Address, Object Value: 192.168.10.1, Object Name: None, is removed from Firewall: firewall_1, Group: BLOCKLIST_IN"</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"cisco_asa_firewall"</span><span class="p">:</span> <span class="s2">"firewall_1"</span><span class="p">,</span>
+    <span class="s2">"cisco_asa_network_object_group"</span><span class="p">:</span> <span class="s2">"BLOCKLIST_IN"</span><span class="p">,</span>
+    <span class="s2">"cisco_asa_network_object_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"cisco_asa_network_object_kind"</span><span class="p">:</span> <span class="s2">"IPv4Address"</span><span class="p">,</span>
+    <span class="s2">"cisco_asa_network_object_value"</span><span class="p">:</span> <span class="s2">"192.168.10.1"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">512</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;MacBook-Pro.local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-cisco-asa&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-24 12:24:30&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">512</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"MacBook-Pro.local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-cisco-asa"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-06-24 12:24:30"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">Object Kind: IPv4Address, Object Value: 192.168.10.1, Object Name: None, is removed from Firewall: firewall_1, Group: BLOCKLIST_IN</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\"</span><span class="s2">Object Kind: IPv4Address, Object Value: 192.168.10.1, Object Name: None, is removed from Firewall: firewall_1, Group: BLOCKLIST_IN</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1305,15 +1305,15 @@ hostname(config)# access-group my-internet-access in interface inside
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">remove_results</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Removed&quot;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="s2">"Removed"</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;NotFound&quot;</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;Remove Network Object From Network Object Group Results:</span><span class="se">\n\n</span><span class="s2">    </span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="s2">"NotFound"</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="s2">"Remove Network Object From Network Object Group Results:</span><span class="se">\n\n</span><span class="s2">    </span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createPlainText</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
   
-<span class="n">status_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;p style= &quot;color:</span><span class="si">{color}</span><span class="s2">&quot;&gt;</span><span class="si">{status}</span><span class="s2">&lt;/p&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">text</span><span class="p">)</span>
-<span class="n">row</span><span class="p">[</span><span class="s1">&#39;cisco_asa_status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">status_text</span><span class="p">)</span>
-<span class="n">row</span><span class="p">[</span><span class="s2">&quot;cisco_asa_query_date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">status_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;p style= "color:</span><span class="si">{color}</span><span class="s2">"&gt;</span><span class="si">{status}</span><span class="s2">&lt;/p&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">"red"</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">text</span><span class="p">)</span>
+<span class="n">row</span><span class="p">[</span><span class="s1">'cisco_asa_status'</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">status_text</span><span class="p">)</span>
+<span class="n">row</span><span class="p">[</span><span class="s2">"cisco_asa_query_date"</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
 </pre></div>
 </div>
 </p>
@@ -1329,17 +1329,17 @@ hostname(config)# access-group my-internet-access in interface inside
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">add_artifact_results</span>
-<span class="n">success</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">)</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
-<span class="n">firewall</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;firewall&quot;</span><span class="p">)</span>
-<span class="n">network_object_group</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;network_object_group&quot;</span><span class="p">)</span>
-<span class="n">network_object_value</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;network_object_value&quot;</span><span class="p">)</span>
-<span class="n">network_object_name</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;network_object_name&quot;</span><span class="p">)</span>
-<span class="n">network_object_kind</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;network_object_kind&quot;</span><span class="p">)</span>
+<span class="n">success</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
+<span class="n">firewall</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"firewall"</span><span class="p">)</span>
+<span class="n">network_object_group</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"network_object_group"</span><span class="p">)</span>
+<span class="n">network_object_value</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"network_object_value"</span><span class="p">)</span>
+<span class="n">network_object_name</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"network_object_name"</span><span class="p">)</span>
+<span class="n">network_object_kind</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"network_object_kind"</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
-  <span class="n">network_object_description</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;network_object_description&quot;</span><span class="p">)</span>
+  <span class="n">network_object_description</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"network_object_description"</span><span class="p">)</span>
   <span class="c1"># Add network object as a row in the network Cisco ASA network objects data table</span>
-  <span class="n">network_object_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;cisco_asa_network_object_dt&quot;</span><span class="p">)</span>
+  <span class="n">network_object_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"cisco_asa_network_object_dt"</span><span class="p">)</span>
   <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_query_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
   <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_firewall</span> <span class="o">=</span> <span class="n">firewall</span>
   <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_group</span> <span class="o">=</span> <span class="n">network_object_group</span>
@@ -1348,12 +1348,12 @@ hostname(config)# access-group my-internet-access in interface inside
   <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_id</span> <span class="o">=</span> <span class="n">network_object_name</span>
   <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_network_object_description</span> <span class="o">=</span> <span class="n">network_object_description</span>  
   <span class="c1"># Update status field</span>
-  <span class="n">status_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;p style= &quot;color:</span><span class="si">{color}</span><span class="s2">&quot;&gt;</span><span class="si">{status}</span><span class="s2">&lt;/p&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s2">&quot;Active&quot;</span><span class="p">)</span>
+  <span class="n">status_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;p style= "color:</span><span class="si">{color}</span><span class="s2">"&gt;</span><span class="si">{status}</span><span class="s2">&lt;/p&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">"green"</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="s2">"Active"</span><span class="p">)</span>
   <span class="n">network_object_row</span><span class="o">.</span><span class="n">cisco_asa_status</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">status_text</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="c1"># Artifact not added to the group so add a note with the reason.</span>
-  <span class="n">reason</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Cisco ASA Add Artifact to Network Object Group Results:</span><span class="se">\n</span><span class="s2">    Artifact value: </span><span class="si">{0}</span><span class="se">\n</span><span class="s2">    Object Name: </span><span class="si">{1}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">    Object Kind: </span><span class="si">{2}</span><span class="s2"> was not added to Firewall: </span><span class="si">{3}</span><span class="s2">, Network Object Group: </span><span class="si">{4}</span><span class="se">\n\n</span><span class="si">{5}</span><span class="s2">&quot;</span>
+  <span class="n">reason</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">)</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Cisco ASA Add Artifact to Network Object Group Results:</span><span class="se">\n</span><span class="s2">    Artifact value: </span><span class="si">{0}</span><span class="se">\n</span><span class="s2">    Object Name: </span><span class="si">{1}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">    Object Kind: </span><span class="si">{2}</span><span class="s2"> was not added to Firewall: </span><span class="si">{3}</span><span class="s2">, Network Object Group: </span><span class="si">{4}</span><span class="se">\n\n</span><span class="si">{5}</span><span class="s2">"</span>
   <span class="n">note</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">network_object_value</span><span class="p">,</span> <span class="n">network_object_name</span><span class="p">,</span> <span class="n">network_object_kind</span><span class="p">,</span> <span class="n">firewall</span><span class="p">,</span> <span class="n">network_object_group</span><span class="p">,</span> <span class="n">reason</span><span class="p">)</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createPlainText</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
 </pre></div>
@@ -1377,8 +1377,8 @@ Typically, a function will create workflow property and this script will run aft
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># (c) Copyright IBM Corp. 2010, 2022. All Rights Reserved.</span>
 <span class="n">VERSION</span> <span class="o">=</span> <span class="mf">1.3</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">  This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident&#39;s rich text (custom) field or an incident note.</span>
+<span class="sd">"""</span>
+<span class="sd">  This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident's rich text (custom) field or an incident note.</span>
 <span class="sd">  A workflow property is used to define the json to convert and identify parameters used on how to perform the conversion.</span>
 <span class="sd">  Typically, a function will create workflow property and this script will run after that function to perform the conversion.</span>
 <span class="sd">  Features:</span>
@@ -1388,54 +1388,54 @@ Typically, a function will create workflow property and this script will run aft
 <span class="sd">  </span>
 <span class="sd">  In order to use this script, define a workflow property called: convert_json_to_rich_text, to define the json and parameters to use for the conversion.</span>
 <span class="sd">  Workflow properties can be added using a command similar to this:</span>
-<span class="sd">  workflow.addProperty(&#39;convert_json_to_rich_text&#39;, {</span>
-<span class="sd">    &quot;version&quot;: 1.3,</span>
-<span class="sd">    &quot;header&quot;: &quot;Artifact scan results for: {}&quot;.format(artifact.value),</span>
-<span class="sd">    &quot;padding&quot;: 10,</span>
-<span class="sd">    &quot;separator&quot;: u&quot;&lt;br /&gt;&quot;,</span>
-<span class="sd">    &quot;sort&quot;: True,</span>
-<span class="sd">    &quot;json&quot;: results.content,</span>
-<span class="sd">    &quot;json_omit_list&quot;: [&quot;omit&quot;],</span>
-<span class="sd">    &quot;incident_field&quot;: None</span>
+<span class="sd">  workflow.addProperty('convert_json_to_rich_text', {</span>
+<span class="sd">    "version": 1.3,</span>
+<span class="sd">    "header": "Artifact scan results for: {}".format(artifact.value),</span>
+<span class="sd">    "padding": 10,</span>
+<span class="sd">    "separator": u"&lt;br /&gt;",</span>
+<span class="sd">    "sort": True,</span>
+<span class="sd">    "json": results.content,</span>
+<span class="sd">    "json_omit_list": ["omit"],</span>
+<span class="sd">    "incident_field": None</span>
 <span class="sd">  })</span>
 <span class="sd">  </span>
 <span class="sd">  Format of workflow.property.convert_json_to_rich_text:</span>
 <span class="sd">  { </span>
-<span class="sd">    &quot;version&quot;: 1.3, [this is for future compatibility]</span>
-<span class="sd">    &quot;header&quot;: str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]</span>
-<span class="sd">    &quot;padding&quot;: 10, [padding for nested json elements, or defaults to 10]</span>
-<span class="sd">    &quot;separator&quot;: u&quot;&lt;br /&gt;&quot;|list such as [&#39;&lt;span&gt;&#39;,&#39;&lt;/span&gt;&#39;], [html separator between json keys and lists or defaults to html break: &#39;&lt;br /&gt;&#39;. </span>
+<span class="sd">    "version": 1.3, [this is for future compatibility]</span>
+<span class="sd">    "header": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]</span>
+<span class="sd">    "padding": 10, [padding for nested json elements, or defaults to 10]</span>
+<span class="sd">    "separator": u"&lt;br /&gt;"|list such as ['&lt;span&gt;','&lt;/span&gt;'], [html separator between json keys and lists or defaults to html break: '&lt;br /&gt;'. </span>
 <span class="sd">                                                If a list, then the data is brackets by the pair specified]</span>
-<span class="sd">    &quot;sort&quot;: True|False, [sort the json keys at each level when displayed]</span>
-<span class="sd">    &quot;json&quot;: json, [required json to convert]</span>
-<span class="sd">    &quot;json_omit_list&quot;: [list of json keys to exclude or None]</span>
-<span class="sd">    &quot;incident_field&quot;: &quot;&lt;incident_field&gt;&quot; [indicates a builtin rich text incident field, such as &#39;description&#39; </span>
-<span class="sd">                                          or a custom rich text field in the format: &#39;properties.&lt;field&gt;&#39;. default: create an incident note]</span>
+<span class="sd">    "sort": True|False, [sort the json keys at each level when displayed]</span>
+<span class="sd">    "json": json, [required json to convert]</span>
+<span class="sd">    "json_omit_list": [list of json keys to exclude or None]</span>
+<span class="sd">    "incident_field": "&lt;incident_field&gt;" [indicates a builtin rich text incident field, such as 'description' </span>
+<span class="sd">                                          or a custom rich text field in the format: 'properties.&lt;field&gt;'. default: create an incident note]</span>
 <span class="sd">  }</span>
 
 <span class="sd">  For playbooks, use playbook.addProperty() with the same format as workflow.addProperty()</span>
 
-<span class="sd">  Playbooks can also use playbook.functions.results.convert_json_to_rich_text using the standard function output which contains the &#39;content&#39; json element.</span>
+<span class="sd">  Playbooks can also use playbook.functions.results.convert_json_to_rich_text using the standard function output which contains the 'content' json element.</span>
 <span class="sd">  When using playbook.functions.results.convert_json_to_rich_text with standard function results, all the defaults for padding, separator, etc. are used.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 <span class="c1"># needed for python 3</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">unicode</span><span class="p">(</span><span class="s2">&quot;abc&quot;</span><span class="p">)</span> <span class="c1"># fails in py3</span>
+    <span class="n">unicode</span><span class="p">(</span><span class="s2">"abc"</span><span class="p">)</span> <span class="c1"># fails in py3</span>
     <span class="n">py2</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="n">unicode</span> <span class="o">=</span> <span class="nb">str</span>
     <span class="n">py2</span> <span class="o">=</span> <span class="kc">False</span>
 
 
-<span class="n">rc</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&amp;+#\?]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+&#39;</span><span class="p">)</span>
+<span class="n">rc</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&amp;+#\?]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'</span><span class="p">)</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">ConvertJson</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to hold the conversion parameters and perform the conversion&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Class to hold the conversion parameters and perform the conversion"""</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">omit_keys</span><span class="o">=</span><span class="p">[],</span> <span class="n">padding</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;&lt;br /&gt;&quot;</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">omit_keys</span><span class="o">=</span><span class="p">[],</span> <span class="n">padding</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="sa">u</span><span class="s2">"&lt;br /&gt;"</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">omit_keys</span> <span class="o">=</span> <span class="n">omit_keys</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">padding</span> <span class="o">=</span> <span class="n">padding</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="o">=</span> <span class="n">separator</span>
@@ -1443,14 +1443,14 @@ Typically, a function will create workflow property and this script will run aft
 
 
     <span class="k">def</span><span class="w"> </span><span class="nf">format_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;[summary]</span>
+<span class="w">        </span><span class="sd">"""[summary]</span>
 <span class="sd">          Find embedded urls (http(s)) and add html anchor tags to display as links</span>
 <span class="sd">          Args:</span>
 <span class="sd">              item ([string])</span>
 
 <span class="sd">          Returns:</span>
 <span class="sd">              [str]: None|original text if no links|text with html links</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">formatted_item</span> <span class="o">=</span> <span class="n">item</span>
         <span class="k">if</span> <span class="n">py2</span><span class="p">:</span>
             <span class="n">num_type</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">item</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">long</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">)))</span>
@@ -1461,23 +1461,23 @@ Typically, a function will create workflow property and this script will run aft
             <span class="nb">list</span> <span class="o">=</span> <span class="n">rc</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">list</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span>
-                    <span class="n">formatted_item</span> <span class="o">=</span> <span class="n">formatted_item</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;&lt;a target=&#39;blank&#39; href=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;</span><span class="si">{0}</span><span class="s2">&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link</span><span class="p">))</span>
+                    <span class="n">formatted_item</span> <span class="o">=</span> <span class="n">formatted_item</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="sa">u</span><span class="s2">"&lt;a target='blank' href='</span><span class="si">{0}</span><span class="s2">'&gt;</span><span class="si">{0}</span><span class="s2">&lt;/a&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">formatted_item</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">expand_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_value</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;[summary]</span>
+<span class="w">        </span><span class="sd">"""[summary]</span>
 <span class="sd">          convert items to html, adding indents to nested dictionaries.</span>
 <span class="sd">          Args:</span>
 <span class="sd">              list_value ([dict|list]): json element</span>
 
 <span class="sd">          Returns:</span>
 <span class="sd">              [str]: html converted code</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_link</span><span class="p">(</span><span class="n">list_value</span><span class="p">)</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">list_value</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;None&lt;br&gt;&quot;</span>
+            <span class="k">return</span> <span class="sa">u</span><span class="s2">"None&lt;br&gt;"</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">items_list</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># this will ensure list starts on second line of key label</span>
@@ -1485,36 +1485,36 @@ Typically, a function will create workflow property and this script will run aft
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
                     <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_json_to_rich_text</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">is_list</span><span class="p">:</span>
-                        <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&lt;li&gt;</span><span class="si">{}</span><span class="s2">&lt;/li&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+                        <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">"&lt;li&gt;</span><span class="si">{}</span><span class="s2">&lt;/li&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
                     <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expand_list</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
                 <span class="k">elif</span> <span class="n">is_list</span><span class="p">:</span>
-                    <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&lt;li&gt;</span><span class="si">{}</span><span class="s2">&lt;/li&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_link</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">item</span><span class="p">))))</span>
+                    <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">"&lt;li&gt;</span><span class="si">{}</span><span class="s2">&lt;/li&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_link</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">item</span><span class="p">))))</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_link</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">item</span><span class="p">)))</span>
 
-            <span class="n">expand_list_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_list</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">expand_list_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_list</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">""</span><span class="p">,</span>
                                                     <span class="n">items_list</span><span class="p">,</span>
                                                     <span class="n">is_list</span><span class="o">=</span><span class="n">is_list</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">is_list</span><span class="p">:</span>
-                <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;&lt;ul&gt;</span><span class="si">{}</span><span class="s2">&lt;/ul&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expand_list_result</span><span class="p">)</span>
+                <span class="k">return</span> <span class="sa">u</span><span class="s2">"&lt;ul&gt;</span><span class="si">{}</span><span class="s2">&lt;/ul&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expand_list_result</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;&lt;div style=&#39;padding:5px&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expand_list_result</span><span class="p">)</span>
+                <span class="k">return</span> <span class="sa">u</span><span class="s2">"&lt;div style='padding:5px'&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expand_list_result</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">convert_json_to_rich_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sub_dict</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;[summary]</span>
+<span class="w">        </span><span class="sd">"""[summary]</span>
 <span class="sd">          Walk dictionary tree and convert to html for better display</span>
 <span class="sd">          Args:</span>
 <span class="sd">              sub_dict ([type]): [description]</span>
 
 <span class="sd">          Returns:</span>
 <span class="sd">              [type]: [description]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">notes</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="n">sub_dict</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)):</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -1527,50 +1527,50 @@ Typically, a function will create workflow property and this script will run aft
                     <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">omit_keys</span><span class="p">:</span>
                         <span class="n">value</span> <span class="o">=</span> <span class="n">sub_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
                         <span class="n">is_list</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
-                        <span class="n">item_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">u</span><span class="s2">&quot;&lt;strong&gt;</span><span class="si">{0}</span><span class="s2">&lt;/strong&gt;: &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
+                        <span class="n">item_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">u</span><span class="s2">"&lt;strong&gt;</span><span class="si">{0}</span><span class="s2">&lt;/strong&gt;: "</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
                         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
                             <span class="n">convert_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_json_to_rich_text</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
                             <span class="k">if</span> <span class="n">convert_result</span><span class="p">:</span>
-                                <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&lt;div style=&#39;padding:</span><span class="si">{}</span><span class="s2">px&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">,</span> <span class="n">convert_result</span><span class="p">))</span>
+                                <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">"&lt;div style='padding:</span><span class="si">{}</span><span class="s2">px'&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">,</span> <span class="n">convert_result</span><span class="p">))</span>
                             <span class="k">else</span><span class="p">:</span>
-                                <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;None&lt;br&gt;&quot;</span><span class="p">)</span>
+                                <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">"None&lt;br&gt;"</span><span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>
                             <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expand_list</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="n">is_list</span><span class="p">))</span>
 
-                        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">make_unicode</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">item_list</span><span class="p">),</span> <span class="n">is_list</span><span class="o">=</span><span class="n">is_list</span><span class="p">))</span>
+                        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">,</span> <span class="sa">u</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">make_unicode</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">item_list</span><span class="p">),</span> <span class="n">is_list</span><span class="o">=</span><span class="n">is_list</span><span class="p">))</span>
 
-        <span class="n">result_notes</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+        <span class="n">result_notes</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">result_notes</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">result_notes</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                <span class="sa">u</span><span class="s2">&quot;&lt;/div&gt;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">),</span> <span class="sa">u</span><span class="s2">&quot;&lt;/div&gt;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">),</span> <span class="sa">u</span><span class="s2">&quot;&lt;/div&gt;&quot;</span>
+                <span class="sa">u</span><span class="s2">"&lt;/div&gt;</span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">),</span> <span class="sa">u</span><span class="s2">"&lt;/div&gt;"</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+                <span class="sa">u</span><span class="s2">"</span><span class="si">{0}</span><span class="s2">&lt;/div&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">),</span> <span class="sa">u</span><span class="s2">"&lt;/div&gt;"</span>
             <span class="p">)</span>  <span class="c1"># tighten up result</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        apply the separator to the data</span>
-<span class="sd">        :param separator: None, str or list such as [&#39;&lt;span&gt;&#39;, &#39;&lt;/span&gt;&#39;]</span>
+<span class="sd">        :param separator: None, str or list such as ['&lt;span&gt;', '&lt;/span&gt;']</span>
 <span class="sd">        :param items: str or list to add separator</span>
 <span class="sd">        :return: text with separator applied</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">_items</span> <span class="o">=</span> <span class="n">items</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">_items</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;&lt;br&gt;&quot;</span>
+            <span class="k">return</span> <span class="s2">"&lt;br&gt;"</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_items</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">_items</span> <span class="o">=</span> <span class="p">[</span><span class="n">_items</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">,</span> <span class="n">separator</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">_items</span><span class="p">])</span>
+            <span class="k">return</span> <span class="sa">u</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">u</span><span class="s2">"</span><span class="si">{}{}{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">,</span> <span class="n">separator</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">_items</span><span class="p">])</span>
 
-        <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_items</span><span class="p">),</span> <span class="n">separator</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_list</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{}{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_items</span><span class="p">),</span> <span class="n">separator</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_list</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">""</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">make_unicode</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s1">&#39;None&#39;</span>
+        <span class="k">return</span> <span class="s1">'None'</span>
 
     <span class="k">return</span> <span class="n">unicode</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
@@ -1585,56 +1585,56 @@ Typically, a function will create workflow property and this script will run aft
     <span class="k">return</span> <span class="kc">None</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_properties</span><span class="p">(</span><span class="n">property_name</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Logic to collect the json and parameters from a workflow property.</span>
 <span class="sd">    Args:</span>
 <span class="sd">      property_name: workflow property to reference</span>
 <span class="sd">    Returns:</span>
 <span class="sd">      padding, separator, header, json_omit_list, incident_field, json, sort_keys</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">result_properties</span> <span class="o">=</span> <span class="n">get_results</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">result_properties</span><span class="p">:</span>
-        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;Playbook/workflow property not found: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">property_name</span><span class="p">))</span>
+        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"Playbook/workflow property not found: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">property_name</span><span class="p">))</span>
 
-    <span class="n">padding</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;padding&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-    <span class="n">separator</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;separator&quot;</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;&lt;br /&gt;&quot;</span><span class="p">)</span>
+    <span class="n">padding</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"padding"</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">separator</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"separator"</span><span class="p">,</span> <span class="sa">u</span><span class="s2">"&lt;br /&gt;"</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;list of separators should be specified as a pair such as [&#39;&lt;div&gt;&#39;, &#39;&lt;/div&gt;&#39;]: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">))</span>
+        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"list of separators should be specified as a pair such as ['&lt;div&gt;', '&lt;/div&gt;']: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">))</span>
 
-    <span class="n">header</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">)</span>
-    <span class="n">sort_keys</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sort&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
-    <span class="n">json_omit_list</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;json_omit_list&quot;</span><span class="p">)</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"header"</span><span class="p">)</span>
+    <span class="n">sort_keys</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sort"</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+    <span class="n">json_omit_list</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"json_omit_list"</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">json_omit_list</span><span class="p">:</span>
         <span class="n">json_omit_list</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">incident_field</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;incident_field&quot;</span><span class="p">)</span>
+    <span class="n">incident_field</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"incident_field"</span><span class="p">)</span>
     
-    <span class="c1"># workflow formatted content is &#39;json&#39;. Standard functions is &#39;content&#39;</span>
-    <span class="n">json</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+    <span class="c1"># workflow formatted content is 'json'. Standard functions is 'content'</span>
+    <span class="n">json</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"json"</span><span class="p">)</span> <span class="k">if</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"json"</span><span class="p">)</span> <span class="k">else</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
     <span class="n">json_err</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1"># is there an issue we need handle now?</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">json</span> <span class="ow">and</span> \
-        <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span> <span class="ow">and</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">):</span>
-        <span class="n">json_err</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
+        <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span> <span class="ow">and</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">):</span>
+        <span class="n">json_err</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="n">padding</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">json_omit_list</span><span class="p">,</span> <span class="n">incident_field</span><span class="p">,</span> <span class="n">json</span><span class="p">,</span> <span class="n">json_err</span><span class="p">,</span> <span class="n">sort_keys</span>
 
 
 <span class="c1">## S T A R T</span>
-<span class="n">padding</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">json_omit_list</span><span class="p">,</span> <span class="n">incident_field</span><span class="p">,</span> <span class="n">json</span><span class="p">,</span> <span class="n">json_err</span><span class="p">,</span> <span class="n">sort_keys</span> <span class="o">=</span> <span class="n">get_properties</span><span class="p">(</span><span class="s1">&#39;convert_json_to_rich_text&#39;</span><span class="p">)</span>
+<span class="n">padding</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">json_omit_list</span><span class="p">,</span> <span class="n">incident_field</span><span class="p">,</span> <span class="n">json</span><span class="p">,</span> <span class="n">json_err</span><span class="p">,</span> <span class="n">sort_keys</span> <span class="o">=</span> <span class="n">get_properties</span><span class="p">(</span><span class="s1">'convert_json_to_rich_text'</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">json_err</span><span class="p">:</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;Result error: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">json_err</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">"Result error: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">json_err</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">header</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}{1}{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">header</span><span class="p">,</span> <span class="n">separator</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{0}{1}{2}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">header</span><span class="p">,</span> <span class="n">separator</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">separator</span><span class="p">)</span>
+            <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{0}{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">separator</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span>
+        <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">""</span>
 
     <span class="n">convert</span> <span class="o">=</span> <span class="n">ConvertJson</span><span class="p">(</span><span class="n">omit_keys</span><span class="o">=</span><span class="n">json_omit_list</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">padding</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="n">separator</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="n">sort_keys</span><span class="p">)</span>
     <span class="n">converted_json</span> <span class="o">=</span> <span class="n">convert</span><span class="o">.</span><span class="n">convert_json_to_rich_text</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span> <span class="n">converted_json</span> <span class="k">if</span> <span class="n">converted_json</span> <span class="k">else</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">None&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{}{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span> <span class="n">converted_json</span> <span class="k">if</span> <span class="n">converted_json</span> <span class="k">else</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">None"</span><span class="p">)</span>
 
 <span class="n">rich_text_note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">incident_field</span><span class="p">:</span>

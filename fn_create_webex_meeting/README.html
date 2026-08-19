@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -670,29 +670,29 @@
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-   <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;success&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span>
-   <span class="s2">&quot;reason&quot;</span><span class="p">:</span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;content&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;status&quot;</span><span class="p">:</span><span class="s2">&quot;SUCCESS&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;host_url&quot;</span><span class="p">:</span><span class="s2">&quot;https://meet8.webex.com/meet8/j.php?MTID=m84f604b5194e7f10e384fe4043aafd&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;attendee_url&quot;</span><span class="p">:</span><span class="s2">&quot;https://meet8.webex.com/meet8/j.php?MTID=meb86e2013c2d82c3c9dea7b8b27253&quot;</span>
+   <span class="s2">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span>
+   <span class="s2">"success"</span><span class="p">:</span><span class="n">true</span><span class="p">,</span>
+   <span class="s2">"reason"</span><span class="p">:</span><span class="s2">"None"</span><span class="p">,</span>
+   <span class="s2">"content"</span><span class="p">:{</span>
+      <span class="s2">"status"</span><span class="p">:</span><span class="s2">"SUCCESS"</span><span class="p">,</span>
+      <span class="s2">"host_url"</span><span class="p">:</span><span class="s2">"https://meet8.webex.com/meet8/j.php?MTID=m84f604b5194e7f10e384fe4043aafd"</span><span class="p">,</span>
+      <span class="s2">"attendee_url"</span><span class="p">:</span><span class="s2">"https://meet8.webex.com/meet8/j.php?MTID=meb86e2013c2d82c3c9dea7b8b27253"</span>
    <span class="p">},</span>
-   <span class="s2">&quot;raw&quot;</span><span class="p">:</span><span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">status</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">SUCCESS</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">host_url</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">https://meet8.webex.com/meet8/j.php?MTID=m84f604b5194e7f10e384fe4043aafd</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">attendee_url</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">https://meet8.webex.com/meet8/j.php?MTID=meb86e2013c2d82c3c9dea7b8b27253</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;inputs&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;webex_meeting_name&quot;</span><span class="p">:</span><span class="s2">&quot;My Incident&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;webex_meeting_password&quot;</span><span class="p">:</span><span class="s2">&quot;abcxyzABC!!!&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;webex_meeting_start_time&quot;</span><span class="p">:</span><span class="mi">1613797200000</span><span class="p">,</span>
-      <span class="s2">&quot;webex_meeting_agenda&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;webex_meeting_end_time&quot;</span><span class="p">:</span><span class="mi">1613797620000</span>
+   <span class="s2">"raw"</span><span class="p">:</span><span class="s2">"{</span><span class="se">\"</span><span class="s2">status</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">SUCCESS</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">host_url</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">https://meet8.webex.com/meet8/j.php?MTID=m84f604b5194e7f10e384fe4043aafd</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">attendee_url</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">https://meet8.webex.com/meet8/j.php?MTID=meb86e2013c2d82c3c9dea7b8b27253</span><span class="se">\"</span><span class="s2">}"</span><span class="p">,</span>
+   <span class="s2">"inputs"</span><span class="p">:{</span>
+      <span class="s2">"webex_meeting_name"</span><span class="p">:</span><span class="s2">"My Incident"</span><span class="p">,</span>
+      <span class="s2">"webex_meeting_password"</span><span class="p">:</span><span class="s2">"abcxyzABC!!!"</span><span class="p">,</span>
+      <span class="s2">"webex_meeting_start_time"</span><span class="p">:</span><span class="mi">1613797200000</span><span class="p">,</span>
+      <span class="s2">"webex_meeting_agenda"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"webex_meeting_end_time"</span><span class="p">:</span><span class="mi">1613797620000</span>
    <span class="p">},</span>
-   <span class="s2">&quot;metrics&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package&quot;</span><span class="p">:</span><span class="s2">&quot;fn-create-webex-meeting&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package_version&quot;</span><span class="p">:</span><span class="s2">&quot;1.1.0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;host&quot;</span><span class="p">:</span><span class="s2">&quot;MacBook-Pro.local&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span><span class="mi">8725</span><span class="p">,</span>
-      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span><span class="s2">&quot;2021-02-05 10:11:36&quot;</span>
+   <span class="s2">"metrics"</span><span class="p">:{</span>
+      <span class="s2">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span>
+      <span class="s2">"package"</span><span class="p">:</span><span class="s2">"fn-create-webex-meeting"</span><span class="p">,</span>
+      <span class="s2">"package_version"</span><span class="p">:</span><span class="s2">"1.1.0"</span><span class="p">,</span>
+      <span class="s2">"host"</span><span class="p">:</span><span class="s2">"MacBook-Pro.local"</span><span class="p">,</span>
+      <span class="s2">"execution_time_ms"</span><span class="p">:</span><span class="mi">8725</span><span class="p">,</span>
+      <span class="s2">"timestamp"</span><span class="p">:</span><span class="s2">"2021-02-05 10:11:36"</span>
    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -712,7 +712,7 @@
   <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">description</span> <span class="ow">and</span> <span class="n">incident</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
     <span class="n">inputs</span><span class="o">.</span><span class="n">webex_meeting_agenda</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">content</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">inputs</span><span class="o">.</span><span class="n">webex_meeting_agenda</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">inputs</span><span class="o">.</span><span class="n">webex_meeting_agenda</span> <span class="o">=</span> <span class="s2">""</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">webex_meeting_agenda</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">webex_meeting_agenda</span>
 
@@ -724,29 +724,29 @@
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-  <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;Unable to create Cisco WebEx Meeting&quot;</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="s2">"Unable to create Cisco WebEx Meeting"</span>
 
-  <span class="n">fail_reason</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fail_reason&quot;</span><span class="p">)</span>
+  <span class="n">fail_reason</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"fail_reason"</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">fail_reason</span><span class="p">:</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Failure reason: </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">fail_reason</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{0}</span><span class="s2">:</span><span class="se">\n\t</span><span class="s2">Failure reason: </span><span class="si">{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">fail_reason</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
 
-  <span class="n">host_url</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;host_url&quot;</span><span class="p">)</span>
-  <span class="n">attendee_url</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;attendee_url&quot;</span><span class="p">)</span>
+  <span class="n">host_url</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"host_url"</span><span class="p">)</span>
+  <span class="n">attendee_url</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"attendee_url"</span><span class="p">)</span>
 
   <span class="k">if</span> <span class="n">host_url</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">host_url</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">host_url</span> <span class="o">=</span> <span class="s2">""</span>
 
   <span class="k">if</span> <span class="n">attendee_url</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">attendee_url</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">attendee_url</span> <span class="o">=</span> <span class="s2">""</span>
 
-  <span class="n">ref_html_host</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;a href=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;Link&lt;/a&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">host_url</span><span class="p">)</span>
-  <span class="n">ref_html_attendee</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;a href=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;Link&lt;/a&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attendee_url</span><span class="p">)</span>
+  <span class="n">ref_html_host</span> <span class="o">=</span> <span class="s2">"""&lt;a href='</span><span class="si">{0}</span><span class="s2">'&gt;Link&lt;/a&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">host_url</span><span class="p">)</span>
+  <span class="n">ref_html_attendee</span> <span class="o">=</span> <span class="s2">"""&lt;a href='</span><span class="si">{0}</span><span class="s2">'&gt;Link&lt;/a&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attendee_url</span><span class="p">)</span>
 
-  <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Cisco WebEx Meeting Links:&lt;/b&gt;&lt;br /&gt;Host URL: </span><span class="si">{0}</span><span class="s2">&lt;br /&gt;Attendee URL: </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ref_html_host</span><span class="p">,</span> <span class="n">ref_html_attendee</span><span class="p">)</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Cisco WebEx Meeting Links:&lt;/b&gt;&lt;br /&gt;Host URL: </span><span class="si">{0}</span><span class="s2">&lt;br /&gt;Attendee URL: </span><span class="si">{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ref_html_host</span><span class="p">,</span> <span class="n">ref_html_attendee</span><span class="p">)</span>
 
 <span class="n">note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>

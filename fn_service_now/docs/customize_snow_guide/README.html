@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -447,26 +447,26 @@
 
 <span class="w">		</span><span class="c1">//Get the required parameters to create an Incident</span>
 <span class="w">		</span><span class="nx">record</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">;</span>
-<span class="w">		</span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">);</span>
-<span class="w">		</span><span class="nx">caseName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;SN: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;short_description&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; [&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;]&quot;</span><span class="p">;</span>
+<span class="w">		</span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">"number"</span><span class="p">);</span>
+<span class="w">		</span><span class="nx">caseName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"SN: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">"short_description"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" ["</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"]"</span><span class="p">;</span>
 
 <span class="w">		</span><span class="c1">//Map ServiceNow severity in digits to Resilient strings</span>
-<span class="w">		</span><span class="c1">//TIP: use the &#39;finfo&#39; command on Resilient Integrations Server</span>
+<span class="w">		</span><span class="c1">//TIP: use the 'finfo' command on Resilient Integrations Server</span>
 <span class="w">		</span><span class="c1">//to get Resilient field information</span>
 <span class="w">		</span><span class="nx">resSeverityMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">			</span><span class="s2">&quot;1&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;High&quot;</span><span class="p">,</span>
-<span class="w">			</span><span class="s2">&quot;2&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Medium&quot;</span><span class="p">,</span>
-<span class="w">			</span><span class="s2">&quot;3&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Low&quot;</span>
+<span class="w">			</span><span class="s2">"1"</span><span class="o">:</span><span class="w"> </span><span class="s2">"High"</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">"2"</span><span class="o">:</span><span class="w"> </span><span class="s2">"Medium"</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">"3"</span><span class="o">:</span><span class="w"> </span><span class="s2">"Low"</span>
 <span class="w">		</span><span class="p">};</span>
 
-<span class="w">		</span><span class="nx">severityMapped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resSeverityMap</span><span class="p">[</span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;severity&quot;</span><span class="p">).</span><span class="nx">toString</span><span class="p">()];</span>
+<span class="w">		</span><span class="nx">severityMapped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resSeverityMap</span><span class="p">[</span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">"severity"</span><span class="p">).</span><span class="nx">toString</span><span class="p">()];</span>
 
 <span class="w">		</span><span class="c1">//Initialize options</span>
 <span class="w">		</span><span class="nx">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">			</span><span class="nx">initSnNote</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Incident created in IBM SOAR&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="nx">initSnNote</span><span class="o">:</span><span class="w"> </span><span class="s2">"Incident created in IBM SOAR"</span><span class="p">,</span>
 <span class="w">			</span><span class="nx">optionalFields</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">				</span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">),</span>
-<span class="w">				</span><span class="s2">&quot;severity_code&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">severityMapped</span>
+<span class="w">				</span><span class="s2">"description"</span><span class="o">:</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">"description"</span><span class="p">),</span>
+<span class="w">				</span><span class="s2">"severity_code"</span><span class="o">:</span><span class="w"> </span><span class="nx">severityMapped</span>
 <span class="w">			</span><span class="p">}</span>
 <span class="w">		</span><span class="p">};</span>
 
@@ -475,16 +475,16 @@
 
 <span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">			</span><span class="c1">// Create the initial RES Note</span>
-<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&lt;br&gt;This &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; has been sent from &lt;b&gt;ServiceNow&lt;/b&gt;&quot;</span><span class="p">;</span>
-<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;&lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="p">;</span>
-<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">&#39;&lt;br&gt;&lt;b&gt;ServiceNow Link:&lt;/b&gt; &lt;a href=&quot;&#39;</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">&#39;&quot;&gt;&#39;</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">&#39;&lt;/a&gt;&lt;/div&gt;&#39;</span><span class="p">;</span>
-<span class="w">			</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;html&quot;</span><span class="p">);</span>
+<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"&lt;br&gt;This "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" has been sent from &lt;b&gt;ServiceNow&lt;/b&gt;"</span><span class="p">;</span>
+<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">"&lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt; "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="p">;</span>
+<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">'&lt;br&gt;&lt;b&gt;ServiceNow Link:&lt;/b&gt; &lt;a href="'</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">'"&gt;'</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">'&lt;/a&gt;&lt;/div&gt;'</span><span class="p">;</span>
+<span class="w">			</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="p">,</span><span class="w"> </span><span class="s2">"html"</span><span class="p">);</span>
 
-<span class="w">			</span><span class="c1">// Get all Work Notes. Returns as a string where each entry is delimited by &#39;\n\n&#39;</span>
+<span class="w">			</span><span class="c1">// Get all Work Notes. Returns as a string where each entry is delimited by '\n\n'</span>
 <span class="w">			</span><span class="nx">workNotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="p">.</span><span class="nx">getJournalEntry</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">);</span>
 
-<span class="w">			</span><span class="c1">//Split the Work Notes on &#39;\n\n&#39;</span>
-<span class="w">			</span><span class="nx">workNotesSplit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">workNotes</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;\n\n&quot;</span><span class="p">);</span>
+<span class="w">			</span><span class="c1">//Split the Work Notes on '\n\n'</span>
+<span class="w">			</span><span class="nx">workNotesSplit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">workNotes</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">"\n\n"</span><span class="p">);</span>
 
 <span class="w">			</span><span class="c1">//Loop each Work Note and add a Resilient Note</span>
 <span class="w">			</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">workNotesSplit</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
@@ -496,7 +496,7 @@
 <span class="w">		</span><span class="p">}</span>
 <span class="w">	</span><span class="p">}</span>
 <span class="w">	</span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">errMsg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">		</span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Failed to create an Incident in IBM SOAR.\nReason: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
+<span class="w">		</span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Failed to create an Incident in IBM SOAR.\nReason: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
 <span class="w">		</span><span class="nx">gs</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">errMsg</span><span class="p">);</span>
 <span class="w">	</span><span class="p">}</span>
 <span class="p">})();</span>
@@ -514,16 +514,16 @@
 
 <span class="w">		</span><span class="c1">//Get the required parameters to create a Task</span>
 <span class="w">		</span><span class="nx">record</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">;</span>
-<span class="w">		</span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">);</span>
-<span class="w">		</span><span class="nx">caseName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;SN: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;short_description&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; [&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;]&quot;</span><span class="p">;</span>
+<span class="w">		</span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">"number"</span><span class="p">);</span>
+<span class="w">		</span><span class="nx">caseName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"SN: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">"short_description"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" ["</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"]"</span><span class="p">;</span>
 <span class="w">		</span><span class="nx">incidentId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">workflow</span><span class="p">.</span><span class="nx">variables</span><span class="p">.</span><span class="nx">u_ibm_resilient_incident_id</span><span class="p">;</span>
 
 <span class="w">		</span><span class="c1">//Initialize options</span>
 <span class="w">		</span><span class="nx">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">			</span><span class="nx">initSnNote</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Task created in IBM SOAR&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="nx">initSnNote</span><span class="o">:</span><span class="w"> </span><span class="s2">"Task created in IBM SOAR"</span><span class="p">,</span>
 <span class="w">			</span><span class="nx">incidentId</span><span class="o">:</span><span class="w"> </span><span class="nx">incidentId</span><span class="p">,</span>
 <span class="w">			</span><span class="nx">optionalFields</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">				</span><span class="s2">&quot;instr_text&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span>
+<span class="w">				</span><span class="s2">"instr_text"</span><span class="o">:</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">"description"</span><span class="p">)</span>
 <span class="w">			</span><span class="p">}</span>
 <span class="w">		</span><span class="p">};</span>
 
@@ -532,16 +532,16 @@
 
 <span class="w">		</span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">res</span><span class="p">){</span>
 <span class="w">			</span><span class="c1">// Create the initial RES Note</span>
-<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&lt;br&gt;This &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; has been sent from &lt;b&gt;ServiceNow&lt;/b&gt;&quot;</span><span class="p">;</span>
-<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;&lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="p">;</span>
-<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">&#39;&lt;br&gt;&lt;b&gt;ServiceNow Link:&lt;/b&gt; &lt;a href=&quot;&#39;</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">&#39;&quot;&gt;&#39;</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">&#39;&lt;/a&gt;&lt;/div&gt;&#39;</span><span class="p">;</span>
-<span class="w">			</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;html&quot;</span><span class="p">);</span>
+<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"&lt;br&gt;This "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" has been sent from &lt;b&gt;ServiceNow&lt;/b&gt;"</span><span class="p">;</span>
+<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">"&lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt; "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="p">;</span>
+<span class="w">			</span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">'&lt;br&gt;&lt;b&gt;ServiceNow Link:&lt;/b&gt; &lt;a href="'</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">'"&gt;'</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">'&lt;/a&gt;&lt;/div&gt;'</span><span class="p">;</span>
+<span class="w">			</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="p">,</span><span class="w"> </span><span class="s2">"html"</span><span class="p">);</span>
 
-<span class="w">			</span><span class="c1">// Get all Work Notes. Returns as a string where each entry is delimited by &#39;\n\n&#39;</span>
+<span class="w">			</span><span class="c1">// Get all Work Notes. Returns as a string where each entry is delimited by '\n\n'</span>
 <span class="w">			</span><span class="nx">workNotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="p">.</span><span class="nx">getJournalEntry</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">);</span>
 
-<span class="w">			</span><span class="c1">//Split the Work Notes on &#39;\n\n&#39;</span>
-<span class="w">			</span><span class="nx">workNotesSplit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">workNotes</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;\n\n&quot;</span><span class="p">);</span>
+<span class="w">			</span><span class="c1">//Split the Work Notes on '\n\n'</span>
+<span class="w">			</span><span class="nx">workNotesSplit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">workNotes</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">"\n\n"</span><span class="p">);</span>
 
 <span class="w">			</span><span class="c1">//Loop each Work Note and add a Resilient Note</span>
 <span class="w">			</span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">workNotesSplit</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
@@ -553,7 +553,7 @@
 <span class="w">		</span><span class="p">}</span>
 <span class="w">	</span><span class="p">}</span>
 <span class="w">	</span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">errMsg</span><span class="p">){</span>
-<span class="w">		</span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Failed to create a Task in IBM SOAR for Incident &quot;</span><span class="o">+</span><span class="nx">incidentId</span><span class="o">+</span><span class="s2">&quot;.\nReason: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
+<span class="w">		</span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Failed to create a Task in IBM SOAR for Incident "</span><span class="o">+</span><span class="nx">incidentId</span><span class="o">+</span><span class="s2">".\nReason: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
 <span class="w">		</span><span class="nx">gs</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">errMsg</span><span class="p">);</span>
 <span class="w">	</span><span class="p">}</span>
 <span class="p">})();</span>
@@ -579,7 +579,7 @@
 <span class="w">		</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="p">);</span>
 <span class="w">	</span><span class="p">}</span>
 <span class="w">	</span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">errMsg</span><span class="p">){</span>
-<span class="w">		</span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Failed to add a note in IBM SOAR.\nReason: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
+<span class="w">		</span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Failed to add a note in IBM SOAR.\nReason: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
 <span class="w">		</span><span class="nx">gs</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">errMsg</span><span class="p">);</span>
 <span class="w">	</span><span class="p">}</span>
 <span class="p">})();</span>
@@ -605,7 +605,7 @@
 <span class="w">		</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="p">);</span>
 <span class="w">	</span><span class="p">}</span>
 <span class="w">	</span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">errMsg</span><span class="p">){</span>
-<span class="w">		</span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Failed to add a note in IBM SOAR.\nReason: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
+<span class="w">		</span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Failed to add a note in IBM SOAR.\nReason: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
 <span class="w">		</span><span class="nx">gs</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">errMsg</span><span class="p">);</span>
 <span class="w">	</span><span class="p">}</span>
 <span class="p">})();</span>
@@ -624,21 +624,21 @@
 <span class="w">		</span><span class="c1">//Map ServiceNow state to a color</span>
 <span class="w">		</span><span class="c1">//Colors accepted by resHelper.updateStateInResilient() = green/orange/yellow/red</span>
 <span class="w">		</span><span class="nx">stateToColorMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">			</span><span class="s2">&quot;New&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;green&quot;</span><span class="p">,</span>
-<span class="w">			</span><span class="s2">&quot;In Progress&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;orange&quot;</span><span class="p">,</span>
-<span class="w">			</span><span class="s2">&quot;On Hold&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;yellow&quot;</span><span class="p">,</span>
-<span class="w">			</span><span class="s2">&quot;Resolved&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
-<span class="w">			</span><span class="s2">&quot;Closed&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
-<span class="w">			</span><span class="s2">&quot;Canceled&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
-<span class="w">			</span><span class="s2">&quot;Cancelled&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">"New"</span><span class="o">:</span><span class="w"> </span><span class="s2">"green"</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">"In Progress"</span><span class="o">:</span><span class="w"> </span><span class="s2">"orange"</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">"On Hold"</span><span class="o">:</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">"Resolved"</span><span class="o">:</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">"Closed"</span><span class="o">:</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">"Canceled"</span><span class="o">:</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">"Cancelled"</span><span class="o">:</span><span class="w"> </span><span class="s2">"red"</span><span class="p">,</span>
 
 <span class="w">			</span><span class="c1">// colors for security incidents states</span>
-<span class="w">			</span><span class="s2">&quot;Draft&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;green&quot;</span><span class="p">,</span>
-<span class="w">			</span><span class="s2">&quot;Analysis&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;orange&quot;</span><span class="p">,</span>
-<span class="w">			</span><span class="s2">&quot;Contain&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;yellow&quot;</span><span class="p">,</span>
-<span class="w">			</span><span class="s2">&quot;Eradicate&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;yellow&quot;</span><span class="p">,</span>
-<span class="w">			</span><span class="s2">&quot;Recover&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;yellow&quot;</span><span class="p">,</span>
-<span class="w">			</span><span class="s2">&quot;Review&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;red&quot;</span>
+<span class="w">			</span><span class="s2">"Draft"</span><span class="o">:</span><span class="w"> </span><span class="s2">"green"</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">"Analysis"</span><span class="o">:</span><span class="w"> </span><span class="s2">"orange"</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">"Contain"</span><span class="o">:</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">"Eradicate"</span><span class="o">:</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">"Recover"</span><span class="o">:</span><span class="w"> </span><span class="s2">"yellow"</span><span class="p">,</span>
+<span class="w">			</span><span class="s2">"Review"</span><span class="o">:</span><span class="w"> </span><span class="s2">"red"</span>
 <span class="w">		</span><span class="p">};</span>
 
 <span class="w">		</span><span class="c1">//Get resilient_reference_id depending on what Table the record is in</span>
@@ -651,17 +651,17 @@
 <span class="w">		</span><span class="p">}</span>
 <span class="w">		</span><span class="c1">// If it does not exist, default to green</span>
 <span class="w">		</span><span class="k">catch</span><span class="p">(</span><span class="nx">errMsg</span><span class="p">){</span>
-<span class="w">			</span><span class="nx">snTicketStateColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;green&quot;</span><span class="p">;</span>
+<span class="w">			</span><span class="nx">snTicketStateColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"green"</span><span class="p">;</span>
 <span class="w">		</span><span class="p">}</span>
 
 <span class="w">		</span><span class="c1">//Update that status in the res datatable</span>
 <span class="w">		</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">updateStateInResilient</span><span class="p">(</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">snTicketState</span><span class="p">,</span><span class="w"> </span><span class="nx">snTicketStateColor</span><span class="p">);</span>
 
 <span class="w">		</span><span class="c1">//Add a note to the resilient incident/task stating the change</span>
-<span class="w">		</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;ServiceNow Record state changed to: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snTicketState</span><span class="p">);</span>
+<span class="w">		</span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="s2">"ServiceNow Record state changed to: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snTicketState</span><span class="p">);</span>
 
 <span class="w">		</span><span class="c1">//Get resolution notes if there are any</span>
-<span class="w">		</span><span class="nx">resolutionNotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;close_notes&quot;</span><span class="p">);</span>
+<span class="w">		</span><span class="nx">resolutionNotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">"close_notes"</span><span class="p">);</span>
 
 <span class="w">		</span><span class="c1">//Add a note to the resilient incident/task if there are resolution notes</span>
 <span class="w">		</span><span class="k">if</span><span class="p">(</span><span class="nx">resolutionNotes</span><span class="p">){</span>
@@ -669,7 +669,7 @@
 <span class="w">		</span><span class="p">}</span>
 <span class="w">	</span><span class="p">}</span>
 <span class="w">	</span><span class="k">catch</span><span class="p">(</span><span class="nx">errMsg</span><span class="p">){</span>
-<span class="w">		</span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Failed to update state in IBM SOAR.\nReason: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
+<span class="w">		</span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Failed to update state in IBM SOAR.\nReason: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
 <span class="w">		</span><span class="nx">gs</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">errMsg</span><span class="p">);</span>
 <span class="w">	</span><span class="p">}</span>
 <span class="p">})();</span>
@@ -981,26 +981,26 @@
 
 <span class="w">        </span><span class="c1">//Get the required parameters to create an Incident</span>
 <span class="w">        </span><span class="nx">record</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">;</span>
-<span class="w">        </span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;number&quot;</span><span class="p">);</span>
-<span class="w">        </span><span class="nx">caseName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;SN: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;short_description&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; [&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;]&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">"number"</span><span class="p">);</span>
+<span class="w">        </span><span class="nx">caseName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"SN: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">"short_description"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" ["</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">"]"</span><span class="p">;</span>
 
 <span class="w">        </span><span class="c1">//Map ServiceNow severity in digits to Resilient strings</span>
-<span class="w">        </span><span class="c1">//TIP: use the &#39;finfo&#39; command on Resilient Integrations Server</span>
+<span class="w">        </span><span class="c1">//TIP: use the 'finfo' command on Resilient Integrations Server</span>
 <span class="w">        </span><span class="c1">//to get Resilient field information</span>
 <span class="w">        </span><span class="nx">resSeverityMap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="s2">&quot;1&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;High&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;2&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Medium&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="s2">&quot;3&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Low&quot;</span>
+<span class="w">            </span><span class="s2">"1"</span><span class="o">:</span><span class="w"> </span><span class="s2">"High"</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">"2"</span><span class="o">:</span><span class="w"> </span><span class="s2">"Medium"</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">"3"</span><span class="o">:</span><span class="w"> </span><span class="s2">"Low"</span>
 <span class="w">        </span><span class="p">};</span>
 
-<span class="w">        </span><span class="nx">severityMapped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resSeverityMap</span><span class="p">[</span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;severity&quot;</span><span class="p">).</span><span class="nx">toString</span><span class="p">()];</span>
+<span class="w">        </span><span class="nx">severityMapped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resSeverityMap</span><span class="p">[</span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">"severity"</span><span class="p">).</span><span class="nx">toString</span><span class="p">()];</span>
 
 <span class="w">        </span><span class="c1">//Initialize options</span>
 <span class="w">        </span><span class="nx">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">            </span><span class="nx">initSnNote</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Incident created in IBM SOAR&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">initSnNote</span><span class="o">:</span><span class="w"> </span><span class="s2">"Incident created in IBM SOAR"</span><span class="p">,</span>
 <span class="w">            </span><span class="nx">optionalFields</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">                </span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">),</span>
-<span class="w">                </span><span class="s2">&quot;severity_code&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">severityMapped</span>
+<span class="w">                </span><span class="s2">"description"</span><span class="o">:</span><span class="w"> </span><span class="nx">record</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="s2">"description"</span><span class="p">),</span>
+<span class="w">                </span><span class="s2">"severity_code"</span><span class="o">:</span><span class="w"> </span><span class="nx">severityMapped</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">        </span><span class="p">};</span>
 
@@ -1009,16 +1009,16 @@
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">            </span><span class="c1">// Create the initial RES Note</span>
-<span class="w">            </span><span class="nx">noteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&lt;br&gt;This &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot; has been sent from &lt;b&gt;ServiceNow&lt;/b&gt;&quot;</span><span class="p">;</span>
-<span class="w">            </span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;&lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt; &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="p">;</span>
-<span class="w">            </span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">&#39;&lt;br&gt;&lt;b&gt;ServiceNow Link:&lt;/b&gt; &lt;a href=&quot;&#39;</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">&#39;&quot;&gt;&#39;</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">&#39;&lt;/a&gt;&lt;/div&gt;&#39;</span><span class="p">;</span>
-<span class="w">            </span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;html&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="nx">noteText</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"&lt;br&gt;This "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_type</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">" has been sent from &lt;b&gt;ServiceNow&lt;/b&gt;"</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">"&lt;br&gt;&lt;b&gt;ServiceNow ID:&lt;/b&gt; "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">snRecordId</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">noteText</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">'&lt;br&gt;&lt;b&gt;ServiceNow Link:&lt;/b&gt; &lt;a href="'</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">'"&gt;'</span><span class="o">+</span><span class="nx">res</span><span class="p">.</span><span class="nx">snLink</span><span class="o">+</span><span class="s1">'&lt;/a&gt;&lt;/div&gt;'</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">resHelper</span><span class="p">.</span><span class="nx">addNote</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">res_reference_id</span><span class="p">,</span><span class="w"> </span><span class="nx">noteText</span><span class="p">,</span><span class="w"> </span><span class="s2">"html"</span><span class="p">);</span>
 
-<span class="w">            </span><span class="c1">// Get all Work Notes. Returns as a string where each entry is delimited by &#39;\n\n&#39;</span>
+<span class="w">            </span><span class="c1">// Get all Work Notes. Returns as a string where each entry is delimited by '\n\n'</span>
 <span class="w">            </span><span class="nx">workNotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="p">.</span><span class="nx">getJournalEntry</span><span class="p">(</span><span class="o">-</span><span class="mf">1</span><span class="p">);</span>
 
-<span class="w">            </span><span class="c1">//Split the Work Notes on &#39;\n\n&#39;</span>
-<span class="w">            </span><span class="nx">workNotesSplit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">workNotes</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;\n\n&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="c1">//Split the Work Notes on '\n\n'</span>
+<span class="w">            </span><span class="nx">workNotesSplit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">workNotes</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">"\n\n"</span><span class="p">);</span>
 
 <span class="w">            </span><span class="c1">//Loop each Work Note and add a Resilient Note</span>
 <span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">workNotesSplit</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
@@ -1030,7 +1030,7 @@
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">    </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">errMsg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Failed to create an Incident in IBM SOAR.\nReason: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">current</span><span class="p">.</span><span class="nx">work_notes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Failed to create an Incident in IBM SOAR.\nReason: "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">errMsg</span><span class="p">;</span>
 <span class="w">        </span><span class="nx">gs</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">errMsg</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">})();</span>

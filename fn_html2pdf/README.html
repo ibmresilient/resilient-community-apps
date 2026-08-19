@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -630,7 +630,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="s1">&#39;&lt;base64 encoded PDF data&gt;&#39;</span>
+    <span class="s1">'content'</span><span class="p">:</span> <span class="s1">'&lt;base64 encoded PDF data&gt;'</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -645,9 +645,9 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># results in base64. see output property &#39;content&#39;:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># results in base64. see output property 'content':</span>
 <span class="c1"># results.content</span>
-<span class="c1"># or use workflow properties, such as &#39;pdf&#39;, when using this function with another function such as utilities: base64 to attachment:</span>
+<span class="c1"># or use workflow properties, such as 'pdf', when using this function with another function such as utilities: base64 to attachment:</span>
 <span class="c1"># inputs.base64content = workflow.properties.pdf.content</span>
 </pre></div>
 </div>

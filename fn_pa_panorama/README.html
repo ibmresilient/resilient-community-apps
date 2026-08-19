@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -733,32 +733,32 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;@code&quot;</span><span class="p">:</span> <span class="s2">&quot;19&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;@status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;job&quot;</span><span class="p">:</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;line&quot;</span><span class="p">:</span> <span class="s2">&quot;Commit job enqueued with jobid 8&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"@code"</span><span class="p">:</span> <span class="s2">"19"</span><span class="p">,</span>
+    <span class="s2">"@status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+    <span class="s2">"result"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"job"</span><span class="p">:</span> <span class="s2">"8"</span><span class="p">,</span>
+      <span class="s2">"msg"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"line"</span><span class="p">:</span> <span class="s2">"Commit job enqueued with jobid 8"</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;panorama_label&quot;</span><span class="p">:</span> <span class="s2">&quot;panOS&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"panorama_label"</span><span class="p">:</span> <span class="s2">"panOS"</span><span class="p">,</span>
+    <span class="s2">"panorama_location"</span><span class="p">:</span> <span class="s2">"vsys"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1245</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-pa-panorama&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.5.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-08-09 09:01:22&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1245</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-pa-panorama"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.5.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-08-09 09:01:22"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -766,25 +766,25 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">&quot;vsys&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">"vsys"</span>
 </pre></div>
 </div>
 </p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="s2">""</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">commit_output</span>
 <span class="n">edit_addresses</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">edit_addresses_results</span>
-<span class="k">if</span> <span class="n">edit_addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">note</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Panorama DNS name: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> was unblocked.</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="k">if</span> <span class="n">edit_addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">note</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"Panorama DNS name: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> was unblocked.</span><span class="se">\n</span><span class="s2">"</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">note</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;Panorama Unblock DNS failed with reason: </span><span class="si">{</span><span class="n">edit_addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+  <span class="n">note</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"Panorama Unblock DNS failed with reason: </span><span class="si">{</span><span class="n">edit_addresses</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">note</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;msg&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;line&quot;</span><span class="p">))</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">note</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"result"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"msg"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"line"</span><span class="p">))</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
 </pre></div>
@@ -839,33 +839,33 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;@code&quot;</span><span class="p">:</span> <span class="s2">&quot;19&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;@status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;job&quot;</span><span class="p">:</span> <span class="s2">&quot;576&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;line&quot;</span><span class="p">:</span> <span class="s2">&quot;Job enqueued with jobid 576&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"@code"</span><span class="p">:</span> <span class="s2">"19"</span><span class="p">,</span>
+    <span class="s2">"@status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+    <span class="s2">"result"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"job"</span><span class="p">:</span> <span class="s2">"576"</span><span class="p">,</span>
+      <span class="s2">"msg"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"line"</span><span class="p">:</span> <span class="s2">"Job enqueued with jobid 576"</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;panorama_commit_without_default_template&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_device_group&quot;</span><span class="p">:</span> <span class="s2">&quot;group1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_label&quot;</span><span class="p">:</span> <span class="s2">&quot;panorama&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"panorama_commit_without_default_template"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">"panorama_device_group"</span><span class="p">:</span> <span class="s2">"group1"</span><span class="p">,</span>
+    <span class="s2">"panorama_label"</span><span class="p">:</span> <span class="s2">"panorama"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">13235</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-pa-panorama&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.6.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-01-28 09:54:17&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">13235</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-pa-panorama"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.6.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2025-01-28 09:54:17"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -873,10 +873,10 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">panorama_commit_without_default_template</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_commit_without_default_templates&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_device_group</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_device_group_name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">panorama_commit_without_default_template</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_commit_without_default_templates"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_device_group</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_device_group_name"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -885,10 +885,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">panorama_commit_all_return</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Panorama: Commit All returned</span><span class="se">\n</span><span class="si">{</span><span class="n">dumps</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{}),</span><span class="w"> </span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Panorama: Commit All returned</span><span class="se">\n</span><span class="si">{</span><span class="n">dumps</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'content'</span><span class="p">,</span><span class="w"> </span><span class="p">{}),</span><span class="w"> </span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Panorama: Commit All failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Panorama: Commit All failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -959,30 +959,30 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;@code&quot;</span><span class="p">:</span> <span class="s2">&quot;20&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;@status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="s2">&quot;command succeeded&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"@code"</span><span class="p">:</span> <span class="s2">"20"</span><span class="p">,</span>
+    <span class="s2">"@status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+    <span class="s2">"msg"</span><span class="p">:</span> <span class="s2">"command succeeded"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;panorama_label&quot;</span><span class="p">:</span> <span class="s2">&quot;panorama_label1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_name_parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;5.6.7.4&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_request_body&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\n</span><span class="s2">  </span><span class="se">\&quot;</span><span class="s2">entry</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">@name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">5.6.7.4</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">description</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">5.6.7.4</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\&quot;</span><span class="s2">ip-netmask</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">5.6.7.4</span><span class="se">\&quot;\n</span><span class="s2">  }</span><span class="se">\n</span><span class="s2">}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"panorama_label"</span><span class="p">:</span> <span class="s2">"panorama_label1"</span><span class="p">,</span>
+    <span class="s2">"panorama_location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+    <span class="s2">"panorama_name_parameter"</span><span class="p">:</span> <span class="s2">"5.6.7.4"</span><span class="p">,</span>
+    <span class="s2">"panorama_request_body"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\n</span><span class="s2">  </span><span class="se">\"</span><span class="s2">entry</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\n</span><span class="s2">    </span><span class="se">\"</span><span class="s2">@name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">5.6.7.4</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">5.6.7.4</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">    </span><span class="se">\"</span><span class="s2">ip-netmask</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">5.6.7.4</span><span class="se">\"\n</span><span class="s2">  }</span><span class="se">\n</span><span class="s2">}"</span><span class="p">,</span>
+    <span class="s2">"panorama_vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">514</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-pa-panorama&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-04-25 08:59:01&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">514</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"localhost"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-pa-panorama"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.3.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-04-25 08:59:01"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -991,27 +991,27 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">&quot;vsys&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">"vsys"</span>
 
-<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;vsys&quot;</span><span class="p">,</span> <span class="s2">&quot;panorama-pushed&quot;</span><span class="p">]:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_vsys</span> <span class="o">=</span> <span class="s2">&quot;vsys1&quot;</span>
-<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">==</span> <span class="s2">&quot;device-group&quot;</span><span class="p">:</span>
-  <span class="c1"># If `panorama_location` equals &#39;device-group&#39; then set `panorama_device_group`</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_device_group</span> <span class="o">=</span> <span class="s2">&quot;group1&quot;</span>
+<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"vsys"</span><span class="p">,</span> <span class="s2">"panorama-pushed"</span><span class="p">]:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_vsys</span> <span class="o">=</span> <span class="s2">"vsys1"</span>
+<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">==</span> <span class="s2">"device-group"</span><span class="p">:</span>
+  <span class="c1"># If `panorama_location` equals 'device-group' then set `panorama_device_group`</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_device_group</span> <span class="o">=</span> <span class="s2">"group1"</span>
 
 <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_name_parameter</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
 
 <span class="n">body</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;entry&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-    <span class="s2">&quot;fqdn&quot;</span><span class="p">:</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
+  <span class="s2">"entry"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"@name"</span><span class="p">:</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+    <span class="s2">"fqdn"</span><span class="p">:</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_request_body</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1089,30 +1089,30 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;@code&quot;</span><span class="p">:</span> <span class="s2">&quot;20&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;@status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="s2">&quot;command succeeded&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"@code"</span><span class="p">:</span> <span class="s2">"20"</span><span class="p">,</span>
+    <span class="s2">"@status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+    <span class="s2">"msg"</span><span class="p">:</span> <span class="s2">"command succeeded"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;panorama_label&quot;</span><span class="p">:</span> <span class="s2">&quot;panOS&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_name_parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;Blocked Group&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_request_body&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">entry</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">@name</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Blocked Group</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">description</span><span class="se">\&quot;</span><span class="s2">: null, </span><span class="se">\&quot;</span><span class="s2">static</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">member</span><span class="se">\&quot;</span><span class="s2">: [</span><span class="se">\&quot;</span><span class="s2">1.2.3.4</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">42.36.75.4</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">test.com</span><span class="se">\&quot;</span><span class="s2">]}}}&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"panorama_label"</span><span class="p">:</span> <span class="s2">"panOS"</span><span class="p">,</span>
+    <span class="s2">"panorama_location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+    <span class="s2">"panorama_name_parameter"</span><span class="p">:</span> <span class="s2">"Blocked Group"</span><span class="p">,</span>
+    <span class="s2">"panorama_request_body"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">entry</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\"</span><span class="s2">@name</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Blocked Group</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">: null, </span><span class="se">\"</span><span class="s2">static</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\"</span><span class="s2">member</span><span class="se">\"</span><span class="s2">: [</span><span class="se">\"</span><span class="s2">1.2.3.4</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">42.36.75.4</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">test.com</span><span class="se">\"</span><span class="s2">]}}}"</span><span class="p">,</span>
+    <span class="s2">"panorama_vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2028</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-pa-panorama&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.5.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-08-09 09:01:19&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">2028</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-pa-panorama"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.5.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-08-09 09:01:19"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1122,31 +1122,31 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 
-<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">&quot;vsys&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">"vsys"</span>
 
-<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;vsys&quot;</span><span class="p">,</span> <span class="s2">&quot;panorama-pushed&quot;</span><span class="p">]:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_vsys</span> <span class="o">=</span> <span class="s2">&quot;vsys1&quot;</span>
-<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">==</span> <span class="s2">&quot;device-group&quot;</span><span class="p">:</span>
-  <span class="c1"># If `panorama_location` equals &#39;device-group&#39; then set `panorama_device_group`</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_device_group</span> <span class="o">=</span> <span class="s2">&quot;group1&quot;</span>
+<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"vsys"</span><span class="p">,</span> <span class="s2">"panorama-pushed"</span><span class="p">]:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_vsys</span> <span class="o">=</span> <span class="s2">"vsys1"</span>
+<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">==</span> <span class="s2">"device-group"</span><span class="p">:</span>
+  <span class="c1"># If `panorama_location` equals 'device-group' then set `panorama_device_group`</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_device_group</span> <span class="o">=</span> <span class="s2">"group1"</span>
 
-<span class="n">dns_name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="n">group</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_groups_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;entry&quot;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="n">dns_name</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="n">group</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_groups_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"result"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"entry"</span><span class="p">,</span> <span class="p">[])</span>
 <span class="k">if</span> <span class="n">group</span><span class="p">:</span>
   <span class="n">group</span> <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="n">addresses</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_addresses_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;result&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;entry&quot;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="n">addresses</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_addresses_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"result"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"entry"</span><span class="p">,</span> <span class="p">[])</span>
 <span class="k">for</span> <span class="n">address</span> <span class="ow">in</span> <span class="n">addresses</span><span class="p">:</span>
-  <span class="k">if</span> <span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;fqdn&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
-    <span class="n">dns_name</span> <span class="o">=</span> <span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;@name&quot;</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"fqdn"</span><span class="p">)</span> <span class="o">==</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
+    <span class="n">dns_name</span> <span class="o">=</span> <span class="n">address</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"@name"</span><span class="p">)</span>
     <span class="k">break</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">dns_name</span><span class="p">:</span>
-  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The DNS address </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> was not found in the specified address group.&quot;</span><span class="p">)</span>
+  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The DNS address </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> was not found in the specified address group."</span><span class="p">)</span>
 
-<span class="n">group_name</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;@name&quot;</span><span class="p">)</span>
-<span class="n">des</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span>
-<span class="n">member_list</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;static&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;member&quot;</span><span class="p">)</span>
+<span class="n">group_name</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"@name"</span><span class="p">)</span>
+<span class="n">des</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">)</span>
+<span class="n">member_list</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"static"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"member"</span><span class="p">)</span>
 
 <span class="c1"># Remove IP address from list</span>
 <span class="n">member_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">dns_name</span><span class="p">)</span>
@@ -1155,28 +1155,28 @@ Additional package dependencies may exist for each of these packages:</p>
 
 <span class="c1"># If using api version 9.0 or before uncomment below for the body</span>
 <span class="c1"># body = {</span>
-<span class="c1">#   &quot;entry&quot;: {</span>
-<span class="c1">#     &quot;@name&quot;: group_name,</span>
-<span class="c1">#     &quot;description&quot;: des,</span>
-<span class="c1">#     &quot;static&quot;: {</span>
-<span class="c1">#       &quot;member&quot;: dumps(member_list)</span>
+<span class="c1">#   "entry": {</span>
+<span class="c1">#     "@name": group_name,</span>
+<span class="c1">#     "description": des,</span>
+<span class="c1">#     "static": {</span>
+<span class="c1">#       "member": dumps(member_list)</span>
 <span class="c1">#     }</span>
 <span class="c1">#   }</span>
 <span class="c1"># }</span>
 
 <span class="n">body</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;entry&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="n">group_name</span><span class="p">,</span>
-    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">des</span><span class="p">,</span>
-    <span class="s2">&quot;static&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;member&quot;</span><span class="p">:</span> <span class="n">member_list</span>
+  <span class="s2">"entry"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"@name"</span><span class="p">:</span> <span class="n">group_name</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="n">des</span><span class="p">,</span>
+    <span class="s2">"static"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"member"</span><span class="p">:</span> <span class="n">member_list</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_request_body</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1184,10 +1184,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">edit_addresses_results</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Panorama DNS name: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> was unblocked.&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Panorama DNS name: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> was unblocked."</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Panorama Unblock DNS failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Panorama Unblock DNS failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1258,32 +1258,32 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;@code&quot;</span><span class="p">:</span> <span class="s2">&quot;20&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;@status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="s2">&quot;command succeeded&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"response"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"@code"</span><span class="p">:</span> <span class="s2">"20"</span><span class="p">,</span>
+      <span class="s2">"@status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+      <span class="s2">"msg"</span><span class="p">:</span> <span class="s2">"command succeeded"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;xml_response&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">response status=</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2"> code=</span><span class="se">\&quot;</span><span class="s2">20</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">msg</span><span class="se">\u003e</span><span class="s2">command succeeded</span><span class="se">\u003c</span><span class="s2">/msg</span><span class="se">\u003e\u003c</span><span class="s2">/response</span><span class="se">\u003e</span><span class="s2">&quot;</span>
+    <span class="s2">"xml_response"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">response status=</span><span class="se">\"</span><span class="s2">success</span><span class="se">\"</span><span class="s2"> code=</span><span class="se">\"</span><span class="s2">20</span><span class="se">\"\u003e\u003c</span><span class="s2">msg</span><span class="se">\u003e</span><span class="s2">command succeeded</span><span class="se">\u003c</span><span class="s2">/msg</span><span class="se">\u003e\u003c</span><span class="s2">/response</span><span class="se">\u003e</span><span class="s2">"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;panorama_label&quot;</span><span class="p">:</span> <span class="s2">&quot;panorama_label1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_user_group_xml&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  </span><span class="se">\u003c</span><span class="s2">entry name=</span><span class="se">\&quot;</span><span class="s2">Blocked_Users</span><span class="se">\&quot;\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">user</span><span class="se">\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">member</span><span class="se">\u003e</span><span class="s2">Blocked_User</span><span class="se">\u003c</span><span class="s2">/member</span><span class="se">\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">member</span><span class="se">\u003e</span><span class="s2">Blocked_user_2</span><span class="se">\u003c</span><span class="s2">/member</span><span class="se">\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">/user</span><span class="se">\u003e\n</span><span class="s2">  </span><span class="se">\u003c</span><span class="s2">/entry</span><span class="se">\u003e\n</span><span class="s2">  &quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_user_group_xpath&quot;</span><span class="p">:</span> <span class="s2">&quot;/config/shared/local-user-database/user-group/entry[@name=</span><span class="se">\u0027</span><span class="s2">Blocked_Users</span><span class="se">\u0027</span><span class="s2">]&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"panorama_label"</span><span class="p">:</span> <span class="s2">"panorama_label1"</span><span class="p">,</span>
+    <span class="s2">"panorama_location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+    <span class="s2">"panorama_user_group_xml"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">  </span><span class="se">\u003c</span><span class="s2">entry name=</span><span class="se">\"</span><span class="s2">Blocked_Users</span><span class="se">\"\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">user</span><span class="se">\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">member</span><span class="se">\u003e</span><span class="s2">Blocked_User</span><span class="se">\u003c</span><span class="s2">/member</span><span class="se">\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">member</span><span class="se">\u003e</span><span class="s2">Blocked_user_2</span><span class="se">\u003c</span><span class="s2">/member</span><span class="se">\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">/user</span><span class="se">\u003e\n</span><span class="s2">  </span><span class="se">\u003c</span><span class="s2">/entry</span><span class="se">\u003e\n</span><span class="s2">  "</span><span class="p">,</span>
+    <span class="s2">"panorama_user_group_xpath"</span><span class="p">:</span> <span class="s2">"/config/shared/local-user-database/user-group/entry[@name=</span><span class="se">\u0027</span><span class="s2">Blocked_Users</span><span class="se">\u0027</span><span class="s2">]"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">514</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-pa-panorama&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-04-25 11:12:20&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">514</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"localhost"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-pa-panorama"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.3.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-04-25 11:12:20"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1291,14 +1291,14 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">&quot;vsys&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">"vsys"</span>
 <span class="c1"># Set this to the name of the user group you wish to add a user to</span>
-<span class="n">group_name</span> <span class="o">=</span> <span class="s2">&quot;Blocked_Users&quot;</span>
+<span class="n">group_name</span> <span class="o">=</span> <span class="s2">"Blocked_Users"</span>
 
 <span class="c1"># Set this to the xpath of the group you are interested in</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_user_group_xpath</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;/config/shared/local-user-database/user-group/entry[@name=&#39;</span><span class="si">{</span><span class="n">group_name</span><span class="si">}</span><span class="s2">&#39;]&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_user_group_xpath</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"/config/shared/local-user-database/user-group/entry[@name='</span><span class="si">{</span><span class="n">group_name</span><span class="si">}</span><span class="s2">']"</span>
 
-<span class="n">users_list</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_users_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;user_list&quot;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="n">users_list</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">get_users_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"user_list"</span><span class="p">,</span> <span class="p">[])</span>
 
 <span class="n">blocked_users</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -1308,36 +1308,36 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">users_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
   <span class="c1"># multiple users returned</span>
   <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users_list</span><span class="p">:</span>
-    <span class="n">blocked_users</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;#text&quot;</span><span class="p">)))</span>
+    <span class="n">blocked_users</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"#text"</span><span class="p">)))</span>
 
 <span class="c1"># Remove the user from the blocked list if they are there</span>
 <span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span> <span class="ow">in</span> <span class="n">blocked_users</span><span class="p">:</span>
   <span class="n">blocked_users</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The Panorama user(s): </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> is not found in the group: </span><span class="si">{</span><span class="n">group_name</span><span class="si">}</span><span class="s2"> and can not be removed from it.&quot;</span><span class="p">)</span>
+  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The Panorama user(s): </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> is not found in the group: </span><span class="si">{</span><span class="n">group_name</span><span class="si">}</span><span class="s2"> and can not be removed from it."</span><span class="p">)</span>
 
 <span class="c1"># Updated function creates the xml request body for you</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_users_list</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">blocked_users</span><span class="p">)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_user_group_name</span> <span class="o">=</span> <span class="n">group_name</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 <span class="c1"># Giving the xml request body as an input still works</span>
-<span class="c1"># panorama_xml = &quot;&quot;</span>
+<span class="c1"># panorama_xml = ""</span>
 <span class="c1"># # Set xml to empty users if list is empty</span>
 <span class="c1"># if len(users_list) == 0:</span>
-<span class="c1">#   panorama_xml = f&#39;&lt;entry name=&quot;{group_name}&quot;/&gt;&#39;</span>
+<span class="c1">#   panorama_xml = f'&lt;entry name="{group_name}"/&gt;'</span>
 
 <span class="c1"># # Multiple members, build xml which the function will send to Panorama</span>
 <span class="c1"># else:</span>
-<span class="c1">#   panorama_xml = f&quot;&lt;entry name=&#39;{group_name}&#39;&gt;&lt;user&gt;&quot;</span>
+<span class="c1">#   panorama_xml = f"&lt;entry name='{group_name}'&gt;&lt;user&gt;"</span>
 
 <span class="c1">#   # Add member nodes with the username to the xml string</span>
 <span class="c1">#   for user in blocked_users:</span>
-<span class="c1">#     panorama_xml += f&quot;&lt;member&gt;{user}&lt;/member&gt;&quot;</span>
+<span class="c1">#     panorama_xml += f"&lt;member&gt;{user}&lt;/member&gt;"</span>
 
 <span class="c1">#   # Add the ending of the xml to the string</span>
-<span class="c1">#   panorama_xml += &quot;&lt;/user&gt;&lt;/entry&gt;&quot;</span>
+<span class="c1">#   panorama_xml += "&lt;/user&gt;&lt;/entry&gt;"</span>
 
 <span class="c1"># inputs.panorama_user_group_xml = panorama_xml</span>
 </pre></div>
@@ -1347,10 +1347,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">edit_users_results</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Panorama User account: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> was unblocked.&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Panorama User account: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> was unblocked."</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Panorama Unblock User failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Panorama Unblock User failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1415,47 +1415,47 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;@code&quot;</span><span class="p">:</span> <span class="s2">&quot;19&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;@status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;@count&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;@total-count&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;entry&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"@code"</span><span class="p">:</span> <span class="s2">"19"</span><span class="p">,</span>
+    <span class="s2">"@status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+    <span class="s2">"result"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"@count"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+      <span class="s2">"@total-count"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+      <span class="s2">"entry"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;Blocked Group&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;static&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;member&quot;</span><span class="p">:</span> <span class="p">[</span>
-              <span class="s2">&quot;1.2.3.4&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;42.36.75.4&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;test.com&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;1.1.1.1&quot;</span>
+          <span class="s2">"@location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+          <span class="s2">"@name"</span><span class="p">:</span> <span class="s2">"Blocked Group"</span><span class="p">,</span>
+          <span class="s2">"@vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span><span class="p">,</span>
+          <span class="s2">"static"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"member"</span><span class="p">:</span> <span class="p">[</span>
+              <span class="s2">"1.2.3.4"</span><span class="p">,</span>
+              <span class="s2">"42.36.75.4"</span><span class="p">,</span>
+              <span class="s2">"test.com"</span><span class="p">,</span>
+              <span class="s2">"1.1.1.1"</span>
             <span class="p">]</span>
           <span class="p">}</span>
         <span class="p">}</span>
       <span class="p">]</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;panorama_label&quot;</span><span class="p">:</span> <span class="s2">&quot;panOS&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_name_parameter&quot;</span><span class="p">:</span> <span class="s2">&quot;Blocked Group&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"panorama_label"</span><span class="p">:</span> <span class="s2">"panOS"</span><span class="p">,</span>
+    <span class="s2">"panorama_location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+    <span class="s2">"panorama_name_parameter"</span><span class="p">:</span> <span class="s2">"Blocked Group"</span><span class="p">,</span>
+    <span class="s2">"panorama_vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">3285</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-pa-panorama&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.5.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-08-09 09:01:13&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">3285</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-pa-panorama"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.5.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-08-09 09:01:13"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1463,17 +1463,17 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">&quot;vsys&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">"vsys"</span>
 
-<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;vsys&quot;</span><span class="p">,</span> <span class="s2">&quot;panorama-pushed&quot;</span><span class="p">]:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_vsys</span> <span class="o">=</span> <span class="s2">&quot;vsys1&quot;</span>
-<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">==</span> <span class="s2">&quot;device-group&quot;</span><span class="p">:</span>
-  <span class="c1"># If `panorama_location` equals &#39;device-group&#39; then set `panorama_device_group`</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_device_group</span> <span class="o">=</span> <span class="s2">&quot;group1&quot;</span>
+<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"vsys"</span><span class="p">,</span> <span class="s2">"panorama-pushed"</span><span class="p">]:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_vsys</span> <span class="o">=</span> <span class="s2">"vsys1"</span>
+<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">==</span> <span class="s2">"device-group"</span><span class="p">:</span>
+  <span class="c1"># If `panorama_location` equals 'device-group' then set `panorama_device_group`</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_device_group</span> <span class="o">=</span> <span class="s2">"group1"</span>
 
-<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_name_parameter</span> <span class="o">=</span> <span class="s2">&quot;Blocked Group&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_name_parameter</span> <span class="o">=</span> <span class="s2">"Blocked Group"</span>
 </pre></div>
 </div>
 </p>
@@ -1483,10 +1483,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">address_groups</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Panorama Get Address Groups</span><span class="se">\n</span><span class="si">{</span><span class="n">dumps</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{}),</span><span class="w"> </span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Panorama Get Address Groups</span><span class="se">\n</span><span class="si">{</span><span class="n">dumps</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span><span class="w"> </span><span class="p">{}),</span><span class="w"> </span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Panorama Get address groups failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Panorama Get address groups failed with reason: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1545,122 +1545,122 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;@code&quot;</span><span class="p">:</span> <span class="s2">&quot;19&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;@status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;@count&quot;</span><span class="p">:</span> <span class="s2">&quot;13&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;@total-count&quot;</span><span class="p">:</span> <span class="s2">&quot;13&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;entry&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"@code"</span><span class="p">:</span> <span class="s2">"19"</span><span class="p">,</span>
+    <span class="s2">"@status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+    <span class="s2">"result"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"@count"</span><span class="p">:</span> <span class="s2">"13"</span><span class="p">,</span>
+      <span class="s2">"@total-count"</span><span class="p">:</span> <span class="s2">"13"</span><span class="p">,</span>
+      <span class="s2">"entry"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;ip-netmask&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span>
+          <span class="s2">"@location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+          <span class="s2">"@name"</span><span class="p">:</span> <span class="s2">"1.1.1.1"</span><span class="p">,</span>
+          <span class="s2">"@vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span><span class="p">,</span>
+          <span class="s2">"ip-netmask"</span><span class="p">:</span> <span class="s2">"1.1.1.1"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;google&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;fqdn&quot;</span><span class="p">:</span> <span class="s2">&quot;www.google.com&quot;</span>
+          <span class="s2">"@location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+          <span class="s2">"@name"</span><span class="p">:</span> <span class="s2">"google"</span><span class="p">,</span>
+          <span class="s2">"@vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span><span class="p">,</span>
+          <span class="s2">"fqdn"</span><span class="p">:</span> <span class="s2">"www.google.com"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;2.2.2.2&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;2.2.2.2&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;ip-netmask&quot;</span><span class="p">:</span> <span class="s2">&quot;2.2.2.2&quot;</span>
+          <span class="s2">"@location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+          <span class="s2">"@name"</span><span class="p">:</span> <span class="s2">"2.2.2.2"</span><span class="p">,</span>
+          <span class="s2">"@vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span><span class="p">,</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"2.2.2.2"</span><span class="p">,</span>
+          <span class="s2">"ip-netmask"</span><span class="p">:</span> <span class="s2">"2.2.2.2"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;google.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;google.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;fqdn&quot;</span><span class="p">:</span> <span class="s2">&quot;google.com&quot;</span>
+          <span class="s2">"@location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+          <span class="s2">"@name"</span><span class="p">:</span> <span class="s2">"google.com"</span><span class="p">,</span>
+          <span class="s2">"@vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span><span class="p">,</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"google.com"</span><span class="p">,</span>
+          <span class="s2">"fqdn"</span><span class="p">:</span> <span class="s2">"google.com"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;www.ibm.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;www.ibm.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;fqdn&quot;</span><span class="p">:</span> <span class="s2">&quot;www.ibm.com&quot;</span>
+          <span class="s2">"@location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+          <span class="s2">"@name"</span><span class="p">:</span> <span class="s2">"www.ibm.com"</span><span class="p">,</span>
+          <span class="s2">"@vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span><span class="p">,</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"www.ibm.com"</span><span class="p">,</span>
+          <span class="s2">"fqdn"</span><span class="p">:</span> <span class="s2">"www.ibm.com"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;3.3.3.3&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;3.3.3.3&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;ip-netmask&quot;</span><span class="p">:</span> <span class="s2">&quot;3.3.3.3&quot;</span>
+          <span class="s2">"@location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+          <span class="s2">"@name"</span><span class="p">:</span> <span class="s2">"3.3.3.3"</span><span class="p">,</span>
+          <span class="s2">"@vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span><span class="p">,</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"3.3.3.3"</span><span class="p">,</span>
+          <span class="s2">"ip-netmask"</span><span class="p">:</span> <span class="s2">"3.3.3.3"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.3.4&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.3.4&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;ip-netmask&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.3.4&quot;</span>
+          <span class="s2">"@location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+          <span class="s2">"@name"</span><span class="p">:</span> <span class="s2">"1.2.3.4"</span><span class="p">,</span>
+          <span class="s2">"@vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span><span class="p">,</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"1.2.3.4"</span><span class="p">,</span>
+          <span class="s2">"ip-netmask"</span><span class="p">:</span> <span class="s2">"1.2.3.4"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;test.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;test.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;fqdn&quot;</span><span class="p">:</span> <span class="s2">&quot;test.com&quot;</span>
+          <span class="s2">"@location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+          <span class="s2">"@name"</span><span class="p">:</span> <span class="s2">"test.com"</span><span class="p">,</span>
+          <span class="s2">"@vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span><span class="p">,</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"test.com"</span><span class="p">,</span>
+          <span class="s2">"fqdn"</span><span class="p">:</span> <span class="s2">"test.com"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;abc.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;abc.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;fqdn&quot;</span><span class="p">:</span> <span class="s2">&quot;abc.com&quot;</span>
+          <span class="s2">"@location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+          <span class="s2">"@name"</span><span class="p">:</span> <span class="s2">"abc.com"</span><span class="p">,</span>
+          <span class="s2">"@vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span><span class="p">,</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"abc.com"</span><span class="p">,</span>
+          <span class="s2">"fqdn"</span><span class="p">:</span> <span class="s2">"abc.com"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;def.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;def.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;fqdn&quot;</span><span class="p">:</span> <span class="s2">&quot;def.com&quot;</span>
+          <span class="s2">"@location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+          <span class="s2">"@name"</span><span class="p">:</span> <span class="s2">"def.com"</span><span class="p">,</span>
+          <span class="s2">"@vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span><span class="p">,</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"def.com"</span><span class="p">,</span>
+          <span class="s2">"fqdn"</span><span class="p">:</span> <span class="s2">"def.com"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;123.123.123.123&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;123.123.123.123&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;fqdn&quot;</span><span class="p">:</span> <span class="s2">&quot;123.123.123.123&quot;</span>
+          <span class="s2">"@location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+          <span class="s2">"@name"</span><span class="p">:</span> <span class="s2">"123.123.123.123"</span><span class="p">,</span>
+          <span class="s2">"@vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span><span class="p">,</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"123.123.123.123"</span><span class="p">,</span>
+          <span class="s2">"fqdn"</span><span class="p">:</span> <span class="s2">"123.123.123.123"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;122.122.122.122&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;122.122.122.122&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;ip-netmask&quot;</span><span class="p">:</span> <span class="s2">&quot;122.122.122.122&quot;</span>
+          <span class="s2">"@location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+          <span class="s2">"@name"</span><span class="p">:</span> <span class="s2">"122.122.122.122"</span><span class="p">,</span>
+          <span class="s2">"@vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span><span class="p">,</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"122.122.122.122"</span><span class="p">,</span>
+          <span class="s2">"ip-netmask"</span><span class="p">:</span> <span class="s2">"122.122.122.122"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;@location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;42.36.75.4&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;42.36.75.4&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;ip-netmask&quot;</span><span class="p">:</span> <span class="s2">&quot;42.36.75.4&quot;</span>
+          <span class="s2">"@location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+          <span class="s2">"@name"</span><span class="p">:</span> <span class="s2">"42.36.75.4"</span><span class="p">,</span>
+          <span class="s2">"@vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span><span class="p">,</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"42.36.75.4"</span><span class="p">,</span>
+          <span class="s2">"ip-netmask"</span><span class="p">:</span> <span class="s2">"42.36.75.4"</span>
         <span class="p">}</span>
       <span class="p">]</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;panorama_label&quot;</span><span class="p">:</span> <span class="s2">&quot;panOS&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys1&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"panorama_label"</span><span class="p">:</span> <span class="s2">"panOS"</span><span class="p">,</span>
+    <span class="s2">"panorama_location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+    <span class="s2">"panorama_vsys"</span><span class="p">:</span> <span class="s2">"vsys1"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">3280</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-pa-panorama&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.5.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-08-09 09:01:13&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">3280</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-pa-panorama"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.5.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-08-09 09:01:13"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1668,16 +1668,16 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">&quot;vsys&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">"vsys"</span>
 
-<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;vsys&quot;</span><span class="p">,</span> <span class="s2">&quot;panorama-pushed&quot;</span><span class="p">]:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_vsys</span> <span class="o">=</span> <span class="s2">&quot;vsys1&quot;</span>
-<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">==</span> <span class="s2">&quot;device-group&quot;</span><span class="p">:</span>
-  <span class="c1"># If `panorama_location` equals &#39;device-group&#39; then set `panorama_device_group`</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_device_group</span> <span class="o">=</span> <span class="s2">&quot;group1&quot;</span>
+<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"vsys"</span><span class="p">,</span> <span class="s2">"panorama-pushed"</span><span class="p">]:</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_vsys</span> <span class="o">=</span> <span class="s2">"vsys1"</span>
+<span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">==</span> <span class="s2">"device-group"</span><span class="p">:</span>
+  <span class="c1"># If `panorama_location` equals 'device-group' then set `panorama_device_group`</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_device_group</span> <span class="o">=</span> <span class="s2">"group1"</span>
 
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1731,61 +1731,61 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;@status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;job&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;devices&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;entry&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;details&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;msg&quot;</span><span class="p">:</span> <span class="s2">&quot;device 00000000000 not connected&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"@status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+    <span class="s2">"result"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"job"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"devices"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"entry"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"details"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"msg"</span><span class="p">:</span> <span class="s2">"device 00000000000 not connected"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;devicename&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-            <span class="s2">&quot;multi-vsys&quot;</span><span class="p">:</span> <span class="s2">&quot;no&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;FAIL&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;serial-no&quot;</span><span class="p">:</span> <span class="s2">&quot;00000000000&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;not connected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;tfin&quot;</span><span class="p">:</span> <span class="s2">&quot;2025/01/28 06:54:04&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;tstart&quot;</span><span class="p">:</span> <span class="s2">&quot;06:54:04&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;vsys&quot;</span><span class="p">:</span> <span class="n">null</span>
+            <span class="s2">"devicename"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">"multi-vsys"</span><span class="p">:</span> <span class="s2">"no"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"FAIL"</span><span class="p">,</span>
+            <span class="s2">"serial-no"</span><span class="p">:</span> <span class="s2">"00000000000"</span><span class="p">,</span>
+            <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"not connected"</span><span class="p">,</span>
+            <span class="s2">"tfin"</span><span class="p">:</span> <span class="s2">"2025/01/28 06:54:04"</span><span class="p">,</span>
+            <span class="s2">"tstart"</span><span class="p">:</span> <span class="s2">"06:54:04"</span><span class="p">,</span>
+            <span class="s2">"vsys"</span><span class="p">:</span> <span class="n">null</span>
           <span class="p">}</span>
         <span class="p">},</span>
-        <span class="s2">&quot;dgname&quot;</span><span class="p">:</span> <span class="s2">&quot;group1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;576&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;positionInQ&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;progress&quot;</span><span class="p">:</span> <span class="s2">&quot;100&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;push_type&quot;</span><span class="p">:</span> <span class="s2">&quot;shared-policy&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;queued&quot;</span><span class="p">:</span> <span class="s2">&quot;NO&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;FAIL&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;sched&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;FIN&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;stoppable&quot;</span><span class="p">:</span> <span class="s2">&quot;no&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;tdeq&quot;</span><span class="p">:</span> <span class="s2">&quot;06:54:04&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;tenq&quot;</span><span class="p">:</span> <span class="s2">&quot;2025/01/28 06:54:04&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;tfin&quot;</span><span class="p">:</span> <span class="s2">&quot;2025/01/28 06:54:04&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;CommitAll&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;warnings&quot;</span><span class="p">:</span> <span class="n">null</span>
+        <span class="s2">"dgname"</span><span class="p">:</span> <span class="s2">"group1"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"576"</span><span class="p">,</span>
+        <span class="s2">"positionInQ"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="s2">"progress"</span><span class="p">:</span> <span class="s2">"100"</span><span class="p">,</span>
+        <span class="s2">"push_type"</span><span class="p">:</span> <span class="s2">"shared-policy"</span><span class="p">,</span>
+        <span class="s2">"queued"</span><span class="p">:</span> <span class="s2">"NO"</span><span class="p">,</span>
+        <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"FAIL"</span><span class="p">,</span>
+        <span class="s2">"sched"</span><span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"FIN"</span><span class="p">,</span>
+        <span class="s2">"stoppable"</span><span class="p">:</span> <span class="s2">"no"</span><span class="p">,</span>
+        <span class="s2">"tdeq"</span><span class="p">:</span> <span class="s2">"06:54:04"</span><span class="p">,</span>
+        <span class="s2">"tenq"</span><span class="p">:</span> <span class="s2">"2025/01/28 06:54:04"</span><span class="p">,</span>
+        <span class="s2">"tfin"</span><span class="p">:</span> <span class="s2">"2025/01/28 06:54:04"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"CommitAll"</span><span class="p">,</span>
+        <span class="s2">"user"</span><span class="p">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+        <span class="s2">"warnings"</span><span class="p">:</span> <span class="n">null</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;panorama_job_id&quot;</span><span class="p">:</span> <span class="mi">576</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_label&quot;</span><span class="p">:</span> <span class="s2">&quot;panorama&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"panorama_job_id"</span><span class="p">:</span> <span class="mi">576</span><span class="p">,</span>
+    <span class="s2">"panorama_label"</span><span class="p">:</span> <span class="s2">"panorama"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">530</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-pa-panorama&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.6.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-01-28 10:40:31&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">530</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-pa-panorama"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.6.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2025-01-28 10:40:31"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1793,9 +1793,9 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_job_id</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_job_id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_job_id</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_job_id"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1804,10 +1804,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">panorama_job_status_return</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Panorama: Get Job Status results:</span><span class="se">\n</span><span class="si">{</span><span class="n">dumps</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{}),</span><span class="w"> </span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Panorama: Get Job Status results:</span><span class="se">\n</span><span class="si">{</span><span class="n">dumps</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'content'</span><span class="p">,</span><span class="w"> </span><span class="p">{}),</span><span class="w"> </span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Panorama: Get Job Status failed with reason:</span><span class="se">\n</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Panorama: Get Job Status failed with reason:</span><span class="se">\n</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1860,85 +1860,85 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;response&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;@code&quot;</span><span class="p">:</span> <span class="s2">&quot;19&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;@status&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;@count&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;@total-count&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;entry&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;@admin&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@dirtyId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@name&quot;</span><span class="p">:</span> <span class="s2">&quot;Blocked_Users&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;@time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023/04/25 10:34:14&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;user&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;@admin&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;@dirtyId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;@time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023/04/25 10:34:14&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;member&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"response"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"@code"</span><span class="p">:</span> <span class="s2">"19"</span><span class="p">,</span>
+      <span class="s2">"@status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+      <span class="s2">"result"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"@count"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+        <span class="s2">"@total-count"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+        <span class="s2">"entry"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"@admin"</span><span class="p">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+          <span class="s2">"@dirtyId"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+          <span class="s2">"@name"</span><span class="p">:</span> <span class="s2">"Blocked_Users"</span><span class="p">,</span>
+          <span class="s2">"@time"</span><span class="p">:</span> <span class="s2">"2023/04/25 10:34:14"</span><span class="p">,</span>
+          <span class="s2">"user"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"@admin"</span><span class="p">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+            <span class="s2">"@dirtyId"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+            <span class="s2">"@time"</span><span class="p">:</span> <span class="s2">"2023/04/25 10:34:14"</span><span class="p">,</span>
+            <span class="s2">"member"</span><span class="p">:</span> <span class="p">[</span>
               <span class="p">{</span>
-                <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;Blocked_User&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;@admin&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;@dirtyId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;@time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023/04/25 10:34:14&quot;</span>
+                <span class="s2">"#text"</span><span class="p">:</span> <span class="s2">"Blocked_User"</span><span class="p">,</span>
+                <span class="s2">"@admin"</span><span class="p">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+                <span class="s2">"@dirtyId"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+                <span class="s2">"@time"</span><span class="p">:</span> <span class="s2">"2023/04/25 10:34:14"</span>
               <span class="p">},</span>
               <span class="p">{</span>
-                <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;Blocked_user_2&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;@admin&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;@dirtyId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;@time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023/04/25 10:34:14&quot;</span>
+                <span class="s2">"#text"</span><span class="p">:</span> <span class="s2">"Blocked_user_2"</span><span class="p">,</span>
+                <span class="s2">"@admin"</span><span class="p">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+                <span class="s2">"@dirtyId"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+                <span class="s2">"@time"</span><span class="p">:</span> <span class="s2">"2023/04/25 10:34:14"</span>
               <span class="p">},</span>
               <span class="p">{</span>
-                <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;jeff&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;@admin&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;@dirtyId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;@time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023/04/25 10:34:14&quot;</span>
+                <span class="s2">"#text"</span><span class="p">:</span> <span class="s2">"jeff"</span><span class="p">,</span>
+                <span class="s2">"@admin"</span><span class="p">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+                <span class="s2">"@dirtyId"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+                <span class="s2">"@time"</span><span class="p">:</span> <span class="s2">"2023/04/25 10:34:14"</span>
               <span class="p">}</span>
             <span class="p">]</span>
           <span class="p">}</span>
         <span class="p">}</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="s2">&quot;user_list&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"user_list"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;Blocked_User&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;@admin&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;@dirtyId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;@time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023/04/25 10:34:14&quot;</span>
+        <span class="s2">"#text"</span><span class="p">:</span> <span class="s2">"Blocked_User"</span><span class="p">,</span>
+        <span class="s2">"@admin"</span><span class="p">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+        <span class="s2">"@dirtyId"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+        <span class="s2">"@time"</span><span class="p">:</span> <span class="s2">"2023/04/25 10:34:14"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;Blocked_user_2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;@admin&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;@dirtyId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;@time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023/04/25 10:34:14&quot;</span>
+        <span class="s2">"#text"</span><span class="p">:</span> <span class="s2">"Blocked_user_2"</span><span class="p">,</span>
+        <span class="s2">"@admin"</span><span class="p">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+        <span class="s2">"@dirtyId"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+        <span class="s2">"@time"</span><span class="p">:</span> <span class="s2">"2023/04/25 10:34:14"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;#text&quot;</span><span class="p">:</span> <span class="s2">&quot;jeff&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;@admin&quot;</span><span class="p">:</span> <span class="s2">&quot;admin&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;@dirtyId&quot;</span><span class="p">:</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;@time&quot;</span><span class="p">:</span> <span class="s2">&quot;2023/04/25 10:34:14&quot;</span>
+        <span class="s2">"#text"</span><span class="p">:</span> <span class="s2">"jeff"</span><span class="p">,</span>
+        <span class="s2">"@admin"</span><span class="p">:</span> <span class="s2">"admin"</span><span class="p">,</span>
+        <span class="s2">"@dirtyId"</span><span class="p">:</span> <span class="s2">"2"</span><span class="p">,</span>
+        <span class="s2">"@time"</span><span class="p">:</span> <span class="s2">"2023/04/25 10:34:14"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;xml_response&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">response status=</span><span class="se">\&quot;</span><span class="s2">success</span><span class="se">\&quot;</span><span class="s2"> code=</span><span class="se">\&quot;</span><span class="s2">19</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">result total-count=</span><span class="se">\&quot;</span><span class="s2">1</span><span class="se">\&quot;</span><span class="s2"> count=</span><span class="se">\&quot;</span><span class="s2">1</span><span class="se">\&quot;\u003e\n</span><span class="s2">  </span><span class="se">\u003c</span><span class="s2">entry name=</span><span class="se">\&quot;</span><span class="s2">Blocked_Users</span><span class="se">\&quot;</span><span class="s2"> admin=</span><span class="se">\&quot;</span><span class="s2">admin</span><span class="se">\&quot;</span><span class="s2"> dirtyId=</span><span class="se">\&quot;</span><span class="s2">2</span><span class="se">\&quot;</span><span class="s2"> time=</span><span class="se">\&quot;</span><span class="s2">2023/04/25 10:34:14</span><span class="se">\&quot;\u003e\n</span><span class="s2">    </span><span class="se">\u003c</span><span class="s2">user admin=</span><span class="se">\&quot;</span><span class="s2">admin</span><span class="se">\&quot;</span><span class="s2"> dirtyId=</span><span class="se">\&quot;</span><span class="s2">2</span><span class="se">\&quot;</span><span class="s2"> time=</span><span class="se">\&quot;</span><span class="s2">2023/04/25 10:34:14</span><span class="se">\&quot;\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">member admin=</span><span class="se">\&quot;</span><span class="s2">admin</span><span class="se">\&quot;</span><span class="s2"> dirtyId=</span><span class="se">\&quot;</span><span class="s2">2</span><span class="se">\&quot;</span><span class="s2"> time=</span><span class="se">\&quot;</span><span class="s2">2023/04/25 10:34:14</span><span class="se">\&quot;\u003e</span><span class="s2">Blocked_User</span><span class="se">\u003c</span><span class="s2">/member</span><span class="se">\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">member admin=</span><span class="se">\&quot;</span><span class="s2">admin</span><span class="se">\&quot;</span><span class="s2"> dirtyId=</span><span class="se">\&quot;</span><span class="s2">2</span><span class="se">\&quot;</span><span class="s2"> time=</span><span class="se">\&quot;</span><span class="s2">2023/04/25 10:34:14</span><span class="se">\&quot;\u003e</span><span class="s2">Blocked_user_2</span><span class="se">\u003c</span><span class="s2">/member</span><span class="se">\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">member admin=</span><span class="se">\&quot;</span><span class="s2">admin</span><span class="se">\&quot;</span><span class="s2"> dirtyId=</span><span class="se">\&quot;</span><span class="s2">2</span><span class="se">\&quot;</span><span class="s2"> time=</span><span class="se">\&quot;</span><span class="s2">2023/04/25 10:34:14</span><span class="se">\&quot;\u003e</span><span class="s2">jeff</span><span class="se">\u003c</span><span class="s2">/member</span><span class="se">\u003e\n</span><span class="s2">    </span><span class="se">\u003c</span><span class="s2">/user</span><span class="se">\u003e\n</span><span class="s2">  </span><span class="se">\u003c</span><span class="s2">/entry</span><span class="se">\u003e\n\u003c</span><span class="s2">/result</span><span class="se">\u003e\u003c</span><span class="s2">/response</span><span class="se">\u003e</span><span class="s2">&quot;</span>
+    <span class="s2">"xml_response"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">response status=</span><span class="se">\"</span><span class="s2">success</span><span class="se">\"</span><span class="s2"> code=</span><span class="se">\"</span><span class="s2">19</span><span class="se">\"\u003e\u003c</span><span class="s2">result total-count=</span><span class="se">\"</span><span class="s2">1</span><span class="se">\"</span><span class="s2"> count=</span><span class="se">\"</span><span class="s2">1</span><span class="se">\"\u003e\n</span><span class="s2">  </span><span class="se">\u003c</span><span class="s2">entry name=</span><span class="se">\"</span><span class="s2">Blocked_Users</span><span class="se">\"</span><span class="s2"> admin=</span><span class="se">\"</span><span class="s2">admin</span><span class="se">\"</span><span class="s2"> dirtyId=</span><span class="se">\"</span><span class="s2">2</span><span class="se">\"</span><span class="s2"> time=</span><span class="se">\"</span><span class="s2">2023/04/25 10:34:14</span><span class="se">\"\u003e\n</span><span class="s2">    </span><span class="se">\u003c</span><span class="s2">user admin=</span><span class="se">\"</span><span class="s2">admin</span><span class="se">\"</span><span class="s2"> dirtyId=</span><span class="se">\"</span><span class="s2">2</span><span class="se">\"</span><span class="s2"> time=</span><span class="se">\"</span><span class="s2">2023/04/25 10:34:14</span><span class="se">\"\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">member admin=</span><span class="se">\"</span><span class="s2">admin</span><span class="se">\"</span><span class="s2"> dirtyId=</span><span class="se">\"</span><span class="s2">2</span><span class="se">\"</span><span class="s2"> time=</span><span class="se">\"</span><span class="s2">2023/04/25 10:34:14</span><span class="se">\"\u003e</span><span class="s2">Blocked_User</span><span class="se">\u003c</span><span class="s2">/member</span><span class="se">\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">member admin=</span><span class="se">\"</span><span class="s2">admin</span><span class="se">\"</span><span class="s2"> dirtyId=</span><span class="se">\"</span><span class="s2">2</span><span class="se">\"</span><span class="s2"> time=</span><span class="se">\"</span><span class="s2">2023/04/25 10:34:14</span><span class="se">\"\u003e</span><span class="s2">Blocked_user_2</span><span class="se">\u003c</span><span class="s2">/member</span><span class="se">\u003e\n</span><span class="s2">      </span><span class="se">\u003c</span><span class="s2">member admin=</span><span class="se">\"</span><span class="s2">admin</span><span class="se">\"</span><span class="s2"> dirtyId=</span><span class="se">\"</span><span class="s2">2</span><span class="se">\"</span><span class="s2"> time=</span><span class="se">\"</span><span class="s2">2023/04/25 10:34:14</span><span class="se">\"\u003e</span><span class="s2">jeff</span><span class="se">\u003c</span><span class="s2">/member</span><span class="se">\u003e\n</span><span class="s2">    </span><span class="se">\u003c</span><span class="s2">/user</span><span class="se">\u003e\n</span><span class="s2">  </span><span class="se">\u003c</span><span class="s2">/entry</span><span class="se">\u003e\n\u003c</span><span class="s2">/result</span><span class="se">\u003e\u003c</span><span class="s2">/response</span><span class="se">\u003e</span><span class="s2">"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;panorama_label&quot;</span><span class="p">:</span> <span class="s2">&quot;panorama_label1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_location&quot;</span><span class="p">:</span> <span class="s2">&quot;vsys&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;panorama_user_group_xpath&quot;</span><span class="p">:</span> <span class="s2">&quot;/config/shared/local-user-database/user-group/entry[@name=</span><span class="se">\u0027</span><span class="s2">Blocked_Users</span><span class="se">\u0027</span><span class="s2">]&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"panorama_label"</span><span class="p">:</span> <span class="s2">"panorama_label1"</span><span class="p">,</span>
+    <span class="s2">"panorama_location"</span><span class="p">:</span> <span class="s2">"vsys"</span><span class="p">,</span>
+    <span class="s2">"panorama_user_group_xpath"</span><span class="p">:</span> <span class="s2">"/config/shared/local-user-database/user-group/entry[@name=</span><span class="se">\u0027</span><span class="s2">Blocked_Users</span><span class="se">\u0027</span><span class="s2">]"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">504</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-pa-panorama&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.3.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-04-25 11:12:19&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">504</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"localhost"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-pa-panorama"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.3.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-04-25 11:12:19"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1947,10 +1947,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set this to the xpath of the group you are interested in</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_user_group_xpath</span> <span class="o">=</span> <span class="s2">&quot;/config/shared/local-user-database/user-group/entry[@name=&#39;Blocked_Users&#39;]&quot;</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;panorama_label&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">&quot;vsys&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_user_group_xpath</span> <span class="o">=</span> <span class="s2">"/config/shared/local-user-database/user-group/entry[@name='Blocked_Users']"</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">panorama_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"panorama_label"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">panorama_location</span> <span class="o">=</span> <span class="s2">"vsys"</span>
 </pre></div>
 </div>
 </p>

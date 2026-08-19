@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -467,11 +467,11 @@
 <span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="n">success</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
 
-  <span class="n">directions_link</span><span class="p">:</span> <span class="s2">&quot;https://www.google.com/maps/dir/?api=1&amp;origin=xxx&amp;destination=xxx&quot;</span><span class="p">,</span><span class="n">s</span>
+  <span class="n">directions_link</span><span class="p">:</span> <span class="s2">"https://www.google.com/maps/dir/?api=1&amp;origin=xxx&amp;destination=xxx"</span><span class="p">,</span><span class="n">s</span>
 
   <span class="n">inputs</span><span class="p">:</span> <span class="p">{</span>
-    <span class="n">google_maps_origin</span><span class="p">:</span> <span class="s2">&quot;IBM, Armonk, New York&quot;</span><span class="p">,</span>
-    <span class="n">google_maps_destination</span><span class="p">:</span> <span class="s2">&quot;IBM Resilient, Cambridge, Boston, MA&quot;</span>
+    <span class="n">google_maps_origin</span><span class="p">:</span> <span class="s2">"IBM, Armonk, New York"</span><span class="p">,</span>
+    <span class="n">google_maps_destination</span><span class="p">:</span> <span class="s2">"IBM Resilient, Cambridge, Boston, MA"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
@@ -482,10 +482,10 @@
 <h2>Pre-Process Script:<a class="headerlink" href="#pre-process-script" title="Link to this heading">¶</a></h2>
 <p>This example sets the origin and gets the destination <strong>from the Incident Details.</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set Origin</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">google_maps_origin</span> <span class="o">=</span> <span class="s2">&quot;IBM, Armonk, New York&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">google_maps_origin</span> <span class="o">=</span> <span class="s2">"IBM, Armonk, New York"</span>
 
 <span class="c1"># Get destination from Incident Details</span>
-<span class="n">destination</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">, </span><span class="si">{1}</span><span class="s2">, </span><span class="si">{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">addr</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">city</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">country</span><span class="p">)</span>
+<span class="n">destination</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{0}</span><span class="s2">, </span><span class="si">{1}</span><span class="s2">, </span><span class="si">{2}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">addr</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">city</span><span class="p">,</span> <span class="n">incident</span><span class="o">.</span><span class="n">country</span><span class="p">)</span>
 
 <span class="c1"># Set Destination</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">google_maps_destination</span> <span class="o">=</span> <span class="n">destination</span>
@@ -497,8 +497,8 @@
 <p>This example <strong>adds a Note to the Incident.</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">):</span>
 
-  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;b&gt;Example: Google Maps Directions Wokflow has complete&lt;/b&gt;</span>
-<span class="s2">                &lt;b&gt;Directions Link:&lt;/b&gt; &lt;a href=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;</span><span class="si">{0}</span><span class="s2">&lt;/a&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">directions_link</span><span class="p">)</span>
+  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">"""&lt;br&gt;&lt;b&gt;Example: Google Maps Directions Wokflow has complete&lt;/b&gt;</span>
+<span class="s2">                &lt;b&gt;Directions Link:&lt;/b&gt; &lt;a href='</span><span class="si">{0}</span><span class="s2">'&gt;</span><span class="si">{0}</span><span class="s2">&lt;/a&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">directions_link</span><span class="p">)</span>
 
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 </pre></div>

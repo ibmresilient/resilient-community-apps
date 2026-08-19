@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -499,58 +499,58 @@ If upgrading from version 1.0.0,  <strong>manually</strong> add the <strong>hibp
 <section id="have-i-been-pwned-get-breaches">
 <h3>Have I Been Pwned Get Breaches:<a class="headerlink" href="#have-i-been-pwned-get-breaches" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;Inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;email_address&quot;</span><span class="p">:</span> <span class="s2">&quot;test@email.com&quot;</span>
+  <span class="s2">"Inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"email_address"</span><span class="p">:</span> <span class="s2">"test@email.com"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;Run Time&quot;</span><span class="p">:</span> <span class="s2">&quot;2000&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;Breaches&quot;</span><span class="p">:</span>
+  <span class="s2">"Run Time"</span><span class="p">:</span> <span class="s2">"2000"</span><span class="p">,</span>
+  <span class="s2">"Breaches"</span><span class="p">:</span>
     <span class="p">[</span>
        <span class="p">{</span>
-          <span class="sa">u</span><span class="s1">&#39;PwnCount&#39;</span><span class="p">:</span><span class="mi">14936670</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;Domain&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;000webhost.com&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;IsSensitive&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;Name&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;000webhost&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;Title&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;000webhost&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;DataClasses&#39;</span><span class="p">:[</span>
-             <span class="sa">u</span><span class="s1">&#39;Email addresses&#39;</span><span class="p">,</span>
-             <span class="sa">u</span><span class="s1">&#39;IP addresses&#39;</span><span class="p">,</span>
-             <span class="sa">u</span><span class="s1">&#39;Names&#39;</span><span class="p">,</span>
-             <span class="sa">u</span><span class="s1">&#39;Passwords&#39;</span>
+          <span class="sa">u</span><span class="s1">'PwnCount'</span><span class="p">:</span><span class="mi">14936670</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'Domain'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'000webhost.com'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'IsSensitive'</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'Name'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'000webhost'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'Title'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'000webhost'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'DataClasses'</span><span class="p">:[</span>
+             <span class="sa">u</span><span class="s1">'Email addresses'</span><span class="p">,</span>
+             <span class="sa">u</span><span class="s1">'IP addresses'</span><span class="p">,</span>
+             <span class="sa">u</span><span class="s1">'Names'</span><span class="p">,</span>
+             <span class="sa">u</span><span class="s1">'Passwords'</span>
           <span class="p">],</span>
-          <span class="sa">u</span><span class="s1">&#39;LogoType&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;IsSpamList&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;IsRetired&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;BreachDate&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;2015-03-01&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;IsFabricated&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;ModifiedDate&#39;</span><span class="p">:</span>      <span class="sa">u</span><span class="s1">&#39;2017-12-10T21:44:27      Z&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;AddedDate&#39;</span><span class="p">:</span>      <span class="sa">u</span><span class="s1">&#39;2015-10-26T23:35:45      Z&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;IsVerified&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;Description&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;In approximately March 2015,</span>
-          <span class="n">the</span> <span class="n">free</span> <span class="n">web</span> <span class="n">hosting</span> <span class="n">provider</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;http://www.troyhunt.com/2015/10/breaches-traders-plain-text-passwords.html&quot;</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;_blank&quot;</span> <span class="n">rel</span><span class="o">=</span><span class="s2">&quot;noopener&quot;</span><span class="o">&gt;</span><span class="mi">000</span><span class="n">webhost</span> <span class="n">suffered</span> <span class="n">a</span> <span class="n">major</span> <span class="n">data</span> <span class="n">breach</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">that</span> <span class="n">exposed</span> <span class="n">almost</span> <span class="mi">15</span> <span class="n">million</span> <span class="n">customer</span> <span class="n">records</span><span class="o">.</span> <span class="n">The</span> <span class="n">data</span> <span class="n">was</span> <span class="n">sold</span> <span class="ow">and</span> <span class="n">traded</span> <span class="n">before</span> <span class="mi">000</span><span class="n">webhost</span> <span class="n">was</span> <span class="n">alerted</span> <span class="ow">in</span> <span class="n">October</span><span class="o">.</span> <span class="n">The</span> <span class="n">breach</span> <span class="n">included</span> <span class="n">names</span><span class="p">,</span>
-          <span class="n">email</span> <span class="n">addresses</span> <span class="ow">and</span> <span class="n">plain</span> <span class="n">text</span> <span class="n">passwords</span><span class="o">.</span><span class="s1">&#39;</span>
+          <span class="sa">u</span><span class="s1">'LogoType'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'png'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'IsSpamList'</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'IsRetired'</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'BreachDate'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'2015-03-01'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'IsFabricated'</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'ModifiedDate'</span><span class="p">:</span>      <span class="sa">u</span><span class="s1">'2017-12-10T21:44:27      Z'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'AddedDate'</span><span class="p">:</span>      <span class="sa">u</span><span class="s1">'2015-10-26T23:35:45      Z'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'IsVerified'</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'Description'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'In approximately March 2015,</span>
+          <span class="n">the</span> <span class="n">free</span> <span class="n">web</span> <span class="n">hosting</span> <span class="n">provider</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">"http://www.troyhunt.com/2015/10/breaches-traders-plain-text-passwords.html"</span> <span class="n">target</span><span class="o">=</span><span class="s2">"_blank"</span> <span class="n">rel</span><span class="o">=</span><span class="s2">"noopener"</span><span class="o">&gt;</span><span class="mi">000</span><span class="n">webhost</span> <span class="n">suffered</span> <span class="n">a</span> <span class="n">major</span> <span class="n">data</span> <span class="n">breach</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">that</span> <span class="n">exposed</span> <span class="n">almost</span> <span class="mi">15</span> <span class="n">million</span> <span class="n">customer</span> <span class="n">records</span><span class="o">.</span> <span class="n">The</span> <span class="n">data</span> <span class="n">was</span> <span class="n">sold</span> <span class="ow">and</span> <span class="n">traded</span> <span class="n">before</span> <span class="mi">000</span><span class="n">webhost</span> <span class="n">was</span> <span class="n">alerted</span> <span class="ow">in</span> <span class="n">October</span><span class="o">.</span> <span class="n">The</span> <span class="n">breach</span> <span class="n">included</span> <span class="n">names</span><span class="p">,</span>
+          <span class="n">email</span> <span class="n">addresses</span> <span class="ow">and</span> <span class="n">plain</span> <span class="n">text</span> <span class="n">passwords</span><span class="o">.</span><span class="s1">'</span>
        <span class="p">},</span>
        <span class="p">{</span>
-          <span class="sa">u</span><span class="s1">&#39;PwnCount&#39;</span><span class="p">:</span><span class="mi">7990619</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;Domain&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;8tracks.com&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;IsSensitive&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;Name&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;8tracks&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;Title&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;8tracks&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;DataClasses&#39;</span><span class="p">:[</span>
-             <span class="sa">u</span><span class="s1">&#39;Email addresses&#39;</span><span class="p">,</span>
-             <span class="sa">u</span><span class="s1">&#39;Passwords&#39;</span>
+          <span class="sa">u</span><span class="s1">'PwnCount'</span><span class="p">:</span><span class="mi">7990619</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'Domain'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'8tracks.com'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'IsSensitive'</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'Name'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'8tracks'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'Title'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'8tracks'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'DataClasses'</span><span class="p">:[</span>
+             <span class="sa">u</span><span class="s1">'Email addresses'</span><span class="p">,</span>
+             <span class="sa">u</span><span class="s1">'Passwords'</span>
           <span class="p">],</span>
-          <span class="sa">u</span><span class="s1">&#39;LogoType&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;IsSpamList&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;IsRetired&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;BreachDate&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;2017-06-27&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;IsFabricated&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;ModifiedDate&#39;</span><span class="p">:</span>      <span class="sa">u</span><span class="s1">&#39;2018-02-16T07:09:30      Z&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;AddedDate&#39;</span><span class="p">:</span>      <span class="sa">u</span><span class="s1">&#39;2018-02-16T07:09:30      Z&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;IsVerified&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;Description&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;In June 2017,</span>
-          <span class="n">the</span> <span class="n">online</span> <span class="n">playlists</span> <span class="n">service</span> <span class="n">known</span> <span class="k">as</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;https://blog.8tracks.com/2017/06/27/password-security-alert/&quot;</span> <span class="n">target</span><span class="o">=</span><span class="s2">&quot;_blank&quot;</span> <span class="n">rel</span><span class="o">=</span><span class="s2">&quot;noopener&quot;</span><span class="o">&gt;</span><span class="mi">8</span><span class="n">Tracks</span> <span class="n">suffered</span> <span class="n">a</span> <span class="n">data</span> <span class="n">breach</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">which</span> <span class="n">impacted</span> <span class="mi">18</span> <span class="n">million</span> <span class="n">accounts</span><span class="o">.</span> <span class="n">In</span> <span class="n">their</span> <span class="n">disclosure</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'LogoType'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'png'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'IsSpamList'</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'IsRetired'</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'BreachDate'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'2017-06-27'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'IsFabricated'</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'ModifiedDate'</span><span class="p">:</span>      <span class="sa">u</span><span class="s1">'2018-02-16T07:09:30      Z'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'AddedDate'</span><span class="p">:</span>      <span class="sa">u</span><span class="s1">'2018-02-16T07:09:30      Z'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'IsVerified'</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'Description'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'In June 2017,</span>
+          <span class="n">the</span> <span class="n">online</span> <span class="n">playlists</span> <span class="n">service</span> <span class="n">known</span> <span class="k">as</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">"https://blog.8tracks.com/2017/06/27/password-security-alert/"</span> <span class="n">target</span><span class="o">=</span><span class="s2">"_blank"</span> <span class="n">rel</span><span class="o">=</span><span class="s2">"noopener"</span><span class="o">&gt;</span><span class="mi">8</span><span class="n">Tracks</span> <span class="n">suffered</span> <span class="n">a</span> <span class="n">data</span> <span class="n">breach</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">which</span> <span class="n">impacted</span> <span class="mi">18</span> <span class="n">million</span> <span class="n">accounts</span><span class="o">.</span> <span class="n">In</span> <span class="n">their</span> <span class="n">disclosure</span><span class="p">,</span>
           <span class="mi">8</span>      <span class="n">Tracks</span> <span class="n">advised</span> <span class="n">that</span> <span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="n">the</span> <span class="n">vector</span> <span class="k">for</span> <span class="n">the</span> <span class="n">attack</span> <span class="n">was</span> <span class="n">an</span> <span class="n">employee</span>\<span class="n">u2019s</span> <span class="n">GitHub</span> <span class="n">account</span><span class="p">,</span>
-          <span class="n">which</span> <span class="n">was</span> <span class="ow">not</span> <span class="n">secured</span> <span class="n">using</span> <span class="n">two</span><span class="o">-</span><span class="n">factor</span> <span class="n">authentication</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">.</span> <span class="n">Salted</span> <span class="n">SHA</span><span class="o">-</span><span class="mi">1</span> <span class="n">password</span> <span class="n">hashes</span> <span class="k">for</span> <span class="n">users</span> <span class="n">who</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">didn</span>\<span class="s1">&#39;t&lt;/em&gt; sign up with either Google or Facebook authentication were also included. The data was provided to HIBP by whitehat security researcher and data analyst Adam Davies and contained almost 8 million unique email addresses.&#39;</span>
+          <span class="n">which</span> <span class="n">was</span> <span class="ow">not</span> <span class="n">secured</span> <span class="n">using</span> <span class="n">two</span><span class="o">-</span><span class="n">factor</span> <span class="n">authentication</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">.</span> <span class="n">Salted</span> <span class="n">SHA</span><span class="o">-</span><span class="mi">1</span> <span class="n">password</span> <span class="n">hashes</span> <span class="k">for</span> <span class="n">users</span> <span class="n">who</span> <span class="o">&lt;</span><span class="n">em</span><span class="o">&gt;</span><span class="n">didn</span>\<span class="s1">'t&lt;/em&gt; sign up with either Google or Facebook authentication were also included. The data was provided to HIBP by whitehat security researcher and data analyst Adam Davies and contained almost 8 million unique email addresses.'</span>
        <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
@@ -560,31 +560,31 @@ If upgrading from version 1.0.0,  <strong>manually</strong> add the <strong>hibp
 <section id="have-i-been-pwned-get-pastes">
 <h3>Have I Been Pwned Get Pastes:<a class="headerlink" href="#have-i-been-pwned-get-pastes" title="Link to this heading">¶</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-  <span class="s2">&quot;Inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;email_address&quot;</span><span class="p">:</span> <span class="s2">&quot;test@email.com&quot;</span>
+  <span class="s2">"Inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"email_address"</span><span class="p">:</span> <span class="s2">"test@email.com"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;Pastes&quot;</span><span class="p">:</span>
+  <span class="s2">"Pastes"</span><span class="p">:</span>
     <span class="p">[</span>
        <span class="p">{</span>
-          <span class="sa">u</span><span class="s1">&#39;Date&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;Source&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;AdHocUrl&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;EmailCount&#39;</span><span class="p">:</span><span class="mi">9893</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;Id&#39;</span><span class="p">:</span>      <span class="sa">u</span><span class="s1">&#39;http://siph0n.in/exploits.php?id=3670&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;Title&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;siph0n.in&#39;</span>
+          <span class="sa">u</span><span class="s1">'Date'</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'Source'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'AdHocUrl'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'EmailCount'</span><span class="p">:</span><span class="mi">9893</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'Id'</span><span class="p">:</span>      <span class="sa">u</span><span class="s1">'http://siph0n.in/exploits.php?id=3670'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'Title'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'siph0n.in'</span>
        <span class="p">},</span>
        <span class="p">{</span>
-          <span class="sa">u</span><span class="s1">&#39;Date&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;Source&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;AdHocUrl&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;EmailCount&#39;</span><span class="p">:</span><span class="mi">12002</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;Id&#39;</span><span class="p">:</span>      <span class="sa">u</span><span class="s1">&#39;http://siph0n.in/exploits.php?id=3892&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;Title&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;siph0n.in&#39;</span>
+          <span class="sa">u</span><span class="s1">'Date'</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'Source'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'AdHocUrl'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'EmailCount'</span><span class="p">:</span><span class="mi">12002</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'Id'</span><span class="p">:</span>      <span class="sa">u</span><span class="s1">'http://siph0n.in/exploits.php?id=3892'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'Title'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'siph0n.in'</span>
        <span class="p">},</span>
        <span class="p">{</span>
-          <span class="sa">u</span><span class="s1">&#39;Date&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;Source&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;AdHocUrl&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;EmailCount&#39;</span><span class="p">:</span><span class="mi">99791</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;Id&#39;</span><span class="p">:</span>      <span class="sa">u</span><span class="s1">&#39;http://siph0n.in/exploits.php?id=4680&#39;</span><span class="p">,</span>
-          <span class="sa">u</span><span class="s1">&#39;Title&#39;</span><span class="p">:</span><span class="sa">u</span><span class="s1">&#39;remotestaff.com.au&#39;</span>
+          <span class="sa">u</span><span class="s1">'Date'</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'Source'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'AdHocUrl'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'EmailCount'</span><span class="p">:</span><span class="mi">99791</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'Id'</span><span class="p">:</span>      <span class="sa">u</span><span class="s1">'http://siph0n.in/exploits.php?id=4680'</span><span class="p">,</span>
+          <span class="sa">u</span><span class="s1">'Title'</span><span class="p">:</span><span class="sa">u</span><span class="s1">'remotestaff.com.au'</span>
        <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
@@ -609,9 +609,9 @@ If upgrading from version 1.0.0,  <strong>manually</strong> add the <strong>hibp
     <span class="n">des</span> <span class="o">=</span> <span class="kc">None</span>
 
   <span class="k">if</span> <span class="n">des</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;Breaches: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">Breaches</span><span class="p">))</span>
+    <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">"Breaches: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">Breaches</span><span class="p">))</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">des</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Breaches: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">Breaches</span><span class="p">))</span>
+    <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">des</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">Breaches: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">Breaches</span><span class="p">))</span>
 </pre></div>
 </div>
 </section>

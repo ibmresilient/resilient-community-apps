@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -481,114 +481,114 @@ and select the <code class="docutils literal notranslate"><span class="pre">hibp
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;Breaches&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"Breaches"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;AddedDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-10-26T23:35:45Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;BreachDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2015-03-01&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;DataClasses&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;Email addresses&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;IP addresses&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Names&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Passwords&quot;</span>
+        <span class="s2">"AddedDate"</span><span class="p">:</span> <span class="s2">"2015-10-26T23:35:45Z"</span><span class="p">,</span>
+        <span class="s2">"BreachDate"</span><span class="p">:</span> <span class="s2">"2015-03-01"</span><span class="p">,</span>
+        <span class="s2">"DataClasses"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"Email addresses"</span><span class="p">,</span>
+          <span class="s2">"IP addresses"</span><span class="p">,</span>
+          <span class="s2">"Names"</span><span class="p">,</span>
+          <span class="s2">"Passwords"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;Description&quot;</span><span class="p">:</span> <span class="s2">&quot;In approximately March 2015, the free web hosting provider </span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\&quot;</span><span class="s2">http://www.troyhunt.com/2015/10/breaches-traders-plain-text-passwords.html</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;</span><span class="s2"> rel=</span><span class="se">\&quot;</span><span class="s2">noopener</span><span class="se">\&quot;\u003e</span><span class="s2">000webhost suffered a major data breach</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e</span><span class="s2"> that exposed almost 15 million customer records. The data was sold and traded before 000webhost was alerted in October. The breach included names, email addresses and plain text passwords.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Domain&quot;</span><span class="p">:</span> <span class="s2">&quot;000webhost.com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;IsFabricated&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsMalware&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsRetired&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsSensitive&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsSpamList&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsVerified&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;LogoPath&quot;</span><span class="p">:</span> <span class="s2">&quot;https://haveibeenpwned.com/Content/Images/PwnedLogos/000webhost.png&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ModifiedDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-12-10T21:44:27Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="s2">&quot;000webhost&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;PwnCount&quot;</span><span class="p">:</span> <span class="mi">14936670</span><span class="p">,</span>
-        <span class="s2">&quot;Title&quot;</span><span class="p">:</span> <span class="s2">&quot;000webhost&quot;</span>
+        <span class="s2">"Description"</span><span class="p">:</span> <span class="s2">"In approximately March 2015, the free web hosting provider </span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\"</span><span class="s2">http://www.troyhunt.com/2015/10/breaches-traders-plain-text-passwords.html</span><span class="se">\"</span><span class="s2"> target=</span><span class="se">\"</span><span class="s2">_blank</span><span class="se">\"</span><span class="s2"> rel=</span><span class="se">\"</span><span class="s2">noopener</span><span class="se">\"\u003e</span><span class="s2">000webhost suffered a major data breach</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e</span><span class="s2"> that exposed almost 15 million customer records. The data was sold and traded before 000webhost was alerted in October. The breach included names, email addresses and plain text passwords."</span><span class="p">,</span>
+        <span class="s2">"Domain"</span><span class="p">:</span> <span class="s2">"000webhost.com"</span><span class="p">,</span>
+        <span class="s2">"IsFabricated"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsMalware"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsRetired"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsSensitive"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsSpamList"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsVerified"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"LogoPath"</span><span class="p">:</span> <span class="s2">"https://haveibeenpwned.com/Content/Images/PwnedLogos/000webhost.png"</span><span class="p">,</span>
+        <span class="s2">"ModifiedDate"</span><span class="p">:</span> <span class="s2">"2017-12-10T21:44:27Z"</span><span class="p">,</span>
+        <span class="s2">"Name"</span><span class="p">:</span> <span class="s2">"000webhost"</span><span class="p">,</span>
+        <span class="s2">"PwnCount"</span><span class="p">:</span> <span class="mi">14936670</span><span class="p">,</span>
+        <span class="s2">"Title"</span><span class="p">:</span> <span class="s2">"000webhost"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;AddedDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-02-26T10:06:02Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;BreachDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-02-19&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;DataClasses&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;Email addresses&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Passwords&quot;</span>
+        <span class="s2">"AddedDate"</span><span class="p">:</span> <span class="s2">"2018-02-26T10:06:02Z"</span><span class="p">,</span>
+        <span class="s2">"BreachDate"</span><span class="p">:</span> <span class="s2">"2018-02-19"</span><span class="p">,</span>
+        <span class="s2">"DataClasses"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"Email addresses"</span><span class="p">,</span>
+          <span class="s2">"Passwords"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;Description&quot;</span><span class="p">:</span> <span class="s2">&quot;In February 2018, </span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\&quot;</span><span class="s2">https://www.troyhunt.com/ive-just-added-2844-new-data-breaches-with-80m-records-to-have-i-been-pwned/</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;</span><span class="s2"> rel=</span><span class="se">\&quot;</span><span class="s2">noopener</span><span class="se">\&quot;\u003e</span><span class="s2">a massive collection of almost 3,000 alleged data breaches was found online</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e</span><span class="s2">. Whilst some of the data had previously been seen in Have I Been Pwned, 2,844 of the files consisting of more than 80 million unique email addresses had not previously been seen. Each file contained both an email address and plain text password and were consequently loaded as a single </span><span class="se">\u0026</span><span class="s2">quot;unverified</span><span class="se">\u0026</span><span class="s2">quot; data breach.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Domain&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;IsFabricated&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsMalware&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsRetired&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsSensitive&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsSpamList&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsVerified&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;LogoPath&quot;</span><span class="p">:</span> <span class="s2">&quot;https://haveibeenpwned.com/Content/Images/PwnedLogos/List.png&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ModifiedDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-02-26T10:06:02Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="s2">&quot;2844Breaches&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;PwnCount&quot;</span><span class="p">:</span> <span class="mi">80115532</span><span class="p">,</span>
-        <span class="s2">&quot;Title&quot;</span><span class="p">:</span> <span class="s2">&quot;2,844 Separate Data Breaches&quot;</span>
+        <span class="s2">"Description"</span><span class="p">:</span> <span class="s2">"In February 2018, </span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\"</span><span class="s2">https://www.troyhunt.com/ive-just-added-2844-new-data-breaches-with-80m-records-to-have-i-been-pwned/</span><span class="se">\"</span><span class="s2"> target=</span><span class="se">\"</span><span class="s2">_blank</span><span class="se">\"</span><span class="s2"> rel=</span><span class="se">\"</span><span class="s2">noopener</span><span class="se">\"\u003e</span><span class="s2">a massive collection of almost 3,000 alleged data breaches was found online</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e</span><span class="s2">. Whilst some of the data had previously been seen in Have I Been Pwned, 2,844 of the files consisting of more than 80 million unique email addresses had not previously been seen. Each file contained both an email address and plain text password and were consequently loaded as a single </span><span class="se">\u0026</span><span class="s2">quot;unverified</span><span class="se">\u0026</span><span class="s2">quot; data breach."</span><span class="p">,</span>
+        <span class="s2">"Domain"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"IsFabricated"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsMalware"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsRetired"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsSensitive"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsSpamList"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsVerified"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"LogoPath"</span><span class="p">:</span> <span class="s2">"https://haveibeenpwned.com/Content/Images/PwnedLogos/List.png"</span><span class="p">,</span>
+        <span class="s2">"ModifiedDate"</span><span class="p">:</span> <span class="s2">"2018-02-26T10:06:02Z"</span><span class="p">,</span>
+        <span class="s2">"Name"</span><span class="p">:</span> <span class="s2">"2844Breaches"</span><span class="p">,</span>
+        <span class="s2">"PwnCount"</span><span class="p">:</span> <span class="mi">80115532</span><span class="p">,</span>
+        <span class="s2">"Title"</span><span class="p">:</span> <span class="s2">"2,844 Separate Data Breaches"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;AddedDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-03-21T18:50:00Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;BreachDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-07-01&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;DataClasses&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;Email addresses&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Genders&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Geographic locations&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;IP addresses&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Names&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Passwords&quot;</span>
+        <span class="s2">"AddedDate"</span><span class="p">:</span> <span class="s2">"2019-03-21T18:50:00Z"</span><span class="p">,</span>
+        <span class="s2">"BreachDate"</span><span class="p">:</span> <span class="s2">"2018-07-01"</span><span class="p">,</span>
+        <span class="s2">"DataClasses"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"Email addresses"</span><span class="p">,</span>
+          <span class="s2">"Genders"</span><span class="p">,</span>
+          <span class="s2">"Geographic locations"</span><span class="p">,</span>
+          <span class="s2">"IP addresses"</span><span class="p">,</span>
+          <span class="s2">"Names"</span><span class="p">,</span>
+          <span class="s2">"Passwords"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;Description&quot;</span><span class="p">:</span> <span class="s2">&quot;In July 2018, the health and fitness service </span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\&quot;</span><span class="s2">https://8fit.zendesk.com/hc/en-us/articles/360017746394-Notice</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;</span><span class="s2"> rel=</span><span class="se">\&quot;</span><span class="s2">noopener</span><span class="se">\&quot;\u003e</span><span class="s2">8fit suffered a data breach</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e</span><span class="s2">. The data subsequently appeared for sale on a dark web marketplace in February 2019 and included over 15M unique email addresses alongside names, genders, IP addresses and passwords stored as bcrypt hashes. The data was provided to HIBP by </span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\&quot;</span><span class="s2">https://dehashed.com/</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;</span><span class="s2"> rel=</span><span class="se">\&quot;</span><span class="s2">noopener</span><span class="se">\&quot;\u003e</span><span class="s2">dehashed.com</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e</span><span class="s2">.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Domain&quot;</span><span class="p">:</span> <span class="s2">&quot;8fit.com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;IsFabricated&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsMalware&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsRetired&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsSensitive&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsSpamList&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsVerified&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;LogoPath&quot;</span><span class="p">:</span> <span class="s2">&quot;https://haveibeenpwned.com/Content/Images/PwnedLogos/8fit.png&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ModifiedDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-03-21T18:50:00Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="s2">&quot;8fit&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;PwnCount&quot;</span><span class="p">:</span> <span class="mi">15025407</span><span class="p">,</span>
-        <span class="s2">&quot;Title&quot;</span><span class="p">:</span> <span class="s2">&quot;8fit&quot;</span>
+        <span class="s2">"Description"</span><span class="p">:</span> <span class="s2">"In July 2018, the health and fitness service </span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\"</span><span class="s2">https://8fit.zendesk.com/hc/en-us/articles/360017746394-Notice</span><span class="se">\"</span><span class="s2"> target=</span><span class="se">\"</span><span class="s2">_blank</span><span class="se">\"</span><span class="s2"> rel=</span><span class="se">\"</span><span class="s2">noopener</span><span class="se">\"\u003e</span><span class="s2">8fit suffered a data breach</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e</span><span class="s2">. The data subsequently appeared for sale on a dark web marketplace in February 2019 and included over 15M unique email addresses alongside names, genders, IP addresses and passwords stored as bcrypt hashes. The data was provided to HIBP by </span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\"</span><span class="s2">https://dehashed.com/</span><span class="se">\"</span><span class="s2"> target=</span><span class="se">\"</span><span class="s2">_blank</span><span class="se">\"</span><span class="s2"> rel=</span><span class="se">\"</span><span class="s2">noopener</span><span class="se">\"\u003e</span><span class="s2">dehashed.com</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e</span><span class="s2">."</span><span class="p">,</span>
+        <span class="s2">"Domain"</span><span class="p">:</span> <span class="s2">"8fit.com"</span><span class="p">,</span>
+        <span class="s2">"IsFabricated"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsMalware"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsRetired"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsSensitive"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsSpamList"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsVerified"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"LogoPath"</span><span class="p">:</span> <span class="s2">"https://haveibeenpwned.com/Content/Images/PwnedLogos/8fit.png"</span><span class="p">,</span>
+        <span class="s2">"ModifiedDate"</span><span class="p">:</span> <span class="s2">"2019-03-21T18:50:00Z"</span><span class="p">,</span>
+        <span class="s2">"Name"</span><span class="p">:</span> <span class="s2">"8fit"</span><span class="p">,</span>
+        <span class="s2">"PwnCount"</span><span class="p">:</span> <span class="mi">15025407</span><span class="p">,</span>
+        <span class="s2">"Title"</span><span class="p">:</span> <span class="s2">"8fit"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;AddedDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-02-16T07:09:30Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;BreachDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-06-27&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;DataClasses&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;Email addresses&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Passwords&quot;</span>
+        <span class="s2">"AddedDate"</span><span class="p">:</span> <span class="s2">"2018-02-16T07:09:30Z"</span><span class="p">,</span>
+        <span class="s2">"BreachDate"</span><span class="p">:</span> <span class="s2">"2017-06-27"</span><span class="p">,</span>
+        <span class="s2">"DataClasses"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"Email addresses"</span><span class="p">,</span>
+          <span class="s2">"Passwords"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;Description&quot;</span><span class="p">:</span> <span class="s2">&quot;In June 2017, the online playlists service known as </span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\&quot;</span><span class="s2">https://blog.8tracks.com/2017/06/27/password-security-alert/</span><span class="se">\&quot;</span><span class="s2"> target=</span><span class="se">\&quot;</span><span class="s2">_blank</span><span class="se">\&quot;</span><span class="s2"> rel=</span><span class="se">\&quot;</span><span class="s2">noopener</span><span class="se">\&quot;\u003e</span><span class="s2">8Tracks suffered a data breach</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e</span><span class="s2"> which impacted 18 million accounts. In their disclosure, 8Tracks advised that </span><span class="se">\u0026</span><span class="s2">quot;the vector for the attack was an employee</span><span class="se">\u2019</span><span class="s2">s GitHub account, which was not secured using two-factor authentication</span><span class="se">\u0026</span><span class="s2">quot;. Salted SHA-1 password hashes for users who </span><span class="se">\u003c</span><span class="s2">em</span><span class="se">\u003e</span><span class="s2">didn</span><span class="se">\u0027</span><span class="s2">t</span><span class="se">\u003c</span><span class="s2">/em</span><span class="se">\u003e</span><span class="s2"> sign up with either Google or Facebook authentication were also included. The data was provided to HIBP by whitehat security researcher and data analyst Adam Davies and contained almost 8 million unique email addresses. The complete set of 18M records was later provided by JimScott.Sec@protonmail.com and updated in HIBP accordingly.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Domain&quot;</span><span class="p">:</span> <span class="s2">&quot;8tracks.com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;IsFabricated&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsMalware&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsRetired&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsSensitive&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsSpamList&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;IsVerified&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;LogoPath&quot;</span><span class="p">:</span> <span class="s2">&quot;https://haveibeenpwned.com/Content/Images/PwnedLogos/8tracks.png&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ModifiedDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-08-25T08:52:21Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Name&quot;</span><span class="p">:</span> <span class="s2">&quot;8tracks&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;PwnCount&quot;</span><span class="p">:</span> <span class="mi">17979961</span><span class="p">,</span>
-        <span class="s2">&quot;Title&quot;</span><span class="p">:</span> <span class="s2">&quot;8tracks&quot;</span>
+        <span class="s2">"Description"</span><span class="p">:</span> <span class="s2">"In June 2017, the online playlists service known as </span><span class="se">\u003c</span><span class="s2">a href=</span><span class="se">\"</span><span class="s2">https://blog.8tracks.com/2017/06/27/password-security-alert/</span><span class="se">\"</span><span class="s2"> target=</span><span class="se">\"</span><span class="s2">_blank</span><span class="se">\"</span><span class="s2"> rel=</span><span class="se">\"</span><span class="s2">noopener</span><span class="se">\"\u003e</span><span class="s2">8Tracks suffered a data breach</span><span class="se">\u003c</span><span class="s2">/a</span><span class="se">\u003e</span><span class="s2"> which impacted 18 million accounts. In their disclosure, 8Tracks advised that </span><span class="se">\u0026</span><span class="s2">quot;the vector for the attack was an employee</span><span class="se">\u2019</span><span class="s2">s GitHub account, which was not secured using two-factor authentication</span><span class="se">\u0026</span><span class="s2">quot;. Salted SHA-1 password hashes for users who </span><span class="se">\u003c</span><span class="s2">em</span><span class="se">\u003e</span><span class="s2">didn</span><span class="se">\u0027</span><span class="s2">t</span><span class="se">\u003c</span><span class="s2">/em</span><span class="se">\u003e</span><span class="s2"> sign up with either Google or Facebook authentication were also included. The data was provided to HIBP by whitehat security researcher and data analyst Adam Davies and contained almost 8 million unique email addresses. The complete set of 18M records was later provided by JimScott.Sec@protonmail.com and updated in HIBP accordingly."</span><span class="p">,</span>
+        <span class="s2">"Domain"</span><span class="p">:</span> <span class="s2">"8tracks.com"</span><span class="p">,</span>
+        <span class="s2">"IsFabricated"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsMalware"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsRetired"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsSensitive"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsSpamList"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"IsVerified"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"LogoPath"</span><span class="p">:</span> <span class="s2">"https://haveibeenpwned.com/Content/Images/PwnedLogos/8tracks.png"</span><span class="p">,</span>
+        <span class="s2">"ModifiedDate"</span><span class="p">:</span> <span class="s2">"2019-08-25T08:52:21Z"</span><span class="p">,</span>
+        <span class="s2">"Name"</span><span class="p">:</span> <span class="s2">"8tracks"</span><span class="p">,</span>
+        <span class="s2">"PwnCount"</span><span class="p">:</span> <span class="mi">17979961</span><span class="p">,</span>
+        <span class="s2">"Title"</span><span class="p">:</span> <span class="s2">"8tracks"</span>
       <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;email_address&quot;</span><span class="p">:</span> <span class="s2">&quot;test@email.com&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"email_address"</span><span class="p">:</span> <span class="s2">"test@email.com"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">302</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;My Host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-04-27 16:43:44&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">302</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"My Host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"unknown"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"unknown"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-04-27 16:43:44"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -607,17 +607,17 @@ and select the <code class="docutils literal notranslate"><span class="pre">hibp
   <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
     <span class="n">hit</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">resp_data</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span>
-    <span class="n">resp_dict</span> <span class="o">=</span> <span class="n">resp_data</span><span class="p">[</span><span class="s2">&quot;Breaches&quot;</span><span class="p">]</span>
+    <span class="n">resp_dict</span> <span class="o">=</span> <span class="n">resp_data</span><span class="p">[</span><span class="s2">"Breaches"</span><span class="p">]</span>
     <span class="n">hit</span> <span class="o">=</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Number of Breached Sites&quot;</span><span class="p">,</span> 
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;number&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">resp_dict</span><span class="p">))</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Number of Breached Sites"</span><span class="p">,</span> 
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"number"</span><span class="p">,</span>
+        <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">resp_dict</span><span class="p">))</span>
       <span class="p">}</span>
     <span class="p">]</span>
-    <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="s2">&quot;HIBP Function hits added&quot;</span><span class="p">,</span> <span class="n">hit</span><span class="p">)</span>
+    <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="s2">"HIBP Function hits added"</span><span class="p">,</span> <span class="n">hit</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Have I Been Pwned has failed: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Have I Been Pwned has failed: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
 
 
 </pre></div>
@@ -660,53 +660,53 @@ and select the <code class="docutils literal notranslate"><span class="pre">hibp
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;Pastes&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"Pastes"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;Date&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;EmailCount&quot;</span><span class="p">:</span> <span class="mi">9893</span><span class="p">,</span>
-        <span class="s2">&quot;Id&quot;</span><span class="p">:</span> <span class="s2">&quot;http://siph0n.in/exploits.php?id=3670&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Source&quot;</span><span class="p">:</span> <span class="s2">&quot;AdHocUrl&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Title&quot;</span><span class="p">:</span> <span class="s2">&quot;siph0n.in&quot;</span>
+        <span class="s2">"Date"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"EmailCount"</span><span class="p">:</span> <span class="mi">9893</span><span class="p">,</span>
+        <span class="s2">"Id"</span><span class="p">:</span> <span class="s2">"http://siph0n.in/exploits.php?id=3670"</span><span class="p">,</span>
+        <span class="s2">"Source"</span><span class="p">:</span> <span class="s2">"AdHocUrl"</span><span class="p">,</span>
+        <span class="s2">"Title"</span><span class="p">:</span> <span class="s2">"siph0n.in"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;Date&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;EmailCount&quot;</span><span class="p">:</span> <span class="mi">12002</span><span class="p">,</span>
-        <span class="s2">&quot;Id&quot;</span><span class="p">:</span> <span class="s2">&quot;http://siph0n.in/exploits.php?id=3892&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Source&quot;</span><span class="p">:</span> <span class="s2">&quot;AdHocUrl&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Title&quot;</span><span class="p">:</span> <span class="s2">&quot;siph0n.in&quot;</span>
+        <span class="s2">"Date"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"EmailCount"</span><span class="p">:</span> <span class="mi">12002</span><span class="p">,</span>
+        <span class="s2">"Id"</span><span class="p">:</span> <span class="s2">"http://siph0n.in/exploits.php?id=3892"</span><span class="p">,</span>
+        <span class="s2">"Source"</span><span class="p">:</span> <span class="s2">"AdHocUrl"</span><span class="p">,</span>
+        <span class="s2">"Title"</span><span class="p">:</span> <span class="s2">"siph0n.in"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;Date&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;EmailCount&quot;</span><span class="p">:</span> <span class="mi">99791</span><span class="p">,</span>
-        <span class="s2">&quot;Id&quot;</span><span class="p">:</span> <span class="s2">&quot;http://siph0n.in/exploits.php?id=4680&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Source&quot;</span><span class="p">:</span> <span class="s2">&quot;AdHocUrl&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Title&quot;</span><span class="p">:</span> <span class="s2">&quot;remotestaff.com.au&quot;</span>
+        <span class="s2">"Date"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"EmailCount"</span><span class="p">:</span> <span class="mi">99791</span><span class="p">,</span>
+        <span class="s2">"Id"</span><span class="p">:</span> <span class="s2">"http://siph0n.in/exploits.php?id=4680"</span><span class="p">,</span>
+        <span class="s2">"Source"</span><span class="p">:</span> <span class="s2">"AdHocUrl"</span><span class="p">,</span>
+        <span class="s2">"Title"</span><span class="p">:</span> <span class="s2">"remotestaff.com.au"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;Date&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;EmailCount&quot;</span><span class="p">:</span> <span class="mi">104720</span><span class="p">,</span>
-        <span class="s2">&quot;Id&quot;</span><span class="p">:</span> <span class="s2">&quot;https://a.pomf.cat/dioeav.txt&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Source&quot;</span><span class="p">:</span> <span class="s2">&quot;AdHocUrl&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Title&quot;</span><span class="p">:</span> <span class="s2">&quot;a.pomf.cat&quot;</span>
+        <span class="s2">"Date"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"EmailCount"</span><span class="p">:</span> <span class="mi">104720</span><span class="p">,</span>
+        <span class="s2">"Id"</span><span class="p">:</span> <span class="s2">"https://a.pomf.cat/dioeav.txt"</span><span class="p">,</span>
+        <span class="s2">"Source"</span><span class="p">:</span> <span class="s2">"AdHocUrl"</span><span class="p">,</span>
+        <span class="s2">"Title"</span><span class="p">:</span> <span class="s2">"a.pomf.cat"</span>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;email_address&quot;</span><span class="p">:</span> <span class="s2">&quot;test@email.com&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"email_address"</span><span class="p">:</span> <span class="s2">"test@email.com"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">669</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;My Host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-04-27 16:43:48&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">669</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"My Host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"unknown"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"unknown"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-04-27 16:43:48"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -725,18 +725,18 @@ and select the <code class="docutils literal notranslate"><span class="pre">hibp
   <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
     <span class="n">hit</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">resp_data</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span>
-    <span class="n">resp_dict</span> <span class="o">=</span> <span class="n">resp_data</span><span class="p">[</span><span class="s2">&quot;Pastes&quot;</span><span class="p">]</span>
+    <span class="n">resp_dict</span> <span class="o">=</span> <span class="n">resp_data</span><span class="p">[</span><span class="s2">"Pastes"</span><span class="p">]</span>
     
     <span class="n">hit</span> <span class="o">=</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Pastes&quot;</span><span class="p">,</span> 
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;number&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">resp_dict</span><span class="p">),</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Pastes"</span><span class="p">,</span> 
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"number"</span><span class="p">,</span>
+        <span class="s2">"value"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">resp_dict</span><span class="p">),</span>
       <span class="p">}</span>
     <span class="p">]</span>
-    <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="s2">&quot;HIBP Function hits added&quot;</span><span class="p">,</span> <span class="n">hit</span><span class="p">)</span>
+    <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="s2">"HIBP Function hits added"</span><span class="p">,</span> <span class="n">hit</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;Have I Been Pwned has failed: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">u</span><span class="s2">"Have I Been Pwned has failed: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
 
 
     

@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -724,131 +724,131 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;es_doc_type&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;es_index&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;es_query&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">query</span><span class="se">\&quot;</span><span class="s2">: {</span><span class="se">\&quot;</span><span class="s2">match_all</span><span class="se">\&quot;</span><span class="s2">: </span><span class="si">{}</span><span class="s2">}}&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"es_doc_type"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"es_index"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"es_query"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">query</span><span class="se">\"</span><span class="s2">: {</span><span class="se">\"</span><span class="s2">match_all</span><span class="se">\"</span><span class="s2">: </span><span class="si">{}</span><span class="s2">}}"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;matched_records&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;relation&quot;</span><span class="p">:</span> <span class="s2">&quot;gte&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">10000</span>
+  <span class="s2">"matched_records"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"relation"</span><span class="p">:</span> <span class="s2">"gte"</span><span class="p">,</span>
+    <span class="s2">"value"</span><span class="p">:</span> <span class="mi">10000</span>
   <span class="p">},</span>
-  <span class="s2">&quot;query_results&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"query_results"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">&quot;_id&quot;</span><span class="p">:</span> <span class="s2">&quot;kS_ekIEBTwR1htd9OD_f&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;_index&quot;</span><span class="p">:</span> <span class="s2">&quot;.ds-logs-app_search.analytics-default-2022.06.23-000001&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;_score&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-      <span class="s2">&quot;_source&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;@timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-23T14:01:30.224Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;agent&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;ephemeral_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1ac55df2-51a2-4756-b50e-a4fa638ab155&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="s2">&quot;9ee8fac8927c&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;9ee8fac8927c&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filebeat&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;7.15.1&quot;</span>
+      <span class="s2">"_id"</span><span class="p">:</span> <span class="s2">"kS_ekIEBTwR1htd9OD_f"</span><span class="p">,</span>
+      <span class="s2">"_index"</span><span class="p">:</span> <span class="s2">".ds-logs-app_search.analytics-default-2022.06.23-000001"</span><span class="p">,</span>
+      <span class="s2">"_score"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+      <span class="s2">"_source"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"@timestamp"</span><span class="p">:</span> <span class="s2">"2022-06-23T14:01:30.224Z"</span><span class="p">,</span>
+        <span class="s2">"agent"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"ephemeral_id"</span><span class="p">:</span> <span class="s2">"1ac55df2-51a2-4756-b50e-a4fa638ab155"</span><span class="p">,</span>
+          <span class="s2">"hostname"</span><span class="p">:</span> <span class="s2">"9ee8fac8927c"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa"</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"9ee8fac8927c"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"filebeat"</span><span class="p">,</span>
+          <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"7.15.1"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;data_stream&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;dataset&quot;</span><span class="p">:</span> <span class="s2">&quot;app_search.analytics&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;namespace&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;logs&quot;</span>
+        <span class="s2">"data_stream"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"dataset"</span><span class="p">:</span> <span class="s2">"app_search.analytics"</span><span class="p">,</span>
+          <span class="s2">"namespace"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"logs"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;ecs&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.7.0&quot;</span>
+        <span class="s2">"ecs"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.7.0"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;event&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;loco_moco_search&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;app-search-analytics&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-23T14:01:30Z&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;dataset&quot;</span><span class="p">:</span> <span class="s2">&quot;app-search-analytics&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;document_ids&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;park_rocky-mountain&quot;</span>
+        <span class="s2">"event"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"loco_moco_search"</span><span class="p">,</span>
+          <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"app-search-analytics"</span><span class="p">,</span>
+          <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2022-06-23T14:01:30Z"</span><span class="p">,</span>
+          <span class="s2">"dataset"</span><span class="p">:</span> <span class="s2">"app-search-analytics"</span><span class="p">,</span>
+          <span class="s2">"document_ids"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"park_rocky-mountain"</span>
           <span class="p">],</span>
-          <span class="s2">&quot;loco_moco_search_request_id&quot;</span><span class="p">:</span> <span class="s2">&quot;6sHMDt44SGG_V-p11TXUyw&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;query_string&quot;</span><span class="p">:</span> <span class="s2">&quot;rocky&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[]</span>
+          <span class="s2">"loco_moco_search_request_id"</span><span class="p">:</span> <span class="s2">"6sHMDt44SGG_V-p11TXUyw"</span><span class="p">,</span>
+          <span class="s2">"query_string"</span><span class="p">:</span> <span class="s2">"rocky"</span><span class="p">,</span>
+          <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[]</span>
         <span class="p">},</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;9ee8fac8927c&quot;</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"9ee8fac8927c"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;log&quot;</span>
+        <span class="s2">"input"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"log"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;engine_id&quot;</span><span class="p">:</span> <span class="s2">&quot;62b326c9d0164ee8e257b729&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;index_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2022.06.23&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;lm_account_id&quot;</span><span class="p">:</span> <span class="s2">&quot;62b2f277d0164e239457b719&quot;</span>
+        <span class="s2">"labels"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"engine_id"</span><span class="p">:</span> <span class="s2">"62b326c9d0164ee8e257b729"</span><span class="p">,</span>
+          <span class="s2">"index_date"</span><span class="p">:</span> <span class="s2">"2022.06.23"</span><span class="p">,</span>
+          <span class="s2">"lm_account_id"</span><span class="p">:</span> <span class="s2">"62b2f277d0164e239457b719"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;log&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;file&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/app/logs/filebeat.log&quot;</span>
+        <span class="s2">"log"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"file"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/app/logs/filebeat.log"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">58011</span>
+          <span class="s2">"offset"</span><span class="p">:</span> <span class="mi">58011</span>
         <span class="p">},</span>
-        <span class="s2">&quot;related&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="s2">&quot;129.41.46.6&quot;</span>
+        <span class="s2">"related"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"ip"</span><span class="p">:</span> <span class="s2">"129.41.46.6"</span>
         <span class="p">}</span>
       <span class="p">}</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">&quot;_id&quot;</span><span class="p">:</span> <span class="s2">&quot;DJXekIEBhfwfcOFNGY18&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;_index&quot;</span><span class="p">:</span> <span class="s2">&quot;.ds-logs-app_search.analytics-default-2022.06.23-000001&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;_score&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-      <span class="s2">&quot;_source&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;@timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-23T14:01:21.239Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;agent&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;ephemeral_id&quot;</span><span class="p">:</span> <span class="s2">&quot;1ac55df2-51a2-4756-b50e-a4fa638ab155&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="s2">&quot;9ee8fac8927c&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;9ee8fac8927c&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;filebeat&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;7.15.1&quot;</span>
+      <span class="s2">"_id"</span><span class="p">:</span> <span class="s2">"DJXekIEBhfwfcOFNGY18"</span><span class="p">,</span>
+      <span class="s2">"_index"</span><span class="p">:</span> <span class="s2">".ds-logs-app_search.analytics-default-2022.06.23-000001"</span><span class="p">,</span>
+      <span class="s2">"_score"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+      <span class="s2">"_source"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"@timestamp"</span><span class="p">:</span> <span class="s2">"2022-06-23T14:01:21.239Z"</span><span class="p">,</span>
+        <span class="s2">"agent"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"ephemeral_id"</span><span class="p">:</span> <span class="s2">"1ac55df2-51a2-4756-b50e-a4fa638ab155"</span><span class="p">,</span>
+          <span class="s2">"hostname"</span><span class="p">:</span> <span class="s2">"9ee8fac8927c"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"19cfd1c7-99c3-461b-97e2-fd1a1e9e50fa"</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"9ee8fac8927c"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"filebeat"</span><span class="p">,</span>
+          <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"7.15.1"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;data_stream&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;dataset&quot;</span><span class="p">:</span> <span class="s2">&quot;app_search.analytics&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;namespace&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;logs&quot;</span>
+        <span class="s2">"data_stream"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"dataset"</span><span class="p">:</span> <span class="s2">"app_search.analytics"</span><span class="p">,</span>
+          <span class="s2">"namespace"</span><span class="p">:</span> <span class="s2">"default"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"logs"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;ecs&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.7.0&quot;</span>
+        <span class="s2">"ecs"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.7.0"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;event&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;loco_moco_search&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;app-search-analytics&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-23T14:01:21Z&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;dataset&quot;</span><span class="p">:</span> <span class="s2">&quot;app-search-analytics&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;document_ids&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;park_rocky-mountain&quot;</span>
+        <span class="s2">"event"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"loco_moco_search"</span><span class="p">,</span>
+          <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"app-search-analytics"</span><span class="p">,</span>
+          <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2022-06-23T14:01:21Z"</span><span class="p">,</span>
+          <span class="s2">"dataset"</span><span class="p">:</span> <span class="s2">"app-search-analytics"</span><span class="p">,</span>
+          <span class="s2">"document_ids"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"park_rocky-mountain"</span>
           <span class="p">],</span>
-          <span class="s2">&quot;loco_moco_search_request_id&quot;</span><span class="p">:</span> <span class="s2">&quot;f7z0me0oSeGuUArcVdl9xw&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;query_string&quot;</span><span class="p">:</span> <span class="s2">&quot;1075.6&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[]</span>
+          <span class="s2">"loco_moco_search_request_id"</span><span class="p">:</span> <span class="s2">"f7z0me0oSeGuUArcVdl9xw"</span><span class="p">,</span>
+          <span class="s2">"query_string"</span><span class="p">:</span> <span class="s2">"1075.6"</span><span class="p">,</span>
+          <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[]</span>
         <span class="p">},</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;9ee8fac8927c&quot;</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"9ee8fac8927c"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;log&quot;</span>
+        <span class="s2">"input"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"log"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;engine_id&quot;</span><span class="p">:</span> <span class="s2">&quot;62b326c9d0164ee8e257b729&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;index_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2022.06.23&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;lm_account_id&quot;</span><span class="p">:</span> <span class="s2">&quot;62b2f277d0164e239457b719&quot;</span>
+        <span class="s2">"labels"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"engine_id"</span><span class="p">:</span> <span class="s2">"62b326c9d0164ee8e257b729"</span><span class="p">,</span>
+          <span class="s2">"index_date"</span><span class="p">:</span> <span class="s2">"2022.06.23"</span><span class="p">,</span>
+          <span class="s2">"lm_account_id"</span><span class="p">:</span> <span class="s2">"62b2f277d0164e239457b719"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;log&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;file&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="s2">&quot;/app/logs/filebeat.log&quot;</span>
+        <span class="s2">"log"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"file"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"path"</span><span class="p">:</span> <span class="s2">"/app/logs/filebeat.log"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">51948</span>
+          <span class="s2">"offset"</span><span class="p">:</span> <span class="mi">51948</span>
         <span class="p">},</span>
-        <span class="s2">&quot;related&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="s2">&quot;129.41.46.6&quot;</span>
+        <span class="s2">"related"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"ip"</span><span class="p">:</span> <span class="s2">"129.41.46.6"</span>
         <span class="p">}</span>
       <span class="p">}</span>
     <span class="p">},</span>
   <span class="p">],</span>
-  <span class="s2">&quot;returned_records&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="s2">"returned_records"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -865,30 +865,30 @@ Additional package dependencies may exist for each of these packages:</p>
   </details>
   <details><summary>Example Post-Process Script:</summary>
   <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
 <span class="sd"># An Example of the result object</span>
 <span class="sd">    results = {</span>
-<span class="sd">        &quot;inputs&quot;: {</span>
-<span class="sd">          &quot;es_query&quot;: { &quot;query&quot;: { &quot;match_all&quot;: {} } },</span>
-<span class="sd">          &quot;es_doc_type&quot;: logs,</span>
-<span class="sd">          &quot;es_index&quot; : my_logstore</span>
+<span class="sd">        "inputs": {</span>
+<span class="sd">          "es_query": { "query": { "match_all": {} } },</span>
+<span class="sd">          "es_doc_type": logs,</span>
+<span class="sd">          "es_index" : my_logstore</span>
 <span class="sd">        },</span>
-<span class="sd">        &quot;query_results&quot;: [</span>
+<span class="sd">        "query_results": [</span>
 <span class="sd">          &lt;elasticsearch-record&gt;,</span>
-<span class="sd">        &quot;success&quot;: True / False,</span>
-<span class="sd">        &quot;matched_records&quot;: 1000,</span>
-<span class="sd">        &quot;returned_records&quot;: 100</span>
+<span class="sd">        "success": True / False,</span>
+<span class="sd">        "matched_records": 1000,</span>
+<span class="sd">        "returned_records": 100</span>
 <span class="sd">    }</span>
 <span class="sd">    Note: The schema of elasticsearch-record; outlined above, will reflect the structure of your data in Elastic itself</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">matched_records</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;b&gt;ElasticSearch Query status&lt;/b&gt;</span>
+  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">"""&lt;b&gt;ElasticSearch Query status&lt;/b&gt;</span>
 <span class="s2">                &lt;br&gt; Query supplied: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
-<span class="s2">                &lt;br&gt; Total matched records :&lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;es_query&quot;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">matched_records</span><span class="p">)</span>
+<span class="s2">                &lt;br&gt; Total matched records :&lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"es_query"</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">matched_records</span><span class="p">)</span>
 
   <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">returned_records</span><span class="p">:</span>
-    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt; Total returned records : &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">returned_records</span><span class="p">)</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"""&lt;br&gt; Total returned records : &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">returned_records</span><span class="p">)</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 </pre></div>
 </div>

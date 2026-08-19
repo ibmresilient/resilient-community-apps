@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -688,35 +688,35 @@ List any steps that are needed to configure the endpoint to use this app.
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;matches&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"matches"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;cacheDuration&quot;</span><span class="p">:</span> <span class="s2">&quot;300s&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;platformType&quot;</span><span class="p">:</span> <span class="s2">&quot;ANY_PLATFORM&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;threat&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;http://malware.testing.google.test/testing/malware/*&quot;</span>
+        <span class="s2">"cacheDuration"</span><span class="p">:</span> <span class="s2">"300s"</span><span class="p">,</span>
+        <span class="s2">"platformType"</span><span class="p">:</span> <span class="s2">"ANY_PLATFORM"</span><span class="p">,</span>
+        <span class="s2">"threat"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"http://malware.testing.google.test/testing/malware/*"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;threatEntryType&quot;</span><span class="p">:</span> <span class="s2">&quot;URL&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;threatType&quot;</span><span class="p">:</span> <span class="s2">&quot;MALWARE&quot;</span>
+        <span class="s2">"threatEntryType"</span><span class="p">:</span> <span class="s2">"URL"</span><span class="p">,</span>
+        <span class="s2">"threatType"</span><span class="p">:</span> <span class="s2">"MALWARE"</span>
       <span class="p">}</span>
     <span class="p">]</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;googlesafebrowsing_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;URL&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;googlesafebrowsing_artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;http://malware.testing.google.test/testing/malware/*&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"googlesafebrowsing_artifact_type"</span><span class="p">:</span> <span class="s2">"URL"</span><span class="p">,</span>
+    <span class="s2">"googlesafebrowsing_artifact_value"</span><span class="p">:</span> <span class="s2">"http://malware.testing.google.test/testing/malware/*"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">411</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;My Host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-googlesafebrowsing&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-02-17 14:05:42&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">411</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"My Host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-googlesafebrowsing"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-02-17 14:05:42"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -733,39 +733,39 @@ List any steps that are needed to configure the endpoint to use this app.
 <details><summary>Example Post-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This link contains further information on the site status of the url that is being checked</span>
-<span class="n">LINK_URL</span> <span class="o">=</span> <span class="s2">&quot;https://www.google.com/transparencyreport/safebrowsing/diagnostic/#url=</span><span class="si">{}</span><span class="s2">&quot;</span>
+<span class="n">LINK_URL</span> <span class="o">=</span> <span class="s2">"https://www.google.com/transparencyreport/safebrowsing/diagnostic/#url=</span><span class="si">{}</span><span class="s2">"</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
   <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
     <span class="n">resp</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span>
     <span class="n">hit</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;matches&quot;</span><span class="p">,</span> <span class="p">[]):</span>
-      <span class="n">linkurl</span> <span class="o">=</span> <span class="n">match</span><span class="p">[</span><span class="s2">&quot;threat&quot;</span><span class="p">][</span><span class="s2">&quot;url&quot;</span><span class="p">]</span>
-      <span class="n">link</span> <span class="o">=</span> <span class="n">LINK_URL</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">match</span><span class="p">[</span><span class="s2">&quot;threat&quot;</span><span class="p">][</span><span class="s2">&quot;url&quot;</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"matches"</span><span class="p">,</span> <span class="p">[]):</span>
+      <span class="n">linkurl</span> <span class="o">=</span> <span class="n">match</span><span class="p">[</span><span class="s2">"threat"</span><span class="p">][</span><span class="s2">"url"</span><span class="p">]</span>
+      <span class="n">link</span> <span class="o">=</span> <span class="n">LINK_URL</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">match</span><span class="p">[</span><span class="s2">"threat"</span><span class="p">][</span><span class="s2">"url"</span><span class="p">])</span>
       <span class="n">hit</span> <span class="o">=</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Threat Type&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">match</span><span class="p">[</span><span class="s2">&quot;threatType&quot;</span><span class="p">])</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Threat Type"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+        <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">match</span><span class="p">[</span><span class="s2">"threatType"</span><span class="p">])</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Report Link&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;uri&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Report Link"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"uri"</span><span class="p">,</span>
+        <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link</span><span class="p">)</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Platform Type&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">match</span><span class="p">[</span><span class="s2">&quot;platformType&quot;</span><span class="p">])</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Platform Type"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+        <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">match</span><span class="p">[</span><span class="s2">"platformType"</span><span class="p">])</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;URL Name&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">linkurl</span><span class="p">)</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"URL Name"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+        <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">linkurl</span><span class="p">)</span>
       <span class="p">}</span>
       <span class="p">]</span>
-      <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="s2">&quot;Google Safe Browsing Function&quot;</span><span class="p">,</span> <span class="n">hit</span><span class="p">)</span>
+      <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="s2">"Google Safe Browsing Function"</span><span class="p">,</span> <span class="n">hit</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Google Safe Browsing url check failed: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Google Safe Browsing url check failed: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
 
 </pre></div>
 </div>

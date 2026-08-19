@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -754,96 +754,96 @@ $ sudo cpan -fTi install Email::Outlook::Message
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;authentication-results&quot;</span><span class="p">:</span> <span class="s2">&quot;spf=none (sender 00.00.0000.0000)</span><span class="se">\r\n</span><span class="s2"> smtp.mailfrom=example.ibm.com; dkim=none (message not signed)</span><span class="se">\r\n</span><span class="s2"> header.d=none;dmarc=fail action=none header.from=us.ibm.com;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;body&quot;</span><span class="p">:</span> <span class="s2">&quot;email body&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;content-type&quot;</span><span class="p">:</span> <span class="s2">&quot;text/html; charset=</span><span class="se">\&quot;</span><span class="s2">UTF-8</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-10-10T19:54:18&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;from&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"authentication-results"</span><span class="p">:</span> <span class="s2">"spf=none (sender 00.00.0000.0000)</span><span class="se">\r\n</span><span class="s2"> smtp.mailfrom=example.ibm.com; dkim=none (message not signed)</span><span class="se">\r\n</span><span class="s2"> header.d=none;dmarc=fail action=none header.from=us.ibm.com;"</span><span class="p">,</span>
+    <span class="s2">"body"</span><span class="p">:</span> <span class="s2">"email body"</span><span class="p">,</span>
+    <span class="s2">"content-type"</span><span class="p">:</span> <span class="s2">"text/html; charset=</span><span class="se">\"</span><span class="s2">UTF-8</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"date"</span><span class="p">:</span> <span class="s2">"2022-10-10T19:54:18"</span><span class="p">,</span>
+    <span class="s2">"from"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">[</span>
-        <span class="s2">&quot;Example Admin&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;Example@us.ibm.com&quot;</span>
+        <span class="s2">"Example Admin"</span><span class="p">,</span>
+        <span class="s2">"Example@us.ibm.com"</span>
       <span class="p">]</span>
     <span class="p">],</span>
-    <span class="s2">&quot;has_defects&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-    <span class="s2">&quot;html_body&quot;</span><span class="p">:</span> <span class="s2">&quot;[</span><span class="se">\&quot;</span><span class="s2">body</span><span class="se">\&quot;</span><span class="s2">]&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;message-id&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">2022@example.ibm.com</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;mime-version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;plain_body&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;received&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"has_defects"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">"html_body"</span><span class="p">:</span> <span class="s2">"[</span><span class="se">\"</span><span class="s2">body</span><span class="se">\"</span><span class="s2">]"</span><span class="p">,</span>
+    <span class="s2">"message-id"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">2022@example.ibm.com</span><span class="se">\u003e</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"mime-version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"plain_body"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"received"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;by&quot;</span><span class="p">:</span> <span class="s2">&quot;example.ibm.com 8.15.2/8.15.2/Submit&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="s2">&quot;Mon, 10 Oct 2022 12:54:18 -0700&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;date_utc&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-10-10T19:54:18&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;delay&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;from&quot;</span><span class="p">:</span> <span class="s2">&quot;www-data@localhost&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;hop&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;29AJsIaP1141965&quot;</span>
+        <span class="s2">"by"</span><span class="p">:</span> <span class="s2">"example.ibm.com 8.15.2/8.15.2/Submit"</span><span class="p">,</span>
+        <span class="s2">"date"</span><span class="p">:</span> <span class="s2">"Mon, 10 Oct 2022 12:54:18 -0700"</span><span class="p">,</span>
+        <span class="s2">"date_utc"</span><span class="p">:</span> <span class="s2">"2022-10-10T19:54:18"</span><span class="p">,</span>
+        <span class="s2">"delay"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"from"</span><span class="p">:</span> <span class="s2">"www-data@localhost"</span><span class="p">,</span>
+        <span class="s2">"hop"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"29AJsIaP1141965"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;received-spf&quot;</span><span class="p">:</span> <span class="s2">&quot;None (protection.outlook.com: example.ibm.com does not</span><span class="se">\r\n</span><span class="s2"> designate permitted sender hosts)&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;return-path&quot;</span><span class="p">:</span> <span class="s2">&quot;www-data@example.ibm.com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;subject&quot;</span><span class="p">:</span> <span class="s2">&quot;Ready&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timezone&quot;</span><span class="p">:</span> <span class="s2">&quot;-7.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;to&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"received-spf"</span><span class="p">:</span> <span class="s2">"None (protection.outlook.com: example.ibm.com does not</span><span class="se">\r\n</span><span class="s2"> designate permitted sender hosts)"</span><span class="p">,</span>
+    <span class="s2">"return-path"</span><span class="p">:</span> <span class="s2">"www-data@example.ibm.com"</span><span class="p">,</span>
+    <span class="s2">"subject"</span><span class="p">:</span> <span class="s2">"Ready"</span><span class="p">,</span>
+    <span class="s2">"timezone"</span><span class="p">:</span> <span class="s2">"-7.0"</span><span class="p">,</span>
+    <span class="s2">"to"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">[</span>
-        <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;example@ibm.com&quot;</span>
+        <span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"example@ibm.com"</span>
       <span class="p">]</span>
     <span class="p">],</span>
-    <span class="s2">&quot;to_domains&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;ibm.com&quot;</span>
+    <span class="s2">"to_domains"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"ibm.com"</span>
     <span class="p">],</span>
-    <span class="s2">&quot;x-crosspremisesheadersfiltered&quot;</span><span class="p">:</span> <span class="s2">&quot;outlook.com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-crosspremisesheaderspromoted&quot;</span><span class="p">:</span> <span class="s2">&quot;outlook.com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-eopattributedmessage&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-forefront-antispam-report&quot;</span><span class="p">:</span> <span class="s2">&quot;CIP:169.55.84.251;CTRY:US;LANG:en;SCL:-1;SRV:;IPV:NLI;SFV:NSPM;H:gmx.mail.ibm.com;PTR:fb.54.37a9.ip4.static.sl-reverse.com;CAT:NONE;SFS:;DIR:INB;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-microsoft-antispam&quot;</span><span class="p">:</span> <span class="s2">&quot;BCL:0;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-microsoft-antispam-mailbox-delivery&quot;</span><span class="p">:</span> <span class="s2">&quot;ucf:0;jmr:0;auth:0;dest:I;ENG:(910001)(944506478)(944626604)(920097)(930097);&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-microsoft-antispam-message-info&quot;</span><span class="p">:</span> <span class="s2">&quot;abcdefgh@@@@@@@&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-crosstenant-authas&quot;</span><span class="p">:</span> <span class="s2">&quot;Anonymous&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-crosstenant-authsource&quot;</span><span class="p">:</span> <span class="s2">&quot;ibm.com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-crosstenant-fromentityheader&quot;</span><span class="p">:</span> <span class="s2">&quot;HybridOnPrem&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-crosstenant-id&quot;</span><span class="p">:</span> <span class="s2">&quot;dd9e9&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-crosstenant-network-message-id&quot;</span><span class="p">:</span> <span class="s2">&quot;some-id-1234567&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-crosstenant-originalarrivaltime&quot;</span><span class="p">:</span> <span class="s2">&quot;10 Oct 2022 19:54:24.1967</span><span class="se">\r\n</span><span class="s2"> (UTC)&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-crosstenant-originalattributedtenantconnectingip&quot;</span><span class="p">:</span> <span class="s2">&quot;TenantId=tenent-id-1234567;Ip=[000.00.00.000];Helo=[gmx.mail.com]&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-organization-authas&quot;</span><span class="p">:</span> <span class="s2">&quot;Anonymous&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-organization-authsource&quot;</span><span class="p">:</span> <span class="s2">&quot;ibm.com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-organization-expirationinterval&quot;</span><span class="p">:</span> <span class="s2">&quot;1:00:00:00.0000000&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-organization-expirationintervalreason&quot;</span><span class="p">:</span> <span class="s2">&quot;OriginalSubmit&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-organization-expirationstarttime&quot;</span><span class="p">:</span> <span class="s2">&quot;10 Oct 2022 19:54:24.3217</span><span class="se">\r\n</span><span class="s2"> (UTC)&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-organization-expirationstarttimereason&quot;</span><span class="p">:</span> <span class="s2">&quot;OriginalSubmit&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-organization-messagedirectionality&quot;</span><span class="p">:</span> <span class="s2">&quot;Originating&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-organization-network-message-id&quot;</span><span class="p">:</span> <span class="s2">&quot;some-id-123456&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-organization-scl&quot;</span><span class="p">:</span> <span class="s2">&quot;-1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-processed-by-bccfoldering&quot;</span><span class="p">:</span> <span class="s2">&quot;00.00.0000.0000&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-transport-crosstenantheadersstamped&quot;</span><span class="p">:</span> <span class="s2">&quot;MN2PR15MB2877&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-exchange-transport-endtoendlatency&quot;</span><span class="p">:</span> <span class="s2">&quot;00:00:14.1482542&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-office365-filtering-correlation-id&quot;</span><span class="p">:</span> <span class="s2">&quot;467954c2-54fc-491f-6f45-08daaaf93b34&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-publictraffictype&quot;</span><span class="p">:</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-ms-traffictypediagnostic&quot;</span><span class="p">:</span> <span class="s2">&quot;ABCDEFGH&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-organizationheaderspreserved&quot;</span><span class="p">:</span> <span class="s2">&quot;ibm.com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-originatororg&quot;</span><span class="p">:</span> <span class="s2">&quot;mail.ibm.com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;x-tm-as-gconf&quot;</span><span class="p">:</span> <span class="s2">&quot;00&quot;</span>
+    <span class="s2">"x-crosspremisesheadersfiltered"</span><span class="p">:</span> <span class="s2">"outlook.com"</span><span class="p">,</span>
+    <span class="s2">"x-crosspremisesheaderspromoted"</span><span class="p">:</span> <span class="s2">"outlook.com"</span><span class="p">,</span>
+    <span class="s2">"x-eopattributedmessage"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="s2">"x-forefront-antispam-report"</span><span class="p">:</span> <span class="s2">"CIP:169.55.84.251;CTRY:US;LANG:en;SCL:-1;SRV:;IPV:NLI;SFV:NSPM;H:gmx.mail.ibm.com;PTR:fb.54.37a9.ip4.static.sl-reverse.com;CAT:NONE;SFS:;DIR:INB;"</span><span class="p">,</span>
+    <span class="s2">"x-microsoft-antispam"</span><span class="p">:</span> <span class="s2">"BCL:0;"</span><span class="p">,</span>
+    <span class="s2">"x-microsoft-antispam-mailbox-delivery"</span><span class="p">:</span> <span class="s2">"ucf:0;jmr:0;auth:0;dest:I;ENG:(910001)(944506478)(944626604)(920097)(930097);"</span><span class="p">,</span>
+    <span class="s2">"x-microsoft-antispam-message-info"</span><span class="p">:</span> <span class="s2">"abcdefgh@@@@@@@"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-crosstenant-authas"</span><span class="p">:</span> <span class="s2">"Anonymous"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-crosstenant-authsource"</span><span class="p">:</span> <span class="s2">"ibm.com"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-crosstenant-fromentityheader"</span><span class="p">:</span> <span class="s2">"HybridOnPrem"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-crosstenant-id"</span><span class="p">:</span> <span class="s2">"dd9e9"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-crosstenant-network-message-id"</span><span class="p">:</span> <span class="s2">"some-id-1234567"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-crosstenant-originalarrivaltime"</span><span class="p">:</span> <span class="s2">"10 Oct 2022 19:54:24.1967</span><span class="se">\r\n</span><span class="s2"> (UTC)"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-crosstenant-originalattributedtenantconnectingip"</span><span class="p">:</span> <span class="s2">"TenantId=tenent-id-1234567;Ip=[000.00.00.000];Helo=[gmx.mail.com]"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-organization-authas"</span><span class="p">:</span> <span class="s2">"Anonymous"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-organization-authsource"</span><span class="p">:</span> <span class="s2">"ibm.com"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-organization-expirationinterval"</span><span class="p">:</span> <span class="s2">"1:00:00:00.0000000"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-organization-expirationintervalreason"</span><span class="p">:</span> <span class="s2">"OriginalSubmit"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-organization-expirationstarttime"</span><span class="p">:</span> <span class="s2">"10 Oct 2022 19:54:24.3217</span><span class="se">\r\n</span><span class="s2"> (UTC)"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-organization-expirationstarttimereason"</span><span class="p">:</span> <span class="s2">"OriginalSubmit"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-organization-messagedirectionality"</span><span class="p">:</span> <span class="s2">"Originating"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-organization-network-message-id"</span><span class="p">:</span> <span class="s2">"some-id-123456"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-organization-scl"</span><span class="p">:</span> <span class="s2">"-1"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-processed-by-bccfoldering"</span><span class="p">:</span> <span class="s2">"00.00.0000.0000"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-transport-crosstenantheadersstamped"</span><span class="p">:</span> <span class="s2">"MN2PR15MB2877"</span><span class="p">,</span>
+    <span class="s2">"x-ms-exchange-transport-endtoendlatency"</span><span class="p">:</span> <span class="s2">"00:00:14.1482542"</span><span class="p">,</span>
+    <span class="s2">"x-ms-office365-filtering-correlation-id"</span><span class="p">:</span> <span class="s2">"467954c2-54fc-491f-6f45-08daaaf93b34"</span><span class="p">,</span>
+    <span class="s2">"x-ms-publictraffictype"</span><span class="p">:</span> <span class="s2">"Email"</span><span class="p">,</span>
+    <span class="s2">"x-ms-traffictypediagnostic"</span><span class="p">:</span> <span class="s2">"ABCDEFGH"</span><span class="p">,</span>
+    <span class="s2">"x-organizationheaderspreserved"</span><span class="p">:</span> <span class="s2">"ibm.com"</span><span class="p">,</span>
+    <span class="s2">"x-originatororg"</span><span class="p">:</span> <span class="s2">"mail.ibm.com"</span><span class="p">,</span>
+    <span class="s2">"x-tm-as-gconf"</span><span class="p">:</span> <span class="s2">"00"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;attachment_id&quot;</span><span class="p">:</span> <span class="mi">88</span><span class="p">,</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2125</span><span class="p">,</span>
-    <span class="s2">&quot;parse_utilities_email_attachments&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"attachment_id"</span><span class="p">:</span> <span class="mi">88</span><span class="p">,</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2125</span><span class="p">,</span>
+    <span class="s2">"parse_utilities_email_attachments"</span><span class="p">:</span> <span class="n">true</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1347</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;My Host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-parse-utilities&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.1.1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-10-13 15:50:56&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1347</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"My Host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-parse-utilities"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.1.1"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-10-13 15:50:56"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">received</span><span class="se">\&quot;</span><span class="s2">: [{</span><span class="se">\&quot;</span><span class="s2">from</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">www-data@localhost</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">by</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">example.ibm.com 8.15.2/8.15.2/Submit</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">abcdefgh</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">return-path</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">www-data@example.ibm.com</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\"</span><span class="s2">received</span><span class="se">\"</span><span class="s2">: [{</span><span class="se">\"</span><span class="s2">from</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">www-data@localhost</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">by</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">example.ibm.com 8.15.2/8.15.2/Submit</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">abcdefgh</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">return-path</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">www-data@example.ibm.com</span><span class="se">\"</span><span class="s2">}"</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -868,8 +868,8 @@ $ sudo cpan -fTi install Email::Outlook::Message
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">email_parse</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-  <span class="n">note_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;Playbook &#39;Parse Utilities: Email Parsing (Artifact) - Example (PB)&#39; Failed&lt;br&gt;</span>
-<span class="s2">                  &lt;b&gt;Reason:&lt;/b&gt; </span><span class="si">{0}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
+  <span class="n">note_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""Playbook 'Parse Utilities: Email Parsing (Artifact) - Example (PB)' Failed&lt;br&gt;</span>
+<span class="s2">                  &lt;b&gt;Reason:&lt;/b&gt; </span><span class="si">{0}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
 
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
 
@@ -877,81 +877,81 @@ $ sudo cpan -fTi install Email::Outlook::Message
   <span class="n">email</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span>
 
   <span class="c1"># Get Email Subject</span>
-  <span class="n">eml_subject</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;subject&quot;</span><span class="p">,</span> <span class="s2">&quot;BLANK SUBJECT LINE&quot;</span><span class="p">)</span>
+  <span class="n">eml_subject</span> <span class="o">=</span> <span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"subject"</span><span class="p">,</span> <span class="s2">"BLANK SUBJECT LINE"</span><span class="p">)</span>
 
   <span class="c1">#########################################</span>
   <span class="c1"># Add Artifacts for Email Recipient: to #</span>
   <span class="c1">#########################################</span>
-  <span class="k">for</span> <span class="n">eml_addr</span> <span class="ow">in</span> <span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;to&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+  <span class="k">for</span> <span class="n">eml_addr</span> <span class="ow">in</span> <span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"to"</span><span class="p">,</span> <span class="p">[]):</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">eml_addr</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
-      <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;Email Recipient&quot;</span><span class="p">,</span> <span class="n">eml_addr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">eml_addr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">"Email Recipient"</span><span class="p">,</span> <span class="n">eml_addr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">eml_addr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
   <span class="c1">#########################################</span>
   <span class="c1"># Add Artifacts for Email Recipient: cc #</span>
   <span class="c1">#########################################</span>
-  <span class="k">for</span> <span class="n">eml_addr</span> <span class="ow">in</span> <span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;cc&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+  <span class="k">for</span> <span class="n">eml_addr</span> <span class="ow">in</span> <span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"cc"</span><span class="p">,</span> <span class="p">[]):</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">eml_addr</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
-      <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;Email Recipient&quot;</span><span class="p">,</span> <span class="n">eml_addr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">eml_addr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">"Email Recipient"</span><span class="p">,</span> <span class="n">eml_addr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">eml_addr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
   <span class="c1">########################################</span>
   <span class="c1"># Add Artifacts for Email Sender: from #</span>
   <span class="c1">########################################</span>
-  <span class="k">for</span> <span class="n">eml_addr</span> <span class="ow">in</span> <span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;from&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+  <span class="k">for</span> <span class="n">eml_addr</span> <span class="ow">in</span> <span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"from"</span><span class="p">,</span> <span class="p">[]):</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">eml_addr</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
-      <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;Email Sender&quot;</span><span class="p">,</span> <span class="n">eml_addr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">eml_addr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">"Email Sender"</span><span class="p">,</span> <span class="n">eml_addr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">eml_addr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
   <span class="c1">################################################</span>
   <span class="c1"># Add Artifacts for IPs found in Email Headers #</span>
   <span class="c1">################################################</span>
-  <span class="k">for</span> <span class="n">eml_header</span> <span class="ow">in</span> <span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;received&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+  <span class="k">for</span> <span class="n">eml_header</span> <span class="ow">in</span> <span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"received"</span><span class="p">,</span> <span class="p">[]):</span>
 
-    <span class="n">the_header</span> <span class="o">=</span> <span class="n">eml_header</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;from&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">the_header</span> <span class="o">=</span> <span class="n">eml_header</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"from"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">the_header</span><span class="p">:</span>
-      <span class="n">ips</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.)</span><span class="si">{3}</span><span class="s1">(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)&#39;</span><span class="p">,</span> <span class="n">the_header</span><span class="p">)</span>
+      <span class="n">ips</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">'(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.)</span><span class="si">{3}</span><span class="s1">(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)'</span><span class="p">,</span> <span class="n">the_header</span><span class="p">)</span>
       <span class="n">unique_ips</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">ips</span><span class="p">)</span>
 
       <span class="k">for</span> <span class="n">an_ip</span> <span class="ow">in</span> <span class="n">unique_ips</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">an_ip</span><span class="p">:</span>
-          <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;IP Address&quot;</span><span class="p">,</span> <span class="n">an_ip</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;Hop </span><span class="si">{0}</span><span class="s2"> at </span><span class="si">{1}</span><span class="se">\n\n</span><span class="s2">Header: </span><span class="si">{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">eml_header</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hop&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">eml_header</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;date_utc&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">the_header</span><span class="p">))</span>
+          <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">"IP Address"</span><span class="p">,</span> <span class="n">an_ip</span><span class="p">,</span> <span class="sa">u</span><span class="s2">"Hop </span><span class="si">{0}</span><span class="s2"> at </span><span class="si">{1}</span><span class="se">\n\n</span><span class="s2">Header: </span><span class="si">{2}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">eml_header</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hop"</span><span class="p">,</span> <span class="s2">""</span><span class="p">),</span> <span class="n">eml_header</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"date_utc"</span><span class="p">,</span> <span class="s2">""</span><span class="p">),</span> <span class="n">the_header</span><span class="p">))</span>
 
   <span class="c1">##############################################</span>
   <span class="c1"># Add Artifacts for URLs found in Email Body #</span>
   <span class="c1">##############################################</span>
   <span class="n">urls</span> <span class="o">=</span> <span class="p">[]</span>
-  <span class="k">for</span> <span class="n">eml_body_content</span> <span class="ow">in</span> <span class="p">[</span><span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;plain_body&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;html_body&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)]:</span>
-    <span class="n">urls</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">&#39;http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&amp;+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+&#39;</span><span class="p">,</span> <span class="n">eml_body_content</span><span class="p">))</span>
+  <span class="k">for</span> <span class="n">eml_body_content</span> <span class="ow">in</span> <span class="p">[</span><span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"plain_body"</span><span class="p">,</span> <span class="s2">""</span><span class="p">),</span> <span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"html_body"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)]:</span>
+    <span class="n">urls</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="s1">'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&amp;+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'</span><span class="p">,</span> <span class="n">eml_body_content</span><span class="p">))</span>
 
   <span class="n">uniq_urls</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">urls</span><span class="p">)</span>
 
   <span class="k">for</span> <span class="n">a_url</span> <span class="ow">in</span> <span class="n">uniq_urls</span><span class="p">:</span>
     <span class="c1"># Remove any backslash as regex can add</span>
-    <span class="n">a_url</span> <span class="o">=</span> <span class="n">a_url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&#39;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">a_url</span> <span class="o">=</span> <span class="n">a_url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="se">\\</span><span class="s1">'</span><span class="p">,</span><span class="s2">""</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">a_url</span><span class="p">:</span>
-      <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;URL&quot;</span><span class="p">,</span> <span class="n">a_url</span><span class="p">,</span> <span class="s2">&quot;Found in parsed Email&quot;</span><span class="p">)</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">"URL"</span><span class="p">,</span> <span class="n">a_url</span><span class="p">,</span> <span class="s2">"Found in parsed Email"</span><span class="p">)</span>
 
   <span class="c1">################################################</span>
   <span class="c1"># Add the Email Body as a Note to the Incident #</span>
   <span class="c1">################################################</span>
-  <span class="k">if</span> <span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">):</span>
-    <span class="n">note_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Parsed Email::&lt;/b&gt;&lt;br&gt;</span>
+  <span class="k">if</span> <span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"body"</span><span class="p">):</span>
+    <span class="n">note_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;b&gt;Parsed Email::&lt;/b&gt;&lt;br&gt;</span>
 <span class="s2">                    &lt;b&gt;Subject:&lt;/b&gt;&lt;br&gt;</span><span class="si">{0}</span><span class="s2">&lt;br&gt;</span>
 <span class="s2">                    &lt;b&gt;From:&lt;/b&gt;&lt;br&gt;</span><span class="si">{1}</span><span class="s2">&lt;br&gt;</span>
 <span class="s2">                    &lt;b&gt;To:&lt;/b&gt;&lt;br&gt;</span><span class="si">{2}</span><span class="s2">&lt;br&gt;</span>
-<span class="s2">                    &lt;b&gt;Body:&lt;/b&gt;&lt;br&gt;</span><span class="si">{3}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">eml_subject</span><span class="p">),</span>
-                                  <span class="nb">str</span><span class="p">(</span><span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;from&quot;</span><span class="p">,</span> <span class="s2">&quot;N/A&quot;</span><span class="p">)),</span>
-                                  <span class="nb">str</span><span class="p">(</span><span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;to&quot;</span><span class="p">,</span> <span class="s2">&quot;N/A&quot;</span><span class="p">)),</span>
-                                  <span class="nb">str</span><span class="p">(</span><span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">,</span> <span class="s2">&quot;N/A&quot;</span><span class="p">)))</span>
+<span class="s2">                    &lt;b&gt;Body:&lt;/b&gt;&lt;br&gt;</span><span class="si">{3}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">eml_subject</span><span class="p">),</span>
+                                  <span class="nb">str</span><span class="p">(</span><span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"from"</span><span class="p">,</span> <span class="s2">"N/A"</span><span class="p">)),</span>
+                                  <span class="nb">str</span><span class="p">(</span><span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"to"</span><span class="p">,</span> <span class="s2">"N/A"</span><span class="p">)),</span>
+                                  <span class="nb">str</span><span class="p">(</span><span class="n">email</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"body"</span><span class="p">,</span> <span class="s2">"N/A"</span><span class="p">)))</span>
 
     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
 
-<span class="w">  </span><span class="sd">&#39;&#39;&#39;Uncomment this if you would like to add a (safer) plain_text only Note</span>
-<span class="sd">  if email.get(&quot;plain_body&quot;):</span>
-<span class="sd">    note_text = u&quot;&quot;&quot;Parsed Email::\n\nSubject:\n{0}\n\nFrom:\n{1}\n\nTo:\n{2}\n\nBody:\n{3}&quot;&quot;&quot;.format(str(eml_subject),</span>
-<span class="sd">      str(email.get(&quot;from&quot;, &quot;N/A&quot;)), unicode(email.get(&quot;to&quot;, &quot;N/A&quot;)), str(email.get(&quot;body&quot;, &quot;N/A&quot;)))</span>
+<span class="w">  </span><span class="sd">'''Uncomment this if you would like to add a (safer) plain_text only Note</span>
+<span class="sd">  if email.get("plain_body"):</span>
+<span class="sd">    note_text = u"""Parsed Email::\n\nSubject:\n{0}\n\nFrom:\n{1}\n\nTo:\n{2}\n\nBody:\n{3}""".format(str(eml_subject),</span>
+<span class="sd">      str(email.get("from", "N/A")), unicode(email.get("to", "N/A")), str(email.get("body", "N/A")))</span>
 
 <span class="sd">    incident.addNote(helper.createPlainText(note_text))</span>
-<span class="sd">  &#39;&#39;&#39;</span>
+<span class="sd">  '''</span>
 </pre></div>
 </div>
 </p>
@@ -1006,19 +1006,19 @@ $ sudo cpan -fTi install Email::Outlook::Message
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;expiration_status&quot;</span><span class="p">:</span> <span class="s2">&quot;Valid&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;basicConstraints&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;issuerAltNames&quot;</span><span class="p">:</span> <span class="s2">&quot;[]&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;subjectAltNames&quot;</span><span class="p">:</span> <span class="s2">&quot;[</span><span class="se">\&quot;</span><span class="s2">sni.cloudflaressl.com</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">*.adamtheautomator.com</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">adamtheautomator.com</span><span class="se">\&quot;</span><span class="s2">]&quot;</span>
+  <span class="s2">"expiration_status"</span><span class="p">:</span> <span class="s2">"Valid"</span><span class="p">,</span>
+  <span class="s2">"extensions"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"basicConstraints"</span><span class="p">:</span> <span class="s2">"false"</span><span class="p">,</span>
+    <span class="s2">"issuerAltNames"</span><span class="p">:</span> <span class="s2">"[]"</span><span class="p">,</span>
+    <span class="s2">"subjectAltNames"</span><span class="p">:</span> <span class="s2">"[</span><span class="se">\"</span><span class="s2">sni.cloudflaressl.com</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">*.adamtheautomator.com</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">adamtheautomator.com</span><span class="se">\"</span><span class="s2">]"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;issuer&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">[(b</span><span class="se">\u0027</span><span class="s2">C</span><span class="se">\u0027</span><span class="s2">, b</span><span class="se">\u0027</span><span class="s2">US</span><span class="se">\u0027</span><span class="s2">), (b</span><span class="se">\u0027</span><span class="s2">O</span><span class="se">\u0027</span><span class="s2">, b</span><span class="se">\u0027</span><span class="s2">Cloudflare, Inc.</span><span class="se">\u0027</span><span class="s2">), (b</span><span class="se">\u0027</span><span class="s2">CN</span><span class="se">\u0027</span><span class="s2">, b</span><span class="se">\u0027</span><span class="s2">Cloudflare Inc ECC CA-3</span><span class="se">\u0027</span><span class="s2">)]</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;notAfter&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-29 23:59:59&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;notBefore&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-03-29 00:00:00&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;public_key&quot;</span><span class="p">:</span> <span class="s2">&quot;b</span><span class="se">\u0027</span><span class="s2">-----BEGIN PUBLIC KEY-----</span><span class="se">\\</span><span class="s2">BgBGmQ==</span><span class="se">\\</span><span class="s2">n-----END PUBLIC KEY-----</span><span class="se">\\</span><span class="s2">n</span><span class="se">\u0027</span><span class="s2">&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;signature_algorithm&quot;</span><span class="p">:</span> <span class="s2">&quot;b</span><span class="se">\u0027</span><span class="s2">ecdsa-with-SHA256</span><span class="se">\u0027</span><span class="s2">&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;subject&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2">[(b</span><span class="se">\u0027</span><span class="s2">C</span><span class="se">\u0027</span><span class="s2">, b</span><span class="se">\u0027</span><span class="s2">US</span><span class="se">\u0027</span><span class="s2">), (b</span><span class="se">\u0027</span><span class="s2">ST</span><span class="se">\u0027</span><span class="s2">, b</span><span class="se">\u0027</span><span class="s2">California</span><span class="se">\u0027</span><span class="s2">), (b</span><span class="se">\u0027</span><span class="s2">L</span><span class="se">\u0027</span><span class="s2">, b</span><span class="se">\u0027</span><span class="s2">San Francisco</span><span class="se">\u0027</span><span class="s2">), (b</span><span class="se">\u0027</span><span class="s2">O</span><span class="se">\u0027</span><span class="s2">, b</span><span class="se">\u0027</span><span class="s2">Cloudflare, Inc.</span><span class="se">\u0027</span><span class="s2">), (b</span><span class="se">\u0027</span><span class="s2">CN</span><span class="se">\u0027</span><span class="s2">, b</span><span class="se">\u0027</span><span class="s2">sni.cloudflaressl.com</span><span class="se">\u0027</span><span class="s2">)]</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="s2">"issuer"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\"</span><span class="s2">[(b</span><span class="se">\u0027</span><span class="s2">C</span><span class="se">\u0027</span><span class="s2">, b</span><span class="se">\u0027</span><span class="s2">US</span><span class="se">\u0027</span><span class="s2">), (b</span><span class="se">\u0027</span><span class="s2">O</span><span class="se">\u0027</span><span class="s2">, b</span><span class="se">\u0027</span><span class="s2">Cloudflare, Inc.</span><span class="se">\u0027</span><span class="s2">), (b</span><span class="se">\u0027</span><span class="s2">CN</span><span class="se">\u0027</span><span class="s2">, b</span><span class="se">\u0027</span><span class="s2">Cloudflare Inc ECC CA-3</span><span class="se">\u0027</span><span class="s2">)]</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span>
+  <span class="s2">"notAfter"</span><span class="p">:</span> <span class="s2">"2023-03-29 23:59:59"</span><span class="p">,</span>
+  <span class="s2">"notBefore"</span><span class="p">:</span> <span class="s2">"2022-03-29 00:00:00"</span><span class="p">,</span>
+  <span class="s2">"public_key"</span><span class="p">:</span> <span class="s2">"b</span><span class="se">\u0027</span><span class="s2">-----BEGIN PUBLIC KEY-----</span><span class="se">\\</span><span class="s2">BgBGmQ==</span><span class="se">\\</span><span class="s2">n-----END PUBLIC KEY-----</span><span class="se">\\</span><span class="s2">n</span><span class="se">\u0027</span><span class="s2">"</span><span class="p">,</span>
+  <span class="s2">"signature_algorithm"</span><span class="p">:</span> <span class="s2">"b</span><span class="se">\u0027</span><span class="s2">ecdsa-with-SHA256</span><span class="se">\u0027</span><span class="s2">"</span><span class="p">,</span>
+  <span class="s2">"subject"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\"</span><span class="s2">[(b</span><span class="se">\u0027</span><span class="s2">C</span><span class="se">\u0027</span><span class="s2">, b</span><span class="se">\u0027</span><span class="s2">US</span><span class="se">\u0027</span><span class="s2">), (b</span><span class="se">\u0027</span><span class="s2">ST</span><span class="se">\u0027</span><span class="s2">, b</span><span class="se">\u0027</span><span class="s2">California</span><span class="se">\u0027</span><span class="s2">), (b</span><span class="se">\u0027</span><span class="s2">L</span><span class="se">\u0027</span><span class="s2">, b</span><span class="se">\u0027</span><span class="s2">San Francisco</span><span class="se">\u0027</span><span class="s2">), (b</span><span class="se">\u0027</span><span class="s2">O</span><span class="se">\u0027</span><span class="s2">, b</span><span class="se">\u0027</span><span class="s2">Cloudflare, Inc.</span><span class="se">\u0027</span><span class="s2">), (b</span><span class="se">\u0027</span><span class="s2">CN</span><span class="se">\u0027</span><span class="s2">, b</span><span class="se">\u0027</span><span class="s2">sni.cloudflaressl.com</span><span class="se">\u0027</span><span class="s2">)]</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mi">2</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1035,27 +1035,27 @@ $ sudo cpan -fTi install Email::Outlook::Message
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;#45bc27&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">color</span> <span class="o">=</span> <span class="s2">"#45bc27"</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ssl_results</span>
 
-<span class="k">if</span> <span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">expiration_status</span> <span class="o">!=</span> <span class="s2">&quot;Valid&quot;</span><span class="p">):</span>
-  <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;#ff402b&quot;</span>
-<span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;Certificate Subject :&lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">expiration_status</span> <span class="o">!=</span> <span class="s2">"Valid"</span><span class="p">):</span>
+  <span class="n">color</span> <span class="o">=</span> <span class="s2">"#ff402b"</span>
+<span class="n">noteText</span> <span class="o">=</span> <span class="s2">"""&lt;br&gt;Certificate Subject :&lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
 <span class="s2">              &lt;b&gt;Certificate Expiry After :&lt;/b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/a&gt;</span>
-<span class="s2">              &lt;b&gt;Expiration Status:&lt;/b&gt; &lt;b style=&quot;color: </span><span class="si">{2}</span><span class="s2">&quot;&gt;</span><span class="si">{3}</span><span class="s2">&lt;/b&gt;</span>
-<span class="s2">              &lt;br&gt;Issuer Details :&lt;b&gt;</span><span class="si">{4}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">subject</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">notAfter</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">expiration_status</span><span class="p">,</span><span class="n">results</span><span class="o">.</span><span class="n">issuer</span><span class="p">)</span>
+<span class="s2">              &lt;b&gt;Expiration Status:&lt;/b&gt; &lt;b style="color: </span><span class="si">{2}</span><span class="s2">"&gt;</span><span class="si">{3}</span><span class="s2">&lt;/b&gt;</span>
+<span class="s2">              &lt;br&gt;Issuer Details :&lt;b&gt;</span><span class="si">{4}</span><span class="s2">&lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">subject</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">notAfter</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">expiration_status</span><span class="p">,</span><span class="n">results</span><span class="o">.</span><span class="n">issuer</span><span class="p">)</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 
-<span class="n">playbook</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s1">&#39;convert_json_to_rich_text&#39;</span><span class="p">,</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="s2">&quot;padding&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="s2">&quot;separator&quot;</span><span class="p">:</span> <span class="sa">u</span><span class="s2">&quot;&lt;br&gt;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;json&quot;</span><span class="p">:</span> <span class="n">results</span><span class="p">,</span>
-    <span class="s2">&quot;json_omit_list&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;incident_field&quot;</span><span class="p">:</span> <span class="kc">None</span>
+<span class="n">playbook</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s1">'convert_json_to_rich_text'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="s2">"header"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">"padding"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">"separator"</span><span class="p">:</span> <span class="sa">u</span><span class="s2">"&lt;br&gt;"</span><span class="p">,</span>
+    <span class="s2">"json"</span><span class="p">:</span> <span class="n">results</span><span class="p">,</span>
+    <span class="s2">"json_omit_list"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"incident_field"</span><span class="p">:</span> <span class="kc">None</span>
   <span class="p">})</span>
 </pre></div>
 </div>
@@ -1128,30 +1128,30 @@ $ sudo cpan -fTi install Email::Outlook::Message
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;/AA&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">&quot;/AcroForm&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">&quot;/Colors </span><span class="se">\u003e</span><span class="s2"> 2^24&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">&quot;/EmbeddedFile&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">&quot;/Encrypt&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">&quot;/JBIG2Decode&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">&quot;/JS&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">&quot;/JavaScript&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">&quot;/Launch&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">&quot;/ObjStm&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">&quot;/OpenAction&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">&quot;/Page&quot;</span><span class="p">:</span> <span class="mi">85</span><span class="p">,</span>
-  <span class="s2">&quot;/RichMedia&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">&quot;/XFA&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">&quot;endobj&quot;</span><span class="p">:</span> <span class="mi">570</span><span class="p">,</span>
-  <span class="s2">&quot;endstream&quot;</span><span class="p">:</span> <span class="mi">398</span><span class="p">,</span>
-  <span class="s2">&quot;filename&quot;</span><span class="p">:</span> <span class="s2">&quot;README.pdf&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="s2">&quot;%PDF-1.4&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;isPdf&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;obj&quot;</span><span class="p">:</span> <span class="mi">570</span><span class="p">,</span>
-  <span class="s2">&quot;startxref&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">&quot;stream&quot;</span><span class="p">:</span> <span class="mi">398</span><span class="p">,</span>
-  <span class="s2">&quot;trailer&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-  <span class="s2">&quot;xref&quot;</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="s2">"/AA"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"/AcroForm"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"/Colors </span><span class="se">\u003e</span><span class="s2"> 2^24"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"/EmbeddedFile"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"/Encrypt"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"/JBIG2Decode"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"/JS"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"/JavaScript"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"/Launch"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"/ObjStm"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"/OpenAction"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"/Page"</span><span class="p">:</span> <span class="mi">85</span><span class="p">,</span>
+  <span class="s2">"/RichMedia"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"/XFA"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s2">"endobj"</span><span class="p">:</span> <span class="mi">570</span><span class="p">,</span>
+  <span class="s2">"endstream"</span><span class="p">:</span> <span class="mi">398</span><span class="p">,</span>
+  <span class="s2">"filename"</span><span class="p">:</span> <span class="s2">"README.pdf"</span><span class="p">,</span>
+  <span class="s2">"header"</span><span class="p">:</span> <span class="s2">"%PDF-1.4"</span><span class="p">,</span>
+  <span class="s2">"isPdf"</span><span class="p">:</span> <span class="s2">"True"</span><span class="p">,</span>
+  <span class="s2">"obj"</span><span class="p">:</span> <span class="mi">570</span><span class="p">,</span>
+  <span class="s2">"startxref"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"stream"</span><span class="p">:</span> <span class="mi">398</span><span class="p">,</span>
+  <span class="s2">"trailer"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="s2">"xref"</span><span class="p">:</span> <span class="mi">1</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1170,31 +1170,31 @@ $ sudo cpan -fTi install Email::Outlook::Message
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The output of PDFiD is a dictionary with the fundamental elements of the PDF file.</span>
 <span class="c1"># These include,</span>
-<span class="c1">#  - &quot;isPdf&quot; (True or False)</span>
-<span class="c1">#  - &quot;header&quot; (the PDF version header)</span>
-<span class="c1">#  - &quot;obj&quot;, &quot;endobj&quot; and so on: the count of each element.</span>
+<span class="c1">#  - "isPdf" (True or False)</span>
+<span class="c1">#  - "header" (the PDF version header)</span>
+<span class="c1">#  - "obj", "endobj" and so on: the count of each element.</span>
 <span class="c1"># More documentation can be found at https://blog.didierstevens.com/programs/pdf-tools/</span>
 
 <span class="c1"># Some sections of interest</span>
 <span class="n">interesting_sections</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="s1">&#39;obj&#39;</span><span class="p">,</span> <span class="s1">&#39;endobj&#39;</span><span class="p">,</span> <span class="s1">&#39;stream&#39;</span><span class="p">,</span> <span class="s1">&#39;endstream&#39;</span><span class="p">,</span> <span class="s1">&#39;startxref&#39;</span><span class="p">,</span> <span class="s1">&#39;xref&#39;</span><span class="p">,</span> <span class="s1">&#39;trailer&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;/AA&#39;</span><span class="p">,</span> <span class="s1">&#39;/AcroForm&#39;</span><span class="p">,</span> <span class="s1">&#39;/EmbeddedFile&#39;</span><span class="p">,</span> <span class="s1">&#39;/Encrypt&#39;</span><span class="p">,</span> <span class="s1">&#39;/JBIG2Decode&#39;</span><span class="p">,</span> <span class="s1">&#39;/JS&#39;</span><span class="p">,</span> <span class="s1">&#39;/JavaScript&#39;</span><span class="p">,</span> <span class="s1">&#39;/Launch&#39;</span><span class="p">,</span> <span class="s1">&#39;/ObjStm&#39;</span><span class="p">,</span> <span class="s1">&#39;/OpenAction&#39;</span><span class="p">,</span> <span class="s1">&#39;/Page&#39;</span><span class="p">,</span> <span class="s1">&#39;/RichMedia&#39;</span><span class="p">,</span> <span class="s1">&#39;/XFA&#39;</span>
+  <span class="s1">'obj'</span><span class="p">,</span> <span class="s1">'endobj'</span><span class="p">,</span> <span class="s1">'stream'</span><span class="p">,</span> <span class="s1">'endstream'</span><span class="p">,</span> <span class="s1">'startxref'</span><span class="p">,</span> <span class="s1">'xref'</span><span class="p">,</span> <span class="s1">'trailer'</span><span class="p">,</span>
+  <span class="s1">'/AA'</span><span class="p">,</span> <span class="s1">'/AcroForm'</span><span class="p">,</span> <span class="s1">'/EmbeddedFile'</span><span class="p">,</span> <span class="s1">'/Encrypt'</span><span class="p">,</span> <span class="s1">'/JBIG2Decode'</span><span class="p">,</span> <span class="s1">'/JS'</span><span class="p">,</span> <span class="s1">'/JavaScript'</span><span class="p">,</span> <span class="s1">'/Launch'</span><span class="p">,</span> <span class="s1">'/ObjStm'</span><span class="p">,</span> <span class="s1">'/OpenAction'</span><span class="p">,</span> <span class="s1">'/Page'</span><span class="p">,</span> <span class="s1">'/RichMedia'</span><span class="p">,</span> <span class="s1">'/XFA'</span>
   <span class="p">]</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">pdfid_results</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">isPdf</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;Not a PDF file: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">))))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="sa">u</span><span class="s2">"Not a PDF file: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"filename"</span><span class="p">))))</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="c1"># In this example we just write them to a note in the incident</span>
-  <span class="n">note_data</span> <span class="o">=</span> <span class="p">[</span><span class="sa">u</span><span class="s2">&quot;PDFID report for </span><span class="si">{}</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">):&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;filename&quot;</span><span class="p">),</span> <span class="n">results</span><span class="o">.</span><span class="n">header</span><span class="p">)]</span>
+  <span class="n">note_data</span> <span class="o">=</span> <span class="p">[</span><span class="sa">u</span><span class="s2">"PDFID report for </span><span class="si">{}</span><span class="s2"> (</span><span class="si">{}</span><span class="s2">):"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"filename"</span><span class="p">),</span> <span class="n">results</span><span class="o">.</span><span class="n">header</span><span class="p">)]</span>
 
   <span class="k">for</span> <span class="n">section</span> <span class="ow">in</span> <span class="n">interesting_sections</span><span class="p">:</span>
     <span class="n">value</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-      <span class="n">note_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+      <span class="n">note_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
 
-  <span class="n">text</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createPlainText</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">note_data</span><span class="p">))</span>
+  <span class="n">text</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createPlainText</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">note_data</span><span class="p">))</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
   <span class="c1"># Maybe extend this to alert if (/JS or /JavaScript) and (/AA or /OpenAction)</span>
@@ -1278,7 +1278,7 @@ $ sudo cpan -fTi install Email::Outlook::Message
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">html</span><span class="se">\u003e\u003c</span><span class="s2">body</span><span class="se">\u003e\u003c</span><span class="s2">h2</span><span class="se">\u003e</span><span class="s2">My CD Collection</span><span class="se">\u003c</span><span class="s2">/h2</span><span class="se">\u003e\u003c</span><span class="s2">table border=</span><span class="se">\&quot;</span><span class="s2">1</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">tr bgcolor=</span><span class="se">\&quot;</span><span class="s2">#9acd32</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">th style=</span><span class="se">\&quot;</span><span class="s2">text-align:left</span><span class="se">\&quot;\u003e</span><span class="s2">Title</span><span class="se">\u003c</span><span class="s2">/th</span><span class="se">\u003e\u003c</span><span class="s2">th style=</span><span class="se">\&quot;</span><span class="s2">text-align:left</span><span class="se">\&quot;\u003e</span><span class="s2">Artist</span><span class="se">\u003c</span><span class="s2">/th</span><span class="se">\u003e\u003c</span><span class="s2">/tr</span><span class="se">\u003e\u003c</span><span class="s2">tr</span><span class="se">\u003e\u003c</span><span class="s2">td</span><span class="se">\u003e</span><span class="s2">Empire Burlesque</span><span class="se">\u003c</span><span class="s2">/td</span><span class="se">\u003e\u003c</span><span class="s2">td</span><span class="se">\u003e</span><span class="s2">Bob Dylan</span><span class="se">\u003c</span><span class="s2">/td</span><span class="se">\u003e\u003c</span><span class="s2">/tr</span><span class="se">\u003e\u003c</span><span class="s2">tr</span><span class="se">\u003e\u003c</span><span class="s2">td</span><span class="se">\u003e</span><span class="s2">Hide your heart</span><span class="se">\u003c</span><span class="s2">/td</span><span class="se">\u003e\u003c</span><span class="s2">td</span><span class="se">\u003e</span><span class="s2">Bonnie Tyler</span><span class="se">\u003c</span><span class="s2">/td</span><span class="se">\u003e\u003c</span><span class="s2">/tr</span><span class="se">\u003e\u003c</span><span class="s2">tr</span><span class="se">\u003e\u003c</span><span class="s2">td</span><span class="se">\u003e</span><span class="s2">Greatest Hits</span><span class="se">\u003c</span><span class="s2">/td</span><span class="se">\u003e\u003c</span><span class="s2">td</span><span class="se">\u003e</span><span class="s2">Dolly Parton</span><span class="se">\u003c</span><span class="s2">/td</span><span class="se">\u003e\u003c</span><span class="s2">/tr</span><span class="se">\u003e\u003c</span><span class="s2">tr</span><span class="se">\u003e\u003c</span><span class="s2">td</span><span class="se">\u003e</span><span class="s2">Still got the blues</span><span class="se">\u003c</span><span class="s2">/td</span><span class="se">\u003e\u003c</span><span class="s2">td</span><span class="se">\u003e</span><span class="s2">Gary Moore</span><span class="se">\u003c</span><span class="s2">/td</span><span class="se">\u003e\u003c</span><span class="s2">/tr</span><span class="se">\u003e\u003c</span><span class="s2">/table</span><span class="se">\u003e\u003c</span><span class="s2">/body</span><span class="se">\u003e\u003c</span><span class="s2">/html</span><span class="se">\u003e</span><span class="s2">&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">html</span><span class="se">\u003e\u003c</span><span class="s2">body</span><span class="se">\u003e\u003c</span><span class="s2">h2</span><span class="se">\u003e</span><span class="s2">My CD Collection</span><span class="se">\u003c</span><span class="s2">/h2</span><span class="se">\u003e\u003c</span><span class="s2">table border=</span><span class="se">\"</span><span class="s2">1</span><span class="se">\"\u003e\u003c</span><span class="s2">tr bgcolor=</span><span class="se">\"</span><span class="s2">#9acd32</span><span class="se">\"\u003e\u003c</span><span class="s2">th style=</span><span class="se">\"</span><span class="s2">text-align:left</span><span class="se">\"\u003e</span><span class="s2">Title</span><span class="se">\u003c</span><span class="s2">/th</span><span class="se">\u003e\u003c</span><span class="s2">th style=</span><span class="se">\"</span><span class="s2">text-align:left</span><span class="se">\"\u003e</span><span class="s2">Artist</span><span class="se">\u003c</span><span class="s2">/th</span><span class="se">\u003e\u003c</span><span class="s2">/tr</span><span class="se">\u003e\u003c</span><span class="s2">tr</span><span class="se">\u003e\u003c</span><span class="s2">td</span><span class="se">\u003e</span><span class="s2">Empire Burlesque</span><span class="se">\u003c</span><span class="s2">/td</span><span class="se">\u003e\u003c</span><span class="s2">td</span><span class="se">\u003e</span><span class="s2">Bob Dylan</span><span class="se">\u003c</span><span class="s2">/td</span><span class="se">\u003e\u003c</span><span class="s2">/tr</span><span class="se">\u003e\u003c</span><span class="s2">tr</span><span class="se">\u003e\u003c</span><span class="s2">td</span><span class="se">\u003e</span><span class="s2">Hide your heart</span><span class="se">\u003c</span><span class="s2">/td</span><span class="se">\u003e\u003c</span><span class="s2">td</span><span class="se">\u003e</span><span class="s2">Bonnie Tyler</span><span class="se">\u003c</span><span class="s2">/td</span><span class="se">\u003e\u003c</span><span class="s2">/tr</span><span class="se">\u003e\u003c</span><span class="s2">tr</span><span class="se">\u003e\u003c</span><span class="s2">td</span><span class="se">\u003e</span><span class="s2">Greatest Hits</span><span class="se">\u003c</span><span class="s2">/td</span><span class="se">\u003e\u003c</span><span class="s2">td</span><span class="se">\u003e</span><span class="s2">Dolly Parton</span><span class="se">\u003c</span><span class="s2">/td</span><span class="se">\u003e\u003c</span><span class="s2">/tr</span><span class="se">\u003e\u003c</span><span class="s2">tr</span><span class="se">\u003e\u003c</span><span class="s2">td</span><span class="se">\u003e</span><span class="s2">Still got the blues</span><span class="se">\u003c</span><span class="s2">/td</span><span class="se">\u003e\u003c</span><span class="s2">td</span><span class="se">\u003e</span><span class="s2">Gary Moore</span><span class="se">\u003c</span><span class="s2">/td</span><span class="se">\u003e\u003c</span><span class="s2">/tr</span><span class="se">\u003e\u003c</span><span class="s2">/table</span><span class="se">\u003e\u003c</span><span class="s2">/body</span><span class="se">\u003e\u003c</span><span class="s2">/html</span><span class="se">\u003e</span><span class="s2">"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1288,7 +1288,7 @@ $ sudo cpan -fTi install Email::Outlook::Message
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">parse_utilities_artifact_id</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">id</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">parse_utilities_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">parse_utilities_xml_stylesheet</span> <span class="o">=</span> <span class="s2">&quot;cdcatalog.xslt&quot;</span>  <span class="c1"># CHANGEME</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">parse_utilities_xml_stylesheet</span> <span class="o">=</span> <span class="s2">"cdcatalog.xslt"</span>  <span class="c1"># CHANGEME</span>
 </pre></div>
 </div>
 </p>
@@ -1322,8 +1322,8 @@ Typically, a function will create workflow property and this script will run aft
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.</span>
 <span class="n">VERSION</span> <span class="o">=</span> <span class="mf">1.3</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">  This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident&#39;s rich text (custom) field or an incident note.</span>
+<span class="sd">"""</span>
+<span class="sd">  This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident's rich text (custom) field or an incident note.</span>
 <span class="sd">  A workflow property is used to define the json to convert and identify parameters used on how to perform the conversion.</span>
 <span class="sd">  Typically, a function will create workflow property and this script will run after that function to perform the conversion.</span>
 <span class="sd">  Features:</span>
@@ -1333,54 +1333,54 @@ Typically, a function will create workflow property and this script will run aft
 
 <span class="sd">  In order to use this script, define a workflow property called: convert_json_to_rich_text, to define the json and parameters to use for the conversion.</span>
 <span class="sd">  Workflow properties can be added using a command similar to this:</span>
-<span class="sd">  workflow.addProperty(&#39;convert_json_to_rich_text&#39;, {</span>
-<span class="sd">    &quot;version&quot;: 1.3,</span>
-<span class="sd">    &quot;header&quot;: &quot;Artifact scan results for: {}&quot;.format(artifact.value),</span>
-<span class="sd">    &quot;padding&quot;: 10,</span>
-<span class="sd">    &quot;separator&quot;: u&quot;&lt;br /&gt;&quot;,</span>
-<span class="sd">    &quot;sort&quot;: True,</span>
-<span class="sd">    &quot;json&quot;: results.content,</span>
-<span class="sd">    &quot;json_omit_list&quot;: [&quot;omit&quot;],</span>
-<span class="sd">    &quot;incident_field&quot;: None</span>
+<span class="sd">  workflow.addProperty('convert_json_to_rich_text', {</span>
+<span class="sd">    "version": 1.3,</span>
+<span class="sd">    "header": "Artifact scan results for: {}".format(artifact.value),</span>
+<span class="sd">    "padding": 10,</span>
+<span class="sd">    "separator": u"&lt;br /&gt;",</span>
+<span class="sd">    "sort": True,</span>
+<span class="sd">    "json": results.content,</span>
+<span class="sd">    "json_omit_list": ["omit"],</span>
+<span class="sd">    "incident_field": None</span>
 <span class="sd">  })</span>
 
 <span class="sd">  Format of workflow.property.convert_json_to_rich_text:</span>
 <span class="sd">  {</span>
-<span class="sd">    &quot;version&quot;: 1.3, [this is for future compatibility]</span>
-<span class="sd">    &quot;header&quot;: str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]</span>
-<span class="sd">    &quot;padding&quot;: 10, [padding for nested json elements, or defaults to 10]</span>
-<span class="sd">    &quot;separator&quot;: u&quot;&lt;br /&gt;&quot;|list such as [&#39;&lt;span&gt;&#39;,&#39;&lt;/span&gt;&#39;], [html separator between json keys and lists or defaults to html break: &#39;&lt;br /&gt;&#39;.</span>
+<span class="sd">    "version": 1.3, [this is for future compatibility]</span>
+<span class="sd">    "header": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]</span>
+<span class="sd">    "padding": 10, [padding for nested json elements, or defaults to 10]</span>
+<span class="sd">    "separator": u"&lt;br /&gt;"|list such as ['&lt;span&gt;','&lt;/span&gt;'], [html separator between json keys and lists or defaults to html break: '&lt;br /&gt;'.</span>
 <span class="sd">                                                If a list, then the data is brackets by the pair specified]</span>
-<span class="sd">    &quot;sort&quot;: True|False, [sort the json keys at each level when displayed]</span>
-<span class="sd">    &quot;json&quot;: json, [required json to convert]</span>
-<span class="sd">    &quot;json_omit_list&quot;: [list of json keys to exclude or None]</span>
-<span class="sd">    &quot;incident_field&quot;: &quot;&lt;incident_field&gt;&quot; [indicates a builtin rich text incident field, such as &#39;description&#39;</span>
-<span class="sd">                                          or a custom rich text field in the format: &#39;properties.&lt;field&gt;&#39;. default: create an incident note]</span>
+<span class="sd">    "sort": True|False, [sort the json keys at each level when displayed]</span>
+<span class="sd">    "json": json, [required json to convert]</span>
+<span class="sd">    "json_omit_list": [list of json keys to exclude or None]</span>
+<span class="sd">    "incident_field": "&lt;incident_field&gt;" [indicates a builtin rich text incident field, such as 'description'</span>
+<span class="sd">                                          or a custom rich text field in the format: 'properties.&lt;field&gt;'. default: create an incident note]</span>
 <span class="sd">  }</span>
 
 <span class="sd">  For playbooks, use playbook.addProperty() with the same format as workflow.addProperty()</span>
 
-<span class="sd">  Playbooks can also use playbook.functions.results.convert_json_to_rich_text using the standard function output which contains the &#39;content&#39; json element.</span>
+<span class="sd">  Playbooks can also use playbook.functions.results.convert_json_to_rich_text using the standard function output which contains the 'content' json element.</span>
 <span class="sd">  When using playbook.functions.results.convert_json_to_rich_text with standard function results, all the defaults for padding, separator, etc. are used.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 <span class="c1"># needed for python 3</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">unicode</span><span class="p">(</span><span class="s2">&quot;abc&quot;</span><span class="p">)</span> <span class="c1"># fails in py3</span>
+    <span class="n">unicode</span><span class="p">(</span><span class="s2">"abc"</span><span class="p">)</span> <span class="c1"># fails in py3</span>
     <span class="n">py2</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="n">unicode</span> <span class="o">=</span> <span class="nb">str</span>
     <span class="n">py2</span> <span class="o">=</span> <span class="kc">False</span>
 
 
-<span class="n">rc</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&amp;+#\?]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+&#39;</span><span class="p">)</span>
+<span class="n">rc</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&amp;+#\?]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'</span><span class="p">)</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">ConvertJson</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to hold the conversion parameters and perform the conversion&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Class to hold the conversion parameters and perform the conversion"""</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">omit_keys</span><span class="o">=</span><span class="p">[],</span> <span class="n">padding</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;&lt;br /&gt;&quot;</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">omit_keys</span><span class="o">=</span><span class="p">[],</span> <span class="n">padding</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="sa">u</span><span class="s2">"&lt;br /&gt;"</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">omit_keys</span> <span class="o">=</span> <span class="n">omit_keys</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">padding</span> <span class="o">=</span> <span class="n">padding</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="o">=</span> <span class="n">separator</span>
@@ -1388,14 +1388,14 @@ Typically, a function will create workflow property and this script will run aft
 
 
     <span class="k">def</span><span class="w"> </span><span class="nf">format_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;[summary]</span>
+<span class="w">        </span><span class="sd">"""[summary]</span>
 <span class="sd">          Find embedded urls (http(s)) and add html anchor tags to display as links</span>
 <span class="sd">          Args:</span>
 <span class="sd">              item ([string])</span>
 
 <span class="sd">          Returns:</span>
 <span class="sd">              [str]: None|original text if no links|text with html links</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">formatted_item</span> <span class="o">=</span> <span class="n">item</span>
         <span class="k">if</span> <span class="n">py2</span><span class="p">:</span>
             <span class="n">num_type</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">item</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">long</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">)))</span>
@@ -1406,23 +1406,23 @@ Typically, a function will create workflow property and this script will run aft
             <span class="nb">list</span> <span class="o">=</span> <span class="n">rc</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">list</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span>
-                    <span class="n">formatted_item</span> <span class="o">=</span> <span class="n">formatted_item</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;&lt;a target=&#39;blank&#39; href=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;</span><span class="si">{0}</span><span class="s2">&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link</span><span class="p">))</span>
+                    <span class="n">formatted_item</span> <span class="o">=</span> <span class="n">formatted_item</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="sa">u</span><span class="s2">"&lt;a target='blank' href='</span><span class="si">{0}</span><span class="s2">'&gt;</span><span class="si">{0}</span><span class="s2">&lt;/a&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">formatted_item</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">expand_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_value</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;[summary]</span>
+<span class="w">        </span><span class="sd">"""[summary]</span>
 <span class="sd">          convert items to html, adding indents to nested dictionaries.</span>
 <span class="sd">          Args:</span>
 <span class="sd">              list_value ([dict|list]): json element</span>
 
 <span class="sd">          Returns:</span>
 <span class="sd">              [str]: html converted code</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_link</span><span class="p">(</span><span class="n">list_value</span><span class="p">)</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">list_value</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;None&lt;br&gt;&quot;</span>
+            <span class="k">return</span> <span class="sa">u</span><span class="s2">"None&lt;br&gt;"</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">items_list</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># this will ensure list starts on second line of key label</span>
@@ -1430,36 +1430,36 @@ Typically, a function will create workflow property and this script will run aft
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
                     <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_json_to_rich_text</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">is_list</span><span class="p">:</span>
-                        <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&lt;li&gt;</span><span class="si">{}</span><span class="s2">&lt;/li&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+                        <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">"&lt;li&gt;</span><span class="si">{}</span><span class="s2">&lt;/li&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
                     <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expand_list</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
                 <span class="k">elif</span> <span class="n">is_list</span><span class="p">:</span>
-                    <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&lt;li&gt;</span><span class="si">{}</span><span class="s2">&lt;/li&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_link</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">item</span><span class="p">))))</span>
+                    <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">"&lt;li&gt;</span><span class="si">{}</span><span class="s2">&lt;/li&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_link</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">item</span><span class="p">))))</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_link</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">item</span><span class="p">)))</span>
 
-            <span class="n">expand_list_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_list</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">expand_list_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_list</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">""</span><span class="p">,</span>
                                                     <span class="n">items_list</span><span class="p">,</span>
                                                     <span class="n">is_list</span><span class="o">=</span><span class="n">is_list</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">is_list</span><span class="p">:</span>
-                <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;&lt;ul&gt;</span><span class="si">{}</span><span class="s2">&lt;/ul&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expand_list_result</span><span class="p">)</span>
+                <span class="k">return</span> <span class="sa">u</span><span class="s2">"&lt;ul&gt;</span><span class="si">{}</span><span class="s2">&lt;/ul&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expand_list_result</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;&lt;div style=&#39;padding:5px&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expand_list_result</span><span class="p">)</span>
+                <span class="k">return</span> <span class="sa">u</span><span class="s2">"&lt;div style='padding:5px'&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expand_list_result</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">convert_json_to_rich_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sub_dict</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;[summary]</span>
+<span class="w">        </span><span class="sd">"""[summary]</span>
 <span class="sd">          Walk dictionary tree and convert to html for better display</span>
 <span class="sd">          Args:</span>
 <span class="sd">              sub_dict ([type]): [description]</span>
 
 <span class="sd">          Returns:</span>
 <span class="sd">              [type]: [description]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">notes</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="n">sub_dict</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)):</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -1472,50 +1472,50 @@ Typically, a function will create workflow property and this script will run aft
                     <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">omit_keys</span><span class="p">:</span>
                         <span class="n">value</span> <span class="o">=</span> <span class="n">sub_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
                         <span class="n">is_list</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
-                        <span class="n">item_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">u</span><span class="s2">&quot;&lt;strong&gt;</span><span class="si">{0}</span><span class="s2">&lt;/strong&gt;: &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
+                        <span class="n">item_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">u</span><span class="s2">"&lt;strong&gt;</span><span class="si">{0}</span><span class="s2">&lt;/strong&gt;: "</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
                         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
                             <span class="n">convert_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_json_to_rich_text</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
                             <span class="k">if</span> <span class="n">convert_result</span><span class="p">:</span>
-                                <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&lt;div style=&#39;padding:</span><span class="si">{}</span><span class="s2">px&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">,</span> <span class="n">convert_result</span><span class="p">))</span>
+                                <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">"&lt;div style='padding:</span><span class="si">{}</span><span class="s2">px'&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">,</span> <span class="n">convert_result</span><span class="p">))</span>
                             <span class="k">else</span><span class="p">:</span>
-                                <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;None&lt;br&gt;&quot;</span><span class="p">)</span>
+                                <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">"None&lt;br&gt;"</span><span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>
                             <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expand_list</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="n">is_list</span><span class="p">))</span>
 
-                        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">make_unicode</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">item_list</span><span class="p">),</span> <span class="n">is_list</span><span class="o">=</span><span class="n">is_list</span><span class="p">))</span>
+                        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">,</span> <span class="sa">u</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">make_unicode</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">item_list</span><span class="p">),</span> <span class="n">is_list</span><span class="o">=</span><span class="n">is_list</span><span class="p">))</span>
 
-        <span class="n">result_notes</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+        <span class="n">result_notes</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">result_notes</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">result_notes</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                <span class="sa">u</span><span class="s2">&quot;&lt;/div&gt;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">),</span> <span class="sa">u</span><span class="s2">&quot;&lt;/div&gt;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">),</span> <span class="sa">u</span><span class="s2">&quot;&lt;/div&gt;&quot;</span>
+                <span class="sa">u</span><span class="s2">"&lt;/div&gt;</span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">),</span> <span class="sa">u</span><span class="s2">"&lt;/div&gt;"</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+                <span class="sa">u</span><span class="s2">"</span><span class="si">{0}</span><span class="s2">&lt;/div&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">),</span> <span class="sa">u</span><span class="s2">"&lt;/div&gt;"</span>
             <span class="p">)</span>  <span class="c1"># tighten up result</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        apply the separator to the data</span>
-<span class="sd">        :param separator: None, str or list such as [&#39;&lt;span&gt;&#39;, &#39;&lt;/span&gt;&#39;]</span>
+<span class="sd">        :param separator: None, str or list such as ['&lt;span&gt;', '&lt;/span&gt;']</span>
 <span class="sd">        :param items: str or list to add separator</span>
 <span class="sd">        :return: text with separator applied</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">_items</span> <span class="o">=</span> <span class="n">items</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">_items</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;&lt;br&gt;&quot;</span>
+            <span class="k">return</span> <span class="s2">"&lt;br&gt;"</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_items</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">_items</span> <span class="o">=</span> <span class="p">[</span><span class="n">_items</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">,</span> <span class="n">separator</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">_items</span><span class="p">])</span>
+            <span class="k">return</span> <span class="sa">u</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">u</span><span class="s2">"</span><span class="si">{}{}{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">,</span> <span class="n">separator</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">_items</span><span class="p">])</span>
 
-        <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_items</span><span class="p">),</span> <span class="n">separator</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_list</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{}{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_items</span><span class="p">),</span> <span class="n">separator</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_list</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">""</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">make_unicode</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s1">&#39;None&#39;</span>
+        <span class="k">return</span> <span class="s1">'None'</span>
 
     <span class="k">return</span> <span class="n">unicode</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
@@ -1530,56 +1530,56 @@ Typically, a function will create workflow property and this script will run aft
     <span class="k">return</span> <span class="kc">None</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_properties</span><span class="p">(</span><span class="n">property_name</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Logic to collect the json and parameters from a workflow property.</span>
 <span class="sd">    Args:</span>
 <span class="sd">      property_name: workflow property to reference</span>
 <span class="sd">    Returns:</span>
 <span class="sd">      padding, separator, header, json_omit_list, incident_field, json, sort_keys</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">result_properties</span> <span class="o">=</span> <span class="n">get_results</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">result_properties</span><span class="p">:</span>
-        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;Playbook/workflow property not found: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">property_name</span><span class="p">))</span>
+        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"Playbook/workflow property not found: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">property_name</span><span class="p">))</span>
 
-    <span class="n">padding</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;padding&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-    <span class="n">separator</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;separator&quot;</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;&lt;br /&gt;&quot;</span><span class="p">)</span>
+    <span class="n">padding</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"padding"</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">separator</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"separator"</span><span class="p">,</span> <span class="sa">u</span><span class="s2">"&lt;br /&gt;"</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;list of separators should be specified as a pair such as [&#39;&lt;div&gt;&#39;, &#39;&lt;/div&gt;&#39;]: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">))</span>
+        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"list of separators should be specified as a pair such as ['&lt;div&gt;', '&lt;/div&gt;']: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">))</span>
 
-    <span class="n">header</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">)</span>
-    <span class="n">sort_keys</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sort&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
-    <span class="n">json_omit_list</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;json_omit_list&quot;</span><span class="p">)</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"header"</span><span class="p">)</span>
+    <span class="n">sort_keys</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sort"</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+    <span class="n">json_omit_list</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"json_omit_list"</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">json_omit_list</span><span class="p">:</span>
         <span class="n">json_omit_list</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">incident_field</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;incident_field&quot;</span><span class="p">)</span>
+    <span class="n">incident_field</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"incident_field"</span><span class="p">)</span>
 
-    <span class="c1"># workflow formatted content is &#39;json&#39;. Standard functions is &#39;content&#39;</span>
-    <span class="n">json</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+    <span class="c1"># workflow formatted content is 'json'. Standard functions is 'content'</span>
+    <span class="n">json</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"json"</span><span class="p">)</span> <span class="k">if</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"json"</span><span class="p">)</span> <span class="k">else</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
     <span class="n">json_err</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1"># is there an issue we need handle now?</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">json</span> <span class="ow">and</span> \
-        <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span> <span class="ow">and</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">):</span>
-        <span class="n">json_err</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
+        <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span> <span class="ow">and</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">):</span>
+        <span class="n">json_err</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">padding</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">json_omit_list</span><span class="p">,</span> <span class="n">incident_field</span><span class="p">,</span> <span class="n">json</span><span class="p">,</span> <span class="n">json_err</span><span class="p">,</span> <span class="n">sort_keys</span>
 
 
 <span class="c1">## S T A R T</span>
-<span class="n">padding</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">json_omit_list</span><span class="p">,</span> <span class="n">incident_field</span><span class="p">,</span> <span class="n">json</span><span class="p">,</span> <span class="n">json_err</span><span class="p">,</span> <span class="n">sort_keys</span> <span class="o">=</span> <span class="n">get_properties</span><span class="p">(</span><span class="s1">&#39;convert_json_to_rich_text&#39;</span><span class="p">)</span>
+<span class="n">padding</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">json_omit_list</span><span class="p">,</span> <span class="n">incident_field</span><span class="p">,</span> <span class="n">json</span><span class="p">,</span> <span class="n">json_err</span><span class="p">,</span> <span class="n">sort_keys</span> <span class="o">=</span> <span class="n">get_properties</span><span class="p">(</span><span class="s1">'convert_json_to_rich_text'</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">json_err</span><span class="p">:</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;Result error: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">json_err</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">"Result error: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">json_err</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">header</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}{1}{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">header</span><span class="p">,</span> <span class="n">separator</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{0}{1}{2}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">header</span><span class="p">,</span> <span class="n">separator</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">separator</span><span class="p">)</span>
+            <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{0}{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">separator</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span>
+        <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">""</span>
 
     <span class="n">convert</span> <span class="o">=</span> <span class="n">ConvertJson</span><span class="p">(</span><span class="n">omit_keys</span><span class="o">=</span><span class="n">json_omit_list</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">padding</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="n">separator</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="n">sort_keys</span><span class="p">)</span>
     <span class="n">converted_json</span> <span class="o">=</span> <span class="n">convert</span><span class="o">.</span><span class="n">convert_json_to_rich_text</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span> <span class="n">converted_json</span> <span class="k">if</span> <span class="n">converted_json</span> <span class="k">else</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">None&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{}{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span> <span class="n">converted_json</span> <span class="k">if</span> <span class="n">converted_json</span> <span class="k">else</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">None"</span><span class="p">)</span>
 
 <span class="n">rich_text_note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">incident_field</span><span class="p">:</span>

@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -665,147 +665,147 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">&quot;adobe_malware_classifier&quot;</span><span class="p">:</span> <span class="s2">&quot;malicious&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;anti_virus&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"adobe_malware_classifier"</span><span class="p">:</span> <span class="s2">"malicious"</span><span class="p">,</span>
+      <span class="s2">"anti_virus"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Troj/Agent-APCU&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Sophos&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Troj/Agent-APCU"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"Sophos"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;W32/Lamer.CQ&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Fortinet&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"W32/Lamer.CQ"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"Fortinet"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;PUA.Win.Packer.Purebasic-2&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Clam&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"PUA.Win.Packer.Purebasic-2"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"Clam"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Win32.Generic.VC&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;AVG&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Win32.Generic.VC"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"AVG"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Gen:Win32.FileInfector.uwZ@a4T!Kcmi&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;MicroWorld&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Gen:Win32.FileInfector.uwZ@a4T!Kcmi"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"MicroWorld"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Virus ( 004d554e1 )&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;K7GW&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Virus ( 004d554e1 )"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"K7GW"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;W32.Sivis.A5&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;QuickHeal&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"W32.Sivis.A5"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"QuickHeal"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Trojan/Win32.FileInfector&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;AhnLab&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Trojan/Win32.FileInfector"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"AhnLab"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Win32:Malware-gen&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Avast&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Win32:Malware-gen"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"Avast"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Trojan.PWS.Onlinegames.KEGA&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;BitDefender&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Trojan.PWS.Onlinegames.KEGA"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"BitDefender"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Trojan.GenericKD.40542465&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;BitDefender&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Trojan.GenericKD.40542465"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"BitDefender"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Gen.Win32.FileInfector&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Ikarus&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Gen.Win32.FileInfector"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"Ikarus"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Virus.Win32.sivis.a&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Sunbelt&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Virus.Win32.sivis.a"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"Sunbelt"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Gen:Win32.FileInfector.uwZ@a4T!Kcmi&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;BitDefender&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Gen:Win32.FileInfector.uwZ@a4T!Kcmi"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"BitDefender"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;PUA.Win.Packer.Purebasic-2&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Clam&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"PUA.Win.Packer.Purebasic-2"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"Clam"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Gen:Win32.Backdoor.ozZbauKWKdpb&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;BitDefender&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Gen:Win32.Backdoor.ozZbauKWKdpb"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"BitDefender"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Win32.Generic.VC&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;AVG&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Win32.Generic.VC"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"AVG"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Virus ( 004d554e1 )&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;K7GW&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Virus ( 004d554e1 )"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"K7GW"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Win32.HLLW.Siggen.4657&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;DrWeb&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Win32.HLLW.Siggen.4657"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"DrWeb"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;TR/Dropper.Gen8&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Avira&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"TR/Dropper.Gen8"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"Avira"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Win32/Zatoxp.C&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Eset&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Win32/Zatoxp.C"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"Eset"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Win32:Malware-gen&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Avast&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Win32:Malware-gen"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"Avast"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Virus ( 004d554e1 )&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;K7&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Virus ( 004d554e1 )"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"K7"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Trojan/Win32.FileInfector&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;AhnLab&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Trojan/Win32.FileInfector"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"AhnLab"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Win32:Lamer-A&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Avast&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Win32:Lamer-A"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"Avast"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;Gen:Win32.FileInfector.uwZ@a4T!Kcmi&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;BitDefender&quot;</span>
+          <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"Gen:Win32.FileInfector.uwZ@a4T!Kcmi"</span><span class="p">,</span>
+          <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"BitDefender"</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;entropic&quot;</span><span class="p">:</span> <span class="s2">&quot;5.952427&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;filesize&quot;</span><span class="p">:</span> <span class="s2">&quot;2438340&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;first_seen&quot;</span><span class="p">:</span> <span class="s2">&quot;2016-08-25 02:44:39&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;import_hash&quot;</span><span class="p">:</span> <span class="s2">&quot;33f98db5bdb6a7013d52f0120248df35&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;last_seen&quot;</span><span class="p">:</span> <span class="s2">&quot;2016-08-25 02:44:39&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;magic&quot;</span><span class="p">:</span> <span class="s2">&quot;PE32 executable (GUI) Intel 80386, for MS Windows&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;md5&quot;</span><span class="p">:</span> <span class="s2">&quot;dfe1832e02888422f48d6896dc8e8f73&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;pehash&quot;</span><span class="p">:</span> <span class="s2">&quot;243c359*******829f30b30c45839cbf6&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;sha1&quot;</span><span class="p">:</span> <span class="s2">&quot;c56ba4*******7be3c1eb5588cec27c413eb208&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;sha256&quot;</span><span class="p">:</span> <span class="s2">&quot;d8d395f87443*******0a4308e7b380a0aca86bfc8939ded9f4c8c5cb1e838a&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;sha512&quot;</span><span class="p">:</span> <span class="s2">&quot;7ca1fdfe537913b8*******efc1f11b00d405f2d21e416e7023c4ebed2bfa887d2bc4d4d553ce41667c99def47ea05e6ce4a773c4ee7173927f1d263e724c16c2&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2016-08-25 02:44:39&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;tlsh&quot;</span><span class="p">:</span> <span class="s2">&quot;c1b52a5273fa0*******f75a8b7a3944939fea11d22e08e1164314d88b6f808e75bb7&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;exe&quot;</span>
+      <span class="s2">"entropic"</span><span class="p">:</span> <span class="s2">"5.952427"</span><span class="p">,</span>
+      <span class="s2">"filesize"</span><span class="p">:</span> <span class="s2">"2438340"</span><span class="p">,</span>
+      <span class="s2">"first_seen"</span><span class="p">:</span> <span class="s2">"2016-08-25 02:44:39"</span><span class="p">,</span>
+      <span class="s2">"import_hash"</span><span class="p">:</span> <span class="s2">"33f98db5bdb6a7013d52f0120248df35"</span><span class="p">,</span>
+      <span class="s2">"last_seen"</span><span class="p">:</span> <span class="s2">"2016-08-25 02:44:39"</span><span class="p">,</span>
+      <span class="s2">"magic"</span><span class="p">:</span> <span class="s2">"PE32 executable (GUI) Intel 80386, for MS Windows"</span><span class="p">,</span>
+      <span class="s2">"md5"</span><span class="p">:</span> <span class="s2">"dfe1832e02888422f48d6896dc8e8f73"</span><span class="p">,</span>
+      <span class="s2">"pehash"</span><span class="p">:</span> <span class="s2">"243c359*******829f30b30c45839cbf6"</span><span class="p">,</span>
+      <span class="s2">"sha1"</span><span class="p">:</span> <span class="s2">"c56ba4*******7be3c1eb5588cec27c413eb208"</span><span class="p">,</span>
+      <span class="s2">"sha256"</span><span class="p">:</span> <span class="s2">"d8d395f87443*******0a4308e7b380a0aca86bfc8939ded9f4c8c5cb1e838a"</span><span class="p">,</span>
+      <span class="s2">"sha512"</span><span class="p">:</span> <span class="s2">"7ca1fdfe537913b8*******efc1f11b00d405f2d21e416e7023c4ebed2bfa887d2bc4d4d553ce41667c99def47ea05e6ce4a773c4ee7173927f1d263e724c16c2"</span><span class="p">,</span>
+      <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2016-08-25 02:44:39"</span><span class="p">,</span>
+      <span class="s2">"tlsh"</span><span class="p">:</span> <span class="s2">"c1b52a5273fa0*******f75a8b7a3944939fea11d22e08e1164314d88b6f808e75bb7"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"exe"</span>
     <span class="p">}</span>
   <span class="p">],</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;shadowserver_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Malware SHA-1 Hash&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;shadowserver_artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;c56ba498d41caa7be3c1eb5588cec27c413eb208&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"shadowserver_artifact_type"</span><span class="p">:</span> <span class="s2">"Malware SHA-1 Hash"</span><span class="p">,</span>
+    <span class="s2">"shadowserver_artifact_value"</span><span class="p">:</span> <span class="s2">"c56ba498d41caa7be3c1eb5588cec27c413eb208"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">386</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;My Host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-shadowserver&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-03-30 11:34:35&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">386</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"My Host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-shadowserver"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-03-30 11:34:35"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -828,14 +828,14 @@ Additional package dependencies may exist for each of these packages:</p>
     <span class="n">hit_list</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">attribute_value</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
       <span class="n">hit</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">attribute</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attribute_value</span><span class="p">)</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="n">attribute</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+        <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attribute_value</span><span class="p">)</span>
       <span class="p">}</span>
       <span class="n">hit_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hit</span><span class="p">)</span>
-    <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="s2">&quot;ShadowServer Function&quot;</span><span class="p">,</span> <span class="n">hit_list</span><span class="p">)</span>
+    <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="s2">"ShadowServer Function"</span><span class="p">,</span> <span class="n">hit_list</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;ShadowServer Hash check failed: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"ShadowServer Hash check failed: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
     
 </pre></div>
 </div>

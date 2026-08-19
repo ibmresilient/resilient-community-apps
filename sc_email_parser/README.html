@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -474,7 +474,7 @@ The below images show the creation of the <code class="docutils literal notransl
 </div>
 <p>This datatable is used to capture email conversation information for both inbound and outbound messages within an incident. If you’re not using Outbound Email 2.0 or greater, this generic email script will continue to work without this datatable.</p>
 <p>If you are using Outbound Email 2.0 or greater, you can edit this script to enable the logic to populate the inbound email message into the incident’s <code class="docutils literal notranslate"><span class="pre">Email</span> <span class="pre">Conversations</span></code> datatable. Modify line 10, SAVE_CONVERSATION = True, to perform this action</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## Uncomment if you&#39;re using Outbound EMail 2.0 or greater and want to capture the inbound email in the Email Conversation datatable</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">## Uncomment if you're using Outbound EMail 2.0 or greater and want to capture the inbound email in the Email Conversation datatable</span>
 <span class="c1">#processor.add_email_conversation(emailmessage.headers, processor.emailContents, [attachment.suggested_filename for attachment in emailmessage.attachments])</span>
 </pre></div>
 </div>
@@ -547,13 +547,13 @@ If you are using an older email script:</p></li>
 <p>New incidents need an owner, either an individual identified by their email address or a group name. In the provided script, every incident is owned by the user admin&#64;co3sys.com. This should be changed to reflect your IBM SOAR platform. For example, to change the owner to l1&#64;businessname.com, locate line 25 of the script:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The new incident owner - the email address of a user or the name of a group and cannot be blank.</span>
 <span class="c1"># Change this value to reflect who will be the owner of the incident before running the script.</span>
-<span class="n">newIncidentOwner</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">newIncidentOwner</span> <span class="o">=</span> <span class="s2">""</span>
 </pre></div>
 </div>
 <p>Edit the line:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># The new incident owner - the email address of a user or the name of a group and cannot be blank.</span>
 <span class="c1"># Change this value to reflect who will be the owner of the incident before running the script.</span>
-<span class="n">newIncidentOwner</span> <span class="o">=</span> <span class="s2">&quot;l1@businessname.com&quot;</span>
+<span class="n">newIncidentOwner</span> <span class="o">=</span> <span class="s2">"l1@businessname.com"</span>
 </pre></div>
 </div>
 </section>
@@ -591,12 +591,12 @@ Please note that, compared to version v1 of the script, the allowlist variable l
 <h4>IP address allowlists<a class="headerlink" href="#ip-address-allowlists" title="Link to this heading">¶</a></h4>
 <p>The IP address allowlists are divided into separate IPv4 and IPv6 lists. These lists apply to the IP addresses retrieved by pattern matching in the body of the email message. If an IP address appears on a allowlist, it is not added as an artifact to the incident.</p>
 <p>There are two categories of IP allowlist entry, CIDR (Classless Inter-Domain Routing) and IPRange. For example, in IP V4, IBM owns the <code class="docutils literal notranslate"><span class="pre">9</span></code> class A network. You may want to also allowlist an IP range, such as <code class="docutils literal notranslate"><span class="pre">12.0.0.1</span> <span class="pre">-</span> <span class="pre">12.5.5.5</span></code>. To add these criteria to the allowlist you would add the following to ipV4AllowList:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="s2">&quot;9.0.0.0/8&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;12.0.0.1-12.5.5.5&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="s2">"9.0.0.0/8"</span><span class="p">,</span>
+  <span class="s2">"12.0.0.1-12.5.5.5"</span>
 </pre></div>
 </div>
 <p>You may also want to allowlist an explicit IP address, such as <code class="docutils literal notranslate"><span class="pre">13.13.13.13</span></code>. This would be specified by:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="s2">&quot;13.13.13.13&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>  <span class="s2">"13.13.13.13"</span>
 </pre></div>
 </div>
 <p>IP v6 allowlists operate similarly. For example to allowlist a V6 CIDR <code class="docutils literal notranslate"><span class="pre">aaaa::/16</span></code> you would add <code class="docutils literal notranslate"><span class="pre">CIDR(&quot;aaaa::/16&quot;)</span></code> to ipV6AllowList. For example:</p>
@@ -614,14 +614,14 @@ Please note that, compared to version v1 of the script, the allowlist variable l
 <p>should become:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Allowlist for IP V4 addresses</span>
 <span class="n">ipV4AllowList</span> <span class="o">=</span> <span class="n">AllowList</span><span class="p">([</span>
-  <span class="s2">&quot;9.0.0.0/8&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;12.0.0.1-12.5.5.5&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;13.13.13.13&quot;</span>
+  <span class="s2">"9.0.0.0/8"</span><span class="p">,</span>
+  <span class="s2">"12.0.0.1-12.5.5.5"</span><span class="p">,</span>
+  <span class="s2">"13.13.13.13"</span>
 <span class="p">])</span>
 
 <span class="c1"># Allowlist for IP V6 addresses</span>
 <span class="n">ipV6AllowList</span> <span class="o">=</span> <span class="n">AllowList</span><span class="p">([</span>
-  <span class="s2">&quot;aaaa::/16&quot;</span>
+  <span class="s2">"aaaa::/16"</span>
 <span class="p">])</span>
 </pre></div>
 </div>
@@ -631,15 +631,15 @@ Please note that, compared to version v1 of the script, the allowlist variable l
 <p>The domain allowlist applies to URLs found in the body of the email. If a allowlisted domain is discovered in a potential URL artifact, then it is not added to the incident. Domains can be added explicitly, such as <code class="docutils literal notranslate"><span class="pre">mail.businessname.com</span></code>, or using a wildcard, such as <code class="docutils literal notranslate"><span class="pre">*.otherbusinessname.com</span></code>. For example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Domain allowlist</span>
 <span class="n">domainAllowList</span> <span class="o">=</span> <span class="p">[</span>
-  <span class="c1">#&quot;*.ibm.com&quot;</span>
+  <span class="c1">#"*.ibm.com"</span>
 <span class="p">]</span>
 </pre></div>
 </div>
 <p>would become:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Domain allowlist</span>
 <span class="n">domainAllowList</span> <span class="o">=</span> <span class="n">AllowList</span><span class="p">([</span>
-  <span class="s2">&quot;mail.businessname.com&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;*.otherbusinessname.com&quot;</span>
+  <span class="s2">"mail.businessname.com"</span><span class="p">,</span>
+  <span class="s2">"*.otherbusinessname.com"</span>
 <span class="p">])</span>
 </pre></div>
 </div>
@@ -667,12 +667,12 @@ Add the following script to the IBM SOAR platform:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">addArtifact</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">artifactType</span><span class="p">,</span> <span class="n">description</span><span class="p">):</span>
-<span class="w">  </span><span class="sd">&quot;&quot;&quot;This method adds new artifacts to the incident derived from matches of the the regular expression</span>
+<span class="w">  </span><span class="sd">"""This method adds new artifacts to the incident derived from matches of the the regular expression</span>
 <span class="sd">  parameter within the email body contents.</span>
-<span class="sd">  Parameter &quot;regex&quot; - a regular expression to match against the email body contents.</span>
-<span class="sd">  Parameter &quot;artifactType&quot; - the type of the artifact(s).</span>
-<span class="sd">  Parameter &quot;description&quot; - the description of the artifact(s).</span>
-<span class="sd">  &quot;&quot;&quot;</span>
+<span class="sd">  Parameter "regex" - a regular expression to match against the email body contents.</span>
+<span class="sd">  Parameter "artifactType" - the type of the artifact(s).</span>
+<span class="sd">  Parameter "description" - the description of the artifact(s).</span>
+<span class="sd">  """</span>
   <span class="n">dataList</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">content</span><span class="p">))</span> <span class="c1"># Using a set to enforce uniqueness</span>
   <span class="k">if</span> <span class="n">dataList</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataList</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">:</span>
     <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">theArtifact</span><span class="p">:</span> <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">artifactType</span><span class="p">,</span> <span class="n">theArtifact</span><span class="p">,</span> <span class="n">description</span><span class="p">),</span> <span class="n">dataList</span><span class="p">)</span>
@@ -681,24 +681,24 @@ Add the following script to the IBM SOAR platform:</p>
 <span class="c1"># Mainline starts here</span>
 <span class="c1">###</span>
 
-<span class="c1"># Add &quot;Phishing&quot; as an incident type for the associated incident</span>
-<span class="n">incident</span><span class="o">.</span><span class="n">incident_type_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Phishing&quot;</span><span class="p">)</span>
+<span class="c1"># Add "Phishing" as an incident type for the associated incident</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">incident_type_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"Phishing"</span><span class="p">)</span>
 
 <span class="c1"># Add the email sender information to the incident as the recipient of the phishing attempt</span>
 <span class="n">reportingUserInfo</span> <span class="o">=</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">from</span><span class="o">.</span><span class="n">address</span>
 <span class="k">if</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">from</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-  <span class="n">reportingUserInfo</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> &lt;</span><span class="si">{1}</span><span class="s2">&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">emailmessage</span><span class="o">.</span><span class="n">from</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">from</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
-<span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;Email Recipient&quot;</span><span class="p">,</span> <span class="n">reportingUserInfo</span><span class="p">,</span> <span class="s2">&quot;Recipient of suspicious email&quot;</span><span class="p">)</span>
+  <span class="n">reportingUserInfo</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{0}</span><span class="s2"> &lt;</span><span class="si">{1}</span><span class="s2">&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">emailmessage</span><span class="o">.</span><span class="n">from</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">from</span><span class="o">.</span><span class="n">address</span><span class="p">)</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">"Email Recipient"</span><span class="p">,</span> <span class="n">reportingUserInfo</span><span class="p">,</span> <span class="s2">"Recipient of suspicious email"</span><span class="p">)</span>
 
 <span class="c1"># Extract email sender information on the assumption that a phishing email is being forwarded</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">emailmessage</span><span class="o">.</span><span class="n">body</span><span class="o">.</span><span class="n">content</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-  <span class="n">addArtifact</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;From: (.*)\n&quot;</span><span class="p">,</span> <span class="s2">&quot;Email Sender&quot;</span><span class="p">,</span> <span class="s2">&quot;Suspicious email sender&quot;</span><span class="p">)</span>
-  <span class="n">addArtifact</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Reply-To: (.*)\n&quot;</span><span class="p">,</span> <span class="s2">&quot;Email Sender&quot;</span><span class="p">,</span> <span class="s2">&quot;Suspicious email sender (Reply-To)&quot;</span><span class="p">)</span>
+  <span class="n">addArtifact</span><span class="p">(</span><span class="sa">r</span><span class="s2">"From: (.*)\n"</span><span class="p">,</span> <span class="s2">"Email Sender"</span><span class="p">,</span> <span class="s2">"Suspicious email sender"</span><span class="p">)</span>
+  <span class="n">addArtifact</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Reply-To: (.*)\n"</span><span class="p">,</span> <span class="s2">"Email Sender"</span><span class="p">,</span> <span class="s2">"Suspicious email sender (Reply-To)"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Run the script as part of a rule that includes a condition that helps identify the email message as a phishing report. The script should run either as part of a multi-script rule that first runs the generic script, or as a separate rule that runs afterwards. It is important that the phishing-specific script should run after the generic script because the generic script causes the <code class="docutils literal notranslate"><span class="pre">incident</span></code> variable to be set, and the phishing-specific script shown above expects this to have been done already.</p>
 <p>NOTE: If you choose to implement the solution as one script, not two, then be sure that you add the Phishing incident type to the incident at a point in the script when the incident object exists. For example, the following command should occur after the incident is created or found.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">incident</span><span class="o">.</span><span class="n">incident_type_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Phishing&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">incident</span><span class="o">.</span><span class="n">incident_type_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"Phishing"</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>

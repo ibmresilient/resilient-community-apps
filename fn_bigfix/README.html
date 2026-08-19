@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -679,25 +679,25 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;status_message&quot;</span><span class="p">:</span> <span class="s2">&quot;The Fixlet which this action addresses is not relevant on this machine.&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"OK"</span><span class="p">,</span>
+    <span class="s2">"status_message"</span><span class="p">:</span> <span class="s2">"The Fixlet which this action addresses is not relevant on this machine."</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;bigfix_action_id&quot;</span><span class="p">:</span> <span class="mi">48</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"bigfix_action_id"</span><span class="p">:</span> <span class="mi">48</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">60372</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-bigfix&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-08-08 14:07:26&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">60372</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-bigfix"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.2.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-08-08 14:07:26"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -712,17 +712,17 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">)</span>
-<span class="n">status</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span>
-<span class="n">status_message</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status_message&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'content'</span><span class="p">)</span>
+<span class="n">status</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"status"</span><span class="p">)</span>
+<span class="n">status_message</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"status_message"</span><span class="p">)</span>
 <span class="n">action_id</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">res_bigfix_action_id</span>
 
-<span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="ow">and</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;OK&quot;</span> <span class="ow">or</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;Failed&quot;</span><span class="p">)):</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">status</span> <span class="ow">and</span> <span class="p">(</span><span class="n">status</span> <span class="o">==</span> <span class="s2">"OK"</span> <span class="ow">or</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">"Failed"</span><span class="p">)):</span>
   <span class="n">row</span><span class="o">.</span><span class="n">res_remediation_status</span> <span class="o">=</span> <span class="n">status_message</span>
-  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;Big Fix Integration: Big Fix Action ID &lt;b&gt;&#39;</span><span class="si">{}</span><span class="s2">&#39;&lt;/b&gt; finished with status &lt;b&gt;&#39;</span><span class="si">{}</span><span class="s2">&#39;&lt;/b&gt;.&quot;</span> \
+  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">"Big Fix Integration: Big Fix Action ID &lt;b&gt;'</span><span class="si">{}</span><span class="s2">'&lt;/b&gt; finished with status &lt;b&gt;'</span><span class="si">{}</span><span class="s2">'&lt;/b&gt;."</span> \
               <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">action_id</span><span class="p">,</span> <span class="n">status_message</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;Big Fix Integration: Big Fix Action ID &lt;b&gt;&#39;</span><span class="si">{}</span><span class="s2">&#39;&lt;/b&gt; unsuccessful.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">action_id</span><span class="p">)</span>
+  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">"Big Fix Integration: Big Fix Action ID &lt;b&gt;'</span><span class="si">{}</span><span class="s2">'&lt;/b&gt; unsuccessful."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">action_id</span><span class="p">)</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 </pre></div>
@@ -807,40 +807,40 @@ Registry Key (MS Windows registry key)</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;endpoint_hits&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"endpoint_hits"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;computer_id&quot;</span><span class="p">:</span> <span class="mi">12315195</span><span class="p">,</span>
-        <span class="s2">&quot;computer_name&quot;</span><span class="p">:</span> <span class="s2">&quot;bigfix.test&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;failure&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;query_id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;resp_time&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span>
+        <span class="s2">"computer_id"</span><span class="p">:</span> <span class="mi">12315195</span><span class="p">,</span>
+        <span class="s2">"computer_name"</span><span class="p">:</span> <span class="s2">"bigfix.test"</span><span class="p">,</span>
+        <span class="s2">"failure"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"query_id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"resp_time"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"False"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;hits_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&quot;hits_over_limit&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-    <span class="s2">&quot;query_execution_date&quot;</span><span class="p">:</span> <span class="s2">&quot;08-08-2022 14:05:48&quot;</span>
+    <span class="s2">"hits_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"hits_over_limit"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">"query_execution_date"</span><span class="p">:</span> <span class="s2">"08-08-2022 14:05:48"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;bigfix_artifact_id&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-    <span class="s2">&quot;bigfix_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Process Name&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;bigfix_artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;Run Intel SA-00086 Vulnerability Detection Tool&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;bigfix_incident_id&quot;</span><span class="p">:</span> <span class="mi">2111</span><span class="p">,</span>
-    <span class="s2">&quot;bigfix_incident_plan_status&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"bigfix_artifact_id"</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="s2">"bigfix_artifact_type"</span><span class="p">:</span> <span class="s2">"Process Name"</span><span class="p">,</span>
+    <span class="s2">"bigfix_artifact_value"</span><span class="p">:</span> <span class="s2">"Run Intel SA-00086 Vulnerability Detection Tool"</span><span class="p">,</span>
+    <span class="s2">"bigfix_incident_id"</span><span class="p">:</span> <span class="mi">2111</span><span class="p">,</span>
+    <span class="s2">"bigfix_incident_plan_status"</span><span class="p">:</span> <span class="s2">"A"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">15313</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-bigfix&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-08-08 14:05:48&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">15313</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-bigfix"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.2.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-08-08 14:05:48"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -852,8 +852,8 @@ Registry Key (MS Windows registry key)</p>
 <span class="n">inputs</span><span class="o">.</span><span class="n">bigfix_artifact_value</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">bigfix_artifact_type</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span>
 <span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">properties</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">bigfix_artifact_properties_name</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">bigfix_artifact_properties_value</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">bigfix_artifact_properties_name</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"name"</span><span class="p">]</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">bigfix_artifact_properties_value</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"value"</span><span class="p">]</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">bigfix_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">bigfix_incident_plan_status</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">plan_status</span>
 </pre></div>
@@ -862,29 +862,29 @@ Registry Key (MS Windows registry key)</p>
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;BigFix Integration: Ran query for artifact id </span><span class="si">{}</span><span class="s2"> of type </span><span class="si">{}</span><span class="s2"> and value </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"BigFix Integration: Ran query for artifact id </span><span class="si">{}</span><span class="s2"> of type </span><span class="si">{}</span><span class="s2"> and value </span><span class="si">{}</span><span class="s2">."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">):</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
-  <span class="n">endpoint_hits</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;endpoint_hits&quot;</span><span class="p">)</span>
-  <span class="n">hits_count</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hits_count&quot;</span><span class="p">)</span>
-  <span class="n">query_execution_date</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;query_execution_date&quot;</span><span class="p">)</span>
-  <span class="n">hits_over_limit</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hits_over_limit&quot;</span><span class="p">)</span>
-  <span class="n">att_name</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;att_name&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">):</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
+  <span class="n">endpoint_hits</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"endpoint_hits"</span><span class="p">)</span>
+  <span class="n">hits_count</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hits_count"</span><span class="p">)</span>
+  <span class="n">query_execution_date</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"query_execution_date"</span><span class="p">)</span>
+  <span class="n">hits_over_limit</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hits_over_limit"</span><span class="p">)</span>
+  <span class="n">att_name</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"att_name"</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">hits_over_limit</span><span class="p">:</span>
-    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;There were </span><span class="si">{}</span><span class="s2"> hits found. Added as an attachment. Attachment name: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hits_count</span><span class="p">,</span> <span class="n">att_name</span><span class="p">)</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"There were </span><span class="si">{}</span><span class="s2"> hits found. Added as an attachment. Attachment name: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hits_count</span><span class="p">,</span> <span class="n">att_name</span><span class="p">)</span>
   <span class="k">elif</span> <span class="n">endpoint_hits</span><span class="p">:</span>
-    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;There were </span><span class="si">{}</span><span class="s2"> hits found.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hits_count</span><span class="p">)</span>
+    <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"There were </span><span class="si">{}</span><span class="s2"> hits found."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hits_count</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">eh</span> <span class="ow">in</span> <span class="n">endpoint_hits</span><span class="p">:</span>
-      <span class="n">newrow</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s1">&#39;res_bigfix_query_results&#39;</span><span class="p">)</span>
-      <span class="n">newrow</span><span class="p">[</span><span class="s2">&quot;res_query_execution_date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">query_execution_date</span>
-      <span class="n">newrow</span><span class="p">[</span><span class="s2">&quot;res_remediation_status&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;None&quot;</span>
-      <span class="n">newrow</span><span class="p">[</span><span class="s2">&quot;res_artifact_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span>
-      <span class="n">newrow</span><span class="p">[</span><span class="s2">&quot;res_artifact_value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
-      <span class="n">newrow</span><span class="p">[</span><span class="s2">&quot;res_bigfix_computer_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">eh</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;computer_id&quot;</span><span class="p">)</span>
-      <span class="n">newrow</span><span class="p">[</span><span class="s2">&quot;res_bigfix_computer_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">eh</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;computer_name&quot;</span><span class="p">)</span>
+      <span class="n">newrow</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s1">'res_bigfix_query_results'</span><span class="p">)</span>
+      <span class="n">newrow</span><span class="p">[</span><span class="s2">"res_query_execution_date"</span><span class="p">]</span> <span class="o">=</span> <span class="n">query_execution_date</span>
+      <span class="n">newrow</span><span class="p">[</span><span class="s2">"res_remediation_status"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"None"</span>
+      <span class="n">newrow</span><span class="p">[</span><span class="s2">"res_artifact_type"</span><span class="p">]</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span>
+      <span class="n">newrow</span><span class="p">[</span><span class="s2">"res_artifact_value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
+      <span class="n">newrow</span><span class="p">[</span><span class="s2">"res_bigfix_computer_id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">eh</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"computer_id"</span><span class="p">)</span>
+      <span class="n">newrow</span><span class="p">[</span><span class="s2">"res_bigfix_computer_name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">eh</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"computer_name"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;There were no hits found.&quot;</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"There were no hits found."</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">noteText</span><span class="p">)</span>
 </pre></div>
@@ -939,27 +939,27 @@ Registry Key (MS Windows registry key)</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;att_name&quot;</span><span class="p">:</span> <span class="s2">&quot;bigfix-properties-bigfix.test-20220808.xml&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"att_name"</span><span class="p">:</span> <span class="s2">"bigfix-properties-bigfix.test-20220808.xml"</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"OK"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;bigfix_asset_id&quot;</span><span class="p">:</span> <span class="mi">12315195</span><span class="p">,</span>
-    <span class="s2">&quot;bigfix_asset_name&quot;</span><span class="p">:</span> <span class="s2">&quot;bigfix.test&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;bigfix_incident_id&quot;</span><span class="p">:</span> <span class="mi">2111</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"bigfix_asset_id"</span><span class="p">:</span> <span class="mi">12315195</span><span class="p">,</span>
+    <span class="s2">"bigfix_asset_name"</span><span class="p">:</span> <span class="s2">"bigfix.test"</span><span class="p">,</span>
+    <span class="s2">"bigfix_incident_id"</span><span class="p">:</span> <span class="mi">2111</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1708</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-bigfix&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-08-08 14:06:13&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1708</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-bigfix"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.2.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-08-08 14:06:13"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -976,17 +976,17 @@ Registry Key (MS Windows registry key)</p>
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
-<span class="n">status</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span>
-<span class="n">status_note</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status_note&quot;</span><span class="p">)</span>
-<span class="n">att_name</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;att_name&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
+<span class="n">status</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"status"</span><span class="p">)</span>
+<span class="n">status_note</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"status_note"</span><span class="p">)</span>
+<span class="n">att_name</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"att_name"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="n">status</span> <span class="ow">and</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;OK&quot;</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;BigFix Integration: Ran query for BigFix Asset id &lt;b&gt;&#39;</span><span class="si">{}</span><span class="s2">&#39;&lt;/b&gt; and name &lt;b&gt;&#39;</span><span class="si">{}</span><span class="s2">&#39;&lt;/b&gt;. &quot;</span> \
-             <span class="s2">&quot;Added as an attachment. Attachment name: &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt; &quot;</span>\
+<span class="k">if</span> <span class="n">status</span> <span class="ow">and</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">"OK"</span><span class="p">:</span>
+  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"BigFix Integration: Ran query for BigFix Asset id &lt;b&gt;'</span><span class="si">{}</span><span class="s2">'&lt;/b&gt; and name &lt;b&gt;'</span><span class="si">{}</span><span class="s2">'&lt;/b&gt;. "</span> \
+             <span class="s2">"Added as an attachment. Attachment name: &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt; "</span>\
               <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">res_bigfix_computer_id</span><span class="p">,</span> <span class="n">unicode</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">res_bigfix_computer_name</span><span class="p">),</span> <span class="n">att_name</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;BigFix Integration: Query unsuccessful for BigFix Asset id &lt;b&gt;&#39;</span><span class="si">{}</span><span class="s2">&#39;&lt;/b&gt; and name &lt;b&gt;&#39;</span><span class="si">{}</span><span class="s2">&#39;&lt;/b&gt;.&quot;</span>\
+  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"BigFix Integration: Query unsuccessful for BigFix Asset id &lt;b&gt;'</span><span class="si">{}</span><span class="s2">'&lt;/b&gt; and name &lt;b&gt;'</span><span class="si">{}</span><span class="s2">'&lt;/b&gt;."</span>\
               <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">res_bigfix_computer_id</span><span class="p">,</span> <span class="n">unicode</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">res_bigfix_computer_name</span><span class="p">))</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
@@ -1053,30 +1053,30 @@ Registry Key (MS Windows registry key)</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;action_id&quot;</span><span class="p">:</span> <span class="s2">&quot;48&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;remediation_date&quot;</span><span class="p">:</span> <span class="s2">&quot;08-08-2022 14:06:24&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;OK&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;status_message&quot;</span><span class="p">:</span> <span class="s2">&quot;BigFix action created successfully.&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"action_id"</span><span class="p">:</span> <span class="s2">"48"</span><span class="p">,</span>
+    <span class="s2">"remediation_date"</span><span class="p">:</span> <span class="s2">"08-08-2022 14:06:24"</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"OK"</span><span class="p">,</span>
+    <span class="s2">"status_message"</span><span class="p">:</span> <span class="s2">"BigFix action created successfully."</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;bigfix_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;Process Name&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;bigfix_artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;Run Intel SA-00086 Vulnerability Detection Tool&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;bigfix_asset_id&quot;</span><span class="p">:</span> <span class="mi">12315195</span><span class="p">,</span>
-    <span class="s2">&quot;bigfix_incident_id&quot;</span><span class="p">:</span> <span class="mi">2111</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"bigfix_artifact_type"</span><span class="p">:</span> <span class="s2">"Process Name"</span><span class="p">,</span>
+    <span class="s2">"bigfix_artifact_value"</span><span class="p">:</span> <span class="s2">"Run Intel SA-00086 Vulnerability Detection Tool"</span><span class="p">,</span>
+    <span class="s2">"bigfix_asset_id"</span><span class="p">:</span> <span class="mi">12315195</span><span class="p">,</span>
+    <span class="s2">"bigfix_incident_id"</span><span class="p">:</span> <span class="mi">2111</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">412</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-bigfix&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-08-08 14:06:24&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">412</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-bigfix"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.2.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-08-08 14:06:24"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1094,19 +1094,19 @@ Registry Key (MS Windows registry key)</p>
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
-<span class="n">status</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">)</span>
-<span class="n">action_id</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;action_id&quot;</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">status</span> <span class="ow">and</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;OK&quot;</span><span class="p">:</span>
-  <span class="n">row</span><span class="o">.</span><span class="n">res_remediation_status</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status_message&quot;</span><span class="p">)</span>
-  <span class="n">row</span><span class="o">.</span><span class="n">res_remediation_date</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;remediation_date&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
+<span class="n">status</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"status"</span><span class="p">)</span>
+<span class="n">action_id</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"action_id"</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">status</span> <span class="ow">and</span> <span class="n">status</span> <span class="o">==</span> <span class="s2">"OK"</span><span class="p">:</span>
+  <span class="n">row</span><span class="o">.</span><span class="n">res_remediation_status</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"status_message"</span><span class="p">)</span>
+  <span class="n">row</span><span class="o">.</span><span class="n">res_remediation_date</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"remediation_date"</span><span class="p">)</span>
   <span class="n">row</span><span class="o">.</span><span class="n">res_bigfix_action_id</span> <span class="o">=</span> <span class="n">action_id</span>
-  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Big Fix Integration: Action created successfully to remediate artifact value &lt;b&gt;&#39;</span><span class="si">{}</span><span class="s2">&#39;&lt;/b&gt; &quot;</span> \
-              <span class="s2">&quot;and type &lt;b&gt;&#39;</span><span class="si">{}</span><span class="s2">&#39;&lt;/b&gt; on endpoint &lt;b&gt;&#39;</span><span class="si">{}</span><span class="s2">&#39;&lt;/b&gt;. BigFix Action ID &lt;b&gt;&#39;</span><span class="si">{}</span><span class="s2">&#39;&lt;/b&gt;.&quot;</span>\
+  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Big Fix Integration: Action created successfully to remediate artifact value &lt;b&gt;'</span><span class="si">{}</span><span class="s2">'&lt;/b&gt; "</span> \
+              <span class="s2">"and type &lt;b&gt;'</span><span class="si">{}</span><span class="s2">'&lt;/b&gt; on endpoint &lt;b&gt;'</span><span class="si">{}</span><span class="s2">'&lt;/b&gt;. BigFix Action ID &lt;b&gt;'</span><span class="si">{}</span><span class="s2">'&lt;/b&gt;."</span>\
               <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">res_artifact_value</span><span class="p">),</span> <span class="n">row</span><span class="o">.</span><span class="n">res_artifact_type</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">unicode</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">res_bigfix_computer_name</span><span class="p">),</span> <span class="n">action_id</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Big Fix Integration: Action creation unsuccessful to remediate artifact value &lt;b&gt;&#39;</span><span class="si">{}</span><span class="s2">&#39;&lt;/b&gt; &quot;</span> \
-             <span class="s2">&quot;and type &lt;b&gt;&#39;</span><span class="si">{}</span><span class="s2">&#39;&lt;/b&gt; on endpoint &lt;b&gt;&#39;</span><span class="si">{}</span><span class="s2">&#39;&lt;/b&gt;.&quot;</span>\
+  <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Big Fix Integration: Action creation unsuccessful to remediate artifact value &lt;b&gt;'</span><span class="si">{}</span><span class="s2">'&lt;/b&gt; "</span> \
+             <span class="s2">"and type &lt;b&gt;'</span><span class="si">{}</span><span class="s2">'&lt;/b&gt; on endpoint &lt;b&gt;'</span><span class="si">{}</span><span class="s2">'&lt;/b&gt;."</span>\
             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">res_artifact_value</span><span class="p">),</span> <span class="n">row</span><span class="o">.</span><span class="n">res_artifact_type</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">unicode</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">res_bigfix_computer_name</span><span class="p">))</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 </pre></div>

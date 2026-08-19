@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -493,7 +493,7 @@
 <h2>Post-Process Script:<a class="headerlink" href="#post-process-script" title="Link to this heading">¶</a></h2>
 <p>This example <strong>adds a Note to the Incident.</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;IP Info Analysis ran against input &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt; &lt;br&gt;&lt;br&gt; Hostname : &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt; &lt;br&gt; Country &lt;b&gt;</span><span class="si">{2}</span><span class="s2">&lt;/b&gt; &lt;br&gt; GeoLocation :&lt;b&gt;</span><span class="si">{3}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;ipinfo_query_ip&quot;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">query_result</span><span class="p">[</span><span class="s1">&#39;hostname&#39;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">query_result</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">query_result</span><span class="p">[</span><span class="s1">&#39;loc&#39;</span><span class="p">])</span>
+  <span class="n">noteText</span> <span class="o">=</span> <span class="s2">"""IP Info Analysis ran against input &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt; &lt;br&gt;&lt;br&gt; Hostname : &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt; &lt;br&gt; Country &lt;b&gt;</span><span class="si">{2}</span><span class="s2">&lt;/b&gt; &lt;br&gt; GeoLocation :&lt;b&gt;</span><span class="si">{3}</span><span class="s2">&lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"ipinfo_query_ip"</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">query_result</span><span class="p">[</span><span class="s1">'hostname'</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">query_result</span><span class="p">[</span><span class="s1">'country'</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">query_result</span><span class="p">[</span><span class="s1">'loc'</span><span class="p">])</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -501,23 +501,23 @@
 <section id="output">
 <h2>Output :<a class="headerlink" href="#output" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s1">&#39;inputs&#39;</span><span class="p">:</span>
-        <span class="p">{</span><span class="s1">&#39;ipinfo_query_ip&#39;</span><span class="p">:</span> <span class="s1">&#39;8.8.8.8&#39;</span><span class="p">},</span>
-    <span class="s1">&#39;query_result&#39;</span><span class="p">:</span>
-        <span class="p">{</span><span class="s1">&#39;ip&#39;</span><span class="p">:</span> <span class="s1">&#39;8.8.8.8&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;hostname&#39;</span><span class="p">:</span>
-        <span class="s1">&#39;google-public-dns-a.google.com&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;city&#39;</span><span class="p">:</span> <span class="s1">&#39;Mountain View&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;region&#39;</span><span class="p">:</span> <span class="s1">&#39;California&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;country&#39;</span><span class="p">:</span> <span class="s1">&#39;US&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;loc&#39;</span><span class="p">:</span> <span class="s1">&#39;37.3860,-122.0840&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;postal&#39;</span><span class="p">:</span> <span class="s1">&#39;94035&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;phone&#39;</span><span class="p">:</span> <span class="s1">&#39;650&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;org&#39;</span><span class="p">:</span> <span class="s1">&#39;AS15169 Google LLC&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;country_name&#39;</span><span class="p">:</span> <span class="s1">&#39;United States&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;latitude&#39;</span><span class="p">:</span> <span class="s1">&#39;37.3860&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;longitude&#39;</span><span class="p">:</span> <span class="s1">&#39;-122.0840&#39;</span><span class="p">}</span>
+    <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">'inputs'</span><span class="p">:</span>
+        <span class="p">{</span><span class="s1">'ipinfo_query_ip'</span><span class="p">:</span> <span class="s1">'8.8.8.8'</span><span class="p">},</span>
+    <span class="s1">'query_result'</span><span class="p">:</span>
+        <span class="p">{</span><span class="s1">'ip'</span><span class="p">:</span> <span class="s1">'8.8.8.8'</span><span class="p">,</span>
+        <span class="s1">'hostname'</span><span class="p">:</span>
+        <span class="s1">'google-public-dns-a.google.com'</span><span class="p">,</span>
+        <span class="s1">'city'</span><span class="p">:</span> <span class="s1">'Mountain View'</span><span class="p">,</span>
+        <span class="s1">'region'</span><span class="p">:</span> <span class="s1">'California'</span><span class="p">,</span>
+        <span class="s1">'country'</span><span class="p">:</span> <span class="s1">'US'</span><span class="p">,</span>
+        <span class="s1">'loc'</span><span class="p">:</span> <span class="s1">'37.3860,-122.0840'</span><span class="p">,</span>
+        <span class="s1">'postal'</span><span class="p">:</span> <span class="s1">'94035'</span><span class="p">,</span>
+        <span class="s1">'phone'</span><span class="p">:</span> <span class="s1">'650'</span><span class="p">,</span>
+        <span class="s1">'org'</span><span class="p">:</span> <span class="s1">'AS15169 Google LLC'</span><span class="p">,</span>
+        <span class="s1">'country_name'</span><span class="p">:</span> <span class="s1">'United States'</span><span class="p">,</span>
+        <span class="s1">'latitude'</span><span class="p">:</span> <span class="s1">'37.3860'</span><span class="p">,</span>
+        <span class="s1">'longitude'</span><span class="p">:</span> <span class="s1">'-122.0840'</span><span class="p">}</span>
         <span class="p">}</span>
 
 </pre></div>

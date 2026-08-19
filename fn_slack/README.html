@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -712,7 +712,7 @@ Use the app.config setting: <code class="docutils literal notranslate"><span cla
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;channel&quot;</span><span class="p">:</span> <span class="s2">&quot;testv2&quot;</span>
+  <span class="s2">"channel"</span><span class="p">:</span> <span class="s2">"testv2"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -730,7 +730,7 @@ Use the app.config setting: <code class="docutils literal notranslate"><span cla
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;Slack channel </span><span class="si">{}</span><span class="s2"> has been archived. The conversation history has been saved as an attachment.&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">channel</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""Slack channel </span><span class="si">{}</span><span class="s2"> has been archived. The conversation history has been saved as an attachment."""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">channel</span><span class="p">)</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -820,8 +820,8 @@ Use the app.config setting: <code class="docutils literal notranslate"><span cla
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;channel&quot;</span><span class="p">:</span> <span class="s2">&quot;testingv2&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://ibm-soar-test.slack.com/archives/C03QZGV0YJU/p1658330688241129&quot;</span>
+  <span class="s2">"channel"</span><span class="p">:</span> <span class="s2">"testingv2"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://ibm-soar-test.slack.com/archives/C03QZGV0YJU/p1658330688241129"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -854,7 +854,7 @@ Use the app.config setting: <code class="docutils literal notranslate"><span cla
 
 <span class="c1"># Slack additional text message</span>
 <span class="c1"># Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">slack_text</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rule_slack_text</span> <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rule_slack_text</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">slack_text</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rule_slack_text</span> <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rule_slack_text</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s1">''</span>
 
 <span class="c1"># Slack Channel ID, faster than finding via channel name</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">slack_channel_id</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">slack_channel_id</span> <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">slack_channel_id</span> <span class="k">else</span> <span class="n">inputs</span><span class="o">.</span><span class="n">slack_channel_id</span>
@@ -865,11 +865,11 @@ Use the app.config setting: <code class="docutils literal notranslate"><span cla
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">users</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">users</span> <span class="o">=</span> <span class="s2">""</span>
 <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">user_info</span><span class="p">:</span>
-  <span class="n">users</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+  <span class="n">users</span> <span class="o">+=</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
 <span class="c1"># Create a note</span>
-<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;Artifact Attachment was posted to &lt;a href=&#39;</span><span class="si">{}</span><span class="s2">&#39;&gt;Slack channel #</span><span class="si">{}</span><span class="s2">&lt;/a&gt;. Members of this channel are: </span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">channel</span><span class="p">,</span> <span class="n">users</span><span class="p">)</span>
+<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""Artifact Attachment was posted to &lt;a href='</span><span class="si">{}</span><span class="s2">'&gt;Slack channel #</span><span class="si">{}</span><span class="s2">&lt;/a&gt;. Members of this channel are: </span><span class="se">\n</span><span class="si">{}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">channel</span><span class="p">,</span> <span class="n">users</span><span class="p">)</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -965,8 +965,8 @@ Use the app.config setting: <code class="docutils literal notranslate"><span cla
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;channel&quot;</span><span class="p">:</span> <span class="s2">&quot;testingv2&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://ibm-soar-test.slack.com/archives/C03QZGV0YJU/p1658330751752819&quot;</span>
+  <span class="s2">"channel"</span><span class="p">:</span> <span class="s2">"testingv2"</span><span class="p">,</span>
+  <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://ibm-soar-test.slack.com/archives/C03QZGV0YJU/p1658330751752819"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -980,40 +980,40 @@ Use the app.config setting: <code class="docutils literal notranslate"><span cla
 
 <span class="c1"># Slack additional text message</span>
 <span class="c1"># Additional text message to include with the Incident, Note, Artifact, Attachment or Task data.</span>
-<span class="n">rule_additional_text</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rule_slack_text</span> <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rule_slack_text</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+<span class="n">rule_additional_text</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rule_slack_text</span> <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">rule_slack_text</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s1">''</span>
 
 <span class="c1"># Incident id for the URL</span>
 <span class="n">incident_id_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 
 <span class="c1"># Slack text message in JSON format</span>
 <span class="c1"># ---------------------------------</span>
-<span class="c1"># Do not remove first 3 elements &quot;Additional Text&quot;, &quot;Resilient URL&quot; and &quot;Type of data&quot;,</span>
+<span class="c1"># Do not remove first 3 elements "Additional Text", "Resilient URL" and "Type of data",</span>
 <span class="c1"># the information is used to generate the title of the message.</span>
 <span class="c1">#</span>
 <span class="c1"># Add/remove information using the syntax:</span>
-<span class="c1"># &quot;label&quot;: {{ &quot;type&quot;: &quot;[string|richtext|boolean|datetime&quot;, &quot;data&quot;: &quot;resilient field data&quot; }}</span>
+<span class="c1"># "label": {{ "type": "[string|richtext|boolean|datetime", "data": "resilient field data" }}</span>
 <span class="c1">#</span>
-<span class="c1"># Make sure to send &quot;datetime&quot; types as integers and not strings:</span>
-<span class="c1"># without double quotes: { &quot;type&quot;: &quot;datetime&quot;, &quot;data&quot;: resilient datetime data}</span>
+<span class="c1"># Make sure to send "datetime" types as integers and not strings:</span>
+<span class="c1"># without double quotes: { "type": "datetime", "data": resilient datetime data}</span>
 <span class="c1">#</span>
-<span class="c1"># Text fields like &#39;artifact.value&#39;, or &#39;Slack additional text message&#39; can include double quotes.</span>
-<span class="c1"># Watch out for embedded double quotes in these text fields and escape with field.replace(u&#39;&quot;&#39;, u&#39;\\&quot;&#39;) otherwise json.loads will fail.</span>
-<span class="n">slack_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;{{</span>
-<span class="s2">  &quot;Additional Text&quot;: {{&quot;type&quot;: &quot;string&quot;, &quot;data&quot;: &quot;</span><span class="si">{0}</span><span class="s2">&quot; }},</span>
-<span class="s2">  &quot;Resilient URL&quot;: {{&quot;type&quot;: &quot;incident&quot;, &quot;data&quot;: &quot;</span><span class="si">{1}</span><span class="s2">&quot; }},</span>
-<span class="s2">  &quot;Type of data&quot;: {{&quot;type&quot;: &quot;string&quot;, &quot;data&quot;: &quot;</span><span class="si">{2}</span><span class="s2">&quot; }},</span>
-<span class="s2">  &quot;Incident ID&quot;: {{&quot;type&quot;: &quot;string&quot;, &quot;data&quot;: &quot;</span><span class="si">{3}</span><span class="s2">&quot; }},</span>
-<span class="s2">  &quot;Artifact Type&quot;: {{&quot;type&quot;: &quot;string&quot;, &quot;data&quot;: &quot;</span><span class="si">{4}</span><span class="s2">&quot; }},</span>
-<span class="s2">  &quot;Artifact Value&quot;: {{&quot;type&quot;: &quot;string&quot;, &quot;data&quot;: &quot;</span><span class="si">{5}</span><span class="s2">&quot; }},</span>
-<span class="s2">  &quot;Artifact Created By&quot;: {{&quot;type&quot;: &quot;string&quot;, &quot;data&quot;: &quot;</span><span class="si">{6}</span><span class="s2">&quot; }},</span>
-<span class="s2">  &quot;Artifact Created on&quot;: {{&quot;type&quot;: &quot;datetime&quot;, &quot;data&quot;: </span><span class="si">{7}</span><span class="s2"> }}</span>
-<span class="s2">}}&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-  <span class="n">rule_additional_text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;&#39;</span><span class="p">),</span>
+<span class="c1"># Text fields like 'artifact.value', or 'Slack additional text message' can include double quotes.</span>
+<span class="c1"># Watch out for embedded double quotes in these text fields and escape with field.replace(u'"', u'\\"') otherwise json.loads will fail.</span>
+<span class="n">slack_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""{{</span>
+<span class="s2">  "Additional Text": {{"type": "string", "data": "</span><span class="si">{0}</span><span class="s2">" }},</span>
+<span class="s2">  "Resilient URL": {{"type": "incident", "data": "</span><span class="si">{1}</span><span class="s2">" }},</span>
+<span class="s2">  "Type of data": {{"type": "string", "data": "</span><span class="si">{2}</span><span class="s2">" }},</span>
+<span class="s2">  "Incident ID": {{"type": "string", "data": "</span><span class="si">{3}</span><span class="s2">" }},</span>
+<span class="s2">  "Artifact Type": {{"type": "string", "data": "</span><span class="si">{4}</span><span class="s2">" }},</span>
+<span class="s2">  "Artifact Value": {{"type": "string", "data": "</span><span class="si">{5}</span><span class="s2">" }},</span>
+<span class="s2">  "Artifact Created By": {{"type": "string", "data": "</span><span class="si">{6}</span><span class="s2">" }},</span>
+<span class="s2">  "Artifact Created on": {{"type": "datetime", "data": </span><span class="si">{7}</span><span class="s2"> }}</span>
+<span class="s2">}}"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+  <span class="n">rule_additional_text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">'"'</span><span class="p">,</span> <span class="sa">u</span><span class="s1">'</span><span class="se">\\</span><span class="s1">"'</span><span class="p">),</span>
   <span class="n">incident_id_str</span><span class="p">,</span>
-  <span class="s2">&quot;Artifact&quot;</span><span class="p">,</span>
+  <span class="s2">"Artifact"</span><span class="p">,</span>
   <span class="n">incident_id_str</span><span class="p">,</span>
   <span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="p">,</span>
-  <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;&#39;</span><span class="p">),</span>
+  <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">'"'</span><span class="p">,</span> <span class="sa">u</span><span class="s1">'</span><span class="se">\\</span><span class="s1">"'</span><span class="p">),</span>
   <span class="n">artifact</span><span class="o">.</span><span class="n">creator</span><span class="o">.</span><span class="n">display_name</span><span class="p">,</span>
   <span class="n">artifact</span><span class="o">.</span><span class="n">created</span><span class="p">)</span>
 
@@ -1048,11 +1048,11 @@ Use the app.config setting: <code class="docutils literal notranslate"><span cla
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">users</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">users</span> <span class="o">=</span> <span class="s2">""</span>
 <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">user_info</span><span class="p">:</span>
-  <span class="n">users</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+  <span class="n">users</span> <span class="o">+=</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
 <span class="c1"># Create a note</span>
-<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;Artifact was posted to &lt;a href=&#39;</span><span class="si">{}</span><span class="s2">&#39;&gt;Slack channel #</span><span class="si">{}</span><span class="s2">&lt;/a&gt;. Members of this channel are: </span><span class="se">\n</span><span class="si">{}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">channel</span><span class="p">,</span> <span class="n">users</span><span class="p">)</span>
+<span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""Artifact was posted to &lt;a href='</span><span class="si">{}</span><span class="s2">'&gt;Slack channel #</span><span class="si">{}</span><span class="s2">&lt;/a&gt;. Members of this channel are: </span><span class="se">\n</span><span class="si">{}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">url</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">channel</span><span class="p">,</span> <span class="n">users</span><span class="p">)</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 </pre></div>
 </div>

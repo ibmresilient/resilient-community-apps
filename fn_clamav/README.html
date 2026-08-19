@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -674,7 +674,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># TODO: Copy and paste an example of the Function Output within this code block.</span>
     <span class="c1"># To view the output of a Function, run resilient-circuits in DEBUG mode and invoke the Function.</span>
-    <span class="c1"># The Function results will be printed in the logs: &quot;resilient-circuits run --loglevel=DEBUG&quot;</span>
+    <span class="c1"># The Function results will be printed in the logs: "resilient-circuits run --loglevel=DEBUG"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -694,70 +694,70 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">##  CLAMAV - clamav_scan_stream script ##</span>
 <span class="c1"># Example results:</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd"># Virus found incident attachment</span>
-<span class="sd">Result:    { &quot;inputs&quot;: {&quot;incident_id&quot;: 2095, &quot;attachment_id&quot;: 3, &quot;artifact_id&quot;: null, &quot;task_id&quot;: null},</span>
-<span class="sd">             &quot;response&quot;: {&quot;stream&quot;: [&quot;FOUND&quot;, &quot;Eicar-Test-Signature&quot;]},</span>
-<span class="sd">             &quot;file_name&quot;: &quot;eicar.txt&quot;</span>
+<span class="sd">Result:    { "inputs": {"incident_id": 2095, "attachment_id": 3, "artifact_id": null, "task_id": null},</span>
+<span class="sd">             "response": {"stream": ["FOUND", "Eicar-Test-Signature"]},</span>
+<span class="sd">             "file_name": "eicar.txt"</span>
 <span class="sd">}</span>
 <span class="sd"># Virus found task attachment</span>
-<span class="sd">Result:    { &quot;inputs&quot;: {&quot;incident_id&quot;: 2095, &quot;attachment_id&quot;: 25, &quot;artifact_id&quot;: null, &quot;task_id&quot;: 2251251},</span>
-<span class="sd">             &quot;response&quot;: {&quot;stream&quot;: [&quot;FOUND&quot;, &quot;Eicar-Test-Signature&quot;]},</span>
-<span class="sd">             &quot;file_name&quot;: &quot;eicar.txt&quot;</span>
+<span class="sd">Result:    { "inputs": {"incident_id": 2095, "attachment_id": 25, "artifact_id": null, "task_id": 2251251},</span>
+<span class="sd">             "response": {"stream": ["FOUND", "Eicar-Test-Signature"]},</span>
+<span class="sd">             "file_name": "eicar.txt"</span>
 <span class="sd">}</span>
 
 <span class="sd"># Virus found artifact attachment</span>
-<span class="sd">Result:    { &quot;inputs&quot;: {&quot;incident_id&quot;: 2095, &quot;attachment_id&quot;: null, &quot;artifact_id&quot;: 10, &quot;task_id&quot;: null},</span>
-<span class="sd">             &quot;response&quot;: {&quot;stream&quot;: [&quot;FOUND&quot;, &quot;Eicar-Test-Signature&quot;]},</span>
-<span class="sd">             &quot;file_name&quot;: &quot;eicar.txt&quot;</span>
+<span class="sd">Result:    { "inputs": {"incident_id": 2095, "attachment_id": null, "artifact_id": 10, "task_id": null},</span>
+<span class="sd">             "response": {"stream": ["FOUND", "Eicar-Test-Signature"]},</span>
+<span class="sd">             "file_name": "eicar.txt"</span>
 <span class="sd">}</span>
 <span class="sd"># No malware or  detected</span>
-<span class="sd">Result:    { &quot;inputs&quot;: {&quot;incident_id&quot;: 2095, &quot;attachment_id&quot;: 3, &quot;artifact_id&quot;: null, &quot;task_id&quot;: null}</span>
-<span class="sd">             &quot;response&quot;: {&quot;stream&quot;: [&quot;OK&quot;, &#39;&#39;]},</span>
-<span class="sd">             &quot;file_name&quot;: &quot;test.txt&quot;,</span>
+<span class="sd">Result:    { "inputs": {"incident_id": 2095, "attachment_id": 3, "artifact_id": null, "task_id": null}</span>
+<span class="sd">             "response": {"stream": ["OK", '']},</span>
+<span class="sd">             "file_name": "test.txt",</span>
 <span class="sd">           }</span>
 
 <span class="sd"># Got an error</span>
-<span class="sd">Result:    { &quot;inputs&quot;: {&quot;incident_id&quot;: 2095, &quot;attachment_id&quot;: 3, &quot;artifact_id&quot;: null, &quot;task_id&quot;: null</span>
-<span class="sd">             &quot;response&quot;: {&quot;stream&quot;: [&quot;ERROR&quot;, &#39;&lt;reason&gt;&#39;]},</span>
-<span class="sd">             &quot;file_name&quot;: &quot;test.txt&quot;,</span>
+<span class="sd">Result:    { "inputs": {"incident_id": 2095, "attachment_id": 3, "artifact_id": null, "task_id": null</span>
+<span class="sd">             "response": {"stream": ["ERROR", '&lt;reason&gt;']},</span>
+<span class="sd">             "file_name": "test.txt",</span>
 <span class="sd">           }</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="c1"># Processing</span>
 
-<span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;#45bc27&quot;</span>
+<span class="n">color</span> <span class="o">=</span> <span class="s2">"#45bc27"</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">response</span>
 <span class="n">file_name</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">file_name</span>
 <span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span>
 
-<span class="k">if</span> <span class="n">response</span> <span class="ow">and</span> <span class="n">response</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;ERROR&quot;</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;FOUND&quot;</span><span class="p">:</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;#ff402b&quot;</span>
+<span class="k">if</span> <span class="n">response</span> <span class="ow">and</span> <span class="n">response</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">"ERROR"</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"FOUND"</span><span class="p">:</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s2">"#ff402b"</span>
 
     <span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="ow">and</span> <span class="n">inputs</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">:</span>
-        <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;ClamAV scan complete</span>
-<span class="s2">                        &lt;br&gt;&lt;b&gt;Incident ID:&lt;/b&gt;&lt;/br&gt; &#39;</span><span class="si">{0}</span><span class="s2">&#39;</span>
-<span class="s2">                        &lt;br&gt;&lt;b&gt;Artifact ID:&lt;/b&gt;&lt;/br&gt; &#39;</span><span class="si">{1}</span><span class="s2">&#39;</span>
-<span class="s2">                        &lt;br&gt;&lt;b&gt;Attachment Name:&lt;/b&gt;&lt;/br&gt; &#39;</span><span class="si">{2}</span><span class="s2">&#39;</span>
-<span class="s2">                        &lt;br&gt;&lt;b&gt;Scan Status:&lt;/b&gt; &lt;b style=&quot;color: </span><span class="si">{3}</span><span class="s2">&quot;&gt;</span><span class="si">{4}</span><span class="s2">&lt;/b&gt;&lt;/br&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span><span class="p">,</span>
+        <span class="n">noteText</span> <span class="o">=</span> <span class="s2">"""&lt;br&gt;ClamAV scan complete</span>
+<span class="s2">                        &lt;br&gt;&lt;b&gt;Incident ID:&lt;/b&gt;&lt;/br&gt; '</span><span class="si">{0}</span><span class="s2">'</span>
+<span class="s2">                        &lt;br&gt;&lt;b&gt;Artifact ID:&lt;/b&gt;&lt;/br&gt; '</span><span class="si">{1}</span><span class="s2">'</span>
+<span class="s2">                        &lt;br&gt;&lt;b&gt;Attachment Name:&lt;/b&gt;&lt;/br&gt; '</span><span class="si">{2}</span><span class="s2">'</span>
+<span class="s2">                        &lt;br&gt;&lt;b&gt;Scan Status:&lt;/b&gt; &lt;b style="color: </span><span class="si">{3}</span><span class="s2">"&gt;</span><span class="si">{4}</span><span class="s2">&lt;/b&gt;&lt;/br&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span><span class="p">,</span>
                                                                                     <span class="n">inputs</span><span class="o">.</span><span class="n">artifact_id</span><span class="p">,</span>
                                                                                     <span class="n">file_name</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">elif</span> <span class="n">inputs</span><span class="o">.</span><span class="n">attachment_id</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">task_id</span><span class="p">:</span>
-            <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;ClamAV scan complete</span>
-<span class="s2">                          &lt;br&gt;&lt;b&gt;Task ID:&lt;/b&gt;&lt;/br&gt; &#39;</span><span class="si">{0}</span><span class="s2">&#39;</span>
-<span class="s2">                          &lt;br&gt;&lt;b&gt;Attachment ID:&lt;/b&gt;&lt;/br&gt; &#39;</span><span class="si">{1}</span><span class="s2">&#39;</span>
-<span class="s2">                          &lt;br&gt;&lt;b&gt;Attachment Name:&lt;/b&gt;&lt;/br&gt; &#39;</span><span class="si">{2}</span><span class="s2">&#39;</span>
-<span class="s2">                          &lt;br&gt;&lt;b&gt;Scan Status:&lt;/b&gt; &lt;b style=&quot;color: </span><span class="si">{3}</span><span class="s2">&quot;&gt;</span><span class="si">{4}</span><span class="s2">&lt;/b&gt;&lt;/br&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">task_id</span><span class="p">,</span>
+            <span class="n">noteText</span> <span class="o">=</span> <span class="s2">"""&lt;br&gt;ClamAV scan complete</span>
+<span class="s2">                          &lt;br&gt;&lt;b&gt;Task ID:&lt;/b&gt;&lt;/br&gt; '</span><span class="si">{0}</span><span class="s2">'</span>
+<span class="s2">                          &lt;br&gt;&lt;b&gt;Attachment ID:&lt;/b&gt;&lt;/br&gt; '</span><span class="si">{1}</span><span class="s2">'</span>
+<span class="s2">                          &lt;br&gt;&lt;b&gt;Attachment Name:&lt;/b&gt;&lt;/br&gt; '</span><span class="si">{2}</span><span class="s2">'</span>
+<span class="s2">                          &lt;br&gt;&lt;b&gt;Scan Status:&lt;/b&gt; &lt;b style="color: </span><span class="si">{3}</span><span class="s2">"&gt;</span><span class="si">{4}</span><span class="s2">&lt;/b&gt;&lt;/br&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">task_id</span><span class="p">,</span>
                                                                                       <span class="n">inputs</span><span class="o">.</span><span class="n">attachment_id</span><span class="p">,</span>
                                                                                       <span class="n">file_name</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">elif</span> <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span><span class="p">:</span>
-            <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;ClamAV scan complete</span>
-<span class="s2">                          &lt;br&gt;&lt;b&gt;Incident ID:&lt;/b&gt;&lt;/br&gt; &#39;</span><span class="si">{0}</span><span class="s2">&#39;</span>
-<span class="s2">                          &lt;br&gt;&lt;b&gt;Attachment ID:&lt;/b&gt;&lt;/br&gt;&#39;</span><span class="si">{1}</span><span class="s2">&#39;</span>
-<span class="s2">                          &lt;br&gt;&lt;b&gt;Attachment Name:&lt;/b&gt;&lt;/br&gt; &#39;</span><span class="si">{2}</span><span class="s2">&#39;</span>
-<span class="s2">                          &lt;br&gt;&lt;b&gt;Scan Status:&lt;/b&gt; &lt;b style=&quot;color: </span><span class="si">{3}</span><span class="s2">&quot;&gt;</span><span class="si">{4}</span><span class="s2">&lt;/b&gt;&lt;/br&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span><span class="p">,</span>
+            <span class="n">noteText</span> <span class="o">=</span> <span class="s2">"""&lt;br&gt;ClamAV scan complete</span>
+<span class="s2">                          &lt;br&gt;&lt;b&gt;Incident ID:&lt;/b&gt;&lt;/br&gt; '</span><span class="si">{0}</span><span class="s2">'</span>
+<span class="s2">                          &lt;br&gt;&lt;b&gt;Attachment ID:&lt;/b&gt;&lt;/br&gt;'</span><span class="si">{1}</span><span class="s2">'</span>
+<span class="s2">                          &lt;br&gt;&lt;b&gt;Attachment Name:&lt;/b&gt;&lt;/br&gt; '</span><span class="si">{2}</span><span class="s2">'</span>
+<span class="s2">                          &lt;br&gt;&lt;b&gt;Scan Status:&lt;/b&gt; &lt;b style="color: </span><span class="si">{3}</span><span class="s2">"&gt;</span><span class="si">{4}</span><span class="s2">&lt;/b&gt;&lt;/br&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span><span class="p">,</span>
                                                                                       <span class="n">inputs</span><span class="o">.</span><span class="n">attachment_id</span><span class="p">,</span>
                                                                                       <span class="n">file_name</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">stream</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">if</span> <span class="n">inputs</span><span class="o">.</span><span class="n">task_id</span><span class="p">:</span>

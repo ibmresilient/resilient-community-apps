@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -752,24 +752,24 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">3661</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">3661</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">3326</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-symantec-dlp&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-04-01 14:47:41&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">3326</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-symantec-dlp"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-04-01 14:47:41"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -826,27 +826,27 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;new_notes&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">From Symantec DLP (2022-03-27T12:37:33)</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">User: Administrator</span><span class="se">\n</span><span class="s2">Note detail: </span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">My note written in SOAR</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"new_notes"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"</span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">From Symantec DLP (2022-03-27T12:37:33)</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">User: Administrator</span><span class="se">\n</span><span class="s2">Note detail: </span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">My note written in SOAR</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">"</span>
     <span class="p">],</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">3595</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">3595</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">45486</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-symantec-dlp&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-03-28 13:38:15&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">45486</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-symantec-dlp"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-03-28 13:38:15"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -902,285 +902,285 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;editableIncidentDetails&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;customAttributeGroups&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"editableIncidentDetails"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"customAttributeGroups"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;customAttributes&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"customAttributes"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ibm_soar_case_url&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;https://mysoar.com:443/#incidents/3449&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"ibm_soar_case_url"</span><span class="p">,</span>
+              <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"https://mysoar.com:443/#incidents/3449"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ibm_soar_case_id&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;3449&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"ibm_soar_case_id"</span><span class="p">,</span>
+              <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"3449"</span>
             <span class="p">}</span>
           <span class="p">],</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;custom_attribute_group.default&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;nameInternationalized&quot;</span><span class="p">:</span> <span class="n">true</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"custom_attribute_group.default"</span><span class="p">,</span>
+          <span class="s2">"nameInternationalized"</span><span class="p">:</span> <span class="n">true</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;customAttributes&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"customAttributes"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Resolution&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;Business Issue&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Resolution"</span><span class="p">,</span>
+              <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"Business Issue"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Dismissal Reason&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;Bus. Process Issue&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Dismissal Reason"</span><span class="p">,</span>
+              <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"Bus. Process Issue"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Assigned To&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Assigned To"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Business Unit&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Business Unit"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Employee Code&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Employee Code"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;First Name&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"First Name"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Last Name&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Last Name"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Phone&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Phone"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Sender Email&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Sender Email"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Manager First Name&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Manager First Name"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Manager Last Name&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Manager Last Name"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Manager Phone&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Manager Phone"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Manager Email&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Manager Email"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Region&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Region"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Country&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Country"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;displayOrder&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
-              <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-              <span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Postal Code&quot;</span>
+              <span class="s2">"displayOrder"</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+              <span class="s2">"email"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+              <span class="s2">"index"</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Postal Code"</span>
             <span class="p">}</span>
           <span class="p">],</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Predefined&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;nameInternationalized&quot;</span><span class="p">:</span> <span class="n">false</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Predefined"</span><span class="p">,</span>
+          <span class="s2">"nameInternationalized"</span><span class="p">:</span> <span class="n">false</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;incidentId&quot;</span><span class="p">:</span> <span class="mi">468</span><span class="p">,</span>
-      <span class="s2">&quot;infoMap&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;detectedRemediationStatus&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;incidentStatusId&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="s2">&quot;incidentStatusName&quot;</span><span class="p">:</span> <span class="s2">&quot;Resolved&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;isHidden&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;isHidingNotAllowed&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;preventOrProtectStatusId&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;severityId&quot;</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="s2">"incidentId"</span><span class="p">:</span> <span class="mi">468</span><span class="p">,</span>
+      <span class="s2">"infoMap"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"detectedRemediationStatus"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"incidentStatusId"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"incidentStatusName"</span><span class="p">:</span> <span class="s2">"Resolved"</span><span class="p">,</span>
+        <span class="s2">"isHidden"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"isHidingNotAllowed"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"preventOrProtectStatusId"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"severityId"</span><span class="p">:</span> <span class="mi">1</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="s2">&quot;notes&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">From Symantec DLP</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">User: </span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">Administrator added note at 2022-02-07T16:23:50.32</span><span class="se">\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">Note detail</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">: </span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">added a note 2/7/2022 4:23pm</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e\n</span><span class="s2">                        &quot;</span><span class="p">,</span>
-      <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">From Symantec DLP</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">User: </span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">Administrator added note at 2022-02-08T08:31:12.158</span><span class="se">\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">Note detail</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">: </span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">added a second note 2/7/2022</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e\n</span><span class="s2">                        &quot;</span><span class="p">,</span>
-      <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">From Symantec DLP</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">User: </span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">Administrator added note at 2022-02-10T20:49:58.47</span><span class="se">\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">Note detail</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">: </span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">added note to SOAR and will send it to DLP</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e\n</span><span class="s2">                        &quot;</span><span class="p">,</span>
-      <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">From Symantec DLP</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">User: </span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">Administrator added note at 2022-02-10T20:49:58.47</span><span class="se">\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">Note detail</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">: </span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">added note to SOAR and will send it to DLP</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e\n</span><span class="s2">                        &quot;</span>
+    <span class="s2">"notes"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"</span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">From Symantec DLP</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">User: </span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">Administrator added note at 2022-02-07T16:23:50.32</span><span class="se">\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">Note detail</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">: </span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">added a note 2/7/2022 4:23pm</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e\n</span><span class="s2">                        "</span><span class="p">,</span>
+      <span class="s2">"</span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">From Symantec DLP</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">User: </span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">Administrator added note at 2022-02-08T08:31:12.158</span><span class="se">\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">Note detail</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">: </span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">added a second note 2/7/2022</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e\n</span><span class="s2">                        "</span><span class="p">,</span>
+      <span class="s2">"</span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">From Symantec DLP</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">User: </span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">Administrator added note at 2022-02-10T20:49:58.47</span><span class="se">\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">Note detail</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">: </span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">added note to SOAR and will send it to DLP</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e\n</span><span class="s2">                        "</span><span class="p">,</span>
+      <span class="s2">"</span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">From Symantec DLP</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">User: </span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">Administrator added note at 2022-02-10T20:49:58.47</span><span class="se">\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">br</span><span class="se">\u003e\n</span><span class="s2">                        </span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">Note detail</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e</span><span class="s2">: </span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">added note to SOAR and will send it to DLP</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e\n</span><span class="s2">                        "</span>
     <span class="p">],</span>
-    <span class="s2">&quot;sdlp_incident_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://my-IP/ProtectManager/IncidentDetail.do?value(variable_1)=incident.id</span><span class="se">\u0026</span><span class="s2">value(operator_1)=incident.id_in</span><span class="se">\u0026</span><span class="s2">value(operand_1)=468&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;staticIncidentDetails&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;incidentId&quot;</span><span class="p">:</span> <span class="mi">468</span><span class="p">,</span>
-      <span class="s2">&quot;infoMap&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;attachmentInfo&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"sdlp_incident_url"</span><span class="p">:</span> <span class="s2">"https://my-IP/ProtectManager/IncidentDetail.do?value(variable_1)=incident.id</span><span class="se">\u0026</span><span class="s2">value(operator_1)=incident.id_in</span><span class="se">\u0026</span><span class="s2">value(operand_1)=468"</span><span class="p">,</span>
+    <span class="s2">"staticIncidentDetails"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"incidentId"</span><span class="p">:</span> <span class="mi">468</span><span class="p">,</span>
+      <span class="s2">"infoMap"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"attachmentInfo"</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="s2">&quot;documentFormat&quot;</span><span class="p">:</span> <span class="s2">&quot;unicode&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;messageComponentId&quot;</span><span class="p">:</span> <span class="mi">981</span><span class="p">,</span>
-            <span class="s2">&quot;messageComponentName&quot;</span><span class="p">:</span> <span class="s2">&quot;c:</span><span class="se">\\</span><span class="s2">passwordpolicy.ini&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;messageComponentType&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-            <span class="s2">&quot;originalSize&quot;</span><span class="p">:</span> <span class="mi">16482</span><span class="p">,</span>
-            <span class="s2">&quot;wasCracked&quot;</span><span class="p">:</span> <span class="n">false</span>
+            <span class="s2">"documentFormat"</span><span class="p">:</span> <span class="s2">"unicode"</span><span class="p">,</span>
+            <span class="s2">"messageComponentId"</span><span class="p">:</span> <span class="mi">981</span><span class="p">,</span>
+            <span class="s2">"messageComponentName"</span><span class="p">:</span> <span class="s2">"c:</span><span class="se">\\</span><span class="s2">passwordpolicy.ini"</span><span class="p">,</span>
+            <span class="s2">"messageComponentType"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s2">"originalSize"</span><span class="p">:</span> <span class="mi">16482</span><span class="p">,</span>
+            <span class="s2">"wasCracked"</span><span class="p">:</span> <span class="n">false</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="s2">&quot;creationDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-02-04T16:08:48.678&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;detectionDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-02-04T16:08:43.08&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;detectionServerId&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;detectionServerName&quot;</span><span class="p">:</span> <span class="s2">&quot;Single-tier Detection Server&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;discoverContentRootPath&quot;</span><span class="p">:</span> <span class="s2">&quot;DLP-WINDOWS10-8&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;discoverMillisSinceFirstSeen&quot;</span><span class="p">:</span> <span class="mi">165799618</span><span class="p">,</span>
-        <span class="s2">&quot;discoverName&quot;</span><span class="p">:</span> <span class="s2">&quot;passwordpolicy.ini&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;discoverRepositoryLocation&quot;</span><span class="p">:</span> <span class="s2">&quot;DLP-WINDOWS10-8 - c:</span><span class="se">\\</span><span class="s2">passwordpolicy.ini&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;discoverScanId&quot;</span><span class="p">:</span> <span class="mi">41</span><span class="p">,</span>
-        <span class="s2">&quot;discoverScanStartDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-02-04T15:39:28&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;discoverServer&quot;</span><span class="p">:</span> <span class="s2">&quot;DLP-WINDOWS10-8&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;discoverTargetId&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
-        <span class="s2">&quot;discoverTargetName&quot;</span><span class="p">:</span> <span class="s2">&quot;SS number on 9.30.94.38&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;discoverUrl&quot;</span><span class="p">:</span> <span class="s2">&quot;DLP-WINDOWS10-8 - c:</span><span class="se">\\</span><span class="s2">passwordpolicy.ini&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;endpointConnectionStatus&quot;</span><span class="p">:</span> <span class="s2">&quot;CONNECTED&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;fileAccessDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-02-04T16:01:06.431&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;fileCreateDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-02-12T09:50:16.39&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;fileOwner&quot;</span><span class="p">:</span> <span class="s2">&quot;BUILTIN</span><span class="se">\\</span><span class="s2">administrators&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;isBlockedStatusSuperseded&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;matchCount&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="s2">&quot;messageAclEntries&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"creationDate"</span><span class="p">:</span> <span class="s2">"2022-02-04T16:08:48.678"</span><span class="p">,</span>
+        <span class="s2">"detectionDate"</span><span class="p">:</span> <span class="s2">"2022-02-04T16:08:43.08"</span><span class="p">,</span>
+        <span class="s2">"detectionServerId"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"detectionServerName"</span><span class="p">:</span> <span class="s2">"Single-tier Detection Server"</span><span class="p">,</span>
+        <span class="s2">"discoverContentRootPath"</span><span class="p">:</span> <span class="s2">"DLP-WINDOWS10-8"</span><span class="p">,</span>
+        <span class="s2">"discoverMillisSinceFirstSeen"</span><span class="p">:</span> <span class="mi">165799618</span><span class="p">,</span>
+        <span class="s2">"discoverName"</span><span class="p">:</span> <span class="s2">"passwordpolicy.ini"</span><span class="p">,</span>
+        <span class="s2">"discoverRepositoryLocation"</span><span class="p">:</span> <span class="s2">"DLP-WINDOWS10-8 - c:</span><span class="se">\\</span><span class="s2">passwordpolicy.ini"</span><span class="p">,</span>
+        <span class="s2">"discoverScanId"</span><span class="p">:</span> <span class="mi">41</span><span class="p">,</span>
+        <span class="s2">"discoverScanStartDate"</span><span class="p">:</span> <span class="s2">"2022-02-04T15:39:28"</span><span class="p">,</span>
+        <span class="s2">"discoverServer"</span><span class="p">:</span> <span class="s2">"DLP-WINDOWS10-8"</span><span class="p">,</span>
+        <span class="s2">"discoverTargetId"</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
+        <span class="s2">"discoverTargetName"</span><span class="p">:</span> <span class="s2">"SS number on 9.30.94.38"</span><span class="p">,</span>
+        <span class="s2">"discoverUrl"</span><span class="p">:</span> <span class="s2">"DLP-WINDOWS10-8 - c:</span><span class="se">\\</span><span class="s2">passwordpolicy.ini"</span><span class="p">,</span>
+        <span class="s2">"endpointConnectionStatus"</span><span class="p">:</span> <span class="s2">"CONNECTED"</span><span class="p">,</span>
+        <span class="s2">"fileAccessDate"</span><span class="p">:</span> <span class="s2">"2022-02-04T16:01:06.431"</span><span class="p">,</span>
+        <span class="s2">"fileCreateDate"</span><span class="p">:</span> <span class="s2">"2021-02-12T09:50:16.39"</span><span class="p">,</span>
+        <span class="s2">"fileOwner"</span><span class="p">:</span> <span class="s2">"BUILTIN</span><span class="se">\\</span><span class="s2">administrators"</span><span class="p">,</span>
+        <span class="s2">"isBlockedStatusSuperseded"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"matchCount"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">"messageAclEntries"</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="s2">&quot;aclType&quot;</span><span class="p">:</span> <span class="s2">&quot;FILE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;cloudStorageCollaborator&quot;</span><span class="p">:</span> <span class="s2">&quot;BUILTIN</span><span class="se">\\</span><span class="s2">administrators&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;cloudstorageRole&quot;</span><span class="p">:</span> <span class="s2">&quot;WRITE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;grantDeny&quot;</span><span class="p">:</span> <span class="s2">&quot;GRANT&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readACLFile&quot;</span><span class="p">:</span> <span class="s2">&quot;BUILTIN</span><span class="se">\\</span><span class="s2">administrators&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readACLShare&quot;</span><span class="p">:</span> <span class="s2">&quot;BUILTIN</span><span class="se">\\</span><span class="s2">administrators&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sharePointACL&quot;</span><span class="p">:</span> <span class="s2">&quot;BUILTIN</span><span class="se">\\</span><span class="s2">administrators&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sharepointPermission&quot;</span><span class="p">:</span> <span class="s2">&quot;WRITE&quot;</span>
+            <span class="s2">"aclType"</span><span class="p">:</span> <span class="s2">"FILE"</span><span class="p">,</span>
+            <span class="s2">"cloudStorageCollaborator"</span><span class="p">:</span> <span class="s2">"BUILTIN</span><span class="se">\\</span><span class="s2">administrators"</span><span class="p">,</span>
+            <span class="s2">"cloudstorageRole"</span><span class="p">:</span> <span class="s2">"WRITE"</span><span class="p">,</span>
+            <span class="s2">"grantDeny"</span><span class="p">:</span> <span class="s2">"GRANT"</span><span class="p">,</span>
+            <span class="s2">"readACLFile"</span><span class="p">:</span> <span class="s2">"BUILTIN</span><span class="se">\\</span><span class="s2">administrators"</span><span class="p">,</span>
+            <span class="s2">"readACLShare"</span><span class="p">:</span> <span class="s2">"BUILTIN</span><span class="se">\\</span><span class="s2">administrators"</span><span class="p">,</span>
+            <span class="s2">"sharePointACL"</span><span class="p">:</span> <span class="s2">"BUILTIN</span><span class="se">\\</span><span class="s2">administrators"</span><span class="p">,</span>
+            <span class="s2">"sharepointPermission"</span><span class="p">:</span> <span class="s2">"WRITE"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;aclType&quot;</span><span class="p">:</span> <span class="s2">&quot;FILE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;cloudStorageCollaborator&quot;</span><span class="p">:</span> <span class="s2">&quot;BUILTIN</span><span class="se">\\</span><span class="s2">administrators&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;cloudstorageRole&quot;</span><span class="p">:</span> <span class="s2">&quot;READ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;grantDeny&quot;</span><span class="p">:</span> <span class="s2">&quot;GRANT&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readACLFile&quot;</span><span class="p">:</span> <span class="s2">&quot;BUILTIN</span><span class="se">\\</span><span class="s2">administrators&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readACLShare&quot;</span><span class="p">:</span> <span class="s2">&quot;BUILTIN</span><span class="se">\\</span><span class="s2">administrators&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sharePointACL&quot;</span><span class="p">:</span> <span class="s2">&quot;BUILTIN</span><span class="se">\\</span><span class="s2">administrators&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sharepointPermission&quot;</span><span class="p">:</span> <span class="s2">&quot;READ&quot;</span>
+            <span class="s2">"aclType"</span><span class="p">:</span> <span class="s2">"FILE"</span><span class="p">,</span>
+            <span class="s2">"cloudStorageCollaborator"</span><span class="p">:</span> <span class="s2">"BUILTIN</span><span class="se">\\</span><span class="s2">administrators"</span><span class="p">,</span>
+            <span class="s2">"cloudstorageRole"</span><span class="p">:</span> <span class="s2">"READ"</span><span class="p">,</span>
+            <span class="s2">"grantDeny"</span><span class="p">:</span> <span class="s2">"GRANT"</span><span class="p">,</span>
+            <span class="s2">"readACLFile"</span><span class="p">:</span> <span class="s2">"BUILTIN</span><span class="se">\\</span><span class="s2">administrators"</span><span class="p">,</span>
+            <span class="s2">"readACLShare"</span><span class="p">:</span> <span class="s2">"BUILTIN</span><span class="se">\\</span><span class="s2">administrators"</span><span class="p">,</span>
+            <span class="s2">"sharePointACL"</span><span class="p">:</span> <span class="s2">"BUILTIN</span><span class="se">\\</span><span class="s2">administrators"</span><span class="p">,</span>
+            <span class="s2">"sharepointPermission"</span><span class="p">:</span> <span class="s2">"READ"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;aclType&quot;</span><span class="p">:</span> <span class="s2">&quot;FILE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;cloudStorageCollaborator&quot;</span><span class="p">:</span> <span class="s2">&quot;NT AUTHORITY</span><span class="se">\\</span><span class="s2">system&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;cloudstorageRole&quot;</span><span class="p">:</span> <span class="s2">&quot;WRITE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;grantDeny&quot;</span><span class="p">:</span> <span class="s2">&quot;GRANT&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readACLFile&quot;</span><span class="p">:</span> <span class="s2">&quot;NT AUTHORITY</span><span class="se">\\</span><span class="s2">system&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readACLShare&quot;</span><span class="p">:</span> <span class="s2">&quot;NT AUTHORITY</span><span class="se">\\</span><span class="s2">system&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sharePointACL&quot;</span><span class="p">:</span> <span class="s2">&quot;NT AUTHORITY</span><span class="se">\\</span><span class="s2">system&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sharepointPermission&quot;</span><span class="p">:</span> <span class="s2">&quot;WRITE&quot;</span>
+            <span class="s2">"aclType"</span><span class="p">:</span> <span class="s2">"FILE"</span><span class="p">,</span>
+            <span class="s2">"cloudStorageCollaborator"</span><span class="p">:</span> <span class="s2">"NT AUTHORITY</span><span class="se">\\</span><span class="s2">system"</span><span class="p">,</span>
+            <span class="s2">"cloudstorageRole"</span><span class="p">:</span> <span class="s2">"WRITE"</span><span class="p">,</span>
+            <span class="s2">"grantDeny"</span><span class="p">:</span> <span class="s2">"GRANT"</span><span class="p">,</span>
+            <span class="s2">"readACLFile"</span><span class="p">:</span> <span class="s2">"NT AUTHORITY</span><span class="se">\\</span><span class="s2">system"</span><span class="p">,</span>
+            <span class="s2">"readACLShare"</span><span class="p">:</span> <span class="s2">"NT AUTHORITY</span><span class="se">\\</span><span class="s2">system"</span><span class="p">,</span>
+            <span class="s2">"sharePointACL"</span><span class="p">:</span> <span class="s2">"NT AUTHORITY</span><span class="se">\\</span><span class="s2">system"</span><span class="p">,</span>
+            <span class="s2">"sharepointPermission"</span><span class="p">:</span> <span class="s2">"WRITE"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;aclType&quot;</span><span class="p">:</span> <span class="s2">&quot;FILE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;cloudStorageCollaborator&quot;</span><span class="p">:</span> <span class="s2">&quot;NT AUTHORITY</span><span class="se">\\</span><span class="s2">system&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;cloudstorageRole&quot;</span><span class="p">:</span> <span class="s2">&quot;READ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;grantDeny&quot;</span><span class="p">:</span> <span class="s2">&quot;GRANT&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readACLFile&quot;</span><span class="p">:</span> <span class="s2">&quot;NT AUTHORITY</span><span class="se">\\</span><span class="s2">system&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readACLShare&quot;</span><span class="p">:</span> <span class="s2">&quot;NT AUTHORITY</span><span class="se">\\</span><span class="s2">system&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sharePointACL&quot;</span><span class="p">:</span> <span class="s2">&quot;NT AUTHORITY</span><span class="se">\\</span><span class="s2">system&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sharepointPermission&quot;</span><span class="p">:</span> <span class="s2">&quot;READ&quot;</span>
+            <span class="s2">"aclType"</span><span class="p">:</span> <span class="s2">"FILE"</span><span class="p">,</span>
+            <span class="s2">"cloudStorageCollaborator"</span><span class="p">:</span> <span class="s2">"NT AUTHORITY</span><span class="se">\\</span><span class="s2">system"</span><span class="p">,</span>
+            <span class="s2">"cloudstorageRole"</span><span class="p">:</span> <span class="s2">"READ"</span><span class="p">,</span>
+            <span class="s2">"grantDeny"</span><span class="p">:</span> <span class="s2">"GRANT"</span><span class="p">,</span>
+            <span class="s2">"readACLFile"</span><span class="p">:</span> <span class="s2">"NT AUTHORITY</span><span class="se">\\</span><span class="s2">system"</span><span class="p">,</span>
+            <span class="s2">"readACLShare"</span><span class="p">:</span> <span class="s2">"NT AUTHORITY</span><span class="se">\\</span><span class="s2">system"</span><span class="p">,</span>
+            <span class="s2">"sharePointACL"</span><span class="p">:</span> <span class="s2">"NT AUTHORITY</span><span class="se">\\</span><span class="s2">system"</span><span class="p">,</span>
+            <span class="s2">"sharepointPermission"</span><span class="p">:</span> <span class="s2">"READ"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;aclType&quot;</span><span class="p">:</span> <span class="s2">&quot;FILE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;cloudStorageCollaborator&quot;</span><span class="p">:</span> <span class="s2">&quot;BUILTIN</span><span class="se">\\</span><span class="s2">users&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;cloudstorageRole&quot;</span><span class="p">:</span> <span class="s2">&quot;READ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;grantDeny&quot;</span><span class="p">:</span> <span class="s2">&quot;GRANT&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readACLFile&quot;</span><span class="p">:</span> <span class="s2">&quot;BUILTIN</span><span class="se">\\</span><span class="s2">users&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readACLShare&quot;</span><span class="p">:</span> <span class="s2">&quot;BUILTIN</span><span class="se">\\</span><span class="s2">users&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sharePointACL&quot;</span><span class="p">:</span> <span class="s2">&quot;BUILTIN</span><span class="se">\\</span><span class="s2">users&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sharepointPermission&quot;</span><span class="p">:</span> <span class="s2">&quot;READ&quot;</span>
+            <span class="s2">"aclType"</span><span class="p">:</span> <span class="s2">"FILE"</span><span class="p">,</span>
+            <span class="s2">"cloudStorageCollaborator"</span><span class="p">:</span> <span class="s2">"BUILTIN</span><span class="se">\\</span><span class="s2">users"</span><span class="p">,</span>
+            <span class="s2">"cloudstorageRole"</span><span class="p">:</span> <span class="s2">"READ"</span><span class="p">,</span>
+            <span class="s2">"grantDeny"</span><span class="p">:</span> <span class="s2">"GRANT"</span><span class="p">,</span>
+            <span class="s2">"readACLFile"</span><span class="p">:</span> <span class="s2">"BUILTIN</span><span class="se">\\</span><span class="s2">users"</span><span class="p">,</span>
+            <span class="s2">"readACLShare"</span><span class="p">:</span> <span class="s2">"BUILTIN</span><span class="se">\\</span><span class="s2">users"</span><span class="p">,</span>
+            <span class="s2">"sharePointACL"</span><span class="p">:</span> <span class="s2">"BUILTIN</span><span class="se">\\</span><span class="s2">users"</span><span class="p">,</span>
+            <span class="s2">"sharepointPermission"</span><span class="p">:</span> <span class="s2">"READ"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;aclType&quot;</span><span class="p">:</span> <span class="s2">&quot;FILE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;cloudStorageCollaborator&quot;</span><span class="p">:</span> <span class="s2">&quot;NT AUTHORITY</span><span class="se">\\</span><span class="s2">authenticated users&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;cloudstorageRole&quot;</span><span class="p">:</span> <span class="s2">&quot;WRITE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;grantDeny&quot;</span><span class="p">:</span> <span class="s2">&quot;GRANT&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readACLFile&quot;</span><span class="p">:</span> <span class="s2">&quot;NT AUTHORITY</span><span class="se">\\</span><span class="s2">authenticated users&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readACLShare&quot;</span><span class="p">:</span> <span class="s2">&quot;NT AUTHORITY</span><span class="se">\\</span><span class="s2">authenticated users&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sharePointACL&quot;</span><span class="p">:</span> <span class="s2">&quot;NT AUTHORITY</span><span class="se">\\</span><span class="s2">authenticated users&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sharepointPermission&quot;</span><span class="p">:</span> <span class="s2">&quot;WRITE&quot;</span>
+            <span class="s2">"aclType"</span><span class="p">:</span> <span class="s2">"FILE"</span><span class="p">,</span>
+            <span class="s2">"cloudStorageCollaborator"</span><span class="p">:</span> <span class="s2">"NT AUTHORITY</span><span class="se">\\</span><span class="s2">authenticated users"</span><span class="p">,</span>
+            <span class="s2">"cloudstorageRole"</span><span class="p">:</span> <span class="s2">"WRITE"</span><span class="p">,</span>
+            <span class="s2">"grantDeny"</span><span class="p">:</span> <span class="s2">"GRANT"</span><span class="p">,</span>
+            <span class="s2">"readACLFile"</span><span class="p">:</span> <span class="s2">"NT AUTHORITY</span><span class="se">\\</span><span class="s2">authenticated users"</span><span class="p">,</span>
+            <span class="s2">"readACLShare"</span><span class="p">:</span> <span class="s2">"NT AUTHORITY</span><span class="se">\\</span><span class="s2">authenticated users"</span><span class="p">,</span>
+            <span class="s2">"sharePointACL"</span><span class="p">:</span> <span class="s2">"NT AUTHORITY</span><span class="se">\\</span><span class="s2">authenticated users"</span><span class="p">,</span>
+            <span class="s2">"sharepointPermission"</span><span class="p">:</span> <span class="s2">"WRITE"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;aclType&quot;</span><span class="p">:</span> <span class="s2">&quot;FILE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;cloudStorageCollaborator&quot;</span><span class="p">:</span> <span class="s2">&quot;NT AUTHORITY</span><span class="se">\\</span><span class="s2">authenticated users&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;cloudstorageRole&quot;</span><span class="p">:</span> <span class="s2">&quot;READ&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;grantDeny&quot;</span><span class="p">:</span> <span class="s2">&quot;GRANT&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readACLFile&quot;</span><span class="p">:</span> <span class="s2">&quot;NT AUTHORITY</span><span class="se">\\</span><span class="s2">authenticated users&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;readACLShare&quot;</span><span class="p">:</span> <span class="s2">&quot;NT AUTHORITY</span><span class="se">\\</span><span class="s2">authenticated users&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sharePointACL&quot;</span><span class="p">:</span> <span class="s2">&quot;NT AUTHORITY</span><span class="se">\\</span><span class="s2">authenticated users&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;sharepointPermission&quot;</span><span class="p">:</span> <span class="s2">&quot;READ&quot;</span>
+            <span class="s2">"aclType"</span><span class="p">:</span> <span class="s2">"FILE"</span><span class="p">,</span>
+            <span class="s2">"cloudStorageCollaborator"</span><span class="p">:</span> <span class="s2">"NT AUTHORITY</span><span class="se">\\</span><span class="s2">authenticated users"</span><span class="p">,</span>
+            <span class="s2">"cloudstorageRole"</span><span class="p">:</span> <span class="s2">"READ"</span><span class="p">,</span>
+            <span class="s2">"grantDeny"</span><span class="p">:</span> <span class="s2">"GRANT"</span><span class="p">,</span>
+            <span class="s2">"readACLFile"</span><span class="p">:</span> <span class="s2">"NT AUTHORITY</span><span class="se">\\</span><span class="s2">authenticated users"</span><span class="p">,</span>
+            <span class="s2">"readACLShare"</span><span class="p">:</span> <span class="s2">"NT AUTHORITY</span><span class="se">\\</span><span class="s2">authenticated users"</span><span class="p">,</span>
+            <span class="s2">"sharePointACL"</span><span class="p">:</span> <span class="s2">"NT AUTHORITY</span><span class="se">\\</span><span class="s2">authenticated users"</span><span class="p">,</span>
+            <span class="s2">"sharepointPermission"</span><span class="p">:</span> <span class="s2">"READ"</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="s2">&quot;messageDate&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-02-03T22:40:43&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;messageId&quot;</span><span class="p">:</span> <span class="mi">468</span><span class="p">,</span>
-        <span class="s2">&quot;messageSource&quot;</span><span class="p">:</span> <span class="s2">&quot;DISCOVER&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;messageType&quot;</span><span class="p">:</span> <span class="s2">&quot;EDAR&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;messageTypeId&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
-        <span class="s2">&quot;policyGroupId&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-        <span class="s2">&quot;policyGroupName&quot;</span><span class="p">:</span> <span class="s2">&quot;Customer Data Protection&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;policyId&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
-        <span class="s2">&quot;policyName&quot;</span><span class="p">:</span> <span class="s2">&quot;Customer Data Protection&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;policyVersion&quot;</span><span class="p">:</span> <span class="mi">2</span>
+        <span class="s2">"messageDate"</span><span class="p">:</span> <span class="s2">"2022-02-03T22:40:43"</span><span class="p">,</span>
+        <span class="s2">"messageId"</span><span class="p">:</span> <span class="mi">468</span><span class="p">,</span>
+        <span class="s2">"messageSource"</span><span class="p">:</span> <span class="s2">"DISCOVER"</span><span class="p">,</span>
+        <span class="s2">"messageType"</span><span class="p">:</span> <span class="s2">"EDAR"</span><span class="p">,</span>
+        <span class="s2">"messageTypeId"</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+        <span class="s2">"policyGroupId"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">"policyGroupName"</span><span class="p">:</span> <span class="s2">"Customer Data Protection"</span><span class="p">,</span>
+        <span class="s2">"policyId"</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+        <span class="s2">"policyName"</span><span class="p">:</span> <span class="s2">"Customer Data Protection"</span><span class="p">,</span>
+        <span class="s2">"policyVersion"</span><span class="p">:</span> <span class="mi">2</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;sdlp_incident_id&quot;</span><span class="p">:</span> <span class="mi">468</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"sdlp_incident_id"</span><span class="p">:</span> <span class="mi">468</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">7312</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-symantec-dlp&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-03-03 10:53:00&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">7312</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-symantec-dlp"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-03-03 10:53:00"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1197,20 +1197,20 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Put the results json into a workflow property so we can call the </span>
 <span class="c1"># convert_json_to_rich_text script to print readable formatted json in an incident note.</span>
-<span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">)</span>
-<span class="n">sdlp_incident_id</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sdlp_incident_id&quot;</span><span class="p">)</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"inputs"</span><span class="p">)</span>
+<span class="n">sdlp_incident_id</span> <span class="o">=</span> <span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sdlp_incident_id"</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
 
-<span class="n">header</span> <span class="o">=</span> <span class="s2">&quot;Symantec DLP Incident Id: </span><span class="si">{0}</span><span class="s2"> Details:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sdlp_incident_id</span><span class="p">)</span>
+<span class="n">header</span> <span class="o">=</span> <span class="s2">"Symantec DLP Incident Id: </span><span class="si">{0}</span><span class="s2"> Details:"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sdlp_incident_id</span><span class="p">)</span>
 
 <span class="n">json_note</span> <span class="o">=</span> <span class="p">{</span>
-              <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="n">header</span><span class="p">,</span> 
-              <span class="s2">&quot;json&quot;</span><span class="p">:</span> <span class="n">content</span><span class="p">,</span>
-              <span class="s2">&quot;sort&quot;</span><span class="p">:</span> <span class="kc">False</span>
+              <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.1"</span><span class="p">,</span>
+              <span class="s2">"header"</span><span class="p">:</span> <span class="n">header</span><span class="p">,</span> 
+              <span class="s2">"json"</span><span class="p">:</span> <span class="n">content</span><span class="p">,</span>
+              <span class="s2">"sort"</span><span class="p">:</span> <span class="kc">False</span>
             <span class="p">}</span>
 
-<span class="n">workflow</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s1">&#39;convert_json_to_rich_text&#39;</span><span class="p">,</span> <span class="n">json_note</span><span class="p">)</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s1">'convert_json_to_rich_text'</span><span class="p">,</span> <span class="n">json_note</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1257,26 +1257,26 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;reason:&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"reason:"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;sdlp_incident_id&quot;</span><span class="p">:</span> <span class="mi">625</span><span class="p">,</span>
-    <span class="s2">&quot;sdlp_note_text&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">Symantec DLP: Upload Binaries for incident Id 625</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e\u003c</span><span class="s2">br /</span><span class="se">\u003e</span><span class="s2"> 1 artifact files added&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"sdlp_incident_id"</span><span class="p">:</span> <span class="mi">625</span><span class="p">,</span>
+    <span class="s2">"sdlp_note_text"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">b</span><span class="se">\u003e</span><span class="s2">Symantec DLP: Upload Binaries for incident Id 625</span><span class="se">\u003c</span><span class="s2">/b</span><span class="se">\u003e\u003c</span><span class="s2">br /</span><span class="se">\u003e</span><span class="s2"> 1 artifact files added"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">68314</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-symantec-dlp&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-03-29 09:20:06&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">68314</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-symantec-dlp"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-03-29 09:20:06"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1299,7 +1299,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
   <span class="c1"># Get the current time</span>
   <span class="n">dt_now</span> <span class="o">=</span> <span class="n">Date</span><span class="p">()</span>
-  <span class="n">note</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Sent to Symantec DLP at </span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;br&gt;</span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dt_now</span><span class="p">,</span> <span class="n">unicode</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+  <span class="n">note</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Sent to Symantec DLP at </span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;br&gt;</span><span class="si">{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dt_now</span><span class="p">,</span> <span class="n">unicode</span><span class="p">(</span><span class="n">note</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>
@@ -1352,29 +1352,29 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;sdlp_incident_id&quot;</span><span class="p">:</span> <span class="mi">481</span><span class="p">,</span>
-    <span class="s2">&quot;sdlp_incident_severity_id&quot;</span><span class="p">:</span> <span class="s2">&quot;Low&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sdlp_incident_status&quot;</span><span class="p">:</span> <span class="s2">&quot;Dismissed&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"sdlp_incident_id"</span><span class="p">:</span> <span class="mi">481</span><span class="p">,</span>
+    <span class="s2">"sdlp_incident_severity_id"</span><span class="p">:</span> <span class="s2">"Low"</span><span class="p">,</span>
+    <span class="s2">"sdlp_incident_status"</span><span class="p">:</span> <span class="s2">"Dismissed"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">3661</span><span class="p">,</span>
-    <span class="s2">&quot;sdlp_incident_severity_id&quot;</span><span class="p">:</span> <span class="s2">&quot;Info&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sdlp_incident_status&quot;</span><span class="p">:</span> <span class="s2">&quot;Dismissed&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">3661</span><span class="p">,</span>
+    <span class="s2">"sdlp_incident_severity_id"</span><span class="p">:</span> <span class="s2">"Info"</span><span class="p">,</span>
+    <span class="s2">"sdlp_incident_status"</span><span class="p">:</span> <span class="s2">"Dismissed"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">15519</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-symantec-dlp&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-04-01 14:47:38&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">15519</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-symantec-dlp"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-04-01 14:47:38"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1383,7 +1383,7 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">sdlp_incident_status</span> <span class="o">=</span> <span class="s2">&quot;Resolved&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">sdlp_incident_status</span> <span class="o">=</span> <span class="s2">"Resolved"</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">sdlp_incident_severity_id</span> <span class="o">=</span> <span class="kc">None</span>
 </pre></div>
 </div>
@@ -1391,13 +1391,13 @@ List any user permissions that are needed to use this endpoint. For example, lis
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
-<span class="n">success</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">sdlp_incident_id</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sdlp_incident_id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
+<span class="n">success</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">sdlp_incident_id</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sdlp_incident_id"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">=</span> <span class="s1">&#39;&lt;b&gt;Symantec DLP: Resolve Incident in DLP&lt;/b&gt;&lt;br&gt; incidentId </span><span class="si">{0}</span><span class="s1"> Resolved.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sdlp_incident_id</span><span class="p">)</span>
+  <span class="n">noteText</span> <span class="o">=</span> <span class="s1">'&lt;b&gt;Symantec DLP: Resolve Incident in DLP&lt;/b&gt;&lt;br&gt; incidentId </span><span class="si">{0}</span><span class="s1"> Resolved.'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sdlp_incident_id</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">=</span> <span class="s1">&#39;&lt;b&gt;Symantec DLP: Resolve Incident in DLP&lt;/b&gt;&lt;br&gt; incidentId </span><span class="si">{0}</span><span class="s1">: check the status in Symantec DLP.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sdlp_incident_id</span><span class="p">)</span>
+  <span class="n">noteText</span> <span class="o">=</span> <span class="s1">'&lt;b&gt;Symantec DLP: Resolve Incident in DLP&lt;/b&gt;&lt;br&gt; incidentId </span><span class="si">{0}</span><span class="s1">: check the status in Symantec DLP.'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sdlp_incident_id</span><span class="p">)</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">noteText</span><span class="p">)</span>
 </pre></div>
@@ -1452,28 +1452,28 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;artifact_name_list&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;c:</span><span class="se">\\</span><span class="s2">Users</span><span class="se">\\</span><span class="s2">Administrator</span><span class="se">\\</span><span class="s2">Documents</span><span class="se">\\</span><span class="s2">three-ss-one-cc.txt&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"artifact_name_list"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"c:</span><span class="se">\\</span><span class="s2">Users</span><span class="se">\\</span><span class="s2">Administrator</span><span class="se">\\</span><span class="s2">Documents</span><span class="se">\\</span><span class="s2">three-ss-one-cc.txt"</span>
     <span class="p">],</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">3456</span><span class="p">,</span>
-    <span class="s2">&quot;sdlp_incident_id&quot;</span><span class="p">:</span> <span class="mi">578</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">3456</span><span class="p">,</span>
+    <span class="s2">"sdlp_incident_id"</span><span class="p">:</span> <span class="mi">578</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">9905</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-symantec-dlp&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-03-07 14:10:32&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">9905</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-symantec-dlp"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-03-07 14:10:32"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1489,17 +1489,17 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">upload_result</span>
-<span class="n">sdlp_inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">)</span>
-<span class="n">sdlp_incident_id</span> <span class="o">=</span> <span class="n">sdlp_inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sdlp_incident_id&quot;</span><span class="p">)</span>
+<span class="n">sdlp_inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"inputs"</span><span class="p">)</span>
+<span class="n">sdlp_incident_id</span> <span class="o">=</span> <span class="n">sdlp_inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sdlp_incident_id"</span><span class="p">)</span>
 
-<span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;&lt;b&gt;Symantec DLP: Upload Binaries for incident Id </span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sdlp_incident_id</span><span class="p">)</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">artifact_list</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;artifact_name_list&#39;</span><span class="p">)</span>
+<span class="n">note</span> <span class="o">=</span> <span class="s2">"&lt;b&gt;Symantec DLP: Upload Binaries for incident Id </span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;br&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sdlp_incident_id</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">artifact_list</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'artifact_name_list'</span><span class="p">)</span>
   <span class="n">num_artifacts</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">artifact_list</span><span class="p">)</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> </span><span class="si">{1}</span><span class="s2"> Attachment files added&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">num_artifacts</span><span class="p">)</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{0}</span><span class="s2"> </span><span class="si">{1}</span><span class="s2"> Attachment files added"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">num_artifacts</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{0}</span><span class="s2"> attachment NOT added&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{0}</span><span class="s2"> attachment NOT added"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -1522,8 +1522,8 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># (c) Copyright IBM Corp. 2010, 2020. All Rights Reserved.</span>
 <span class="n">VERSION</span> <span class="o">=</span> <span class="mf">1.1</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">  This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident&#39;s rich text (custom) field or an incident note.</span>
+<span class="sd">"""</span>
+<span class="sd">  This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident's rich text (custom) field or an incident note.</span>
 <span class="sd">  A workflow property is used to define the json to convert and identify parameters used on how to perform the conversion.</span>
 <span class="sd">  Typically, a function will create workflow property and this script will run after that function to perform the conversion.</span>
 <span class="sd">  Features:</span>
@@ -1533,47 +1533,47 @@ List any user permissions that are needed to use this endpoint. For example, lis
 <span class="sd">  </span>
 <span class="sd">  In order to use this script, define a workflow property called: convert_json_to_rich_text, to define the json and parameters to use for the conversion.</span>
 <span class="sd">  Workflow properties can be added using a command similar to this:</span>
-<span class="sd">  workflow.addProperty(&#39;convert_json_to_rich_text&#39;, {</span>
-<span class="sd">    &quot;version&quot;: 1.1,</span>
-<span class="sd">    &quot;header&quot;: &quot;Artifact scan results for: {}&quot;.format(artifact.value),</span>
-<span class="sd">    &quot;padding&quot;: 10,</span>
-<span class="sd">    &quot;separator&quot;: u&quot;&lt;br /&gt;&quot;,</span>
-<span class="sd">    &quot;sort&quot;: True,</span>
-<span class="sd">    &quot;json&quot;: results.content,</span>
-<span class="sd">    &quot;json_omit_list&quot;: [&quot;omit&quot;],</span>
-<span class="sd">    &quot;incident_field&quot;: None</span>
+<span class="sd">  workflow.addProperty('convert_json_to_rich_text', {</span>
+<span class="sd">    "version": 1.1,</span>
+<span class="sd">    "header": "Artifact scan results for: {}".format(artifact.value),</span>
+<span class="sd">    "padding": 10,</span>
+<span class="sd">    "separator": u"&lt;br /&gt;",</span>
+<span class="sd">    "sort": True,</span>
+<span class="sd">    "json": results.content,</span>
+<span class="sd">    "json_omit_list": ["omit"],</span>
+<span class="sd">    "incident_field": None</span>
 <span class="sd">  })</span>
 <span class="sd">  </span>
 <span class="sd">  Format of workflow.property.convert_json_to_rich_text:</span>
 <span class="sd">  { </span>
-<span class="sd">    &quot;version&quot;: 1.1, [this is for future compatibility]</span>
-<span class="sd">    &quot;header&quot;: str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]</span>
-<span class="sd">    &quot;padding&quot;: 10, [padding for nested json elements, or defaults to 10]</span>
-<span class="sd">    &quot;separator&quot;: u&quot;&lt;br /&gt;&quot;|list such as [&#39;&lt;span&gt;&#39;,&#39;&lt;/span&gt;&#39;], [html separator between json keys and lists or defaults to html break: &#39;&lt;br /&gt;&#39;. </span>
+<span class="sd">    "version": 1.1, [this is for future compatibility]</span>
+<span class="sd">    "header": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]</span>
+<span class="sd">    "padding": 10, [padding for nested json elements, or defaults to 10]</span>
+<span class="sd">    "separator": u"&lt;br /&gt;"|list such as ['&lt;span&gt;','&lt;/span&gt;'], [html separator between json keys and lists or defaults to html break: '&lt;br /&gt;'. </span>
 <span class="sd">                                                If a list, then the data is brackets by the pair specified]</span>
-<span class="sd">    &quot;sort&quot;: True|False, [sort the json keys at each level when displayed]</span>
-<span class="sd">    &quot;json&quot;: json, [required json to convert]</span>
-<span class="sd">    &quot;json_omit_list&quot;: [list of json keys to exclude or None]</span>
-<span class="sd">    &quot;incident_field&quot;: &quot;&lt;incident_field&gt;&quot; [indicates a builtin rich text incident field, such as &#39;description&#39; </span>
-<span class="sd">                                          or a custom rich text field in the format: &#39;properties.&lt;field&gt;&#39;. default: create an incident note]</span>
+<span class="sd">    "sort": True|False, [sort the json keys at each level when displayed]</span>
+<span class="sd">    "json": json, [required json to convert]</span>
+<span class="sd">    "json_omit_list": [list of json keys to exclude or None]</span>
+<span class="sd">    "incident_field": "&lt;incident_field&gt;" [indicates a builtin rich text incident field, such as 'description' </span>
+<span class="sd">                                          or a custom rich text field in the format: 'properties.&lt;field&gt;'. default: create an incident note]</span>
 <span class="sd">  }</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 <span class="c1"># needed for python 3</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">unicode</span><span class="p">(</span><span class="s2">&quot;abc&quot;</span><span class="p">)</span>
+    <span class="n">unicode</span><span class="p">(</span><span class="s2">"abc"</span><span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="n">unicode</span> <span class="o">=</span> <span class="nb">str</span>
 
 
-<span class="n">rc</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&amp;+#\?]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+&#39;</span><span class="p">)</span>
+<span class="n">rc</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&amp;+#\?]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'</span><span class="p">)</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">ConvertJson</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to hold the conversion parameters and perform the conversion&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Class to hold the conversion parameters and perform the conversion"""</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">omit_keys</span><span class="o">=</span><span class="p">[],</span> <span class="n">padding</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;&lt;br /&gt;&quot;</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">omit_keys</span><span class="o">=</span><span class="p">[],</span> <span class="n">padding</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="sa">u</span><span class="s2">"&lt;br /&gt;"</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">omit_keys</span> <span class="o">=</span> <span class="n">omit_keys</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">padding</span> <span class="o">=</span> <span class="n">padding</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="o">=</span> <span class="n">separator</span>
@@ -1581,36 +1581,36 @@ List any user permissions that are needed to use this endpoint. For example, lis
 
 
     <span class="k">def</span><span class="w"> </span><span class="nf">format_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;[summary]</span>
+<span class="w">        </span><span class="sd">"""[summary]</span>
 <span class="sd">          Find embedded urls (http(s)) and add html anchor tags to display as links</span>
 <span class="sd">          Args:</span>
 <span class="sd">              item ([string])</span>
 
 <span class="sd">          Returns:</span>
 <span class="sd">              [str]: None|original text if no links|text with html links</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">formatted_item</span> <span class="o">=</span> <span class="n">item</span>
         <span class="k">if</span> <span class="n">item</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
             <span class="nb">list</span> <span class="o">=</span> <span class="n">rc</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">list</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span>
-                    <span class="n">formatted_item</span> <span class="o">=</span> <span class="n">formatted_item</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;&lt;a target=&#39;blank&#39; href=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;</span><span class="si">{0}</span><span class="s2">&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link</span><span class="p">))</span>
+                    <span class="n">formatted_item</span> <span class="o">=</span> <span class="n">formatted_item</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="sa">u</span><span class="s2">"&lt;a target='blank' href='</span><span class="si">{0}</span><span class="s2">'&gt;</span><span class="si">{0}</span><span class="s2">&lt;/a&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">formatted_item</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">expand_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_value</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;[summary]</span>
+<span class="w">        </span><span class="sd">"""[summary]</span>
 <span class="sd">          convert items to html, adding indents to nested dictionaries.</span>
 <span class="sd">          Args:</span>
 <span class="sd">              list_value ([dict|list]): json element</span>
 
 <span class="sd">          Returns:</span>
 <span class="sd">              [str]: html converted code</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_link</span><span class="p">(</span><span class="n">list_value</span><span class="p">)</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">list_value</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;None&lt;br&gt;&quot;</span>
+            <span class="k">return</span> <span class="sa">u</span><span class="s2">"None&lt;br&gt;"</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">items_list</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># this will ensure list starts on second line of key label</span>
@@ -1618,36 +1618,36 @@ List any user permissions that are needed to use this endpoint. For example, lis
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
                     <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_json_to_rich_text</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">is_list</span><span class="p">:</span>
-                        <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&lt;li&gt;</span><span class="si">{}</span><span class="s2">&lt;/li&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+                        <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">"&lt;li&gt;</span><span class="si">{}</span><span class="s2">&lt;/li&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
                     <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expand_list</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
                 <span class="k">elif</span> <span class="n">is_list</span><span class="p">:</span>
-                    <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&lt;li&gt;</span><span class="si">{}</span><span class="s2">&lt;/li&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_link</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">item</span><span class="p">))))</span>
+                    <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">"&lt;li&gt;</span><span class="si">{}</span><span class="s2">&lt;/li&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_link</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">item</span><span class="p">))))</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_link</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">item</span><span class="p">)))</span>
 
-            <span class="n">expand_list_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_list</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">expand_list_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_list</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">""</span><span class="p">,</span>
                                                     <span class="n">items_list</span><span class="p">,</span>
                                                     <span class="n">is_list</span><span class="o">=</span><span class="n">is_list</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">is_list</span><span class="p">:</span>
-                <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;&lt;ul&gt;</span><span class="si">{}</span><span class="s2">&lt;/ul&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expand_list_result</span><span class="p">)</span>
+                <span class="k">return</span> <span class="sa">u</span><span class="s2">"&lt;ul&gt;</span><span class="si">{}</span><span class="s2">&lt;/ul&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expand_list_result</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;&lt;div style=&#39;padding:5px&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expand_list_result</span><span class="p">)</span>
+                <span class="k">return</span> <span class="sa">u</span><span class="s2">"&lt;div style='padding:5px'&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expand_list_result</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">convert_json_to_rich_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sub_dict</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;[summary]</span>
+<span class="w">        </span><span class="sd">"""[summary]</span>
 <span class="sd">          Walk dictionary tree and convert to html for better display</span>
 <span class="sd">          Args:</span>
 <span class="sd">              sub_dict ([type]): [description]</span>
 
 <span class="sd">          Returns:</span>
 <span class="sd">              [type]: [description]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">notes</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="n">sub_dict</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -1660,90 +1660,90 @@ List any user permissions that are needed to use this endpoint. For example, lis
                     <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">omit_keys</span><span class="p">:</span>
                         <span class="n">value</span> <span class="o">=</span> <span class="n">sub_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
                         <span class="n">is_list</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
-                        <span class="n">item_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">u</span><span class="s2">&quot;&lt;strong&gt;</span><span class="si">{0}</span><span class="s2">&lt;/strong&gt;: &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
+                        <span class="n">item_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">u</span><span class="s2">"&lt;strong&gt;</span><span class="si">{0}</span><span class="s2">&lt;/strong&gt;: "</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
                         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
                             <span class="n">convert_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_json_to_rich_text</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
                             <span class="k">if</span> <span class="n">convert_result</span><span class="p">:</span>
-                                <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&lt;div style=&#39;padding:</span><span class="si">{}</span><span class="s2">px&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">,</span> <span class="n">convert_result</span><span class="p">))</span>
+                                <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">"&lt;div style='padding:</span><span class="si">{}</span><span class="s2">px'&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">,</span> <span class="n">convert_result</span><span class="p">))</span>
                             <span class="k">else</span><span class="p">:</span>
-                                <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;None&lt;br&gt;&quot;</span><span class="p">)</span>
+                                <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">"None&lt;br&gt;"</span><span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>
                             <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expand_list</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="n">is_list</span><span class="p">))</span>
-                        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">item_list</span><span class="p">),</span> <span class="n">is_list</span><span class="o">=</span><span class="n">is_list</span><span class="p">))</span>
+                        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">,</span> <span class="sa">u</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">item_list</span><span class="p">),</span> <span class="n">is_list</span><span class="o">=</span><span class="n">is_list</span><span class="p">))</span>
 
-        <span class="n">result_notes</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+        <span class="n">result_notes</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">result_notes</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">result_notes</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                <span class="sa">u</span><span class="s2">&quot;&lt;/div&gt;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">),</span> <span class="sa">u</span><span class="s2">&quot;&lt;/div&gt;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">),</span> <span class="sa">u</span><span class="s2">&quot;&lt;/div&gt;&quot;</span>
+                <span class="sa">u</span><span class="s2">"&lt;/div&gt;</span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">),</span> <span class="sa">u</span><span class="s2">"&lt;/div&gt;"</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+                <span class="sa">u</span><span class="s2">"</span><span class="si">{0}</span><span class="s2">&lt;/div&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">),</span> <span class="sa">u</span><span class="s2">"&lt;/div&gt;"</span>
             <span class="p">)</span>  <span class="c1"># tighten up result</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        apply the separator to the data</span>
-<span class="sd">        :param separator: None, str or list such as [&#39;&lt;span&gt;&#39;, &#39;&lt;/span&gt;&#39;]</span>
+<span class="sd">        :param separator: None, str or list such as ['&lt;span&gt;', '&lt;/span&gt;']</span>
 <span class="sd">        :param items: str or list to add separator</span>
 <span class="sd">        :return: text with separator applied</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">_items</span> <span class="o">=</span> <span class="n">items</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">_items</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;&lt;br&gt;&quot;</span>
+            <span class="k">return</span> <span class="s2">"&lt;br&gt;"</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_items</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">_items</span> <span class="o">=</span> <span class="p">[</span><span class="n">_items</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">,</span> <span class="n">separator</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">_items</span><span class="p">])</span>
+            <span class="k">return</span> <span class="sa">u</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">u</span><span class="s2">"</span><span class="si">{}{}{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">,</span> <span class="n">separator</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">_items</span><span class="p">])</span>
 
-        <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_items</span><span class="p">),</span> <span class="n">separator</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_list</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{}{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_items</span><span class="p">),</span> <span class="n">separator</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_list</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">""</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_properties</span><span class="p">(</span><span class="n">property_name</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Logic to collect the json and parameters from a workflow property.</span>
 <span class="sd">    Args:</span>
 <span class="sd">      property_name: workflow property to reference</span>
 <span class="sd">    Returns:</span>
 <span class="sd">      padding, separator, header, json_omit_list, incident_field, json, sort_keys</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">property_name</span><span class="p">):</span>
-        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;workflow.properties.</span><span class="si">{}</span><span class="s2"> undefined&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">property_name</span><span class="p">))</span>
+        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"workflow.properties.</span><span class="si">{}</span><span class="s2"> undefined"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">property_name</span><span class="p">))</span>
 
-    <span class="n">padding</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;padding&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-    <span class="n">separator</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;separator&quot;</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;&lt;br /&gt;&quot;</span><span class="p">)</span>
+    <span class="n">padding</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"padding"</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">separator</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"separator"</span><span class="p">,</span> <span class="sa">u</span><span class="s2">"&lt;br /&gt;"</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;list of separators should be specified as a pair such as [&#39;&lt;div&gt;&#39;, &#39;&lt;/div&gt;&#39;]: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">))</span>
+        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"list of separators should be specified as a pair such as ['&lt;div&gt;', '&lt;/div&gt;']: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">))</span>
 
-    <span class="n">header</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">)</span>
-    <span class="n">json_omit_list</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;json_omit_list&quot;</span><span class="p">)</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"header"</span><span class="p">)</span>
+    <span class="n">json_omit_list</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"json_omit_list"</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">json_omit_list</span><span class="p">:</span>
         <span class="n">json_omit_list</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">incident_field</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;incident_field&quot;</span><span class="p">)</span>
-    <span class="n">json</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="n">incident_field</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"incident_field"</span><span class="p">)</span>
+    <span class="n">json</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"json"</span><span class="p">,</span> <span class="p">{})</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">json</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;json element is not formatted correctly: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">json</span><span class="p">))</span>
-    <span class="n">sort_keys</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sort&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"json element is not formatted correctly: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">json</span><span class="p">))</span>
+    <span class="n">sort_keys</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="n">property_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sort"</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">padding</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">json_omit_list</span><span class="p">,</span> <span class="n">incident_field</span><span class="p">,</span> <span class="n">json</span><span class="p">,</span> <span class="n">sort_keys</span>
 
 
 <span class="c1">## S T A R T</span>
-<span class="k">if</span> <span class="s1">&#39;workflow&#39;</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
-    <span class="n">padding</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">json_omit_list</span><span class="p">,</span> <span class="n">incident_field</span><span class="p">,</span> <span class="n">json</span><span class="p">,</span> <span class="n">sort_keys</span> <span class="o">=</span> <span class="n">get_properties</span><span class="p">(</span><span class="s1">&#39;convert_json_to_rich_text&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="s1">'workflow'</span> <span class="ow">in</span> <span class="nb">globals</span><span class="p">():</span>
+    <span class="n">padding</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">json_omit_list</span><span class="p">,</span> <span class="n">incident_field</span><span class="p">,</span> <span class="n">json</span><span class="p">,</span> <span class="n">sort_keys</span> <span class="o">=</span> <span class="n">get_properties</span><span class="p">(</span><span class="s1">'convert_json_to_rich_text'</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">header</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}{1}{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">header</span><span class="p">,</span> <span class="n">separator</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{0}{1}{2}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">header</span><span class="p">,</span> <span class="n">separator</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">separator</span><span class="p">)</span>
+            <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{0}{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">separator</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span>
+        <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">""</span>
 
     <span class="n">convert</span> <span class="o">=</span> <span class="n">ConvertJson</span><span class="p">(</span><span class="n">omit_keys</span><span class="o">=</span><span class="n">json_omit_list</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">padding</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="n">separator</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="n">sort_keys</span><span class="p">)</span>
     <span class="n">converted_json</span> <span class="o">=</span> <span class="n">convert</span><span class="o">.</span><span class="n">convert_json_to_rich_text</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span> <span class="n">converted_json</span> <span class="k">if</span> <span class="n">converted_json</span> <span class="k">else</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">None&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{}{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span> <span class="n">converted_json</span> <span class="k">if</span> <span class="n">converted_json</span> <span class="k">else</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">None"</span><span class="p">)</span>
 
     <span class="n">rich_text_note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">incident_field</span><span class="p">:</span>
@@ -1944,83 +1944,83 @@ does not include.</p>
     "incident_type_ids": [16],
     "severity_code": "{{ editableIncidentDetails.infoMap.severityId|string|soar_substitute('{"1": "High", "2": "Medium", "3": "Low", "4": "Low"}')}}",
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>{# Custom properties for DLP Attributes #}
-&quot;properties&quot;: {
-    &quot;sdlp_incident_id&quot;: {{ staticIncidentDetails.incidentId }},
-    &quot;sdlp_incident_status&quot;: &quot;{{ editableIncidentDetails.infoMap.incidentStatusName|replace(&#39;incident.status.&#39;, &#39;&#39;) }}&quot;,
-    &quot;sdlp_incident_url&quot;: {&quot;format&quot; : &quot;html&quot;, &quot;content&quot; : &quot;&lt;a target=&#39;blank&#39; href=&#39;{{ sdlp_incident_url }}&#39;&gt;Symantec DLP Incident&lt;/a&gt;&quot;},
-    &quot;sdlp_policy_name&quot;: &quot;{{ staticIncidentDetails.infoMap.policyName }}&quot;,
-    &quot;sdlp_policy_id&quot;: {{ staticIncidentDetails.infoMap.policyId }},
-    &quot;sdlp_policy_group_id&quot;: {{ staticIncidentDetails.infoMap.policyGroupId }},
-    &quot;sdlp_policy_group_name&quot;: &quot;{{ staticIncidentDetails.infoMap.policyGroupName }}&quot;
+"properties": {
+    "sdlp_incident_id": {{ staticIncidentDetails.incidentId }},
+    "sdlp_incident_status": "{{ editableIncidentDetails.infoMap.incidentStatusName|replace('incident.status.', '') }}",
+    "sdlp_incident_url": {"format" : "html", "content" : "&lt;a target='blank' href='{{ sdlp_incident_url }}'&gt;Symantec DLP Incident&lt;/a&gt;"},
+    "sdlp_policy_name": "{{ staticIncidentDetails.infoMap.policyName }}",
+    "sdlp_policy_id": {{ staticIncidentDetails.infoMap.policyId }},
+    "sdlp_policy_group_id": {{ staticIncidentDetails.infoMap.policyGroupId }},
+    "sdlp_policy_group_name": "{{ staticIncidentDetails.infoMap.policyGroupName }}"
 },
 {# Artifacts which we will try to pull out of the Incident #}
-&quot;artifacts&quot;: [
-  {% if staticIncidentDetails.infoMap.get(&#39;discoverServer&#39;, False) %}
+"artifacts": [
+  {% if staticIncidentDetails.infoMap.get('discoverServer', False) %}
     {{- comma() }}
     {
-      &quot;type&quot;: {&quot;name&quot;: &quot;System Name&quot;},
-      &quot;value&quot;: &quot;{{ staticIncidentDetails.infoMap.discoverServer|replace(&#39;\\&#39;, &#39;\\\\&#39;)|replace(&#39;&quot;&#39;, &#39;\\&quot;&#39;) }}&quot;,
-      &quot;description&quot;: {
-        &quot;format&quot;: &quot;text&quot;,
-        &quot;content&quot;: &quot;System Name of the machine that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}&quot;
+      "type": {"name": "System Name"},
+      "value": "{{ staticIncidentDetails.infoMap.discoverServer|replace('\\', '\\\\')|replace('"', '\\"') }}",
+      "description": {
+        "format": "text",
+        "content": "System Name of the machine that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
       }
     }
   {% endif %}
-  {% if staticIncidentDetails.infoMap.get(&#39;discoverContentRootPath&#39;, False) %}
+  {% if staticIncidentDetails.infoMap.get('discoverContentRootPath', False) %}
     {{- comma() }}
     {
-      &quot;type&quot;: { &quot;name&quot;: &quot;File Path&quot;},
-      &quot;value&quot;: &quot;{{ staticIncidentDetails.infoMap.discoverContentRootPath|replace(&quot;\\&quot;, &quot;\\\\&quot;) }}&quot;,
-      &quot;description&quot; : {
-          &quot;format&quot; : &quot;html&quot;,
-          &quot;content&quot; : &quot;File Path of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}&quot;
+      "type": { "name": "File Path"},
+      "value": "{{ staticIncidentDetails.infoMap.discoverContentRootPath|replace("\\", "\\\\") }}",
+      "description" : {
+          "format" : "html",
+          "content" : "File Path of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
       }
     }
   {%- endif -%}
-  {% if staticIncidentDetails.infoMap.get(&#39;discoverName&#39;, False) %}
+  {% if staticIncidentDetails.infoMap.get('discoverName', False) %}
     {{- comma() }}
     {
-      &quot;type&quot;: { &quot;name&quot;: &quot;File Name&quot;},
-      &quot;value&quot;: &quot;{{ staticIncidentDetails.infoMap.discoverName|replace(&quot;\\&quot;, &quot;\\\\&quot;) }}&quot;,
-      &quot;description&quot; : {
-          &quot;format&quot; : &quot;html&quot;,
-          &quot;content&quot; : &quot;File Name of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}&quot;
+      "type": { "name": "File Name"},
+      "value": "{{ staticIncidentDetails.infoMap.discoverName|replace("\\", "\\\\") }}",
+      "description" : {
+          "format" : "html",
+          "content" : "File Name of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
       }
     }
   {%- endif -%}
-  {% if staticIncidentDetails.infoMap.get(&#39;fileOwner&#39;, False) %}
+  {% if staticIncidentDetails.infoMap.get('fileOwner', False) %}
     {{- comma() }}
     {
-      &quot;type&quot;: { &quot;name&quot;: &quot;User Account&quot;},
-      &quot;value&quot;: &quot;{{ staticIncidentDetails.infoMap.fileOwner|replace(&quot;\\&quot;, &quot;\\\\&quot;) }}&quot;,
-      &quot;description&quot; : {
-          &quot;format&quot; : &quot;html&quot;,
-          &quot;content&quot; : &quot;File Owner of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}&quot;
+      "type": { "name": "User Account"},
+      "value": "{{ staticIncidentDetails.infoMap.fileOwner|replace("\\", "\\\\") }}",
+      "description" : {
+          "format" : "html",
+          "content" : "File Owner of the file that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
       }
     }
   {%- endif -%}
-  {% if staticIncidentDetails.infoMap.get(&#39;endpointMachineIpAddress&#39;, False) %}
+  {% if staticIncidentDetails.infoMap.get('endpointMachineIpAddress', False) %}
     {{- comma() }}
     {
-      &quot;type&quot;: {&quot;name&quot;: &quot;IP Address&quot;},
-      &quot;value&quot;: &quot;{{ staticIncidentDetails.infoMap.endpointMachineIpAddress|replace(&#39;\\&#39;, &#39;\\\\&#39;)|replace(&#39;&quot;&#39;, &#39;\\&quot;&#39;) }}&quot;,
-      &quot;description&quot;: {
-        &quot;format&quot;: &quot;text&quot;,
-        &quot;content&quot;: &quot;IP Address of the machine that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}&quot;
+      "type": {"name": "IP Address"},
+      "value": "{{ staticIncidentDetails.infoMap.endpointMachineIpAddress|replace('\\', '\\\\')|replace('"', '\\"') }}",
+      "description": {
+        "format": "text",
+        "content": "IP Address of the machine that generated Symantec DLP Incident Id {{ staticIncidentDetails.incidentId }}"
       },
-      &quot;properties&quot;: [{&quot;name&quot;: &quot;source&quot;, &quot;value&quot;: &quot;true&quot;}]
+      "properties": [{"name": "source", "value": "true"}]
     }
   {% endif %}
 ],
-&quot;comments&quot;: [
+"comments": [
   {%- for note_text in notes -%}
     {
-      &quot;text&quot;: {
-        &quot;format&quot;: &quot;html&quot;,
-        &quot;content&quot;: &quot;{{note_text|replace(&#39;\\&#39;, &#39;\\\\&#39;)|replace(&#39;&quot;&#39;, &#39;\\&quot;&#39;)}}&quot;
+      "text": {
+        "format": "html",
+        "content": "{{note_text|replace('\\', '\\\\')|replace('"', '\\"')}}"
       }
     }
-    {{ &quot;,&quot; if not loop.last else &quot;&quot; }}
+    {{ "," if not loop.last else "" }}
   {%- endfor -%}
 ]
 </pre></div>

@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -573,49 +573,49 @@
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;test page ΣΤ&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;children&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;test of fn_wiki_create_updateΣ Τ &quot;</span><span class="p">,</span>
-      <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">39</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;shresh@example.com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient Sysadmin&quot;</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"test page ΣΤ"</span><span class="p">,</span>
+      <span class="s2">"children"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"test of fn_wiki_create_updateΣ Τ "</span><span class="p">,</span>
+      <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">39</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"shresh@example.com"</span><span class="p">,</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"Resilient Sysadmin"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;create_date&quot;</span><span class="p">:</span> <span class="mi">1743079240704</span><span class="p">,</span>
-      <span class="s2">&quot;last_modified_time&quot;</span><span class="p">:</span> <span class="mi">1743079240704</span><span class="p">,</span>
-      <span class="s2">&quot;last_modified_by&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">39</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;shresh@example.com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient Sysadmin&quot;</span>
+      <span class="s2">"create_date"</span><span class="p">:</span> <span class="mi">1743079240704</span><span class="p">,</span>
+      <span class="s2">"last_modified_time"</span><span class="p">:</span> <span class="mi">1743079240704</span><span class="p">,</span>
+      <span class="s2">"last_modified_by"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">39</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"shresh@example.com"</span><span class="p">,</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"Resilient Sysadmin"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;mentioned_widgets&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;perms&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;update&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;delete&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="s2">"mentioned_widgets"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"perms"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"update"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"delete"</span><span class="p">:</span> <span class="n">true</span>
       <span class="p">},</span>
-      <span class="s2">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+      <span class="s2">"parent"</span><span class="p">:</span> <span class="s2">""</span>
     <span class="p">},</span>
-    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;wiki_contents_as_json&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;wiki_path&quot;</span><span class="p">:</span> <span class="s2">&quot;test page ΣΤ&quot;</span>
+    <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"wiki_contents_as_json"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"wiki_path"</span><span class="p">:</span> <span class="s2">"test page ΣΤ"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-wiki&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;li-b6f3814c-2cf7-11b2-a85c-95da948e58bf.ibm.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">357</span><span class="p">,</span>
-      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-03-27 12:40:58&quot;</span>
+    <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+      <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-wiki"</span><span class="p">,</span>
+      <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.1"</span><span class="p">,</span>
+      <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"li-b6f3814c-2cf7-11b2-a85c-95da948e58bf.ibm.com"</span><span class="p">,</span>
+      <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">357</span><span class="p">,</span>
+      <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2025-03-27 12:40:58"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;test page ΣΤ&quot;</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"test page ΣΤ"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -631,13 +631,13 @@
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;Page: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wiki_path&#39;</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="s2">"Page: '</span><span class="si">{}</span><span class="s2">'"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'wiki_path'</span><span class="p">))</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
-    <span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> contents:</span><span class="se">\n\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;json&#39;</span><span class="p">):</span>
-        <span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">JSON contents:</span><span class="se">\n\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;json&#39;</span><span class="p">])</span>
+    <span class="n">note</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> contents:</span><span class="se">\n\n</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">'text'</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'json'</span><span class="p">):</span>
+        <span class="n">note</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> </span><span class="se">\n</span><span class="s2">JSON contents:</span><span class="se">\n\n</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">'json'</span><span class="p">])</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> not found&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+    <span class="n">note</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{}</span><span class="s2"> not found"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
 </pre></div>
@@ -689,48 +689,48 @@
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;test page ΣΤ&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;children&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;test of fn_wiki_create_updateΣ Τ&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">39</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;shresh@example.com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient Sysadmin&quot;</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"test page ΣΤ"</span><span class="p">,</span>
+      <span class="s2">"children"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"test of fn_wiki_create_updateΣ Τ"</span><span class="p">,</span>
+      <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">39</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"shresh@example.com"</span><span class="p">,</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"Resilient Sysadmin"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;create_date&quot;</span><span class="p">:</span> <span class="mi">1743079240704</span><span class="p">,</span>
-      <span class="s2">&quot;last_modified_time&quot;</span><span class="p">:</span> <span class="mi">1743079240704</span><span class="p">,</span>
-      <span class="s2">&quot;last_modified_by&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">39</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;shresh@example.com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Resilient Sysadmin&quot;</span>
+      <span class="s2">"create_date"</span><span class="p">:</span> <span class="mi">1743079240704</span><span class="p">,</span>
+      <span class="s2">"last_modified_time"</span><span class="p">:</span> <span class="mi">1743079240704</span><span class="p">,</span>
+      <span class="s2">"last_modified_by"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">39</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"shresh@example.com"</span><span class="p">,</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"Resilient Sysadmin"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;mentioned_widgets&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;perms&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;update&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;delete&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="s2">"mentioned_widgets"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"perms"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"update"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"delete"</span><span class="p">:</span> <span class="n">true</span>
       <span class="p">},</span>
-      <span class="s2">&quot;parent&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+      <span class="s2">"parent"</span><span class="p">:</span> <span class="s2">""</span>
     <span class="p">},</span>
-    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;wiki_path&quot;</span><span class="p">:</span> <span class="s2">&quot;test page ΣΤ&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;wiki_body&quot;</span><span class="p">:</span> <span class="s2">&quot;test of fn_wiki_create_updateΣ Τ &quot;</span><span class="p">,</span>
-      <span class="s2">&quot;wiki_create_if_missing&quot;</span><span class="p">:</span> <span class="n">true</span>
+    <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"wiki_path"</span><span class="p">:</span> <span class="s2">"test page ΣΤ"</span><span class="p">,</span>
+      <span class="s2">"wiki_body"</span><span class="p">:</span> <span class="s2">"test of fn_wiki_create_updateΣ Τ "</span><span class="p">,</span>
+      <span class="s2">"wiki_create_if_missing"</span><span class="p">:</span> <span class="n">true</span>
     <span class="p">},</span>
-    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-wiki&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;li-b6f3814c-2cf7-11b2-a85c-95da948e58bf.ibm.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">624</span><span class="p">,</span>
-      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-03-27 12:40:40&quot;</span>
+    <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+      <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-wiki"</span><span class="p">,</span>
+      <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.1"</span><span class="p">,</span>
+      <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"li-b6f3814c-2cf7-11b2-a85c-95da948e58bf.ibm.com"</span><span class="p">,</span>
+      <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">624</span><span class="p">,</span>
+      <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2025-03-27 12:40:40"</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">}</span>
@@ -747,9 +747,9 @@
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;Page/Id: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wiki_path&#39;</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="s2">"Page/Id: '</span><span class="si">{}</span><span class="s2">'"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'wiki_path'</span><span class="p">))</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> created/updated</span><span class="se">\n\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]))</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2"> created/updated</span><span class="se">\n\n</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">'text'</span><span class="p">]))</span>
 </pre></div>
 </div>
 </p>
@@ -793,26 +793,26 @@
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
   <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;test of fn_wiki_create_updateΣ Τ &quot;</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"content"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"test of fn_wiki_create_updateΣ Τ "</span>
     <span class="p">],</span>
-    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;wiki_search_term&quot;</span><span class="p">:</span> <span class="s2">&quot;Σ Τ&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;wiki_path&quot;</span><span class="p">:</span> <span class="s2">&quot;test page ΣΤ&quot;</span>
+    <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"wiki_search_term"</span><span class="p">:</span> <span class="s2">"Σ Τ"</span><span class="p">,</span>
+      <span class="s2">"wiki_path"</span><span class="p">:</span> <span class="s2">"test page ΣΤ"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-wiki&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;li-b6f3814c-2cf7-11b2-a85c-95da948e58bf.ibm.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">363</span><span class="p">,</span>
-      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-03-27 12:41:13&quot;</span>
+    <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+      <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-wiki"</span><span class="p">,</span>
+      <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.1"</span><span class="p">,</span>
+      <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"li-b6f3814c-2cf7-11b2-a85c-95da948e58bf.ibm.com"</span><span class="p">,</span>
+      <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">363</span><span class="p">,</span>
+      <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2025-03-27 12:41:13"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;test page ΣΤ&quot;</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"test page ΣΤ"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -828,11 +828,11 @@
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;Page/Id: &#39;</span><span class="si">{}</span><span class="s2">&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wiki_path&#39;</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note</span> <span class="o">=</span> <span class="s2">"Page/Id: '</span><span class="si">{}</span><span class="s2">'"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'wiki_path'</span><span class="p">))</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="se">\n\n</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">)))</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="se">\n\n</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">)))</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> not found&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2"> not found"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>

@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -588,7 +588,7 @@
 </section>
 <section id="post-process-script">
 <h2>Post-Process Script<a class="headerlink" href="#post-process-script" title="Link to this heading">¶</a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result_data</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result_data</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">'content'</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">key_data</span><span class="p">,</span><span class="n">value_data</span> <span class="ow">in</span> <span class="n">result_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 <span class="n">rich_text_tmp</span> <span class="o">+=</span> <span class="n">rich_text_format</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key_data</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span><span class="n">value_data</span><span class="p">)</span><span class="n">browse_rich_text_final</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">rich_text_tmp</span><span class="p">)</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">browse_rich_text_final</span><span class="p">)</span>

@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -639,318 +639,318 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;caseFileID&quot;</span><span class="p">:</span> <span class="s2">&quot;7c551c65686c0866daafcee3d838f052&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;coOwner&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-    <span class="s2">&quot;contents&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;editorType&quot;</span><span class="p">:</span> <span class="s2">&quot;draft&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;plainText&quot;</span><span class="p">:</span> <span class="s2">&quot;Threat Type</span><span class="se">\n</span><span class="s2">Describe the type of Collection being created</span><span class="se">\n</span><span class="s2">Overview</span><span class="se">\n</span><span class="s2">Give a succinct overview of the threat involved</span><span class="se">\n</span><span class="s2">Indicators of Compromise</span><span class="se">\n</span><span class="s2"> 1.1.1.1 https://ru.wikipedia.org/wiki cf23df2207d99a74fbe169e3eba035e633b65d94 </span><span class="se">\n</span><span class="s2"> 108.177.16.0 CVE-2015-0313 poehali@namore.com stopspam.ru/tak/kak jorik.txt </span><span class="se">\n</span><span class="s2">ya.com 152c883836f1f3eec207395ac6f8e0c6 .ru50d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c </span><span class="se">\n</span><span class="s2">Protection</span><span class="se">\n</span><span class="s2">Share best practices for protection against this threat</span><span class="se">\n</span><span class="s2">Recommendations</span><span class="se">\n</span><span class="s2">Recommend a course of action, resources or applications to remediate this threat</span><span class="se">\n</span><span class="s2">References</span><span class="se">\n</span><span class="s2">Add further resources and information about this threat&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;rawContentState&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;blocks&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"caseFileID"</span><span class="p">:</span> <span class="s2">"7c551c65686c0866daafcee3d838f052"</span><span class="p">,</span>
+    <span class="s2">"coOwner"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">"contents"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"editorType"</span><span class="p">:</span> <span class="s2">"draft"</span><span class="p">,</span>
+      <span class="s2">"plainText"</span><span class="p">:</span> <span class="s2">"Threat Type</span><span class="se">\n</span><span class="s2">Describe the type of Collection being created</span><span class="se">\n</span><span class="s2">Overview</span><span class="se">\n</span><span class="s2">Give a succinct overview of the threat involved</span><span class="se">\n</span><span class="s2">Indicators of Compromise</span><span class="se">\n</span><span class="s2"> 1.1.1.1 https://ru.wikipedia.org/wiki cf23df2207d99a74fbe169e3eba035e633b65d94 </span><span class="se">\n</span><span class="s2"> 108.177.16.0 CVE-2015-0313 poehali@namore.com stopspam.ru/tak/kak jorik.txt </span><span class="se">\n</span><span class="s2">ya.com 152c883836f1f3eec207395ac6f8e0c6 .ru50d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c </span><span class="se">\n</span><span class="s2">Protection</span><span class="se">\n</span><span class="s2">Share best practices for protection against this threat</span><span class="se">\n</span><span class="s2">Recommendations</span><span class="se">\n</span><span class="s2">Recommend a course of action, resources or applications to remediate this threat</span><span class="se">\n</span><span class="s2">References</span><span class="se">\n</span><span class="s2">Add further resources and information about this threat"</span><span class="p">,</span>
+      <span class="s2">"rawContentState"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"blocks"</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;entityRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;inlineStyleRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;1988j&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Threat Type&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;header-one&quot;</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"depth"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"entityRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"inlineStyleRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"1988j"</span><span class="p">,</span>
+            <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"Threat Type"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"header-one"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;entityRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;inlineStyleRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;f1988&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Describe the type of Collection being created&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;unstyled&quot;</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"depth"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"entityRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"inlineStyleRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"f1988"</span><span class="p">,</span>
+            <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"Describe the type of Collection being created"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"unstyled"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;entityRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;inlineStyleRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;989eq&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Overview&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;header-one&quot;</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"depth"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"entityRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"inlineStyleRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"989eq"</span><span class="p">,</span>
+            <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"Overview"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"header-one"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;entityRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;inlineStyleRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;e6gah&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Give a succinct overview of the threat involved&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;unstyled&quot;</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"depth"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"entityRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"inlineStyleRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"e6gah"</span><span class="p">,</span>
+            <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"Give a succinct overview of the threat involved"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"unstyled"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;entityRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;inlineStyleRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;73loq&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Indicators of Compromise&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;header-one&quot;</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"depth"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"entityRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"inlineStyleRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"73loq"</span><span class="p">,</span>
+            <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"Indicators of Compromise"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"header-one"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;entityRanges&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"depth"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"entityRanges"</span><span class="p">:</span> <span class="p">[</span>
               <span class="p">{</span>
-                <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">1</span>
+                <span class="s2">"key"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"length"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+                <span class="s2">"offset"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
               <span class="p">{</span>
-                <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
-                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">9</span>
+                <span class="s2">"key"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">"length"</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
+                <span class="s2">"offset"</span><span class="p">:</span> <span class="mi">9</span>
               <span class="p">},</span>
               <span class="p">{</span>
-                <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-                <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
-                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">39</span>
+                <span class="s2">"key"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                <span class="s2">"length"</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+                <span class="s2">"offset"</span><span class="p">:</span> <span class="mi">39</span>
               <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;inlineStyleRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;3ge65&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot; 1.1.1.1 https://ru.wikipedia.org/wiki cf23df2207d99a74fbe169e3eba035e633b65d94 &quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;unstyled&quot;</span>
+            <span class="s2">"inlineStyleRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"3ge65"</span><span class="p">,</span>
+            <span class="s2">"text"</span><span class="p">:</span> <span class="s2">" 1.1.1.1 https://ru.wikipedia.org/wiki cf23df2207d99a74fbe169e3eba035e633b65d94 "</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"unstyled"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;entityRanges&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"depth"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"entityRanges"</span><span class="p">:</span> <span class="p">[</span>
               <span class="p">{</span>
-                <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-                <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
-                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">1</span>
+                <span class="s2">"key"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                <span class="s2">"length"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+                <span class="s2">"offset"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
               <span class="p">{</span>
-                <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-                <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
-                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">14</span>
+                <span class="s2">"key"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                <span class="s2">"length"</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
+                <span class="s2">"offset"</span><span class="p">:</span> <span class="mi">14</span>
               <span class="p">},</span>
               <span class="p">{</span>
-                <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-                <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span>
-                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">47</span>
+                <span class="s2">"key"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+                <span class="s2">"length"</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span>
+                <span class="s2">"offset"</span><span class="p">:</span> <span class="mi">47</span>
               <span class="p">},</span>
               <span class="p">{</span>
-                <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-                <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
-                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">67</span>
+                <span class="s2">"key"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+                <span class="s2">"length"</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+                <span class="s2">"offset"</span><span class="p">:</span> <span class="mi">67</span>
               <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;inlineStyleRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;6efvp&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot; 108.177.16.0 CVE-2015-0313 poehali@namore.com stopspam.ru/tak/kak jorik.txt &quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;unstyled&quot;</span>
+            <span class="s2">"inlineStyleRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"6efvp"</span><span class="p">,</span>
+            <span class="s2">"text"</span><span class="p">:</span> <span class="s2">" 108.177.16.0 CVE-2015-0313 poehali@namore.com stopspam.ru/tak/kak jorik.txt "</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"unstyled"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;entityRanges&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"depth"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"entityRanges"</span><span class="p">:</span> <span class="p">[</span>
               <span class="p">{</span>
-                <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
-                <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">0</span>
+                <span class="s2">"key"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+                <span class="s2">"length"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+                <span class="s2">"offset"</span><span class="p">:</span> <span class="mi">0</span>
               <span class="p">},</span>
               <span class="p">{</span>
-                <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-                <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
-                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">7</span>
+                <span class="s2">"key"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+                <span class="s2">"length"</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+                <span class="s2">"offset"</span><span class="p">:</span> <span class="mi">7</span>
               <span class="p">},</span>
               <span class="p">{</span>
-                <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
-                <span class="s2">&quot;length&quot;</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
-                <span class="s2">&quot;offset&quot;</span><span class="p">:</span> <span class="mi">43</span>
+                <span class="s2">"key"</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+                <span class="s2">"length"</span><span class="p">:</span> <span class="mi">64</span><span class="p">,</span>
+                <span class="s2">"offset"</span><span class="p">:</span> <span class="mi">43</span>
               <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;inlineStyleRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;a9563&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;ya.com 152c883836f1f3eec207395ac6f8e0c6 .ru50d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c &quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;unstyled&quot;</span>
+            <span class="s2">"inlineStyleRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"a9563"</span><span class="p">,</span>
+            <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"ya.com 152c883836f1f3eec207395ac6f8e0c6 .ru50d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c "</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"unstyled"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;entityRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;inlineStyleRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;29es1&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Protection&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;header-one&quot;</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"depth"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"entityRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"inlineStyleRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"29es1"</span><span class="p">,</span>
+            <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"Protection"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"header-one"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;entityRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;inlineStyleRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;79k7&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Share best practices for protection against this threat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;unstyled&quot;</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"depth"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"entityRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"inlineStyleRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"79k7"</span><span class="p">,</span>
+            <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"Share best practices for protection against this threat"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"unstyled"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;entityRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;inlineStyleRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;7ua1h&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Recommendations&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;header-one&quot;</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"depth"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"entityRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"inlineStyleRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"7ua1h"</span><span class="p">,</span>
+            <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"Recommendations"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"header-one"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;entityRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;inlineStyleRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;1fnn&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Recommend a course of action, resources or applications to remediate this threat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;unstyled&quot;</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"depth"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"entityRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"inlineStyleRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"1fnn"</span><span class="p">,</span>
+            <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"Recommend a course of action, resources or applications to remediate this threat"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"unstyled"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;entityRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;inlineStyleRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;l9da&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;References&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;header-one&quot;</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"depth"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"entityRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"inlineStyleRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"l9da"</span><span class="p">,</span>
+            <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"References"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"header-one"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{},</span>
-            <span class="s2">&quot;depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;entityRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;inlineStyleRanges&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;78bt3&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Add further resources and information about this threat&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;unstyled&quot;</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">"depth"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"entityRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"inlineStyleRanges"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"key"</span><span class="p">:</span> <span class="s2">"78bt3"</span><span class="p">,</span>
+            <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"Add further resources and information about this threat"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"unstyled"</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="s2">&quot;entityMap&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;IP&quot;</span>
+        <span class="s2">"entityMap"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"0"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"1.1.1.1"</span><span class="p">,</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"IP"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;mutability&quot;</span><span class="p">:</span> <span class="s2">&quot;IMMUTABLE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;OBSERVABLE&quot;</span>
+            <span class="s2">"mutability"</span><span class="p">:</span> <span class="s2">"IMMUTABLE"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"OBSERVABLE"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;https://ru.wikipedia.org/wiki&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;URL&quot;</span>
+          <span class="s2">"1"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"https://ru.wikipedia.org/wiki"</span><span class="p">,</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"URL"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;mutability&quot;</span><span class="p">:</span> <span class="s2">&quot;IMMUTABLE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;OBSERVABLE&quot;</span>
+            <span class="s2">"mutability"</span><span class="p">:</span> <span class="s2">"IMMUTABLE"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"OBSERVABLE"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;cf23df220*******169e3eba035e633b65d94&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;MAL&quot;</span>
+          <span class="s2">"2"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"cf23df220*******169e3eba035e633b65d94"</span><span class="p">,</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"MAL"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;mutability&quot;</span><span class="p">:</span> <span class="s2">&quot;IMMUTABLE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;OBSERVABLE&quot;</span>
+            <span class="s2">"mutability"</span><span class="p">:</span> <span class="s2">"IMMUTABLE"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"OBSERVABLE"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;108.177.16.0&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;IP&quot;</span>
+          <span class="s2">"3"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"108.177.16.0"</span><span class="p">,</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"IP"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;mutability&quot;</span><span class="p">:</span> <span class="s2">&quot;IMMUTABLE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;OBSERVABLE&quot;</span>
+            <span class="s2">"mutability"</span><span class="p">:</span> <span class="s2">"IMMUTABLE"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"OBSERVABLE"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;CVE-2015-0313&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;VUL&quot;</span>
+          <span class="s2">"4"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"CVE-2015-0313"</span><span class="p">,</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"VUL"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;mutability&quot;</span><span class="p">:</span> <span class="s2">&quot;IMMUTABLE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;OBSERVABLE&quot;</span>
+            <span class="s2">"mutability"</span><span class="p">:</span> <span class="s2">"IMMUTABLE"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"OBSERVABLE"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;5&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;stopspam.ru/tak/kak&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;URL&quot;</span>
+          <span class="s2">"5"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"stopspam.ru/tak/kak"</span><span class="p">,</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"URL"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;mutability&quot;</span><span class="p">:</span> <span class="s2">&quot;IMMUTABLE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;OBSERVABLE&quot;</span>
+            <span class="s2">"mutability"</span><span class="p">:</span> <span class="s2">"IMMUTABLE"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"OBSERVABLE"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;6&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;jorik.txt&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;URL&quot;</span>
+          <span class="s2">"6"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"jorik.txt"</span><span class="p">,</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"URL"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;mutability&quot;</span><span class="p">:</span> <span class="s2">&quot;IMMUTABLE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;OBSERVABLE&quot;</span>
+            <span class="s2">"mutability"</span><span class="p">:</span> <span class="s2">"IMMUTABLE"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"OBSERVABLE"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;7&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;ya.com&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;URL&quot;</span>
+          <span class="s2">"7"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"ya.com"</span><span class="p">,</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"URL"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;mutability&quot;</span><span class="p">:</span> <span class="s2">&quot;IMMUTABLE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;OBSERVABLE&quot;</span>
+            <span class="s2">"mutability"</span><span class="p">:</span> <span class="s2">"IMMUTABLE"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"OBSERVABLE"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;8&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;152c8*******eec207395ac6f8e0c6&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;MAL&quot;</span>
+          <span class="s2">"8"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"152c8*******eec207395ac6f8e0c6"</span><span class="p">,</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"MAL"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;mutability&quot;</span><span class="p">:</span> <span class="s2">&quot;IMMUTABLE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;OBSERVABLE&quot;</span>
+            <span class="s2">"mutability"</span><span class="p">:</span> <span class="s2">"IMMUTABLE"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"OBSERVABLE"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;9&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;50d858e0985ecc7f604*******5ab587f42c2570a884095a9e8ccacd0f6545c&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;MAL&quot;</span>
+          <span class="s2">"9"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"50d858e0985ecc7f604*******5ab587f42c2570a884095a9e8ccacd0f6545c"</span><span class="p">,</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"MAL"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;mutability&quot;</span><span class="p">:</span> <span class="s2">&quot;IMMUTABLE&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;OBSERVABLE&quot;</span>
+            <span class="s2">"mutability"</span><span class="p">:</span> <span class="s2">"IMMUTABLE"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"OBSERVABLE"</span>
           <span class="p">}</span>
         <span class="p">}</span>
       <span class="p">},</span>
-      <span class="s2">&quot;reports&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;wiki&quot;</span><span class="p">:</span> <span class="s2">&quot;Threat Type</span><span class="se">\n</span><span class="s2">Describe the type of Collection being created</span><span class="se">\n</span><span class="s2">Overview</span><span class="se">\n</span><span class="s2">Give a succinct overview of the threat involved</span><span class="se">\n</span><span class="s2">Indicators of Compromise</span><span class="se">\n</span><span class="s2"> 1.1.1.1 https://ru.wikipedia.org/wiki cf23df2207d99a74fbe169e3eba035e633b65d94 </span><span class="se">\n</span><span class="s2"> 108.177.16.0 CVE-2015-0313 poehali@namore.com stopspam.ru/tak/kak jorik.txt </span><span class="se">\n</span><span class="s2">ya.com 152c883836f1f3eec207395ac6f8e0c6 .ru50d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c </span><span class="se">\n</span><span class="s2">Protection</span><span class="se">\n</span><span class="s2">Share best practices for protection against this threat</span><span class="se">\n</span><span class="s2">Recommendations</span><span class="se">\n</span><span class="s2">Recommend a course of action, resources or applications to remediate this threat</span><span class="se">\n</span><span class="s2">References</span><span class="se">\n</span><span class="s2">Add further resources and information about this threat&quot;</span>
+      <span class="s2">"reports"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"wiki"</span><span class="p">:</span> <span class="s2">"Threat Type</span><span class="se">\n</span><span class="s2">Describe the type of Collection being created</span><span class="se">\n</span><span class="s2">Overview</span><span class="se">\n</span><span class="s2">Give a succinct overview of the threat involved</span><span class="se">\n</span><span class="s2">Indicators of Compromise</span><span class="se">\n</span><span class="s2"> 1.1.1.1 https://ru.wikipedia.org/wiki cf23df2207d99a74fbe169e3eba035e633b65d94 </span><span class="se">\n</span><span class="s2"> 108.177.16.0 CVE-2015-0313 poehali@namore.com stopspam.ru/tak/kak jorik.txt </span><span class="se">\n</span><span class="s2">ya.com 152c883836f1f3eec207395ac6f8e0c6 .ru50d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c </span><span class="se">\n</span><span class="s2">Protection</span><span class="se">\n</span><span class="s2">Share best practices for protection against this threat</span><span class="se">\n</span><span class="s2">Recommendations</span><span class="se">\n</span><span class="s2">Recommend a course of action, resources or applications to remediate this threat</span><span class="se">\n</span><span class="s2">References</span><span class="se">\n</span><span class="s2">Add further resources and information about this threat"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-05-20T12:19:07.138Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;deletable&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-    <span class="s2">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;mine&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-    <span class="s2">&quot;nGroups&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;nPeople&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;isDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;QA RVision&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.ibm.com/55000AJ8RT&quot;</span>
+    <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2021-05-20T12:19:07.138Z"</span><span class="p">,</span>
+    <span class="s2">"deletable"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">"extensions"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"links"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"mine"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">"nGroups"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"nPeople"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"owner"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"isDisabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"QA RVision"</span><span class="p">,</span>
+      <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"http://www.ibm.com/55000AJ8RT"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="s2">&quot;public&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Test_Collection&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;tlpColor&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;tlpColorCode&quot;</span><span class="p">:</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;tlpColorName&quot;</span><span class="p">:</span> <span class="s2">&quot;TLP_WHITE&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;tlpIsUserDefined&quot;</span><span class="p">:</span> <span class="n">true</span>
+    <span class="s2">"shared"</span><span class="p">:</span> <span class="s2">"public"</span><span class="p">,</span>
+    <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Test_Collection"</span><span class="p">,</span>
+    <span class="s2">"tlpColor"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"tlpColorCode"</span><span class="p">:</span> <span class="s2">"white"</span><span class="p">,</span>
+      <span class="s2">"tlpColorName"</span><span class="p">:</span> <span class="s2">"TLP_WHITE"</span><span class="p">,</span>
+      <span class="s2">"tlpIsUserDefined"</span><span class="p">:</span> <span class="n">true</span>
     <span class="p">},</span>
-    <span class="s2">&quot;unconvertedContents&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;writeable&quot;</span><span class="p">:</span> <span class="n">false</span>
+    <span class="s2">"unconvertedContents"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"writeable"</span><span class="p">:</span> <span class="n">false</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;xforce_collection_id&quot;</span><span class="p">:</span> <span class="s2">&quot;7c551c65686c0866daafcee3d838f052&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"xforce_collection_id"</span><span class="p">:</span> <span class="s2">"7c551c65686c0866daafcee3d838f052"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">584</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-xforce&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-05-09 09:11:51&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">584</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-xforce"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.1.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-05-09 09:11:51"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -966,17 +966,17 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Post-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">collection_results</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
   <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
-  <span class="k">elif</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;contents&quot;</span><span class="p">,</span> <span class="p">{}):</span>
-    <span class="n">noteText</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Title:&lt;/b&gt; </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">)</span><span class="si">}</span>
-<span class="s2">    &lt;b&gt;Created:&lt;/b&gt; </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;created&#39;</span><span class="p">)</span><span class="si">}</span>
-<span class="s2">    &lt;b&gt;Tags:&lt;/b&gt; </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">)</span><span class="si">}</span>
+  <span class="k">elif</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"contents"</span><span class="p">,</span> <span class="p">{}):</span>
+    <span class="n">noteText</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"""&lt;b&gt;Title:&lt;/b&gt; </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'title'</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">    &lt;b&gt;Created:&lt;/b&gt; </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'created'</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">    &lt;b&gt;Tags:&lt;/b&gt; </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'tags'</span><span class="p">)</span><span class="si">}</span>
 
-<span class="s2">    </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;contents&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;wiki&#39;</span><span class="p">)</span><span class="si">}</span>
-<span class="s2">    &quot;&quot;&quot;</span>
+<span class="s2">    </span><span class="si">{</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'contents'</span><span class="p">,</span><span class="w"> </span><span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'wiki'</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">    """</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">noteText</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1024,156 +1024,156 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;casefiles&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"casefiles"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;caseFileID&quot;</span><span class="p">:</span> <span class="s2">&quot;7c551c65686c0866daafcee3d8061d6b&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-10-14T10:28:28.741Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;isDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u0414\u0430\u0440\u044c\u044f</span><span class="s2"> </span><span class="se">\u041b\u0430\u043d\u0433\u0438\u043d\u0430</span><span class="s2">&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;userid&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.ibm.com/5500038YXJ&quot;</span>
+        <span class="s2">"caseFileID"</span><span class="p">:</span> <span class="s2">"7c551c65686c0866daafcee3d8061d6b"</span><span class="p">,</span>
+        <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2021-10-14T10:28:28.741Z"</span><span class="p">,</span>
+        <span class="s2">"links"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"owner"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"isDisabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u0414\u0430\u0440\u044c\u044f</span><span class="s2"> </span><span class="se">\u041b\u0430\u043d\u0433\u0438\u043d\u0430</span><span class="s2">"</span><span class="p">,</span>
+          <span class="s2">"userid"</span><span class="p">:</span> <span class="s2">"http://www.ibm.com/5500038YXJ"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u0440\u043f\u043e\u043f</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;writable&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="s2">"shared"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u0440\u043f\u043e\u043f</span><span class="s2">"</span><span class="p">,</span>
+        <span class="s2">"writable"</span><span class="p">:</span> <span class="n">false</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;caseFileID&quot;</span><span class="p">:</span> <span class="s2">&quot;7c551c65*******6daafcee3d838f052&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-05-20T12:19:07.138Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;isDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;QA RVision&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;userid&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.ibm.com/55000AJ8RT&quot;</span>
+        <span class="s2">"caseFileID"</span><span class="p">:</span> <span class="s2">"7c551c65*******6daafcee3d838f052"</span><span class="p">,</span>
+        <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2021-05-20T12:19:07.138Z"</span><span class="p">,</span>
+        <span class="s2">"links"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"owner"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"isDisabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"QA RVision"</span><span class="p">,</span>
+          <span class="s2">"userid"</span><span class="p">:</span> <span class="s2">"http://www.ibm.com/55000AJ8RT"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Test_Collection&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;writable&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="s2">"shared"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Test_Collection"</span><span class="p">,</span>
+        <span class="s2">"writable"</span><span class="p">:</span> <span class="n">false</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;caseFileID&quot;</span><span class="p">:</span> <span class="s2">&quot;2a58b28a*******ddc23d856e4871a69&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-03-08T17:51:22.131Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;isDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;First Last&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;userid&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.ibm.com/550001H8BT&quot;</span>
+        <span class="s2">"caseFileID"</span><span class="p">:</span> <span class="s2">"2a58b28a*******ddc23d856e4871a69"</span><span class="p">,</span>
+        <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2023-03-08T17:51:22.131Z"</span><span class="p">,</span>
+        <span class="s2">"links"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"owner"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"isDisabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"First Last"</span><span class="p">,</span>
+          <span class="s2">"userid"</span><span class="p">:</span> <span class="s2">"http://www.ibm.com/550001H8BT"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;test2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;totalVotes&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;writable&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="s2">"shared"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"test2"</span><span class="p">,</span>
+        <span class="s2">"totalVotes"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"writable"</span><span class="p">:</span> <span class="n">true</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;caseFileID&quot;</span><span class="p">:</span> <span class="s2">&quot;6db4c6bc*******fffaf5a754b7ae73d&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-03-10T12:33:59.224Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;isDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;sai Karthik&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;userid&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.ibm.com/55000126PG&quot;</span>
+        <span class="s2">"caseFileID"</span><span class="p">:</span> <span class="s2">"6db4c6bc*******fffaf5a754b7ae73d"</span><span class="p">,</span>
+        <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2020-03-10T12:33:59.224Z"</span><span class="p">,</span>
+        <span class="s2">"links"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"owner"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"isDisabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"sai Karthik"</span><span class="p">,</span>
+          <span class="s2">"userid"</span><span class="p">:</span> <span class="s2">"http://www.ibm.com/55000126PG"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;test1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;writable&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="s2">"shared"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"test1"</span><span class="p">,</span>
+        <span class="s2">"writable"</span><span class="p">:</span> <span class="n">false</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;caseFileID&quot;</span><span class="p">:</span> <span class="s2">&quot;52adef7*******958050c700a8b0da15&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-07-22T17:20:40.817Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;isDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;ZHENG LU&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;userid&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.ibm.com/55v*******YAE9&quot;</span>
+        <span class="s2">"caseFileID"</span><span class="p">:</span> <span class="s2">"52adef7*******958050c700a8b0da15"</span><span class="p">,</span>
+        <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2019-07-22T17:20:40.817Z"</span><span class="p">,</span>
+        <span class="s2">"links"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"owner"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"isDisabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"ZHENG LU"</span><span class="p">,</span>
+          <span class="s2">"userid"</span><span class="p">:</span> <span class="s2">"http://www.ibm.com/55v*******YAE9"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Test Email&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;writable&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="s2">"shared"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Test Email"</span><span class="p">,</span>
+        <span class="s2">"writable"</span><span class="p">:</span> <span class="n">false</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;caseFileID&quot;</span><span class="p">:</span> <span class="s2">&quot;7d889aac9*******bebc01a16979140eb2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-01-23T11:34:04.800Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;isDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;X-Force Research&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;userid&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.ibm.com/55*******JMXN&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;verified&quot;</span><span class="p">:</span> <span class="s2">&quot;researcher&quot;</span>
+        <span class="s2">"caseFileID"</span><span class="p">:</span> <span class="s2">"7d889aac9*******bebc01a16979140eb2"</span><span class="p">,</span>
+        <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2023-01-23T11:34:04.800Z"</span><span class="p">,</span>
+        <span class="s2">"links"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"owner"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"isDisabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"X-Force Research"</span><span class="p">,</span>
+          <span class="s2">"userid"</span><span class="p">:</span> <span class="s2">"http://www.ibm.com/55*******JMXN"</span><span class="p">,</span>
+          <span class="s2">"verified"</span><span class="p">:</span> <span class="s2">"researcher"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;phishing&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;early-warning&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;squatting&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;x-location:all&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;x-industry:media&quot;</span>
+        <span class="s2">"shared"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"phishing"</span><span class="p">,</span>
+          <span class="s2">"early-warning"</span><span class="p">,</span>
+          <span class="s2">"squatting"</span><span class="p">,</span>
+          <span class="s2">"x-location:all"</span><span class="p">,</span>
+          <span class="s2">"x-industry:media"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Taobao Squatting Campaign&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;writable&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Taobao Squatting Campaign"</span><span class="p">,</span>
+        <span class="s2">"writable"</span><span class="p">:</span> <span class="n">false</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;caseFileID&quot;</span><span class="p">:</span> <span class="s2">&quot;e2fa529*******ad37e4f4652c221db&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2017-10-30T07:47:29.799Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;isDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Noah J, A&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;userid&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.ibm.com/50S*******FS2&quot;</span>
+        <span class="s2">"caseFileID"</span><span class="p">:</span> <span class="s2">"e2fa529*******ad37e4f4652c221db"</span><span class="p">,</span>
+        <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2017-10-30T07:47:29.799Z"</span><span class="p">,</span>
+        <span class="s2">"links"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"owner"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"isDisabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Noah J, A"</span><span class="p">,</span>
+          <span class="s2">"userid"</span><span class="p">:</span> <span class="s2">"http://www.ibm.com/50S*******FS2"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;icloader&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;fusioncore&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;kryptik&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;adware&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;malware&quot;</span>
+        <span class="s2">"shared"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"icloader"</span><span class="p">,</span>
+          <span class="s2">"fusioncore"</span><span class="p">,</span>
+          <span class="s2">"kryptik"</span><span class="p">,</span>
+          <span class="s2">"adware"</span><span class="p">,</span>
+          <span class="s2">"malware"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Kryptik / FusionCore / ICLoader Malware Campaign via AWS IP&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;writable&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Kryptik / FusionCore / ICLoader Malware Campaign via AWS IP"</span><span class="p">,</span>
+        <span class="s2">"writable"</span><span class="p">:</span> <span class="n">false</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;caseFileID&quot;</span><span class="p">:</span> <span class="s2">&quot;383879ea*******d38c1c2e9709ffe9&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2018-04-10T13:05:35.686Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;isDisabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;XFTAS Newsletter Admin&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;userid&quot;</span><span class="p">:</span> <span class="s2">&quot;http://www.ibm.com/50GHFD9JCW&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;verified&quot;</span><span class="p">:</span> <span class="s2">&quot;ibmexpert&quot;</span>
+        <span class="s2">"caseFileID"</span><span class="p">:</span> <span class="s2">"383879ea*******d38c1c2e9709ffe9"</span><span class="p">,</span>
+        <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2018-04-10T13:05:35.686Z"</span><span class="p">,</span>
+        <span class="s2">"links"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"owner"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"isDisabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"XFTAS Newsletter Admin"</span><span class="p">,</span>
+          <span class="s2">"userid"</span><span class="p">:</span> <span class="s2">"http://www.ibm.com/50GHFD9JCW"</span><span class="p">,</span>
+          <span class="s2">"verified"</span><span class="p">:</span> <span class="s2">"ibmexpert"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;shared&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;xftas&quot;</span>
+        <span class="s2">"shared"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"xftas"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;XFTAS Daily Threat Assessment for April 02, 2018&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;writable&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"XFTAS Daily Threat Assessment for April 02, 2018"</span><span class="p">,</span>
+        <span class="s2">"writable"</span><span class="p">:</span> <span class="n">false</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;num_of_casefiles&quot;</span><span class="p">:</span> <span class="mi">8</span>
+    <span class="s2">"num_of_casefiles"</span><span class="p">:</span> <span class="mi">8</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;xforce_collection_type&quot;</span><span class="p">:</span> <span class="s2">&quot;public&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;xforce_query&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"xforce_collection_type"</span><span class="p">:</span> <span class="s2">"public"</span><span class="p">,</span>
+    <span class="s2">"xforce_query"</span><span class="p">:</span> <span class="s2">"1.1.1.1"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">556</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-xforce&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-05-09 09:11:47&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">556</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-xforce"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.1.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-05-09 09:11:47"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1182,7 +1182,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">xforce_query</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">xforce_collection_type</span> <span class="o">=</span> <span class="s2">&quot;private&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">xforce_collection_type</span> <span class="o">=</span> <span class="s2">"private"</span>
 </pre></div>
 </div>
 </p>
@@ -1190,13 +1190,13 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Post-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">query_collections_results</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
   <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;b&gt;X-Force Query status&lt;/b&gt;&lt;br&gt;</span><span class="si">{}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="n">noteText</span> <span class="o">=</span> <span class="s2">"""&lt;b&gt;X-Force Query status&lt;/b&gt;&lt;br&gt;</span><span class="si">{}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
-  <span class="k">elif</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;num_of_casefiles&quot;</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;b&gt;X-Force Query status&lt;/b&gt;&lt;br&gt;Total matched case files: &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;num_of_casefiles&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+  <span class="k">elif</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"num_of_casefiles"</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">noteText</span> <span class="o">=</span> <span class="s2">"""&lt;b&gt;X-Force Query status&lt;/b&gt;&lt;br&gt;Total matched case files: &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"num_of_casefiles"</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 </pre></div>
 </div>

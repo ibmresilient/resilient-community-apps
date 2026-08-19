@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -732,32 +732,32 @@ Please keep in mind that this app relies on Tesseract 5.0.1, which is popular op
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="mf">93.921173</span><span class="p">,</span>
-      <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Description&quot;</span>
+      <span class="s2">"confidence"</span><span class="p">:</span> <span class="mf">93.921173</span><span class="p">,</span>
+      <span class="s2">"text"</span><span class="p">:</span> <span class="s2">"Description"</span>
     <span class="p">}</span>
   <span class="p">],</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;ocr_artifact_id&quot;</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span>
-    <span class="s2">&quot;ocr_base64&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;ocr_confidence_threshold&quot;</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
-    <span class="s2">&quot;ocr_incident_id&quot;</span><span class="p">:</span> <span class="mi">2098</span><span class="p">,</span>
-    <span class="s2">&quot;ocr_language&quot;</span><span class="p">:</span> <span class="s2">&quot;eng&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ocr_task_id&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"ocr_artifact_id"</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span>
+    <span class="s2">"ocr_base64"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"ocr_confidence_threshold"</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
+    <span class="s2">"ocr_incident_id"</span><span class="p">:</span> <span class="mi">2098</span><span class="p">,</span>
+    <span class="s2">"ocr_language"</span><span class="p">:</span> <span class="s2">"eng"</span><span class="p">,</span>
+    <span class="s2">"ocr_task_id"</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1161</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;Host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ocr&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-06-27 14:08:28&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1161</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"Host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-ocr"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.1"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-06-27 14:08:28"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -777,12 +777,12 @@ Please keep in mind that this app relies on Tesseract 5.0.1, which is popular op
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">content</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocr_results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">content</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocr_results</span><span class="p">[</span><span class="s2">"content"</span><span class="p">]</span>
 
 <span class="k">if</span> <span class="n">content</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-  <span class="n">output_text</span> <span class="o">=</span> <span class="s2">&quot;Below are the lines detected by OCR, as well as their confidence scores (threshold = </span><span class="si">{0}</span><span class="s2">)</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocr_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;ocr_confidence_threshold&quot;</span><span class="p">))</span>
+  <span class="n">output_text</span> <span class="o">=</span> <span class="s2">"Below are the lines detected by OCR, as well as their confidence scores (threshold = </span><span class="si">{0}</span><span class="s2">)</span><span class="se">\n\n</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocr_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"inputs"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"ocr_confidence_threshold"</span><span class="p">))</span>
   <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
-    <span class="n">output_text</span> <span class="o">+=</span> <span class="s1">&#39;&quot;&#39;</span> <span class="o">+</span> <span class="n">line</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">&#39;&quot; </span><span class="se">\t\t</span><span class="s1"> &lt;i&gt;Confidence Score: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;confidence&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">%&lt;/i&gt;</span><span class="se">\n\n</span><span class="s1">&#39;</span>
+    <span class="n">output_text</span> <span class="o">+=</span> <span class="s1">'"'</span> <span class="o">+</span> <span class="n">line</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"text"</span><span class="p">,</span><span class="kc">None</span><span class="p">)</span> <span class="o">+</span> <span class="sa">f</span><span class="s1">'" </span><span class="se">\t\t</span><span class="s1"> &lt;i&gt;Confidence Score: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"confidence"</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">),</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">%&lt;/i&gt;</span><span class="se">\n\n</span><span class="s1">'</span>
   
   
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">output_text</span><span class="p">)</span>

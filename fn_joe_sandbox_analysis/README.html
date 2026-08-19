@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -688,32 +688,32 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;analysis_report_id&quot;</span><span class="p">:</span> <span class="s2">&quot;2875365&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;analysis_report_name&quot;</span><span class="p">:</span> <span class="s2">&quot;report-3d16493b0814a18d6806ed30f4efac31.html&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;analysis_report_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://jbxcloud.joesecurity.org/api//analysis/2875365&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;analysis_status&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"analysis_report_id"</span><span class="p">:</span> <span class="s2">"2875365"</span><span class="p">,</span>
+    <span class="s2">"analysis_report_name"</span><span class="p">:</span> <span class="s2">"report-3d16493b0814a18d6806ed30f4efac31.html"</span><span class="p">,</span>
+    <span class="s2">"analysis_report_url"</span><span class="p">:</span> <span class="s2">"https://jbxcloud.joesecurity.org/api//analysis/2875365"</span><span class="p">,</span>
+    <span class="s2">"analysis_status"</span><span class="p">:</span> <span class="s2">"unknown"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;artifact_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;attachment_id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2107</span><span class="p">,</span>
-    <span class="s2">&quot;jsb_report_type&quot;</span><span class="p">:</span> <span class="s2">&quot;html&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"artifact_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"artifact_type"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"artifact_value"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"attachment_id"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2107</span><span class="p">,</span>
+    <span class="s2">"jsb_report_type"</span><span class="p">:</span> <span class="s2">"html"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">245007</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-joe-sandbox-analysis&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.2.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-12-22 12:56:30&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">245007</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-joe-sandbox-analysis"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.2.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-12-22 12:56:30"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -733,10 +733,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">artifact_analysis</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">artifact_analysis</span>
 
-<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;Joe Sandbox analysis &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt; complete</span>
-<span class="s2">                    &lt;b&gt;Artifact:&lt;/b&gt; &#39;</span><span class="si">{1}</span><span class="s2">&#39;</span>
-<span class="s2">                    &lt;b&gt;Report URL:&lt;/b&gt; &lt;a href=&#39;</span><span class="si">{2}</span><span class="s2">&#39;&gt;</span><span class="si">{2}</span><span class="s2">&lt;/a&gt;</span>
-<span class="s2">                    &lt;b&gt;Detection Status:&lt;/b&gt;&lt;b&gt;</span><span class="si">{3}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact_analysis</span><span class="o">.</span><span class="n">analysis_report_name</span><span class="p">,</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">artifact_analysis</span><span class="o">.</span><span class="n">analysis_report_url</span><span class="p">,</span> <span class="n">artifact_analysis</span><span class="o">.</span><span class="n">analysis_status</span><span class="p">))</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"""&lt;br&gt;Joe Sandbox analysis &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt; complete</span>
+<span class="s2">                    &lt;b&gt;Artifact:&lt;/b&gt; '</span><span class="si">{1}</span><span class="s2">'</span>
+<span class="s2">                    &lt;b&gt;Report URL:&lt;/b&gt; &lt;a href='</span><span class="si">{2}</span><span class="s2">'&gt;</span><span class="si">{2}</span><span class="s2">&lt;/a&gt;</span>
+<span class="s2">                    &lt;b&gt;Detection Status:&lt;/b&gt;&lt;b&gt;</span><span class="si">{3}</span><span class="s2">&lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact_analysis</span><span class="o">.</span><span class="n">analysis_report_name</span><span class="p">,</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">artifact_analysis</span><span class="o">.</span><span class="n">analysis_report_url</span><span class="p">,</span> <span class="n">artifact_analysis</span><span class="o">.</span><span class="n">analysis_status</span><span class="p">))</span>
 </pre></div>
 </div>
 </p>

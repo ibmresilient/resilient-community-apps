@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -624,28 +624,28 @@
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-   <span class="s2">&quot;content&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;status&quot;</span><span class="p">:</span><span class="s2">&quot;completed&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;domain&quot;</span><span class="p">:</span><span class="s2">&quot;startup417.gb.net&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;user_agent&quot;</span><span class="p">:</span><span class="s2">&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;target&quot;</span><span class="p">:</span><span class="s2">&quot;Microsoft&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;sign_in_to_your_microsoft_account&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;https://startup417.gb.net/M3?mes1=asdf@asdf.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;time&quot;</span><span class="p">:</span><span class="s2">&quot;2018-12-06T22:39:34.210Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;verdict&quot;</span><span class="p">:</span><span class="s2">&quot;malicious&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;plan&quot;</span><span class="p">:</span><span class="s2">&quot;free&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;tld&quot;</span><span class="p">:</span><span class="s2">&quot;net&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;iso_code&quot;</span><span class="p">:</span><span class="s2">&quot;US&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;first_seen&quot;</span><span class="p">:</span><span class="s2">&quot;2018-12-06T19:16:20.825Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;ip_address&quot;</span><span class="p">:</span><span class="s2">&quot;104.24.104.116&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;asn&quot;</span><span class="p">:</span><span class="mi">13335</span><span class="p">,</span>
-      <span class="s2">&quot;user_email&quot;</span><span class="p">:</span><span class="s2">&quot;api&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;user&quot;</span><span class="p">:</span><span class="s2">&quot;free-api&quot;</span>
+   <span class="s2">"content"</span><span class="p">:{</span>
+      <span class="s2">"status"</span><span class="p">:</span><span class="s2">"completed"</span><span class="p">,</span>
+      <span class="s2">"domain"</span><span class="p">:</span><span class="s2">"startup417.gb.net"</span><span class="p">,</span>
+      <span class="s2">"user_agent"</span><span class="p">:</span><span class="s2">"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36"</span><span class="p">,</span>
+      <span class="s2">"target"</span><span class="p">:</span><span class="s2">"Microsoft"</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="p">:</span><span class="s2">"sign_in_to_your_microsoft_account"</span><span class="p">,</span>
+      <span class="s2">"url"</span><span class="p">:</span><span class="s2">"https://startup417.gb.net/M3?mes1=asdf@asdf.com"</span><span class="p">,</span>
+      <span class="s2">"time"</span><span class="p">:</span><span class="s2">"2018-12-06T22:39:34.210Z"</span><span class="p">,</span>
+      <span class="s2">"verdict"</span><span class="p">:</span><span class="s2">"malicious"</span><span class="p">,</span>
+      <span class="s2">"plan"</span><span class="p">:</span><span class="s2">"free"</span><span class="p">,</span>
+      <span class="s2">"tld"</span><span class="p">:</span><span class="s2">"net"</span><span class="p">,</span>
+      <span class="s2">"iso_code"</span><span class="p">:</span><span class="s2">"US"</span><span class="p">,</span>
+      <span class="s2">"first_seen"</span><span class="p">:</span><span class="s2">"2018-12-06T19:16:20.825Z"</span><span class="p">,</span>
+      <span class="s2">"ip_address"</span><span class="p">:</span><span class="s2">"104.24.104.116"</span><span class="p">,</span>
+      <span class="s2">"asn"</span><span class="p">:</span><span class="mi">13335</span><span class="p">,</span>
+      <span class="s2">"user_email"</span><span class="p">:</span><span class="s2">"api"</span><span class="p">,</span>
+      <span class="s2">"user"</span><span class="p">:</span><span class="s2">"free-api"</span>
    <span class="p">},</span>
-   <span class="s2">&quot;inputs&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;phishai_scan_id&quot;</span><span class="p">:</span><span class="s2">&quot;gGBSaVvlN5qc5PcwvnuT&quot;</span>
+   <span class="s2">"inputs"</span><span class="p">:{</span>
+      <span class="s2">"phishai_scan_id"</span><span class="p">:</span><span class="s2">"gGBSaVvlN5qc5PcwvnuT"</span>
    <span class="p">},</span>
-   <span class="s2">&quot;run_time&quot;</span><span class="p">:</span><span class="s2">&quot;0.419372797012&quot;</span>
+   <span class="s2">"run_time"</span><span class="p">:</span><span class="s2">"0.419372797012"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -653,7 +653,7 @@
 </details>
 <details><summary>Example Pre-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">phishai_scan_id</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">phishai_scan_output</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;scan_id&quot;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">phishai_scan_id</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">phishai_scan_output</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"scan_id"</span><span class="p">]</span>
 </pre></div>
 </div>
 </p>
@@ -661,40 +661,40 @@
 <details><summary>Example Post-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;Phish.AI url: &quot;</span> <span class="o">+</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">url</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;&lt;br/&gt;Phish.AI verdict: &quot;</span> <span class="o">+</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">verdict</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;&lt;br/&gt;&lt;a href=</span><span class="se">\&quot;</span><span class="s2">https://app.phish.ai/incident/</span><span class="si">{}</span><span class="se">\&quot;</span><span class="s2">&gt;Phish.AI report link&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">phishai_scan_id</span><span class="p">)</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="s2">"Phish.AI url: "</span> <span class="o">+</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">url</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">"&lt;br/&gt;Phish.AI verdict: "</span> <span class="o">+</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">verdict</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">"&lt;br/&gt;&lt;a href=</span><span class="se">\"</span><span class="s2">https://app.phish.ai/incident/</span><span class="si">{}</span><span class="se">\"</span><span class="s2">&gt;Phish.AI report link&lt;/a&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">phishai_scan_id</span><span class="p">)</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
 
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="sd">Example Response</span>
 
 <span class="sd">{</span>
-<span class="sd">   &quot;content&quot;:{</span>
-<span class="sd">      &quot;status&quot;:&quot;completed&quot;,</span>
-<span class="sd">      &quot;domain&quot;:&quot;startup417.gb.net&quot;,</span>
-<span class="sd">      &quot;user_agent&quot;:&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36&quot;,</span>
-<span class="sd">      &quot;target&quot;:&quot;Microsoft&quot;,</span>
-<span class="sd">      &quot;title&quot;:&quot;sign_in_to_your_microsoft_account&quot;,</span>
-<span class="sd">      &quot;url&quot;:&quot;https://startup417.gb.net/M3?mes1=asdf@asdf.com&quot;,</span>
-<span class="sd">      &quot;time&quot;:&quot;2018-12-06T22:39:34.210Z&quot;,</span>
-<span class="sd">      &quot;verdict&quot;:&quot;malicious&quot;,</span>
-<span class="sd">      &quot;plan&quot;:&quot;free&quot;,</span>
-<span class="sd">      &quot;tld&quot;:&quot;net&quot;,</span>
-<span class="sd">      &quot;iso_code&quot;:&quot;US&quot;,</span>
-<span class="sd">      &quot;first_seen&quot;:&quot;2018-12-06T19:16:20.825Z&quot;,</span>
-<span class="sd">      &quot;ip_address&quot;:&quot;104.24.104.116&quot;,</span>
-<span class="sd">      &quot;asn&quot;:13335,</span>
-<span class="sd">      &quot;user_email&quot;:&quot;api&quot;,</span>
-<span class="sd">      &quot;user&quot;:&quot;free-api&quot;</span>
+<span class="sd">   "content":{</span>
+<span class="sd">      "status":"completed",</span>
+<span class="sd">      "domain":"startup417.gb.net",</span>
+<span class="sd">      "user_agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36",</span>
+<span class="sd">      "target":"Microsoft",</span>
+<span class="sd">      "title":"sign_in_to_your_microsoft_account",</span>
+<span class="sd">      "url":"https://startup417.gb.net/M3?mes1=asdf@asdf.com",</span>
+<span class="sd">      "time":"2018-12-06T22:39:34.210Z",</span>
+<span class="sd">      "verdict":"malicious",</span>
+<span class="sd">      "plan":"free",</span>
+<span class="sd">      "tld":"net",</span>
+<span class="sd">      "iso_code":"US",</span>
+<span class="sd">      "first_seen":"2018-12-06T19:16:20.825Z",</span>
+<span class="sd">      "ip_address":"104.24.104.116",</span>
+<span class="sd">      "asn":13335,</span>
+<span class="sd">      "user_email":"api",</span>
+<span class="sd">      "user":"free-api"</span>
 <span class="sd">   },</span>
-<span class="sd">   &quot;inputs&quot;:{</span>
-<span class="sd">      &quot;phishai_scan_id&quot;:&quot;gGBSaVvlN5qc5PcwvnuT&quot;</span>
+<span class="sd">   "inputs":{</span>
+<span class="sd">      "phishai_scan_id":"gGBSaVvlN5qc5PcwvnuT"</span>
 <span class="sd">   },</span>
-<span class="sd">   &quot;run_time&quot;:&quot;0.419372797012&quot;</span>
+<span class="sd">   "run_time":"0.419372797012"</span>
 <span class="sd">}</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 </pre></div>
 </div>
 </p>
@@ -732,14 +732,14 @@
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-   <span class="s2">&quot;content&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;https://startup417.gb.net/M3?mes1=asdf@asdf.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;scan_id&quot;</span><span class="p">:</span><span class="s2">&quot;gGBSaVvlN5qc5PcwvnuT&quot;</span>
+   <span class="s2">"content"</span><span class="p">:{</span>
+      <span class="s2">"url"</span><span class="p">:</span><span class="s2">"https://startup417.gb.net/M3?mes1=asdf@asdf.com"</span><span class="p">,</span>
+      <span class="s2">"scan_id"</span><span class="p">:</span><span class="s2">"gGBSaVvlN5qc5PcwvnuT"</span>
    <span class="p">},</span>
-   <span class="s2">&quot;inputs&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;artifact_value&quot;</span><span class="p">:</span><span class="s2">&quot;https://startup417.gb.net/M3?mes1=asdf@asdf.com&quot;</span>
+   <span class="s2">"inputs"</span><span class="p">:{</span>
+      <span class="s2">"artifact_value"</span><span class="p">:</span><span class="s2">"https://startup417.gb.net/M3?mes1=asdf@asdf.com"</span>
    <span class="p">},</span>
-   <span class="s2">&quot;run_time&quot;</span><span class="p">:</span><span class="s2">&quot;0.446181058884&quot;</span>
+   <span class="s2">"run_time"</span><span class="p">:</span><span class="s2">"0.446181058884"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -754,20 +754,20 @@
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
 <span class="sd">Example response</span>
 
 <span class="sd">{</span>
-<span class="sd">   &quot;content&quot;:{</span>
-<span class="sd">      &quot;url&quot;:&quot;https://startup417.gb.net/M3?mes1=asdf@asdf.com&quot;,</span>
-<span class="sd">      &quot;scan_id&quot;:&quot;gGBSaVvlN5qc5PcwvnuT&quot;</span>
+<span class="sd">   "content":{</span>
+<span class="sd">      "url":"https://startup417.gb.net/M3?mes1=asdf@asdf.com",</span>
+<span class="sd">      "scan_id":"gGBSaVvlN5qc5PcwvnuT"</span>
 <span class="sd">   },</span>
-<span class="sd">   &quot;inputs&quot;:{</span>
-<span class="sd">      &quot;artifact_value&quot;:&quot;https://startup417.gb.net/M3?mes1=asdf@asdf.com&quot;</span>
+<span class="sd">   "inputs":{</span>
+<span class="sd">      "artifact_value":"https://startup417.gb.net/M3?mes1=asdf@asdf.com"</span>
 <span class="sd">   },</span>
-<span class="sd">   &quot;run_time&quot;:&quot;0.446181058884&quot;</span>
+<span class="sd">   "run_time":"0.446181058884"</span>
 <span class="sd">}</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 </pre></div>
 </div>
 </p>

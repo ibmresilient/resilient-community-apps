@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -650,169 +650,169 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;537&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
-      <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;john_doe@company.com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"537"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"created"</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
+      <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"John Doe"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"john_doe@company.com"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;first_associated_time&quot;</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
-      <span class="s2">&quot;first_related_inc_id&quot;</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
-      <span class="s2">&quot;first_related_inc_owner_handle&quot;</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
-      <span class="s2">&quot;hit_threat_sources&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">537</span><span class="p">,</span>
-      <span class="s2">&quot;last_associated_time&quot;</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
-      <span class="s2">&quot;last_modified_by&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AppBuilder&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;6bf8c47e-77a6-41ad-ad22-1004f7eee7cb&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;apikey&quot;</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"first_associated_time"</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
+      <span class="s2">"first_related_inc_id"</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
+      <span class="s2">"first_related_inc_owner_handle"</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+      <span class="s2">"hit_threat_sources"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">537</span><span class="p">,</span>
+      <span class="s2">"last_associated_time"</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
+      <span class="s2">"last_modified_by"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"AppBuilder"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"6bf8c47e-77a6-41ad-ad22-1004f7eee7cb"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"apikey"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;last_modified_time&quot;</span><span class="p">:</span> <span class="mi">1683874565588</span><span class="p">,</span>
-      <span class="s2">&quot;last_related_inc_id&quot;</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
-      <span class="s2">&quot;last_related_inc_owner_handle&quot;</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
-      <span class="s2">&quot;last_scan_hits&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;perms&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;write&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="s2">"last_modified_time"</span><span class="p">:</span> <span class="mi">1683874565588</span><span class="p">,</span>
+      <span class="s2">"last_related_inc_id"</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
+      <span class="s2">"last_related_inc_owner_handle"</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+      <span class="s2">"last_scan_hits"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"perms"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"write"</span><span class="p">:</span> <span class="n">true</span>
       <span class="p">},</span>
-      <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;related_incident_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;relating&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;relating_incidents&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;scan_option&quot;</span><span class="p">:</span> <span class="s2">&quot;on&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"properties"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"related_incident_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"relating"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"relating_incidents"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"scan_option"</span><span class="p">:</span> <span class="s2">"on"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;tag_handle&quot;</span><span class="p">:</span> <span class="mi">134</span><span class="p">,</span>
-          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">null</span>
+          <span class="s2">"tag_handle"</span><span class="p">:</span> <span class="mi">134</span><span class="p">,</span>
+          <span class="s2">"value"</span><span class="p">:</span> <span class="n">null</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;tag_handle&quot;</span><span class="p">:</span> <span class="mi">127</span><span class="p">,</span>
-          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">null</span>
+          <span class="s2">"tag_handle"</span><span class="p">:</span> <span class="mi">127</span><span class="p">,</span>
+          <span class="s2">"value"</span><span class="p">:</span> <span class="n">null</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;10.10.10.10&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">14</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"10.10.10.10"</span><span class="p">,</span>
+      <span class="s2">"version"</span><span class="p">:</span> <span class="mi">14</span>
     <span class="p">},</span>
-    <span class="s2">&quot;542&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="mi">1683873651813</span><span class="p">,</span>
-      <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;john_doe@company.com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span>
+    <span class="s2">"542"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"created"</span><span class="p">:</span> <span class="mi">1683873651813</span><span class="p">,</span>
+      <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"John Doe"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"john_doe@company.com"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;first_associated_time&quot;</span><span class="p">:</span> <span class="mi">1683873651813</span><span class="p">,</span>
-      <span class="s2">&quot;first_related_inc_id&quot;</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
-      <span class="s2">&quot;first_related_inc_owner_handle&quot;</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
-      <span class="s2">&quot;hit_threat_sources&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">542</span><span class="p">,</span>
-      <span class="s2">&quot;last_associated_time&quot;</span><span class="p">:</span> <span class="mi">1683873651813</span><span class="p">,</span>
-      <span class="s2">&quot;last_modified_by&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AppBuilder&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;6bf8c47e-77a6-41ad-ad22-1004f7eee7cb&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;apikey&quot;</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"first_associated_time"</span><span class="p">:</span> <span class="mi">1683873651813</span><span class="p">,</span>
+      <span class="s2">"first_related_inc_id"</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
+      <span class="s2">"first_related_inc_owner_handle"</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+      <span class="s2">"hit_threat_sources"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">542</span><span class="p">,</span>
+      <span class="s2">"last_associated_time"</span><span class="p">:</span> <span class="mi">1683873651813</span><span class="p">,</span>
+      <span class="s2">"last_modified_by"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"AppBuilder"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"6bf8c47e-77a6-41ad-ad22-1004f7eee7cb"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"apikey"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;last_modified_time&quot;</span><span class="p">:</span> <span class="mi">1683874056253</span><span class="p">,</span>
-      <span class="s2">&quot;last_related_inc_id&quot;</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
-      <span class="s2">&quot;last_related_inc_owner_handle&quot;</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
-      <span class="s2">&quot;last_scan_hits&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;perms&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;write&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="s2">"last_modified_time"</span><span class="p">:</span> <span class="mi">1683874056253</span><span class="p">,</span>
+      <span class="s2">"last_related_inc_id"</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
+      <span class="s2">"last_related_inc_owner_handle"</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+      <span class="s2">"last_scan_hits"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"perms"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"write"</span><span class="p">:</span> <span class="n">true</span>
       <span class="p">},</span>
-      <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;related_incident_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;relating&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;relating_incidents&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;scan_option&quot;</span><span class="p">:</span> <span class="s2">&quot;on&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"properties"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"related_incident_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"relating"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"relating_incidents"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"scan_option"</span><span class="p">:</span> <span class="s2">"on"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;tag_handle&quot;</span><span class="p">:</span> <span class="mi">134</span><span class="p">,</span>
-          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">null</span>
+          <span class="s2">"tag_handle"</span><span class="p">:</span> <span class="mi">134</span><span class="p">,</span>
+          <span class="s2">"value"</span><span class="p">:</span> <span class="n">null</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;tag_handle&quot;</span><span class="p">:</span> <span class="mi">127</span><span class="p">,</span>
-          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">null</span>
+          <span class="s2">"tag_handle"</span><span class="p">:</span> <span class="mi">127</span><span class="p">,</span>
+          <span class="s2">"value"</span><span class="p">:</span> <span class="n">null</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;10.156.54.204&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"10.156.54.204"</span><span class="p">,</span>
+      <span class="s2">"version"</span><span class="p">:</span> <span class="mi">1</span>
     <span class="p">},</span>
-    <span class="s2">&quot;543&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="mi">1683873651839</span><span class="p">,</span>
-      <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;john_doe@company.com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span>
+    <span class="s2">"543"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"created"</span><span class="p">:</span> <span class="mi">1683873651839</span><span class="p">,</span>
+      <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"John Doe"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"john_doe@company.com"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;first_associated_time&quot;</span><span class="p">:</span> <span class="mi">1683873651839</span><span class="p">,</span>
-      <span class="s2">&quot;first_related_inc_id&quot;</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
-      <span class="s2">&quot;first_related_inc_owner_handle&quot;</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
-      <span class="s2">&quot;hit_threat_sources&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">543</span><span class="p">,</span>
-      <span class="s2">&quot;last_associated_time&quot;</span><span class="p">:</span> <span class="mi">1683873651839</span><span class="p">,</span>
-      <span class="s2">&quot;last_modified_by&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AppBuilder&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;6bf8c47e-77a6-41ad-ad22-1004f7eee7cb&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;apikey&quot;</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"first_associated_time"</span><span class="p">:</span> <span class="mi">1683873651839</span><span class="p">,</span>
+      <span class="s2">"first_related_inc_id"</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
+      <span class="s2">"first_related_inc_owner_handle"</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+      <span class="s2">"hit_threat_sources"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">543</span><span class="p">,</span>
+      <span class="s2">"last_associated_time"</span><span class="p">:</span> <span class="mi">1683873651839</span><span class="p">,</span>
+      <span class="s2">"last_modified_by"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"AppBuilder"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"6bf8c47e-77a6-41ad-ad22-1004f7eee7cb"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"apikey"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;last_modified_time&quot;</span><span class="p">:</span> <span class="mi">1683874055257</span><span class="p">,</span>
-      <span class="s2">&quot;last_related_inc_id&quot;</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
-      <span class="s2">&quot;last_related_inc_owner_handle&quot;</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
-      <span class="s2">&quot;last_scan_hits&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;perms&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;write&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="s2">"last_modified_time"</span><span class="p">:</span> <span class="mi">1683874055257</span><span class="p">,</span>
+      <span class="s2">"last_related_inc_id"</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
+      <span class="s2">"last_related_inc_owner_handle"</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+      <span class="s2">"last_scan_hits"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"perms"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"write"</span><span class="p">:</span> <span class="n">true</span>
       <span class="p">},</span>
-      <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;related_incident_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;relating&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;relating_incidents&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;scan_option&quot;</span><span class="p">:</span> <span class="s2">&quot;on&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"properties"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"related_incident_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"relating"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"relating_incidents"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"scan_option"</span><span class="p">:</span> <span class="s2">"on"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;tag_handle&quot;</span><span class="p">:</span> <span class="mi">134</span><span class="p">,</span>
-          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">null</span>
+          <span class="s2">"tag_handle"</span><span class="p">:</span> <span class="mi">134</span><span class="p">,</span>
+          <span class="s2">"value"</span><span class="p">:</span> <span class="n">null</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;tag_handle&quot;</span><span class="p">:</span> <span class="mi">127</span><span class="p">,</span>
-          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">null</span>
+          <span class="s2">"tag_handle"</span><span class="p">:</span> <span class="mi">127</span><span class="p">,</span>
+          <span class="s2">"value"</span><span class="p">:</span> <span class="n">null</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;10.16.157.4&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"10.16.157.4"</span><span class="p">,</span>
+      <span class="s2">"version"</span><span class="p">:</span> <span class="mi">1</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;artifact_id_list&quot;</span><span class="p">:</span> <span class="s2">&quot;1532,1538,1539&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;artifact_tag_values&quot;</span><span class="p">:</span> <span class="s2">&quot;Malicious,Internal&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2325</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"artifact_id_list"</span><span class="p">:</span> <span class="s2">"1532,1538,1539"</span><span class="p">,</span>
+    <span class="s2">"artifact_tag_values"</span><span class="p">:</span> <span class="s2">"Malicious,Internal"</span><span class="p">,</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2325</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">4170</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;IBM-PF36KPAV&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-artifact-utils&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-05-12 02:56:07&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">4170</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"IBM-PF36KPAV"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-artifact-utils"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-05-12 02:56:07"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -820,17 +820,17 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
 <span class="sd">Sample Script to be used to Demonstrate how the Search Function could be used.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="n">search_results</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">search_results</span>
 
 <span class="n">artifact_id_list</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">artifact</span> <span class="ow">in</span> <span class="n">search_results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]:</span>
-  <span class="n">artifact_id_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">artifact</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]))</span>
+<span class="k">for</span> <span class="n">artifact</span> <span class="ow">in</span> <span class="n">search_results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]:</span>
+  <span class="n">artifact_id_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">artifact</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]))</span>
 
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">artifact_id_list</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">artifact_id_list</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">artifact_id_list</span> <span class="o">=</span> <span class="p">(</span><span class="s1">','</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">artifact_id_list</span><span class="p">)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">artifact_tag_values</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">artifact_tags_to_add</span>
 
 </pre></div>
@@ -892,37 +892,37 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;global_artifact_deletion&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;hints&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"global_artifact_deletion"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"hints"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"message"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="n">null</span>
     <span class="p">},</span>
-    <span class="s2">&quot;incident_artifact_deletion&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;hints&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">null</span>
+    <span class="s2">"incident_artifact_deletion"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"hints"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"message"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"title"</span><span class="p">:</span> <span class="n">null</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;artifact_id_list&quot;</span><span class="p">:</span> <span class="s2">&quot;1542&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;artifact_remove_globally&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2325</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"artifact_id_list"</span><span class="p">:</span> <span class="s2">"1542"</span><span class="p">,</span>
+    <span class="s2">"artifact_remove_globally"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2325</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">2354</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;IBM-PF36KPAV&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-artifact-utils&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-05-12 02:54:39&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">2354</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"IBM-PF36KPAV"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-artifact-utils"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-05-12 02:54:39"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -930,17 +930,17 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
 <span class="sd">Sample Script to be used to Demonstrate how the Search Function could be used.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="n">search_results</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">search_results</span>
 
 <span class="n">artifact_id_list</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">artifact</span> <span class="ow">in</span> <span class="n">search_results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]:</span>
-  <span class="n">artifact_id_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">artifact</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]))</span>
+<span class="k">for</span> <span class="n">artifact</span> <span class="ow">in</span> <span class="n">search_results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]:</span>
+  <span class="n">artifact_id_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">artifact</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]))</span>
 
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">artifact_id_list</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">artifact_id_list</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">artifact_id_list</span> <span class="o">=</span> <span class="p">(</span><span class="s1">','</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">artifact_id_list</span><span class="p">)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">artifact_remove_globally</span> <span class="o">=</span> <span class="kc">True</span>
 
 </pre></div>
@@ -1002,113 +1002,113 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;542&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="mi">1683873651813</span><span class="p">,</span>
-      <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;john_doe@company.com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"542"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"created"</span><span class="p">:</span> <span class="mi">1683873651813</span><span class="p">,</span>
+      <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"John Doe"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"john_doe@company.com"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;first_associated_time&quot;</span><span class="p">:</span> <span class="mi">1683873651813</span><span class="p">,</span>
-      <span class="s2">&quot;first_related_inc_id&quot;</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
-      <span class="s2">&quot;first_related_inc_owner_handle&quot;</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
-      <span class="s2">&quot;hit_threat_sources&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">542</span><span class="p">,</span>
-      <span class="s2">&quot;last_associated_time&quot;</span><span class="p">:</span> <span class="mi">1683873651813</span><span class="p">,</span>
-      <span class="s2">&quot;last_modified_by&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AppBuilder&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;6bf8c47e-77a6-41ad-ad22-1004f7eee7cb&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;apikey&quot;</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"first_associated_time"</span><span class="p">:</span> <span class="mi">1683873651813</span><span class="p">,</span>
+      <span class="s2">"first_related_inc_id"</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
+      <span class="s2">"first_related_inc_owner_handle"</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+      <span class="s2">"hit_threat_sources"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">542</span><span class="p">,</span>
+      <span class="s2">"last_associated_time"</span><span class="p">:</span> <span class="mi">1683873651813</span><span class="p">,</span>
+      <span class="s2">"last_modified_by"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"AppBuilder"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"6bf8c47e-77a6-41ad-ad22-1004f7eee7cb"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"apikey"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;last_modified_time&quot;</span><span class="p">:</span> <span class="mi">1683874646685</span><span class="p">,</span>
-      <span class="s2">&quot;last_related_inc_id&quot;</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
-      <span class="s2">&quot;last_related_inc_owner_handle&quot;</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
-      <span class="s2">&quot;last_scan_hits&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;perms&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;write&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="s2">"last_modified_time"</span><span class="p">:</span> <span class="mi">1683874646685</span><span class="p">,</span>
+      <span class="s2">"last_related_inc_id"</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
+      <span class="s2">"last_related_inc_owner_handle"</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+      <span class="s2">"last_scan_hits"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"perms"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"write"</span><span class="p">:</span> <span class="n">true</span>
       <span class="p">},</span>
-      <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;related_incident_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;relating&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;relating_incidents&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;scan_option&quot;</span><span class="p">:</span> <span class="s2">&quot;on&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"properties"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"related_incident_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"relating"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"relating_incidents"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"scan_option"</span><span class="p">:</span> <span class="s2">"on"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;tag_handle&quot;</span><span class="p">:</span> <span class="mi">134</span><span class="p">,</span>
-          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">null</span>
+          <span class="s2">"tag_handle"</span><span class="p">:</span> <span class="mi">134</span><span class="p">,</span>
+          <span class="s2">"value"</span><span class="p">:</span> <span class="n">null</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;10.156.54.204&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">2</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"10.156.54.204"</span><span class="p">,</span>
+      <span class="s2">"version"</span><span class="p">:</span> <span class="mi">2</span>
     <span class="p">},</span>
-    <span class="s2">&quot;543&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="mi">1683873651839</span><span class="p">,</span>
-      <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;john_doe@company.com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span>
+    <span class="s2">"543"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"created"</span><span class="p">:</span> <span class="mi">1683873651839</span><span class="p">,</span>
+      <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"John Doe"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"john_doe@company.com"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;first_associated_time&quot;</span><span class="p">:</span> <span class="mi">1683873651839</span><span class="p">,</span>
-      <span class="s2">&quot;first_related_inc_id&quot;</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
-      <span class="s2">&quot;first_related_inc_owner_handle&quot;</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
-      <span class="s2">&quot;hit_threat_sources&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">543</span><span class="p">,</span>
-      <span class="s2">&quot;last_associated_time&quot;</span><span class="p">:</span> <span class="mi">1683873651839</span><span class="p">,</span>
-      <span class="s2">&quot;last_modified_by&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AppBuilder&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;6bf8c47e-77a6-41ad-ad22-1004f7eee7cb&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;apikey&quot;</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"first_associated_time"</span><span class="p">:</span> <span class="mi">1683873651839</span><span class="p">,</span>
+      <span class="s2">"first_related_inc_id"</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
+      <span class="s2">"first_related_inc_owner_handle"</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+      <span class="s2">"hit_threat_sources"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">543</span><span class="p">,</span>
+      <span class="s2">"last_associated_time"</span><span class="p">:</span> <span class="mi">1683873651839</span><span class="p">,</span>
+      <span class="s2">"last_modified_by"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"AppBuilder"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"6bf8c47e-77a6-41ad-ad22-1004f7eee7cb"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"apikey"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;last_modified_time&quot;</span><span class="p">:</span> <span class="mi">1683874648355</span><span class="p">,</span>
-      <span class="s2">&quot;last_related_inc_id&quot;</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
-      <span class="s2">&quot;last_related_inc_owner_handle&quot;</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
-      <span class="s2">&quot;last_scan_hits&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;perms&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;write&quot;</span><span class="p">:</span> <span class="n">true</span>
+      <span class="s2">"last_modified_time"</span><span class="p">:</span> <span class="mi">1683874648355</span><span class="p">,</span>
+      <span class="s2">"last_related_inc_id"</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
+      <span class="s2">"last_related_inc_owner_handle"</span><span class="p">:</span> <span class="mi">33</span><span class="p">,</span>
+      <span class="s2">"last_scan_hits"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"perms"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"write"</span><span class="p">:</span> <span class="n">true</span>
       <span class="p">},</span>
-      <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;related_incident_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;relating&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;relating_incidents&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;scan_option&quot;</span><span class="p">:</span> <span class="s2">&quot;on&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"properties"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"related_incident_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"relating"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"relating_incidents"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"scan_option"</span><span class="p">:</span> <span class="s2">"on"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;tag_handle&quot;</span><span class="p">:</span> <span class="mi">134</span><span class="p">,</span>
-          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">null</span>
+          <span class="s2">"tag_handle"</span><span class="p">:</span> <span class="mi">134</span><span class="p">,</span>
+          <span class="s2">"value"</span><span class="p">:</span> <span class="n">null</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;10.16.157.4&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">2</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"10.16.157.4"</span><span class="p">,</span>
+      <span class="s2">"version"</span><span class="p">:</span> <span class="mi">2</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;artifact_id_list&quot;</span><span class="p">:</span> <span class="s2">&quot;1538,1539&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;artifact_tag_values&quot;</span><span class="p">:</span> <span class="s2">&quot;Malicious&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2325</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"artifact_id_list"</span><span class="p">:</span> <span class="s2">"1538,1539"</span><span class="p">,</span>
+    <span class="s2">"artifact_tag_values"</span><span class="p">:</span> <span class="s2">"Malicious"</span><span class="p">,</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2325</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">3654</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;IBM-PF36KPAV&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-artifact-utils&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-05-12 02:57:28&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">3654</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"IBM-PF36KPAV"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-artifact-utils"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-05-12 02:57:28"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1116,17 +1116,17 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
 <span class="sd">Sample Script to be used to Demonstrate how the Search Function could be used.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="n">search_results</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">search_results</span>
 
 <span class="n">artifact_id_list</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">artifact</span> <span class="ow">in</span> <span class="n">search_results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]:</span>
-  <span class="n">artifact_id_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">artifact</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]))</span>
+<span class="k">for</span> <span class="n">artifact</span> <span class="ow">in</span> <span class="n">search_results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]:</span>
+  <span class="n">artifact_id_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">artifact</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]))</span>
 
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">artifact_id_list</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">artifact_id_list</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">artifact_id_list</span> <span class="o">=</span> <span class="p">(</span><span class="s1">','</span><span class="p">)</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">artifact_id_list</span><span class="p">)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">artifact_tag_values</span> <span class="o">=</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">artifact_tags_to_remove</span>
 
 </pre></div>
@@ -1248,422 +1248,422 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;actions&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"actions"</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Update Data Table Row&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Update Data Table Row"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">96</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: XML Transformation&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">96</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: XML Transformation"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Get Data Table Rows&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Get Data Table Rows"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">91</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: Shell Command&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">91</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: Shell Command"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">92</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: String to Attachment&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">92</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: String to Attachment"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Get Data Table Row&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Get Data Table Row"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Delete Data Table Rows&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">17</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Delete Data Table Rows"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Delete Data Table Row&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Delete Data Table Row"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Add Row to Datatable&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Add Row to Datatable"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">27</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Defender Find Machine by DNS name&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">27</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Defender Find Machine by DNS name"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Defender Find Machines by File Hash&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Defender Find Machines by File Hash"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Defender Find Machines by Internal IP Address&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Defender Find Machines by Internal IP Address"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Defender Get File Information&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Defender Get File Information"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Defender Set Indicator&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Defender Set Indicator"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: (Artifact) Attachment to Base64&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">75</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: (Artifact) Attachment to Base64"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">81</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: Email Parsing (Artifact)&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">81</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: Email Parsing (Artifact)"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">79</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: Call REST API&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">79</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: Call REST API"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">76</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: Artifact Hash&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">76</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: Artifact Hash"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">83</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: Expand URL&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">83</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: Expand URL"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">84</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: Extract SSL Certificate&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">84</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: Extract SSL Certificate"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">87</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: JSON2HTML&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">87</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: JSON2HTML"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">88</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: Parse SSL Certificate&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">88</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: Parse SSL Certificate"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">210</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: LDAP Utilities: Remove User(s) from Group(s)&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">210</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: LDAP Utilities: Remove User(s) from Group(s)"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">225</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;QRadar Move from Sample Blocked to Sample Suspected&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">225</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"QRadar Move from Sample Blocked to Sample Suspected"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">145</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: SEP - Get Endpoint Details for artifact&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">145</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: SEP - Get Endpoint Details for artifact"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: Domain Distance&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">80</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: Domain Distance"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">142</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: SEP - Delete Hash from Blacklist&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">142</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: SEP - Delete Hash from Blacklist"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">155</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: SEP - Initiate EOC Scan for Artifact&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">155</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: SEP - Initiate EOC Scan for Artifact"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">213</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: LDAP Utilities: Toggle Access&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">213</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: LDAP Utilities: Toggle Access"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">214</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: LDAP Utilities: Update&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">214</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: LDAP Utilities: Update"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">221</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Find All QRadar Reference Sets&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">221</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Find All QRadar Reference Sets"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">222</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Find in QRadar Reference Set&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">222</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Find in QRadar Reference Set"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">223</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;QRadar Add to Reference Set&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">223</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"QRadar Add to Reference Set"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">191</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: Exchange Online Get User Profile&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">191</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: Exchange Online Get User Profile"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">224</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;QRadar Add to Reference Table&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">224</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"QRadar Add to Reference Table"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">194</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: Exchange Online Query Messages on Artifact&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">194</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: Exchange Online Query Messages on Artifact"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">139</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: SEP - Add Hash to Blacklist&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">139</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: SEP - Add Hash to Blacklist"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">205</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Schedule a Rule/Playbook to Run - Artifact&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">205</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Schedule a Rule/Playbook to Run - Artifact"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">267</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: urlscan.io&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">267</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: urlscan.io"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">209</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: LDAP Utilities: Add User(s) to Group(s)&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">209</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: LDAP Utilities: Add User(s) to Group(s)"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">211</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: LDAP Utilities: Search&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">211</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: LDAP Utilities: Search"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">212</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Example: LDAP Utilities: Set Password&quot;</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">212</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Example: LDAP Utilities: Set Password"</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="s2">&quot;attachment&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
-        <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="s2">&quot;john_doe@company.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;fname&quot;</span><span class="p">:</span> <span class="s2">&quot;John&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">&quot;is_external&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-          <span class="s2">&quot;is_ldap&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-          <span class="s2">&quot;is_saml&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-          <span class="s2">&quot;lname&quot;</span><span class="p">:</span> <span class="s2">&quot;Doe&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;locked&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-          <span class="s2">&quot;password_changed&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-          <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;ui_theme&quot;</span><span class="p">:</span> <span class="s2">&quot;verydarkmode&quot;</span>
+        <span class="s2">"attachment"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"created"</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
+        <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"John Doe"</span><span class="p">,</span>
+          <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"john_doe@company.com"</span><span class="p">,</span>
+          <span class="s2">"fname"</span><span class="p">:</span> <span class="s2">"John"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">"is_external"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">"is_ldap"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">"is_saml"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">"lname"</span><span class="p">:</span> <span class="s2">"Doe"</span><span class="p">,</span>
+          <span class="s2">"locked"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">"password_changed"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"A"</span><span class="p">,</span>
+          <span class="s2">"ui_theme"</span><span class="p">:</span> <span class="s2">"verydarkmode"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;creator_principal&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;john_doe@company.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span>
+        <span class="s2">"creator_principal"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"John Doe"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"john_doe@company.com"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;global_artifact&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"global_artifact"</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
-            <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;john_doe@company.com&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span>
+            <span class="s2">"created"</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
+            <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"John Doe"</span><span class="p">,</span>
+              <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"john_doe@company.com"</span><span class="p">,</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-            <span class="s2">&quot;first_associated_time&quot;</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
-            <span class="s2">&quot;first_related_inc_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-            <span class="s2">&quot;first_related_inc_owner_handle&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-            <span class="s2">&quot;hit_threat_sources&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">537</span><span class="p">,</span>
-            <span class="s2">&quot;last_associated_time&quot;</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
-            <span class="s2">&quot;last_modified_by&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AppBuilder&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;6bf8c47e-77a6-41ad-ad22-1004f7eee7cb&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;apikey&quot;</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">"first_associated_time"</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
+            <span class="s2">"first_related_inc_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">"first_related_inc_owner_handle"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">"hit_threat_sources"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">537</span><span class="p">,</span>
+            <span class="s2">"last_associated_time"</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
+            <span class="s2">"last_modified_by"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"AppBuilder"</span><span class="p">,</span>
+              <span class="s2">"id"</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"6bf8c47e-77a6-41ad-ad22-1004f7eee7cb"</span><span class="p">,</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"apikey"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;last_modified_time&quot;</span><span class="p">:</span> <span class="mi">1683874117659</span><span class="p">,</span>
-            <span class="s2">&quot;last_related_inc_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-            <span class="s2">&quot;last_related_inc_owner_handle&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-            <span class="s2">&quot;last_scan_hits&quot;</span><span class="p">:</span> <span class="p">[],</span>
-            <span class="s2">&quot;perms&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;write&quot;</span><span class="p">:</span> <span class="n">true</span>
+            <span class="s2">"last_modified_time"</span><span class="p">:</span> <span class="mi">1683874117659</span><span class="p">,</span>
+            <span class="s2">"last_related_inc_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">"last_related_inc_owner_handle"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">"last_scan_hits"</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">"perms"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"write"</span><span class="p">:</span> <span class="n">true</span>
             <span class="p">},</span>
-            <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-            <span class="s2">&quot;related_incident_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">&quot;relating&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-            <span class="s2">&quot;relating_incidents&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-            <span class="s2">&quot;scan_option&quot;</span><span class="p">:</span> <span class="s2">&quot;on&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-            <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"properties"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">"related_incident_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"relating"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">"relating_incidents"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">"scan_option"</span><span class="p">:</span> <span class="s2">"on"</span><span class="p">,</span>
+            <span class="s2">"summary"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+            <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span>
               <span class="p">{</span>
-                <span class="s2">&quot;tag_handle&quot;</span><span class="p">:</span> <span class="s2">&quot;Internal&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">null</span>
+                <span class="s2">"tag_handle"</span><span class="p">:</span> <span class="s2">"Internal"</span><span class="p">,</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="n">null</span>
               <span class="p">}</span>
             <span class="p">],</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;10.10.10.10&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">13</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"IP Address"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"10.10.10.10"</span><span class="p">,</span>
+            <span class="s2">"version"</span><span class="p">:</span> <span class="mi">13</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="s2">&quot;global_info&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
-          <span class="s2">&quot;creator&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;john_doe@company.com&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span>
+        <span class="s2">"global_info"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"created"</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
+          <span class="s2">"creator"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"John Doe"</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"john_doe@company.com"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"user"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;first_associated_time&quot;</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
-          <span class="s2">&quot;first_related_inc_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;first_related_inc_owner_handle&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;hit_threat_sources&quot;</span><span class="p">:</span> <span class="p">[],</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">537</span><span class="p">,</span>
-          <span class="s2">&quot;last_associated_time&quot;</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
-          <span class="s2">&quot;last_modified_by&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AppBuilder&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;6bf8c47e-77a6-41ad-ad22-1004f7eee7cb&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;apikey&quot;</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"first_associated_time"</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
+          <span class="s2">"first_related_inc_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"first_related_inc_owner_handle"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"hit_threat_sources"</span><span class="p">:</span> <span class="p">[],</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="mi">537</span><span class="p">,</span>
+          <span class="s2">"last_associated_time"</span><span class="p">:</span> <span class="mi">1683824680171</span><span class="p">,</span>
+          <span class="s2">"last_modified_by"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"AppBuilder"</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"6bf8c47e-77a6-41ad-ad22-1004f7eee7cb"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"apikey"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;last_modified_time&quot;</span><span class="p">:</span> <span class="mi">1683874117659</span><span class="p">,</span>
-          <span class="s2">&quot;last_related_inc_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;last_related_inc_owner_handle&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;last_scan_hits&quot;</span><span class="p">:</span> <span class="p">[],</span>
-          <span class="s2">&quot;perms&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;write&quot;</span><span class="p">:</span> <span class="n">true</span>
+          <span class="s2">"last_modified_time"</span><span class="p">:</span> <span class="mi">1683874117659</span><span class="p">,</span>
+          <span class="s2">"last_related_inc_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"last_related_inc_owner_handle"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"last_scan_hits"</span><span class="p">:</span> <span class="p">[],</span>
+          <span class="s2">"perms"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"write"</span><span class="p">:</span> <span class="n">true</span>
           <span class="p">},</span>
-          <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;related_incident_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">&quot;relating&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-          <span class="s2">&quot;relating_incidents&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-          <span class="s2">&quot;scan_option&quot;</span><span class="p">:</span> <span class="s2">&quot;on&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"properties"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"related_incident_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">"relating"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">"relating_incidents"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">"scan_option"</span><span class="p">:</span> <span class="s2">"on"</span><span class="p">,</span>
+          <span class="s2">"summary"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="s2">&quot;tag_handle&quot;</span><span class="p">:</span> <span class="s2">&quot;Internal&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">null</span>
+              <span class="s2">"tag_handle"</span><span class="p">:</span> <span class="s2">"Internal"</span><span class="p">,</span>
+              <span class="s2">"value"</span><span class="p">:</span> <span class="n">null</span>
             <span class="p">}</span>
           <span class="p">],</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;10.10.10.10&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mi">13</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"IP Address"</span><span class="p">,</span>
+          <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"10.10.10.10"</span><span class="p">,</span>
+          <span class="s2">"version"</span><span class="p">:</span> <span class="mi">13</span>
         <span class="p">},</span>
-        <span class="s2">&quot;hash&quot;</span><span class="p">:</span> <span class="s2">&quot;8a1f78cd1b0f77a54d47e45e8e70329d95286364646e1dab9cf6ad6b2a926bb1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;hits&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1532</span><span class="p">,</span>
-        <span class="s2">&quot;inc_id&quot;</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
-        <span class="s2">&quot;inc_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Sentinel Incident 1965 - First access credential added to Application or Service Principal where no credential was present&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;inc_owner&quot;</span><span class="p">:</span> <span class="s2">&quot;Tier 1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;destination&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-          <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="s2">"hash"</span><span class="p">:</span> <span class="s2">"8a1f78cd1b0f77a54d47e45e8e70329d95286364646e1dab9cf6ad6b2a926bb1"</span><span class="p">,</span>
+        <span class="s2">"hits"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1532</span><span class="p">,</span>
+        <span class="s2">"inc_id"</span><span class="p">:</span> <span class="mi">2325</span><span class="p">,</span>
+        <span class="s2">"inc_name"</span><span class="p">:</span> <span class="s2">"Sentinel Incident 1965 - First access credential added to Application or Service Principal where no credential was present"</span><span class="p">,</span>
+        <span class="s2">"inc_owner"</span><span class="p">:</span> <span class="s2">"Tier 1"</span><span class="p">,</span>
+        <span class="s2">"ip"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"destination"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+          <span class="s2">"source"</span><span class="p">:</span> <span class="n">false</span>
         <span class="p">},</span>
-        <span class="s2">&quot;last_modified_by&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AppBuilder&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;6bf8c47e-77a6-41ad-ad22-1004f7eee7cb&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;apikey&quot;</span>
+        <span class="s2">"last_modified_by"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"AppBuilder"</span><span class="p">,</span>
+          <span class="s2">"id"</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"6bf8c47e-77a6-41ad-ad22-1004f7eee7cb"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"apikey"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;last_modified_time&quot;</span><span class="p">:</span> <span class="mi">1683844894105</span><span class="p">,</span>
-        <span class="s2">&quot;parent_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;pending_scan_result&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;pending_sources&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;perms&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;delete&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-          <span class="s2">&quot;read&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-          <span class="s2">&quot;write&quot;</span><span class="p">:</span> <span class="n">true</span>
+        <span class="s2">"last_modified_time"</span><span class="p">:</span> <span class="mi">1683844894105</span><span class="p">,</span>
+        <span class="s2">"parent_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"pending_scan_result"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"pending_sources"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"perms"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"delete"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">"read"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+          <span class="s2">"write"</span><span class="p">:</span> <span class="n">true</span>
         <span class="p">},</span>
-        <span class="s2">&quot;playbooks&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"playbooks"</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Dig&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;playbook_handle&quot;</span><span class="p">:</span> <span class="s2">&quot;dig&quot;</span>
+            <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"Dig"</span><span class="p">,</span>
+            <span class="s2">"playbook_handle"</span><span class="p">:</span> <span class="s2">"dig"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Traceroute&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;playbook_handle&quot;</span><span class="p">:</span> <span class="s2">&quot;traceroute&quot;</span>
+            <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"Traceroute"</span><span class="p">,</span>
+            <span class="s2">"playbook_handle"</span><span class="p">:</span> <span class="s2">"traceroute"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Whois&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;playbook_handle&quot;</span><span class="p">:</span> <span class="s2">&quot;whois&quot;</span>
+            <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"Whois"</span><span class="p">,</span>
+            <span class="s2">"playbook_handle"</span><span class="p">:</span> <span class="s2">"whois"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;NMAP Scan&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;playbook_handle&quot;</span><span class="p">:</span> <span class="s2">&quot;nmap_scan&quot;</span>
+            <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"NMAP Scan"</span><span class="p">,</span>
+            <span class="s2">"playbook_handle"</span><span class="p">:</span> <span class="s2">"nmap_scan"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;playbook_handle&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span>
+            <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"test"</span><span class="p">,</span>
+            <span class="s2">"playbook_handle"</span><span class="p">:</span> <span class="s2">"test"</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"properties"</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;destination&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"destination"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"false"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;source&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;false&quot;</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"source"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"false"</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="s2">&quot;related_incident_count&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;relating&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;10.10.10.10&quot;</span>
+        <span class="s2">"related_incident_count"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"relating"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"IP Address"</span><span class="p">,</span>
+        <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"10.10.10.10"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;recordsFiltered&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&quot;recordsTotal&quot;</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="s2">"recordsFiltered"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"recordsTotal"</span><span class="p">:</span> <span class="mi">1</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;artifact_include_incident_count&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-    <span class="s2">&quot;artifact_tag_method&quot;</span><span class="p">:</span> <span class="s2">&quot;not_in&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;artifact_tag_values&quot;</span><span class="p">:</span> <span class="s2">&quot;Malicious&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;artifact_type_method&quot;</span><span class="p">:</span> <span class="s2">&quot;in&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;artifact_type_values&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address,MAC Address,String&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;10.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;artifact_value_method&quot;</span><span class="p">:</span> <span class="s2">&quot;contains&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="mi">2325</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"artifact_include_incident_count"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">"artifact_tag_method"</span><span class="p">:</span> <span class="s2">"not_in"</span><span class="p">,</span>
+    <span class="s2">"artifact_tag_values"</span><span class="p">:</span> <span class="s2">"Malicious"</span><span class="p">,</span>
+    <span class="s2">"artifact_type_method"</span><span class="p">:</span> <span class="s2">"in"</span><span class="p">,</span>
+    <span class="s2">"artifact_type_values"</span><span class="p">:</span> <span class="s2">"IP Address,MAC Address,String"</span><span class="p">,</span>
+    <span class="s2">"artifact_value"</span><span class="p">:</span> <span class="s2">"10."</span><span class="p">,</span>
+    <span class="s2">"artifact_value_method"</span><span class="p">:</span> <span class="s2">"contains"</span><span class="p">,</span>
+    <span class="s2">"incident_id"</span><span class="p">:</span> <span class="mi">2325</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">879</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;IBM-PF36KPAV&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-artifact-utils&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-05-12 02:53:35&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">879</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"IBM-PF36KPAV"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-artifact-utils"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-05-12 02:53:35"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1671,9 +1671,9 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
 <span class="sd">Sample Script to be used to Demonstrate how the Search Function could be used.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">artifact_include_incident_count</span> <span class="o">=</span> <span class="kc">False</span>
 

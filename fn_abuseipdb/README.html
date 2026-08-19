@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -709,62 +709,62 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;abuseConfidenceScore&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-      <span class="s2">&quot;countryCode&quot;</span><span class="p">:</span> <span class="s2">&quot;TH&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;countryName&quot;</span><span class="p">:</span> <span class="s2">&quot;Thailand&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;cattelecom.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;hostnames&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;ipAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;110.77.136.226&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;ipVersion&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-      <span class="s2">&quot;isPublic&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-      <span class="s2">&quot;isWhitelisted&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;isp&quot;</span><span class="p">:</span> <span class="s2">&quot;CAT Telecom Public Company Ltd&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;lastReportedAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-02-08T17:10:55+00:00&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;numDistinctUsers&quot;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
-      <span class="s2">&quot;reports&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"abuseConfidenceScore"</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+      <span class="s2">"countryCode"</span><span class="p">:</span> <span class="s2">"TH"</span><span class="p">,</span>
+      <span class="s2">"countryName"</span><span class="p">:</span> <span class="s2">"Thailand"</span><span class="p">,</span>
+      <span class="s2">"domain"</span><span class="p">:</span> <span class="s2">"cattelecom.com"</span><span class="p">,</span>
+      <span class="s2">"hostnames"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"ipAddress"</span><span class="p">:</span> <span class="s2">"110.77.136.226"</span><span class="p">,</span>
+      <span class="s2">"ipVersion"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="s2">"isPublic"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+      <span class="s2">"isWhitelisted"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"isp"</span><span class="p">:</span> <span class="s2">"CAT Telecom Public Company Ltd"</span><span class="p">,</span>
+      <span class="s2">"lastReportedAt"</span><span class="p">:</span> <span class="s2">"2022-02-08T17:10:55+00:00"</span><span class="p">,</span>
+      <span class="s2">"numDistinctUsers"</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span>
+      <span class="s2">"reports"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"categories"</span><span class="p">:</span> <span class="p">[</span>
             <span class="mi">18</span>
           <span class="p">],</span>
-          <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Attempted Brute Force (dovecot)&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;reportedAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-02-08T17:10:55+00:00&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;reporterCountryCode&quot;</span><span class="p">:</span> <span class="s2">&quot;GB&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;reporterCountryName&quot;</span><span class="p">:</span> <span class="s2">&quot;United Kingdom of Great Britain and Northern Ireland&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;reporterId&quot;</span><span class="p">:</span> <span class="mi">34703</span>
+          <span class="s2">"comment"</span><span class="p">:</span> <span class="s2">"Attempted Brute Force (dovecot)"</span><span class="p">,</span>
+          <span class="s2">"reportedAt"</span><span class="p">:</span> <span class="s2">"2022-02-08T17:10:55+00:00"</span><span class="p">,</span>
+          <span class="s2">"reporterCountryCode"</span><span class="p">:</span> <span class="s2">"GB"</span><span class="p">,</span>
+          <span class="s2">"reporterCountryName"</span><span class="p">:</span> <span class="s2">"United Kingdom of Great Britain and Northern Ireland"</span><span class="p">,</span>
+          <span class="s2">"reporterId"</span><span class="p">:</span> <span class="mi">34703</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;categories&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"categories"</span><span class="p">:</span> <span class="p">[</span>
             <span class="mi">18</span>
           <span class="p">],</span>
-          <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;Email Auth Brute force attack 1/1 in last day&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;reportedAt&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-02-06T19:27:40+00:00&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;reporterCountryCode&quot;</span><span class="p">:</span> <span class="s2">&quot;GB&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;reporterCountryName&quot;</span><span class="p">:</span> <span class="s2">&quot;United Kingdom of Great Britain and Northern Ireland&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;reporterId&quot;</span><span class="p">:</span> <span class="mi">49881</span>
+          <span class="s2">"comment"</span><span class="p">:</span> <span class="s2">"Email Auth Brute force attack 1/1 in last day"</span><span class="p">,</span>
+          <span class="s2">"reportedAt"</span><span class="p">:</span> <span class="s2">"2022-02-06T19:27:40+00:00"</span><span class="p">,</span>
+          <span class="s2">"reporterCountryCode"</span><span class="p">:</span> <span class="s2">"GB"</span><span class="p">,</span>
+          <span class="s2">"reporterCountryName"</span><span class="p">:</span> <span class="s2">"United Kingdom of Great Britain and Northern Ireland"</span><span class="p">,</span>
+          <span class="s2">"reporterId"</span><span class="p">:</span> <span class="mi">49881</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;totalReports&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="s2">&quot;usageType&quot;</span><span class="p">:</span> <span class="n">null</span>
+      <span class="s2">"totalReports"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">"usageType"</span><span class="p">:</span> <span class="n">null</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;abuseipdb_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;abuseipdb_artifact_value&quot;</span><span class="p">:</span> <span class="s2">&quot;110.77.136.226&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"abuseipdb_artifact_type"</span><span class="p">:</span> <span class="s2">"IP Address"</span><span class="p">,</span>
+    <span class="s2">"abuseipdb_artifact_value"</span><span class="p">:</span> <span class="s2">"110.77.136.226"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">298</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;My Host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-abuseipdb&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-02-11 14:18:53&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">298</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"My Host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-abuseipdb"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-02-11 14:18:53"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -782,85 +782,85 @@ List any prerequisites that are needed to use with this endpoint solution. Remov
 <details><summary>Example Post-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">CATEGORIES</span><span class="o">=</span> <span class="p">{</span>
-  <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;Fraud Orders&quot;</span><span class="p">,</span>
-  <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;DDoS Attack&quot;</span><span class="p">,</span>
-  <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;FTP Brute-Force&quot;</span><span class="p">,</span>
-  <span class="mi">6</span><span class="p">:</span> <span class="s2">&quot;Ping of Death&quot;</span><span class="p">,</span>
-  <span class="mi">7</span><span class="p">:</span> <span class="s2">&quot;Phishing&quot;</span><span class="p">,</span>
-  <span class="mi">8</span><span class="p">:</span> <span class="s2">&quot;Fraud VoIP&quot;</span><span class="p">,</span>
-  <span class="mi">9</span><span class="p">:</span> <span class="s2">&quot;Open Proxy&quot;</span><span class="p">,</span>
-  <span class="mi">10</span><span class="p">:</span> <span class="s2">&quot;Web Spam&quot;</span><span class="p">,</span>
-  <span class="mi">11</span><span class="p">:</span> <span class="s2">&quot;Email Spam&quot;</span><span class="p">,</span>
-  <span class="mi">12</span><span class="p">:</span> <span class="s2">&quot;Blog Spam&quot;</span><span class="p">,</span>
-  <span class="mi">13</span><span class="p">:</span> <span class="s2">&quot;VPN IP&quot;</span><span class="p">,</span>
-  <span class="mi">14</span><span class="p">:</span> <span class="s2">&quot;Port Scan&quot;</span><span class="p">,</span>
-  <span class="mi">15</span><span class="p">:</span> <span class="s2">&quot;Hacking&quot;</span><span class="p">,</span>
-  <span class="mi">16</span><span class="p">:</span> <span class="s2">&quot;SQL Injection&quot;</span><span class="p">,</span>
-  <span class="mi">17</span><span class="p">:</span> <span class="s2">&quot;Spoofing&quot;</span><span class="p">,</span>
-  <span class="mi">18</span><span class="p">:</span> <span class="s2">&quot;Brute-Force&quot;</span><span class="p">,</span>
-  <span class="mi">19</span><span class="p">:</span> <span class="s2">&quot;Bad Web Bot&quot;</span><span class="p">,</span>
-  <span class="mi">20</span><span class="p">:</span> <span class="s2">&quot;Exploited Host&quot;</span><span class="p">,</span>
-  <span class="mi">21</span><span class="p">:</span> <span class="s2">&quot;Web App Attack&quot;</span><span class="p">,</span>
-  <span class="mi">22</span><span class="p">:</span> <span class="s2">&quot;SSH&quot;</span><span class="p">,</span>
-  <span class="mi">23</span><span class="p">:</span> <span class="s2">&quot;IoT Targeted&quot;</span><span class="p">,</span>
+  <span class="mi">3</span><span class="p">:</span> <span class="s2">"Fraud Orders"</span><span class="p">,</span>
+  <span class="mi">4</span><span class="p">:</span> <span class="s2">"DDoS Attack"</span><span class="p">,</span>
+  <span class="mi">5</span><span class="p">:</span> <span class="s2">"FTP Brute-Force"</span><span class="p">,</span>
+  <span class="mi">6</span><span class="p">:</span> <span class="s2">"Ping of Death"</span><span class="p">,</span>
+  <span class="mi">7</span><span class="p">:</span> <span class="s2">"Phishing"</span><span class="p">,</span>
+  <span class="mi">8</span><span class="p">:</span> <span class="s2">"Fraud VoIP"</span><span class="p">,</span>
+  <span class="mi">9</span><span class="p">:</span> <span class="s2">"Open Proxy"</span><span class="p">,</span>
+  <span class="mi">10</span><span class="p">:</span> <span class="s2">"Web Spam"</span><span class="p">,</span>
+  <span class="mi">11</span><span class="p">:</span> <span class="s2">"Email Spam"</span><span class="p">,</span>
+  <span class="mi">12</span><span class="p">:</span> <span class="s2">"Blog Spam"</span><span class="p">,</span>
+  <span class="mi">13</span><span class="p">:</span> <span class="s2">"VPN IP"</span><span class="p">,</span>
+  <span class="mi">14</span><span class="p">:</span> <span class="s2">"Port Scan"</span><span class="p">,</span>
+  <span class="mi">15</span><span class="p">:</span> <span class="s2">"Hacking"</span><span class="p">,</span>
+  <span class="mi">16</span><span class="p">:</span> <span class="s2">"SQL Injection"</span><span class="p">,</span>
+  <span class="mi">17</span><span class="p">:</span> <span class="s2">"Spoofing"</span><span class="p">,</span>
+  <span class="mi">18</span><span class="p">:</span> <span class="s2">"Brute-Force"</span><span class="p">,</span>
+  <span class="mi">19</span><span class="p">:</span> <span class="s2">"Bad Web Bot"</span><span class="p">,</span>
+  <span class="mi">20</span><span class="p">:</span> <span class="s2">"Exploited Host"</span><span class="p">,</span>
+  <span class="mi">21</span><span class="p">:</span> <span class="s2">"Web App Attack"</span><span class="p">,</span>
+  <span class="mi">22</span><span class="p">:</span> <span class="s2">"SSH"</span><span class="p">,</span>
+  <span class="mi">23</span><span class="p">:</span> <span class="s2">"IoT Targeted"</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">result_ip_hits</span>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
   <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
-    <span class="n">resp_data</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
-    <span class="n">number_of_reports</span> <span class="o">=</span> <span class="n">resp_data</span><span class="p">[</span><span class="s1">&#39;totalReports&#39;</span><span class="p">]</span>
-    <span class="n">country_name</span> <span class="o">=</span> <span class="n">resp_data</span><span class="p">[</span><span class="s1">&#39;countryName&#39;</span><span class="p">]</span>
-    <span class="n">most_recent_report</span> <span class="o">=</span> <span class="n">resp_data</span><span class="p">[</span><span class="s1">&#39;lastReportedAt&#39;</span><span class="p">]</span>
-    <span class="n">confidence_score</span> <span class="o">=</span> <span class="n">resp_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;abuseConfidenceScore&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">resp_data</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]</span>
+    <span class="n">number_of_reports</span> <span class="o">=</span> <span class="n">resp_data</span><span class="p">[</span><span class="s1">'totalReports'</span><span class="p">]</span>
+    <span class="n">country_name</span> <span class="o">=</span> <span class="n">resp_data</span><span class="p">[</span><span class="s1">'countryName'</span><span class="p">]</span>
+    <span class="n">most_recent_report</span> <span class="o">=</span> <span class="n">resp_data</span><span class="p">[</span><span class="s1">'lastReportedAt'</span><span class="p">]</span>
+    <span class="n">confidence_score</span> <span class="o">=</span> <span class="n">resp_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"abuseConfidenceScore"</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     
     <span class="n">hit</span> <span class="o">=</span> <span class="p">[]</span>
     
     <span class="c1"># get clean list of de-duped categories</span>
-    <span class="n">categories_names</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">resp_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reports&#39;</span><span class="p">):</span>
+    <span class="n">categories_names</span> <span class="o">=</span> <span class="s2">""</span>
+    <span class="k">if</span> <span class="n">resp_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reports'</span><span class="p">):</span>
         <span class="n">categories_list</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">report</span> <span class="ow">in</span> <span class="n">resp_data</span><span class="p">[</span><span class="s1">&#39;reports&#39;</span><span class="p">]:</span>
-            <span class="n">categories_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">report</span><span class="p">[</span><span class="s2">&quot;categories&quot;</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">report</span> <span class="ow">in</span> <span class="n">resp_data</span><span class="p">[</span><span class="s1">'reports'</span><span class="p">]:</span>
+            <span class="n">categories_list</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">report</span><span class="p">[</span><span class="s2">"categories"</span><span class="p">])</span>
         <span class="n">categories_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">categories_list</span><span class="p">)</span>  <span class="c1"># dedup list</span>
-        <span class="n">categories_names</span> <span class="o">=</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">CATEGORIES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">categories_set</span><span class="p">)</span>
+        <span class="n">categories_names</span> <span class="o">=</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">CATEGORIES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="s1">'unknown'</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">categories_set</span><span class="p">)</span>
   
     
-    <span class="c1"># only return data if there&#39;s anything useful</span>
+    <span class="c1"># only return data if there's anything useful</span>
     <span class="k">if</span> <span class="n">number_of_reports</span> <span class="ow">or</span> <span class="n">confidence_score</span><span class="p">:</span>
       <span class="n">hit</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Confidence Score&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;number&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">confidence_score</span><span class="p">)</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Confidence Score"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"number"</span><span class="p">,</span>
+          <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">confidence_score</span><span class="p">)</span>
         <span class="p">},</span> 
         <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Number of Reports&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;number&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number_of_reports</span><span class="p">)</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Number of Reports"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"number"</span><span class="p">,</span>
+          <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">number_of_reports</span><span class="p">)</span>
         <span class="p">},</span> 
         <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Country&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">country_name</span><span class="p">)</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Country"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+          <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">country_name</span><span class="p">)</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Most Recent Report&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">most_recent_report</span><span class="p">)</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Most Recent Report"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+          <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">most_recent_report</span><span class="p">)</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Categories&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;string&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">categories_names</span><span class="p">)</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Categories"</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"string"</span><span class="p">,</span>
+          <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">categories_names</span><span class="p">)</span>
         <span class="p">}</span>
         <span class="p">]</span>
-      <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="s2">&quot;AbuseIPDB Function hits added&quot;</span><span class="p">,</span> <span class="n">hit</span><span class="p">)</span>
+      <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="s2">"AbuseIPDB Function hits added"</span><span class="p">,</span> <span class="n">hit</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-      <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">resp_data</span><span class="p">[</span><span class="s1">&#39;ipAddress&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> has no reports or confidence score to return or is not in AbuseIPDB&#39;s database.&quot;</span><span class="p">)</span>
+      <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">resp_data</span><span class="p">[</span><span class="s1">'ipAddress'</span><span class="p">]</span><span class="si">}</span><span class="s2"> has no reports or confidence score to return or is not in AbuseIPDB's database."</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;AbuseIPDB Check IP Address Blocklist failed: </span><span class="si">{results.reason}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"AbuseIPDB Check IP Address Blocklist failed: </span><span class="si">{results.reason}</span><span class="s2">"</span><span class="p">)</span>
 
 </pre></div>
 </div>

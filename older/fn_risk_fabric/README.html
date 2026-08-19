@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -440,7 +440,7 @@ fully-automated mitigation process. Currently, workflow only adds Tasks as examp
 -p fn_risk_fabric \
 -m risk_fabric_integration_functions \
 --workflow rf_example_get_host_risk rf_example_get_host_risk rf_example_get_user_risk rf_example_mitigate_persistent_insider_threats \
---rule &quot;RF Example: Get IP Risk&quot; &quot;RF Example: Get Host Risk&quot; &quot;RF Example: Get User Risk&quot; &quot;RF Example: Persistent Insider Threat&quot; \
+--rule "RF Example: Get IP Risk" "RF Example: Get Host Risk" "RF Example: Get User Risk" "RF Example: Persistent Insider Threat" \
 --field rf_actionplanguid
 </pre></div>
 </div>
@@ -495,7 +495,7 @@ verifyFlag=True
 <p>The create_incidents_action_plan.py example python script located in the fn_risk_fabric/util directory will create incidents in Resilient with an incident type of “Action Plan” for any Risk Fabric Action Plans assigned to the “resilient” queue.</p>
 <p>To use this script, first make sure that an “RF Action Plan” Incident Type is created in Resilient.  To check this, go to “Customization Settings” and click on “Incident Types” tab and make sure “RF Action Plan” is in the list of Incident Types.  If not, then add it.</p>
 <p>Use the following command to add “RF Action Plan” incidents to Resilient:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python create_incidents_action_plans.py --itype &quot;RF Action Plan&quot; --queue resilient
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python create_incidents_action_plans.py --itype "RF Action Plan" --queue resilient
 </pre></div>
 </div>
 <p>When the incident is created, a comment to the Action Plan record in Risk Fabric will be made with the Resilient Incident ID.</p>
@@ -505,7 +505,7 @@ verifyFlag=True
 <p>The create_incidents_risk_model.py example python script located in the fn_risk_fabric/util directory will create incidents in Resilient with an incident type of “RF Risk Model” for any Risk Fabric Risk Models with a limit of 10 records.</p>
 <p>To use this script, first make sure that an “RF Risk Model” Incident Type is created in Resilient.  To check this, go to “Customization Settings” and click on “Incident Types” tab and make sure “RF Risk Model” is in the list of Incident Types.  If not, then add it.</p>
 <p>Use the following command to add “RF Risk Model” incidents to Resilient:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python create_incidents_risk_models.py --itype &quot;RF Risk Model&quot; --limit 10
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>python create_incidents_risk_models.py --itype "RF Risk Model" --limit 10
 </pre></div>
 </div>
 </section>

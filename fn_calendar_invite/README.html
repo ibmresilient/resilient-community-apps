@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -692,33 +692,33 @@ Included in the package is an example workflow that uses the fn_calendar_invite 
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{{</span>
-   <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;success&quot;</span><span class="p">:</span><span class="n">true</span><span class="p">,</span>
-   <span class="s2">&quot;reason&quot;</span><span class="p">:</span><span class="s2">&quot;None&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;content&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;recipient&quot;</span><span class="p">:[</span>
-         <span class="s2">&quot;a@a.com&quot;</span><span class="p">,</span>
-         <span class="s2">&quot;restest@gmail.com&quot;</span>
+   <span class="s2">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span>
+   <span class="s2">"success"</span><span class="p">:</span><span class="n">true</span><span class="p">,</span>
+   <span class="s2">"reason"</span><span class="p">:</span><span class="s2">"None"</span><span class="p">,</span>
+   <span class="s2">"content"</span><span class="p">:{</span>
+      <span class="s2">"recipient"</span><span class="p">:[</span>
+         <span class="s2">"a@a.com"</span><span class="p">,</span>
+         <span class="s2">"restest@gmail.com"</span>
       <span class="p">],</span>
-      <span class="s2">&quot;sender&quot;</span><span class="p">:</span><span class="s2">&quot;Resilient Meeting Organizer &lt;restest@gmail.com&gt;&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;subject&quot;</span><span class="p">:</span><span class="s2">&quot;My Incident&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span><span class="s2">&quot;My Inicdent meeting&quot;</span>
+      <span class="s2">"sender"</span><span class="p">:</span><span class="s2">"Resilient Meeting Organizer &lt;restest@gmail.com&gt;"</span><span class="p">,</span>
+      <span class="s2">"subject"</span><span class="p">:</span><span class="s2">"My Incident"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span><span class="s2">"My Inicdent meeting"</span>
    <span class="p">},</span>
-   <span class="s2">&quot;raw&quot;</span><span class="p">:</span><span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">recipient</span><span class="se">\&quot;</span><span class="s2">: [</span><span class="se">\&quot;</span><span class="s2">a@a.com</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">restest@gmail.com</span><span class="se">\&quot;</span><span class="s2">], </span><span class="se">\&quot;</span><span class="s2">sender</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Resilient Meeting Organizer &lt;restest@gmail.com&gt;</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">subject</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">My Incident</span><span class="se">\&quot;</span><span class="s2">, </span><span class="se">\&quot;</span><span class="s2">description</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">My Incident meeting</span><span class="se">\&quot;</span><span class="s2">}&quot;</span><span class="p">,</span>
-   <span class="s2">&quot;inputs&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;calendar_invite_incident_id&quot;</span><span class="p">:</span><span class="mi">2151</span><span class="p">,</span>
-      <span class="s2">&quot;calendar_invite_datetime&quot;</span><span class="p">:</span><span class="mi">1611291600000</span><span class="p">,</span>
-      <span class="s2">&quot;calendar_invite_extra_email_addr&quot;</span><span class="p">:</span><span class="s2">&quot;restest@gmail.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;calendar_invite_subject&quot;</span><span class="p">:</span><span class="s2">&quot;My Incident&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;calendar_invite_description&quot;</span><span class="p">:</span><span class="s2">&quot;My Incident meeting&quot;</span>
+   <span class="s2">"raw"</span><span class="p">:</span><span class="s2">"{</span><span class="se">\"</span><span class="s2">recipient</span><span class="se">\"</span><span class="s2">: [</span><span class="se">\"</span><span class="s2">a@a.com</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">restest@gmail.com</span><span class="se">\"</span><span class="s2">], </span><span class="se">\"</span><span class="s2">sender</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Resilient Meeting Organizer &lt;restest@gmail.com&gt;</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">subject</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">My Incident</span><span class="se">\"</span><span class="s2">, </span><span class="se">\"</span><span class="s2">description</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">My Incident meeting</span><span class="se">\"</span><span class="s2">}"</span><span class="p">,</span>
+   <span class="s2">"inputs"</span><span class="p">:{</span>
+      <span class="s2">"calendar_invite_incident_id"</span><span class="p">:</span><span class="mi">2151</span><span class="p">,</span>
+      <span class="s2">"calendar_invite_datetime"</span><span class="p">:</span><span class="mi">1611291600000</span><span class="p">,</span>
+      <span class="s2">"calendar_invite_extra_email_addr"</span><span class="p">:</span><span class="s2">"restest@gmail.com"</span><span class="p">,</span>
+      <span class="s2">"calendar_invite_subject"</span><span class="p">:</span><span class="s2">"My Incident"</span><span class="p">,</span>
+      <span class="s2">"calendar_invite_description"</span><span class="p">:</span><span class="s2">"My Incident meeting"</span>
    <span class="p">},</span>
-   <span class="s2">&quot;metrics&quot;</span><span class="p">:{</span>
-      <span class="s2">&quot;version&quot;</span><span class="p">:</span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package&quot;</span><span class="p">:</span><span class="s2">&quot;fn-calendar-invite&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;package_version&quot;</span><span class="p">:</span><span class="s2">&quot;1.1.0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;host&quot;</span><span class="p">:</span><span class="s2">&quot;MacBook-Pro.local&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span><span class="mi">12759</span><span class="p">,</span>
-      <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span><span class="s2">&quot;2021-01-08 15:27:01&quot;</span>
+   <span class="s2">"metrics"</span><span class="p">:{</span>
+      <span class="s2">"version"</span><span class="p">:</span><span class="s2">"1.0"</span><span class="p">,</span>
+      <span class="s2">"package"</span><span class="p">:</span><span class="s2">"fn-calendar-invite"</span><span class="p">,</span>
+      <span class="s2">"package_version"</span><span class="p">:</span><span class="s2">"1.1.0"</span><span class="p">,</span>
+      <span class="s2">"host"</span><span class="p">:</span><span class="s2">"MacBook-Pro.local"</span><span class="p">,</span>
+      <span class="s2">"execution_time_ms"</span><span class="p">:</span><span class="mi">12759</span><span class="p">,</span>
+      <span class="s2">"timestamp"</span><span class="p">:</span><span class="s2">"2021-01-08 15:27:01"</span>
    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -741,18 +741,18 @@ Included in the package is an example workflow that uses the fn_calendar_invite 
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># results.content dict contains &quot;recipient&quot;, &quot;sender&quot;, &quot;subject&quot;, body&quot;</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
-<span class="n">r_to</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;recipient&quot;</span><span class="p">)</span>
-<span class="n">r_from</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sender&quot;</span><span class="p">)</span>
-<span class="n">r_subject</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;subject&quot;</span><span class="p">)</span>
-<span class="n">r_description</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># results.content dict contains "recipient", "sender", "subject", body"</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
+<span class="n">r_to</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"recipient"</span><span class="p">)</span>
+<span class="n">r_from</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sender"</span><span class="p">)</span>
+<span class="n">r_subject</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"subject"</span><span class="p">)</span>
+<span class="n">r_description</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">)</span>
 
-<span class="n">note_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;p&gt;&lt;b&gt;Meeting Invite&lt;/b&gt;&lt;/p&gt;</span>
+<span class="n">note_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;p&gt;&lt;b&gt;Meeting Invite&lt;/b&gt;&lt;/p&gt;</span>
 <span class="s2">To: </span><span class="si">{}</span><span class="s2">&lt;br&gt;</span>
 <span class="s2">From:</span><span class="si">{}</span><span class="s2">&lt;br&gt;</span>
 <span class="s2">Subject: </span><span class="si">{}</span><span class="s2">&lt;br&gt;</span>
-<span class="s2">Description: </span><span class="si">{}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r_to</span><span class="p">,</span> <span class="n">r_from</span><span class="p">,</span> <span class="n">r_subject</span><span class="p">,</span> <span class="n">r_description</span><span class="p">)</span>
+<span class="s2">Description: </span><span class="si">{}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r_to</span><span class="p">,</span> <span class="n">r_from</span><span class="p">,</span> <span class="n">r_subject</span><span class="p">,</span> <span class="n">r_description</span><span class="p">)</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
 </pre></div>

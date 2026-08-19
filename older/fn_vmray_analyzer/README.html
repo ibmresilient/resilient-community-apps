@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -661,11 +661,11 @@
 <section id="function-output">
 <h2>Function Output:<a class="headerlink" href="#function-output" title="Link to this heading">¶</a></h2>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-                <span class="s2">&quot;analysis_report_status&quot;</span><span class="p">:</span> <span class="n">analysis_report_status</span><span class="p">,</span>
-                <span class="s2">&quot;incident_id&quot;</span><span class="p">:</span> <span class="n">incident_id</span><span class="p">,</span>
-                <span class="s2">&quot;artifact_id&quot;</span><span class="p">:</span> <span class="n">artifact_id</span><span class="p">,</span>
-                <span class="s2">&quot;attachment_id&quot;</span><span class="p">:</span> <span class="n">attachment_id</span><span class="p">,</span>
-                <span class="s2">&quot;sample_final_result&quot;</span><span class="p">:</span> <span class="n">sample_final_result</span>
+                <span class="s2">"analysis_report_status"</span><span class="p">:</span> <span class="n">analysis_report_status</span><span class="p">,</span>
+                <span class="s2">"incident_id"</span><span class="p">:</span> <span class="n">incident_id</span><span class="p">,</span>
+                <span class="s2">"artifact_id"</span><span class="p">:</span> <span class="n">artifact_id</span><span class="p">,</span>
+                <span class="s2">"attachment_id"</span><span class="p">:</span> <span class="n">attachment_id</span><span class="p">,</span>
+                <span class="s2">"sample_final_result"</span><span class="p">:</span> <span class="n">sample_final_result</span>
             <span class="p">}</span>
 
 </pre></div>
@@ -690,68 +690,68 @@
 <h2>Post-Process Script:<a class="headerlink" href="#post-process-script" title="Link to this heading">¶</a></h2>
 <p>This example adds a Note to the Incident and color codes the <code class="docutils literal notranslate"><span class="pre">analysis_status</span></code> depending if it was <strong>malicious</strong> or <strong>clean</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w">  </span><span class="nf">font_color</span><span class="p">(</span><span class="n">vti_score</span><span class="p">,</span><span class="n">sample_severity</span><span class="p">):</span>
-  <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;green&quot;</span>
+  <span class="n">color</span> <span class="o">=</span> <span class="s2">"green"</span>
   <span class="k">try</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">sample_severity</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;malicious&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="nb">int</span><span class="p">(</span><span class="n">vti_score</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">75</span><span class="p">:</span>
-      <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span>
-    <span class="k">elif</span> <span class="n">sample_severity</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;blacklisted&quot;</span><span class="p">,</span><span class="s2">&quot;suspicious&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="nb">int</span><span class="p">(</span><span class="n">vti_score</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">50</span><span class="p">:</span>
-      <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;yellow&quot;</span>
+    <span class="k">if</span> <span class="n">sample_severity</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"malicious"</span><span class="p">]</span> <span class="ow">or</span> <span class="nb">int</span><span class="p">(</span><span class="n">vti_score</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">75</span><span class="p">:</span>
+      <span class="n">color</span> <span class="o">=</span> <span class="s2">"red"</span>
+    <span class="k">elif</span> <span class="n">sample_severity</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"blacklisted"</span><span class="p">,</span><span class="s2">"suspicious"</span><span class="p">]</span> <span class="ow">or</span> <span class="nb">int</span><span class="p">(</span><span class="n">vti_score</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">50</span><span class="p">:</span>
+      <span class="n">color</span> <span class="o">=</span> <span class="s2">"yellow"</span>
   <span class="k">except</span><span class="p">:</span>
       <span class="k">pass</span>
   <span class="k">return</span> <span class="n">color</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">analysis_report_status</span><span class="p">:</span>
- <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;Successful submit &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt; to VMRay Cloud Analyzer.However it will take time to generate an analysis report, please submit it again later. &lt;br&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attachment</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+ <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""Successful submit &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt; to VMRay Cloud Analyzer.However it will take time to generate an analysis report, please submit it again later. &lt;br&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attachment</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
 <span class="k">else</span><span class="p">:</span>
- <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;Successful submit &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt; to VMRay Analyzer.Check the results below: &lt;br&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attachment</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+ <span class="n">noteText</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""Successful submit &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt; to VMRay Analyzer.Check the results below: &lt;br&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attachment</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
  <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">sample_final_result</span><span class="p">:</span>
-   <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;-----------------------------------------------------------------------&quot;&quot;&quot;</span>
-   <span class="n">color</span> <span class="o">=</span> <span class="n">font_color</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s2">&quot;sample_report&quot;</span><span class="p">][</span><span class="s2">&quot;sample_score&quot;</span><span class="p">],</span><span class="n">sample</span><span class="p">[</span><span class="s2">&quot;sample_report&quot;</span><span class="p">][</span><span class="s2">&quot;sample_last_reputation_severity&quot;</span><span class="p">])</span>
-   <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;VMRay Sandbox Analysis: &lt;b&gt;</span><span class="si">{sample_filename}</span><span class="s2">&lt;/b&gt; complete.&lt;br&gt;</span>
+   <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">"""-----------------------------------------------------------------------"""</span>
+   <span class="n">color</span> <span class="o">=</span> <span class="n">font_color</span><span class="p">(</span><span class="n">sample</span><span class="p">[</span><span class="s2">"sample_report"</span><span class="p">][</span><span class="s2">"sample_score"</span><span class="p">],</span><span class="n">sample</span><span class="p">[</span><span class="s2">"sample_report"</span><span class="p">][</span><span class="s2">"sample_last_reputation_severity"</span><span class="p">])</span>
+   <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt;VMRay Sandbox Analysis: &lt;b&gt;</span><span class="si">{sample_filename}</span><span class="s2">&lt;/b&gt; complete.&lt;br&gt;</span>
 <span class="s2">                   VMRAY Online Attachment: &lt;a href=</span><span class="si">{sample_online_report}</span><span class="s2">&gt;</span><span class="si">{sample_online_report}</span><span class="s2">&lt;/a&gt;&lt;br&gt;</span>
-<span class="s2">                   VMRay Analyzer result:  VTI Score: &lt;b style= &quot;color:</span><span class="si">{color}</span><span class="s2">&quot;&gt;</span><span class="si">{sample_vti_score}</span><span class="s2">&lt;/b&gt;,  Severity: &lt;b style= &quot;color:</span><span class="si">{color}</span><span class="s2">&quot;&gt;</span><span class="si">{sample_severity}</span><span class="s2">&lt;/b&gt; &lt;br&gt;</span>
-<span class="s2">               &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sample_filename</span><span class="o">=</span><span class="n">sample</span><span class="p">[</span><span class="s2">&quot;sample_report&quot;</span><span class="p">][</span><span class="s2">&quot;sample_filename&quot;</span><span class="p">],</span>
-                           <span class="n">sample_online_report</span><span class="o">=</span><span class="n">sample</span><span class="p">[</span><span class="s2">&quot;sample_report&quot;</span><span class="p">][</span><span class="s2">&quot;sample_webif_url&quot;</span><span class="p">],</span>
+<span class="s2">                   VMRay Analyzer result:  VTI Score: &lt;b style= "color:</span><span class="si">{color}</span><span class="s2">"&gt;</span><span class="si">{sample_vti_score}</span><span class="s2">&lt;/b&gt;,  Severity: &lt;b style= "color:</span><span class="si">{color}</span><span class="s2">"&gt;</span><span class="si">{sample_severity}</span><span class="s2">&lt;/b&gt; &lt;br&gt;</span>
+<span class="s2">               """</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sample_filename</span><span class="o">=</span><span class="n">sample</span><span class="p">[</span><span class="s2">"sample_report"</span><span class="p">][</span><span class="s2">"sample_filename"</span><span class="p">],</span>
+                           <span class="n">sample_online_report</span><span class="o">=</span><span class="n">sample</span><span class="p">[</span><span class="s2">"sample_report"</span><span class="p">][</span><span class="s2">"sample_webif_url"</span><span class="p">],</span>
                            <span class="n">color</span> <span class="o">=</span> <span class="n">color</span><span class="p">,</span>
-                           <span class="n">sample_vti_score</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;sample_report&quot;</span><span class="p">][</span><span class="s2">&quot;sample_score&quot;</span><span class="p">],</span>
-                           <span class="n">sample_severity</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;sample_report&quot;</span><span class="p">][</span><span class="s2">&quot;sample_last_reputation_severity&quot;</span><span class="p">])</span>
+                           <span class="n">sample_vti_score</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="s2">"sample_report"</span><span class="p">][</span><span class="s2">"sample_score"</span><span class="p">],</span>
+                           <span class="n">sample_severity</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="s2">"sample_report"</span><span class="p">][</span><span class="s2">"sample_last_reputation_severity"</span><span class="p">])</span>
 
-   <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt;| analysis_id | analysis_job_started | analysis_vti_score | analysis_severity |&lt;br&gt;&quot;&quot;&quot;</span>
+   <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt;| analysis_id | analysis_job_started | analysis_vti_score | analysis_severity |&lt;br&gt;"""</span>
 
-   <span class="k">for</span> <span class="n">analysis</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;sample_analysis_report&quot;</span><span class="p">]:</span>
-     <span class="n">color</span> <span class="o">=</span> <span class="n">font_color</span><span class="p">(</span><span class="n">analysis</span><span class="p">[</span><span class="s2">&quot;analysis_vti_score&quot;</span><span class="p">],</span><span class="n">analysis</span><span class="p">[</span><span class="s2">&quot;analysis_severity&quot;</span><span class="p">])</span>
-     <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;| &lt;a href=</span><span class="si">{analysis_link}</span><span class="s2">&gt;  </span><span class="si">{analysis_id}</span><span class="s2"> &lt;/a&gt; | </span><span class="si">{analysis_job_started}</span><span class="s2"> |  &lt;b style= &quot;color:</span><span class="si">{color}</span><span class="s2">&quot;&gt; </span><span class="si">{analysis_vti_score}</span><span class="s2">&lt;/b&gt;  | &lt;b style= &quot;color:</span><span class="si">{color}</span><span class="s2">&quot;&gt;</span><span class="si">{analysis_severity}</span><span class="s2">&lt;/b&gt; |&lt;br&gt;</span>
-<span class="s2">                 &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">analysis_link</span><span class="o">=</span><span class="n">analysis</span><span class="p">[</span><span class="s2">&quot;analysis_webif_url&quot;</span><span class="p">],</span>
-                           <span class="n">analysis_id</span><span class="o">=</span><span class="n">analysis</span><span class="p">[</span><span class="s2">&quot;analysis_id&quot;</span><span class="p">],</span>
-                           <span class="n">analysis_job_started</span><span class="o">=</span><span class="n">analysis</span><span class="p">[</span><span class="s2">&quot;analysis_job_started&quot;</span><span class="p">],</span>
-                           <span class="n">analysis_vti_score</span><span class="o">=</span><span class="n">analysis</span><span class="p">[</span><span class="s2">&quot;analysis_vti_score&quot;</span><span class="p">],</span>
-                           <span class="n">analysis_severity</span><span class="o">=</span><span class="n">analysis</span><span class="p">[</span><span class="s2">&quot;analysis_severity&quot;</span><span class="p">],</span>
+   <span class="k">for</span> <span class="n">analysis</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">[</span><span class="s2">"sample_analysis_report"</span><span class="p">]:</span>
+     <span class="n">color</span> <span class="o">=</span> <span class="n">font_color</span><span class="p">(</span><span class="n">analysis</span><span class="p">[</span><span class="s2">"analysis_vti_score"</span><span class="p">],</span><span class="n">analysis</span><span class="p">[</span><span class="s2">"analysis_severity"</span><span class="p">])</span>
+     <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">"""| &lt;a href=</span><span class="si">{analysis_link}</span><span class="s2">&gt;  </span><span class="si">{analysis_id}</span><span class="s2"> &lt;/a&gt; | </span><span class="si">{analysis_job_started}</span><span class="s2"> |  &lt;b style= "color:</span><span class="si">{color}</span><span class="s2">"&gt; </span><span class="si">{analysis_vti_score}</span><span class="s2">&lt;/b&gt;  | &lt;b style= "color:</span><span class="si">{color}</span><span class="s2">"&gt;</span><span class="si">{analysis_severity}</span><span class="s2">&lt;/b&gt; |&lt;br&gt;</span>
+<span class="s2">                 """</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">analysis_link</span><span class="o">=</span><span class="n">analysis</span><span class="p">[</span><span class="s2">"analysis_webif_url"</span><span class="p">],</span>
+                           <span class="n">analysis_id</span><span class="o">=</span><span class="n">analysis</span><span class="p">[</span><span class="s2">"analysis_id"</span><span class="p">],</span>
+                           <span class="n">analysis_job_started</span><span class="o">=</span><span class="n">analysis</span><span class="p">[</span><span class="s2">"analysis_job_started"</span><span class="p">],</span>
+                           <span class="n">analysis_vti_score</span><span class="o">=</span><span class="n">analysis</span><span class="p">[</span><span class="s2">"analysis_vti_score"</span><span class="p">],</span>
+                           <span class="n">analysis_severity</span><span class="o">=</span><span class="n">analysis</span><span class="p">[</span><span class="s2">"analysis_severity"</span><span class="p">],</span>
                            <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
 
-   <span class="n">reputations</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">reputation</span><span class="p">[</span><span class="s2">&quot;reputation_lookup_severity&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">reputation</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">[</span><span class="s2">&quot;sample_reputation_report&quot;</span><span class="p">]]</span>
+   <span class="n">reputations</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">reputation</span><span class="p">[</span><span class="s2">"reputation_lookup_severity"</span><span class="p">])</span> <span class="k">for</span> <span class="n">reputation</span> <span class="ow">in</span> <span class="n">sample</span><span class="p">[</span><span class="s2">"sample_reputation_report"</span><span class="p">]]</span>
 
-   <span class="k">if</span> <span class="s2">&quot;malicious&quot;</span> <span class="ow">in</span> <span class="n">reputations</span><span class="p">:</span>
-     <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;red&quot;</span>
-     <span class="n">reputation_lookup_severity</span> <span class="o">=</span> <span class="s2">&quot;malicious&quot;</span>
-   <span class="k">elif</span> <span class="s2">&quot;suspicious&quot;</span> <span class="ow">in</span> <span class="n">reputations</span><span class="p">:</span>
-     <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;yellow&quot;</span>
-     <span class="n">reputation_lookup_severity</span> <span class="o">=</span> <span class="s2">&quot;suspicious&quot;</span>
-   <span class="k">elif</span> <span class="s2">&quot;blacklisted&quot;</span> <span class="ow">in</span> <span class="n">reputations</span><span class="p">:</span>
-     <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;yellow&quot;</span>
-     <span class="n">reputation_lookup_severity</span> <span class="o">=</span> <span class="s2">&quot;blacklisted&quot;</span>
-   <span class="k">elif</span> <span class="s2">&quot;not_suspicious&quot;</span> <span class="ow">in</span> <span class="n">reputations</span><span class="p">:</span>
-     <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;green&quot;</span>
-     <span class="n">reputation_lookup_severity</span> <span class="o">=</span> <span class="s2">&quot;not_suspicious&quot;</span>
-   <span class="k">elif</span> <span class="s2">&quot;whitelisted&quot;</span> <span class="ow">in</span> <span class="n">reputations</span><span class="p">:</span>
-     <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;green&quot;</span>
-     <span class="n">reputation_lookup_severity</span> <span class="o">=</span> <span class="s2">&quot;whitelisted&quot;</span>
+   <span class="k">if</span> <span class="s2">"malicious"</span> <span class="ow">in</span> <span class="n">reputations</span><span class="p">:</span>
+     <span class="n">color</span> <span class="o">=</span> <span class="s2">"red"</span>
+     <span class="n">reputation_lookup_severity</span> <span class="o">=</span> <span class="s2">"malicious"</span>
+   <span class="k">elif</span> <span class="s2">"suspicious"</span> <span class="ow">in</span> <span class="n">reputations</span><span class="p">:</span>
+     <span class="n">color</span> <span class="o">=</span> <span class="s2">"yellow"</span>
+     <span class="n">reputation_lookup_severity</span> <span class="o">=</span> <span class="s2">"suspicious"</span>
+   <span class="k">elif</span> <span class="s2">"blacklisted"</span> <span class="ow">in</span> <span class="n">reputations</span><span class="p">:</span>
+     <span class="n">color</span> <span class="o">=</span> <span class="s2">"yellow"</span>
+     <span class="n">reputation_lookup_severity</span> <span class="o">=</span> <span class="s2">"blacklisted"</span>
+   <span class="k">elif</span> <span class="s2">"not_suspicious"</span> <span class="ow">in</span> <span class="n">reputations</span><span class="p">:</span>
+     <span class="n">color</span> <span class="o">=</span> <span class="s2">"green"</span>
+     <span class="n">reputation_lookup_severity</span> <span class="o">=</span> <span class="s2">"not_suspicious"</span>
+   <span class="k">elif</span> <span class="s2">"whitelisted"</span> <span class="ow">in</span> <span class="n">reputations</span><span class="p">:</span>
+     <span class="n">color</span> <span class="o">=</span> <span class="s2">"green"</span>
+     <span class="n">reputation_lookup_severity</span> <span class="o">=</span> <span class="s2">"whitelisted"</span>
    <span class="k">else</span><span class="p">:</span>
-     <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;green&quot;</span>
-     <span class="n">reputation_lookup_severity</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>
+     <span class="n">color</span> <span class="o">=</span> <span class="s2">"green"</span>
+     <span class="n">reputation_lookup_severity</span> <span class="o">=</span> <span class="s2">"unknown"</span>
 
-   <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;Reputation lookup result:  &lt;b style= &quot;color:</span><span class="si">{color}</span><span class="s2">&quot;&gt;</span><span class="si">{reputation_lookup_severity}</span><span class="s2"> &lt;/b&gt; &lt;br&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">reputation_lookup_severity</span><span class="o">=</span><span class="n">reputation_lookup_severity</span><span class="p">)</span>
+   <span class="n">noteText</span> <span class="o">+=</span> <span class="sa">u</span><span class="s2">"""Reputation lookup result:  &lt;b style= "color:</span><span class="si">{color}</span><span class="s2">"&gt;</span><span class="si">{reputation_lookup_severity}</span><span class="s2"> &lt;/b&gt; &lt;br&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">reputation_lookup_severity</span><span class="o">=</span><span class="n">reputation_lookup_severity</span><span class="p">)</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">))</span>
 </pre></div>

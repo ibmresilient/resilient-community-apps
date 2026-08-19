@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="search" title="Search" href="../search.html"><link rel="next" title="watsonx.ai for SOAR Analysts" href="../fn_watsonx_analyst/README.html"><link rel="prev" title="URL ScanIO" href="../fn_urlscanio/README.html">
+<link rel="search" title="Search" href="../search.html"><link rel="next" title="IBM QRadar SOAR Response Assistant" href="../fn_watsonx_analyst/README.html"><link rel="prev" title="URL ScanIO" href="../fn_urlscanio/README.html">
         <link rel="prefetch" href="../_static/IBM_Security_Light.png" as="image">
         <link rel="prefetch" href="../_static/IBM_Security_Dark.png" as="image">
 
@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -767,705 +767,705 @@ Sample playbook using the VirusTotal function:
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;scan&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;last_dns_records&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"scan"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"data"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"attributes"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"last_dns_records"</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;NS&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;b.iana-servers.net&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ttl&quot;</span><span class="p">:</span> <span class="mi">16570</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"NS"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"b.iana-servers.net"</span><span class="p">,</span>
+            <span class="s2">"ttl"</span><span class="p">:</span> <span class="mi">16570</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;MX&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ttl&quot;</span><span class="p">:</span> <span class="mi">20693</span>
+            <span class="s2">"priority"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"MX"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+            <span class="s2">"ttl"</span><span class="p">:</span> <span class="mi">20693</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;AAAA&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;2606:2800:220:1:248:1893:25c8:1946&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ttl&quot;</span><span class="p">:</span> <span class="mi">21556</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"AAAA"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"2606:2800:220:1:248:1893:25c8:1946"</span><span class="p">,</span>
+            <span class="s2">"ttl"</span><span class="p">:</span> <span class="mi">21556</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;TXT&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;wgyf8z8cgvm2qmxpnbnldrcltvk4xqfn&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ttl&quot;</span><span class="p">:</span> <span class="mi">21600</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"TXT"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"wgyf8z8cgvm2qmxpnbnldrcltvk4xqfn"</span><span class="p">,</span>
+            <span class="s2">"ttl"</span><span class="p">:</span> <span class="mi">21600</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;A&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;93.184.216.34&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ttl&quot;</span><span class="p">:</span> <span class="mi">11480</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"A"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"93.184.216.34"</span><span class="p">,</span>
+            <span class="s2">"ttl"</span><span class="p">:</span> <span class="mi">11480</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;rname&quot;</span><span class="p">:</span> <span class="s2">&quot;noc.dns.icann.org&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;retry&quot;</span><span class="p">:</span> <span class="mi">3600</span><span class="p">,</span>
-            <span class="s2">&quot;refresh&quot;</span><span class="p">:</span> <span class="mi">7200</span><span class="p">,</span>
-            <span class="s2">&quot;minimum&quot;</span><span class="p">:</span> <span class="mi">3600</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;ns.icann.org&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;expire&quot;</span><span class="p">:</span> <span class="mi">1209600</span><span class="p">,</span>
-            <span class="s2">&quot;ttl&quot;</span><span class="p">:</span> <span class="mi">3600</span><span class="p">,</span>
-            <span class="s2">&quot;serial&quot;</span><span class="p">:</span> <span class="mi">2022091285</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;SOA&quot;</span>
+            <span class="s2">"rname"</span><span class="p">:</span> <span class="s2">"noc.dns.icann.org"</span><span class="p">,</span>
+            <span class="s2">"retry"</span><span class="p">:</span> <span class="mi">3600</span><span class="p">,</span>
+            <span class="s2">"refresh"</span><span class="p">:</span> <span class="mi">7200</span><span class="p">,</span>
+            <span class="s2">"minimum"</span><span class="p">:</span> <span class="mi">3600</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"ns.icann.org"</span><span class="p">,</span>
+            <span class="s2">"expire"</span><span class="p">:</span> <span class="mi">1209600</span><span class="p">,</span>
+            <span class="s2">"ttl"</span><span class="p">:</span> <span class="mi">3600</span><span class="p">,</span>
+            <span class="s2">"serial"</span><span class="p">:</span> <span class="mi">2022091285</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"SOA"</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;TXT&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;v=spf1 -all&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ttl&quot;</span><span class="p">:</span> <span class="mi">21600</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"TXT"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"v=spf1 -all"</span><span class="p">,</span>
+            <span class="s2">"ttl"</span><span class="p">:</span> <span class="mi">21600</span>
           <span class="p">},</span>
           <span class="p">{</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;NS&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;a.iana-servers.net&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ttl&quot;</span><span class="p">:</span> <span class="mi">16570</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"NS"</span><span class="p">,</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"a.iana-servers.net"</span><span class="p">,</span>
+            <span class="s2">"ttl"</span><span class="p">:</span> <span class="mi">16570</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="s2">&quot;jarm&quot;</span><span class="p">:</span> <span class="s2">&quot;29d29d15d29d2*******2d0000003014e6e1a0bc19438ed392b132659e77&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;whois&quot;</span><span class="p">:</span> <span class="s2">&quot;Creation Date: 1995-08-14T04:00:00Z</span><span class="se">\n</span><span class="s2">DNSSEC: signedDelegation</span><span class="se">\n</span><span class="s2">Domain Name: EXAMPLE.COM</span><span class="se">\n</span><span class="s2">Domain Status: clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited</span><span class="se">\n</span><span class="s2">Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited</span><span class="se">\n</span><span class="s2">Domain Status: clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited</span><span class="se">\n</span><span class="s2">Name Server: A.IANA-SERVERS.NET</span><span class="se">\n</span><span class="s2">Name Server: B.IANA-SERVERS.NET</span><span class="se">\n</span><span class="s2">Registrar IANA ID: 376</span><span class="se">\n</span><span class="s2">Registrar URL: http://res-dom.iana.org</span><span class="se">\n</span><span class="s2">Registrar WHOIS Server: whois.iana.org</span><span class="se">\n</span><span class="s2">Registrar: RESERVED-Internet Assigned Numbers Authority</span><span class="se">\n</span><span class="s2">Registry Domain ID: 2336799_DOMAIN_COM-VRSN</span><span class="se">\n</span><span class="s2">Registry Expiry Date: 2023-08-13T04:00:00Z</span><span class="se">\n</span><span class="s2">Updated Date: 2022-08-14T07:01:31Z</span><span class="se">\n</span><span class="s2">created: 1992-01-01</span><span class="se">\n</span><span class="s2">domain: EXAMPLE.COM</span><span class="se">\n</span><span class="s2">organisation: Internet Assigned Numbers Authority</span><span class="se">\n</span><span class="s2">source: IANA&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;last_https_certificate_date&quot;</span><span class="p">:</span> <span class="mi">1684856030</span><span class="p">,</span>
-        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;popularity_ranks&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;Majestic&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1684861082</span><span class="p">,</span>
-            <span class="s2">&quot;rank&quot;</span><span class="p">:</span> <span class="mi">333</span>
+        <span class="s2">"jarm"</span><span class="p">:</span> <span class="s2">"29d29d15d29d2*******2d0000003014e6e1a0bc19438ed392b132659e77"</span><span class="p">,</span>
+        <span class="s2">"whois"</span><span class="p">:</span> <span class="s2">"Creation Date: 1995-08-14T04:00:00Z</span><span class="se">\n</span><span class="s2">DNSSEC: signedDelegation</span><span class="se">\n</span><span class="s2">Domain Name: EXAMPLE.COM</span><span class="se">\n</span><span class="s2">Domain Status: clientDeleteProhibited https://icann.org/epp#clientDeleteProhibited</span><span class="se">\n</span><span class="s2">Domain Status: clientTransferProhibited https://icann.org/epp#clientTransferProhibited</span><span class="se">\n</span><span class="s2">Domain Status: clientUpdateProhibited https://icann.org/epp#clientUpdateProhibited</span><span class="se">\n</span><span class="s2">Name Server: A.IANA-SERVERS.NET</span><span class="se">\n</span><span class="s2">Name Server: B.IANA-SERVERS.NET</span><span class="se">\n</span><span class="s2">Registrar IANA ID: 376</span><span class="se">\n</span><span class="s2">Registrar URL: http://res-dom.iana.org</span><span class="se">\n</span><span class="s2">Registrar WHOIS Server: whois.iana.org</span><span class="se">\n</span><span class="s2">Registrar: RESERVED-Internet Assigned Numbers Authority</span><span class="se">\n</span><span class="s2">Registry Domain ID: 2336799_DOMAIN_COM-VRSN</span><span class="se">\n</span><span class="s2">Registry Expiry Date: 2023-08-13T04:00:00Z</span><span class="se">\n</span><span class="s2">Updated Date: 2022-08-14T07:01:31Z</span><span class="se">\n</span><span class="s2">created: 1992-01-01</span><span class="se">\n</span><span class="s2">domain: EXAMPLE.COM</span><span class="se">\n</span><span class="s2">organisation: Internet Assigned Numbers Authority</span><span class="se">\n</span><span class="s2">source: IANA"</span><span class="p">,</span>
+        <span class="s2">"last_https_certificate_date"</span><span class="p">:</span> <span class="mi">1684856030</span><span class="p">,</span>
+        <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"popularity_ranks"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"Majestic"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1684861082</span><span class="p">,</span>
+            <span class="s2">"rank"</span><span class="p">:</span> <span class="mi">333</span>
           <span class="p">},</span>
-          <span class="s2">&quot;Statvoo&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1684169881</span><span class="p">,</span>
-            <span class="s2">&quot;rank&quot;</span><span class="p">:</span> <span class="mi">12875</span>
+          <span class="s2">"Statvoo"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1684169881</span><span class="p">,</span>
+            <span class="s2">"rank"</span><span class="p">:</span> <span class="mi">12875</span>
           <span class="p">},</span>
-          <span class="s2">&quot;Alexa&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1684083481</span><span class="p">,</span>
-            <span class="s2">&quot;rank&quot;</span><span class="p">:</span> <span class="mi">12875</span>
+          <span class="s2">"Alexa"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1684083481</span><span class="p">,</span>
+            <span class="s2">"rank"</span><span class="p">:</span> <span class="mi">12875</span>
           <span class="p">},</span>
-          <span class="s2">&quot;Cisco Umbrella&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1684861081</span><span class="p">,</span>
-            <span class="s2">&quot;rank&quot;</span><span class="p">:</span> <span class="mi">11545</span>
+          <span class="s2">"Cisco Umbrella"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1684861081</span><span class="p">,</span>
+            <span class="s2">"rank"</span><span class="p">:</span> <span class="mi">11545</span>
           <span class="p">}</span>
         <span class="p">},</span>
-        <span class="s2">&quot;last_analysis_date&quot;</span><span class="p">:</span> <span class="mi">1684855729</span><span class="p">,</span>
-        <span class="s2">&quot;last_dns_records_date&quot;</span><span class="p">:</span> <span class="mi">1684856030</span><span class="p">,</span>
-        <span class="s2">&quot;last_analysis_stats&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;harmless&quot;</span><span class="p">:</span> <span class="mi">68</span><span class="p">,</span>
-          <span class="s2">&quot;malicious&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;suspicious&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-          <span class="s2">&quot;undetected&quot;</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span>
-          <span class="s2">&quot;timeout&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="s2">"last_analysis_date"</span><span class="p">:</span> <span class="mi">1684855729</span><span class="p">,</span>
+        <span class="s2">"last_dns_records_date"</span><span class="p">:</span> <span class="mi">1684856030</span><span class="p">,</span>
+        <span class="s2">"last_analysis_stats"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"harmless"</span><span class="p">:</span> <span class="mi">68</span><span class="p">,</span>
+          <span class="s2">"malicious"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"suspicious"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+          <span class="s2">"undetected"</span><span class="p">:</span> <span class="mi">19</span><span class="p">,</span>
+          <span class="s2">"timeout"</span><span class="p">:</span> <span class="mi">0</span>
         <span class="p">},</span>
-        <span class="s2">&quot;creation_date&quot;</span><span class="p">:</span> <span class="mi">808372800</span><span class="p">,</span>
-        <span class="s2">&quot;whois_date&quot;</span><span class="p">:</span> <span class="mi">1682950996</span><span class="p">,</span>
-        <span class="s2">&quot;reputation&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span>
-        <span class="s2">&quot;registrar&quot;</span><span class="p">:</span> <span class="s2">&quot;RESERVED-Internet Assigned Numbers Authority&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;last_analysis_results&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;Bkav&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Bkav&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;CMC Threat Intelligence&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;CMC Threat Intelligence&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Snort IP sample list&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Snort IP sample list&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;0xSI_f33d&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;0xSI_f33d&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;ViriBack&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;ViriBack&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;PhishLabs&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;PhishLabs&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;K7AntiVirus&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;K7AntiVirus&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;CINS Army&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;CINS Army&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Quttera&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Quttera&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;PrecisionSec&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;PrecisionSec&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;OpenPhish&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;OpenPhish&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;VX Vault&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;VX Vault&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;ArcSight Threat Intelligence&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;ArcSight Threat Intelligence&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Scantitan&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Scantitan&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;AlienVault&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AlienVault&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Sophos&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Sophos&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Phishtank&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Phishtank&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Cyan&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Cyan&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Spam404&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Spam404&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;SecureBrain&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;SecureBrain&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;CRDF&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;CRDF&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Fortinet&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Fortinet&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;alphaMountain.ai&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;alphaMountain.ai&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Lionic&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Lionic&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Cyble&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Cyble&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Seclookup&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Seclookup&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Xcitium Verdict Cloud&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Xcitium Verdict Cloud&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Google Safebrowsing&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Google Safebrowsing&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;SafeToOpen&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;SafeToOpen&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;ADMINUSLabs&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;ADMINUSLabs&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;ESTsecurity&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;ESTsecurity&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Juniper Networks&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Juniper Networks&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Heimdal Security&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Heimdal Security&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;AutoShun&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AutoShun&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Trustwave&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Trustwave&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;AICC (MONITORAPP)&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AICC (MONITORAPP)&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;CyRadar&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;CyRadar&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Dr.Web&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Dr.Web&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Emsisoft&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Emsisoft&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Abusix&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Abusix&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Webroot&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Webroot&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Avira&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Avira&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;securolytics&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;securolytics&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Antiy-AVL&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Antiy-AVL&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;AlphaSOC&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;AlphaSOC&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Acronis&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Acronis&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Quick Heal&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Quick Heal&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;URLQuery&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;URLQuery&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Viettel Threat Intelligence&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Viettel Threat Intelligence&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;DNS8&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;DNS8&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;benkow.cc&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;benkow.cc&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;EmergingThreats&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;EmergingThreats&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Chong Lua Dao&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Chong Lua Dao&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Yandex Safebrowsing&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Yandex Safebrowsing&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Lumu&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Lumu&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;zvelo&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;zvelo&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Kaspersky&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Kaspersky&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Segasec&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Segasec&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Sucuri SiteCheck&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Sucuri SiteCheck&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;desenmascara.me&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;desenmascara.me&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;CrowdSec&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;CrowdSec&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Cluster25&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Cluster25&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;URLhaus&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;URLhaus&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;PREBYTES&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;PREBYTES&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;StopForumSpam&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;StopForumSpam&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Blueliv&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Blueliv&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Netcraft&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Netcraft&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;ZeroCERT&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;ZeroCERT&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Phishing Database&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Phishing Database&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;MalwarePatrol&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;MalwarePatrol&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;IPsum&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;IPsum&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Malwared&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Malwared&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;BitDefender&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;BitDefender&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;GreenSnow&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;GreenSnow&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;G-Data&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;G-Data&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;VIPRE&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;VIPRE&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;SCUMWARE.org&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;SCUMWARE.org&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;PhishFort&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;PhishFort&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;malwares.com URL checker&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;malwares.com URL checker&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Forcepoint ThreatSeeker&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Forcepoint ThreatSeeker&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Criminal IP&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;undetected&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;unrated&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Criminal IP&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Certego&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Certego&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;ESET&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;ESET&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Threatsourcing&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Threatsourcing&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;ThreatHive&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;ThreatHive&quot;</span>
-          <span class="p">},</span>
-          <span class="s2">&quot;Bfore.Ai PreCrime&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;harmless&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="s2">&quot;clean&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;blacklist&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;engine_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Bfore.Ai PreCrime&quot;</span>
+        <span class="s2">"creation_date"</span><span class="p">:</span> <span class="mi">808372800</span><span class="p">,</span>
+        <span class="s2">"whois_date"</span><span class="p">:</span> <span class="mi">1682950996</span><span class="p">,</span>
+        <span class="s2">"reputation"</span><span class="p">:</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span>
+        <span class="s2">"registrar"</span><span class="p">:</span> <span class="s2">"RESERVED-Internet Assigned Numbers Authority"</span><span class="p">,</span>
+        <span class="s2">"last_analysis_results"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"Bkav"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Bkav"</span>
+          <span class="p">},</span>
+          <span class="s2">"CMC Threat Intelligence"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"CMC Threat Intelligence"</span>
+          <span class="p">},</span>
+          <span class="s2">"Snort IP sample list"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Snort IP sample list"</span>
+          <span class="p">},</span>
+          <span class="s2">"0xSI_f33d"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"0xSI_f33d"</span>
+          <span class="p">},</span>
+          <span class="s2">"ViriBack"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"ViriBack"</span>
+          <span class="p">},</span>
+          <span class="s2">"PhishLabs"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"PhishLabs"</span>
+          <span class="p">},</span>
+          <span class="s2">"K7AntiVirus"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"K7AntiVirus"</span>
+          <span class="p">},</span>
+          <span class="s2">"CINS Army"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"CINS Army"</span>
+          <span class="p">},</span>
+          <span class="s2">"Quttera"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Quttera"</span>
+          <span class="p">},</span>
+          <span class="s2">"PrecisionSec"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"PrecisionSec"</span>
+          <span class="p">},</span>
+          <span class="s2">"OpenPhish"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"OpenPhish"</span>
+          <span class="p">},</span>
+          <span class="s2">"VX Vault"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"VX Vault"</span>
+          <span class="p">},</span>
+          <span class="s2">"ArcSight Threat Intelligence"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"ArcSight Threat Intelligence"</span>
+          <span class="p">},</span>
+          <span class="s2">"Scantitan"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Scantitan"</span>
+          <span class="p">},</span>
+          <span class="s2">"AlienVault"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"AlienVault"</span>
+          <span class="p">},</span>
+          <span class="s2">"Sophos"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Sophos"</span>
+          <span class="p">},</span>
+          <span class="s2">"Phishtank"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Phishtank"</span>
+          <span class="p">},</span>
+          <span class="s2">"Cyan"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Cyan"</span>
+          <span class="p">},</span>
+          <span class="s2">"Spam404"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Spam404"</span>
+          <span class="p">},</span>
+          <span class="s2">"SecureBrain"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"SecureBrain"</span>
+          <span class="p">},</span>
+          <span class="s2">"CRDF"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"CRDF"</span>
+          <span class="p">},</span>
+          <span class="s2">"Fortinet"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Fortinet"</span>
+          <span class="p">},</span>
+          <span class="s2">"alphaMountain.ai"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"alphaMountain.ai"</span>
+          <span class="p">},</span>
+          <span class="s2">"Lionic"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Lionic"</span>
+          <span class="p">},</span>
+          <span class="s2">"Cyble"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Cyble"</span>
+          <span class="p">},</span>
+          <span class="s2">"Seclookup"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Seclookup"</span>
+          <span class="p">},</span>
+          <span class="s2">"Xcitium Verdict Cloud"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Xcitium Verdict Cloud"</span>
+          <span class="p">},</span>
+          <span class="s2">"Google Safebrowsing"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Google Safebrowsing"</span>
+          <span class="p">},</span>
+          <span class="s2">"SafeToOpen"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"SafeToOpen"</span>
+          <span class="p">},</span>
+          <span class="s2">"ADMINUSLabs"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"ADMINUSLabs"</span>
+          <span class="p">},</span>
+          <span class="s2">"ESTsecurity"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"ESTsecurity"</span>
+          <span class="p">},</span>
+          <span class="s2">"Juniper Networks"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Juniper Networks"</span>
+          <span class="p">},</span>
+          <span class="s2">"Heimdal Security"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Heimdal Security"</span>
+          <span class="p">},</span>
+          <span class="s2">"AutoShun"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"AutoShun"</span>
+          <span class="p">},</span>
+          <span class="s2">"Trustwave"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Trustwave"</span>
+          <span class="p">},</span>
+          <span class="s2">"AICC (MONITORAPP)"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"AICC (MONITORAPP)"</span>
+          <span class="p">},</span>
+          <span class="s2">"CyRadar"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"CyRadar"</span>
+          <span class="p">},</span>
+          <span class="s2">"Dr.Web"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Dr.Web"</span>
+          <span class="p">},</span>
+          <span class="s2">"Emsisoft"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Emsisoft"</span>
+          <span class="p">},</span>
+          <span class="s2">"Abusix"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Abusix"</span>
+          <span class="p">},</span>
+          <span class="s2">"Webroot"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Webroot"</span>
+          <span class="p">},</span>
+          <span class="s2">"Avira"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Avira"</span>
+          <span class="p">},</span>
+          <span class="s2">"securolytics"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"securolytics"</span>
+          <span class="p">},</span>
+          <span class="s2">"Antiy-AVL"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Antiy-AVL"</span>
+          <span class="p">},</span>
+          <span class="s2">"AlphaSOC"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"AlphaSOC"</span>
+          <span class="p">},</span>
+          <span class="s2">"Acronis"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Acronis"</span>
+          <span class="p">},</span>
+          <span class="s2">"Quick Heal"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Quick Heal"</span>
+          <span class="p">},</span>
+          <span class="s2">"URLQuery"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"URLQuery"</span>
+          <span class="p">},</span>
+          <span class="s2">"Viettel Threat Intelligence"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Viettel Threat Intelligence"</span>
+          <span class="p">},</span>
+          <span class="s2">"DNS8"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"DNS8"</span>
+          <span class="p">},</span>
+          <span class="s2">"benkow.cc"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"benkow.cc"</span>
+          <span class="p">},</span>
+          <span class="s2">"EmergingThreats"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"EmergingThreats"</span>
+          <span class="p">},</span>
+          <span class="s2">"Chong Lua Dao"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Chong Lua Dao"</span>
+          <span class="p">},</span>
+          <span class="s2">"Yandex Safebrowsing"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Yandex Safebrowsing"</span>
+          <span class="p">},</span>
+          <span class="s2">"Lumu"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Lumu"</span>
+          <span class="p">},</span>
+          <span class="s2">"zvelo"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"zvelo"</span>
+          <span class="p">},</span>
+          <span class="s2">"Kaspersky"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Kaspersky"</span>
+          <span class="p">},</span>
+          <span class="s2">"Segasec"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Segasec"</span>
+          <span class="p">},</span>
+          <span class="s2">"Sucuri SiteCheck"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Sucuri SiteCheck"</span>
+          <span class="p">},</span>
+          <span class="s2">"desenmascara.me"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"desenmascara.me"</span>
+          <span class="p">},</span>
+          <span class="s2">"CrowdSec"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"CrowdSec"</span>
+          <span class="p">},</span>
+          <span class="s2">"Cluster25"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Cluster25"</span>
+          <span class="p">},</span>
+          <span class="s2">"URLhaus"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"URLhaus"</span>
+          <span class="p">},</span>
+          <span class="s2">"PREBYTES"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"PREBYTES"</span>
+          <span class="p">},</span>
+          <span class="s2">"StopForumSpam"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"StopForumSpam"</span>
+          <span class="p">},</span>
+          <span class="s2">"Blueliv"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Blueliv"</span>
+          <span class="p">},</span>
+          <span class="s2">"Netcraft"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Netcraft"</span>
+          <span class="p">},</span>
+          <span class="s2">"ZeroCERT"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"ZeroCERT"</span>
+          <span class="p">},</span>
+          <span class="s2">"Phishing Database"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Phishing Database"</span>
+          <span class="p">},</span>
+          <span class="s2">"MalwarePatrol"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"MalwarePatrol"</span>
+          <span class="p">},</span>
+          <span class="s2">"IPsum"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"IPsum"</span>
+          <span class="p">},</span>
+          <span class="s2">"Malwared"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Malwared"</span>
+          <span class="p">},</span>
+          <span class="s2">"BitDefender"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"BitDefender"</span>
+          <span class="p">},</span>
+          <span class="s2">"GreenSnow"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"GreenSnow"</span>
+          <span class="p">},</span>
+          <span class="s2">"G-Data"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"G-Data"</span>
+          <span class="p">},</span>
+          <span class="s2">"VIPRE"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"VIPRE"</span>
+          <span class="p">},</span>
+          <span class="s2">"SCUMWARE.org"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"SCUMWARE.org"</span>
+          <span class="p">},</span>
+          <span class="s2">"PhishFort"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"PhishFort"</span>
+          <span class="p">},</span>
+          <span class="s2">"malwares.com URL checker"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"malwares.com URL checker"</span>
+          <span class="p">},</span>
+          <span class="s2">"Forcepoint ThreatSeeker"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Forcepoint ThreatSeeker"</span>
+          <span class="p">},</span>
+          <span class="s2">"Criminal IP"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"undetected"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"unrated"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Criminal IP"</span>
+          <span class="p">},</span>
+          <span class="s2">"Certego"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Certego"</span>
+          <span class="p">},</span>
+          <span class="s2">"ESET"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"ESET"</span>
+          <span class="p">},</span>
+          <span class="s2">"Threatsourcing"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Threatsourcing"</span>
+          <span class="p">},</span>
+          <span class="s2">"ThreatHive"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"ThreatHive"</span>
+          <span class="p">},</span>
+          <span class="s2">"Bfore.Ai PreCrime"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"harmless"</span><span class="p">,</span>
+            <span class="s2">"result"</span><span class="p">:</span> <span class="s2">"clean"</span><span class="p">,</span>
+            <span class="s2">"method"</span><span class="p">:</span> <span class="s2">"blacklist"</span><span class="p">,</span>
+            <span class="s2">"engine_name"</span><span class="p">:</span> <span class="s2">"Bfore.Ai PreCrime"</span>
           <span class="p">}</span>
         <span class="p">},</span>
-        <span class="s2">&quot;last_update_date&quot;</span><span class="p">:</span> <span class="mi">1660460491</span><span class="p">,</span>
-        <span class="s2">&quot;last_modification_date&quot;</span><span class="p">:</span> <span class="mi">1684875206</span><span class="p">,</span>
-        <span class="s2">&quot;tld&quot;</span><span class="p">:</span> <span class="s2">&quot;com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;last_https_certificate&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">1870</span><span class="p">,</span>
-          <span class="s2">&quot;public_key&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;rsa&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;key_size&quot;</span><span class="p">:</span> <span class="mi">2048</span><span class="p">,</span>
-              <span class="s2">&quot;modulus&quot;</span><span class="p">:</span> <span class="s2">&quot;c280778959b8456f*******fa7badc757d07afbb6fadd05bba28171bbe17f21d25f2ef0d2724e7534f88d62e34ada5190d4013d9c0cc071f7e62fb6d6076726d0deff17cef085fd31c166ca876505472a5fc0abb88cc3bfd0177f63a35cf046fb86aafb4dd72a5e7f9ae013977dbefb7d35570d5d5e819835ea1642a2d3b074f7592ded38e7fe7a1bb336e67eae3f9ea61683de53014e8100aebb42f51f752934cde9848038ae3c3714c0f027ce3052b98adc5f22a079f84f4e4904e2757caa2f2a1e03ec714ca32a61fc6fca911e935a2e780858f6eebb34205d9ae6afc6d7f2bf0a7bfa8e9277e36c7b0c4086644a15ec70d7728e6330e10bef5a30972e25&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;exponent&quot;</span><span class="p">:</span> <span class="s2">&quot;10001&quot;</span>
+        <span class="s2">"last_update_date"</span><span class="p">:</span> <span class="mi">1660460491</span><span class="p">,</span>
+        <span class="s2">"last_modification_date"</span><span class="p">:</span> <span class="mi">1684875206</span><span class="p">,</span>
+        <span class="s2">"tld"</span><span class="p">:</span> <span class="s2">"com"</span><span class="p">,</span>
+        <span class="s2">"last_https_certificate"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"size"</span><span class="p">:</span> <span class="mi">1870</span><span class="p">,</span>
+          <span class="s2">"public_key"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"rsa"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"key_size"</span><span class="p">:</span> <span class="mi">2048</span><span class="p">,</span>
+              <span class="s2">"modulus"</span><span class="p">:</span> <span class="s2">"c280778959b8456f*******fa7badc757d07afbb6fadd05bba28171bbe17f21d25f2ef0d2724e7534f88d62e34ada5190d4013d9c0cc071f7e62fb6d6076726d0deff17cef085fd31c166ca876505472a5fc0abb88cc3bfd0177f63a35cf046fb86aafb4dd72a5e7f9ae013977dbefb7d35570d5d5e819835ea1642a2d3b074f7592ded38e7fe7a1bb336e67eae3f9ea61683de53014e8100aebb42f51f752934cde9848038ae3c3714c0f027ce3052b98adc5f22a079f84f4e4904e2757caa2f2a1e03ec714ca32a61fc6fca911e935a2e780858f6eebb34205d9ae6afc6d7f2bf0a7bfa8e9277e36c7b0c4086644a15ec70d7728e6330e10bef5a30972e25"</span><span class="p">,</span>
+              <span class="s2">"exponent"</span><span class="p">:</span> <span class="s2">"10001"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;algorithm&quot;</span><span class="p">:</span> <span class="s2">&quot;RSA&quot;</span>
+            <span class="s2">"algorithm"</span><span class="p">:</span> <span class="s2">"RSA"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;thumbprint_sha256&quot;</span><span class="p">:</span> <span class="s2">&quot;5ef2f214260ab8f58e5*******ac04b0f171807d8d1185fddd67470e9ab6096&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;cert_signature&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;signature&quot;</span><span class="p">:</span> <span class="s2">&quot;59e44ad8a982*******30c6d762675b33c74bec5f73da79192f8cf062d5810edf3b8d6fc6cff139632cd4fe98724850b74a2c2f60ff5a7d87d768aaee9c9582b6e006fb9cd24eec442c54c16859d34613923bfc68e95c984a9b2e5410f4478d795b9cfd974bf584fe716ff7c4030c46c4e224dcb83673a93bf2bc5c59c1af243a1253b84f6f7536ea885aede14749130060df207d4c408ba4364c5e23fdaacc541afa437e8427674f713bb4a7d3659819bc744df8973b93342e860c24d615d125a10f6efff33891450e8d69fc6b95c2b35dbadeddd36b625f2958aac693f9afe1af815286dea185ac2d26218af4078b5fa5e098f53f9ccf823a1833123f4c6&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;signature_algorithm&quot;</span><span class="p">:</span> <span class="s2">&quot;sha256RSA&quot;</span>
+          <span class="s2">"thumbprint_sha256"</span><span class="p">:</span> <span class="s2">"5ef2f214260ab8f58e5*******ac04b0f171807d8d1185fddd67470e9ab6096"</span><span class="p">,</span>
+          <span class="s2">"cert_signature"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"signature"</span><span class="p">:</span> <span class="s2">"59e44ad8a982*******30c6d762675b33c74bec5f73da79192f8cf062d5810edf3b8d6fc6cff139632cd4fe98724850b74a2c2f60ff5a7d87d768aaee9c9582b6e006fb9cd24eec442c54c16859d34613923bfc68e95c984a9b2e5410f4478d795b9cfd974bf584fe716ff7c4030c46c4e224dcb83673a93bf2bc5c59c1af243a1253b84f6f7536ea885aede14749130060df207d4c408ba4364c5e23fdaacc541afa437e8427674f713bb4a7d3659819bc744df8973b93342e860c24d615d125a10f6efff33891450e8d69fc6b95c2b35dbadeddd36b625f2958aac693f9afe1af815286dea185ac2d26218af4078b5fa5e098f53f9ccf823a1833123f4c6"</span><span class="p">,</span>
+            <span class="s2">"signature_algorithm"</span><span class="p">:</span> <span class="s2">"sha256RSA"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;validity&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;not_after&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-02-13 23:59:59&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;not_before&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-01-13 00:00:00&quot;</span>
+          <span class="s2">"validity"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"not_after"</span><span class="p">:</span> <span class="s2">"2024-02-13 23:59:59"</span><span class="p">,</span>
+            <span class="s2">"not_before"</span><span class="p">:</span> <span class="s2">"2023-01-13 00:00:00"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;V3&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;extensions&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;certificate_policies&quot;</span><span class="p">:</span> <span class="p">[</span>
-              <span class="s2">&quot;2.23.140.1.2.2&quot;</span>
+          <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"V3"</span><span class="p">,</span>
+          <span class="s2">"extensions"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"certificate_policies"</span><span class="p">:</span> <span class="p">[</span>
+              <span class="s2">"2.23.140.1.2.2"</span>
             <span class="p">],</span>
-            <span class="s2">&quot;extended_key_usage&quot;</span><span class="p">:</span> <span class="p">[</span>
-              <span class="s2">&quot;serverAuth&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;clientAuth&quot;</span>
+            <span class="s2">"extended_key_usage"</span><span class="p">:</span> <span class="p">[</span>
+              <span class="s2">"serverAuth"</span><span class="p">,</span>
+              <span class="s2">"clientAuth"</span>
             <span class="p">],</span>
-            <span class="s2">&quot;authority_key_identifier&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;keyid&quot;</span><span class="p">:</span> <span class="s2">&quot;a12ab1abc1ab123c12abc1ab1a12a1a12345a1a1&quot;</span>
+            <span class="s2">"authority_key_identifier"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"keyid"</span><span class="p">:</span> <span class="s2">"a12ab1abc1ab123c12abc1ab1a12a1a12345a1a1"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;subject_alternative_name&quot;</span><span class="p">:</span> <span class="p">[</span>
-              <span class="s2">&quot;www.example.org&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;example.net&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;example.edu&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;example.com&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;example.org&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;www.example.com&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;www.example.edu&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;www.example.net&quot;</span>
+            <span class="s2">"subject_alternative_name"</span><span class="p">:</span> <span class="p">[</span>
+              <span class="s2">"www.example.org"</span><span class="p">,</span>
+              <span class="s2">"example.net"</span><span class="p">,</span>
+              <span class="s2">"example.edu"</span><span class="p">,</span>
+              <span class="s2">"example.com"</span><span class="p">,</span>
+              <span class="s2">"example.org"</span><span class="p">,</span>
+              <span class="s2">"www.example.com"</span><span class="p">,</span>
+              <span class="s2">"www.example.edu"</span><span class="p">,</span>
+              <span class="s2">"www.example.net"</span>
             <span class="p">],</span>
-            <span class="s2">&quot;subject_key_identifier&quot;</span><span class="p">:</span> <span class="s2">&quot;a12ab1abc1ab123c12abc1ab1a12a1a12345a1a2&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;crl_distribution_points&quot;</span><span class="p">:</span> <span class="p">[</span>
-              <span class="s2">&quot;http://crl3.digicert.com/DigiCertTLSRSASHA2562020CA1-4.crl&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;http://crl4.digicert.com/DigiCertTLSRSASHA2562020CA1-4.crl&quot;</span>
+            <span class="s2">"subject_key_identifier"</span><span class="p">:</span> <span class="s2">"a12ab1abc1ab123c12abc1ab1a12a1a12345a1a2"</span><span class="p">,</span>
+            <span class="s2">"crl_distribution_points"</span><span class="p">:</span> <span class="p">[</span>
+              <span class="s2">"http://crl3.digicert.com/DigiCertTLSRSASHA2562020CA1-4.crl"</span><span class="p">,</span>
+              <span class="s2">"http://crl4.digicert.com/DigiCertTLSRSASHA2562020CA1-4.crl"</span>
             <span class="p">],</span>
-            <span class="s2">&quot;key_usage&quot;</span><span class="p">:</span> <span class="p">[</span>
-              <span class="s2">&quot;digitalSignature&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;keyEncipherment&quot;</span>
+            <span class="s2">"key_usage"</span><span class="p">:</span> <span class="p">[</span>
+              <span class="s2">"digitalSignature"</span><span class="p">,</span>
+              <span class="s2">"keyEncipherment"</span>
             <span class="p">],</span>
-            <span class="s2">&quot;1.3.6.1.4.1.11129.2.4.2&quot;</span><span class="p">:</span> <span class="s2">&quot;1234567b123456789*******4d5db1acec55cb79db4cd13a12345678abcdefg&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;CA&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;ca_information_access&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;CA Issuers&quot;</span><span class="p">:</span> <span class="s2">&quot;http://cacerts.digicert.com/DigiCertTLSRSASHA2562020CA1-1.crt&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;OCSP&quot;</span><span class="p">:</span> <span class="s2">&quot;http://ocsp.digicert.com&quot;</span>
+            <span class="s2">"1.3.6.1.4.1.11129.2.4.2"</span><span class="p">:</span> <span class="s2">"1234567b123456789*******4d5db1acec55cb79db4cd13a12345678abcdefg"</span><span class="p">,</span>
+            <span class="s2">"CA"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"ca_information_access"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"CA Issuers"</span><span class="p">:</span> <span class="s2">"http://cacerts.digicert.com/DigiCertTLSRSASHA2562020CA1-1.crt"</span><span class="p">,</span>
+              <span class="s2">"OCSP"</span><span class="p">:</span> <span class="s2">"http://ocsp.digicert.com"</span>
             <span class="p">}</span>
           <span class="p">},</span>
-          <span class="s2">&quot;thumbprint&quot;</span><span class="p">:</span> <span class="s2">&quot;a1abc12345678b716d2a7d61b51c6d5764ab1234&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;serial_number&quot;</span><span class="p">:</span> <span class="s2">&quot;a1abc123456c7a1234567890d6b12a1&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;issuer&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="s2">&quot;US&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;CN&quot;</span><span class="p">:</span> <span class="s2">&quot;DigiCert TLS RSA SHA256 2020 CA1&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;O&quot;</span><span class="p">:</span> <span class="s2">&quot;DigiCert Inc&quot;</span>
+          <span class="s2">"thumbprint"</span><span class="p">:</span> <span class="s2">"a1abc12345678b716d2a7d61b51c6d5764ab1234"</span><span class="p">,</span>
+          <span class="s2">"serial_number"</span><span class="p">:</span> <span class="s2">"a1abc123456c7a1234567890d6b12a1"</span><span class="p">,</span>
+          <span class="s2">"issuer"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"C"</span><span class="p">:</span> <span class="s2">"US"</span><span class="p">,</span>
+            <span class="s2">"CN"</span><span class="p">:</span> <span class="s2">"DigiCert TLS RSA SHA256 2020 CA1"</span><span class="p">,</span>
+            <span class="s2">"O"</span><span class="p">:</span> <span class="s2">"DigiCert Inc"</span>
           <span class="p">},</span>
-          <span class="s2">&quot;subject&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="s2">&quot;US&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;L&quot;</span><span class="p">:</span> <span class="s2">&quot;Los Angeles&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;CN&quot;</span><span class="p">:</span> <span class="s2">&quot;www.example.org&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;O&quot;</span><span class="p">:</span> <span class="s2">&quot;Internet</span><span class="se">\u00a0</span><span class="s2">Corporation</span><span class="se">\u00a0</span><span class="s2">for</span><span class="se">\u00a0</span><span class="s2">Assigned</span><span class="se">\u00a0</span><span class="s2">Names</span><span class="se">\u00a0</span><span class="s2">and</span><span class="se">\u00a0</span><span class="s2">Numbers&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;ST&quot;</span><span class="p">:</span> <span class="s2">&quot;California&quot;</span>
+          <span class="s2">"subject"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"C"</span><span class="p">:</span> <span class="s2">"US"</span><span class="p">,</span>
+            <span class="s2">"L"</span><span class="p">:</span> <span class="s2">"Los Angeles"</span><span class="p">,</span>
+            <span class="s2">"CN"</span><span class="p">:</span> <span class="s2">"www.example.org"</span><span class="p">,</span>
+            <span class="s2">"O"</span><span class="p">:</span> <span class="s2">"Internet</span><span class="se">\u00a0</span><span class="s2">Corporation</span><span class="se">\u00a0</span><span class="s2">for</span><span class="se">\u00a0</span><span class="s2">Assigned</span><span class="se">\u00a0</span><span class="s2">Names</span><span class="se">\u00a0</span><span class="s2">and</span><span class="se">\u00a0</span><span class="s2">Numbers"</span><span class="p">,</span>
+            <span class="s2">"ST"</span><span class="p">:</span> <span class="s2">"California"</span>
           <span class="p">}</span>
         <span class="p">},</span>
-        <span class="s2">&quot;categories&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;Forcepoint ThreatSeeker&quot;</span><span class="p">:</span> <span class="s2">&quot;information technology&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Sophos&quot;</span><span class="p">:</span> <span class="s2">&quot;information technology&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;Xcitium Verdict Cloud&quot;</span><span class="p">:</span> <span class="s2">&quot;mobile communications&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;BitDefender&quot;</span><span class="p">:</span> <span class="s2">&quot;computersandsoftware&quot;</span>
+        <span class="s2">"categories"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"Forcepoint ThreatSeeker"</span><span class="p">:</span> <span class="s2">"information technology"</span><span class="p">,</span>
+          <span class="s2">"Sophos"</span><span class="p">:</span> <span class="s2">"information technology"</span><span class="p">,</span>
+          <span class="s2">"Xcitium Verdict Cloud"</span><span class="p">:</span> <span class="s2">"mobile communications"</span><span class="p">,</span>
+          <span class="s2">"BitDefender"</span><span class="p">:</span> <span class="s2">"computersandsoftware"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;total_votes&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;harmless&quot;</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span>
-          <span class="s2">&quot;malicious&quot;</span><span class="p">:</span> <span class="mi">5</span>
+        <span class="s2">"total_votes"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"harmless"</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span>
+          <span class="s2">"malicious"</span><span class="p">:</span> <span class="mi">5</span>
         <span class="p">}</span>
       <span class="p">},</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;domain&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;example.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;self&quot;</span><span class="p">:</span> <span class="s2">&quot;https://virustotal.com/api/v3/domains/example.com&quot;</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"domain"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"example.com"</span><span class="p">,</span>
+      <span class="s2">"links"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"self"</span><span class="p">:</span> <span class="s2">"https://virustotal.com/api/v3/domains/example.com"</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;success&quot;</span>
+  <span class="s2">"code"</span><span class="p">:</span> <span class="s2">"success"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1473,8 +1473,8 @@ Sample playbook using the VirusTotal function:
 </details>
 <details><summary>Example Pre-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">typeLookup</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;Email Attachment&#39;</span><span class="p">:</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="s1">&#39;Malware Sample&#39;</span><span class="p">:</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="s1">&#39;Malware MD5 Hash&#39;</span><span class="p">:</span> <span class="s1">&#39;hash&#39;</span><span class="p">,</span> <span class="s1">&#39;Malware SHA-1 Hash&#39;</span><span class="p">:</span> <span class="s1">&#39;hash&#39;</span><span class="p">,</span> <span class="s1">&#39;Malware SHA-256 Hash&#39;</span><span class="p">:</span> <span class="s1">&#39;hash&#39;</span><span class="p">,</span> <span class="s1">&#39;Other File&#39;</span><span class="p">:</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="s1">&#39;RCF 822 Email Message File&#39;</span><span class="p">:</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="s1">&#39;File Name&#39;</span><span class="p">:</span> <span class="s1">&#39;filename&#39;</span><span class="p">,</span>
- <span class="s1">&#39;URL&#39;</span><span class="p">:</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;IP Address&#39;</span><span class="p">:</span> <span class="s1">&#39;ip&#39;</span><span class="p">,</span> <span class="s1">&#39;DNS Name&#39;</span><span class="p">:</span><span class="s1">&#39;domain&#39;</span><span class="p">}</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">typeLookup</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">'Email Attachment'</span><span class="p">:</span> <span class="s1">'file'</span><span class="p">,</span> <span class="s1">'Malware Sample'</span><span class="p">:</span> <span class="s1">'file'</span><span class="p">,</span> <span class="s1">'Malware MD5 Hash'</span><span class="p">:</span> <span class="s1">'hash'</span><span class="p">,</span> <span class="s1">'Malware SHA-1 Hash'</span><span class="p">:</span> <span class="s1">'hash'</span><span class="p">,</span> <span class="s1">'Malware SHA-256 Hash'</span><span class="p">:</span> <span class="s1">'hash'</span><span class="p">,</span> <span class="s1">'Other File'</span><span class="p">:</span> <span class="s1">'file'</span><span class="p">,</span> <span class="s1">'RCF 822 Email Message File'</span><span class="p">:</span> <span class="s1">'file'</span><span class="p">,</span> <span class="s1">'File Name'</span><span class="p">:</span> <span class="s1">'filename'</span><span class="p">,</span>
+ <span class="s1">'URL'</span><span class="p">:</span> <span class="s1">'url'</span><span class="p">,</span> <span class="s1">'IP Address'</span><span class="p">:</span> <span class="s1">'ip'</span><span class="p">,</span> <span class="s1">'DNS Name'</span><span class="p">:</span><span class="s1">'domain'</span><span class="p">}</span>
 <span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="n">typeLookup</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">vt_type</span> <span class="o">=</span> <span class="n">typeLookup</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
@@ -1492,88 +1492,88 @@ Sample playbook using the VirusTotal function:
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 
-<span class="n">VIRUSTOTAL_GUI_URL</span> <span class="o">=</span> <span class="s2">&quot;https://www.virustotal.com/gui&quot;</span>
+<span class="n">VIRUSTOTAL_GUI_URL</span> <span class="o">=</span> <span class="s2">"https://www.virustotal.com/gui"</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">vt_scan_results</span>
 
 <span class="c1"># Uncomment the following 2 lines to have the results json printed formatted to a note.</span>
 <span class="c1">#pretty_results = dumps(results, indent=4, sort_keys=True)</span>
-<span class="c1">#incident.addNote(helper.createRichText(u&quot;&lt;p&gt;VirusTotal scan of {0}: {1} with artifact_id: {2}&lt;/p&gt;&lt;div&gt;{3}&lt;/div&gt;&quot;.format(artifact.type, artifact.value, artifact.id, pretty_results)))</span>
+<span class="c1">#incident.addNote(helper.createRichText(u"&lt;p&gt;VirusTotal scan of {0}: {1} with artifact_id: {2}&lt;/p&gt;&lt;div&gt;{3}&lt;/div&gt;".format(artifact.type, artifact.value, artifact.id, pretty_results)))</span>
 
-<span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&lt;p&gt;VirusTotal scan of </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">: &lt;b&gt;</span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&lt;/b&gt; with artifact_id: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&lt;/p&gt;&quot;</span>
-<span class="n">scan</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;scan&quot;</span><span class="p">,</span>  <span class="p">{})</span>
+<span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"&lt;p&gt;VirusTotal scan of </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">: &lt;b&gt;</span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2">&lt;/b&gt; with artifact_id: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&lt;/p&gt;"</span>
+<span class="n">scan</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"scan"</span><span class="p">,</span>  <span class="p">{})</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">scan</span><span class="p">:</span>
-  <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No scan data returned VirusTotal scan </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> with artifact_id: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">"No scan data returned VirusTotal scan </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> with artifact_id: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="n">scan</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">{})</span>
-<span class="n">scan_error</span> <span class="o">=</span> <span class="n">scan</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">scan</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"data"</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">scan_error</span> <span class="o">=</span> <span class="n">scan</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"error"</span><span class="p">,</span> <span class="p">{})</span>
 <span class="k">if</span> <span class="n">scan_error</span><span class="p">:</span>
-  <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">Error returned: </span><span class="si">{</span><span class="n">scan_error</span><span class="si">}</span><span class="s2">&quot;</span>
-  <span class="c1">#helper.fail(&quot;Error returned from VirusTotal scan {0}: {1}: {2}&quot;.format(artifact.type, artifact.value, scan_error))</span>
+  <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">Error returned: </span><span class="si">{</span><span class="n">scan_error</span><span class="si">}</span><span class="s2">"</span>
+  <span class="c1">#helper.fail("Error returned from VirusTotal scan {0}: {1}: {2}".format(artifact.type, artifact.value, scan_error))</span>
 
 <span class="n">stats</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">attributes</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
-  <span class="n">attributes</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;attributes&quot;</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="n">attributes</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"attributes"</span><span class="p">,</span> <span class="p">{})</span>
   <span class="k">if</span> <span class="n">attributes</span><span class="p">:</span>
     <span class="c1"># If this a report the stats are in last_analysis_stats otherwise they are in stats</span>
-    <span class="n">stats</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;last_analysis_stats&quot;</span><span class="p">,</span> <span class="p">{})</span>
+    <span class="n">stats</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"last_analysis_stats"</span><span class="p">,</span> <span class="p">{})</span>
     <span class="k">if</span> <span class="n">stats</span> <span class="o">==</span> <span class="p">{}:</span>
-	    <span class="n">stats</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;stats&quot;</span><span class="p">,</span> <span class="p">{})</span>
+	    <span class="n">stats</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"stats"</span><span class="p">,</span> <span class="p">{})</span>
 
 <span class="c1"># Write statistics to the note</span>
 <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">stats</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-  <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;malicious&quot;</span><span class="p">:</span>
-    <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">msg</span><span class="si">}{</span><span class="n">k</span><span class="si">}</span><span class="s2">: &lt;span style=&#39;color:red&#39;&gt;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&lt;/span&gt;&lt;br&gt;&quot;</span>
+  <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">"malicious"</span><span class="p">:</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">msg</span><span class="si">}{</span><span class="n">k</span><span class="si">}</span><span class="s2">: &lt;span style='color:red'&gt;</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&lt;/span&gt;&lt;br&gt;"</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">msg</span><span class="si">}{</span><span class="n">k</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&lt;br&gt;&quot;</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">msg</span><span class="si">}{</span><span class="n">k</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&lt;br&gt;"</span>
 
 <span class="c1"># Write the last analysis time to the note</span>
-<span class="n">last_analysis_date</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;last_analysis_date&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">last_analysis_date</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"last_analysis_date"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">last_analysis_date</span><span class="p">:</span>
-  <span class="n">last_analysis_date_str</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">last_analysis_date</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%b-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span>
-  <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">&lt;br&gt;Last analysis date: </span><span class="si">{</span><span class="n">last_analysis_date_str</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="n">last_analysis_date_str</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">last_analysis_date</span><span class="p">)</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">'%Y-%b-</span><span class="si">%d</span><span class="s1"> %H:%M:%S'</span><span class="p">)</span>
+  <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">&lt;br&gt;Last analysis date: </span><span class="si">{</span><span class="n">last_analysis_date_str</span><span class="si">}</span><span class="s2">"</span>
 
 <span class="c1"># Add VirusTotal Report link to the note</span>
 <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
-  <span class="n">uriLookup</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;Email Attachment&#39;</span><span class="p">:</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;Malware Sample&#39;</span><span class="p">:</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;Malware MD5 Hash&#39;</span><span class="p">:</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;Malware SHA-1 Hash&#39;</span><span class="p">:</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;Malware SHA-256 Hash&#39;</span><span class="p">:</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;Other File&#39;</span><span class="p">:</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;RCF 822 Email Message File&#39;</span><span class="p">:</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;File Name&#39;</span><span class="p">:</span> <span class="s1">&#39;file&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;URL&#39;</span><span class="p">:</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;IP Address&#39;</span><span class="p">:</span> <span class="s1">&#39;ip-address&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;DNS Name&#39;</span><span class="p">:</span> <span class="s1">&#39;domain&#39;</span><span class="p">}</span>
+  <span class="n">uriLookup</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">'Email Attachment'</span><span class="p">:</span> <span class="s1">'file'</span><span class="p">,</span>
+                <span class="s1">'Malware Sample'</span><span class="p">:</span> <span class="s1">'file'</span><span class="p">,</span>
+                <span class="s1">'Malware MD5 Hash'</span><span class="p">:</span> <span class="s1">'file'</span><span class="p">,</span>
+                <span class="s1">'Malware SHA-1 Hash'</span><span class="p">:</span> <span class="s1">'file'</span><span class="p">,</span>
+                <span class="s1">'Malware SHA-256 Hash'</span><span class="p">:</span> <span class="s1">'file'</span><span class="p">,</span>
+                <span class="s1">'Other File'</span><span class="p">:</span> <span class="s1">'file'</span><span class="p">,</span>
+                <span class="s1">'RCF 822 Email Message File'</span><span class="p">:</span> <span class="s1">'file'</span><span class="p">,</span>
+                <span class="s1">'File Name'</span><span class="p">:</span> <span class="s1">'file'</span><span class="p">,</span>
+                <span class="s1">'URL'</span><span class="p">:</span> <span class="s1">'url'</span><span class="p">,</span>
+                <span class="s1">'IP Address'</span><span class="p">:</span> <span class="s1">'ip-address'</span><span class="p">,</span>
+                <span class="s1">'DNS Name'</span><span class="p">:</span> <span class="s1">'domain'</span><span class="p">}</span>
   <span class="n">uri_fragment</span> <span class="o">=</span> <span class="n">uriLookup</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-  <span class="n">vt_id</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">vt_id</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"id"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
   <span class="k">if</span> <span class="n">vt_id</span> <span class="ow">and</span> <span class="n">uri_fragment</span><span class="p">:</span>
-    <span class="n">link_back</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&lt;a href=&#39;</span><span class="si">{</span><span class="n">VIRUSTOTAL_GUI_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uri_fragment</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">vt_id</span><span class="si">}</span><span class="s2">&#39;&gt;VirusTotal Report&lt;/a&gt;&quot;</span>
-    <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">&lt;br&gt;</span><span class="si">{</span><span class="n">link_back</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">link_back</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"&lt;a href='</span><span class="si">{</span><span class="n">VIRUSTOTAL_GUI_URL</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">uri_fragment</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">vt_id</span><span class="si">}</span><span class="s2">'&gt;VirusTotal Report&lt;/a&gt;"</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">&lt;br&gt;</span><span class="si">{</span><span class="n">link_back</span><span class="si">}</span><span class="s2">"</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">stats</span><span class="p">:</span>
-  <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">No stats returned from scan </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> with artifact_id: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span>
+  <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">No stats returned from scan </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> with artifact_id: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">"</span>
 
-<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;div&gt;</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="p">))</span>
+<span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="sa">f</span><span class="s2">"&lt;div&gt;</span><span class="si">{</span><span class="n">msg</span><span class="si">}</span><span class="s2">&lt;/div&gt;"</span><span class="p">))</span>
 
 <span class="c1"># Create artifacts from results</span>
-<span class="n">last_http_response_content_sha256</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;last_http_response_content_sha256&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">last_http_response_content_sha256</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"last_http_response_content_sha256"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">last_http_response_content_sha256</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s1">&#39;Malware SHA-256 Hash&#39;</span><span class="p">,</span> <span class="n">last_http_response_content_sha256</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Created by VirusTotal scan of artifact type: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2"> value: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> artifact_id: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s1">'Malware SHA-256 Hash'</span><span class="p">,</span> <span class="n">last_http_response_content_sha256</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Created by VirusTotal scan of artifact type: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2"> value: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> artifact_id: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="n">sha256</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sha256&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">sha256</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sha256"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">sha256</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s1">&#39;Malware SHA-256 Hash&#39;</span><span class="p">,</span> <span class="n">sha256</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Created by VirusTotal scan of artifact type: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2"> value: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> artifact_id: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s1">'Malware SHA-256 Hash'</span><span class="p">,</span> <span class="n">sha256</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Created by VirusTotal scan of artifact type: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2"> value: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> artifact_id: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="n">md5</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;md5&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">md5</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"md5"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">md5</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s1">&#39;Malware MD5 Hash&#39;</span><span class="p">,</span> <span class="n">md5</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Created by VirusTotal scan of artifact type: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2"> value: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> artifact_id: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s1">'Malware MD5 Hash'</span><span class="p">,</span> <span class="n">md5</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Created by VirusTotal scan of artifact type: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2"> value: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> artifact_id: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-<span class="n">sha1</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sha1&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">sha1</span> <span class="o">=</span> <span class="n">attributes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sha1"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">sha1</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s1">&#39;Malware SHA-1 Hash&#39;</span><span class="p">,</span> <span class="n">sha1</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Created by VirusTotal scan of artifact type: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2"> value: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> artifact_id: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s1">'Malware SHA-1 Hash'</span><span class="p">,</span> <span class="n">sha1</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Created by VirusTotal scan of artifact type: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2"> value: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> artifact_id: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1610,7 +1610,7 @@ Sample playbook using the VirusTotal function:
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Uncomment the following 2 lines to have the results json printed formatted to a note.</span>
 <span class="c1">#pretty_results = json.dumps(results, indent=4, sort_keys=True)</span>
-<span class="c1">#incident.addNote(helper.createRichText(u&quot;&lt;p&gt;VirusTotal scan of {0}: {1} artifact_id: {2}&lt;/p&gt;&lt;div&gt;{3}&lt;/div&gt;&quot;.format(artifact.type, artifact.value, artifact.id, pretty_results)))</span>
+<span class="c1">#incident.addNote(helper.createRichText(u"&lt;p&gt;VirusTotal scan of {0}: {1} artifact_id: {2}&lt;/p&gt;&lt;div&gt;{3}&lt;/div&gt;".format(artifact.type, artifact.value, artifact.id, pretty_results)))</span>
 </pre></div>
 </div>
 </section>
@@ -1635,7 +1635,7 @@ Sample playbook using the VirusTotal function:
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">watsonx.ai for SOAR Analysts</div>
+                <div class="title">IBM QRadar SOAR Response Assistant</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>

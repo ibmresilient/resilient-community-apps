@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -602,26 +602,26 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;number&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="s2">&quot;9903&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;attacks&quot;</span><span class="p">:</span> <span class="s2">&quot;49&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;maxdate&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-02-15&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;mindate&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-09-29&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-02-16 04:06:44&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;maxrisk&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;asabusecontact&quot;</span><span class="p">:</span> <span class="s2">&quot;abuse@cloudflare.com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;as&quot;</span><span class="p">:</span> <span class="s2">&quot;13335&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;asname&quot;</span><span class="p">:</span> <span class="s2">&quot;CLOUDFLARENET&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;ascountry&quot;</span><span class="p">:</span> <span class="s2">&quot;US&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;assize&quot;</span><span class="p">:</span> <span class="s2">&quot;2500608&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.0/24&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;threatfeeds&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;alexa&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span>
+    <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"number"</span><span class="p">:</span> <span class="s2">"1.1.1.1"</span><span class="p">,</span>
+        <span class="s2">"count"</span><span class="p">:</span> <span class="s2">"9903"</span><span class="p">,</span>
+        <span class="s2">"attacks"</span><span class="p">:</span> <span class="s2">"49"</span><span class="p">,</span>
+        <span class="s2">"maxdate"</span><span class="p">:</span> <span class="s2">"2024-02-15"</span><span class="p">,</span>
+        <span class="s2">"mindate"</span><span class="p">:</span> <span class="s2">"2021-09-29"</span><span class="p">,</span>
+        <span class="s2">"updated"</span><span class="p">:</span> <span class="s2">"2024-02-16 04:06:44"</span><span class="p">,</span>
+        <span class="s2">"comment"</span><span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+        <span class="s2">"maxrisk"</span><span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+        <span class="s2">"asabusecontact"</span><span class="p">:</span> <span class="s2">"abuse@cloudflare.com"</span><span class="p">,</span>
+        <span class="s2">"as"</span><span class="p">:</span> <span class="s2">"13335"</span><span class="p">,</span>
+        <span class="s2">"asname"</span><span class="p">:</span> <span class="s2">"CLOUDFLARENET"</span><span class="p">,</span>
+        <span class="s2">"ascountry"</span><span class="p">:</span> <span class="s2">"US"</span><span class="p">,</span>
+        <span class="s2">"assize"</span><span class="p">:</span> <span class="s2">"2500608"</span><span class="p">,</span>
+        <span class="s2">"network"</span><span class="p">:</span> <span class="s2">"1.1.1.0/24"</span><span class="p">,</span>
+        <span class="s2">"threatfeeds"</span><span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+        <span class="s2">"alexa"</span><span class="p">:</span> <span class="s2">"None"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;?xml version=</span><span class="se">\&quot;</span><span class="s2">1.0</span><span class="se">\&quot;</span><span class="s2"> encoding=</span><span class="se">\&quot;</span><span class="s2">UTF-8</span><span class="se">\&quot;</span><span class="s2">?&gt;</span><span class="se">\n</span><span class="s2">&lt;ip&gt;&lt;number&gt;1.1.1.1&lt;/number&gt;&lt;count&gt;9903&lt;/count&gt;&lt;attacks&gt;49&lt;/attacks&gt;&lt;maxdate&gt;2024-02-15&lt;/maxdate&gt;&lt;mindate&gt;2021-09-29&lt;/mindate&gt;&lt;updated&gt;2024-02-16 04:06:44&lt;/updated&gt;&lt;comment&gt;&lt;/comment&gt;&lt;maxrisk&gt;&lt;/maxrisk&gt;&lt;asabusecontact&gt;abuse@cloudflare.com&lt;/asabusecontact&gt;&lt;as&gt;13335&lt;/as&gt;&lt;asname&gt;CLOUDFLARENET&lt;/asname&gt;&lt;ascountry&gt;US&lt;/ascountry&gt;&lt;assize&gt;2500608&lt;/assize&gt;&lt;network&gt;1.1.1.0/24&lt;/network&gt;&lt;threatfeeds&gt;&lt;mastodon&gt;&lt;lastseen&gt;2024-02-16&lt;/lastseen&gt;&lt;firstseen&gt;2023-07-13&lt;/firstseen&gt;&lt;/mastodon&gt;&lt;openresolver&gt;&lt;lastseen&gt;2024-02-15&lt;/lastseen&gt;&lt;firstseen&gt;2022-02-04&lt;/firstseen&gt;&lt;/openresolver&gt;&lt;/threatfeeds&gt;&lt;alexa&gt;&lt;lastrank&gt;4585&lt;/lastrank&gt;&lt;domains&gt;2&lt;/domains&gt;&lt;firstseen&gt;2015-12-29&lt;/firstseen&gt;&lt;lastseen&gt;2015-12-29&lt;/lastseen&gt;&lt;hostname&gt;null.scientificamerican.com&lt;/hostname&gt;&lt;/alexa&gt;&lt;/ip&gt;&quot;</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">"&lt;?xml version=</span><span class="se">\"</span><span class="s2">1.0</span><span class="se">\"</span><span class="s2"> encoding=</span><span class="se">\"</span><span class="s2">UTF-8</span><span class="se">\"</span><span class="s2">?&gt;</span><span class="se">\n</span><span class="s2">&lt;ip&gt;&lt;number&gt;1.1.1.1&lt;/number&gt;&lt;count&gt;9903&lt;/count&gt;&lt;attacks&gt;49&lt;/attacks&gt;&lt;maxdate&gt;2024-02-15&lt;/maxdate&gt;&lt;mindate&gt;2021-09-29&lt;/mindate&gt;&lt;updated&gt;2024-02-16 04:06:44&lt;/updated&gt;&lt;comment&gt;&lt;/comment&gt;&lt;maxrisk&gt;&lt;/maxrisk&gt;&lt;asabusecontact&gt;abuse@cloudflare.com&lt;/asabusecontact&gt;&lt;as&gt;13335&lt;/as&gt;&lt;asname&gt;CLOUDFLARENET&lt;/asname&gt;&lt;ascountry&gt;US&lt;/ascountry&gt;&lt;assize&gt;2500608&lt;/assize&gt;&lt;network&gt;1.1.1.0/24&lt;/network&gt;&lt;threatfeeds&gt;&lt;mastodon&gt;&lt;lastseen&gt;2024-02-16&lt;/lastseen&gt;&lt;firstseen&gt;2023-07-13&lt;/firstseen&gt;&lt;/mastodon&gt;&lt;openresolver&gt;&lt;lastseen&gt;2024-02-15&lt;/lastseen&gt;&lt;firstseen&gt;2022-02-04&lt;/firstseen&gt;&lt;/openresolver&gt;&lt;/threatfeeds&gt;&lt;alexa&gt;&lt;lastrank&gt;4585&lt;/lastrank&gt;&lt;domains&gt;2&lt;/domains&gt;&lt;firstseen&gt;2015-12-29&lt;/firstseen&gt;&lt;lastseen&gt;2015-12-29&lt;/lastseen&gt;&lt;hostname&gt;null.scientificamerican.com&lt;/hostname&gt;&lt;/alexa&gt;&lt;/ip&gt;"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -632,10 +632,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This script employs the `fn_rest_api` function to send a REST request to the SANS endpoint, using the value from the artifact if the artifact is an IP address.</span>
 
 <span class="c1"># REST methods</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_method</span>  <span class="o">=</span> <span class="s2">&quot;GET&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_method</span>  <span class="o">=</span> <span class="s2">"GET"</span>
 
 <span class="c1"># Endpoint url</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_url</span>     <span class="o">=</span>  <span class="sa">f</span><span class="s2">&quot;http://isc.sans.edu/api/ip/</span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ip_address</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_url</span>     <span class="o">=</span>  <span class="sa">f</span><span class="s2">"http://isc.sans.edu/api/ip/</span><span class="si">{</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ip_address</span><span class="si">}</span><span class="s2">"</span>
 
 <span class="c1"># Verify</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">rest_api_verify</span>  <span class="o">=</span> <span class="kc">True</span>
@@ -660,19 +660,19 @@ Additional package dependencies may exist for each of these packages:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">xml.etree.ElementTree</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ET</span>
 
 <span class="n">IP_INFO_UNAVAILABLE_TEMPLATE</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;as&quot;</span> <span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-  <span class="s2">&quot;assize&quot;</span>  <span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
-  <span class="s2">&quot;count&quot;</span>   <span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;attacks&quot;</span> <span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;maxdate&quot;</span> <span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;mindate&quot;</span> <span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;updated&quot;</span> <span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;comment&quot;</span> <span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;maxrisk&quot;</span> <span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;network&quot;</span> <span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;asname&quot;</span>  <span class="p">:</span> <span class="s2">&quot;not routed&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;ascountry&quot;</span> <span class="p">:</span> <span class="s2">&quot;XX&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;asabusecontact&quot;</span> <span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">}</span>
+  <span class="s2">"as"</span> <span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
+  <span class="s2">"assize"</span>  <span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span>
+  <span class="s2">"count"</span>   <span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+  <span class="s2">"attacks"</span> <span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+  <span class="s2">"maxdate"</span> <span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+  <span class="s2">"mindate"</span> <span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+  <span class="s2">"updated"</span> <span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+  <span class="s2">"comment"</span> <span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+  <span class="s2">"maxrisk"</span> <span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+  <span class="s2">"network"</span> <span class="p">:</span> <span class="s2">"None"</span><span class="p">,</span>
+  <span class="s2">"asname"</span>  <span class="p">:</span> <span class="s2">"not routed"</span><span class="p">,</span>
+  <span class="s2">"ascountry"</span> <span class="p">:</span> <span class="s2">"XX"</span><span class="p">,</span>
+  <span class="s2">"asabusecontact"</span> <span class="p">:</span> <span class="s2">"None"</span><span class="p">}</span>
 
 <span class="n">json_intel</span><span class="p">,</span> <span class="n">success</span> <span class="o">=</span> <span class="p">{},</span> <span class="kc">True</span>
 
@@ -683,17 +683,17 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="k">for</span> <span class="n">each_tag</span> <span class="ow">in</span> <span class="n">ET</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">raw_response</span><span class="p">):</span>
 
     <span class="c1"># Skipping process if the number tag has no value</span>
-    <span class="k">if</span> <span class="n">each_tag</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;number&quot;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">each_tag</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">each_tag</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">"number"</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">each_tag</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
         <span class="n">success</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">break</span>
 
     <span class="c1"># Certain tags tend to have nested values, these are flattened and added to `json_intel`</span>
-    <span class="k">if</span> <span class="n">each_tag</span><span class="o">.</span><span class="n">tag</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;threatfeed&quot;</span><span class="p">,</span> <span class="s2">&quot;ssh&quot;</span><span class="p">,</span> <span class="s2">&quot;weblogs&quot;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">each_tag</span><span class="o">.</span><span class="n">tag</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"threatfeed"</span><span class="p">,</span> <span class="s2">"ssh"</span><span class="p">,</span> <span class="s2">"weblogs"</span><span class="p">]:</span>
         <span class="n">json_intel</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">sub_tag</span> <span class="ow">in</span> <span class="n">each_tag</span><span class="p">:</span>
-            <span class="n">json_intel</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">each_tag</span><span class="o">.</span><span class="n">tag</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">sub_tag</span><span class="o">.</span><span class="n">tag</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub_tag</span><span class="o">.</span><span class="n">text</span>
+            <span class="n">json_intel</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">each_tag</span><span class="o">.</span><span class="n">tag</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">sub_tag</span><span class="o">.</span><span class="n">tag</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">sub_tag</span><span class="o">.</span><span class="n">text</span>
 
-    <span class="c1"># Otherwise tag and it&#39;s value is directly added</span>
+    <span class="c1"># Otherwise tag and it's value is directly added</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">json_intel</span><span class="p">[</span><span class="n">each_tag</span><span class="o">.</span><span class="n">tag</span><span class="p">]</span>  <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">each_tag</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 
@@ -706,9 +706,9 @@ Additional package dependencies may exist for each of these packages:</p>
 
 
 <span class="n">playbook</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;content&quot;</span> <span class="p">:</span> <span class="n">json_intel</span><span class="p">,</span>
-    <span class="s2">&quot;success&quot;</span> <span class="p">:</span> <span class="n">success</span><span class="p">,</span>
-    <span class="s2">&quot;raw&quot;</span> <span class="p">:</span> <span class="n">raw_response</span>
+    <span class="s2">"content"</span> <span class="p">:</span> <span class="n">json_intel</span><span class="p">,</span>
+    <span class="s2">"success"</span> <span class="p">:</span> <span class="n">success</span><span class="p">,</span>
+    <span class="s2">"raw"</span> <span class="p">:</span> <span class="n">raw_response</span>
 <span class="p">}</span>
 
 </pre></div>
@@ -728,7 +728,7 @@ Additional package dependencies may exist for each of these packages:</p>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">compile_section_by_dtype</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Complies received information into HIT Cards. The information can have varied datatype. This function</span>
 <span class="sd">    automatically detects the data type and formats the information suitable for a SOAR artifact. The result</span>
 <span class="sd">    is returned as a dictionary representing the subsection with its name, data type, and converted</span>
@@ -742,32 +742,32 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="sd">    Returns:</span>
 <span class="sd">    -------</span>
 <span class="sd">        dict: A dictionary representing the subsection with the following keys:</span>
-<span class="sd">            - &quot;name&quot;  : The name or identifier passed as the &#39;name&#39; parameter.</span>
-<span class="sd">            - &quot;type&quot;  : The determined data type of the &#39;value&#39; (either &quot;string,&quot; &quot;uri,&quot; or &quot;number&quot;).</span>
-<span class="sd">            - &quot;value&quot; : The &#39;value&#39; converted to the appropriate data type (int for numbers).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">info_type</span> <span class="o">=</span> <span class="s2">&quot;string&quot;</span>
+<span class="sd">            - "name"  : The name or identifier passed as the 'name' parameter.</span>
+<span class="sd">            - "type"  : The determined data type of the 'value' (either "string," "uri," or "number").</span>
+<span class="sd">            - "value" : The 'value' converted to the appropriate data type (int for numbers).</span>
+<span class="sd">    """</span>
+    <span class="n">info_type</span> <span class="o">=</span> <span class="s2">"string"</span>
 
-    <span class="c1"># if &quot;http&quot; found, the string is classified as an URL</span>
-    <span class="k">if</span> <span class="s2">&quot;http&quot;</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
-        <span class="n">info_type</span> <span class="o">=</span> <span class="s2">&quot;uri&quot;</span>
+    <span class="c1"># if "http" found, the string is classified as an URL</span>
+    <span class="k">if</span> <span class="s2">"http"</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+        <span class="n">info_type</span> <span class="o">=</span> <span class="s2">"uri"</span>
 
     <span class="c1"># detects if the given string is a number</span>
     <span class="k">elif</span> <span class="n">value</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
-        <span class="n">info_type</span> <span class="o">=</span> <span class="s2">&quot;number&quot;</span>
+        <span class="n">info_type</span> <span class="o">=</span> <span class="s2">"number"</span>
         <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
     <span class="c1"># format required for a HIT card to compile within an artifact</span>
     <span class="n">subsection</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;name&quot;</span>  <span class="p">:</span> <span class="n">name</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span>  <span class="p">:</span> <span class="n">info_type</span><span class="p">,</span>
-        <span class="s2">&quot;value&quot;</span> <span class="p">:</span> <span class="n">value</span>
+        <span class="s2">"name"</span>  <span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+        <span class="s2">"type"</span>  <span class="p">:</span> <span class="n">info_type</span><span class="p">,</span>
+        <span class="s2">"value"</span> <span class="p">:</span> <span class="n">value</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">subsection</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">dedup_section</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    An HIT card exclusively accommodates distinct entries and cannot exhibit information in a nested</span>
 <span class="sd">    structure. Consequently, data is condensed and organized within the HIT card. To prevent</span>
 <span class="sd">    redundancies, this function is employed to attach an index number to the names of recurring</span>
@@ -779,20 +779,20 @@ Additional package dependencies may exist for each of these packages:</p>
 
 <span class="sd">    Returns:</span>
 <span class="sd">    -------</span>
-<span class="sd">        dict : Similar dictionary with de-duplicated &quot;name&quot; value</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        dict : Similar dictionary with de-duplicated "name" value</span>
+<span class="sd">    """</span>
     <span class="n">unique_keys</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">each_item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">each_item</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unique_keys</span><span class="p">:</span>
-            <span class="n">unique_keys</span><span class="p">[</span><span class="n">each_item</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">each_item</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unique_keys</span><span class="p">:</span>
+            <span class="n">unique_keys</span><span class="p">[</span><span class="n">each_item</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">unique_keys</span><span class="p">[</span><span class="n">each_item</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">section</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">section</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">unique_keys</span><span class="p">[</span><span class="n">each_item</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]])</span>
+            <span class="n">unique_keys</span><span class="p">[</span><span class="n">each_item</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">section</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s2">"name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">section</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s2">"name"</span><span class="p">]</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">unique_keys</span><span class="p">[</span><span class="n">each_item</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]])</span>
     <span class="k">return</span> <span class="n">section</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">create_hits</span><span class="p">(</span><span class="n">success</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
-<span class="w">  </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">  </span><span class="sd">"""</span>
 <span class="sd">  Wrapper function that creates a HIT. Dpendin on the result being returned from the sub-playbook</span>
 <span class="sd">  this function uses `dedup_section` and `compile_section_by_dtype` functions to format the json results</span>
 <span class="sd">  in the format required for HIT creation</span>
@@ -805,12 +805,12 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="sd">  Returns:</span>
 <span class="sd">  -------</span>
 <span class="sd">      None</span>
-<span class="sd">  &quot;&quot;&quot;</span>
+<span class="sd">  """</span>
     <span class="n">intel</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">attribute</span> <span class="ow">in</span> <span class="n">response</span><span class="p">:</span>
             <span class="n">intel</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">compile_section_by_dtype</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="n">attribute</span><span class="p">],</span> <span class="n">attribute</span><span class="p">))</span>
-        <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="s2">&quot;ISC SANS IP Information:&quot;</span><span class="p">,</span> <span class="n">dedup_section</span><span class="p">(</span><span class="n">intel</span><span class="p">))</span>
+        <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="s2">"ISC SANS IP Information:"</span><span class="p">,</span> <span class="n">dedup_section</span><span class="p">(</span><span class="n">intel</span><span class="p">))</span>
 
 <span class="n">create_hits</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">subplaybooks</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ip_information</span><span class="o">.</span><span class="n">success</span><span class="p">,</span> <span class="n">playbook</span><span class="o">.</span><span class="n">subplaybooks</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ip_information</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 

@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -504,7 +504,7 @@ Fixable items can be converted to Python 3 directly from the datatable with the 
 <span class="n">Components</span><span class="p">:</span>  <span class="n">conditions</span><span class="p">,</span> <span class="n">functions</span>
 <span class="n">Notes</span><span class="p">:</span>
 <span class="n">Python</span> <span class="mi">3</span> <span class="n">conversion</span> <span class="n">found</span> <span class="n">significant</span> <span class="n">changes</span><span class="o">.</span> <span class="n">Please</span> <span class="n">review</span> <span class="ow">and</span> <span class="n">convert</span> <span class="n">manually</span><span class="o">.</span>
-<span class="n">Unicode</span> <span class="n">strings</span> <span class="n">found</span> <span class="p">(</span><span class="s1">&#39;u&#39;</span> <span class="n">string</span> <span class="n">prefix</span><span class="p">)</span><span class="o">.</span> <span class="n">This</span> <span class="n">can</span> <span class="n">remain</span> <span class="k">for</span> <span class="n">Python</span> <span class="mi">3</span><span class="p">,</span> <span class="ow">and</span> <span class="n">but</span> <span class="n">cleaner</span> <span class="n">to</span> <span class="n">remove</span><span class="o">.</span>
+<span class="n">Unicode</span> <span class="n">strings</span> <span class="n">found</span> <span class="p">(</span><span class="s1">'u'</span> <span class="n">string</span> <span class="n">prefix</span><span class="p">)</span><span class="o">.</span> <span class="n">This</span> <span class="n">can</span> <span class="n">remain</span> <span class="k">for</span> <span class="n">Python</span> <span class="mi">3</span><span class="p">,</span> <span class="ow">and</span> <span class="n">but</span> <span class="n">cleaner</span> <span class="n">to</span> <span class="n">remove</span><span class="o">.</span>
 <span class="o">-----</span>
 
 <span class="n">Id</span><span class="p">:</span>          <span class="mi">488</span>
@@ -711,42 +711,42 @@ tab.</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;script&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;actions&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;created_date&quot;</span><span class="p">:</span> <span class="mi">1743719293802</span><span class="p">,</span>
-      <span class="s2">&quot;creator_id&quot;</span><span class="p">:</span> <span class="s2">&quot;sysadmin@example.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-      <span class="s2">&quot;language&quot;</span><span class="p">:</span> <span class="s2">&quot;python3&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;last_modified_by&quot;</span><span class="p">:</span> <span class="s2">&quot;sysadmin@example.com&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;last_modified_time&quot;</span><span class="p">:</span> <span class="mi">1743719293802</span><span class="p">,</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;email py2&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;object_type&quot;</span><span class="p">:</span> <span class="s2">&quot;__emailmessage&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;playbook_handle&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;programmatic_name&quot;</span><span class="p">:</span> <span class="s2">&quot;email_py2&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;script_text&quot;</span><span class="p">:</span> <span class="s2">&quot;incident.addNote(emailmessage.sender)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;uuid&quot;</span><span class="p">:</span> <span class="s2">&quot;****-31fb-4d9a-a3b3-95c6c9c9f148&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"script"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"actions"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"created_date"</span><span class="p">:</span> <span class="mi">1743719293802</span><span class="p">,</span>
+      <span class="s2">"creator_id"</span><span class="p">:</span> <span class="s2">"sysadmin@example.com"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+      <span class="s2">"language"</span><span class="p">:</span> <span class="s2">"python3"</span><span class="p">,</span>
+      <span class="s2">"last_modified_by"</span><span class="p">:</span> <span class="s2">"sysadmin@example.com"</span><span class="p">,</span>
+      <span class="s2">"last_modified_time"</span><span class="p">:</span> <span class="mi">1743719293802</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"email py2"</span><span class="p">,</span>
+      <span class="s2">"object_type"</span><span class="p">:</span> <span class="s2">"__emailmessage"</span><span class="p">,</span>
+      <span class="s2">"playbook_handle"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"programmatic_name"</span><span class="p">:</span> <span class="s2">"email_py2"</span><span class="p">,</span>
+      <span class="s2">"script_text"</span><span class="p">:</span> <span class="s2">"incident.addNote(emailmessage.sender)</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span>
+      <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"uuid"</span><span class="p">:</span> <span class="s2">"****-31fb-4d9a-a3b3-95c6c9c9f148"</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;py2_item_id&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
-    <span class="s2">&quot;py2_item_type&quot;</span><span class="p">:</span> <span class="s2">&quot;script&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"py2_item_id"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s2">"py2_item_type"</span><span class="p">:</span> <span class="s2">"script"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">798</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;my.app.host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-search-for-py2&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-04-04 12:25:47&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">798</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"my.app.host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-search-for-py2"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2025-04-04 12:25:47"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -767,10 +767,10 @@ tab.</p>
 
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
   <span class="n">now</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">now</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Converted&quot;</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">"date"</span><span class="p">]</span> <span class="o">=</span> <span class="n">now</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">"status"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Converted"</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python 2 conversion failed for &#39;</span><span class="si">{</span><span class="n">row</span><span class="o">.</span><span class="n">item_name</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Python 2 conversion failed for '</span><span class="si">{</span><span class="n">row</span><span class="o">.</span><span class="n">item_name</span><span class="si">}</span><span class="s2">': </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -841,67 +841,67 @@ Python 2 can be converted to Python 3 if the item is mark in the datatable as â€
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;playbook&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;PY2_CONVERTIBLE&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"playbook"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"4"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"attributes"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"PY2_CONVERTIBLE"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Py2 3Conditions&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;py2_3conditions&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="s2">"Py2 3Conditions"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"py2_3conditions"</span><span class="p">,</span>
+        <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[]</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="s2">&quot;script&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;5&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;PY2_CONVERTIBLE&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;PY2_UNICODE&quot;</span>
+    <span class="s2">"script"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"5"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"attributes"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"PY2_CONVERTIBLE"</span><span class="p">,</span>
+          <span class="s2">"PY2_UNICODE"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;email py2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"email py2"</span><span class="p">,</span>
+        <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[]</span>
       <span class="p">},</span>
-      <span class="s2">&quot;6&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;PY2_CONVERTIBLE&quot;</span>
+      <span class="s2">"6"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"attributes"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"PY2_CONVERTIBLE"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;py2_script&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"py2_script"</span><span class="p">,</span>
+        <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[]</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="s2">&quot;workflow&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;5&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;attributes&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;PY2_CONVERTIBLE&quot;</span>
+    <span class="s2">"workflow"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"5"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"attributes"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"PY2_CONVERTIBLE"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;display_name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;py2 workflow&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="s2">"display_name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"py2 workflow"</span><span class="p">,</span>
+        <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[]</span>
       <span class="p">}</span>
     <span class="p">}</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;py2_item_id&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;py2_item_type&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;py2_playbooks_only&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;py2_scripts_only&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;py2_search_tags&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;py2_workflows_only&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"py2_item_id"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"py2_item_type"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"py2_playbooks_only"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"py2_scripts_only"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"py2_search_tags"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"py2_workflows_only"</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">3758</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;my.app.host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-search-for-py2&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-04-04 12:25:17&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">3758</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"my.app.host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-search-for-py2"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2025-04-04 12:25:17"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -927,54 +927,54 @@ Python 2 can be converted to Python 3 if the item is mark in the datatable as â€
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">search_for_py2_results</span>
 
 <span class="n">PY2_LOOKUP</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;PY2_UNCONVERTIBLE&quot;</span><span class="p">:</span> <span class="s2">&quot;Python 3 conversion found significant changes. Please review and convert manually.&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;PY2_CONVERTIBLE&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="si">{item_type}</span><span class="s2"> set to run Python 2. This </span><span class="si">{item_type}</span><span class="s2"> can be easily changed to use Python 2. Check function input scripts, local scripts, and scripts used in conditions. Mostly likely the only change needed is to convert all language settings to Python 3.&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;PY2_ITERS&quot;</span><span class="p">:</span> <span class="s2">&quot;Python 2 iters found. Convert to use .items(), .keys(), and .values() as appropriate&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;PY2_JAVA_UTIL_DATE&quot;</span><span class="p">:</span> <span class="s2">&quot;&#39;import java.util.Date&#39; found. Change to &#39;from datetime import datetime&#39; and datetime functions such as &#39;datetime.now()&#39;.&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;PY2_UNICODE&quot;</span><span class="p">:</span> <span class="s2">&quot;Unicode strings found (&#39;u&#39; string prefix). This can remain for Python 3, and but cleaner to remove.&quot;</span>
+  <span class="s2">"PY2_UNCONVERTIBLE"</span><span class="p">:</span> <span class="s2">"Python 3 conversion found significant changes. Please review and convert manually."</span><span class="p">,</span>
+  <span class="s2">"PY2_CONVERTIBLE"</span><span class="p">:</span> <span class="s2">"</span><span class="si">{item_type}</span><span class="s2"> set to run Python 2. This </span><span class="si">{item_type}</span><span class="s2"> can be easily changed to use Python 2. Check function input scripts, local scripts, and scripts used in conditions. Mostly likely the only change needed is to convert all language settings to Python 3."</span><span class="p">,</span>
+  <span class="s2">"PY2_ITERS"</span><span class="p">:</span> <span class="s2">"Python 2 iters found. Convert to use .items(), .keys(), and .values() as appropriate"</span><span class="p">,</span>
+  <span class="s2">"PY2_JAVA_UTIL_DATE"</span><span class="p">:</span> <span class="s2">"'import java.util.Date' found. Change to 'from datetime import datetime' and datetime functions such as 'datetime.now()'."</span><span class="p">,</span>
+  <span class="s2">"PY2_UNICODE"</span><span class="p">:</span> <span class="s2">"Unicode strings found ('u' string prefix). This can remain for Python 3, and but cleaner to remove."</span>
 <span class="p">}</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">display_db_row</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">now</span><span class="p">,</span> <span class="n">item_type</span><span class="p">,</span> <span class="n">item_id</span><span class="p">,</span> <span class="n">item_name</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">attributes</span><span class="p">):</span>
   <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">now</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Unconverted&quot;</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;item_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">make_url</span><span class="p">(</span><span class="n">item_type</span><span class="p">,</span> <span class="n">item_id</span><span class="p">,</span> <span class="n">item_name</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;item_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">item_id</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;item_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">item_name</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">"date"</span><span class="p">]</span> <span class="o">=</span> <span class="n">now</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">"status"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Unconverted"</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">"item_type"</span><span class="p">]</span> <span class="o">=</span> <span class="n">make_url</span><span class="p">(</span><span class="n">item_type</span><span class="p">,</span> <span class="n">item_id</span><span class="p">,</span> <span class="n">item_name</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">"item_id"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">item_id</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">"item_name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">item_name</span>
   <span class="k">if</span> <span class="n">tags</span><span class="p">:</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;app_tags&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">tag</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tag_handle&quot;</span><span class="p">)</span>  <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">tags</span><span class="p">])</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"app_tags"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">tag</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tag_handle"</span><span class="p">)</span>  <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">tags</span><span class="p">])</span>
   <span class="n">msg</span> <span class="o">=</span> <span class="p">[]</span>
   <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">attributes</span><span class="p">:</span>
-    <span class="n">row</span><span class="p">[</span><span class="n">attr</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="s2">&quot;Yes&quot;</span>
-    <span class="n">msg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PY2_LOOKUP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item_type</span><span class="o">=</span><span class="n">item_type</span><span class="o">.</span><span class="n">title</span><span class="p">()))</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;notes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="n">attr</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="s2">"Yes"</span>
+    <span class="n">msg</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PY2_LOOKUP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item_type</span><span class="o">=</span><span class="n">item_type</span><span class="o">.</span><span class="n">title</span><span class="p">()))</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">"notes"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">display_db</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="s2">&quot;search_for_py2_results&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">display_db</span><span class="p">(</span><span class="n">db</span><span class="o">=</span><span class="s2">"search_for_py2_results"</span><span class="p">):</span>
   <span class="n">now</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
   <span class="n">found</span> <span class="o">=</span> <span class="kc">False</span>
-  <span class="k">for</span> <span class="n">item_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;script&quot;</span><span class="p">,</span> <span class="s2">&quot;playbook&quot;</span><span class="p">,</span> <span class="s2">&quot;workflow&quot;</span><span class="p">]:</span>
+  <span class="k">for</span> <span class="n">item_type</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"script"</span><span class="p">,</span> <span class="s2">"playbook"</span><span class="p">,</span> <span class="s2">"workflow"</span><span class="p">]:</span>
     <span class="k">for</span> <span class="n">item_id</span><span class="p">,</span> <span class="n">item_info</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">item_type</span><span class="p">,</span> <span class="p">[])</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
       <span class="n">found</span> <span class="o">=</span> <span class="kc">True</span>
       <span class="n">display_db_row</span><span class="p">(</span><span class="n">db</span><span class="p">,</span>
                      <span class="n">now</span><span class="p">,</span>
                      <span class="n">item_type</span><span class="p">,</span>
                      <span class="n">item_id</span><span class="p">,</span>
-                     <span class="n">item_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;display_name&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">item_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;display_name&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">item_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">),</span>
-                     <span class="n">item_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;tags&quot;</span><span class="p">,</span> <span class="p">[]),</span>
-                     <span class="n">item_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;attributes&quot;</span><span class="p">,</span> <span class="p">[]))</span>
+                     <span class="n">item_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"display_name"</span><span class="p">)</span> <span class="k">if</span> <span class="n">item_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"display_name"</span><span class="p">)</span> <span class="k">else</span> <span class="n">item_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">),</span>
+                     <span class="n">item_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tags"</span><span class="p">,</span> <span class="p">[]),</span>
+                     <span class="n">item_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"attributes"</span><span class="p">,</span> <span class="p">[]))</span>
              
   <span class="k">if</span> <span class="ow">not</span> <span class="n">found</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;No Python 2 scripts, workflows or playbooks found&quot;</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"No Python 2 scripts, workflows or playbooks found"</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">make_url</span><span class="p">(</span><span class="n">item_type</span><span class="p">,</span> <span class="n">item_id</span><span class="p">,</span> <span class="n">item_name</span><span class="p">):</span>
-  <span class="k">if</span> <span class="n">item_type</span> <span class="o">==</span> <span class="s2">&quot;script&quot;</span><span class="p">:</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;a target=&#39;_blank&#39; href=&#39;#customize?tab=scripts&amp;script=</span><span class="si">{</span><span class="n">item_id</span><span class="si">}</span><span class="s2">&#39;&gt;</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">&lt;/a&gt;&quot;</span>
+  <span class="k">if</span> <span class="n">item_type</span> <span class="o">==</span> <span class="s2">"script"</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"&lt;a target='_blank' href='#customize?tab=scripts&amp;script=</span><span class="si">{</span><span class="n">item_id</span><span class="si">}</span><span class="s2">'&gt;</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">&lt;/a&gt;"</span>
 
-  <span class="k">if</span> <span class="n">item_type</span> <span class="o">==</span> <span class="s2">&quot;workflow&quot;</span><span class="p">:</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;a target=&#39;_blank&#39; href=&#39;#customize?tab=workflows&amp;workflow=</span><span class="si">{</span><span class="n">item_id</span><span class="si">}</span><span class="s2">&#39;&gt;</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">&lt;/a&gt;&quot;</span>
+  <span class="k">if</span> <span class="n">item_type</span> <span class="o">==</span> <span class="s2">"workflow"</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"&lt;a target='_blank' href='#customize?tab=workflows&amp;workflow=</span><span class="si">{</span><span class="n">item_id</span><span class="si">}</span><span class="s2">'&gt;</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">&lt;/a&gt;"</span>
 
-  <span class="k">if</span> <span class="n">item_type</span> <span class="o">==</span> <span class="s2">&quot;playbook&quot;</span><span class="p">:</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;a target=&#39;_blank&#39; href=&#39;#playbooks/designer/</span><span class="si">{</span><span class="n">item_id</span><span class="si">}</span><span class="s2">&#39;&gt;</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">&lt;/a&gt;&quot;</span>
+  <span class="k">if</span> <span class="n">item_type</span> <span class="o">==</span> <span class="s2">"playbook"</span><span class="p">:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"&lt;a target='_blank' href='#playbooks/designer/</span><span class="si">{</span><span class="n">item_id</span><span class="si">}</span><span class="s2">'&gt;</span><span class="si">{</span><span class="n">item_name</span><span class="si">}</span><span class="s2">&lt;/a&gt;"</span>
 
   <span class="k">return</span> <span class="n">item_name</span>
 
@@ -982,7 +982,7 @@ Python 2 can be converted to Python 3 if the item is mark in the datatable as â€
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
     <span class="n">display_db</span><span class="p">()</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Search for PY2 failed: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Search for PY2 failed: </span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
 </pre></div>
 </div>

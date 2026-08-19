@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -758,15 +758,15 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;@odata.context&quot;</span><span class="p">:</span> <span class="s2">&quot;https://graph.microsoft.com/v1.0/$metadata#security/alerts&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="p">[]</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"@odata.context"</span><span class="p">:</span> <span class="s2">"https://graph.microsoft.com/v1.0/$metadata#security/alerts"</span><span class="p">,</span>
+    <span class="s2">"value"</span><span class="p">:</span> <span class="p">[]</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;microsoft_security_graph_alert_search_query&quot;</span><span class="p">:</span> <span class="s2">&quot;filter=userStates/any(user:</span><span class="si">%20u</span><span class="s2">ser/accountName</span><span class="si">%20e</span><span class="s2">q%20</span><span class="se">\u0027</span><span class="s2">example@example.microsoft.com</span><span class="se">\u0027</span><span class="s2">)&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"microsoft_security_graph_alert_search_query"</span><span class="p">:</span> <span class="s2">"filter=userStates/any(user:</span><span class="si">%20u</span><span class="s2">ser/accountName</span><span class="si">%20e</span><span class="s2">q%20</span><span class="se">\u0027</span><span class="s2">example@example.microsoft.com</span><span class="se">\u0027</span><span class="s2">)"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;run_time&quot;</span><span class="p">:</span> <span class="mf">0.3749861717224121</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="s2">"run_time"</span><span class="p">:</span> <span class="mf">0.3749861717224121</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -776,7 +776,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
-<span class="n">search</span> <span class="o">=</span> <span class="s2">&quot;filter=&quot;</span>
+<span class="n">search</span> <span class="o">=</span> <span class="s2">"filter="</span>
 <span class="n">conjunction</span> <span class="o">=</span> <span class="kc">False</span>
 
 <span class="c1"># Assuming rule and artifact are predefined objects with the necessary properties</span>
@@ -784,23 +784,23 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">microsoft_security_graph_query_start_datetime</span><span class="p">:</span>
     <span class="n">start</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">microsoft_security_graph_query_start_datetime</span><span class="p">)</span>
     <span class="n">start_ts</span> <span class="o">=</span> <span class="n">start</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
-    <span class="n">start_filter</span> <span class="o">=</span> <span class="s2">&quot;createdDateTime</span><span class="si">%20g</span><span class="s2">e%20</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">start_ts</span><span class="p">)</span>
+    <span class="n">start_filter</span> <span class="o">=</span> <span class="s2">"createdDateTime</span><span class="si">%20g</span><span class="s2">e%20</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">start_ts</span><span class="p">)</span>
     <span class="n">search</span> <span class="o">+=</span> <span class="n">start_filter</span>
     <span class="n">conjunction</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">microsoft_security_graph_query_end_datetime</span><span class="p">:</span>
     <span class="n">end</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">microsoft_security_graph_query_end_datetime</span><span class="p">)</span>
     <span class="n">end_ts</span> <span class="o">=</span> <span class="n">end</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
-    <span class="n">end_filter</span> <span class="o">=</span> <span class="s2">&quot;createdDateTime</span><span class="si">%20le</span><span class="s2">%20</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end_ts</span><span class="p">)</span>
+    <span class="n">end_filter</span> <span class="o">=</span> <span class="s2">"createdDateTime</span><span class="si">%20le</span><span class="s2">%20</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">end_ts</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">conjunction</span><span class="p">:</span> 
-        <span class="n">search</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">%20a</span><span class="s2">nd%20&quot;</span>
+        <span class="n">search</span> <span class="o">+=</span> <span class="s2">"</span><span class="si">%20a</span><span class="s2">nd%20"</span>
     <span class="n">search</span> <span class="o">+=</span> <span class="n">end_filter</span>
     <span class="n">conjunction</span> <span class="o">=</span> <span class="kc">True</span>
 
-<span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;User Account&quot;</span><span class="p">:</span>
-    <span class="n">artifact_filter</span> <span class="o">=</span> <span class="s2">&quot;userStates/any(user:</span><span class="si">%20u</span><span class="s2">ser/accountName</span><span class="si">%20e</span><span class="s2">q%20&#39;</span><span class="si">{}</span><span class="s2">&#39;)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"User Account"</span><span class="p">:</span>
+    <span class="n">artifact_filter</span> <span class="o">=</span> <span class="s2">"userStates/any(user:</span><span class="si">%20u</span><span class="s2">ser/accountName</span><span class="si">%20e</span><span class="s2">q%20'</span><span class="si">{}</span><span class="s2">')"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">conjunction</span><span class="p">:</span> 
-        <span class="n">search</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="si">%20a</span><span class="s2">nd%20&quot;</span>
+        <span class="n">search</span> <span class="o">+=</span> <span class="s2">"</span><span class="si">%20a</span><span class="s2">nd%20"</span>
     <span class="n">search</span> <span class="o">+=</span> <span class="n">artifact_filter</span>
     <span class="n">conjunction</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -813,12 +813,12 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">alerts</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">value</span>
-<span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;Microsoft Security Graph Alert Search&lt;br&gt;There are &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt; alerts based on the artifact of value &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alerts</span><span class="p">)),</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="n">note</span> <span class="o">=</span> <span class="s2">"Microsoft Security Graph Alert Search&lt;br&gt;There are &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt; alerts based on the artifact of value &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">alerts</span><span class="p">)),</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">alerts</span><span class="p">):</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;&lt;br&gt;&lt;b&gt;Alert ids:&lt;/b&gt;&quot;</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">"&lt;br&gt;&lt;b&gt;Alert ids:&lt;/b&gt;"</span>
   <span class="k">for</span> <span class="n">alert</span> <span class="ow">in</span> <span class="n">alerts</span><span class="p">:</span>
-    <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;&lt;br&gt;- </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">alert</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+    <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">"&lt;br&gt;- </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">alert</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
 </pre></div>
@@ -861,92 +861,92 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;@odata.context&quot;</span><span class="p">:</span> <span class="s2">&quot;https://graph.microsoft.com/v1.0/$metadata#security/alerts/$entity&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;activityGroupName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;alertDetections&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;assignedTo&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;azureSubscriptionId&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;azureTenantId&quot;</span><span class="p">:</span> <span class="s2">&quot;50ad7d3e-b889-434d-802d-13b87c68047b&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;Discovery&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;closedDateTime&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;cloudAppStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;comments&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;createdDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-11-18T00:25:41.2649763Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;A known tool or technique was used to gather information on this device. Attackers might be trying to gather information about the target device or network for later attacks.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;detectionIds&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;eventDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-11-18T00:21:12.910332Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;fileStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;historyStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;hostStates&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"@odata.context"</span><span class="p">:</span> <span class="s2">"https://graph.microsoft.com/v1.0/$metadata#security/alerts/$entity"</span><span class="p">,</span>
+    <span class="s2">"activityGroupName"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"alertDetections"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"assignedTo"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"azureSubscriptionId"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"azureTenantId"</span><span class="p">:</span> <span class="s2">"50ad7d3e-b889-434d-802d-13b87c68047b"</span><span class="p">,</span>
+    <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"Discovery"</span><span class="p">,</span>
+    <span class="s2">"closedDateTime"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"cloudAppStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"comments"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"createdDateTime"</span><span class="p">:</span> <span class="s2">"2021-11-18T00:25:41.2649763Z"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"A known tool or technique was used to gather information on this device. Attackers might be trying to gather information about the target device or network for later attacks."</span><span class="p">,</span>
+    <span class="s2">"detectionIds"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"eventDateTime"</span><span class="p">:</span> <span class="s2">"2021-11-18T00:21:12.910332Z"</span><span class="p">,</span>
+    <span class="s2">"feedback"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"fileStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"historyStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"hostStates"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;fqdn&quot;</span><span class="p">:</span> <span class="s2">&quot;windowsvmos&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;isAzureAdJoined&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-        <span class="s2">&quot;isAzureAdRegistered&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;isHybridAzureDomainJoined&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;netBiosName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;os&quot;</span><span class="p">:</span> <span class="s2">&quot;Windows10&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;privateIpAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;publicIpAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;2.2.2.2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;riskScore&quot;</span><span class="p">:</span> <span class="s2">&quot;Medium&quot;</span>
+        <span class="s2">"fqdn"</span><span class="p">:</span> <span class="s2">"windowsvmos"</span><span class="p">,</span>
+        <span class="s2">"isAzureAdJoined"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+        <span class="s2">"isAzureAdRegistered"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"isHybridAzureDomainJoined"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"netBiosName"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"os"</span><span class="p">:</span> <span class="s2">"Windows10"</span><span class="p">,</span>
+        <span class="s2">"privateIpAddress"</span><span class="p">:</span> <span class="s2">"1.0.0.0"</span><span class="p">,</span>
+        <span class="s2">"publicIpAddress"</span><span class="p">:</span> <span class="s2">"2.2.2.2"</span><span class="p">,</span>
+        <span class="s2">"riskScore"</span><span class="p">:</span> <span class="s2">"Medium"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;da637727919412649530_-883158861&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;incidentIds&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;investigationSecurityStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;lastEventDateTime&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;lastModifiedDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2021-11-18T00:25:41.7333333Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;malwareStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;messageSecurityStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;networkConnections&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;processes&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;recommendedActions&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;registryKeyStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;riskScore&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;securityResources&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;low&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sourceMaterials&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;https://securitycenter.microsoft.com/alert/da637727919412649530_-883158861&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;https://security.microsoft.com/incidents/37&quot;</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"da637727919412649530_-883158861"</span><span class="p">,</span>
+    <span class="s2">"incidentIds"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"investigationSecurityStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"lastEventDateTime"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"lastModifiedDateTime"</span><span class="p">:</span> <span class="s2">"2021-11-18T00:25:41.7333333Z"</span><span class="p">,</span>
+    <span class="s2">"malwareStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"messageSecurityStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"networkConnections"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"processes"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"recommendedActions"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"registryKeyStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"riskScore"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"securityResources"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"severity"</span><span class="p">:</span> <span class="s2">"low"</span><span class="p">,</span>
+    <span class="s2">"sourceMaterials"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"https://securitycenter.microsoft.com/alert/da637727919412649530_-883158861"</span><span class="p">,</span>
+      <span class="s2">"https://security.microsoft.com/incidents/37"</span>
     <span class="p">],</span>
-    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;newAlert&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Suspicious Process Discovery&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;triggers&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;uriClickSecurityStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;userStates&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"newAlert"</span><span class="p">,</span>
+    <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Suspicious Process Discovery"</span><span class="p">,</span>
+    <span class="s2">"triggers"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"uriClickSecurityStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"userStates"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;aadUserId&quot;</span><span class="p">:</span> <span class="s2">&quot;ae973ab4-1b5e-48b2-bf2f-c3bf1b3634a2&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;accountName&quot;</span><span class="p">:</span> <span class="s2">&quot;example&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;domainName&quot;</span><span class="p">:</span> <span class="s2">&quot;WindowsVMOS&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;emailRole&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;isVpn&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;logonDateTime&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;logonId&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;logonIp&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;logonLocation&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;logonType&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;onPremisesSecurityIdentifier&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;riskScore&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;userAccountType&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;userPrincipalName&quot;</span><span class="p">:</span> <span class="s2">&quot;example@example.microsoft.com&quot;</span>
+        <span class="s2">"aadUserId"</span><span class="p">:</span> <span class="s2">"ae973ab4-1b5e-48b2-bf2f-c3bf1b3634a2"</span><span class="p">,</span>
+        <span class="s2">"accountName"</span><span class="p">:</span> <span class="s2">"example"</span><span class="p">,</span>
+        <span class="s2">"domainName"</span><span class="p">:</span> <span class="s2">"WindowsVMOS"</span><span class="p">,</span>
+        <span class="s2">"emailRole"</span><span class="p">:</span> <span class="s2">"unknown"</span><span class="p">,</span>
+        <span class="s2">"isVpn"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"logonDateTime"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"logonId"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"logonIp"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"logonLocation"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"logonType"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"onPremisesSecurityIdentifier"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"riskScore"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"userAccountType"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"userPrincipalName"</span><span class="p">:</span> <span class="s2">"example@example.microsoft.com"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;vendorInformation&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;provider&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft Defender ATP&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;providerVersion&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;subProvider&quot;</span><span class="p">:</span> <span class="s2">&quot;MicrosoftDefenderATP&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft&quot;</span>
+    <span class="s2">"vendorInformation"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"provider"</span><span class="p">:</span> <span class="s2">"Microsoft Defender ATP"</span><span class="p">,</span>
+      <span class="s2">"providerVersion"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"subProvider"</span><span class="p">:</span> <span class="s2">"MicrosoftDefenderATP"</span><span class="p">,</span>
+      <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"Microsoft"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;vulnerabilityStates&quot;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="s2">"vulnerabilityStates"</span><span class="p">:</span> <span class="p">[]</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;microsoft_security_graph_alert_id&quot;</span><span class="p">:</span> <span class="s2">&quot;da637727919412649530_-883158861&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"microsoft_security_graph_alert_id"</span><span class="p">:</span> <span class="s2">"da637727919412649530_-883158861"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;run_time&quot;</span><span class="p">:</span> <span class="mf">0.7184658050537109</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="s2">"run_time"</span><span class="p">:</span> <span class="mf">0.7184658050537109</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -965,24 +965,24 @@ Additional package dependencies may exist for each of these packages:</p>
 
 <span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">user_states</span><span class="p">:</span>
   <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">logonIp</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;IP Address&quot;</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">logonIp</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">"IP Address"</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">logonIp</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
 
   <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">accountName</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;User Account&quot;</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">accountName</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">"User Account"</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">accountName</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
 
   <span class="k">if</span> <span class="n">state</span><span class="o">.</span><span class="n">userPrincipalName</span><span class="p">:</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">&quot;User Account&quot;</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">userPrincipalName</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s2">"User Account"</span><span class="p">,</span> <span class="n">state</span><span class="o">.</span><span class="n">userPrincipalName</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
 
 <span class="c1"># Put the results json into a workflow property so we can call the</span>
 <span class="c1"># convert_json_to_rich_text script to print readable formatted json in an incident note.</span>
 <span class="n">json_note</span> <span class="o">=</span> <span class="p">{</span>
-              <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft Security Graph Get Alert Details&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;json&quot;</span><span class="p">:</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">,</span>
-              <span class="s2">&quot;sort&quot;</span><span class="p">:</span> <span class="kc">False</span>
+              <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0."</span><span class="p">,</span>
+              <span class="s2">"header"</span><span class="p">:</span> <span class="s2">"Microsoft Security Graph Get Alert Details"</span><span class="p">,</span>
+              <span class="s2">"json"</span><span class="p">:</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">,</span>
+              <span class="s2">"sort"</span><span class="p">:</span> <span class="kc">False</span>
             <span class="p">}</span>
 
-<span class="n">workflow</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s1">&#39;convert_json_to_rich_text&#39;</span><span class="p">,</span> <span class="n">json_note</span><span class="p">)</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s1">'convert_json_to_rich_text'</span><span class="p">,</span> <span class="n">json_note</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1029,97 +1029,97 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;@odata.context&quot;</span><span class="p">:</span> <span class="s2">&quot;https://graph.microsoft.com/v1.0/$metadata#security/alerts/$entity&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;CustomProperties&quot;</span><span class="p">:</span> <span class="s2">&quot;[</span><span class="se">\&quot;</span><span class="s2">{</span><span class="se">\\\&quot;</span><span class="s2">Investigation Steps</span><span class="se">\\\&quot;</span><span class="s2">:</span><span class="se">\\\&quot;</span><span class="s2">1. Review the IP addresses and determine if they should be communicating with the virtual machine</span><span class="se">\\\\</span><span class="s2">r</span><span class="se">\\\\</span><span class="s2">n2. Enforce the hardening rule recommended by Defender for Cloud which will allow access only to recommended IP addresses. You can edit the rule</span><span class="se">\u0027</span><span class="s2">s properties and change the IP addresses to be allowed, or alternatively edit the Network Security Group</span><span class="se">\u0027</span><span class="s2">s rules directly</span><span class="se">\\\&quot;</span><span class="s2">,</span><span class="se">\\\&quot;</span><span class="s2">Destination Port</span><span class="se">\\\&quot;</span><span class="s2">:</span><span class="se">\\\&quot;</span><span class="s2">514</span><span class="se">\\\&quot;</span><span class="s2">,</span><span class="se">\\\&quot;</span><span class="s2">Protocol</span><span class="se">\\\&quot;</span><span class="s2">:</span><span class="se">\\\&quot;</span><span class="s2">TCP</span><span class="se">\\\&quot;</span><span class="s2">,</span><span class="se">\\\&quot;</span><span class="s2">Source IP(s) [Number of attempts]</span><span class="se">\\\&quot;</span><span class="s2">:</span><span class="se">\\\&quot;</span><span class="s2">IP: 1.2.3.4 [42]</span><span class="se">\\\&quot;</span><span class="s2">,</span><span class="se">\\\&quot;</span><span class="s2">resourceType</span><span class="se">\\\&quot;</span><span class="s2">:</span><span class="se">\\\&quot;</span><span class="s2">Virtual Machine</span><span class="se">\\\&quot;</span><span class="s2">,</span><span class="se">\\\&quot;</span><span class="s2">ReportingSystem</span><span class="se">\\\&quot;</span><span class="s2">:</span><span class="se">\\\&quot;</span><span class="s2">Azure</span><span class="se">\\\&quot;</span><span class="s2">}</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;\\\&quot;</span><span class="s2">PreAttack</span><span class="se">\\\&quot;\&quot;</span><span class="s2">]&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;activityGroupName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;alertDetections&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;assignedTo&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;azureSubscriptionId&quot;</span><span class="p">:</span> <span class="s2">&quot;a4b7e24a-c7aa-4d84-8dae-89e99b336784&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;azureTenantId&quot;</span><span class="p">:</span> <span class="s2">&quot;50ad7d3e-b889-434d-802d-13b87c68047b&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="s2">&quot;Network_TrafficFromUnrecommendedIP&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;closedDateTime&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;cloudAppStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;comments&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;createdDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-04-06T17:03:05.9705338Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Defender for Cloud detected inbound traffic from IP addresses that are recommended to be blocked. This typically occurs when this IP address doesn</span><span class="se">\u0027</span><span class="s2">t communicate regularly with this resource.</span><span class="se">\r\n</span><span class="s2">Alternatively, the IP address has been flagged as malicious by Microsoft</span><span class="se">\u0027</span><span class="s2">s threat intelligence sources.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;detectionIds&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;eventDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-04-05T01:00:00Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;feedback&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;fileStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;historyStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;hostStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;2517531803999999999_eb4f270a-9603-44e0-adb2-16c0e5842d7d&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;incidentIds&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;investigationSecurityStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;lastEventDateTime&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;lastModifiedDateTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-04-07T12:26:36.5586762Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;malwareStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;messageSecurityStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;networkConnections&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"@odata.context"</span><span class="p">:</span> <span class="s2">"https://graph.microsoft.com/v1.0/$metadata#security/alerts/$entity"</span><span class="p">,</span>
+    <span class="s2">"CustomProperties"</span><span class="p">:</span> <span class="s2">"[</span><span class="se">\"</span><span class="s2">{</span><span class="se">\\\"</span><span class="s2">Investigation Steps</span><span class="se">\\\"</span><span class="s2">:</span><span class="se">\\\"</span><span class="s2">1. Review the IP addresses and determine if they should be communicating with the virtual machine</span><span class="se">\\\\</span><span class="s2">r</span><span class="se">\\\\</span><span class="s2">n2. Enforce the hardening rule recommended by Defender for Cloud which will allow access only to recommended IP addresses. You can edit the rule</span><span class="se">\u0027</span><span class="s2">s properties and change the IP addresses to be allowed, or alternatively edit the Network Security Group</span><span class="se">\u0027</span><span class="s2">s rules directly</span><span class="se">\\\"</span><span class="s2">,</span><span class="se">\\\"</span><span class="s2">Destination Port</span><span class="se">\\\"</span><span class="s2">:</span><span class="se">\\\"</span><span class="s2">514</span><span class="se">\\\"</span><span class="s2">,</span><span class="se">\\\"</span><span class="s2">Protocol</span><span class="se">\\\"</span><span class="s2">:</span><span class="se">\\\"</span><span class="s2">TCP</span><span class="se">\\\"</span><span class="s2">,</span><span class="se">\\\"</span><span class="s2">Source IP(s) [Number of attempts]</span><span class="se">\\\"</span><span class="s2">:</span><span class="se">\\\"</span><span class="s2">IP: 1.2.3.4 [42]</span><span class="se">\\\"</span><span class="s2">,</span><span class="se">\\\"</span><span class="s2">resourceType</span><span class="se">\\\"</span><span class="s2">:</span><span class="se">\\\"</span><span class="s2">Virtual Machine</span><span class="se">\\\"</span><span class="s2">,</span><span class="se">\\\"</span><span class="s2">ReportingSystem</span><span class="se">\\\"</span><span class="s2">:</span><span class="se">\\\"</span><span class="s2">Azure</span><span class="se">\\\"</span><span class="s2">}</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"\\\"</span><span class="s2">PreAttack</span><span class="se">\\\"\"</span><span class="s2">]"</span><span class="p">,</span>
+    <span class="s2">"activityGroupName"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"alertDetections"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"assignedTo"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"azureSubscriptionId"</span><span class="p">:</span> <span class="s2">"a4b7e24a-c7aa-4d84-8dae-89e99b336784"</span><span class="p">,</span>
+    <span class="s2">"azureTenantId"</span><span class="p">:</span> <span class="s2">"50ad7d3e-b889-434d-802d-13b87c68047b"</span><span class="p">,</span>
+    <span class="s2">"category"</span><span class="p">:</span> <span class="s2">"Network_TrafficFromUnrecommendedIP"</span><span class="p">,</span>
+    <span class="s2">"closedDateTime"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"cloudAppStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"comments"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"createdDateTime"</span><span class="p">:</span> <span class="s2">"2022-04-06T17:03:05.9705338Z"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Defender for Cloud detected inbound traffic from IP addresses that are recommended to be blocked. This typically occurs when this IP address doesn</span><span class="se">\u0027</span><span class="s2">t communicate regularly with this resource.</span><span class="se">\r\n</span><span class="s2">Alternatively, the IP address has been flagged as malicious by Microsoft</span><span class="se">\u0027</span><span class="s2">s threat intelligence sources."</span><span class="p">,</span>
+    <span class="s2">"detectionIds"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"eventDateTime"</span><span class="p">:</span> <span class="s2">"2022-04-05T01:00:00Z"</span><span class="p">,</span>
+    <span class="s2">"feedback"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"fileStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"historyStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"hostStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"2517531803999999999_eb4f270a-9603-44e0-adb2-16c0e5842d7d"</span><span class="p">,</span>
+    <span class="s2">"incidentIds"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"investigationSecurityStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"lastEventDateTime"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"lastModifiedDateTime"</span><span class="p">:</span> <span class="s2">"2022-04-07T12:26:36.5586762Z"</span><span class="p">,</span>
+    <span class="s2">"malwareStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"messageSecurityStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"networkConnections"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;applicationName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;destinationAddress&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;destinationDomain&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;destinationLocation&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;destinationPort&quot;</span><span class="p">:</span> <span class="s2">&quot;514&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;destinationUrl&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;direction&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;domainRegisteredDateTime&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;localDnsName&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;natDestinationAddress&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;natDestinationPort&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;natSourceAddress&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;natSourcePort&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;protocol&quot;</span><span class="p">:</span> <span class="s2">&quot;tcp&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;riskScore&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;sourceAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;12.34.56.78&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;sourceLocation&quot;</span><span class="p">:</span> <span class="s2">&quot;Fort Worth, Texas, US&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;sourcePort&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;urlParameters&quot;</span><span class="p">:</span> <span class="n">null</span>
+        <span class="s2">"applicationName"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"destinationAddress"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"destinationDomain"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"destinationLocation"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"destinationPort"</span><span class="p">:</span> <span class="s2">"514"</span><span class="p">,</span>
+        <span class="s2">"destinationUrl"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"direction"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"domainRegisteredDateTime"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"localDnsName"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"natDestinationAddress"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"natDestinationPort"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"natSourceAddress"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"natSourcePort"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"protocol"</span><span class="p">:</span> <span class="s2">"tcp"</span><span class="p">,</span>
+        <span class="s2">"riskScore"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"sourceAddress"</span><span class="p">:</span> <span class="s2">"12.34.56.78"</span><span class="p">,</span>
+        <span class="s2">"sourceLocation"</span><span class="p">:</span> <span class="s2">"Fort Worth, Texas, US"</span><span class="p">,</span>
+        <span class="s2">"sourcePort"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"urlParameters"</span><span class="p">:</span> <span class="n">null</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;processes&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;recommendedActions&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;{</span><span class="se">\&quot;</span><span class="s2">kind</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">openBlade</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">displayValue</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">Enforce rule</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">extension</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">Microsoft_Azure_Security_R3</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">detailBlade</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">AdaptiveNetworkControlsResourceBlade</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\&quot;</span><span class="s2">detailBladeInputs</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">protectedResourceId=/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder</span><span class="se">\&quot;</span><span class="s2">}&quot;</span>
+    <span class="s2">"processes"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"recommendedActions"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"{</span><span class="se">\"</span><span class="s2">kind</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">openBlade</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">displayValue</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Enforce rule</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">extension</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">Microsoft_Azure_Security_R3</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">detailBlade</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">AdaptiveNetworkControlsResourceBlade</span><span class="se">\"</span><span class="s2">,</span><span class="se">\"</span><span class="s2">detailBladeInputs</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">protectedResourceId=/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder</span><span class="se">\"</span><span class="s2">}"</span>
     <span class="p">],</span>
-    <span class="s2">&quot;registryKeyStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;riskScore&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;securityResources&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"registryKeyStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"riskScore"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"securityResources"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;resource&quot;</span><span class="p">:</span> <span class="s2">&quot;/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;resourceType&quot;</span><span class="p">:</span> <span class="s2">&quot;attacked&quot;</span>
+        <span class="s2">"resource"</span><span class="p">:</span> <span class="s2">"/subscriptions/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourcegroups/demoassets/providers/microsoft.compute/virtualmachines/logforwarder"</span><span class="p">,</span>
+        <span class="s2">"resourceType"</span><span class="p">:</span> <span class="s2">"attacked"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="s2">&quot;low&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;sourceMaterials&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;https://portal.azure.com/#blade/Microsoft_Azure_Security_AzureDefenderForData/AlertBlade/alertId/2517531803999999999_eb4f270a-9603-44e0-adb2-16c0e5842d7d/subscriptionId/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroup/demoassets/referencedFrom/alertDeepLink/location/centralus&quot;</span>
+    <span class="s2">"severity"</span><span class="p">:</span> <span class="s2">"low"</span><span class="p">,</span>
+    <span class="s2">"sourceMaterials"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"https://portal.azure.com/#blade/Microsoft_Azure_Security_AzureDefenderForData/AlertBlade/alertId/2517531803999999999_eb4f270a-9603-44e0-adb2-16c0e5842d7d/subscriptionId/a4b7e24a-c7aa-4d84-8dae-89e99b336784/resourceGroup/demoassets/referencedFrom/alertDeepLink/location/centralus"</span>
     <span class="p">],</span>
-    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;tags&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;&quot;</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"unknown"</span><span class="p">,</span>
+    <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">""</span>
     <span class="p">],</span>
-    <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Traffic detected from IP addresses recommended for blocking&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;triggers&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;uriClickSecurityStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;userStates&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;vendorInformation&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;provider&quot;</span><span class="p">:</span> <span class="s2">&quot;ASC&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;providerVersion&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;subProvider&quot;</span><span class="p">:</span> <span class="s2">&quot;AdaptiveNetworkHardenings&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;vendor&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft&quot;</span>
+    <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Traffic detected from IP addresses recommended for blocking"</span><span class="p">,</span>
+    <span class="s2">"triggers"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"uriClickSecurityStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"userStates"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"vendorInformation"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"provider"</span><span class="p">:</span> <span class="s2">"ASC"</span><span class="p">,</span>
+      <span class="s2">"providerVersion"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"subProvider"</span><span class="p">:</span> <span class="s2">"AdaptiveNetworkHardenings"</span><span class="p">,</span>
+      <span class="s2">"vendor"</span><span class="p">:</span> <span class="s2">"Microsoft"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;vulnerabilityStates&quot;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="s2">"vulnerabilityStates"</span><span class="p">:</span> <span class="p">[]</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;microsoft_security_graph_alert_data&quot;</span><span class="p">:</span> <span class="s2">&quot;{</span><span class="se">\n</span><span class="s2">        </span><span class="se">\&quot;</span><span class="s2">assignedTo</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">        </span><span class="se">\n</span><span class="s2">        </span><span class="se">\&quot;</span><span class="s2">comments</span><span class="se">\&quot;</span><span class="s2">: [</span><span class="se">\u0027\u0027</span><span class="s2">, </span><span class="se">\u0027\u0027</span><span class="s2">],</span><span class="se">\n</span><span class="s2">        </span><span class="se">\&quot;</span><span class="s2">feedback</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">        </span><span class="se">\&quot;</span><span class="s2">status</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">unknown</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">        </span><span class="se">\&quot;</span><span class="s2">tags</span><span class="se">\&quot;</span><span class="s2">: [</span><span class="se">\u0027\u0027</span><span class="s2">, </span><span class="se">\u0027\u0027</span><span class="s2">],</span><span class="se">\n</span><span class="s2">        </span><span class="se">\&quot;</span><span class="s2">vendorInformation</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\n</span><span class="s2">        {</span><span class="se">\n</span><span class="s2">            </span><span class="se">\&quot;</span><span class="s2">provider</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">ASC</span><span class="se">\&quot;</span><span class="s2">,</span><span class="se">\n</span><span class="s2">            </span><span class="se">\&quot;</span><span class="s2">vendor</span><span class="se">\&quot;</span><span class="s2">: </span><span class="se">\&quot;</span><span class="s2">Microsoft</span><span class="se">\&quot;\n</span><span class="s2">        }</span><span class="se">\n</span><span class="s2">    }&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;microsoft_security_graph_alert_id&quot;</span><span class="p">:</span> <span class="s2">&quot;2517531803999999999_eb4f270a-9603-44e0-adb2-16c0e5842d7d&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"microsoft_security_graph_alert_data"</span><span class="p">:</span> <span class="s2">"{</span><span class="se">\n</span><span class="s2">        </span><span class="se">\"</span><span class="s2">assignedTo</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">        </span><span class="se">\n</span><span class="s2">        </span><span class="se">\"</span><span class="s2">comments</span><span class="se">\"</span><span class="s2">: [</span><span class="se">\u0027\u0027</span><span class="s2">, </span><span class="se">\u0027\u0027</span><span class="s2">],</span><span class="se">\n</span><span class="s2">        </span><span class="se">\"</span><span class="s2">feedback</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">        </span><span class="se">\"</span><span class="s2">status</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">unknown</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">        </span><span class="se">\"</span><span class="s2">tags</span><span class="se">\"</span><span class="s2">: [</span><span class="se">\u0027\u0027</span><span class="s2">, </span><span class="se">\u0027\u0027</span><span class="s2">],</span><span class="se">\n</span><span class="s2">        </span><span class="se">\"</span><span class="s2">vendorInformation</span><span class="se">\"</span><span class="s2">:</span><span class="se">\n</span><span class="s2">        {</span><span class="se">\n</span><span class="s2">            </span><span class="se">\"</span><span class="s2">provider</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">ASC</span><span class="se">\"</span><span class="s2">,</span><span class="se">\n</span><span class="s2">            </span><span class="se">\"</span><span class="s2">vendor</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">Microsoft</span><span class="se">\"\n</span><span class="s2">        }</span><span class="se">\n</span><span class="s2">    }"</span><span class="p">,</span>
+    <span class="s2">"microsoft_security_graph_alert_id"</span><span class="p">:</span> <span class="s2">"2517531803999999999_eb4f270a-9603-44e0-adb2-16c0e5842d7d"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;run_time&quot;</span><span class="p">:</span> <span class="mf">0.4577150344848633</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="s2">"run_time"</span><span class="p">:</span> <span class="mf">0.4577150344848633</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1131,20 +1131,20 @@ Additional package dependencies may exist for each of these packages:</p>
 
 <span class="c1"># Current time in ISO 8601 format</span>
 <span class="n">epoch_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span>
-<span class="n">closedDateTime</span> <span class="o">=</span> <span class="n">epoch_time</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;Z&quot;</span>  <span class="c1"># Adding &#39;Z&#39; to indicate UTC time</span>
+<span class="n">closedDateTime</span> <span class="o">=</span> <span class="n">epoch_time</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="o">+</span> <span class="s2">"Z"</span>  <span class="c1"># Adding 'Z' to indicate UTC time</span>
 
 <span class="n">provider</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">msg_alert_details</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">vendorInformation</span><span class="o">.</span><span class="n">provider</span>
 <span class="n">vendor</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">msg_alert_details</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">vendor</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;{{</span>
-<span class="s1">        &quot;closedDateTime&quot;: &quot;</span><span class="si">{0}</span><span class="s1">&quot;,</span>
-<span class="s1">        &quot;status&quot;: &quot;</span><span class="si">{1}</span><span class="s1">&quot;,</span>
-<span class="s1">        &quot;vendorInformation&quot;:</span>
+<span class="n">data</span> <span class="o">=</span> <span class="s1">'''{{</span>
+<span class="s1">        "closedDateTime": "</span><span class="si">{0}</span><span class="s1">",</span>
+<span class="s1">        "status": "</span><span class="si">{1}</span><span class="s1">",</span>
+<span class="s1">        "vendorInformation":</span>
 <span class="s1">        {{</span>
-<span class="s1">            &quot;provider&quot;: &quot;</span><span class="si">{2}</span><span class="s1">&quot;,</span>
-<span class="s1">            &quot;vendor&quot;: &quot;</span><span class="si">{3}</span><span class="s1">&quot;</span>
+<span class="s1">            "provider": "</span><span class="si">{2}</span><span class="s1">",</span>
+<span class="s1">            "vendor": "</span><span class="si">{3}</span><span class="s1">"</span>
 <span class="s1">        }}</span>
-<span class="s1">    }}&#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">closedDateTime</span><span class="p">,</span> <span class="s2">&quot;resolved&quot;</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span> <span class="n">vendor</span><span class="p">)</span>
+<span class="s1">    }}'''</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">closedDateTime</span><span class="p">,</span> <span class="s2">"resolved"</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span> <span class="n">vendor</span><span class="p">)</span>
 
 <span class="n">inputs</span><span class="o">.</span><span class="n">microsoft_security_graph_alert_data</span> <span class="o">=</span> <span class="n">data</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">microsoft_security_graph_alert_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">microsoft_security_graph_alert_id</span>
@@ -1157,11 +1157,11 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Put the results json into a workflow property so we can call the</span>
 <span class="c1"># convert_json_to_rich_text script to print readable formatted json in an incident note.</span>
-<span class="n">json_note</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;header&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft Security Graph Resolve Alert&quot;</span><span class="p">,</span>
-             <span class="s2">&quot;json&quot;</span><span class="p">:</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">}</span>
+<span class="n">json_note</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0."</span><span class="p">,</span>
+             <span class="s2">"header"</span><span class="p">:</span> <span class="s2">"Microsoft Security Graph Resolve Alert"</span><span class="p">,</span>
+             <span class="s2">"json"</span><span class="p">:</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">}</span>
 
-<span class="n">workflow</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s1">&#39;convert_json_to_rich_text&#39;</span><span class="p">,</span> <span class="n">json_note</span><span class="p">)</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">addProperty</span><span class="p">(</span><span class="s1">'convert_json_to_rich_text'</span><span class="p">,</span> <span class="n">json_note</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1181,8 +1181,8 @@ Features:
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># (c) Copyright IBM Corp. 2010, 2024. All Rights Reserved.</span>
 <span class="n">VERSION</span> <span class="o">=</span> <span class="mf">1.3</span>
-<span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">  This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident&#39;s rich text (custom) field or an incident note.</span>
+<span class="sd">"""</span>
+<span class="sd">  This script converts a json object into a hierarchical display of rich text and adds the rich text to an incident's rich text (custom) field or an incident note.</span>
 <span class="sd">  A workflow property is used to define the json to convert and identify parameters used on how to perform the conversion.</span>
 <span class="sd">  Typically, a function will create workflow property and this script will run after that function to perform the conversion.</span>
 <span class="sd">  Features:</span>
@@ -1192,54 +1192,54 @@ Features:
 <span class="sd">  </span>
 <span class="sd">  In order to use this script, define a workflow property called: convert_json_to_rich_text, to define the json and parameters to use for the conversion.</span>
 <span class="sd">  Workflow properties can be added using a command similar to this:</span>
-<span class="sd">  workflow.addProperty(&#39;convert_json_to_rich_text&#39;, {</span>
-<span class="sd">    &quot;version&quot;: 1.3,</span>
-<span class="sd">    &quot;header&quot;: &quot;Artifact scan results for: {}&quot;.format(artifact.value),</span>
-<span class="sd">    &quot;padding&quot;: 10,</span>
-<span class="sd">    &quot;separator&quot;: u&quot;&lt;br /&gt;&quot;,</span>
-<span class="sd">    &quot;sort&quot;: True,</span>
-<span class="sd">    &quot;json&quot;: results.content,</span>
-<span class="sd">    &quot;json_omit_list&quot;: [&quot;omit&quot;],</span>
-<span class="sd">    &quot;incident_field&quot;: None</span>
+<span class="sd">  workflow.addProperty('convert_json_to_rich_text', {</span>
+<span class="sd">    "version": 1.3,</span>
+<span class="sd">    "header": "Artifact scan results for: {}".format(artifact.value),</span>
+<span class="sd">    "padding": 10,</span>
+<span class="sd">    "separator": u"&lt;br /&gt;",</span>
+<span class="sd">    "sort": True,</span>
+<span class="sd">    "json": results.content,</span>
+<span class="sd">    "json_omit_list": ["omit"],</span>
+<span class="sd">    "incident_field": None</span>
 <span class="sd">  })</span>
 <span class="sd">  </span>
 <span class="sd">  Format of workflow.property.convert_json_to_rich_text:</span>
 <span class="sd">  { </span>
-<span class="sd">    &quot;version&quot;: 1.3, [this is for future compatibility]</span>
-<span class="sd">    &quot;header&quot;: str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]</span>
-<span class="sd">    &quot;padding&quot;: 10, [padding for nested json elements, or defaults to 10]</span>
-<span class="sd">    &quot;separator&quot;: u&quot;&lt;br /&gt;&quot;|list such as [&#39;&lt;span&gt;&#39;,&#39;&lt;/span&gt;&#39;], [html separator between json keys and lists or defaults to html break: &#39;&lt;br /&gt;&#39;. </span>
+<span class="sd">    "version": 1.3, [this is for future compatibility]</span>
+<span class="sd">    "header": str, [header line to add to converted json produced or None. Ex: Results from scanning artifact: xxx. The header may contain rich text tags]</span>
+<span class="sd">    "padding": 10, [padding for nested json elements, or defaults to 10]</span>
+<span class="sd">    "separator": u"&lt;br /&gt;"|list such as ['&lt;span&gt;','&lt;/span&gt;'], [html separator between json keys and lists or defaults to html break: '&lt;br /&gt;'. </span>
 <span class="sd">                                                If a list, then the data is brackets by the pair specified]</span>
-<span class="sd">    &quot;sort&quot;: True|False, [sort the json keys at each level when displayed]</span>
-<span class="sd">    &quot;json&quot;: json, [required json to convert]</span>
-<span class="sd">    &quot;json_omit_list&quot;: [list of json keys to exclude or None]</span>
-<span class="sd">    &quot;incident_field&quot;: &quot;&lt;incident_field&gt;&quot; [indicates a builtin rich text incident field, such as &#39;description&#39; </span>
-<span class="sd">                                          or a custom rich text field in the format: &#39;properties.&lt;field&gt;&#39;. default: create an incident note]</span>
+<span class="sd">    "sort": True|False, [sort the json keys at each level when displayed]</span>
+<span class="sd">    "json": json, [required json to convert]</span>
+<span class="sd">    "json_omit_list": [list of json keys to exclude or None]</span>
+<span class="sd">    "incident_field": "&lt;incident_field&gt;" [indicates a builtin rich text incident field, such as 'description' </span>
+<span class="sd">                                          or a custom rich text field in the format: 'properties.&lt;field&gt;'. default: create an incident note]</span>
 <span class="sd">  }</span>
 
 <span class="sd">  For playbooks, use playbook.addProperty() with the same format as workflow.addProperty()</span>
 
-<span class="sd">  Playbooks can also use playbook.functions.results.convert_json_to_rich_text using the standard function output which contains the &#39;content&#39; json element.</span>
+<span class="sd">  Playbooks can also use playbook.functions.results.convert_json_to_rich_text using the standard function output which contains the 'content' json element.</span>
 <span class="sd">  When using playbook.functions.results.convert_json_to_rich_text with standard function results, all the defaults for padding, separator, etc. are used.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 
 <span class="c1"># needed for python 3</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">unicode</span><span class="p">(</span><span class="s2">&quot;abc&quot;</span><span class="p">)</span> <span class="c1"># fails in py3</span>
+    <span class="n">unicode</span><span class="p">(</span><span class="s2">"abc"</span><span class="p">)</span> <span class="c1"># fails in py3</span>
     <span class="n">py2</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="n">unicode</span> <span class="o">=</span> <span class="nb">str</span>
     <span class="n">py2</span> <span class="o">=</span> <span class="kc">False</span>
 
 
-<span class="n">rc</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&amp;+#\?]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+&#39;</span><span class="p">)</span>
+<span class="n">rc</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&amp;+#\?]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'</span><span class="p">)</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">ConvertJson</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to hold the conversion parameters and perform the conversion&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Class to hold the conversion parameters and perform the conversion"""</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">omit_keys</span><span class="o">=</span><span class="p">[],</span> <span class="n">padding</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="sa">u</span><span class="s2">&quot;&lt;br /&gt;&quot;</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">omit_keys</span><span class="o">=</span><span class="p">[],</span> <span class="n">padding</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="sa">u</span><span class="s2">"&lt;br /&gt;"</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">omit_keys</span> <span class="o">=</span> <span class="n">omit_keys</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">padding</span> <span class="o">=</span> <span class="n">padding</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="o">=</span> <span class="n">separator</span>
@@ -1247,14 +1247,14 @@ Features:
 
 
     <span class="k">def</span><span class="w"> </span><span class="nf">format_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;[summary]</span>
+<span class="w">        </span><span class="sd">"""[summary]</span>
 <span class="sd">          Find embedded urls (http(s)) and add html anchor tags to display as links</span>
 <span class="sd">          Args:</span>
 <span class="sd">              item ([string])</span>
 
 <span class="sd">          Returns:</span>
 <span class="sd">              [str]: None|original text if no links|text with html links</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">formatted_item</span> <span class="o">=</span> <span class="n">item</span>
         <span class="k">if</span> <span class="n">py2</span><span class="p">:</span>
             <span class="n">num_type</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">item</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">long</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">float</span><span class="p">)))</span>
@@ -1265,23 +1265,23 @@ Features:
             <span class="nb">list</span> <span class="o">=</span> <span class="n">rc</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">list</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span>
-                    <span class="n">formatted_item</span> <span class="o">=</span> <span class="n">formatted_item</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;&lt;a target=&#39;blank&#39; href=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;</span><span class="si">{0}</span><span class="s2">&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link</span><span class="p">))</span>
+                    <span class="n">formatted_item</span> <span class="o">=</span> <span class="n">formatted_item</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="sa">u</span><span class="s2">"&lt;a target='blank' href='</span><span class="si">{0}</span><span class="s2">'&gt;</span><span class="si">{0}</span><span class="s2">&lt;/a&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">link</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">formatted_item</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">expand_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_value</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;[summary]</span>
+<span class="w">        </span><span class="sd">"""[summary]</span>
 <span class="sd">          convert items to html, adding indents to nested dictionaries.</span>
 <span class="sd">          Args:</span>
 <span class="sd">              list_value ([dict|list]): json element</span>
 
 <span class="sd">          Returns:</span>
 <span class="sd">              [str]: html converted code</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_link</span><span class="p">(</span><span class="n">list_value</span><span class="p">)</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">list_value</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;None&lt;br&gt;&quot;</span>
+            <span class="k">return</span> <span class="sa">u</span><span class="s2">"None&lt;br&gt;"</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">items_list</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># this will ensure list starts on second line of key label</span>
@@ -1289,36 +1289,36 @@ Features:
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
                     <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_json_to_rich_text</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">is_list</span><span class="p">:</span>
-                        <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&lt;li&gt;</span><span class="si">{}</span><span class="s2">&lt;/li&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
+                        <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">"&lt;li&gt;</span><span class="si">{}</span><span class="s2">&lt;/li&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
                     <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expand_list</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
                 <span class="k">elif</span> <span class="n">is_list</span><span class="p">:</span>
-                    <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&lt;li&gt;</span><span class="si">{}</span><span class="s2">&lt;/li&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_link</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">item</span><span class="p">))))</span>
+                    <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">"&lt;li&gt;</span><span class="si">{}</span><span class="s2">&lt;/li&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_link</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">item</span><span class="p">))))</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">items_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format_link</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">item</span><span class="p">)))</span>
 
-            <span class="n">expand_list_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_list</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">expand_list_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_list</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">""</span><span class="p">,</span>
                                                     <span class="n">items_list</span><span class="p">,</span>
                                                     <span class="n">is_list</span><span class="o">=</span><span class="n">is_list</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">is_list</span><span class="p">:</span>
-                <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;&lt;ul&gt;</span><span class="si">{}</span><span class="s2">&lt;/ul&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expand_list_result</span><span class="p">)</span>
+                <span class="k">return</span> <span class="sa">u</span><span class="s2">"&lt;ul&gt;</span><span class="si">{}</span><span class="s2">&lt;/ul&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expand_list_result</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;&lt;div style=&#39;padding:5px&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expand_list_result</span><span class="p">)</span>
+                <span class="k">return</span> <span class="sa">u</span><span class="s2">"&lt;div style='padding:5px'&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">expand_list_result</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">convert_json_to_rich_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sub_dict</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;[summary]</span>
+<span class="w">        </span><span class="sd">"""[summary]</span>
 <span class="sd">          Walk dictionary tree and convert to html for better display</span>
 <span class="sd">          Args:</span>
 <span class="sd">              sub_dict ([type]): [description]</span>
 
 <span class="sd">          Returns:</span>
 <span class="sd">              [type]: [description]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">notes</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="n">sub_dict</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)):</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -1331,50 +1331,50 @@ Features:
                     <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">omit_keys</span><span class="p">:</span>
                         <span class="n">value</span> <span class="o">=</span> <span class="n">sub_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
                         <span class="n">is_list</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
-                        <span class="n">item_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">u</span><span class="s2">&quot;&lt;strong&gt;</span><span class="si">{0}</span><span class="s2">&lt;/strong&gt;: &quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
+                        <span class="n">item_list</span> <span class="o">=</span> <span class="p">[</span><span class="sa">u</span><span class="s2">"&lt;strong&gt;</span><span class="si">{0}</span><span class="s2">&lt;/strong&gt;: "</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
                         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
                             <span class="n">convert_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convert_json_to_rich_text</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
                             <span class="k">if</span> <span class="n">convert_result</span><span class="p">:</span>
-                                <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&lt;div style=&#39;padding:</span><span class="si">{}</span><span class="s2">px&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">,</span> <span class="n">convert_result</span><span class="p">))</span>
+                                <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">"&lt;div style='padding:</span><span class="si">{}</span><span class="s2">px'&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">padding</span><span class="p">,</span> <span class="n">convert_result</span><span class="p">))</span>
                             <span class="k">else</span><span class="p">:</span>
-                                <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;None&lt;br&gt;&quot;</span><span class="p">)</span>
+                                <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">u</span><span class="s2">"None&lt;br&gt;"</span><span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>
                             <span class="n">item_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expand_list</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="n">is_list</span><span class="p">))</span>
 
-                        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">make_unicode</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">item_list</span><span class="p">),</span> <span class="n">is_list</span><span class="o">=</span><span class="n">is_list</span><span class="p">))</span>
+                        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">,</span> <span class="sa">u</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">make_unicode</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">item_list</span><span class="p">),</span> <span class="n">is_list</span><span class="o">=</span><span class="n">is_list</span><span class="p">))</span>
 
-        <span class="n">result_notes</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+        <span class="n">result_notes</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">result_notes</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">result_notes</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                <span class="sa">u</span><span class="s2">&quot;&lt;/div&gt;</span><span class="si">{0}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">),</span> <span class="sa">u</span><span class="s2">&quot;&lt;/div&gt;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
-                <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">),</span> <span class="sa">u</span><span class="s2">&quot;&lt;/div&gt;&quot;</span>
+                <span class="sa">u</span><span class="s2">"&lt;/div&gt;</span><span class="si">{0}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">),</span> <span class="sa">u</span><span class="s2">"&lt;/div&gt;"</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span>
+                <span class="sa">u</span><span class="s2">"</span><span class="si">{0}</span><span class="s2">&lt;/div&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">separator</span><span class="p">),</span> <span class="sa">u</span><span class="s2">"&lt;/div&gt;"</span>
             <span class="p">)</span>  <span class="c1"># tighten up result</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">is_list</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        apply the separator to the data</span>
-<span class="sd">        :param separator: None, str or list such as [&#39;&lt;span&gt;&#39;, &#39;&lt;/span&gt;&#39;]</span>
+<span class="sd">        :param separator: None, str or list such as ['&lt;span&gt;', '&lt;/span&gt;']</span>
 <span class="sd">        :param items: str or list to add separator</span>
 <span class="sd">        :return: text with separator applied</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">_items</span> <span class="o">=</span> <span class="n">items</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">_items</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;&lt;br&gt;&quot;</span>
+            <span class="k">return</span> <span class="s2">"&lt;br&gt;"</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_items</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">_items</span> <span class="o">=</span> <span class="p">[</span><span class="n">_items</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">,</span> <span class="n">separator</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">_items</span><span class="p">])</span>
+            <span class="k">return</span> <span class="sa">u</span><span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">u</span><span class="s2">"</span><span class="si">{}{}{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">,</span> <span class="n">separator</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">_items</span><span class="p">])</span>
 
-        <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_items</span><span class="p">),</span> <span class="n">separator</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_list</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{}{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_items</span><span class="p">),</span> <span class="n">separator</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">is_list</span> <span class="k">else</span> <span class="sa">u</span><span class="s2">""</span><span class="p">)</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">make_unicode</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s1">&#39;None&#39;</span>
+        <span class="k">return</span> <span class="s1">'None'</span>
 
     <span class="k">return</span> <span class="n">unicode</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
@@ -1389,56 +1389,56 @@ Features:
     <span class="k">return</span> <span class="kc">None</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_properties</span><span class="p">(</span><span class="n">property_name</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Logic to collect the json and parameters from a workflow property.</span>
 <span class="sd">    Args:</span>
 <span class="sd">      property_name: workflow property to reference</span>
 <span class="sd">    Returns:</span>
 <span class="sd">      padding, separator, header, json_omit_list, incident_field, json, sort_keys</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">result_properties</span> <span class="o">=</span> <span class="n">get_results</span><span class="p">(</span><span class="n">property_name</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">result_properties</span><span class="p">:</span>
-        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;Playbook/workflow property not found: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">property_name</span><span class="p">))</span>
+        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"Playbook/workflow property not found: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">property_name</span><span class="p">))</span>
 
-    <span class="n">padding</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;padding&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
-    <span class="n">separator</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;separator&quot;</span><span class="p">,</span> <span class="sa">u</span><span class="s2">&quot;&lt;br /&gt;&quot;</span><span class="p">)</span>
+    <span class="n">padding</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"padding"</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+    <span class="n">separator</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"separator"</span><span class="p">,</span> <span class="sa">u</span><span class="s2">"&lt;br /&gt;"</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;list of separators should be specified as a pair such as [&#39;&lt;div&gt;&#39;, &#39;&lt;/div&gt;&#39;]: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">))</span>
+        <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"list of separators should be specified as a pair such as ['&lt;div&gt;', '&lt;/div&gt;']: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">))</span>
 
-    <span class="n">header</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;header&quot;</span><span class="p">)</span>
-    <span class="n">sort_keys</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sort&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
-    <span class="n">json_omit_list</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;json_omit_list&quot;</span><span class="p">)</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"header"</span><span class="p">)</span>
+    <span class="n">sort_keys</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"sort"</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
+    <span class="n">json_omit_list</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"json_omit_list"</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">json_omit_list</span><span class="p">:</span>
         <span class="n">json_omit_list</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">incident_field</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;incident_field&quot;</span><span class="p">)</span>
+    <span class="n">incident_field</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"incident_field"</span><span class="p">)</span>
     
-    <span class="c1"># workflow formatted content is &#39;json&#39;. Standard functions is &#39;content&#39;</span>
-    <span class="n">json</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;json&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
+    <span class="c1"># workflow formatted content is 'json'. Standard functions is 'content'</span>
+    <span class="n">json</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"json"</span><span class="p">)</span> <span class="k">if</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"json"</span><span class="p">)</span> <span class="k">else</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
     <span class="n">json_err</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="c1"># is there an issue we need handle now?</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">json</span> <span class="ow">and</span> \
-        <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span> <span class="ow">and</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">):</span>
-        <span class="n">json_err</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)</span>
+        <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span> <span class="ow">and</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">):</span>
+        <span class="n">json_err</span> <span class="o">=</span> <span class="n">result_properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="n">padding</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">json_omit_list</span><span class="p">,</span> <span class="n">incident_field</span><span class="p">,</span> <span class="n">json</span><span class="p">,</span> <span class="n">json_err</span><span class="p">,</span> <span class="n">sort_keys</span>
 
 
 <span class="c1">## S T A R T</span>
-<span class="n">padding</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">json_omit_list</span><span class="p">,</span> <span class="n">incident_field</span><span class="p">,</span> <span class="n">json</span><span class="p">,</span> <span class="n">json_err</span><span class="p">,</span> <span class="n">sort_keys</span> <span class="o">=</span> <span class="n">get_properties</span><span class="p">(</span><span class="s1">&#39;convert_json_to_rich_text&#39;</span><span class="p">)</span>
+<span class="n">padding</span><span class="p">,</span> <span class="n">separator</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">json_omit_list</span><span class="p">,</span> <span class="n">incident_field</span><span class="p">,</span> <span class="n">json</span><span class="p">,</span> <span class="n">json_err</span><span class="p">,</span> <span class="n">sort_keys</span> <span class="o">=</span> <span class="n">get_properties</span><span class="p">(</span><span class="s1">'convert_json_to_rich_text'</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">json_err</span><span class="p">:</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;Result error: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">json_err</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">"Result error: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">json_err</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">header</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">separator</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}{1}{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">header</span><span class="p">,</span> <span class="n">separator</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{0}{1}{2}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">separator</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">header</span><span class="p">,</span> <span class="n">separator</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">separator</span><span class="p">)</span>
+            <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{0}{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">header</span><span class="p">,</span> <span class="n">separator</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;</span>
+        <span class="n">hdr</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">""</span>
 
     <span class="n">convert</span> <span class="o">=</span> <span class="n">ConvertJson</span><span class="p">(</span><span class="n">omit_keys</span><span class="o">=</span><span class="n">json_omit_list</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="n">padding</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="n">separator</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="n">sort_keys</span><span class="p">)</span>
     <span class="n">converted_json</span> <span class="o">=</span> <span class="n">convert</span><span class="o">.</span><span class="n">convert_json_to_rich_text</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{}{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span> <span class="n">converted_json</span> <span class="k">if</span> <span class="n">converted_json</span> <span class="k">else</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">None&quot;</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{}{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hdr</span><span class="p">,</span> <span class="n">converted_json</span> <span class="k">if</span> <span class="n">converted_json</span> <span class="k">else</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">None"</span><span class="p">)</span>
 
 <span class="n">rich_text_note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">incident_field</span><span class="p">:</span>

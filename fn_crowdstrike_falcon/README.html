@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -447,12 +447,12 @@
 </ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">fn_crowdstrike_falcon</span><span class="p">]</span>
 
-<span class="c1"># API Client Authentication, CrowdStrike&#39;s newer standard based on OAuth2</span>
+<span class="c1"># API Client Authentication, CrowdStrike's newer standard based on OAuth2</span>
 <span class="n">cs_falcon_oauth2_base_url</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">api</span><span class="o">.</span><span class="n">crowdstrike</span><span class="o">.</span><span class="n">com</span>
 <span class="n">cs_falcon_oauth2_cid</span><span class="o">=&lt;</span><span class="n">YOUR</span> <span class="n">CROWDSTRIKE</span> <span class="n">CLIENT</span> <span class="n">ID</span><span class="o">&gt;</span>
 <span class="n">cs_falcon_oauth2_key</span><span class="o">=&lt;</span><span class="n">YOUR</span> <span class="n">CROWDSTRIKE</span> <span class="n">OAUTH2</span> <span class="n">KEY</span><span class="o">&gt;</span>
 
-<span class="c1"># API Key Authentication, CrowdStrike&#39;s legacy authentication standard</span>
+<span class="c1"># API Key Authentication, CrowdStrike's legacy authentication standard</span>
 <span class="n">cs_falcon_bauth_base_url</span><span class="o">=</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">falconapi</span><span class="o">.</span><span class="n">crowdstrike</span><span class="o">.</span><span class="n">com</span>
 <span class="n">cs_falcon_bauth_api_uuid</span><span class="o">=&lt;</span><span class="n">YOUR</span> <span class="n">CROWDSTRIKE</span> <span class="n">UUID</span><span class="o">&gt;</span>
 <span class="n">cs_falcon_bauth_api_key</span><span class="o">=&lt;</span><span class="n">YOUR</span> <span class="n">CROWDSTRIKE</span> <span class="n">API</span> <span class="n">KEY</span><span class="o">&gt;</span>
@@ -502,79 +502,79 @@
 <section id="output">
 <h3>Output:<a class="headerlink" href="#output" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-crowdstrike-falcon&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-02-11 13:23:43&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1619</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-crowdstrike-falcon"</span><span class="p">,</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2019-02-11 13:23:43"</span><span class="p">,</span>
+        <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"localhost"</span><span class="p">,</span>
+        <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+        <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1619</span>
     <span class="p">},</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;cs_query&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="s2">&quot;cs_filter_string&quot;</span><span class="p">:</span> <span class="s2">&quot;hostname:&#39;localhost*&#39;&quot;</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"cs_query"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">"cs_filter_string"</span><span class="p">:</span> <span class="s2">"hostname:'localhost*'"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="s2">&quot;modified_timestamp&quot;</span><span class="p">:</span> <span class="mi">1549891335000</span><span class="p">,</span>
-        <span class="s2">&quot;config_id_platform&quot;</span><span class="p">:</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;system_manufacturer&quot;</span><span class="p">:</span> <span class="s2">&quot;innotek GmbH&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;meta&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;295&quot;</span>
+    <span class="s2">"content"</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="s2">"modified_timestamp"</span><span class="p">:</span> <span class="mi">1549891335000</span><span class="p">,</span>
+        <span class="s2">"config_id_platform"</span><span class="p">:</span> <span class="s2">"8"</span><span class="p">,</span>
+        <span class="s2">"system_manufacturer"</span><span class="p">:</span> <span class="s2">"innotek GmbH"</span><span class="p">,</span>
+        <span class="s2">"meta"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"295"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;first_seen&quot;</span><span class="p">:</span> <span class="mi">1549548472000</span><span class="p">,</span>
-        <span class="s2">&quot;platform_id&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;local_ip&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.63.3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;hostname&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost.localdomain&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;config_id_build&quot;</span><span class="p">:</span> <span class="s2">&quot;6703&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;minor_version&quot;</span><span class="p">:</span> <span class="s2">&quot;10&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;os_version&quot;</span><span class="p">:</span> <span class="s2">&quot;CentOS 7&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;provision_status&quot;</span><span class="p">:</span> <span class="s2">&quot;Provisioned&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;mac_address&quot;</span><span class="p">:</span> <span class="s2">&quot;0-0-0-0-0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;bios_version&quot;</span><span class="p">:</span> <span class="s2">&quot;VirtualBox&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;agent_load_flags&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="s2">&quot;normal&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;bios_manufacturer&quot;</span><span class="p">:</span> <span class="s2">&quot;innotek GmbH&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;product_type_desc&quot;</span><span class="p">:</span> <span class="s2">&quot;Server&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;device_policies&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;sensor_update&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;applied&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-                <span class="s2">&quot;applied_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-02-07T14:09:24.94667175Z&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;settings_hash&quot;</span><span class="p">:</span> <span class="s2">&quot;65994753|8|2|automatic&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;policy_type&quot;</span><span class="p">:</span> <span class="s2">&quot;sensor-update&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;assigned_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-02-07T14:09:24.946671267Z&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;policy_id&quot;</span><span class="p">:</span> <span class="s2">&quot;4eac5ba86b27414098820732fe7876f6&quot;</span>
+        <span class="s2">"first_seen"</span><span class="p">:</span> <span class="mi">1549548472000</span><span class="p">,</span>
+        <span class="s2">"platform_id"</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
+        <span class="s2">"local_ip"</span><span class="p">:</span> <span class="s2">"192.168.63.3"</span><span class="p">,</span>
+        <span class="s2">"hostname"</span><span class="p">:</span> <span class="s2">"localhost.localdomain"</span><span class="p">,</span>
+        <span class="s2">"config_id_build"</span><span class="p">:</span> <span class="s2">"6703"</span><span class="p">,</span>
+        <span class="s2">"minor_version"</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+        <span class="s2">"os_version"</span><span class="p">:</span> <span class="s2">"CentOS 7"</span><span class="p">,</span>
+        <span class="s2">"provision_status"</span><span class="p">:</span> <span class="s2">"Provisioned"</span><span class="p">,</span>
+        <span class="s2">"mac_address"</span><span class="p">:</span> <span class="s2">"0-0-0-0-0"</span><span class="p">,</span>
+        <span class="s2">"bios_version"</span><span class="p">:</span> <span class="s2">"VirtualBox"</span><span class="p">,</span>
+        <span class="s2">"agent_load_flags"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="s2">"normal"</span><span class="p">,</span>
+        <span class="s2">"bios_manufacturer"</span><span class="p">:</span> <span class="s2">"innotek GmbH"</span><span class="p">,</span>
+        <span class="s2">"product_type_desc"</span><span class="p">:</span> <span class="s2">"Server"</span><span class="p">,</span>
+        <span class="s2">"device_policies"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"sensor_update"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"applied"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">"applied_date"</span><span class="p">:</span> <span class="s2">"2019-02-07T14:09:24.94667175Z"</span><span class="p">,</span>
+                <span class="s2">"settings_hash"</span><span class="p">:</span> <span class="s2">"65994753|8|2|automatic"</span><span class="p">,</span>
+                <span class="s2">"policy_type"</span><span class="p">:</span> <span class="s2">"sensor-update"</span><span class="p">,</span>
+                <span class="s2">"assigned_date"</span><span class="p">:</span> <span class="s2">"2019-02-07T14:09:24.946671267Z"</span><span class="p">,</span>
+                <span class="s2">"policy_id"</span><span class="p">:</span> <span class="s2">"4eac5ba86b27414098820732fe7876f6"</span>
             <span class="p">},</span>
-            <span class="s2">&quot;prevention&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;applied&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-                <span class="s2">&quot;applied_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-02-08T14:47:54.526691595Z&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;settings_hash&quot;</span><span class="p">:</span> <span class="s2">&quot;d4cbb29&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;policy_type&quot;</span><span class="p">:</span> <span class="s2">&quot;prevention&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;assigned_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-02-08T14:47:47.25675937Z&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;policy_id&quot;</span><span class="p">:</span> <span class="s2">&quot;25291d90954c476d86c6fb2db38d7d72&quot;</span>
+            <span class="s2">"prevention"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"applied"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">"applied_date"</span><span class="p">:</span> <span class="s2">"2019-02-08T14:47:54.526691595Z"</span><span class="p">,</span>
+                <span class="s2">"settings_hash"</span><span class="p">:</span> <span class="s2">"d4cbb29"</span><span class="p">,</span>
+                <span class="s2">"policy_type"</span><span class="p">:</span> <span class="s2">"prevention"</span><span class="p">,</span>
+                <span class="s2">"assigned_date"</span><span class="p">:</span> <span class="s2">"2019-02-08T14:47:47.25675937Z"</span><span class="p">,</span>
+                <span class="s2">"policy_id"</span><span class="p">:</span> <span class="s2">"25291d90954c476d86c6fb2db38d7d72"</span>
             <span class="p">}</span>
         <span class="p">},</span>
-        <span class="s2">&quot;agent_local_time&quot;</span><span class="p">:</span> <span class="mi">1549859544549</span><span class="p">,</span>
-        <span class="s2">&quot;slow_changing_modified_timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-02-11T13:22:15Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;device_id&quot;</span><span class="p">:</span> <span class="s2">&quot;606e693c6ac040107c07dcc7c7ed6785&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;system_product_name&quot;</span><span class="p">:</span> <span class="s2">&quot;VirtualBox&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;cid&quot;</span><span class="p">:</span> <span class="s2">&quot;b1e43228990c4bfe8e979969d955b800&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;external_ip&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;major_version&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;platform_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Linux&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;config_id_base&quot;</span><span class="p">:</span> <span class="s2">&quot;65994753&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;policies&quot;</span><span class="p">:</span> <span class="p">[{</span>
-            <span class="s2">&quot;applied&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-            <span class="s2">&quot;applied_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-02-08T14:47:54.526691595Z&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;settings_hash&quot;</span><span class="p">:</span> <span class="s2">&quot;d4cbb29&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;policy_type&quot;</span><span class="p">:</span> <span class="s2">&quot;prevention&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;assigned_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-02-08T14:47:47.25675937Z&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;policy_id&quot;</span><span class="p">:</span> <span class="s2">&quot;25291d90954c476d86c6fb2db38d7d72&quot;</span>
+        <span class="s2">"agent_local_time"</span><span class="p">:</span> <span class="mi">1549859544549</span><span class="p">,</span>
+        <span class="s2">"slow_changing_modified_timestamp"</span><span class="p">:</span> <span class="s2">"2019-02-11T13:22:15Z"</span><span class="p">,</span>
+        <span class="s2">"device_id"</span><span class="p">:</span> <span class="s2">"606e693c6ac040107c07dcc7c7ed6785"</span><span class="p">,</span>
+        <span class="s2">"system_product_name"</span><span class="p">:</span> <span class="s2">"VirtualBox"</span><span class="p">,</span>
+        <span class="s2">"cid"</span><span class="p">:</span> <span class="s2">"b1e43228990c4bfe8e979969d955b800"</span><span class="p">,</span>
+        <span class="s2">"external_ip"</span><span class="p">:</span> <span class="s2">"0.0.0.0"</span><span class="p">,</span>
+        <span class="s2">"major_version"</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
+        <span class="s2">"platform_name"</span><span class="p">:</span> <span class="s2">"Linux"</span><span class="p">,</span>
+        <span class="s2">"config_id_base"</span><span class="p">:</span> <span class="s2">"65994753"</span><span class="p">,</span>
+        <span class="s2">"policies"</span><span class="p">:</span> <span class="p">[{</span>
+            <span class="s2">"applied"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">"applied_date"</span><span class="p">:</span> <span class="s2">"2019-02-08T14:47:54.526691595Z"</span><span class="p">,</span>
+            <span class="s2">"settings_hash"</span><span class="p">:</span> <span class="s2">"d4cbb29"</span><span class="p">,</span>
+            <span class="s2">"policy_type"</span><span class="p">:</span> <span class="s2">"prevention"</span><span class="p">,</span>
+            <span class="s2">"assigned_date"</span><span class="p">:</span> <span class="s2">"2019-02-08T14:47:47.25675937Z"</span><span class="p">,</span>
+            <span class="s2">"policy_id"</span><span class="p">:</span> <span class="s2">"25291d90954c476d86c6fb2db38d7d72"</span>
         <span class="p">}],</span>
-        <span class="s2">&quot;agent_version&quot;</span><span class="p">:</span> <span class="s2">&quot;4.21.6703.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;last_seen&quot;</span><span class="p">:</span> <span class="mi">1549891334000</span>
+        <span class="s2">"agent_version"</span><span class="p">:</span> <span class="s2">"4.21.6703.0"</span><span class="p">,</span>
+        <span class="s2">"last_seen"</span><span class="p">:</span> <span class="mi">1549891334000</span>
     <span class="p">}]</span>
 <span class="p">}</span>
 </pre></div>
@@ -583,11 +583,11 @@
 <section id="pre-process-script">
 <h3>Pre-Process Script:<a class="headerlink" href="#pre-process-script" title="Link to this heading">¶</a></h3>
 <p>This example uses the Artifact Value to create the <code class="docutils literal notranslate"><span class="pre">cs_filter_string</span></code></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: &quot;hostname:&#39;sampleName*&#39;+platform_name:&#39;Windows&#39;&quot; ==&gt; Searches CrowdStrike for devices who&#39;s hostname contains &#39;sampleName&#39; and platform is &#39;Windows&#39;</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">cs_filter_string</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;hostname:&#39;</span><span class="si">{0}</span><span class="s2">*&#39;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: "hostname:'sampleName*'+platform_name:'Windows'" ==&gt; Searches CrowdStrike for devices who's hostname contains 'sampleName' and platform is 'Windows'</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">cs_filter_string</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"hostname:'</span><span class="si">{0}</span><span class="s2">*'"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
 <span class="c1"># This query searches the meta data of devices after applying the above filter</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">cs_query</span> <span class="o">=</span> <span class="s2">&quot;JohnsMacBook&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">cs_query</span> <span class="o">=</span> <span class="s2">"JohnsMacBook"</span>
 </pre></div>
 </div>
 </section>
@@ -605,7 +605,7 @@
 
   <span class="c1"># For each device, add a row to the cs_falcon_devices_dt</span>
   <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
-    <span class="n">new_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;cs_falcon_devices_dt&quot;</span><span class="p">)</span>
+    <span class="n">new_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"cs_falcon_devices_dt"</span><span class="p">)</span>
     <span class="n">new_row</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">dt_now</span>
     <span class="n">new_row</span><span class="o">.</span><span class="n">device_id</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">device_id</span>
     <span class="n">new_row</span><span class="o">.</span><span class="n">hostname</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">hostname</span>
@@ -666,29 +666,29 @@
 <section id="id2">
 <h3>Output:<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;cs_device_id&quot;</span><span class="p">:</span> <span class="s2">&quot;606e693c6ac040107c07dcc7c7ed6785&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;cs_action_name&quot;</span><span class="p">:</span> <span class="s2">&quot;contain&quot;</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"reason"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"cs_device_id"</span><span class="p">:</span> <span class="s2">"606e693c6ac040107c07dcc7c7ed6785"</span><span class="p">,</span>
+        <span class="s2">"cs_action_name"</span><span class="p">:</span> <span class="s2">"contain"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-crowdstrike-falcon&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-02-11 13:42:16&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">3920</span>
+    <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-crowdstrike-falcon"</span><span class="p">,</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2019-02-11 13:42:16"</span><span class="p">,</span>
+        <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+        <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"localhost"</span><span class="p">,</span>
+        <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+        <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">3920</span>
     <span class="p">},</span>
-    <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;meta&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;query_time&quot;</span><span class="p">:</span> <span class="mf">0.725871979</span><span class="p">,</span>
-            <span class="s2">&quot;trace_id&quot;</span><span class="p">:</span> <span class="s2">&quot;349764c9-721f-4a90-bc48-74d793c0e151&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;powered_by&quot;</span><span class="p">:</span> <span class="s2">&quot;device-api&quot;</span>
+    <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"meta"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"query_time"</span><span class="p">:</span> <span class="mf">0.725871979</span><span class="p">,</span>
+            <span class="s2">"trace_id"</span><span class="p">:</span> <span class="s2">"349764c9-721f-4a90-bc48-74d793c0e151"</span><span class="p">,</span>
+            <span class="s2">"powered_by"</span><span class="p">:</span> <span class="s2">"device-api"</span>
         <span class="p">},</span>
-        <span class="s2">&quot;device_id&quot;</span><span class="p">:</span> <span class="s2">&quot;606e693c6ac040107c07dcc7c7ed6785&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;device_status&quot;</span><span class="p">:</span> <span class="s2">&quot;contained&quot;</span>
+        <span class="s2">"device_id"</span><span class="p">:</span> <span class="s2">"606e693c6ac040107c07dcc7c7ed6785"</span><span class="p">,</span>
+        <span class="s2">"device_status"</span><span class="p">:</span> <span class="s2">"contained"</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -700,7 +700,7 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the unique CrowdStrike device_id. Taken here from the CS Falcon: Devices Data Table</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">cs_device_id</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">device_id</span>
 
-<span class="c1"># inputs.cs_action_name is a select field and is set to &quot;contain&quot; in the Workflow&#39;s Input tab</span>
+<span class="c1"># inputs.cs_action_name is a select field and is set to "contain" in the Workflow's Input tab</span>
 </pre></div>
 </div>
 </section>
@@ -711,20 +711,20 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">java.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">Date</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">get_formatted_timestamp</span><span class="p">():</span>
-<span class="w">  </span><span class="sd">&quot;&quot;&quot;Function that returns the current Resilient Appliance time in the format: mm/dd/yyyy hh:mm:ss&quot;&quot;&quot;</span>
+<span class="w">  </span><span class="sd">"""Function that returns the current Resilient Appliance time in the format: mm/dd/yyyy hh:mm:ss"""</span>
   <span class="n">dt</span> <span class="o">=</span> <span class="n">Date</span><span class="p">()</span>
-  <span class="k">return</span> <span class="sa">u</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">/</span><span class="si">{2}</span><span class="s2"> </span><span class="si">{3}</span><span class="s2">:</span><span class="si">{4}</span><span class="s2">:</span><span class="si">{5}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+  <span class="k">return</span> <span class="sa">u</span><span class="s2">"</span><span class="si">{0}</span><span class="s2">/</span><span class="si">{1}</span><span class="s2">/</span><span class="si">{2}</span><span class="s2"> </span><span class="si">{3}</span><span class="s2">:</span><span class="si">{4}</span><span class="s2">:</span><span class="si">{5}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
     <span class="n">dt</span><span class="o">.</span><span class="n">getMonth</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dt</span><span class="o">.</span><span class="n">getDate</span><span class="p">(),</span> <span class="n">dt</span><span class="o">.</span><span class="n">getYear</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1900</span><span class="p">,</span> <span class="n">dt</span><span class="o">.</span><span class="n">getHours</span><span class="p">(),</span> <span class="n">dt</span><span class="o">.</span><span class="n">getMinutes</span><span class="p">(),</span> <span class="n">dt</span><span class="o">.</span><span class="n">getSeconds</span><span class="p">())</span>
 
 
-<span class="c1"># If the function successfully sent a &quot;contain device&quot; request to CrowdStrike, updated the Data Table and add a Note to the Incident</span>
+<span class="c1"># If the function successfully sent a "contain device" request to CrowdStrike, updated the Data Table and add a Note to the Incident</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
 
-  <span class="c1"># Get the current time in the format &#39;mm/dd/yyyy hh:mm:ss&#39;</span>
+  <span class="c1"># Get the current time in the format 'mm/dd/yyyy hh:mm:ss'</span>
   <span class="n">formatted_date</span> <span class="o">=</span> <span class="n">get_formatted_timestamp</span><span class="p">()</span>
 
   <span class="c1"># Generate the value we want to update the cell to</span>
-  <span class="n">latest_action_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;Action: </span><span class="si">{0}</span><span class="s2">. Time: </span><span class="si">{1}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cs_action</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">cs_action_name</span><span class="p">),</span> <span class="n">formatted_date</span><span class="p">)</span>
+  <span class="n">latest_action_text</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"Action: </span><span class="si">{0}</span><span class="s2">. Time: </span><span class="si">{1}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">unicode</span><span class="p">(</span><span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">cs_action</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">cs_action_name</span><span class="p">),</span> <span class="n">formatted_date</span><span class="p">)</span>
 
   <span class="c1"># Update the latest_action Data Table cell</span>
   <span class="n">row</span><span class="o">.</span><span class="n">latest_action</span> <span class="o">=</span> <span class="n">latest_action_text</span>
@@ -732,10 +732,10 @@
   <span class="c1"># Update the device_status Data Table cell</span>
   <span class="n">row</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">device_status</span>
 
-  <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;&lt;b&gt;device-action request sent to CrowdStrike&lt;/b&gt;</span>
+  <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"""&lt;br&gt;&lt;b&gt;device-action request sent to CrowdStrike&lt;/b&gt;</span>
 <span class="s2">                 &lt;br&gt;&lt;b&gt;Action:&lt;/b&gt; </span><span class="si">{0}</span>
 <span class="s2">                 &lt;br&gt;&lt;b&gt;Device ID:&lt;/b&gt; </span><span class="si">{1}</span>
-<span class="s2">                 &lt;br&gt;&lt;b&gt;Device Status:&lt;/b&gt; </span><span class="si">{2}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">cs_action_name</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">device_id</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">device_status</span><span class="p">)</span>
+<span class="s2">                 &lt;br&gt;&lt;b&gt;Device Status:&lt;/b&gt; </span><span class="si">{2}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">cs_action_name</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">device_id</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">device_status</span><span class="p">)</span>
 
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
 </pre></div>
@@ -785,38 +785,38 @@
 <section id="id6">
 <h3>Output:<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+    <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s1">'reason'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
 
-    <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;cs_ioc_type&#39;</span><span class="p">:</span> <span class="s1">&#39;DNS Name&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;cs_ioc_value&#39;</span><span class="p">:</span> <span class="s1">&#39;google.com&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;cs_return_limit&#39;</span><span class="p">:</span> <span class="kc">None</span>
+    <span class="s1">'inputs'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'cs_ioc_type'</span><span class="p">:</span> <span class="s1">'DNS Name'</span><span class="p">,</span>
+        <span class="s1">'cs_ioc_value'</span><span class="p">:</span> <span class="s1">'google.com'</span><span class="p">,</span>
+        <span class="s1">'cs_return_limit'</span><span class="p">:</span> <span class="kc">None</span>
     <span class="p">},</span>
 
-    <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="s1">&#39;fn-crowdstrike-falcon&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2019-02-18 13:32:52&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;package_version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;execution_time_ms&#39;</span><span class="p">:</span> <span class="mi">930</span>
+    <span class="s1">'metrics'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'package'</span><span class="p">:</span> <span class="s1">'fn-crowdstrike-falcon'</span><span class="p">,</span>
+        <span class="s1">'timestamp'</span><span class="p">:</span> <span class="s1">'2019-02-18 13:32:52'</span><span class="p">,</span>
+        <span class="s1">'package_version'</span><span class="p">:</span> <span class="s1">'1.0.0'</span><span class="p">,</span>
+        <span class="s1">'host'</span><span class="p">:</span> <span class="s1">'localhost'</span><span class="p">,</span>
+        <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+        <span class="s1">'execution_time_ms'</span><span class="p">:</span> <span class="mi">930</span>
     <span class="p">},</span>
 
-    <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s1">&#39;meta&#39;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s1">&#39;query_time&#39;</span><span class="p">:</span> <span class="mf">0.046912103</span><span class="p">,</span>
-            <span class="s1">&#39;entity&#39;</span><span class="p">:</span> <span class="s1">&#39;/devices/entities/devices/v1{?ids*}&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;pagination&#39;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s1">&#39;limit&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-                <span class="s1">&#39;offset&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span>
+    <span class="s1">'content'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">'meta'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">'query_time'</span><span class="p">:</span> <span class="mf">0.046912103</span><span class="p">,</span>
+            <span class="s1">'entity'</span><span class="p">:</span> <span class="s1">'/devices/entities/devices/v1{?ids*}'</span><span class="p">,</span>
+            <span class="s1">'pagination'</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">'limit'</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+                <span class="s1">'offset'</span><span class="p">:</span> <span class="s1">''</span>
             <span class="p">},</span>
-            <span class="s1">&#39;trace_id&#39;</span><span class="p">:</span> <span class="s1">&#39;676d1be7-4d96-4ba0-ae6c-dd8aaae30c54&#39;</span>
+            <span class="s1">'trace_id'</span><span class="p">:</span> <span class="s1">'676d1be7-4d96-4ba0-ae6c-dd8aaae30c54'</span>
         <span class="p">},</span>
-        <span class="s1">&#39;device_ids&#39;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s1">&#39;889e958fb8354a0e4f9f5abcb3016bfa&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;9fc8f81b962541b26d1e0feaf2c1523e&#39;</span>
+        <span class="s1">'device_ids'</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">'889e958fb8354a0e4f9f5abcb3016bfa'</span><span class="p">,</span>
+            <span class="s1">'9fc8f81b962541b26d1e0feaf2c1523e'</span>
         <span class="p">]</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -856,7 +856,7 @@
 
   <span class="c1"># For each device, add a row to the cs_falcon_devices_dt</span>
   <span class="k">for</span> <span class="n">device_id</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">device_ids</span><span class="p">:</span>
-    <span class="n">new_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;cs_falcon_devices_ioc_ran_on_results_dt&quot;</span><span class="p">)</span>
+    <span class="n">new_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"cs_falcon_devices_ioc_ran_on_results_dt"</span><span class="p">)</span>
     <span class="n">new_row</span><span class="o">.</span><span class="n">timestamp</span> <span class="o">=</span> <span class="n">dt_now</span>
     <span class="n">new_row</span><span class="o">.</span><span class="n">ioc_type</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">cs_ioc_type</span>
     <span class="n">new_row</span><span class="o">.</span><span class="n">ioc_value</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">cs_ioc_value</span>

@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -689,24 +689,24 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;ocm_comment_author&quot;</span><span class="p">:</span> <span class="s2">&quot;me&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ocm_incident_comment&quot;</span><span class="p">:</span> <span class="s2">&quot;hello&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ocm_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"ocm_comment_author"</span><span class="p">:</span> <span class="s2">"me"</span><span class="p">,</span>
+    <span class="s2">"ocm_incident_comment"</span><span class="p">:</span> <span class="s2">"hello"</span><span class="p">,</span>
+    <span class="s2">"ocm_incident_id"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">6816</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;my.app.host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ocm&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-05-23 11:13:18&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">6816</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"my.app.host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-ocm"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2025-05-23 11:13:18"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -724,10 +724,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ocm_create_comment_return</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;On Call Manager: Create Comment was successful.&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"On Call Manager: Create Comment was successful."</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;On Call Manager: Create Comment failed with reason:</span><span class="se">\n</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"On Call Manager: Create Comment failed with reason:</span><span class="se">\n</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -918,30 +918,30 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;deduplicationKey&quot;</span><span class="p">:</span> <span class="s2">&quot;abc&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;eventid&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"deduplicationKey"</span><span class="p">:</span> <span class="s2">"abc"</span><span class="p">,</span>
+    <span class="s2">"eventid"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;ocm_event_priority&quot;</span><span class="p">:</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ocm_event_severity&quot;</span><span class="p">:</span> <span class="s2">&quot;Minor&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ocm_event_summary&quot;</span><span class="p">:</span> <span class="s2">&quot;failure somewhere&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ocm_resource_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Something failed&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ocm_soar_inc_id&quot;</span><span class="p">:</span> <span class="mi">2174</span><span class="p">,</span>
-    <span class="s2">&quot;ocm_type_statusorthreshold&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003e</span><span class="s2"> 1 minute&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"ocm_event_priority"</span><span class="p">:</span> <span class="s2">"3"</span><span class="p">,</span>
+    <span class="s2">"ocm_event_severity"</span><span class="p">:</span> <span class="s2">"Minor"</span><span class="p">,</span>
+    <span class="s2">"ocm_event_summary"</span><span class="p">:</span> <span class="s2">"failure somewhere"</span><span class="p">,</span>
+    <span class="s2">"ocm_resource_name"</span><span class="p">:</span> <span class="s2">"Something failed"</span><span class="p">,</span>
+    <span class="s2">"ocm_soar_inc_id"</span><span class="p">:</span> <span class="mi">2174</span><span class="p">,</span>
+    <span class="s2">"ocm_type_statusorthreshold"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003e</span><span class="s2"> 1 minute"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1052</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;my.app.host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ocm&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-07-08 11:37:32&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1052</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"my.app.host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-ocm"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2025-07-08 11:37:32"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -954,17 +954,17 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_summary</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_summary</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_severity</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_severity</span>
 
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_event_priority&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_event_priority"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_priority</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_priority</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_type_statusorthreshold&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_type_eventtype&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;Either ocm_type_statusorthreshold or ocm_type_eventtype must be given.&quot;</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_type_statusorthreshold&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_type_statusorthreshold"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_type_eventtype"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"Either ocm_type_statusorthreshold or ocm_type_eventtype must be given."</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_type_statusorthreshold"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_type_statusorthreshold</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ocm_type_statusorthreshold</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_type_eventtype&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_type_eventtype"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_type_eventtype</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">ocm_type_eventtype</span>
 
 <span class="c1"># Example input for adding custom properties to the On Call Manager event.</span>
-<span class="c1">#inputs.ocm_event_details = {&quot;subject&quot;:&quot;Example subject&quot;, &quot;reason&quot;:&quot;something happened&quot;, &quot;country&quot;:&quot;US&quot;, &quot;region&quot;:&quot;NA&quot;}</span>
+<span class="c1">#inputs.ocm_event_details = {"subject":"Example subject", "reason":"something happened", "country":"US", "region":"NA"}</span>
 </pre></div>
 </div>
 </p>
@@ -973,10 +973,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ocm_create_event_return</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;On Call Manager: Create Event was successful and returned:</span><span class="se">\n</span><span class="si">{</span><span class="n">dumps</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">{}),</span><span class="w"> </span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"On Call Manager: Create Event was successful and returned:</span><span class="se">\n</span><span class="si">{</span><span class="n">dumps</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'content'</span><span class="p">,</span><span class="w"> </span><span class="p">{}),</span><span class="w"> </span><span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;On Call Manager: Create Event failed with reason:</span><span class="se">\n</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"On Call Manager: Create Event failed with reason:</span><span class="se">\n</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1023,53 +1023,53 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;accessScopes&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;deduplicationKey&quot;</span><span class="p">:</span> <span class="s2">&quot;abc&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;eventSource&quot;</span><span class="p">:</span> <span class="s2">&quot;Event API&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;eventState&quot;</span><span class="p">:</span> <span class="s2">&quot;open&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;eventid&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;firstOccurrence&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-07-08T15:37:31.545Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;incidentUuid&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;instanceUuid&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;lastOccurrence&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-07-08T15:37:31.545Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;maxSeverity10Seen&quot;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
-    <span class="s2">&quot;postTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-07-08T15:37:31.570Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;resource&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Something failed&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Unknown&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"accessScopes"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"deduplicationKey"</span><span class="p">:</span> <span class="s2">"abc"</span><span class="p">,</span>
+    <span class="s2">"eventSource"</span><span class="p">:</span> <span class="s2">"Event API"</span><span class="p">,</span>
+    <span class="s2">"eventState"</span><span class="p">:</span> <span class="s2">"open"</span><span class="p">,</span>
+    <span class="s2">"eventid"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span><span class="p">,</span>
+    <span class="s2">"firstOccurrence"</span><span class="p">:</span> <span class="s2">"2025-07-08T15:37:31.545Z"</span><span class="p">,</span>
+    <span class="s2">"incidentUuid"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span><span class="p">,</span>
+    <span class="s2">"instanceUuid"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span><span class="p">,</span>
+    <span class="s2">"lastOccurrence"</span><span class="p">:</span> <span class="s2">"2025-07-08T15:37:31.545Z"</span><span class="p">,</span>
+    <span class="s2">"maxSeverity10Seen"</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+    <span class="s2">"postTime"</span><span class="p">:</span> <span class="s2">"2025-07-08T15:37:31.570Z"</span><span class="p">,</span>
+    <span class="s2">"resource"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Something failed"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Unknown"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-    <span class="s2">&quot;severity10&quot;</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
-    <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;failure somewhere&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;suppressed&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;statusOrThreshold&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003e</span><span class="s2"> 1 minute&quot;</span>
+    <span class="s2">"severity"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">"severity10"</span><span class="p">:</span> <span class="mi">40</span><span class="p">,</span>
+    <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"failure somewhere"</span><span class="p">,</span>
+    <span class="s2">"suppressed"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"statusOrThreshold"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003e</span><span class="s2"> 1 minute"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;urls&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"urls"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Link to the SOAR incident.&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://example.com&quot;</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Link to the SOAR incident."</span><span class="p">,</span>
+        <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://example.com"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;xInYSuppressed&quot;</span><span class="p">:</span> <span class="n">false</span>
+    <span class="s2">"xInYSuppressed"</span><span class="p">:</span> <span class="n">false</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;ocm_deduplicationkey&quot;</span><span class="p">:</span> <span class="s2">&quot;***&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ocm_eventid&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"ocm_deduplicationkey"</span><span class="p">:</span> <span class="s2">"***"</span><span class="p">,</span>
+    <span class="s2">"ocm_eventid"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">480</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;my.app.host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ocm&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-07-08 11:37:36&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">480</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"my.app.host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-ocm"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2025-07-08 11:37:36"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1079,10 +1079,10 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Both eventid and deduplicationKey are required inputs</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ocm_create_event_return</span>
-<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
 <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_deduplicationkey</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;deduplicationKey&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_eventid</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;eventid&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_deduplicationkey</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"deduplicationKey"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_eventid</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"eventid"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1090,8 +1090,8 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ocm_get_event_results</span>
-<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;On Call Manager: Get Event failed with reason:</span><span class="se">\n</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"On Call Manager: Get Event failed with reason:</span><span class="se">\n</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1132,70 +1132,70 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;accessScopes&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;closedOwner&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;closedTeam&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;correlationDetails&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Something failed&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"accessScopes"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"closedOwner"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+    <span class="s2">"closedTeam"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+    <span class="s2">"correlationDetails"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Something failed"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;createdTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-07-08T15:37:31.545Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Name: Something failed&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;displayId&quot;</span><span class="p">:</span> <span class="s2">&quot;0000-34m1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;escalated&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-    <span class="s2">&quot;eventSummary&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;events&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;maxSeverities10Seen&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"createdTime"</span><span class="p">:</span> <span class="s2">"2025-07-08T15:37:31.545Z"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Name: Something failed"</span><span class="p">,</span>
+    <span class="s2">"displayId"</span><span class="p">:</span> <span class="s2">"0000-34m1"</span><span class="p">,</span>
+    <span class="s2">"escalated"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">"eventSummary"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"events"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"maxSeverities10Seen"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">40</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">"severity"</span><span class="p">:</span> <span class="mi">40</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;openSeverities10&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"openSeverities10"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">40</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">"severity"</span><span class="p">:</span> <span class="mi">40</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;severities&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"severities"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">3</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">"severity"</span><span class="p">:</span> <span class="mi">3</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;severities10&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"severities10"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">&quot;severity&quot;</span><span class="p">:</span> <span class="mi">40</span>
+          <span class="s2">"count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">"severity"</span><span class="p">:</span> <span class="mi">40</span>
         <span class="p">}</span>
       <span class="p">]</span>
     <span class="p">},</span>
-    <span class="s2">&quot;firstInProgressTime&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;lastChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-07-08T15:37:33.436Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s2">&quot;resolvedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;unassigned&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Name: Something failed&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;team&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;wasEscalated&quot;</span><span class="p">:</span> <span class="n">false</span>
+    <span class="s2">"firstInProgressTime"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span><span class="p">,</span>
+    <span class="s2">"lastChanged"</span><span class="p">:</span> <span class="s2">"2025-07-08T15:37:33.436Z"</span><span class="p">,</span>
+    <span class="s2">"owner"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+    <span class="s2">"priority"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"resolvedTime"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+    <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"unassigned"</span><span class="p">,</span>
+    <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Name: Something failed"</span><span class="p">,</span>
+    <span class="s2">"team"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+    <span class="s2">"wasEscalated"</span><span class="p">:</span> <span class="n">false</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;ocm_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"ocm_incident_id"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">571</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;my.app.host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ocm&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-07-08 11:37:38&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">571</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"my.app.host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-ocm"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2025-07-08 11:37:38"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1212,36 +1212,36 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ocm_get_incident_results</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_tab_visible</span> <span class="o">=</span> <span class="kc">True</span>
-  <span class="n">inc</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="n">inc</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
   <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_id</span><span class="p">:</span>
     <span class="c1"># If incident property ocm incident id has a value then add the incident data to the data table</span>
-    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;on_call_manager_incidents&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_query_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;ocm_incident_summary&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_owner&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;owner&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_team&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_display_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayId&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_last_changed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lastChanged&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S.</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span> <span class="k">if</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lastChanged&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_priority&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"on_call_manager_incidents"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_query_time'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_state'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"state"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s2">"ocm_incident_summary"</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"summary"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_description'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_owner'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"owner"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_team'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"team"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_display_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"displayId"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_last_changed'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lastChanged"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S.</span><span class="si">%f</span><span class="s2">"</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span> <span class="k">if</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lastChanged"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_priority'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"priority"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
   <span class="k">else</span><span class="p">:</span> <span class="c1"># else add the incident data to the incident properties</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_assigned_owner</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;owner&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_assigned_team</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_description</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_display_id</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayId&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_id</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_priority</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_state</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_summary</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_last_changed_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lastChanged&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S.</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span> <span class="k">if</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lastChanged&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"summary"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_assigned_owner</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"owner"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_assigned_team</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"team"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_description</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_display_id</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"displayId"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_id</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"id"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_priority</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"priority"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_state</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"state"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_summary</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"summary"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_last_changed_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lastChanged"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S.</span><span class="si">%f</span><span class="s2">"</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span> <span class="k">if</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lastChanged"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;On Call Manager: Get Incident failed with reason:</span><span class="se">\n</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"On Call Manager: Get Incident failed with reason:</span><span class="se">\n</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1318,65 +1318,65 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">&quot;accessScopes&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;closedOwner&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;closedTeam&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;correlationDetails&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;cluster&quot;</span><span class="p">:</span> <span class="s2">&quot;SAMPLE - Pipeline Project&quot;</span>
+      <span class="s2">"accessScopes"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"closedOwner"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"closedTeam"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"correlationDetails"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"cluster"</span><span class="p">:</span> <span class="s2">"SAMPLE - Pipeline Project"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;createdTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-05-23T14:29:03.698Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Cluster: SAMPLE - Pipeline Project&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;displayId&quot;</span><span class="p">:</span> <span class="s2">&quot;0000-20m1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;escalated&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;firstInProgressTime&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;lastChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-05-23T14:29:10.258Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="s2">&quot;resolvedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;unassigned&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Cluster: SAMPLE - Pipeline Project&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;team&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;wasEscalated&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="s2">"createdTime"</span><span class="p">:</span> <span class="s2">"2025-05-23T14:29:03.698Z"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Cluster: SAMPLE - Pipeline Project"</span><span class="p">,</span>
+      <span class="s2">"displayId"</span><span class="p">:</span> <span class="s2">"0000-20m1"</span><span class="p">,</span>
+      <span class="s2">"escalated"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"firstInProgressTime"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span><span class="p">,</span>
+      <span class="s2">"lastChanged"</span><span class="p">:</span> <span class="s2">"2025-05-23T14:29:10.258Z"</span><span class="p">,</span>
+      <span class="s2">"owner"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"priority"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">"resolvedTime"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"unassigned"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Cluster: SAMPLE - Pipeline Project"</span><span class="p">,</span>
+      <span class="s2">"team"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"wasEscalated"</span><span class="p">:</span> <span class="n">false</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">&quot;accessScopes&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;closedOwner&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;closedTeam&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;correlationDetails&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;application&quot;</span><span class="p">:</span> <span class="s2">&quot;SAMPLE - Online Sales&quot;</span>
+      <span class="s2">"accessScopes"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"closedOwner"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"closedTeam"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"correlationDetails"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"application"</span><span class="p">:</span> <span class="s2">"SAMPLE - Online Sales"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;createdTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-05-23T14:29:00.871Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Application: SAMPLE - Online Sales&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;displayId&quot;</span><span class="p">:</span> <span class="s2">&quot;0000-19m1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;escalated&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;firstInProgressTime&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;lastChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-05-23T14:29:14.512Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="s2">&quot;resolvedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;unassigned&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Application: SAMPLE - Online Sales&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;team&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;wasEscalated&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="s2">"createdTime"</span><span class="p">:</span> <span class="s2">"2025-05-23T14:29:00.871Z"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Application: SAMPLE - Online Sales"</span><span class="p">,</span>
+      <span class="s2">"displayId"</span><span class="p">:</span> <span class="s2">"0000-19m1"</span><span class="p">,</span>
+      <span class="s2">"escalated"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"firstInProgressTime"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span><span class="p">,</span>
+      <span class="s2">"lastChanged"</span><span class="p">:</span> <span class="s2">"2025-05-23T14:29:14.512Z"</span><span class="p">,</span>
+      <span class="s2">"owner"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"priority"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">"resolvedTime"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"unassigned"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Application: SAMPLE - Online Sales"</span><span class="p">,</span>
+      <span class="s2">"team"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"wasEscalated"</span><span class="p">:</span> <span class="n">false</span>
     <span class="p">}</span>
   <span class="p">],</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">3845</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;my.app.host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ocm&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-05-23 10:45:17&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{},</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">3845</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"my.app.host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-ocm"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2025-05-23 10:45:17"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1384,14 +1384,14 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_start&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_start</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_start&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_limit&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_limit</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_limit&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_incident_owner&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_incident_owner</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_incident_owner&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_incident_team&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_incident_team</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_incident_team&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_start"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_start</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_start"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_limit"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_limit</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_limit"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_incident_owner"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_incident_owner</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_incident_owner"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_incident_team"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_incident_team</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_incident_team"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1400,24 +1400,24 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ocm_list_incidents_return</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">[])</span>
   <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_tab_visible</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">for</span> <span class="n">inc</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
-      <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;on_call_manager_incidents&quot;</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_query_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;ocm_incident_summary&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_owner&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;owner&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_team&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_display_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayId&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_last_changed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lastChanged&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S.</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span> <span class="k">if</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lastChanged&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_priority&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+      <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"on_call_manager_incidents"</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_query_time'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_state'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"state"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">"ocm_incident_summary"</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"summary"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_description'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_owner'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"owner"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_team'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"team"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"id"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_display_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"displayId"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_last_changed'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lastChanged"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S.</span><span class="si">%f</span><span class="s2">"</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span> <span class="k">if</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lastChanged"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_priority'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"priority"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;On Call Manager: List Incidents failed with reason:</span><span class="se">\n</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"On Call Manager: List Incidents failed with reason:</span><span class="se">\n</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1507,76 +1507,76 @@ Incidents can be requested by incident properties, like incident priority and in
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">&quot;accessScopes&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;closedOwner&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;closedTeam&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;correlationDetails&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;application&quot;</span><span class="p">:</span> <span class="s2">&quot;SAMPLE - Online Sales&quot;</span>
+      <span class="s2">"accessScopes"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"closedOwner"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"closedTeam"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"correlationDetails"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"application"</span><span class="p">:</span> <span class="s2">"SAMPLE - Online Sales"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;createdTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-07-08T15:00:37.538Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Application: SAMPLE - Online Sales&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;displayId&quot;</span><span class="p">:</span> <span class="s2">&quot;0000-32m1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;escalated&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;eventsURL&quot;</span><span class="p">:</span> <span class="s2">&quot;https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/events&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;firstInProgressTime&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;incidentURL&quot;</span><span class="p">:</span> <span class="s2">&quot;https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;lastChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-07-08T15:00:49.937Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="s2">&quot;resolvedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;unassigned&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Application: SAMPLE - Online Sales&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;team&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;timelineURL&quot;</span><span class="p">:</span> <span class="s2">&quot;https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/timeline&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;wasEscalated&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="s2">"createdTime"</span><span class="p">:</span> <span class="s2">"2025-07-08T15:00:37.538Z"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Application: SAMPLE - Online Sales"</span><span class="p">,</span>
+      <span class="s2">"displayId"</span><span class="p">:</span> <span class="s2">"0000-32m1"</span><span class="p">,</span>
+      <span class="s2">"escalated"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"eventsURL"</span><span class="p">:</span> <span class="s2">"https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/events"</span><span class="p">,</span>
+      <span class="s2">"firstInProgressTime"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span><span class="p">,</span>
+      <span class="s2">"incidentURL"</span><span class="p">:</span> <span class="s2">"https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span><span class="p">,</span>
+      <span class="s2">"lastChanged"</span><span class="p">:</span> <span class="s2">"2025-07-08T15:00:49.937Z"</span><span class="p">,</span>
+      <span class="s2">"owner"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"priority"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">"resolvedTime"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"unassigned"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Application: SAMPLE - Online Sales"</span><span class="p">,</span>
+      <span class="s2">"team"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"timelineURL"</span><span class="p">:</span> <span class="s2">"https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/timeline"</span><span class="p">,</span>
+      <span class="s2">"wasEscalated"</span><span class="p">:</span> <span class="n">false</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">&quot;accessScopes&quot;</span><span class="p">:</span> <span class="p">[],</span>
-      <span class="s2">&quot;closedOwner&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;closedTeam&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;correlationDetails&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;application&quot;</span><span class="p">:</span> <span class="s2">&quot;SAMPLE - Online Banking&quot;</span>
+      <span class="s2">"accessScopes"</span><span class="p">:</span> <span class="p">[],</span>
+      <span class="s2">"closedOwner"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"closedTeam"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"correlationDetails"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"application"</span><span class="p">:</span> <span class="s2">"SAMPLE - Online Banking"</span>
       <span class="p">},</span>
-      <span class="s2">&quot;createdTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-07-08T15:00:30.658Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Application: SAMPLE - Online Banking&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;displayId&quot;</span><span class="p">:</span> <span class="s2">&quot;0000-31m1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;escalated&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;eventsURL&quot;</span><span class="p">:</span> <span class="s2">&quot;https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/events&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;firstInProgressTime&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;incidentURL&quot;</span><span class="p">:</span> <span class="s2">&quot;https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;lastChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-07-08T15:00:54.943Z&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="s2">&quot;resolvedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;unassigned&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Application: SAMPLE - Online Banking&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;team&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;timelineURL&quot;</span><span class="p">:</span> <span class="s2">&quot;https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/timeline&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;wasEscalated&quot;</span><span class="p">:</span> <span class="n">false</span>
+      <span class="s2">"createdTime"</span><span class="p">:</span> <span class="s2">"2025-07-08T15:00:30.658Z"</span><span class="p">,</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Application: SAMPLE - Online Banking"</span><span class="p">,</span>
+      <span class="s2">"displayId"</span><span class="p">:</span> <span class="s2">"0000-31m1"</span><span class="p">,</span>
+      <span class="s2">"escalated"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"eventsURL"</span><span class="p">:</span> <span class="s2">"https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/events"</span><span class="p">,</span>
+      <span class="s2">"firstInProgressTime"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span><span class="p">,</span>
+      <span class="s2">"incidentURL"</span><span class="p">:</span> <span class="s2">"https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span><span class="p">,</span>
+      <span class="s2">"lastChanged"</span><span class="p">:</span> <span class="s2">"2025-07-08T15:00:54.943Z"</span><span class="p">,</span>
+      <span class="s2">"owner"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"priority"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">"resolvedTime"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"unassigned"</span><span class="p">,</span>
+      <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Application: SAMPLE - Online Banking"</span><span class="p">,</span>
+      <span class="s2">"team"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+      <span class="s2">"timelineURL"</span><span class="p">:</span> <span class="s2">"https://oncallmanager.ibm.com/api/incidentquery/v1/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/timeline"</span><span class="p">,</span>
+      <span class="s2">"wasEscalated"</span><span class="p">:</span> <span class="n">false</span>
     <span class="p">}</span>
   <span class="p">],</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;ocm_endtime&quot;</span><span class="p">:</span> <span class="mi">1752033600000</span><span class="p">,</span>
-    <span class="s2">&quot;ocm_event_combiner&quot;</span><span class="p">:</span> <span class="s2">&quot;and&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ocm_event_filter_1&quot;</span><span class="p">:</span> <span class="s2">&quot;severity </span><span class="se">\u003e</span><span class="s2">= </span><span class="se">\&quot;</span><span class="s2">minor</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ocm_starttime&quot;</span><span class="p">:</span> <span class="mi">1751860800000</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"ocm_endtime"</span><span class="p">:</span> <span class="mi">1752033600000</span><span class="p">,</span>
+    <span class="s2">"ocm_event_combiner"</span><span class="p">:</span> <span class="s2">"and"</span><span class="p">,</span>
+    <span class="s2">"ocm_event_filter_1"</span><span class="p">:</span> <span class="s2">"severity </span><span class="se">\u003e</span><span class="s2">= </span><span class="se">\"</span><span class="s2">minor</span><span class="se">\"</span><span class="s2">"</span><span class="p">,</span>
+    <span class="s2">"ocm_starttime"</span><span class="p">:</span> <span class="mi">1751860800000</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">592</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;my.app.host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ocm&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-07-08 11:11:46&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">592</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"my.app.host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-ocm"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2025-07-08 11:11:46"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1584,24 +1584,24 @@ Incidents can be requested by incident properties, like incident priority and in
 </details>
 <details><summary>Example Function Input Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_endtime&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_endtime</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_endtime&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_event_combiner&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_combiner</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_event_combiner&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_event_filter_1&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_filter_1</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_event_filter_1&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_event_filter_2&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_filter_2</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_event_filter_2&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_event_filter_3&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_filter_3</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_event_filter_3&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_event_filter_4&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_filter_4</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_event_filter_4&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_event_filter_5&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_filter_5</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_event_filter_5&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_incident_filter&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_incident_filter</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_incident_filter&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_starttime&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_starttime</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_starttime&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_endtime"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_endtime</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_endtime"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_event_combiner"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_combiner</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_event_combiner"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_event_filter_1"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_filter_1</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_event_filter_1"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_event_filter_2"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_filter_2</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_event_filter_2"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_event_filter_3"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_filter_3</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_event_filter_3"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_event_filter_4"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_filter_4</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_event_filter_4"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_event_filter_5"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_event_filter_5</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_event_filter_5"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_incident_filter"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_incident_filter</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_incident_filter"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_starttime"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_starttime</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_starttime"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1610,24 +1610,24 @@ Incidents can be requested by incident properties, like incident priority and in
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ocm_query_incidents_results</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">[])</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">[])</span>
   <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_tab_visible</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">for</span> <span class="n">inc</span> <span class="ow">in</span> <span class="n">content</span><span class="p">:</span>
-      <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;on_call_manager_incidents&quot;</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_query_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_state&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s2">&quot;ocm_incident_summary&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_owner&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;owner&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_team&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_display_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayId&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_last_changed&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lastChanged&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S.</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span> <span class="k">if</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lastChanged&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;ocm_incident_priority&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+      <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"on_call_manager_incidents"</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_query_time'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_state'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"state"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s2">"ocm_incident_summary"</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"summary"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_description'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_owner'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"owner"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_team'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"team"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"id"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_display_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"displayId"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_last_changed'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lastChanged"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S.</span><span class="si">%f</span><span class="s2">"</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span> <span class="k">if</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lastChanged"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'ocm_incident_priority'</span><span class="p">]</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"priority"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;On Call Manager: Query Incidents failed with reason:</span><span class="se">\n</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"On Call Manager: Query Incidents failed with reason:</span><span class="se">\n</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1710,76 +1710,76 @@ Incidents can be requested by incident properties, like incident priority and in
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;accessScopes&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;assignedBy&quot;</span><span class="p">:</span> <span class="s2">&quot;MANUAL&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;closedOwner&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;closedTeam&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;correlationDetails&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;cluster&quot;</span><span class="p">:</span> <span class="s2">&quot;SAMPLE - Pipeline Project&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"accessScopes"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"assignedBy"</span><span class="p">:</span> <span class="s2">"MANUAL"</span><span class="p">,</span>
+    <span class="s2">"closedOwner"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+    <span class="s2">"closedTeam"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+    <span class="s2">"correlationDetails"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"cluster"</span><span class="p">:</span> <span class="s2">"SAMPLE - Pipeline Project"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;createdTime&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-05-23T14:29:03.698Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Cluster: SAMPLE - Pipeline Project&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;displayId&quot;</span><span class="p">:</span> <span class="s2">&quot;0000-20m1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;escalated&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-    <span class="s2">&quot;eventTypeCounts&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"createdTime"</span><span class="p">:</span> <span class="s2">"2025-05-23T14:29:03.698Z"</span><span class="p">,</span>
+    <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Cluster: SAMPLE - Pipeline Project"</span><span class="p">,</span>
+    <span class="s2">"displayId"</span><span class="p">:</span> <span class="s2">"0000-20m1"</span><span class="p">,</span>
+    <span class="s2">"escalated"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">"eventTypeCounts"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="s2">&quot;eventType&quot;</span><span class="p">:</span> <span class="s2">&quot;Build Status&quot;</span>
+        <span class="s2">"count"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"eventType"</span><span class="p">:</span> <span class="s2">"Build Status"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;firstInProgressTime&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;lastChanged&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-05-23T15:27:13.602Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;owner&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s2">&quot;resolvedTime&quot;</span><span class="p">:</span> <span class="s2">&quot;-&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;resourcePropertyCounts&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"firstInProgressTime"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span><span class="p">,</span>
+    <span class="s2">"lastChanged"</span><span class="p">:</span> <span class="s2">"2025-05-23T15:27:13.602Z"</span><span class="p">,</span>
+    <span class="s2">"owner"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+    <span class="s2">"priority"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"resolvedTime"</span><span class="p">:</span> <span class="s2">"-"</span><span class="p">,</span>
+    <span class="s2">"resourcePropertyCounts"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="s2">&quot;propertyName&quot;</span><span class="p">:</span> <span class="s2">&quot;cluster&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;propertyValue&quot;</span><span class="p">:</span> <span class="s2">&quot;SAMPLE - Pipeline Project&quot;</span>
+        <span class="s2">"count"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"propertyName"</span><span class="p">:</span> <span class="s2">"cluster"</span><span class="p">,</span>
+        <span class="s2">"propertyValue"</span><span class="p">:</span> <span class="s2">"SAMPLE - Pipeline Project"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="s2">&quot;propertyName&quot;</span><span class="p">:</span> <span class="s2">&quot;hostname&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;propertyValue&quot;</span><span class="p">:</span> <span class="s2">&quot;buildbox&quot;</span>
+        <span class="s2">"count"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"propertyName"</span><span class="p">:</span> <span class="s2">"hostname"</span><span class="p">,</span>
+        <span class="s2">"propertyValue"</span><span class="p">:</span> <span class="s2">"buildbox"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="s2">&quot;propertyName&quot;</span><span class="p">:</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;propertyValue&quot;</span><span class="p">:</span> <span class="s2">&quot;SAMPLE - Pipeline Project&quot;</span>
+        <span class="s2">"count"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"propertyName"</span><span class="p">:</span> <span class="s2">"name"</span><span class="p">,</span>
+        <span class="s2">"propertyValue"</span><span class="p">:</span> <span class="s2">"SAMPLE - Pipeline Project"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;count&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-        <span class="s2">&quot;propertyName&quot;</span><span class="p">:</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;propertyValue&quot;</span><span class="p">:</span> <span class="s2">&quot;Pipeline&quot;</span>
+        <span class="s2">"count"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">"propertyName"</span><span class="p">:</span> <span class="s2">"type"</span><span class="p">,</span>
+        <span class="s2">"propertyValue"</span><span class="p">:</span> <span class="s2">"Pipeline"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="s2">&quot;assignedToTeam&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Cluster: SAMPLE - Pipeline Project&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;team&quot;</span><span class="p">:</span> <span class="s2">&quot;test_1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;wasEscalated&quot;</span><span class="p">:</span> <span class="n">false</span>
+    <span class="s2">"state"</span><span class="p">:</span> <span class="s2">"assignedToTeam"</span><span class="p">,</span>
+    <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Cluster: SAMPLE - Pipeline Project"</span><span class="p">,</span>
+    <span class="s2">"team"</span><span class="p">:</span> <span class="s2">"test_1"</span><span class="p">,</span>
+    <span class="s2">"wasEscalated"</span><span class="p">:</span> <span class="n">false</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;ocm_eventsummary&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;ocm_incident_id&quot;</span><span class="p">:</span> <span class="s2">&quot;xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ocm_incident_state&quot;</span><span class="p">:</span> <span class="s2">&quot;assignedToTeam&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ocm_incident_team&quot;</span><span class="p">:</span> <span class="s2">&quot;test_1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ocm_includecounts&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"ocm_eventsummary"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"ocm_incident_id"</span><span class="p">:</span> <span class="s2">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span><span class="p">,</span>
+    <span class="s2">"ocm_incident_state"</span><span class="p">:</span> <span class="s2">"assignedToTeam"</span><span class="p">,</span>
+    <span class="s2">"ocm_incident_team"</span><span class="p">:</span> <span class="s2">"test_1"</span><span class="p">,</span>
+    <span class="s2">"ocm_includecounts"</span><span class="p">:</span> <span class="n">true</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">4373</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;my.app.host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-ocm&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2025-05-23 11:27:17&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">4373</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"my.app.host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-ocm"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2025-05-23 11:27:17"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1788,16 +1788,16 @@ Incidents can be requested by incident properties, like incident priority and in
 <details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">ocm_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_id</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_incident_state&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_incident_state</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_incident_state&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_incident_state"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_incident_state</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_incident_state"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_incident_state</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_state</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_incident_owner&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_incident_owner</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_incident_owner&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_incident_team&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_incident_team</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_incident_team&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_incident_resolutioncode&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_incident_resolutioncode</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;ocm_incident_resolutioncode&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_incident_owner"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_incident_owner</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_incident_owner"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_incident_team"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_incident_team</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_incident_team"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_incident_resolutioncode"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">ocm_incident_resolutioncode</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"ocm_incident_resolutioncode"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1806,21 +1806,21 @@ Incidents can be requested by incident properties, like incident priority and in
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ocm_update_incident_output</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;On Call Manager: Update Incident successfully updated the incident with ID: </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-  <span class="n">inc</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_assigned_owner</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;owner&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_assigned_team</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;team&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_description</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_display_id</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;displayId&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_id</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_priority</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;priority&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_state</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;state&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_summary</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;summary&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_last_changed_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lastChanged&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S.</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span> <span class="k">if</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;lastChanged&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"On Call Manager: Update Incident successfully updated the incident with ID: </span><span class="si">{</span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+  <span class="n">inc</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_assigned_owner</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"owner"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_assigned_team</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"team"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_description</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"description"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_display_id</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"displayId"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_id</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"id"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_priority</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"priority"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_state</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"state"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_summary</span> <span class="o">=</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"summary"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">ocm_incident_last_changed_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lastChanged"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S.</span><span class="si">%f</span><span class="s2">"</span><span class="p">)</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span> <span class="k">if</span> <span class="n">inc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"lastChanged"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
 
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;On Call Manager: Update Incident failed with reason:</span><span class="se">\n</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reason&#39;</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">f</span><span class="s2">"On Call Manager: Update Incident failed with reason:</span><span class="se">\n</span><span class="si">{</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'reason'</span><span class="p">,</span><span class="w"> </span><span class="kc">None</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>

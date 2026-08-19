@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -476,100 +476,100 @@ and select the qraw_mitre.res file downloaded above.
 <details><summary>Outputs Qradar Advisor Offense Analysis:</summary>
 <p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;insights&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;high_value_assets&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;high_value_users&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;insights&quot;</span><span class="p">:</span> <span class="s2">&quot;Watson has analyzed this offense and a total of three observables.  The reasoning process has not found any additional indicators that are related to this offense.  No data points were found to be linked with the offense.  One indicator was related to suspicious activity, and all indicators were active.  In particular, one IP address has been found, which is known to be suspicious or malicious.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;is_stage3_pending&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-    <span class="s2">&quot;malware_families&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;related_investigations&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"insights"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"high_value_assets"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"high_value_users"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"insights"</span><span class="p">:</span> <span class="s2">"Watson has analyzed this offense and a total of three observables.  The reasoning process has not found any additional indicators that are related to this offense.  No data points were found to be linked with the offense.  One indicator was related to suspicious activity, and all indicators were active.  In particular, one IP address has been found, which is known to be suspicious or malicious."</span><span class="p">,</span>
+    <span class="s2">"is_stage3_pending"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">"malware_families"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"related_investigations"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;analysis_time&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;concern_score&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;is_search&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Investigations&quot;</span>
+        <span class="s2">"analysis_time"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"concern_score"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"is_search"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"priority"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"source"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Investigations"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;risky_users&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;stage3_insights&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;start_time&quot;</span><span class="p">:</span> <span class="mi">1659629011957</span><span class="p">,</span>
-    <span class="s2">&quot;stop_time&quot;</span><span class="p">:</span> <span class="mi">1659636230480</span><span class="p">,</span>
-    <span class="s2">&quot;tactics&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"risky_users"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"stage3_insights"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"start_time"</span><span class="p">:</span> <span class="mi">1659629011957</span><span class="p">,</span>
+    <span class="s2">"stop_time"</span><span class="p">:</span> <span class="mi">1659636230480</span><span class="p">,</span>
+    <span class="s2">"tactics"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
-        <span class="s2">&quot;data_sources&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;xfe&quot;</span>
+        <span class="s2">"confidence"</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+        <span class="s2">"data_sources"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"xfe"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;event_count&quot;</span><span class="p">:</span> <span class="mi">206</span><span class="p">,</span>
-        <span class="s2">&quot;flow_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;TA0011&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"event_count"</span><span class="p">:</span> <span class="mi">206</span><span class="p">,</span>
+        <span class="s2">"flow_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"TA0011"</span><span class="p">,</span>
+        <span class="s2">"nodes"</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="s2">&quot;is_internal&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;89.223.26.52&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;IpAddress&quot;</span>
+            <span class="s2">"is_internal"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"89.223.26.52"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"IpAddress"</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="s2">&quot;rules&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;tactic_id&quot;</span><span class="p">:</span> <span class="s2">&quot;Command and Control&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;techniques&quot;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="s2">"rules"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"tactic_id"</span><span class="p">:</span> <span class="s2">"Command and Control"</span><span class="p">,</span>
+        <span class="s2">"techniques"</span><span class="p">:</span> <span class="p">[]</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;threat_actors&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;watched_users&quot;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="s2">"threat_actors"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"watched_users"</span><span class="p">:</span> <span class="p">[]</span>
   <span class="p">},</span>
-  <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">ul</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\&quot;</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-meta-icons-png/identity-square-dark-300-dpi.png</span><span class="se">\&quot;</span><span class="s2"> alt=</span><span class="se">\&quot;</span><span class="s2">identity</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">width:20px; height:20px</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> userD</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">ul style=</span><span class="se">\&quot;</span><span class="s2">list-style-type:none</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\&quot;</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\&quot;</span><span class="s2"> alt=</span><span class="se">\&quot;</span><span class="s2">ipv4-addr</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">width:20px; height:20px</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 192.168.0.17</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">ul</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\&quot;</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\&quot;</span><span class="s2"> alt=</span><span class="se">\&quot;</span><span class="s2">ipv4-addr</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">width:20px; height:20px</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 89.223.26.52</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">ul style=</span><span class="se">\&quot;</span><span class="s2">list-style-type:none</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\&quot;</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\&quot;</span><span class="s2"> alt=</span><span class="se">\&quot;</span><span class="s2">ipv4-addr</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">width:20px; height:20px</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 192.168.0.17</span><span class="se">\u003c</span><span class="s2">img src=</span><span class="se">\&quot;</span><span class="s2">https://image.flaticon.com/icons/svg/282/282100.svg</span><span class="se">\&quot;</span><span class="s2"> alt=</span><span class="se">\&quot;</span><span class="s2">link</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">width:15px; height:15px</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\u003e\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e</span><span class="s2">x-mitre-tactic Command and Control</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">ul</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\&quot;</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\&quot;</span><span class="s2"> alt=</span><span class="se">\&quot;</span><span class="s2">ipv4-addr</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">width:20px; height:20px</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 193.184.16.214</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">ul style=</span><span class="se">\&quot;</span><span class="s2">list-style-type:none</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\&quot;</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\&quot;</span><span class="s2"> alt=</span><span class="se">\&quot;</span><span class="s2">ipv4-addr</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">width:20px; height:20px</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 192.168.0.17</span><span class="se">\u003c</span><span class="s2">img src=</span><span class="se">\&quot;</span><span class="s2">https://image.flaticon.com/icons/svg/282/282100.svg</span><span class="se">\&quot;</span><span class="s2"> alt=</span><span class="se">\&quot;</span><span class="s2">link</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">width:15px; height:15px</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\u003e\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">There are 5 objects and 2 links.</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;observables&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">ul</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\"</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-meta-icons-png/identity-square-dark-300-dpi.png</span><span class="se">\"</span><span class="s2"> alt=</span><span class="se">\"</span><span class="s2">identity</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width:20px; height:20px</span><span class="se">\"</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> userD</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">ul style=</span><span class="se">\"</span><span class="s2">list-style-type:none</span><span class="se">\"\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\"</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\"</span><span class="s2"> alt=</span><span class="se">\"</span><span class="s2">ipv4-addr</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width:20px; height:20px</span><span class="se">\"</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 192.168.0.17</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">ul</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\"</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\"</span><span class="s2"> alt=</span><span class="se">\"</span><span class="s2">ipv4-addr</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width:20px; height:20px</span><span class="se">\"</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 89.223.26.52</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">ul style=</span><span class="se">\"</span><span class="s2">list-style-type:none</span><span class="se">\"\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\"</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\"</span><span class="s2"> alt=</span><span class="se">\"</span><span class="s2">ipv4-addr</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width:20px; height:20px</span><span class="se">\"</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 192.168.0.17</span><span class="se">\u003c</span><span class="s2">img src=</span><span class="se">\"</span><span class="s2">https://image.flaticon.com/icons/svg/282/282100.svg</span><span class="se">\"</span><span class="s2"> alt=</span><span class="se">\"</span><span class="s2">link</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width:15px; height:15px</span><span class="se">\"</span><span class="s2">/</span><span class="se">\u003e\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e</span><span class="s2">x-mitre-tactic Command and Control</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">ul</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\"</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\"</span><span class="s2"> alt=</span><span class="se">\"</span><span class="s2">ipv4-addr</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width:20px; height:20px</span><span class="se">\"</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 193.184.16.214</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">ul style=</span><span class="se">\"</span><span class="s2">list-style-type:none</span><span class="se">\"\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\"</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\"</span><span class="s2"> alt=</span><span class="se">\"</span><span class="s2">ipv4-addr</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width:20px; height:20px</span><span class="se">\"</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 192.168.0.17</span><span class="se">\u003c</span><span class="s2">img src=</span><span class="se">\"</span><span class="s2">https://image.flaticon.com/icons/svg/282/282100.svg</span><span class="se">\"</span><span class="s2"> alt=</span><span class="se">\"</span><span class="s2">link</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width:15px; height:15px</span><span class="se">\"</span><span class="s2">/</span><span class="se">\u003e\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">There are 5 objects and 2 links.</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">"</span><span class="p">,</span>
+  <span class="s2">"observables"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;userD&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;relevance&quot;</span><span class="p">:</span> <span class="s2">&quot;very-high&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;toxicity&quot;</span><span class="p">:</span> <span class="s2">&quot;very-low&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;identity&quot;</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"userD"</span><span class="p">,</span>
+      <span class="s2">"relevance"</span><span class="p">:</span> <span class="s2">"very-high"</span><span class="p">,</span>
+      <span class="s2">"toxicity"</span><span class="p">:</span> <span class="s2">"very-low"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"identity"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;89.223.26.52&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;relevance&quot;</span><span class="p">:</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;toxicity&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ipv4-addr&quot;</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"89.223.26.52"</span><span class="p">,</span>
+      <span class="s2">"relevance"</span><span class="p">:</span> <span class="s2">"medium"</span><span class="p">,</span>
+      <span class="s2">"toxicity"</span><span class="p">:</span> <span class="s2">"high"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"ipv4-addr"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.0.17&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;relevance&quot;</span><span class="p">:</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;toxicity&quot;</span><span class="p">:</span> <span class="s2">&quot;very-low&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ipv4-addr&quot;</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"192.168.0.17"</span><span class="p">,</span>
+      <span class="s2">"relevance"</span><span class="p">:</span> <span class="s2">"medium"</span><span class="p">,</span>
+      <span class="s2">"toxicity"</span><span class="p">:</span> <span class="s2">"very-low"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"ipv4-addr"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;193.184.16.214&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;relevance&quot;</span><span class="p">:</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;toxicity&quot;</span><span class="p">:</span> <span class="s2">&quot;very-low&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ipv4-addr&quot;</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"193.184.16.214"</span><span class="p">,</span>
+      <span class="s2">"relevance"</span><span class="p">:</span> <span class="s2">"medium"</span><span class="p">,</span>
+      <span class="s2">"toxicity"</span><span class="p">:</span> <span class="s2">"very-low"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"ipv4-addr"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Command and Control&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;relevance&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;toxicity&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;x-mitre-tactic&quot;</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Command and Control"</span><span class="p">,</span>
+      <span class="s2">"relevance"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"toxicity"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"x-mitre-tactic"</span>
     <span class="p">}</span>
   <span class="p">],</span>
-  <span class="s2">&quot;stix&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;bundle--9813614d-e715-4ad4-a4bd-7cf204190449&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;objects&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"stix"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"bundle--9813614d-e715-4ad4-a4bd-7cf204190449"</span><span class="p">,</span>
+    <span class="s2">"objects"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-08-04T17:08:32.000Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;identity--2f4ac158-751e-42de-bf88-2a02fe6a5840&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;identity_class&quot;</span><span class="p">:</span> <span class="s2">&quot;individual&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-08-04T17:08:32.000Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;userD&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;identity&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;x_ibm_security_relevance&quot;</span><span class="p">:</span> <span class="s2">&quot;very-high&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;x_ibm_security_toxicity&quot;</span><span class="p">:</span> <span class="s2">&quot;very-low&quot;</span>
+        <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2022-08-04T17:08:32.000Z"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"identity--2f4ac158-751e-42de-bf88-2a02fe6a5840"</span><span class="p">,</span>
+        <span class="s2">"identity_class"</span><span class="p">:</span> <span class="s2">"individual"</span><span class="p">,</span>
+        <span class="s2">"modified"</span><span class="p">:</span> <span class="s2">"2022-08-04T17:08:32.000Z"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"userD"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"identity"</span><span class="p">,</span>
+        <span class="s2">"x_ibm_security_relevance"</span><span class="p">:</span> <span class="s2">"very-high"</span><span class="p">,</span>
+        <span class="s2">"x_ibm_security_toxicity"</span><span class="p">:</span> <span class="s2">"very-low"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;spec_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;bundle&quot;</span>
+    <span class="s2">"spec_version"</span><span class="p">:</span> <span class="s2">"2.0"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"bundle"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -628,37 +628,37 @@ and select the qraw_mitre.res file downloaded above.
 <p>
 <p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
- <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> 
- <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> 
- <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> 
- <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span>
-     <span class="s2">&quot;mitre_tactics&quot;</span><span class="p">:</span> <span class="p">[</span>
+ <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span> 
+ <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> 
+ <span class="s1">'reason'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> 
+ <span class="s1">'content'</span><span class="p">:</span> <span class="p">{</span>
+     <span class="s2">"mitre_tactics"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
       
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
-        <span class="s2">&quot;ref&quot;</span><span class="p">:</span> <span class="s2">&quot;String&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;collection&quot;</span><span class="p">:</span> <span class="s2">&quot;String&quot;</span><span class="p">,</span> 
-        <span class="s2">&quot;mitre_techniques&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+        <span class="s2">"ref"</span><span class="p">:</span> <span class="s2">"String"</span><span class="p">,</span>
+        <span class="s2">"collection"</span><span class="p">:</span> <span class="s2">"String"</span><span class="p">,</span> 
+        <span class="s2">"mitre_techniques"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;String&quot;</span><span class="p">,</span> 
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;String&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;external_references&quot;</span><span class="p">:</span> <span class="p">[{</span><span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;String&quot;</span><span class="p">}],</span>
-            <span class="s2">&quot;x_mitre_detection&quot;</span><span class="p">:</span> <span class="s2">&quot;String&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;String&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;collection&quot;</span><span class="p">:</span> <span class="s2">&quot;String&quot;</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"String"</span><span class="p">,</span> 
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"String"</span><span class="p">,</span>
+            <span class="s2">"external_references"</span><span class="p">:</span> <span class="p">[{</span><span class="s2">"url"</span><span class="p">:</span> <span class="s2">"String"</span><span class="p">}],</span>
+            <span class="s2">"x_mitre_detection"</span><span class="p">:</span> <span class="s2">"String"</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"String"</span><span class="p">,</span>
+            <span class="s2">"collection"</span><span class="p">:</span> <span class="s2">"String"</span>
             <span class="p">}</span>
         <span class="p">]</span>
         <span class="p">}</span>
     <span class="p">]</span>
     <span class="p">},</span>
-  <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;mitre_tactic_id&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> 
-            <span class="s1">&#39;mitre_tactic_name&#39;</span><span class="p">:</span> <span class="s1">&#39;Initial Access, Execution,       Credential Access&#39;</span><span class="p">},</span> 
-  <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span> 
-              <span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="s1">&#39;fn-mitre-integration&#39;</span><span class="p">,</span> <span class="s1">&#39;package_version&#39;</span><span class="p">:</span> <span class="s1">&#39;2.0.2&#39;</span><span class="p">,</span> 
-              <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;MacBook-Pro.local&#39;</span><span class="p">,</span> 
-              <span class="s1">&#39;execution_time_ms&#39;</span><span class="p">:</span> <span class="mi">114275</span><span class="p">,</span> 
-              <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2022-09-26 12:56:58&#39;</span>
+  <span class="s1">'inputs'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'mitre_tactic_id'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> 
+            <span class="s1">'mitre_tactic_name'</span><span class="p">:</span> <span class="s1">'Initial Access, Execution,       Credential Access'</span><span class="p">},</span> 
+  <span class="s1">'metrics'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span> 
+              <span class="s1">'package'</span><span class="p">:</span> <span class="s1">'fn-mitre-integration'</span><span class="p">,</span> <span class="s1">'package_version'</span><span class="p">:</span> <span class="s1">'2.0.2'</span><span class="p">,</span> 
+              <span class="s1">'host'</span><span class="p">:</span> <span class="s1">'MacBook-Pro.local'</span><span class="p">,</span> 
+              <span class="s1">'execution_time_ms'</span><span class="p">:</span> <span class="mi">114275</span><span class="p">,</span> 
+              <span class="s1">'timestamp'</span><span class="p">:</span> <span class="s1">'2022-09-26 12:56:58'</span>
               <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -669,7 +669,7 @@ and select the qraw_mitre.res file downloaded above.
 **NOTE:** this example may be in JSON format, yet on the SOAR Platform `results` will be a Python Dictionary
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">insights</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">qraw_offense_insights</span><span class="o">.</span><span class="n">insights</span>
 
-<span class="n">tactics</span> <span class="o">=</span> <span class="n">insights</span><span class="p">[</span><span class="s2">&quot;tactics&quot;</span><span class="p">]</span>
+<span class="n">tactics</span> <span class="o">=</span> <span class="n">insights</span><span class="p">[</span><span class="s2">"tactics"</span><span class="p">]</span>
 
 <span class="n">mitre_tactic_names</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">if</span> <span class="n">tactics</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -677,81 +677,81 @@ and select the qraw_mitre.res file downloaded above.
     <span class="c1">#</span>
     <span class="c1"># Note, even though QRAW calls it tactic_id, it is more a tactic name</span>
     <span class="c1">#</span>
-    <span class="n">mitre_tactic_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;tactic_id&quot;</span><span class="p">])</span>
+    <span class="n">mitre_tactic_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tactic</span><span class="p">[</span><span class="s2">"tactic_id"</span><span class="p">])</span>
 <span class="c1">#</span>
 <span class="c1"># QRadar Advisor might return more than one tactics for a given offense. Include them inputs</span>
 <span class="c1"># a comma separated string</span>
 <span class="c1">#</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">mitre_tactic_name</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mitre_tactic_names</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">mitre_tactic_name</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mitre_tactic_names</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
 </details>
 <details><summary>Example MITRE Tactic Information Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Example of data returned in ResultPayload&#39;s content</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">""" Example of data returned in ResultPayload's content</span>
 <span class="sd">{</span>
-<span class="sd">  &quot;mitre_tactics&quot;: [</span>
+<span class="sd">  "mitre_tactics": [</span>
 <span class="sd">    {</span>
 <span class="sd">      </span>
-<span class="sd">      &quot;name&quot;: String,</span>
-<span class="sd">      &quot;id&quot;: String,</span>
-<span class="sd">      &quot;ref&quot;: &quot;String&quot;,</span>
-<span class="sd">      &quot;collection&quot;: &quot;String&quot;, </span>
-<span class="sd">      &quot;mitre_techniques&quot;: [</span>
+<span class="sd">      "name": String,</span>
+<span class="sd">      "id": String,</span>
+<span class="sd">      "ref": "String",</span>
+<span class="sd">      "collection": "String", </span>
+<span class="sd">      "mitre_techniques": [</span>
 <span class="sd">        {</span>
-<span class="sd">          &quot;name&quot;: &quot;String&quot;, </span>
-<span class="sd">          &quot;description&quot;: &quot;String&quot;,</span>
-<span class="sd">          &quot;external_references&quot;: [{&quot;url&quot;: &quot;String&quot;}],</span>
-<span class="sd">          &quot;x_mitre_detection&quot;: &quot;String&quot;,</span>
-<span class="sd">          &quot;id&quot;: &quot;String&quot;,</span>
-<span class="sd">          &quot;collection&quot;: &quot;String&quot;</span>
+<span class="sd">          "name": "String", </span>
+<span class="sd">          "description": "String",</span>
+<span class="sd">          "external_references": [{"url": "String"}],</span>
+<span class="sd">          "x_mitre_detection": "String",</span>
+<span class="sd">          "id": "String",</span>
+<span class="sd">          "collection": "String"</span>
 <span class="sd">        }</span>
 <span class="sd">      ]</span>
 <span class="sd">    }</span>
 <span class="sd">  ]</span>
 <span class="sd">}</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="c1"># Read result from QRAW to get confidence information</span>
 <span class="n">insights</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">qraw_offense_insights</span><span class="o">.</span><span class="n">insights</span>
-<span class="n">mitre_tactics</span> <span class="o">=</span> <span class="n">insights</span><span class="p">[</span><span class="s2">&quot;tactics&quot;</span><span class="p">]</span>
+<span class="n">mitre_tactics</span> <span class="o">=</span> <span class="n">insights</span><span class="p">[</span><span class="s2">"tactics"</span><span class="p">]</span>
 
 <span class="n">tactic_confidence</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">if</span> <span class="n">mitre_tactics</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
   <span class="k">for</span> <span class="n">tactic</span> <span class="ow">in</span> <span class="n">mitre_tactics</span><span class="p">:</span>
-    <span class="n">tactic_confidence</span><span class="p">[</span><span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;tactic_id&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;confidence&quot;</span><span class="p">]</span>
+    <span class="n">tactic_confidence</span><span class="p">[</span><span class="n">tactic</span><span class="p">[</span><span class="s2">"tactic_id"</span><span class="p">]]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"confidence"</span><span class="p">]</span>
     
-<span class="n">tactics</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;mitre_tactics&quot;</span><span class="p">]</span>
+<span class="n">tactics</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"mitre_tactics"</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">tactic</span> <span class="ow">in</span> <span class="n">tactics</span><span class="p">:</span>
   <span class="c1">#</span>
   <span class="c1"># MITRE ATTACK of Incident Datatable</span>
   <span class="c1">#</span>
-  <span class="n">tactic_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;mitre_attack_of_incident&quot;</span><span class="p">)</span>
-  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span>
-  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">&quot;attack_tactic&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
-  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">&quot;tactic_code&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
-  <span class="n">url_html</span> <span class="o">=</span> <span class="s1">&#39;&lt;a href=&quot;&#39;</span> <span class="o">+</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&quot;&gt;&#39;</span> <span class="o">+</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;/a&gt;&lt;br&gt;&#39;</span>
-  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">&quot;reference&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">url_html</span><span class="p">)</span>
-  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">&quot;confidence&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">tactic_confidence</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+  <span class="n">tactic_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"mitre_attack_of_incident"</span><span class="p">)</span>
+  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">"collection"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"collection"</span><span class="p">]</span>
+  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">"attack_tactic"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">"tactic_code"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span>
+  <span class="n">url_html</span> <span class="o">=</span> <span class="s1">'&lt;a href="'</span> <span class="o">+</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"ref"</span><span class="p">]</span> <span class="o">+</span> <span class="s1">'"&gt;'</span> <span class="o">+</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"ref"</span><span class="p">]</span> <span class="o">+</span> <span class="s1">'&lt;/a&gt;&lt;br&gt;'</span>
+  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">"reference"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">url_html</span><span class="p">)</span>
+  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">"confidence"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">tactic_confidence</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">tactic</span><span class="p">[</span><span class="s2">"name"</span><span class="p">],</span> <span class="s2">""</span><span class="p">))</span>
   <span class="c1">#</span>
   <span class="c1"># MITRE ATT&amp;CK techniques Datatable</span>
   <span class="c1">#</span>
-  <span class="n">techs</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;mitre_techniques&quot;</span><span class="p">]</span>
+  <span class="n">techs</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"mitre_techniques"</span><span class="p">]</span>
   <span class="k">for</span> <span class="n">att_tech</span> <span class="ow">in</span> <span class="n">techs</span><span class="p">:</span>
-    <span class="n">tech_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;mitre_attack_techniques&quot;</span><span class="p">)</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;tactic&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+    <span class="n">tech_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"mitre_attack_techniques"</span><span class="p">)</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"collection"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"collection"</span><span class="p">]</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"tactic"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
 
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;technique_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;technique_description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">att_tech</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">])</span>
-    <span class="n">refs</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">&quot;external_references&quot;</span><span class="p">]</span>
-    <span class="n">ref_html</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"technique_name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"technique_description"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">att_tech</span><span class="p">[</span><span class="s2">"description"</span><span class="p">])</span>
+    <span class="n">refs</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">"external_references"</span><span class="p">]</span>
+    <span class="n">ref_html</span> <span class="o">=</span> <span class="s2">""</span>
     <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="n">refs</span><span class="p">:</span>
-      <span class="n">url</span> <span class="o">=</span> <span class="n">ref</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span>
+      <span class="n">url</span> <span class="o">=</span> <span class="n">ref</span><span class="p">[</span><span class="s2">"url"</span><span class="p">]</span>
       
-      <span class="n">https_str</span> <span class="o">=</span> <span class="s2">&quot;https://&quot;</span>
-      <span class="n">http_str</span> <span class="o">=</span> <span class="s2">&quot;http://&quot;</span>
+      <span class="n">https_str</span> <span class="o">=</span> <span class="s2">"https://"</span>
+      <span class="n">http_str</span> <span class="o">=</span> <span class="s2">"http://"</span>
 
       <span class="n">start_pos</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">https_str</span><span class="p">)</span>
 
@@ -765,19 +765,19 @@ and select the qraw_mitre.res file downloaded above.
         <span class="k">else</span><span class="p">:</span>
           <span class="n">start_pos</span> <span class="o">=</span> <span class="mi">0</span> 
 
-      <span class="n">end_pos</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">start_pos</span><span class="p">)</span>
+      <span class="n">end_pos</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="n">start_pos</span><span class="p">)</span>
       <span class="k">if</span> <span class="n">end_pos</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="c1"># We don&#39;t know how to extract</span>
+        <span class="c1"># We don't know how to extract</span>
         <span class="n">display_str</span> <span class="o">=</span> <span class="n">url</span>
       <span class="k">elif</span> <span class="n">end_pos</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
         <span class="n">display_str</span> <span class="o">=</span> <span class="n">url</span><span class="p">[</span><span class="n">start_pos</span><span class="p">:]</span>
       <span class="k">else</span><span class="p">:</span>
         <span class="n">display_str</span> <span class="o">=</span> <span class="n">url</span><span class="p">[</span><span class="n">start_pos</span><span class="p">:</span><span class="n">end_pos</span><span class="p">]</span>
       
-      <span class="n">ref_html</span> <span class="o">=</span> <span class="n">ref_html</span> <span class="o">+</span> <span class="s1">&#39;&lt;a href=&quot;&#39;</span> <span class="o">+</span> <span class="n">ref</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&quot;&gt;&#39;</span> <span class="o">+</span> <span class="n">display_str</span> <span class="o">+</span> <span class="s1">&#39;&lt;/a&gt;&lt;br&gt;&#39;</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;references&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref_html</span><span class="p">)</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;detection&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">att_tech</span><span class="p">[</span><span class="s2">&quot;x_mitre_detection&quot;</span><span class="p">])</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;technique_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+      <span class="n">ref_html</span> <span class="o">=</span> <span class="n">ref_html</span> <span class="o">+</span> <span class="s1">'&lt;a href="'</span> <span class="o">+</span> <span class="n">ref</span><span class="p">[</span><span class="s2">"url"</span><span class="p">]</span> <span class="o">+</span> <span class="s1">'"&gt;'</span> <span class="o">+</span> <span class="n">display_str</span> <span class="o">+</span> <span class="s1">'&lt;/a&gt;&lt;br&gt;'</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"references"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref_html</span><span class="p">)</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"detection"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">att_tech</span><span class="p">[</span><span class="s2">"x_mitre_detection"</span><span class="p">])</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"technique_id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span>
 </pre></div>
 </div>
 </p>
@@ -846,27 +846,27 @@ A new task is created with description, detection, and mitigation for the select
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;tactics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;has_ibm_default&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;c0dfacf7-235e-416c-9b2b-c250ef8f3919&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;last_updated&quot;</span><span class="p">:</span> <span class="mi">1607611408002</span><span class="p">,</span>
-    <span class="s2">&quot;mapping&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;Initial Access&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;ibm_default&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;TA0001&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;techniques&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;Valid Accounts&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;T1078&quot;</span>
+  <span class="s2">"tactics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"has_ibm_default"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"c0dfacf7-235e-416c-9b2b-c250ef8f3919"</span><span class="p">,</span>
+    <span class="s2">"last_updated"</span><span class="p">:</span> <span class="mi">1607611408002</span><span class="p">,</span>
+    <span class="s2">"mapping"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"Initial Access"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"confidence"</span><span class="p">:</span> <span class="s2">"high"</span><span class="p">,</span>
+        <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"ibm_default"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"TA0001"</span><span class="p">,</span>
+        <span class="s2">"techniques"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"Valid Accounts"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"confidence"</span><span class="p">:</span> <span class="s2">"high"</span><span class="p">,</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"T1078"</span>
           <span class="p">}</span>
         <span class="p">},</span>
-        <span class="s2">&quot;user_override&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="s2">"user_override"</span><span class="p">:</span> <span class="n">false</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="s2">&quot;min-mitre-version&quot;</span><span class="p">:</span> <span class="mi">7</span>
+    <span class="s2">"min-mitre-version"</span><span class="p">:</span> <span class="mi">7</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -927,41 +927,41 @@ A new task is created with description, detection, and mitigation for the select
 </details>
 <details><summary>Example MITRE Tactic Information Pre-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
 <span class="sd">Sample data from QRaw:</span>
 <span class="sd">  {</span>
-<span class="sd">    u&#39;id&#39;: u&#39;SYSTEM-1458&#39;, </span>
-<span class="sd">    u&#39;has_ibm_default&#39;: True, </span>
-<span class="sd">    u&#39;mapping&#39;: {</span>
-<span class="sd">                  u&#39;Privilege Escalation&#39;: {</span>
-<span class="sd">                                              u&#39;user_override&#39;: False, </span>
-<span class="sd">                                              u&#39;confidence&#39;: u&#39;high&#39;, </span>
-<span class="sd">                                              u&#39;ibm_default&#39;: True, </span>
-<span class="sd">                                              u&#39;enabled&#39;: True, </span>
-<span class="sd">                                              u&#39;techniques&#39;: {}</span>
+<span class="sd">    u'id': u'SYSTEM-1458', </span>
+<span class="sd">    u'has_ibm_default': True, </span>
+<span class="sd">    u'mapping': {</span>
+<span class="sd">                  u'Privilege Escalation': {</span>
+<span class="sd">                                              u'user_override': False, </span>
+<span class="sd">                                              u'confidence': u'high', </span>
+<span class="sd">                                              u'ibm_default': True, </span>
+<span class="sd">                                              u'enabled': True, </span>
+<span class="sd">                                              u'techniques': {}</span>
 <span class="sd">                  }, </span>
-<span class="sd">                  u&#39;Execution&#39;: {</span>
-<span class="sd">                                  u&#39;user_override&#39;: False, </span>
-<span class="sd">                                  u&#39;confidence&#39;: u&#39;high&#39;, </span>
-<span class="sd">                                  u&#39;ibm_default&#39;: True, </span>
-<span class="sd">                                  u&#39;enabled&#39;: True, </span>
-<span class="sd">                                  u&#39;techniques&#39;: {}</span>
+<span class="sd">                  u'Execution': {</span>
+<span class="sd">                                  u'user_override': False, </span>
+<span class="sd">                                  u'confidence': u'high', </span>
+<span class="sd">                                  u'ibm_default': True, </span>
+<span class="sd">                                  u'enabled': True, </span>
+<span class="sd">                                  u'techniques': {}</span>
 <span class="sd">                  }, </span>
-<span class="sd">                  u&#39;Initial Access&#39;: {</span>
-<span class="sd">                                  u&#39;user_override&#39;: False, </span>
-<span class="sd">                                  u&#39;confidence&#39;: u&#39;high&#39;, </span>
-<span class="sd">                                  u&#39;ibm_default&#39;: True, </span>
-<span class="sd">                                  u&#39;enabled&#39;: True, </span>
-<span class="sd">                                  u&#39;techniques&#39;: {}</span>
+<span class="sd">                  u'Initial Access': {</span>
+<span class="sd">                                  u'user_override': False, </span>
+<span class="sd">                                  u'confidence': u'high', </span>
+<span class="sd">                                  u'ibm_default': True, </span>
+<span class="sd">                                  u'enabled': True, </span>
+<span class="sd">                                  u'techniques': {}</span>
 <span class="sd">                  }</span>
 <span class="sd">    }</span>
 <span class="sd">  }</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="n">tactics</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">qraw_rule_map</span><span class="o">.</span><span class="n">tactics</span>
 
-<span class="n">mapping</span> <span class="o">=</span> <span class="n">tactics</span><span class="p">[</span><span class="s2">&quot;mapping&quot;</span><span class="p">]</span>
+<span class="n">mapping</span> <span class="o">=</span> <span class="n">tactics</span><span class="p">[</span><span class="s2">"mapping"</span><span class="p">]</span>
 
-<span class="n">att_tactics</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">att_tactics</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">mitre_tactic_name</span> <span class="o">=</span> <span class="n">att_tactics</span>
 </pre></div>
 </div>
@@ -969,69 +969,69 @@ A new task is created with description, detection, and mitigation for the select
 </details>
 <details><summary>Example MITRE Tactic Information Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Example of data returned in ResultPayload&#39;s content</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">""" Example of data returned in ResultPayload's content</span>
 <span class="sd">{</span>
-<span class="sd">  &quot;mitre_tactics&quot;: [</span>
+<span class="sd">  "mitre_tactics": [</span>
 <span class="sd">    {</span>
 <span class="sd">      </span>
-<span class="sd">      &quot;name&quot;: String,</span>
-<span class="sd">      &quot;id&quot;: String,</span>
-<span class="sd">      &quot;ref&quot;: &quot;String&quot;,</span>
-<span class="sd">      &quot;collection&quot;: &quot;String&quot;, </span>
-<span class="sd">      &quot;mitre_techniques&quot;: [</span>
+<span class="sd">      "name": String,</span>
+<span class="sd">      "id": String,</span>
+<span class="sd">      "ref": "String",</span>
+<span class="sd">      "collection": "String", </span>
+<span class="sd">      "mitre_techniques": [</span>
 <span class="sd">        {</span>
-<span class="sd">          &quot;name&quot;: &quot;String&quot;, </span>
-<span class="sd">          &quot;description&quot;: &quot;String&quot;,</span>
-<span class="sd">          &quot;external_references&quot;: [{&quot;url&quot;: &quot;String&quot;}],</span>
-<span class="sd">          &quot;x_mitre_detection&quot;: &quot;String&quot;,</span>
-<span class="sd">          &quot;id&quot;: &quot;String&quot;,</span>
-<span class="sd">          &quot;collection&quot;: &quot;String&quot;</span>
+<span class="sd">          "name": "String", </span>
+<span class="sd">          "description": "String",</span>
+<span class="sd">          "external_references": [{"url": "String"}],</span>
+<span class="sd">          "x_mitre_detection": "String",</span>
+<span class="sd">          "id": "String",</span>
+<span class="sd">          "collection": "String"</span>
 <span class="sd">        }</span>
 <span class="sd">      ]</span>
 <span class="sd">    }</span>
 <span class="sd">  ]</span>
 <span class="sd">}</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="c1"># Read result from QRAW to get confidence information</span>
-<span class="n">mapping</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">qraw_rule_map</span><span class="o">.</span><span class="n">tactics</span><span class="p">[</span><span class="s2">&quot;mapping&quot;</span><span class="p">]</span>
+<span class="n">mapping</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">qraw_rule_map</span><span class="o">.</span><span class="n">tactics</span><span class="p">[</span><span class="s2">"mapping"</span><span class="p">]</span>
 <span class="n">tactic_names</span> <span class="o">=</span> <span class="n">mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
 
 <span class="n">tactic_confidence</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">if</span> <span class="n">tactic_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
   <span class="k">for</span> <span class="n">t_name</span> <span class="ow">in</span> <span class="n">tactic_names</span><span class="p">:</span>
-    <span class="n">tactic_confidence</span><span class="p">[</span><span class="n">t_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">t_name</span><span class="p">][</span><span class="s2">&quot;confidence&quot;</span><span class="p">]</span>
+    <span class="n">tactic_confidence</span><span class="p">[</span><span class="n">t_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="n">t_name</span><span class="p">][</span><span class="s2">"confidence"</span><span class="p">]</span>
     
-<span class="n">tactics</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;mitre_tactics&quot;</span><span class="p">]</span>
+<span class="n">tactics</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"mitre_tactics"</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">tactic</span> <span class="ow">in</span> <span class="n">tactics</span><span class="p">:</span>
   <span class="c1">#</span>
   <span class="c1"># MITRE ATTACK of Incident Datatable</span>
   <span class="c1">#</span>
-  <span class="n">tactic_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;mitre_attack_of_incident&quot;</span><span class="p">)</span>
-  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span>
-  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">&quot;attack_tactic&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
-  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">&quot;tactic_code&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
-  <span class="n">url_html</span> <span class="o">=</span> <span class="s1">&#39;&lt;a href=&quot;&#39;</span> <span class="o">+</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&quot;&gt;&#39;</span> <span class="o">+</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;ref&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;/a&gt;&lt;br&gt;&#39;</span>
-  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">&quot;reference&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">url_html</span><span class="p">)</span>
-  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">&quot;confidence&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">tactic_confidence</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+  <span class="n">tactic_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"mitre_attack_of_incident"</span><span class="p">)</span>
+  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">"collection"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"collection"</span><span class="p">]</span>
+  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">"attack_tactic"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">"tactic_code"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span>
+  <span class="n">url_html</span> <span class="o">=</span> <span class="s1">'&lt;a href="'</span> <span class="o">+</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"ref"</span><span class="p">]</span> <span class="o">+</span> <span class="s1">'"&gt;'</span> <span class="o">+</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"ref"</span><span class="p">]</span> <span class="o">+</span> <span class="s1">'&lt;/a&gt;&lt;br&gt;'</span>
+  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">"reference"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">url_html</span><span class="p">)</span>
+  <span class="n">tactic_row</span><span class="p">[</span><span class="s2">"confidence"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">tactic_confidence</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">tactic</span><span class="p">[</span><span class="s2">"name"</span><span class="p">],</span> <span class="s2">""</span><span class="p">))</span>
   <span class="c1">#</span>
   <span class="c1"># MITRE ATT&amp;CK techniques Datatable</span>
   <span class="c1">#</span>
-  <span class="n">techs</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;mitre_techniques&quot;</span><span class="p">]</span>
+  <span class="n">techs</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"mitre_techniques"</span><span class="p">]</span>
   <span class="k">for</span> <span class="n">att_tech</span> <span class="ow">in</span> <span class="n">techs</span><span class="p">:</span>
-    <span class="n">tech_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;mitre_attack_techniques&quot;</span><span class="p">)</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;collection&quot;</span><span class="p">]</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;tactic&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+    <span class="n">tech_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"mitre_attack_techniques"</span><span class="p">)</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"collection"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"collection"</span><span class="p">]</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"tactic"</span><span class="p">]</span> <span class="o">=</span> <span class="n">tactic</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
 
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;technique_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;technique_description&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">att_tech</span><span class="p">[</span><span class="s2">&quot;description&quot;</span><span class="p">])</span>
-    <span class="n">refs</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">&quot;external_references&quot;</span><span class="p">]</span>
-    <span class="n">ref_html</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"technique_name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"technique_description"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">att_tech</span><span class="p">[</span><span class="s2">"description"</span><span class="p">])</span>
+    <span class="n">refs</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">"external_references"</span><span class="p">]</span>
+    <span class="n">ref_html</span> <span class="o">=</span> <span class="s2">""</span>
     <span class="k">for</span> <span class="n">ref</span> <span class="ow">in</span> <span class="n">refs</span><span class="p">:</span>
-      <span class="n">url</span> <span class="o">=</span> <span class="n">ref</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span>
+      <span class="n">url</span> <span class="o">=</span> <span class="n">ref</span><span class="p">[</span><span class="s2">"url"</span><span class="p">]</span>
       
-      <span class="n">https_str</span> <span class="o">=</span> <span class="s2">&quot;https://&quot;</span>
-      <span class="n">http_str</span> <span class="o">=</span> <span class="s2">&quot;http://&quot;</span>
+      <span class="n">https_str</span> <span class="o">=</span> <span class="s2">"https://"</span>
+      <span class="n">http_str</span> <span class="o">=</span> <span class="s2">"http://"</span>
 
       <span class="n">start_pos</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">https_str</span><span class="p">)</span>
 
@@ -1045,19 +1045,19 @@ A new task is created with description, detection, and mitigation for the select
         <span class="k">else</span><span class="p">:</span>
           <span class="n">start_pos</span> <span class="o">=</span> <span class="mi">0</span> 
 
-      <span class="n">end_pos</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">start_pos</span><span class="p">)</span>
+      <span class="n">end_pos</span> <span class="o">=</span> <span class="n">url</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="n">start_pos</span><span class="p">)</span>
       <span class="k">if</span> <span class="n">end_pos</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="c1"># We don&#39;t know how to extract</span>
+        <span class="c1"># We don't know how to extract</span>
         <span class="n">display_str</span> <span class="o">=</span> <span class="n">url</span>
       <span class="k">elif</span> <span class="n">end_pos</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
         <span class="n">display_str</span> <span class="o">=</span> <span class="n">url</span><span class="p">[</span><span class="n">start_pos</span><span class="p">:]</span>
       <span class="k">else</span><span class="p">:</span>
         <span class="n">display_str</span> <span class="o">=</span> <span class="n">url</span><span class="p">[</span><span class="n">start_pos</span><span class="p">:</span><span class="n">end_pos</span><span class="p">]</span>
       
-      <span class="n">ref_html</span> <span class="o">=</span> <span class="n">ref_html</span> <span class="o">+</span> <span class="s1">&#39;&lt;a href=&quot;&#39;</span> <span class="o">+</span> <span class="n">ref</span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&quot;&gt;&#39;</span> <span class="o">+</span> <span class="n">display_str</span> <span class="o">+</span> <span class="s1">&#39;&lt;/a&gt;&lt;br&gt;&#39;</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;references&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref_html</span><span class="p">)</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;detection&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">att_tech</span><span class="p">[</span><span class="s2">&quot;x_mitre_detection&quot;</span><span class="p">])</span>
-    <span class="n">tech_row</span><span class="p">[</span><span class="s2">&quot;technique_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span>
+      <span class="n">ref_html</span> <span class="o">=</span> <span class="n">ref_html</span> <span class="o">+</span> <span class="s1">'&lt;a href="'</span> <span class="o">+</span> <span class="n">ref</span><span class="p">[</span><span class="s2">"url"</span><span class="p">]</span> <span class="o">+</span> <span class="s1">'"&gt;'</span> <span class="o">+</span> <span class="n">display_str</span> <span class="o">+</span> <span class="s1">'&lt;/a&gt;&lt;br&gt;'</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"references"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">ref_html</span><span class="p">)</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"detection"</span><span class="p">]</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">att_tech</span><span class="p">[</span><span class="s2">"x_mitre_detection"</span><span class="p">])</span>
+    <span class="n">tech_row</span><span class="p">[</span><span class="s2">"technique_id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">att_tech</span><span class="p">[</span><span class="s2">"id"</span><span class="p">]</span>
 
 </pre></div>
 </div>

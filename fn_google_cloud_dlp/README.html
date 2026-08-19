@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -706,7 +706,7 @@ Additional package dependencies may exist for each of these packages:
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
-<span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;String&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"String"</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">gcp_artifact_input</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">artifact_id</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">id</span>
@@ -716,11 +716,11 @@ Additional package dependencies may exist for each of these packages:
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">"""</span>
 <span class="sd">If the integration was successful in operation, upload a new artifact containing the now de-identified text.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&quot;&quot;De-Identified using Google Cloud DLP&lt;b&gt;</span><span class="si">{}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;de_identified_text&quot;</span><span class="p">]))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="sa">u</span><span class="s2">"""De-Identified using Google Cloud DLP&lt;b&gt;</span><span class="si">{}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"de_identified_text"</span><span class="p">]))</span>
 </pre></div>
 </div>
 </p>
@@ -813,18 +813,18 @@ Additional package dependencies may exist for each of these packages:
 </details>
 <details><summary>Example Post-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Print all the findings as a richtext note. This note may be very long if you run the integration on a large file with lots of PII. In these cases you may want to limit how many findings are put into the note.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;findings&quot;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">attachment_name</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;attachment_name&quot;</span><span class="p">)</span>
-        <span class="n">note_text</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Findings were found from attachment &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&lt;br&gt; Findings: &lt;br&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attachment_name</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">finding</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;findings&quot;</span><span class="p">,</span> <span class="p">[]):</span>
-            <span class="n">text_quote</span> <span class="o">=</span> <span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;quote&quot;</span><span class="p">)</span>
-            <span class="n">info_type</span> <span class="o">=</span> <span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;info_type&quot;</span><span class="p">)</span>
-            <span class="n">likelihood</span> <span class="o">=</span> <span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;likelihood&quot;</span><span class="p">)</span>
-            <span class="n">note_text</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;Text Quote: &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Print all the findings as a richtext note. This note may be very long if you run the integration on a large file with lots of PII. In these cases you may want to limit how many findings are put into the note."""</span>
+    <span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"findings"</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">attachment_name</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"attachment_name"</span><span class="p">)</span>
+        <span class="n">note_text</span> <span class="o">=</span> <span class="s2">"""Findings were found from attachment &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&lt;br&gt; Findings: &lt;br&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attachment_name</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">finding</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"findings"</span><span class="p">,</span> <span class="p">[]):</span>
+            <span class="n">text_quote</span> <span class="o">=</span> <span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"quote"</span><span class="p">)</span>
+            <span class="n">info_type</span> <span class="o">=</span> <span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"info_type"</span><span class="p">)</span>
+            <span class="n">likelihood</span> <span class="o">=</span> <span class="n">finding</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"likelihood"</span><span class="p">)</span>
+            <span class="n">note_text</span> <span class="o">+=</span> <span class="s2">"""Text Quote: &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;</span>
 <span class="s2">                            &lt;br&gt; Information Type Suspected: &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;</span>
-<span class="s2">                            &lt;br&gt; Likelihood / Confidence: &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&lt;br&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text_quote</span><span class="p">,</span> <span class="n">info_type</span><span class="p">,</span> <span class="n">likelihood</span><span class="p">)</span>
+<span class="s2">                            &lt;br&gt; Likelihood / Confidence: &lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;&lt;br&gt;&lt;br&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text_quote</span><span class="p">,</span> <span class="n">info_type</span><span class="p">,</span> <span class="n">likelihood</span><span class="p">)</span>
         <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
 
 </pre></div>

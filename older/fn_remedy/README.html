@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -727,13 +727,13 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python 2 compatibility for CP4S 1.6</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">mk_str</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">quotes</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;&quot;&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mk_str</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">quotes</span><span class="o">=</span><span class="sa">u</span><span class="s1">'"'</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;null&quot;</span>
+        <span class="k">return</span> <span class="s2">"null"</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">esc_value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+        <span class="n">esc_value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">'"'</span><span class="p">,</span> <span class="sa">u</span><span class="s1">'</span><span class="se">\\</span><span class="s1">"'</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">quotes</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{0}{1}{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">quotes</span><span class="p">,</span> <span class="n">esc_value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="sa">u</span><span class="s1">'</span><span class="si">{0}{1}{0}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">quotes</span><span class="p">,</span> <span class="n">esc_value</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">esc_value</span>
 
@@ -743,10 +743,10 @@ Additional package dependencies may exist for each of these packages:</p>
 
 <span class="c1"># Use this section to add key, value pairs to send to Remedy</span>
 <span class="c1"># These values will be added/updated on the target Remedy incident,</span>
-<span class="c1"># so they must conform with the &quot;HPD:IncidentInterface_Create&quot; schema</span>
-<span class="n">payload</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;{&quot;Status_Reason&quot;: &quot;foo&quot;}&quot;&quot;&quot;</span>
+<span class="c1"># so they must conform with the "HPD:IncidentInterface_Create" schema</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="s2">"""{"Status_Reason": "foo"}"""</span>
 
-<span class="n">inputs</span><span class="o">.</span><span class="n">remedy_payload</span> <span class="o">=</span> <span class="n">payload</span> <span class="k">if</span> <span class="n">payload</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">remedy_payload</span> <span class="o">=</span> <span class="n">payload</span> <span class="k">if</span> <span class="n">payload</span> <span class="k">else</span> <span class="s1">''</span>
 
 </pre></div>
 </div>
@@ -754,23 +754,23 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&lt;h5&gt;Remedy Close Incident:&lt;/h5&gt;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">noteText</span> <span class="o">=</span> <span class="s2">"&lt;h5&gt;Remedy Close Incident:&lt;/h5&gt;"</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]:</span>
-    <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;closed&quot;</span><span class="p">]:</span>
-      <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;The following incidents were matched in Remedy and successfully closed:&lt;/p&gt;&quot;</span>
-      <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;closed&quot;</span><span class="p">]:</span>
-        <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;    Incident Number </span><span class="si">{0}</span><span class="s2">, Request ID: </span><span class="si">{1}</span><span class="s2">&lt;/p&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">][</span><span class="s2">&quot;Incident Number&quot;</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">][</span><span class="s2">&quot;Request ID&quot;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;skipped&quot;</span><span class="p">]:</span>
-      <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;The following incidents were not able to be closed. Common reasons include that the incident has been previously closed, &quot;</span> \
-      <span class="s2">&quot;the incident has been deleted, or the payload sent to Remedy was incomplete according to the requirements of your specific system:&lt;/p&gt;&quot;</span>
-      <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;skipped&quot;</span><span class="p">]:</span>
-        <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;    Incident Number </span><span class="si">{0}</span><span class="s2">, Request ID: </span><span class="si">{1}</span><span class="s2">&lt;/p&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">][</span><span class="s2">&quot;Incident Number&quot;</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">][</span><span class="s2">&quot;Request ID&quot;</span><span class="p">])</span>
-<span class="k">elif</span> <span class="ow">not</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;closed&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;skipped&quot;</span><span class="p">]:</span>
+<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">"success"</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"closed"</span><span class="p">]:</span>
+      <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"&lt;p&gt;The following incidents were matched in Remedy and successfully closed:&lt;/p&gt;"</span>
+      <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"closed"</span><span class="p">]:</span>
+        <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"&lt;p&gt;    Incident Number </span><span class="si">{0}</span><span class="s2">, Request ID: </span><span class="si">{1}</span><span class="s2">&lt;/p&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">"values"</span><span class="p">][</span><span class="s2">"Incident Number"</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s2">"values"</span><span class="p">][</span><span class="s2">"Request ID"</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"skipped"</span><span class="p">]:</span>
+      <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"&lt;p&gt;The following incidents were not able to be closed. Common reasons include that the incident has been previously closed, "</span> \
+      <span class="s2">"the incident has been deleted, or the payload sent to Remedy was incomplete according to the requirements of your specific system:&lt;/p&gt;"</span>
+      <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"skipped"</span><span class="p">]:</span>
+        <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"&lt;p&gt;    Incident Number </span><span class="si">{0}</span><span class="s2">, Request ID: </span><span class="si">{1}</span><span class="s2">&lt;/p&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">"values"</span><span class="p">][</span><span class="s2">"Incident Number"</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="s2">"values"</span><span class="p">][</span><span class="s2">"Request ID"</span><span class="p">])</span>
+<span class="k">elif</span> <span class="ow">not</span> <span class="n">results</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"closed"</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">results</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"skipped"</span><span class="p">]:</span>
   <span class="c1"># no sync to remedy, just exit</span>
   <span class="n">noteText</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;Function failed to complete. Reason: </span><span class="si">{}</span><span class="s2">&lt;/p&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">)</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"&lt;p&gt;Function failed to complete. Reason: </span><span class="si">{}</span><span class="s2">&lt;/p&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">noteText</span><span class="p">:</span>
   <span class="n">richText</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">)</span>
@@ -849,29 +849,29 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Input Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python 2 compatibility for CP4S 1.6</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">mk_str</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">quotes</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;&quot;&#39;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mk_str</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">quotes</span><span class="o">=</span><span class="sa">u</span><span class="s1">'"'</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;null&quot;</span>
+        <span class="k">return</span> <span class="s2">"null"</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">esc_value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+        <span class="n">esc_value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">'"'</span><span class="p">,</span> <span class="sa">u</span><span class="s1">'</span><span class="se">\\</span><span class="s1">"'</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">quotes</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{0}{1}{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">quotes</span><span class="p">,</span> <span class="n">esc_value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="sa">u</span><span class="s1">'</span><span class="si">{0}{1}{0}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">quotes</span><span class="p">,</span> <span class="n">esc_value</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">esc_value</span>
 
 
-<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;{{ &quot;ApplyTemplate&quot;: </span><span class="si">{}</span><span class="s2">,</span>
-<span class="s2">  &quot;First_Name&quot;: </span><span class="si">{}</span><span class="s2">,</span>
-<span class="s2">  &quot;Last_Name&quot;: </span><span class="si">{}</span><span class="s2">,</span>
-<span class="s2">  &quot;Impact&quot;: </span><span class="si">{}</span><span class="s2">,</span>
-<span class="s2">  &quot;Urgency&quot;: </span><span class="si">{}</span><span class="s2">,</span>
-<span class="s2">  &quot;Service_Type&quot;: </span><span class="si">{}</span><span class="s2">,</span>
-<span class="s2">  &quot;Status&quot;: </span><span class="si">{}</span><span class="s2">,</span>
-<span class="s2">  &quot;Reported Source&quot;: </span><span class="si">{}</span><span class="s2">,</span>
-<span class="s2">  &quot;Description&quot;: </span><span class="si">{}</span><span class="s2">,</span>
-<span class="s2">  &quot;Assigned Support Organization&quot;: </span><span class="si">{}</span><span class="s2">,</span>
-<span class="s2">  &quot;additional_data&quot;: </span><span class="si">{}</span>
-<span class="s2">}}&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mk_str</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">remedy_template</span><span class="p">),</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""{{ "ApplyTemplate": </span><span class="si">{}</span><span class="s2">,</span>
+<span class="s2">  "First_Name": </span><span class="si">{}</span><span class="s2">,</span>
+<span class="s2">  "Last_Name": </span><span class="si">{}</span><span class="s2">,</span>
+<span class="s2">  "Impact": </span><span class="si">{}</span><span class="s2">,</span>
+<span class="s2">  "Urgency": </span><span class="si">{}</span><span class="s2">,</span>
+<span class="s2">  "Service_Type": </span><span class="si">{}</span><span class="s2">,</span>
+<span class="s2">  "Status": </span><span class="si">{}</span><span class="s2">,</span>
+<span class="s2">  "Reported Source": </span><span class="si">{}</span><span class="s2">,</span>
+<span class="s2">  "Description": </span><span class="si">{}</span><span class="s2">,</span>
+<span class="s2">  "Assigned Support Organization": </span><span class="si">{}</span><span class="s2">,</span>
+<span class="s2">  "additional_data": </span><span class="si">{}</span>
+<span class="s2">}}"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mk_str</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">remedy_template</span><span class="p">),</span>
   <span class="n">mk_str</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">remedy_first_name</span><span class="p">),</span>
   <span class="n">mk_str</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">remedy_last_name</span><span class="p">),</span>
   <span class="n">mk_str</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">remedy_impact</span><span class="p">),</span>
@@ -881,7 +881,7 @@ Additional package dependencies may exist for each of these packages:</p>
   <span class="n">mk_str</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">remedy_reported_source</span><span class="p">),</span>
   <span class="n">mk_str</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">remedy_note</span><span class="p">),</span>
   <span class="n">mk_str</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">remedy_support_group</span><span class="p">),</span>
-  <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">remedy_additional_data</span><span class="o">.</span><span class="n">content</span> <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">remedy_additional_data</span><span class="o">.</span><span class="n">content</span> <span class="k">else</span> <span class="s2">&quot;null&quot;</span>
+  <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">remedy_additional_data</span><span class="o">.</span><span class="n">content</span> <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">remedy_additional_data</span><span class="o">.</span><span class="n">content</span> <span class="k">else</span> <span class="s2">"null"</span>
 <span class="p">)</span>
 
 <span class="c1"># set inputs</span>
@@ -896,18 +896,18 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">noteText</span> <span class="o">=</span> <span class="s2">&quot;&lt;h5&gt; Remedy Create Incident&lt;/h5&gt;&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">noteText</span> <span class="o">=</span> <span class="s2">"&lt;h5&gt; Remedy Create Incident&lt;/h5&gt;"</span>
 
 <span class="n">task_id</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">id</span>
 <span class="n">task_name</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">name</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]:</span>
-  <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;Successfully sent task </span><span class="si">{0}</span><span class="s2"> </span><span class="se">\&quot;</span><span class="si">{1}</span><span class="se">\&quot;</span><span class="s2"> to Remedy as Incident Number </span><span class="si">{2}</span><span class="s2"> (UI name) and Request ID </span><span class="si">{3}</span><span class="s2"> (API name).&lt;/p&gt;&quot;</span>\
-  <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">task_name</span><span class="p">,</span> \
-  <span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;values&quot;</span><span class="p">][</span><span class="s2">&quot;Incident Number&quot;</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">][</span><span class="s2">&quot;values&quot;</span><span class="p">][</span><span class="s2">&quot;Request ID&quot;</span><span class="p">])</span>
+<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">"success"</span><span class="p">]:</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"&lt;p&gt;Successfully sent task </span><span class="si">{0}</span><span class="s2"> </span><span class="se">\"</span><span class="si">{1}</span><span class="se">\"</span><span class="s2"> to Remedy as Incident Number </span><span class="si">{2}</span><span class="s2"> (UI name) and Request ID </span><span class="si">{3}</span><span class="s2"> (API name).&lt;/p&gt;"</span>\
+  <span class="s2">""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">task_name</span><span class="p">,</span> \
+  <span class="n">results</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"values"</span><span class="p">][</span><span class="s2">"Incident Number"</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"values"</span><span class="p">][</span><span class="s2">"Request ID"</span><span class="p">])</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;Unable to send task </span><span class="si">{0}</span><span class="s2"> </span><span class="se">\&quot;</span><span class="si">{1}</span><span class="se">\&quot;</span><span class="s2"> to Remedy&lt;/p&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">task_name</span><span class="p">)</span>
-  <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;Ensure the activity fields and payload you provide meet the minimum requirements in your system for incident creation and routing.&quot;</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"&lt;p&gt;Unable to send task </span><span class="si">{0}</span><span class="s2"> </span><span class="se">\"</span><span class="si">{1}</span><span class="se">\"</span><span class="s2"> to Remedy&lt;/p&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">task_id</span><span class="p">,</span> <span class="n">task_name</span><span class="p">)</span>
+  <span class="n">noteText</span> <span class="o">+=</span> <span class="s2">"&lt;p&gt;Ensure the activity fields and payload you provide meet the minimum requirements in your system for incident creation and routing."</span>
 
 <span class="n">richText</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">noteText</span><span class="p">)</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">richText</span><span class="p">)</span>

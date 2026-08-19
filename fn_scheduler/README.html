@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -747,19 +747,19 @@ Additional package dependencies may exist for each of these packages:</p>
 </pre></div>
 </div>
 <p>When creating a rule to schedule for a given datatable, the pre-processing script will look like this (assuming you’re using rule activity fields)</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_type</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_type&quot;</span><span class="p">,</span> <span class="s2">&quot;cron&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_type</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_type"</span><span class="p">,</span> <span class="s2">"cron"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_type&quot;</span><span class="p">,</span> <span class="s2">&quot;cron&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;date&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_type"</span><span class="p">,</span> <span class="s2">"cron"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"date"</span><span class="p">:</span>
   <span class="c1"># date format converted to use dashes</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_type_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_type_value&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_type_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_type_value"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"/"</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_type_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_type_value&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_type_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_type_value"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
 
-<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_rule_name</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_rule_name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_rule_parameters</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_rule_parameters&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_label_prefix</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_label_prefix&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_rule_name</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_rule_name"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_rule_parameters</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_rule_parameters"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_label_prefix</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_label_prefix"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_is_playbook</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_is_playbook&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_is_playbook</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_is_playbook"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -861,28 +861,28 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-  <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;args&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2219</span><span class="p">,</span> <span class="c1"># incident_id</span>
+  <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+  <span class="s1">'content'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'args'</span><span class="p">:</span> <span class="p">(</span><span class="mi">2219</span><span class="p">,</span> <span class="c1"># incident_id</span>
     <span class="kc">None</span><span class="p">,</span> <span class="c1"># object_id</span>
     <span class="kc">None</span><span class="p">,</span> <span class="c1"># row_id</span>
-    <span class="sa">u</span><span class="s1">&#39;rule3&#39;</span><span class="p">,</span> <span class="c1"># Rule to execute</span>
-    <span class="sa">u</span><span class="s1">&#39;Delete rule3&#39;</span><span class="p">,</span> <span class="c1"># Scheduled rule Label</span>
+    <span class="sa">u</span><span class="s1">'rule3'</span><span class="p">,</span> <span class="c1"># Rule to execute</span>
+    <span class="sa">u</span><span class="s1">'Delete rule3'</span><span class="p">,</span> <span class="c1"># Scheduled rule Label</span>
     <span class="mi">49</span><span class="p">,</span> <span class="c1"># rule_id</span>
     <span class="mi">0</span><span class="p">,</span> <span class="c1"># object_type_id</span>
     <span class="kc">None</span><span class="p">,</span>
     <span class="kc">None</span><span class="p">),</span>
-    <span class="s1">&#39;executor&#39;</span><span class="p">:</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;max_instances&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s1">&#39;func&#39;</span><span class="p">:</span> <span class="s1">&#39;fn_scheduler.components.create_a_scheduled_rule:triggered_job&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;rule3&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;next_run_time&#39;</span><span class="p">:</span> <span class="s1">&#39;Oct 03 2019 12:35PM&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;triggered_job&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;misfire_grace_time&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s1">&#39;trigger&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="s1">&#39;coalesce&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s1">&#39;kwargs&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'executor'</span><span class="p">:</span> <span class="s1">'default'</span><span class="p">,</span>
+    <span class="s1">'max_instances'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">'func'</span><span class="p">:</span> <span class="s1">'fn_scheduler.components.create_a_scheduled_rule:triggered_job'</span><span class="p">,</span>
+    <span class="s1">'id'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'rule3'</span><span class="p">,</span>
+    <span class="s1">'next_run_time'</span><span class="p">:</span> <span class="s1">'Oct 03 2019 12:35PM'</span><span class="p">,</span>
+    <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'triggered_job'</span><span class="p">,</span>
+    <span class="s1">'misfire_grace_time'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">'trigger'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">'coalesce'</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">'version'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">'kwargs'</span><span class="p">:</span> <span class="p">{</span>
 
     <span class="p">}</span>
   <span class="p">}</span>
@@ -893,20 +893,20 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 </details>
 <details><summary>Example Script: Function Pre-Process</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_type</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_type&quot;</span><span class="p">,</span> <span class="s2">&quot;cron&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_type</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_type"</span><span class="p">,</span> <span class="s2">"cron"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_type&quot;</span><span class="p">,</span> <span class="s2">&quot;cron&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;date&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_type"</span><span class="p">,</span> <span class="s2">"cron"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"date"</span><span class="p">:</span>
   <span class="c1"># date format converted to use dashes</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_type_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_type_value&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_type_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_type_value"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"/"</span><span class="p">,</span> <span class="s2">"-"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_type_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_type_value&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_type_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_type_value"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
 
-<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_rule_name</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_rule_name&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_rule_parameters</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_rule_parameters&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_label_prefix</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_label_prefix&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_rule_name</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_rule_name"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_rule_parameters</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_rule_parameters"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_label_prefix</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_label_prefix"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_is_playbook</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_is_playbook&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_rule_type</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_rule_type&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_is_playbook</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_is_playbook"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_rule_type</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_rule_type"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -917,30 +917,30 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">output_scheduled_rule_create</span>
-<span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span> <span class="c1"># &#39;2023-03-24 11:28:34&#39;</span>
+<span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S"</span><span class="p">)</span> <span class="c1"># '2023-03-24 11:28:34'</span>
 <span class="n">TYPE_LOOKUP</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;Incident&#39;</span><span class="p">,</span>
-  <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;Task&quot;</span><span class="p">,</span>
-  <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;Artifact&quot;</span><span class="p">,</span>
-  <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;Attachment&quot;</span><span class="p">}</span>
+  <span class="mi">0</span><span class="p">:</span> <span class="s1">'Incident'</span><span class="p">,</span>
+  <span class="mi">1</span><span class="p">:</span> <span class="s2">"Task"</span><span class="p">,</span>
+  <span class="mi">4</span><span class="p">:</span> <span class="s2">"Artifact"</span><span class="p">,</span>
+  <span class="mi">5</span><span class="p">:</span> <span class="s2">"Attachment"</span><span class="p">}</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">job</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
-  <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;scheduler_rules&quot;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;reported_on&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">now</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;schedule_label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;schedule_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;incident_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;schedule&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Active&#39;</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;next_run_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;next_run_time&#39;</span><span class="p">]</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;rule_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TYPE_LOOKUP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">][</span><span class="mi">6</span><span class="p">],</span> <span class="s2">&quot;Datatable&quot;</span><span class="p">)</span>
-  <span class="k">if</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">][</span><span class="mi">8</span><span class="p">]:</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;rule&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&lt;a href=&#39;#playbooks/designer/</span><span class="si">{}</span><span class="s2">&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">][</span><span class="mi">5</span><span class="p">],</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">job</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
+  <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"scheduler_rules"</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'reported_on'</span><span class="p">]</span> <span class="o">=</span> <span class="n">now</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'schedule_label'</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'schedule_type'</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">'type'</span><span class="p">]</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'incident_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">'args'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'schedule'</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">'value'</span><span class="p">]</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Active'</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'next_run_time'</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">'next_run_time'</span><span class="p">]</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'rule_type'</span><span class="p">]</span> <span class="o">=</span> <span class="n">TYPE_LOOKUP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s1">'args'</span><span class="p">][</span><span class="mi">6</span><span class="p">],</span> <span class="s2">"Datatable"</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">job</span><span class="p">[</span><span class="s1">'args'</span><span class="p">][</span><span class="mi">8</span><span class="p">]:</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'rule'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"&lt;a href='#playbooks/designer/</span><span class="si">{}</span><span class="s2">'&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s1">'args'</span><span class="p">][</span><span class="mi">5</span><span class="p">],</span> <span class="n">job</span><span class="p">[</span><span class="s1">'args'</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;rule&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&lt;a href=&#39;#customize?tab=actions&amp;id=</span><span class="si">{}</span><span class="s2">&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">][</span><span class="mi">5</span><span class="p">],</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'rule'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"&lt;a href='#customize?tab=actions&amp;id=</span><span class="si">{}</span><span class="s2">'&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s1">'args'</span><span class="p">][</span><span class="mi">5</span><span class="p">],</span> <span class="n">job</span><span class="p">[</span><span class="s1">'args'</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Schedule a Rule/Playbook failed: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Schedule a Rule/Playbook failed: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">)))</span>
 </pre></div>
 </div>
 </p>
@@ -997,28 +997,28 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-  <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;args&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2219</span><span class="p">,</span> <span class="c1"># incident_id</span>
+  <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+  <span class="s1">'content'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'args'</span><span class="p">:</span> <span class="p">(</span><span class="mi">2219</span><span class="p">,</span> <span class="c1"># incident_id</span>
     <span class="kc">None</span><span class="p">,</span> <span class="c1"># object_id</span>
     <span class="kc">None</span><span class="p">,</span> <span class="c1"># row_id</span>
-    <span class="sa">u</span><span class="s1">&#39;rule3&#39;</span><span class="p">,</span> <span class="c1"># Rule to execute</span>
-    <span class="sa">u</span><span class="s1">&#39;Delete rule3&#39;</span><span class="p">,</span> <span class="c1"># Scheduled rule Label</span>
+    <span class="sa">u</span><span class="s1">'rule3'</span><span class="p">,</span> <span class="c1"># Rule to execute</span>
+    <span class="sa">u</span><span class="s1">'Delete rule3'</span><span class="p">,</span> <span class="c1"># Scheduled rule Label</span>
     <span class="mi">49</span><span class="p">,</span> <span class="c1"># rule_id</span>
     <span class="mi">0</span><span class="p">,</span> <span class="c1"># object_type_id</span>
     <span class="kc">None</span><span class="p">,</span>
     <span class="kc">None</span><span class="p">),</span>
-    <span class="s1">&#39;executor&#39;</span><span class="p">:</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;max_instances&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s1">&#39;func&#39;</span><span class="p">:</span> <span class="s1">&#39;fn_scheduler.components.create_a_scheduled_rule:triggered_job&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;rule3&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;next_run_time&#39;</span><span class="p">:</span> <span class="s1">&#39;Oct 03 2019 12:35PM&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;triggered_job&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;misfire_grace_time&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s1">&#39;trigger&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="s1">&#39;coalesce&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s1">&#39;kwargs&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'executor'</span><span class="p">:</span> <span class="s1">'default'</span><span class="p">,</span>
+    <span class="s1">'max_instances'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">'func'</span><span class="p">:</span> <span class="s1">'fn_scheduler.components.create_a_scheduled_rule:triggered_job'</span><span class="p">,</span>
+    <span class="s1">'id'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'rule3'</span><span class="p">,</span>
+    <span class="s1">'next_run_time'</span><span class="p">:</span> <span class="s1">'Oct 03 2019 12:35PM'</span><span class="p">,</span>
+    <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'triggered_job'</span><span class="p">,</span>
+    <span class="s1">'misfire_grace_time'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">'trigger'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="s1">'coalesce'</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">'version'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">'kwargs'</span><span class="p">:</span> <span class="p">{</span>
 
     <span class="p">}</span>
   <span class="p">}</span>
@@ -1029,10 +1029,10 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 </details>
 <details><summary>Example Script: Function Pre-Process</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_label</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;schedule_label&#39;</span><span class="p">]</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">modify_scheduler_type</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;modify_schedule_type&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">modify_scheduler_type_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;modify_schedule_type_value&quot;</span><span class="p">,</span> <span class="s2">&quot;cron&quot;</span><span class="p">)</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_rule_parameters</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;schedule_rule_parameters&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_label</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'schedule_label'</span><span class="p">]</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">modify_scheduler_type</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"modify_schedule_type"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">modify_scheduler_type_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"modify_schedule_type_value"</span><span class="p">,</span> <span class="s2">"cron"</span><span class="p">)</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_rule_parameters</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"schedule_rule_parameters"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 </pre></div>
 </div>
@@ -1043,17 +1043,17 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">output_scheduled_rule_modify</span>
-<span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span> <span class="c1"># &#39;2023-03-24 11:28:34&#39;</span>
+<span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S"</span><span class="p">)</span> <span class="c1"># '2023-03-24 11:28:34'</span>
 
-<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Modify Scheduled Rule/Playbook failed: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;reason&quot;</span><span class="p">)))</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Modify Scheduled Rule/Playbook failed: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"reason"</span><span class="p">)))</span>
 
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">job</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;reported_on&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">now</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;schedule_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;schedule&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">)</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Modify Scheduled Rule/Playbook succeeded for: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)))</span>
+  <span class="n">job</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'reported_on'</span><span class="p">]</span> <span class="o">=</span> <span class="n">now</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'schedule_type'</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'type'</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'schedule'</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'value'</span><span class="p">)</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Modify Scheduled Rule/Playbook succeeded for: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'id'</span><span class="p">)))</span>
 
 </pre></div>
 </div>
@@ -1092,21 +1092,21 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span>
-    <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="s1">'content'</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s1">&#39;args&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2219</span><span class="p">,</span> <span class="c1"># incident_id</span>
+      <span class="s1">'args'</span><span class="p">:</span> <span class="p">(</span><span class="mi">2219</span><span class="p">,</span> <span class="c1"># incident_id</span>
       <span class="kc">None</span><span class="p">,</span> <span class="c1"># object_id</span>
       <span class="kc">None</span><span class="p">,</span> <span class="c1"># row_id</span>
-      <span class="sa">u</span><span class="s1">&#39;rule3&#39;</span><span class="p">,</span> <span class="c1"># scheduled rule</span>
-      <span class="sa">u</span><span class="s1">&#39;Delete rule3&#39;</span><span class="p">,</span> <span class="c1"># schedule rule label</span>
+      <span class="sa">u</span><span class="s1">'rule3'</span><span class="p">,</span> <span class="c1"># scheduled rule</span>
+      <span class="sa">u</span><span class="s1">'Delete rule3'</span><span class="p">,</span> <span class="c1"># schedule rule label</span>
       <span class="mi">49</span><span class="p">,</span> <span class="c1"># rule_id</span>
       <span class="mi">0</span><span class="p">,</span> <span class="c1"># object_type_id</span>
       <span class="kc">None</span><span class="p">,</span>
       <span class="kc">None</span><span class="p">),</span>
-      <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;date&#39;</span><span class="p">,</span> <span class="c1"># schedule rule type</span>
-      <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;rule3&#39;</span><span class="p">,</span> <span class="c1"># schedule rule label</span>
-      <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;Oct 03 2019 12:35PM&#39;</span> <span class="c1"># Schedule</span>
+      <span class="s1">'type'</span><span class="p">:</span> <span class="s1">'date'</span><span class="p">,</span> <span class="c1"># schedule rule type</span>
+      <span class="s1">'id'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'rule3'</span><span class="p">,</span> <span class="c1"># schedule rule label</span>
+      <span class="s1">'value'</span><span class="p">:</span> <span class="s1">'Oct 03 2019 12:35PM'</span> <span class="c1"># Schedule</span>
     <span class="p">}</span>
   <span class="p">],</span>
 <span class="p">}</span>
@@ -1116,7 +1116,7 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 </details>
 <details><summary>Example Script: Function Pre-Process</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">incidents_returned</span> <span class="o">==</span> <span class="s2">&quot;All&quot;</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">incidents_returned</span> <span class="o">==</span> <span class="s2">"All"</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
@@ -1129,35 +1129,35 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">output_scheduled_rule_list</span>
-<span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span> <span class="c1"># &#39;2023-03-24 11:28:34&#39;</span>
-<span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S"</span><span class="p">)</span> <span class="c1"># '2023-03-24 11:28:34'</span>
+<span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2">"</span><span class="p">)</span>
 <span class="n">TYPE_LOOKUP</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;Incident&#39;</span><span class="p">,</span>
-  <span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;Task&quot;</span><span class="p">,</span>
-  <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;Artifact&quot;</span><span class="p">,</span>
-  <span class="mi">5</span><span class="p">:</span> <span class="s2">&quot;Attachment&quot;</span><span class="p">}</span>
+  <span class="mi">0</span><span class="p">:</span> <span class="s1">'Incident'</span><span class="p">,</span>
+  <span class="mi">1</span><span class="p">:</span> <span class="s2">"Task"</span><span class="p">,</span>
+  <span class="mi">4</span><span class="p">:</span> <span class="s2">"Artifact"</span><span class="p">,</span>
+  <span class="mi">5</span><span class="p">:</span> <span class="s2">"Attachment"</span><span class="p">}</span>
 
-<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]:</span>
-  <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;scheduler_rules&quot;</span><span class="p">)</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;reported_on&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">date</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;schedule_label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;-- no scheduled rules --&quot;</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="p">[</span><span class="s1">'content'</span><span class="p">]:</span>
+  <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"scheduler_rules"</span><span class="p">)</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'reported_on'</span><span class="p">]</span> <span class="o">=</span> <span class="n">date</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'schedule_label'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"-- no scheduled rules --"</span>
 
 <span class="k">else</span><span class="p">:</span>
-  <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]:</span>
-    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;scheduler_rules&quot;</span><span class="p">)</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;schedule_label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;schedule_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;incident_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;schedule&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;reported_on&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">now</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Active&#39;</span> <span class="k">if</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;next_run_time&#39;</span><span class="p">]</span> <span class="k">else</span> <span class="s1">&#39;Paused&#39;</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;next_run_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;next_run_time&#39;</span><span class="p">]</span>
-    <span class="n">row</span><span class="p">[</span><span class="s1">&#39;rule_type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TYPE_LOOKUP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">][</span><span class="mi">6</span><span class="p">],</span> <span class="s2">&quot;Datatable&quot;</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">job</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s1">'content'</span><span class="p">]:</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"scheduler_rules"</span><span class="p">)</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'schedule_label'</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'schedule_type'</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">'type'</span><span class="p">]</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'incident_id'</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">'args'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'schedule'</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">'value'</span><span class="p">]</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'reported_on'</span><span class="p">]</span> <span class="o">=</span> <span class="n">now</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Active'</span> <span class="k">if</span> <span class="n">job</span><span class="p">[</span><span class="s1">'next_run_time'</span><span class="p">]</span> <span class="k">else</span> <span class="s1">'Paused'</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'next_run_time'</span><span class="p">]</span> <span class="o">=</span> <span class="n">job</span><span class="p">[</span><span class="s1">'next_run_time'</span><span class="p">]</span>
+    <span class="n">row</span><span class="p">[</span><span class="s1">'rule_type'</span><span class="p">]</span> <span class="o">=</span> <span class="n">TYPE_LOOKUP</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s1">'args'</span><span class="p">][</span><span class="mi">6</span><span class="p">],</span> <span class="s2">"Datatable"</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">][</span><span class="mi">8</span><span class="p">]:</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;rule&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&lt;a href=&#39;#playbooks/designer/</span><span class="si">{}</span><span class="s2">&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">][</span><span class="mi">5</span><span class="p">],</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">job</span><span class="p">[</span><span class="s1">'args'</span><span class="p">][</span><span class="mi">8</span><span class="p">]:</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'rule'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"&lt;a href='#playbooks/designer/</span><span class="si">{}</span><span class="s2">'&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s1">'args'</span><span class="p">][</span><span class="mi">5</span><span class="p">],</span> <span class="n">job</span><span class="p">[</span><span class="s1">'args'</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
-      <span class="n">row</span><span class="p">[</span><span class="s1">&#39;rule&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&lt;a href=&#39;#customize?tab=actions&amp;id=</span><span class="si">{}</span><span class="s2">&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">][</span><span class="mi">5</span><span class="p">],</span> <span class="n">job</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
+      <span class="n">row</span><span class="p">[</span><span class="s1">'rule'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"&lt;a href='#customize?tab=actions&amp;id=</span><span class="si">{}</span><span class="s2">'&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s1">'args'</span><span class="p">][</span><span class="mi">5</span><span class="p">],</span> <span class="n">job</span><span class="p">[</span><span class="s1">'args'</span><span class="p">][</span><span class="mi">4</span><span class="p">])</span>
 
 </pre></div>
 </div>
@@ -1196,37 +1196,37 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="sa">u</span><span class="s1">&#39;scheduler_label&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;2225&#39;</span>
+  <span class="s1">'inputs'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="sa">u</span><span class="s1">'scheduler_label'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'2225'</span>
   <span class="p">},</span>
-  <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="s1">&#39;fn-scheduler&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2019-10-08 15:38:04&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;package_version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;marks-mbp.cambridge.ibm.com&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;execution_time_ms&#39;</span><span class="p">:</span> <span class="mi">21</span>
+  <span class="s1">'metrics'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'package'</span><span class="p">:</span> <span class="s1">'fn-scheduler'</span><span class="p">,</span>
+    <span class="s1">'timestamp'</span><span class="p">:</span> <span class="s1">'2019-10-08 15:38:04'</span><span class="p">,</span>
+    <span class="s1">'package_version'</span><span class="p">:</span> <span class="s1">'1.0.0'</span><span class="p">,</span>
+    <span class="s1">'host'</span><span class="p">:</span> <span class="s1">'marks-mbp.cambridge.ibm.com'</span><span class="p">,</span>
+    <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+    <span class="s1">'execution_time_ms'</span><span class="p">:</span> <span class="mi">21</span>
   <span class="p">},</span>
-  <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-  <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;args&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2225</span><span class="p">,</span>
+  <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+  <span class="s1">'content'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'args'</span><span class="p">:</span> <span class="p">(</span><span class="mi">2225</span><span class="p">,</span>
     <span class="kc">None</span><span class="p">,</span>
     <span class="kc">None</span><span class="p">,</span>
-    <span class="sa">u</span><span class="s1">&#39;2225&#39;</span><span class="p">,</span>
-    <span class="sa">u</span><span class="s1">&#39;Demo Scheduler&#39;</span><span class="p">,</span>
+    <span class="sa">u</span><span class="s1">'2225'</span><span class="p">,</span>
+    <span class="sa">u</span><span class="s1">'Demo Scheduler'</span><span class="p">,</span>
     <span class="mi">39</span><span class="p">,</span>
     <span class="mi">0</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="sa">u</span><span class="s1">&#39;scheduler_demo&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;yes&#39;</span>
+      <span class="sa">u</span><span class="s1">'scheduler_demo'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'yes'</span>
     <span class="p">},</span>
     <span class="kc">None</span><span class="p">),</span>
-    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;interval&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;2225&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;2m&#39;</span>
+    <span class="s1">'type'</span><span class="p">:</span> <span class="s1">'interval'</span><span class="p">,</span>
+    <span class="s1">'id'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'2225'</span><span class="p">,</span>
+    <span class="s1">'value'</span><span class="p">:</span> <span class="s1">'2m'</span>
   <span class="p">},</span>
-  <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="s1">&#39;{&quot;args&quot;: [2225, null, null, &quot;2225&quot;, &quot;Demo Scheduler&quot;, 39, 0, {&quot;scheduler_demo&quot;: &quot;yes&quot;}, null], &quot;type&quot;: &quot;interval&quot;, &quot;id&quot;: &quot;2225&quot;, &quot;value&quot;: &quot;2m&quot;}&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span>
+  <span class="s1">'raw'</span><span class="p">:</span> <span class="s1">'{"args": [2225, null, null, "2225", "Demo Scheduler", 39, 0, {"scheduler_demo": "yes"}, null], "type": "interval", "id": "2225", "value": "2m"}'</span><span class="p">,</span>
+  <span class="s1">'reason'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1243,10 +1243,10 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">output_scheduled_rule_pause</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Paused&#39;</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Paused'</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; (Error)&quot;</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="o">+</span> <span class="s2">" (Error)"</span>
 
 </pre></div>
 </div>
@@ -1284,8 +1284,8 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span>
-    <span class="s1">&#39;content&#39;</span><span class="p">:</span>  <span class="kc">None</span>
+    <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="s1">'content'</span><span class="p">:</span>  <span class="kc">None</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1302,10 +1302,10 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">output_scheduled_rule_remove</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Deleted&quot;</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Deleted"</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; (Error)&quot;</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="o">+</span> <span class="s2">" (Error)"</span>
 </pre></div>
 </div>
 </p>
@@ -1342,37 +1342,37 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="sa">u</span><span class="s1">&#39;scheduler_label&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;2225&#39;</span>
+  <span class="s1">'inputs'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="sa">u</span><span class="s1">'scheduler_label'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'2225'</span>
   <span class="p">},</span>
-  <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="s1">&#39;fn-scheduler&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2019-10-08 15:38:04&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;package_version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;marks-mbp.cambridge.ibm.com&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;execution_time_ms&#39;</span><span class="p">:</span> <span class="mi">21</span>
+  <span class="s1">'metrics'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'package'</span><span class="p">:</span> <span class="s1">'fn-scheduler'</span><span class="p">,</span>
+    <span class="s1">'timestamp'</span><span class="p">:</span> <span class="s1">'2019-10-08 15:38:04'</span><span class="p">,</span>
+    <span class="s1">'package_version'</span><span class="p">:</span> <span class="s1">'1.0.0'</span><span class="p">,</span>
+    <span class="s1">'host'</span><span class="p">:</span> <span class="s1">'marks-mbp.cambridge.ibm.com'</span><span class="p">,</span>
+    <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">,</span>
+    <span class="s1">'execution_time_ms'</span><span class="p">:</span> <span class="mi">21</span>
   <span class="p">},</span>
-  <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-  <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s1">&#39;args&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">2225</span><span class="p">,</span>
+  <span class="s1">'success'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+  <span class="s1">'content'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">'args'</span><span class="p">:</span> <span class="p">(</span><span class="mi">2225</span><span class="p">,</span>
     <span class="kc">None</span><span class="p">,</span>
     <span class="kc">None</span><span class="p">,</span>
-    <span class="sa">u</span><span class="s1">&#39;2225&#39;</span><span class="p">,</span>
-    <span class="sa">u</span><span class="s1">&#39;Demo Scheduler&#39;</span><span class="p">,</span>
+    <span class="sa">u</span><span class="s1">'2225'</span><span class="p">,</span>
+    <span class="sa">u</span><span class="s1">'Demo Scheduler'</span><span class="p">,</span>
     <span class="mi">39</span><span class="p">,</span>
     <span class="mi">0</span><span class="p">,</span>
     <span class="p">{</span>
-      <span class="sa">u</span><span class="s1">&#39;scheduler_demo&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;yes&#39;</span>
+      <span class="sa">u</span><span class="s1">'scheduler_demo'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'yes'</span>
     <span class="p">},</span>
     <span class="kc">None</span><span class="p">),</span>
-    <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;interval&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="sa">u</span><span class="s1">&#39;2225&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;2m&#39;</span>
+    <span class="s1">'type'</span><span class="p">:</span> <span class="s1">'interval'</span><span class="p">,</span>
+    <span class="s1">'id'</span><span class="p">:</span> <span class="sa">u</span><span class="s1">'2225'</span><span class="p">,</span>
+    <span class="s1">'value'</span><span class="p">:</span> <span class="s1">'2m'</span>
   <span class="p">},</span>
-  <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="s1">&#39;{&quot;args&quot;: [2225, null, null, &quot;2225&quot;, &quot;Demo Scheduler&quot;, 39, 0, {&quot;scheduler_demo&quot;: &quot;yes&quot;}, null], &quot;type&quot;: &quot;interval&quot;, &quot;id&quot;: &quot;2225&quot;, &quot;value&quot;: &quot;2m&quot;}&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span>
+  <span class="s1">'raw'</span><span class="p">:</span> <span class="s1">'{"args": [2225, null, null, "2225", "Demo Scheduler", 39, 0, {"scheduler_demo": "yes"}, null], "type": "interval", "id": "2225", "value": "2m"}'</span><span class="p">,</span>
+  <span class="s1">'reason'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1389,10 +1389,10 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">output_scheduled_rule_resume</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">):</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Active&#39;</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">):</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'Active'</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; (Error)&quot;</span>
+  <span class="n">row</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'status'</span><span class="p">]</span> <span class="o">+</span> <span class="s2">" (Error)"</span>
 </pre></div>
 </div>
 </p>
@@ -1429,22 +1429,22 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;scheduler_label&quot;</span><span class="p">:</span> <span class="s2">&quot;rulex1-5713&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"scheduler_label"</span><span class="p">:</span> <span class="s2">"rulex1-5713"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-scheduler&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1609</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-04-28 17:39:27&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-scheduler"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"2.0.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1609</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-04-28 17:39:27"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1453,7 +1453,7 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 </details>
 <details><summary>Example Script: Function Pre-Process</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_label</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;schedule_label&#39;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">scheduler_label</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">'schedule_label'</span><span class="p">]</span>
 </pre></div>
 </div>
 </p>
@@ -1463,9 +1463,9 @@ needs to be scheduled from the same intended artifact, attachment, task, note, e
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">output_scheduled_rule_run</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">results</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">&quot;Run Scheduled Job Now failed for job </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;schedule_label&#39;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
+  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="s2">"Run Scheduled Job Now failed for job </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">'schedule_label'</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;Run Scheduled Job Now succeeded for job: </span><span class="si">{}</span><span class="s2">, Rule/Playbook: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;schedule_label&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;rule&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+  <span class="n">msg</span> <span class="o">=</span> <span class="s2">"Run Scheduled Job Now succeeded for job: </span><span class="si">{}</span><span class="s2">, Rule/Playbook: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">'schedule_label'</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">'rule'</span><span class="p">]</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
 </pre></div>
 </div>

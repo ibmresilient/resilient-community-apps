@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -663,12 +663,12 @@ Additional package dependencies may exist for each of these packages:</p>
 </div>
 <blockquote>
 <div><p><strong>NOTE:</strong> the <code class="docutils literal notranslate"><span class="pre">grpc_function</span></code> is derived from your <code class="docutils literal notranslate"><span class="pre">.proto</span></code> files like the <code class="docutils literal notranslate"><span class="pre">helloworld.proto</span></code> example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">syntax</span> <span class="o">=</span> <span class="s2">&quot;proto3&quot;</span><span class="p">;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">syntax</span> <span class="o">=</span> <span class="s2">"proto3"</span><span class="p">;</span>
 
 <span class="n">option</span> <span class="n">java_multiple_files</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
-<span class="n">option</span> <span class="n">java_package</span> <span class="o">=</span> <span class="s2">&quot;io.grpc.examples.helloworld&quot;</span><span class="p">;</span>
-<span class="n">option</span> <span class="n">java_outer_classname</span> <span class="o">=</span> <span class="s2">&quot;HelloWorldProto&quot;</span><span class="p">;</span>
-<span class="n">option</span> <span class="n">objc_class_prefix</span> <span class="o">=</span> <span class="s2">&quot;HLW&quot;</span><span class="p">;</span>
+<span class="n">option</span> <span class="n">java_package</span> <span class="o">=</span> <span class="s2">"io.grpc.examples.helloworld"</span><span class="p">;</span>
+<span class="n">option</span> <span class="n">java_outer_classname</span> <span class="o">=</span> <span class="s2">"HelloWorldProto"</span><span class="p">;</span>
+<span class="n">option</span> <span class="n">objc_class_prefix</span> <span class="o">=</span> <span class="s2">"HLW"</span><span class="p">;</span>
 
 <span class="n">package</span> <span class="n">helloworld</span><span class="p">;</span>
 
@@ -678,7 +678,7 @@ Additional package dependencies may exist for each of these packages:</p>
  <span class="n">rpc</span> <span class="n">SayHello</span> <span class="p">(</span><span class="n">HelloRequest</span><span class="p">)</span> <span class="n">returns</span> <span class="p">(</span><span class="n">HelloReply</span><span class="p">)</span> <span class="p">{}</span>
 <span class="p">}</span>
 
-<span class="o">//</span> <span class="n">The</span> <span class="n">request</span> <span class="n">message</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">user</span><span class="s1">&#39;s name.</span>
+<span class="o">//</span> <span class="n">The</span> <span class="n">request</span> <span class="n">message</span> <span class="n">containing</span> <span class="n">the</span> <span class="n">user</span><span class="s1">'s name.</span>
 <span class="n">message</span> <span class="n">HelloRequest</span> <span class="p">{</span>
  <span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
@@ -695,8 +695,8 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Outputs:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;Hello, [name]!&#39;</span><span class="p">},</span>
-    <span class="s1">&#39;channel&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost:50051</span>
+    <span class="s1">'content'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'message'</span><span class="p">:</span> <span class="s1">'Hello, [name]!'</span><span class="p">},</span>
+    <span class="s1">'channel'</span><span class="p">:</span> <span class="s1">'localhost:50051</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -705,13 +705,13 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">dict_to_json_str</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
-<span class="w">  </span><span class="sd">&quot;&quot;&quot;Function that converts a dictionary into a JSON string.</span>
+<span class="w">  </span><span class="sd">"""Function that converts a dictionary into a JSON string.</span>
 <span class="sd">     Supports types: basestring, unicode, bool, int and nested dicts.</span>
 <span class="sd">     Does not support lists.</span>
-<span class="sd">     If the value is None, it sets it to False.&quot;&quot;&quot;</span>
+<span class="sd">     If the value is None, it sets it to False."""</span>
 
-  <span class="n">json_entry</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;:</span><span class="si">{1}</span><span class="s1">&#39;</span>
-  <span class="n">json_entry_str</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">&#39;&quot;</span><span class="si">{0}</span><span class="s1">&quot;:&quot;</span><span class="si">{1}</span><span class="s1">&quot;&#39;</span>
+  <span class="n">json_entry</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">'"</span><span class="si">{0}</span><span class="s1">":</span><span class="si">{1}</span><span class="s1">'</span>
+  <span class="n">json_entry_str</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">'"</span><span class="si">{0}</span><span class="s1">":"</span><span class="si">{1}</span><span class="s1">"'</span>
   <span class="n">entries</span> <span class="o">=</span> <span class="p">[]</span>
 
   <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
@@ -722,17 +722,17 @@ Additional package dependencies may exist for each of these packages:</p>
       <span class="n">value</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
-      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s1">&#39;dict_to_json_str does not support Python Lists&#39;</span><span class="p">)</span>
+      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s1">'dict_to_json_str does not support Python Lists'</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
-      <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;&quot;&#39;</span><span class="p">,</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">u</span><span class="s1">'"'</span><span class="p">,</span> <span class="sa">u</span><span class="s1">'</span><span class="se">\\</span><span class="s1">"'</span><span class="p">)</span>
       <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry_str</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">unicode</span><span class="p">):</span>
       <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
-      <span class="n">value</span> <span class="o">=</span> <span class="s1">&#39;true&#39;</span> <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="kc">True</span> <span class="k">else</span> <span class="s1">&#39;false&#39;</span>
+      <span class="n">value</span> <span class="o">=</span> <span class="s1">'true'</span> <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="kc">True</span> <span class="k">else</span> <span class="s1">'false'</span>
       <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
 
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
@@ -742,17 +742,17 @@ Additional package dependencies may exist for each of these packages:</p>
       <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">json_entry</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">dict_to_json_str</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
 
     <span class="k">else</span><span class="p">:</span>
-      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s1">&#39;dict_to_json_str does not support this type: </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+      <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s1">'dict_to_json_str does not support this type: </span><span class="si">{0}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
 
-  <span class="k">return</span> <span class="sa">u</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> </span><span class="si">{1}</span><span class="s1"> </span><span class="si">{2}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;{&#39;</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">entries</span><span class="p">),</span> <span class="sa">u</span><span class="s1">&#39;}&#39;</span><span class="p">)</span>
+  <span class="k">return</span> <span class="sa">u</span><span class="s1">'</span><span class="si">{0}</span><span class="s1"> </span><span class="si">{1}</span><span class="s1"> </span><span class="si">{2}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="sa">u</span><span class="s1">'{'</span><span class="p">,</span> <span class="s1">','</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">entries</span><span class="p">),</span> <span class="sa">u</span><span class="s1">'}'</span><span class="p">)</span>
 
 <span class="c1"># Define Inputs assuming grpc_channel is defined in app.config</span>
 
 <span class="c1"># The gRPC Function to call</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">grpc_function</span> <span class="o">=</span> <span class="s2">&quot;helloworld:SayHello(HelloRequest)&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">grpc_function</span> <span class="o">=</span> <span class="s2">"helloworld:SayHello(HelloRequest)"</span>
 
 <span class="c1"># The gRPC Function Request Data</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">grpc_function_data</span> <span class="o">=</span> <span class="n">dict_to_json_str</span><span class="p">({</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">})</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">grpc_function_data</span> <span class="o">=</span> <span class="n">dict_to_json_str</span><span class="p">({</span><span class="s2">"name"</span><span class="p">:</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">})</span>
 </pre></div>
 </div>
 </p>
@@ -760,11 +760,11 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Post-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="n">grpc_response_data</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]</span>
-<span class="n">grpc_channel</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">&#39;channel&#39;</span><span class="p">]</span>
+<span class="n">grpc_response_data</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">'content'</span><span class="p">]</span>
+<span class="n">grpc_channel</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s1">'channel'</span><span class="p">]</span>
 
-<span class="n">rich_text</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="sa">u</span><span class="s2">&quot;&quot;&quot;A gRPC Response has been received from &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;br&gt;</span>
-<span class="s2">                                      &lt;b&gt;Response:&lt;/b&gt; </span><span class="si">{1}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">grpc_channel</span><span class="p">,</span> <span class="n">grpc_response_data</span><span class="p">))</span>
+<span class="n">rich_text</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="sa">u</span><span class="s2">"""A gRPC Response has been received from &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&lt;br&gt;</span>
+<span class="s2">                                      &lt;b&gt;Response:&lt;/b&gt; </span><span class="si">{1}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">grpc_channel</span><span class="p">,</span> <span class="n">grpc_response_data</span><span class="p">))</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">rich_text</span><span class="p">)</span>
 </pre></div>

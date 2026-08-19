@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -763,27 +763,27 @@ List any steps that are needed to configure the endpoint to use this app.
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;tactics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;has_ibm_default&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;c0dfacf7-235e-416c-9b2b-c250ef8f3919&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;last_updated&quot;</span><span class="p">:</span> <span class="mi">1607611408002</span><span class="p">,</span>
-    <span class="s2">&quot;mapping&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;Initial Access&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;ibm_default&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;TA0001&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;techniques&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;Valid Accounts&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-            <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;T1078&quot;</span>
+  <span class="s2">"tactics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"has_ibm_default"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"c0dfacf7-235e-416c-9b2b-c250ef8f3919"</span><span class="p">,</span>
+    <span class="s2">"last_updated"</span><span class="p">:</span> <span class="mi">1607611408002</span><span class="p">,</span>
+    <span class="s2">"mapping"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"Initial Access"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"confidence"</span><span class="p">:</span> <span class="s2">"high"</span><span class="p">,</span>
+        <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"ibm_default"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"TA0001"</span><span class="p">,</span>
+        <span class="s2">"techniques"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"Valid Accounts"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"confidence"</span><span class="p">:</span> <span class="s2">"high"</span><span class="p">,</span>
+            <span class="s2">"enabled"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+            <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"T1078"</span>
           <span class="p">}</span>
         <span class="p">},</span>
-        <span class="s2">&quot;user_override&quot;</span><span class="p">:</span> <span class="n">false</span>
+        <span class="s2">"user_override"</span><span class="p">:</span> <span class="n">false</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="s2">&quot;min-mitre-version&quot;</span><span class="p">:</span> <span class="mi">7</span>
+    <span class="s2">"min-mitre-version"</span><span class="p">:</span> <span class="mi">7</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -800,8 +800,8 @@ List any steps that are needed to configure the endpoint to use this app.
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tactics</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">tactics</span>
-<span class="n">mapping</span> <span class="o">=</span> <span class="n">tactics</span><span class="p">[</span><span class="s2">&quot;mapping&quot;</span><span class="p">]</span>
-<span class="n">att_tactics</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">mapping</span> <span class="o">=</span> <span class="n">tactics</span><span class="p">[</span><span class="s2">"mapping"</span><span class="p">]</span>
+<span class="n">att_tactics</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mapping</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_tactic_name</span> <span class="o">=</span> <span class="n">att_tactics</span>
 
 </pre></div>
@@ -856,100 +856,100 @@ List any steps that are needed to configure the endpoint to use this app.
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;insights&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;high_value_assets&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;high_value_users&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;insights&quot;</span><span class="p">:</span> <span class="s2">&quot;Watson has analyzed this offense and a total of three observables.  The reasoning process has not found any additional indicators that are related to this offense.  No data points were found to be linked with the offense.  One indicator was related to suspicious activity, and all indicators were active.  In particular, one IP address has been found, which is known to be suspicious or malicious.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;is_stage3_pending&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-    <span class="s2">&quot;malware_families&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;related_investigations&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"insights"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"high_value_assets"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"high_value_users"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"insights"</span><span class="p">:</span> <span class="s2">"Watson has analyzed this offense and a total of three observables.  The reasoning process has not found any additional indicators that are related to this offense.  No data points were found to be linked with the offense.  One indicator was related to suspicious activity, and all indicators were active.  In particular, one IP address has been found, which is known to be suspicious or malicious."</span><span class="p">,</span>
+    <span class="s2">"is_stage3_pending"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+    <span class="s2">"malware_families"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"related_investigations"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;analysis_time&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;concern_score&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s2">&quot;is_search&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Investigations&quot;</span>
+        <span class="s2">"analysis_time"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"concern_score"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"is_search"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"priority"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"source"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Investigations"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;risky_users&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;stage3_insights&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;start_time&quot;</span><span class="p">:</span> <span class="mi">1659629011957</span><span class="p">,</span>
-    <span class="s2">&quot;stop_time&quot;</span><span class="p">:</span> <span class="mi">1659636230480</span><span class="p">,</span>
-    <span class="s2">&quot;tactics&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"risky_users"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"stage3_insights"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="s2">"start_time"</span><span class="p">:</span> <span class="mi">1659629011957</span><span class="p">,</span>
+    <span class="s2">"stop_time"</span><span class="p">:</span> <span class="mi">1659636230480</span><span class="p">,</span>
+    <span class="s2">"tactics"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
-        <span class="s2">&quot;data_sources&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;xfe&quot;</span>
+        <span class="s2">"confidence"</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+        <span class="s2">"data_sources"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"xfe"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;event_count&quot;</span><span class="p">:</span> <span class="mi">206</span><span class="p">,</span>
-        <span class="s2">&quot;flow_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;TA0011&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;nodes&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"event_count"</span><span class="p">:</span> <span class="mi">206</span><span class="p">,</span>
+        <span class="s2">"flow_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"TA0011"</span><span class="p">,</span>
+        <span class="s2">"nodes"</span><span class="p">:</span> <span class="p">[</span>
           <span class="p">{</span>
-            <span class="s2">&quot;is_internal&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-            <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;89.223.26.52&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;IpAddress&quot;</span>
+            <span class="s2">"is_internal"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+            <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"89.223.26.52"</span><span class="p">,</span>
+            <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"IpAddress"</span>
           <span class="p">}</span>
         <span class="p">],</span>
-        <span class="s2">&quot;rules&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;tactic_id&quot;</span><span class="p">:</span> <span class="s2">&quot;Command and Control&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;techniques&quot;</span><span class="p">:</span> <span class="p">[]</span>
+        <span class="s2">"rules"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"tactic_id"</span><span class="p">:</span> <span class="s2">"Command and Control"</span><span class="p">,</span>
+        <span class="s2">"techniques"</span><span class="p">:</span> <span class="p">[]</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;threat_actors&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;watched_users&quot;</span><span class="p">:</span> <span class="p">[]</span>
+    <span class="s2">"threat_actors"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"watched_users"</span><span class="p">:</span> <span class="p">[]</span>
   <span class="p">},</span>
-  <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">ul</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\&quot;</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-meta-icons-png/identity-square-dark-300-dpi.png</span><span class="se">\&quot;</span><span class="s2"> alt=</span><span class="se">\&quot;</span><span class="s2">identity</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">width:20px; height:20px</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> userD</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">ul style=</span><span class="se">\&quot;</span><span class="s2">list-style-type:none</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\&quot;</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\&quot;</span><span class="s2"> alt=</span><span class="se">\&quot;</span><span class="s2">ipv4-addr</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">width:20px; height:20px</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 192.168.0.17</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">ul</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\&quot;</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\&quot;</span><span class="s2"> alt=</span><span class="se">\&quot;</span><span class="s2">ipv4-addr</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">width:20px; height:20px</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 89.223.26.52</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">ul style=</span><span class="se">\&quot;</span><span class="s2">list-style-type:none</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\&quot;</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\&quot;</span><span class="s2"> alt=</span><span class="se">\&quot;</span><span class="s2">ipv4-addr</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">width:20px; height:20px</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 192.168.0.17</span><span class="se">\u003c</span><span class="s2">img src=</span><span class="se">\&quot;</span><span class="s2">https://image.flaticon.com/icons/svg/282/282100.svg</span><span class="se">\&quot;</span><span class="s2"> alt=</span><span class="se">\&quot;</span><span class="s2">link</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">width:15px; height:15px</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\u003e\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e</span><span class="s2">x-mitre-tactic Command and Control</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">ul</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\&quot;</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\&quot;</span><span class="s2"> alt=</span><span class="se">\&quot;</span><span class="s2">ipv4-addr</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">width:20px; height:20px</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 193.184.16.214</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">ul style=</span><span class="se">\&quot;</span><span class="s2">list-style-type:none</span><span class="se">\&quot;\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\&quot;</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\&quot;</span><span class="s2"> alt=</span><span class="se">\&quot;</span><span class="s2">ipv4-addr</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">width:20px; height:20px</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 192.168.0.17</span><span class="se">\u003c</span><span class="s2">img src=</span><span class="se">\&quot;</span><span class="s2">https://image.flaticon.com/icons/svg/282/282100.svg</span><span class="se">\&quot;</span><span class="s2"> alt=</span><span class="se">\&quot;</span><span class="s2">link</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">width:15px; height:15px</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\u003e\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">There are 5 objects and 2 links.</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;observables&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">ul</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\"</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-meta-icons-png/identity-square-dark-300-dpi.png</span><span class="se">\"</span><span class="s2"> alt=</span><span class="se">\"</span><span class="s2">identity</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width:20px; height:20px</span><span class="se">\"</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> userD</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">ul style=</span><span class="se">\"</span><span class="s2">list-style-type:none</span><span class="se">\"\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\"</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\"</span><span class="s2"> alt=</span><span class="se">\"</span><span class="s2">ipv4-addr</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width:20px; height:20px</span><span class="se">\"</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 192.168.0.17</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">ul</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\"</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\"</span><span class="s2"> alt=</span><span class="se">\"</span><span class="s2">ipv4-addr</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width:20px; height:20px</span><span class="se">\"</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 89.223.26.52</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">ul style=</span><span class="se">\"</span><span class="s2">list-style-type:none</span><span class="se">\"\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\"</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\"</span><span class="s2"> alt=</span><span class="se">\"</span><span class="s2">ipv4-addr</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width:20px; height:20px</span><span class="se">\"</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 192.168.0.17</span><span class="se">\u003c</span><span class="s2">img src=</span><span class="se">\"</span><span class="s2">https://image.flaticon.com/icons/svg/282/282100.svg</span><span class="se">\"</span><span class="s2"> alt=</span><span class="se">\"</span><span class="s2">link</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width:15px; height:15px</span><span class="se">\"</span><span class="s2">/</span><span class="se">\u003e\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e</span><span class="s2">x-mitre-tactic Command and Control</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">ul</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\"</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\"</span><span class="s2"> alt=</span><span class="se">\"</span><span class="s2">ipv4-addr</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width:20px; height:20px</span><span class="se">\"</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 193.184.16.214</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">ul style=</span><span class="se">\"</span><span class="s2">list-style-type:none</span><span class="se">\"\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\"</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\"</span><span class="s2"> alt=</span><span class="se">\"</span><span class="s2">ipv4-addr</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width:20px; height:20px</span><span class="se">\"</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 192.168.0.17</span><span class="se">\u003c</span><span class="s2">img src=</span><span class="se">\"</span><span class="s2">https://image.flaticon.com/icons/svg/282/282100.svg</span><span class="se">\"</span><span class="s2"> alt=</span><span class="se">\"</span><span class="s2">link</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width:15px; height:15px</span><span class="se">\"</span><span class="s2">/</span><span class="se">\u003e\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">There are 5 objects and 2 links.</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">"</span><span class="p">,</span>
+  <span class="s2">"observables"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;userD&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;relevance&quot;</span><span class="p">:</span> <span class="s2">&quot;very-high&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;toxicity&quot;</span><span class="p">:</span> <span class="s2">&quot;very-low&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;identity&quot;</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"userD"</span><span class="p">,</span>
+      <span class="s2">"relevance"</span><span class="p">:</span> <span class="s2">"very-high"</span><span class="p">,</span>
+      <span class="s2">"toxicity"</span><span class="p">:</span> <span class="s2">"very-low"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"identity"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;89.223.26.52&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;relevance&quot;</span><span class="p">:</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;toxicity&quot;</span><span class="p">:</span> <span class="s2">&quot;high&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ipv4-addr&quot;</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"89.223.26.52"</span><span class="p">,</span>
+      <span class="s2">"relevance"</span><span class="p">:</span> <span class="s2">"medium"</span><span class="p">,</span>
+      <span class="s2">"toxicity"</span><span class="p">:</span> <span class="s2">"high"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"ipv4-addr"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;192.168.0.17&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;relevance&quot;</span><span class="p">:</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;toxicity&quot;</span><span class="p">:</span> <span class="s2">&quot;very-low&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ipv4-addr&quot;</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"192.168.0.17"</span><span class="p">,</span>
+      <span class="s2">"relevance"</span><span class="p">:</span> <span class="s2">"medium"</span><span class="p">,</span>
+      <span class="s2">"toxicity"</span><span class="p">:</span> <span class="s2">"very-low"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"ipv4-addr"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;193.184.16.214&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;relevance&quot;</span><span class="p">:</span> <span class="s2">&quot;medium&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;toxicity&quot;</span><span class="p">:</span> <span class="s2">&quot;very-low&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ipv4-addr&quot;</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"193.184.16.214"</span><span class="p">,</span>
+      <span class="s2">"relevance"</span><span class="p">:</span> <span class="s2">"medium"</span><span class="p">,</span>
+      <span class="s2">"toxicity"</span><span class="p">:</span> <span class="s2">"very-low"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"ipv4-addr"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Command and Control&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;relevance&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;toxicity&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;x-mitre-tactic&quot;</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Command and Control"</span><span class="p">,</span>
+      <span class="s2">"relevance"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"toxicity"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"x-mitre-tactic"</span>
     <span class="p">}</span>
   <span class="p">],</span>
-  <span class="s2">&quot;stix&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;bundle--9813614d-e715-4ad4-a4bd-7cf204190449&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;objects&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"stix"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"bundle--9813614d-e715-4ad4-a4bd-7cf204190449"</span><span class="p">,</span>
+    <span class="s2">"objects"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-08-04T17:08:32.000Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;identity--2f4ac158-751e-42de-bf88-2a02fe6a5840&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;identity_class&quot;</span><span class="p">:</span> <span class="s2">&quot;individual&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-08-04T17:08:32.000Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;userD&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;identity&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;x_ibm_security_relevance&quot;</span><span class="p">:</span> <span class="s2">&quot;very-high&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;x_ibm_security_toxicity&quot;</span><span class="p">:</span> <span class="s2">&quot;very-low&quot;</span>
+        <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2022-08-04T17:08:32.000Z"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"identity--2f4ac158-751e-42de-bf88-2a02fe6a5840"</span><span class="p">,</span>
+        <span class="s2">"identity_class"</span><span class="p">:</span> <span class="s2">"individual"</span><span class="p">,</span>
+        <span class="s2">"modified"</span><span class="p">:</span> <span class="s2">"2022-08-04T17:08:32.000Z"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"userD"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"identity"</span><span class="p">,</span>
+        <span class="s2">"x_ibm_security_relevance"</span><span class="p">:</span> <span class="s2">"very-high"</span><span class="p">,</span>
+        <span class="s2">"x_ibm_security_toxicity"</span><span class="p">:</span> <span class="s2">"very-low"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;spec_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;bundle&quot;</span>
+    <span class="s2">"spec_version"</span><span class="p">:</span> <span class="s2">"2.0"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"bundle"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -980,14 +980,14 @@ List any steps that are needed to configure the endpoint to use this app.
 <span class="c1">#</span>
 <span class="c1"># We publish a data table according to the stix</span>
 
-<span class="c1"># Check that we didn&#39;t get a status of 404 (no observables) for insights.</span>
-<span class="k">if</span> <span class="s2">&quot;status_code&quot;</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;insights&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;insights&quot;</span><span class="p">][</span><span class="s2">&quot;status_code&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+<span class="c1"># Check that we didn't get a status of 404 (no observables) for insights.</span>
+<span class="k">if</span> <span class="s2">"status_code"</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">"insights"</span><span class="p">]</span> <span class="ow">and</span> <span class="n">results</span><span class="p">[</span><span class="s2">"insights"</span><span class="p">][</span><span class="s2">"status_code"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
     <span class="n">process_insights</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">process_insights</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="k">for</span> <span class="n">observable</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">observables</span><span class="p">:</span>
-  <span class="n">qradar_obs</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;qradar_advisor_observable&quot;</span><span class="p">)</span>
+  <span class="n">qradar_obs</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"qradar_advisor_observable"</span><span class="p">)</span>
   <span class="n">qradar_obs</span><span class="o">.</span><span class="n">qradar_advisor_toxicity</span> <span class="o">=</span> <span class="n">observable</span><span class="o">.</span><span class="n">toxicity</span>
   <span class="n">qradar_obs</span><span class="o">.</span><span class="n">qradar_advisor_relevance</span> <span class="o">=</span> <span class="n">observable</span><span class="o">.</span><span class="n">relevance</span>
   <span class="n">qradar_obs</span><span class="o">.</span><span class="n">qradar_advisor_type</span> <span class="o">=</span> <span class="n">observable</span><span class="o">.</span><span class="n">type</span>
@@ -1001,16 +1001,16 @@ List any steps that are needed to configure the endpoint to use this app.
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
 
 <span class="k">if</span> <span class="n">process_insights</span><span class="p">:</span>
-    <span class="c1"># If we didn&#39;t get a 404 (no observables) status process for insights.</span>
+    <span class="c1"># If we didn't get a 404 (no observables) status process for insights.</span>
     <span class="c1"># Task</span>
-    <span class="n">task_title</span> <span class="o">=</span> <span class="s2">&quot;Review QRadar Advisor Analysis for Offense &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">qradar_id</span><span class="p">)</span>
-    <span class="n">task_summary</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">insights</span><span class="o">.</span><span class="n">insights</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">results</span><span class="o">.</span><span class="n">insights</span><span class="o">.</span><span class="n">stage3_insights</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addTask</span><span class="p">(</span><span class="n">task_title</span><span class="p">,</span> <span class="s2">&quot;Initial&quot;</span><span class="p">,</span> <span class="n">task_summary</span><span class="p">)</span>
+    <span class="n">task_title</span> <span class="o">=</span> <span class="s2">"Review QRadar Advisor Analysis for Offense "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">qradar_id</span><span class="p">)</span>
+    <span class="n">task_summary</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">insights</span><span class="o">.</span><span class="n">insights</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n\n</span><span class="s2">"</span> <span class="o">+</span> <span class="n">results</span><span class="o">.</span><span class="n">insights</span><span class="o">.</span><span class="n">stage3_insights</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addTask</span><span class="p">(</span><span class="n">task_title</span><span class="p">,</span> <span class="s2">"Initial"</span><span class="p">,</span> <span class="n">task_summary</span><span class="p">)</span>
 
     <span class="c1">#</span>
     <span class="c1"># MITRE tactic information</span>
     <span class="c1">#</span>
-    <span class="n">tactics</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">insights</span><span class="p">[</span><span class="s2">&quot;tactics&quot;</span><span class="p">]</span>
+    <span class="n">tactics</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">insights</span><span class="p">[</span><span class="s2">"tactics"</span><span class="p">]</span>
 
     <span class="n">mitre_tactic_names</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="n">tactics</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1018,12 +1018,12 @@ List any steps that are needed to configure the endpoint to use this app.
         <span class="c1">#</span>
         <span class="c1"># Note, even though QRAW calls it tactic_id, it is more a tactic name</span>
         <span class="c1">#</span>
-        <span class="n">mitre_tactic_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tactic</span><span class="p">[</span><span class="s2">&quot;tactic_id&quot;</span><span class="p">])</span>
+        <span class="n">mitre_tactic_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tactic</span><span class="p">[</span><span class="s2">"tactic_id"</span><span class="p">])</span>
     <span class="c1">#</span>
     <span class="c1"># QRadar Advisor might return more than one tactics for a given offense. Include them inputs</span>
     <span class="c1"># a comma separated string</span>
     <span class="c1">#</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_tactic_name</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mitre_tactic_names</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">mitre_tactic_name</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mitre_tactic_names</span><span class="p">)</span>
 
 <span class="c1"># Note that results.stix is the raw stix return from QRadar Advisor in stix 2 (json) format</span>
 <span class="c1"># Users can add their customize codes to handle the stix data here</span>
@@ -1068,59 +1068,59 @@ List any steps that are needed to configure the endpoint to use this app.
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;search&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;is_toxic&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;other_count&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-    <span class="s2">&quot;reference_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&quot;search_results&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;other_observables&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"search"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"is_toxic"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"other_count"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">"reference_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"search_results"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"other_observables"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;www.poloatmer.ru&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;reference_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1524258360</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;DomainName&quot;</span>
+          <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"www.poloatmer.ru"</span><span class="p">,</span>
+          <span class="s2">"reference_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1524258360</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"DomainName"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;gorinfotech.ru&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;reference_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1513402560</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;DomainName&quot;</span>
+          <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"gorinfotech.ru"</span><span class="p">,</span>
+          <span class="s2">"reference_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1513402560</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"DomainName"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;forexpack.ru&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;reference_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1498685280</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;DomainName&quot;</span>
+          <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"forexpack.ru"</span><span class="p">,</span>
+          <span class="s2">"reference_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1498685280</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"DomainName"</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;suspicious_observables&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"suspicious_observables"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Botnet Command and Control Server:Regional Internet Registry&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;reference_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1660857629</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Reputation&quot;</span>
+          <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"Botnet Command and Control Server:Regional Internet Registry"</span><span class="p">,</span>
+          <span class="s2">"reference_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1660857629</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"Reputation"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;89.223.26.52&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;reference_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-          <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="mi">1660857629</span><span class="p">,</span>
-          <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;IpAddress&quot;</span>
+          <span class="s2">"label"</span><span class="p">:</span> <span class="s2">"89.223.26.52"</span><span class="p">,</span>
+          <span class="s2">"reference_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+          <span class="s2">"timestamp"</span><span class="p">:</span> <span class="mi">1660857629</span><span class="p">,</span>
+          <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"IpAddress"</span>
         <span class="p">}</span>
       <span class="p">]</span>
     <span class="p">},</span>
-    <span class="s2">&quot;search_value&quot;</span><span class="p">:</span> <span class="s2">&quot;89.223.26.52&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;search_value_type&quot;</span><span class="p">:</span> <span class="s2">&quot;IpAddress&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;suspicious_count&quot;</span><span class="p">:</span> <span class="mi">2</span>
+    <span class="s2">"search_value"</span><span class="p">:</span> <span class="s2">"89.223.26.52"</span><span class="p">,</span>
+    <span class="s2">"search_value_type"</span><span class="p">:</span> <span class="s2">"IpAddress"</span><span class="p">,</span>
+    <span class="s2">"suspicious_count"</span><span class="p">:</span> <span class="mi">2</span>
   <span class="p">},</span>
-  <span class="s2">&quot;whois&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;contact_country&quot;</span><span class="p">:</span> <span class="s2">&quot;Russia&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;contact_email&quot;</span><span class="p">:</span> <span class="s2">&quot;abuse@selectel.ru&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;contact_name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;contact_org&quot;</span><span class="p">:</span> <span class="s2">&quot;SELECTEL-NET&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;contact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;registrant&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;created_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-02-02T12:51:32.000Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;registrar_name&quot;</span><span class="p">:</span> <span class="s2">&quot;RIPE&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;updated_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-02-02T12:51:32.000Z&quot;</span>
+  <span class="s2">"whois"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"contact_country"</span><span class="p">:</span> <span class="s2">"Russia"</span><span class="p">,</span>
+    <span class="s2">"contact_email"</span><span class="p">:</span> <span class="s2">"abuse@selectel.ru"</span><span class="p">,</span>
+    <span class="s2">"contact_name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"contact_org"</span><span class="p">:</span> <span class="s2">"SELECTEL-NET"</span><span class="p">,</span>
+    <span class="s2">"contact_type"</span><span class="p">:</span> <span class="s2">"registrant"</span><span class="p">,</span>
+    <span class="s2">"created_date"</span><span class="p">:</span> <span class="s2">"2022-02-02T12:51:32.000Z"</span><span class="p">,</span>
+    <span class="s2">"registrar_name"</span><span class="p">:</span> <span class="s2">"RIPE"</span><span class="p">,</span>
+    <span class="s2">"updated_date"</span><span class="p">:</span> <span class="s2">"2022-02-02T12:51:32.000Z"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1137,9 +1137,9 @@ List any steps that are needed to configure the endpoint to use this app.
 <span class="c1"># The “user:” prefix needs to be added to a username search</span>
 <span class="c1">#</span>
 <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;User Account&quot;</span><span class="p">:</span><span class="s2">&quot;user:&quot;</span>       
+  <span class="s2">"User Account"</span><span class="p">:</span><span class="s2">"user:"</span>       
 <span class="p">}</span>
-<span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">prefix</span> <span class="o">=</span> <span class="s2">""</span>
 <span class="k">if</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">:</span>
   <span class="n">prefix</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="nb">type</span><span class="p">]</span>
 
@@ -1160,88 +1160,88 @@ List any steps that are needed to configure the endpoint to use this app.
 <span class="c1">#</span>
 <span class="n">return_search</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">search</span>
 
-<span class="n">status_set</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="s2">&quot;status_code&quot;</span> <span class="ow">in</span> <span class="n">return_search</span> <span class="k">else</span> <span class="kc">False</span>
+<span class="n">status_set</span> <span class="o">=</span> <span class="kc">True</span> <span class="k">if</span> <span class="s2">"status_code"</span> <span class="ow">in</span> <span class="n">return_search</span> <span class="k">else</span> <span class="kc">False</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">status_set</span><span class="p">:</span>
-    <span class="n">api_version</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">if</span> <span class="s2">&quot;suspicious_observables&quot;</span> <span class="ow">in</span> <span class="n">return_search</span><span class="o">.</span><span class="n">search_results</span> <span class="k">else</span> <span class="mi">1</span>
+    <span class="n">api_version</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">if</span> <span class="s2">"suspicious_observables"</span> <span class="ow">in</span> <span class="n">return_search</span><span class="o">.</span><span class="n">search_results</span> <span class="k">else</span> <span class="mi">1</span>
 
 <span class="c1">#</span>
 <span class="c1"># Sample return json dict for v2.0</span>
 <span class="c1">#</span>
-<span class="sd">&#39;&#39;&#39;{</span>
-<span class="sd">      &quot;search&quot;: {</span>
-<span class="sd">          &quot;search_value_type&quot;: &quot;DomainName&quot;, </span>
-<span class="sd">          &quot;other_count&quot;: 1, </span>
-<span class="sd">          &quot;search_results&quot;: {</span>
-<span class="sd">          &quot;suspicious_observables&quot;: [</span>
+<span class="sd">'''{</span>
+<span class="sd">      "search": {</span>
+<span class="sd">          "search_value_type": "DomainName", </span>
+<span class="sd">          "other_count": 1, </span>
+<span class="sd">          "search_results": {</span>
+<span class="sd">          "suspicious_observables": [</span>
 <span class="sd">                  {</span>
-<span class="sd">                      &quot;reference_count&quot;: 1, </span>
-<span class="sd">                      &quot;timestamp&quot;: 1529421998, </span>
-<span class="sd">                      &quot;type&quot;: &quot;DomainName&quot;, </span>
-<span class="sd">                      &quot;label&quot;: &quot;mydomain.com&quot;</span>
+<span class="sd">                      "reference_count": 1, </span>
+<span class="sd">                      "timestamp": 1529421998, </span>
+<span class="sd">                      "type": "DomainName", </span>
+<span class="sd">                      "label": "mydomain.com"</span>
 <span class="sd">                  }, </span>
 <span class="sd">                  {</span>
-<span class="sd">                      &quot;reference_count&quot;: 1, </span>
-<span class="sd">                      &quot;timestamp&quot;: 1462407300, </span>
-<span class="sd">                      &quot;type&quot;: &quot;EmailContent&quot;, </span>
-<span class="sd">                      &quot;label&quot;: &quot;ccf2d5f4ab37650ccbb582f351aa6fdd:&quot;</span>
+<span class="sd">                      "reference_count": 1, </span>
+<span class="sd">                      "timestamp": 1462407300, </span>
+<span class="sd">                      "type": "EmailContent", </span>
+<span class="sd">                      "label": "ccf2d5f4ab37650ccbb582f351aa6fdd:"</span>
 <span class="sd">                  }, </span>
 <span class="sd">                  {</span>
-<span class="sd">                      &quot;reference_count&quot;: 1, </span>
-<span class="sd">                      &quot;timestamp&quot;: 1462407300, </span>
-<span class="sd">                      &quot;type&quot;: &quot;File&quot;, </span>
-<span class="sd">                      &quot;label&quot;: &quot;ccf2d5f4ab37650ccbb582f351aa6fdd&quot;</span>
+<span class="sd">                      "reference_count": 1, </span>
+<span class="sd">                      "timestamp": 1462407300, </span>
+<span class="sd">                      "type": "File", </span>
+<span class="sd">                      "label": "ccf2d5f4ab37650ccbb582f351aa6fdd"</span>
 <span class="sd">                  }, </span>
 <span class="sd">                  {</span>
-<span class="sd">                      &quot;reference_count&quot;: 1, </span>
-<span class="sd">                      &quot;timestamp&quot;: 1463566500, </span>
-<span class="sd">                      &quot;type&quot;: &quot;IpAddress&quot;, </span>
-<span class="sd">                      &quot;label&quot;: &quot;190.104.198.116&quot;</span>
+<span class="sd">                      "reference_count": 1, </span>
+<span class="sd">                      "timestamp": 1463566500, </span>
+<span class="sd">                      "type": "IpAddress", </span>
+<span class="sd">                      "label": "190.104.198.116"</span>
 <span class="sd">                  },</span>
 <span class="sd">                  {</span>
-<span class="sd">                      &quot;reference_count&quot;: 1, </span>
-<span class="sd">                      &quot;timestamp&quot;: 1463072400, </span>
-<span class="sd">                      &quot;type&quot;: &quot;Hash&quot;, </span>
-<span class="sd">                      &quot;label&quot;: &quot;51417677b5e7b17542d383f5b25e2b43&quot;</span>
+<span class="sd">                      "reference_count": 1, </span>
+<span class="sd">                      "timestamp": 1463072400, </span>
+<span class="sd">                      "type": "Hash", </span>
+<span class="sd">                      "label": "51417677b5e7b17542d383f5b25e2b43"</span>
 <span class="sd">                  }</span>
 <span class="sd">          ], </span>
-<span class="sd">          &quot;other_observables&quot;: [</span>
+<span class="sd">          "other_observables": [</span>
 <span class="sd">              {</span>
-<span class="sd">                  &quot;reference_count&quot;: 1, </span>
-<span class="sd">                  &quot;timestamp&quot;: 1529421998, </span>
-<span class="sd">                  &quot;type&quot;: &quot;DomainName&quot;, </span>
-<span class="sd">                  &quot;label&quot;: &quot;mydomain.com&quot;</span>
+<span class="sd">                  "reference_count": 1, </span>
+<span class="sd">                  "timestamp": 1529421998, </span>
+<span class="sd">                  "type": "DomainName", </span>
+<span class="sd">                  "label": "mydomain.com"</span>
 <span class="sd">              }</span>
 <span class="sd">          ]</span>
 <span class="sd">      }, </span>
-<span class="sd">      &quot;suspicious_count&quot;: 5, </span>
-<span class="sd">      &quot;search_value&quot;: &quot;mydomain.com&quot;, </span>
-<span class="sd">      &quot;reference_count&quot;: 1, </span>
-<span class="sd">      &quot;is_toxic&quot;: false}, </span>
-<span class="sd">      &quot;whois&quot;: {</span>
-<span class="sd">          &quot;updated_date&quot;: &quot;2015-09-15T23:25:25.000Z&quot;, </span>
-<span class="sd">          &quot;contact_country&quot;: &quot;Canada&quot;, </span>
-<span class="sd">          &quot;registrar_name&quot;: &quot;Domain.com, LLC&quot;, </span>
-<span class="sd">          &quot;contact_email&quot;: &quot;noreply@data-protected.net&quot;, </span>
-<span class="sd">          &quot;created_date&quot;: &quot;2000-06-22T04:00:00.000Z&quot;, </span>
-<span class="sd">          &quot;contact_name&quot;: &quot;Data Protected Data Protected&quot;, </span>
-<span class="sd">          &quot;contact_type&quot;: &quot;registrant&quot;, &quot;contact_org&quot;: &quot;Data Protected&quot;</span>
+<span class="sd">      "suspicious_count": 5, </span>
+<span class="sd">      "search_value": "mydomain.com", </span>
+<span class="sd">      "reference_count": 1, </span>
+<span class="sd">      "is_toxic": false}, </span>
+<span class="sd">      "whois": {</span>
+<span class="sd">          "updated_date": "2015-09-15T23:25:25.000Z", </span>
+<span class="sd">          "contact_country": "Canada", </span>
+<span class="sd">          "registrar_name": "Domain.com, LLC", </span>
+<span class="sd">          "contact_email": "noreply@data-protected.net", </span>
+<span class="sd">          "created_date": "2000-06-22T04:00:00.000Z", </span>
+<span class="sd">          "contact_name": "Data Protected Data Protected", </span>
+<span class="sd">          "contact_type": "registrant", "contact_org": "Data Protected"</span>
 <span class="sd">      }</span>
 <span class="sd">      }</span>
-<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">'''</span>
 <span class="c1">#</span>
 <span class="c1"># We ONLY create artifacts for those observables that can be mapped to</span>
 <span class="c1"># default Resilient artifacts. If customer has custom artifacts, and wants</span>
 <span class="c1"># to map them as well, please modify the following mapping dict.</span>
 <span class="c1">#</span>
 <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;DomainName&quot;</span><span class="p">:</span> <span class="s2">&quot;DNS Name&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;EmailContent&quot;</span><span class="p">:</span> <span class="s2">&quot;Email Body&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;File&quot;</span><span class="p">:</span> <span class="s2">&quot;Malware MD5 Hash&quot;</span><span class="p">,</span>  <span class="c1"># File type is a hash value. So we map File to Malware MD5 Hash</span>
-    <span class="s2">&quot;IpAddress&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Hash&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="mi">32</span><span class="p">:</span> <span class="s2">&quot;Malware MD5 Hash&quot;</span><span class="p">,</span>
-        <span class="mi">40</span><span class="p">:</span> <span class="s2">&quot;Malware SHA-1 Hash&quot;</span><span class="p">,</span>
-        <span class="mi">64</span><span class="p">:</span> <span class="s2">&quot;Malware SHA-256 Hash&quot;</span>
+    <span class="s2">"DomainName"</span><span class="p">:</span> <span class="s2">"DNS Name"</span><span class="p">,</span>
+    <span class="s2">"EmailContent"</span><span class="p">:</span> <span class="s2">"Email Body"</span><span class="p">,</span>
+    <span class="s2">"File"</span><span class="p">:</span> <span class="s2">"Malware MD5 Hash"</span><span class="p">,</span>  <span class="c1"># File type is a hash value. So we map File to Malware MD5 Hash</span>
+    <span class="s2">"IpAddress"</span><span class="p">:</span> <span class="s2">"IP Address"</span><span class="p">,</span>
+    <span class="s2">"Hash"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="mi">32</span><span class="p">:</span> <span class="s2">"Malware MD5 Hash"</span><span class="p">,</span>
+        <span class="mi">40</span><span class="p">:</span> <span class="s2">"Malware SHA-1 Hash"</span><span class="p">,</span>
+        <span class="mi">64</span><span class="p">:</span> <span class="s2">"Malware SHA-256 Hash"</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
@@ -1250,16 +1250,16 @@ List any steps that are needed to configure the endpoint to use this app.
 <span class="c1">#</span>
 <span class="k">if</span> <span class="n">status_set</span><span class="p">:</span>
     <span class="c1"># Add an error status note.</span>
-    <span class="n">summary_string</span> <span class="o">=</span> <span class="s1">&#39;The artifact returned an error.&#39;</span>
-    <span class="n">status_string</span> <span class="o">=</span> <span class="s2">&quot;QRadar Advisor returned status code &#39;</span><span class="si">{}</span><span class="s2">&#39;.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">return_search</span><span class="p">[</span><span class="s2">&quot;status_code&quot;</span><span class="p">])</span>
-    <span class="k">if</span> <span class="n">return_search</span><span class="p">[</span><span class="s2">&quot;status_code&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">422</span><span class="p">:</span>
-        <span class="n">summary_string</span> <span class="o">=</span> <span class="s2">&quot;This artifact has an unsupported value.&quot;</span>
+    <span class="n">summary_string</span> <span class="o">=</span> <span class="s1">'The artifact returned an error.'</span>
+    <span class="n">status_string</span> <span class="o">=</span> <span class="s2">"QRadar Advisor returned status code '</span><span class="si">{}</span><span class="s2">'."</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">return_search</span><span class="p">[</span><span class="s2">"status_code"</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">return_search</span><span class="p">[</span><span class="s2">"status_code"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">422</span><span class="p">:</span>
+        <span class="n">summary_string</span> <span class="o">=</span> <span class="s2">"This artifact has an unsupported value."</span>
 
-    <span class="n">note_string</span> <span class="o">=</span> <span class="s2">&quot;&lt;h3&gt;Watson Search Result Summary&lt;/h3&gt;&lt;hr&gt;&quot;</span>
-    <span class="n">note_string</span> <span class="o">+=</span> <span class="s2">&quot;&lt;br&gt;&lt;p&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2">font-weight:bold</span><span class="se">\&quot;</span><span class="s2">&gt;&quot;</span> <span class="o">+</span> <span class="n">status_string</span> <span class="o">+</span> <span class="s2">&quot;&lt;/span&gt;&lt;/p&gt;&quot;</span>
-    <span class="n">note_string</span> <span class="o">+=</span> <span class="s2">&quot;&lt;p&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2">font-weight:bold</span><span class="se">\&quot;</span><span class="s2">&gt;&quot;</span> <span class="o">+</span> <span class="n">summary_string</span> <span class="o">+</span> <span class="s2">&quot;&lt;/span&gt;&lt;/p&gt;&lt;br&gt;&quot;</span>
-    <span class="n">note_string</span> <span class="o">+=</span>  <span class="s2">&quot;&lt;p&gt;Search Value: &quot;</span> <span class="o">+</span> <span class="n">return_search</span><span class="o">.</span><span class="n">search_value</span> <span class="o">+</span> <span class="s2">&quot;&lt;/p&gt;&quot;</span>
-    <span class="n">note_string</span> <span class="o">+=</span>  <span class="s2">&quot;&lt;p&gt;Search Type:  &lt;span style=</span><span class="se">\&quot;</span><span class="s2">color:white; border-bottom-left-radius: 2.96667px;background-color:#808080</span><span class="se">\&quot;</span><span class="s2">&gt;&amp;nbsp &quot;</span> <span class="o">+</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span> <span class="o">+</span> <span class="s2">&quot;&amp;nbsp&lt;/span&gt;&lt;/p&gt;&quot;</span>
+    <span class="n">note_string</span> <span class="o">=</span> <span class="s2">"&lt;h3&gt;Watson Search Result Summary&lt;/h3&gt;&lt;hr&gt;"</span>
+    <span class="n">note_string</span> <span class="o">+=</span> <span class="s2">"&lt;br&gt;&lt;p&gt;&lt;span style=</span><span class="se">\"</span><span class="s2">font-weight:bold</span><span class="se">\"</span><span class="s2">&gt;"</span> <span class="o">+</span> <span class="n">status_string</span> <span class="o">+</span> <span class="s2">"&lt;/span&gt;&lt;/p&gt;"</span>
+    <span class="n">note_string</span> <span class="o">+=</span> <span class="s2">"&lt;p&gt;&lt;span style=</span><span class="se">\"</span><span class="s2">font-weight:bold</span><span class="se">\"</span><span class="s2">&gt;"</span> <span class="o">+</span> <span class="n">summary_string</span> <span class="o">+</span> <span class="s2">"&lt;/span&gt;&lt;/p&gt;&lt;br&gt;"</span>
+    <span class="n">note_string</span> <span class="o">+=</span>  <span class="s2">"&lt;p&gt;Search Value: "</span> <span class="o">+</span> <span class="n">return_search</span><span class="o">.</span><span class="n">search_value</span> <span class="o">+</span> <span class="s2">"&lt;/p&gt;"</span>
+    <span class="n">note_string</span> <span class="o">+=</span>  <span class="s2">"&lt;p&gt;Search Type:  &lt;span style=</span><span class="se">\"</span><span class="s2">color:white; border-bottom-left-radius: 2.96667px;background-color:#808080</span><span class="se">\"</span><span class="s2">&gt;&amp;nbsp "</span> <span class="o">+</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span> <span class="o">+</span> <span class="s2">"&amp;nbsp&lt;/span&gt;&lt;/p&gt;"</span>
     <span class="n">html_note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_string</span><span class="p">)</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">html_note</span><span class="p">)</span>
 
@@ -1268,7 +1268,7 @@ List any steps that are needed to configure the endpoint to use this app.
     <span class="n">suspicious_observables</span> <span class="o">=</span> <span class="n">return_search</span><span class="o">.</span><span class="n">search_results</span><span class="o">.</span><span class="n">suspicious_observables</span>
 
     <span class="n">new_artifact_count</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">summary_string</span> <span class="o">=</span> <span class="s2">&quot;This artifact is not a suspicious observable&quot;</span>
+    <span class="n">summary_string</span> <span class="o">=</span> <span class="s2">"This artifact is not a suspicious observable"</span>
 
     <span class="k">for</span> <span class="n">observable</span> <span class="ow">in</span> <span class="n">suspicious_observables</span><span class="p">:</span>
         <span class="c1">#</span>
@@ -1276,34 +1276,34 @@ List any steps that are needed to configure the endpoint to use this app.
         <span class="c1">#</span>
         <span class="k">if</span> <span class="n">observable</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">:</span>
             <span class="c1">#</span>
-            <span class="c1"># Note sometimes QRadar Advisor return the artifact itself as a suspicious observable. We don&#39;t want to</span>
+            <span class="c1"># Note sometimes QRadar Advisor return the artifact itself as a suspicious observable. We don't want to</span>
             <span class="c1"># duplicate here.</span>
             <span class="c1">#</span>
             <span class="k">if</span> <span class="n">mapping</span><span class="p">[</span><span class="n">observable</span><span class="o">.</span><span class="n">type</span><span class="p">]</span> <span class="o">!=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span> <span class="ow">or</span> <span class="n">observable</span><span class="o">.</span><span class="n">label</span> <span class="o">!=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
                 <span class="n">new_artifact_count</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="k">if</span> <span class="n">observable</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;Hash&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">observable</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"Hash"</span><span class="p">:</span>
                     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">observable</span><span class="o">.</span><span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">[</span><span class="n">observable</span><span class="o">.</span><span class="n">type</span><span class="p">]</span> <span class="ow">and</span>  <span class="n">observable</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">isalnum</span><span class="p">():</span>
                         <span class="c1"># Hash is likely MD5, SHA1 or SHA256.</span>
                         <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">mapping</span><span class="p">[</span><span class="n">observable</span><span class="o">.</span><span class="n">type</span><span class="p">][</span><span class="nb">len</span><span class="p">(</span><span class="n">observable</span><span class="o">.</span><span class="n">label</span><span class="p">)],</span> <span class="n">observable</span><span class="o">.</span><span class="n">label</span><span class="p">,</span>
-                                             <span class="s2">&quot;Watson Search result&quot;</span><span class="p">)</span>
+                                             <span class="s2">"Watson Search result"</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">mapping</span><span class="p">[</span><span class="n">observable</span><span class="o">.</span><span class="n">type</span><span class="p">],</span> <span class="n">observable</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="s2">&quot;Watson Search result&quot;</span><span class="p">)</span>
+                    <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">mapping</span><span class="p">[</span><span class="n">observable</span><span class="o">.</span><span class="n">type</span><span class="p">],</span> <span class="n">observable</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="s2">"Watson Search result"</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1">#</span>
-                <span class="c1"># The artifact itself is a suspicious observable. We don&#39;t create new (duplicated) artifact. But we show this info</span>
+                <span class="c1"># The artifact itself is a suspicious observable. We don't create new (duplicated) artifact. But we show this info</span>
                 <span class="c1">#</span>
-                <span class="n">summary_string</span> <span class="o">=</span> <span class="s2">&quot;This artifact is a suspicious observable&quot;</span>
+                <span class="n">summary_string</span> <span class="o">=</span> <span class="s2">"This artifact is a suspicious observable"</span>
 
     <span class="c1"># Add a note about number of suspicious_observables</span>
-    <span class="n">note_string</span> <span class="o">=</span> <span class="s2">&quot;&lt;h3&gt;Watson Search Result Summary&lt;/h3&gt;&lt;hr&gt;&quot;</span>
-    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">&quot;&lt;br&gt;&lt;p&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2">font-weight:bold</span><span class="se">\&quot;</span><span class="s2">&gt;&quot;</span> <span class="o">+</span> <span class="n">summary_string</span> <span class="o">+</span> <span class="s2">&quot;&lt;/span&gt;&lt;/p&gt;&lt;br&gt;&quot;</span>
-    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">&quot;&lt;p&gt;Search Value: &quot;</span> <span class="o">+</span> <span class="n">return_search</span><span class="o">.</span><span class="n">search_value</span> <span class="o">+</span> <span class="s2">&quot;&lt;/p&gt;&quot;</span>
-    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">&quot;&lt;p&gt;Search Type:  &lt;span style=</span><span class="se">\&quot;</span><span class="s2">color:white; border-bottom-left-radius: 2.96667px;background-color:#808080</span><span class="se">\&quot;</span><span class="s2">&gt;&amp;nbsp &quot;</span> <span class="o">+</span> <span class="n">return_search</span><span class="o">.</span><span class="n">search_value_type</span> <span class="o">+</span> <span class="s2">&quot;&amp;nbsp&lt;/span&gt;&lt;/p&gt;&quot;</span>
-    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">&quot;&lt;p style=</span><span class="se">\&quot;</span><span class="s2">color:#FF00FF;</span><span class="se">\&quot;</span><span class="s2">&gt;Suspicious observables: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
-        <span class="n">return_search</span><span class="o">.</span><span class="n">suspicious_count</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&lt;/p&gt;&quot;</span>
-    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">&quot;&lt;p style=</span><span class="se">\&quot;</span><span class="s2">color:red;</span><span class="se">\&quot;</span><span class="s2">&gt;New artifacts mapped from suspicious observables: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
-        <span class="n">new_artifact_count</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&lt;/p&gt;&quot;</span>
-    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">&quot;&lt;p&gt;Other observables: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">return_search</span><span class="o">.</span><span class="n">other_count</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&lt;/p&gt;&quot;</span>
+    <span class="n">note_string</span> <span class="o">=</span> <span class="s2">"&lt;h3&gt;Watson Search Result Summary&lt;/h3&gt;&lt;hr&gt;"</span>
+    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">"&lt;br&gt;&lt;p&gt;&lt;span style=</span><span class="se">\"</span><span class="s2">font-weight:bold</span><span class="se">\"</span><span class="s2">&gt;"</span> <span class="o">+</span> <span class="n">summary_string</span> <span class="o">+</span> <span class="s2">"&lt;/span&gt;&lt;/p&gt;&lt;br&gt;"</span>
+    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">"&lt;p&gt;Search Value: "</span> <span class="o">+</span> <span class="n">return_search</span><span class="o">.</span><span class="n">search_value</span> <span class="o">+</span> <span class="s2">"&lt;/p&gt;"</span>
+    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">"&lt;p&gt;Search Type:  &lt;span style=</span><span class="se">\"</span><span class="s2">color:white; border-bottom-left-radius: 2.96667px;background-color:#808080</span><span class="se">\"</span><span class="s2">&gt;&amp;nbsp "</span> <span class="o">+</span> <span class="n">return_search</span><span class="o">.</span><span class="n">search_value_type</span> <span class="o">+</span> <span class="s2">"&amp;nbsp&lt;/span&gt;&lt;/p&gt;"</span>
+    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">"&lt;p style=</span><span class="se">\"</span><span class="s2">color:#FF00FF;</span><span class="se">\"</span><span class="s2">&gt;Suspicious observables: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+        <span class="n">return_search</span><span class="o">.</span><span class="n">suspicious_count</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"&lt;/p&gt;"</span>
+    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">"&lt;p style=</span><span class="se">\"</span><span class="s2">color:red;</span><span class="se">\"</span><span class="s2">&gt;New artifacts mapped from suspicious observables: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+        <span class="n">new_artifact_count</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"&lt;/p&gt;"</span>
+    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">"&lt;p&gt;Other observables: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">return_search</span><span class="o">.</span><span class="n">other_count</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"&lt;/p&gt;"</span>
     <span class="n">html_note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_string</span><span class="p">)</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">html_note</span><span class="p">)</span>
 
@@ -1312,48 +1312,48 @@ List any steps that are needed to configure the endpoint to use this app.
     <span class="n">new_artifact_count</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">toxic_count</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">non_toxic_count</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">summary_string</span> <span class="o">=</span> <span class="s2">&quot;This artifact is not a suspicious observable&quot;</span>
+    <span class="n">summary_string</span> <span class="o">=</span> <span class="s2">"This artifact is not a suspicious observable"</span>
     <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">return_search</span><span class="o">.</span><span class="n">search_results</span><span class="p">:</span>
-        <span class="n">value_type</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span>
+        <span class="n">value_type</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">value_type</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">:</span>
             <span class="c1">#</span>
             <span class="c1"># We know what artifact type corresponds to this value type</span>
             <span class="c1">#</span>
-            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;values&quot;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s2">"values"</span><span class="p">]:</span>
                 <span class="c1">#</span>
                 <span class="c1"># We care about the toxic ones only</span>
                 <span class="c1">#</span>
-                <span class="k">if</span> <span class="n">val</span><span class="p">[</span><span class="s2">&quot;is_toxic&quot;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">val</span><span class="p">[</span><span class="s2">"is_toxic"</span><span class="p">]:</span>
                     <span class="n">toxic_count</span> <span class="o">+=</span> <span class="mi">1</span>
                     <span class="c1">#</span>
-                    <span class="c1"># Note sometimes QRadar Advisor return the artifact itself as a suspicious observable. We don&#39;t want to</span>
+                    <span class="c1"># Note sometimes QRadar Advisor return the artifact itself as a suspicious observable. We don't want to</span>
                     <span class="c1"># duplicate here.</span>
                     <span class="c1">#</span>
                     <span class="k">if</span> <span class="n">mapping</span><span class="p">[</span><span class="n">value_type</span><span class="p">]</span> <span class="o">!=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span> <span class="ow">or</span> <span class="n">val</span><span class="o">.</span><span class="n">label</span> <span class="o">!=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">:</span>
                         <span class="n">new_artifact_count</span> <span class="o">+=</span> <span class="mi">1</span>
-                        <span class="k">if</span> <span class="n">value_type</span> <span class="o">==</span> <span class="s2">&quot;Hash&quot;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">value_type</span> <span class="o">==</span> <span class="s2">"Hash"</span><span class="p">:</span>
                             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">label</span><span class="p">)</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">[</span><span class="n">value_type</span><span class="p">]</span> <span class="ow">and</span>  <span class="n">val</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">isalnum</span><span class="p">():</span>
                                 <span class="c1"># Hash is likely MD5, SHA1 or SHA256.</span>
-                                <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">mapping</span><span class="p">[</span><span class="n">value_type</span><span class="p">][</span><span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">label</span><span class="p">)],</span> <span class="n">val</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="s2">&quot;Watson Search result&quot;</span><span class="p">)</span>
+                                <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">mapping</span><span class="p">[</span><span class="n">value_type</span><span class="p">][</span><span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="o">.</span><span class="n">label</span><span class="p">)],</span> <span class="n">val</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="s2">"Watson Search result"</span><span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>
-                            <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">mapping</span><span class="p">[</span><span class="n">value_type</span><span class="p">],</span> <span class="n">val</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="s2">&quot;Watson Search result&quot;</span><span class="p">)</span>
+                            <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">mapping</span><span class="p">[</span><span class="n">value_type</span><span class="p">],</span> <span class="n">val</span><span class="o">.</span><span class="n">label</span><span class="p">,</span> <span class="s2">"Watson Search result"</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="c1">#</span>
-                        <span class="c1"># The artifact itself is a suspicious observable. We don&#39;t create new (duplicated) artifact. But we show this info</span>
+                        <span class="c1"># The artifact itself is a suspicious observable. We don't create new (duplicated) artifact. But we show this info</span>
                         <span class="c1">#</span>
-                        <span class="n">summary_string</span> <span class="o">=</span> <span class="s2">&quot;This artifact is a suspicious observable&quot;</span>
+                        <span class="n">summary_string</span> <span class="o">=</span> <span class="s2">"This artifact is a suspicious observable"</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">non_toxic_count</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="c1"># Add a note about number of suspicious_observables</span>
-    <span class="n">note_string</span> <span class="o">=</span> <span class="s2">&quot;&lt;h3&gt;Watson Search Result Summary&lt;/h3&gt;&lt;hr&gt;&quot;</span>
-    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">&quot;&lt;br&gt;&lt;p&gt;&lt;span style=</span><span class="se">\&quot;</span><span class="s2">font-weight:bold</span><span class="se">\&quot;</span><span class="s2">&gt;&quot;</span> <span class="o">+</span> <span class="n">summary_string</span> <span class="o">+</span> <span class="s2">&quot;&lt;/span&gt;&lt;/p&gt;&lt;br&gt;&quot;</span>
-    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">&quot;&lt;p&gt;Search Value: &quot;</span> <span class="o">+</span> <span class="n">return_search</span><span class="o">.</span><span class="n">search_value</span> <span class="o">+</span> <span class="s2">&quot;&lt;/p&gt;&quot;</span>
-    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">&quot;&lt;p&gt;Search Type:  &lt;span style=</span><span class="se">\&quot;</span><span class="s2">color:white; border-bottom-left-radius: 2.96667px;background-color:#808080</span><span class="se">\&quot;</span><span class="s2">&gt;&amp;nbsp &quot;</span> <span class="o">+</span> <span class="n">return_search</span><span class="o">.</span><span class="n">search_value_type</span> <span class="o">+</span> <span class="s2">&quot;&amp;nbsp&lt;/span&gt;&lt;/p&gt;&quot;</span>
-    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">&quot;&lt;p style=</span><span class="se">\&quot;</span><span class="s2">color:#FF00FF;</span><span class="se">\&quot;</span><span class="s2">&gt;Toxic observables: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">toxic_count</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&lt;/p&gt;&quot;</span>
-    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">&quot;&lt;p style=</span><span class="se">\&quot;</span><span class="s2">color:red;</span><span class="se">\&quot;</span><span class="s2">&gt;New artifacts mapped from toxic observables: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
-        <span class="n">new_artifact_count</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&lt;/p&gt;&quot;</span>
-    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">&quot;&lt;p&gt;Non toxic observables: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">non_toxic_count</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&lt;/p&gt;&quot;</span>
+    <span class="n">note_string</span> <span class="o">=</span> <span class="s2">"&lt;h3&gt;Watson Search Result Summary&lt;/h3&gt;&lt;hr&gt;"</span>
+    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">"&lt;br&gt;&lt;p&gt;&lt;span style=</span><span class="se">\"</span><span class="s2">font-weight:bold</span><span class="se">\"</span><span class="s2">&gt;"</span> <span class="o">+</span> <span class="n">summary_string</span> <span class="o">+</span> <span class="s2">"&lt;/span&gt;&lt;/p&gt;&lt;br&gt;"</span>
+    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">"&lt;p&gt;Search Value: "</span> <span class="o">+</span> <span class="n">return_search</span><span class="o">.</span><span class="n">search_value</span> <span class="o">+</span> <span class="s2">"&lt;/p&gt;"</span>
+    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">"&lt;p&gt;Search Type:  &lt;span style=</span><span class="se">\"</span><span class="s2">color:white; border-bottom-left-radius: 2.96667px;background-color:#808080</span><span class="se">\"</span><span class="s2">&gt;&amp;nbsp "</span> <span class="o">+</span> <span class="n">return_search</span><span class="o">.</span><span class="n">search_value_type</span> <span class="o">+</span> <span class="s2">"&amp;nbsp&lt;/span&gt;&lt;/p&gt;"</span>
+    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">"&lt;p style=</span><span class="se">\"</span><span class="s2">color:#FF00FF;</span><span class="se">\"</span><span class="s2">&gt;Toxic observables: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">toxic_count</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"&lt;/p&gt;"</span>
+    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">"&lt;p style=</span><span class="se">\"</span><span class="s2">color:red;</span><span class="se">\"</span><span class="s2">&gt;New artifacts mapped from toxic observables: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span>
+        <span class="n">new_artifact_count</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"&lt;/p&gt;"</span>
+    <span class="n">note_string</span> <span class="o">=</span> <span class="n">note_string</span> <span class="o">+</span> <span class="s2">"&lt;p&gt;Non toxic observables: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">non_toxic_count</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"&lt;/p&gt;"</span>
     <span class="n">html_note</span> <span class="o">=</span> <span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_string</span><span class="p">)</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">html_note</span><span class="p">)</span>
 
@@ -1405,37 +1405,37 @@ List any steps that are needed to configure the endpoint to use this app.
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;note&quot;</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\u003c</span><span class="s2">ul</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\&quot;</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\&quot;</span><span class="s2"> alt=</span><span class="se">\&quot;</span><span class="s2">ipv4-addr</span><span class="se">\&quot;</span><span class="s2"> style=</span><span class="se">\&quot;</span><span class="s2">width:20px; height:20px</span><span class="se">\&quot;</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 89.223.26.52</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">There is 1 object and 0 link.</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;observables&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"note"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">ul</span><span class="se">\u003e\u003c</span><span class="s2">li</span><span class="se">\u003e\u003c</span><span class="s2">img src=</span><span class="se">\"</span><span class="s2">https://raw.githubusercontent.com/freetaxii/stix2-graphics/master/icons/png/stix2-sco-network-address-icons-png/ipv4-addr-square-dark-300-dpi.png</span><span class="se">\"</span><span class="s2"> alt=</span><span class="se">\"</span><span class="s2">ipv4-addr</span><span class="se">\"</span><span class="s2"> style=</span><span class="se">\"</span><span class="s2">width:20px; height:20px</span><span class="se">\"</span><span class="s2">/</span><span class="se">\u003e</span><span class="s2"> 89.223.26.52</span><span class="se">\u003c</span><span class="s2">/li</span><span class="se">\u003e\u003c</span><span class="s2">/ul</span><span class="se">\u003e\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">There is 1 object and 0 link.</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">"</span><span class="p">,</span>
+  <span class="s2">"observables"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;89.223.26.52&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;relevance&quot;</span><span class="p">:</span> <span class="s2">&quot;very-high&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;toxicity&quot;</span><span class="p">:</span> <span class="s2">&quot;very-low&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ipv4-addr&quot;</span>
+      <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"89.223.26.52"</span><span class="p">,</span>
+      <span class="s2">"relevance"</span><span class="p">:</span> <span class="s2">"very-high"</span><span class="p">,</span>
+      <span class="s2">"toxicity"</span><span class="p">:</span> <span class="s2">"very-low"</span><span class="p">,</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"ipv4-addr"</span>
     <span class="p">}</span>
   <span class="p">],</span>
-  <span class="s2">&quot;stix&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;bundle--610d4a69-eb55-4655-b6ee-2fa86473c517&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;objects&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"stix"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"bundle--610d4a69-eb55-4655-b6ee-2fa86473c517"</span><span class="p">,</span>
+    <span class="s2">"objects"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-08-18T21:22:05.000Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;indicator--13f7fe84-2fc9-4f8e-ac1f-9ab6ae14bb10&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;labels&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;benign&quot;</span>
+        <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2022-08-18T21:22:05.000Z"</span><span class="p">,</span>
+        <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"indicator--13f7fe84-2fc9-4f8e-ac1f-9ab6ae14bb10"</span><span class="p">,</span>
+        <span class="s2">"labels"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"benign"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;modified&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-08-18T21:22:05.000Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;IpAddress&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;pattern&quot;</span><span class="p">:</span> <span class="s2">&quot;[ipv4-addr:value=</span><span class="se">\u0027</span><span class="s2">89.223.26.52</span><span class="se">\u0027</span><span class="s2">]&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;indicator&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;valid_from&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-08-18T21:22:05.000Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;x_ibm_security_relevance&quot;</span><span class="p">:</span> <span class="s2">&quot;very-high&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;x_ibm_security_toxicity&quot;</span><span class="p">:</span> <span class="s2">&quot;very-low&quot;</span>
+        <span class="s2">"modified"</span><span class="p">:</span> <span class="s2">"2022-08-18T21:22:05.000Z"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"IpAddress"</span><span class="p">,</span>
+        <span class="s2">"pattern"</span><span class="p">:</span> <span class="s2">"[ipv4-addr:value=</span><span class="se">\u0027</span><span class="s2">89.223.26.52</span><span class="se">\u0027</span><span class="s2">]"</span><span class="p">,</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"indicator"</span><span class="p">,</span>
+        <span class="s2">"valid_from"</span><span class="p">:</span> <span class="s2">"2022-08-18T21:22:05.000Z"</span><span class="p">,</span>
+        <span class="s2">"x_ibm_security_relevance"</span><span class="p">:</span> <span class="s2">"very-high"</span><span class="p">,</span>
+        <span class="s2">"x_ibm_security_toxicity"</span><span class="p">:</span> <span class="s2">"very-low"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;spec_version&quot;</span><span class="p">:</span> <span class="s2">&quot;2.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;bundle&quot;</span>
+    <span class="s2">"spec_version"</span><span class="p">:</span> <span class="s2">"2.0"</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"bundle"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;summary&quot;</span><span class="p">:</span> <span class="s2">&quot;Watson Search with Local Context of indicator 89.223.26.52 returns 1 observable.&quot;</span>
+  <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Watson Search with Local Context of indicator 89.223.26.52 returns 1 observable."</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1451,9 +1451,9 @@ List any steps that are needed to configure the endpoint to use this app.
 <span class="c1"># The “user:” prefix needs to be added to a username search.</span>
 <span class="c1">#</span>
 <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;User Account&quot;</span><span class="p">:</span><span class="s2">&quot;user:&quot;</span>       
+  <span class="s2">"User Account"</span><span class="p">:</span><span class="s2">"user:"</span>       
 <span class="p">}</span>
-<span class="n">prefix</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="n">prefix</span> <span class="o">=</span> <span class="s2">""</span>
 <span class="k">if</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">:</span>
   <span class="n">prefix</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">[</span><span class="nb">type</span><span class="p">]</span>
 
@@ -1472,15 +1472,15 @@ List any steps that are needed to configure the endpoint to use this app.
 <span class="c1">#   * results.summary: used here to create a Task.</span>
 <span class="c1">#   * results.stix: raw stix data (not used here), for any customized parsing.</span>
 
-<span class="c1"># Check that we didn&#39;t get a status of 404 (no observables) for insights.</span>
-<span class="k">if</span> <span class="s2">&quot;status_code&quot;</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;stix&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;stix&quot;</span><span class="p">][</span><span class="s2">&quot;status_code&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
+<span class="c1"># Check that we didn't get a status of 404 (no observables) for insights.</span>
+<span class="k">if</span> <span class="s2">"status_code"</span> <span class="ow">in</span> <span class="n">results</span><span class="p">[</span><span class="s2">"stix"</span><span class="p">]</span> <span class="ow">and</span> <span class="n">results</span><span class="p">[</span><span class="s2">"stix"</span><span class="p">][</span><span class="s2">"status_code"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
     <span class="n">add_task</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">add_task</span>  <span class="o">=</span> <span class="kc">True</span>
 <span class="c1"># We publish a data table according to the stix if obserables found.</span>
 <span class="n">date_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
 <span class="k">for</span> <span class="n">observable</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">observables</span><span class="p">:</span>
-  <span class="n">qradar_obs</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;qradar_advisor_observable_for_artifact&quot;</span><span class="p">)</span>
+  <span class="n">qradar_obs</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"qradar_advisor_observable_for_artifact"</span><span class="p">)</span>
   <span class="n">qradar_obs</span><span class="o">.</span><span class="n">qradar_advisor_toxicity</span> <span class="o">=</span> <span class="n">observable</span><span class="o">.</span><span class="n">toxicity</span> 
   <span class="n">qradar_obs</span><span class="o">.</span><span class="n">qradar_advisor_relevance</span> <span class="o">=</span> <span class="n">observable</span><span class="o">.</span><span class="n">relevance</span>
   <span class="n">qradar_obs</span><span class="o">.</span><span class="n">qradar_advisor_type</span> <span class="o">=</span> <span class="n">observable</span><span class="o">.</span><span class="n">type</span> 
@@ -1493,7 +1493,7 @@ List any steps that are needed to configure the endpoint to use this app.
 
 <span class="k">if</span> <span class="n">add_task</span><span class="p">:</span>
     <span class="c1"># Create a task</span>
-    <span class="n">incident</span><span class="o">.</span><span class="n">addTask</span><span class="p">(</span><span class="s2">&quot;Review Watson Search with Local Context of artifact: &quot;</span> <span class="o">+</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="s2">&quot;Initial&quot;</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span>
+    <span class="n">incident</span><span class="o">.</span><span class="n">addTask</span><span class="p">(</span><span class="s2">"Review Watson Search with Local Context of artifact: "</span> <span class="o">+</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="s2">"Initial"</span><span class="p">,</span> <span class="n">results</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1516,36 +1516,36 @@ List any steps that are needed to configure the endpoint to use this app.
 <span class="c1"># a String type artifact will be created.</span>
 <span class="c1">#</span>
 <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;domain-name&quot;</span><span class="p">:</span> <span class="s2">&quot;DNS Name&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;DNS Name&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;EmailContent&quot;</span><span class="p">:</span> <span class="s2">&quot;Email Body&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ipv4-addr&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;malware&quot;</span><span class="p">:</span> <span class="s2">&quot;Malware Family/Variant&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;URL&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;identity&quot;</span><span class="p">:</span> <span class="s2">&quot;User Account&quot;</span>
+    <span class="s2">"domain-name"</span><span class="p">:</span> <span class="s2">"DNS Name"</span><span class="p">,</span>
+    <span class="s2">"domain"</span><span class="p">:</span> <span class="s2">"DNS Name"</span><span class="p">,</span>
+    <span class="s2">"EmailContent"</span><span class="p">:</span> <span class="s2">"Email Body"</span><span class="p">,</span>
+    <span class="s2">"ipv4-addr"</span><span class="p">:</span> <span class="s2">"IP Address"</span><span class="p">,</span>
+    <span class="s2">"malware"</span><span class="p">:</span> <span class="s2">"Malware Family/Variant"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"URL"</span><span class="p">,</span>
+    <span class="s2">"identity"</span><span class="p">:</span> <span class="s2">"User Account"</span>
 <span class="p">}</span>
 
-<span class="n">artifact_description</span> <span class="o">=</span> <span class="s2">&quot;QRadar Advisor Analysis observable&quot;</span>
+<span class="n">artifact_description</span> <span class="o">=</span> <span class="s2">"QRadar Advisor Analysis observable"</span>
 <span class="nb">type</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">qradar_advisor_type</span>
 <span class="k">if</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">:</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">mapping</span><span class="p">[</span><span class="nb">type</span><span class="p">],</span> <span class="n">row</span><span class="o">.</span><span class="n">qradar_advisor_description</span><span class="p">,</span> <span class="n">artifact_description</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">&quot;String&quot;</span>
+    <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">"String"</span>
     <span class="c1">#</span>
-    <span class="c1"># if the type is &quot;file&quot;, the description could be MD5 hash, SHA-256 hash, SHA-1.</span>
+    <span class="c1"># if the type is "file", the description could be MD5 hash, SHA-256 hash, SHA-1.</span>
     <span class="c1"># Distinguish them according to the length.</span>
     <span class="c1">#</span>
-    <span class="c1"># Anything else is considered &quot;File Name&quot;</span>
+    <span class="c1"># Anything else is considered "File Name"</span>
     <span class="c1">#</span>
-    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;file&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">"file"</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">qradar_advisor_description</span><span class="p">)</span> <span class="o">==</span> <span class="mi">32</span><span class="p">:</span>
-            <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">&quot;Malware MD5 Hash&quot;</span>
+            <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">"Malware MD5 Hash"</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">qradar_advisor_description</span><span class="p">)</span> <span class="o">==</span> <span class="mi">64</span><span class="p">:</span>
-            <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">&quot;Malware SHA-256 Hash&quot;</span>
+            <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">"Malware SHA-256 Hash"</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">qradar_advisor_description</span><span class="p">)</span> <span class="o">==</span> <span class="mi">40</span><span class="p">:</span>
-            <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">&quot;Malware SHA-1 Hash&quot;</span>
+            <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">"Malware SHA-1 Hash"</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">&quot;File Name&quot;</span>
+            <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">"File Name"</span>
 
     <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">qradar_advisor_description</span><span class="p">,</span> <span class="n">artifact_description</span><span class="p">)</span>
 </pre></div>
@@ -1570,36 +1570,36 @@ List any steps that are needed to configure the endpoint to use this app.
 <span class="c1"># a String type artifact will be created.</span>
 <span class="c1">#</span>
 <span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;domain-name&quot;</span><span class="p">:</span> <span class="s2">&quot;DNS Name&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;DNS Name&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;EmailContent&quot;</span><span class="p">:</span> <span class="s2">&quot;Email Body&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ipv4-addr&quot;</span><span class="p">:</span> <span class="s2">&quot;IP Address&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;malware&quot;</span><span class="p">:</span> <span class="s2">&quot;Malware Family/Variant&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="s2">&quot;URL&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;identity&quot;</span><span class="p">:</span> <span class="s2">&quot;User Account&quot;</span>
+    <span class="s2">"domain-name"</span><span class="p">:</span> <span class="s2">"DNS Name"</span><span class="p">,</span>
+    <span class="s2">"domain"</span><span class="p">:</span> <span class="s2">"DNS Name"</span><span class="p">,</span>
+    <span class="s2">"EmailContent"</span><span class="p">:</span> <span class="s2">"Email Body"</span><span class="p">,</span>
+    <span class="s2">"ipv4-addr"</span><span class="p">:</span> <span class="s2">"IP Address"</span><span class="p">,</span>
+    <span class="s2">"malware"</span><span class="p">:</span> <span class="s2">"Malware Family/Variant"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"URL"</span><span class="p">,</span>
+    <span class="s2">"identity"</span><span class="p">:</span> <span class="s2">"User Account"</span>
 <span class="p">}</span>
 
-<span class="n">artifact_description</span> <span class="o">=</span> <span class="s2">&quot;Watson Search with Local Context observable&quot;</span>
+<span class="n">artifact_description</span> <span class="o">=</span> <span class="s2">"Watson Search with Local Context observable"</span>
 <span class="nb">type</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">qradar_advisor_type</span>
 <span class="k">if</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">mapping</span><span class="p">:</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">mapping</span><span class="p">[</span><span class="nb">type</span><span class="p">],</span> <span class="n">row</span><span class="o">.</span><span class="n">qradar_advisor_description</span><span class="p">,</span> <span class="n">artifact_description</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">&quot;String&quot;</span>
+    <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">"String"</span>
     <span class="c1">#</span>
-    <span class="c1"># if the type is &quot;file&quot;, the description could be MD5 hash, SHA-256 hash, SHA-1.</span>
+    <span class="c1"># if the type is "file", the description could be MD5 hash, SHA-256 hash, SHA-1.</span>
     <span class="c1"># Distinguish them according to the length.</span>
     <span class="c1">#</span>
-    <span class="c1"># Anything else is considered &quot;File Name&quot;</span>
+    <span class="c1"># Anything else is considered "File Name"</span>
     <span class="c1">#</span>
-    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">&quot;file&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="s2">"file"</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">qradar_advisor_description</span><span class="p">)</span> <span class="o">==</span> <span class="mi">32</span><span class="p">:</span>
-            <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">&quot;Malware MD5 Hash&quot;</span>
+            <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">"Malware MD5 Hash"</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">qradar_advisor_description</span><span class="p">)</span> <span class="o">==</span> <span class="mi">64</span><span class="p">:</span>
-            <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">&quot;Malware SHA-256 Hash&quot;</span>
+            <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">"Malware SHA-256 Hash"</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">qradar_advisor_description</span><span class="p">)</span> <span class="o">==</span> <span class="mi">40</span><span class="p">:</span>
-            <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">&quot;Malware SHA-1 Hash&quot;</span>
+            <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">"Malware SHA-1 Hash"</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">&quot;File Name&quot;</span>
+            <span class="n">artifact_type</span> <span class="o">=</span> <span class="s2">"File Name"</span>
 
     <span class="n">incident</span><span class="o">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">qradar_advisor_description</span><span class="p">,</span> <span class="n">artifact_description</span><span class="p">)</span>
 </pre></div>

@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -769,27 +769,27 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Create operation successful.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Create operation successful."</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="n">true</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;splunk_query_param1&quot;</span><span class="p">:</span> <span class="s2">&quot;ip&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;splunk_threat_intel_type&quot;</span><span class="p">:</span> <span class="s2">&quot;ip_intel&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;splunk_label&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;splunk_query_param2&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"splunk_query_param1"</span><span class="p">:</span> <span class="s2">"ip"</span><span class="p">,</span>
+    <span class="s2">"splunk_threat_intel_type"</span><span class="p">:</span> <span class="s2">"ip_intel"</span><span class="p">,</span>
+    <span class="s2">"splunk_label"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"splunk_query_param2"</span><span class="p">:</span> <span class="s2">"1.1.1.1"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-splunk-integration&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.4.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1115</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-29 09:40:23&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-splunk-integration"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.4.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1115</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-08-29 09:40:23"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -799,43 +799,43 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lookup_map</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;DNS Name&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;ip_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;domain&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Email Attachment&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Email Attachment Name&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;file_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;file_name&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Email Body&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Email Recipient&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Email Sender&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;email_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;src_user&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Email Sender Name&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;email_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;src_user&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Email Subject&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;email_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;subject&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;File Name&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;file_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;file_name&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;File Path&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;HTTP Request Header&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;HTTP Response Header&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;IP Address&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;ip_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;ip&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Log File&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;MAC Address&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Malware Family/Variant&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Malware MD5 Hash&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;file_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;file_hash&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Malware Sample&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Malware Sample Fuzzy Hash&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;file_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;file_hash&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Malware SHA-1 Hash&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;file_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;file_hash&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Malware SHA-256 Hash&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;file_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;file_hash&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Mutex&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Network CIDR Range&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Other File&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Password&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Port&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Process Name&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;process_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;process&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Registry Key&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;registry_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;registry_value_name&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;RFC 822 Email Message File&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Service&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;service_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;service&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;String&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;System Name&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;service_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;service&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;URI Path&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;URL&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;http_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;URL Referer&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;http_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;http_referrer&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;User Account&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;User Agent&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;http_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;http_user_agent&quot;</span><span class="p">)</span>
+  <span class="s2">"DNS Name"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"ip_intel"</span><span class="p">,</span> <span class="s2">"domain"</span><span class="p">),</span>
+  <span class="s2">"Email Attachment"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Email Attachment Name"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"file_intel"</span><span class="p">,</span> <span class="s2">"file_name"</span><span class="p">),</span>
+  <span class="s2">"Email Body"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Email Recipient"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Email Sender"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"email_intel"</span><span class="p">,</span> <span class="s2">"src_user"</span><span class="p">),</span>
+  <span class="s2">"Email Sender Name"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"email_intel"</span><span class="p">,</span> <span class="s2">"src_user"</span><span class="p">),</span>
+  <span class="s2">"Email Subject"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"email_intel"</span><span class="p">,</span> <span class="s2">"subject"</span><span class="p">),</span>
+  <span class="s2">"File Name"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"file_intel"</span><span class="p">,</span> <span class="s2">"file_name"</span><span class="p">),</span>
+  <span class="s2">"File Path"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"HTTP Request Header"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"HTTP Response Header"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"IP Address"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"ip_intel"</span><span class="p">,</span> <span class="s2">"ip"</span><span class="p">),</span>
+  <span class="s2">"Log File"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"MAC Address"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Malware Family/Variant"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Malware MD5 Hash"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"file_intel"</span><span class="p">,</span> <span class="s2">"file_hash"</span><span class="p">),</span>
+  <span class="s2">"Malware Sample"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Malware Sample Fuzzy Hash"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"file_intel"</span><span class="p">,</span> <span class="s2">"file_hash"</span><span class="p">),</span>
+  <span class="s2">"Malware SHA-1 Hash"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"file_intel"</span><span class="p">,</span> <span class="s2">"file_hash"</span><span class="p">),</span>
+  <span class="s2">"Malware SHA-256 Hash"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"file_intel"</span><span class="p">,</span> <span class="s2">"file_hash"</span><span class="p">),</span>
+  <span class="s2">"Mutex"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Network CIDR Range"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Other File"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Password"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Port"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Process Name"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"process_intel"</span><span class="p">,</span> <span class="s2">"process"</span><span class="p">),</span>
+  <span class="s2">"Registry Key"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"registry_intel"</span><span class="p">,</span> <span class="s2">"registry_value_name"</span><span class="p">),</span>
+  <span class="s2">"RFC 822 Email Message File"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Service"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"service_intel"</span><span class="p">,</span> <span class="s2">"service"</span><span class="p">),</span>
+  <span class="s2">"String"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"System Name"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"service_intel"</span><span class="p">,</span> <span class="s2">"service"</span><span class="p">),</span>
+  <span class="s2">"URI Path"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"URL"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"http_intel"</span><span class="p">,</span> <span class="s2">"url"</span><span class="p">),</span>
+  <span class="s2">"URL Referer"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"http_intel"</span><span class="p">,</span> <span class="s2">"http_referrer"</span><span class="p">),</span>
+  <span class="s2">"User Account"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"User Agent"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"http_intel"</span><span class="p">,</span> <span class="s2">"http_user_agent"</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="n">lookup_map</span> <span class="ow">and</span> <span class="n">lookup_map</span><span class="p">[</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="p">]:</span>
@@ -843,9 +843,9 @@ Additional package dependencies may exist for each of these packages:</p>
   <span class="n">inputs</span><span class="o">.</span><span class="n">splunk_threat_intel_type</span> <span class="o">=</span> <span class="n">threat_type</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">splunk_query_param1</span> <span class="o">=</span> <span class="n">threat_field_name</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">splunk_query_param2</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">splunk_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;splunk_server&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">splunk_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"splunk_server"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Artifact type not supported: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Artifact type not supported: </span><span class="si">{</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -855,24 +855,24 @@ Additional package dependencies may exist for each of these packages:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">add_intel_item</span>
 <span class="n">now</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">timestamp</span><span class="p">()</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
-<span class="n">results_content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">results_content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
 
-<span class="n">result_note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Artifact&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&lt;br&gt;&lt;br&gt;</span>
+<span class="n">result_note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;b&gt;Artifact&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&lt;br&gt;&lt;br&gt;</span>
 <span class="s2">&lt;b&gt;Splunk Add Status&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&lt;br&gt;</span>
-<span class="s2">&lt;b&gt;Message&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
-                             <span class="s2">&quot;Successful&quot;</span> <span class="k">if</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;Unsuccessful&quot;</span><span class="p">,</span>
-                             <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;message&quot;</span><span class="p">,</span> <span class="s2">&quot;None&quot;</span><span class="p">))</span>
+<span class="s2">&lt;b&gt;Message&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+                             <span class="s2">"Successful"</span> <span class="k">if</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"status"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="k">else</span> <span class="s2">"Unsuccessful"</span><span class="p">,</span>
+                             <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"message"</span><span class="p">,</span> <span class="s2">"None"</span><span class="p">))</span>
 
-<span class="k">if</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+<span class="k">if</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"status"</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">result_note</span><span class="p">))</span>
-  <span class="n">results_inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span>
-  <span class="n">result_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;splunk_intel_results&quot;</span><span class="p">)</span>
+  <span class="n">results_inputs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"inputs"</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="n">result_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"splunk_intel_results"</span><span class="p">)</span>
   <span class="n">result_row</span><span class="o">.</span><span class="n">create_date</span> <span class="o">=</span> <span class="n">now</span>
-  <span class="n">result_row</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Added&quot;</span>
-  <span class="n">result_row</span><span class="o">.</span><span class="n">intel_collection</span> <span class="o">=</span> <span class="n">results_inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;splunk_threat_intel_type&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-  <span class="n">result_row</span><span class="o">.</span><span class="n">intel_field</span> <span class="o">=</span> <span class="n">results_inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;splunk_query_param1&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-  <span class="n">result_row</span><span class="o">.</span><span class="n">intel_value</span> <span class="o">=</span> <span class="n">results_inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;splunk_query_param2&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-  <span class="n">result_row</span><span class="o">.</span><span class="n">splunk_server</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;splunk_server&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">result_row</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">"Added"</span>
+  <span class="n">result_row</span><span class="o">.</span><span class="n">intel_collection</span> <span class="o">=</span> <span class="n">results_inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'splunk_threat_intel_type'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">result_row</span><span class="o">.</span><span class="n">intel_field</span> <span class="o">=</span> <span class="n">results_inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'splunk_query_param1'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">result_row</span><span class="o">.</span><span class="n">intel_value</span> <span class="o">=</span> <span class="n">results_inputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'splunk_query_param2'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">result_row</span><span class="o">.</span><span class="n">splunk_server</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"splunk_server"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -925,26 +925,26 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;Delete operation successful.&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">true</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"Delete operation successful."</span><span class="p">,</span>
+    <span class="s2">"status"</span><span class="p">:</span> <span class="n">true</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;splunk_threat_intel_key&quot;</span><span class="p">:</span> <span class="s2">&quot;dc3c8a0ce1f2464897d8c1995d66e1e4&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;splunk_threat_intel_type&quot;</span><span class="p">:</span> <span class="s2">&quot;ip_intel&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;splunk_label&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"splunk_threat_intel_key"</span><span class="p">:</span> <span class="s2">"dc3c8a0ce1f2464897d8c1995d66e1e4"</span><span class="p">,</span>
+    <span class="s2">"splunk_threat_intel_type"</span><span class="p">:</span> <span class="s2">"ip_intel"</span><span class="p">,</span>
+    <span class="s2">"splunk_label"</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-splunk-integration&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.4.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">875</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-29 09:50:50&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-splunk-integration"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.4.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">875</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-08-29 09:50:50"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -963,17 +963,17 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Post-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">delete_intel_item</span>
-<span class="n">results_content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">results_content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
 
-<span class="n">result_note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Artifact&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&lt;br&gt;&lt;br&gt;</span>
+<span class="n">result_note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;b&gt;Artifact&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&lt;br&gt;&lt;br&gt;</span>
 <span class="s2">&lt;b&gt;Splunk Delete Status&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&lt;br&gt;</span>
-<span class="s2">&lt;b&gt;Message&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">intel_value</span><span class="p">,</span>
-                             <span class="s2">&quot;Successful&quot;</span> <span class="k">if</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;Unsuccessful&quot;</span><span class="p">,</span>
-                             <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;message&quot;</span><span class="p">,</span> <span class="s2">&quot;None&quot;</span><span class="p">))</span>
+<span class="s2">&lt;b&gt;Message&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">intel_value</span><span class="p">,</span>
+                             <span class="s2">"Successful"</span> <span class="k">if</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"status"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="k">else</span> <span class="s2">"Unsuccessful"</span><span class="p">,</span>
+                             <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"message"</span><span class="p">,</span> <span class="s2">"None"</span><span class="p">))</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">result_note</span><span class="p">))</span>
-<span class="k">if</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">):</span>
-  <span class="n">row</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Deleted&quot;</span>
+<span class="k">if</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"status"</span><span class="p">):</span>
+  <span class="n">row</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">"Deleted"</span>
 </pre></div>
 </div>
 </p>
@@ -1056,47 +1056,47 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">&quot;_key&quot;</span><span class="p">:</span> <span class="s2">&quot;dc3c8a0ce1f2464897d8c1995d66e1e4&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;disabled&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;item_key&quot;</span><span class="p">:</span> <span class="s2">&quot;dc3c8a0ce1f2464897d8c1995d66e1e4&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;threat_collection&quot;</span><span class="p">:</span> <span class="s2">&quot;ip_intel&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;threat_key&quot;</span><span class="p">:</span> <span class="s2">&quot;restapi&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;1693316401&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span>
+      <span class="s2">"_key"</span><span class="p">:</span> <span class="s2">"dc3c8a0ce1f2464897d8c1995d66e1e4"</span><span class="p">,</span>
+      <span class="s2">"disabled"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+      <span class="s2">"ip"</span><span class="p">:</span> <span class="s2">"1.1.1.1"</span><span class="p">,</span>
+      <span class="s2">"item_key"</span><span class="p">:</span> <span class="s2">"dc3c8a0ce1f2464897d8c1995d66e1e4"</span><span class="p">,</span>
+      <span class="s2">"threat_collection"</span><span class="p">:</span> <span class="s2">"ip_intel"</span><span class="p">,</span>
+      <span class="s2">"threat_key"</span><span class="p">:</span> <span class="s2">"restapi"</span><span class="p">,</span>
+      <span class="s2">"time"</span><span class="p">:</span> <span class="s2">"1693316401"</span><span class="p">,</span>
+      <span class="s2">"updated"</span><span class="p">:</span> <span class="s2">"0"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">&quot;_key&quot;</span><span class="p">:</span> <span class="s2">&quot;ecbe47f05d3b47788529c89050c1bf56&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;disabled&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;ip&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;item_key&quot;</span><span class="p">:</span> <span class="s2">&quot;ecbe47f05d3b47788529c89050c1bf56&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;threat_collection&quot;</span><span class="p">:</span> <span class="s2">&quot;ip_intel&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;threat_key&quot;</span><span class="p">:</span> <span class="s2">&quot;restapi&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="s2">&quot;1693316423&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;0&quot;</span>
+      <span class="s2">"_key"</span><span class="p">:</span> <span class="s2">"ecbe47f05d3b47788529c89050c1bf56"</span><span class="p">,</span>
+      <span class="s2">"disabled"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+      <span class="s2">"ip"</span><span class="p">:</span> <span class="s2">"1.1.1.1"</span><span class="p">,</span>
+      <span class="s2">"item_key"</span><span class="p">:</span> <span class="s2">"ecbe47f05d3b47788529c89050c1bf56"</span><span class="p">,</span>
+      <span class="s2">"threat_collection"</span><span class="p">:</span> <span class="s2">"ip_intel"</span><span class="p">,</span>
+      <span class="s2">"threat_key"</span><span class="p">:</span> <span class="s2">"restapi"</span><span class="p">,</span>
+      <span class="s2">"time"</span><span class="p">:</span> <span class="s2">"1693316423"</span><span class="p">,</span>
+      <span class="s2">"updated"</span><span class="p">:</span> <span class="s2">"0"</span>
     <span class="p">}</span>
   <span class="p">],</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;splunk_query_param1&quot;</span><span class="p">:</span> <span class="s2">&quot;ip_intel&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;splunk_max_return&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="s2">&quot;splunk_query&quot;</span><span class="p">:</span> <span class="s2">&quot;| `%param1%` | eval item_key=_key | search %param2%=%param3%&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;splunk_label&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;splunk_query_param3&quot;</span><span class="p">:</span> <span class="s2">&quot;1.1.1.1&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;splunk_query_param2&quot;</span><span class="p">:</span> <span class="s2">&quot;ip&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"splunk_query_param1"</span><span class="p">:</span> <span class="s2">"ip_intel"</span><span class="p">,</span>
+    <span class="s2">"splunk_max_return"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">"splunk_query"</span><span class="p">:</span> <span class="s2">"| `%param1%` | eval item_key=_key | search %param2%=%param3%"</span><span class="p">,</span>
+    <span class="s2">"splunk_label"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"splunk_query_param3"</span><span class="p">:</span> <span class="s2">"1.1.1.1"</span><span class="p">,</span>
+    <span class="s2">"splunk_query_param2"</span><span class="p">:</span> <span class="s2">"ip"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-splunk-integration&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.4.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">9392</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-29 09:50:33&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-splunk-integration"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.4.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">9392</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-08-29 09:50:33"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1106,43 +1106,43 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Pre-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lookup_map</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;DNS Name&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;ip_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;domain&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Email Attachment&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Email Attachment Name&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;file_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;file_name&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Email Body&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Email Recipient&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Email Sender&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;email_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;src_user&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Email Sender Name&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;email_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;src_user&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Email Subject&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;email_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;subject&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;File Name&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;file_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;file_name&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;File Path&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;HTTP Request Header&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;HTTP Response Header&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;IP Address&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;ip_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;ip&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Log File&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;MAC Address&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Malware Family/Variant&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Malware MD5 Hash&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;file_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;file_hash&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Malware Sample&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Malware Sample Fuzzy Hash&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;file_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;file_hash&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Malware SHA-1 Hash&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;file_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;file_hash&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Malware SHA-256 Hash&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;file_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;file_hash&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Mutex&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Network CIDR Range&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Other File&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Password&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Port&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Process Name&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;process_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;process&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;Registry Key&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;registry_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;registry_value_name&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;RFC 822 Email Message File&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;Service&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;service_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;service&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;String&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;System Name&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;service_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;service&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;URI Path&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;URL&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;http_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;URL Referer&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;http_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;http_referrer&quot;</span><span class="p">),</span>
-  <span class="s2">&quot;User Account&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-  <span class="s2">&quot;User Agent&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;http_intel&quot;</span><span class="p">,</span> <span class="s2">&quot;http_user_agent&quot;</span><span class="p">)</span>
+  <span class="s2">"DNS Name"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"ip_intel"</span><span class="p">,</span> <span class="s2">"domain"</span><span class="p">),</span>
+  <span class="s2">"Email Attachment"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Email Attachment Name"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"file_intel"</span><span class="p">,</span> <span class="s2">"file_name"</span><span class="p">),</span>
+  <span class="s2">"Email Body"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Email Recipient"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Email Sender"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"email_intel"</span><span class="p">,</span> <span class="s2">"src_user"</span><span class="p">),</span>
+  <span class="s2">"Email Sender Name"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"email_intel"</span><span class="p">,</span> <span class="s2">"src_user"</span><span class="p">),</span>
+  <span class="s2">"Email Subject"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"email_intel"</span><span class="p">,</span> <span class="s2">"subject"</span><span class="p">),</span>
+  <span class="s2">"File Name"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"file_intel"</span><span class="p">,</span> <span class="s2">"file_name"</span><span class="p">),</span>
+  <span class="s2">"File Path"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"HTTP Request Header"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"HTTP Response Header"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"IP Address"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"ip_intel"</span><span class="p">,</span> <span class="s2">"ip"</span><span class="p">),</span>
+  <span class="s2">"Log File"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"MAC Address"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Malware Family/Variant"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Malware MD5 Hash"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"file_intel"</span><span class="p">,</span> <span class="s2">"file_hash"</span><span class="p">),</span>
+  <span class="s2">"Malware Sample"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Malware Sample Fuzzy Hash"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"file_intel"</span><span class="p">,</span> <span class="s2">"file_hash"</span><span class="p">),</span>
+  <span class="s2">"Malware SHA-1 Hash"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"file_intel"</span><span class="p">,</span> <span class="s2">"file_hash"</span><span class="p">),</span>
+  <span class="s2">"Malware SHA-256 Hash"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"file_intel"</span><span class="p">,</span> <span class="s2">"file_hash"</span><span class="p">),</span>
+  <span class="s2">"Mutex"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Network CIDR Range"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Other File"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Password"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Port"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Process Name"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"process_intel"</span><span class="p">,</span> <span class="s2">"process"</span><span class="p">),</span>
+  <span class="s2">"Registry Key"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"registry_intel"</span><span class="p">,</span> <span class="s2">"registry_value_name"</span><span class="p">),</span>
+  <span class="s2">"RFC 822 Email Message File"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"Service"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"service_intel"</span><span class="p">,</span> <span class="s2">"service"</span><span class="p">),</span>
+  <span class="s2">"String"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"System Name"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"service_intel"</span><span class="p">,</span> <span class="s2">"service"</span><span class="p">),</span>
+  <span class="s2">"URI Path"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"URL"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"http_intel"</span><span class="p">,</span> <span class="s2">"url"</span><span class="p">),</span>
+  <span class="s2">"URL Referer"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"http_intel"</span><span class="p">,</span> <span class="s2">"http_referrer"</span><span class="p">),</span>
+  <span class="s2">"User Account"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="s2">"User Agent"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"http_intel"</span><span class="p">,</span> <span class="s2">"http_user_agent"</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="k">if</span> <span class="n">artifact</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="n">lookup_map</span> <span class="ow">and</span> <span class="n">lookup_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="p">):</span>
@@ -1150,11 +1150,11 @@ Additional package dependencies may exist for each of these packages:</p>
   <span class="n">inputs</span><span class="o">.</span><span class="n">splunk_query_param1</span> <span class="o">=</span> <span class="n">threat_type</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">splunk_query_param2</span> <span class="o">=</span> <span class="n">threat_field_name</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">splunk_query_param3</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">splunk_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;splunk_server&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">splunk_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"splunk_server"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;Artifact type not supported: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="p">))</span>
+  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"Artifact type not supported: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">type</span><span class="p">))</span>
 
-<span class="n">inputs</span><span class="o">.</span><span class="n">splunk_query</span> <span class="o">=</span> <span class="s2">&quot;| `%param1%` | eval item_key=_key | search %param2%=%param3%&quot;</span>
+<span class="n">inputs</span><span class="o">.</span><span class="n">splunk_query</span> <span class="o">=</span> <span class="s2">"| `%param1%` | eval item_key=_key | search %param2%=%param3%"</span>
 <span class="n">inputs</span><span class="o">.</span><span class="n">splunk_max_return</span> <span class="o">=</span> <span class="mi">10</span>
 </pre></div>
 </div>
@@ -1164,23 +1164,23 @@ Additional package dependencies may exist for each of these packages:</p>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">search</span>
 
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{}):</span>
-  <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{}):</span>
-    <span class="n">result_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;splunk_intel_results&quot;</span><span class="p">)</span>
-    <span class="n">result_row</span><span class="o">.</span><span class="n">create_date</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">))</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
-    <span class="n">result_row</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;threat_key&quot;</span><span class="p">)</span>
-    <span class="n">result_row</span><span class="o">.</span><span class="n">intel_collection</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;splunk_query_param1&#39;</span><span class="p">)</span>
-    <span class="n">result_row</span><span class="o">.</span><span class="n">intel_key</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;_key&quot;</span><span class="p">)</span>
-    <span class="n">result_row</span><span class="o">.</span><span class="n">splunk_server</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;splunk_server&quot;</span><span class="p">)</span>
-    <span class="n">result_row</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Active&quot;</span> <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;disabled&quot;</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;Disabled&quot;</span>
-    <span class="n">event</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;item_key&quot;</span><span class="p">)</span> <span class="c1"># not presented</span>
-    <span class="n">result_row</span><span class="o">.</span><span class="n">intel_field</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;splunk_query_param2&quot;</span><span class="p">)</span>
-    <span class="n">result_row</span><span class="o">.</span><span class="n">intel_value</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;splunk_query_param3&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{}):</span>
+  <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{}):</span>
+    <span class="n">result_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"splunk_intel_results"</span><span class="p">)</span>
+    <span class="n">result_row</span><span class="o">.</span><span class="n">create_date</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"time"</span><span class="p">))</span><span class="o">*</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">result_row</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"threat_key"</span><span class="p">)</span>
+    <span class="n">result_row</span><span class="o">.</span><span class="n">intel_collection</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"inputs"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'splunk_query_param1'</span><span class="p">)</span>
+    <span class="n">result_row</span><span class="o">.</span><span class="n">intel_key</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"_key"</span><span class="p">)</span>
+    <span class="n">result_row</span><span class="o">.</span><span class="n">splunk_server</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"splunk_server"</span><span class="p">)</span>
+    <span class="n">result_row</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">"Active"</span> <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"disabled"</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">"Disabled"</span>
+    <span class="n">event</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"item_key"</span><span class="p">)</span> <span class="c1"># not presented</span>
+    <span class="n">result_row</span><span class="o">.</span><span class="n">intel_field</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"inputs"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"splunk_query_param2"</span><span class="p">)</span>
+    <span class="n">result_row</span><span class="o">.</span><span class="n">intel_value</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"inputs"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"splunk_query_param3"</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">result_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;splunk_intel_results&quot;</span><span class="p">)</span>
+  <span class="n">result_row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"splunk_intel_results"</span><span class="p">)</span>
   <span class="n">result_row</span><span class="o">.</span><span class="n">intel_value</span> <span class="o">=</span> <span class="n">artifact</span><span class="o">.</span><span class="n">value</span>
-  <span class="n">result_row</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">&quot;Not Found&quot;</span>
-  <span class="n">result_row</span><span class="o">.</span><span class="n">splunk_server</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;splunk_server&quot;</span><span class="p">)</span>
+  <span class="n">result_row</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="s2">"Not Found"</span>
+  <span class="n">result_row</span><span class="o">.</span><span class="n">splunk_server</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"splunk_server"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1244,31 +1244,31 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;details&quot;</span><span class="p">:</span> <span class="p">{},</span>
-    <span class="s2">&quot;success_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&quot;failure_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;warnings&quot;</span><span class="p">:</span> <span class="p">[],</span>
-    <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="s2">&quot;1 event updated successfully&quot;</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"details"</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s2">"success_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"failure_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"warnings"</span><span class="p">:</span> <span class="p">[],</span>
+    <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"message"</span><span class="p">:</span> <span class="s2">"1 event updated successfully"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;event_id&quot;</span><span class="p">:</span> <span class="s2">&quot;0DE6791A-6F7D-42DC-BAF0-26D58032AE40@@notable@@b98308abb5851cacd0589ec3177389d6&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;notable_event_status&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="s2">&quot;comment&quot;</span><span class="p">:</span> <span class="s2">&quot;SOAR incident is active&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;splunk_label&quot;</span><span class="p">:</span> <span class="n">null</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"event_id"</span><span class="p">:</span> <span class="s2">"0DE6791A-6F7D-42DC-BAF0-26D58032AE40@@notable@@b98308abb5851cacd0589ec3177389d6"</span><span class="p">,</span>
+    <span class="s2">"notable_event_status"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"comment"</span><span class="p">:</span> <span class="s2">"SOAR incident is active"</span><span class="p">,</span>
+    <span class="s2">"splunk_label"</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-splunk-integration&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.4.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;local&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">3790</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-08-29 09:55:24&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-splunk-integration"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.4.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"local"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">3790</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-08-29 09:55:24"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1277,18 +1277,18 @@ Additional package dependencies may exist for each of these packages:</p>
 </details>
 <details><summary>Example Pre-Process Script:</summary>
 <p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;Updating information from SOAR&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">inputs</span><span class="o">.</span><span class="n">comment</span> <span class="o">=</span> <span class="s2">"Updating information from SOAR"</span>
 <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">splunk_notable_event_id</span><span class="p">:</span>
   <span class="n">inputs</span><span class="o">.</span><span class="n">event_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">properties</span><span class="o">.</span><span class="n">splunk_notable_event_id</span>
-  <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">plan_status</span> <span class="o">==</span> <span class="s2">&quot;C&quot;</span><span class="p">:</span>
+  <span class="k">if</span> <span class="n">incident</span><span class="o">.</span><span class="n">plan_status</span> <span class="o">==</span> <span class="s2">"C"</span><span class="p">:</span>
       <span class="n">inputs</span><span class="o">.</span><span class="n">notable_event_status</span> <span class="o">=</span> <span class="mi">5</span>
-      <span class="n">inputs</span><span class="o">.</span><span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;SOAR incident is closed&quot;</span>
+      <span class="n">inputs</span><span class="o">.</span><span class="n">comment</span> <span class="o">=</span> <span class="s2">"SOAR incident is closed"</span>
   <span class="k">else</span><span class="p">:</span>
       <span class="n">inputs</span><span class="o">.</span><span class="n">notable_event_status</span> <span class="o">=</span> <span class="mi">2</span>
-      <span class="n">inputs</span><span class="o">.</span><span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;SOAR incident is active&quot;</span>
-  <span class="n">inputs</span><span class="o">.</span><span class="n">splunk_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">&quot;splunk_server&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+      <span class="n">inputs</span><span class="o">.</span><span class="n">comment</span> <span class="o">=</span> <span class="s2">"SOAR incident is active"</span>
+  <span class="n">inputs</span><span class="o">.</span><span class="n">splunk_label</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">playbook</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="s2">"splunk_server"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">&quot;Ensure that the incident custom field is set: splunk_notable_event_id&quot;</span><span class="p">)</span>
+  <span class="n">helper</span><span class="o">.</span><span class="n">fail</span><span class="p">(</span><span class="s2">"Ensure that the incident custom field is set: splunk_notable_event_id"</span><span class="p">)</span>
 </pre></div>
 </div>
 </p>
@@ -1296,13 +1296,13 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Post-Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">update_event</span>
-<span class="n">results_content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">,</span> <span class="p">{})</span>
+<span class="n">results_content</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">,</span> <span class="p">{})</span>
 
-<span class="n">result_note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&lt;b&gt;Splunk Update notable event&lt;/b&gt;:&lt;br&gt;&lt;br&gt;&quot;</span>
-<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;content&quot;</span><span class="p">),</span> <span class="nb">dict</span><span class="p">):</span>
-  <span class="n">result_note</span> <span class="o">=</span> <span class="n">result_note</span> <span class="o">+</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Splunk Update Status&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&lt;br&gt;</span>
-<span class="s2">&lt;b&gt;Message&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">&quot;Successful&quot;</span> <span class="k">if</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;success&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;Unsuccessful&quot;</span><span class="p">,</span>
-                             <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;message&quot;</span><span class="p">,</span> <span class="s2">&quot;None&quot;</span><span class="p">))</span>
+<span class="n">result_note</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"&lt;b&gt;Splunk Update notable event&lt;/b&gt;:&lt;br&gt;&lt;br&gt;"</span>
+<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"content"</span><span class="p">),</span> <span class="nb">dict</span><span class="p">):</span>
+  <span class="n">result_note</span> <span class="o">=</span> <span class="n">result_note</span> <span class="o">+</span> <span class="sa">u</span><span class="s2">"""&lt;b&gt;Splunk Update Status&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&lt;br&gt;</span>
+<span class="s2">&lt;b&gt;Message&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"Successful"</span> <span class="k">if</span> <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"success"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="k">else</span> <span class="s2">"Unsuccessful"</span><span class="p">,</span>
+                             <span class="n">results_content</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"message"</span><span class="p">,</span> <span class="s2">"None"</span><span class="p">))</span>
 <span class="k">else</span><span class="p">:</span>
   <span class="n">result_note</span> <span class="o">=</span> <span class="n">result_note</span> <span class="o">+</span> <span class="n">results_content</span>
 

@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -583,75 +583,75 @@ docker_extra_&lt;argument&gt;<span class="o">=</span>&lt;string&gt;<span class="
 <section id="function-output">
 <h3>Function Output:<a class="headerlink" href="#function-output" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;content&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;attachment_name&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-             <span class="s1">&#39;container_exit_status&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Error&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;StatusCode&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
-             <span class="s1">&#39;container_id&#39;</span><span class="p">:</span> <span class="s1">&#39;2e3760ce9fe8aaafbf41ce0eac49d0a9bf9b030d8840192ce053ff0b52d04b39&#39;</span><span class="p">,</span>
-             <span class="s1">&#39;container_stats&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;blkio_stats&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;io_merged_recursive&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                                                 <span class="s1">&#39;io_queue_recursive&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                                                 <span class="s1">&#39;io_service_bytes_recursive&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                                                 <span class="s1">&#39;io_service_time_recursive&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                                                 <span class="s1">&#39;io_serviced_recursive&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                                                 <span class="s1">&#39;io_time_recursive&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                                                 <span class="s1">&#39;io_wait_time_recursive&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-                                                 <span class="s1">&#39;sectors_recursive&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
-                                 <span class="s1">&#39;cpu_stats&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;cpu_usage&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;total_usage&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                                                             <span class="s1">&#39;usage_in_kernelmode&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                                                             <span class="s1">&#39;usage_in_usermode&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
-                                               <span class="s1">&#39;throttling_data&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;periods&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                                                                   <span class="s1">&#39;throttled_periods&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                                                                   <span class="s1">&#39;throttled_time&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}},</span>
-                                 <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="s1">&#39;2e3760ce9fe8aaafbf41ce0eac49d0a9bf9b030d8840192ce053ff0b52d04b39&#39;</span><span class="p">,</span>
-                                 <span class="s1">&#39;memory_stats&#39;</span><span class="p">:</span> <span class="p">{},</span>
-                                 <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;/zealous_chaplygin&#39;</span><span class="p">,</span>
-                                 <span class="s1">&#39;num_procs&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                                 <span class="s1">&#39;pids_stats&#39;</span><span class="p">:</span> <span class="p">{},</span>
-                                 <span class="s1">&#39;precpu_stats&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;cpu_usage&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;total_usage&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                                                                <span class="s1">&#39;usage_in_kernelmode&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                                                                <span class="s1">&#39;usage_in_usermode&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
-                                                  <span class="s1">&#39;throttling_data&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;periods&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                                                                      <span class="s1">&#39;throttled_periods&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                                                                      <span class="s1">&#39;throttled_time&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}},</span>
-                                 <span class="s1">&#39;preread&#39;</span><span class="p">:</span> <span class="s1">&#39;0001-01-01T00:00:00Z&#39;</span><span class="p">,</span>
-                                 <span class="s1">&#39;read&#39;</span><span class="p">:</span> <span class="s1">&#39;0001-01-01T00:00:00Z&#39;</span><span class="p">,</span>
-                                 <span class="s1">&#39;storage_stats&#39;</span><span class="p">:</span> <span class="p">{}},</span>
-             <span class="s1">&#39;logs&#39;</span><span class="p">:</span> <span class="s1">&#39;Hash 60B7C0FEAD45F2066E5B805A91F4F0FC found in NSRL &#39;</span>
-                     <span class="s1">&#39;Database.</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>
-             <span class="s1">&#39;res_links&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;res_object&#39;</span><span class="p">:</span> <span class="s1">&#39;https://192.168.57.101/#incidents/2097&#39;</span><span class="p">}},</span>
- <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;docker_artifact_type&#39;</span><span class="p">:</span> <span class="s1">&#39;Malware MD5 Hash&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;docker_image&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="mi">1851</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;nsrl&#39;</span><span class="p">},</span>
-            <span class="s1">&#39;docker_input&#39;</span><span class="p">:</span> <span class="s1">&#39;60B7C0FEAD45F2066E5B805A91F4F0FC&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;docker_operation&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="s1">&#39;incident_id&#39;</span><span class="p">:</span> <span class="mi">2097</span><span class="p">},</span>
- <span class="s1">&#39;metrics&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;execution_time_ms&#39;</span><span class="p">:</span> <span class="mi">2844</span><span class="p">,</span>
-             <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s1">&#39;RyanG-MBP-18.local&#39;</span><span class="p">,</span>
-             <span class="s1">&#39;package&#39;</span><span class="p">:</span> <span class="s1">&#39;fn-docker&#39;</span><span class="p">,</span>
-             <span class="s1">&#39;package_version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0.0&#39;</span><span class="p">,</span>
-             <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="s1">&#39;2019-03-05 11:40:34&#39;</span><span class="p">,</span>
-             <span class="s1">&#39;timestamp_epoch&#39;</span><span class="p">:</span> <span class="mi">1551786034614</span><span class="p">,</span>
-             <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span><span class="p">},</span>
- <span class="s1">&#39;raw&#39;</span><span class="p">:</span> <span class="s1">&#39;{&quot;logs&quot;: &quot;Hash 60B7C0FEAD45F2066E5B805A91F4F0FC found in NSRL &#39;</span>
-        <span class="s1">&#39;Database.</span><span class="se">\\</span><span class="s1">n&quot;, &quot;container_exit_status&quot;: {&quot;Error&quot;: null, &quot;StatusCode&quot;: &#39;</span>
-        <span class="s1">&#39;0}, &quot;container_stats&quot;: {&quot;read&quot;: &quot;0001-01-01T00:00:00Z&quot;, &quot;preread&quot;: &#39;</span>
-        <span class="s1">&#39;&quot;0001-01-01T00:00:00Z&quot;, &quot;pids_stats&quot;: </span><span class="si">{}</span><span class="s1">, &quot;blkio_stats&quot;: &#39;</span>
-        <span class="s1">&#39;{&quot;io_service_bytes_recursive&quot;: null, &quot;io_serviced_recursive&quot;: null, &#39;</span>
-        <span class="s1">&#39;&quot;io_queue_recursive&quot;: null, &quot;io_service_time_recursive&quot;: null, &#39;</span>
-        <span class="s1">&#39;&quot;io_wait_time_recursive&quot;: null, &quot;io_merged_recursive&quot;: null, &#39;</span>
-        <span class="s1">&#39;&quot;io_time_recursive&quot;: null, &quot;sectors_recursive&quot;: null}, &quot;num_procs&quot;: &#39;</span>
-        <span class="s1">&#39;0, &quot;storage_stats&quot;: </span><span class="si">{}</span><span class="s1">, &quot;cpu_stats&quot;: {&quot;cpu_usage&quot;: {&quot;total_usage&quot;: 0, &#39;</span>
-        <span class="s1">&#39;&quot;usage_in_kernelmode&quot;: 0, &quot;usage_in_usermode&quot;: 0}, &quot;throttling_data&quot;: &#39;</span>
-        <span class="s1">&#39;{&quot;periods&quot;: 0, &quot;throttled_periods&quot;: 0, &quot;throttled_time&quot;: 0}}, &#39;</span>
-        <span class="s1">&#39;&quot;precpu_stats&quot;: {&quot;cpu_usage&quot;: {&quot;total_usage&quot;: 0, &#39;</span>
-        <span class="s1">&#39;&quot;usage_in_kernelmode&quot;: 0, &quot;usage_in_usermode&quot;: 0}, &quot;throttling_data&quot;: &#39;</span>
-        <span class="s1">&#39;{&quot;periods&quot;: 0, &quot;throttled_periods&quot;: 0, &quot;throttled_time&quot;: 0}}, &#39;</span>
-        <span class="s1">&#39;&quot;memory_stats&quot;: </span><span class="si">{}</span><span class="s1">, &quot;name&quot;: &quot;/zealous_chaplygin&quot;, &quot;id&quot;: &#39;</span>
-        <span class="s1">&#39;&quot;2e3760ce9fe8aaafbf41ce0eac49d0a9bf9b030d8840192ce053ff0b52d04b39&quot;}, &#39;</span>
-        <span class="s1">&#39;&quot;container_id&quot;: &#39;</span>
-        <span class="s1">&#39;&quot;2e3760ce9fe8aaafbf41ce0eac49d0a9bf9b030d8840192ce053ff0b52d04b39&quot;, &#39;</span>
-        <span class="s1">&#39;&quot;res_links&quot;: {&quot;res_object&quot;: &#39;</span>
-        <span class="s1">&#39;&quot;https://192.168.57.101/#incidents/2097&quot;}, &quot;attachment_name&quot;: null}&#39;</span><span class="p">,</span>
- <span class="s1">&#39;reason&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
- <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
- <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;1.0&#39;</span>
+    <span class="s1">'content'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'attachment_name'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+             <span class="s1">'container_exit_status'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'Error'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">'StatusCode'</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+             <span class="s1">'container_id'</span><span class="p">:</span> <span class="s1">'2e3760ce9fe8aaafbf41ce0eac49d0a9bf9b030d8840192ce053ff0b52d04b39'</span><span class="p">,</span>
+             <span class="s1">'container_stats'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'blkio_stats'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'io_merged_recursive'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                                 <span class="s1">'io_queue_recursive'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                                 <span class="s1">'io_service_bytes_recursive'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                                 <span class="s1">'io_service_time_recursive'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                                 <span class="s1">'io_serviced_recursive'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                                 <span class="s1">'io_time_recursive'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                                 <span class="s1">'io_wait_time_recursive'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+                                                 <span class="s1">'sectors_recursive'</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span>
+                                 <span class="s1">'cpu_stats'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'cpu_usage'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'total_usage'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                                             <span class="s1">'usage_in_kernelmode'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                                             <span class="s1">'usage_in_usermode'</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+                                               <span class="s1">'throttling_data'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'periods'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                                                   <span class="s1">'throttled_periods'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                                                   <span class="s1">'throttled_time'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}},</span>
+                                 <span class="s1">'id'</span><span class="p">:</span> <span class="s1">'2e3760ce9fe8aaafbf41ce0eac49d0a9bf9b030d8840192ce053ff0b52d04b39'</span><span class="p">,</span>
+                                 <span class="s1">'memory_stats'</span><span class="p">:</span> <span class="p">{},</span>
+                                 <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'/zealous_chaplygin'</span><span class="p">,</span>
+                                 <span class="s1">'num_procs'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                 <span class="s1">'pids_stats'</span><span class="p">:</span> <span class="p">{},</span>
+                                 <span class="s1">'precpu_stats'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'cpu_usage'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'total_usage'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                                                <span class="s1">'usage_in_kernelmode'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                                                <span class="s1">'usage_in_usermode'</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+                                                  <span class="s1">'throttling_data'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'periods'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                                                      <span class="s1">'throttled_periods'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                                                                      <span class="s1">'throttled_time'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}},</span>
+                                 <span class="s1">'preread'</span><span class="p">:</span> <span class="s1">'0001-01-01T00:00:00Z'</span><span class="p">,</span>
+                                 <span class="s1">'read'</span><span class="p">:</span> <span class="s1">'0001-01-01T00:00:00Z'</span><span class="p">,</span>
+                                 <span class="s1">'storage_stats'</span><span class="p">:</span> <span class="p">{}},</span>
+             <span class="s1">'logs'</span><span class="p">:</span> <span class="s1">'Hash 60B7C0FEAD45F2066E5B805A91F4F0FC found in NSRL '</span>
+                     <span class="s1">'Database.</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span>
+             <span class="s1">'res_links'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'res_object'</span><span class="p">:</span> <span class="s1">'https://192.168.57.101/#incidents/2097'</span><span class="p">}},</span>
+ <span class="s1">'inputs'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'docker_artifact_type'</span><span class="p">:</span> <span class="s1">'Malware MD5 Hash'</span><span class="p">,</span>
+            <span class="s1">'docker_image'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'id'</span><span class="p">:</span> <span class="mi">1851</span><span class="p">,</span> <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'nsrl'</span><span class="p">},</span>
+            <span class="s1">'docker_input'</span><span class="p">:</span> <span class="s1">'60B7C0FEAD45F2066E5B805A91F4F0FC'</span><span class="p">,</span>
+            <span class="s1">'docker_operation'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">'incident_id'</span><span class="p">:</span> <span class="mi">2097</span><span class="p">},</span>
+ <span class="s1">'metrics'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'execution_time_ms'</span><span class="p">:</span> <span class="mi">2844</span><span class="p">,</span>
+             <span class="s1">'host'</span><span class="p">:</span> <span class="s1">'RyanG-MBP-18.local'</span><span class="p">,</span>
+             <span class="s1">'package'</span><span class="p">:</span> <span class="s1">'fn-docker'</span><span class="p">,</span>
+             <span class="s1">'package_version'</span><span class="p">:</span> <span class="s1">'1.0.0'</span><span class="p">,</span>
+             <span class="s1">'timestamp'</span><span class="p">:</span> <span class="s1">'2019-03-05 11:40:34'</span><span class="p">,</span>
+             <span class="s1">'timestamp_epoch'</span><span class="p">:</span> <span class="mi">1551786034614</span><span class="p">,</span>
+             <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span><span class="p">},</span>
+ <span class="s1">'raw'</span><span class="p">:</span> <span class="s1">'{"logs": "Hash 60B7C0FEAD45F2066E5B805A91F4F0FC found in NSRL '</span>
+        <span class="s1">'Database.</span><span class="se">\\</span><span class="s1">n", "container_exit_status": {"Error": null, "StatusCode": '</span>
+        <span class="s1">'0}, "container_stats": {"read": "0001-01-01T00:00:00Z", "preread": '</span>
+        <span class="s1">'"0001-01-01T00:00:00Z", "pids_stats": </span><span class="si">{}</span><span class="s1">, "blkio_stats": '</span>
+        <span class="s1">'{"io_service_bytes_recursive": null, "io_serviced_recursive": null, '</span>
+        <span class="s1">'"io_queue_recursive": null, "io_service_time_recursive": null, '</span>
+        <span class="s1">'"io_wait_time_recursive": null, "io_merged_recursive": null, '</span>
+        <span class="s1">'"io_time_recursive": null, "sectors_recursive": null}, "num_procs": '</span>
+        <span class="s1">'0, "storage_stats": </span><span class="si">{}</span><span class="s1">, "cpu_stats": {"cpu_usage": {"total_usage": 0, '</span>
+        <span class="s1">'"usage_in_kernelmode": 0, "usage_in_usermode": 0}, "throttling_data": '</span>
+        <span class="s1">'{"periods": 0, "throttled_periods": 0, "throttled_time": 0}}, '</span>
+        <span class="s1">'"precpu_stats": {"cpu_usage": {"total_usage": 0, '</span>
+        <span class="s1">'"usage_in_kernelmode": 0, "usage_in_usermode": 0}, "throttling_data": '</span>
+        <span class="s1">'{"periods": 0, "throttled_periods": 0, "throttled_time": 0}}, '</span>
+        <span class="s1">'"memory_stats": </span><span class="si">{}</span><span class="s1">, "name": "/zealous_chaplygin", "id": '</span>
+        <span class="s1">'"2e3760ce9fe8aaafbf41ce0eac49d0a9bf9b030d8840192ce053ff0b52d04b39"}, '</span>
+        <span class="s1">'"container_id": '</span>
+        <span class="s1">'"2e3760ce9fe8aaafbf41ce0eac49d0a9bf9b030d8840192ce053ff0b52d04b39", '</span>
+        <span class="s1">'"res_links": {"res_object": '</span>
+        <span class="s1">'"https://192.168.57.101/#incidents/2097"}, "attachment_name": null}'</span><span class="p">,</span>
+ <span class="s1">'reason'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+ <span class="s1">'success'</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+ <span class="s1">'version'</span><span class="p">:</span> <span class="s1">'1.0'</span>
     <span class="p">}</span>
 
 </pre></div>
@@ -675,25 +675,25 @@ docker_extra_&lt;argument&gt;<span class="o">=</span>&lt;string&gt;<span class="
 </section>
 <section id="post-process-script">
 <h3>Post-Process Script:<a class="headerlink" href="#post-process-script" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note_text_start</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Docker Integration&lt;/b&gt;</span>
-<span class="s2">              &lt;br&gt;&lt;br&gt;A container was ran using the image &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note_text_start</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;b&gt;Docker Integration&lt;/b&gt;</span>
+<span class="s2">              &lt;br&gt;&lt;br&gt;A container was ran using the image &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"docker_image"</span><span class="p">][</span><span class="s2">"name"</span><span class="p">])</span>
 
 <span class="c1"># If the Attachment attribute of the content payload is set; we are dealing with an attachment</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;attachment_name&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-  <span class="n">note_text_attachment</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; On an Attachment with name </span><span class="si">{0}</span><span class="s2"> &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;attachment_name&quot;</span><span class="p">])</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"attachment_name"</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+  <span class="n">note_text_attachment</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt; On an Attachment with name </span><span class="si">{0}</span><span class="s2"> """</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"attachment_name"</span><span class="p">])</span>
   <span class="n">note_text_start</span> <span class="o">+=</span> <span class="n">note_text_attachment</span>
 
 <span class="c1"># Otherwise we are dealing with an artifact</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">note_text_artifact</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; On an Artifact of Type: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
-<span class="s2">                          &lt;br&gt; Artifact Value: &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_artifact_type&quot;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_input&quot;</span><span class="p">])</span>
+  <span class="n">note_text_artifact</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt; On an Artifact of Type: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
+<span class="s2">                          &lt;br&gt; Artifact Value: &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"docker_artifact_type"</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"docker_input"</span><span class="p">])</span>
   <span class="n">note_text_start</span> <span class="o">+=</span> <span class="n">note_text_artifact</span>
 
-<span class="n">note_text_end</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;Container ID : &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
+<span class="n">note_text_end</span> <span class="o">=</span> <span class="s2">"""&lt;br&gt;Container ID : &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
 <span class="s2">              &lt;br&gt;Container exit code : &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;</span>
 <span class="s2">              &lt;br&gt;&lt;br&gt; Container Logs have been saved as an attachment.</span>
-<span class="s2">              Container Stats, Logs, Function Inputs or Run Time Metrics are also available as part of the result payload&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;container_id&quot;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;container_exit_status&quot;</span><span class="p">])</span>
+<span class="s2">              Container Stats, Logs, Function Inputs or Run Time Metrics are also available as part of the result payload"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"container_id"</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"container_exit_status"</span><span class="p">])</span>
 
 <span class="n">note_text</span> <span class="o">=</span> <span class="n">note_text_start</span><span class="o">+</span><span class="n">note_text_end</span>
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
@@ -705,24 +705,24 @@ docker_extra_&lt;argument&gt;<span class="o">=</span>&lt;string&gt;<span class="
 
 <span class="k">if</span> <span class="n">des</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-  <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Docker Integration:&lt;/b&gt;&lt;br&gt; Artifact was scanned by docker image </span><span class="si">{0}</span><span class="s2">  </span><span class="se">\n</span><span class="si">{1}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">],</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;logs&quot;</span><span class="p">])</span>
+  <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;b&gt;Docker Integration:&lt;/b&gt;&lt;br&gt; Artifact was scanned by docker image </span><span class="si">{0}</span><span class="s2">  </span><span class="se">\n</span><span class="si">{1}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"docker_image"</span><span class="p">][</span><span class="s2">"name"</span><span class="p">],</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"logs"</span><span class="p">])</span>
   <span class="c1"># Uncomment this line to NOT have the Amass subdomain results appended to the descript of the artifact</span>
-  <span class="c1">#artifact.description = u&quot;&quot;&quot;&lt;b&gt;Docker Integration:&lt;/b&gt;&lt;br&gt; Artifact was scanned by docker image {0}&quot;&quot;&quot;.format(results.inputs[&quot;docker_image&quot;][&quot;name&quot;])</span>
+  <span class="c1">#artifact.description = u"""&lt;b&gt;Docker Integration:&lt;/b&gt;&lt;br&gt; Artifact was scanned by docker image {0}""".format(results.inputs["docker_image"]["name"])</span>
 <span class="k">else</span><span class="p">:</span>
 
-  <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">des</span> <span class="o">+</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Docker Integration:&lt;/b&gt;&lt;br&gt; Artifact was scanned by docker image </span><span class="si">{0}</span><span class="s2">  </span><span class="se">\n</span><span class="si">{1}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">],</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;logs&quot;</span><span class="p">])</span>
+  <span class="n">artifact</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="n">des</span> <span class="o">+</span> <span class="sa">u</span><span class="s2">"""&lt;b&gt;Docker Integration:&lt;/b&gt;&lt;br&gt; Artifact was scanned by docker image </span><span class="si">{0}</span><span class="s2">  </span><span class="se">\n</span><span class="si">{1}</span><span class="s2">"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"docker_image"</span><span class="p">][</span><span class="s2">"name"</span><span class="p">],</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"logs"</span><span class="p">])</span>
 
   <span class="c1"># Uncomment this line to NOT have the Amass subdomain results appended to the descript of the artifact</span>
-  <span class="c1">#artifact.description = des + u&quot;&quot;&quot;&lt;b&gt;Docker Integration:&lt;/b&gt;&lt;br&gt; Artifact was scanned by docker image {0}&quot;&quot;&quot;.format(results.inputs[&quot;docker_image&quot;][&quot;name&quot;])</span>
+  <span class="c1">#artifact.description = des + u"""&lt;b&gt;Docker Integration:&lt;/b&gt;&lt;br&gt; Artifact was scanned by docker image {0}""".format(results.inputs["docker_image"]["name"])</span>
 
 
-<span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;docker_integration_invocations&quot;</span><span class="p">)</span>
-<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_timestamp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp_epoch&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="mi">0</span>
-<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_container_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;container_id&quot;</span><span class="p">]</span>
-<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+<span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"docker_integration_invocations"</span><span class="p">)</span>
+<span class="n">row</span><span class="p">[</span><span class="s2">"docker_timestamp"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">"metrics"</span><span class="p">][</span><span class="s2">"timestamp_epoch"</span><span class="p">]</span> <span class="ow">or</span> <span class="mi">0</span>
+<span class="n">row</span><span class="p">[</span><span class="s2">"docker_container_id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"container_id"</span><span class="p">]</span>
+<span class="n">row</span><span class="p">[</span><span class="s2">"docker_image"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"docker_image"</span><span class="p">][</span><span class="s2">"name"</span><span class="p">]</span>
 
-<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_artifact_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_artifact_type&quot;</span><span class="p">]</span>
-<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_artifact_value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_input&quot;</span><span class="p">]</span>
+<span class="n">row</span><span class="p">[</span><span class="s2">"docker_artifact_type"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"docker_artifact_type"</span><span class="p">]</span>
+<span class="n">row</span><span class="p">[</span><span class="s2">"docker_artifact_value"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"docker_input"</span><span class="p">]</span>
 
 </pre></div>
 </div>
@@ -753,25 +753,25 @@ docker_extra_&lt;argument&gt;<span class="o">=</span>&lt;string&gt;<span class="
 </section>
 <section id="id2">
 <h3>2: Post-Process Script:<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note_text_start</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;b&gt;Docker Integration&lt;/b&gt;</span>
-<span class="s2">              &lt;br&gt;&lt;br&gt;A container was ran using the image &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">note_text_start</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;b&gt;Docker Integration&lt;/b&gt;</span>
+<span class="s2">              &lt;br&gt;&lt;br&gt;A container was ran using the image &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"docker_image"</span><span class="p">][</span><span class="s2">"name"</span><span class="p">])</span>
 
 <span class="c1"># If the Attachment attribute of the content payload is set; we are dealing with an attachment</span>
-<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;attachment_name&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
-  <span class="n">note_text_attachment</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; On an Attachment with name </span><span class="si">{0}</span><span class="s2"> &quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;attachment_name&quot;</span><span class="p">])</span>
+<span class="k">if</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"attachment_name"</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+  <span class="n">note_text_attachment</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt; On an Attachment with name </span><span class="si">{0}</span><span class="s2"> """</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"attachment_name"</span><span class="p">])</span>
   <span class="n">note_text_start</span> <span class="o">+=</span> <span class="n">note_text_attachment</span>
 
 <span class="c1"># Otherwise we are dealing with an artifact</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">note_text_artifact</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;br&gt; On an Artifact of Type: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
-<span class="s2">                          &lt;br&gt; Artifact Value: &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_artifact_type&quot;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_input&quot;</span><span class="p">])</span>
+  <span class="n">note_text_artifact</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;br&gt; On an Artifact of Type: &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
+<span class="s2">                          &lt;br&gt; Artifact Value: &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"docker_artifact_type"</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"docker_input"</span><span class="p">])</span>
   <span class="n">note_text_start</span> <span class="o">+=</span> <span class="n">note_text_artifact</span>
 
-<span class="n">note_text_end</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;&lt;br&gt;Container ID : &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
+<span class="n">note_text_end</span> <span class="o">=</span> <span class="s2">"""&lt;br&gt;Container ID : &lt;b&gt;</span><span class="si">{0}</span><span class="s2">&lt;/b&gt;</span>
 <span class="s2">              &lt;br&gt;Container exit code : &lt;b&gt;</span><span class="si">{1}</span><span class="s2">&lt;/b&gt;</span>
 <span class="s2">              &lt;br&gt;&lt;br&gt; Container Logs have been saved as an attachment.</span>
-<span class="s2">              Container Stats, Logs, Function Inputs or Run Time Metrics are also available as part of the result payload&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;container_id&quot;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;container_exit_status&quot;</span><span class="p">])</span>
+<span class="s2">              Container Stats, Logs, Function Inputs or Run Time Metrics are also available as part of the result payload"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"container_id"</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"container_exit_status"</span><span class="p">])</span>
 
 <span class="n">note_text</span> <span class="o">=</span> <span class="n">note_text_start</span><span class="o">+</span><span class="n">note_text_end</span>
 
@@ -782,15 +782,15 @@ docker_extra_&lt;argument&gt;<span class="o">=</span>&lt;string&gt;<span class="
   <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note_text</span><span class="p">))</span>
 
 <span class="c1"># Add an entry to the docker_integration_invocations Datatable</span>
-<span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">&quot;docker_integration_invocations&quot;</span><span class="p">)</span>
+<span class="n">row</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="s2">"docker_integration_invocations"</span><span class="p">)</span>
 
-<span class="k">if</span> <span class="s2">&quot;task&quot;</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;res_links&quot;</span><span class="p">][</span><span class="s2">&quot;res_object&quot;</span><span class="p">]:</span>
-  <span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_links&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;&quot;&quot;&lt;a href=&quot;</span><span class="si">{}</span><span class="s2">&quot;&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt;&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;res_links&quot;</span><span class="p">][</span><span class="s2">&quot;res_object&quot;</span><span class="p">],</span> <span class="s2">&quot;Task Link&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="s2">"task"</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"res_links"</span><span class="p">][</span><span class="s2">"res_object"</span><span class="p">]:</span>
+  <span class="n">row</span><span class="p">[</span><span class="s2">"docker_links"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">"""&lt;a href="</span><span class="si">{}</span><span class="s2">"&gt;</span><span class="si">{}</span><span class="s2">&lt;/a&gt;"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"res_links"</span><span class="p">][</span><span class="s2">"res_object"</span><span class="p">],</span> <span class="s2">"Task Link"</span><span class="p">)</span>
 
-<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_timestamp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;metrics&quot;</span><span class="p">][</span><span class="s2">&quot;timestamp_epoch&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="mi">0</span>
-<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_container_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;container_id&quot;</span><span class="p">]</span>
-<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">&quot;:&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_image&quot;</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;docker_operation&quot;</span><span class="p">]])</span>
-<span class="n">row</span><span class="p">[</span><span class="s2">&quot;docker_attachment_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">&quot;attachment_name&quot;</span><span class="p">]</span>
+<span class="n">row</span><span class="p">[</span><span class="s2">"docker_timestamp"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">"metrics"</span><span class="p">][</span><span class="s2">"timestamp_epoch"</span><span class="p">]</span> <span class="ow">or</span> <span class="mi">0</span>
+<span class="n">row</span><span class="p">[</span><span class="s2">"docker_container_id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"container_id"</span><span class="p">]</span>
+<span class="n">row</span><span class="p">[</span><span class="s2">"docker_image"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">u</span><span class="s2">":"</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"docker_image"</span><span class="p">][</span><span class="s2">"name"</span><span class="p">],</span> <span class="n">results</span><span class="o">.</span><span class="n">inputs</span><span class="p">[</span><span class="s2">"docker_operation"</span><span class="p">]])</span>
+<span class="n">row</span><span class="p">[</span><span class="s2">"docker_attachment_name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="s2">"attachment_name"</span><span class="p">]</span>
 
 </pre></div>
 </div>

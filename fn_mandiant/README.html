@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -675,478 +675,478 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="s2">&quot;url--30347ecb-ecc0-5d63-a422-2f0aa046d48c&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;mscore&quot;</span><span class="p">:</span> <span class="mi">99</span><span class="p">,</span>
-    <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;url&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;http://achren.org&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;is_publishable&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-    <span class="s2">&quot;sources&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"url--30347ecb-ecc0-5d63-a422-2f0aa046d48c"</span><span class="p">,</span>
+    <span class="s2">"mscore"</span><span class="p">:</span> <span class="mi">99</span><span class="p">,</span>
+    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"url"</span><span class="p">,</span>
+    <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"http://achren.org"</span><span class="p">,</span>
+    <span class="s2">"is_publishable"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+    <span class="s2">"sources"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;first_seen&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-07-31T00:15:02.614+0000&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;last_seen&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-07-31T00:15:02.614+0000&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;osint&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-        <span class="s2">&quot;category&quot;</span><span class="p">:</span> <span class="p">[],</span>
-        <span class="s2">&quot;source_name&quot;</span><span class="p">:</span> <span class="s2">&quot;malwaredomainlist&quot;</span>
+        <span class="s2">"first_seen"</span><span class="p">:</span> <span class="s2">"2020-07-31T00:15:02.614+0000"</span><span class="p">,</span>
+        <span class="s2">"last_seen"</span><span class="p">:</span> <span class="s2">"2020-07-31T00:15:02.614+0000"</span><span class="p">,</span>
+        <span class="s2">"osint"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+        <span class="s2">"category"</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">"source_name"</span><span class="p">:</span> <span class="s2">"malwaredomainlist"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;verdict&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;analystVerdict&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;verdict&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;confidenceScore&quot;</span><span class="p">:</span> <span class="mi">0</span>
+    <span class="s2">"verdict"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"analystVerdict"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"verdict"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"confidenceScore"</span><span class="p">:</span> <span class="mi">0</span>
       <span class="p">},</span>
-      <span class="s2">&quot;authoritativeVerdict&quot;</span><span class="p">:</span> <span class="s2">&quot;mlVerdict&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;mlVerdict&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;confidenceScore&quot;</span><span class="p">:</span> <span class="mf">0.9888736570875306</span><span class="p">,</span>
-        <span class="s2">&quot;verdict&quot;</span><span class="p">:</span> <span class="s2">&quot;malicious&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-02-17T22:00:35.914+0000&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;modelVersion&quot;</span><span class="p">:</span> <span class="s2">&quot;6.1.0&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;reasoning&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-          <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">185</span><span class="p">,</span>
-          <span class="s2">&quot;neighbor_influence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;mandiant&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;bp_hosting&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-              <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Bulletproof Hosting&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+      <span class="s2">"authoritativeVerdict"</span><span class="p">:</span> <span class="s2">"mlVerdict"</span><span class="p">,</span>
+      <span class="s2">"mlVerdict"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"confidenceScore"</span><span class="p">:</span> <span class="mf">0.9888736570875306</span><span class="p">,</span>
+        <span class="s2">"verdict"</span><span class="p">:</span> <span class="s2">"malicious"</span><span class="p">,</span>
+        <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2022-02-17T22:00:35.914+0000"</span><span class="p">,</span>
+        <span class="s2">"modelVersion"</span><span class="p">:</span> <span class="s2">"6.1.0"</span><span class="p">,</span>
+        <span class="s2">"reasoning"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+          <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">185</span><span class="p">,</span>
+          <span class="s2">"neighbor_influence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"mandiant"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"bp_hosting"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+              <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Bulletproof Hosting"</span><span class="p">,</span>
+              <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
             <span class="p">},</span>
-            <span class="s2">&quot;fqdn_analysis&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-              <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="s2">&quot;low&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;FQDN Analysis&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-              <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">2</span>
+            <span class="s2">"fqdn_analysis"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+              <span class="s2">"confidence"</span><span class="p">:</span> <span class="s2">"low"</span><span class="p">,</span>
+              <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"FQDN Analysis"</span><span class="p">,</span>
+              <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+              <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">2</span>
             <span class="p">},</span>
-            <span class="s2">&quot;knowledge_graph&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-              <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Knowledge Graph&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+            <span class="s2">"knowledge_graph"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+              <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Knowledge Graph"</span><span class="p">,</span>
+              <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
             <span class="p">},</span>
-            <span class="s2">&quot;malware_analysis&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-              <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Malware Analysis&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">3</span>
+            <span class="s2">"malware_analysis"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+              <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Malware Analysis"</span><span class="p">,</span>
+              <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">3</span>
             <span class="p">},</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Mandiant&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;spam&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-              <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Spam Monitoring&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Mandiant"</span><span class="p">,</span>
+            <span class="s2">"spam"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+              <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Spam Monitoring"</span><span class="p">,</span>
+              <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
             <span class="p">},</span>
-            <span class="s2">&quot;url_analysis&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-              <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="s2">&quot;low&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;URL Analysis&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-              <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">4</span>
+            <span class="s2">"url_analysis"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+              <span class="s2">"confidence"</span><span class="p">:</span> <span class="s2">"low"</span><span class="p">,</span>
+              <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"URL Analysis"</span><span class="p">,</span>
+              <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+              <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">4</span>
             <span class="p">}</span>
           <span class="p">},</span>
-          <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
-          <span class="s2">&quot;confidence_count&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;benign&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;high&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;low&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-              <span class="s2">&quot;med&quot;</span><span class="p">:</span> <span class="mi">0</span>
+          <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+          <span class="s2">"confidence_count"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"benign"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"high"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"low"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+              <span class="s2">"med"</span><span class="p">:</span> <span class="mi">0</span>
             <span class="p">},</span>
-            <span class="s2">&quot;malicious&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;high&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;low&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;med&quot;</span><span class="p">:</span> <span class="mi">4</span>
+            <span class="s2">"malicious"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"high"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"low"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"med"</span><span class="p">:</span> <span class="mi">4</span>
             <span class="p">}</span>
           <span class="p">},</span>
-          <span class="s2">&quot;tp&quot;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="s2">&quot;crowdsource&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-              <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="s2">&quot;med&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Crowdsourced Threat Analysis&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
-              <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">91</span>
+          <span class="s2">"tp"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"crowdsource"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+              <span class="s2">"confidence"</span><span class="p">:</span> <span class="s2">"med"</span><span class="p">,</span>
+              <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Crowdsourced Threat Analysis"</span><span class="p">,</span>
+              <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+              <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">91</span>
             <span class="p">},</span>
-            <span class="s2">&quot;misp&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;dch&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Dynamic Cloud Hosting (DCH) Provider&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">9</span>
+            <span class="s2">"misp"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"dch"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Dynamic Cloud Hosting (DCH) Provider"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">9</span>
               <span class="p">},</span>
-              <span class="s2">&quot;edu&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Educational Institution&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"edu"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Educational Institution"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;MISP&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;other&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Other&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">14</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"MISP"</span><span class="p">,</span>
+              <span class="s2">"other"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Other"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">14</span>
               <span class="p">},</span>
-              <span class="s2">&quot;popular_infra&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Popular Internet Infrastructure&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">18</span>
+              <span class="s2">"popular_infra"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Popular Internet Infrastructure"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">18</span>
               <span class="p">},</span>
-              <span class="s2">&quot;popular_web&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Popular Website&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">8</span>
+              <span class="s2">"popular_web"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Popular Website"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">8</span>
               <span class="p">},</span>
-              <span class="s2">&quot;sinkhole&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Internet Sinkhole&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"sinkhole"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Internet Sinkhole"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;vpn&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Known VPN Hosting Provider&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"vpn"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Known VPN Hosting Provider"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">}</span>
             <span class="p">},</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Third Party&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;tif&quot;</span><span class="p">:</span> <span class="p">{</span>
-              <span class="s2">&quot;aa419&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Aa419&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Third Party"</span><span class="p">,</span>
+            <span class="s2">"tif"</span><span class="p">:</span> <span class="p">{</span>
+              <span class="s2">"aa419"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Aa419"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;azorult-tracker&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Azorult-tracker&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"azorult-tracker"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Azorult-tracker"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;benkow&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Benkow&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"benkow"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Benkow"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;botvrij_urls&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Botvrij Urls&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"botvrij_urls"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Botvrij Urls"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;cryptolaemus&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Cryptolaemus&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"cryptolaemus"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Cryptolaemus"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;cybercrimetracker&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Cybercrimetracker&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"cybercrimetracker"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Cybercrimetracker"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;davidonzo_hashes&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Davidonzo Hashes&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"davidonzo_hashes"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Davidonzo Hashes"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;dev&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Dev&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"dev"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Dev"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;digitalside_it_hashes&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Digitalside It Hashes&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"digitalside_it_hashes"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Digitalside It Hashes"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;digitalside_it_urls&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Digitalside It Urls&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"digitalside_it_urls"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Digitalside It Urls"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;dyndns_ponmocup&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Dyndns Ponmocup&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"dyndns_ponmocup"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Dyndns Ponmocup"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;feodo&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Feodo&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"feodo"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Feodo"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;feodo_ids&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Feodo Ids&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"feodo_ids"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Feodo Ids"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;fumik0&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Fumik0&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"fumik0"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Fumik0"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;futex.re&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Futex.re&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"futex.re"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Futex.re"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;h3x_1day&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;H3x 1day&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"h3x_1day"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"H3x 1day"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;malc0de&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Malc0de&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"malc0de"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Malc0de"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;malshare&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Malshare&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"malshare"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Malshare"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;malwared&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Malwared&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"malwared"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Malwared"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;malwaredomainlist&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="s2">&quot;med&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Malwaredomainlist&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"malwaredomainlist"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="s2">"med"</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Malwaredomainlist"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;malwaremustdie&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Malwaremustdie&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"malwaremustdie"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Malwaremustdie"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Threat Intelligence Feeds&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;openphish&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Openphish&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Threat Intelligence Feeds"</span><span class="p">,</span>
+              <span class="s2">"openphish"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Openphish"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;phishing_database&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Phishing Database&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"phishing_database"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Phishing Database"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;phishstats&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Phishstats&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"phishstats"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Phishstats"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;phishtank&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Phishtank&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"phishtank"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Phishtank"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;phishtank_valid_online&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Phishtank Valid Online&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"phishtank_valid_online"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Phishtank Valid Online"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;urlhaus&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Urlhaus&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"urlhaus"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Urlhaus"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;urlscan_phishing&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Urlscan Phishing&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"urlscan_phishing"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Urlscan Phishing"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;viriback&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Viriback&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"viriback"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Viriback"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">},</span>
-              <span class="s2">&quot;vxvault_virilist&quot;</span><span class="p">:</span> <span class="p">{</span>
-                <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-                <span class="s2">&quot;malicious_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Vxvault Virilist&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;response_count&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;source_count&quot;</span><span class="p">:</span> <span class="mi">1</span>
+              <span class="s2">"vxvault_virilist"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"confidence"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+                <span class="s2">"malicious_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Vxvault Virilist"</span><span class="p">,</span>
+                <span class="s2">"response_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s2">"source_count"</span><span class="p">:</span> <span class="mi">1</span>
               <span class="p">}</span>
             <span class="p">}</span>
           <span class="p">},</span>
-          <span class="s2">&quot;benign_count&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-          <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.1&quot;</span>
+          <span class="s2">"benign_count"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+          <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0.1"</span>
         <span class="p">}</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="s2">&quot;misp&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;akamai&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;alexa_1M&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;apple&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;bank-website&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;cisco_1M&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;cisco_top1000&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;cisco_top20k&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;common-contact-emails&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;covid-19-cyber-threat-coalition-whitelist&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;covid-19-krassi-whitelist&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;dax30&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;empty-hashes&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;google-gcp&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;google-gmail-sending-ips&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;googlebot&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;majestic_million_1M&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;microsoft&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;microsoft-attack-simulator&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;microsoft-azure&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;microsoft-azure-china&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;microsoft-azure-germany&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;microsoft-azure-us-gov&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;microsoft-win10-connection-endpoints&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;mozilla-IntermediateCA&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;multicast&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;nioc-filehash&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;ovh-cluster&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;public-dns-v4&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;public-dns-v6&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;sinkholes&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;smtp-receiving-ips&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;smtp-sending-ips&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;university_domains&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;url-shortener&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;vpn-ipv4&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;vpn-ipv6&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;whats-my-ip&quot;</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
-      <span class="s2">&quot;wikimedia&quot;</span><span class="p">:</span> <span class="n">false</span>
+    <span class="s2">"misp"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"akamai"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"alexa_1M"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"apple"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"bank-website"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"cisco_1M"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"cisco_top1000"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"cisco_top20k"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"common-contact-emails"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"covid-19-cyber-threat-coalition-whitelist"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"covid-19-krassi-whitelist"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"dax30"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"empty-hashes"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"google-gcp"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"google-gmail-sending-ips"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"googlebot"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"majestic_million_1M"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"microsoft"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"microsoft-attack-simulator"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"microsoft-azure"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"microsoft-azure-china"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"microsoft-azure-germany"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"microsoft-azure-us-gov"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"microsoft-win10-connection-endpoints"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"mozilla-IntermediateCA"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"multicast"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"nioc-filehash"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"ovh-cluster"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"public-dns-v4"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"public-dns-v6"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"sinkholes"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"smtp-receiving-ips"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"smtp-sending-ips"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"university_domains"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"url-shortener"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"vpn-ipv4"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"vpn-ipv6"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"whats-my-ip"</span><span class="p">:</span> <span class="n">false</span><span class="p">,</span>
+      <span class="s2">"wikimedia"</span><span class="p">:</span> <span class="n">false</span>
     <span class="p">},</span>
-    <span class="s2">&quot;last_updated&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-02-17T22:00:36.968Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;first_seen&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-07-31T00:15:02.000Z&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;last_seen&quot;</span><span class="p">:</span> <span class="s2">&quot;2020-07-31T00:15:02.000Z&quot;</span>
+    <span class="s2">"last_updated"</span><span class="p">:</span> <span class="s2">"2022-02-17T22:00:36.968Z"</span><span class="p">,</span>
+    <span class="s2">"first_seen"</span><span class="p">:</span> <span class="s2">"2020-07-31T00:15:02.000Z"</span><span class="p">,</span>
+    <span class="s2">"last_seen"</span><span class="p">:</span> <span class="s2">"2020-07-31T00:15:02.000Z"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;mandiant_artifact_data&quot;</span><span class="p">:</span> <span class="s2">&quot;http://achren.org&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;mandiant_artifact_type&quot;</span><span class="p">:</span> <span class="s2">&quot;URL&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"mandiant_artifact_data"</span><span class="p">:</span> <span class="s2">"http://achren.org"</span><span class="p">,</span>
+    <span class="s2">"mandiant_artifact_type"</span><span class="p">:</span> <span class="s2">"URL"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-mandiant&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;App Host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">223</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2023-10-03 13:20:15&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-mandiant"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.0"</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"App Host"</span><span class="p">,</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">223</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2023-10-03 13:20:15"</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
@@ -1164,7 +1164,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compile_section_by_dtype</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Complies received information into HIT Cards. The information can have varied datatype. This function</span>
 <span class="sd">    automatically detects the data type and formats the information suitable for a SOAR artifact. The result</span>
 <span class="sd">    is returned as a dictionary representing the subsection with its name, data type, and converted</span>
@@ -1178,32 +1178,32 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="sd">    Returns:</span>
 <span class="sd">    -------</span>
 <span class="sd">        dict: A dictionary representing the subsection with the following keys:</span>
-<span class="sd">            - &quot;name&quot;  : The name or identifier passed as the &#39;name&#39; parameter.</span>
-<span class="sd">            - &quot;type&quot;  : The determined data type of the &#39;value&#39; (either &quot;string,&quot; &quot;uri,&quot; or &quot;number&quot;).</span>
-<span class="sd">            - &quot;value&quot; : The &#39;value&#39; converted to the appropriate data type (int for numbers).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">info_type</span> <span class="o">=</span> <span class="s2">&quot;string&quot;</span>
+<span class="sd">            - "name"  : The name or identifier passed as the 'name' parameter.</span>
+<span class="sd">            - "type"  : The determined data type of the 'value' (either "string," "uri," or "number").</span>
+<span class="sd">            - "value" : The 'value' converted to the appropriate data type (int for numbers).</span>
+<span class="sd">    """</span>
+    <span class="n">info_type</span> <span class="o">=</span> <span class="s2">"string"</span>
 
-    <span class="c1"># if &quot;http&quot; found, the string is classified as an URL</span>
-    <span class="k">if</span> <span class="s2">&quot;http&quot;</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
-        <span class="n">info_type</span> <span class="o">=</span> <span class="s2">&quot;uri&quot;</span>
+    <span class="c1"># if "http" found, the string is classified as an URL</span>
+    <span class="k">if</span> <span class="s2">"http"</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+        <span class="n">info_type</span> <span class="o">=</span> <span class="s2">"uri"</span>
 
     <span class="c1"># detects if the given string is a number</span>
     <span class="k">elif</span> <span class="n">value</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
-        <span class="n">info_type</span> <span class="o">=</span> <span class="s2">&quot;number&quot;</span>
+        <span class="n">info_type</span> <span class="o">=</span> <span class="s2">"number"</span>
         <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
     <span class="c1"># format required for a HIT card to compile within an artifact</span>
     <span class="n">subsection</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;name&quot;</span>  <span class="p">:</span> <span class="n">name</span><span class="p">,</span>
-        <span class="s2">&quot;type&quot;</span>  <span class="p">:</span> <span class="n">info_type</span><span class="p">,</span>
-        <span class="s2">&quot;value&quot;</span> <span class="p">:</span> <span class="n">value</span>
+        <span class="s2">"name"</span>  <span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+        <span class="s2">"type"</span>  <span class="p">:</span> <span class="n">info_type</span><span class="p">,</span>
+        <span class="s2">"value"</span> <span class="p">:</span> <span class="n">value</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">subsection</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">dedup_section</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    An HIT card exclusively accommodates distinct entries and cannot exhibit information in a nested</span>
 <span class="sd">    structure. Consequently, data is condensed and organized within the HIT card. To prevent</span>
 <span class="sd">    redundancies, this function is employed to attach an index number to the names of recurring</span>
@@ -1215,22 +1215,22 @@ Additional package dependencies may exist for each of these packages:</p>
 
 <span class="sd">    Returns:</span>
 <span class="sd">    -------</span>
-<span class="sd">        dict : Similar dictionary with de-duplicated &quot;name&quot; value</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        dict : Similar dictionary with de-duplicated "name" value</span>
+<span class="sd">    """</span>
     <span class="n">unique_keys</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">each_item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">each_item</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unique_keys</span><span class="p">:</span>
-            <span class="n">unique_keys</span><span class="p">[</span><span class="n">each_item</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">each_item</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">unique_keys</span><span class="p">:</span>
+            <span class="n">unique_keys</span><span class="p">[</span><span class="n">each_item</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">unique_keys</span><span class="p">[</span><span class="n">each_item</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="n">section</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">section</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">unique_keys</span><span class="p">[</span><span class="n">each_item</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]])</span>
+            <span class="n">unique_keys</span><span class="p">[</span><span class="n">each_item</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">section</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s2">"name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">section</span><span class="p">[</span><span class="n">idx</span><span class="p">][</span><span class="s2">"name"</span><span class="p">]</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">unique_keys</span><span class="p">[</span><span class="n">each_item</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]])</span>
     <span class="k">return</span> <span class="n">section</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">dedup_verdict_section</span><span class="p">(</span><span class="n">section</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Verdict is a special section that contains the result of multiple analysis. Each analysis has</span>
-<span class="sd">    its own &quot;name&quot;, &quot;response_count&quot;, &quot;source_count&quot;, &quot;benign_count&quot;, &quot;confidence&quot;, and &quot;malicious_count&quot;.</span>
+<span class="sd">    its own "name", "response_count", "source_count", "benign_count", "confidence", and "malicious_count".</span>
 <span class="sd">    As these values are being repeated, this function finds the appropriate analysis being performed using</span>
 <span class="sd">    the name parameter, and appends that to the appropriate fields, there by eliminating duplicates.</span>
 
@@ -1245,28 +1245,28 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="sd">        section (dict): Verdict section of the response</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        dict :  Similar dictionary with &quot;name&quot; values modified with their appropriate analysis type.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">verdict_name</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<span class="sd">        dict :  Similar dictionary with "name" values modified with their appropriate analysis type.</span>
+<span class="sd">    """</span>
+    <span class="n">verdict_name</span> <span class="o">=</span> <span class="s2">""</span>
 
     <span class="k">for</span> <span class="n">each_item</span> <span class="ow">in</span> <span class="n">section</span><span class="p">:</span>
         <span class="c1"># Saving the analysis name for subsequent fields</span>
-        <span class="k">if</span> <span class="n">each_item</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span>
-            <span class="n">verdict_name</span> <span class="o">=</span> <span class="n">each_item</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">each_item</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"name"</span><span class="p">:</span>
+            <span class="n">verdict_name</span> <span class="o">=</span> <span class="n">each_item</span><span class="p">[</span><span class="s2">"value"</span><span class="p">]</span>
 
         <span class="c1"># Appending analysis name to fields that belong to the analysis</span>
         <span class="k">if</span> <span class="n">verdict_name</span><span class="p">:</span>
-            <span class="n">each_item</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">verdict_name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">each_item</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">each_item</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">verdict_name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">each_item</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
     <span class="k">return</span> <span class="n">section</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">compile_hits_section</span><span class="p">(</span><span class="n">gathered_info</span><span class="p">,</span> <span class="n">compiled_section</span><span class="p">:</span><span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    The purpose of this function is to flatten and organize data from the `gathered_info`</span>
 <span class="sd">    dictionary and append it to the `compiled_section` list. The function can also handle</span>
 <span class="sd">    recursive calls when it encounters nested dictionaries or lists.</span>
 
-<span class="sd">    Here&#39;s a breakdown of its functionality:</span>
+<span class="sd">    Here's a breakdown of its functionality:</span>
 <span class="sd">        1. It iterates through the keys of the `gathered_info` dictionary.</span>
 <span class="sd">        2. If a key corresponds to a dictionary, it recursively calls itself with the nested</span>
 <span class="sd">            dictionary, aiming to flatten it, and appends the results to the `compiled_section`.</span>
@@ -1290,7 +1290,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="sd">    Returns:</span>
 <span class="sd">    -------</span>
 <span class="sd">        list: compiled_section</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">for</span> <span class="n">each_key</span> <span class="ow">in</span> <span class="n">gathered_info</span><span class="p">:</span>
 
         <span class="c1"># This function has been designed with recursion in mind. This means that</span>
@@ -1315,8 +1315,8 @@ Additional package dependencies may exist for each of these packages:</p>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">each_entity</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">each_entity</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
                     <span class="n">subsection</span> <span class="o">=</span> <span class="n">compile_hits_section</span><span class="p">(</span><span class="n">each_entity</span><span class="p">,</span> <span class="n">compiled_section</span><span class="p">)</span>
 
-        <span class="c1"># Finally, if the key or value is not a list or dict, then it&#39;s classified based on</span>
-        <span class="c1"># it&#39;s datatype and formatted into a section.</span>
+        <span class="c1"># Finally, if the key or value is not a list or dict, then it's classified based on</span>
+        <span class="c1"># it's datatype and formatted into a section.</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">subsection</span> <span class="o">=</span> <span class="n">compile_section_by_dtype</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">gathered_info</span><span class="p">[</span><span class="n">each_key</span><span class="p">]),</span> <span class="n">each_key</span><span class="p">)</span>
             <span class="n">compiled_section</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subsection</span><span class="p">)</span>
@@ -1325,7 +1325,7 @@ Additional package dependencies may exist for each of these packages:</p>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">add_response_as_hits</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Here the HIT cards are created for artifacts. Depending on the response, 2 or more cards can</span>
 <span class="sd">    be created. The primary/top level of the response is created into a HIT card by itself. Every</span>
 <span class="sd">    other nested item within the response is created into a standalone section.</span>
@@ -1337,7 +1337,7 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="sd">    Returns:</span>
 <span class="sd">    -------</span>
 <span class="sd">        None</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Extract information found in the top level of the response and create a standalone HIT card</span>
     <span class="c1"># for those values. This usually has information related to MScore. Other sections are created</span>
     <span class="c1"># into separate HIT cards.</span>
@@ -1353,21 +1353,21 @@ Additional package dependencies may exist for each of these packages:</p>
     <span class="c1"># avoid any conflicts.</span>
     <span class="k">for</span> <span class="n">each_section</span> <span class="ow">in</span> <span class="n">other_sections</span><span class="p">:</span>
         <span class="n">section</span> <span class="o">=</span> <span class="n">compile_hits_section</span><span class="p">(</span><span class="n">other_sections</span><span class="p">[</span><span class="n">each_section</span><span class="p">],</span> <span class="p">[])</span>
-        <span class="k">if</span> <span class="n">each_section</span> <span class="o">==</span> <span class="s2">&quot;verdict&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">each_section</span> <span class="o">==</span> <span class="s2">"verdict"</span><span class="p">:</span>
             <span class="n">section</span> <span class="o">=</span> <span class="n">dedup_verdict_section</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
         <span class="n">section</span> <span class="o">=</span> <span class="n">dedup_section</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
-        <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mandiant Threat intelligence: </span><span class="si">{</span><span class="n">each_section</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">section</span><span class="p">)</span>
+        <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Mandiant Threat intelligence: </span><span class="si">{</span><span class="n">each_section</span><span class="o">.</span><span class="n">title</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">section</span><span class="p">)</span>
 
     <span class="n">section</span> <span class="o">=</span> <span class="n">compile_hits_section</span><span class="p">(</span><span class="n">main_section</span><span class="p">,</span> <span class="p">[])</span>
     <span class="n">section</span> <span class="o">=</span> <span class="n">dedup_section</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
-    <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="s2">&quot;Mandiant Threat intelligence: MScore&quot;</span><span class="p">,</span> <span class="n">section</span><span class="p">)</span>
+    <span class="n">artifact</span><span class="o">.</span><span class="n">addHit</span><span class="p">(</span><span class="s2">"Mandiant Threat intelligence: MScore"</span><span class="p">,</span> <span class="n">section</span><span class="p">)</span>
 
 
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">mandiant_results</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="o">.</span><span class="n">success</span><span class="p">:</span>
     <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">reason</span><span class="p">))</span>
-<span class="k">elif</span> <span class="s2">&quot;error&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
+<span class="k">elif</span> <span class="s2">"error"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
     <span class="n">add_response_as_hits</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 </pre></div>
 </div>

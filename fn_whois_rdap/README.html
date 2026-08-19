@@ -334,7 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlhaus/README.html">URLhaus</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">watsonx.ai for SOAR Analysts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#app-usage">App usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html#data-selection">Data selection</a></li>
@@ -665,297 +665,297 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;asn&quot;</span><span class="p">:</span> <span class="s2">&quot;8075&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;asn_cidr&quot;</span><span class="p">:</span> <span class="s2">&quot;172.200.0.0/13&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;asn_country_code&quot;</span><span class="p">:</span> <span class="s2">&quot;GB&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;asn_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2002-02-13&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;asn_description&quot;</span><span class="p">:</span> <span class="s2">&quot;MICROSOFT-CORP-MSN-AS-BLOCK, US&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;asn_registry&quot;</span><span class="p">:</span> <span class="s2">&quot;ripencc&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;display_content&quot;</span><span class="p">:</span> <span class="s2">&quot;{ </span><span class="se">\&quot;</span><span class="s2">dns_zone</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">25.147.206.172.origin.asn.cymru.com</span><span class="se">\&quot;</span><span class="s2"> }&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;dns_zone&quot;</span><span class="p">:</span> <span class="s2">&quot;25.147.206.172.origin.asn.cymru.com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;entities&quot;</span><span class="p">:</span> <span class="p">[</span>
-      <span class="s2">&quot;DH5439-RIPE&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;MICROSOFT-MAINT&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;MRPA3-RIPE&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;ORG-MA42-RIPE&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;RIPE-NCC-HM-MNT&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;MAC274-RIPE&quot;</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"asn"</span><span class="p">:</span> <span class="s2">"8075"</span><span class="p">,</span>
+    <span class="s2">"asn_cidr"</span><span class="p">:</span> <span class="s2">"172.200.0.0/13"</span><span class="p">,</span>
+    <span class="s2">"asn_country_code"</span><span class="p">:</span> <span class="s2">"GB"</span><span class="p">,</span>
+    <span class="s2">"asn_date"</span><span class="p">:</span> <span class="s2">"2002-02-13"</span><span class="p">,</span>
+    <span class="s2">"asn_description"</span><span class="p">:</span> <span class="s2">"MICROSOFT-CORP-MSN-AS-BLOCK, US"</span><span class="p">,</span>
+    <span class="s2">"asn_registry"</span><span class="p">:</span> <span class="s2">"ripencc"</span><span class="p">,</span>
+    <span class="s2">"display_content"</span><span class="p">:</span> <span class="s2">"{ </span><span class="se">\"</span><span class="s2">dns_zone</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">25.147.206.172.origin.asn.cymru.com</span><span class="se">\"</span><span class="s2"> }"</span><span class="p">,</span>
+    <span class="s2">"dns_zone"</span><span class="p">:</span> <span class="s2">"25.147.206.172.origin.asn.cymru.com"</span><span class="p">,</span>
+    <span class="s2">"entities"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"DH5439-RIPE"</span><span class="p">,</span>
+      <span class="s2">"MICROSOFT-MAINT"</span><span class="p">,</span>
+      <span class="s2">"MRPA3-RIPE"</span><span class="p">,</span>
+      <span class="s2">"ORG-MA42-RIPE"</span><span class="p">,</span>
+      <span class="s2">"RIPE-NCC-HM-MNT"</span><span class="p">,</span>
+      <span class="s2">"MAC274-RIPE"</span>
     <span class="p">],</span>
-    <span class="s2">&quot;network&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;cidr&quot;</span><span class="p">:</span> <span class="s2">&quot;172.128.0.0/10, 172.192.0.0/12, 172.208.0.0/13&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;GB&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;end_address&quot;</span><span class="p">:</span> <span class="s2">&quot;172.215.255.255&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;events&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"network"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"cidr"</span><span class="p">:</span> <span class="s2">"172.128.0.0/10, 172.192.0.0/12, 172.208.0.0/13"</span><span class="p">,</span>
+      <span class="s2">"country"</span><span class="p">:</span> <span class="s2">"GB"</span><span class="p">,</span>
+      <span class="s2">"end_address"</span><span class="p">:</span> <span class="s2">"172.215.255.255"</span><span class="p">,</span>
+      <span class="s2">"events"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;registration&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;actor&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-05-16T09:38:13Z&quot;</span>
+          <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"registration"</span><span class="p">,</span>
+          <span class="s2">"actor"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-05-16T09:38:13Z"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;action&quot;</span><span class="p">:</span> <span class="s2">&quot;last changed&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;actor&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-05-16T09:38:13Z&quot;</span>
+          <span class="s2">"action"</span><span class="p">:</span> <span class="s2">"last changed"</span><span class="p">,</span>
+          <span class="s2">"actor"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-05-16T09:38:13Z"</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;handle&quot;</span><span class="p">:</span> <span class="s2">&quot;172.128.0.0 - 172.215.255.255&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;ip_version&quot;</span><span class="p">:</span> <span class="s2">&quot;v4&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;https://rdap.db.ripe.net/ip/172.206.147.25&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;http://www.ripe.net/data-tools/support/documentation/terms&quot;</span>
+      <span class="s2">"handle"</span><span class="p">:</span> <span class="s2">"172.128.0.0 - 172.215.255.255"</span><span class="p">,</span>
+      <span class="s2">"ip_version"</span><span class="p">:</span> <span class="s2">"v4"</span><span class="p">,</span>
+      <span class="s2">"links"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"https://rdap.db.ripe.net/ip/172.206.147.25"</span><span class="p">,</span>
+        <span class="s2">"http://www.ripe.net/data-tools/support/documentation/terms"</span>
       <span class="p">],</span>
-      <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;UK-MICROSOFT-20000324&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;notices&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"UK-MICROSOFT-20000324"</span><span class="p">,</span>
+      <span class="s2">"notices"</span><span class="p">:</span> <span class="p">[</span>
         <span class="p">{</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;This output has been filtered.&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Filtered&quot;</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"This output has been filtered."</span><span class="p">,</span>
+          <span class="s2">"links"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Filtered"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;If you see inaccuracies in the results, please visit:&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;https://www.ripe.net/contact-form?topic=ripe_dbm</span><span class="se">\u0026</span><span class="s2">show_form=true&quot;</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"If you see inaccuracies in the results, please visit:"</span><span class="p">,</span>
+          <span class="s2">"links"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"https://www.ripe.net/contact-form?topic=ripe_dbm</span><span class="se">\u0026</span><span class="s2">show_form=true"</span>
           <span class="p">],</span>
-          <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Whois Inaccuracy Reporting&quot;</span>
+          <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Whois Inaccuracy Reporting"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Objects returned came from source</span><span class="se">\n</span><span class="s2">RIPE&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Source&quot;</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Objects returned came from source</span><span class="se">\n</span><span class="s2">RIPE"</span><span class="p">,</span>
+          <span class="s2">"links"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Source"</span>
         <span class="p">},</span>
         <span class="p">{</span>
-          <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;This is the RIPE Database query service. The objects are in RDAP format.&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&quot;http://www.ripe.net/db/support/db-terms-conditions.pdf&quot;</span>
+          <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"This is the RIPE Database query service. The objects are in RDAP format."</span><span class="p">,</span>
+          <span class="s2">"links"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">"http://www.ripe.net/db/support/db-terms-conditions.pdf"</span>
           <span class="p">],</span>
-          <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="s2">&quot;Terms and Conditions&quot;</span>
+          <span class="s2">"title"</span><span class="p">:</span> <span class="s2">"Terms and Conditions"</span>
         <span class="p">}</span>
       <span class="p">],</span>
-      <span class="s2">&quot;parent_handle&quot;</span><span class="p">:</span> <span class="s2">&quot;0.0.0.0 - 255.255.255.255&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;remarks&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-      <span class="s2">&quot;start_address&quot;</span><span class="p">:</span> <span class="s2">&quot;172.128.0.0&quot;</span><span class="p">,</span>
-      <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="p">[</span>
-        <span class="s2">&quot;active&quot;</span>
+      <span class="s2">"parent_handle"</span><span class="p">:</span> <span class="s2">"0.0.0.0 - 255.255.255.255"</span><span class="p">,</span>
+      <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"remarks"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+      <span class="s2">"start_address"</span><span class="p">:</span> <span class="s2">"172.128.0.0"</span><span class="p">,</span>
+      <span class="s2">"status"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="s2">"active"</span>
       <span class="p">],</span>
-      <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;ALLOCATED PA&quot;</span>
+      <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"ALLOCATED PA"</span>
     <span class="p">},</span>
-    <span class="s2">&quot;nir&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;objects&quot;</span><span class="p">:</span> <span class="p">{</span>
-      <span class="s2">&quot;DH5439-RIPE&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;contact&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="p">[</span>
+    <span class="s2">"nir"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"objects"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">"DH5439-RIPE"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"contact"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"address"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;One Microsoft Way</span><span class="se">\n</span><span class="s2">Redmond, WA 98052&quot;</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+              <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"One Microsoft Way</span><span class="se">\n</span><span class="s2">Redmond, WA 98052"</span>
             <span class="p">}</span>
           <span class="p">],</span>
-          <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;individual&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Divya Quamara&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;phone&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"email"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"individual"</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Divya Quamara"</span><span class="p">,</span>
+          <span class="s2">"phone"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;voice&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;+1-425-882-8080&quot;</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"voice"</span><span class="p">,</span>
+              <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"+1-425-882-8080"</span>
             <span class="p">}</span>
           <span class="p">],</span>
-          <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">null</span>
+          <span class="s2">"role"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"title"</span><span class="p">:</span> <span class="n">null</span>
         <span class="p">},</span>
-        <span class="s2">&quot;entities&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;events&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;events_actor&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;handle&quot;</span><span class="p">:</span> <span class="s2">&quot;DH5439-RIPE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;https://rdap.db.ripe.net/entity/DH5439-RIPE&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;http://www.ripe.net/data-tools/support/documentation/terms&quot;</span>
+        <span class="s2">"entities"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"events"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"events_actor"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"handle"</span><span class="p">:</span> <span class="s2">"DH5439-RIPE"</span><span class="p">,</span>
+        <span class="s2">"links"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"https://rdap.db.ripe.net/entity/DH5439-RIPE"</span><span class="p">,</span>
+          <span class="s2">"http://www.ripe.net/data-tools/support/documentation/terms"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;notices&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;remarks&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;administrative&quot;</span>
+        <span class="s2">"notices"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"remarks"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"roles"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"administrative"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">null</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="n">null</span>
       <span class="p">},</span>
-      <span class="s2">&quot;MAC274-RIPE&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;contact&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"MAC274-RIPE"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"contact"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"address"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;One Microsoft Way</span><span class="se">\n</span><span class="s2">Redmond, WA 98052&quot;</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+              <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"One Microsoft Way</span><span class="se">\n</span><span class="s2">Redmond, WA 98052"</span>
             <span class="p">}</span>
           <span class="p">],</span>
-          <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"email"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;abuse&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;abuse@microsoft.com&quot;</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"abuse"</span><span class="p">,</span>
+              <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"abuse@microsoft.com"</span>
             <span class="p">}</span>
           <span class="p">],</span>
-          <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;group&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft Abuse Contact&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;phone&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">null</span>
+          <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"group"</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Microsoft Abuse Contact"</span><span class="p">,</span>
+          <span class="s2">"phone"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"role"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"title"</span><span class="p">:</span> <span class="n">null</span>
         <span class="p">},</span>
-        <span class="s2">&quot;entities&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;MICROSOFT-MAINT&quot;</span>
+        <span class="s2">"entities"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"MICROSOFT-MAINT"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;events&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;events_actor&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;handle&quot;</span><span class="p">:</span> <span class="s2">&quot;MAC274-RIPE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;notices&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;remarks&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;abuse&quot;</span>
+        <span class="s2">"events"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"events_actor"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"handle"</span><span class="p">:</span> <span class="s2">"MAC274-RIPE"</span><span class="p">,</span>
+        <span class="s2">"links"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"notices"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"remarks"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"roles"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"abuse"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">null</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="n">null</span>
       <span class="p">},</span>
-      <span class="s2">&quot;MICROSOFT-MAINT&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;contact&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;individual&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;MICROSOFT-MAINT&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;phone&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">null</span>
+      <span class="s2">"MICROSOFT-MAINT"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"contact"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"address"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"email"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"individual"</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"MICROSOFT-MAINT"</span><span class="p">,</span>
+          <span class="s2">"phone"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"role"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"title"</span><span class="p">:</span> <span class="n">null</span>
         <span class="p">},</span>
-        <span class="s2">&quot;entities&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;events&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;events_actor&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;handle&quot;</span><span class="p">:</span> <span class="s2">&quot;MICROSOFT-MAINT&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;https://rdap.db.ripe.net/entity/MICROSOFT-MAINT&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;http://www.ripe.net/data-tools/support/documentation/terms&quot;</span>
+        <span class="s2">"entities"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"events"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"events_actor"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"handle"</span><span class="p">:</span> <span class="s2">"MICROSOFT-MAINT"</span><span class="p">,</span>
+        <span class="s2">"links"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"https://rdap.db.ripe.net/entity/MICROSOFT-MAINT"</span><span class="p">,</span>
+          <span class="s2">"http://www.ripe.net/data-tools/support/documentation/terms"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;notices&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;remarks&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;registrant&quot;</span>
+        <span class="s2">"notices"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"remarks"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"roles"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"registrant"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">null</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="n">null</span>
       <span class="p">},</span>
-      <span class="s2">&quot;MRPA3-RIPE&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;contact&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"MRPA3-RIPE"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"contact"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"address"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;One Microsoft Way</span><span class="se">\n</span><span class="s2">Redmond, WA 98052&quot;</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+              <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"One Microsoft Way</span><span class="se">\n</span><span class="s2">Redmond, WA 98052"</span>
             <span class="p">}</span>
           <span class="p">],</span>
-          <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;group&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft Routing, Peering, and DNS&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;phone&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">null</span>
+          <span class="s2">"email"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"group"</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Microsoft Routing, Peering, and DNS"</span><span class="p">,</span>
+          <span class="s2">"phone"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"role"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"title"</span><span class="p">:</span> <span class="n">null</span>
         <span class="p">},</span>
-        <span class="s2">&quot;entities&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;events&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;events_actor&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;handle&quot;</span><span class="p">:</span> <span class="s2">&quot;MRPA3-RIPE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;https://rdap.db.ripe.net/entity/MRPA3-RIPE&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;http://www.ripe.net/data-tools/support/documentation/terms&quot;</span>
+        <span class="s2">"entities"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"events"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"events_actor"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"handle"</span><span class="p">:</span> <span class="s2">"MRPA3-RIPE"</span><span class="p">,</span>
+        <span class="s2">"links"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"https://rdap.db.ripe.net/entity/MRPA3-RIPE"</span><span class="p">,</span>
+          <span class="s2">"http://www.ripe.net/data-tools/support/documentation/terms"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;notices&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;remarks&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;technical&quot;</span>
+        <span class="s2">"notices"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"remarks"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"roles"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"technical"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">null</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="n">null</span>
       <span class="p">},</span>
-      <span class="s2">&quot;ORG-MA42-RIPE&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;contact&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="s2">"ORG-MA42-RIPE"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"contact"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"address"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;One Microsoft Way</span><span class="se">\n</span><span class="s2">WA 98052</span><span class="se">\n</span><span class="s2">Redmond</span><span class="se">\n</span><span class="s2">UNITED STATES&quot;</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+              <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"One Microsoft Way</span><span class="se">\n</span><span class="s2">WA 98052</span><span class="se">\n</span><span class="s2">Redmond</span><span class="se">\n</span><span class="s2">UNITED STATES"</span>
             <span class="p">}</span>
           <span class="p">],</span>
-          <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;org&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft Limited&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;phone&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"email"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"org"</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Microsoft Limited"</span><span class="p">,</span>
+          <span class="s2">"phone"</span><span class="p">:</span> <span class="p">[</span>
             <span class="p">{</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;voice&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;+1 425 882 8080&quot;</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"voice"</span><span class="p">,</span>
+              <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"+1 425 882 8080"</span>
             <span class="p">},</span>
             <span class="p">{</span>
-              <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;fax&quot;</span><span class="p">,</span>
-              <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="s2">&quot;+1 425 936 7329&quot;</span>
+              <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"fax"</span><span class="p">,</span>
+              <span class="s2">"value"</span><span class="p">:</span> <span class="s2">"+1 425 936 7329"</span>
             <span class="p">}</span>
           <span class="p">],</span>
-          <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">null</span>
+          <span class="s2">"role"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"title"</span><span class="p">:</span> <span class="n">null</span>
         <span class="p">},</span>
-        <span class="s2">&quot;entities&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;events&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;events_actor&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;handle&quot;</span><span class="p">:</span> <span class="s2">&quot;ORG-MA42-RIPE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;https://rdap.db.ripe.net/entity/ORG-MA42-RIPE&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;http://www.ripe.net/data-tools/support/documentation/terms&quot;</span>
+        <span class="s2">"entities"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"events"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"events_actor"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"handle"</span><span class="p">:</span> <span class="s2">"ORG-MA42-RIPE"</span><span class="p">,</span>
+        <span class="s2">"links"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"https://rdap.db.ripe.net/entity/ORG-MA42-RIPE"</span><span class="p">,</span>
+          <span class="s2">"http://www.ripe.net/data-tools/support/documentation/terms"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;notices&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;remarks&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;registrant&quot;</span>
+        <span class="s2">"notices"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"remarks"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"roles"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"registrant"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">null</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="n">null</span>
       <span class="p">},</span>
-      <span class="s2">&quot;RIPE-NCC-HM-MNT&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;contact&quot;</span><span class="p">:</span> <span class="p">{</span>
-          <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;individual&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;RIPE-NCC-HM-MNT&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;phone&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-          <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">null</span>
+      <span class="s2">"RIPE-NCC-HM-MNT"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"contact"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="s2">"address"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"email"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"kind"</span><span class="p">:</span> <span class="s2">"individual"</span><span class="p">,</span>
+          <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"RIPE-NCC-HM-MNT"</span><span class="p">,</span>
+          <span class="s2">"phone"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"role"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+          <span class="s2">"title"</span><span class="p">:</span> <span class="n">null</span>
         <span class="p">},</span>
-        <span class="s2">&quot;entities&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;events&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;events_actor&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;handle&quot;</span><span class="p">:</span> <span class="s2">&quot;RIPE-NCC-HM-MNT&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;links&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;https://rdap.db.ripe.net/entity/RIPE-NCC-HM-MNT&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;http://www.ripe.net/data-tools/support/documentation/terms&quot;</span>
+        <span class="s2">"entities"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"events"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"events_actor"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"handle"</span><span class="p">:</span> <span class="s2">"RIPE-NCC-HM-MNT"</span><span class="p">,</span>
+        <span class="s2">"links"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"https://rdap.db.ripe.net/entity/RIPE-NCC-HM-MNT"</span><span class="p">,</span>
+          <span class="s2">"http://www.ripe.net/data-tools/support/documentation/terms"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;notices&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;remarks&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;registrant&quot;</span>
+        <span class="s2">"notices"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"remarks"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"roles"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"registrant"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;status&quot;</span><span class="p">:</span> <span class="n">null</span>
+        <span class="s2">"status"</span><span class="p">:</span> <span class="n">null</span>
       <span class="p">}</span>
     <span class="p">},</span>
-    <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;172.206.147.25&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span>
+    <span class="s2">"query"</span><span class="p">:</span> <span class="s2">"172.206.147.25"</span><span class="p">,</span>
+    <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;rdap_depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s2">&quot;rdap_query&quot;</span><span class="p">:</span> <span class="s2">&quot;172.206.147.25&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"rdap_depth"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"rdap_query"</span><span class="p">:</span> <span class="s2">"172.206.147.25"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1470</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;my.app.host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-whois-rdap&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.5&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-09-24 13:56:32&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1470</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"my.app.host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-whois-rdap"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.5"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-09-24 13:56:32"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -972,12 +972,12 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">format_link</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
-  <span class="k">if</span> <span class="n">item</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;https://&quot;</span> <span class="ow">in</span> <span class="n">item</span> <span class="ow">or</span> <span class="s2">&quot;http://&quot;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s2">&quot;&lt;a target=&#39;blank&#39; href=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;</span><span class="si">{0}</span><span class="s2">&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">item</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">"https://"</span> <span class="ow">in</span> <span class="n">item</span> <span class="ow">or</span> <span class="s2">"http://"</span> <span class="ow">in</span> <span class="n">item</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">"&lt;a target='blank' href='</span><span class="si">{0}</span><span class="s2">'&gt;</span><span class="si">{0}</span><span class="s2">&lt;/a&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
   <span class="k">else</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">item</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">expand_list</span><span class="p">(</span><span class="n">list_value</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;&lt;br&gt;&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">expand_list</span><span class="p">(</span><span class="n">list_value</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">"&lt;br&gt;"</span><span class="p">):</span>
   <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">format_link</span><span class="p">(</span><span class="n">list_value</span><span class="p">)</span>
   <span class="k">else</span><span class="p">:</span>
@@ -985,7 +985,7 @@ Additional package dependencies may exist for each of these packages:</p>
       <span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
       <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_value</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-          <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;div style=&#39;padding:10px&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">walk_dict</span><span class="p">(</span><span class="n">item</span><span class="p">)))</span>
+          <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"&lt;div style='padding:10px'&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">walk_dict</span><span class="p">(</span><span class="n">item</span><span class="p">)))</span>
         <span class="k">else</span><span class="p">:</span>
           <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">format_link</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
       <span class="k">return</span> <span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
@@ -995,20 +995,20 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="k">def</span><span class="w"> </span><span class="nf">walk_dict</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">):</span>
   <span class="n">notes</span> <span class="o">=</span> <span class="p">[]</span>
   <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">sub_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;display_content&#39;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'display_content'</span><span class="p">]:</span>
       <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: &lt;div style=&#39;padding:10px&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">walk_dict</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: &lt;div style='padding:10px'&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">walk_dict</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
       <span class="k">else</span><span class="p">:</span>
-        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">expand_list</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">expand_list</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
       
-  <span class="k">return</span> <span class="s2">&quot;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+  <span class="k">return</span> <span class="s2">"&lt;br&gt;"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
     
 
-<span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;RDAP Whois for artifact: </span><span class="si">{}</span><span class="s2">&lt;br&gt;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]:</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="n">walk_dict</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">])</span>
+<span class="n">note</span> <span class="o">=</span> <span class="s2">"RDAP Whois for artifact: </span><span class="si">{}</span><span class="s2">&lt;br&gt;&lt;br&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">"success"</span><span class="p">]:</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="n">walk_dict</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">"content"</span><span class="p">])</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;This Artifact has no ans accessible registry information&quot;</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">"This Artifact has no ans accessible registry information"</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
 
@@ -1052,73 +1052,73 @@ Additional package dependencies may exist for each of these packages:</p>
 <div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
 </div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;asn&quot;</span><span class="p">:</span> <span class="s2">&quot;8075&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;asn_cidr&quot;</span><span class="p">:</span> <span class="s2">&quot;172.200.0.0/13&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;asn_country_code&quot;</span><span class="p">:</span> <span class="s2">&quot;GB&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;asn_date&quot;</span><span class="p">:</span> <span class="s2">&quot;2002-02-13&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;asn_description&quot;</span><span class="p">:</span> <span class="s2">&quot;MICROSOFT-CORP-MSN-AS-BLOCK, US&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;asn_registry&quot;</span><span class="p">:</span> <span class="s2">&quot;ripencc&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;display_content&quot;</span><span class="p">:</span> <span class="s2">&quot;{ </span><span class="se">\&quot;</span><span class="s2">dns_zone</span><span class="se">\&quot;</span><span class="s2">:</span><span class="se">\&quot;</span><span class="s2">25.147.206.172.origin.asn.cymru.com</span><span class="se">\&quot;</span><span class="s2"> }&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;dns_zone&quot;</span><span class="p">:</span> <span class="s2">&quot;25.147.206.172.origin.asn.cymru.com&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;nets&quot;</span><span class="p">:</span> <span class="p">[</span>
+  <span class="s2">"content"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"asn"</span><span class="p">:</span> <span class="s2">"8075"</span><span class="p">,</span>
+    <span class="s2">"asn_cidr"</span><span class="p">:</span> <span class="s2">"172.200.0.0/13"</span><span class="p">,</span>
+    <span class="s2">"asn_country_code"</span><span class="p">:</span> <span class="s2">"GB"</span><span class="p">,</span>
+    <span class="s2">"asn_date"</span><span class="p">:</span> <span class="s2">"2002-02-13"</span><span class="p">,</span>
+    <span class="s2">"asn_description"</span><span class="p">:</span> <span class="s2">"MICROSOFT-CORP-MSN-AS-BLOCK, US"</span><span class="p">,</span>
+    <span class="s2">"asn_registry"</span><span class="p">:</span> <span class="s2">"ripencc"</span><span class="p">,</span>
+    <span class="s2">"display_content"</span><span class="p">:</span> <span class="s2">"{ </span><span class="se">\"</span><span class="s2">dns_zone</span><span class="se">\"</span><span class="s2">:</span><span class="se">\"</span><span class="s2">25.147.206.172.origin.asn.cymru.com</span><span class="se">\"</span><span class="s2"> }"</span><span class="p">,</span>
+    <span class="s2">"dns_zone"</span><span class="p">:</span> <span class="s2">"25.147.206.172.origin.asn.cymru.com"</span><span class="p">,</span>
+    <span class="s2">"nets"</span><span class="p">:</span> <span class="p">[</span>
       <span class="p">{</span>
-        <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="s2">&quot;One Microsoft Way</span><span class="se">\n</span><span class="s2">WA 98052</span><span class="se">\n</span><span class="s2">Redmond</span><span class="se">\n</span><span class="s2">UNITED STATES&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;cidr&quot;</span><span class="p">:</span> <span class="s2">&quot;172.128.0.0/10, 172.192.0.0/12, 172.208.0.0/13&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="s2">&quot;GB&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-05-16T09:38:13Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft Corporation AS8075</span><span class="se">\n</span><span class="s2">To report suspected security issues specific to</span><span class="se">\n</span><span class="s2">traffic emanating from Microsoft online services,</span><span class="se">\n</span><span class="s2">including the distribution of malicious content</span><span class="se">\n</span><span class="s2">or other illicit or illegal material through a</span><span class="se">\n</span><span class="s2">Microsoft online service, please submit reports</span><span class="se">\n</span><span class="s2">to:</span><span class="se">\n</span><span class="s2">* https://cert.microsoft.com</span><span class="se">\n</span><span class="s2">For SPAM and other abuse issues, such as Microsoft</span><span class="se">\n</span><span class="s2">Accounts, please contact:</span><span class="se">\n</span><span class="s2">* abuse@microsoft.com</span><span class="se">\n</span><span class="s2">To report security vulnerabilities in Microsoft</span><span class="se">\n</span><span class="s2">products and services, please contact:</span><span class="se">\n</span><span class="s2">* secure@microsoft.com</span><span class="se">\n</span><span class="s2">For legal and law enforcement-related requests,</span><span class="se">\n</span><span class="s2">please contact:</span><span class="se">\n</span><span class="s2">* msndcc@microsoft.com</span><span class="se">\n</span><span class="s2">For routing, peering or DNS issues, please</span><span class="se">\n</span><span class="s2">contact:</span><span class="se">\n</span><span class="s2">* IOC@microsoft.com&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;emails&quot;</span><span class="p">:</span> <span class="p">[</span>
-          <span class="s2">&quot;abuse@microsoft.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;secure@microsoft.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;msndcc@microsoft.com&quot;</span><span class="p">,</span>
-          <span class="s2">&quot;IOC@microsoft.com&quot;</span>
+        <span class="s2">"address"</span><span class="p">:</span> <span class="s2">"One Microsoft Way</span><span class="se">\n</span><span class="s2">WA 98052</span><span class="se">\n</span><span class="s2">Redmond</span><span class="se">\n</span><span class="s2">UNITED STATES"</span><span class="p">,</span>
+        <span class="s2">"cidr"</span><span class="p">:</span> <span class="s2">"172.128.0.0/10, 172.192.0.0/12, 172.208.0.0/13"</span><span class="p">,</span>
+        <span class="s2">"city"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"country"</span><span class="p">:</span> <span class="s2">"GB"</span><span class="p">,</span>
+        <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2024-05-16T09:38:13Z"</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Microsoft Corporation AS8075</span><span class="se">\n</span><span class="s2">To report suspected security issues specific to</span><span class="se">\n</span><span class="s2">traffic emanating from Microsoft online services,</span><span class="se">\n</span><span class="s2">including the distribution of malicious content</span><span class="se">\n</span><span class="s2">or other illicit or illegal material through a</span><span class="se">\n</span><span class="s2">Microsoft online service, please submit reports</span><span class="se">\n</span><span class="s2">to:</span><span class="se">\n</span><span class="s2">* https://cert.microsoft.com</span><span class="se">\n</span><span class="s2">For SPAM and other abuse issues, such as Microsoft</span><span class="se">\n</span><span class="s2">Accounts, please contact:</span><span class="se">\n</span><span class="s2">* abuse@microsoft.com</span><span class="se">\n</span><span class="s2">To report security vulnerabilities in Microsoft</span><span class="se">\n</span><span class="s2">products and services, please contact:</span><span class="se">\n</span><span class="s2">* secure@microsoft.com</span><span class="se">\n</span><span class="s2">For legal and law enforcement-related requests,</span><span class="se">\n</span><span class="s2">please contact:</span><span class="se">\n</span><span class="s2">* msndcc@microsoft.com</span><span class="se">\n</span><span class="s2">For routing, peering or DNS issues, please</span><span class="se">\n</span><span class="s2">contact:</span><span class="se">\n</span><span class="s2">* IOC@microsoft.com"</span><span class="p">,</span>
+        <span class="s2">"emails"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">"abuse@microsoft.com"</span><span class="p">,</span>
+          <span class="s2">"secure@microsoft.com"</span><span class="p">,</span>
+          <span class="s2">"msndcc@microsoft.com"</span><span class="p">,</span>
+          <span class="s2">"IOC@microsoft.com"</span>
         <span class="p">],</span>
-        <span class="s2">&quot;handle&quot;</span><span class="p">:</span> <span class="s2">&quot;MRPA3-RIPE&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;UK-MICROSOFT-20000324&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;postal_code&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;range&quot;</span><span class="p">:</span> <span class="s2">&quot;172.128.0.0 - 172.215.255.255&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-05-16T09:38:13Z&quot;</span>
+        <span class="s2">"handle"</span><span class="p">:</span> <span class="s2">"MRPA3-RIPE"</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"UK-MICROSOFT-20000324"</span><span class="p">,</span>
+        <span class="s2">"postal_code"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"range"</span><span class="p">:</span> <span class="s2">"172.128.0.0 - 172.215.255.255"</span><span class="p">,</span>
+        <span class="s2">"state"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"updated"</span><span class="p">:</span> <span class="s2">"2024-05-16T09:38:13Z"</span>
       <span class="p">},</span>
       <span class="p">{</span>
-        <span class="s2">&quot;address&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;cidr&quot;</span><span class="p">:</span> <span class="s2">&quot;172.200.0.0/13&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;city&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;created&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-07-08T19:11:00Z&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Microsoft&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;emails&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;handle&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;postal_code&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;range&quot;</span><span class="p">:</span> <span class="s2">&quot;172.200.0.0 - 172.207.255.255&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;state&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-        <span class="s2">&quot;updated&quot;</span><span class="p">:</span> <span class="s2">&quot;2022-07-08T19:11:00Z&quot;</span>
+        <span class="s2">"address"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"cidr"</span><span class="p">:</span> <span class="s2">"172.200.0.0/13"</span><span class="p">,</span>
+        <span class="s2">"city"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"country"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"created"</span><span class="p">:</span> <span class="s2">"2022-07-08T19:11:00Z"</span><span class="p">,</span>
+        <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Microsoft"</span><span class="p">,</span>
+        <span class="s2">"emails"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"handle"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"postal_code"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"range"</span><span class="p">:</span> <span class="s2">"172.200.0.0 - 172.207.255.255"</span><span class="p">,</span>
+        <span class="s2">"state"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+        <span class="s2">"updated"</span><span class="p">:</span> <span class="s2">"2022-07-08T19:11:00Z"</span>
       <span class="p">}</span>
     <span class="p">],</span>
-    <span class="s2">&quot;nir&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="s2">&quot;172.206.147.25&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;raw_referral&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-    <span class="s2">&quot;referral&quot;</span><span class="p">:</span> <span class="n">null</span>
+    <span class="s2">"nir"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"query"</span><span class="p">:</span> <span class="s2">"172.206.147.25"</span><span class="p">,</span>
+    <span class="s2">"raw"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"raw_referral"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+    <span class="s2">"referral"</span><span class="p">:</span> <span class="n">null</span>
   <span class="p">},</span>
-  <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;whois_query&quot;</span><span class="p">:</span> <span class="s2">&quot;172.206.147.25&quot;</span>
+  <span class="s2">"inputs"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"whois_query"</span><span class="p">:</span> <span class="s2">"172.206.147.25"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;metrics&quot;</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">&quot;execution_time_ms&quot;</span><span class="p">:</span> <span class="mi">1307</span><span class="p">,</span>
-    <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;my.app.host&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package&quot;</span><span class="p">:</span> <span class="s2">&quot;fn-whois-rdap&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;package_version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0.5&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="s2">&quot;2024-09-24 13:57:53&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"metrics"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"execution_time_ms"</span><span class="p">:</span> <span class="mi">1307</span><span class="p">,</span>
+    <span class="s2">"host"</span><span class="p">:</span> <span class="s2">"my.app.host"</span><span class="p">,</span>
+    <span class="s2">"package"</span><span class="p">:</span> <span class="s2">"fn-whois-rdap"</span><span class="p">,</span>
+    <span class="s2">"package_version"</span><span class="p">:</span> <span class="s2">"1.0.5"</span><span class="p">,</span>
+    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="s2">"2024-09-24 13:57:53"</span><span class="p">,</span>
+    <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
   <span class="p">},</span>
-  <span class="s2">&quot;raw&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
-  <span class="s2">&quot;success&quot;</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
-  <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;1.0&quot;</span>
+  <span class="s2">"raw"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+  <span class="s2">"reason"</span><span class="p">:</span> <span class="n">null</span><span class="p">,</span>
+  <span class="s2">"success"</span><span class="p">:</span> <span class="n">true</span><span class="p">,</span>
+  <span class="s2">"version"</span><span class="p">:</span> <span class="s2">"1.0"</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1134,12 +1134,12 @@ Additional package dependencies may exist for each of these packages:</p>
 <details><summary>Example Function Post Process Script:</summary>
 <p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">format_link</span><span class="p">(</span><span class="n">item</span><span class="p">):</span>
-  <span class="k">if</span> <span class="n">item</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;https://&quot;</span> <span class="ow">in</span> <span class="n">item</span> <span class="ow">or</span> <span class="s2">&quot;http://&quot;</span> <span class="ow">in</span> <span class="n">item</span><span class="p">):</span>
-    <span class="k">return</span> <span class="s2">&quot;&lt;a target=&#39;blank&#39; href=&#39;</span><span class="si">{0}</span><span class="s2">&#39;&gt;</span><span class="si">{0}</span><span class="s2">&lt;/a&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">item</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">"https://"</span> <span class="ow">in</span> <span class="n">item</span> <span class="ow">or</span> <span class="s2">"http://"</span> <span class="ow">in</span> <span class="n">item</span><span class="p">):</span>
+    <span class="k">return</span> <span class="s2">"&lt;a target='blank' href='</span><span class="si">{0}</span><span class="s2">'&gt;</span><span class="si">{0}</span><span class="s2">&lt;/a&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
   <span class="k">else</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">item</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">expand_list</span><span class="p">(</span><span class="n">list_value</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">&quot;&lt;br&gt;&quot;</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">expand_list</span><span class="p">(</span><span class="n">list_value</span><span class="p">,</span> <span class="n">separator</span><span class="o">=</span><span class="s2">"&lt;br&gt;"</span><span class="p">):</span>
   <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">format_link</span><span class="p">(</span><span class="n">list_value</span><span class="p">)</span>
   <span class="k">else</span><span class="p">:</span>
@@ -1147,7 +1147,7 @@ Additional package dependencies may exist for each of these packages:</p>
       <span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
       <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_value</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-          <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;div style=&#39;padding:10px&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">walk_dict</span><span class="p">(</span><span class="n">item</span><span class="p">)))</span>
+          <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"&lt;div style='padding:10px'&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">walk_dict</span><span class="p">(</span><span class="n">item</span><span class="p">)))</span>
         <span class="k">else</span><span class="p">:</span>
           <span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">format_link</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
       <span class="k">return</span> <span class="n">separator</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
@@ -1157,20 +1157,20 @@ Additional package dependencies may exist for each of these packages:</p>
 <span class="k">def</span><span class="w"> </span><span class="nf">walk_dict</span><span class="p">(</span><span class="n">sub_dict</span><span class="p">):</span>
   <span class="n">notes</span> <span class="o">=</span> <span class="p">[]</span>
   <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">sub_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;display_content&#39;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'display_content'</span><span class="p">]:</span>
       <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: &lt;div style=&#39;padding:10px&#39;&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">walk_dict</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: &lt;div style='padding:10px'&gt;</span><span class="si">{}</span><span class="s2">&lt;/div&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">walk_dict</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
       <span class="k">else</span><span class="p">:</span>
-        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">expand_list</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
+        <span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"&lt;b&gt;</span><span class="si">{}</span><span class="s2">&lt;/b&gt;: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">expand_list</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span>
       
-  <span class="k">return</span> <span class="s2">&quot;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
+  <span class="k">return</span> <span class="s2">"&lt;br&gt;"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">notes</span><span class="p">)</span>
     
 
-<span class="n">note</span> <span class="o">=</span> <span class="s2">&quot;Whois for artifact: </span><span class="si">{}</span><span class="s2">&lt;br&gt;&lt;br&gt;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;success&quot;</span><span class="p">]:</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="n">walk_dict</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">&quot;content&quot;</span><span class="p">])</span>
+<span class="n">note</span> <span class="o">=</span> <span class="s2">"Whois for artifact: </span><span class="si">{}</span><span class="s2">&lt;br&gt;&lt;br&gt;"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">artifact</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="s2">"success"</span><span class="p">]:</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="n">walk_dict</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">"content"</span><span class="p">])</span>
 <span class="k">else</span><span class="p">:</span>
-  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">&quot;This Artifact has no whois information&quot;</span>
+  <span class="n">note</span> <span class="o">=</span> <span class="n">note</span> <span class="o">+</span> <span class="s2">"This Artifact has no whois information"</span>
 
 <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">helper</span><span class="o">.</span><span class="n">createRichText</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
 
