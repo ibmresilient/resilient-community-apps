@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {},
+  "raw": "{}",
+  "inputs": {
+    "sep_groupid": "groupid",
+    "sep_fingerprintlist_id": "fingerprintlist_id"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.0.1",
+    "host": "host",
+    "execution_time_ms": 2038,
+    "timestamp": "2023-01-06 11:32:28"
+  }
+}

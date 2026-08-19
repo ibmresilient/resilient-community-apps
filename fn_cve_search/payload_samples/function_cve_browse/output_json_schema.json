@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "api_call": {
+      "type": "string"
+    }
+  }
+}

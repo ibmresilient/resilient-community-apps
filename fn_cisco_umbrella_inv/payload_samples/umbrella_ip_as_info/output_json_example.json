@@ -1,0 +1,30 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "as_for_ip": [
+      {
+        "cidr": "1.1.1.0/24",
+        "asn": 13335,
+        "ir": 3,
+        "description": "CLOUDFLARENET, US 86400",
+        "creation_date": "2010-07-14"
+      }
+    ],
+    "ip_address": "1.1.1.1",
+    "query_execution_time": "2024-11-19 09:28:19"
+  },
+  "raw": null,
+  "inputs": {
+    "umbinv_resource": "1.1.1.1"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-cisco-umbrella-inv",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 844,
+    "timestamp": "2024-11-19 09:28:19"
+  }
+}

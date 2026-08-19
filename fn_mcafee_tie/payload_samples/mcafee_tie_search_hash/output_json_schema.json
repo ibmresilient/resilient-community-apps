@@ -1,0 +1,289 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Generated schema for Root",
+    "type": "object",
+    "properties": {
+      "version": {
+        "type": "string"
+      },
+      "success": {
+        "type": "boolean"
+      },
+      "reason": {
+        "type": "string"
+      },
+      "content": {
+        "type": "object",
+        "properties": {
+          "mcafee_topic_name": {
+            "type": "string"
+          },
+          "mcafee_dxl_payload": {
+            "type": "object",
+            "properties": {
+              "hashes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "value"
+                  ]
+                }
+              },
+              "providerId": {
+                "type": "number"
+              },
+              "trustLevel": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "hashes",
+              "providerId",
+              "trustLevel"
+            ]
+          },
+          "mcafee_publish_method": {
+            "type": "string"
+          },
+          "mcafee_wait_for_response": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "mcafee_topic_name",
+          "mcafee_dxl_payload",
+          "mcafee_publish_method",
+          "mcafee_wait_for_response"
+        ]
+      },
+      "raw": {
+        "type": "object",
+        "properties": {
+          "mcafee_topic_name": {
+            "type": "string"
+          },
+          "mcafee_dxl_payload": {
+            "type": "object",
+            "properties": {
+              "hashes\\": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type\\": {
+                      "type": "string"
+                    },
+                    "value\\": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type\\",
+                    "value\\"
+                  ]
+                }
+              },
+              "providerId\\": {
+                "type": "number"
+              },
+              "trustLevel\\": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "hashes\\",
+              "providerId\\",
+              "trustLevel\\"
+            ]
+          },
+          "mcafee_publish_method": {
+            "type": "string"
+          },
+          "mcafee_wait_for_response": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "mcafee_topic_name",
+          "mcafee_dxl_payload",
+          "mcafee_publish_method",
+          "mcafee_wait_for_response"
+        ]
+      },
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "mcafee_publish_method": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          },
+          "mcafee_topic_name": {
+            "type": "string"
+          },
+          "mcafee_dxl_payload": {
+            "type": "object",
+            "properties": {
+              "hashes": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "type",
+                    "value"
+                  ]
+                }
+              },
+              "providerId": {
+                "type": "number"
+              },
+              "trustLevel": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "hashes",
+              "providerId",
+              "trustLevel"
+            ]
+          },
+          "mcafee_wait_for_response": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          }
+        },
+        "required": [
+          "mcafee_publish_method",
+          "mcafee_topic_name",
+          "mcafee_dxl_payload",
+          "mcafee_wait_for_response"
+        ]
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "package": {
+            "type": "string"
+          },
+          "package_version": {
+            "type": "string"
+          },
+          "host": {
+            "type": "string"
+          },
+          "execution_time_ms": {
+            "type": "number"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "version",
+          "package",
+          "package_version",
+          "host",
+          "execution_time_ms",
+          "timestamp"
+        ]
+      },
+      "mcafee_topic_name": {
+        "type": "string"
+      },
+      "mcafee_dxl_payload": {
+        "type": "object",
+        "properties": {
+          "hashes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "type",
+                "value"
+              ]
+            }
+          },
+          "providerId": {
+            "type": "number"
+          },
+          "trustLevel": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "hashes",
+          "providerId",
+          "trustLevel"
+        ]
+      },
+      "mcafee_publish_method": {
+        "type": "string"
+      },
+      "mcafee_wait_for_response": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "version",
+      "success",
+      "reason",
+      "content",
+      "raw",
+      "inputs",
+      "metrics",
+      "mcafee_topic_name",
+      "mcafee_dxl_payload",
+      "mcafee_publish_method",
+      "mcafee_wait_for_response"
+    ]
+}

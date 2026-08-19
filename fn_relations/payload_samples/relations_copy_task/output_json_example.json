@@ -1,0 +1,31 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "task": {
+      "name": "Task 60 from Parent: parent1 task",
+      "due_date": null,
+      "phase_id": "Initial",
+      "required": true,
+      "instructions": "<div class=\"rte\"><div>some instructions</div></div>"
+    },
+    "children": [
+      2097,
+      2100
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "task_id": 60,
+    "relations_parent_incident_id": 2096
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-relations",
+    "package_version": "3.1.0",
+    "host": "localhost",
+    "execution_time_ms": 2517,
+    "timestamp": "2024-01-17 11:25:51"
+  }
+}

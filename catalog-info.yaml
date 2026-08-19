@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: resilient-community-apps
+  description: QRadar SOAR Apps
+  annotations:
+    github.com/project-slug: Resilient/resilient-community-apps
+    jira/project-key: SOARAPPS
+    jira/component: Functions
+    backstage.io/techdocs-ref: dir:.
+    isc.ibm.com/public: "true"
+    isc.ibm.com/consumer: ""
+    isc.ibm.com/capability: QRS
+    isc.ibm.com/toolchain: "qrs-dev-apps-toolchain"
+    isc.ibm.com/interactive-scan: "false"
+spec:
+  type: service
+  lifecycle: production
+  owner: soarapps
