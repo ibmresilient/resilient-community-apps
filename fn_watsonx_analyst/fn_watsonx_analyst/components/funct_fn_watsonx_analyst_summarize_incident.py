@@ -118,7 +118,7 @@ class FunctionComponent(WatsonxAppFunction):
 
             user_message_parts.append(f"Provide a {summary_type} summary of this incident.")
             user_message_parts.append(f"\nIncident Data:\n{context}")
- 
+
             user_message = "\n\n".join(user_message_parts)
 
             # 4. Build chat messages using ChatPrompting
@@ -128,7 +128,7 @@ class FunctionComponent(WatsonxAppFunction):
                 user_message=user_message
             )
 
-            response_format = IncidentTechSummarySchema if summary_type == "technical" \
+            response_format = IncidentTechSummarySchema if summary_type_lower == "technical" \
                 else IncidentExecSummarySchema
 
             # 5. Generate summary via WatsonX using chat API
@@ -138,7 +138,7 @@ class FunctionComponent(WatsonxAppFunction):
             incident_name = incident_payload.get('incident', {}).get('name', 'Unknown')
             incident_types: List[str]
             incident_type_ids = incident_payload.get('incident', {}).get('incident_type_ids')
-            
+
             # Convert to list of strings and handle empty/None values
             incident_types = [str(type_id) for type_id in incident_type_ids] if incident_type_ids else ['Unknown']
             incident_severity = incident_payload.get('incident', {}).get('severity_code', 'Unknown')
@@ -147,7 +147,7 @@ class FunctionComponent(WatsonxAppFunction):
             if summary_type_lower == 'technical':
                 prefix = f"**Technical Summary**: {incident_name}\n\n**Incident Type(s)**: {', '.join(incident_types)}\n\n**Incident Severity**: {incident_severity}\n"
                 tasktree = incident_payload.get('incident').get('tasktree', [])
-                
+
                 def traverse_tasktree(tasktree: dict, parent: str = '') -> Tuple[dict, dict]:
                     complete_tasktree = {}
                     incomplete_tasktree = {} # phase: [tasks]
@@ -156,10 +156,9 @@ class FunctionComponent(WatsonxAppFunction):
                         phase_name = phase.get('phase_name')
                         if parent:
                             phase_name = parent + ' - ' + phase_name
-                        
+
                         complete_tasktree[phase_name] = {'tasks': [], 'child_phases': []}
                         incomplete_tasktree[phase_name] = {'tasks': [], 'child_phases': []}
-                        
 
                         for task in phase.get('tasks', []):
                             if task.get("status", "") == "Closed":
