@@ -1,0 +1,30 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "created_time": "2023-12-08T17:28:38.377Z",
+    "rrn": "rrn:collaboration:us2:eeeeeeeeee-c4c4-427c-8fc9-f9e1e1e1e1ee1:comment:CDNOQXKNAFN5",
+    "target": "rrn:investigation:us2:eeeeeeeee-c4c4-427c-8fc9-f9efe1e1e1e1e1:investigation:3XAAXAAXAAXAA",
+    "creator": {
+      "type": "USER",
+      "name": "Admin User"
+    },
+    "body": "Created by IBM SOAR:  Admin closing as BENIGN from SOAR December 8, 2023",
+    "visibility": "PUBLIC",
+    "attachments": null
+  },
+  "raw": null,
+  "inputs": {
+    "rapid7_insight_idr_comment_text": "<div class=\"rte\"><div>Admin User closing as BENIGN from SOAR December 8, 2023</div></div>",
+    "rapid7_insight_idr_rrn": "rrn:investigation:us2:eeeeeeeee-c4c4-427c-8fc9-f9efe1e1e1e1e1:investigation:3XAAXAAXAAXAA"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-rapid7-insight-idr",
+    "package_version": "1.0.0",
+    "host": "laptop.local",
+    "execution_time_ms": 263,
+    "timestamp": "2023-12-08 12:28:38"
+  }
+}

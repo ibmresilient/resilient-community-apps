@@ -1,0 +1,3 @@
+include README.md
+include rc_data-feed_plugin-filefeed/*
+include rc_data-feed_plugin-filefeed/LICENSE

@@ -1,0 +1,12 @@
+{
+  "generated_text": "<p>Text from watsonx.ai</p>",
+  "raw_output": "Text from watsonx.ai",
+  "tag": "HTML model tag to be prefixed before any AI-generated content",
+  "metadata": {
+    "model_id": "ibm/granite-3-2b-instruct",
+    "stop_reason": "EOS token",
+    "created_at": "2023-07-21T16:52:32.190Z",
+    "generated_token_count": 8,
+    "input_token_count": 10
+  }
+}
