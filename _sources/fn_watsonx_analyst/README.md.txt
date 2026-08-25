@@ -19,32 +19,22 @@
     - [Installing the App](#installing-the-app)
     - [App Configuration](#app-configuration)
 - [App usage](#app-usage)
-  - [Note Conversation](#note-conversation)
-  - [Artifact and Attachment Scan](#artifact-and-attachment-scan)
+  - [Artifact and Attachment Analysis](#artifact-and-attachment-analysis)
       - [What file formats can be scanned?](#what-file-formats-can-be-scanned)
-  - [Text Generation](#text-generation)
   - [Incident Summarization](#incident-summarization)
       - [What type of summaries are available?](#what-type-of-summaries-are-available)
+  - [Playbook Execution Summary](#playbook-execution-summary)
+  - [Text Generation](#text-generation)
 - [How to get the best out of the app](#how-to-get-the-best-out-of-the-app)
     - [Model quality](#model-quality)
-    - [Background on how a note conversation response is generated](#background-on-how-a-note-conversation-response-is-generated)
     - [Prompting Guide](#prompting-guide)
       - [Response Quality](#response-quality)
-      - [Reply chain prompts](#reply-chain-prompts)
 - [Data selection](#data-selection)
   - [Custom incident properties](#custom-incident-properties)
   - [Creating the override config](#creating-the-override-config)
   - [Setting up the dropdown](#setting-up-the-dropdown)
-- [SOAR Customizations](#soar-customizations)
-  - [Function - watsonx.ai Converse via Notes](#function-watsonx-ai-converse-via-notes)
-  - [Function - watsonx.ai Scan Artifact](#function-watsonx-ai-scan-artifact)
-  - [Function - watsonx.ai Scan Attachment](#function-watsonx-ai-scan-attachment)
-  - [Function - watsonx.ai Text Generation](#function-watsonx-ai-text-generation)
-  - [Script - watsonx.ai Add Artifact Report to Notes](#script-watsonx-ai-add-artifact-report-to-notes)
-  - [Script - watsonx.ai Respond to note](#script-watsonx-ai-respond-to-note)
-  - [Playbooks](#playbooks)
-  - [Troubleshooting \& Support](#troubleshooting--support)
-    - [For Support](#for-support)
+- [Troubleshooting \& Support](#troubleshooting--support)
+  - [For Support](#for-support)
 <!-- TOC -->
 
 ---
@@ -53,9 +43,9 @@
 
 | Version | Date    | Notes                                                                                                                                                                                             |
 |---------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 2.0.0   | 08/2026 | Changed name to IBM QRadar SOAR Response Assistant. Now, compatibility is tied to minimum SOAR 51.0.11.0+. Playbooks do not add notes for summaries, conversation playbooks have been disabled. Test Configuration action saves configured watsonx API connection details to SOAR backend. Playbook Execution Summary feature has been added. |  
+| 2.0.0   | 08/2026 | <ul><li>Changed name to IBM QRadar SOAR Response Assistant.</li><li>Compatibility is tied to minimum SOAR 51.0.11.0+.</li><li>Note conversations have been replaced with an integrated User Interface, Playbooks now add AI insights directly to the object.</li><li>Test Configuration action saves configured watsonx API connection details to SOAR backend.</li><li>Playbook Execution Summary feature has been added.</li> |  
 | 1.2.3   | 06/2026 | Updated model list, improved security safeguards by limiting text extraction from binary file types.                                                                                       |
-| 1.2.2   | 02/2026 | Support for new chat models (e.g., IBM's granite-4-h-small, openai's gpt-oss, etc.). Embedding model now configurable. Fix for mistral models outputing [INST]. Workspace names will be known to the assistant in incident Q&A, and incident summary. |  
+| 1.2.2   | 02/2026 | Support for new chat models (e.g., IBM's granite-4-h-small, OpenAI's gpt-oss, etc.). Embedding model now configurable. Fix for mistral models outputting [INST]. Workspace names will be known to the assistant in incident Q&A, and incident summary. |  
 | 1.2.1   | 01/2026 | Data payload config can control individual incident properties. Fix for failing to extract contents from plaintext files.                                                                         |
 | 1.2.0   | 06/2025 | Incident summary playbook, support for artifact/attachment scans on images and non-file artifacts, token usage & estimated cost (in USD cents) in all scans and summaries, data ingestion optimisation and user-customization feature, japanese language inclusion and prompt optimisations. |
 | 1.1.1   | 06/2025 | Updated model list, rich text whitespace fixes, playbook execution API fixes, improved stability in generating embeddings, minor change to scan playbooks' activation form.                       |
@@ -68,45 +58,34 @@
 
 ## Overview
 
-**Leverage generative AI with watsonx.ai for artifact scanning, incident and playbook execution summarization**
+**Leverage generative AI with watsonx.ai for artifact analysis, incident and playbook execution summarization**
 
 ![screenshot: main](./doc/screenshots/main.png)
 
 ### Key Features
 
-<!-- - Q&A: ask watsonx.ai questions about an incident, artifact, or attachment.
-  - Portions of relevant SOAR data will be used in the answer generation process.
-  - Prompts can be written in the following languages: English, French, German, Portuguese, Spanish, and Japanese.
-    - Responses will then be generated in the given language.
-  - The `watsonx.ai Retry Note Conversation` playbook makes it easy to execute the same query again without rewriting it.
-    - helpful in comparing results of two models for example.
-    - note: changing model in one playbook will not change it for the other. -->
-- Artifact and attachment analysis: 
+- Incident Summarization: ask watsonx.ai to generate a summary of the incident.
+  - Uses incident data to generate an AI Summary. Two types of summaries are generated:
+    - Executive Summary generates a high-level overview of a cybersecurity incident, detailing situation, attack, and defense in three sections for executive audiences.
+    - Technical Summary produces a detailed technical report of a cybersecurity incident, covering overview, artifact analysis, and mitigation actions for incident response teams.
+- Artifact and Attachment Analysis: 
   - Use playbooks to quickly generate a report on an artifact or attachment, as a preliminary assessment.
   - Supported file types include: any plaintext file and `.eml` files.
-- Playbook Execution summary 
-  - summarize the execution flow of an executed playbook, explain phases of the playbooks' progress and why certain pathways were taken.
-- Text generation: 
+- Playbook Execution Summary:
+  - Summarize the execution flow of an executed playbook, explain phases of the playbooks' progress and why certain pathways were taken.
+- Text Generation: 
   - Use watsonx.ai to generate text based on a given prompt in a function.
-- Incident Summarization: ask watsonx.ai to generate a summary of the incident.
-  - Uses Incident data to generate an AI Summary. Two types of summaries are generated:
-    - Executive Summary: Generates a high-level overview of a cybersecurity incident, detailing situation, attack, and defense in three sections for executive audiences.
-    - Technical Summary: Produces a detailed technical report of a cybersecurity incident, covering overview, artifact analysis, and mitigation actions for incident response teams.
-- Query cost estimation.
-  <!-- - The estimated cost (in USD cents) is shown in the AI content heading in notes. 
-    - Its shown for QnA, scanned artifacts/attachments and summarization.
-    - example - `Generation tokens: 78650, Embedding tokens: 54829. Estimated cost: 1.33479 USD cents`
-    - **Note**: This is just an estimation based off the understood pricing at time of release of each app version. To get actual token usage and billing information, navigate to the billing page in watsonx.ai or IBM Cloud. -->
-- Guardrails.
-  - We have now implemented guardrails to ensure that only queries related to the security domain are covered.
+- Guardrails:
+  - Only queries related to the security domain are covered.
+
 ---
 
 ## Requirements
 
-This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
+This app supports the IBM Security QRadar SOAR Platform operating on an App Host/Edge Gateway.
 
 - [SOAR Platform](#soar-platform) version 51.0.11.0+ installed.
-- A subscription to watsonx.ai with watsonx.ai Runtime Service.
+- A subscription to watsonx.ai with **watsonx.ai Runtime Service**.
   - A watsonx.ai Project ID
   - An IBM Cloud IAM API Key
   - A watsonx.ai [Endpoint URL](https://cloud.ibm.com/apidocs/watsonx-ai#endpoint-url)
@@ -128,7 +107,7 @@ These connection details can be found on the landing page for watsonx.ai, as see
 - For testing in a non-production environment you can use a free trial subscription to watsonx.ai.
 - Using this account, create a project on the watsonx.ai platform.
 
-> These instructions work as of 2025-02-13. These steps may become outdated due to changes made outside of this app.
+> These instructions work as of 2026-08-25. These steps may become outdated due to changes made outside of this app.
 
 #### Watsonx.ai Project ID
 
@@ -172,28 +151,20 @@ Find the relevant Endpoint for your region at https://cloud.ibm.com/apidocs/wats
 
 Lite accounts make it easy to get started with IBM Cloud® and try out services.
 
-When you're ready to unlock the full IBM Cloud catalog, get extra free resources, and more, you can upgrade to a Pay-As-You-Go or Subscription account. 
+When you're ready to unlock the full IBM Cloud catalogue, get extra free resources, and more, you can upgrade to a Pay-As-You-Go or Subscription account. 
 
 By upgrading to Pay-As-You-Go account, you would receive a $200 credit for 30 days. When you enter a credit card for a new Pay-As-You-Go account, you'll receive a promotional credit to use on any IBM product including watsonx.ai. For more details please refer to ```Promotional credit for upgrading your account``` section [here](https://cloud.ibm.com/docs/account?topic=account-upgrading-account#promotional-credit-for-upgrading-your-account).
 
 ### SOAR platform
-The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
+The SOAR platform supports App Host/Edge Gateway.
 
-If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `51.0.11.0.0`.
-* The app is in a container-based format (available from the AppExchange as a `zip` file).
+* The app is in a container-based format (available from the AppExchange as a `zip` manifest file, that the App Host/Edge Gateway will deploy).
 
-
-Guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_, _App Host Deployment Guide_, or _Integration Server Guide_ by expanding **Apps** in the Table of Contents pane. The System Administrator Guide is available by expanding **System Administrator**.
+Guides are available on the IBM Documentation website at [ibm.biz/soar-docs](https://ibm.biz/soar-docs). On this web page, select your SOAR platform version. On the follow-on page, you can find the _Edge Gateway Deployment Guide_ or _App Host Deployment Guide_ by expanding **SOAR Apps and App Host** in the Table of Contents panel. The System Administrator Guide is available by expanding **SOAR System Administrator**, where you can find **Managing SOAR Apps**.
 
 ### Cloud Pak for Security
 
 Cloud Pak for Security is currently not supported.
-<!-- If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= `1.10.15`.
-* Cloud Pak is configured with an Edge Gateway. -->
-
-Guides are available on the IBM Documentation website at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs). From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration & Automation.
 
 ### Proxy Server
 The app **does not** support a proxy server.
@@ -201,6 +172,7 @@ The app **does not** support a proxy server.
 ### Python Environment
 The app runs on Python 3.12.
 Additional package dependencies may exist for each of these packages:
+
 * numpy==2.2.0 
 * mail-parser==4.1.2 
 * xlrd==2.0.1 
@@ -227,8 +199,7 @@ Additional package dependencies may exist for each of these packages:
 ## Installation
 
 ### Installing the App
-* To install or uninstall an App or Integration on the _SOAR platform_, see the documentation at [ibm.biz/soar-docs](https://ibm.biz/soar-docs).
-<!-- * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation. -->
+* To install or uninstall an App on the _SOAR platform_, see the [IBM QRadar SOAR documentation](https://www.ibm.com/docs/en/sqsp/51.0.0?topic=soar-apps-app-host).
 
 ### App Configuration
 The following table provides the settings you need to configure the app. These settings are made in the app.config file. See the documentation discussed in the Requirements section for the procedure.
@@ -238,11 +209,11 @@ The following table provides the settings you need to configure the app. These s
 | **watsonx_api_key**    | Yes      | 0123-4567-89ab-cdef                      | Your watsonx.ai API key - see [IBM Cloud IAM API Key](#ibm-cloud-iam-api-key). **This should be saved as an App Secret.** |
 | **watsonx_endpoint**   | Yes      | `https://us-south.ml.cloud.ibm.com`      | The watsonx.ai API URL - see [watsonx.ai Endpoint URL](#watsonxai-endpoint-url).                                          |
 | **watsonx_project_id** | Yes      | 0123-4567-89ab-cdef                      | The watsonx.ai project id - see [watsonx.ai Project ID](#watsonxai-project-id).                                         |
-| **watsonx_model**      | No       | openai/gpt-oss-120b                      | The watsonx.ai ready to use large language model to be used in the Agent chat in the Response Assistant UI.                                         |
-| **render_markdown**    | No       | `true` or `false`                        | Set to `false` to disable rendering of markdown in incident notes.                                                        |
-| **default_language**   | No       | `en`, `fr`, `de`, `pt`, `es` or `ja`     | Language used for scans and summaries, and is used as the fallback language if prompt's language can't be detected.       |
-| **local_embeddings**   | No       | `true`, `false`                          | Use local (App host/integration server) compute resources to generate embeddings instead of watsonx.ai. Only recommended for integration servers that have >6GB of memory. |
+| **watsonx_model**      | No       | openai/gpt-oss-120b                      | The model to use for Agent conversations in Response Assistant Assistant. |
+| **render_markdown**    | No       | `true` or `false`                        |  This setting must be set to `true` for the Response Assistant to work.                                                       |
 | **embedding_model**    | No       | `ibm/granite-278m-multilingual-embedding` | Watsonx model to generate embeddings. [See options](https://dataplatform.cloud.ibm.com/docs/content/wsj/analyze-data/fm-models-embed.html?context=wx#ibm-provided)|
+<!-- | **default_language**   | No       | `en`, `fr`, `de`, `pt`, `es` or `ja`     | Language used for artifiact/attachment analyses.       | -->
+<!-- | **local_embeddings**   | No       | `true`, `false`                          | Use local (App host) compute resources to generate embeddings for artifact analysis instead of watsonx.ai. This is not recommended, as App Host containers are limited to 2GB of memory. | -->
 
 **Note**: The watsonx embedding model needs to support at least 500 input tokens (`sentence-transformers/all-minilm-l6-v2` will not work)
 
@@ -253,60 +224,42 @@ The config is setup automatically, you just need to add the following **case sen
 
 ---
 
-# App usage
+## App usage
 
-<!-- ## Note Conversation
-
-The *watsonx.ai Note Conversation* playbook allows for incident, artifact, and attachment Q&A
-
-![](doc/screenshots/incident_qna.png)
-
-- This playbook is triggered when a note with the text `@watsonx` is added to an incident.
-- By default, this will be an incident Q&A, where incident details, including artifact and attachment **metadata**, are included in context with the user's prompt.
-  - Artifact or attachment Q&A can be invoked by including the object's name in square brackets. 
-    - Instead of using incident data in context for generating a response, only relevant artifact/attachment data will be included.
-    - For attachments, and artifacts with an attached file, the file's  content will be included.
-    - Examples of supported file types can be checked in the [What file formats can be scanned?](#what-file-formats-can-be-scanned)
-    - E.g., `@watsonx does the artifact [123.sh] seem like it could be used maliciuously?`.
-    - E.g., `@watsonx respond with the text in the attachment [incident_overview.png].`. -->
-
-## Artifact and Attachment Scan
+### Artifact and Attachment Analysis
 
 ![](doc/screenshots/scan_artifact_action.png)
 ![](doc/screenshots/scan_artifact_result.png)
 
 The *watsonx.ai Scan Artifact* and *watsonx.ai Scan Attachment* playbooks summarize, and outline potential dangers of file contents.
 
-**This scan is not intended to replace Threat Intelligence sources for performing malware file hash scans**. It's intended use is to be a utility to quickly summarize and assess natural language, and/or code in a document.
+**This analysis is not intended to replace Threat Intelligence sources for performing malware file hash scans**. It's intended use is to be a utility to quickly summarize and assess existing insights from threat sources, natural language contents, and/or code in a document.
 
 #### What file formats can be scanned?
 - The app supports text to be extracted from only plain text-based documents (utf-8 and ascii).
 
 Examples of supported file formats include:
 - Document formats: `md`, `txt`, `rtf`, and `eml`.
-- Any plaintext file with standard text encoding: ascii & utf-8.
+
+Examples of files **not supported**:
+- `pdf`, `pptx`, `docx`, `png`
 
 
 ## Incident Summarization
 
-
 ![](doc/screenshots/incident_summarization.png)
-<!-- ![](doc/screenshots/incident_summarizer_action.png)
-![](doc/screenshots/incident_summarizer_selection.png)
-![](doc/screenshots/incident_summarizer_result.png) -->
 
-The *watsonx.ai Summarize Incident* playbooks summarizes the whole incident based on selected summary type.
+The *watsonx.ai Summarize Incident* playbooks summarizes the incident based on the selected summary type.
 
-**This scan is not intended to replace detailed analysis of the security incidents recorded in QRadar SOAR**. It's intended use is to be a utility to summarize and get a precise overview of the incident depending on user type.
+**This analysis is not intended to replace detailed analysis of the security incidents recorded in QRadar SOAR by SOC Analysts.**. It's intended use is to be a utility to summarize and get a precise overview of the incident depending on user type.
 
 #### What type of summaries are available?
 
-- There are two type of summaries avaiable to the users:
-  - Executive Summary: Delivers a clear, high-level overview of a cybersecurity incident, tailored for executives and decision-makers to quickly grasp the situation, attack details, and defensive actions. Its concise, formal structure supports strategic planning and communication without requiring technical expertise.
-  - Technical Summmary: Provides an in-depth technical report for incident response teams and cybersecurity analysts, detailing the incident’s technical aspects, artifact analysis, and mitigation steps. Its structured format aids operational teams in investigating, responding to, and preventing future incidents effectively.
+- There are two type of summaries available to the users:
+  - Executive Summary delivers a clear, high-level overview of a cybersecurity incident, tailored for executives and decision-makers to quickly grasp the situation, attack details, and defensive actions. Its concise, formal structure supports strategic planning and communication without requiring technical expertise.
+  - Technical Summary provides an in-depth technical report for incident response teams and cybersecurity analysts, detailing the incident’s technical aspects, artifact analysis, and mitigation steps. Its structured format aids operational teams in investigating, responding to, and preventing future incidents effectively.
 
 ## Playbook Execution Summary
-
 
 ![](doc/screenshots/exec_summary_large_result.png)
 
@@ -322,57 +275,37 @@ The *watsonx.ai Text Generation* function can be used to roll out your own genAI
 
 ---
 
-# How to get the best out of the app
+## How to get the best out of the app
 
 ### Model quality
 
-- Each large language model is different, and perform differently depending on the situation.
-- You can switch model at any time at the function level in the Playbook designer for each use-case.
-- This can allow you to try out different models hosted by IBM.
-- The default mistral model performs well, and is very competitively priced.
-- Certain topics and use-cases like task-related questions may be better suited for a different model.
-- Model list:
+- For each use-case, we have set the best model for the task in the playbooks that ship with this app.
+- Other models are available for you to test by updating the playbook, and changing the `fn_watsonx_analyst_model_id` function input for the relative playbook's function.
+- To change the model used by the Response Assistant agent, change the `watsonx_model` field in the `app.config` - see [App Configuration](#app-configuration) for more details.
+- Refer to [Regional availability of services and features](https://dataplatform.cloud.ibm.com/docs/content/wsj/getting-started/regional-datactr.html?context=wx&pos=2) to see what models are available in your watsonx region.
+- Current model list on watsonx.ai:
   - ibm/granite-4-h-small
   - meta-llama/llama-3-3-70b-instruct
   - meta-llama/llama-4-maverick-17b-128e-instruct-fp8
   - mistralai/mistral-small-3-1-24b-instruct-2503
   - openai/gpt-oss-120b
 
-<!-- 
-### Background on how a note conversation response is generated
-
-- As of version 1.1.0, semantic search is used to find the most relevant data to answer your question from a dataset.
-  - Embeddings (semantic representations of text) are generated for queried data.
-  - Then, the given prompt is embedded, and the distance between the meaning of your prompt and the meaning of each piece of embedded data is compared.
-  - Data that is considered close to the data you are asking for will then be added as context to a call to an LLM with your query.
- -->
 
 ### Prompting Guide
 
 #### Response Quality
 
-- Quality of response can differ between LLMs specifically when the input context is larger than 4KB limit. There are some models that cannot exceed the limit of 4KB context size.
-- Most of the Note Conversation answers are returned in about ~6 seconds. However, it's also important to note that large artifacts would also take more time to process.
+- Quality of response can differ between LLMs specifically when the input context is larger than the model's context limit.
 - Asking very specific and clearly defined questions can improve the quality of the generated responses. When querying LLMs, it's essential to be as clear and specific as possible about the information or task you want the model to address. This will help the model to generate more accurate and relevant responses.
   - For example, summarizing an incident for a CTO would be a different response than summarizing an incident for a Security analyst.
   - Another example would be if you do not want to include some artifact types in your queries then it should be specifically mentioned.
-  <!-- - Another example would be finding names of libraries in a python artifact. -->
-  <!-- - `@watsonx what python libraries have been imported in [artifact_name.py]? Do not share the code but only the names of the libraries that have been imported. Do not share the methods or functions of those libraries. Generally, libraries are imported with the syntax ```import <library name>` -->
-- If the initial results are unsatisfactory, consider refining your question.
-  <!-- - You can refine your query by continuing the conversation in replies. -->
-<!-- - ![](doc/screenshots/incident_qna_summary.png) -->
-
-<!-- #### Reply chain prompts -->
-
-<!-- - When querying watsonx in a reply note, previous (parent, grandparent, etc.) notes **in the reply chain** will be added to the context, which can help when getting more detail on specific topics. -->
-  <!-- - If the previous notes in the reply chain derail the conversation, you can start a new note conversation by creating a new "root" note. -->
+- If the initial results are unsatisfactory, consider refining your prompt.
 
 ---
 
+## Data selection
 
-# Data selection
-
-You can override the configuration for the data we send to watsonx for incident summaries. While we wouldn't recommend stripping too much from the default configuration, as adding or removing data will likely impact the quality of responses.
+You can override the configuration for the data we send to watsonx for **incident summaries**. It is not recommended to remove too much from the default configuration, as removing data will likely impact the quality of responses. Adding additional data is not supported.
 
 ## Custom incident properties
 
@@ -382,10 +315,10 @@ The default configuration allows all custom properties to be sent to watsonx, if
 
 
 ## Creating the override config
-By creating a `yaml` file under `/var/rescircuits` in the App Configuration page, you can provide an override config, which you can choose to use, for each compatible function (Converse via Notes, and Summarize Incident).
+By creating a `yaml` file under `/var/rescircuits` in the App Configuration page, you can provide an override config, which you can choose to use for Summarize Incident.
 
 
-Make sure that the file name is `<yourname>.yaml`, and that the file path is `/var/rescircuits` (the file path in the UI should not include the file's name).
+Make sure that the file name is `<override-name>.yaml`, and that the file path is `/var/rescircuits` (the file path in the UI should not include the file's name).
 
 The contents of the default configuration will be below, you can use this as a base config to modify. **Note**: Quality will vary if the config is changed from the default, continue at your own risk, and revert back to default if the data configuration causes a drop in quality.
 
@@ -525,334 +458,8 @@ To be able to use this configuration, we'll have to add and entry to the data co
 - click the 'Add/Edit values' label
 - under `default`, add a new config option with the filename of the config without the file extension - e.g., <code>config1.yaml</code> &rarr; <code>config1</code>
 - click the checkmark, and hit save
-- now to set the config on supporting functions (Converse via Notes, Summarize Incident), open the relevant playbooks, edit the watsonx function's input script and set the `fn_watsonx_analyst_data_config` value to the file name (without extension) that you set in the Customization settings.
+- now to set the config on Summarize Incident, open the relevant playbooks, edit the watsonx function's input script and set the `fn_watsonx_analyst_data_config` value to the file name (without extension) that you set in the Customization settings.
 
----
-
-# SOAR Customizations
-
-## Function - watsonx.ai Converse via Notes
-Allow conversation in an incident's Notes tab. Will take a portion of previous notes in the reply chain as context.
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name                             |   Type   | Required | Example | Tooltip                                                             |
-|----------------------------------|:--------:|:--------:|---------|---------------------------------------------------------------------|
-| `fn_watsonx_analyst_incident_id` | `number` |   Yes    | `2095`  | You can use Data Navigator for this                                 |
-| `fn_watsonx_analyst_model_id`    | `select` |   Yes    | `-`     | Which watsonx.ai generative AI model to use to perform the task?    |
-| `fn_watsonx_analyst_note_id`     | `number` |   Yes    | `-`     | ID for the Incident note to respond to. You can use Data Navigator. |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
-
-```python
-results = {
-  "generated_text": "\u003cp\u003eText from watsonx.ai\u003c/p\u003e",
-  "metadata": {
-    "created_at": "2023-07-21T16:52:32.190Z",
-    "generated_token_count": 8,
-    "input_token_count": 10,
-    "model_id": "ibm/granite-3-2b-instruct",
-    "stop_reason": "EOS token"
-  },
-  "raw_output": "Text from watsonx.ai",
-  "tag": "HTML model tag to be prefixed before any AI-generated content"
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Input Script:</summary>
-<p>
-
-```python
-
-inputs.fn_watsonx_analyst_incident_id = incident.id
-inputs.fn_watsonx_analyst_model_id = "ibm/granite-3-2b-instruct"
-inputs.fn_watsonx_analyst_note_id = note.id
-
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Post Process Script:</summary>
-<p>
-
-```python
-
-generated_text = playbook.functions.results.ai_response["content"]["generated_text"]
-tag = playbook.functions.results.ai_response["content"]["tag"]
-
-if generated_text != "":
-  note.addNote(tag + generated_text)
-
-```
-
-</p>
-</details>
-
----
-## Function - watsonx.ai Scan Artifact
-Use watsonx.ai to scan an artifact, and assess whether the artifact indicates any malicious activity. Design to work with log files, scripts (e.g. Bash, Python, Lua, Powershell, Perl).
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name                               |   Type   | Required | Example                                                                                                                    | Tooltip                                                        |
-|------------------------------------|:--------:|:--------:|----------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| `fn_watsonx_analyst_artifact_id`   | `number` |   Yes    | `-`                                                                                                                        | You can use data navigator to add this.                        |
-| `fn_watsonx_analyst_incident_id`   | `number` |   Yes    | `2095`                                                                                                                     | You can use Data Navigator for this                            |
-| `fn_watsonx_analyst_model_id`      | `select` |   Yes    | `-`                                                                                                                        | Which watsonx.ai generative AI model to use to perform the task? |
-| `fn_watsonx_analyst_system_prompt` |  `text`  |    No    | `You are a helpful AI assistant knowledgeable in cyber security. You are inoffensive, and respond clearly, and concisely.` | Optional grounding prompt                                      |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
-
-```python
-results = {
-  "generated_text": "\u003cp\u003eText from watsonx.ai\u003c/p\u003e",
-  "metadata": {
-    "created_at": "2023-07-21T16:52:32.190Z",
-    "generated_token_count": 8,
-    "input_token_count": 10,
-    "model_id": "ibm/granite-3-2b-instruct",
-    "stop_reason": "EOS token"
-  },
-  "raw_output": "Text from watsonx.ai",
-  "tag": "HTML model tag to be prefixed before any AI-generated content"
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Input Script:</summary>
-<p>
-
-```python
-None
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Post Process Script:</summary>
-<p>
-
-```python
-
-generated_text = playbook.functions.results.ai_response["content"]["generated_text"]
-tag = playbook.functions.results.ai_response["content"]["tag"]
-
-if generated_text:
-  generated_text = generated_text.strip()
-  incident.addNote(tag + generated_text)
-
-```
-
-</p>
-</details>
-
----
-## Function - watsonx.ai Scan Attachment
-Use watsonx.ai to scan an artifact, and assess whether the attachment indicates any malicious activity. Design to work with log files, scripts (e.g. Bash, Python, Lua, Powershell, Perl), but should be able to summarize other textual files.
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `fn_watsonx_analyst_attachment_id` | `number` | Yes | `-` | You can use data navigator to set this field. |
-| `fn_watsonx_analyst_incident_id` | `number` | Yes | `2095` | You can use Data Navigator for this |
-| `fn_watsonx_analyst_model_id` | `select` | Yes | `-` | Which watsonx.ai generative AI model to use to perform the task? |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
-
-```python
-results = {
-  "generated_text": "\u003cp\u003eText from watsonx.ai\u003c/p\u003e",
-  "metadata": {
-    "created_at": "2023-07-21T16:52:32.190Z",
-    "generated_token_count": 8,
-    "input_token_count": 10,
-    "model_id": "ibm/granite-3-2b-instruct",
-    "stop_reason": "EOS token"
-  },
-  "raw_output": "Text from watsonx.ai",
-  "tag": "HTML model tag to be prefixed before any AI-generated content"
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Input Script:</summary>
-<p>
-
-```python
-
-inputs.fn_watsonx_analyst_model_id = "ibm/granite-3-2b-instruct"
-inputs.fn_watsonx_analyst_incident_id = incident.id
-inputs.fn_watsonx_analyst_attachment_id = attachment.id
-
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Post Process Script:</summary>
-<p>
-
-```python
-
-generated_text = playbook.functions.results.ai_response["content"]["generated_text"]
-tag = playbook.functions.results.ai_response["content"]["tag"]
-
-if generated_text:
-  generated_text = generated_text.strip()
-  incident.addNote(tag + generated_text)
-
-```
-
-</p>
-</details>
-
----
-## Function - watsonx.ai Text Generation
-Perform Text Generation using watsonx.ai. Can replace '{}' in prompts with comma-separated strings in `fn_watsonx_analyst_arguments`.
-
-<details><summary>Inputs:</summary>
-<p>
-
-| Name | Type | Required | Example | Tooltip |
-| ---- | :--: | :------: | ------- | ------- |
-| `fn_watsonx_analyst_arguments` | `text` | No | `foo,bar,foobar` | Comma-separated arguments to replace '{}'s in the prompt |
-| `fn_watsonx_analyst_model_id` | `select` | Yes | `-` | Which watsonx.ai generative AI model to use to perform the task? |
-| `fn_watsonx_analyst_prompt` | `text` | Yes | `Tell me about this incident.` | What you are asking the LLM |
-| `fn_watsonx_analyst_system_prompt` | `text` | No | `You are a helpful AI assistant knowledgeable in cyber security. You are inoffensive, and respond clearly, and concisely.` | Optional grounding prompt |
-
-</p>
-</details>
-
-<details><summary>Outputs:</summary>
-<p>
-
-> **NOTE:** This example might be in JSON format, but `results` is a Python Dictionary on the SOAR platform.
-
-```python
-results = {
-  "generated_text": "\u003cp\u003eText from watsonx.ai\u003c/p\u003e",
-  "metadata": {
-    "created_at": "2023-07-21T16:52:32.190Z",
-    "generated_token_count": 8,
-    "input_token_count": 10,
-    "model_id": "ibm/granite-3-2b-instruct",
-    "stop_reason": "EOS token"
-  },
-  "raw_output": "Text from watsonx.ai",
-  "tag": "HTML model tag to be prefixed before any AI-generated content"
-}
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Input Script:</summary>
-<p>
-
-```python
-None
-```
-
-</p>
-</details>
-
-<details><summary>Example Function Post Process Script:</summary>
-<p>
-
-```python
-None
-```
-
-</p>
-</details>
-
----
-
-## Script - watsonx.ai Add Artifact Report to Notes
-
-
-**Object:** artifact
-
-<details><summary>Script Text:</summary>
-<p>
-
-```python
-
-generated_text = playbook.functions.results.ai_response["content"]["generated_text"]
-tag = playbook.functions.results.ai_response["content"]["tag"]
-
-if generated_text:
-  generated_text = generated_text.strip()
-  incident.addNote(tag + generated_text)
-
-```
-
-</p>
-</details>
-
----
-## Script - watsonx.ai Respond to note
-
-
-**Object:** note
-
-<details><summary>Script Text:</summary>
-<p>
-
-```python
-
-generated_text = playbook.functions.results.ai_response["content"]["generated_text"]
-tag = playbook.functions.results.ai_response["content"]["tag"]
-
-if generated_text != "":
-  note.addNote(tag + generated_text)
-
-```
-
-</p>
-</details>
-
----
-
-## Playbooks
-| Playbook Name                      | Description                                                                                                                                                                                                  | Activation Type | Object     | Status    | Condition                                      | 
-|------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|------------|-----------|------------------------------------------------| 
-| watsonx.ai Note Conversation       | This Playbook is triggered when a user writes a note that contains "@watsonx" at the start of the note.   A reply will be generated by IBM watsonx.ai generative AI, and added as a reply to the first note. | Automatic       | note       | `enabled` | `note.text contains @watsonx AND object_added` | 
-| watsonx.ai Retry Note Conversation | If a response fails to be generated, you can use this playbook on a note with a query for `@watsonx` to try again.                                                                                           | Manual          | note       | `enabled` | `-`                                            | 
-| watsonx.ai Scan Artifact           | Watsonx reads the contents of the provided artifact if an attachment is supplied.  Then, Watsonx gives a summary of the contents, and threat scores.                                                         | Manual          | artifact   | `enabled` | `-`                                            | 
-| watsonx.ai Scan Attachment         | None                                                                                                                                                                                                         | Manual          | attachment | `enabled` | `-`                                            | 
-
----
 
 ## Troubleshooting & Support
 
@@ -865,7 +472,7 @@ If any of the actions fail, the following steps may help:
   - Check SOAR’s `client.log` log file which may give some extra information.
 - If these do not give sufficient information, then you may enable debug level logging for the app by editing the `app.config` and adding `loglevel=DEBUG` inside the `[resilient]` section
  
-### For Support
-This is a IBM Community provided app. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
+## For Support
+This is an IBM Community provided app. Please search the Community [ibm.biz/soarcommunity](https://ibm.biz/soarcommunity) for assistance.
 
 [^1]: Incident type, artifact/attachment type IDs are substituted with the respective SOAR API name in LLM context.

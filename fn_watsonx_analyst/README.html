@@ -335,10 +335,6 @@
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_virustotal/README.html">VirusTotal</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">IBM QRadar SOAR Response Assistant</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#app-usage">App usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#data-selection">Data selection</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#soar-customizations">SOAR Customizations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_webex/README.html">Cisco Webex</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_whois/README.html">Whois</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_whois_rdap/README.html">Whois RDAP</a></li>
@@ -430,28 +426,26 @@
 </li>
 <li><p><a class="reference internal" href="#app-usage"><span class="xref myst">App usage</span></a></p>
 <ul>
-<li><p><a class="reference internal" href="#note-conversation"><span class="xref myst">Note Conversation</span></a></p></li>
-<li><p><a class="reference internal" href="#artifact-and-attachment-scan"><span class="xref myst">Artifact and Attachment Scan</span></a></p>
+<li><p><a class="reference internal" href="#artifact-and-attachment-analysis"><span class="xref myst">Artifact and Attachment Analysis</span></a></p>
 <ul>
 <li><p><a class="reference internal" href="#what-file-formats-can-be-scanned"><span class="xref myst">What file formats can be scanned?</span></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#text-generation"><span class="xref myst">Text Generation</span></a></p></li>
 <li><p><a class="reference internal" href="#incident-summarization"><span class="xref myst">Incident Summarization</span></a></p>
 <ul>
 <li><p><a class="reference internal" href="#what-type-of-summaries-are-available"><span class="xref myst">What type of summaries are available?</span></a></p></li>
 </ul>
 </li>
+<li><p><a class="reference internal" href="#playbook-execution-summary"><span class="xref myst">Playbook Execution Summary</span></a></p></li>
+<li><p><a class="reference internal" href="#text-generation"><span class="xref myst">Text Generation</span></a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#how-to-get-the-best-out-of-the-app"><span class="xref myst">How to get the best out of the app</span></a></p>
 <ul>
 <li><p><a class="reference internal" href="#model-quality"><span class="xref myst">Model quality</span></a></p></li>
-<li><p><a class="reference internal" href="#background-on-how-a-note-conversation-response-is-generated"><span class="xref myst">Background on how a note conversation response is generated</span></a></p></li>
 <li><p><a class="reference internal" href="#prompting-guide"><span class="xref myst">Prompting Guide</span></a></p>
 <ul>
 <li><p><a class="reference internal" href="#response-quality"><span class="xref myst">Response Quality</span></a></p></li>
-<li><p><a class="reference internal" href="#reply-chain-prompts"><span class="xref myst">Reply chain prompts</span></a></p></li>
 </ul>
 </li>
 </ul>
@@ -463,20 +457,9 @@
 <li><p><a class="reference internal" href="#setting-up-the-dropdown"><span class="xref myst">Setting up the dropdown</span></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#soar-customizations"><span class="xref myst">SOAR Customizations</span></a></p>
-<ul>
-<li><p><a class="reference internal" href="#function-watsonx-ai-converse-via-notes"><span class="xref myst">Function - watsonx.ai Converse via Notes</span></a></p></li>
-<li><p><a class="reference internal" href="#function-watsonx-ai-scan-artifact"><span class="xref myst">Function - watsonx.ai Scan Artifact</span></a></p></li>
-<li><p><a class="reference internal" href="#function-watsonx-ai-scan-attachment"><span class="xref myst">Function - watsonx.ai Scan Attachment</span></a></p></li>
-<li><p><a class="reference internal" href="#function-watsonx-ai-text-generation"><span class="xref myst">Function - watsonx.ai Text Generation</span></a></p></li>
-<li><p><a class="reference internal" href="#script-watsonx-ai-add-artifact-report-to-notes"><span class="xref myst">Script - watsonx.ai Add Artifact Report to Notes</span></a></p></li>
-<li><p><a class="reference internal" href="#script-watsonx-ai-respond-to-note"><span class="xref myst">Script - watsonx.ai Respond to note</span></a></p></li>
-<li><p><a class="reference internal" href="#playbooks"><span class="xref myst">Playbooks</span></a></p></li>
 <li><p><a class="reference internal" href="#troubleshooting--support"><span class="xref myst">Troubleshooting &amp; Support</span></a></p>
 <ul>
 <li><p><a class="reference internal" href="#for-support"><span class="xref myst">For Support</span></a></p></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -495,7 +478,7 @@
 <tbody>
 <tr class="row-even"><td><p>2.0.0</p></td>
 <td><p>08/2026</p></td>
-<td><p>Changed name to IBM QRadar SOAR Response Assistant. Now, compatibility is tied to minimum SOAR 51.0.11.0+. Playbooks do not add notes for summaries, conversation playbooks have been disabled. Test Configuration action saves configured watsonx API connection details to SOAR backend. Playbook Execution Summary feature has been added.</p></td>
+<td><p><ul><li>Changed name to IBM QRadar SOAR Response Assistant.</li><li>Compatibility is tied to minimum SOAR 51.0.11.0+.</li><li>Note conversations have been replaced with an integrated User Interface, Playbooks now add AI insights directly to the object.</li><li>Test Configuration action saves configured watsonx API connection details to SOAR backend.</li><li>Playbook Execution Summary feature has been added.</li></p></td>
 </tr>
 <tr class="row-odd"><td><p>1.2.3</p></td>
 <td><p>06/2026</p></td>
@@ -503,7 +486,7 @@
 </tr>
 <tr class="row-even"><td><p>1.2.2</p></td>
 <td><p>02/2026</p></td>
-<td><p>Support for new chat models (e.g., IBM’s granite-4-h-small, openai’s gpt-oss, etc.). Embedding model now configurable. Fix for mistral models outputing [INST]. Workspace names will be known to the assistant in incident Q&amp;A, and incident summary.</p></td>
+<td><p>Support for new chat models (e.g., IBM’s granite-4-h-small, OpenAI’s gpt-oss, etc.). Embedding model now configurable. Fix for mistral models outputting [INST]. Workspace names will be known to the assistant in incident Q&amp;A, and incident summary.</p></td>
 </tr>
 <tr class="row-odd"><td><p>1.2.1</p></td>
 <td><p>01/2026</p></td>
@@ -540,53 +523,40 @@
 <hr class="docutils" />
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
-<p><strong>Leverage generative AI with watsonx.ai for artifact scanning, incident and playbook execution summarization</strong></p>
+<p><strong>Leverage generative AI with watsonx.ai for artifact analysis, incident and playbook execution summarization</strong></p>
 <p><img alt="screenshot: main" src="../_images/main79.png" /></p>
 <section id="key-features">
 <h3>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">¶</a></h3>
-<!-- - Q&A: ask watsonx.ai questions about an incident, artifact, or attachment.
-  - Portions of relevant SOAR data will be used in the answer generation process.
-  - Prompts can be written in the following languages: English, French, German, Portuguese, Spanish, and Japanese.
-    - Responses will then be generated in the given language.
-  - The `watsonx.ai Retry Note Conversation` playbook makes it easy to execute the same query again without rewriting it.
-    - helpful in comparing results of two models for example.
-    - note: changing model in one playbook will not change it for the other. -->
-<ul>
-<li><p>Artifact and attachment analysis:</p>
 <ul class="simple">
+<li><p>Incident Summarization: ask watsonx.ai to generate a summary of the incident.</p>
+<ul>
+<li><p>Uses incident data to generate an AI Summary. Two types of summaries are generated:</p>
+<ul>
+<li><p>Executive Summary generates a high-level overview of a cybersecurity incident, detailing situation, attack, and defense in three sections for executive audiences.</p></li>
+<li><p>Technical Summary produces a detailed technical report of a cybersecurity incident, covering overview, artifact analysis, and mitigation actions for incident response teams.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Artifact and Attachment Analysis:</p>
+<ul>
 <li><p>Use playbooks to quickly generate a report on an artifact or attachment, as a preliminary assessment.</p></li>
 <li><p>Supported file types include: any plaintext file and <code class="docutils literal notranslate"><span class="pre">.eml</span></code> files.</p></li>
 </ul>
 </li>
-<li><p>Playbook Execution summary</p>
-<ul class="simple">
-<li><p>summarize the execution flow of an executed playbook, explain phases of the playbooks’ progress and why certain pathways were taken.</p></li>
+<li><p>Playbook Execution Summary:</p>
+<ul>
+<li><p>Summarize the execution flow of an executed playbook, explain phases of the playbooks’ progress and why certain pathways were taken.</p></li>
 </ul>
 </li>
-<li><p>Text generation:</p>
-<ul class="simple">
+<li><p>Text Generation:</p>
+<ul>
 <li><p>Use watsonx.ai to generate text based on a given prompt in a function.</p></li>
 </ul>
 </li>
-<li><p>Incident Summarization: ask watsonx.ai to generate a summary of the incident.</p>
-<ul class="simple">
-<li><p>Uses Incident data to generate an AI Summary. Two types of summaries are generated:</p>
+<li><p>Guardrails:</p>
 <ul>
-<li><p>Executive Summary: Generates a high-level overview of a cybersecurity incident, detailing situation, attack, and defense in three sections for executive audiences.</p></li>
-<li><p>Technical Summary: Produces a detailed technical report of a cybersecurity incident, covering overview, artifact analysis, and mitigation actions for incident response teams.</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>Query cost estimation.</p>
-<!-- - The estimated cost (in USD cents) is shown in the AI content heading in notes. 
-  - Its shown for QnA, scanned artifacts/attachments and summarization.
-  - example - `Generation tokens: 78650, Embedding tokens: 54829. Estimated cost: 1.33479 USD cents`
-  - **Note**: This is just an estimation based off the understood pricing at time of release of each app version. To get actual token usage and billing information, navigate to the billing page in watsonx.ai or IBM Cloud. -->
-</li>
-<li><p>Guardrails.</p>
-<ul class="simple">
-<li><p>We have now implemented guardrails to ensure that only queries related to the security domain are covered.</p></li>
+<li><p>Only queries related to the security domain are covered.</p></li>
 </ul>
 </li>
 </ul>
@@ -595,10 +565,10 @@
 <hr class="docutils" />
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
-<p>This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.</p>
+<p>This app supports the IBM Security QRadar SOAR Platform operating on an App Host/Edge Gateway.</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#soar-platform"><span class="xref myst">SOAR Platform</span></a> version 51.0.11.0+ installed.</p></li>
-<li><p>A subscription to watsonx.ai with watsonx.ai Runtime Service.</p>
+<li><p>A subscription to watsonx.ai with <strong>watsonx.ai Runtime Service</strong>.</p>
 <ul>
 <li><p>A watsonx.ai Project ID</p></li>
 <li><p>An IBM Cloud IAM API Key</p></li>
@@ -621,7 +591,7 @@
 <li><p>Using this account, create a project on the watsonx.ai platform.</p></li>
 </ul>
 <blockquote>
-<div><p>These instructions work as of 2025-02-13. These steps may become outdated due to changes made outside of this app.</p>
+<div><p>These instructions work as of 2026-08-25. These steps may become outdated due to changes made outside of this app.</p>
 </div></blockquote>
 <section id="watsonx-ai-project-id">
 <h4>Watsonx.ai Project ID<a class="headerlink" href="#watsonx-ai-project-id" title="Link to this heading">¶</a></h4>
@@ -658,26 +628,20 @@
 <section id="watsonx-ai-free-credits">
 <h3>Watsonx.ai Free Credits<a class="headerlink" href="#watsonx-ai-free-credits" title="Link to this heading">¶</a></h3>
 <p>Lite accounts make it easy to get started with IBM Cloud® and try out services.</p>
-<p>When you’re ready to unlock the full IBM Cloud catalog, get extra free resources, and more, you can upgrade to a Pay-As-You-Go or Subscription account.</p>
+<p>When you’re ready to unlock the full IBM Cloud catalogue, get extra free resources, and more, you can upgrade to a Pay-As-You-Go or Subscription account.</p>
 <p>By upgrading to Pay-As-You-Go account, you would receive a $200 credit for 30 days. When you enter a credit card for a new Pay-As-You-Go account, you’ll receive a promotional credit to use on any IBM product including watsonx.ai. For more details please refer to <code class="docutils literal notranslate"><span class="pre">Promotional</span> <span class="pre">credit</span> <span class="pre">for</span> <span class="pre">upgrading</span> <span class="pre">your</span> <span class="pre">account</span></code> section <a class="reference external" href="https://cloud.ibm.com/docs/account?topic=account-upgrading-account#promotional-credit-for-upgrading-your-account">here</a>.</p>
 </section>
 <section id="soar-platform">
 <h3>SOAR platform<a class="headerlink" href="#soar-platform" title="Link to this heading">¶</a></h3>
-<p>The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.</p>
-<p>If deploying to a SOAR platform with an App Host, the requirements are:</p>
+<p>The SOAR platform supports App Host/Edge Gateway.</p>
 <ul class="simple">
-<li><p>SOAR platform &gt;= <code class="docutils literal notranslate"><span class="pre">51.0.11.0.0</span></code>.</p></li>
-<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> file).</p></li>
+<li><p>The app is in a container-based format (available from the AppExchange as a <code class="docutils literal notranslate"><span class="pre">zip</span></code> manifest file, that the App Host/Edge Gateway will deploy).</p></li>
 </ul>
-<p>Guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em>, <em>App Host Deployment Guide</em>, or <em>Integration Server Guide</em> by expanding <strong>Apps</strong> in the Table of Contents pane. The System Administrator Guide is available by expanding <strong>System Administrator</strong>.</p>
+<p>Guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>. On this web page, select your SOAR platform version. On the follow-on page, you can find the <em>Edge Gateway Deployment Guide</em> or <em>App Host Deployment Guide</em> by expanding <strong>SOAR Apps and App Host</strong> in the Table of Contents panel. The System Administrator Guide is available by expanding <strong>SOAR System Administrator</strong>, where you can find <strong>Managing SOAR Apps</strong>.</p>
 </section>
 <section id="cloud-pak-for-security">
 <h3>Cloud Pak for Security<a class="headerlink" href="#cloud-pak-for-security" title="Link to this heading">¶</a></h3>
 <p>Cloud Pak for Security is currently not supported.</p>
-<!-- If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= `1.10.15`.
-* Cloud Pak is configured with an Edge Gateway. -->
-<p>Guides are available on the IBM Documentation website at <a class="reference external" href="https://ibm.biz/cp4s-docs">ibm.biz/cp4s-docs</a>. From this web page, select your IBM Cloud Pak for Security version. From the version-specific IBM Documentation page, select Case Management and Orchestration &amp; Automation.</p>
 </section>
 <section id="proxy-server">
 <h3>Proxy Server<a class="headerlink" href="#proxy-server" title="Link to this heading">¶</a></h3>
@@ -717,9 +681,8 @@ Additional package dependencies may exist for each of these packages:</p>
 <section id="installing-the-app">
 <h3>Installing the App<a class="headerlink" href="#installing-the-app" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>To install or uninstall an App or Integration on the <em>SOAR platform</em>, see the documentation at <a class="reference external" href="https://ibm.biz/soar-docs">ibm.biz/soar-docs</a>.</p></li>
+<li><p>To install or uninstall an App on the <em>SOAR platform</em>, see the <a class="reference external" href="https://www.ibm.com/docs/en/sqsp/51.0.0?topic=soar-apps-app-host">IBM QRadar SOAR documentation</a>.</p></li>
 </ul>
-<!-- * To install or uninstall an App on _IBM Cloud Pak for Security_, see the documentation at [ibm.biz/cp4s-docs](https://ibm.biz/cp4s-docs) and follow the instructions above to navigate to Orchestration and Automation. -->
 </section>
 <section id="app-configuration">
 <h3>App Configuration<a class="headerlink" href="#app-configuration" title="Link to this heading">¶</a></h3>
@@ -752,22 +715,12 @@ Additional package dependencies may exist for each of these packages:</p>
 <tr class="row-odd"><td><p><strong>watsonx_model</strong></p></td>
 <td><p>No</p></td>
 <td><p>openai/gpt-oss-120b</p></td>
-<td><p>The watsonx.ai ready to use large language model to be used in the Agent chat in the Response Assistant UI.</p></td>
+<td><p>The model to use for Agent conversations in Response Assistant Assistant.</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>render_markdown</strong></p></td>
 <td><p>No</p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
-<td><p>Set to <code class="docutils literal notranslate"><span class="pre">false</span></code> to disable rendering of markdown in incident notes.</p></td>
-</tr>
-<tr class="row-odd"><td><p><strong>default_language</strong></p></td>
-<td><p>No</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">en</span></code>, <code class="docutils literal notranslate"><span class="pre">fr</span></code>, <code class="docutils literal notranslate"><span class="pre">de</span></code>, <code class="docutils literal notranslate"><span class="pre">pt</span></code>, <code class="docutils literal notranslate"><span class="pre">es</span></code> or <code class="docutils literal notranslate"><span class="pre">ja</span></code></p></td>
-<td><p>Language used for scans and summaries, and is used as the fallback language if prompt’s language can’t be detected.</p></td>
-</tr>
-<tr class="row-even"><td><p><strong>local_embeddings</strong></p></td>
-<td><p>No</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code>, <code class="docutils literal notranslate"><span class="pre">false</span></code></p></td>
-<td><p>Use local (App host/integration server) compute resources to generate embeddings instead of watsonx.ai. Only recommended for integration servers that have &gt;6GB of memory.</p></td>
+<td><p>This setting must be set to <code class="docutils literal notranslate"><span class="pre">true</span></code> for the Response Assistant to work.</p></td>
 </tr>
 <tr class="row-odd"><td><p><strong>embedding_model</strong></p></td>
 <td><p>No</p></td>
@@ -777,6 +730,8 @@ Additional package dependencies may exist for each of these packages:</p>
 </tbody>
 </table>
 </div>
+<!-- | **default_language**   | No       | `en`, `fr`, `de`, `pt`, `es` or `ja`     | Language used for artifiact/attachment analyses.       | -->
+<!-- | **local_embeddings**   | No       | `true`, `false`                          | Use local (App host) compute resources to generate embeddings for artifact analysis instead of watsonx.ai. This is not recommended, as App Host containers are limited to 2GB of memory. | -->
 <p><strong>Note</strong>: The watsonx embedding model needs to support at least 500 input tokens (<code class="docutils literal notranslate"><span class="pre">sentence-transformers/all-minilm-l6-v2</span></code> will not work)</p>
 <p>The config is setup automatically, you just need to add the following <strong>case sensitive</strong> App secrets with the details from the <a class="reference internal" href="#requirements"><span class="xref myst">requirements</span></a> section:</p>
 <ul class="simple">
@@ -786,57 +741,43 @@ Additional package dependencies may exist for each of these packages:</p>
 </ul>
 </section>
 </section>
-</section>
 <hr class="docutils" />
 <section id="app-usage">
-<h1>App usage<a class="headerlink" href="#app-usage" title="Link to this heading">¶</a></h1>
-<!-- ## Note Conversation
-
-The *watsonx.ai Note Conversation* playbook allows for incident, artifact, and attachment Q&A
-
-![](doc/screenshots/incident_qna.png)
-
-- This playbook is triggered when a note with the text `@watsonx` is added to an incident.
-- By default, this will be an incident Q&A, where incident details, including artifact and attachment **metadata**, are included in context with the user's prompt.
-  - Artifact or attachment Q&A can be invoked by including the object's name in square brackets. 
-    - Instead of using incident data in context for generating a response, only relevant artifact/attachment data will be included.
-    - For attachments, and artifacts with an attached file, the file's  content will be included.
-    - Examples of supported file types can be checked in the [What file formats can be scanned?](#what-file-formats-can-be-scanned)
-    - E.g., `@watsonx does the artifact [123.sh] seem like it could be used maliciuously?`.
-    - E.g., `@watsonx respond with the text in the attachment [incident_overview.png].`. -->
-<section id="artifact-and-attachment-scan">
-<h2>Artifact and Attachment Scan<a class="headerlink" href="#artifact-and-attachment-scan" title="Link to this heading">¶</a></h2>
+<h2>App usage<a class="headerlink" href="#app-usage" title="Link to this heading">¶</a></h2>
+<section id="artifact-and-attachment-analysis">
+<h3>Artifact and Attachment Analysis<a class="headerlink" href="#artifact-and-attachment-analysis" title="Link to this heading">¶</a></h3>
 <p><img alt="" src="../_images/scan_artifact_action.png" />
 <img alt="" src="../_images/scan_artifact_result.png" /></p>
 <p>The <em>watsonx.ai Scan Artifact</em> and <em>watsonx.ai Scan Attachment</em> playbooks summarize, and outline potential dangers of file contents.</p>
-<p><strong>This scan is not intended to replace Threat Intelligence sources for performing malware file hash scans</strong>. It’s intended use is to be a utility to quickly summarize and assess natural language, and/or code in a document.</p>
+<p><strong>This analysis is not intended to replace Threat Intelligence sources for performing malware file hash scans</strong>. It’s intended use is to be a utility to quickly summarize and assess existing insights from threat sources, natural language contents, and/or code in a document.</p>
 <section id="what-file-formats-can-be-scanned">
-<h3>What file formats can be scanned?<a class="headerlink" href="#what-file-formats-can-be-scanned" title="Link to this heading">¶</a></h3>
+<h4>What file formats can be scanned?<a class="headerlink" href="#what-file-formats-can-be-scanned" title="Link to this heading">¶</a></h4>
 <ul class="simple">
 <li><p>The app supports text to be extracted from only plain text-based documents (utf-8 and ascii).</p></li>
 </ul>
 <p>Examples of supported file formats include:</p>
 <ul class="simple">
 <li><p>Document formats: <code class="docutils literal notranslate"><span class="pre">md</span></code>, <code class="docutils literal notranslate"><span class="pre">txt</span></code>, <code class="docutils literal notranslate"><span class="pre">rtf</span></code>, and <code class="docutils literal notranslate"><span class="pre">eml</span></code>.</p></li>
-<li><p>Any plaintext file with standard text encoding: ascii &amp; utf-8.</p></li>
 </ul>
+<p>Examples of files <strong>not supported</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pdf</span></code>, <code class="docutils literal notranslate"><span class="pre">pptx</span></code>, <code class="docutils literal notranslate"><span class="pre">docx</span></code>, <code class="docutils literal notranslate"><span class="pre">png</span></code></p></li>
+</ul>
+</section>
 </section>
 </section>
 <section id="incident-summarization">
 <h2>Incident Summarization<a class="headerlink" href="#incident-summarization" title="Link to this heading">¶</a></h2>
 <p><img alt="" src="../_images/incident_summarization.png" /></p>
-<!-- ![](doc/screenshots/incident_summarizer_action.png)
-![](doc/screenshots/incident_summarizer_selection.png)
-![](doc/screenshots/incident_summarizer_result.png) -->
-<p>The <em>watsonx.ai Summarize Incident</em> playbooks summarizes the whole incident based on selected summary type.</p>
-<p><strong>This scan is not intended to replace detailed analysis of the security incidents recorded in QRadar SOAR</strong>. It’s intended use is to be a utility to summarize and get a precise overview of the incident depending on user type.</p>
+<p>The <em>watsonx.ai Summarize Incident</em> playbooks summarizes the incident based on the selected summary type.</p>
+<p><strong>This analysis is not intended to replace detailed analysis of the security incidents recorded in QRadar SOAR by SOC Analysts.</strong>. It’s intended use is to be a utility to summarize and get a precise overview of the incident depending on user type.</p>
 <section id="what-type-of-summaries-are-available">
 <h3>What type of summaries are available?<a class="headerlink" href="#what-type-of-summaries-are-available" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>There are two type of summaries avaiable to the users:</p>
+<li><p>There are two type of summaries available to the users:</p>
 <ul>
-<li><p>Executive Summary: Delivers a clear, high-level overview of a cybersecurity incident, tailored for executives and decision-makers to quickly grasp the situation, attack details, and defensive actions. Its concise, formal structure supports strategic planning and communication without requiring technical expertise.</p></li>
-<li><p>Technical Summmary: Provides an in-depth technical report for incident response teams and cybersecurity analysts, detailing the incident’s technical aspects, artifact analysis, and mitigation steps. Its structured format aids operational teams in investigating, responding to, and preventing future incidents effectively.</p></li>
+<li><p>Executive Summary delivers a clear, high-level overview of a cybersecurity incident, tailored for executives and decision-makers to quickly grasp the situation, attack details, and defensive actions. Its concise, formal structure supports strategic planning and communication without requiring technical expertise.</p></li>
+<li><p>Technical Summary provides an in-depth technical report for incident response teams and cybersecurity analysts, detailing the incident’s technical aspects, artifact analysis, and mitigation steps. Its structured format aids operational teams in investigating, responding to, and preventing future incidents effectively.</p></li>
 </ul>
 </li>
 </ul>
@@ -858,19 +799,17 @@ The *watsonx.ai Note Conversation* playbook allows for incident, artifact, and a
 <li><p>Playbook logic can act as a force multiplier to create sophisticated AI workflows to perform predefined tasks automatically.</p></li>
 </ul>
 </section>
-</section>
 <hr class="docutils" />
 <section id="how-to-get-the-best-out-of-the-app">
-<h1>How to get the best out of the app<a class="headerlink" href="#how-to-get-the-best-out-of-the-app" title="Link to this heading">¶</a></h1>
+<h2>How to get the best out of the app<a class="headerlink" href="#how-to-get-the-best-out-of-the-app" title="Link to this heading">¶</a></h2>
 <section id="model-quality">
-<h2>Model quality<a class="headerlink" href="#model-quality" title="Link to this heading">¶</a></h2>
+<h3>Model quality<a class="headerlink" href="#model-quality" title="Link to this heading">¶</a></h3>
 <ul class="simple">
-<li><p>Each large language model is different, and perform differently depending on the situation.</p></li>
-<li><p>You can switch model at any time at the function level in the Playbook designer for each use-case.</p></li>
-<li><p>This can allow you to try out different models hosted by IBM.</p></li>
-<li><p>The default mistral model performs well, and is very competitively priced.</p></li>
-<li><p>Certain topics and use-cases like task-related questions may be better suited for a different model.</p></li>
-<li><p>Model list:</p>
+<li><p>For each use-case, we have set the best model for the task in the playbooks that ship with this app.</p></li>
+<li><p>Other models are available for you to test by updating the playbook, and changing the <code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_model_id</span></code> function input for the relative playbook’s function.</p></li>
+<li><p>To change the model used by the Response Assistant agent, change the <code class="docutils literal notranslate"><span class="pre">watsonx_model</span></code> field in the <code class="docutils literal notranslate"><span class="pre">app.config</span></code> - see <a class="reference internal" href="#app-configuration"><span class="xref myst">App Configuration</span></a> for more details.</p></li>
+<li><p>Refer to <a class="reference external" href="https://dataplatform.cloud.ibm.com/docs/content/wsj/getting-started/regional-datactr.html?context=wx&amp;pos=2">Regional availability of services and features</a> to see what models are available in your watsonx region.</p></li>
+<li><p>Current model list on watsonx.ai:</p>
 <ul>
 <li><p>ibm/granite-4-h-small</p></li>
 <li><p>meta-llama/llama-3-3-70b-instruct</p></li>
@@ -880,45 +819,29 @@ The *watsonx.ai Note Conversation* playbook allows for incident, artifact, and a
 </ul>
 </li>
 </ul>
-<!-- 
-### Background on how a note conversation response is generated
-
-- As of version 1.1.0, semantic search is used to find the most relevant data to answer your question from a dataset.
-  - Embeddings (semantic representations of text) are generated for queried data.
-  - Then, the given prompt is embedded, and the distance between the meaning of your prompt and the meaning of each piece of embedded data is compared.
-  - Data that is considered close to the data you are asking for will then be added as context to a call to an LLM with your query.
- -->
 </section>
 <section id="prompting-guide">
-<h2>Prompting Guide<a class="headerlink" href="#prompting-guide" title="Link to this heading">¶</a></h2>
+<h3>Prompting Guide<a class="headerlink" href="#prompting-guide" title="Link to this heading">¶</a></h3>
 <section id="response-quality">
-<h3>Response Quality<a class="headerlink" href="#response-quality" title="Link to this heading">¶</a></h3>
-<ul>
-<li><p>Quality of response can differ between LLMs specifically when the input context is larger than 4KB limit. There are some models that cannot exceed the limit of 4KB context size.</p></li>
-<li><p>Most of the Note Conversation answers are returned in about ~6 seconds. However, it’s also important to note that large artifacts would also take more time to process.</p></li>
-<li><p>Asking very specific and clearly defined questions can improve the quality of the generated responses. When querying LLMs, it’s essential to be as clear and specific as possible about the information or task you want the model to address. This will help the model to generate more accurate and relevant responses.</p>
+<h4>Response Quality<a class="headerlink" href="#response-quality" title="Link to this heading">¶</a></h4>
 <ul class="simple">
+<li><p>Quality of response can differ between LLMs specifically when the input context is larger than the model’s context limit.</p></li>
+<li><p>Asking very specific and clearly defined questions can improve the quality of the generated responses. When querying LLMs, it’s essential to be as clear and specific as possible about the information or task you want the model to address. This will help the model to generate more accurate and relevant responses.</p>
+<ul>
 <li><p>For example, summarizing an incident for a CTO would be a different response than summarizing an incident for a Security analyst.</p></li>
 <li><p>Another example would be if you do not want to include some artifact types in your queries then it should be specifically mentioned.</p></li>
 </ul>
-<!-- - Another example would be finding names of libraries in a python artifact. -->
-<!-- - `@watsonx what python libraries have been imported in [artifact_name.py]? Do not share the code but only the names of the libraries that have been imported. Do not share the methods or functions of those libraries. Generally, libraries are imported with the syntax ```import <library name>` -->
 </li>
-<li><p>If the initial results are unsatisfactory, consider refining your question.</p>
-<!-- - You can refine your query by continuing the conversation in replies. -->
-</li>
+<li><p>If the initial results are unsatisfactory, consider refining your prompt.</p></li>
 </ul>
-<!-- - ![](doc/screenshots/incident_qna_summary.png) -->
-<!-- #### Reply chain prompts -->
-<!-- - When querying watsonx in a reply note, previous (parent, grandparent, etc.) notes **in the reply chain** will be added to the context, which can help when getting more detail on specific topics. -->
-  <!-- - If the previous notes in the reply chain derail the conversation, you can start a new note conversation by creating a new "root" note. -->
 </section>
 </section>
 </section>
 <hr class="docutils" />
 <section id="data-selection">
-<h1>Data selection<a class="headerlink" href="#data-selection" title="Link to this heading">¶</a></h1>
-<p>You can override the configuration for the data we send to watsonx for incident summaries. While we wouldn’t recommend stripping too much from the default configuration, as adding or removing data will likely impact the quality of responses.</p>
+<h2>Data selection<a class="headerlink" href="#data-selection" title="Link to this heading">¶</a></h2>
+<p>You can override the configuration for the data we send to watsonx for <strong>incident summaries</strong>. It is not recommended to remove too much from the default configuration, as removing data will likely impact the quality of responses. Adding additional data is not supported.</p>
+</section>
 <section id="custom-incident-properties">
 <h2>Custom incident properties<a class="headerlink" href="#custom-incident-properties" title="Link to this heading">¶</a></h2>
 <p>The default configuration allows all custom properties to be sent to watsonx, if you want to limit which properties are sent, you can do so by modifying the <code class="docutils literal notranslate"><span class="pre">properties</span></code> field in an override config below, remove the <code class="docutils literal notranslate"><span class="pre">&quot;*&quot;</span></code> item under properties, and specify each property key you want to keep.</p>
@@ -926,8 +849,8 @@ The *watsonx.ai Note Conversation* playbook allows for incident, artifact, and a
 </section>
 <section id="creating-the-override-config">
 <h2>Creating the override config<a class="headerlink" href="#creating-the-override-config" title="Link to this heading">¶</a></h2>
-<p>By creating a <code class="docutils literal notranslate"><span class="pre">yaml</span></code> file under <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code> in the App Configuration page, you can provide an override config, which you can choose to use, for each compatible function (Converse via Notes, and Summarize Incident).</p>
-<p>Make sure that the file name is <code class="docutils literal notranslate"><span class="pre">&lt;yourname&gt;.yaml</span></code>, and that the file path is <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code> (the file path in the UI should not include the file’s name).</p>
+<p>By creating a <code class="docutils literal notranslate"><span class="pre">yaml</span></code> file under <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code> in the App Configuration page, you can provide an override config, which you can choose to use for Summarize Incident.</p>
+<p>Make sure that the file name is <code class="docutils literal notranslate"><span class="pre">&lt;override-name&gt;.yaml</span></code>, and that the file path is <code class="docutils literal notranslate"><span class="pre">/var/rescircuits</span></code> (the file path in the UI should not include the file’s name).</p>
 <p>The contents of the default configuration will be below, you can use this as a base config to modify. <strong>Note</strong>: Quality will vary if the config is changed from the default, continue at your own risk, and revert back to default if the data configuration causes a drop in quality.</p>
 <p><strong>Note</strong>: <strong>You must restart the app after creating the new payload file, as until then, the app will fallback to default configuration.</strong></p>
 <details>
@@ -1060,441 +983,9 @@ The *watsonx.ai Note Conversation* playbook allows for incident, artifact, and a
 <li><p>click the ‘Add/Edit values’ label</p></li>
 <li><p>under <code class="docutils literal notranslate"><span class="pre">default</span></code>, add a new config option with the filename of the config without the file extension - e.g., <code>config1.yaml</code> → <code>config1</code></p></li>
 <li><p>click the checkmark, and hit save</p></li>
-<li><p>now to set the config on supporting functions (Converse via Notes, Summarize Incident), open the relevant playbooks, edit the watsonx function’s input script and set the <code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_data_config</span></code> value to the file name (without extension) that you set in the Customization settings.</p></li>
+<li><p>now to set the config on Summarize Incident, open the relevant playbooks, edit the watsonx function’s input script and set the <code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_data_config</span></code> value to the file name (without extension) that you set in the Customization settings.</p></li>
 </ul>
 </section>
-</section>
-<hr class="docutils" />
-<section id="soar-customizations">
-<h1>SOAR Customizations<a class="headerlink" href="#soar-customizations" title="Link to this heading">¶</a></h1>
-<section id="function-watsonx-ai-converse-via-notes">
-<h2>Function - watsonx.ai Converse via Notes<a class="headerlink" href="#function-watsonx-ai-converse-via-notes" title="Link to this heading">¶</a></h2>
-<p>Allow conversation in an incident’s Notes tab. Will take a portion of previous notes in the reply chain as context.</p>
-<details><summary>Inputs:</summary>
-<p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Name</p></th>
-<th class="head text-center"><p>Type</p></th>
-<th class="head text-center"><p>Required</p></th>
-<th class="head"><p>Example</p></th>
-<th class="head"><p>Tooltip</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_incident_id</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">2095</span></code></p></td>
-<td><p>You can use Data Navigator for this</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_model_id</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>Which watsonx.ai generative AI model to use to perform the task?</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_note_id</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>ID for the Incident note to respond to. You can use Data Navigator.</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</p>
-</details>
-<details><summary>Outputs:</summary>
-<p>
-<blockquote>
-<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
-</div></blockquote>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">"generated_text"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">Text from watsonx.ai</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">"</span><span class="p">,</span>
-  <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2023-07-21T16:52:32.190Z"</span><span class="p">,</span>
-    <span class="s2">"generated_token_count"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-    <span class="s2">"input_token_count"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="s2">"model_id"</span><span class="p">:</span> <span class="s2">"ibm/granite-3-2b-instruct"</span><span class="p">,</span>
-    <span class="s2">"stop_reason"</span><span class="p">:</span> <span class="s2">"EOS token"</span>
-  <span class="p">},</span>
-  <span class="s2">"raw_output"</span><span class="p">:</span> <span class="s2">"Text from watsonx.ai"</span><span class="p">,</span>
-  <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"HTML model tag to be prefixed before any AI-generated content"</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</p>
-</details>
-<details><summary>Example Function Input Script:</summary>
-<p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_model_id</span> <span class="o">=</span> <span class="s2">"ibm/granite-3-2b-instruct"</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_note_id</span> <span class="o">=</span> <span class="n">note</span><span class="o">.</span><span class="n">id</span>
-
-</pre></div>
-</div>
-</p>
-</details>
-<details><summary>Example Function Post Process Script:</summary>
-<p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"generated_text"</span><span class="p">]</span>
-<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"tag"</span><span class="p">]</span>
-
-<span class="k">if</span> <span class="n">generated_text</span> <span class="o">!=</span> <span class="s2">""</span><span class="p">:</span>
-  <span class="n">note</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">tag</span> <span class="o">+</span> <span class="n">generated_text</span><span class="p">)</span>
-
-</pre></div>
-</div>
-</p>
-</details>
-</section>
-<hr class="docutils" />
-<section id="function-watsonx-ai-scan-artifact">
-<h2>Function - watsonx.ai Scan Artifact<a class="headerlink" href="#function-watsonx-ai-scan-artifact" title="Link to this heading">¶</a></h2>
-<p>Use watsonx.ai to scan an artifact, and assess whether the artifact indicates any malicious activity. Design to work with log files, scripts (e.g. Bash, Python, Lua, Powershell, Perl).</p>
-<details><summary>Inputs:</summary>
-<p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Name</p></th>
-<th class="head text-center"><p>Type</p></th>
-<th class="head text-center"><p>Required</p></th>
-<th class="head"><p>Example</p></th>
-<th class="head"><p>Tooltip</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_artifact_id</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>You can use data navigator to add this.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_incident_id</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">2095</span></code></p></td>
-<td><p>You can use Data Navigator for this</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_model_id</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>Which watsonx.ai generative AI model to use to perform the task?</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_system_prompt</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td class="text-center"><p>No</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">are</span> <span class="pre">a</span> <span class="pre">helpful</span> <span class="pre">AI</span> <span class="pre">assistant</span> <span class="pre">knowledgeable</span> <span class="pre">in</span> <span class="pre">cyber</span> <span class="pre">security.</span> <span class="pre">You</span> <span class="pre">are</span> <span class="pre">inoffensive,</span> <span class="pre">and</span> <span class="pre">respond</span> <span class="pre">clearly,</span> <span class="pre">and</span> <span class="pre">concisely.</span></code></p></td>
-<td><p>Optional grounding prompt</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</p>
-</details>
-<details><summary>Outputs:</summary>
-<p>
-<blockquote>
-<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
-</div></blockquote>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">"generated_text"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">Text from watsonx.ai</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">"</span><span class="p">,</span>
-  <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2023-07-21T16:52:32.190Z"</span><span class="p">,</span>
-    <span class="s2">"generated_token_count"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-    <span class="s2">"input_token_count"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="s2">"model_id"</span><span class="p">:</span> <span class="s2">"ibm/granite-3-2b-instruct"</span><span class="p">,</span>
-    <span class="s2">"stop_reason"</span><span class="p">:</span> <span class="s2">"EOS token"</span>
-  <span class="p">},</span>
-  <span class="s2">"raw_output"</span><span class="p">:</span> <span class="s2">"Text from watsonx.ai"</span><span class="p">,</span>
-  <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"HTML model tag to be prefixed before any AI-generated content"</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</p>
-</details>
-<details><summary>Example Function Input Script:</summary>
-<p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kc">None</span>
-</pre></div>
-</div>
-</p>
-</details>
-<details><summary>Example Function Post Process Script:</summary>
-<p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"generated_text"</span><span class="p">]</span>
-<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"tag"</span><span class="p">]</span>
-
-<span class="k">if</span> <span class="n">generated_text</span><span class="p">:</span>
-  <span class="n">generated_text</span> <span class="o">=</span> <span class="n">generated_text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">tag</span> <span class="o">+</span> <span class="n">generated_text</span><span class="p">)</span>
-
-</pre></div>
-</div>
-</p>
-</details>
-</section>
-<hr class="docutils" />
-<section id="function-watsonx-ai-scan-attachment">
-<h2>Function - watsonx.ai Scan Attachment<a class="headerlink" href="#function-watsonx-ai-scan-attachment" title="Link to this heading">¶</a></h2>
-<p>Use watsonx.ai to scan an artifact, and assess whether the attachment indicates any malicious activity. Design to work with log files, scripts (e.g. Bash, Python, Lua, Powershell, Perl), but should be able to summarize other textual files.</p>
-<details><summary>Inputs:</summary>
-<p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Name</p></th>
-<th class="head text-center"><p>Type</p></th>
-<th class="head text-center"><p>Required</p></th>
-<th class="head"><p>Example</p></th>
-<th class="head"><p>Tooltip</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_attachment_id</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>You can use data navigator to set this field.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_incident_id</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">number</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">2095</span></code></p></td>
-<td><p>You can use Data Navigator for this</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_model_id</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>Which watsonx.ai generative AI model to use to perform the task?</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</p>
-</details>
-<details><summary>Outputs:</summary>
-<p>
-<blockquote>
-<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
-</div></blockquote>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">"generated_text"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">Text from watsonx.ai</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">"</span><span class="p">,</span>
-  <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2023-07-21T16:52:32.190Z"</span><span class="p">,</span>
-    <span class="s2">"generated_token_count"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-    <span class="s2">"input_token_count"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="s2">"model_id"</span><span class="p">:</span> <span class="s2">"ibm/granite-3-2b-instruct"</span><span class="p">,</span>
-    <span class="s2">"stop_reason"</span><span class="p">:</span> <span class="s2">"EOS token"</span>
-  <span class="p">},</span>
-  <span class="s2">"raw_output"</span><span class="p">:</span> <span class="s2">"Text from watsonx.ai"</span><span class="p">,</span>
-  <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"HTML model tag to be prefixed before any AI-generated content"</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</p>
-</details>
-<details><summary>Example Function Input Script:</summary>
-<p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_model_id</span> <span class="o">=</span> <span class="s2">"ibm/granite-3-2b-instruct"</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_incident_id</span> <span class="o">=</span> <span class="n">incident</span><span class="o">.</span><span class="n">id</span>
-<span class="n">inputs</span><span class="o">.</span><span class="n">fn_watsonx_analyst_attachment_id</span> <span class="o">=</span> <span class="n">attachment</span><span class="o">.</span><span class="n">id</span>
-
-</pre></div>
-</div>
-</p>
-</details>
-<details><summary>Example Function Post Process Script:</summary>
-<p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"generated_text"</span><span class="p">]</span>
-<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"tag"</span><span class="p">]</span>
-
-<span class="k">if</span> <span class="n">generated_text</span><span class="p">:</span>
-  <span class="n">generated_text</span> <span class="o">=</span> <span class="n">generated_text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">tag</span> <span class="o">+</span> <span class="n">generated_text</span><span class="p">)</span>
-
-</pre></div>
-</div>
-</p>
-</details>
-</section>
-<hr class="docutils" />
-<section id="function-watsonx-ai-text-generation">
-<h2>Function - watsonx.ai Text Generation<a class="headerlink" href="#function-watsonx-ai-text-generation" title="Link to this heading">¶</a></h2>
-<p>Perform Text Generation using watsonx.ai. Can replace ‘{}’ in prompts with comma-separated strings in <code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_arguments</span></code>.</p>
-<details><summary>Inputs:</summary>
-<p>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Name</p></th>
-<th class="head text-center"><p>Type</p></th>
-<th class="head text-center"><p>Required</p></th>
-<th class="head"><p>Example</p></th>
-<th class="head"><p>Tooltip</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_arguments</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td class="text-center"><p>No</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">foo,bar,foobar</span></code></p></td>
-<td><p>Comma-separated arguments to replace ‘{}’s in the prompt</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_model_id</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">select</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-<td><p>Which watsonx.ai generative AI model to use to perform the task?</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_prompt</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">Tell</span> <span class="pre">me</span> <span class="pre">about</span> <span class="pre">this</span> <span class="pre">incident.</span></code></p></td>
-<td><p>What you are asking the LLM</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fn_watsonx_analyst_system_prompt</span></code></p></td>
-<td class="text-center"><p><code class="docutils literal notranslate"><span class="pre">text</span></code></p></td>
-<td class="text-center"><p>No</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">are</span> <span class="pre">a</span> <span class="pre">helpful</span> <span class="pre">AI</span> <span class="pre">assistant</span> <span class="pre">knowledgeable</span> <span class="pre">in</span> <span class="pre">cyber</span> <span class="pre">security.</span> <span class="pre">You</span> <span class="pre">are</span> <span class="pre">inoffensive,</span> <span class="pre">and</span> <span class="pre">respond</span> <span class="pre">clearly,</span> <span class="pre">and</span> <span class="pre">concisely.</span></code></p></td>
-<td><p>Optional grounding prompt</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</p>
-</details>
-<details><summary>Outputs:</summary>
-<p>
-<blockquote>
-<div><p><strong>NOTE:</strong> This example might be in JSON format, but <code class="docutils literal notranslate"><span class="pre">results</span></code> is a Python Dictionary on the SOAR platform.</p>
-</div></blockquote>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">"generated_text"</span><span class="p">:</span> <span class="s2">"</span><span class="se">\u003c</span><span class="s2">p</span><span class="se">\u003e</span><span class="s2">Text from watsonx.ai</span><span class="se">\u003c</span><span class="s2">/p</span><span class="se">\u003e</span><span class="s2">"</span><span class="p">,</span>
-  <span class="s2">"metadata"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"created_at"</span><span class="p">:</span> <span class="s2">"2023-07-21T16:52:32.190Z"</span><span class="p">,</span>
-    <span class="s2">"generated_token_count"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-    <span class="s2">"input_token_count"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-    <span class="s2">"model_id"</span><span class="p">:</span> <span class="s2">"ibm/granite-3-2b-instruct"</span><span class="p">,</span>
-    <span class="s2">"stop_reason"</span><span class="p">:</span> <span class="s2">"EOS token"</span>
-  <span class="p">},</span>
-  <span class="s2">"raw_output"</span><span class="p">:</span> <span class="s2">"Text from watsonx.ai"</span><span class="p">,</span>
-  <span class="s2">"tag"</span><span class="p">:</span> <span class="s2">"HTML model tag to be prefixed before any AI-generated content"</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</p>
-</details>
-<details><summary>Example Function Input Script:</summary>
-<p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kc">None</span>
-</pre></div>
-</div>
-</p>
-</details>
-<details><summary>Example Function Post Process Script:</summary>
-<p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kc">None</span>
-</pre></div>
-</div>
-</p>
-</details>
-</section>
-<hr class="docutils" />
-<section id="script-watsonx-ai-add-artifact-report-to-notes">
-<h2>Script - watsonx.ai Add Artifact Report to Notes<a class="headerlink" href="#script-watsonx-ai-add-artifact-report-to-notes" title="Link to this heading">¶</a></h2>
-<p><strong>Object:</strong> artifact</p>
-<details><summary>Script Text:</summary>
-<p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"generated_text"</span><span class="p">]</span>
-<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"tag"</span><span class="p">]</span>
-
-<span class="k">if</span> <span class="n">generated_text</span><span class="p">:</span>
-  <span class="n">generated_text</span> <span class="o">=</span> <span class="n">generated_text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-  <span class="n">incident</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">tag</span> <span class="o">+</span> <span class="n">generated_text</span><span class="p">)</span>
-
-</pre></div>
-</div>
-</p>
-</details>
-</section>
-<hr class="docutils" />
-<section id="script-watsonx-ai-respond-to-note">
-<h2>Script - watsonx.ai Respond to note<a class="headerlink" href="#script-watsonx-ai-respond-to-note" title="Link to this heading">¶</a></h2>
-<p><strong>Object:</strong> note</p>
-<details><summary>Script Text:</summary>
-<p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="n">generated_text</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"generated_text"</span><span class="p">]</span>
-<span class="n">tag</span> <span class="o">=</span> <span class="n">playbook</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">ai_response</span><span class="p">[</span><span class="s2">"content"</span><span class="p">][</span><span class="s2">"tag"</span><span class="p">]</span>
-
-<span class="k">if</span> <span class="n">generated_text</span> <span class="o">!=</span> <span class="s2">""</span><span class="p">:</span>
-  <span class="n">note</span><span class="o">.</span><span class="n">addNote</span><span class="p">(</span><span class="n">tag</span> <span class="o">+</span> <span class="n">generated_text</span><span class="p">)</span>
-
-</pre></div>
-</div>
-</p>
-</details>
-</section>
-<hr class="docutils" />
-<section id="playbooks">
-<h2>Playbooks<a class="headerlink" href="#playbooks" title="Link to this heading">¶</a></h2>
-<div class="table-wrapper colwidths-auto docutils container">
-<table class="docutils align-default">
-<thead>
-<tr class="row-odd"><th class="head"><p>Playbook Name</p></th>
-<th class="head"><p>Description</p></th>
-<th class="head"><p>Activation Type</p></th>
-<th class="head"><p>Object</p></th>
-<th class="head"><p>Status</p></th>
-<th class="head"><p>Condition</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>watsonx.ai Note Conversation</p></td>
-<td><p>This Playbook is triggered when a user writes a note that contains “&#64;watsonx” at the start of the note.   A reply will be generated by IBM watsonx.ai generative AI, and added as a reply to the first note.</p></td>
-<td><p>Automatic</p></td>
-<td><p>note</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">note.text</span> <span class="pre">contains</span> <span class="pre">&#64;watsonx</span> <span class="pre">AND</span> <span class="pre">object_added</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>watsonx.ai Retry Note Conversation</p></td>
-<td><p>If a response fails to be generated, you can use this playbook on a note with a query for <code class="docutils literal notranslate"><span class="pre">&#64;watsonx</span></code> to try again.</p></td>
-<td><p>Manual</p></td>
-<td><p>note</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>watsonx.ai Scan Artifact</p></td>
-<td><p>Watsonx reads the contents of the provided artifact if an attachment is supplied.  Then, Watsonx gives a summary of the contents, and threat scores.</p></td>
-<td><p>Manual</p></td>
-<td><p>artifact</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>watsonx.ai Scan Attachment</p></td>
-<td><p>None</p></td>
-<td><p>Manual</p></td>
-<td><p>attachment</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">enabled</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">-</span></code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<hr class="docutils" />
 <section id="troubleshooting-support">
 <h2>Troubleshooting &amp; Support<a class="headerlink" href="#troubleshooting-support" title="Link to this heading">¶</a></h2>
 <p>If any of the actions fail, the following steps may help:</p>
@@ -1513,10 +1004,10 @@ The *watsonx.ai Note Conversation* playbook allows for incident, artifact, and a
 </li>
 <li><p>If these do not give sufficient information, then you may enable debug level logging for the app by editing the <code class="docutils literal notranslate"><span class="pre">app.config</span></code> and adding <code class="docutils literal notranslate"><span class="pre">loglevel=DEBUG</span></code> inside the <code class="docutils literal notranslate"><span class="pre">[resilient]</span></code> section</p></li>
 </ul>
-<section id="for-support">
-<h3>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h3>
-<p>This is a IBM Community provided app. Please search the Community <a class="reference external" href="https://ibm.biz/soarcommunity">ibm.biz/soarcommunity</a> for assistance.</p>
 </section>
+<section id="for-support">
+<h2>For Support<a class="headerlink" href="#for-support" title="Link to this heading">¶</a></h2>
+<p>This is an IBM Community provided app. Please search the Community <a class="reference external" href="https://ibm.biz/soarcommunity">ibm.biz/soarcommunity</a> for assistance.</p>
 </section>
 </section>
 <hr class="footnotes docutils" />
@@ -1607,11 +1098,11 @@ The *watsonx.ai Note Conversation* playbook allows for incident, artifact, and a
 <li><a class="reference internal" href="#app-configuration">App Configuration</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#app-usage">App usage</a><ul>
+<li><a class="reference internal" href="#artifact-and-attachment-analysis">Artifact and Attachment Analysis</a><ul>
+<li><a class="reference internal" href="#what-file-formats-can-be-scanned">What file formats can be scanned?</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#app-usage">App usage</a><ul>
-<li><a class="reference internal" href="#artifact-and-attachment-scan">Artifact and Attachment Scan</a><ul>
-<li><a class="reference internal" href="#what-file-formats-can-be-scanned">What file formats can be scanned?</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#incident-summarization">Incident Summarization</a><ul>
@@ -1620,8 +1111,6 @@ The *watsonx.ai Note Conversation* playbook allows for incident, artifact, and a
 </li>
 <li><a class="reference internal" href="#playbook-execution-summary">Playbook Execution Summary</a></li>
 <li><a class="reference internal" href="#text-generation">Text Generation</a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#how-to-get-the-best-out-of-the-app">How to get the best out of the app</a><ul>
 <li><a class="reference internal" href="#model-quality">Model quality</a></li>
 <li><a class="reference internal" href="#prompting-guide">Prompting Guide</a><ul>
@@ -1630,24 +1119,12 @@ The *watsonx.ai Note Conversation* playbook allows for incident, artifact, and a
 </li>
 </ul>
 </li>
-<li><a class="reference internal" href="#data-selection">Data selection</a><ul>
+<li><a class="reference internal" href="#data-selection">Data selection</a></li>
 <li><a class="reference internal" href="#custom-incident-properties">Custom incident properties</a></li>
 <li><a class="reference internal" href="#creating-the-override-config">Creating the override config</a></li>
 <li><a class="reference internal" href="#setting-up-the-dropdown">Setting up the dropdown</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#soar-customizations">SOAR Customizations</a><ul>
-<li><a class="reference internal" href="#function-watsonx-ai-converse-via-notes">Function - watsonx.ai Converse via Notes</a></li>
-<li><a class="reference internal" href="#function-watsonx-ai-scan-artifact">Function - watsonx.ai Scan Artifact</a></li>
-<li><a class="reference internal" href="#function-watsonx-ai-scan-attachment">Function - watsonx.ai Scan Attachment</a></li>
-<li><a class="reference internal" href="#function-watsonx-ai-text-generation">Function - watsonx.ai Text Generation</a></li>
-<li><a class="reference internal" href="#script-watsonx-ai-add-artifact-report-to-notes">Script - watsonx.ai Add Artifact Report to Notes</a></li>
-<li><a class="reference internal" href="#script-watsonx-ai-respond-to-note">Script - watsonx.ai Respond to note</a></li>
-<li><a class="reference internal" href="#playbooks">Playbooks</a></li>
-<li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a><ul>
+<li><a class="reference internal" href="#troubleshooting-support">Troubleshooting &amp; Support</a></li>
 <li><a class="reference internal" href="#for-support">For Support</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
