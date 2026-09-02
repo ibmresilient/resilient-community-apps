@@ -11,7 +11,7 @@ import os
 import sys
 from collections.abc import Callable, Collection, Mapping
 from types import FrameType
-from typing import Any, TypeVar, cast
+from typing import Any, ClassVar, TypeVar, cast
 
 from coverage import env
 from coverage.core import Core
@@ -57,7 +57,7 @@ class Collector:
     # The stack of active Collectors.  Collectors are added here when started,
     # and popped when stopped.  Collectors on the stack are paused when not
     # the top, and resumed when they become the top again.
-    _collectors: list[Collector] = []
+    _collectors: ClassVar[list[Collector]] = []
 
     def __init__(
         self,
@@ -385,7 +385,7 @@ class Collector:
         """
         return any(tracer.activity() for tracer in self.tracers)
 
-    def switch_context(self, new_context: str | None) -> None:
+    def switch_context(self, new_context: str | None) -> str | None:
         """Switch to a new dynamic context."""
         context: str | None
         self.flush_data()
@@ -395,7 +395,7 @@ class Collector:
                 context += "|" + new_context
         else:
             context = new_context
-        self.covdata.set_context(context)
+        return self.covdata.set_context(context)
 
     def disable_plugin(self, disposition: TFileDisposition) -> None:
         """Disable the plugin mentioned in `disposition`."""
