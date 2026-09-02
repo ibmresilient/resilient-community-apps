@@ -1,0 +1,1272 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "mscore": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "is_publishable": {
+          "type": "boolean"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "first_seen": {
+                "type": "string"
+              },
+              "last_seen": {
+                "type": "string"
+              },
+              "osint": {
+                "type": "boolean"
+              },
+              "category": {
+                "type": "array"
+              },
+              "source_name": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "verdict": {
+          "type": "object",
+          "properties": {
+            "analystVerdict": {
+              "type": "object",
+              "properties": {
+                "timestamp": {},
+                "verdict": {},
+                "confidenceScore": {
+                  "type": "integer"
+                }
+              }
+            },
+            "authoritativeVerdict": {
+              "type": "string"
+            },
+            "mlVerdict": {
+              "type": "object",
+              "properties": {
+                "confidenceScore": {
+                  "type": "number"
+                },
+                "verdict": {
+                  "type": "string"
+                },
+                "timestamp": {
+                  "type": "string"
+                },
+                "modelVersion": {
+                  "type": "string"
+                },
+                "reasoning": {
+                  "type": "object",
+                  "properties": {
+                    "malicious_count": {
+                      "type": "integer"
+                    },
+                    "source_count": {
+                      "type": "integer"
+                    },
+                    "neighbor_influence": {},
+                    "mandiant": {
+                      "type": "object",
+                      "properties": {
+                        "bp_hosting": {
+                          "type": "object",
+                          "properties": {
+                            "benign_count": {
+                              "type": "integer"
+                            },
+                            "confidence": {},
+                            "malicious_count": {
+                              "type": "integer"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "response_count": {
+                              "type": "integer"
+                            },
+                            "source_count": {
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "fqdn_analysis": {
+                          "type": "object",
+                          "properties": {
+                            "benign_count": {
+                              "type": "integer"
+                            },
+                            "confidence": {
+                              "type": "string"
+                            },
+                            "malicious_count": {
+                              "type": "integer"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "response_count": {
+                              "type": "integer"
+                            },
+                            "source_count": {
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "knowledge_graph": {
+                          "type": "object",
+                          "properties": {
+                            "benign_count": {
+                              "type": "integer"
+                            },
+                            "confidence": {},
+                            "malicious_count": {
+                              "type": "integer"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "response_count": {
+                              "type": "integer"
+                            },
+                            "source_count": {
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "malware_analysis": {
+                          "type": "object",
+                          "properties": {
+                            "benign_count": {
+                              "type": "integer"
+                            },
+                            "confidence": {},
+                            "malicious_count": {
+                              "type": "integer"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "response_count": {
+                              "type": "integer"
+                            },
+                            "source_count": {
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "spam": {
+                          "type": "object",
+                          "properties": {
+                            "benign_count": {
+                              "type": "integer"
+                            },
+                            "confidence": {},
+                            "malicious_count": {
+                              "type": "integer"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "response_count": {
+                              "type": "integer"
+                            },
+                            "source_count": {
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "url_analysis": {
+                          "type": "object",
+                          "properties": {
+                            "benign_count": {
+                              "type": "integer"
+                            },
+                            "confidence": {
+                              "type": "string"
+                            },
+                            "malicious_count": {
+                              "type": "integer"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "response_count": {
+                              "type": "integer"
+                            },
+                            "source_count": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "response_count": {
+                      "type": "integer"
+                    },
+                    "confidence_count": {
+                      "type": "object",
+                      "properties": {
+                        "benign": {
+                          "type": "object",
+                          "properties": {
+                            "high": {
+                              "type": "integer"
+                            },
+                            "low": {
+                              "type": "integer"
+                            },
+                            "med": {
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "malicious": {
+                          "type": "object",
+                          "properties": {
+                            "high": {
+                              "type": "integer"
+                            },
+                            "low": {
+                              "type": "integer"
+                            },
+                            "med": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "tp": {
+                      "type": "object",
+                      "properties": {
+                        "crowdsource": {
+                          "type": "object",
+                          "properties": {
+                            "benign_count": {
+                              "type": "integer"
+                            },
+                            "confidence": {
+                              "type": "string"
+                            },
+                            "malicious_count": {
+                              "type": "integer"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "response_count": {
+                              "type": "integer"
+                            },
+                            "source_count": {
+                              "type": "integer"
+                            }
+                          }
+                        },
+                        "misp": {
+                          "type": "object",
+                          "properties": {
+                            "dch": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "edu": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "other": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "popular_infra": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "popular_web": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "sinkhole": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "vpn": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "tif": {
+                          "type": "object",
+                          "properties": {
+                            "aa419": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "azorult-tracker": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "benkow": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "botvrij_urls": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "cryptolaemus": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "cybercrimetracker": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "davidonzo_hashes": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "dev": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "digitalside_it_hashes": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "digitalside_it_urls": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "dyndns_ponmocup": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "feodo": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "feodo_ids": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "fumik0": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "futex.re": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "h3x_1day": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "malc0de": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "malshare": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "malwared": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "malwaredomainlist": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {
+                                  "type": "string"
+                                },
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "malwaremustdie": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "openphish": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "phishing_database": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "phishstats": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "phishtank": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "phishtank_valid_online": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "urlhaus": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "urlscan_phishing": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "viriback": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            },
+                            "vxvault_virilist": {
+                              "type": "object",
+                              "properties": {
+                                "benign_count": {
+                                  "type": "integer"
+                                },
+                                "confidence": {},
+                                "malicious_count": {
+                                  "type": "integer"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "response_count": {
+                                  "type": "integer"
+                                },
+                                "source_count": {
+                                  "type": "integer"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "benign_count": {
+                      "type": "integer"
+                    },
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "misp": {
+          "type": "object",
+          "properties": {
+            "akamai": {
+              "type": "boolean"
+            },
+            "alexa_1M": {
+              "type": "boolean"
+            },
+            "apple": {
+              "type": "boolean"
+            },
+            "bank-website": {
+              "type": "boolean"
+            },
+            "cisco_1M": {
+              "type": "boolean"
+            },
+            "cisco_top1000": {
+              "type": "boolean"
+            },
+            "cisco_top20k": {
+              "type": "boolean"
+            },
+            "common-contact-emails": {
+              "type": "boolean"
+            },
+            "covid-19-cyber-threat-coalition-whitelist": {
+              "type": "boolean"
+            },
+            "covid-19-krassi-whitelist": {
+              "type": "boolean"
+            },
+            "dax30": {
+              "type": "boolean"
+            },
+            "empty-hashes": {
+              "type": "boolean"
+            },
+            "google-gcp": {
+              "type": "boolean"
+            },
+            "google-gmail-sending-ips": {
+              "type": "boolean"
+            },
+            "googlebot": {
+              "type": "boolean"
+            },
+            "majestic_million_1M": {
+              "type": "boolean"
+            },
+            "microsoft": {
+              "type": "boolean"
+            },
+            "microsoft-attack-simulator": {
+              "type": "boolean"
+            },
+            "microsoft-azure": {
+              "type": "boolean"
+            },
+            "microsoft-azure-china": {
+              "type": "boolean"
+            },
+            "microsoft-azure-germany": {
+              "type": "boolean"
+            },
+            "microsoft-azure-us-gov": {
+              "type": "boolean"
+            },
+            "microsoft-win10-connection-endpoints": {
+              "type": "boolean"
+            },
+            "mozilla-IntermediateCA": {
+              "type": "boolean"
+            },
+            "multicast": {
+              "type": "boolean"
+            },
+            "nioc-filehash": {
+              "type": "boolean"
+            },
+            "ovh-cluster": {
+              "type": "boolean"
+            },
+            "public-dns-v4": {
+              "type": "boolean"
+            },
+            "public-dns-v6": {
+              "type": "boolean"
+            },
+            "sinkholes": {
+              "type": "boolean"
+            },
+            "smtp-receiving-ips": {
+              "type": "boolean"
+            },
+            "smtp-sending-ips": {
+              "type": "boolean"
+            },
+            "university_domains": {
+              "type": "boolean"
+            },
+            "url-shortener": {
+              "type": "boolean"
+            },
+            "vpn-ipv4": {
+              "type": "boolean"
+            },
+            "vpn-ipv6": {
+              "type": "boolean"
+            },
+            "whats-my-ip": {
+              "type": "boolean"
+            },
+            "wikimedia": {
+              "type": "boolean"
+            }
+          }
+        },
+        "last_updated": {
+          "type": "string"
+        },
+        "first_seen": {
+          "type": "string"
+        },
+        "last_seen": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "mandiant_artifact_data": {
+          "type": "string"
+        },
+        "mandiant_artifact_type": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

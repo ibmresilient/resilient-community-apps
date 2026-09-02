@@ -1,0 +1,86 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "success": {
+        "type": "boolean"
+      },
+      "reason": {
+        "type": "string"
+      },
+      "content": {
+        "type": "array",
+        "items": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "createdDateTime": {
+                "type": "null"
+              },
+              "displayName": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "internalId": {
+                "type": "null"
+              },
+              "classification": {
+                "type": "null"
+              },
+              "specialization": {
+                "type": "null"
+              },
+              "visibility": {
+                "type": "string"
+              },
+              "webUrl": {
+                "type": "string"
+              },
+              "isArchived": {
+                "type": "boolean"
+              },
+              "isMembershipLimitedToOwners": {
+                "type": "boolean"
+              },
+              "memberSettings": {
+                "type": "null"
+              },
+              "guestSettings": {
+                "type": "null"
+              },
+              "messagingSettings": {
+                "type": "null"
+              },
+              "funSettings": {
+                "type": "null"
+              },
+              "discoverySettings": {
+                "type": "null"
+              },
+              "tagSettings": {
+                "type": "null"
+              },
+              "summary": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ]
+          }
+        ]
+      }
+    },
+    "required": [
+      "success",
+      "reason",
+      "content"
+    ]
+  }
+  
+  

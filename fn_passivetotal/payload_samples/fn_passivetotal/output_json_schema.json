@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "pager": {},
+        "queryValue": {
+          "type": "string"
+        },
+        "queryType": {
+          "type": "string"
+        },
+        "firstSeen": {},
+        "lastSeen": {},
+        "totalRecords": {
+          "type": "integer"
+        },
+        "results": {
+          "type": "array"
+        },
+        "classification": {},
+        "primaryDomain": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        },
+        "subdomains": {
+          "type": "array"
+        },
+        "tags_hits_str": {
+          "type": "string"
+        },
+        "report_url": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "passivetotal_artifact_type": {
+          "type": "string"
+        },
+        "passivetotal_artifact_value": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

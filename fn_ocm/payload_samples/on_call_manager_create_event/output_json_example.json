@@ -1,0 +1,26 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "deduplicationKey": "abc",
+    "eventid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  },
+  "raw": null,
+  "inputs": {
+    "ocm_event_priority": "3",
+    "ocm_event_summary": "failure somewhere",
+    "ocm_type_statusorthreshold": "> 1 minute",
+    "ocm_soar_inc_id": 2174,
+    "ocm_event_severity": "Minor",
+    "ocm_resource_name": "Something failed"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ocm",
+    "package_version": "1.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 1052,
+    "timestamp": "2025-07-08 11:37:32"
+  }
+}

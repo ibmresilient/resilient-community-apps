@@ -1,0 +1,750 @@
+[
+    {
+        "create_date": 1659446077602,
+        "display_name": "Resilient User",
+        "email": "resilientSampleuser@cp4s.com",
+        "enabled": true,
+        "fname": "soar5",
+        "group_ids": [21],
+        "id": 20,
+        "instance_roles": [{
+            "effective_permissions": [105,
+                104,
+                139,
+                153,304
+            ],
+            "role_handles": [1001],
+            "typed_object": {
+                "object_id": 201,
+                "object_name": "Test Organization",
+                "parent": null,
+                "type_id": 7,
+                "type_name": "organization"
+            }
+        }],
+        "is_external": false,
+        "is_ldap": false,
+        "is_saml": false,
+        "last_login": null,
+        "last_modified_time": 1659446103302,
+        "lname": "Sysadmin",
+        "locked": false,
+        "org_id": 201,
+        "org_last_modified_time": 1659446103247,
+        "password_changed": false,
+        "role_handles": [1001],
+        "roles": {
+            "administrator": false,
+            "create_incs": true,
+            "master_administrator": true,
+            "observer": false
+        },
+        "status": "A",
+        "system_permission_handles": [],
+        "ui_theme": "verydarkmode"
+    },
+    {
+        "create_date": 1663844066901,
+        "display_name": "Pradeep Gupta",
+        "email": "pradeepg@5rf2xs.onmicrosoft.com",
+        "enabled": true,
+        "fname": "Pradeep",
+        "group_ids": [46],
+        "id": 29,
+        "instance_roles": [{
+            "effective_permissions": [105,
+                104,
+                139,
+                153,304
+            ],
+            "role_handles": [1001],
+            "typed_object": {
+                "object_id": 201,
+                "object_name": "Test Organization",
+                "parent": null,
+                "type_id": 7,
+                "type_name": "organization"
+            }
+        }],
+        "is_external": false,
+        "is_ldap": false,
+        "is_saml": false,
+        "last_login": null,
+        "last_modified_time": 1663844093776,
+        "lname": "Gupta",
+        "locked": false,
+        "org_id": 201,
+        "org_last_modified_time": 1663844093723,
+        "password_changed": false,
+        "role_handles": [1001],
+        "roles": {
+            "administrator": false,
+            "create_incs": true,
+            "master_administrator": true,
+            "observer": false
+        },
+        "status": "A",
+        "system_permission_handles": [],
+        "ui_theme": "verydarkmode"
+    },
+    {
+        "create_date": 1663844246432,
+        "display_name": "Alex Wilber",
+        "email": "alexw@5rf2xs.onmicrosoft.com",
+        "enabled": true,
+        "fname": "Alex",
+        "group_ids": [],
+        "id": 30,
+        "instance_roles": [{
+            "effective_permissions": [105,
+                104,
+                139,
+                153,304
+            ],
+            "role_handles": [1001],
+            "typed_object": {
+                "object_id": 201,
+                "object_name": "Test Organization",
+                "parent": null,
+                "type_id": 7,
+                "type_name": "organization"
+            }
+        }],
+        "is_external": false,
+        "is_ldap": false,
+        "is_saml": false,
+        "last_login": null,
+        "last_modified_time": 1663844246708,
+        "lname": "Wilber",
+        "locked": false,
+        "org_id": 201,
+        "org_last_modified_time": 1663844246660,
+        "password_changed": false,
+        "role_handles": [1001],
+        "roles": {
+            "administrator": false,
+            "create_incs": true,
+            "master_administrator": true,
+            "observer": false
+        },
+        "status": "A",
+        "system_permission_handles": [],
+        "ui_theme": "verydarkmode"
+    },
+    {
+        "create_date": 1663844272004,
+        "display_name": "Calvin Wynne",
+        "email": "adminsoarms@5rf2xs.onmicrosoft.com",
+        "enabled": true,
+        "fname": "Calvin",
+        "group_ids": [45],
+        "id": 31,
+        "instance_roles": [{
+            "effective_permissions": [105,
+                104,
+                139,
+                153,304
+            ],
+            "role_handles": [1001],
+            "typed_object": {
+                "object_id": 201,
+                "object_name": "Test Organization",
+                "parent": null,
+                "type_id": 7,
+                "type_name": "organization"
+            }
+        }],
+        "is_external": false,
+        "is_ldap": false,
+        "is_saml": false,
+        "last_login": null,
+        "last_modified_time": 1663844272263,
+        "lname": "Wynne",
+        "locked": false,
+        "org_id": 201,
+        "org_last_modified_time": 1663844272222,
+        "password_changed": false,
+        "role_handles": [1001],
+        "roles": {
+            "administrator": false,
+            "create_incs": true,
+            "master_administrator": true,
+            "observer": false
+        },
+        "status": "A",
+        "system_permission_handles": [],
+        "ui_theme": "verydarkmode"
+    },
+    {
+        "create_date": 1663844287738,
+        "display_name": "Diego Siciliani",
+        "email": "diegos@5rf2xs.onmicrosoft.com",
+        "enabled": true,
+        "fname": "Diego",
+        "group_ids": [45],
+        "id": 32,
+        "instance_roles": [{
+            "effective_permissions": [105,
+                104,
+                139,
+                153,304
+            ],
+            "role_handles": [1001],
+            "typed_object": {
+                "object_id": 201,
+                "object_name": "Test Organization",
+                "parent": null,
+                "type_id": 7,
+                "type_name": "organization"
+            }
+        }],
+        "is_external": false,
+        "is_ldap": false,
+        "is_saml": false,
+        "last_login": null,
+        "last_modified_time": 1663844288013,
+        "lname": "Siciliani",
+        "locked": false,
+        "org_id": 201,
+        "org_last_modified_time": 1663844287961,
+        "password_changed": false,
+        "role_handles": [1001],
+        "roles": {
+            "administrator": false,
+            "create_incs": true,
+            "master_administrator": true,
+            "observer": false
+        },
+        "status": "A",
+        "system_permission_handles": [],
+        "ui_theme": "verydarkmode"
+    },
+    {
+        "create_date": 1663844302692,
+        "display_name": "Grady Archie",
+        "email": "gradya@5rf2xs.onmicrosoft.com",
+        "enabled": true,
+        "fname": "Grady",
+        "group_ids": [],
+        "id": 33,
+        "instance_roles": [{
+            "effective_permissions": [105,
+                104,
+                139,
+                153,304
+            ],
+            "role_handles": [1001],
+            "typed_object": {
+                "object_id": 201,
+                "object_name": "Test Organization",
+                "parent": null,
+                "type_id": 7,
+                "type_name": "organization"
+            }
+        }],
+        "is_external": false,
+        "is_ldap": false,
+        "is_saml": false,
+        "last_login": null,
+        "last_modified_time": 1663844302962,
+        "lname": "Archie",
+        "locked": false,
+        "org_id": 201,
+        "org_last_modified_time": 1663844302908,
+        "password_changed": false,
+        "role_handles": [1001],
+        "roles": {
+            "administrator": false,
+            "create_incs": true,
+            "master_administrator": true,
+            "observer": false
+        },
+        "status": "A",
+        "system_permission_handles": [],
+        "ui_theme": "verydarkmode"
+    },
+    {
+        "create_date": 1663844317671,
+        "display_name": "Henrietta Mueller",
+        "email": "henriettam@5rf2xs.onmicrosoft.com",
+        "enabled": true,
+        "fname": "Henrietta",
+        "group_ids": [45],
+        "id": 34,
+        "instance_roles": [{
+            "effective_permissions": [105,
+                104,
+                139,
+                153,304
+            ],
+            "role_handles": [1001],
+            "typed_object": {
+                "object_id": 201,
+                "object_name": "Test Organization",
+                "parent": null,
+                "type_id": 7,
+                "type_name": "organization"
+            }
+        }],
+        "is_external": false,
+        "is_ldap": false,
+        "is_saml": false,
+        "last_login": null,
+        "last_modified_time": 1663844317963,
+        "lname": "Mueller",
+        "locked": false,
+        "org_id": 201,
+        "org_last_modified_time": 1663844317916,
+        "password_changed": false,
+        "role_handles": [1001],
+        "roles": {
+            "administrator": false,
+            "create_incs": true,
+            "master_administrator": true,
+            "observer": false
+        },
+        "status": "A",
+        "system_permission_handles": [],
+        "ui_theme": "verydarkmode"
+    },
+    {
+        "create_date": 1663844332124,
+        "display_name": "Isaiah Langer",
+        "email": "isaiahl@5rf2xs.onmicrosoft.com",
+        "enabled": true,
+        "fname": "Isaiah",
+        "group_ids": [],
+        "id": 35,
+        "instance_roles": [{
+            "effective_permissions": [105,
+                104,
+                139,
+                153,304
+            ],
+            "role_handles": [1001],
+            "typed_object": {
+                "object_id": 201,
+                "object_name": "Test Organization",
+                "parent": null,
+                "type_id": 7,
+                "type_name": "organization"
+            }
+        }],
+        "is_external": false,
+        "is_ldap": false,
+        "is_saml": false,
+        "last_login": null,
+        "last_modified_time": 1663844332388,
+        "lname": "Langer",
+        "locked": false,
+        "org_id": 201,
+        "org_last_modified_time": 1663844332339,
+        "password_changed": false,
+        "role_handles": [1001],
+        "roles": {
+            "administrator": false,
+            "create_incs": true,
+            "master_administrator": true,
+            "observer": false
+        },
+        "status": "A",
+        "system_permission_handles": [],
+        "ui_theme": "verydarkmode"
+    },
+    {
+        "create_date": 1663844346537,
+        "display_name": "Johanna Lorenz",
+        "email": "johannal@5rf2xs.onmicrosoft.com",
+        "enabled": true,
+        "fname": "Johanna",
+        "group_ids": [45],
+        "id": 36,
+        "instance_roles": [{
+            "effective_permissions": [105,
+                104,
+                139,
+                153,304
+            ],
+            "role_handles": [1001],
+            "typed_object": {
+                "object_id": 201,
+                "object_name": "Test Organization",
+                "parent": null,
+                "type_id": 7,
+                "type_name": "organization"
+            }
+        }],
+        "is_external": false,
+        "is_ldap": false,
+        "is_saml": false,
+        "last_login": null,
+        "last_modified_time": 1663844346801,
+        "lname": "Lorenz",
+        "locked": false,
+        "org_id": 201,
+        "org_last_modified_time": 1663844346752,
+        "password_changed": false,
+        "role_handles": [1001],
+        "roles": {
+            "administrator": false,
+            "create_incs": true,
+            "master_administrator": true,
+            "observer": false
+        },
+        "status": "A",
+        "system_permission_handles": [],
+        "ui_theme": "verydarkmode"
+    },
+    {
+        "create_date": 1663844361813,
+        "display_name": "Joni Sherman",
+        "email": "jonis@5rf2xs.onmicrosoft.com",
+        "enabled": true,
+        "fname": "Joni",
+        "group_ids": [46],
+        "id": 37,
+        "instance_roles": [{
+            "effective_permissions": [105,
+                104,
+                139,
+                153,304
+            ],
+            "role_handles": [1001],
+            "typed_object": {
+                "object_id": 201,
+                "object_name": "Test Organization",
+                "parent": null,
+                "type_id": 7,
+                "type_name": "organization"
+            }
+        }],
+        "is_external": false,
+        "is_ldap": false,
+        "is_saml": false,
+        "last_login": null,
+        "last_modified_time": 1663844362096,
+        "lname": "Sherman",
+        "locked": false,
+        "org_id": 201,
+        "org_last_modified_time": 1663844362048,
+        "password_changed": false,
+        "role_handles": [1001],
+        "roles": {
+            "administrator": false,
+            "create_incs": true,
+            "master_administrator": true,
+            "observer": false
+        },
+        "status": "A",
+        "system_permission_handles": [],
+        "ui_theme": "verydarkmode"
+    },
+    {
+        "create_date": 1663844376592,
+        "display_name": "Lee Gu",
+        "email": "leeg@5rf2xs.onmicrosoft.com",
+        "enabled": true,
+        "fname": "Lee",
+        "group_ids": [],
+        "id": 38,
+        "instance_roles": [{
+            "effective_permissions": [105,
+                104,
+                139,
+                153,304
+            ],
+            "role_handles": [1001],
+            "typed_object": {
+                "object_id": 201,
+                "object_name": "Test Organization",
+                "parent": null,
+                "type_id": 7,
+                "type_name": "organization"
+            }
+        }],
+        "is_external": false,
+        "is_ldap": false,
+        "is_saml": false,
+        "last_login": null,
+        "last_modified_time": 1663844376892,
+        "lname": "Gu",
+        "locked": false,
+        "org_id": 201,
+        "org_last_modified_time": 1663844376836,
+        "password_changed": false,
+        "role_handles": [1001],
+        "roles": {
+            "administrator": false,
+            "create_incs": true,
+            "master_administrator": true,
+            "observer": false
+        },
+        "status": "A",
+        "system_permission_handles": [],
+        "ui_theme": "verydarkmode"
+    },
+    {
+        "create_date": 1663844392646,
+        "display_name": "Lidia Holloway",
+        "email": "lidiah@5rf2xs.onmicrosoft.com",
+        "enabled": true,
+        "fname": "Lidia",
+        "group_ids": [46],
+        "id": 39,
+        "instance_roles": [{
+            "effective_permissions": [105,
+                104,
+                139,
+                153,304
+            ],
+            "role_handles": [1001],
+            "typed_object": {
+                "object_id": 201,
+                "object_name": "Test Organization",
+                "parent": null,
+                "type_id": 7,
+                "type_name": "organization"
+            }
+        }],
+        "is_external": false,
+        "is_ldap": false,
+        "is_saml": false,
+        "last_login": null,
+        "last_modified_time": 1663844392930,
+        "lname": "Holloway",
+        "locked": false,
+        "org_id": 201,
+        "org_last_modified_time": 1663844392872,
+        "password_changed": false,
+        "role_handles": [1001],
+        "roles": {
+            "administrator": false,
+            "create_incs": true,
+            "master_administrator": true,
+            "observer": false
+        },
+        "status": "A",
+        "system_permission_handles": [],
+        "ui_theme": "verydarkmode"
+    },
+    {
+        "create_date": 1663844408322,
+        "display_name": "Lynne Robbins",
+        "email": "lynner@5rf2xs.onmicrosoft.com",
+        "enabled": true,
+        "fname": "Lynne",
+        "group_ids": [46],
+        "id": 40,
+        "instance_roles": [{
+            "effective_permissions": [105,
+                104,
+                139,
+                153,304
+            ],
+            "role_handles": [1001],
+            "typed_object": {
+                "object_id": 201,
+                "object_name": "Test Organization",
+                "parent": null,
+                "type_id": 7,
+                "type_name": "organization"
+            }
+        }],
+        "is_external": false,
+        "is_ldap": false,
+        "is_saml": false,
+        "last_login": null,
+        "last_modified_time": 1663844408620,
+        "lname": "Robbins",
+        "locked": false,
+        "org_id": 201,
+        "org_last_modified_time": 1663844408568,
+        "password_changed": false,
+        "role_handles": [1001],
+        "roles": {
+            "administrator": false,
+            "create_incs": true,
+            "master_administrator": true,
+            "observer": false
+        },
+        "status": "A",
+        "system_permission_handles": [],
+        "ui_theme": "verydarkmode"
+    },
+    {
+        "create_date": 1663844423663,
+        "display_name": "Megan Bowen",
+        "email": "meganb@5rf2xs.onmicrosoft.com",
+        "enabled": true,
+        "fname": "Megan",
+        "group_ids": [46],
+        "id": 41,
+        "instance_roles": [{
+            "effective_permissions": [105,
+                104,
+                139,
+                153,304
+            ],
+            "role_handles": [1001],
+            "typed_object": {
+                "object_id": 201,
+                "object_name": "Test Organization",
+                "parent": null,
+                "type_id": 7,
+                "type_name": "organization"
+            }
+        }],
+        "is_external": false,
+        "is_ldap": false,
+        "is_saml": false,
+        "last_login": null,
+        "last_modified_time": 1663844423966,
+        "lname": "Bowen",
+        "locked": false,
+        "org_id": 201,
+        "org_last_modified_time": 1663844423904,
+        "password_changed": false,
+        "role_handles": [1001],
+        "roles": {
+            "administrator": false,
+            "create_incs": true,
+            "master_administrator": true,
+            "observer": false
+        },
+        "status": "A",
+        "system_permission_handles": [],
+        "ui_theme": "verydarkmode"
+    },
+    {
+        "create_date": 1663844438440,
+        "display_name": "Miriam Graham",
+        "email": "miriamg@5rf2xs.onmicrosoft.com",
+        "enabled": true,
+        "fname": "Miriam",
+        "group_ids": [],
+        "id": 42,
+        "instance_roles": [{
+            "effective_permissions": [105,
+                104,
+                139,
+                153,304
+            ],
+            "role_handles": [1001],
+            "typed_object": {
+                "object_id": 201,
+                "object_name": "Test Organization",
+                "parent": null,
+                "type_id": 7,
+                "type_name": "organization"
+            }
+        }],
+        "is_external": false,
+        "is_ldap": false,
+        "is_saml": false,
+        "last_login": null,
+        "last_modified_time": 1663844438742,
+        "lname": "Graham",
+        "locked": false,
+        "org_id": 201,
+        "org_last_modified_time": 1663844438678,
+        "password_changed": false,
+        "role_handles": [1001],
+        "roles": {
+            "administrator": false,
+            "create_incs": true,
+            "master_administrator": true,
+            "observer": false
+        },
+        "status": "A",
+        "system_permission_handles": [],
+        "ui_theme": "verydarkmode"
+    },
+    {
+        "create_date": 1663844453671,
+        "display_name": "Nestor Wilke",
+        "email": "nestorw@5rf2xs.onmicrosoft.com",
+        "enabled": true,
+        "fname": "Nestor",
+        "group_ids": [],
+        "id": 43,
+        "instance_roles": [{
+            "effective_permissions": [105,
+                104,
+                139,
+                153,304
+            ],
+            "role_handles": [1001],
+            "typed_object": {
+                "object_id": 201,
+                "object_name": "Test Organization",
+                "parent": null,
+                "type_id": 7,
+                "type_name": "organization"
+            }
+        }],
+        "is_external": false,
+        "is_ldap": false,
+        "is_saml": false,
+        "last_login": null,
+        "last_modified_time": 1663844453931,
+        "lname": "Wilke",
+        "locked": false,
+        "org_id": 201,
+        "org_last_modified_time": 1663844453881,
+        "password_changed": false,
+        "role_handles": [1001],
+        "roles": {
+            "administrator": false,
+            "create_incs": true,
+            "master_administrator": true,
+            "observer": false
+        },
+        "status": "A",
+        "system_permission_handles": [],
+        "ui_theme": "verydarkmode"
+    },
+    {
+        "create_date": 1663844468575,
+        "display_name": "Patti Fernandez",
+        "email": "pattif@5rf2xs.onmicrosoft.com",
+        "enabled": true,
+        "fname": "Patti",
+        "group_ids": [46],
+        "id": 44,
+        "instance_roles": [{
+            "effective_permissions": [105,
+                104,
+                139,
+                153,304
+            ],
+            "role_handles": [1001],
+            "typed_object": {
+                "object_id": 201,
+                "object_name": "Test Organization",
+                "parent": null,
+                "type_id": 7,
+                "type_name": "organization"
+            }
+        }],
+        "is_external": false,
+        "is_ldap": false,
+        "is_saml": false,
+        "last_login": null,
+        "last_modified_time": 1663844468857,
+        "lname": "Fernandez",
+        "locked": false,
+        "org_id": 201,
+        "org_last_modified_time": 1663844468804,
+        "password_changed": false,
+        "role_handles": [1001],
+        "roles": {
+            "administrator": false,
+            "create_incs": true,
+            "master_administrator": true,
+            "observer": false
+        },
+        "status": "A",
+        "system_permission_handles": [],
+        "ui_theme": "verydarkmode"
+    }
+]

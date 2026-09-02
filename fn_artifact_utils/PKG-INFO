@@ -1,0 +1,13 @@
+Metadata-Version: 2.1
+Name: fn_artifact_utils
+Version: 1.0.0
+Summary: Functions allowing interactions with Artifacts.
+Home-page: http://ibm.biz/soarcommunity
+Author: Nick Mumaw
+Author-email: Nick.Mumaw@ibm.com
+License: Apache
+Platform: any
+Classifier: Programming Language :: Python
+Requires-Python: >=3.6
+
+This package contains 4 functions allowing you to interact with SOAR Artifacts for use with other automations. The capabilities this app supports is:<br>- Searching for Artifacts<br>- Tagging Artifacts<br>- Removing Tags<br>- Deleting Artifacts

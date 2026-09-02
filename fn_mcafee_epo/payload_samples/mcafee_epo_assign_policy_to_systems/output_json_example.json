@@ -1,0 +1,28 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "name": "richard test1",
+      "id": "1011",
+      "message": "Assign policy succeeded",
+      "status": 0
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "mcafee_epo_product_id": "EPOAGENTMETA",
+    "mcafee_epo_system_name_or_id": "richard test1",
+    "mcafee_epo_object_id": 4,
+    "mcafee_epo_type_id": 3
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mcafee-epo",
+    "package_version": "3.0.0",
+    "host": "local",
+    "execution_time_ms": 631,
+    "timestamp": "2023-10-09 13:21:13"
+  }
+}

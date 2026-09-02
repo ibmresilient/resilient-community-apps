@@ -1,0 +1,29 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "data": {
+      "id": "6",
+      "author": {
+        "username": "admin@example.com"
+      },
+      "timestamp": "2024-08-01T20:05:28.833246",
+      "body": "Created by IBM SOAR:  Sumo Logic: Get Insight Comments  playbook created 1 notes in SOAR."
+    },
+    "errors": []
+  },
+  "raw": null,
+  "inputs": {
+    "sumo_logic_insight_id": "2a8419c4-b84b-3b6c-8447-af4ccbfba9c6",
+    "sumo_logic_comment_text": "<b>Sumo Logic: Get Insight Comments</b> playbook created 1 notes in SOAR."
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sumo-logic",
+    "package_version": "1.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 9515,
+    "timestamp": "2024-08-01 16:05:30"
+  }
+}

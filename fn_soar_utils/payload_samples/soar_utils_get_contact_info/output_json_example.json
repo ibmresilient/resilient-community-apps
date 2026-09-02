@@ -1,0 +1,34 @@
+{
+  "owner": {
+    "owner_type": "individual",
+    "owner_info": {
+      "fname": "admin",
+      "lname": "example",
+      "title": null,
+      "display_name": "admin example",
+      "email": "admin@example.com",
+      "phone": null,
+      "cell": null
+    }
+  },
+  "members": [
+    {
+      "fname": "admin2",
+      "lname": "example",
+      "title": null,
+      "display_name": "admin2 example",
+      "email": "admin2@example.com",
+      "phone": null,
+      "cell": null
+    },
+    {
+      "fname": "admin3",
+      "lname": "example",
+      "title": null,
+      "display_name": "admin3 example",
+      "email": "admin3@example.com",
+      "phone": null,
+      "cell": null
+    }
+  ]
+}

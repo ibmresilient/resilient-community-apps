@@ -1,0 +1,42 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "type": "incident",
+    "id": 32,
+    "uuid": "b50616ee-8c1b-4830-a0d5-601b3a550ab9",
+    "name": "powershell.exe",
+    "content_type": "application/x-msdownload",
+    "created": 1691389665926,
+    "creator_id": 9,
+    "size": 720768,
+    "actions": [],
+    "playbooks": [],
+    "task_id": null,
+    "task_name": null,
+    "task_custom": null,
+    "task_members": null,
+    "task_at_id": null,
+    "reconciliation_status": "matched",
+    "vers": 8,
+    "inc_id": 2154,
+    "inc_name": "ReaQta Alert - Detection Strategy, Endpoint: ACTIVEDIRECTORY",
+    "inc_owner": 8
+  },
+  "raw": null,
+  "inputs": {
+    "reaqta_hive": "rhiveam",
+    "reaqta_program_path": "c:\\windows\\system32\\windowspowershell\\v1.0\\powershell.exe",
+    "reaqta_endpoint_id": "836686917654282240",
+    "reaqta_incident_id": 2154
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 22507,
+    "timestamp": "2023-08-07 14:27:46"
+  }
+}
