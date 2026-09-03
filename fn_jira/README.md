@@ -34,6 +34,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 3.2.2 | 08/2026 | Fix and improve logging around silent 200 patch conflict errors in poller |
 | 3.2.1 | 09/2025 | Update version for jira dependency to support new search endpoints for Jira cloud |
 | 3.2.0 | 02/2025 | Add new app.config setting create_soar_incidents, that controls if the poller creates new SOAR cases or not. |
 | 3.1.0 | 03/2024 | Update to poller to automatically account for time zone differences between SOAR and Jira. |
@@ -85,14 +86,14 @@ This app allows for the tracking of SOAR Incidents and Tasks as Jira Issues. Bid
 This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRadar SOAR for IBM Cloud Pak for Security.
 
 ### SOAR platform
-The SOAR platform supports two app deployment mechanisms, Edge Gateway (formerly App Host) and integration server.
+The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
-If deploying to a SOAR platform with an Edge Gateway, the requirements are:
-* SOAR platform >= `51.0.0`.
+If deploying to a SOAR platform with an App Host, the requirements are:
+* SOAR platform >= `51.0.8.0.20735`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `51.0.0`.
+* SOAR platform >= `51.0.8.0.20735`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -113,7 +114,7 @@ The above guides are available on the IBM Documentation website at [ibm.biz/soar
 
 ### Cloud Pak for Security
 If you are deploying to IBM Cloud Pak for Security, the requirements are:
-* IBM Cloud Pak for Security >= `1.10`.
+* IBM Cloud Pak for Security >= `1.10.15`.
 * Cloud Pak is configured with an Edge Gateway.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
@@ -127,7 +128,7 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app does support a proxy server.
 
 ### Python Environment
-Python 3.9 and 3.11 are supported.
+Python 3.11 and 3.12 are officially supported.
 Additional package dependencies may exist for each of these packages:
 * jira~=3.2
 * pyjwt~=2.4

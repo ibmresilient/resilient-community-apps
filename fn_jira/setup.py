@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name='fn_jira',
     display_name='Jira App for IBM SOAR',
-    version='3.2.1',
+    version='3.2.2',
     license='MIT',
     author='IBM SOAR',
     url='https://ibm.com/mysupport',
@@ -30,11 +30,12 @@ setup(
                         Example rules and workflows can used used or modified to meet your business processes.""",
     install_requires=[
         'resilient_circuits>=51.0.0',
+        'cryptography>=50.0.0',
         'jira~=3.10; python_version>="3.11"',
         'pyjwt~=2.4'
     ],
     packages=find_packages(),
-    python_requires='>=3.9',
+    python_requires='>=3.11',
     include_package_data=True,
     platforms='any',
     classifiers=[

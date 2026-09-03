@@ -393,9 +393,15 @@ class PollerComponent(AppFunctionComponent):
 
         # If SOAR soar_close_payload is not empty then close cases
         if soar_close_payload["patches"]:
-            # Send put request to SOAR
-            # This will close all cases that need to be closed
-            self.res_client.put("/incidents/patch", soar_close_payload)
+            try:
+                # Send put request to SOAR
+                # This will close all cases that need to be closed
+                response = self.res_client.put("/incidents/patch", soar_close_payload)
+                LOG.debug(str(response))
+                if response.get("success") is False:
+                    LOG.error("Failed to close one or more SOAR incidents: %s", str(response))
+            except Exception as err:
+                LOG.error(str(err))
 
     def soar_update_cases(self, soar_cases_to_update):
         """
@@ -434,6 +440,8 @@ class PollerComponent(AppFunctionComponent):
                 # This will update all cases that need to be updated
                 response = self.res_client.put("/incidents/patch", soar_update_payload)
                 LOG.debug(str(response))
+                if response.get("success") is False:
+                    LOG.error("Failed to update one or more SOAR incidents: %s", str(response))
             except Exception as err:
                 LOG.error(str(err))
 
