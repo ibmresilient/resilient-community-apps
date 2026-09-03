@@ -1,0 +1,22 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "count": 1
+  },
+  "raw": null,
+  "inputs": {
+    "vmware_cbc_note_type": "alert",
+    "vmware_cbc_incident_id": 2186,
+    "vmware_cbc_id": "0730b7bc-7d51-9d64-68b1-d3e01d28a716"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-vmware-cbc",
+    "package_version": "1.0.0",
+    "host": "myapphost.com",
+    "execution_time_ms": 56753,
+    "timestamp": "2024-04-24 16:15:57"
+  }
+}

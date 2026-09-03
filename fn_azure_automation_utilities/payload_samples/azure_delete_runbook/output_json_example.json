@@ -1,0 +1,22 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": "",
+  "content": {
+    "status": 200
+  },
+  "raw": null,
+  "inputs": {
+    "account_name": "automation1",
+    "resource_group_name": "demoassets",
+    "runbook_name": "test_fail"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-azure-automation-utilities",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 3220,
+    "timestamp": "2023-08-16 14:09:43"
+  }
+}

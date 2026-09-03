@@ -1,0 +1,6 @@
+{
+  "dkim_verify": false,
+  "arc_verify": false,
+  "dkim_message": "Message is not DKIM signed",
+  "arc_message": "Message is not ARC signed"
+}

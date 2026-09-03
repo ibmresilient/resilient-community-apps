@@ -1,0 +1,168 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "devices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "ip": {
+                "type": "string"
+              },
+              "ips": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "ip": {
+                      "type": "string"
+                    },
+                    "timems": {
+                      "type": "integer"
+                    },
+                    "time": {
+                      "type": "string"
+                    },
+                    "sid": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              "did": {
+                "type": "integer"
+              },
+              "sid": {
+                "type": "integer"
+              },
+              "hostname": {
+                "type": "string"
+              },
+              "time": {
+                "type": "integer"
+              },
+              "endtime": {
+                "type": "integer"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "tid": {
+                      "type": "integer"
+                    },
+                    "expiry": {
+                      "type": "integer"
+                    },
+                    "thid": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "restricted": {
+                      "type": "boolean"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "auto": {
+                          "type": "boolean"
+                        },
+                        "color": {
+                          "type": "integer"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "visibility": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "isReferenced": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              "os": {
+                "type": "string"
+              },
+              "typename": {
+                "type": "string"
+              },
+              "typelabel": {
+                "type": "string"
+              },
+              "credentials": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "lastSeen": {
+                      "type": "integer"
+                    },
+                    "credential": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "base_device_url": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "darktrace_incident_group_id": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

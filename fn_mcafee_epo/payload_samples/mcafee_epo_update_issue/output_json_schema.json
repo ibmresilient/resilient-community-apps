@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "integer"
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "mcafee_epo_issue_name": {},
+        "mcafee_epo_issue_properties": {},
+        "mcafee_epo_ticket_server_name": {},
+        "mcafee_epo_issue_due": {},
+        "mcafee_epo_issue_id": {
+          "type": "integer"
+        },
+        "mcafee_epo_issue_state": {},
+        "mcafee_epo_issue_description": {},
+        "mcafee_epo_issue_severity": {
+          "type": "string"
+        },
+        "mcafee_epo_issue_assignee": {
+          "type": "string"
+        },
+        "mcafee_epo_ticket_id": {},
+        "mcafee_epo_issue_priority": {
+          "type": "string"
+        },
+        "mcafee_epo_issue_resolution": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

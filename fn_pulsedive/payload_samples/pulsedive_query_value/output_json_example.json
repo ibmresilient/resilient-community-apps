@@ -1,0 +1,184 @@
+{
+  "resp_json": {
+    "version": "1.0",
+    "success": true,
+    "reason": null,
+    "content": {
+      "qid": null,
+      "iid": 6473513,
+      "indicator": "abuse.ch",
+      "type": "domain",
+      "risk": "none",
+      "risk_recommended": "none",
+      "manualrisk": 0,
+      "retired": null,
+      "stamp_added": "2019-09-16 14:44:58",
+      "stamp_updated": "2025-04-01 15:01:35",
+      "stamp_seen": "2025-04-01 15:01:35",
+      "stamp_probed": "2022-11-03 11:59:49",
+      "stamp_retired": null,
+      "recent": 0,
+      "submissions": 2,
+      "umbrella_rank": 83028,
+      "umbrella_domain": "abuse.ch",
+      "riskfactors": [
+        {
+          "rfid": 74,
+          "description": "SPF record present",
+          "risk": "none"
+        },
+        {
+          "rfid": 58,
+          "description": "top 100k domain",
+          "risk": "none"
+        }
+      ],
+      "redirects": {
+        "from": [],
+        "to": []
+      },
+      "threats": [],
+      "feeds": [],
+      "comments": [],
+      "attributes": {
+        "port": [
+          "443",
+          "80"
+        ],
+        "protocol": [
+          "HTTP",
+          "HTTPS"
+        ],
+        "technology": [
+          "Apache",
+          "Google Analytics",
+          "Varnish"
+        ]
+      },
+      "properties": {
+        "http": {
+          "content-type": "text/html",
+          "x-xss-protection": "1; mode=block",
+          "accept-ranges": "bytes",
+          "vary": "Accept-Encoding",
+          "x-content-type-options": "nosniff",
+          "server": "Apache/2",
+          "content-encoding": "gzip",
+          "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+          "x-cache": "HIT, HIT",
+          "x-cache-hits": "1, 1",
+          "referrer-policy": "strict-origin-when-cross-origin",
+          "cache-control": "max-age=300",
+          "content-length": "7282",
+          "age": "295",
+          "expect-ct": "enforce, max-age=86400",
+          "++code": "200",
+          "x-frame-options": "sameorigin",
+          "via": "1.1 varnish, 1.1 varnish",
+          "++content-type": "text/html",
+          "x-timer": "S1655705710.293965,VS0,VE2",
+          "content-security-policy": "default-src 'self' https://fonts.gstatic.com https://www.gstatic.com:443; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://platform.twitter.com:443 https://www.gstatic.com:443 https://www.googletagmanager.com:443; style-src 'self' 'unsafe-inline' https://www.gstatic.com:443 https://fonts.googleapis.com; frame-src https://platform.twitter.com:443; img-src 'self' data: https://syndication.twitter.com:443; object-src 'none'",
+          "expires": "Mon, 20 Jun 2022 03:21:21 GMT",
+          "x-served-by": "cache-msp11882-MSP, cache-ewr18130-EWR",
+          "permissions-policy": "accelerometer=(), ambient-light-sensor=(), autoplay=(), camera=(), encrypted-media=(), fullscreen=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), speaker=(), usb=(), vr=()",
+          "etag": "\"8edf-5e1c9ed6e707e-gzip\"",
+          "date": "Mon, 20 Jun 2022 06:15:10 GMT",
+          "last-modified": "Sun, 19 Jun 2022 09:51:11 GMT"
+        },
+        "dns": {
+          "mname": "ns-cloud-d1.googledomains.com",
+          "ns": [
+            "ns-cloud-d3.googledomains.com",
+            "ns-cloud-d4.googledomains.com",
+            "ns-cloud-d1.googledomains.com",
+            "ns-cloud-d2.googledomains.com"
+          ],
+          "rname": "cloud-dns-hostmaster@google.com",
+          "mx": "mail.abuse.ch",
+          "soa": "ns-cloud-d1.googledomains.com. cloud-dns-hostmaster.google.com. 2 21600 3600 259200 300",
+          "a": [
+            "151.101.130.49",
+            "151.101.194.49",
+            "151.101.66.49",
+            "151.101.2.49"
+          ],
+          "txt": [
+            "_globalsign-domain-verification=3_1gRaAk96wFvXtX*******Ew5GcqF5wtj8Uyt292w",
+            "google-site-verification=9GmGDr8P2F0vNkxmJl*******lDyiltmmXIyqi01tg",
+            "globalsign-domain-verification=o5TMkvqJXW*********LZjm6Vc2Yv7_Go1DndvoC7",
+            "v=spf1 mx ip4:207.154.192.128 ip4:92.42.187.64 ~all"
+          ],
+          "caa": [
+            "pki.goog",
+            "globalsign.com",
+            "swisssign.com"
+          ]
+        },
+        "meta": {
+          "viewport": "width=device-width, initial-scale=1",
+          "twitter:card": "summary",
+          "robots": "all",
+          "charset": "utf-8",
+          "description": "abuse.ch | Fighting malware and botnets",
+          "twitter:title": "abuse.ch - Figthing malware and botnets",
+          "twitter:description": "abuse.ch is a non-profit project fighting malware and botnets for the good of the internet",
+          "twitter:creator": "@abuse_ch",
+          "twitter:image": "https://abuse.ch/images/abusech_twitter.png",
+          "keywords": "***",
+          "twitter:url": "https://abuse.ch/",
+          "twitter:site": "@abuse_ch"
+        },
+        "ssl": {
+          "version": "v3",
+          "domain": "abuse.ch",
+          "org": "GlobalSign Atlas R3 DV TLS CA H2 2021",
+          "issuer": "/C=BE/O=GlobalSign nv-sa/CN=GlobalSign Atlas R3 DV TLS CA H2 2021",
+          "valid": "2021-12-25 16:49:23",
+          "subject": "/CN=abuse.ch",
+          "expires": "2023-01-26 16:49:22"
+        },
+        "geo": {
+          "region": "",
+          "country": "",
+          "city": "",
+          "countrycode": ""
+        },
+        "whois": {
+          "++gdpr": "",
+          "++privacy": ""
+        },
+        "cookies": {
+          "_ga": "GA1.1.1460828935.1655705711",
+          "_ga_mzsj4f05dr": "GS1.1.1655705710.1.0.1655705710.0"
+        },
+        "dom": {
+          "screenshot": "https://sandbox.pulsedive.com/screenshots/6821ea07aaa8d56e1df7777c582f9ff1.jpeg"
+        }
+      }
+    },
+    "raw": "",
+    "inputs": {
+      "incident_id": 3102,
+      "pulsedive_query_type": {
+        "id": 3625,
+        "name": "Indicator"
+      },
+      "attachment_name": null,
+      "pulsedive_value": "abuse.ch",
+      "pulsedive_feed_org": null,
+      "pulsedive_pretty": {
+        "id": 3640,
+        "name": "Yes"
+      }
+    },
+    "metrics": {
+      "version": "1.0",
+      "package": "fn-pulsedive",
+      "package_version": "1.0.1",
+      "host": "li-b6f3814c-2cf7-11b2-a85c-95da948e58bf.ibm.com",
+      "execution_time_ms": 1716,
+      "timestamp": "2025-04-04 15:04:47"
+    }
+  },
+  "att_name": "pulsedive_Indicator_abuse.ch.txt"
+}

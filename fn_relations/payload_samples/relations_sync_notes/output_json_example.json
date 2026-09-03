@@ -1,0 +1,26 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "new_note": {
+      "text": {
+        "format": "html",
+        "content": "Note from Parent Incident: <a href=\"#incidents/2096\" target=\"_blank\">2096</a><br>Note ID: 111<br>On Date: 01/17/2024 11:27:09<br>By: Resilient Sysadmin<br><br><div class=\"rte\"><div>parent note</div></div>"
+      }
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "incident_id": 2096,
+    "relations_note_id": 111
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-relations",
+    "package_version": "3.1.0",
+    "host": "localhost",
+    "execution_time_ms": 1882,
+    "timestamp": "2024-01-17 11:27:17"
+  }
+}
