@@ -1,0 +1,1 @@
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_jira/main/3.2/app-fn_jira-3.2.2-43918.zip

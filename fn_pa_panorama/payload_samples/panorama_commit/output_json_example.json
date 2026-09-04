@@ -1,0 +1,28 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "@status": "success",
+    "@code": "19",
+    "result": {
+      "msg": {
+        "line": "Commit job enqueued with jobid 8"
+      },
+      "job": "8"
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "panorama_location": "vsys",
+    "panorama_label": "panOS"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-pa-panorama",
+    "package_version": "1.5.0",
+    "host": "local",
+    "execution_time_ms": 1245,
+    "timestamp": "2024-08-09 09:01:22"
+  }
+}

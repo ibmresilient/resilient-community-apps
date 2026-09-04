@@ -1,0 +1,73 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Generated schema for Root",
+    "type": "object",
+    "properties": {
+      "success": {
+        "type": "string"
+      },
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "twitter_search_tweet_string": {
+            "type": "string"
+          },
+          "twitter_search_tweet_count": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "twitter_search_tweet_string",
+          "twitter_search_tweet_count"
+        ]
+      },
+      "tweets": {
+        "type": "object",
+        "properties": {
+          "statuses": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "id_str": {
+                "type": "string"
+              },
+              "entities": {
+                "type": "object",
+                "properties": {
+                  "urls": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "url"
+                    ]
+                  }
+                },
+                "required": [
+                  "urls"
+                ]
+              }
+            },
+            "required": [
+              "text",
+              "id_str",
+              "entities"
+            ]
+          }
+        },
+        "required": [
+          "statuses"
+        ]
+      }
+    },
+    "required": [
+      "success",
+      "inputs",
+      "tweets"
+    ]
+  }

@@ -1,0 +1,26 @@
+{
+    "success": true,
+    "reason": "success",
+    "content": [
+        {
+            "id": "322d20bf-450e-46d6-9338-*****",
+            "createdDateTime": null,
+            "displayName": "example",
+            "description": "example",
+            "internalId": null,
+            "classification": null,
+            "specialization": null,
+            "visibility": "public",
+            "webUrl": "",
+            "isArchived": false,
+            "isMembershipLimitedToOwners": false,
+            "memberSettings": null,
+            "guestSettings": null,
+            "messagingSettings": null,
+            "funSettings": null,
+            "discoverySettings": null,
+            "tagSettings": null,
+            "summary": ""
+        }
+    ]
+}

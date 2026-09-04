@@ -1,0 +1,28 @@
+{
+    "version": 2,
+    "success": "True",
+    "reason": "None",
+    "content": {
+      "Name": "Test 21",
+      "Format": "TXT",
+      "Location": "s3://test-ip-set/trusted_ip.txt",
+      "Tags": {
+        "Owner": "Hydra"
+      },
+      "Status": "ACTIVE"
+    },
+    "raw": "None",
+    "inputs": {
+      "aws_gd_region": "us-east-1",
+      "aws_gd_ip_set_id": "6c4c7290f81b40ab85e298a785b1db38",
+      "aws_gd_detector_id": "48bb********************b7ccbc82"
+    },
+    "metrics": {
+      "version": "1.0",
+      "package": "fn-aws-guardduty",
+      "package_version": "2.0.0",
+      "host": "localhost",
+      "execution_time_ms": 720,
+      "timestamp": "2025-07-23 10:20:20"
+    }
+}

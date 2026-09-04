@@ -1,0 +1,8 @@
+include README.md
+include Dockerfile
+include entrypoint.sh
+include fn_components/util/*
+include fn_components/LICENSE
+include screenshots/*
+
+exclude *.bak

@@ -1,0 +1,322 @@
+{
+    "version": 2,
+    "success": true,
+    "reason": null,
+    "content": [
+        {
+            "id": "1712856387749",
+            "replyToId": null,
+            "etag": "1712856410448",
+            "messageType": "message",
+            "createdDateTime": "2024-04-11T17:26:27.749Z",
+            "lastModifiedDateTime": "2024-04-11T17:26:50.448Z",
+            "lastEditedDateTime": "2024-04-11T17:26:50.443Z",
+            "deletedDateTime": null,
+            "subject": null,
+            "summary": null,
+            "chatId": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3Ac6c9f3a494ff471096393b6c168122d3%40thread.tacv2/1712856387749?groupId=82e05555-b2b8-4402-a478-bbccc1741d87&tenantId=1d8a5928-8678-408e-ab06-50ca7e01766a&createdTime=1712856387749&parentMessageId=1712856387749",
+            "policyViolation": null,
+            "eventDetail": null,
+            "from": {
+                "device": null,
+                "user": null,
+                "application": {
+                    "@odata.type": "#microsoft.graph.teamworkApplicationIdentity",
+                    "id": "b2dd8a00-02e7-43fe-aaa4-8dc27897856b",
+                    "displayName": "Approvals",
+                    "applicationIdentityType": "bot"
+                }
+            },
+            "body": {
+                "contentType": "html",
+                "content": "<attachment id=\"5276328387474c0d89af528922c8b40e\"></attachment>"
+            },
+            "channelIdentity": {
+                "teamId": "82e05555-b2b8-4402-a478-bbccc1741d87",
+                "channelId": "some-channel-id"
+            },
+            "attachments": [
+                {
+                    "id": "5276328*******9af528922c8b40e",
+                    "contentType": "application/vnd.microsoft.card.adaptive",
+                    "contentUrl": null,
+                    "content": {
+                        "type": "AdaptiveCard",
+                        "body": [
+                            {
+                                "columns": [
+                                    {
+                                        "width": "40",
+                                        "items": [
+                                            {
+                                                "columns": [
+                                                    {
+                                                        "width": "auto",
+                                                        "items": [
+                                                            {
+                                                                "color": "good",
+                                                                "text": "Approved",
+                                                                "id": "approvalStatus",
+                                                                "spacing": "null",
+                                                                "type": "TextBlock"
+                                                            }
+                                                        ],
+                                                        "backgroundImage": {
+                                                            "url": "https://graph.microsoft.com/v1.0/teams/82e05555-b2b8-4402-a478-bbccc1741d87/channels/some-channel-id/messages/1712856387749/hostedContents/aWQ9LHR5cGU9MSx1cmw9aHR0cHM6Ly91cy1wcm9kLmFzeW5jZ3cudGVhbXMubWljcm9zb2Z0LmNvbS92MS9vYmplY3RzLzAtd3VzLWQ1LTM5MDlhYmJmZjU0MTg4MWIxOWI4N2IwYzc5N2MzNGUxL3ZpZXdzL2ltZ19wcmV2aWV3/$value",
+                                                            "fillMode": "repeatHorizontally",
+                                                            "verticalAlignment": "center"
+                                                        },
+                                                        "verticalContentAlignment": "center",
+                                                        "minHeight": "28px",
+                                                        "spacing": "null",
+                                                        "type": "Column"
+                                                    },
+                                                    {
+                                                        "width": "auto",
+                                                        "items": [],
+                                                        "type": "Column"
+                                                    }
+                                                ],
+                                                "type": "ColumnSet"
+                                            }
+                                        ],
+                                        "verticalContentAlignment": "center",
+                                        "type": "Column"
+                                    }
+                                ],
+                                "id": "infoTag",
+                                "type": "ColumnSet"
+                            },
+                            {
+                                "maxLines": 2,
+                                "size": "large",
+                                "text": "test approvals",
+                                "weight": "bolder",
+                                "wrap": true,
+                                "id": "approvalTitle",
+                                "spacing": "null",
+                                "type": "TextBlock"
+                            },
+                            {
+                                "maxLines": 5,
+                                "text": "addl information here",
+                                "wrap": true,
+                                "id": "approvalDetails",
+                                "type": "TextBlock"
+                            },
+                            {
+                                "items": [
+                                    {
+                                        "columns": [
+                                            {
+                                                "width": "160px",
+                                                "items": [
+                                                    {
+                                                        "maxLines": 5,
+                                                        "text": "Requested by",
+                                                        "weight": "bolder",
+                                                        "wrap": true,
+                                                        "type": "TextBlock"
+                                                    }
+                                                ],
+                                                "type": "Column"
+                                            },
+                                            {
+                                                "width": "stretch",
+                                                "items": [
+                                                    {
+                                                        "maxLines": 5,
+                                                        "text": "Calvin Wynne",
+                                                        "wrap": true,
+                                                        "type": "TextBlock"
+                                                    }
+                                                ],
+                                                "type": "Column"
+                                            }
+                                        ],
+                                        "spacing": "null",
+                                        "type": "ColumnSet"
+                                    },
+                                    {
+                                        "columns": [
+                                            {
+                                                "width": "160px",
+                                                "items": [
+                                                    {
+                                                        "maxLines": 5,
+                                                        "text": "Approved by",
+                                                        "weight": "bolder",
+                                                        "wrap": true,
+                                                        "type": "TextBlock"
+                                                    }
+                                                ],
+                                                "type": "Column"
+                                            },
+                                            {
+                                                "width": "stretch",
+                                                "items": [
+                                                    {
+                                                        "maxLines": 5,
+                                                        "text": "Calvin Wynne",
+                                                        "wrap": true,
+                                                        "type": "TextBlock"
+                                                    }
+                                                ],
+                                                "type": "Column"
+                                            }
+                                        ],
+                                        "spacing": "null",
+                                        "type": "ColumnSet"
+                                    }
+                                ],
+                                "id": "aggregatedActions",
+                                "type": "Container"
+                            },
+                            {
+                                "actions": [
+                                    {
+                                        "data": {
+                                            "msteams": {
+                                                "type": "task/fetch",
+                                                "title": "View Details Click"
+                                            },
+                                            "approvalId": "049d399b-9b1f-4edf-b6b3-6e3232af2610",
+                                            "approvalType": "Basic"
+                                        },
+                                        "title": "View details",
+                                        "id": "viewDetailsAction",
+                                        "type": "Action.Submit"
+                                    }
+                                ],
+                                "spacing": "Large",
+                                "type": "ActionSet"
+                            }
+                        ],
+                        "speak": "test approvals",
+                        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                        "version": "1.2",
+                        "refresh": {
+                            "userIds": [
+                                "8:orgid:1111-222-333"
+                            ],
+                            "action": {
+                                "verb": "AutoRefresh",
+                                "data": {
+                                    "approvalId": "049d399b-9b1f-4edf-b6b3-6e3232af2610",
+                                    "approvalType": "Basic"
+                                },
+                                "title": "AutoRefresh",
+                                "type": "Action.Execute"
+                            }
+                        }
+                    },
+                    "name": null,
+                    "thumbnailUrl": null,
+                    "teamsAppId": null
+                }
+            ],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1712770657511",
+            "replyToId": null,
+            "etag": "1712770657511",
+            "messageType": "message",
+            "createdDateTime": "2024-04-10T17:37:37.511Z",
+            "lastModifiedDateTime": "2024-04-10T17:37:37.511Z",
+            "lastEditedDateTime": null,
+            "deletedDateTime": null,
+            "subject": null,
+            "summary": null,
+            "chatId": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3Ac6c9f3a494ff471096393b6c168122d3%40thread.tacv2/1712770657511?groupId=82e05555-b2b8-4402-a478-bbccc1741d87&tenantId=1d8a5928-8678-408e-ab06-50ca7e01766a&createdTime=1712770657511&parentMessageId=1712770657511",
+            "policyViolation": null,
+            "eventDetail": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "user": {
+                    "@odata.type": "#microsoft.graph.teamworkUserIdentity",
+                    "id": "1111-222-333",
+                    "displayName": "Calvin Wynne",
+                    "userIdentityType": "aadUser",
+                    "tenantId": "1d8a5928-8678-408e-ab06-50ca7e01766a"
+                }
+            },
+            "body": {
+                "contentType": "html",
+                "content": "test msg"
+            },
+            "channelIdentity": {
+                "teamId": "82e05555-b2b8-4402-a478-bbccc1741d87",
+                "channelId": "some-channel-id"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        },
+        {
+            "id": "1712671827711",
+            "replyToId": null,
+            "etag": "1712671827711",
+            "messageType": "message",
+            "createdDateTime": "2024-04-09T14:10:27.711Z",
+            "lastModifiedDateTime": "2024-04-09T14:10:27.711Z",
+            "lastEditedDateTime": null,
+            "deletedDateTime": null,
+            "subject": null,
+            "summary": null,
+            "chatId": null,
+            "importance": "normal",
+            "locale": "en-us",
+            "webUrl": "https://teams.microsoft.com/l/message/19%3Ac6c9f3a494ff471096393b6c168122d3%40thread.tacv2/1712671827711?groupId=82e05555-b2b8-4402-a478-bbccc1741d87&tenantId=1d8a5928-8678-408e-ab06-50ca7e01766a&createdTime=1712671827711&parentMessageId=1712671827711",
+            "policyViolation": null,
+            "eventDetail": null,
+            "from": {
+                "application": null,
+                "device": null,
+                "user": {
+                    "@odata.type": "#microsoft.graph.teamworkUserIdentity",
+                    "id": "1111-222-333",
+                    "displayName": "Calvin Wynne",
+                    "userIdentityType": "aadUser",
+                    "tenantId": "1d8a5928-8678-408e-ab06-50ca7e01766a"
+                }
+            },
+            "body": {
+                "contentType": "html",
+                "content": "<p>new message to teams\" members on for this incident</p>\n<br>\n<p>Incident: <a target=\"blank\" href=\"https://9.46.240.241:443/#incidents/2161?orgId=202\">2161</a></p>"
+            },
+            "channelIdentity": {
+                "teamId": "82e05555-b2b8-4402-a478-bbccc1741d87",
+                "channelId": "some-channel-id"
+            },
+            "attachments": [],
+            "mentions": [],
+            "reactions": []
+        }
+    ],
+    "raw": null,
+    "inputs": {
+        "ms_groupteam_id": null,
+        "ms_message_id": null,
+        "ms_channel_name": "Org_resilient Incident_2161",
+        "ms_group_mail_nickname": null,
+        "ms_groupteam_name": "testGroup",
+        "ms_channel_id": null
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-teams",
+        "package_version": "2.2.0",
+        "host": "localhost.cambridge.ibm.com",
+        "execution_time_ms": 3014,
+        "timestamp": "2024-04-11 13:27:59"
+    }
+}

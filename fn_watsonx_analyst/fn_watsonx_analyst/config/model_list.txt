@@ -1,0 +1,11 @@
+# model_id input_cost_per_mill_tokens output_cost_per_mill_tokens
+# updated 11-05-2026
+
+ibm/granite-4-h-small 0.06 0.25
+
+meta-llama/llama-3-3-70b-instruct 0.71
+meta-llama/llama-4-maverick-17b-128e-instruct-fp8 0.35 1.4
+
+mistralai/mistral-small-3-1-24b-instruct-2503 0.1 0.3
+
+openai/gpt-oss-120b 0.15 0.6
