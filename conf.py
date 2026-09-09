@@ -6,6 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+import json
 import sys
 from resilient_sdk.util import package_file_helpers
 import os
@@ -150,12 +151,21 @@ html_js_files = [
 # open ALLOW_IMAGE_NAMES to get list of images to include
 base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__)))
 path_allow_images = os.path.join(base_dir, ".scripts", "ALLOW_IMAGE_NAMES.txt")
+# This file is read by Sphinx at docs build time. The JSON is intended to be updated
+# automatically in the SPS workspace before documentation deployment rather than being
+# hand-maintained in conf.py.
+path_recently_updated_apps = os.path.join(base_dir, "docs", "recently_updated_apps.json")
 all_packages = []
 with open(path_allow_images, "r", encoding="utf-8") as allowed_images:
     for line in allowed_images.readlines():
         line = line.strip()
         if line and not line.startswith("#"):
             all_packages.append(line)
+
+with open(path_recently_updated_apps, "r", encoding="utf-8") as recently_updated_apps_file:
+    recently_updated_names = json.load(recently_updated_apps_file)
+
+recently_updated_names = [package_name for package_name in recently_updated_names if package_name in all_packages][:8]
 
 
 # for MVP this list was removed from the TOC but may be replaced eventually
@@ -168,10 +178,12 @@ myst_substitutions = {
 }
 
 # generate list of recently updated apps which will be removed from the "all apps" side bar and placed at the top
-recently_updated_names = ["fn_service_now", "fn_remedy", "fn_siemplify", "fn_vmware_cbc", "fn_aws_iam", "fn_symantec_dlp", "rc_data_feed_plugin_resilientfeed", "fn_wiz"]
+# source of truth is docs/recently_updated_apps.json. SPS may refresh that file in the
+# pipeline workspace before docs deployment so the published site reflects the latest
+# promoted apps without requiring a repo write-back.
 # generate paths to each readme for the TOC/sidebar
-all_readmes = "\n    ".join([f"/{p}/README.md" for p in all_packages if p not in recently_updated_names])
-recently_updated = "\n    ".join([f"/{p}/README.md" for p in recently_updated_names])
+all_readmes = "\n    ".join([f"/{p}/README" for p in all_packages if p not in recently_updated_names])
+recently_updated = "\n    ".join([f"/{p}/README" for p in recently_updated_names])
 
 
 # create root table of contents; this determines the main page (index.rst)
@@ -182,6 +194,7 @@ TOC = f"""
 .. toctree::
     :maxdepth: 1
     :titlesonly:
+    :glob:
     :caption: New and Recently Updated Apps
 
     {recently_updated}
@@ -199,6 +212,7 @@ TOC = f"""
 .. toctree::
     :maxdepth: 1
     :titlesonly:
+    :glob:
     :caption: All Apps
 
     {all_readmes}
