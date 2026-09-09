@@ -1,0 +1,194 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "status": "Success",
+    "messages": [],
+    "data": {
+      "id": 11,
+      "fields": [
+        {
+          "name": "Owner",
+          "values": [
+            "admin<admin@example.com>"
+          ]
+        },
+        {
+          "name": "Workflow",
+          "values": [
+            "Basic"
+          ]
+        },
+        {
+          "name": "Creator",
+          "values": [
+            "admin<admin@example.com>"
+          ]
+        },
+        {
+          "name": "Subject",
+          "values": [
+            "IBM SOAR Isolation Request for 1.1.1.1"
+          ]
+        },
+        {
+          "name": "Ticket Template Name",
+          "values": [
+            "Basic Change Traffic Request"
+          ]
+        },
+        {
+          "name": "Change Request Description",
+          "values": [
+            "Isolation Request initiated by the IBM SOAR Integration."
+          ]
+        },
+        {
+          "name": "LastUpdated",
+          "values": [
+            "2024-08-02 09:26:26"
+          ]
+        },
+        {
+          "name": "Requestor",
+          "values": [
+            "admin<admin@example.com>"
+          ]
+        },
+        {
+          "name": "Form Type",
+          "values": [
+            "Traffic Change"
+          ]
+        },
+        {
+          "name": "status",
+          "values": [
+            "open"
+          ]
+        }
+      ],
+      "originalTraffic": [
+        {
+          "source": {
+            "items": [
+              {
+                "value": "1.1.1.1"
+              },
+              {
+                "value": "any"
+              }
+            ]
+          },
+          "destination": {
+            "items": [
+              {
+                "value": "any"
+              },
+              {
+                "value": "1.1.1.1"
+              }
+            ]
+          },
+          "service": {
+            "items": [
+              {
+                "value": "any"
+              }
+            ]
+          },
+          "application": {
+            "items": [
+              {
+                "value": "any"
+              }
+            ]
+          },
+          "user": {
+            "items": [
+              {
+                "value": "any"
+              }
+            ]
+          },
+          "fields": [
+            {
+              "name": "Requested URL Category",
+              "values": [
+                "any"
+              ]
+            }
+          ],
+          "action": "Drop"
+        }
+      ],
+      "plannedTraffic": [
+        {
+          "source": {
+            "items": [
+              {
+                "value": "1.1.1.1"
+              },
+              {
+                "value": "any"
+              }
+            ]
+          },
+          "destination": {
+            "items": [
+              {
+                "value": "any"
+              },
+              {
+                "value": "1.1.1.1"
+              }
+            ]
+          },
+          "service": {
+            "items": [
+              {
+                "value": "*"
+              }
+            ]
+          },
+          "application": {
+            "items": [
+              {
+                "value": "any"
+              }
+            ]
+          },
+          "user": {
+            "items": [
+              {
+                "value": "any"
+              }
+            ]
+          },
+          "fields": [
+            {
+              "name": "Change URL Category",
+              "values": [
+                "any"
+              ]
+            }
+          ],
+          "action": "Drop"
+        }
+      ]
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "algosec_change_request_id": 11
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-algosec",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 8305,
+    "timestamp": "2024-08-02 09:26:31"
+  }
+}

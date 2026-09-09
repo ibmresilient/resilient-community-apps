@@ -1,0 +1,22 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "status_code": 204,
+    "message": "Successfully deleted channel: demoChannel"
+  },
+  "raw": null,
+  "inputs": {
+    "ms_groupteam_id": "b4829344-e28d-4c8e-bb2a-c470e0bb1ee3",
+    "ms_channel_name": "demoChannel"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-teams",
+    "package_version": "3.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 1827,
+    "timestamp": "2024-08-15 11:55:04"
+  }
+}

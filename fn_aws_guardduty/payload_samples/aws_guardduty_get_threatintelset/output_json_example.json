@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "success": "True",
+  "reason": "None",
+  "content": {
+    "Name": "Test 18",
+    "Format": "TXT",
+    "Location": "s3://test-threat-intel-set/malicious_ip.txt",
+    "Tags": {
+      "Mitigation": "Possible",
+      "Severity": "LOW"
+    },
+    "Status": "INACTIVE"
+  },
+  "raw": "None",
+  "inputs": {
+    "aws_gd_region": "us-east-1",
+    "aws_gd_detector_id": "48bb********************b7ccbc82",
+    "aws_gd_threat_intel_set_id": "114da827a1d0442b96f7039275b321e8"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-aws-guardduty",
+    "package_version": "2.0.0",
+    "host": "localhost",
+    "execution_time_ms": 972,
+    "timestamp": "2025-07-18 14:41:10"
+  }
+}

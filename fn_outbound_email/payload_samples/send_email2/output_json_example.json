@@ -1,0 +1,27 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "mail_body": "\n<h2>Incident Summary</h2>\n    Severity Code: Low\n<br>\n    Plan Status: A\n<br>\n    Created: 2022-08-05 14:03:23.441000\n<br>\n    Incident Type: Lost PC / laptop / tablet\n<br>\n    Task: <a target='_blank' href='https://9.30.55.116:443/#incidents/2139?orgId=201&amp;taskId=994&amp;tabName=details'>Notify carrier/ISP</a>\n<br>\n    Instructions: \n<br>\nIf the lost or stolen device has cellular access, call the device service provider and notify them of the device loss."
+  },
+  "raw": null,
+  "inputs": {
+    "mail_to": "userB@example.com",
+    "mail_incident_id": 2139,
+    "mail_attachments": "original_msg,.txt",
+    "mail_subject": "[2139] Incident generated from email \"send -> receive\" via mailbox outlook Task:Notify carrier/ISP",
+    "mail_importance": "normal",
+    "mail_from": "userA@example.com",
+    "mail_inline_template": "\n<h2>Incident Summary</h2>\n    Severity Code: Low\n<br>\n    Plan Status: A\n<br>\n    Created: 2022-08-05 14:03:23.441000\n<br>\n    Incident Type: Lost PC / laptop / tablet\n<br>\n    Task: <a target='_blank' href='{{ template_helper.generate_task_url(2139,994) }}'>Notify carrier/ISP</a>\n<br>\n    Instructions: \n<br>\nIf the lost or stolen device has cellular access, call the device service provider and notify them of the device loss.\n",
+    "mail_cc": null
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-outbound-email",
+    "package_version": "2.0.0",
+    "host": "localhost",
+    "execution_time_ms": 3363,
+    "timestamp": "2022-08-08 15:37:59"
+  }
+}

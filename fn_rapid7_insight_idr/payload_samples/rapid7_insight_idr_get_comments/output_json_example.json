@@ -1,0 +1,21 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "count": 1
+  },
+  "raw": null,
+  "inputs": {
+    "rapid7_insight_idr_incident_id": 2195,
+    "rapid7_insight_idr_rrn": "rrn:investigation:us2:eeeeeeee-cccc-4c4c-8fc9-f9e19e19e1:investigation:AAAAAAAAAA"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-rapid7-insight-idr",
+    "package_version": "1.0.0",
+    "host": "mylaptop",
+    "execution_time_ms": 59301,
+    "timestamp": "2023-12-06 11:56:52"
+  }
+}

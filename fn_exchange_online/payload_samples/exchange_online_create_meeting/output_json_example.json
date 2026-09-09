@@ -1,0 +1,102 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('soartester%40mytenant.onmicrosoft.com')/calendar/events/$entity",
+    "@odata.etag": "W/\"4uV5MvSh7kOPFHsGsb/3vAAANEMjtA==\"",
+    "id": "AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAENAADi5Xky9KHuQ48Uewaxv-e8AAA0UGB5AAA=",
+    "createdDateTime": "2023-06-15T11:57:25.2936799Z",
+    "lastModifiedDateTime": "2023-06-15T11:57:25.5084032Z",
+    "changeKey": "4uV5MvSh7kOPFHsGsb/3vAAANEMjtA==",
+    "categories": [],
+    "transactionId": null,
+    "originalStartTimeZone": "Eastern Standard Time",
+    "originalEndTimeZone": "Eastern Standard Time",
+    "iCalUId": "040000008200E00074C5B7101A82E008000000000C57E88C809FD90100000000000000001000000079E26061BC861948905C74B45C5736E5",
+    "reminderMinutesBeforeStart": 15,
+    "isReminderOn": true,
+    "hasAttachments": false,
+    "subject": "test",
+    "bodyPreview": "test test",
+    "importance": "normal",
+    "sensitivity": "normal",
+    "isAllDay": false,
+    "isCancelled": false,
+    "isOrganizer": true,
+    "responseRequested": true,
+    "seriesMasterId": null,
+    "showAs": "busy",
+    "type": "singleInstance",
+    "webLink": "https://outlook.office365.com/owa/?itemid=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAENAADi5Xky9KHuQ48Uewaxv%2Fe8AAA0UGB5AAA%3D&exvsurl=1&path=/calendar/item",
+    "onlineMeetingUrl": null,
+    "isOnlineMeeting": false,
+    "onlineMeetingProvider": "unknown",
+    "allowNewTimeProposals": true,
+    "occurrenceId": null,
+    "isDraft": false,
+    "hideAttendees": false,
+    "responseStatus": {
+      "response": "organizer",
+      "time": "0001-01-01T00:00:00Z"
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<html>\r\n<head>\r\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n</head>\r\n<body>\r\ntest test\r\n</body>\r\n</html>\r\n"
+    },
+    "start": {
+      "dateTime": "2023-06-27T12:00:00.0000000",
+      "timeZone": "Eastern Standard Time"
+    },
+    "end": {
+      "dateTime": "2023-06-27T13:00:00.0000000",
+      "timeZone": "Eastern Standard Time"
+    },
+    "location": {
+      "displayName": "",
+      "locationType": "default",
+      "uniqueIdType": "unknown",
+      "address": {},
+      "coordinates": {}
+    },
+    "locations": [],
+    "recurrence": null,
+    "attendees": [
+      {
+        "type": "required",
+        "status": {
+          "response": "none",
+          "time": "0001-01-01T00:00:00Z"
+        },
+        "emailAddress": {}
+      }
+    ],
+    "organizer": {
+      "emailAddress": {
+        "name": "SOAR tester",
+        "address": "soartester@mytenant.onmicrosoft.com"
+      }
+    },
+    "onlineMeeting": null
+  },
+  "raw": "{\"@odata.context\": \"https://graph.microsoft.com/v1.0/$metadata#users('soartester%40mytenant.onmicrosoft.com')/calendar/events/$entity\", \"@odata.etag\": \"W/\\\"4uV5MvSh7kOPFHsGsb/3vAAANEMjtA==\\\"\", \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAENAADi5Xky9KHuQ48Uewaxv-e8AAA0UGB5AAA=\", \"createdDateTime\": \"2023-06-15T11:57:25.2936799Z\", \"lastModifiedDateTime\": \"2023-06-15T11:57:25.5084032Z\", \"changeKey\": \"4uV5MvSh7kOPFHsGsb/3vAAANEMjtA==\", \"categories\": [], \"transactionId\": null, \"originalStartTimeZone\": \"Eastern Standard Time\", \"originalEndTimeZone\": \"Eastern Standard Time\", \"iCalUId\": \"040000008200E00074C5B7101A82E008000000000C57E88C809FD90100000000000000001000000079E26061BC861948905C74B45C5736E5\", \"reminderMinutesBeforeStart\": 15, \"isReminderOn\": true, \"hasAttachments\": false, \"subject\": \"test\", \"bodyPreview\": \"test test\", \"importance\": \"normal\", \"sensitivity\": \"normal\", \"isAllDay\": false, \"isCancelled\": false, \"isOrganizer\": true, \"responseRequested\": true, \"seriesMasterId\": null, \"showAs\": \"busy\", \"type\": \"singleInstance\", \"webLink\": \"https://outlook.office365.com/owa/?itemid=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAENAADi5Xky9KHuQ48Uewaxv%2Fe8AAA0UGB5AAA%3D&exvsurl=1&path=/calendar/item\", \"onlineMeetingUrl\": null, \"isOnlineMeeting\": false, \"onlineMeetingProvider\": \"unknown\", \"allowNewTimeProposals\": true, \"occurrenceId\": null, \"isDraft\": false, \"hideAttendees\": false, \"responseStatus\": {\"response\": \"organizer\", \"time\": \"0001-01-01T00:00:00Z\"}, \"body\": {\"contentType\": \"html\", \"content\": \"<html>\\r\\n<head>\\r\\n<meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\">\\r\\n</head>\\r\\n<body>\\r\\ntest test\\r\\n</body>\\r\\n</html>\\r\\n\"}, \"start\": {\"dateTime\": \"2023-06-27T12:00:00.0000000\", \"timeZone\": \"Eastern Standard Time\"}, \"end\": {\"dateTime\": \"2023-06-27T13:00:00.0000000\", \"timeZone\": \"Eastern Standard Time\"}, \"location\": {\"displayName\": \"\", \"locationType\": \"default\", \"uniqueIdType\": \"unknown\", \"address\": {}, \"coordinates\": {}}, \"locations\": [], \"recurrence\": null, \"attendees\": [{\"type\": \"required\", \"status\": {\"response\": \"none\", \"time\": \"0001-01-01T00:00:00Z\"}, \"emailAddress\": {}}], \"organizer\": {\"emailAddress\": {\"name\": \"SOAR tester\", \"address\": \"soartester@mytenant.onmicrosoft.com\"}}, \"onlineMeeting\": null}",
+  "inputs": {
+    "exo_meeting_end_time": 1687885200000,
+    "exo_meeting_email_address": "soartester@mytenant.onmicrosoft.com",
+    "exo_meeting_required_attendees": null,
+    "exo_meeting_body": "test test",
+    "exo_meeting_subject": "test",
+    "exo_meeting_location": null,
+    "exo_meeting_start_time": 1687881600000,
+    "exo_meeting_optional_attendees": null
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-exchange-online",
+    "package_version": "1.4.0",
+    "host": "myLaptop",
+    "execution_time_ms": 2094,
+    "timestamp": "2023-06-15 19:57:25"
+  },
+  "pretty_string": "{\n    \"@odata.context\": \"https://graph.microsoft.com/v1.0/$metadata#users('soartester%40mytenant.onmicrosoft.com')/calendar/events/$entity\",\n    \"@odata.etag\": \"W/\\\"4uV5MvSh7kOPFHsGsb/3vAAANEMjtA==\\\"\",\n    \"id\": \"AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv-e8AAAAAAENAADi5Xky9KHuQ48Uewaxv-e8AAA0UGB5AAA=\",\n    \"createdDateTime\": \"2023-06-15T11:57:25.2936799Z\",\n    \"lastModifiedDateTime\": \"2023-06-15T11:57:25.5084032Z\",\n    \"changeKey\": \"4uV5MvSh7kOPFHsGsb/3vAAANEMjtA==\",\n    \"categories\": [],\n    \"transactionId\": null,\n    \"originalStartTimeZone\": \"Eastern Standard Time\",\n    \"originalEndTimeZone\": \"Eastern Standard Time\",\n    \"iCalUId\": \"040000008200E00074C5B7101A82E008000000000C57E88C809FD90100000000000000001000000079E26061BC861948905C74B45C5736E5\",\n    \"reminderMinutesBeforeStart\": 15,\n    \"isReminderOn\": true,\n    \"hasAttachments\": false,\n    \"subject\": \"test\",\n    \"bodyPreview\": \"test test\",\n    \"importance\": \"normal\",\n    \"sensitivity\": \"normal\",\n    \"isAllDay\": false,\n    \"isCancelled\": false,\n    \"isOrganizer\": true,\n    \"responseRequested\": true,\n    \"seriesMasterId\": null,\n    \"showAs\": \"busy\",\n    \"type\": \"singleInstance\",\n    \"webLink\": \"https://outlook.office365.com/owa/?itemid=AAMkAGVhZGFlNDVhLTI0MDAtNGE1Ni05Zjk3LTAxNzllYjFiNDAzYwBGAAAAAADG92SqC8zpQJ1GSk2scH2NBwDi5Xky9KHuQ48Uewaxv%2Fe8AAAAAAENAADi5Xky9KHuQ48Uewaxv%2Fe8AAA0UGB5AAA%3D&exvsurl=1&path=/calendar/item\",\n    \"onlineMeetingUrl\": null,\n    \"isOnlineMeeting\": false,\n    \"onlineMeetingProvider\": \"unknown\",\n    \"allowNewTimeProposals\": true,\n    \"occurrenceId\": null,\n    \"isDraft\": false,\n    \"hideAttendees\": false,\n    \"responseStatus\": {\n        \"response\": \"organizer\",\n        \"time\": \"0001-01-01T00:00:00Z\"\n    },\n    \"body\": {\n        \"contentType\": \"html\",\n        \"content\": \"<html>\\r\\n<head>\\r\\n<meta http-equiv=\\\"Content-Type\\\" content=\\\"text/html; charset=utf-8\\\">\\r\\n</head>\\r\\n<body>\\r\\ntest test\\r\\n</body>\\r\\n</html>\\r\\n\"\n    },\n    \"start\": {\n        \"dateTime\": \"2023-06-27T12:00:00.0000000\",\n        \"timeZone\": \"Eastern Standard Time\"\n    },\n    \"end\": {\n        \"dateTime\": \"2023-06-27T13:00:00.0000000\",\n        \"timeZone\": \"Eastern Standard Time\"\n    },\n    \"location\": {\n        \"displayName\": \"\",\n        \"locationType\": \"default\",\n        \"uniqueIdType\": \"unknown\",\n        \"address\": {},\n        \"coordinates\": {}\n    },\n    \"locations\": [],\n    \"recurrence\": null,\n    \"attendees\": [\n        {\n            \"type\": \"required\",\n            \"status\": {\n                \"response\": \"none\",\n                \"time\": \"0001-01-01T00:00:00Z\"\n            },\n            \"emailAddress\": {}\n        }\n    ],\n    \"organizer\": {\n        \"emailAddress\": {\n            \"name\": \"SOAR tester\",\n            \"address\": \"soartester@mytenant.onmicrosoft.com\"\n        }\n    },\n    \"onlineMeeting\": null\n}"
+}

@@ -1,0 +1,20 @@
+{
+  {# JINJA template for closing a SOAR incident using endpoint data #}
+  {# modify to specify your specific **data** fields #}
+  "plan_status": "C",
+  "resolution_id": "Resolved",
+  "resolution_summary": {% if resolve_reason %} "Closed by PagerDuty, with resolution note {{ resolve_reason }}" {% else %} "Closed by PagerDuty" {% endif %},
+  "properties": {
+    "pd_incident_id": "{{ id }}",
+    "pd_incident_url": "<a target='_blank' href='{{ html_url }}'>Link</a>",
+    "pd_incident_service_name": "{{ service.summary }}",
+    "pd_incident_service_id": "{{ service.id }}",
+    "pd_incident_key": "{{ incident_key }}",
+    "pd_incident_status": "{{ status }}",
+    "pd_incident_escalation_policy_name": "{{ escalation_policy.summary }}",
+    "pd_incident_escalation_policy_id": "{{ escalation_policy.id }}"
+    {% if priority %}
+      ,"pd_incident_priority": "{{ priority.summary }}"
+    {% endif %}
+  }
+}

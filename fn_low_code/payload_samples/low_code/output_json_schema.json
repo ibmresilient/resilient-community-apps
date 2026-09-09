@@ -1,0 +1,60 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "version": {
+        "type": "number"
+      },
+      "success": {
+        "type": "boolean"
+      },
+      "reason": {
+        "type": "null"
+      },
+      "status_code": {
+        "type": "integer"
+      },
+      "content": {
+        "type": "string"
+      },
+      "content_type": {
+        "type": "string"
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "package": {
+            "type": "string"
+          },
+          "package_version": {
+            "type": "string"
+          },
+          "host": {
+            "type": "string"
+          },
+          "execution_time_ms": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "version",
+          "package",
+          "package_version",
+          "host",
+          "execution_time_ms"
+        ]
+      }
+    },
+    "required": [
+      "version",
+      "success",
+      "reason",
+      "status_code",
+      "content",
+      "content_type",
+      "metrics"
+    ]
+  }

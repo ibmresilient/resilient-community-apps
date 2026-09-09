@@ -1,0 +1,4 @@
+include README.md
+include fn_floss/util/*
+include fn_floss/LICENSE
+include fn_floss/doc/*

@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": [
+    "test of fn_wiki_create_update\u03a3 \u03a4 "
+  ],
+  "raw": "",
+  "inputs": {
+    "wiki_search_term": "\u03a3 \u03a4",
+    "wiki_path": "test page \u03a3\u03a4"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-wiki",
+    "package_version": "1.0.1",
+    "host": "my.app.host",
+    "execution_time_ms": 363,
+    "timestamp": "2025-03-27 12:41:13"
+  },
+  "title": "test page \u03a3\u03a4"
+}

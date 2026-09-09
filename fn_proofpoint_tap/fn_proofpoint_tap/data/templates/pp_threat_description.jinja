@@ -1,0 +1,13 @@
+TAP Event Kind:{%- if kind is defined %} {{ kind }} {%- else %} N/A {% endif %}
+Classification:{%- if classification is defined %} {{ classification }} {%- else %} N/A{% endif %}
+Sender:{%- if sender is defined %} {{ sender }} {%- else %} N/A{% endif %}
+Subject:{%- if subject is defined %} {{ subject }}{%- else %} N/A{% endif %}
+From address:{%- if fromAddress is defined %} {{ fromAddress }}{%- else %} N/A{% endif %}
+From header:{%- if headerFrom is defined %} {{ headerFrom }}{%- else %} N/A{% endif %}
+Header Reply To:{%- if headerReplyTo is defined %} {{ headerReplyTo }}{%- else %}N/A{% endif %}
+Header To:{%- if headerTo is defined %} {{ headerTo }}{%- else %} N/A{% endif %}
+Recipient:{%- if recipient is defined %} {{ recipient }}{%- else %} N/A{% endif %}
+Sender IP:{%- if senderIP is defined %} {{ senderIP }}{%- else %} N/A{% endif %}
+Click IP:{%- if clickIP is defined %} {{ clickIP }}{%- else %} N/A{% endif %}
+Threat URL:{%- if threatURL is defined %} {{ threatURL }}{%- else %} N/A{% endif %}
+Message ID:{%- if messageID is defined %} {{ messageID }}{%- else %} N/A{% endif %}

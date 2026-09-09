@@ -1,0 +1,142 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string"
+          },
+          "custom_id": {},
+          "name": {
+            "type": "string"
+          },
+          "shortname": {
+            "type": "string"
+          },
+          "network_size_v4": {
+            "type": "integer"
+          },
+          "rating": {
+            "type": "integer"
+          },
+          "rating_date": {
+            "type": "string"
+          },
+          "added_date": {
+            "type": "string"
+          },
+          "industry": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "slug": {
+                "type": "string"
+              }
+            }
+          },
+          "sub_industry": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "slug": {
+                "type": "string"
+              }
+            }
+          },
+          "type": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "logo": {
+            "type": "string"
+          },
+          "sparkline": {
+            "type": "string"
+          },
+          "subscription_type": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "slug": {
+                "type": "string"
+              }
+            }
+          },
+          "primary_domain": {
+            "type": "string"
+          },
+          "display_url": {
+            "type": "string"
+          },
+          "tier": {},
+          "tier_name": {},
+          "life_cycle": {},
+          "relationship": {},
+          "details": {
+            "type": "object",
+            "properties": {
+              "confidence": {
+                "type": "string"
+              },
+              "is_primary": {
+                "type": "boolean"
+              },
+              "primary_company": {}
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "bitsight_ci_limit": {
+          "type": "integer"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

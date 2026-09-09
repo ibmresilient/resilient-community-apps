@@ -1,0 +1,99 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Generated schema for Root",
+    "type": "object",
+    "properties": {
+      "Inputs": {
+        "type": "object",
+        "properties": {
+          "email_address": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email_address"
+        ]
+      },
+      "Rn Time": {
+        "type": "string"
+      },
+      "Breaches": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "PwnCont": {
+              "type": "number"
+            },
+            "Domain": {
+              "type": "string"
+            },
+            "IsSensitive": {
+              "type": "boolean"
+            },
+            "Name": {
+              "type": "string"
+            },
+            "Title": {
+              "type": "string"
+            },
+            "DataClasses": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "LogoType": {
+              "type": "string"
+            },
+            "IsSpamList": {
+              "type": "boolean"
+            },
+            "IsRetired": {
+              "type": "boolean"
+            },
+            "BreachDate": {
+              "type": "string"
+            },
+            "IsFabricated": {
+              "type": "boolean"
+            },
+            "ModifiedDate": {
+              "type": "string"
+            },
+            "AddedDate": {
+              "type": "string"
+            },
+            "IsVerified": {
+              "type": "boolean"
+            },
+            "Description": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "PwnCont",
+            "Domain",
+            "IsSensitive",
+            "Name",
+            "Title",
+            "DataClasses",
+            "LogoType",
+            "IsSpamList",
+            "IsRetired",
+            "BreachDate",
+            "IsFabricated",
+            "ModifiedDate",
+            "AddedDate",
+            "IsVerified",
+            "Description"
+          ]
+        }
+      }
+    },
+    "required": [
+      "Inputs",
+      "Rn Time",
+      "Breaches"
+    ]
+}

@@ -1,0 +1,535 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "incident_events": [
+      {
+        "summariser": "SmbWriteSummary",
+        "acknowledged": false,
+        "pinned": true,
+        "createdAt": 1663207439360,
+        "attackPhases": [
+          5
+        ],
+        "title": "SMB Writes of Suspicious Files",
+        "id": "da042c57-3e45-4e65-aca5-63dbcdf8df0c",
+        "incidentEventUrl": "https://my.darktrace.com/#aiaincidentevent/da042c57-3e45-4e65-aca5-63dbcdf8df0c",
+        "children": [
+          "da042c57-3e45-4e65-aca5-63dbcdf8df0c"
+        ],
+        "category": "suspicious",
+        "currentGroup": "gda042c57-3e45-4e65-aca5-63dbcdf8df0c",
+        "groupCategory": "suspicious",
+        "groupScore": 0.9796746496148376,
+        "groupPreviousGroups": [],
+        "activityId": "da39a3ee",
+        "groupingIds": [
+          "0ade7c2c"
+        ],
+        "groupByActivity": false,
+        "userTriggered": false,
+        "externalTriggered": false,
+        "aiaScore": 52.0,
+        "summary": "The device win10.windomain.local was observed transferring suspicious files over SMB to dc.windomain.local.\n\nThis activity was identified as unusual compared to the source device's normal SMB activity.\n\nSuch transfers may indicate an attempt to move laterally through the network, by transferring malicious software to victim devices before executing it.\n\nConsequently, if this activity was not expected, the security team may wish to determine the reason for these file transfers.",
+        "periods": [
+          {
+            "start": 1663207328000,
+            "end": 1663207329000
+          }
+        ],
+        "breachDevices": [
+          {
+            "identifier": "win10.windomain.local",
+            "hostname": "win10.windomain.local",
+            "ip": "0.0.0.0",
+            "mac": null,
+            "subnet": null,
+            "did": 9,
+            "sid": 1
+          }
+        ],
+        "relatedBreaches": [
+          {
+            "modelName": "Compromise / Ransomware / Ransom or Offensive Words Written to SMB",
+            "pbid": 182,
+            "threatScore": 88.0,
+            "timestamp": 1663207316000,
+            "acknowledged": false,
+            "commentCount": 0,
+            "time": 1663207316000,
+            "creationTime": 1663207327000,
+            "aianalystData": [
+              {
+                "uuid": "da042c57-3e45-4e65-aca5-63dbcdf8df0c",
+                "related": [
+                  182
+                ],
+                "summariser": "SmbWriteSummary"
+              }
+            ],
+            "model": {
+              "then": {
+                "name": "Compromise::Ransomware::Ransom or Offensive Words Written to SMB",
+                "pid": 629,
+                "phid": 2865,
+                "uuid": "80010119-6d7f-0000-0305-5e0000000325",
+                "logic": {
+                  "data": [
+                    {
+                      "cid": 8067,
+                      "weight": 1
+                    },
+                    {
+                      "cid": 8065,
+                      "weight": 1
+                    },
+                    {
+                      "cid": 8066,
+                      "weight": 1
+                    }
+                  ],
+                  "targetScore": 1,
+                  "type": "weightedComponentList",
+                  "version": 1
+                },
+                "throttle": 3600,
+                "sharedEndpoints": true,
+                "actions": {
+                  "alert": true,
+                  "antigena": {},
+                  "breach": true,
+                  "model": true,
+                  "setPriority": false,
+                  "setTag": false,
+                  "setType": false
+                },
+                "tags": [
+                  "AP: Exploit"
+                ],
+                "interval": 300,
+                "delay": 0,
+                "sequenced": false,
+                "active": true,
+                "modified": "2022-09-05 15:04:11",
+                "activeTimes": {
+                  "devices": {},
+                  "tags": {},
+                  "type": "exclusions",
+                  "version": 2
+                },
+                "autoUpdatable": true,
+                "autoUpdate": true,
+                "autoSuppress": true,
+                "description": "A device is writing suspicious terms to network file shares that may indicate a threat. This is particularly relevant for ransomware infections that overwrite internal data.\\n\\nAction: Investigate the file writes that are occurring to see if they are overwriting important internal data.",
+                "behaviour": "decreasing",
+                "created": {
+                  "by": "System"
+                },
+                "edited": {
+                  "by": "System"
+                },
+                "version": 99,
+                "priority": 4,
+                "category": "Suspicious",
+                "compliance": false
+              },
+              "now": {
+                "name": "Compromise::Ransomware::Ransom or Offensive Words Written to SMB",
+                "pid": 629,
+                "phid": 3000,
+                "uuid": "80010119-6d7f-0000-0305-5e0000000325",
+                "logic": {
+                  "data": [
+                    {
+                      "cid": 8330,
+                      "weight": 1
+                    },
+                    {
+                      "cid": 8328,
+                      "weight": 1
+                    },
+                    {
+                      "cid": 8329,
+                      "weight": 1
+                    }
+                  ],
+                  "targetScore": 1,
+                  "type": "weightedComponentList",
+                  "version": 1
+                },
+                "throttle": 3600,
+                "sharedEndpoints": true,
+                "actions": {
+                  "alert": true,
+                  "antigena": {},
+                  "breach": true,
+                  "model": true,
+                  "setPriority": false,
+                  "setTag": false,
+                  "setType": false
+                },
+                "tags": [
+                  "AP: Exploit"
+                ],
+                "interval": 300,
+                "delay": 0,
+                "sequenced": false,
+                "active": true,
+                "modified": "2022-09-22 11:48:13",
+                "activeTimes": {
+                  "devices": {},
+                  "tags": {},
+                  "type": "exclusions",
+                  "version": 2
+                },
+                "autoUpdatable": true,
+                "autoUpdate": true,
+                "autoSuppress": true,
+                "description": "A device is writing suspicious terms to network file shares that may indicate a threat. This is particularly relevant for ransomware infections that overwrite internal data.\\n\\nAction: Investigate the file writes that are occurring to see if they are overwriting important internal data.",
+                "behaviour": "decreasing",
+                "created": {
+                  "by": "System"
+                },
+                "edited": {
+                  "by": "System"
+                },
+                "message": "Added new regex filter to the last component",
+                "version": 100,
+                "priority": 4,
+                "category": "Suspicious",
+                "compliance": false
+              }
+            },
+            "triggeredComponents": [
+              {
+                "time": 1663207315000,
+                "cbid": 186,
+                "cid": 8065,
+                "chid": 10353,
+                "size": 5,
+                "threshold": 4,
+                "interval": 300,
+                "logic": {
+                  "data": {
+                    "left": {
+                      "left": "A",
+                      "operator": "AND",
+                      "right": {
+                        "left": "C",
+                        "operator": "AND",
+                        "right": {
+                          "left": "E",
+                          "operator": "AND",
+                          "right": "F"
+                        }
+                      }
+                    },
+                    "operator": "OR",
+                    "right": {
+                      "left": "B",
+                      "operator": "AND",
+                      "right": {
+                        "left": "C",
+                        "operator": "AND",
+                        "right": "F"
+                      }
+                    }
+                  },
+                  "version": "v0.1"
+                },
+                "metric": {
+                  "mlid": 291,
+                  "name": "smbmovesuccess",
+                  "label": "SMB Move Success"
+                },
+                "triggeredFilters": [
+                  {
+                    "cfid": 71760,
+                    "id": "A",
+                    "filterType": "Message",
+                    "arguments": {
+                      "value": "someregex"
+                    },
+                    "comparatorType": "matches regular expression",
+                    "trigger": {
+                      "value": "share=\\\\0.0.0.0\\dummy_files file=<n/a> rename=0.txt.txt.txt.txt.txt.txt.txt.txt.txt.txt.txt.lockbit version=smb2 account=vagrant"
+                    }
+                  },
+                  {
+                    "cfid": 71762,
+                    "id": "C",
+                    "filterType": "Direction",
+                    "arguments": {
+                      "value": "out"
+                    },
+                    "comparatorType": "is",
+                    "trigger": {
+                      "value": "out"
+                    }
+                  },
+                  {
+                    "cfid": 71763,
+                    "id": "E",
+                    "filterType": "Message",
+                    "arguments": {
+                      "value": "BackupData.dat.locked"
+                    },
+                    "comparatorType": "does not contain",
+                    "trigger": {
+                      "value": "share=\\\\0.0.0.0\\dummy_files file=<n/a> rename=0.txt.txt.txt.txt.txt.txt.txt.txt.txt.txt.txt.lockbit version=smb2 account=vagrant"
+                    }
+                  },
+                  {
+                    "cfid": 71764,
+                    "id": "F",
+                    "filterType": "Unique message fields",
+                    "arguments": {},
+                    "comparatorType": "is",
+                    "trigger": {
+                      "value": "true"
+                    }
+                  },
+                  {
+                    "cfid": 71765,
+                    "id": "d1",
+                    "filterType": "Message",
+                    "arguments": {},
+                    "comparatorType": "display",
+                    "trigger": {
+                      "value": "share=\\\\0.0.0.0\\dummy_files file=<n/a> rename=0.txt.txt.txt.txt.txt.txt.txt.txt.txt.txt.txt.lockbit version=smb2 account=vagrant"
+                    }
+                  }
+                ]
+              }
+            ],
+            "score": 0.871,
+            "device": {
+              "did": 9,
+              "ip": "0.0.0.0",
+              "ips": [
+                {
+                  "ip": "0.0.0.0",
+                  "timems": 1668114000000,
+                  "time": "2022-11-10 21:00:00",
+                  "sid": 1
+                }
+              ],
+              "sid": 1,
+              "hostname": "win10.windomain.local",
+              "firstSeen": 1646081506000,
+              "lastSeen": 1668115594000,
+              "typename": "desktop",
+              "typelabel": "Desktop",
+              "credentials": [
+                "vagrant"
+              ]
+            }
+          }
+        ],
+        "details": [
+          [
+            {
+              "header": "Breaching device",
+              "contents": [
+                {
+                  "key": "Source device",
+                  "type": "device",
+                  "values": [
+                    {
+                      "identifier": "win10.windomain.local",
+                      "hostname": "win10.windomain.local",
+                      "ip": "0.0.0.0",
+                      "mac": null,
+                      "subnet": null,
+                      "did": 9,
+                      "sid": 1
+                    }
+                  ]
+                },
+                {
+                  "key": "Username observed prior to activity",
+                  "type": "string",
+                  "values": [
+                    "vagrant"
+                  ]
+                },
+                {
+                  "key": "Source of username",
+                  "type": "string",
+                  "values": [
+                    "NTLM login"
+                  ]
+                },
+                {
+                  "key": "Time observed",
+                  "type": "timestamp",
+                  "values": [
+                    1663207315000
+                  ]
+                },
+                {
+                  "key": "Event UID",
+                  "type": "string",
+                  "values": [
+                    "CxC9C21vzm9i5FmHse01"
+                  ]
+                }
+              ]
+            }
+          ],
+          [
+            {
+              "header": "Files Written",
+              "contents": [
+                {
+                  "key": "Filename",
+                  "type": "string",
+                  "values": [
+                    "11.txt.txt.txt"
+                  ]
+                },
+                {
+                  "key": "Size",
+                  "type": "dataVolume",
+                  "values": [
+                    100
+                  ]
+                },
+                {
+                  "key": "Destination device",
+                  "type": "device",
+                  "values": [
+                    {
+                      "identifier": "dc.windomain.local",
+                      "hostname": "dc.windomain.local",
+                      "ip": "0.0.0.0",
+                      "mac": null,
+                      "subnet": null,
+                      "did": 4,
+                      "sid": 1
+                    }
+                  ]
+                },
+                {
+                  "key": "Destination share",
+                  "type": "string",
+                  "values": [
+                    "\\\\0.0.0.00.0.0.0\\dummy_files"
+                  ]
+                },
+                {
+                  "key": "Time",
+                  "type": "timestamp",
+                  "values": [
+                    1663207328000
+                  ]
+                },
+                {
+                  "key": "Filename",
+                  "type": "string",
+                  "values": [
+                    "11.txt.txt"
+                  ]
+                },
+                {
+                  "key": "Size",
+                  "type": "dataVolume",
+                  "values": [
+                    100
+                  ]
+                },
+                {
+                  "key": "Destination device",
+                  "type": "device",
+                  "values": [
+                    {
+                      "identifier": "dc.windomain.local",
+                      "hostname": "dc.windomain.local",
+                      "ip": "0.0.0.0",
+                      "mac": null,
+                      "subnet": null,
+                      "did": 4,
+                      "sid": 1
+                    }
+                  ]
+                },
+                {
+                  "key": "Destination share",
+                  "type": "string",
+                  "values": [
+                    "\\\\0.0.0.00.0.0.0\\dummy_files"
+                  ]
+                },
+                {
+                  "key": "Time",
+                  "type": "timestamp",
+                  "values": [
+                    1663207328000
+                  ]
+                },
+                {
+                  "key": "Filename",
+                  "type": "string",
+                  "values": [
+                    "27.txt.txt.txt"
+                  ]
+                },
+                {
+                  "key": "Size",
+                  "type": "dataVolume",
+                  "values": [
+                    100
+                  ]
+                },
+                {
+                  "key": "Destination device",
+                  "type": "device",
+                  "values": [
+                    {
+                      "identifier": "dc.windomain.local",
+                      "hostname": "dc.windomain.local",
+                      "ip": "0.0.0.0",
+                      "mac": null,
+                      "subnet": null,
+                      "did": 4,
+                      "sid": 1
+                    }
+                  ]
+                },
+                {
+                  "key": "Destination share",
+                  "type": "string",
+                  "values": [
+                    "\\\\0.0.0.00.0.0.0\\dummy_files"
+                  ]
+                },
+                {
+                  "key": "Time",
+                  "type": "timestamp",
+                  "values": [
+                    1663207329000
+                  ]
+                }
+              ]
+            }
+          ]
+        ]
+      }
+    ],
+    "base_model_breach_url": "https://my.darktrace.com/#modelbreach/"
+  },
+  "raw": null,
+  "inputs": {
+    "darktrace_incident_group_id": "gda042c57-3e45-4e65-aca5-63dbcdf8df0c",
+    "darktrace_include_model_breach_data": true
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-darktrace",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 245,
+    "timestamp": "2022-11-10 16:41:35"
+  }
+}

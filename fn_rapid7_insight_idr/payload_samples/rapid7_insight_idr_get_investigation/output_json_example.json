@@ -1,0 +1,35 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "rapid7_insight_idr_investigation": {
+      "rrn": "rrn:investigation:us2:eeeeeeee-ccc4-4ccc-8eee-eeeeeeeeeeee:investigation:AAAAAAAAAA",
+      "organization_id": "e4463fba-cd64-427c-8fc9-f9e1983f24e1",
+      "title": "1st investigation",
+      "source": "USER",
+      "status": "INVESTIGATING",
+      "priority": "LOW",
+      "last_accessed": "2023-12-01T22:41:02.993Z",
+      "created_time": "2023-11-10T15:55:12.182Z",
+      "disposition": "MALICIOUS",
+      "assignee": null,
+      "first_alert_time": null,
+      "latest_alert_time": null,
+      "responsibility": null,
+      "entity_url": "https://us2.api.insight.rapid7.com/op/6E85858585854#/investigations/rrn:investigation:us2:eeeeeeee-cccc-4c4c-8fc9-f9e1983f24e1:investigation:AAAAAAAAAA"
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "rapid7_insight_idr_rrn": "rrn:investigation:us12:cccccccc-cd64-427c-8fc9-f9e1983f24e1:investigation:3AAAAAAAAAA"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-rapid7-insight-idr",
+    "package_version": "1.0.0",
+    "host": "Book-Pro.local",
+    "execution_time_ms": 229,
+    "timestamp": "2023-12-04 10:24:18"
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "salesforce_account": {
+          "type": "object",
+          "properties": {
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            },
+            "Id": {
+              "type": "string"
+            },
+            "IsDeleted": {
+              "type": "boolean"
+            },
+            "MasterRecordId": {},
+            "Name": {
+              "type": "string"
+            },
+            "Type": {},
+            "ParentId": {},
+            "BillingStreet": {},
+            "BillingCity": {},
+            "BillingState": {},
+            "BillingPostalCode": {},
+            "BillingCountry": {},
+            "BillingLatitude": {},
+            "BillingLongitude": {},
+            "BillingGeocodeAccuracy": {},
+            "BillingAddress": {},
+            "ShippingStreet": {},
+            "ShippingCity": {},
+            "ShippingState": {},
+            "ShippingPostalCode": {},
+            "ShippingCountry": {},
+            "ShippingLatitude": {},
+            "ShippingLongitude": {},
+            "ShippingGeocodeAccuracy": {},
+            "ShippingAddress": {},
+            "Phone": {},
+            "Fax": {},
+            "AccountNumber": {},
+            "Website": {},
+            "PhotoUrl": {},
+            "Sic": {},
+            "Industry": {},
+            "AnnualRevenue": {},
+            "NumberOfEmployees": {},
+            "Ownership": {},
+            "TickerSymbol": {},
+            "Description": {},
+            "Rating": {
+              "type": "string"
+            },
+            "Site": {},
+            "OwnerId": {
+              "type": "string"
+            },
+            "CreatedDate": {
+              "type": "string"
+            },
+            "CreatedById": {
+              "type": "string"
+            },
+            "LastModifiedDate": {
+              "type": "string"
+            },
+            "LastModifiedById": {
+              "type": "string"
+            },
+            "SystemModstamp": {
+              "type": "string"
+            },
+            "LastActivityDate": {},
+            "LastViewedDate": {
+              "type": "string"
+            },
+            "LastReferencedDate": {
+              "type": "string"
+            },
+            "Jigsaw": {},
+            "JigsawCompanyId": {},
+            "AccountSource": {},
+            "DunsNumber": {},
+            "Tradestyle": {},
+            "NaicsCode": {},
+            "NaicsDesc": {},
+            "YearStarted": {},
+            "SicDesc": {},
+            "DandbCompanyId": {},
+            "CustomerPriority__c": {},
+            "SLA__c": {},
+            "Active__c": {},
+            "NumberofLocations__c": {},
+            "UpsellOpportunity__c": {},
+            "SLASerialNumber__c": {},
+            "SLAExpirationDate__c": {}
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "salesforce_account_id": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

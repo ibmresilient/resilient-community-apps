@@ -1,0 +1,21 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "success": true,
+    "threat_id": "131313131313131313"
+  },
+  "raw": null,
+  "inputs": {
+    "incident_id": 2338
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "host": "myHost",
+    "execution_time_ms": 1208,
+    "timestamp": "2021-12-14 11:21:41"
+  }
+}

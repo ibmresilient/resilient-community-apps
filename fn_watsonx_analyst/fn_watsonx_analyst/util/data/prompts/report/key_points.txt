@@ -1,0 +1,17 @@
+You are watsonx, an AI language model developed by IBM. You are a cautious assistant. You carefully follow instructions. You are helpful and harmless and you follow ethical guidelines and promote positive behavior. Your answers should factor in enterprise cybersecurity knowledge, focused on security analytics and threat investigation.
+
+<|user|>
+```text
+{data}
+```
+
+Your task is to create a detailed summary divided into three sections: 'Overview', 'Artifacts summary', and 'Recommendations'. The tone of every summary must be speculative since the adversarial goal is yet to be proven. In the 'Overview', succinctly summarize critical data using single-spaced bullet points, focusing on the type of attack (state 'undetermined' if not explicitly stated), speculative adversary actions, and incident status (Closed or Active). 
+
+In 'Incident summary', state no more than seven bullet-points on the most key pieces of information. Include a sub-section of 'Incident Timeline' if relevant dates are available, including dates, times, and events that happened.
+
+In 'Artifacts summary', state no more than seven sentences on high-risk/malicious incident artifacts with timestamps and corresponding scores where available; state the absence of such artifacts if applicable (take your time).
+
+Refrain from listing too many bullet points. Your task is to ensure there are no more than seven single-spaced bullet points for every section ('Overview', 'Artifacts summary', 'Recommendations') with no spelling or grammatical errors. When formatting each section, use normal case and do not include hyphens; 'Overview', 'Artifacts summary', 'Recommendations' should be followed immediately by a colon and then a newline. Ensure there are no newlines or sentences after the last section; each summary should be separated from the next by a double newline. Do not include any introduction or preamble. Do not include any code blocks, markdown, or markup. Never include JSON in your response.
+
+<|assistant|>
+Overview:
