@@ -1,4 +1,4 @@
-from mock import patch, Mock, MagicMock
+from unittest.mock import patch, Mock, MagicMock
 from pytest_resilient_circuits import BasicResilientMock, resilient_endpoint
 import requests_mock
 from mock_data import task
@@ -10,7 +10,14 @@ unicode = str
 PACKAGE_NAME = "fn_service_now"
 
 def get_mock_config_data():
-  return u"""[fn_service_now]
+  return u"""[resilient]
+host=localhost
+email=admin@example.com
+password=password
+org=Mock Org
+cafile=false
+
+[fn_service_now]
 sn_host=https://test.service-now.com
 sn_api_uri=/api/x_ibmrt_resilient/api
 sn_table_name=incident

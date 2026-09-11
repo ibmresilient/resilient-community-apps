@@ -102,17 +102,14 @@ class TestFnSnowCreateRecord:
           "sn_state": "New"
         }
 
-        ResilientHelper.sn_api_request = MagicMock(return_value=mock_post_response)
-
         mock_add_row_response = {"id": 3}
-
-        ServiceNowRecordsDataTable.add_row = MagicMock(return_value=mock_add_row_response)
 
         mock_rename_task = None
 
-        ResilientHelper.rename_task = MagicMock(return_value=mock_rename_task)
-
-        results = call_fn_snow_create_record_function(circuits_app, inputs)
+        with patch.object(ResilientHelper, "sn_api_request", MagicMock(return_value=mock_post_response)), \
+             patch.object(ServiceNowRecordsDataTable, "add_row", MagicMock(return_value=mock_add_row_response)), \
+             patch.object(ResilientHelper, "rename_task", MagicMock(return_value=mock_rename_task)):
+            results = call_fn_snow_create_record_function(circuits_app, inputs)
 
         del results["sn_time_created"]
         results["res_link"] = 'https://example.com/#incidents/3003?task_id=4004'

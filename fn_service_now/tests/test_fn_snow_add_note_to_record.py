@@ -7,6 +7,7 @@ from resilient_circuits.util import get_function_definition
 from resilient_circuits import SubmitTestFunction, FunctionResult
 from sn_test_helper import *
 from copy import deepcopy
+from unittest.mock import MagicMock, patch
 from fn_service_now.util.resilient_helper import ResilientHelper
 
 FUNCTION_NAME = "fn_snow_add_note_to_record"
@@ -73,8 +74,8 @@ class TestFnSnowAddNoteToRecord:
 
         mock_response = {"sn_ref_id": "INC0010459"}
 
-        ResilientHelper.sn_api_request = MagicMock(return_value=mock_response)
+        with patch.object(ResilientHelper, "sn_api_request", MagicMock(return_value=mock_response)):
+            results = call_fn_snow_add_note_to_record_function(circuits_app, inputs)
 
-        results = call_fn_snow_add_note_to_record_function(circuits_app, inputs)
         for key in expected_results:
           assert(expected_results[key] == results[key])

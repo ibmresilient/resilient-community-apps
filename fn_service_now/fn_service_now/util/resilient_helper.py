@@ -88,19 +88,27 @@ class ResilientHelper(object):
         self._sn_host = self._get_config_option("sn_host", placeholder="https://instance.service-now.com")
 
         self._sn_table_name = str(self._get_config_option("sn_table_name", optional=True, placeholder="incident"))
-        self._sn_username = str(self._get_config_option("sn_username", placeholder="<ServiceNow Username>"))
-        # Handle password surrounded by ' or "
-        pwd = str(self._get_config_option("sn_password", placeholder="<ServiceNow Password>"))
-        if (pwd.startswith("'") and pwd.endswith("'")) or (pwd.startswith('"') and pwd.endswith('"')):
-            self._sn_password = pwd[1:-1]
+        self._sn_api_key = self._get_config_option("sn_api_key", optional=True)
+
+        if self._sn_api_key:
+            self._sn_username = None
+            self._sn_password = None
+            self._sn_api_auth = None
+            self._auth_mode = "api_key"
         else:
-            self._sn_password = pwd
+            self._sn_username = str(self._get_config_option("sn_username", placeholder="<ServiceNow Username>"))
+            # Handle password surrounded by ' or "
+            pwd = str(self._get_config_option("sn_password", placeholder="<ServiceNow Password>"))
+            if (pwd.startswith("'") and pwd.endswith("'")) or (pwd.startswith('"') and pwd.endswith('"')):
+                self._sn_password = pwd[1:-1]
+            else:
+                self._sn_password = pwd
+            self._sn_api_auth = (self.username, self._sn_password)
+            self._auth_mode = "basic"
 
         # https://instance.service-now.com/api/x_ibmrt_resilient/api
         self._sn_api_uri = self._get_config_option("sn_api_uri")
         self._base_api_url = urljoin(self.host, self.api_uri)
-
-        self._sn_api_auth = (self.username, self._sn_password)
 
         self._cp4s_prefix = self._get_config_option("cp4s_cases_prefix", placeholder=CP4S_CASES_REST_PREFIX, optional=True)
 
@@ -506,21 +514,28 @@ class ResilientHelper(object):
         if method not in SUPPORTED_METHODS:
             raise ValueError(f"{method} is not a supported ServiceNow API Request. Supported methods are: {SUPPORTED_METHODS}")
 
-        headers = self.headers if headers is None else headers
+        headers = self.headers.copy() if headers is None else headers.copy()
         url = f"{self._base_api_url}{endpoint}"
+
+        if self._auth_mode == "api_key":
+            headers["x-sn-apikey"] = self._sn_api_key
 
         if callback is None:
             callback = default_callback_for_sn_request
 
-        res = self.rc.execute(
-            method=method,
-            url=url,
-            auth=self._sn_api_auth,
-            headers=headers,
-            params=params,
-            data=json.dumps(data),
-            callback=callback
-        )
+        execute_kwargs = {
+            "method": method,
+            "url": url,
+            "headers": headers,
+            "params": params,
+            "data": json.dumps(data),
+            "callback": callback
+        }
+
+        if self._auth_mode == "basic":
+            execute_kwargs["auth"] = self._sn_api_auth
+
+        res = self.rc.execute(**execute_kwargs)
 
         LOG.info("SN REQUEST:\nmethod: %s\nurl: %s\nbody: %s",
                  res.request.method,

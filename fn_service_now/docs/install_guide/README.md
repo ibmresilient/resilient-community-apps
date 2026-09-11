@@ -2,16 +2,16 @@
 
 
 ## Prerequisites
-* ServiceNow Instance with ITSM enabled and running `Xanadu` or newer releases
+* ServiceNow Instance with ITSM enabled and running `Yokohama` or newer releases
 * Access to the `Incident Table` in ServiceNow
 * A user in ServiceNow with an `admin` role
 * IBM Cloud Pak for Security `>= 1.10.18` *or* IBM SOAR `>= v51.0.0.0`
 * An App Host >= `v1.15.0` or an Integrations Server running `resilient-circuits >= v51.0.0.0`.
-  * To setup an App Host see: [ibm.biz/res-app-host-setup](https://ibm.biz/res-app-host-setup)
-  * To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://ibm.biz/res-int-server-guide)
+  * To setup an App Host see: [ibm.biz/res-app-host-setup](https://www.ibm.com/docs/en/sqsp/51.0.0?topic=overview-install-app-host)
+  * To setup an Integration Server see: [ibm.biz/res-int-server-guide](https://www.ibm.com/docs/en/sqsp/51.0.0?topic=isg-introduction)
 * If SOAR instance is not publicly accessible (behind a firewall), a `ServiceNow MID Server` is required
 * If you want to integrate with ServiceNow Security Incident Response (SIR), make sure to install it first
-* `fn_service_now >= v2.3.0` installed, which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
+* `fn_service_now >= v2.4.0` installed, which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
 ---
 
 ## Step 1: *Install ServiceNow IBM SOAR App*
@@ -148,9 +148,22 @@ The following table describes the settings you need to configure the App. If usi
 | sn_host | Yes | Host to access your ServiceNow Instance, such as `https://instance.service-now.com` |
 | sn_api_uri | Yes | URI for the custom APIs that are exposed by your ServiceNow Instance. Default is: `/api/x_ibmrt_resilient/api`. If you decide to implement your own endpoints, you would change this URI. |
 | sn_table_name | Yes | Name of the ServiceNow Table. It is where Incidents and Tasks from SOAR are created and synced. The app supports the Incident table and Security Incident table in ServiceNow (only one table is supported at a time). |
-| sn_username | Yes | The **User ID** from **Step 2.** |
-| sn_password | Yes | The **Password** from **Step 2.** |
+| sn_username | No | The **User ID** from **Step 2.** Required when authenticating with username/password. |
+| sn_password | No | The **Password** from **Step 2.** Required when authenticating with username/password. |
+| sn_api_key | No | Inbound REST API key for ServiceNow. If configured, it takes precedence over `sn_username` and `sn_password`. |
 | render_rich_text | No | If **True** will send rich HTML notes from SOAR to ServiceNow. Should be set to False or omitted if `glide.ui.security.allow_codetag` is not enabled on your ServiceNow system. |
+
+> **Note:** You must configure either `sn_api_key` **or** both `sn_username` and `sn_password`. If `sn_api_key` is set, it takes precedence over `sn_username` and `sn_password`.
+>
+> **ServiceNow API authentication profiles:** When an Inbound Authentication Profile is linked to an API Access Policy in ServiceNow, it acts as an explicit allow-list for that API. If the policy includes only an API key profile, other authentication methods such as basic authentication are blocked for that API. To support both `sn_api_key` and `sn_username` / `sn_password`, configure the API Access Policy to include both the API key authentication profile and a standard/basic authentication profile.
+>
+> **ServiceNow API key authentication:** Configuring `sn_api_key` in the app is only one part of the setup. In ServiceNow, you must also create and configure the inbound REST API key authentication objects required for the target API, including:
+> - an API key
+> - an inbound authentication profile
+> - an API access policy
+> - a link between the inbound authentication profile and the API access policy
+>
+> Without that ServiceNow-side configuration, requests authenticated with `sn_api_key` may fail with authentication errors.
 
 
 ### Custom Layouts

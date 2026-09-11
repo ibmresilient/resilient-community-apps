@@ -50,10 +50,10 @@ class TestFnSnowLookupSysid:
     def test_success(self, circuits_app, inputs, expected_results):
         """ Test calling with sample values for the parameters """
 
-        mock_response = MockedResponse(200, json.dumps({"result": {"sys_id": "19JHGF7686GFDf6789"}})) 
+        mock_response = MockedResponse(200, json.dumps({"result": {"sys_id": "19JHGF7686GFDf6789"}}))
 
-        ResilientHelper.sn_api_request = MagicMock(return_value=mock_response)
+        with patch.object(ResilientHelper, "sn_api_request", MagicMock(return_value=mock_response)):
+            results = call_fn_snow_lookup_sysid_function(circuits_app, inputs)
 
-        results = call_fn_snow_lookup_sysid_function(circuits_app, inputs)
         for key in expected_results:
           assert(expected_results[key] == results[key])

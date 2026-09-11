@@ -60,12 +60,16 @@ def selftest_function(opts):
 
     # NOTE: indentation on these matters because the whitespace in the multi-line string
     # is included with the logging
+    auth_mode = getattr(res_helper, "_auth_mode", "basic")
+    auth_config = f"sn_username: {res_helper.username}" if auth_mode == "basic" else "sn_api_key: configured"
+
     err_reason_msg +=f"""
         ---------
         Current Configs in app.config file:
         ---------
         sn_host: {res_helper.host}
-        sn_username: {res_helper.username}
+        {auth_config}
+        auth_mode: {auth_mode}
         sn_table_name: {res_helper.table_name}
         sn_api_uri: {res_helper.api_uri}
         ---------"""

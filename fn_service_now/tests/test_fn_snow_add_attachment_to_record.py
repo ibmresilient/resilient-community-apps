@@ -56,8 +56,8 @@ class TestFnSnowAddAttachmentToRecord:
 
         mock_response = {'attachment_id': 'c1ea807ddb82230044ccd426ca961937', 'sn_ref_id': 'INC0010459'}
 
-        ResilientHelper.sn_api_request = MagicMock(return_value=mock_response)
+        with patch.object(ResilientHelper, "sn_api_request", MagicMock(return_value=mock_response)):
+            results = call_fn_snow_add_attachment_to_record_function(circuits_app, inputs)
 
-        results = call_fn_snow_add_attachment_to_record_function(circuits_app, inputs)
         for key in expected_results:
             assert(expected_results[key] == results[key])

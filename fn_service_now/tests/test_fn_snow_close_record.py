@@ -95,8 +95,8 @@ class TestFnSnowCloseRecord:
 
         mock_response = {"sn_ref_id": "INC123456", "sn_state": "Closed"}
 
-        ResilientHelper.sn_api_request = MagicMock(return_value=mock_response)
+        with patch.object(ResilientHelper, "sn_api_request", MagicMock(return_value=mock_response)):
+            results = call_fn_snow_close_record_function(circuits_app, inputs)
 
-        results = call_fn_snow_close_record_function(circuits_app, inputs)
         for key in expected_results:
           assert(expected_results[key] == results[key])

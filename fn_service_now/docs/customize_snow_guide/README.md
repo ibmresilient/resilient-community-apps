@@ -4,10 +4,10 @@
 
 
 ## Prerequisites
-* SOAR Platform updated to at least `v31.0.0` or Cloud Pak for Security running at least `v1.9.0`.
-* App Host `>= 1.6.0` or an Integration Server setup with `resilient-circuits >= 31.0.0` installed.
+* SOAR Platform updated to at least `v51.0.0` or Cloud Pak for Security running at least `v1.10.18`.
+* App Host `>= 1.15.10.0` or an Integration Server setup with `resilient-circuits >= 51.0.0` installed.
 * All steps in the **[Installation Guide](../install_guide)** complete.
-* ServiceNow Instance with ITSM enabled and running a `Kingston` or later release.
+* ServiceNow Instance with ITSM enabled and running a `Yokohama` or later release.
 * ServiceNow user with an `admin` role.
 * A basic understanding of **IBM SOAR Workflows**.
 * A basic understanding of **ServiceNow Workflows**.
