@@ -1,0 +1,41 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/schedules/tester1324",
+    "name": "tester1324",
+    "type": "Microsoft.Automation/AutomationAccounts/Schedules",
+    "properties": {
+      "description": "something",
+      "startTime": "2023-08-25T08:40:00+00:00",
+      "startTimeOffsetMinutes": 0.0,
+      "expiryTime": "2023-08-25T08:40:00+00:00",
+      "expiryTimeOffsetMinutes": 0.0,
+      "isEnabled": true,
+      "nextRun": "2023-08-25T08:40:00+00:00",
+      "nextRunOffsetMinutes": 0.0,
+      "interval": null,
+      "frequency": "OneTime",
+      "creationTime": "2023-08-24T15:31:44.2666667+00:00",
+      "lastModifiedTime": "2023-08-24T15:31:44.2666667+00:00",
+      "timeZone": "Etc/UTC",
+      "advancedSchedule": null
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "input_parameters": "{'name': 'tester1324', 'properties': {'startTime': 1692967200000, 'frequency': 'OneTime', 'description': 'something'}}",
+    "account_name": "automation1",
+    "resource_group_name": "demoassets",
+    "schedule_name": "tester1324"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-azure-automation-utilities",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 30624,
+    "timestamp": "2023-08-24 11:31:44"
+  }
+}

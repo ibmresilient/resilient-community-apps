@@ -1,0 +1,23 @@
+{
+  "response": {
+    "version": "v1.2.0",
+    "metadata": {
+      "links": {
+        "self": "https://api.amp.cisco.com/v1/file_lists/aaaaaaaa-bbbb-1111-3333-6695009330bb/files/abcdefghi01234567"
+      }
+    },
+    "data": {
+      "sha256": "00fc4aba3a120ba1f6c3453ea8faa4ca7167fabd30ac297eb59905d7a879e352",
+      "source": "Created by entering SHA-256 via Public api.",
+      "links": {
+        "file_list": "https://api.amp.cisco.com/v1/file_lists/aaaaaaaa-bbbb-1111-3333-6695009330bb"
+      }
+    }
+  },
+  "query_execution_time": "2024-06-03 16:35:14",
+  "input_params": {
+    "file_list_guid": "aaaaaaaa-bbbb-1111-3333-6695009330bb",
+    "file_sha256": "abcdefg123457",
+    "description": "Empty description."
+  }
+}

@@ -1,0 +1,508 @@
+# -*- coding: utf-8 -*-
+# (c) Copyright IBM Corp. 2010, 2023. All Rights Reserved.
+
+from logging import getLogger
+from resilient_lib import IntegrationError
+import time
+
+PACKAGE_NAME = "fn_azure_automation_utilities"
+STATUS_CODE_200 = 200
+STATUS_CODE_201 = 201
+API_VERSION_2019 = "api-version=2019-06-01"
+API_VERSION_2021 = "api-version=2021-06-22"
+
+LOG = getLogger(__name__)
+
+def get_azure_client(rc, options: dict, resource_group_name: str = None, account_name: str = None):
+    """
+    Create Azure Client connection.
+    :param rc: RequestCommon object
+    :type rc: Object
+    :param options: Dictionary of app.config parameters
+    :type options: dict
+    :param resource_group_name: Name of Azure Automation resource group
+    :type resource_group_name: str
+    :param account_name: Name of Azure Automation account
+    :type account_name: str
+    :return: Azure client object
+    :rtype: object
+    """
+    return AzureClient(
+        rc,
+        options.get("client_id"),
+        options.get("client_secret"),
+        options.get("tenant_id"),
+        options.get("subscription_id"),
+        options.get("scope"),
+        rc.get_proxies(),
+        resource_group_name,
+        account_name,
+        refresh_token=options.get("refresh_token")
+    )
+
+# Classes for Exception Handling
+class RunPlaybookRequestError(Exception):
+    def __init__(self, *args, **kwargs):
+        self.msg = args
+        LOG.exception(self.msg)
+
+class AzureRunJobFailed(Exception):
+    def __init__(self, *args, **kwargs):
+        self.msg = args
+        LOG.exception(self.msg)
+
+class AzureClient(object):
+    """ Class for interacting with Azure Automation API """
+
+    def __init__(self, rc, client_id: str, client_secret: str, tenant_id: str, subscription_id: str, scope: str,
+                 proxies: dict, resource_group_name: str = None, automation_account_name: str = None,
+                 refresh_token: str = None):
+        """
+        Constructor for Azure client
+        :param rc: RequestsCommon object
+        :param client_id: Client id credential
+        :type client_id: str
+        :param: client_secret: Client secret key
+        :type client_secret: str
+        :param: tenant_id: Azure AD tenant ID
+        :type tenant_id: str
+        :param: subscription_id: Azure subscription ID
+        :type subscription_id: str
+        :param scope: Permissions the access token needs
+        :type scope: str
+        :param proxies: Dictionary of proxies
+        :type proxies: dict
+        :param resource_group_name: Name of Azure Automation resource group
+        :type resource_group_name: str | None
+        :param automation_account_name: Name of Azure Automation account
+        :type automation_account_name: str | None
+        :param token: Token for request to Azure Automation
+        :type token: None
+        """
+        self.rc = rc
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.tenant_id = tenant_id
+        self.subscription_id = subscription_id
+        self.scope = scope
+        self.resource_group_name = resource_group_name
+        self.automation_account_name = automation_account_name
+        self.proxies = proxies
+        self.refresh_token = refresh_token
+        self.token = self.get_token()
+        self.header = {"Authorization": f"Bearer {self.token}",
+                       "Content-Type": "application/json"}
+        self.base_url = f"https://management.azure.com/subscriptions/{self.subscription_id}/resourceGroups/{self.resource_group_name}/providers/Microsoft.Automation/automationAccounts/{self.automation_account_name}"
+
+    def get_token(self):
+        """
+        Generate token for communication with Azure Automation
+        :return token: validation token
+        :rtype token: str
+        :raises: :class: `AzureTokenRequestError`, :class: `HTTPError`
+        """
+        url = f'https://login.microsoftonline.com/{self.tenant_id}/oauth2/v2.0/token'
+        payload = {
+            'client_id': self.client_id,
+            "scope": self.scope,
+            "client_secret": self.client_secret,
+            "refresh_token": self.refresh_token,
+            'grant_type': 'refresh_token'
+        }
+        try:
+            response = self.rc.execute("POST", url, data=payload)
+            response.raise_for_status()
+            if response.status_code == STATUS_CODE_200:
+                response = response.json()
+                self.token = response['access_token']
+                return response['access_token']
+
+        except Exception as err:
+            raise IntegrationError(str(err))
+
+    def run_runbook(self, runbook_name: str, job_name: int = int(round(time.time() * 1000)), runbook_parameters: dict = {}) -> dict:
+        """
+        Execute Runbook from Azure Automation, have to pass and exist in Azure Automation the runbook parameter
+        :param runbook_name: Runbook name from Azure Automation
+        :type runbook_name: str
+        :param job_name: Job name autogenerated, used for Azure Automation
+        :type job_name: int
+        :param runbook_parameters: dictionary to be parsed from within Azure Runbook
+        :type runbook_parameters: dict
+        :return response_json: It's the response from Azure automation
+        :rtype response_json: dict
+        :raises: ExpiredAuthenticationTokenError, RunPlaybookAzureError
+        """
+        url = f'{self.base_url}/jobs/{job_name}?{API_VERSION_2019}'
+        payload = {
+            "properties": {
+                "runbook": {
+                    "name": runbook_name
+                },
+                "runOn": ""
+            }
+        }
+        if runbook_parameters:
+            LOG.info(f"Executing Runbook '{runbook_name}' with Inputs: {runbook_parameters}")
+            # Add parameters to the payload if parameters are given
+            payload["properties"]["parameters"] = runbook_parameters
+        else:
+            LOG.info(f"Executing Runbook '{runbook_name}' with NO inputs")
+
+        response = self.rc.execute("PUT", url, headers=self.header, json=payload)
+        if response.status_code in [STATUS_CODE_200, STATUS_CODE_201]:
+            LOG.info(f"Runbook '{runbook_name}' successfully executed.")
+            return response.json()
+        else:
+            LOG.exception(f"Runbook '{runbook_name}' execution error.")
+            raise RunPlaybookRequestError(f"Runbook '{runbook_name}' execution error.",
+                                            {'responseCode': response.status_code,
+                                            'responseContent': response.text})
+
+    def get_job(self, job_name: str):
+        """
+        Get the Azure run job.
+        :param job_name: The name given to the run job.
+        :type job_name: str
+        :return: Get response to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/jobs/{job_name}?{API_VERSION_2019}"
+        return self.rc.execute("GET", url, headers=self.header).json()
+
+    def get_job_results(self, job_name: str):
+        """
+        Get the output of a Azure Automation job
+        :param job_name: The name given to the run job.
+        :type job_name: str
+        :return response: String response of the output of the Azure Automation job
+        :return type: str
+        """
+        url = f"{self.base_url}/jobs/{job_name}/output?{API_VERSION_2019}"
+        header = self.header
+        header["Content-Type"] = "text/plain"
+        response = self.rc.execute("GET", url, headers=header).content
+        return response.decode("utf-8")
+
+    def get_job_final_status(self, job_name: str, time_to_wait: int = 30):
+        """
+        Get the final status of an Azure run job
+        :param job_name: The name given to the run job.
+        :type job_name: str
+        :param time_to_wait: The time in seconds to wait before checking status of the job.
+        :type time_to_wait: int
+        """
+
+        # Wait the given amount of seconds then get the job status.
+        # If the job status equals Completed then break the loop
+        while True:
+            time.sleep(time_to_wait)
+            job_status = self.get_job(job_name).get("properties", {}).get("status")
+            if job_status == "Completed":
+                return job_status
+            if job_status == "Failed":
+                raise AzureRunJobFailed(f"Run job: {job_name} failed.")
+
+    def create_account(self, payload: dict, update: bool = False):
+        """
+        Create or update an Azure automation account.
+        :param payload: Payload to send to azure that contains automation account properties.
+        :type payload: dict
+        :param update: True if the account is being updated
+        :type update: boolean
+        :return: Response from the PUT request to create Azure automation account.
+        :return type: dict
+
+        Example payload:
+        {
+            "name": "testAutomationAccount",
+            "location": "eastus",
+            "tags": {
+                "client": "sentinel"
+            },
+            "properties": {
+                "publicNetworkAccess": True,
+                "disableLocalAuth": False,
+                "sku": {
+                    "name": "Basic",
+                    "family": None,
+                    "capacity": None
+                }
+            }
+        }
+        """
+        url = f"{self.base_url}?{API_VERSION_2021}"
+        if update:
+            return self.rc.execute("PATCH", url, headers=self.header, json=payload).json()
+        else:
+            return self.rc.execute("PUT", url, headers=self.header, json=payload).json()
+
+    def delete_acount(self):
+        """
+        Delete an Azure automation account
+        :return: Response from Delete request to delete an Azure automation account.
+        :return type: request object
+        """
+        url = f"{self.base_url}?{API_VERSION_2021}"
+        return self.rc.execute("Delete", url, headers={"Authorization": self.header.get("Authorization")})
+
+    def get_account(self):
+        """
+        Get an Azure automation accounts information.
+        :return: Response from GET request to get an Azure automation account
+        :return type: dict
+        """
+        url = f"{self.base_url}?{API_VERSION_2021}"
+        return self.rc.execute("GET", url, headers=self.header).json()
+
+    def list_accounts(self):
+        """
+        Lists the Automation Accounts within an Azure subscription
+        :return: Response from GET request to list Azure automation accounts
+        :return type: dict
+        """
+        if self.resource_group_name: # If resource group name is given, then list accounts in that resource group
+            url = f"https://management.azure.com/subscriptions/{self.subscription_id}/resourceGroups/{self.resource_group_name}/providers/Microsoft.Automation/automationAccounts?{API_VERSION_2021}"
+        else:# If resource group is ot given, then list all accounts
+            url = f"https://management.azure.com/subscriptions/{self.subscription_id}/providers/Microsoft.Automation/automationAccounts?{API_VERSION_2021}"
+        return self.rc.execute("GET", url, headers=self.header).json()
+
+    def get_module_activity(self, moduleName: str, activityName: str):
+        """
+        Retrieve the activity in the module identified by module name and activity name.
+        :param moduleName: The name of module.
+        :type moduleName: str
+        :param activityName: The name of activity.
+        :type activityName: str
+        :return: Response from GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/modules/{moduleName}/activities/{activityName}?{API_VERSION_2019}"
+        return self.rc.execute("GET", url, headers=self.header).json()
+
+    def list_module_activities(self, moduleName: str):
+        """
+        Retrieve a list of activities in the module identified by module name.
+        :param moduleName: The name of module.
+        :type moduleName: str
+        :return: Response from GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/modules/{moduleName}/activities?{API_VERSION_2019}"
+        return self.rc.execute("GET", url, headers=self.header).json()
+
+    def get_runbook(self, runbook_name: str):
+        """
+        Retrieve the runbook identified by runbook name.
+        :param runbook_name: Name of an Azure runbook
+        :type runbook_name: str
+        :return: Response to GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/runbooks/{runbook_name}?{API_VERSION_2019}"
+        return self.rc.execute("GET", url, headers=self.header).json()
+
+    def list_runbooks_by_automation_account(self):
+        """
+        Retrieve a list of runbooks on the given automation account.
+        :return: Response to GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/runbooks?{API_VERSION_2019}"
+        return self.rc.execute("GET", url, headers=self.header).json()
+
+    def delete_runbook(self, runbook_name: str):
+        """
+        Delete given runbook
+        :param runbook_name: Name of the runbook
+        :type runbook_name: str
+        :return: Response to Delete request to Azure
+        :return type: object
+        """
+        url = f"{self.base_url}/runbooks/{runbook_name}?{API_VERSION_2019}"
+        return self.rc.execute("DELETE", url, headers={"Authorization": self.header.get("Authorization")})
+
+    def list_jobs_by_automation_account(self):
+        """
+        Retrieve a list of jobs.
+        :return: Response from GET request to Azure
+        :return rtype: dict
+        """
+        url = f"{self.base_url}/jobs?{API_VERSION_2019}"
+        header = self.header
+        header["Content-Type"] = 'application/json'
+        return self.rc.execute("GET", url, headers=header).json()
+
+    def get_agent_registration_information(self):
+        """
+        Retrieve the automation agent registration information.
+        :return: Response from GET request to Azure
+        :return type: Dict
+        """
+        url = f"{self.base_url}/agentRegistrationInformation?{API_VERSION_2019}"
+        return self.rc.execute("GET", url, headers=self.header).json()
+
+    def regenerate_account_registration_key(self, payload):
+        """
+        Regenerate a primary or secondary agent registration key
+        :param payload: Dictionary that sets the agent registration key name
+        :type payload: Dict
+        :return: Response from POST request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/agentRegistrationInformation/regenerateKey?{API_VERSION_2019}"
+        return self.rc.execute("POST", url, json=payload, headers=self.header).json()
+
+    def create_credential(self, credential_name: str, payload: dict, update: bool = False):
+        """
+        Create or update a credential.
+        :param credential_name: Name of the Azure automation credential
+        :type credential_name: str
+        :param payload: The credentials properties
+        :type payload: dict
+        :param update: Update the credential or not
+        :type update: boolean
+        :return: Response from PUT request to Azure
+        :return type: dict
+
+        Example payload:
+        {
+            "name": "myCredential",
+            "properties": {
+                "userName": "username1",
+                "password": "<password>",
+                "description": "my description goes here"
+            }
+        }
+        """
+        url = f"{self.base_url}/credentials/{credential_name}?{API_VERSION_2019}"
+        if update:
+            return self.rc.execute("PATCH", url, json=payload, headers=self.header).json()
+        else:
+            return self.rc.execute("PUT", url, json=payload, headers=self.header).json()
+
+    def delete_credential(self, credential_name: str):
+        """
+        Delete a credential.
+         :param credential_name: Name of the Azure automation credential
+        :type credential_name: str
+        :return: Response from DELETE request to Azure
+        :return type: object
+        """
+        url = f"{self.base_url}/credentials/{credential_name}?{API_VERSION_2019}"
+        return self.rc.execute("DELETE", url, headers={"Authorization": self.header.get("Authorization")})
+
+    def get_credential(self, credential_name: str):
+        """
+        Get a credential.
+        :param credential_name: Name of the Azure automation credential
+        :type credential_name: str
+        :return: Response from GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/credentials/{credential_name}?{API_VERSION_2019}"
+        return self.rc.execute("GET", url, headers=self.header).json()
+
+    def list_credentials_by_automation_account(self):
+        """
+        Retrieve a list of credentials.
+        :return: Response from GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/credentials?{API_VERSION_2019}"
+        return self.rc.execute("GET", url, headers=self.header).json()
+
+    def create_schedule(self, schedule_name: str, payload: dict, update: bool = False):
+        """
+        Create or update a schedule.
+        :param schedule_name: Name of the Azure automation schedule
+        :type schedule_name: str
+        :param payload: Properties of the schedule
+        :type payload: dict
+        :param update: Update the schedule or not
+        :type update: boolean
+        :return: Response from PUT request to Azure
+        :return type: dict
+
+        Example payload:
+        {
+            "name": "mySchedule",
+            "properties": {
+                "description": "my description of schedule goes here",
+                "startTime": "2017-03-27T17:28:57.2494819Z",
+                "expiryTime": "2017-04-01T17:28:57.2494819Z",
+                "interval": 1,
+                "frequency": "Hour",
+                "advancedSchedule": {}
+            }
+        }
+        """
+        url = f"{self.base_url}/schedules/{schedule_name}?{API_VERSION_2019}"
+        if update:
+            return self.rc.execute("PATCH", url, json=payload, headers=self.header).json()
+        else:
+            return self.rc.execute("PUT", url, json=payload, headers=self.header).json()
+
+    def delete_schedule(self, schedule_name: str):
+        """
+        Delete the schedule identified by schedule name.
+        :param schedule_name: Name of the Azure automation schedule
+        :type schedule_name: str
+        :return: Response from DELETE request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/schedules/{schedule_name}?{API_VERSION_2019}"
+        return self.rc.execute("Delete", url, headers={"Authorization": self.header.get("Authorization")})
+
+    def get_schedule(self, schedule_name: str):
+        """
+        Retrieve the schedule identified by schedule name.
+        :param schedule_name: Name of the Azure automation schedule
+        :type schedule_name: str
+        :return: Response from GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/schedules/{schedule_name}?{API_VERSION_2019}"
+        return self.rc.execute("GET", url, headers=self.header).json()
+
+    def list_schedule_by_automation_account(self):
+        """
+        Retrieve a list of schedules.
+        :return: Response from GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/schedules?{API_VERSION_2019}"
+        return self.rc.execute("GET", url, headers=self.header).json()
+
+    def get_node_report(self, node_id: str, report_id: str):
+        """
+        Retrieve the Dsc node report data by node id and report id.
+        :param node_id: The Dsc node id.
+        :type node_id: str
+        :param report_id: The report id.
+        :type report_id: str
+        :return: Response from GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/nodes/{node_id}/reports/{report_id}?{API_VERSION_2019}"
+        return self.rc.execute("GET", url, headers=self.header).json()
+
+    def list_node_report_by_node(self, node_id: str):
+        """
+        Retrieve the Dsc node report list by node id.
+        :param node_id: The Dsc node id.
+        :type node_id: str
+        :return: Response from GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/nodes/{node_id}/reports?{API_VERSION_2019}"
+        return self.rc.execute("GET", url, headers=self.header).json()
+
+    def list_statistics_by_automation_account(self):
+        """
+        Retrieve the statistics for the account.
+        :return: Response from GET request to Azure
+        :return type: dict
+        """
+        url = f"{self.base_url}/statistics?{API_VERSION_2021}"
+        return self.rc.execute("GET", url, headers=self.header).json()

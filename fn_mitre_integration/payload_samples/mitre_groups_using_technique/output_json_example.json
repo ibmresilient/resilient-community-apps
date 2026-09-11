@@ -1,0 +1,95 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "mitre_groups": [
+      {
+        "technique": "T1087",
+        "name": "Aquatic Panda",
+        "id": "G0143",
+        "ref": "https://attack.mitre.org/groups/G0143",
+        "description": "<a href=\"https://attack.mitre.org/groups/G0143\">Aquatic Panda</a> is a suspected China-based threat group with a dual mission of intelligence collection and industrial espionage. Active since at least May 2020, <a href=\"https://attack.mitre.org/groups/G0143\">Aquatic Panda</a> has primarily targeted entities in the telecommunications, technology, and government sectors.(Citation: CrowdStrike AQUATIC PANDA December 2021)",
+        "aliases": [
+          "Aquatic Panda"
+        ]
+      },
+      {
+        "technique": "T1087",
+        "name": "UNC2452",
+        "id": "G0118",
+        "ref": "https://attack.mitre.org/groups/G0118",
+        "description": "<a href=\"https://attack.mitre.org/groups/G0118\">UNC2452</a> is a suspected Russian state-sponsored threat group responsible for the 2020 SolarWinds software supply chain intrusion.(Citation: FireEye SUNBURST Backdoor December 2020) Victims of this campaign include government, consulting, technology, telecom, and other organizations in North America, Europe, Asia, and the Middle East.(Citation: FireEye SUNBURST Backdoor December 2020) The group also compromised at least one think tank by late 2019.(Citation: Volexity SolarWinds)",
+        "aliases": [
+          "UNC2452",
+          "NOBELIUM",
+          "StellarParticle",
+          "Dark Halo"
+        ]
+      },
+      {
+        "technique": "T1087",
+        "name": "APT32",
+        "id": "G0050",
+        "ref": "https://attack.mitre.org/groups/G0050",
+        "description": "<a href=\"https://attack.mitre.org/groups/G0050\">APT32</a> is a suspected Vietnam-based threat group that has been active since at least 2014. The group has targeted multiple private sector industries as well as foreign governments, dissidents, and journalists with a strong focus on Southeast Asian countries like Vietnam, the Philippines, Laos, and Cambodia. They have extensively used strategic web compromises to compromise victims.(Citation: FireEye APT32 May 2017)(Citation: Volexity OceanLotus Nov 2017)(Citation: ESET OceanLotus)",
+        "aliases": [
+          "APT32",
+          "SeaLotus",
+          "OceanLotus",
+          "APT-C-00",
+          "Canvas Cyclone",
+          "BISMUTH"
+        ]
+      },
+      {
+        "technique": "T1087",
+        "name": "FIN13",
+        "id": "G1016",
+        "ref": "https://attack.mitre.org/groups/G1016",
+        "description": "<a href=\"https://attack.mitre.org/groups/G1016\">FIN13</a> is a financially motivated cyber threat group that has targeted the financial, retail, and hospitality industries in Mexico and Latin America, as early as 2016. <a href=\"https://attack.mitre.org/groups/G1016\">FIN13</a> achieves its objectives by stealing intellectual property, financial data, mergers and acquisition information, or PII.(Citation: Mandiant FIN13 Aug 2022)(Citation: Sygnia Elephant Beetle Jan 2022)",
+        "aliases": [
+          "FIN13",
+          "Elephant Beetle"
+        ]
+      },
+      {
+        "technique": "T1087",
+        "name": "APT29",
+        "id": "G0016",
+        "ref": "https://attack.mitre.org/groups/G0016",
+        "description": "<a href=\"https://attack.mitre.org/groups/G0016\">APT29</a> is threat group that has been attributed to Russia's Foreign Intelligence Service (SVR).(Citation: White House Imposing Costs RU Gov April 2021)(Citation: UK Gov Malign RIS Activity April 2021) They have operated since at least 2008, often targeting government networks in Europe and NATO member countries, research institutes, and think tanks. <a href=\"https://attack.mitre.org/groups/G0016\">APT29</a> reportedly compromised the Democratic National Committee starting in the summer of 2015.(Citation: F-Secure The Dukes)(Citation: GRIZZLY STEPPE JAR)(Citation: Crowdstrike DNC June 2016)(Citation: UK Gov UK Exposes Russia SolarWinds April 2021)\n\nIn April 2021, the US and UK governments attributed the <a href=\"https://attack.mitre.org/campaigns/C0024\">SolarWinds Compromise</a> to the SVR; public statements included citations to <a href=\"https://attack.mitre.org/groups/G0016\">APT29</a>, Cozy Bear, and The Dukes.(Citation: NSA Joint Advisory SVR SolarWinds April 2021)(Citation: UK NSCS Russia SolarWinds April 2021) Industry reporting also referred to the actors involved in this campaign as UNC2452, NOBELIUM, StellarParticle, Dark Halo, and SolarStorm.(Citation: FireEye SUNBURST Backdoor December 2020)(Citation: MSTIC NOBELIUM Mar 2021)(Citation: CrowdStrike SUNSPOT Implant January 2021)(Citation: Volexity SolarWinds)(Citation: Cybersecurity Advisory SVR TTP May 2021)(Citation: Unit 42 SolarStorm December 2020)",
+        "aliases": [
+          "APT29",
+          "IRON RITUAL",
+          "IRON HEMLOCK",
+          "NobleBaron",
+          "Dark Halo",
+          "NOBELIUM",
+          "UNC2452",
+          "YTTRIUM",
+          "The Dukes",
+          "Cozy Bear",
+          "CozyDuke",
+          "SolarStorm",
+          "Blue Kitsune",
+          "UNC3524",
+          "Midnight Blizzard"
+        ]
+      }
+    ]
+  },
+  "raw": "",
+  "inputs": {
+    "mitre_technique_name": null,
+    "mitre_technique_id": "T1087"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mitre-integration",
+    "package_version": "2.2.0",
+    "host": "my.app.host",
+    "execution_time_ms": 83598,
+    "timestamp": "2025-01-16 08:17:03"
+  }
+}

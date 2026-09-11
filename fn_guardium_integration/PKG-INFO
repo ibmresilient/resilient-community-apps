@@ -1,0 +1,20 @@
+Metadata-Version: 1.1
+Name: fn_guardium_integration
+Version: 1.0.0
+Summary: Resilient Circuits Components for 'fn_guardium_integration'
+Home-page: https://ibm.com
+Author: Neetin Kandhare
+Author-email: nkandha1@in.ibm.com
+License: MIT
+Description: 
+            This Resilient Circuit Component provides below features to Resilient:
+            1. Automatic Resilient incidents creation based on realtime generated Guardium policy violations & outliers - Disabled.
+            2. Generate Guardium Client Secret from Resilient.
+            3. Search Active Risk Spotter - Risky Users Scores Report.
+            4. Search for sensitive objects.
+            5. List Parameter Names By Report Name.
+            6. Search for all default Guardium reports.
+            7. Search for outlier details.
+            
+Platform: any
+Classifier: Programming Language :: Python

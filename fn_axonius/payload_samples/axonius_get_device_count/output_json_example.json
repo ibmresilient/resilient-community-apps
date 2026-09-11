@@ -1,0 +1,21 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "value": 5
+  },
+  "raw": null,
+  "inputs": {
+    "axonius_saved_query_name": null,
+    "axonius_query_string": "(\"specific_data.data.os.type\" == \"Windows\") and (\"specific_data.data.name\" == regex(\"Shirley\", \"i\"))"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-axonius",
+    "package_version": "1.0.0",
+    "host": "mylaptop",
+    "execution_time_ms": 7309,
+    "timestamp": "2024-03-14 14:26:01"
+  }
+}

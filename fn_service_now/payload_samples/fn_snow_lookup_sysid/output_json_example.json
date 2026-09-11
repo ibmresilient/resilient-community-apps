@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "success": false,
+  "reason": null,
+  "content": {
+    "success": false,
+    "inputs": {
+      "sn_query_field": "email",
+      "sn_table_name": "sys_user",
+      "sn_query_value": "ibmresilient"
+    },
+    "sys_id": null
+  },
+  "raw": "{\"success\": false, \"inputs\": {\"sn_query_field\": \"email\", \"sn_table_name\": \"sys_user\", \"sn_query_value\": \"ibmresilient\"}, \"sys_id\": null}",
+  "inputs": {
+    "sn_query_field": "email",
+    "sn_table_name": "sys_user",
+    "sn_query_value": "ibmresilient"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-service-now",
+    "package_version": "2.0.0",
+    "host": "myhost",
+    "execution_time_ms": 1485,
+    "timestamp": "1971-01-01 00:00:00"
+  },
+  "sys_id": null
+}

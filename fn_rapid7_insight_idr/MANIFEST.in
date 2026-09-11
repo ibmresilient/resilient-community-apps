@@ -1,0 +1,16 @@
+include README.md
+include Dockerfile
+include apikey_permissions.txt
+include entrypoint.sh
+recursive-include fn_rapid7_insight_idr/util *
+recursive-include fn_rapid7_insight_idr/lib *
+recursive-include fn_rapid7_insight_idr/poller *
+include fn_rapid7_insight_idr/LICENSE
+include doc/*.md
+include doc/screenshots/*
+include icons/*.png
+recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
+
+global-exclude *.bak

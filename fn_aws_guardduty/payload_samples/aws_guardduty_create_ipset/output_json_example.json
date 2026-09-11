@@ -1,0 +1,47 @@
+{
+    "version": 2,
+    "success": "True",
+    "reason": "None",
+    "content": {
+      "ResponseMetadata": {
+        "RequestId": "1be8305d-f302-4301-8f00-4a6d15c0a821",
+        "HTTPStatusCode": 200,
+        "HTTPHeaders": {
+          "date": "Mon, 21 Jul 2025 15:52:24 GMT",
+          "content-type": "application/json",
+          "content-length": "46",
+          "connection": "***",
+          "x-amzn-requestid": "1be8305d-f302-4301-8f00-4a6d15c0a821",
+          "access-control-allow-origin": "*",
+          "access-control-allow-headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-Content-Sha256,X-Amz-User-Agent,*,Date,X-Amz-Target,x-amzn-platform-id,x-amzn-trace-id",
+          "x-amz-apigw-id": "OERH2EjfIAMEVrA=",
+          "access-control-expose-headers": "x-amzn-ErrorType,x-amzn-requestid,x-amzn-errormessage,x-amzn-trace-id,x-amz-apigw-id,Date",
+          "x-amzn-trace-id": "Root=1-687e6231-7b0f093571c8dbf50752f9d2;Parent=0774277cbf97c298;Sampled=0;Lineage=1:d3f66639:0",
+          "access-control-max-age": "86400"
+        },
+        "RetryAttempts": 0
+      },
+      "IpSetId": "6c4c7290f81b40ab85e298a785b1db38",
+      "status": "ok"
+    },
+    "raw": "None",
+    "inputs": {
+      "aws_gd_format": "TXT",
+      "aws_gd_bucket_owner": "None",
+      "aws_gd_name": "Test 21",
+      "aws_gd_region": "us-east-1",
+      "aws_gd_location": "s3://test-ip-set/trusted_ip.txt",
+      "aws_gd_client_token": "***",
+      "aws_gd_tags": "Owner: Hydra",
+      "aws_gd_activate": "True",
+      "aws_gd_detector_id": "48bb********************b7ccbc82"
+    },
+    "metrics": {
+      "version": "1.0",
+      "package": "fn-aws-guardduty",
+      "package_version": "2.0.0",
+      "host": "localhost",
+      "execution_time_ms": 8094,
+      "timestamp": "2025-07-21 16:52:24"
+    }
+}

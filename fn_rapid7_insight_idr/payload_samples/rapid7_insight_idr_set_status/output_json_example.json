@@ -1,0 +1,37 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "rrn": "rrn:investigation:us2:eeeeeeeee-c4c4-427c-8fc9-f9efe1e1e1e1e1:investigation:3XAAXAAXAAXAA",
+    "organization_id": "e4463fba-cd64-427c-8fc9-f9e1e1e1e1e1e1e1",
+    "title": "Our 1st investigation",
+    "source": "USER",
+    "status": "CLOSED",
+    "priority": "LOW",
+    "last_accessed": "2023-12-08T17:30:12.959Z",
+    "created_time": "2023-11-10T15:55:12.182Z",
+    "disposition": "BENIGN",
+    "assignee": null,
+    "first_alert_time": null,
+    "latest_alert_time": null,
+    "responsibility": null
+  },
+  "raw": null,
+  "inputs": {
+    "rapid7_insight_idr_threat_command_free_text": "<div class=\"rte\"><div>Admin User closing as BENIGN from SOAR December 8, 2023</div></div>",
+    "rapid7_insight_idr_status": "CLOSED",
+    "rapid7_insight_idr_disposition": "BENIGN",
+    "rapid7_insight_idr_threat_command_close_reason": "ProblemSolved",
+    "rapid7_insight_idr_incident_id": 2211,
+    "rapid7_insight_idr_rrn": "rrn:investigation:us2:eeeeeeeee-c4c4-427c-8fc9-f9efe1e1e1e1e1:investigation:3XAAXAAXAAXAA"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-rapid7-insight-idr",
+    "package_version": "1.0.0",
+    "host": "laptop.local",
+    "execution_time_ms": 93166,
+    "timestamp": "2023-12-08 12:30:12"
+  }
+}

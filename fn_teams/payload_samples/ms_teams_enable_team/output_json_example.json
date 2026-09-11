@@ -1,0 +1,62 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups/$entity",
+    "id": "b4829344-e28d-4c8e-bb2a-c470e0bb1ee3",
+    "deletedDateTime": null,
+    "classification": null,
+    "createdDateTime": "2024-08-15T15:31:51Z",
+    "creationOptions": [],
+    "description": "this is a description",
+    "displayName": "demoGroup",
+    "expirationDateTime": null,
+    "groupTypes": [
+      "Unified"
+    ],
+    "isAssignableToRole": null,
+    "mail": "demoGroup_nickname@example.com",
+    "mailEnabled": true,
+    "mailNickname": "demoGroup_nickname",
+    "membershipRule": null,
+    "membershipRuleProcessingState": null,
+    "onPremisesDomainName": null,
+    "onPremisesLastSyncDateTime": null,
+    "onPremisesNetBiosName": null,
+    "onPremisesSamAccountName": null,
+    "onPremisesSecurityIdentifier": null,
+    "onPremisesSyncEnabled": null,
+    "preferredDataLocation": null,
+    "preferredLanguage": null,
+    "proxyAddresses": [
+      "SPO:SPO_4e301f1d-f19e-499d-9bef-0c9d66bdc234@SPO_50ad7d3e-b889-434d-802d-13b87c68047b",
+      "SMTP:demoGroup_nickname@example.com"
+    ],
+    "renewedDateTime": "2024-08-15T15:31:51Z",
+    "resourceBehaviorOptions": [],
+    "resourceProvisioningOptions": [],
+    "securityEnabled": false,
+    "securityIdentifier": "S-1-12-1-3028456260-1284432525-1891904187-3810442208",
+    "theme": null,
+    "uniqueName": null,
+    "visibility": "Private",
+    "onPremisesProvisioningErrors": [],
+    "serviceProvisioningErrors": [],
+    "status_code": 200,
+    "message": "Successfully enabled Teams for Group: demoGroup",
+    "teamsEnabled": true
+  },
+  "raw": null,
+  "inputs": {
+    "ms_group_id": "b4829344-e28d-4c8e-bb2a-c470e0bb1ee3"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-teams",
+    "package_version": "3.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 7554,
+    "timestamp": "2024-08-15 11:36:36"
+  }
+}

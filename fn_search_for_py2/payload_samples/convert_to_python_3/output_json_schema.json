@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "script": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "language": {
+              "type": "string"
+            },
+            "object_type": {
+              "type": "string"
+            },
+            "uuid": {
+              "type": "string"
+            },
+            "actions": {
+              "type": "array"
+            },
+            "tags": {
+              "type": "array"
+            },
+            "creator_id": {
+              "type": "string"
+            },
+            "last_modified_by": {
+              "type": "string"
+            },
+            "last_modified_time": {
+              "type": "integer"
+            },
+            "created_date": {
+              "type": "integer"
+            },
+            "playbook_handle": {},
+            "programmatic_name": {
+              "type": "string"
+            },
+            "script_text": {
+              "type": "string"
+            },
+            "enabled": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "py2_item_id": {
+          "type": "integer"
+        },
+        "py2_item_type": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
