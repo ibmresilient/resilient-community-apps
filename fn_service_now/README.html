@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="search" title="Search" href="../search.html"><link rel="next" title="ServiceNow Installation Guide" href="docs/install_guide/README.html"><link rel="prev" title="Outbound Email" href="../fn_outbound_email/README.html">
+<link rel="search" title="Search" href="../search.html"><link rel="next" title="ServiceNow Installation Guide" href="docs/install_guide/README.html"><link rel="prev" title="IBM Security QRadar SOAR Apps" href="../index.html">
         <link rel="prefetch" href="../_static/IBM_Security_Light.png" as="image">
         <link rel="prefetch" href="../_static/IBM_Security_Dark.png" as="image">
 
@@ -201,15 +201,15 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">New and Recently Updated Apps</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_jira/README.html">Jira</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../fn_outbound_email/README.html">Outbound Email</a></li>
 <li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">ServiceNow</a><input aria-label="Toggle navigation of ServiceNow" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="docs/install_guide/README.html">ServiceNow Installation Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docs/customize_snow_guide/README.html">ServiceNow Customization Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="docs/customize_resilient_guide/README.html">SOAR Customization Guide</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_splunk_integration/README.html">Splunk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_jira/README.html">Jira</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fn_outbound_email/README.html">Outbound Email</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
@@ -398,6 +398,13 @@
   Specify all changes in this release. Do not remove the release
   notes of a previous release
 -->
+<section id="v2-4-0">
+<h3>v2.4.0<a class="headerlink" href="#v2-4-0" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>Added support for authenticating to ServiceNow with an inbound REST API key using <code class="docutils literal notranslate"><span class="pre">sn_api_key</span></code>.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">sn_api_key</span></code> is configured, it takes precedence over <code class="docutils literal notranslate"><span class="pre">sn_username</span></code> and <code class="docutils literal notranslate"><span class="pre">sn_password</span></code>.</p></li>
+</ul>
+</section>
 <section id="v2-3-1">
 <h3>v2.3.1<a class="headerlink" href="#v2-3-1" title="Link to this heading">¶</a></h3>
 <p>Add new input for function fn_snow_create_record. The new boolean input, sn_add_soar_link_on_snow, will determine if a link to the SOAR incident will be added in a note on the ServiceNow incident.</p>
@@ -530,18 +537,18 @@ But migrating to playbooks provides greater functionality along with future app 
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>ServiceNow Instance with ITSM enabled and running <code class="docutils literal notranslate"><span class="pre">Utah</span></code>, or newer releases</p></li>
+<li><p>ServiceNow Instance with ITSM enabled and running <code class="docutils literal notranslate"><span class="pre">Yokohama</span></code>, or newer releases</p></li>
 <li><p>Access to the <strong>Incident Table</strong> in ServiceNow</p></li>
-<li><p>ServiceNow <code class="docutils literal notranslate"><span class="pre">IBM</span> <span class="pre">SOAR</span> <span class="pre">App</span> <span class="pre">&gt;=</span> <span class="pre">v2.3.0</span></code> installed on your ServiceNow Instance which you can download from <a class="reference external" href="http://ibm.biz/get-ibm-resilient-service-now-app">the ServiceNow Store</a></p>
+<li><p>ServiceNow <code class="docutils literal notranslate"><span class="pre">IBM</span> <span class="pre">SOAR</span> <span class="pre">App</span> <span class="pre">&gt;=</span> <span class="pre">v2.4.0</span></code> installed on your ServiceNow Instance which you can download from <a class="reference external" href="http://ibm.biz/get-ibm-resilient-service-now-app">the ServiceNow Store</a></p>
 <ul>
-<li><p>If integrating with ServiceNow Security Incident Table (SIR), <code class="docutils literal notranslate"><span class="pre">IBM</span> <span class="pre">SOAR</span> <span class="pre">App</span> <span class="pre">&gt;=</span> <span class="pre">2.3.0</span></code> and ServiceNow Security Incident Response with its dependencies are required. More information <a class="reference external" href="https://www.servicenow.com/products/security-incident-response.html">here</a>.</p></li>
+<li><p>If integrating with ServiceNow Security Incident Table (SIR), <code class="docutils literal notranslate"><span class="pre">IBM</span> <span class="pre">SOAR</span> <span class="pre">App</span> <span class="pre">&gt;=</span> <span class="pre">2.4.0</span></code> and ServiceNow Security Incident Response with its dependencies are required. More information <a class="reference external" href="https://www.servicenow.com/products/security-incident-response.html">here</a>.</p></li>
 </ul>
 </li>
 <li><p>If IBM SOAR is not publicly accessible (behind a firewall), a ServiceNow MID Server is required. See the <a class="reference internal" href="docs/install_guide/README.html"><span class="std std-doc">Install Guide</span></a> for more information</p></li>
 <li><p>IBM Cloud Pak for Security <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">1.10.18</span></code> <em>or</em> IBM SOAR <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">v51.0.0.0</span></code></p></li>
 <li><p>App Host <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">v1.15.1.0</span></code> (recommended) <em>or</em> an Integration Server running <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">&gt;=</span> <span class="pre">v51.0.2.0</span></code>.</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">fn_service_now</span> <span class="pre">&gt;=</span> <span class="pre">v2.3.0</span></code> installed, which you can download from our <a class="reference external" href="http://ibm.biz/get-ibm-resilient-service-now-integration">App Exchange</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fn_service_now</span> <span class="pre">&gt;=</span> <span class="pre">v2.4.0</span></code> installed, which you can download from our <a class="reference external" href="http://ibm.biz/get-ibm-resilient-service-now-integration">App Exchange</a></p></li>
 </ul>
 </li>
 </ul>
@@ -583,14 +590,14 @@ But migrating to playbooks provides greater functionality along with future app 
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../fn_outbound_email/README.html">
+          <a class="prev-page" href="../index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Outbound Email</div>
+                <div class="title">Home</div>
                 
               </div>
             </a>
@@ -626,6 +633,7 @@ But migrating to playbooks provides greater functionality along with future app 
             <ul>
 <li><a class="reference internal" href="#">ServiceNow</a><ul>
 <li><a class="reference internal" href="#release-notes">Release Notes</a><ul>
+<li><a class="reference internal" href="#v2-4-0">v2.4.0</a></li>
 <li><a class="reference internal" href="#v2-3-1">v2.3.1</a></li>
 <li><a class="reference internal" href="#v2-3-0">v2.3.0</a></li>
 <li><a class="reference internal" href="#v2-2-1">v2.2.1</a></li>

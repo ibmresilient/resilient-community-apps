@@ -28,7 +28,10 @@ sn_api_uri=/api/x_ibmrt_resilient/api
 # labeled [DEPRECATED]
 sn_table_name=incident
 
-# Username + Password of ServiceNow Integrator user who has the the "x_ibmrt_resilient.integrator" role
+# Authentication to ServiceNow.
+# Option 1 (recommended): Inbound REST API key for ServiceNow. If set, this takes precedence over sn_username/sn_password.
+#sn_api_key=<ServiceNow API Key>
+# Option 2: Username + Password of ServiceNow Integrator user who has the the "x_ibmrt_resilient.integrator" role
 sn_username=<ServiceNow Username>
 sn_password=<ServiceNow Password>
 

@@ -15,12 +15,16 @@ docs/customize_resilient_guide/README
   notes of a previous release
 -->
 
+### v2.4.0
+* Added support for authenticating to ServiceNow with an inbound REST API key using `sn_api_key`.
+* If `sn_api_key` is configured, it takes precedence over `sn_username` and `sn_password`.
+
 ### v2.3.1
 Add new input for function fn_snow_create_record. The new boolean input, sn_add_soar_link_on_snow, will determine if a link to the SOAR incident will be added in a note on the ServiceNow incident.
 
 To update incidents, the user must have the following role:
 `x_ibmrt_resilient.integrator`
-The additional permission needed to edit the incident if necessary: 
+The additional permission needed to edit the incident if necessary:
 * `itil`: Grants access to create, read, update, and delete incidents.
 This ensures the integration user has the necessary permissions to update fields like state on the incident table.
 
@@ -109,14 +113,14 @@ Bi-directional app with ServiceNow and IBM Security QRadar SOAR allows SEC Ops P
 ---
 
 ## Requirements
-* ServiceNow Instance with ITSM enabled and running `Utah`, or newer releases
+* ServiceNow Instance with ITSM enabled and running `Yokohama`, or newer releases
 * Access to the **Incident Table** in ServiceNow
-* ServiceNow `IBM SOAR App >= v2.3.0` installed on your ServiceNow Instance which you can download from [the ServiceNow Store](http://ibm.biz/get-ibm-resilient-service-now-app)
-  * If integrating with ServiceNow Security Incident Table (SIR), `IBM SOAR App >= 2.3.0` and ServiceNow Security Incident Response with its dependencies are required. More information [here](https://www.servicenow.com/products/security-incident-response.html).
+* ServiceNow `IBM SOAR App >= v2.4.0` installed on your ServiceNow Instance which you can download from [the ServiceNow Store](http://ibm.biz/get-ibm-resilient-service-now-app)
+  * If integrating with ServiceNow Security Incident Table (SIR), `IBM SOAR App >= 2.4.0` and ServiceNow Security Incident Response with its dependencies are required. More information [here](https://www.servicenow.com/products/security-incident-response.html).
 * If IBM SOAR is not publicly accessible (behind a firewall), a ServiceNow MID Server is required. See the [Install Guide](./docs/install_guide/README.md) for more information
 * IBM Cloud Pak for Security `>= 1.10.18` *or* IBM SOAR `>= v51.0.0.0`
 * App Host `>= v1.15.1.0` (recommended) *or* an Integration Server running `resilient-circuits >= v51.0.2.0`.
-  - `fn_service_now >= v2.3.0` installed, which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
+  - `fn_service_now >= v2.4.0` installed, which you can download from our [App Exchange](http://ibm.biz/get-ibm-resilient-service-now-integration)
 
 ---
 

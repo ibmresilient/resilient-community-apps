@@ -201,15 +201,15 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">New and Recently Updated Apps</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../fn_splunk_integration/README.html">Splunk</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../fn_jira/README.html">Jira</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../fn_outbound_email/README.html">Outbound Email</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../../README.html">ServiceNow</a><input aria-label="Toggle navigation of ServiceNow" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">ServiceNow Installation Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../customize_snow_guide/README.html">ServiceNow Customization Guide</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../customize_resilient_guide/README.html">SOAR Customization Guide</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_splunk_integration/README.html">Splunk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_jira/README.html">Jira</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fn_outbound_email/README.html">Outbound Email</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../fn_watsonx_analyst/README.html">IBM QRadar SOAR Response Assistant</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../fn_urlscanio/README.html">URL ScanIO</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../fn_qradar_enhanced_data/README.html">QRadar Enhanced Data Migration</a></li>
@@ -393,19 +393,19 @@
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>ServiceNow Instance with ITSM enabled and running <code class="docutils literal notranslate"><span class="pre">Xanadu</span></code> or newer releases</p></li>
+<li><p>ServiceNow Instance with ITSM enabled and running <code class="docutils literal notranslate"><span class="pre">Yokohama</span></code> or newer releases</p></li>
 <li><p>Access to the <code class="docutils literal notranslate"><span class="pre">Incident</span> <span class="pre">Table</span></code> in ServiceNow</p></li>
 <li><p>A user in ServiceNow with an <code class="docutils literal notranslate"><span class="pre">admin</span></code> role</p></li>
 <li><p>IBM Cloud Pak for Security <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">1.10.18</span></code> <em>or</em> IBM SOAR <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">v51.0.0.0</span></code></p></li>
 <li><p>An App Host &gt;= <code class="docutils literal notranslate"><span class="pre">v1.15.0</span></code> or an Integrations Server running <code class="docutils literal notranslate"><span class="pre">resilient-circuits</span> <span class="pre">&gt;=</span> <span class="pre">v51.0.0.0</span></code>.</p>
 <ul>
-<li><p>To setup an App Host see: <a class="reference external" href="https://ibm.biz/res-app-host-setup">ibm.biz/res-app-host-setup</a></p></li>
-<li><p>To setup an Integration Server see: <a class="reference external" href="https://ibm.biz/res-int-server-guide">ibm.biz/res-int-server-guide</a></p></li>
+<li><p>To setup an App Host see: <a class="reference external" href="https://www.ibm.com/docs/en/sqsp/51.0.0?topic=overview-install-app-host">ibm.biz/res-app-host-setup</a></p></li>
+<li><p>To setup an Integration Server see: <a class="reference external" href="https://www.ibm.com/docs/en/sqsp/51.0.0?topic=isg-introduction">ibm.biz/res-int-server-guide</a></p></li>
 </ul>
 </li>
 <li><p>If SOAR instance is not publicly accessible (behind a firewall), a <code class="docutils literal notranslate"><span class="pre">ServiceNow</span> <span class="pre">MID</span> <span class="pre">Server</span></code> is required</p></li>
 <li><p>If you want to integrate with ServiceNow Security Incident Response (SIR), make sure to install it first</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fn_service_now</span> <span class="pre">&gt;=</span> <span class="pre">v2.3.0</span></code> installed, which you can download from our <a class="reference external" href="http://ibm.biz/get-ibm-resilient-service-now-integration">App Exchange</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fn_service_now</span> <span class="pre">&gt;=</span> <span class="pre">v2.4.0</span></code> installed, which you can download from our <a class="reference external" href="http://ibm.biz/get-ibm-resilient-service-now-integration">App Exchange</a></p></li>
 </ul>
 </section>
 <hr class="docutils" />
@@ -651,20 +651,36 @@
 <td><p>Name of the ServiceNow Table. It is where Incidents and Tasks from SOAR are created and synced. The app supports the Incident table and Security Incident table in ServiceNow (only one table is supported at a time).</p></td>
 </tr>
 <tr class="row-odd"><td><p>sn_username</p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p>The <strong>User ID</strong> from <strong>Step 2.</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p>The <strong>User ID</strong> from <strong>Step 2.</strong> Required when authenticating with username/password.</p></td>
 </tr>
 <tr class="row-even"><td><p>sn_password</p></td>
-<td class="text-center"><p>Yes</p></td>
-<td><p>The <strong>Password</strong> from <strong>Step 2.</strong></p></td>
+<td class="text-center"><p>No</p></td>
+<td><p>The <strong>Password</strong> from <strong>Step 2.</strong> Required when authenticating with username/password.</p></td>
 </tr>
-<tr class="row-odd"><td><p>render_rich_text</p></td>
+<tr class="row-odd"><td><p>sn_api_key</p></td>
+<td class="text-center"><p>No</p></td>
+<td><p>Inbound REST API key for ServiceNow. If configured, it takes precedence over <code class="docutils literal notranslate"><span class="pre">sn_username</span></code> and <code class="docutils literal notranslate"><span class="pre">sn_password</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p>render_rich_text</p></td>
 <td class="text-center"><p>No</p></td>
 <td><p>If <strong>True</strong> will send rich HTML notes from SOAR to ServiceNow. Should be set to False or omitted if <code class="docutils literal notranslate"><span class="pre">glide.ui.security.allow_codetag</span></code> is not enabled on your ServiceNow system.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
+<blockquote>
+<div><p><strong>Note:</strong> You must configure either <code class="docutils literal notranslate"><span class="pre">sn_api_key</span></code> <strong>or</strong> both <code class="docutils literal notranslate"><span class="pre">sn_username</span></code> and <code class="docutils literal notranslate"><span class="pre">sn_password</span></code>. If <code class="docutils literal notranslate"><span class="pre">sn_api_key</span></code> is set, it takes precedence over <code class="docutils literal notranslate"><span class="pre">sn_username</span></code> and <code class="docutils literal notranslate"><span class="pre">sn_password</span></code>.</p>
+<p><strong>ServiceNow API authentication profiles:</strong> When an Inbound Authentication Profile is linked to an API Access Policy in ServiceNow, it acts as an explicit allow-list for that API. If the policy includes only an API key profile, other authentication methods such as basic authentication are blocked for that API. To support both <code class="docutils literal notranslate"><span class="pre">sn_api_key</span></code> and <code class="docutils literal notranslate"><span class="pre">sn_username</span></code> / <code class="docutils literal notranslate"><span class="pre">sn_password</span></code>, configure the API Access Policy to include both the API key authentication profile and a standard/basic authentication profile.</p>
+<p><strong>ServiceNow API key authentication:</strong> Configuring <code class="docutils literal notranslate"><span class="pre">sn_api_key</span></code> in the app is only one part of the setup. In ServiceNow, you must also create and configure the inbound REST API key authentication objects required for the target API, including:</p>
+<ul class="simple">
+<li><p>an API key</p></li>
+<li><p>an inbound authentication profile</p></li>
+<li><p>an API access policy</p></li>
+<li><p>a link between the inbound authentication profile and the API access policy</p></li>
+</ul>
+<p>Without that ServiceNow-side configuration, requests authenticated with <code class="docutils literal notranslate"><span class="pre">sn_api_key</span></code> may fail with authentication errors.</p>
+</div></blockquote>
 </section>
 <section id="custom-layouts">
 <h3>Custom Layouts<a class="headerlink" href="#custom-layouts" title="Link to this heading">¶</a></h3>
