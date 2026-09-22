@@ -1,0 +1,286 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "alert": {
+          "type": "object",
+          "properties": {
+            "org_key": {
+              "type": "string"
+            },
+            "alert_url": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "backend_timestamp": {
+              "type": "string"
+            },
+            "user_update_timestamp": {},
+            "backend_update_timestamp": {
+              "type": "string"
+            },
+            "detection_timestamp": {
+              "type": "string"
+            },
+            "first_event_timestamp": {
+              "type": "string"
+            },
+            "last_event_timestamp": {
+              "type": "string"
+            },
+            "severity": {
+              "type": "integer"
+            },
+            "reason": {
+              "type": "string"
+            },
+            "reason_code": {
+              "type": "string"
+            },
+            "threat_id": {
+              "type": "string"
+            },
+            "primary_event_id": {
+              "type": "string"
+            },
+            "policy_applied": {
+              "type": "string"
+            },
+            "run_state": {
+              "type": "string"
+            },
+            "sensor_action": {
+              "type": "string"
+            },
+            "workflow": {
+              "type": "object",
+              "properties": {
+                "change_timestamp": {
+                  "type": "string"
+                },
+                "changed_by_type": {
+                  "type": "string"
+                },
+                "changed_by": {
+                  "type": "string"
+                },
+                "closure_reason": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string"
+                }
+              }
+            },
+            "determination": {
+              "type": "object",
+              "properties": {
+                "change_timestamp": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "changed_by_type": {
+                  "type": "string"
+                },
+                "changed_by": {
+                  "type": "string"
+                }
+              }
+            },
+            "tags": {},
+            "alert_notes_present": {
+              "type": "boolean"
+            },
+            "threat_notes_present": {
+              "type": "boolean"
+            },
+            "is_updated": {
+              "type": "boolean"
+            },
+            "device_id": {
+              "type": "integer"
+            },
+            "device_name": {
+              "type": "string"
+            },
+            "device_uem_id": {
+              "type": "string"
+            },
+            "device_target_value": {
+              "type": "string"
+            },
+            "device_policy": {
+              "type": "string"
+            },
+            "device_policy_id": {
+              "type": "integer"
+            },
+            "device_os": {
+              "type": "string"
+            },
+            "device_os_version": {
+              "type": "string"
+            },
+            "device_username": {
+              "type": "string"
+            },
+            "device_location": {
+              "type": "string"
+            },
+            "device_external_ip": {
+              "type": "string"
+            },
+            "device_internal_ip": {
+              "type": "string"
+            },
+            "asset_group": {
+              "type": "array"
+            },
+            "mdr_alert": {
+              "type": "boolean"
+            },
+            "mdr_alert_notes_present": {
+              "type": "boolean"
+            },
+            "mdr_threat_notes_present": {
+              "type": "boolean"
+            },
+            "ttps": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "attack_tactic": {
+              "type": "string"
+            },
+            "process_guid": {
+              "type": "string"
+            },
+            "process_pid": {
+              "type": "integer"
+            },
+            "process_name": {
+              "type": "string"
+            },
+            "process_sha256": {
+              "type": "string"
+            },
+            "process_md5": {
+              "type": "string"
+            },
+            "process_effective_reputation": {
+              "type": "string"
+            },
+            "process_reputation": {
+              "type": "string"
+            },
+            "process_cmdline": {
+              "type": "string"
+            },
+            "process_username": {
+              "type": "string"
+            },
+            "process_issuer": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "process_publisher": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "parent_guid": {
+              "type": "string"
+            },
+            "parent_pid": {
+              "type": "integer"
+            },
+            "parent_name": {
+              "type": "string"
+            },
+            "parent_sha256": {
+              "type": "string"
+            },
+            "parent_md5": {
+              "type": "string"
+            },
+            "parent_effective_reputation": {
+              "type": "string"
+            },
+            "parent_reputation": {
+              "type": "string"
+            },
+            "parent_cmdline": {
+              "type": "string"
+            },
+            "parent_username": {
+              "type": "string"
+            },
+            "childproc_guid": {
+              "type": "string"
+            },
+            "childproc_username": {
+              "type": "string"
+            },
+            "childproc_cmdline": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "vmware_cbc_alert_id": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

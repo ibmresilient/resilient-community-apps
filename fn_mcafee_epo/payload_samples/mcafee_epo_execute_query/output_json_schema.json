@@ -1,0 +1,105 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "EPOLeafNode.Tags": {
+            "type": "string"
+          },
+          "EPOLeafNode.ExcludedTags": {
+            "type": "string"
+          },
+          "EPOLeafNode.LastUpdate": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "EPOLeafNode.os": {
+            "type": "string"
+          },
+          "EPOLeafNode.NodeName": {
+            "type": "string"
+          },
+          "EPOLeafNode.ManagedState": {
+            "type": "integer"
+          },
+          "EPOLeafNode.AgentVersion": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "EPOLeafNode.AgentGUID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "EPOLeafNode.ResortEnabled": {
+            "type": "boolean"
+          },
+          "EPOLeafNode.TransferSiteListsID": {
+            "type": "boolean"
+          },
+          "EPOLeafNode.SequenceErrorCount": {
+            "type": "integer"
+          },
+          "EPOLeafNode.SequenceErrorCountLastUpdate": {},
+          "EPOLeafNode.LastCommSecure": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "incident_id": {
+          "type": "integer"
+        },
+        "datatable_name": {
+          "type": "string"
+        },
+        "mcafee_epo_target": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

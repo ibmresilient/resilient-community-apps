@@ -1,0 +1,93 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "qrhost": "1.1.1.1",
+    "offenseid": "67",
+    "events": [
+      {
+        "event_name": "Attachment Detection - Potentially Malicious URL",
+        "category_name": "Potential Web Vulnerability",
+        "logsourcename": "Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2",
+        "magnitude": "7",
+        "destinationip": "2.2.2.2",
+        "sourceip": "3.3.3.3",
+        "eventcount": "1",
+        "event_time": "1717078699748"
+      },
+      {
+        "event_name": "Attachment Detection - Phishing",
+        "category_name": "Hostile Mail Attachment",
+        "logsourcename": "Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2",
+        "magnitude": "7",
+        "destinationip": "2.2.2.2",
+        "sourceip": "3.3.3.3",
+        "eventcount": "1",
+        "event_time": "1717078700653"
+      },
+      {
+        "event_name": "Attachment Detection - Content violation",
+        "category_name": "Hostile Mail Attachment",
+        "logsourcename": "Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2",
+        "magnitude": "7",
+        "destinationip": "2.2.2.2",
+        "sourceip": "3.3.3.5",
+        "eventcount": "1",
+        "event_time": "1717078701655"
+      },
+      {
+        "event_name": "Attachment Detection - Phishing",
+        "category_name": "Hostile Mail Attachment",
+        "logsourcename": "Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2",
+        "magnitude": "7",
+        "destinationip": "2.2.2.2",
+        "sourceip": "3.3.3.4",
+        "eventcount": "1",
+        "event_time": "1717078704658"
+      },
+      {
+        "event_name": "Attachment Detection - Potentially Malicious URL",
+        "category_name": "Potential Web Vulnerability",
+        "logsourcename": "Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2",
+        "magnitude": "7",
+        "destinationip": "2.2.2.2",
+        "sourceip": "3.3.3.7",
+        "eventcount": "1",
+        "event_time": "1717078705660"
+      },
+      {
+        "event_name": "Attachment Detection - Phishing",
+        "category_name": "Hostile Mail Attachment",
+        "logsourcename": "Experience Center: Trend Micro Deep Discovery Email Inspector @ 2.2.2.2",
+        "magnitude": "7",
+        "destinationip": "2.2.2.2",
+        "sourceip": "3.3.3.8",
+        "eventcount": "1",
+        "event_time": "1717078705660"
+      }
+    ],
+    "current_time": 1719237689000
+  },
+  "raw": null,
+  "inputs": {
+    "qradar_search_param3": "67",
+    "qradar_search_param2": "WHERE INOFFENSE(%param3%)",
+    "qradar_search_param1": "QIDNAME(qid) as event_name,categoryname(category) as category_name,logsourcename(logsourceid) as logsourcename,username,magnitude,destinationip,sourceip,eventcount,starttime as event_time, \"EC File Hash\", \"EC File Path\", \"EC Filename\", \"EC IMP Hash\", \"EC MD5 Hash\", \"EC ParentCommandLine\", \"EC Process CommandLine\", \"EC SHA1 Hash\", \"EC SHA256 Hash\", \"File Hash\", \"MD5 Hash\", \"SHA1 Hash\", \"SHA256 Hash\"",
+    "qradar_query_type": "topevents",
+    "qradar_search_param6": "LIMIT 10",
+    "soar_incident_id": 2105,
+    "soar_table_name": "qr_offense_top_events",
+    "qradar_search_param5": "ORDER BY starttime",
+    "qradar_query": "SELECT %param1% FROM events %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60",
+    "qradar_label": "qradar_1_1_1_1_1103"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "unknown",
+    "package_version": "unknown",
+    "host": "local",
+    "execution_time_ms": 2535,
+    "timestamp": "2024-06-24 10:01:29"
+  }
+}

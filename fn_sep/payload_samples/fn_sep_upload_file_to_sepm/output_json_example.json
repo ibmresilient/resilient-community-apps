@@ -1,0 +1,25 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "commandID": "C9456A59*******89F243B8A537A056D"
+  },
+  "raw": null,
+  "inputs": {
+    "sep_md5": "44d88612fe*******de82e1278abb02f",
+    "sep_sha256": null,
+    "sep_file_path": "C:\\Users\\Administrator\\Desktop\\tesy.txt",
+    "sep_source": "QUARANTINE",
+    "sep_sha1": null,
+    "sep_computer_ids": "01ECF4E*******B91E4D52E45C3ABE4D"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 7428,
+    "timestamp": "2024-07-29 09:49:39"
+  }
+}

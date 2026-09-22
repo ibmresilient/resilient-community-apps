@@ -1,0 +1,77 @@
+{
+    "version": 2,
+    "success": true,
+    "reason": null,
+    "content": {
+        "last_persisted_time": 1713465658000,
+        "username_count": 1,
+        "description": "Login\n",
+        "rules": [
+            {
+                "id": 100462,
+                "type": "CRE_RULE"
+            }
+        ],
+        "event_count": 1,
+        "flow_count": 0,
+        "assigned_to": null,
+        "security_category_count": 1,
+        "follow_up": false,
+        "source_address_ids": [
+            99
+        ],
+        "source_count": 1,
+        "inactive": true,
+        "protected": false,
+        "closing_user": "API_token: ms qradar integration",
+        "destination_networks": [
+            "other"
+        ],
+        "source_network": "other",
+        "category_count": 1,
+        "close_time": 1713465658000,
+        "remote_destination_count": 1,
+        "start_time": 1711492873201,
+        "magnitude": 1,
+        "last_updated_time": 1711492873201,
+        "credibility": 2,
+        "id": 164,
+        "categories": [
+            "User Login Success"
+        ],
+        "severity": 1,
+        "policy_category_count": 0,
+        "log_sources": [
+            {
+                "type_name": "F5FirePass",
+                "type_id": 232,
+                "name": "F5FirePass @ f5networks.firepass.test.com",
+                "id": 962
+            }
+        ],
+        "closing_reason_id": 1,
+        "device_count": 1,
+        "first_persisted_time": 1711492873000,
+        "offense_type": 0,
+        "relevance": 0,
+        "domain_id": 3,
+        "offense_source": "31.107.167.255",
+        "local_destination_address_ids": [],
+        "local_destination_count": 0,
+        "status": "CLOSED"
+    },
+    "raw": null,
+    "inputs": {
+        "qradar_update_json": "{\"status\": \"CLOSED\", \"closing_reason_id\": 1}",
+        "qradar_id": 164,
+        "qradar_label": "11.22.33.44"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-qradar-integration",
+        "package_version": "2.4.0",
+        "host": "localhost",
+        "execution_time_ms": 499,
+        "timestamp": "2024-04-18 14:40:58"
+    }
+}

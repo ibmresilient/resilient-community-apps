@@ -1,0 +1,5 @@
+include README.md
+recursive-include fn_task_utils/util *
+include fn_task_utils/LICENSE
+include doc/*
+include doc/screenshots/*

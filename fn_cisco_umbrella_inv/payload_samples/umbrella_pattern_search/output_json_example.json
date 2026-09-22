@@ -1,0 +1,24 @@
+{
+    "version": 2.0,
+    "success": true,
+    "reason": null,
+    "content": {
+        "query_execution_time": "2018-05-02 16:03:15",
+        "search_matches": {
+            "expression": "exa[a-z]ple.com",
+            "totalResults": 1,
+            "moreDataAvailable": false,
+            "limit": 30,
+            "matches": [
+                {
+                    "name": "example",
+                    "firstSeen": 1432330927421,
+                    "firstSeenISO": "2015-05-22T21:42:07.421Z",
+                    "securityCategories": [
+                        "Botnet"
+                    ]
+                }
+            ]
+        }
+    }
+}

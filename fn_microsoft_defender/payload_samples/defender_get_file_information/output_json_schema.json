@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "@odata.context": {
+          "type": "string"
+        },
+        "sha1": {
+          "type": "string"
+        },
+        "sha256": {
+          "type": "string"
+        },
+        "md5": {
+          "type": "string"
+        },
+        "globalPrevalence": {
+          "type": "integer"
+        },
+        "globalFirstObserved": {
+          "type": "string"
+        },
+        "globalLastObserved": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "fileType": {},
+        "isPeFile": {
+          "type": "boolean"
+        },
+        "filePublisher": {},
+        "fileProductName": {},
+        "signer": {},
+        "issuer": {},
+        "signerHash": {},
+        "isValidCertificate": {
+          "type": "boolean"
+        },
+        "determinationType": {
+          "type": "string"
+        },
+        "determinationValue": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "defender_file_hash": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

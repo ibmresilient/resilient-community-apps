@@ -1,0 +1,26 @@
+{
+  {# JINJA template for updating a new SOAR incident from an endpoint #}
+  {# modify to specify your specific **data** fields #}
+  {% set severity_mapping = '''{
+    "CRITICAL": "High", 
+    "HIGH": "High", 
+    "MEDIUM": "Medium", 
+    "LOW": "Low"
+  }'''
+  %}
+  "severity_code": "{{ severity | soar_substitute(severity_mapping) }}",
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "sumo_logic_insight_global_confidence": {{ (confidence*100)|int }},
+    "sumo_logic_insight_assignee": "{{ assignee.displayName }} ({{assignee.username}})",
+    "sumo_logic_insight_status": "{{ status.displayName }}",
+    "sumo_logic_insight_readable_id": "{{ readableId }}",
+    "sumo_logic_insight_resolution": "{{ resolution }}",
+    "sumo_logic_insight_source": "{{ source }}",
+    "sumo_logic_insight_sub_resolution": "{{ subResolution }}",
+    "sumo_logic_insight_link": "<a target='_blank' href='{{ entity_url }}'>Insight</a>"
+    {% if tags %}
+    ,"sumo_logic_insight_tags": "{{ tags | join(', ') }}"
+    {% endif %}
+  }
+}

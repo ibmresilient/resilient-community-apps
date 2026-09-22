@@ -1,0 +1,22 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": "a\nb\nc",
+  "raw": null,
+  "inputs": {
+    "github_ref": "sample_branch",
+    "github_owner": "test-owner",
+    "github_return_base64": false,
+    "github_file_path": "sample_file",
+    "github_repo": "personal"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-github",
+    "package_version": "1.0.0",
+    "host": "host",
+    "execution_time_ms": 247,
+    "timestamp": "2022-12-03 11:33:58"
+  }
+}
