@@ -1,1 +1,1 @@
-https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_service_now/main/2.4/app-fn_service_now-2.4.0-45049.zip
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_service_now/main/2.4/app-fn_service_now-2.4.0-46548.zip

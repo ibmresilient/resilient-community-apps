@@ -1,10 +1,10 @@
 [
   "fn_service_now",
+  "fn_scheduler",
   "fn_splunk_integration",
   "fn_jira",
   "fn_outbound_email",
   "fn_watsonx_analyst",
   "fn_urlscanio",
-  "fn_qradar_enhanced_data",
-  "fn_microsoft_sentinel"
+  "fn_qradar_enhanced_data"
 ]
