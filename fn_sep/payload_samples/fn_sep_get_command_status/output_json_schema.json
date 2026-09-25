@@ -1,0 +1,161 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "beginTime": {},
+              "lastUpdateTime": {},
+              "computerName": {
+                "type": "string"
+              },
+              "computerIp": {
+                "type": "string"
+              },
+              "domainName": {
+                "type": "string"
+              },
+              "currentLoginUserName": {
+                "type": "string"
+              },
+              "stateId": {
+                "type": "integer"
+              },
+              "subStateId": {
+                "type": "integer"
+              },
+              "subStateDesc": {},
+              "binaryFileId": {},
+              "resultInXML": {},
+              "computerId": {
+                "type": "string"
+              },
+              "hardwareKey": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "size": {
+          "type": "integer"
+        },
+        "sort": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "direction": {
+                "type": "string"
+              },
+              "property": {
+                "type": "string"
+              },
+              "ascending": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "totalElements": {
+          "type": "integer"
+        },
+        "firstPage": {
+          "type": "boolean"
+        },
+        "totalPages": {
+          "type": "integer"
+        },
+        "lastPage": {
+          "type": "boolean"
+        },
+        "numberOfElements": {
+          "type": "integer"
+        },
+        "number": {
+          "type": "integer"
+        },
+        "total_match_count": {
+          "type": "integer"
+        },
+        "total_match_ep_count": {
+          "type": "integer"
+        },
+        "total_remediation_count": {
+          "type": "integer"
+        },
+        "total_fail_remediation_count": {
+          "type": "integer"
+        },
+        "total_remediation_ep_count": {
+          "type": "integer"
+        },
+        "total_not_completed": {
+          "type": "integer"
+        },
+        "total_ep_count": {
+          "type": "integer"
+        },
+        "scan_artifact_value": {
+          "type": "string"
+        },
+        "remediate_artifact_value": {
+          "type": "string"
+        },
+        "overall_command_state": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "sep_status_type": {
+          "type": "string"
+        },
+        "sep_commandid": {
+          "type": "string"
+        },
+        "sep_incident_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

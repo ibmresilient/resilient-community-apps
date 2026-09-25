@@ -1,0 +1,22 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "success": true,
+    "reason:": null
+  },
+  "raw": null,
+  "inputs": {
+    "sentinelone_threat_id": "1308905355630511064",
+    "sentinelone_note_text": "<b>SentinelOne: Get Hash Reputation: </b><br /> Hash <b>1641df58c1027a00f670d41491a2eecff931604c</b> has rank: <b>0</b>"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "host": "myHost",
+    "execution_time_ms": 5590,
+    "timestamp": "2021-12-13 11:28:04"
+  }
+}

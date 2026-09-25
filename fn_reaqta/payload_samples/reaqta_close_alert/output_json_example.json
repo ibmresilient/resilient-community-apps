@@ -1,0 +1,24 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "alertId": "1024257396198866946",
+    "closed": true
+  },
+  "raw": null,
+  "inputs": {
+    "reaqta_is_malicious": false,
+    "reaqta_alert_id": "1024257396198866946",
+    "reaqta_hive": "rhiveam",
+    "reaqta_note": "<div class=\"rte\"><div>closing</div></div>"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-reaqta",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 932,
+    "timestamp": "2023-08-07 14:34:06"
+  }
+}

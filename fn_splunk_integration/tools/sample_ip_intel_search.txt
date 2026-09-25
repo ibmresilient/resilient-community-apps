@@ -1,0 +1,1 @@
+inputlookup ip_intel | search ip=123.201.86.146 | eval item_key=_key

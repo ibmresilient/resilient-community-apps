@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "task": {
+      "id": 302
+    }
+  },
+  "raw": "",
+  "inputs": {
+    "task_name": "Sample_task",
+    "task_utils_payload": {
+      "format": "text",
+      "content": "{\"required\": true, \"instr_text\": \"Close out this required Task\", \"phase_id\": \"Initial\"}"
+    },
+    "incident_id": 2117
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "unknown",
+    "package_version": "unknown",
+    "host": "my.app.host",
+    "execution_time_ms": 2695,
+    "timestamp": "2025-07-04 14:52:26"
+  }
+}

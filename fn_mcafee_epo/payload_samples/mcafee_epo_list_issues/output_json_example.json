@@ -1,0 +1,49 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": [
+    {
+      "severity": "LOW",
+      "activityLog": [
+        {
+          "date": "2023-10-09T07:39:15-07:00",
+          "dirty": true,
+          "issueId": 1,
+          "details": "",
+          "id": 1,
+          "title": "Issue Created",
+          "username": "admin"
+        }
+      ],
+      "dueDate": 1698308400000,
+      "creatorName": "admin",
+      "description": "Testing issue creation",
+      "ticketServerName": null,
+      "priority": "LOW",
+      "type": "BASIC",
+      "resolution": "NONE",
+      "createdDate": "2023-10-09T07:39:15-07:00",
+      "assigneeName": "",
+      "subtype": null,
+      "name": "richard test issue",
+      "assignee": null,
+      "id": 1,
+      "state": "NEW",
+      "ticketId": null
+    }
+  ],
+  "raw": null,
+  "inputs": {
+    "incident_id": 4057,
+    "datatable_name": "mcafee_epo_issues"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mcafee-epo",
+    "package_version": "3.0.0",
+    "host": "local",
+    "execution_time_ms": 1069,
+    "timestamp": "2023-10-09 13:02:47"
+  }
+}

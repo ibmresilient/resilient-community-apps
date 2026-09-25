@@ -1,0 +1,4 @@
+include README.md
+include rc_data-feed_plugin-splunkfeed/*
+include rc_data-feed_plugin-splunkfeed/LICENSE
+include icons/*

@@ -1,0 +1,314 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "created": "2021-05-20T12:19:07.138Z",
+    "owner": {
+      "name": "QA RVision",
+      "uuid": "http://www.ibm.com/55000AJ8RT",
+      "isDisabled": false
+    },
+    "title": "Test_Collection",
+    "caseFileID": "7c551c65686c0866daafcee3d838f052",
+    "tags": [],
+    "links": [],
+    "tlpColor": {
+      "tlpColorName": "TLP_WHITE",
+      "tlpColorCode": "white",
+      "tlpIsUserDefined": true
+    },
+    "writeable": false,
+    "deletable": false,
+    "shared": "public",
+    "mine": false,
+    "coOwner": false,
+    "extensions": [],
+    "nPeople": 0,
+    "nGroups": 0,
+    "unconvertedContents": null,
+    "contents": {
+      "editorType": "draft",
+      "plainText": "Threat Type\nDescribe the type of Collection being created\nOverview\nGive a succinct overview of the threat involved\nIndicators of Compromise\n 1.1.1.1 https://ru.wikipedia.org/wiki cf23df2207d99a74fbe169e3eba035e633b65d94 \n 108.177.16.0 CVE-2015-0313 poehali@namore.com stopspam.ru/tak/kak jorik.txt \nya.com 152c883836f1f3eec207395ac6f8e0c6 .ru50d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c \nProtection\nShare best practices for protection against this threat\nRecommendations\nRecommend a course of action, resources or applications to remediate this threat\nReferences\nAdd further resources and information about this threat",
+      "wiki": "Threat Type\nDescribe the type of Collection being created\nOverview\nGive a succinct overview of the threat involved\nIndicators of Compromise\n 1.1.1.1 https://ru.wikipedia.org/wiki cf23df2207d99a74fbe169e3eba035e633b65d94 \n 108.177.16.0 CVE-2015-0313 poehali@namore.com stopspam.ru/tak/kak jorik.txt \nya.com 152c883836f1f3eec207395ac6f8e0c6 .ru50d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c \nProtection\nShare best practices for protection against this threat\nRecommendations\nRecommend a course of action, resources or applications to remediate this threat\nReferences\nAdd further resources and information about this threat",
+      "rawContentState": {
+        "blocks": [
+          {
+            "key": "1988j",
+            "text": "Threat Type",
+            "type": "header-one",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [],
+            "data": {}
+          },
+          {
+            "key": "f1988",
+            "text": "Describe the type of Collection being created",
+            "type": "unstyled",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [],
+            "data": {}
+          },
+          {
+            "key": "989eq",
+            "text": "Overview",
+            "type": "header-one",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [],
+            "data": {}
+          },
+          {
+            "key": "e6gah",
+            "text": "Give a succinct overview of the threat involved",
+            "type": "unstyled",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [],
+            "data": {}
+          },
+          {
+            "key": "73loq",
+            "text": "Indicators of Compromise",
+            "type": "header-one",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [],
+            "data": {}
+          },
+          {
+            "key": "3ge65",
+            "text": " 1.1.1.1 https://ru.wikipedia.org/wiki cf23df2207d99a74fbe169e3eba035e633b65d94 ",
+            "type": "unstyled",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [
+              {
+                "offset": 1,
+                "length": 7,
+                "key": 0
+              },
+              {
+                "offset": 9,
+                "length": 29,
+                "key": 1
+              },
+              {
+                "offset": 39,
+                "length": 40,
+                "key": 2
+              }
+            ],
+            "data": {}
+          },
+          {
+            "key": "6efvp",
+            "text": " 108.177.16.0 CVE-2015-0313 poehali@namore.com stopspam.ru/tak/kak jorik.txt ",
+            "type": "unstyled",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [
+              {
+                "offset": 1,
+                "length": 12,
+                "key": 3
+              },
+              {
+                "offset": 14,
+                "length": 13,
+                "key": 4
+              },
+              {
+                "offset": 47,
+                "length": 19,
+                "key": 5
+              },
+              {
+                "offset": 67,
+                "length": 9,
+                "key": 6
+              }
+            ],
+            "data": {}
+          },
+          {
+            "key": "a9563",
+            "text": "ya.com 152c883836f1f3eec207395ac6f8e0c6 .ru50d858e0985ecc7f60418aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c ",
+            "type": "unstyled",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [
+              {
+                "offset": 0,
+                "length": 6,
+                "key": 7
+              },
+              {
+                "offset": 7,
+                "length": 32,
+                "key": 8
+              },
+              {
+                "offset": 43,
+                "length": 64,
+                "key": 9
+              }
+            ],
+            "data": {}
+          },
+          {
+            "key": "29es1",
+            "text": "Protection",
+            "type": "header-one",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [],
+            "data": {}
+          },
+          {
+            "key": "79k7",
+            "text": "Share best practices for protection against this threat",
+            "type": "unstyled",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [],
+            "data": {}
+          },
+          {
+            "key": "7ua1h",
+            "text": "Recommendations",
+            "type": "header-one",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [],
+            "data": {}
+          },
+          {
+            "key": "1fnn",
+            "text": "Recommend a course of action, resources or applications to remediate this threat",
+            "type": "unstyled",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [],
+            "data": {}
+          },
+          {
+            "key": "l9da",
+            "text": "References",
+            "type": "header-one",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [],
+            "data": {}
+          },
+          {
+            "key": "78bt3",
+            "text": "Add further resources and information about this threat",
+            "type": "unstyled",
+            "depth": 0,
+            "inlineStyleRanges": [],
+            "entityRanges": [],
+            "data": {}
+          }
+        ],
+        "entityMap": {
+          "0": {
+            "type": "OBSERVABLE",
+            "mutability": "IMMUTABLE",
+            "data": {
+              "type": "IP",
+              "id": "1.1.1.1"
+            }
+          },
+          "1": {
+            "type": "OBSERVABLE",
+            "mutability": "IMMUTABLE",
+            "data": {
+              "type": "URL",
+              "id": "https://ru.wikipedia.org/wiki"
+            }
+          },
+          "2": {
+            "type": "OBSERVABLE",
+            "mutability": "IMMUTABLE",
+            "data": {
+              "type": "MAL",
+              "id": "cf23df2207*******169e3eba035e633b65d94"
+            }
+          },
+          "3": {
+            "type": "OBSERVABLE",
+            "mutability": "IMMUTABLE",
+            "data": {
+              "type": "IP",
+              "id": "108.177.16.0"
+            }
+          },
+          "4": {
+            "type": "OBSERVABLE",
+            "mutability": "IMMUTABLE",
+            "data": {
+              "type": "VUL",
+              "id": "CVE-2015-0313"
+            }
+          },
+          "5": {
+            "type": "OBSERVABLE",
+            "mutability": "IMMUTABLE",
+            "data": {
+              "type": "URL",
+              "id": "stopspam.ru/tak/kak"
+            }
+          },
+          "6": {
+            "type": "OBSERVABLE",
+            "mutability": "IMMUTABLE",
+            "data": {
+              "type": "URL",
+              "id": "jorik.txt"
+            }
+          },
+          "7": {
+            "type": "OBSERVABLE",
+            "mutability": "IMMUTABLE",
+            "data": {
+              "type": "URL",
+              "id": "ya.com"
+            }
+          },
+          "8": {
+            "type": "OBSERVABLE",
+            "mutability": "IMMUTABLE",
+            "data": {
+              "type": "MAL",
+              "id": "152c883836*******207395ac6f8e0c6"
+            }
+          },
+          "9": {
+            "type": "OBSERVABLE",
+            "mutability": "IMMUTABLE",
+            "data": {
+              "type": "MAL",
+              "id": "50d858e0985ecc*******aaf0cc5ab587f42c2570a884095a9e8ccacd0f6545c"
+            }
+          }
+        }
+      },
+      "reports": []
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "xforce_collection_id": "7c551c65*******aafcee3d838f052"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-xforce",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 584,
+    "timestamp": "2023-05-09 09:11:51"
+  }
+}

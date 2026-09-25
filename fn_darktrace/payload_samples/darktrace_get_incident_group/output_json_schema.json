@@ -1,0 +1,186 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "incident_group": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "active": {
+              "type": "boolean"
+            },
+            "acknowledged": {
+              "type": "boolean"
+            },
+            "pinned": {
+              "type": "boolean"
+            },
+            "userTriggered": {
+              "type": "boolean"
+            },
+            "externalTriggered": {
+              "type": "boolean"
+            },
+            "previousIds": {
+              "type": "array"
+            },
+            "groupUrl": {
+              "type": "string"
+            },
+            "incidentEvents": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "uuid": {
+                    "type": "string"
+                  },
+                  "start": {
+                    "type": "integer"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "triggerDid": {
+                    "type": "integer"
+                  },
+                  "visible": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "devices": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "initialDevices": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "category": {
+              "type": "string"
+            },
+            "groupScore": {
+              "type": "number"
+            },
+            "start": {
+              "type": "integer"
+            },
+            "end": {
+              "type": "integer"
+            },
+            "edges": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "isAction": {
+                    "type": "boolean"
+                  },
+                  "source": {
+                    "type": "object",
+                    "properties": {
+                      "nodeType": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "target": {
+                    "type": "object",
+                    "properties": {
+                      "nodeType": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "integer"
+                      }
+                    }
+                  },
+                  "start": {
+                    "type": "integer"
+                  },
+                  "incidentEvent": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "details": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "key": {},
+                        "type": {
+                          "type": "string"
+                        },
+                        "values": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "darktrace_incident_group_id": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

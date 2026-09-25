@@ -1,0 +1,32 @@
+{
+  {# JINJA template for creating a new SOAR incident from an endpoint #}
+  {# See https://ibmresilient.github.io/resilient-python-api/pages/resilient-lib/resilient-lib.html#module-resilient_lib.components.templates_common
+     for details on available jinja methods. Examples for `soar_substitute` and more are included below.
+  #}
+  {# modify to specify your specific **data** fields #}
+  "name": "{{ title }} - Rapid7 InsightIDR",
+  "description": "{{ title | replace('"', '\\"') }}",
+  {# start_date cannot be after discovered_date #}
+  {# {% set start_date = first_alert_time if **happenedAt** <= **receivedAt** else **receivedAt** %} #}
+  "discovered_date": {{ created_time | soar_datetimeformat(split_at='.') }},
+  "start_date": {{ created_time | soar_datetimeformat(split_at='.') }},
+  {# if alert users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  {# "owner_id": "{{ **assignedTo** |soar_substitute('{"Automation": "soar_user1@example.com", "default_user@example.com": "soar_user2@example.com", "DEFAULT": "default_user@example.com" }') }}", #}
+  "plan_status": "A",
+  {#"plan_status": "{{ status|soar_substitute('{"CLOSED": "C", "INVESTIGATING": "A", "OPEN": "A", "WAITING": "A"}') }}",#}
+  {% if priority|lower == "critical" %}
+    "severity_code": "High",
+    {% elif priority|lower == "high" %}
+    "severity_code": "High",
+    {% elif priority|lower == "medium" %}
+    "severity_code": "Medium",
+    {% elif priority|lower == "low" %}
+    "severity_code": "Low",
+    {% else %}
+    "severity_code": "High",
+  {% endif %}
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "rapid7_insight_idr_rrn": "{{ rrn }}"
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "creationTime": 1582213002000,
+  "commentCount": 0,
+  "pbid": 123,
+  "time": 1582212986000,
+  "model": {
+    "then": {
+      "name": "Compromise::HTTP Beaconing to Rare Destination",
+      "pid": 143,
+      "phid": 123,
+      "uuid": "1a814475-5fef-499b-a467-4e2e68352cbb",
+      "logic": {
+        "data": [
+          265
+        ],
+        "type": "componentList",
+        "version": 1
+      },
+      "throttle": 3600,
+      "sharedEndpoints": false,
+      "actions": {
+        "alert": true,
+        "antigena": {},
+        "breach": true,
+        "model": true,
+        "setPriority": false,
+        "setTag": false,
+        "setType": false
+      },
+      "tags": [
+        "AP: C2 Comms",
+        "DNS Server"
+      ],
+      "interval": 0,
+      "delay": 0,
+      "sequenced": false,
+      "active": true,
+      "modified": "2019-11-15 11:42:21",
+      "activeTimes": {
+        "devices": {},
+        "tags": {},
+        "type": "exclusions",
+        "version": 2
+      },
+      "priority": 5,
+      "category": "Critical",
+      "compliance": false,
+      "autoUpdatable": true,
+      "autoUpdate": true,
+      "autoSuppress": true,
+      "description": "A device is making regular HTTP connections to a rare external location...",
+      "behaviour": "decreasing",
+      "defeats": [
+        {
+          "arguments": {
+            "value": "www.example.com"
+          },
+          "comparator": "does not match",
+          "defeatID": 1,
+          "filtertype": "Connection hostname"
+        }
+      ],
+      "created": {
+        "by": "System"
+      },
+      "edited": {
+        "by": "Sarah",
+        "userID": 24
+      },
+      "version": 16
+    }
+  },
+  "now": {
+    "name": "Compromise::HTTP Beaconing to Rare Destination",
+    "pid": 143,
+    "phid": 123,
+    "uuid": "1a814475-5fef-499b-a467-4e2e68352cbb",
+    "logic": {
+      "data": [
+        265
+      ],
+      "type": "componentList",
+      "version": 1
+    },
+    "throttle": 3600,
+    "sharedEndpoints": false,
+    "actions": {
+      "alert": true,
+      "antigena": {},
+      "breach": true,
+      "model": true,
+      "setPriority": false,
+      "setTag": false,
+      "setType": false
+    },
+    "tags": [
+      "AP: C2 Comms",
+      "DNS Server"
+    ],
+    "interval": 0,
+    "delay": 0,
+    "sequenced": false,
+    "active": true,
+    "modified": "2019-11-15 11:42:21",
+    "activeTimes": {
+      "devices": {},
+      "tags": {},
+      "type": "exclusions",
+      "version": 2
+    },
+    "priority": 5,
+    "category": "Critical",
+    "compliance": false,
+    "autoUpdatable": true,
+    "autoUpdate": true,
+    "autoSuppress": true,
+    "description": "A device is making regular HTTP connections to a rare external location...",
+    "behaviour": "decreasing",
+    "defeats": [
+      {
+        "arguments": {
+          "value": "www.example.com"
+        },
+        "comparator": "does not match",
+        "defeatID": 1,
+        "filtertype": "Connection hostname"
+      }
+    ],
+    "created": {
+      "by": "System"
+    },
+    "edited": {
+      "by": "Sarah",
+      "userID": 24
+    },
+    "version": 16
+  },
+  "triggeredComponents": [
+    {
+      "time": 1582212985000,
+      "cbid": 305422,
+      "cid": 265,
+      "chid": 265,
+      "size": 3,
+      "threshold": 2,
+      "interval": 14400,
+      "logic": {
+        "data": {
+          "left": "A",
+          "operator": "AND",
+          "right": {
+            "left": "B",
+            "operator": "AND",
+            "right": ""
+          }
+        },
+        "version": "v0.1"
+      },
+      "metric": {
+        "mlid": 1,
+        "name": "externalconnections",
+        "label": "External Connections"
+      },
+      "triggeredFilters": [
+        {
+          "cfid": 2087,
+          "id": "A",
+          "filterType": "Rare external endpoint",
+          "arguments": {
+            "value": 90
+          },
+          "comparatorType": ">",
+          "trigger": {
+            "value": "94"
+          }
+        }
+      ]
+    }
+  ],
+  "score": 0.325,
+  "device": {
+    "did": 316,
+    "ip": "10.0.56.12",
+    "ips": [
+      {
+        "ip": "10.0.56.12",
+        "timems": 1581508800000,
+        "time": "2020-02-12 12:00:00",
+        "sid": 23
+      }
+    ],
+    "sid": 23,
+    "hostname": "Sarah Development",
+    "firstSeen": 1581591070000,
+    "lastSeen": 1582645442000,
+    "typename": "desktop",
+    "typelabel": "Desktop"
+  }
+}

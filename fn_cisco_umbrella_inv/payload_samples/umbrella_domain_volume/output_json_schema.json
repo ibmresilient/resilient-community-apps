@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "domain_volume": {
+          "type": "object",
+          "properties": {
+            "dates": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "queries": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "dates_converted": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "domain_name": {
+          "type": "string"
+        },
+        "query_execution_time": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "umbinv_stop_relative": {
+          "type": "string"
+        },
+        "umbinv_match": {
+          "type": "string"
+        },
+        "umbinv_start_epoch": {},
+        "umbinv_stop_epoch": {},
+        "umbinv_domain": {
+          "type": "string"
+        },
+        "umbinv_start_relative": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

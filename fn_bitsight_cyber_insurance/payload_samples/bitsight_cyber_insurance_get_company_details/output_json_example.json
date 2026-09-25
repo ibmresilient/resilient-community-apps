@@ -1,0 +1,127 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "custom_id": null,
+    "name": "Saperix, Inc.",
+    "description": "Saperix Technologies LLC develops risk analysis software solutions.",
+    "ipv4_count": 15082,
+    "people_count": 700,
+    "shortname": "Saperix",
+    "industry": "Technology",
+    "industry_slug": "technology",
+    "sub_industry": "Computer & Network Security",
+    "sub_industry_slug": "computer_network_security",
+    "homepage": "http://www.saperix.com",
+    "primary_domain": "saperix.com",
+    "type": "CURATED",
+    "display_url": "https://service.bitsighttech.com/app/spm/company/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/overview/",
+    "rating_details": {
+      "botnet_infections": {
+        "name": "Botnet Infections",
+        "rating": 600,
+        "grade": "D",
+        "percentile": 25,
+        "grade_color": "#E17141",
+        "category": "Compromised Systems",
+        "category_order": 0,
+        "beta": false,
+        "order": 0,
+        "display_url": "https://service.bitsighttech.com/app/spm/company/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/findings/?affects_rating=true&risk_vector=botnet_infections"
+      },
+      "spam_propagation": {
+        "name": "Spam Propagation",
+        "rating": 790,
+        "grade": "A",
+        "percentile": 90,
+        "grade_color": "#239563",
+        "category": "Compromised Systems",
+        "category_order": 0,
+        "beta": false,
+        "order": 1,
+        "display_url": "https://service.bitsighttech.com/app/spm/company/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/findings/?affects_rating=true&risk_vector=spam_propagation"
+      }
+    },
+    "ratings": [
+      {
+        "rating_date": "2025-04-15",
+        "rating": 500,
+        "range": "Basic",
+        "rating_color": "#C23024"
+      },
+      {
+        "rating_date": "2025-04-14",
+        "rating": 500,
+        "range": "Basic",
+        "rating_color": "#C23024"
+      },
+      {
+        "rating_date": "2025-04-13",
+        "rating": 500,
+        "range": "Basic",
+        "rating_color": "#C23024"
+      }
+    ],
+    "search_count": 17880,
+    "subscription_type": "Total Risk Monitoring",
+    "sparkline": "https://api.bitsighttech.com/ratings/v1/companies/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/sparkline?size=small",
+    "subscription_type_key": "continuous_monitoring",
+    "subscription_end_date": null,
+    "bulk_email_sender_status": "null",
+    "service_provider": false,
+    "customer_monitoring_count": 186,
+    "available_upgrade_types": [],
+    "has_company_tree": true,
+    "has_preferred_contact": true,
+    "is_bundle": false,
+    "rating_industry_median": "below",
+    "primary_company": {
+      "guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "name": "Saperix Corporate"
+    },
+    "permissions": {
+      "can_manage_primary_company": true,
+      "can_annotate": true,
+      "can_view_ip_attributions": true,
+      "can_view_infrastructure": true,
+      "can_view_forensics": true,
+      "can_download_company_report": true,
+      "can_view_company_reports": true,
+      "can_view_service_providers": true,
+      "can_request_self_published_entity": true,
+      "has_control": true
+    },
+    "is_primary": false,
+    "security_grade": null,
+    "in_spm_portfolio": true,
+    "is_mycomp_mysubs_bundle": false,
+    "company_features": [],
+    "compliance_claim": {
+      "trust_page": "https://saperix.com",
+      "certifications": [
+        {
+          "name": "NIST CSF",
+          "slug": "nist-csf"
+        }
+      ]
+    },
+    "is_csp": false,
+    "related_companies": [],
+    "has_delegated_security_controls": false,
+    "current_rating": 500
+  },
+  "raw": null,
+  "inputs": {
+    "bitsight_ci_company_guid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-bitsight-cyber-insurance",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 4081,
+    "timestamp": "2025-04-14 10:37:42"
+  }
+}

@@ -1,0 +1,510 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "type": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          },
+          "related": {
+            "type": "object",
+            "properties": {
+              "created_by": {
+                "type": "string"
+              },
+              "labels": {
+                "type": "string"
+              },
+              "inventory": {
+                "type": "string"
+              },
+              "project": {
+                "type": "string"
+              },
+              "organization": {
+                "type": "string"
+              },
+              "credentials": {
+                "type": "string"
+              },
+              "unified_job_template": {
+                "type": "string"
+              },
+              "stdout": {
+                "type": "string"
+              },
+              "execution_environment": {
+                "type": "string"
+              },
+              "job_events": {
+                "type": "string"
+              },
+              "job_host_summaries": {
+                "type": "string"
+              },
+              "activity_stream": {
+                "type": "string"
+              },
+              "notifications": {
+                "type": "string"
+              },
+              "create_schedule": {
+                "type": "string"
+              },
+              "job_template": {
+                "type": "string"
+              },
+              "cancel": {
+                "type": "string"
+              },
+              "project_update": {
+                "type": "string"
+              },
+              "relaunch": {
+                "type": "string"
+              }
+            }
+          },
+          "summary_fields": {
+            "type": "object",
+            "properties": {
+              "organization": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              },
+              "inventory": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "has_active_failures": {
+                    "type": "boolean"
+                  },
+                  "total_hosts": {
+                    "type": "integer"
+                  },
+                  "hosts_with_active_failures": {
+                    "type": "integer"
+                  },
+                  "total_groups": {
+                    "type": "integer"
+                  },
+                  "has_inventory_sources": {
+                    "type": "boolean"
+                  },
+                  "total_inventory_sources": {
+                    "type": "integer"
+                  },
+                  "inventory_sources_with_failures": {
+                    "type": "integer"
+                  },
+                  "organization_id": {
+                    "type": "integer"
+                  },
+                  "kind": {
+                    "type": "string"
+                  }
+                }
+              },
+              "execution_environment": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "image": {
+                    "type": "string"
+                  }
+                }
+              },
+              "project": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "scm_type": {
+                    "type": "string"
+                  },
+                  "allow_override": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "project_update": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  },
+                  "failed": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "job_template": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              },
+              "unified_job_template": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "unified_job_type": {
+                    "type": "string"
+                  }
+                }
+              },
+              "instance_group": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "is_container_group": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "created_by": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "username": {
+                    "type": "string"
+                  },
+                  "first_name": {
+                    "type": "string"
+                  },
+                  "last_name": {
+                    "type": "string"
+                  }
+                }
+              },
+              "user_capabilities": {
+                "type": "object",
+                "properties": {
+                  "delete": {
+                    "type": "boolean"
+                  },
+                  "start": {
+                    "type": "boolean"
+                  }
+                }
+              },
+              "labels": {
+                "type": "object",
+                "properties": {
+                  "count": {
+                    "type": "integer"
+                  },
+                  "results": {
+                    "type": "array"
+                  }
+                }
+              },
+              "credentials": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "kind": {
+                      "type": "string"
+                    },
+                    "cloud": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "created": {
+            "type": "string"
+          },
+          "modified": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "unified_job_template": {
+            "type": "integer"
+          },
+          "launch_type": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "execution_environment": {
+            "type": "integer"
+          },
+          "failed": {
+            "type": "boolean"
+          },
+          "started": {
+            "type": "string"
+          },
+          "finished": {
+            "type": "string"
+          },
+          "canceled_on": {},
+          "elapsed": {
+            "type": "number"
+          },
+          "job_explanation": {
+            "type": "string"
+          },
+          "execution_node": {
+            "type": "string"
+          },
+          "controller_node": {
+            "type": "string"
+          },
+          "launched_by": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            }
+          },
+          "work_unit_id": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "job_type": {
+            "type": "string"
+          },
+          "inventory": {
+            "type": "integer"
+          },
+          "project": {
+            "type": "integer"
+          },
+          "playbook": {
+            "type": "string"
+          },
+          "scm_branch": {
+            "type": "string"
+          },
+          "forks": {
+            "type": "integer"
+          },
+          "limit": {
+            "type": "string"
+          },
+          "verbosity": {
+            "type": "integer"
+          },
+          "extra_vars": {
+            "type": "string"
+          },
+          "job_tags": {
+            "type": "string"
+          },
+          "force_handlers": {
+            "type": "boolean"
+          },
+          "skip_tags": {
+            "type": "string"
+          },
+          "start_at_task": {
+            "type": "string"
+          },
+          "timeout": {
+            "type": "integer"
+          },
+          "use_fact_cache": {
+            "type": "boolean"
+          },
+          "organization": {
+            "type": "integer"
+          },
+          "job_template": {
+            "type": "integer"
+          },
+          "passwords_needed_to_start": {
+            "type": "array"
+          },
+          "allow_simultaneous": {
+            "type": "boolean"
+          },
+          "artifacts": {
+            "type": "object"
+          },
+          "scm_revision": {
+            "type": "string"
+          },
+          "instance_group": {
+            "type": "integer"
+          },
+          "diff_mode": {
+            "type": "boolean"
+          },
+          "job_slice_number": {
+            "type": "integer"
+          },
+          "job_slice_count": {
+            "type": "integer"
+          },
+          "webhook_service": {
+            "type": "string"
+          },
+          "webhook_credential": {},
+          "webhook_guid": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "tower_last_updated": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        "tower_job_status": {}
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

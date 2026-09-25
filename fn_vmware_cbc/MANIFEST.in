@@ -1,0 +1,15 @@
+include README.md
+include Dockerfile
+include apikey_permissions.txt
+recursive-include fn_vmware_cbc/util *
+recursive-include fn_vmware_cbc/lib *
+recursive-include fn_vmware_cbc/poller *
+include fn_vmware_cbc/LICENSE
+include doc/*.md
+include doc/screenshots/*
+include icons/*.png
+recursive-include payload_samples/*/ *.json
+include tox.ini
+recursive-include tests/ *
+
+global-exclude *.bak

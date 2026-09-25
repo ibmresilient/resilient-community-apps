@@ -1,0 +1,118 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": "",
+  "content": {
+    "@status": "success",
+    "@code": "19",
+    "result": {
+      "@total-count": "13",
+      "@count": "13",
+      "entry": [
+        {
+          "@name": "1.1.1.1",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "ip-netmask": "1.1.1.1"
+        },
+        {
+          "@name": "google",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "fqdn": "www.google.com"
+        },
+        {
+          "@name": "2.2.2.2",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "description": "2.2.2.2",
+          "ip-netmask": "2.2.2.2"
+        },
+        {
+          "@name": "google.com",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "description": "google.com",
+          "fqdn": "google.com"
+        },
+        {
+          "@name": "www.ibm.com",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "description": "www.ibm.com",
+          "fqdn": "www.ibm.com"
+        },
+        {
+          "@name": "3.3.3.3",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "description": "3.3.3.3",
+          "ip-netmask": "3.3.3.3"
+        },
+        {
+          "@name": "1.2.3.4",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "description": "1.2.3.4",
+          "ip-netmask": "1.2.3.4"
+        },
+        {
+          "@name": "test.com",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "description": "test.com",
+          "fqdn": "test.com"
+        },
+        {
+          "@name": "abc.com",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "description": "abc.com",
+          "fqdn": "abc.com"
+        },
+        {
+          "@name": "def.com",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "description": "def.com",
+          "fqdn": "def.com"
+        },
+        {
+          "@name": "123.123.123.123",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "description": "123.123.123.123",
+          "fqdn": "123.123.123.123"
+        },
+        {
+          "@name": "122.122.122.122",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "description": "122.122.122.122",
+          "ip-netmask": "122.122.122.122"
+        },
+        {
+          "@name": "42.36.75.4",
+          "@location": "vsys",
+          "@vsys": "vsys1",
+          "description": "42.36.75.4",
+          "ip-netmask": "42.36.75.4"
+        }
+      ]
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "panorama_location": "vsys",
+    "panorama_vsys": "vsys1",
+    "panorama_label": "panOS"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-pa-panorama",
+    "package_version": "1.5.0",
+    "host": "local",
+    "execution_time_ms": 3280,
+    "timestamp": "2024-08-09 09:01:13"
+  }
+}

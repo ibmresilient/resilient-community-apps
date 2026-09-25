@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "b3763ac5-6319-496b-b404-6c5000418a81_4c4831e9-2ed7-a44a-e530-c784cc7c2ddc": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "kind": {
+                "type": "string"
+              },
+              "properties": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string"
+                  },
+                  "friendlyName": {
+                    "type": "string"
+                  },
+                  "resourceId": {
+                    "type": "string"
+                  },
+                  "subscriptionId": {
+                    "type": "string"
+                  },
+                  "additionalData": {
+                    "type": "object",
+                    "properties": {
+                      "ResourceType": {
+                        "type": "string"
+                      },
+                      "ResourceName": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "hostName": {
+                    "type": "string"
+                  },
+                  "azureID": {
+                    "type": "string"
+                  },
+                  "omsAgentID": {
+                    "type": "string"
+                  },
+                  "accountName": {
+                    "type": "string"
+                  }
+                }
+              },
+              "resilient_artifact_type": {
+                "type": "string"
+              },
+              "resilient_artifact_value": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "sentinel_incident_id": {
+          "type": "string"
+        },
+        "sentinel_profile": {},
+        "sentinel_label": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

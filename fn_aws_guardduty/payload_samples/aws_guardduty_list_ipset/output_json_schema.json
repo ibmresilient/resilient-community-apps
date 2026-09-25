@@ -1,0 +1,88 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Generated schema for Root",
+    "type": "object",
+    "properties": {
+      "version": {
+        "type": "number"
+      },
+      "success": {
+        "type": "string"
+      },
+      "reason": {
+        "type": "string"
+      },
+      "content": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "raw": {
+        "type": "string"
+      },
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "aws_gd_max_results": {
+            "type": "number"
+          },
+          "aws_gd_region": {
+            "type": "string"
+          },
+          "aws_gd_next_token": {
+            "type": "string"
+          },
+          "aws_gd_detector_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "aws_gd_max_results",
+          "aws_gd_region",
+          "aws_gd_next_token",
+          "aws_gd_detector_id"
+        ]
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "package": {
+            "type": "string"
+          },
+          "package_version": {
+            "type": "string"
+          },
+          "host": {
+            "type": "string"
+          },
+          "execution_time_ms": {
+            "type": "number"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "version",
+          "package",
+          "package_version",
+          "host",
+          "execution_time_ms",
+          "timestamp"
+        ]
+      }
+    },
+    "required": [
+      "version",
+      "success",
+      "reason",
+      "content",
+      "raw",
+      "inputs",
+      "metrics"
+    ]
+}

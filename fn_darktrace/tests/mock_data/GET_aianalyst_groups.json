@@ -1,0 +1,57 @@
+[
+  {
+    "id": "g04a3f36e-4u8w-v9dh-x6lb-894778cf9633",
+    "active": true,
+    "acknowledged": false,
+    "pinned": false,
+    "userTriggered": false,
+    "externalTriggered": false,
+    "previousIds": [
+      "gc6e8baed-0729-437d-9268-e68d696491c1"
+    ],
+    "incidentEvents": [
+      {
+        "uuid": "04a3f36e-4u8w-v9dh-x6lb-894778cf9633",
+        "start": 1649076587600,
+        "title": "Unusual Internal Upload",
+        "triggerDid": 1044,
+        "visible": true
+      }
+    ],
+    "devices": [
+      1044
+    ],
+    "initialDevices": [
+      1044
+    ],
+    "category": "critical",
+    "groupScore": 99.93292997390672,
+    "start": 1649076587600,
+    "end": 1649243309871,
+    "edges": [
+      {
+        "isAction": false,
+        "source": {
+          "nodeType": "device",
+          "value": 13255
+        },
+        "target": {
+          "nodeType": "device",
+          "value": "1317"
+        },
+        "start": null,
+        "incidentEvent": "04a3f36e-4u8w-v9dh-x6lb-894778cf9633",
+        "description": "Internal Upload",
+        "details": [
+          {
+            "key": null,
+            "type": "dataVolume",
+            "values": [
+              3274396882
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

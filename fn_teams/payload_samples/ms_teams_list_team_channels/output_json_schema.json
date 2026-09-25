@@ -1,0 +1,78 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "success": {
+        "type": "boolean"
+      },
+      "reason": {
+        "type": "string"
+      },
+      "content": {
+        "type": "object",
+        "properties": {
+          "@odata.context": {
+            "type": "string"
+          },
+          "@odata.count": {
+            "type": "integer"
+          },
+          "value": {
+            "type": "array",
+            "items": [
+              {
+                "type": "object",
+                "properties": {
+                  "@odata.id": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "createdDateTime": {
+                    "type": "string"
+                  },
+                  "displayName": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "null"
+                  },
+                  "isFavoriteByDefault": {
+                    "type": "null"
+                  },
+                  "email": {
+                    "type": "null"
+                  },
+                  "tenantId": {
+                    "type": "string"
+                  },
+                  "webUrl": {
+                    "type": "string"
+                  },
+                  "membershipType": {
+                    "type": "string"
+                  },
+                  "isArchived": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "@odata.context",
+          "@odata.count",
+          "value"
+        ]
+      }
+    },
+    "required": [
+      "success",
+      "reason",
+      "content"
+    ]
+  }  
