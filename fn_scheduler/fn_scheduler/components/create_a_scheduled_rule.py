@@ -216,17 +216,36 @@ def validate_actions(rest_client, inc, incident_id, object_id, \
 def get_id(actions, playbooks, scheduler_rule_name) -> int:
     """return the rule_id/playbook_id for a given rule/playbook name enabled for this object
 
+    Lookup is case-insensitive and matches playbooks by display_name. Rules are
+    matched by name case-insensitively.
+
+    Note: the incident REST endpoint (GET /incidents/{id}) only returns
+    'playbook_handle' and 'display_name' per playbook entry — the export key
+    (name field) is not included in the incident response. Matching by export
+    key is therefore not supported here. Users must enter the Playbook
+    display name (any casing is accepted).
+
     :param actions: actions for this object
     :type actions: dict
-    :param playbooks: playbooks for this object
+    :param playbooks: playbooks for this object (from incident response)
     :type playbooks: dict
-    :param scheduler_rule_name: rule/playbook name to lookup
+    :param scheduler_rule_name: rule/playbook display name to lookup
     :type scheduler_rule_name: str
     :return: rule/playbook id, or None
     :rtype: int
     """
-    plbk_id_lookup = {playbk['display_name']: playbk['playbook_handle'] for playbk in playbooks}
-    rule_id_lookup = {action['name']: action['id'] for action in actions if action['enabled']}
-    id_lookup = {**plbk_id_lookup, **rule_id_lookup}
+    lookup_key = scheduler_rule_name.lower()
 
-    return id_lookup.get(scheduler_rule_name)
+    # Match playbook by display_name, case-insensitively.
+    # Note: the incident playbooks array does not contain the export key (name
+    # field) — only display_name and playbook_handle are returned by SOAR.
+    for playbk in playbooks:
+        if playbk['display_name'].lower() == lookup_key:
+            return playbk['playbook_handle']
+
+    # Match rule by name, case-insensitively
+    for action in actions:
+        if action['enabled'] and action['name'].lower() == lookup_key:
+            return action['id']
+
+    return None

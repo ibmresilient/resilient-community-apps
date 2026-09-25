@@ -1,6 +1,6 @@
 [
-  "fn_service_now",
   "fn_scheduler",
+  "fn_service_now",
   "fn_splunk_integration",
   "fn_jira",
   "fn_outbound_email",

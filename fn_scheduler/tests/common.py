@@ -3,6 +3,23 @@
 common files for tests
 """
 
+def setup_mock_playbooks(mock_playbooks, enabled=True):
+    """Mock the /playbooks/query_paged API response"""
+    status = 'enabled' if enabled else 'disabled'
+    mock_playbooks.return_value = {
+        "data": [
+            {
+                "id": 102,
+                "name": "demo_scheduled_playbook",
+                "display_name": "Demo Scheduled Playbook",
+                "playbook_handle": 102,
+                "status": status,
+                "object_type": 0,
+                "activation_type": "manual"
+            }
+        ]
+    }
+
 def setup_mock_incident(mock_inc, end_date=None, success=True):
     # Configure the mock to return a response with an OK status code.
     if not success:
