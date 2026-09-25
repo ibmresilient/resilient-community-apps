@@ -45,6 +45,7 @@
 -->
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 2.2.1   | Sep. 2026 | Improved Rule and Playbook name matching and schedule failure reporting. Updated supported platform and Python versions. |
 | 2.2.0   | Feb. 2025 | Support for MSSP Child orgs |
 | 2.1.2   | Jan. 2024 | Refresh python packages SQLAlchemy and psycopg |
 | 2.1.1   | Jul. 2023 | Added optional dependency postgresql to SQLalchemy |
@@ -127,13 +128,13 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, App Host and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `46.0`.
+* SOAR platform >= `51.0.9.0`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `46.0`.
+* SOAR platform >= `51.0.9.0`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
-* Integration server is running `resilient_circuits>=46.0.0`.
+* Integration server is running `resilient_circuits>=51.0.0` on Python 3.11 or later.
 * If using an API key account, make sure the account provides the following minimum permissions:
   | Name | Permissions |
   | ---- | ----------- |
@@ -166,14 +167,15 @@ These guides are available on the IBM Documentation website at [ibm.biz/cp4s-doc
 The app **does** support a proxy server.
 
 ### Python Environment
-Both Python 3.6, 3.9 and 3.11 are supported.
-Additional package dependencies may exist for each of these packages:
-* APScheduler >= 3.9;python_version >= '3.6'
-* python-dateutil>=2.8.1
-* pytz
-* resilient_circuits>=51.0
-* resilient_lib>=51.0
-* SQLAlchemy>=1.3.8
+Python 3.11 and later are supported.
+
+The app has the following Python package requirements:
+* `APScheduler>=3.9`
+* `psycopg2-binary>=2.7`
+* `python-dateutil>=2.8.1`
+* `pytz`
+* `resilient_circuits>=51.0.0`
+* `SQLAlchemy>=1.3.8`
 
 ---
 
@@ -358,7 +360,7 @@ if results.get("success"):
   else:
     row['rule'] = "<a href='#customize?tab=actions&id={}'>{}</a>".format(job['args'][5], job['args'][4])
 else:
-  incident.addNote("Schedule a Rule/Playbook failed: {}".format(result.get("reason")))
+  incident.addNote("Schedule a Rule/Playbook failed: {}".format(results.get("reason")))
 ```
 
 </p>
