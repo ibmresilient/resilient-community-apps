@@ -1,0 +1,23 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "message": "Information successfully posted in channel General"
+  },
+  "raw": null,
+  "inputs": {
+    "teams_channel": "General",
+    "incident_id": 2121,
+    "teams_mrkdown": true,
+    "teams_payload": "{ \"summary\": \"SOAR Incident\", \"sections\": [ \n  { \"facts\": [ \n    { \"name\": \"Name\", \"value\": \"testing channels\" }, \n    { \"name\": \"Description\", \"value\": \"-\" }, \n    { \"name\": \"Id\", \"value\": \"2121\" }, \n    { \"name\": \"Owner\", \"value\": \"i@example.com\" }, \n    { \"name\": \"Types\", \"value\": \"\" }, \n    { \"name\": \"NIST Attack Vectors\", \"value\": \"\" }, \n    { \"name\": \"Create Date\", \"value\": \"1684173230796\" }, \n    { \"name\": \"Date Occurred\", \"value\": \"-\" }, \n    { \"name\": \"Discovered Date\", \"value\": \"1684173210301\" }, \n    { \"name\": \"Confirmed\", \"value\": \"True\" }, \n    { \"name\": \"Severity\", \"value\": \"Low\" } \n   ]\n  }\n ] \n} \n"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-teams",
+    "package_version": "2.1.0",
+    "host": "local",
+    "execution_time_ms": 2038,
+    "timestamp": "2023-05-15 14:21:57"
+  }
+}

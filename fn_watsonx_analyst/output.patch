@@ -1,0 +1,41 @@
+diff --git a/fn_watsonx_analyst/fn_watsonx_analyst/config/rich_text.yaml b/fn_watsonx_analyst/fn_watsonx_analyst/config/rich_text.yaml
+index 8e2fe94db..0b35ad2a3 100644
+--- a/fn_watsonx_analyst/fn_watsonx_analyst/config/rich_text.yaml
++++ b/fn_watsonx_analyst/fn_watsonx_analyst/config/rich_text.yaml
+@@ -6,6 +6,8 @@ newline_tags:
+     - "</p>"
+     - "<ul>"
+     - "</ul>"
++    - "<ol>"
++    - "</ol>"
+     - "</h1>"
+     - "</h2>"
+     - "</h3>"
+diff --git a/fn_watsonx_analyst/tests/util/test_rich_text.py b/fn_watsonx_analyst/tests/util/test_rich_text.py
+index bf9692e0e..a7d33b9f8 100644
+--- a/fn_watsonx_analyst/tests/util/test_rich_text.py
++++ b/fn_watsonx_analyst/tests/util/test_rich_text.py
+@@ -60,6 +60,16 @@ echo 'hello world'
+ 
+         assert RichTextHelper.toHTML(inputstr).strip() == "<p>bruh_moment_</p>"
+ 
++    def test_ensure_ordered_tags_whitespace(self):
++        inputstr = """
++1. test 1
++1. test 2
++1. test 3
++""".strip()
++        assert RichTextHelper.toHTML(inputstr) == """<ol>
++<li>test 1</li><li>test 2</li><li>test 3</li></ol>
++"""
++
+     def test_nested_lists(self):
+         inputstr = """ - **Email Details:**
+       * Sent to: frank-adams@baneandox.com
+@@ -118,4 +128,4 @@ echo 'hello world'
+ <li><strong>SANS Internet Storm Center Rating:</strong></li></ul>
+ </li><li>IP Address: 128.210.157.251</li><li>Threat Score: 10.0</li></ul>
+ </li></ul>
+-"""
+\ No newline at end of file
++"""

@@ -1,0 +1,220 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "data": [
+      {
+        "agentDetectionInfo": {
+          "accountId": "433241117337583618",
+          "accountName": "SentinelOne",
+          "agentDetectionState": null,
+          "agentDomain": "unknown",
+          "agentIpV4": "10.21.10.88,9.46.92.211",
+          "agentIpV6": "",
+          "agentLastLoggedInUserName": "",
+          "agentMitigationMode": "detect",
+          "agentOsName": "Linux",
+          "agentOsRevision": "CentOS release 7.9.2009 (Core) 3.10.0-1160.49.1.el7.x86_64",
+          "agentRegisteredAt": "2021-10-26T13:18:19.132188Z",
+          "agentUuid": "8329e587-bbe9-b906-a6a5-646e2686eba9",
+          "agentVersion": "21.10.1.6",
+          "externalIp": "129.41.87.3",
+          "groupId": "607447413805059643",
+          "groupName": "Default Group",
+          "siteId": "606060606060606060",
+          "siteName": "mySite"
+        },
+        "agentRealtimeInfo": {
+          "accountId": "43434343434343434343434343",
+          "accountName": "SentinelOne",
+          "activeThreats": 1,
+          "agentComputerName": "SplunkHF1.fyre.ibm.com",
+          "agentDecommissionedAt": null,
+          "agentDomain": "unknown",
+          "agentId": "1275282318251495460",
+          "agentInfected": true,
+          "agentIsActive": true,
+          "agentIsDecommissioned": false,
+          "agentMachineType": "server",
+          "agentMitigationMode": "detect",
+          "agentNetworkStatus": "connected",
+          "agentOsName": "Linux",
+          "agentOsRevision": "CentOS release 7.9.2009 (Core) 3.10.0-1160.49.1.el7.x86_64",
+          "agentOsType": "linux",
+          "agentUuid": "8329e587-bbe9-b906-a6a5-646e2686eba9",
+          "agentVersion": "21.10.1.6",
+          "groupId": "6060606060606060606",
+          "groupName": "Default Group",
+          "networkInterfaces": [
+            {
+              "id": "1275282318268272678",
+              "inet": [
+                "9.46.92.211"
+              ],
+              "inet6": [],
+              "name": "eth1",
+              "physical": "00:00:09:2E:5C:D3"
+            },
+            {
+              "id": "1275282318259884069",
+              "inet": [
+                "10.21.10.88"
+              ],
+              "inet6": [],
+              "name": "eth0",
+              "physical": "00:00:0A:15:0A:58"
+            }
+          ],
+          "operationalState": "na",
+          "rebootRequired": false,
+          "scanAbortedAt": "2021-12-10T21:57:56.711226Z",
+          "scanFinishedAt": "2021-12-10T02:33:00.768224Z",
+          "scanStartedAt": "2021-12-13T16:22:40.612822Z",
+          "scanStatus": "started",
+          "siteId": "606060606060606060",
+          "siteName": "IBM",
+          "storageName": null,
+          "storageType": null,
+          "userActionsNeeded": []
+        },
+        "containerInfo": {
+          "id": null,
+          "image": null,
+          "labels": null,
+          "name": null
+        },
+        "id": "1308905355630511064",
+        "indicators": [
+          {
+            "category": "Persistence",
+            "description": "Unsigned kernel module was loaded.",
+            "ids": [
+              384
+            ],
+            "tactics": [
+              {
+                "name": "Persistence",
+                "source": "MITRE",
+                "techniques": [
+                  {
+                    "link": "https://attack.mitre.org/techniques/T1547/006/",
+                    "name": "T1547.006"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "category": "Persistence",
+            "description": "New kernel module was added.",
+            "ids": [
+              399
+            ],
+            "tactics": [
+              {
+                "name": "Persistence",
+                "source": "MITRE",
+                "techniques": [
+                  {
+                    "link": "https://attack.mitre.org/techniques/T1547/006/",
+                    "name": "T1547.006"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "kubernetesInfo": {
+          "cluster": null,
+          "controllerKind": null,
+          "controllerLabels": null,
+          "controllerName": null,
+          "namespace": null,
+          "namespaceLabels": null,
+          "node": null,
+          "pod": null,
+          "podLabels": null
+        },
+        "mitigationStatus": [],
+        "threatInfo": {
+          "analystVerdict": "true_positive",
+          "analystVerdictDescription": "True positive",
+          "automaticallyResolved": false,
+          "browserType": null,
+          "certificateId": null,
+          "classification": "Malware",
+          "classificationSource": "Static",
+          "cloudFilesHashVerdict": "provider_unknown",
+          "collectionId": "1140024784343285701",
+          "confidenceLevel": "suspicious",
+          "createdAt": "2021-12-11T22:41:17.533077Z",
+          "detectionEngines": [
+            {
+              "key": "executables",
+              "title": "Behavioral AI"
+            }
+          ],
+          "detectionType": "dynamic",
+          "engines": [
+            "DBT - Executables"
+          ],
+          "externalTicketExists": false,
+          "externalTicketId": null,
+          "failedActions": false,
+          "fileExtension": null,
+          "fileExtensionType": null,
+          "filePath": "/opt/CrowdStrike/falcon-sensor12803",
+          "fileSize": 1617904,
+          "fileVerificationType": null,
+          "identifiedAt": "2021-12-11T22:41:17.461397Z",
+          "incidentStatus": "in_progress",
+          "incidentStatusDescription": "In progress",
+          "initiatedBy": "agent_policy",
+          "initiatedByDescription": "Agent Policy",
+          "initiatingUserId": null,
+          "initiatingUsername": null,
+          "isFileless": false,
+          "isValidCertificate": null,
+          "maliciousProcessArguments": " falcon-sensor",
+          "md5": null,
+          "mitigatedPreemptively": false,
+          "mitigationStatus": "not_mitigated",
+          "mitigationStatusDescription": "Not mitigated",
+          "originatorProcess": "systemd",
+          "pendingActions": false,
+          "processUser": "root",
+          "publisherName": null,
+          "reachedEventsLimit": null,
+          "rebootRequired": false,
+          "sha1": "1641df58c1027a00f670d41491a2eecff931604c",
+          "sha256": null,
+          "storyline": "2588b11a-e3cd-1677-7746-3f85cd99c850",
+          "threatId": "1308905355630511064",
+          "threatName": "falcon-sensor12803",
+          "updatedAt": "2021-12-13T16:25:55.851553Z"
+        },
+        "whiteningOptions": [
+          "path",
+          "hash"
+        ]
+      }
+    ],
+    "pagination": {
+      "nextCursor": null,
+      "totalItems": 1
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "sentinelone_threat_id": "1308905355630511064"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "host": "myHost",
+    "execution_time_ms": 260,
+    "timestamp": "2021-12-13 11:26:02"
+  }
+}

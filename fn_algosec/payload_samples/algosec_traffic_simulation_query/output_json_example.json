@@ -1,0 +1,30 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "queryUIResult": "https://aglosec/fa/query/results/#/work/ALL_FIREWALLS_query-1722608134438/",
+    "queryResult": [
+      {
+        "queryDescription": "1.2.3.5=>8.8.8.8:any:any:any",
+        "fipResult": "Unreachable",
+        "finalResult": "Not routed",
+        "queryHTMLPath": "https://aglosec/fa/query/results/#/work/ALL_FIREWALLS_query-1722608134438/"
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "algosec_service": "any",
+    "algosec_source": "1.2.3.5",
+    "algosec_destination": "8.8.8.8"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-algosec",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 9827,
+    "timestamp": "2024-08-02 09:59:19"
+  }
+}

@@ -1,0 +1,14 @@
+{
+    "iat":1234598765,
+    "id":"xxxxxxxx-abcd-41b3-a9ac-123456789012",
+    "perms":[
+       "missing-affiliate",
+       "authenticated",
+       "modify-data",
+       "unaffiliate-entity",
+       "read-data",
+       "tag-write"
+    ],
+    "username":"user@example.com",
+    "view_org":"12345678-abcd-1234-1234-xxxxxxxxxxx"
+ }

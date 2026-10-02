@@ -1,0 +1,342 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "domain_whois": [
+      {
+        "administrativeContactFax": null,
+        "whoisServers": null,
+        "addresses": [
+          "new orchard road"
+        ],
+        "administrativeContactName": "IBM Corporation",
+        "zoneContactEmail": "",
+        "billingContactFax": "",
+        "administrativeContactTelephoneExt": "",
+        "administrativeContactEmail": "dnsadm@us.ibm.com",
+        "technicalContactEmail": "dnstech@us.ibm.com",
+        "technicalContactFax": "19147654370",
+        "nameServers": [
+          "asia3.akam.net",
+          "eur2.akam.net",
+          "eur5.akam.net",
+          "ns1-206.akam.net",
+          "ns1-99.akam.net",
+          "usc2.akam.net",
+          "usc3.akam.net",
+          "usw2.akam.net"
+        ],
+        "zoneContactName": "",
+        "billingContactPostalCode": "",
+        "zoneContactFax": "",
+        "registrantTelephoneExt": "",
+        "zoneContactFaxExt": "",
+        "technicalContactTelephoneExt": "",
+        "billingContactCity": "",
+        "zoneContactStreet": [],
+        "created": "1986-03-19",
+        "administrativeContactCity": "Armonk",
+        "registrantName": "IBM DNS Admin",
+        "zoneContactCity": "",
+        "domainName": "ibm.com",
+        "zoneContactPostalCode": "",
+        "administrativeContactFaxExt": "",
+        "technicalContactCountry": "UNITED STATES",
+        "registrarIANAID": "299",
+        "updated": "2024-03-16",
+        "administrativeContactStreet": [
+          "new orchard road"
+        ],
+        "billingContactEmail": "",
+        "status": [
+          "clientTransferProhibited serverDeleteProhibited serverTransferProhibited serverUpdateProhibited"
+        ],
+        "registrantCity": "Armonk",
+        "billingContactCountry": "",
+        "expires": "2025-03-20",
+        "technicalContactStreet": [
+          "new orchard road"
+        ],
+        "registrantOrganization": "International Business Machines Corporation",
+        "billingContactStreet": [],
+        "registrarName": "CSC Corporate Domains, Inc.",
+        "registrantPostalCode": "10504",
+        "zoneContactTelephone": "",
+        "registrantEmail": "dnsadm@us.ibm.com",
+        "technicalContactFaxExt": "",
+        "technicalContactOrganization": "International Business Machines (IBM)",
+        "emails": [
+          "dnsadm@us.ibm.com",
+          "dnstech@us.ibm.com"
+        ],
+        "registrantStreet": [
+          "new orchard road"
+        ],
+        "technicalContactTelephone": "19192544441",
+        "technicalContactState": "NY",
+        "technicalContactCity": "Armonk",
+        "registrantFax": "1914765437",
+        "registrantCountry": "UNITED STATES",
+        "billingContactFaxExt": "",
+        "timestamp": null,
+        "zoneContactOrganization": "",
+        "administrativeContactCountry": "UNITED STATES",
+        "billingContactName": "",
+        "registrantState": "NY",
+        "registrantTelephone": "19147654227",
+        "administrativeContactState": "NY",
+        "registrantFaxExt": "",
+        "technicalContactPostalCode": "10598",
+        "zoneContactTelephoneExt": "",
+        "administrativeContactOrganization": "International Business Machines (IBM)",
+        "billingContactTelephone": "",
+        "billingContactTelephoneExt": "",
+        "zoneContactState": "",
+        "administrativeContactTelephone": "19147654227",
+        "billingContactOrganization": "",
+        "technicalContactName": "IBM Corporation",
+        "administrativeContactPostalCode": "10598",
+        "zoneContactCountry": "",
+        "billingContactState": "",
+        "auditUpdatedDate": "2024-06-13 01:26:08 UTC",
+        "recordExpired": false,
+        "timeOfLatestRealtimeCheck": null,
+        "hasRawText": true
+      },
+      {
+        "administrativeContactFax": null,
+        "whoisServers": "whois.corporatedomains.com",
+        "addresses": [
+          "new orchard road"
+        ],
+        "administrativeContactName": "IBM Corporation",
+        "zoneContactEmail": null,
+        "billingContactFax": null,
+        "administrativeContactTelephoneExt": null,
+        "administrativeContactEmail": "dnsadm@us.ibm.com",
+        "technicalContactEmail": "dnstech@us.ibm.com",
+        "technicalContactFax": "19147654370",
+        "nameServers": [
+          "asia3.akam.net",
+          "eur2.akam.net",
+          "eur5.akam.net",
+          "ns1-206.akam.net",
+          "ns1-99.akam.net",
+          "usc2.akam.net",
+          "usc3.akam.net",
+          "usw2.akam.net"
+        ],
+        "zoneContactName": null,
+        "billingContactPostalCode": null,
+        "zoneContactFax": null,
+        "registrantTelephoneExt": null,
+        "zoneContactFaxExt": null,
+        "technicalContactTelephoneExt": null,
+        "billingContactCity": null,
+        "zoneContactStreet": [],
+        "created": "1986-03-19",
+        "administrativeContactCity": "Armonk",
+        "registrantName": "IBM DNS Admin",
+        "zoneContactCity": null,
+        "domainName": "ibm.com",
+        "zoneContactPostalCode": null,
+        "administrativeContactFaxExt": null,
+        "technicalContactCountry": "UNITED STATES",
+        "registrarIANAID": "299",
+        "updated": "2024-03-16",
+        "administrativeContactStreet": [
+          "new orchard road"
+        ],
+        "billingContactEmail": null,
+        "status": [
+          "clientTransferProhibited serverDeleteProhibited serverTransferProhibited serverUpdateProhibited"
+        ],
+        "registrantCity": "Armonk",
+        "billingContactCountry": null,
+        "expires": "2025-03-20",
+        "technicalContactStreet": [
+          "new orchard road"
+        ],
+        "registrantOrganization": "International Business Machines Corporation",
+        "billingContactStreet": [],
+        "registrarName": "CSC CORPORATE DOMAINS, INC.",
+        "registrantPostalCode": "10504",
+        "zoneContactTelephone": null,
+        "registrantEmail": "dnsadm@us.ibm.com",
+        "technicalContactFaxExt": null,
+        "technicalContactOrganization": "International Business Machines (IBM)",
+        "emails": [
+          "dnstech@us.ibm.com",
+          "dnsadm@us.ibm.com"
+        ],
+        "registrantStreet": [
+          "new orchard road"
+        ],
+        "technicalContactTelephone": "19192544441",
+        "technicalContactState": "NY",
+        "technicalContactCity": "Armonk",
+        "registrantFax": "1914765437",
+        "registrantCountry": "UNITED STATES",
+        "billingContactFaxExt": null,
+        "timestamp": null,
+        "zoneContactOrganization": null,
+        "administrativeContactCountry": "UNITED STATES",
+        "billingContactName": null,
+        "registrantState": "NY",
+        "registrantTelephone": "19147654227",
+        "administrativeContactState": "NY",
+        "registrantFaxExt": null,
+        "technicalContactPostalCode": "10598",
+        "zoneContactTelephoneExt": null,
+        "administrativeContactOrganization": "International Business Machines (IBM)",
+        "billingContactTelephone": null,
+        "billingContactTelephoneExt": null,
+        "zoneContactState": null,
+        "administrativeContactTelephone": "19147654227",
+        "billingContactOrganization": null,
+        "technicalContactName": "IBM Corporation",
+        "administrativeContactPostalCode": "10598",
+        "zoneContactCountry": null,
+        "billingContactState": null,
+        "auditUpdatedDate": "2024-05-26 18:42:35 UTC",
+        "recordExpired": false,
+        "timeOfLatestRealtimeCheck": 1716802190814,
+        "hasRawText": true
+      },
+      {
+        "administrativeContactFax": null,
+        "whoisServers": null,
+        "addresses": [
+          "new orchard road"
+        ],
+        "administrativeContactName": "IBM Corporation",
+        "zoneContactEmail": "",
+        "billingContactFax": "",
+        "administrativeContactTelephoneExt": "",
+        "administrativeContactEmail": "dnsadm@us.ibm.com",
+        "technicalContactEmail": "dnstech@us.ibm.com",
+        "technicalContactFax": "19147654370",
+        "nameServers": [
+          "asia3.akam.net",
+          "eur2.akam.net",
+          "eur5.akam.net",
+          "ns1-206.akam.net",
+          "ns1-99.akam.net",
+          "usc2.akam.net",
+          "usc3.akam.net",
+          "usw2.akam.net"
+        ],
+        "zoneContactName": "",
+        "billingContactPostalCode": "",
+        "zoneContactFax": "",
+        "registrantTelephoneExt": "",
+        "zoneContactFaxExt": "",
+        "technicalContactTelephoneExt": "",
+        "billingContactCity": "",
+        "zoneContactStreet": [],
+        "created": "1986-03-19",
+        "administrativeContactCity": "Armonk",
+        "registrantName": "IBM DNS Admin",
+        "zoneContactCity": "",
+        "domainName": "ibm.com",
+        "zoneContactPostalCode": "",
+        "administrativeContactFaxExt": "",
+        "technicalContactCountry": "UNITED STATES",
+        "registrarIANAID": "299",
+        "updated": "2023-03-16",
+        "administrativeContactStreet": [
+          "new orchard road"
+        ],
+        "billingContactEmail": "",
+        "status": [
+          "clientTransferProhibited serverDeleteProhibited serverTransferProhibited serverUpdateProhibited"
+        ],
+        "registrantCity": "Armonk",
+        "billingContactCountry": "",
+        "expires": "2024-03-20",
+        "technicalContactStreet": [
+          "new orchard road"
+        ],
+        "registrantOrganization": "International Business Machines Corporation",
+        "billingContactStreet": [],
+        "registrarName": "CSC Corporate Domains, Inc.",
+        "registrantPostalCode": "10504",
+        "zoneContactTelephone": "",
+        "registrantEmail": "dnsadm@us.ibm.com",
+        "technicalContactFaxExt": "",
+        "technicalContactOrganization": "International Business Machines (IBM)",
+        "emails": [
+          "dnsadm@us.ibm.com",
+          "dnstech@us.ibm.com"
+        ],
+        "registrantStreet": [
+          "new orchard road"
+        ],
+        "technicalContactTelephone": "19192544441",
+        "technicalContactState": "NY",
+        "technicalContactCity": "Armonk",
+        "registrantFax": "1914765437",
+        "registrantCountry": "UNITED STATES",
+        "billingContactFaxExt": "",
+        "timestamp": null,
+        "zoneContactOrganization": "",
+        "administrativeContactCountry": "UNITED STATES",
+        "billingContactName": "",
+        "registrantState": "NY",
+        "registrantTelephone": "19147654227",
+        "administrativeContactState": "NY",
+        "registrantFaxExt": "",
+        "technicalContactPostalCode": "10598",
+        "zoneContactTelephoneExt": "",
+        "administrativeContactOrganization": "International Business Machines (IBM)",
+        "billingContactTelephone": "",
+        "billingContactTelephoneExt": "",
+        "zoneContactState": "",
+        "administrativeContactTelephone": "19147654227",
+        "billingContactOrganization": "",
+        "technicalContactName": "IBM Corporation",
+        "administrativeContactPostalCode": "10598",
+        "zoneContactCountry": "",
+        "billingContactState": "",
+        "auditUpdatedDate": "2024-03-10 14:25:15 UTC",
+        "recordExpired": true,
+        "timeOfLatestRealtimeCheck": null,
+        "hasRawText": true
+      }
+    ],
+    "ns_whois": {
+      "ibm.com": {
+        "totalResults": 1,
+        "offset": 0,
+        "moreDataAvailable": false,
+        "limit": 500,
+        "sortField": "created",
+        "domains": [
+          {
+            "domain": "cardiganmerch.shop",
+            "current": false
+          }
+        ]
+      }
+    },
+    "resource": "ibm.com",
+    "resource_type": "domain_name",
+    "query_execution_time": "2024-11-19 10:08:46"
+  },
+  "raw": null,
+  "inputs": {
+    "umbinv_offset": 0,
+    "umbinv_limit": null,
+    "umbinv_resource": "ibm.com",
+    "umbinv_sortby": "created"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-cisco-umbrella-inv",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 1486,
+    "timestamp": "2024-11-19 10:08:46"
+  }
+}

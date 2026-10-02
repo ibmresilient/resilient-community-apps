@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "messages": {
+          "type": "array"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "changeRequestId": {
+              "type": "integer"
+            },
+            "redirectUrl": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "algosec_traffic_change_action": {
+          "type": "string"
+        },
+        "algosec_service": {
+          "type": "string"
+        },
+        "algosec_source": {
+          "type": "string"
+        },
+        "algosec_traffic_change_request_subject": {
+          "type": "string"
+        },
+        "algosec_destination": {
+          "type": "string"
+        },
+        "algosec_traffic_change_template": {
+          "type": "string"
+        },
+        "algosec_traffic_change_request_description": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

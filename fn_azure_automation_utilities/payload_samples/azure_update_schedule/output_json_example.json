@@ -1,0 +1,41 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/demoassets/providers/Microsoft.Automation/automationAccounts/automation1/schedules/s",
+    "name": "s",
+    "type": "Microsoft.Automation/AutomationAccounts/Schedules",
+    "properties": {
+      "description": "",
+      "startTime": "2023-08-29T12:05:00-04:00",
+      "startTimeOffsetMinutes": -240.0,
+      "expiryTime": "2023-08-29T12:05:00-04:00",
+      "expiryTimeOffsetMinutes": -240.0,
+      "isEnabled": false,
+      "nextRun": "2023-08-29T12:05:00-04:00",
+      "nextRunOffsetMinutes": -240.0,
+      "interval": null,
+      "frequency": "OneTime",
+      "creationTime": "2023-08-23T16:05:14.3633333+00:00",
+      "lastModifiedTime": "2023-08-23T17:09:35.4666667+00:00",
+      "timeZone": "America/New_York",
+      "advancedSchedule": null
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "input_parameters": "{'name': 's', 'properties': {'isEnabled': False}}",
+    "account_name": "automation1",
+    "resource_group_name": "demoassets",
+    "schedule_name": "s"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-azure-automation-utilities",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 1640,
+    "timestamp": "2023-08-24 14:00:24"
+  }
+}

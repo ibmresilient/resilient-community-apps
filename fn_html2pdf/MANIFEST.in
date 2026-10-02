@@ -1,0 +1,4 @@
+include README.md
+recursive-include fn_html2pdf/util *
+include fn_html2pdf/LICENSE
+include apikey_permissions.txt

@@ -1,0 +1,46 @@
+{
+    'content': {
+        "Summary": {
+            "Summary": {
+                "Status": "COMPLETED",
+                "Category": "EXECS",
+                "FileType": "DLL",
+                "StartTime": 1522111841,
+                "Duration": 481690
+            },
+            "Classification": {
+                "Type": "MALICIOUS",
+                "Category": "MALWARE_BOTNET",
+                "Score": 82,
+                "DetectedMalware": "Win32/TrojanDownloader.Banload.TNJ trojan"
+            },
+            "FileProperties": {
+                "FileType": "DLL",
+                "FileSize": 2358272,
+                "MD5": "b3b13c2fe5710507612106cb11ceced3",
+                "SHA1": "6f30404f8b30812758acc06455bc95348c86f9f2",
+                "Sha256": "c77ab4c60b73c8f8135d54162813ab7c63432058f17ff00754d5fd547c22db76",
+                "Issuer": "",
+                "DigitalCerificate": "",
+                "SSDeep": "49152:mQU0HSp/RcGuBLe/PESBbFVZ86MfBWPvGZxnBGVV3NcKRLFcTOJP:mQUn6LsPQp6vkoiKt",
+                "RootCA": ""
+            }
+        }
+    },
+    "inputs": {
+        "zia_full_report": False,
+        "zia_md5": "542a09dbd513bf75e29572922ce0687e"
+    },
+    "metrics": {
+        "version": "1.0",
+        "package": "fn-zia",
+        "package_version": "1.0.0",
+        "host": "host.ibm.com",
+        "execution_time_ms": 22199,
+        "timestamp": "2021-05-11 10:33:14"
+    },
+    "raw": '{"Summary": {"Summary": {"Status": "COMPLETED", "Category": "EXECS", "FileType": "EXE", "StartTime": 1620229320, "Duration": 658451}, "Classification": {"Type": "MALICIOUS", "Category": "MALWARE_BOTNET", "Score": 80, "DetectedMalware": "Gen:Variant.MSILPerseus.158871"}, "FileProperties": {"FileType": "EXE", "FileSize": 22016, "MD5": "542a09dbd513bf75e29572922ce0687e", "SHA1": "6e0d16aa60b37596774ed0d3054ed2ff39d9378f", "Sha256": "dbcb1fa12366b385224f1a203c8cc24d6740f4bfa3b4f7a9d6d9ff059f470819", "Issuer": "", "DigitalCerificate": "", "SSDeep": "384:UGaRIorFBiFKx5v38y3QLp29Jub/mPkaVIKvtMNokpkjUo165Dt:1JorvjxZPAgyQRt/7jUo1A", "RootCA": ""}}}',
+    "version": "1.0",
+    "success": True,
+    "reason": None
+}

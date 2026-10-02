@@ -1,0 +1,33 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('b4829344-e28d-4c8e-bb2a-c470e0bb1ee3')/channels/$entity",
+    "id": "19:977e7ffb84df4067ab6b9bdb40589157@thread.tacv2",
+    "createdDateTime": "2024-08-15T15:37:52.0411773Z",
+    "displayName": "demoChannel",
+    "description": "this is a description for demoChannel",
+    "isFavoriteByDefault": false,
+    "email": "",
+    "webUrl": "https://teams.microsoft.com/l/channel/19%3a977e7ffb84df4067ab6b9bdb40589157%40thread.tacv2/demoChannel?groupId=b4829344-e28d-4c8e-bb2a-c470e0bb1ee3&tenantId=50ad7d3e-b889-434d-802d-13b87c68047b",
+    "membershipType": "standard",
+    "isArchived": false,
+    "status_code": 201,
+    "message": "Successfully created channel: demoChannel"
+  },
+  "raw": null,
+  "inputs": {
+    "ms_groupteam_id": "b4829344-e28d-4c8e-bb2a-c470e0bb1ee3",
+    "ms_channel_name": "demoChannel",
+    "ms_description": "this is a description for demoChannel"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-teams",
+    "package_version": "3.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 6283,
+    "timestamp": "2024-08-15 11:37:52"
+  }
+}

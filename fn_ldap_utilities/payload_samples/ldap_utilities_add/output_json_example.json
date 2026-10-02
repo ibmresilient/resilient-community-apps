@@ -1,0 +1,28 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "result": 0,
+    "description": "success",
+    "dn": "",
+    "message": "",
+    "referrals": null,
+    "type": "addResponse"
+  },
+  "raw": null,
+  "inputs": {
+    "ldap_domain_name": "Domain2",
+    "ldap_dn": "cn=Gary1,cn=Users,dc=dev,dc=co3sys,dc=com",
+    "ldap_multiple_group_dn": "[]",
+    "ldap_attribute_name_values": "\"objectClass\": [\"top\",\"person\",\"organizationalPerson\",\"user\"], \"name\": \"Gary\", \"mail\": \"gary1@dev.co3sys.com\", \"sAMAccountName\": \"gary1\""
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ldap-utilities",
+    "package_version": "2.1.1",
+    "host": "local",
+    "execution_time_ms": 545,
+    "timestamp": "2023-08-09 09:54:11"
+  }
+}

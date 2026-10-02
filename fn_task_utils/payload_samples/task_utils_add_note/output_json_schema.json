@@ -1,0 +1,179 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "task_note": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "parent_id": {},
+            "user_id": {
+              "type": "integer"
+            },
+            "user_fname": {
+              "type": "string"
+            },
+            "user_lname": {
+              "type": "string"
+            },
+            "text": {
+              "type": "string"
+            },
+            "create_date": {
+              "type": "integer"
+            },
+            "modify_date": {
+              "type": "integer"
+            },
+            "children": {
+              "type": "array"
+            },
+            "mentioned_users": {
+              "type": "array"
+            },
+            "is_deleted": {
+              "type": "boolean"
+            },
+            "modify_user": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "first_name": {
+                  "type": "string"
+                },
+                "last_name": {
+                  "type": "string"
+                }
+              }
+            },
+            "actions": {
+              "type": "array"
+            },
+            "playbooks": {
+              "type": "array"
+            },
+            "inc_id": {
+              "type": "integer"
+            },
+            "inc_name": {
+              "type": "string"
+            },
+            "task_id": {
+              "type": "integer"
+            },
+            "task_name": {
+              "type": "string"
+            },
+            "task_custom": {
+              "type": "boolean"
+            },
+            "task_members": {},
+            "task_at_id": {},
+            "inc_owner": {
+              "type": "integer"
+            },
+            "user_name": {
+              "type": "string"
+            },
+            "modify_principal": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "display_name": {
+                  "type": "string"
+                }
+              }
+            },
+            "comment_perms": {
+              "type": "object",
+              "properties": {
+                "update": {
+                  "type": "boolean"
+                },
+                "delete": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "task_name": {
+          "type": "string"
+        },
+        "incident_id": {
+          "type": "integer"
+        },
+        "task_utils_note_type": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        },
+        "task_utils_note_body": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

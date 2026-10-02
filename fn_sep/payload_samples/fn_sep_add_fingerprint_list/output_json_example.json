@@ -1,0 +1,23 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "44BB68279D98*******A069DCF6079F"
+  },
+  "raw": null,
+  "inputs": {
+    "sep_domainid": "6E70F04309*******F74FD57C083F99E",
+    "sep_hash_value": "e4ac4548eeebdb*******c47322f0c95a17a9ef6af4099088d6e552f34038d9",
+    "sep_fingerprintlist_name": "Blacklist2",
+    "sep_description": "Fingerprint list 'Blacklist2'"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 226915,
+    "timestamp": "2024-07-15 08:34:13"
+  }
+}

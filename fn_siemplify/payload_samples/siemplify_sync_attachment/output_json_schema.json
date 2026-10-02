@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "evidenceName": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "evidenceThumbnailBase64": {
+          "type": "string"
+        },
+        "evidenceId": {
+          "type": "integer"
+        },
+        "fileType": {
+          "type": "string"
+        },
+        "creatorUserId": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "type": {
+          "type": "integer"
+        },
+        "caseId": {
+          "type": "integer"
+        },
+        "isFavorite": {
+          "type": "boolean"
+        },
+        "modificationTimeUnixTimeInMs": {
+          "type": "integer"
+        },
+        "creationTimeUnixTimeInMs": {
+          "type": "integer"
+        },
+        "alertIdentifier": {}
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "siemplify_incident_id": {
+          "type": "integer"
+        },
+        "siemplify_alert_id": {
+          "type": "string"
+        },
+        "siemplify_case_id": {
+          "type": "integer"
+        },
+        "siemplify_attachment_id": {
+          "type": "integer"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

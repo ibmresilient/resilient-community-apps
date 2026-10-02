@@ -1,0 +1,49 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "deduplicationKey": "abc",
+    "instanceUuid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "firstOccurrence": "2025-07-08T15:37:31.545Z",
+    "lastOccurrence": "2025-07-08T15:37:31.545Z",
+    "postTime": "2025-07-08T15:37:31.570Z",
+    "resource": {
+      "name": "Something failed",
+      "type": "Unknown"
+    },
+    "accessScopes": [],
+    "summary": "failure somewhere",
+    "severity": 3,
+    "severity10": 40,
+    "maxSeverity10Seen": 40,
+    "urls": [
+      {
+        "url": "https://example.com",
+        "description": "Link to the SOAR incident."
+      }
+    ],
+    "type": {
+      "statusOrThreshold": "> 1 minute"
+    },
+    "eventSource": "Event API",
+    "eventState": "open",
+    "xInYSuppressed": false,
+    "incidentUuid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "suppressed": false,
+    "eventid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  },
+  "raw": null,
+  "inputs": {
+    "ocm_eventid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "ocm_deduplicationkey": "***"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ocm",
+    "package_version": "1.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 480,
+    "timestamp": "2025-07-08 11:37:36"
+  }
+}

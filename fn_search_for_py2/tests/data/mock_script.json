@@ -1,0 +1,18 @@
+{
+    "id": 198,
+    "name": "py2 script",
+    "description": "",
+    "language": "python",
+    "object_type": 0,
+    "uuid": "36a4bb7f-858d-4e2d-8792-6a11e2976346",
+    "actions": [],
+    "tags": [],
+    "creator_id": 20,
+    "last_modified_by": 20,
+    "last_modified_time": 1743373439243,
+    "created_date": 1743371131979,
+    "playbook_handle": null,
+    "programmatic_name": "py2_script",
+    "script_text": "z = 3",
+    "enabled": false
+  }

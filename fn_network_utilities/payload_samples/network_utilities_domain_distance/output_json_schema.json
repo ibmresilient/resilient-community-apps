@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "domain_name": {
+      "type": "string"
+    },
+    "distances": {
+      "type": "object",
+      "properties": {
+        "ibm.com": {
+          "type": "integer"
+        },
+        "resilientsystems.com": {
+          "type": "integer"
+        },
+        "ibmcloud.com": {
+          "type": "integer"
+        },
+        "bluemix.com": {
+          "type": "integer"
+        }
+      }
+    },
+    "closest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "distance": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

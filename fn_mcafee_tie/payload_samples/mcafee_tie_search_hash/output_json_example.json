@@ -1,0 +1,36 @@
+{
+    "version": "1.0",
+    "success": true,
+    "reason": "",
+    "content": {
+      "mcafee_topic_name": "/mcafee/event/epo/threat/response",
+      "mcafee_dxl_payload": {"hashes": [{"type": "md5", "value": "Dk0TzJrwTMZLaPw4/goNrA=="}], "providerId": 3, "trustLevel": 1},
+      "mcafee_publish_method": "Service",
+      "mcafee_wait_for_response": "No"
+    },
+    "raw": {"mcafee_topic_name": "/mcafee/event/epo/threat/response", "mcafee_dxl_payload": {"hashes\\": [{"type\\": "md5\\", "value\\": "Dk0TzJrwTMZLaPw4/goNrA==\\"}], "providerId\\": 3, "trustLevel\\": 1}, "mcafee_publish_method": "Service", "mcafee_wait_for_response": "No"},
+    "inputs": {
+      "mcafee_publish_method": {
+        "id": 205,
+        "name": "Service"
+      },
+      "mcafee_topic_name": "/mcafee/event/epo/threat/response",
+      "mcafee_dxl_payload": {"hashes": [{"type": "md5", "value": "Dk0TzJrwTMZLaPw4/goNrA=="}], "providerId": 3, "trustLevel": 1},
+      "mcafee_wait_for_response": {
+        "id": 203,
+        "name": "No"
+      }
+    },
+    "metrics": {
+      "version": "1.0",
+      "package": "fn-mcafee-opendxl",
+      "package_version": "1.2.0",
+      "host": "Marks-MacBook-Pro.local",
+      "execution_time_ms": 0,
+      "timestamp": "2020-12-22 15:31:49"
+    },
+    "mcafee_topic_name": "/mcafee/event/epo/threat/response",
+    "mcafee_dxl_payload": {"hashes": [{"type": "md5", "value": "Dk0TzJrwTMZLaPw4/goNrA=="}], "providerId": 3, "trustLevel": 1},
+    "mcafee_publish_method": "Service",
+    "mcafee_wait_for_response": "No"
+}

@@ -1,0 +1,13 @@
+{
+  {# JINJA template for closing a SOAR incident using endpoint data #}
+  {# modify to specify your specific **data** fields #}
+  "plan_status": "C",
+  "resolution_id": "{{ resolution | soar_substitute('{"False Positive": "Not an Issue", "Resolved": "Resolved", "Duplicate": "Duplicate", "No Action": "Unresolved" }') }}",
+  "resolution_summary": "Closed by Sumo Logic, Insight Status: {{ status.displayName }}",
+  {# add additional fields based on your 'on close' field requirements #}
+  "properties": {
+    "sumo_logic_insight_status": "{{ status.displayName }}",
+    "sumo_logic_insight_resolution": "{{ resolution }}",
+    "sumo_logic_insight_sub_resolution": "{{ subResolution }}"
+  }
+}

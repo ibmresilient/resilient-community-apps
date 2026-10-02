@@ -1,0 +1,6 @@
+{
+  {# include additional "required on close" fields #}
+  "plan_status": "C",
+  "resolution_id": "{{ status|resilient_substitute('{"truepositive": "Resolved", "falsepositive": "Not an Issue"}') }}",
+  "resolution_summary": "{{ description|e }}"
+}

@@ -1,0 +1,29 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "commandline": "dir",
+    "start": 1677189332024,
+    "end": 1677189333668,
+    "elapsed": 1644,
+    "exitcode": 0,
+    "stdout": " Volume in drive C has no label.\r\n Volume Serial Number is 1EA9-8239\r\n\r\n Directory of C:\\Users\\Administrator\r\n\r\n07/05/2020  01:35 PM    <DIR>          .\r\n07/05/2020  01:35 PM    <DIR>          ..\r\n02/19/2019  04:39 PM    <DIR>          .ssh\r\n07/05/2020  01:35 PM    <DIR>          3D Objects\r\n07/05/2020  01:35 PM    <DIR>          Contacts\r\n05/20/2022  04:12 PM    <DIR>          Desktop\r\n07/05/2020  01:35 PM    <DIR>          Documents\r\n11/10/2022  05:31 PM    <DIR>          Downloads\r\n07/05/2020  01:35 PM    <DIR>          Favorites\r\n07/05/2020  01:35 PM    <DIR>          Links\r\n07/05/2020  01:35 PM    <DIR>          Music\r\n08/11/2021  03:31 PM    <DIR>          OneDrive\r\n08/11/2022  02:42 PM    <DIR>          Pictures\r\n07/05/2020  01:35 PM    <DIR>          Saved Games\r\n07/05/2020  01:35 PM    <DIR>          Searches\r\n07/05/2020  01:35 PM    <DIR>          Videos\r\n               0 File(s)              0 bytes\r\n              16 Dir(s)  236,822,659,072 bytes free\r\n",
+    "stderr": "",
+    "stdout_json": null,
+    "stderr_json": null
+  },
+  "raw": null,
+  "inputs": {
+    "network_utilities_shell_command": "pstest:remote_computer",
+    "network_utilities_shell_params": "0.0.0.0"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-network-utilities",
+    "package_version": "1.0.0",
+    "host": "My Host",
+    "execution_time_ms": 1648,
+    "timestamp": "2023-02-23 16:55:33"
+  }
+}

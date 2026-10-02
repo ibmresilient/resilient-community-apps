@@ -1,0 +1,381 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "dtm": {
+          "type": "object"
+        },
+        "cm": {
+          "type": "object",
+          "properties": {
+            "unassigneds": {
+              "type": "array"
+            },
+            "total": {
+              "type": "integer"
+            },
+            "geo_counts": {
+              "type": "object"
+            }
+          }
+        },
+        "regulators": {
+          "type": "object",
+          "properties": {
+            "ids": {
+              "type": "array"
+            }
+          }
+        },
+        "hipaa": {
+          "type": "object",
+          "properties": {
+            "hipaa_adverse": {},
+            "hipaa_misused": {},
+            "hipaa_acquired": {},
+            "hipaa_additional_misuse": {},
+            "hipaa_breach": {},
+            "hipaa_adverse_comment": {},
+            "hipaa_misused_comment": {},
+            "hipaa_acquired_comment": {},
+            "hipaa_additional_misuse_comment": {},
+            "hipaa_breach_comment": {}
+          }
+        },
+        "tasks": {},
+        "artifacts": {},
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "phase_id": {
+          "type": "integer"
+        },
+        "inc_training": {
+          "type": "boolean"
+        },
+        "vers": {
+          "type": "integer"
+        },
+        "addr": {},
+        "city": {},
+        "creator": {},
+        "creator_principal": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "type": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "display_name": {
+              "type": "string"
+            }
+          }
+        },
+        "exposure_type_id": {
+          "type": "integer"
+        },
+        "incident_type_ids": {
+          "type": "array"
+        },
+        "reporter": {},
+        "state": {},
+        "country": {},
+        "zip": {},
+        "workspace": {
+          "type": "integer"
+        },
+        "exposure": {
+          "type": "integer"
+        },
+        "org_handle": {
+          "type": "integer"
+        },
+        "members": {
+          "type": "array"
+        },
+        "negative_pr_likely": {},
+        "perms": {
+          "type": "object",
+          "properties": {
+            "read": {
+              "type": "boolean"
+            },
+            "write": {
+              "type": "boolean"
+            },
+            "comment": {
+              "type": "boolean"
+            },
+            "assign": {
+              "type": "boolean"
+            },
+            "close": {
+              "type": "boolean"
+            },
+            "change_members": {
+              "type": "boolean"
+            },
+            "attach_file": {
+              "type": "boolean"
+            },
+            "read_attachments": {
+              "type": "boolean"
+            },
+            "delete_attachments": {
+              "type": "boolean"
+            },
+            "create_milestones": {
+              "type": "boolean"
+            },
+            "list_milestones": {
+              "type": "boolean"
+            },
+            "create_artifacts": {
+              "type": "boolean"
+            },
+            "list_artifacts": {
+              "type": "boolean"
+            },
+            "delete": {
+              "type": "boolean"
+            },
+            "change_workspace": {
+              "type": "boolean"
+            }
+          }
+        },
+        "confirmed": {
+          "type": "boolean"
+        },
+        "task_changes": {
+          "type": "object",
+          "properties": {
+            "added": {
+              "type": "array"
+            },
+            "removed": {
+              "type": "array"
+            }
+          }
+        },
+        "assessment": {
+          "type": "string"
+        },
+        "data_compromised": {},
+        "draft": {
+          "type": "boolean"
+        },
+        "properties": {
+          "type": "object",
+          "properties": {
+            "sdlp_policy_name": {},
+            "sdlp_policy_group_name": {},
+            "sdlp_policy_id": {},
+            "sdlp_incident_status": {},
+            "sdlp_incident_url": {},
+            "internal_customizations_field": {},
+            "sdlp_incident_id": {},
+            "sdlp_policy_group_id": {}
+          }
+        },
+        "resolution_id": {},
+        "resolution_summary": {},
+        "pii": {
+          "type": "object",
+          "properties": {
+            "data_compromised": {},
+            "determined_date": {
+              "type": "integer"
+            },
+            "harmstatus_id": {
+              "type": "integer"
+            },
+            "data_encrypted": {},
+            "data_contained": {},
+            "impact_likely": {},
+            "ny_impact_likely": {},
+            "or_impact_likely": {},
+            "wa_impact_likely": {},
+            "dc_impact_likely": {},
+            "data_source_ids": {
+              "type": "array"
+            },
+            "data_format": {},
+            "assessment": {
+              "type": "string"
+            },
+            "exposure": {
+              "type": "integer"
+            },
+            "gdpr_harm_risk": {},
+            "gdpr_lawful_data_processing_categories": {
+              "type": "array"
+            },
+            "alberta_health_risk_assessment": {},
+            "california_health_risk_assessment": {},
+            "new_zealand_risk_assessment": {},
+            "singapore_risk_assessment": {}
+          }
+        },
+        "gdpr": {
+          "type": "object",
+          "properties": {
+            "gdpr_breach_circumstances": {
+              "type": "array"
+            },
+            "gdpr_breach_type": {},
+            "gdpr_personal_data": {},
+            "gdpr_identification": {},
+            "gdpr_consequences": {},
+            "gdpr_final_assessment": {},
+            "gdpr_breach_type_comment": {},
+            "gdpr_personal_data_comment": {},
+            "gdpr_identification_comment": {},
+            "gdpr_consequences_comment": {},
+            "gdpr_final_assessment_comment": {},
+            "gdpr_subsequent_notification": {}
+          }
+        },
+        "regulator_risk": {
+          "type": "object"
+        },
+        "inc_last_modified_date": {
+          "type": "integer"
+        },
+        "comments": {},
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "enabled": {
+                "type": "boolean"
+              }
+            }
+          }
+        },
+        "playbooks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "playbook_handle": {
+                "type": "integer"
+              },
+              "display_name": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "timer_field_summarized_incident_data": {
+          "type": "array"
+        },
+        "admin_id": {},
+        "creator_id": {
+          "type": "integer"
+        },
+        "crimestatus_id": {
+          "type": "integer"
+        },
+        "employee_involved": {},
+        "end_date": {},
+        "exposure_dept_id": {},
+        "exposure_individual_name": {},
+        "exposure_vendor_id": {},
+        "jurisdiction_name": {},
+        "jurisdiction_reg_id": {},
+        "start_date": {},
+        "inc_start": {},
+        "org_id": {
+          "type": "integer"
+        },
+        "is_scenario": {
+          "type": "boolean"
+        },
+        "hard_liability": {
+          "type": "integer"
+        },
+        "nist_attack_vectors": {
+          "type": "array"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "sequence_code": {},
+        "discovered_date": {
+          "type": "integer"
+        },
+        "due_date": {},
+        "create_date": {
+          "type": "integer"
+        },
+        "owner_id": {
+          "type": "integer"
+        },
+        "severity_code": {},
+        "plan_status": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "soar_utils_create_fields": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

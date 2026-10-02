@@ -1,0 +1,17 @@
+{
+  {# JINJA template for closing a new SOAR incident from a SentinelOne threat. #}
+  "plan_status": "C",
+  "resolution_id": {
+    "name": "Resolved"
+  },
+  "resolution_summary": {
+    "format": "text",
+    "content": "Closed by SentinelOne"
+  },
+  "properties": {
+    "sentinelone_incident_status": "{{ threatInfo.incidentStatus }}",
+    "sentinelone_threat_analyst_verdict": "{{ threatInfo.analystVerdict }}",
+    "sentinelone_mitigation_status": "{{ threatInfo.mitigationStatus }}",
+    "sentinelone_mitigation_status_description": "{{ threatInfo.mitigationStatusDescription }}"
+  }
+}

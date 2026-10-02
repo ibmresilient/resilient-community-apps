@@ -1,0 +1,26 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "attachment_name": "li-b6f3814c-2cf7-11b2-a85c-95da948e58bf_resilient-circuits_20250502_132601.log",
+    "num_of_lines": 58
+  },
+  "raw": "",
+  "inputs": {
+    "log_min_level": "Error",
+    "log_attachment_name": null,
+    "incident_id": 3102,
+    "log_capture_maxlen": null,
+    "log_capture_date": null,
+    "log_capture_date_option": null
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-log-capture",
+    "package_version": "1.0.1",
+    "host": "my.app.host",
+    "execution_time_ms": 1471,
+    "timestamp": "2025-05-02 13:26:03"
+  }
+}

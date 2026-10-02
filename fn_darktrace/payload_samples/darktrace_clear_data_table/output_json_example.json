@@ -1,0 +1,19 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {},
+  "raw": null,
+  "inputs": {
+    "darktrace_soar_case_id": "2119",
+    "darktrace_data_table_name": "darktrace_associated_devices_dt"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-darktrace",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 976,
+    "timestamp": "2022-11-10 16:46:34"
+  }
+}

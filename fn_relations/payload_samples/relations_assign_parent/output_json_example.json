@@ -1,0 +1,198 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "child_artifact_results": {
+      "success": true,
+      "content": {
+        "id": 15,
+        "type": 1084,
+        "value": "2101",
+        "description": "Parent Incident ID in Relationship",
+        "attachment": null,
+        "parent_id": null,
+        "creator": {
+          "id": 8,
+          "fname": "Resilient",
+          "lname": "Sysadmin",
+          "display_name": "Resilient Sysadmin",
+          "status": "A",
+          "email": "a@example.com",
+          "locked": false,
+          "password_changed": false,
+          "is_external": false,
+          "ui_theme": "verydarkmode",
+          "is_ldap": false,
+          "is_saml": false
+        },
+        "inc_id": 2102,
+        "inc_name": "child3-1",
+        "inc_owner": 8,
+        "hits": [],
+        "created": 1705509534505,
+        "last_modified_time": 1705509534512,
+        "last_modified_by": {
+          "id": 8,
+          "type": "user",
+          "name": "a@example.com",
+          "display_name": "Resilient Sysadmin"
+        },
+        "pending_sources": [],
+        "perms": {
+          "read": true,
+          "write": true,
+          "delete": true
+        },
+        "properties": null,
+        "actions": [
+          {
+            "id": 38,
+            "name": "Example: Relations - Sync Artifact",
+            "enabled": false
+          }
+        ],
+        "playbooks": [
+          {
+            "playbook_handle": 12,
+            "display_name": "Relations: Sync Artifact"
+          }
+        ],
+        "hash": "6750ee9ef3f9c1512a6f9ddf33e43c8fbe26a3660db1b6699e1cc629ff2824ec",
+        "relating": true,
+        "creator_principal": {
+          "id": 8,
+          "type": "user",
+          "name": "a@example.com",
+          "display_name": "Resilient Sysadmin"
+        },
+        "related_incident_count": null,
+        "pending_scan_result": false,
+        "global_info": null,
+        "ip": {
+          "source": null,
+          "destination": null
+        },
+        "global_artifact": []
+      }
+    },
+    "table_addition_results": {
+      "success": true,
+      "content": {
+        "id": 6,
+        "cells": {
+          "relations_incident_status": {
+            "id": "relations_incident_status",
+            "row_id": 6,
+            "value": "Active"
+          },
+          "relations_incident_id": {
+            "id": "relations_incident_id",
+            "row_id": 6,
+            "value": "<div class=\"rte\"><div><a href=\"#incidents/2102\" target=\"_blank\">2102</a></div></div>"
+          },
+          "relations_incident_name": {
+            "id": "relations_incident_name",
+            "row_id": 6,
+            "value": "child3-1"
+          }
+        },
+        "actions": [],
+        "playbooks": [],
+        "type_id": 1001,
+        "table_name": "Relations Child Incidents",
+        "inc_id": 2101,
+        "inc_name": "parent3",
+        "inc_owner": "a@example.com",
+        "version": 1
+      }
+    },
+    "parent_artifact_results": {
+      "success": true,
+      "content": {
+        "id": 16,
+        "type": 1084,
+        "value": "2101",
+        "description": "Parent Incident ID in Relationship",
+        "attachment": null,
+        "parent_id": null,
+        "creator": {
+          "id": 8,
+          "fname": "Resilient",
+          "lname": "Sysadmin",
+          "display_name": "Resilient Sysadmin",
+          "status": "A",
+          "email": "a@example.com",
+          "locked": false,
+          "password_changed": false,
+          "is_external": false,
+          "ui_theme": "verydarkmode",
+          "is_ldap": false,
+          "is_saml": false
+        },
+        "inc_id": 2101,
+        "inc_name": "parent3",
+        "inc_owner": 8,
+        "hits": [],
+        "created": 1705509537212,
+        "last_modified_time": 1705509537219,
+        "last_modified_by": {
+          "id": 8,
+          "type": "user",
+          "name": "a@example.com",
+          "display_name": "Resilient Sysadmin"
+        },
+        "pending_sources": [],
+        "perms": {
+          "read": true,
+          "write": true,
+          "delete": true
+        },
+        "properties": null,
+        "actions": [
+          {
+            "id": 38,
+            "name": "Example: Relations - Sync Artifact",
+            "enabled": false
+          }
+        ],
+        "playbooks": [
+          {
+            "playbook_handle": 12,
+            "display_name": "Relations: Sync Artifact"
+          }
+        ],
+        "hash": "6750ee9ef3f9c1512a6f9ddf33e43c8fbe26a3660db1b6699e1cc629ff2824ec",
+        "relating": true,
+        "creator_principal": {
+          "id": 8,
+          "type": "user",
+          "name": "a@example.com",
+          "display_name": "Resilient Sysadmin"
+        },
+        "related_incident_count": null,
+        "pending_scan_result": false,
+        "global_info": null,
+        "ip": {
+          "source": null,
+          "destination": null
+        },
+        "global_artifact": []
+      }
+    },
+    "notes_synced": 0
+  },
+  "raw": null,
+  "inputs": {
+    "relations_child_incident_id": 2102,
+    "relations_parent_incident_id": 2101
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-relations",
+    "package_version": "3.1.0",
+    "host": "localhost",
+    "execution_time_ms": 5060,
+    "timestamp": "2024-01-17 11:38:57"
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "assets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "internal_axon_id": {
+                "type": "string"
+              },
+              "adapters": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "adapter_list_length": {
+                "type": "integer"
+              },
+              "labels": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "specific_data.data.hostname_preferred": {
+                "type": "string"
+              },
+              "specific_data.data.last_used_users_departments_association": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "specific_data.data.name": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "specific_data.data.os.type_distribution": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "specific_data.data.last_used_users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "specific_data.data.network_interfaces.ips_preferred": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "specific_data.data.last_used_users_mail_association": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "device_count": {
+          "type": "integer"
+        },
+        "endpoint_url": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "axonius_write_attachment": {
+          "type": "boolean"
+        },
+        "axonius_field_name_list": {
+          "type": "string"
+        },
+        "axonius_saved_query_name": {},
+        "axonius_query_string": {
+          "type": "string"
+        },
+        "axonius_incident_id": {
+          "type": "integer"
+        },
+        "axonius_task_id": {},
+        "axonius_device_limit": {
+          "type": "integer"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

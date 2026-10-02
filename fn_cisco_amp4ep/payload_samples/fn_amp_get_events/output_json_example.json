@@ -1,0 +1,92 @@
+{
+  "response": {
+    "version": "v1.2.0",
+    "metadata": {
+      "links": {
+        "self": "https://api.amp.cisco.com/v1/events",
+        "next": "https://api.amp.cisco.com/v1/events?offset=500"
+      },
+      "results": {
+        "total": 1005,
+        "current_item_count": 500,
+        "index": 0,
+        "items_per_page": 500
+      }
+    },
+    "data": [
+      {
+        "id": 17171717171717171717,
+        "timestamp": 1717014714,
+        "timestamp_nanoseconds": 0,
+        "date": "2024-05-29T20:31:54+00:00",
+        "event_type": "Endpoint Isolation Stop Success",
+        "event_type_id": 553648204,
+        "connector_guid": "aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+        "group_guids": [
+          "aaaaaaaa-1111-2222-bbbb-cccccccccccc"
+        ],
+        "computer": {
+          "connector_guid": "aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+          "hostname": "Demo_WannaCry_Ransomware",
+          "external_ip": "238.190.21.1",
+          "active": true,
+          "network_addresses": [
+            {
+              "ip": "222.222.222.245",
+              "mac": "1e:c0:c8:7e:bf:07"
+            }
+          ],
+          "links": {
+            "computer": "https://api.amp.cisco.com/v1/computers/aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+            "trajectory": "https://api.amp.cisco.com/v1/computers/aaaaaaaa-1111-2222-bbbb-cccccccccccc/trajectory",
+            "group": "https://api.amp.cisco.com/v1/groups/aaaaaaaa-1111-2222-bbbb-cccccccccccc"
+          }
+        },
+        "isolation": {
+          "duration": 46
+        }
+      },
+      {
+        "id": 17171717171717171717,
+        "timestamp": 1717014382,
+        "timestamp_nanoseconds": 0,
+        "date": "2024-05-29T20:26:22+00:00",
+        "event_type": "Endpoint Isolation Start Success",
+        "event_type_id": 553648202,
+        "connector_guid": "aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+        "group_guids": [
+          "aaaaaaaa-1111-2222-bbbb-cccccccccccc0"
+        ],
+        "computer": {
+          "connector_guid": "aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+          "hostname": "Demo_WannaCry_Ransomware",
+          "external_ip": "222.222.21.1",
+          "active": true,
+          "network_addresses": [
+            {
+              "ip": "222.222.222.245",
+              "mac": "1e:c0:c8:7e:bf:07"
+            }
+          ],
+          "links": {
+            "computer": "https://api.amp.cisco.com/v1/computers/aaaaaaaa-1111-2222-bbbb-cccccccccccc",
+            "trajectory": "https://api.amp.cisco.com/v1/computers/aaaaaaaa-1111-2222-bbbb-cccccccccccc/trajectory",
+            "group": "https://api.amp.cisco.com/v1/groups/aaaaaaaa-1111-2222-bbbb-cccccccccccc"
+          }
+        }
+      }
+    ]
+  },
+  "query_execution_time": "2024-05-31 16:24:11",
+  "input_params": {
+    "detection_sha256": null,
+    "application_sha256": null,
+    "connector_guid": null,
+    "group_guid": null,
+    "start_date": null,
+    "event_type": null,
+    "severity": null,
+    "limit": null,
+    "offset": null
+  }
+}
