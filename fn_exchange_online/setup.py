@@ -20,7 +20,7 @@ def snake_to_camel(word):
 setup(
     name='fn_exchange_online',
     display_name='Microsoft Exchange Online',
-    version='1.5.0',
+    version='1.5.1',
     license='MIT',
     author='IBM SOAR',
     author_email='',
@@ -38,7 +38,7 @@ setup(
         'pytz>=2019.3',
         'tzlocal>=2.0.0'
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.11',
     packages=find_packages(),
     include_package_data=True,
     platforms='any',

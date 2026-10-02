@@ -529,6 +529,7 @@ class TAddArcFn(Protocol):
         10" or "exit from function 'fooey'."
 
         """
+        ...
 
 
 TArcFragments = dict[TArc, list[tuple[str | None, str | None]]]

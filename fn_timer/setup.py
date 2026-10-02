@@ -23,7 +23,7 @@ def snake_to_camel(word):
 setup(
     name="fn_timer",
     display_name="Timer Function for SOAR",
-    version="1.0.1",
+    version="1.0.2",
     license="MIT",
     author="IBM SOAR",
     url="""<ul><a target='blank' href='https://ibm.biz/soarcommunity'>Support</a></ul>""",
@@ -38,7 +38,7 @@ setup(
     install_requires=[
         "resilient-circuits>=51.0.0"
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.11',
     packages=find_packages(),
     include_package_data=True,
     platforms="any",

@@ -1,10 +1,10 @@
 [
-  "fn_scheduler",
+  "fn_exchange_online",
+  "fn_timer",
   "fn_service_now",
-  "fn_splunk_integration",
-  "fn_jira",
-  "fn_outbound_email",
+  "sc_email_parser",
   "fn_watsonx_analyst",
-  "fn_urlscanio",
-  "fn_qradar_enhanced_data"
+  "fn_scheduler",
+  "rc_data_feed",
+  "fn_splunk_integration"
 ]

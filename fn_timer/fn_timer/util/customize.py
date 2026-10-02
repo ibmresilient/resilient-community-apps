@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# (c) Copyright IBM Corp. 2022, 2025. All Rights Reserved.
-# Generated with resilient-sdk v51.0.7.0.1603
+# (c) Copyright IBM Corp. 2022, 2026. All Rights Reserved.
+# Generated with resilient-sdk v51.0.8.3
 
 """Generate the SOAR customizations required for fn_timer"""
 
@@ -51,7 +51,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 51.0.0.0.9339
+    IBM SOAR Platform Version: 51.0.9.0.20851
 
     Contents:
     - Message Destinations:

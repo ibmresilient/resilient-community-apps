@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-# Generated with resilient-sdk v49.0.4423
+# (c) Copyright IBM Corp. 2010, 2026. All Rights Reserved.
+# Generated with resilient-sdk v51.0.8.3
 
-"""Generate the Resilient customizations required for rc_data_feed"""
+"""Generate the SOAR customizations required for rc_data_feed"""
 
 import base64
 import os
@@ -21,17 +22,30 @@ def codegen_reload_data():
     """
     return {
         "package": u"rc_data_feed",
-        "message_destinations": [u"feed_data"],
-        "functions": [u"data_feeder_sync_incidents"],
+        "message_destinations": [
+            u"feed_data"
+        ],
+        "functions": [
+            u"data_feeder_sync_incidents"
+        ],
         "workflows": [],
-        "actions": [u"Data Feeder: Artifact", u"Data Feeder: Attachment", u"Data Feeder: Incident", u"Data Feeder: Milestone", u"Data Feeder: Note", u"Data Feeder: Task"],
+        "actions": [
+            u"Data Feeder: Artifact",
+            u"Data Feeder: Attachment",
+            u"Data Feeder: Incident",
+            u"Data Feeder: Milestone",
+            u"Data Feeder: Note",
+            u"Data Feeder: Task"
+        ],
         "incident_fields": [],
         "incident_artifact_types": [],
         "incident_types": [],
         "datatables": [],
         "automatic_tasks": [],
         "scripts": [],
-        "playbooks": [u"data_feeder_sync_incidents_pb"]
+        "playbooks": [
+            u"data_feeder_sync_incidents_pb"
+        ]
     }
 
 
@@ -40,7 +54,7 @@ def customization_data(client=None):
     Returns a Generator of ImportDefinitions (Customizations).
     Install them using `resilient-circuits customize`
 
-    IBM SOAR Platform Version: 45.0.7899
+    IBM SOAR Platform Version: 51.0.8.2.32
 
     Contents:
     - Message Destinations:

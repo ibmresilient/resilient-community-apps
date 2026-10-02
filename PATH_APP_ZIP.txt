@@ -1,1 +1,1 @@
-https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_scheduler/main/2.2/app-fn_scheduler-2.2.1-46865.zip
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_exchange_online/main/1.5/app-fn_exchange_online-1.5.1-47785.zip

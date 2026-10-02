@@ -6,7 +6,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Data Feeder: Artifact",
-      "id": 27,
+      "id": 14,
       "logic_type": "all",
       "message_destinations": [
         "feed_data"
@@ -25,7 +25,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Data Feeder: Attachment",
-      "id": 28,
+      "id": 15,
       "logic_type": "all",
       "message_destinations": [
         "feed_data"
@@ -44,7 +44,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Data Feeder: Incident",
-      "id": 29,
+      "id": 16,
       "logic_type": "all",
       "message_destinations": [
         "feed_data"
@@ -63,7 +63,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Data Feeder: Milestone",
-      "id": 30,
+      "id": 17,
       "logic_type": "all",
       "message_destinations": [
         "feed_data"
@@ -82,7 +82,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Data Feeder: Note",
-      "id": 31,
+      "id": 18,
       "logic_type": "all",
       "message_destinations": [
         "feed_data"
@@ -101,7 +101,7 @@
       "conditions": [],
       "enabled": true,
       "export_key": "Data Feeder: Task",
-      "id": 33,
+      "id": 19,
       "logic_type": "all",
       "message_destinations": [
         "feed_data"
@@ -118,8 +118,11 @@
   ],
   "apps": [],
   "automatic_tasks": [],
-  "export_date": 1687453010581,
+  "case_matching_profiles": [],
+  "connectors": null,
+  "export_date": 1787219790664,
   "export_format_version": 2,
+  "export_notes": null,
   "export_type": null,
   "fields": [
     {
@@ -132,10 +135,12 @@
       "deprecated": false,
       "export_key": "__function/df_min_incident_id",
       "hide_notification": false,
-      "id": 548,
+      "id": 345,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
+      "json_example": null,
+      "json_schema": null,
       "name": "df_min_incident_id",
       "operation_perms": {},
       "operations": [],
@@ -162,10 +167,12 @@
       "deprecated": false,
       "export_key": "__function/df_max_incident_id",
       "hide_notification": false,
-      "id": 547,
+      "id": 346,
       "input_type": "number",
       "internal": false,
       "is_tracked": false,
+      "json_example": null,
+      "json_schema": null,
       "name": "df_max_incident_id",
       "operation_perms": {},
       "operations": [],
@@ -191,10 +198,12 @@
       "deprecated": false,
       "export_key": "__function/df_query_api_method",
       "hide_notification": false,
-      "id": 549,
+      "id": 347,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
+      "json_example": null,
+      "json_schema": null,
       "name": "df_query_api_method",
       "operation_perms": {},
       "operations": [],
@@ -225,7 +234,7 @@
   ],
   "functions": [
     {
-      "created_date": 1687446879113,
+      "created_date": 1787219387885,
       "description": {
         "content": "Synchronize Incident(s) and their associated tasks, notes, attachments, artifacts, milestones and associated datatables",
         "format": "text"
@@ -236,15 +245,21 @@
       "id": 1,
       "last_modified_by": {
         "display_name": "Resilient Sysadmin",
-        "id": 8,
-        "name": "a@example.com",
+        "id": 1,
+        "name": "admin@co3sys.com",
         "type": "user"
       },
-      "last_modified_time": 1687446879142,
+      "last_modified_time": 1787219387885,
       "name": "data_feeder_sync_incidents",
+      "output_description": {
+        "content": null,
+        "format": "text"
+      },
+      "output_json_example": "{\"version\": \"1.0\", \"success\": true, \"reason\": null, \"content\": {\"num_of_sync_incidents\": 2}, \"raw\": \"\", \"inputs\": {\"df_max_incident_id\": 2116, \"df_min_incident_id\": 2115, \"df_query_api_method\": true}, \"metrics\": {\"version\": \"1.0\", \"package\": \"unknown\", \"package_version\": \"unknown\", \"host\": \"localhost\", \"execution_time_ms\": 2521, \"timestamp\": \"2024-01-26 21:39:04\"}}",
+      "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-04/schema#\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {\"type\": \"null\"}, \"content\": {\"type\": \"object\", \"properties\": {\"num_of_sync_incidents\": {\"type\": \"integer\"}}, \"required\": [\"num_of_sync_incidents\"]}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"df_max_incident_id\": {\"type\": \"integer\"}, \"df_min_incident_id\": {\"type\": \"integer\"}, \"df_query_api_method\": {\"type\": \"boolean\"}}, \"required\": [\"df_max_incident_id\", \"df_min_incident_id\", \"df_query_api_method\"]}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}, \"required\": [\"version\", \"package\", \"package_version\", \"host\", \"execution_time_ms\", \"timestamp\"]}}, \"required\": [\"version\", \"success\", \"reason\", \"content\", \"inputs\", \"metrics\"]}",
       "tags": [],
       "uuid": "7ffed4e5-72fb-4162-bdef-4ea3ebfa89de",
-      "version": 1,
+      "version": 0,
       "view_items": [
         {
           "content": "b80d11d4-9c6b-4cd7-951a-4fe8c572c9ef",
@@ -276,13 +291,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 5,
+  "id": 4,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1687453008445,
+      "create_date": 1787219789190,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -291,17 +306,16 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1687453008445,
+      "update_date": 1787219789190,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
-  "industries": null,
   "layouts": [],
   "locale": null,
   "message_destinations": [
     {
       "api_keys": [
-        "2aaac5ce-b8fa-420d-8a03-18bc7d4608c2"
+        "8158d750-e42c-4187-b641-ed938bccefd5"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -320,14 +334,14 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 5,
-        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2a2cd2ba_bee0_42fa_a1fb_0e5a68727786\" isExecutable=\"true\" name=\"playbook_2a2cd2ba_bee0_42fa_a1fb_0e5a68727786\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1i1alyh\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Data Feeder: Sync Incidents\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7ffed4e5-72fb-4162-bdef-4ea3ebfa89de\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.df_min_incident_id = playbook.inputs.minimum_incident_id\\ninputs.df_max_incident_id = playbook.inputs.maximum_incident_id\\ninputs.df_query_api_method = playbook.inputs.query_api_method\\n  \",\"pre_processing_script_language\":\"python3\",\"result_name\":\"sync_incident_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1i1alyh\u003c/incoming\u003e\u003coutgoing\u003eFlow_04qk21l\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1i1alyh\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1sh3nix\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"process sync_incident results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"10ca78a6-6405-47ea-8178-275c43e1256b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_04qk21l\u003c/incoming\u003e\u003coutgoing\u003eFlow_1sh3nix\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_04qk21l\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1sh3nix\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2a2cd2ba_bee0_42fa_a1fb_0e5a68727786\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1sh3nix\" id=\"Flow_1sh3nix_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_04qk21l\" id=\"Flow_04qk21l_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1i1alyh\" id=\"Flow_1i1alyh_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.1875\" x=\"646\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"674\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
+        "content_version": 1,
+        "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2a2cd2ba_bee0_42fa_a1fb_0e5a68727786\" isExecutable=\"true\" name=\"playbook_2a2cd2ba_bee0_42fa_a1fb_0e5a68727786\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1i1alyh\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Data Feeder: Sync Incidents\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"7ffed4e5-72fb-4162-bdef-4ea3ebfa89de\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.df_min_incident_id = playbook.inputs.minimum_incident_id\\ninputs.df_max_incident_id = playbook.inputs.maximum_incident_id\\ninputs.df_query_api_method = playbook.inputs.query_api_method\\n  \",\"pre_processing_script_language\":\"python3\",\"result_name\":\"sync_incident_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1i1alyh\u003c/incoming\u003e\u003coutgoing\u003eFlow_04qk21l\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_1i1alyh\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1sh3nix\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"process sync_incident results\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"10ca78a6-6405-47ea-8178-275c43e1256b\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_04qk21l\u003c/incoming\u003e\u003coutgoing\u003eFlow_1sh3nix\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_04qk21l\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1sh3nix\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2a2cd2ba_bee0_42fa_a1fb_0e5a68727786\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1sh3nix\" id=\"Flow_1sh3nix_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"402\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"444\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_04qk21l\" id=\"Flow_04qk21l_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"262\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"318\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1i1alyh\" id=\"Flow_1i1alyh_di\"\u003e\u003comgdi:waypoint x=\"740\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"740\" y=\"178\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.1875\" x=\"646\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642\" y=\"178\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.21875\" x=\"674\" y=\"444\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"642\" y=\"318\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1687446941527,
+      "create_date": 1787219388275,
       "creator_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 8,
-        "name": "a@example.com",
+        "id": 1,
+        "name": "admin@co3sys.com",
         "type": "user"
       },
       "deployment_id": "playbook_2a2cd2ba_bee0_42fa_a1fb_0e5a68727786",
@@ -353,10 +367,12 @@
             "deprecated": false,
             "export_key": "playbook_2a2cd2ba_bee0_42fa_a1fb_0e5a68727786/maximum_incident_id",
             "hide_notification": false,
-            "id": 550,
+            "id": 348,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
+            "json_example": null,
+            "json_schema": null,
             "name": "maximum_incident_id",
             "operation_perms": {},
             "operations": [],
@@ -383,10 +399,12 @@
             "deprecated": false,
             "export_key": "playbook_2a2cd2ba_bee0_42fa_a1fb_0e5a68727786/minimum_incident_id",
             "hide_notification": false,
-            "id": 551,
+            "id": 349,
             "input_type": "number",
             "internal": false,
             "is_tracked": false,
+            "json_example": null,
+            "json_schema": null,
             "name": "minimum_incident_id",
             "operation_perms": {},
             "operations": [],
@@ -413,10 +431,12 @@
             "deprecated": false,
             "export_key": "playbook_2a2cd2ba_bee0_42fa_a1fb_0e5a68727786/query_api_method",
             "hide_notification": false,
-            "id": 552,
+            "id": 350,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
+            "json_example": null,
+            "json_schema": null,
             "name": "query_api_method",
             "operation_perms": {},
             "operations": [],
@@ -459,22 +479,22 @@
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "Resilient Sysadmin",
-        "id": 8,
-        "name": "a@example.com",
+        "id": 1,
+        "name": "admin@co3sys.com",
         "type": "user"
       },
-      "last_modified_time": 1687450928817,
+      "last_modified_time": 1787219388992,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1687447241654,
+          "created_date": 1787219388351,
           "description": "",
           "enabled": false,
           "export_key": "process sync_incident results",
-          "id": 3,
+          "id": 2,
           "language": "python3",
-          "last_modified_by": "a@example.com",
-          "last_modified_time": 1687450922589,
+          "last_modified_by": "admin@co3sys.com",
+          "last_modified_time": 1787219388351,
           "name": "process sync_incident results",
           "object_type": "incident",
           "playbook_handle": "data_feeder_sync_incidents_pb",
@@ -518,10 +538,23 @@
       },
       "name": "data_feeder_sync_incidents_pb",
       "object_type": "incident",
+      "playbook_change_log_info": {
+        "change_log_id": 1,
+        "change_log_items": [],
+        "change_number": 2,
+        "change_number_prefix": "01d836b1-1786-4559-9b34-2085d93ba32d",
+        "create_date": 1787219388844,
+        "modified_principal": {
+          "display_name": "Resilient Sysadmin",
+          "id": 1,
+          "name": "admin@co3sys.com",
+          "type": "user"
+        }
+      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_2a2cd2ba-bee0-42fa-a1fb-0e5a68727786",
-        "id": 2,
+        "id": 7,
         "name": "playbook_2a2cd2ba_bee0_42fa_a1fb_0e5a68727786",
         "type": "playbook",
         "uuid": "a6035656-c7ea-499f-8929-9940f1518057"
@@ -529,17 +562,21 @@
       "tags": [],
       "type": "default",
       "uuid": "2a2cd2ba-bee0-42fa-a1fb-0e5a68727786",
-      "version": 10
+      "version": 4
     }
   ],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 7899,
-    "major": 45,
+    "build_number": 32,
+    "f": 2,
+    "m": 8,
+    "major": 0,
     "minor": 0,
-    "version": "45.0.7899"
+    "r": 0,
+    "v": 51,
+    "version": "51.0.8.2.32"
   },
   "tags": [],
   "task_order": [],

@@ -69,7 +69,7 @@ MESSAGE_PATTERN = re.compile(r"([^<>]+)")
 # check for any combination of upper/lowercase http/https/news/telnet/file. Characters repeated for readability
 DEFANG_PATTERN = re.compile(r"(https|http|ftps|ftp|mailto|news|file|mailto):", re.IGNORECASE)
 # replies to message
-REPLY_PATTERN = re.compile(r"^re: ", re.IGNORECASE)
+REPLY_PATTERN = re.compile(r"^(?:re:\s*|\[[^\]]*\]\s*)*", re.IGNORECASE)
 # possible message-id names
 MESSAGE_ID_LIST =  ["message-id", "x-original-message-id", "x-microsoft-original-message-id", "x-google-original-message-id"]
 
@@ -633,7 +633,7 @@ newIncidentTitle = "Incident generated from email \"{0}\" via mailbox {1}".forma
 
 # Check to see if a similar incident already exists
 # We will search for an incident which has the same name as we would give a new incident
-query_builder.equals(fields.incident.name, newIncidentTitle)
+query_builder.equals(fields.incident.name, REPLY_PATTERN.sub("", subject))
 query_builder.equals(fields.incident.plan_status, "Active")
 query = query_builder.build()
 incidents = helper.findIncidents(query)
