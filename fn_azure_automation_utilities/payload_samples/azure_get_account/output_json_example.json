@@ -1,0 +1,69 @@
+{
+    "content": {
+      "etag": null,
+      "id": "/subscriptions/abcdefgh-1234-abcd-1234-a1b2c3d4e5f6/resourceGroups/DemoAssets/providers/Microsoft.Automation/automationAccounts/testing352",
+      "identity": {
+        "principalId": "ee616124-e026-4ca0-8c64-d34bae779faf",
+        "tenantId": "50ad7d3e-b889-434d-802d-13b87c68047b",
+        "type": "SystemAssigned"
+      },
+      "location": "eastus",
+      "name": "testing352",
+      "properties": {
+        "RegistrationUrl": "https://99f846f3-c84d-4c96-af2b-cd0f7a5bd5d5.agentsvc.eus.azure-automation.net/accounts/99f846f3-c84d-4c96-af2b-cd0f7a5bd5d5",
+        "RuntimeConfiguration": {
+          "powershell": {
+            "builtinModules": {
+              "Az": "8.0.0"
+            }
+          },
+          "powershell7": {
+            "builtinModules": {
+              "Az": "8.0.0"
+            }
+          }
+        },
+        "automationHybridServiceUrl": "https://99f846f3-c84d-4c96-af2b-cd0f7a5bd5d5.jrds.eus.azure-automation.net/automationAccounts/99f846f3-c84d-4c96-af2b-cd0f7a5bd5d5",
+        "creationTime": "2023-07-25T12:05:22.16+00:00",
+        "disableLocalAuth": false,
+        "encryption": {
+          "identity": {
+            "userAssignedIdentity": null
+          },
+          "keySource": "Microsoft.Automation"
+        },
+        "lastModifiedBy": null,
+        "lastModifiedTime": "2023-07-25T12:05:22.16+00:00",
+        "privateEndpointConnections": [],
+        "publicNetworkAccess": true,
+        "sku": {
+          "capacity": null,
+          "family": null,
+          "name": "Basic"
+        },
+        "state": "Ok"
+      },
+      "systemData": {
+        "createdAt": "2023-07-25T12:05:22.16+00:00",
+        "lastModifiedAt": "2023-07-25T12:05:22.16+00:00"
+      },
+      "tags": {},
+      "type": "Microsoft.Automation/AutomationAccounts"
+    },
+    "inputs": {
+      "account_name": "testing352",
+      "resource_group_name": "DemoAssets"
+    },
+    "metrics": {
+      "execution_time_ms": 1433,
+      "host": "local",
+      "package": "fn-azure-automation-utilities",
+      "package_version": "1.0.0",
+      "timestamp": "2023-07-27 14:14:45",
+      "version": "1.0"
+    },
+    "raw": null,
+    "reason": null,
+    "success": true,
+    "version": 2.0
+}

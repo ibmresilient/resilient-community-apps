@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": null,
+  "raw": "null",
+  "inputs": {
+    "kafka_broker_label": "brokerA",
+    "kafka_message": "{\"name\": \"my test incident\",\"description\": \"this is from SOAR\",\"status\": \"A\",\"severity_code\": \"High\", \"discovered_date\": 1708705700642, \"start_date\": 1708705700642}",
+    "kafka_key": null,
+    "kafka_topic": "quickstart-events"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-kafka",
+    "package_version": "1.0.2",
+    "host": "PMBP.local",
+    "execution_time_ms": 559,
+    "timestamp": "2024-05-07 15:32:32"
+  }
+}

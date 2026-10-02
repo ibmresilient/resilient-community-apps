@@ -1,0 +1,521 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Generated schema for Root",
+    "type": "object",
+    "properties": {
+      "version": {
+        "type": "string"
+      },
+      "success": {
+        "type": "boolean"
+      },
+      "reason": {
+        "type": "string"
+      },
+      "content": {
+        "type": "object",
+        "properties": {
+          "hashes": {
+            "type": "object",
+            "properties": {
+              "sha1": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "sha1"
+            ]
+          },
+          "oldReputations": {
+            "type": "object",
+            "properties": {
+              "1": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "number"
+                  },
+                  "providerId": {
+                    "type": "number"
+                  },
+                  "trustLevel": {
+                    "type": "number"
+                  },
+                  "attributes": {
+                    "type": "object",
+                    "properties": {
+                      "2120340": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "2120340"
+                    ]
+                  }
+                },
+                "required": [
+                  "createDate",
+                  "providerId",
+                  "trustLevel",
+                  "attributes"
+                ]
+              },
+              "3": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "number"
+                  },
+                  "providerId": {
+                    "type": "number"
+                  },
+                  "trustLevel": {
+                    "type": "number"
+                  },
+                  "attributes": {
+                    "type": "object",
+                    "properties": {
+                      "2098277": {
+                        "type": "string"
+                      },
+                      "2101652": {
+                        "type": "string"
+                      },
+                      "2102165": {
+                        "type": "string"
+                      },
+                      "2111893": {
+                        "type": "string"
+                      },
+                      "2114965": {
+                        "type": "string"
+                      },
+                      "2123156": {
+                        "type": "string"
+                      },
+                      "2139285": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "2101652",
+                      "2123156",
+                      "2098277",
+                      "2102165",
+                      "2114965",
+                      "2111893",
+                      "2139285"
+                    ]
+                  }
+                },
+                "required": [
+                  "createDate",
+                  "providerId",
+                  "trustLevel",
+                  "attributes"
+                ]
+              }
+            },
+            "required": [
+              "3",
+              "1"
+            ]
+          },
+          "newReputations": {
+            "type": "object",
+            "properties": {
+              "1": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "number"
+                  },
+                  "providerId": {
+                    "type": "number"
+                  },
+                  "trustLevel": {
+                    "type": "number"
+                  },
+                  "attributes": {
+                    "type": "object",
+                    "properties": {
+                      "2120340": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "2120340"
+                    ]
+                  }
+                },
+                "required": [
+                  "createDate",
+                  "providerId",
+                  "trustLevel",
+                  "attributes"
+                ]
+              },
+              "3": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "number"
+                  },
+                  "providerId": {
+                    "type": "number"
+                  },
+                  "trustLevel": {
+                    "type": "number"
+                  },
+                  "attributes": {
+                    "type": "object",
+                    "properties": {
+                      "2098277": {
+                        "type": "string"
+                      },
+                      "2101652": {
+                        "type": "string"
+                      },
+                      "2102165": {
+                        "type": "string"
+                      },
+                      "2111893": {
+                        "type": "string"
+                      },
+                      "2114965": {
+                        "type": "string"
+                      },
+                      "2123156": {
+                        "type": "string"
+                      },
+                      "2139285": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "2101652",
+                      "2123156",
+                      "2098277",
+                      "2102165",
+                      "2114965",
+                      "2111893",
+                      "2139285"
+                    ]
+                  }
+                },
+                "required": [
+                  "createDate",
+                  "providerId",
+                  "trustLevel",
+                  "attributes"
+                ]
+              }
+            },
+            "required": [
+              "3",
+              "1"
+            ]
+          },
+          "updateTime": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "hashes",
+          "oldReputations",
+          "newReputations",
+          "updateTime"
+        ]
+      },
+      "raw": {
+        "type": "object",
+        "properties": {
+          "hashes": {
+            "type": "object",
+            "properties": {
+              "sha1": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "sha1"
+            ]
+          },
+          "oldReputations": {
+            "type": "object",
+            "properties": {
+              "1": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "number"
+                  },
+                  "providerId": {
+                    "type": "number"
+                  },
+                  "trustLevel": {
+                    "type": "number"
+                  },
+                  "attributes": {
+                    "type": "object",
+                    "properties": {
+                      "2120340": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "2120340"
+                    ]
+                  }
+                },
+                "required": [
+                  "createDate",
+                  "providerId",
+                  "trustLevel",
+                  "attributes"
+                ]
+              },
+              "3": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "number"
+                  },
+                  "providerId": {
+                    "type": "number"
+                  },
+                  "trustLevel": {
+                    "type": "number"
+                  },
+                  "attributes": {
+                    "type": "object",
+                    "properties": {
+                      "2098277": {
+                        "type": "string"
+                      },
+                      "2101652": {
+                        "type": "string"
+                      },
+                      "2102165": {
+                        "type": "string"
+                      },
+                      "2111893": {
+                        "type": "string"
+                      },
+                      "2114965": {
+                        "type": "string"
+                      },
+                      "2123156": {
+                        "type": "string"
+                      },
+                      "2139285": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "2101652",
+                      "2123156",
+                      "2098277",
+                      "2102165",
+                      "2114965",
+                      "2111893",
+                      "2139285"
+                    ]
+                  }
+                },
+                "required": [
+                  "createDate",
+                  "providerId",
+                  "trustLevel",
+                  "attributes"
+                ]
+              }
+            },
+            "required": [
+              "3",
+              "1"
+            ]
+          },
+          "newReputations": {
+            "type": "object",
+            "properties": {
+              "1": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "number"
+                  },
+                  "providerId": {
+                    "type": "number"
+                  },
+                  "trustLevel": {
+                    "type": "number"
+                  },
+                  "attributes": {
+                    "type": "object",
+                    "properties": {
+                      "2120340": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "2120340"
+                    ]
+                  }
+                },
+                "required": [
+                  "createDate",
+                  "providerId",
+                  "trustLevel",
+                  "attributes"
+                ]
+              },
+              "3": {
+                "type": "object",
+                "properties": {
+                  "createDate": {
+                    "type": "number"
+                  },
+                  "providerId": {
+                    "type": "number"
+                  },
+                  "trustLevel": {
+                    "type": "number"
+                  },
+                  "attributes": {
+                    "type": "object",
+                    "properties": {
+                      "2098277": {
+                        "type": "string"
+                      },
+                      "2101652": {
+                        "type": "string"
+                      },
+                      "2102165": {
+                        "type": "string"
+                      },
+                      "2111893": {
+                        "type": "string"
+                      },
+                      "2114965": {
+                        "type": "string"
+                      },
+                      "2123156": {
+                        "type": "string"
+                      },
+                      "2139285": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "2101652",
+                      "2123156",
+                      "2098277",
+                      "2102165",
+                      "2114965",
+                      "2111893",
+                      "2139285"
+                    ]
+                  }
+                },
+                "required": [
+                  "createDate",
+                  "providerId",
+                  "trustLevel",
+                  "attributes"
+                ]
+              }
+            },
+            "required": [
+              "3",
+              "1"
+            ]
+          },
+          "updateTime": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "hashes",
+          "oldReputations",
+          "newReputations",
+          "updateTime"
+        ]
+      },
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "mcafee_tie_hash_type": {
+            "type": "string"
+          },
+          "mcafee_tie_hash": {
+            "type": "string"
+          },
+          "mcafee_tie_trust_level": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ]
+          },
+          "mcafee_tie_comment": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "mcafee_tie_hash_type",
+          "mcafee_tie_hash",
+          "mcafee_tie_trust_level",
+          "mcafee_tie_comment"
+        ]
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "package": {
+            "type": "string"
+          },
+          "package_version": {
+            "type": "string"
+          },
+          "host": {
+            "type": "string"
+          },
+          "execution_time_ms": {
+            "type": "number"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "version",
+          "package",
+          "package_version",
+          "host",
+          "execution_time_ms",
+          "timestamp"
+        ]
+      }
+    },
+    "required": [
+      "version",
+      "success",
+      "reason",
+      "content",
+      "raw",
+      "inputs",
+      "metrics"
+    ]
+}

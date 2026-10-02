@@ -1,0 +1,504 @@
+{
+    "RULE": {
+        "properties": {
+            "<named property>": ""
+        }
+    },
+    "WORKFLOW": {
+        "properties": {
+            "<named property>": {
+                    
+            }
+        }
+    },
+    "PLAYBOOK": {
+        "inputs": {
+
+        },
+        "functions": {
+            "results": {
+                "<named property>": {
+
+                }
+            }
+        },
+        "properties": {
+            "<named property>": {
+                    
+            }
+        }
+    },
+    "INCIDENT": {
+        "dtm": {},
+        "cm": {
+            "unassigneds": [],
+            "total": 0,
+            "geo_counts": {}
+        },
+        "regulators": {
+            "ids": [
+                149
+            ]
+        },
+        "hipaa": {
+            "hipaa_adverse": null,
+            "hipaa_misused": null,
+            "hipaa_acquired": null,
+            "hipaa_additional_misuse": null,
+            "hipaa_breach": null,
+            "hipaa_adverse_comment": "",
+            "hipaa_misused_comment": "",
+            "hipaa_acquired_comment": "",
+            "hipaa_additional_misuse_comment": "",
+            "hipaa_breach_comment": ""
+        },
+        "tasks": null,
+        "artifacts": null,
+        "name": "sync task 8088",
+        "description": null,
+        "phase_id": 1011,
+        "inc_training": false,
+        "vers": 4,
+        "addr": null,
+        "city": null,
+        "creator": {
+            "id": 8,
+            "fname": "Resilient",
+            "lname": "Sysadmin",
+            "display_name": "Resilient Sysadmin",
+            "status": "A",
+            "email": "a@example.com",
+            "locked": false,
+            "password_changed": false,
+            "is_external": false,
+            "ui_theme": "verydarkmode",
+            "is_ldap": false,
+            "is_saml": false
+        },
+        "creator_principal": {
+            "id": 8,
+            "type": "user",
+            "name": "a@example.com",
+            "display_name": "Resilient Sysadmin"
+        },
+        "exposure_type_id": 1,
+        "incident_type_ids": [
+            3
+        ],
+        "reporter": null,
+        "state": null,
+        "country": null,
+        "zip": null,
+        "workspace": 2,
+        "exposure": 0,
+        "org_handle": 202,
+        "members": [],
+        "negative_pr_likely": null,
+        "perms": {
+            "read": true,
+            "write": true,
+            "comment": true,
+            "assign": true,
+            "close": true,
+            "change_members": true,
+            "attach_file": true,
+            "read_attachments": true,
+            "delete_attachments": true,
+            "create_milestones": true,
+            "list_milestones": true,
+            "create_artifacts": true,
+            "list_artifacts": true,
+            "delete": true,
+            "change_workspace": true
+        },
+        "confirmed": true,
+        "task_changes": {
+            "added": [],
+            "removed": []
+        },
+        "assessment": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<assessment>\n    <rollups/>\n    <optional>There are 1 required and 0 optional tasks from 1 regulators.</optional>\n</assessment>\n",
+        "data_compromised": null,
+        "draft": false,
+        "properties": {
+            "qr_flow_count": null,
+            "qr_relevance": null,
+            "sentinel_incident_classification_reason": null,
+            "qradar_rule": null,
+            "defender_incident_lastupdatetime": null,
+            "qr_offense_index_value": null,
+            "defender_determination": null,
+            "mitre_tactic_name": null,
+            "qradar_id": null,
+            "qr_offense_index_type": null,
+            "qr_offense_source": null,
+            "defender_classification": null,
+            "sentinel_incident_assigned_to": null,
+            "sentinel_incident_id": null,
+            "sentinel_profile": null,
+            "jira_internal_url": null,
+            "defender_incident_createtime": null,
+            "sentinel_incident_url": null,
+            "qr_destination_ip_count": null,
+            "qr_event_count": null,
+            "qradar_destination": null,
+            "xapp_rawjson": null,
+            "jira_issue_id": null,
+            "sentinel_incident_tactics": null,
+            "ldap_base_dn": null,
+            "internal_customizations_field": null,
+            "jira_url": null,
+            "qr_assigned": null,
+            "sentinel_incident_number": null,
+            "qr_credibility": null,
+            "sentinel_incident_status": null,
+            "qr_source_ip_count": null,
+            "ldap_domain_name": null,
+            "qr_severity": null,
+            "sentinel_incident_classification": null,
+            "defender_incident_id": null,
+            "sentinel_incident_classification_comment": null,
+            "jira_server": "8088",
+            "defender_tags": null,
+            "sentinel_incident_labels": null,
+            "defender_incident_url": null,
+            "qr_magnitude": null
+        },
+        "resolution_id": null,
+        "resolution_summary": null,
+        "pii": {
+            "data_compromised": null,
+            "determined_date": 1666898873834,
+            "harmstatus_id": 2,
+            "data_encrypted": null,
+            "data_contained": null,
+            "impact_likely": null,
+            "ny_impact_likely": null,
+            "or_impact_likely": null,
+            "wa_impact_likely": null,
+            "dc_impact_likely": null,
+            "data_source_ids": [],
+            "data_format": null,
+            "assessment": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<assessment>\n    <rollups/>\n    <optional>There are 1 required and 0 optional tasks from 1 regulators.</optional>\n</assessment>\n",
+            "exposure": 0,
+            "gdpr_harm_risk": null,
+            "gdpr_lawful_data_processing_categories": [],
+            "alberta_health_risk_assessment": null,
+            "california_health_risk_assessment": null,
+            "new_zealand_risk_assessment": null,
+            "singapore_risk_assessment": null
+        },
+        "gdpr": {
+            "gdpr_breach_circumstances": [],
+            "gdpr_breach_type": null,
+            "gdpr_personal_data": null,
+            "gdpr_identification": null,
+            "gdpr_consequences": null,
+            "gdpr_final_assessment": null,
+            "gdpr_breach_type_comment": null,
+            "gdpr_personal_data_comment": null,
+            "gdpr_identification_comment": null,
+            "gdpr_consequences_comment": null,
+            "gdpr_final_assessment_comment": null,
+            "gdpr_subsequent_notification": null
+        },
+        "regulator_risk": {},
+        "inc_last_modified_date": 1668431343323,
+        "comments": null,
+        "actions": [
+            {
+                "id": 27,
+                "name": "Example: Send Incident Email HTML",
+                "enabled": true
+            }
+        ],
+        "playbooks": [
+            {
+                "playbook_handle": 171,
+                "display_name": "test rich text script"
+            }
+        ],
+        "timer_field_summarized_incident_data": [],
+        "admin_id": null,
+        "creator_id": 8,
+        "crimestatus_id": 5,
+        "employee_involved": null,
+        "end_date": null,
+        "exposure_dept_id": null,
+        "exposure_individual_name": null,
+        "exposure_vendor_id": null,
+        "jurisdiction_name": null,
+        "jurisdiction_reg_id": null,
+        "start_date": null,
+        "inc_start": null,
+        "org_id": 202,
+        "is_scenario": false,
+        "hard_liability": 0,
+        "nist_attack_vectors": [],
+        "id": 2171,
+        "sequence_code": "C815-77",
+        "discovered_date": 1666898873834,
+        "due_date": null,
+        "create_date": 1666898894657,
+        "owner_id": 8,
+        "severity_code": 55,
+        "plan_status": "A"
+    },
+    "ARTIFACT": {
+        "id": 302,
+        "type": 1,
+        "value": "1.2.3.4",
+        "description": "test IP Address",
+        "attachment": null,
+        "parent_id": null,
+        "creator": {
+            "id": 8,
+            "fname": "Resilient",
+            "lname": "Sysadmin",
+            "display_name": "Resilient Sysadmin",
+            "status": "A",
+            "email": "a@example.com",
+            "locked": false,
+            "password_changed": false,
+            "is_external": false,
+            "ui_theme": "verydarkmode",
+            "is_ldap": false,
+            "is_saml": false
+        },
+        "inc_id": 2171,
+        "inc_name": "sync task 8088",
+        "inc_owner": 8,
+        "hits": [],
+        "created": 1668631269014,
+        "last_modified_time": 1668631269032,
+        "last_modified_by": {
+            "id": 8,
+            "type": "user",
+            "name": "a@example.com",
+            "display_name": "Resilient Sysadmin"
+        },
+        "pending_sources": [],
+        "perms": {
+            "read": true,
+            "write": true,
+            "delete": true
+        },
+        "properties": [
+            {
+                "name": "destination",
+                "value": "false"
+            },
+            {
+                "name": "source",
+                "value": "false"
+            }
+        ],
+        "actions": [
+            {
+                "id": 97,
+                "name": "Example: Email Parsing (Artifact)",
+                "enabled": false
+            }
+        ],
+        "playbooks": [],
+        "hash": "8b8d9514c6180d5fcd7b7eb52b9f3286cea9c8df818abc5a63ad50ba37bd9935",
+        "relating": true,
+        "creator_principal": {
+            "id": 8,
+            "type": "user",
+            "name": "a@example.com",
+            "display_name": "Resilient Sysadmin"
+        },
+        "related_incident_count": 1,
+        "pending_scan_result": false,
+        "global_info": {
+            "id": 179,
+            "type": 1,
+            "value": "1.2.3.4",
+            "description": null,
+            "summary": null,
+            "creator": {
+                "id": 8,
+                "type": "user",
+                "name": "a@example.com",
+                "display_name": "Resilient Sysadmin"
+            },
+            "created": 1666370270770,
+            "last_modified_by": {
+                "id": 0,
+                "type": "system",
+                "name": "System User",
+                "display_name": "System User"
+            },
+            "last_modified_time": 1666370270771,
+            "related_incident_count": 2,
+            "last_related_inc_id": 2171,
+            "last_related_inc_owner_handle": 8,
+            "first_related_inc_id": 2166,
+            "first_related_inc_owner_handle": 7,
+            "perms": {
+                "write": true
+            },
+            "first_associated_time": 1666370270770,
+            "last_associated_time": 1668631269014,
+            "properties": null,
+            "tags": [],
+            "version": 0,
+            "scan_option": "on",
+            "relating_incidents": true,
+            "hit_threat_sources": [],
+            "relating": true,
+            "last_scan_hits": []
+        },
+        "ip": {
+            "source": false,
+            "destination": false
+        },
+        "global_artifact": [
+            {
+                "id": 179,
+                "type": 1,
+                "value": "1.2.3.4",
+                "description": null,
+                "summary": null,
+                "creator": {
+                    "id": 8,
+                    "type": "user",
+                    "name": "a@example.com",
+                    "display_name": "Resilient Sysadmin"
+                },
+                "created": 1666370270770,
+                "last_modified_by": {
+                    "id": 0,
+                    "type": "system",
+                    "name": "System User",
+                    "display_name": "System User"
+                },
+                "last_modified_time": 1666370270771,
+                "related_incident_count": 2,
+                "last_related_inc_id": 2171,
+                "last_related_inc_owner_handle": 8,
+                "first_related_inc_id": 2166,
+                "first_related_inc_owner_handle": 7,
+                "perms": {
+                    "write": true
+                },
+                "first_associated_time": 1666370270770,
+                "last_associated_time": 1668631269014,
+                "properties": null,
+                "tags": [],
+                "version": 0,
+                "scan_option": "on",
+                "relating_incidents": true,
+                "hit_threat_sources": [],
+                "relating": true,
+                "last_scan_hits": []
+            }
+        ]
+    },
+    "TASK": {
+        "name": "Change device/application passwords",
+        "inc_id": 2171,
+        "inc_owner_id": 8,
+        "due_date": null,
+        "required": true,
+        "owner_id": null,
+        "user_notes": null,
+        "status": "C",
+        "frozen": false,
+        "owner_fname": null,
+        "owner_lname": null,
+        "init_date": 1666898895175,
+        "active": true,
+        "src_name": null,
+        "inc_name": "sync task 8088",
+        "instr_text": "Immediately change any associated app or device passwords to company directory services, bank accounts, email, social networks, and so on, to prevent unauthorized access to personal or company data and any password reset functionality.",
+        "instructions": "Immediately change any associated app or device passwords to company directory services, bank accounts, email, social networks, and so on, to prevent unauthorized access to personal or company data and any password reset functionality.",
+        "form": null,
+        "members": null,
+        "perms": {
+            "read": true,
+            "write": true,
+            "comment": true,
+            "assign": true,
+            "close": true,
+            "change_members": true,
+            "attach_file": true,
+            "read_attachments": true,
+            "delete_attachments": true,
+            "change_header": false
+        },
+        "notes": [],
+        "closed_date": null,
+        "actions": [
+            {
+                "id": 29,
+                "name": "Example: Send Task Email HTML",
+                "enabled": true
+            }
+        ],
+        "playbooks": [],
+        "phase_id": 1011,
+        "category_id": null,
+        "notes_count": 1,
+        "attachments_count": 0,
+        "task_layout": [],
+        "auto_deactivate": true,
+        "creator_principal": {
+            "id": 8,
+            "type": "user",
+            "name": "a@example.com",
+            "display_name": "Resilient Sysadmin"
+        },
+        "timeframe_name": null,
+        "regs": {},
+        "custom": true,
+        "id": 211,
+        "inc_training": false,
+        "cat_name": "Respond",
+        "description": null,
+        "at_id": 123,
+        "private": null
+    },
+    "RESULTS": {
+        "success": true,
+        "reason": null,
+        "metrics": {
+            "package": "fn-sep",
+            "timestamp": "2019-05-23 18:40:17",
+            "package_version": "1.0.0",
+            "host": "myhost",
+            "version": "1.0",
+            "execution_time_ms": 1966
+        },
+        "inputs": {
+        },
+        "content": {
+        }
+    },
+    "INPUTS": {
+    },
+    "ROW": {
+    },
+    "EMAILMESSAGE": {
+        "body": {"content": "31 char MD5 : 02e5f98d4835a2bd280b124f55120a51\n32 char MD5 : a49c17ebd60638f1e82e6d41ed51f15e"},
+        "raw_body": "<div>31 char MD5 : 02e5f98d4835a2bd280b124f55120a51\n32 char MD5 : a49c17ebd60638f1e82e6d41ed51f15e</div>",
+        "subject": "this is subject",
+        "headers": {
+            "message-id": "12345-abcd"
+        },
+        "attachments": [
+        ],
+        "sender": {"name": "A Example", "address": "a@example.com"},
+        "id": 5,
+        "inbound_mailbox": "somemail"
+    },
+    "HELPER_FIND_INCIDENTS": [
+
+    ],
+    "FIELDS": {
+        "incident": {
+            "name": "NAME",
+            "plan_status": "PLAN_STATUS"
+        }
+    }
+}

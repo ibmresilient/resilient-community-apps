@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "children": {
+          "type": "array"
+        },
+        "text": {
+          "type": "string"
+        },
+        "creator": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "type": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "display_name": {
+              "type": "string"
+            }
+          }
+        },
+        "create_date": {
+          "type": "integer"
+        },
+        "last_modified_time": {
+          "type": "integer"
+        },
+        "last_modified_by": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "type": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "display_name": {
+              "type": "string"
+            }
+          }
+        },
+        "mentioned_widgets": {
+          "type": "array"
+        },
+        "perms": {
+          "type": "object",
+          "properties": {
+            "update": {
+              "type": "boolean"
+            },
+            "delete": {
+              "type": "boolean"
+            }
+          }
+        },
+        "parent": {}
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "wiki_contents_as_json": {
+          "type": "boolean"
+        },
+        "wiki_path": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    },
+    "title": {
+      "type": "string"
+    }
+  }
+}

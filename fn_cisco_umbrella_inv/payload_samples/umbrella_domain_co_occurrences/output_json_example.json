@@ -1,0 +1,46 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "cooccurrences": {
+      "pfs2": [
+        [
+          "bizlibrary.com",
+          0.762127475455211
+        ],
+        [
+          "cpeonlinewebinars.com",
+          0.1820483148770022
+        ],
+        [
+          "concursolutions.com",
+          0.03536072307668543
+        ],
+        [
+          "us-2.crowdstrike.com",
+          0.01458944094084707
+        ],
+        [
+          "cisco.com",
+          0.00587404565025434
+        ]
+      ],
+      "found": true
+    },
+    "domain_name": "ibm.com",
+    "query_execution_time": "2024-11-19 10:04:22"
+  },
+  "raw": null,
+  "inputs": {
+    "umbinv_domain": "ibm.com"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-cisco-umbrella-inv",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 473,
+    "timestamp": "2024-11-19 10:04:22"
+  }
+}

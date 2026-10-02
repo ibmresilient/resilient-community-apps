@@ -1,0 +1,150 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "63": {
+          "type": "object",
+          "properties": {
+            "summary": {
+              "type": "string"
+            },
+            "detail": {
+              "type": "string"
+            }
+          }
+        },
+        "127.0.0.1": {
+          "type": "object",
+          "properties": {
+            "summary": {
+              "type": "string"
+            },
+            "detail": {
+              "type": "object",
+              "properties": {
+                "changed": {
+                  "type": "boolean"
+                },
+                "stdout": {
+                  "type": "string"
+                },
+                "stderr": {
+                  "type": "string"
+                },
+                "rc": {
+                  "type": "integer"
+                },
+                "cmd": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "start": {
+                  "type": "string"
+                },
+                "end": {
+                  "type": "string"
+                },
+                "delta": {
+                  "type": "string"
+                },
+                "msg": {
+                  "type": "string"
+                },
+                "invocation": {
+                  "type": "object",
+                  "properties": {
+                    "module_args": {
+                      "type": "object",
+                      "properties": {
+                        "_raw_params": {
+                          "type": "string"
+                        },
+                        "_uses_shell": {
+                          "type": "boolean"
+                        },
+                        "expand_argument_vars": {
+                          "type": "boolean"
+                        },
+                        "stdin_add_newline": {
+                          "type": "boolean"
+                        },
+                        "strip_empty_ends": {
+                          "type": "boolean"
+                        },
+                        "argv": {},
+                        "chdir": {},
+                        "executable": {},
+                        "creates": {},
+                        "removes": {},
+                        "stdin": {}
+                      }
+                    }
+                  }
+                },
+                "stdout_lines": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "stderr_lines": {
+                  "type": "array"
+                },
+                "_ansible_no_log": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "ansible_parameters": {
+          "type": "string"
+        },
+        "ansible_playbook_name": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

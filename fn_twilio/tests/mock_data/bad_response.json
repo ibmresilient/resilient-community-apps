@@ -1,0 +1,9 @@
+
+{
+    "phone_number": "+9788354530",
+    "date_created": "Fri, 03 Apr 2020 18:40:32 +0000",
+    "error_code": 22122,
+    "error_message": "Unable to create record: The 'To' number +9788354530 is not a valid phone number.",
+    "direction": "outbound-api",
+    "status": false
+}

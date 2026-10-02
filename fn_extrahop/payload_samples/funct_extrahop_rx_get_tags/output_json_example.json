@@ -1,0 +1,24 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "result": [
+      {
+        "mod_time": 1681148615537,
+        "id": 21,
+        "name": "SOAR-Testing-tag"
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {},
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-extrahop",
+    "package_version": "1.0.0",
+    "host": "MBP",
+    "execution_time_ms": 628,
+    "timestamp": "2023-04-10 14:21:21"
+  }
+}

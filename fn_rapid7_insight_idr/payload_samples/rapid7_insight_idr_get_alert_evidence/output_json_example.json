@@ -1,0 +1,41 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "data": {
+      "evidences": [
+        {
+          "rrn": "rrn:alerts:us2:e4463fba-cd64-427c-8fc9-f9e1983f24e1:evidence:1:fcd21bbeec66b34322c57b50478014ef",
+          "version": 1,
+          "created_at": "2024-01-14T11:07:37.329397Z",
+          "updated_at": "2024-01-14T11:07:37.329397Z",
+          "evented_at": "2024-01-14T11:07:36.998Z",
+          "external_source": "IDR ABA",
+          "event_type": "raw",
+          "data": "{\"timestamp\":\"2024-01-10T13:51:12.000Z\",\"hostname\":\"r7-test1\",\"appname\":\"sshd\",\"source_data\":\"Jan 10 08:51:12 r7-test1 sshd[19076]: error: maximum authentication attempts exceeded for root from 9.61.113.106 port 54336 ssh2 [preauth]\",\"custom_data\":{\"invalid-login\":\"maximum authentication attempts exceeded for\"}}"
+        }
+      ],
+      "metadata": {
+        "index": 0,
+        "size": 1,
+        "items_in_index": 1,
+        "total_items": 1,
+        "is_last_index": true
+      }
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "rapid7_insight_idr_alert_rrn": "rrn:alerts:us2:e4463fba-cd64-427c-8fc9-f9e1983f24e1:alert:1:17c2b65f73ba0d975e9d24d446a9e91c",
+    "rapid7_insight_idr_rrn": "rrn:investigation:us2:e4463fba-cd64-427c-8fc9-f9e1983f24e1:investigation:8V1AAAAAAA5F"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-rapid7-insight-idr",
+    "package_version": "1.0.0",
+    "host": "mylaptop",
+    "execution_time_ms": 9332,
+    "timestamp": "2024-02-12 13:57:09"
+  }
+}

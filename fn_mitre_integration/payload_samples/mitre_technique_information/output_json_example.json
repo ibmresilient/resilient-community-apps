@@ -1,0 +1,53 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "mitre_techniques": [
+      {
+        "name": "Cloud Administration Command",
+        "description": "Adversaries may abuse cloud management services to execute commands within virtual machines. Resources such as AWS Systems Manager, Azure RunCommand, and Runbooks allow users to remotely run scripts in virtual machines by leveraging installed virtual machine agents. (Citation: AWS Systems Manager Run Command)(Citation: Microsoft Run Command)\n\nIf an adversary gains administrative access to a cloud environment, they may be able to abuse cloud management services to execute commands in the environment\u2019s virtual machines. Additionally, an adversary that compromises a service provider or delegated administrator account may similarly be able to leverage a <a href=\"https://attack.mitre.org/techniques/T1199\">Trusted Relationship</a> to execute commands in connected virtual machines.(Citation: MSTIC Nobelium Oct 2021)",
+        "external_references": [
+          {
+            "url": "https://attack.mitre.org/techniques/T1651"
+          },
+          {
+            "url": "https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html"
+          },
+          {
+            "url": "https://www.microsoft.com/security/blog/2021/10/25/nobelium-targeting-delegated-administrative-privileges-to-facilitate-broader-attacks/"
+          },
+          {
+            "url": "https://learn.microsoft.com/en-us/azure/virtual-machines/run-command-overview"
+          }
+        ],
+        "x_mitre_detection": "",
+        "id": "T1651",
+        "collection": "Enterprise ATT&CK",
+        "tactic": "Execution",
+        "mitre_mitigations": [
+          {
+            "description": "Manage the creation, modification, use, and permissions associated to privileged accounts, including SYSTEM and root.",
+            "name": "Privileged Account Management",
+            "id": "M1026",
+            "collection": "Enterprise ATT&CK"
+          }
+        ]
+      }
+    ]
+  },
+  "raw": "",
+  "inputs": {
+    "mitre_technique_name": "Cloud Administration Command",
+    "mitre_technique_id": "T1651",
+    "mitre_technique_mitigation_only": true
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-mitre-integration",
+    "package_version": "2.2.0",
+    "host": "my.app.host",
+    "execution_time_ms": 71805,
+    "timestamp": "2025-01-16 08:19:21"
+  }
+}

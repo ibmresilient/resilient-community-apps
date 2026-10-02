@@ -1,0 +1,58 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "body": "This is the first part.\r\n",
+    "attachments": [
+      {
+        "filename": "<qbFGyPQAS8>",
+        "payload": "jamisSqGSIb3DQEHAqCAMIjamisxCzAJBgUrDgMCGgUAMIAGCSqGSjamisEHAQAAoIIFSjCCBUYw\r\nggQujamisQICBD++ukQwDQYJKojamisNAQEFBQAwMTELMAkGA1UEBhMCRjamisAKBgNVBAoTA1RE\r\nQzEUMBIGjamisxMLVERDIE9DRVMgQ0jamisNMDQwMjI5MTE1OTAxWhcNMDYwMjamisIyOTAxWjCB\r\ngDELMAkGA1UEjamisEsxKTAnBgNVBAoTIEjamisuIG9yZ2FuaXNhdG9yaXNrIHRpbjamisRuaW5=\r\n",
+        "binary": true,
+        "mail_content_type": "image/jpeg",
+        "content-id": "<qbFGyPQAS8>",
+        "content-disposition": "inline",
+        "charset": null,
+        "content_transfer_encoding": "base64"
+      }
+    ],
+    "from": [
+      [
+        "",
+        "foo@example.com"
+      ]
+    ],
+    "timezone": "+2.0",
+    "content-type": "multipart/mixed; boundary=Apple-Mail-13-196941151",
+    "mime-version": "1.0 (Apple Message framework v730)",
+    "to_domains": [
+      "example.com"
+    ],
+    "message-id": "<9169D984-4E0B-45EF-82D4-8F5E53AD7012@example.com>",
+    "date": "2005-06-06T20:21:22",
+    "subject": "testing",
+    "to": [
+      [
+        "",
+        "blah@example.com"
+      ]
+    ],
+    "has_defects": false,
+    "plain_body": "This is the first part.\r\n",
+    "html_body": "[]"
+  },
+  "raw": "",
+  "inputs": {
+    "parse_utilities_email_attachments": true,
+    "parse_utilities_attachment_id": 9,
+    "parse_utilities_incident_id": 2165
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-parse-utilities",
+    "package_version": "1.1.1",
+    "host": "local",
+    "execution_time_ms": 2242,
+    "timestamp": "2025-06-24 11:06:04"
+  }
+}

@@ -1,0 +1,8 @@
+---
+- name: "Install required packages for Host"
+  gather_facts: false
+  hosts: all
+  become: true
+  tasks:
+    - name: Check whether system is reachable or not
+      action: ping

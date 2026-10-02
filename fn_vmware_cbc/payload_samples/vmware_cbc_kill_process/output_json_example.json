@@ -1,0 +1,37 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "result": {
+      "values": [],
+      "id": 19,
+      "name": "kill",
+      "result_code": 0,
+      "result_type": "WinHresult",
+      "result_desc": "",
+      "sub_keys": [],
+      "files": [],
+      "status": "COMPLETE",
+      "input": {
+        "name": "kill",
+        "object": 2676
+      },
+      "create_time": "2024-06-24T21:39:56Z",
+      "finish_time": "2024-06-24T21:39:56Z"
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "vmware_cbc_device_id": "217340553",
+    "vmware_cbc_process_id": "2676"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-vmware-cbc",
+    "package_version": "1.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 11904,
+    "timestamp": "2024-06-24 17:39:57"
+  }
+}

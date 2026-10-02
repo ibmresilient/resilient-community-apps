@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "channel": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "user_info": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

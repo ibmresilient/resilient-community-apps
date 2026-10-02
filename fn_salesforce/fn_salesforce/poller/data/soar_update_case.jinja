@@ -1,0 +1,24 @@
+{
+  {# JINJA template for updating a new SOAR incident from an endpoint #}
+  {# modify to specify your specific **data** fields #}
+  "severity_code": "{{ Priority }}",
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "salesforce_case_id": "{{ Id }}",
+    "salesforce_case_number": "{{ CaseNumber }}",
+    "salesforce_case_type": "{{ Type }}",
+    "salesforce_case_link": "<a target='_blank' href='{{ entity_url }}'>{{ CaseNumber }}</a>",
+    "salesforce_origin": "{{ Origin }}",
+    "salesforce_account_id": {% if AccountId is none %} null {% else %} "{{ AccountId }}" {% endif %},
+    "salesforce_owner_id": {% if OwnerId is none %} null {% else %} "{{ OwnerId }}" {% endif %},
+    "salesforce_contact_id": {% if ContactId is none %} null {% else %} "{{ ContactId }}" {% endif %},
+    "salesforce_contact_phone": {% if ContactPhone  is none %} null {% else %} "{{ ContactPhone }}" {% endif %},
+    "salesforce_contact_email": {% if ContactEmail is none %} null {% else %} "{{ ContactEmail }}" {% endif %},
+    "salesforce_contact_fax": {% if ContactFax is none %} null {% else %} "{{ ContactFax }}" {% endif %},
+    "salesforce_supplied_name": {% if SuppliedName is none %} null {% else %} "{{ SuppliedName }}" {% endif %},
+    "salesforce_supplied_email": {% if SuppliedEmail is none %} null {% else %} "{{ SuppliedEmail }}" {% endif %},
+    "salesforce_supplied_phone": {% if SuppliedPhone is none %} null {% else %} "{{ SuppliedPhone }}" {% endif %},
+    "salesforce_supplied_company": {% if SuppliedCompany is none %} null {% else %} "{{ SuppliedCompany }}" {% endif %},
+    "salesforce_status": "{{ Status }}"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "content": {
+    "sections": [
+      "general",
+      "geo",
+      "url_list",
+      "passive_dns",
+      "***",
+      "whois",
+      "http_scans"
+    ],
+    "whois": "http://whois.domaintools.com/otx.alienvault.com",
+    "alexa": "http://www.alexa.com/siteinfo/otx.alienvault.com",
+    "indicator": "otx.alienvault.com",
+    "type": "hostname",
+    "type_title": "Hostname",
+    "domain": "alienvault.com",
+    "validation": [
+      {
+        "source": "akamai",
+        "message": "Akamai rank: #6284",
+        "name": "Akamai Popular Domain"
+      },
+      {
+        "source": "whitelist",
+        "message": "Whitelisted domain alienvault.com",
+        "name": "Whitelisted domain"
+      },
+      {
+        "source": "majestic",
+        "message": "Whitelisted domain alienvault.com",
+        "name": "Whitelisted domain"
+      },
+      {
+        "source": "false_positive",
+        "message": "Known False Positive",
+        "name": "Known False Positive"
+      }
+    ],
+    "base_indicator": {
+      "id": 317823453,
+      "indicator": "otx.alienvault.com",
+      "type": "hostname",
+      "title": "",
+      "description": "",
+      "content": "",
+      "access_type": "public",
+      "access_reason": ""
+    },
+    "pulse_info": {
+      "count": 0,
+      "pulses": [],
+      "references": [],
+      "related": {
+        "alienvault": {
+          "adversary": [],
+          "malware_families": [],
+          "industries": []
+        },
+        "other": {
+          "adversary": [],
+          "malware_families": [],
+          "industries": []
+        }
+      }
+    },
+    "false_positive": [
+      {
+        "assessment": "accepted",
+        "assessment_date": 1636644853000,
+        "report_date": 1629702463000
+      }
+    ]
+  }
+}

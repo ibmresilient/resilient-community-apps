@@ -1,0 +1,31 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "status": "Success",
+    "messages": [],
+    "data": {
+      "changeRequestId": 11,
+      "redirectUrl": "https://1.2.3.4/FireFlow/Ticket/Display.html?id=11"
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "algosec_traffic_change_action": "Drop",
+    "algosec_service": "any",
+    "algosec_source": "1.1.1.1, any",
+    "algosec_traffic_change_request_subject": "IBM SOAR Isolation Request for 1.1.1.1",
+    "algosec_destination": "any, 1.1.1.1",
+    "algosec_traffic_change_template": "Basic Change Traffic Request",
+    "algosec_traffic_change_request_description": "Isolation Request initiated by the IBM SOAR Integration."
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-algosec",
+    "package_version": "1.0.0",
+    "host": "local",
+    "execution_time_ms": 9129,
+    "timestamp": "2024-08-02 09:26:21"
+  }
+}

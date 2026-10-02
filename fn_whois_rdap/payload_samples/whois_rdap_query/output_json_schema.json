@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "nir": {},
+        "asn_registry": {
+          "type": "string"
+        },
+        "asn": {
+          "type": "string"
+        },
+        "asn_cidr": {
+          "type": "string"
+        },
+        "asn_country_code": {
+          "type": "string"
+        },
+        "asn_date": {
+          "type": "string"
+        },
+        "asn_description": {
+          "type": "string"
+        },
+        "query": {
+          "type": "string"
+        },
+        "nets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "cidr": {
+                "type": "string"
+              },
+              "name": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "handle": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "range": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "country": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "state": {},
+              "city": {},
+              "address": {
+                "type": [
+                  "null",
+                  "string"
+                ]
+              },
+              "postal_code": {},
+              "emails": {},
+              "created": {
+                "type": "string"
+              },
+              "updated": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "raw": {},
+        "referral": {},
+        "raw_referral": {},
+        "dns_zone": {
+          "type": "string"
+        },
+        "display_content": {
+          "type": "string"
+        }
+      }
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "whois_query": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

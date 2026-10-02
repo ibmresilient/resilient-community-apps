@@ -1,0 +1,1 @@
+https://na.artifactory.swg-devops.com/artifactory/sec-resilient-team-integrations-generic-local/fn_timer/main/1.0/app-fn_timer-1.0.2-47787.zip

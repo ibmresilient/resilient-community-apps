@@ -1,0 +1,23 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "Functions": [
+      "PB: Get workflow data",
+      "PB: Get playbook data"
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "pb_id": 358
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-playbook-utils",
+    "package_version": "1.1.0",
+    "host": "localhost",
+    "execution_time_ms": 1320,
+    "timestamp": "2022-12-08 15:45:50"
+  }
+}

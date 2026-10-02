@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "rrn": {
+          "type": "string"
+        },
+        "organization_id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "priority": {
+          "type": "string"
+        },
+        "last_accessed": {
+          "type": "string"
+        },
+        "created_time": {
+          "type": "string"
+        },
+        "disposition": {
+          "type": "string"
+        },
+        "assignee": {},
+        "first_alert_time": {},
+        "latest_alert_time": {},
+        "responsibility": {}
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "rapid7_insight_idr_threat_command_free_text": {
+          "type": "string"
+        },
+        "rapid7_insight_idr_status": {
+          "type": "string"
+        },
+        "rapid7_insight_idr_disposition": {
+          "type": "string"
+        },
+        "rapid7_insight_idr_threat_command_close_reason": {
+          "type": "string"
+        },
+        "rapid7_insight_idr_incident_id": {
+          "type": "integer"
+        },
+        "rapid7_insight_idr_rrn": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

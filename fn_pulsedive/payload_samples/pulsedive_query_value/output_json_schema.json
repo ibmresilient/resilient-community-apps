@@ -1,0 +1,438 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "resp_json": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        },
+        "reason": {},
+        "content": {
+          "type": "object",
+          "properties": {
+            "qid": {},
+            "iid": {
+              "type": "integer"
+            },
+            "indicator": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "risk": {
+              "type": "string"
+            },
+            "risk_recommended": {
+              "type": "string"
+            },
+            "manualrisk": {
+              "type": "integer"
+            },
+            "retired": {},
+            "stamp_added": {
+              "type": "string"
+            },
+            "stamp_updated": {
+              "type": "string"
+            },
+            "stamp_seen": {
+              "type": "string"
+            },
+            "stamp_probed": {
+              "type": "string"
+            },
+            "stamp_retired": {},
+            "recent": {
+              "type": "integer"
+            },
+            "submissions": {
+              "type": "integer"
+            },
+            "umbrella_rank": {
+              "type": "integer"
+            },
+            "umbrella_domain": {
+              "type": "string"
+            },
+            "riskfactors": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "rfid": {
+                    "type": "integer"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "risk": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "redirects": {
+              "type": "object",
+              "properties": {
+                "from": {
+                  "type": "array"
+                },
+                "to": {
+                  "type": "array"
+                }
+              }
+            },
+            "threats": {
+              "type": "array"
+            },
+            "feeds": {
+              "type": "array"
+            },
+            "comments": {
+              "type": "array"
+            },
+            "attributes": {
+              "type": "object",
+              "properties": {
+                "port": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "protocol": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "technology": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "properties": {
+              "type": "object",
+              "properties": {
+                "http": {
+                  "type": "object",
+                  "properties": {
+                    "content-type": {
+                      "type": "string"
+                    },
+                    "x-xss-protection": {
+                      "type": "string"
+                    },
+                    "accept-ranges": {
+                      "type": "string"
+                    },
+                    "vary": {
+                      "type": "string"
+                    },
+                    "x-content-type-options": {
+                      "type": "string"
+                    },
+                    "server": {
+                      "type": "string"
+                    },
+                    "content-encoding": {
+                      "type": "string"
+                    },
+                    "strict-transport-security": {
+                      "type": "string"
+                    },
+                    "x-cache": {
+                      "type": "string"
+                    },
+                    "x-cache-hits": {
+                      "type": "string"
+                    },
+                    "referrer-policy": {
+                      "type": "string"
+                    },
+                    "cache-control": {
+                      "type": "string"
+                    },
+                    "content-length": {
+                      "type": "string"
+                    },
+                    "age": {
+                      "type": "string"
+                    },
+                    "expect-ct": {
+                      "type": "string"
+                    },
+                    "++code": {
+                      "type": "string"
+                    },
+                    "x-frame-options": {
+                      "type": "string"
+                    },
+                    "via": {
+                      "type": "string"
+                    },
+                    "++content-type": {
+                      "type": "string"
+                    },
+                    "x-timer": {
+                      "type": "string"
+                    },
+                    "content-security-policy": {
+                      "type": "string"
+                    },
+                    "expires": {
+                      "type": "string"
+                    },
+                    "x-served-by": {
+                      "type": "string"
+                    },
+                    "permissions-policy": {
+                      "type": "string"
+                    },
+                    "etag": {
+                      "type": "string"
+                    },
+                    "date": {
+                      "type": "string"
+                    },
+                    "last-modified": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "dns": {
+                  "type": "object",
+                  "properties": {
+                    "mname": {
+                      "type": "string"
+                    },
+                    "ns": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "rname": {
+                      "type": "string"
+                    },
+                    "mx": {
+                      "type": "string"
+                    },
+                    "soa": {
+                      "type": "string"
+                    },
+                    "a": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "txt": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "caa": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "meta": {
+                  "type": "object",
+                  "properties": {
+                    "viewport": {
+                      "type": "string"
+                    },
+                    "twitter:card": {
+                      "type": "string"
+                    },
+                    "robots": {
+                      "type": "string"
+                    },
+                    "charset": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "twitter:title": {
+                      "type": "string"
+                    },
+                    "twitter:description": {
+                      "type": "string"
+                    },
+                    "twitter:creator": {
+                      "type": "string"
+                    },
+                    "twitter:image": {
+                      "type": "string"
+                    },
+                    "keywords": {
+                      "type": "string"
+                    },
+                    "twitter:url": {
+                      "type": "string"
+                    },
+                    "twitter:site": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "ssl": {
+                  "type": "object",
+                  "properties": {
+                    "version": {
+                      "type": "string"
+                    },
+                    "domain": {
+                      "type": "string"
+                    },
+                    "org": {
+                      "type": "string"
+                    },
+                    "issuer": {
+                      "type": "string"
+                    },
+                    "valid": {
+                      "type": "string"
+                    },
+                    "subject": {
+                      "type": "string"
+                    },
+                    "expires": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "geo": {
+                  "type": "object",
+                  "properties": {
+                    "region": {
+                      "type": "string"
+                    },
+                    "country": {
+                      "type": "string"
+                    },
+                    "city": {
+                      "type": "string"
+                    },
+                    "countrycode": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "whois": {
+                  "type": "object",
+                  "properties": {
+                    "++gdpr": {
+                      "type": "string"
+                    },
+                    "++privacy": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "cookies": {
+                  "type": "object",
+                  "properties": {
+                    "_ga": {
+                      "type": "string"
+                    },
+                    "_ga_mzsj4f05dr": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "dom": {
+                  "type": "object",
+                  "properties": {
+                    "screenshot": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "raw": {
+          "type": "string"
+        },
+        "inputs": {
+          "type": "object",
+          "properties": {
+            "incident_id": {
+              "type": "integer"
+            },
+            "pulsedive_query_type": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            },
+            "attachment_name": {},
+            "pulsedive_value": {
+              "type": "string"
+            },
+            "pulsedive_feed_org": {},
+            "pulsedive_pretty": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "metrics": {
+          "type": "object",
+          "properties": {
+            "version": {
+              "type": "string"
+            },
+            "package": {
+              "type": "string"
+            },
+            "package_version": {
+              "type": "string"
+            },
+            "host": {
+              "type": "string"
+            },
+            "execution_time_ms": {
+              "type": "integer"
+            },
+            "timestamp": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "att_name": {
+      "type": "string"
+    }
+  }
+}

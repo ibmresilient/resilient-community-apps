@@ -1,0 +1,128 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "data": [
+      {
+        "accountId": "434343434343434343",
+        "accountName": "SentinelOne",
+        "activeDirectory": {
+          "computerDistinguishedName": null,
+          "computerMemberOf": [],
+          "lastUserDistinguishedName": null,
+          "lastUserMemberOf": []
+        },
+        "activeThreats": 0,
+        "agentVersion": "21.10.1.6",
+        "allowRemoteShell": false,
+        "appsVulnerabilityStatus": "not_applicable",
+        "cloudProviders": {},
+        "computerName": "computerName",
+        "consoleMigrationStatus": "N/A",
+        "coreCount": 2,
+        "cpuCount": 2,
+        "cpuId": "AMD EPYC Processor (with IBPB)",
+        "createdAt": "2021-10-26T13:18:19.135249Z",
+        "detectionState": null,
+        "domain": "unknown",
+        "encryptedApplications": false,
+        "externalId": "",
+        "externalIp": "12.4.8.3",
+        "firewallEnabled": true,
+        "firstFullModeTime": null,
+        "groupId": "607447413805059643",
+        "groupIp": "12.4.8.x",
+        "groupName": "Default Group",
+        "id": "1275282318251495460",
+        "inRemoteShellSession": false,
+        "infected": false,
+        "installerType": ".rpm",
+        "isActive": true,
+        "isDecommissioned": false,
+        "isPendingUninstall": false,
+        "isUninstalled": false,
+        "isUpToDate": true,
+        "lastActiveDate": "2021-12-13T16:23:27.067226Z",
+        "lastIpToMgmt": "10.21.10.88",
+        "lastLoggedInUserName": "",
+        "licenseKey": "",
+        "locationEnabled": false,
+        "locationType": "not_supported",
+        "locations": null,
+        "machineType": "server",
+        "mitigationMode": "protect",
+        "mitigationModeSuspicious": "detect",
+        "modelName": "QEMU Standard PC (i440FX + PIIX, 1996)",
+        "networkInterfaces": [
+          {
+            "gatewayIp": null,
+            "gatewayMacAddress": null,
+            "id": "1275282318259884069",
+            "inet": [
+              "10.21.10.88"
+            ],
+            "inet6": [],
+            "name": "eth0",
+            "physical": "00:00:0A:15:0A:58"
+          },
+          {
+            "gatewayIp": "9.46.92.1",
+            "gatewayMacAddress": "00:00:0c:9f:f0:01",
+            "id": "1275282318268272678",
+            "inet": [
+              "9.46.92.211"
+            ],
+            "inet6": [],
+            "name": "eth1",
+            "physical": "00:00:09:2E:5C:D3"
+          }
+        ],
+        "networkQuarantineEnabled": false,
+        "networkStatus": "connected",
+        "operationalState": "na",
+        "operationalStateExpiration": null,
+        "osArch": "64 bit",
+        "osName": "Linux",
+        "osRevision": "CentOS release 7.9.2009 (Core) 3.10.0-1160.49.1.el7.x86_64",
+        "osStartTime": "2021-12-11T22:40:32Z",
+        "osType": "linux",
+        "osUsername": "root",
+        "rangerStatus": "NotApplicable",
+        "rangerVersion": null,
+        "registeredAt": "2021-10-26T13:18:19.132188Z",
+        "remoteProfilingState": "disabled",
+        "remoteProfilingStateExpiration": null,
+        "scanAbortedAt": "2021-12-10T21:57:56.711226Z",
+        "scanFinishedAt": "2021-12-10T02:33:00.768224Z",
+        "scanStartedAt": "2021-12-13T16:22:40.612822Z",
+        "scanStatus": "started",
+        "siteId": "607447413779893818",
+        "siteName": "mySite",
+        "storageName": null,
+        "storageType": null,
+        "threatRebootRequired": false,
+        "totalMemory": 3789,
+        "updatedAt": "2021-12-13T16:22:40.616308Z",
+        "userActionsNeeded": [],
+        "uuid": "8329e587-bbe9-b906-a6a5-646e2686eba9"
+      }
+    ],
+    "pagination": {
+      "nextCursor": null,
+      "totalItems": 1
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "sentinelone_agent_id": "12121212121212121"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sentinelone",
+    "package_version": "1.0.0",
+    "host": "myHost",
+    "execution_time_ms": 277,
+    "timestamp": "2021-12-13 11:23:55"
+  }
+}

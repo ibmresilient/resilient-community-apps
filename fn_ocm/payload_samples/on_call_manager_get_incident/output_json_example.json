@@ -1,0 +1,66 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "state": "unassigned",
+    "summary": "Name: Something failed",
+    "description": "Name: Something failed",
+    "owner": "-",
+    "team": "-",
+    "closedOwner": "-",
+    "closedTeam": "-",
+    "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "displayId": "0000-34m1",
+    "createdTime": "2025-07-08T15:37:31.545Z",
+    "lastChanged": "2025-07-08T15:37:33.436Z",
+    "firstInProgressTime": "-",
+    "resolvedTime": "-",
+    "eventSummary": {
+      "events": 1,
+      "severities": [
+        {
+          "severity": 3,
+          "count": 1
+        }
+      ],
+      "severities10": [
+        {
+          "severity": 40,
+          "count": 1
+        }
+      ],
+      "maxSeverities10Seen": [
+        {
+          "severity": 40,
+          "count": 1
+        }
+      ],
+      "openSeverities10": [
+        {
+          "severity": 40,
+          "count": 1
+        }
+      ]
+    },
+    "priority": 2,
+    "escalated": false,
+    "wasEscalated": false,
+    "correlationDetails": {
+      "name": "Something failed"
+    },
+    "accessScopes": []
+  },
+  "raw": null,
+  "inputs": {
+    "ocm_incident_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ocm",
+    "package_version": "1.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 571,
+    "timestamp": "2025-07-08 11:37:38"
+  }
+}

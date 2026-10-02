@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "google_maps_origin": {
+          "type": "string"
+        },
+        "google_maps_destination": {
+          "type": "string"
+        }
+      }
+    },
+    "directions_link": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "domains": [
+      "amazon.com"
+    ],
+    "query_execution_time": "2018-04-27 11:37:38",
+    "statuses": {
+      "amazon.com": {
+        "status": 1,
+        "content_categories": [
+          "Ecommerce/Shopping"
+        ],
+        "security_categories": []
+      }
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "umbinv_domains": "amazon.com",
+    "umbinv_status_endpoint": "categorization"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-cisco-umbrella-inv",
+    "package_version": "1.1.0",
+    "host": "local",
+    "execution_time_ms": 27042,
+    "timestamp": "2024-11-19 10:01:55"
+  }
+}

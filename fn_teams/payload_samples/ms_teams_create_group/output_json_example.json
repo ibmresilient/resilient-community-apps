@@ -1,0 +1,64 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "id": "b4829344-e28d-4c8e-bb2a-c470e0bb1ee3",
+    "deletedDateTime": null,
+    "classification": null,
+    "createdDateTime": "2024-08-15T15:31:51Z",
+    "creationOptions": [],
+    "description": "this is a description",
+    "displayName": "demoGroup",
+    "expirationDateTime": null,
+    "groupTypes": [
+      "Unified"
+    ],
+    "isAssignableToRole": null,
+    "mail": "demoGroup_nickname@example.com",
+    "mailEnabled": true,
+    "mailNickname": "demoGroup_nickname",
+    "membershipRule": null,
+    "membershipRuleProcessingState": null,
+    "onPremisesDomainName": null,
+    "onPremisesLastSyncDateTime": null,
+    "onPremisesNetBiosName": null,
+    "onPremisesSamAccountName": null,
+    "onPremisesSecurityIdentifier": null,
+    "onPremisesSyncEnabled": null,
+    "preferredDataLocation": null,
+    "preferredLanguage": null,
+    "proxyAddresses": [
+      "SMTP:demoGroup_nickname@example.com"
+    ],
+    "renewedDateTime": "2024-08-15T15:31:51Z",
+    "resourceBehaviorOptions": [],
+    "resourceProvisioningOptions": [],
+    "securityEnabled": false,
+    "securityIdentifier": "S-1-12-1-3028456260-1284432525-1891904187-3810442208",
+    "theme": null,
+    "uniqueName": null,
+    "visibility": "Private",
+    "onPremisesProvisioningErrors": [],
+    "serviceProvisioningErrors": [],
+    "teamsEnabled": false,
+    "unfoundUsers": []
+  },
+  "raw": null,
+  "inputs": {
+    "incident_id": 2716,
+    "ms_group_name": "demoGroup",
+    "ms_owners_list": "MarkScherfling@example.com",
+    "ms_group_mail_nickname": "demoGroup_nickname",
+    "add_members_from": "None",
+    "ms_description": "this is a description"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-teams",
+    "package_version": "3.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 1706,
+    "timestamp": "2024-08-15 11:31:52"
+  }
+}

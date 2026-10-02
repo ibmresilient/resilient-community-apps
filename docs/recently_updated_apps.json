@@ -1,0 +1,10 @@
+[
+  "fn_timer",
+  "fn_service_now",
+  "sc_email_parser",
+  "fn_watsonx_analyst",
+  "fn_scheduler",
+  "rc_data_feed",
+  "fn_splunk_integration",
+  "fn_jira"
+]

@@ -1,0 +1,63 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "pd": {
+      "service": {
+        "id": "PRRX0IZ",
+        "name": "test1",
+        "description": "something ",
+        "created_at": "2024-04-16T10:18:31-04:00",
+        "updated_at": "2024-04-16T10:18:31-04:00",
+        "status": "active",
+        "teams": [],
+        "alert_creation": "create_alerts_and_incidents",
+        "addons": [],
+        "scheduled_actions": [],
+        "support_hours": null,
+        "last_incident_timestamp": null,
+        "escalation_policy": {
+          "id": "PP43S9F",
+          "type": "escalation_policy_reference",
+          "summary": "testService1-ep",
+          "self": "https://api.pagerduty.com/escalation_policies/PP43S9F",
+          "html_url": "https://ibmtest-8.pagerduty.com/escalation_policies/PP43S9F"
+        },
+        "incident_urgency_rule": {
+          "type": "constant",
+          "urgency": "high"
+        },
+        "acknowledgement_timeout": null,
+        "auto_resolve_timeout": null,
+        "alert_grouping": null,
+        "alert_grouping_timeout": null,
+        "alert_grouping_parameters": {
+          "type": null,
+          "config": null,
+          "is_global_configuration": false
+        },
+        "integrations": [],
+        "response_play": null,
+        "type": "service",
+        "summary": "test1",
+        "self": "https://api.pagerduty.com/services/PRRX0IZ",
+        "html_url": "https://ibmtest-8.pagerduty.com/service-directory/PRRX0IZ"
+      }
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "pd_description": "something ",
+    "pd_escalation_policy": " testService1-ep",
+    "pd_title": "test1"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "unknown",
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 964,
+    "timestamp": "2024-04-16 10:18:31"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "commandline": "bash /root/test.sh",
+    "start": 1677188203275,
+    "end": 1677188204773,
+    "elapsed": 1497,
+    "exitcode": 0,
+    "stdout": "This is a test\nanaconda-ks.cfg\ntest.sh\nWW-falcon-sensor-6.40.0-13707.el7.x86_64.rpm\n/root\nSuccess!\n",
+    "stderr": "",
+    "stdout_json": null,
+    "stderr_json": null
+  },
+  "raw": null,
+  "inputs": {
+    "network_utilities_shell_command": "remote_command_linux:remote_computer",
+    "network_utilities_shell_params": "0.0.0.0"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-network-utilities",
+    "package_version": "1.0.0",
+    "host": "My Host",
+    "execution_time_ms": 1501,
+    "timestamp": "2023-02-23 16:36:44"
+  }
+}

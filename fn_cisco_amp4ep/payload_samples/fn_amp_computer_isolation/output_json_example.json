@@ -1,0 +1,36 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "response": {
+      "version": "v1.2.0",
+      "metadata": {
+        "links": {
+          "self": "https://api.amp.cisco.com/v1/computers/aaaaaaaa-0000-b1b1-bcc5-abcdefg1234/isolation"
+        }
+      },
+      "data": {
+        "available": true,
+        "status": "isolated",
+        "unlock_code": "abcdefg",
+        "comment": null,
+        "isolated_by": "Test User"
+      }
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "amp_comment": null,
+    "amp_computer_isolation": "De-isolate",
+    "amp_conn_guid": "aaaaaaaa-0000-b1b1-bcc5-abcdefg1234"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-cisco-amp4ep",
+    "package_version": "1.0.3",
+    "host": "my.app.host",
+    "execution_time_ms": 1287,
+    "timestamp": "2024-05-29 16:31:54"
+  }
+}
