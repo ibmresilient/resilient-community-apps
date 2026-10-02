@@ -114,7 +114,6 @@ Edit the required configuration setting as described in the [Integration Server]
 ## History
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 1.5.1 | 10/2026 |Refreshed image with latest libraries |
 | 1.5.0 | 06/2025 | Extended functionality to move messages to a custom folder. |
 | 1.4.3 | 06/2025 | Fixed bug for internal email visibility and updated deprecated datetime usage. |
 | 1.4.2 | 12/2024 | Fix bug in Move Message to Folder function |
@@ -205,11 +204,11 @@ This app supports the IBM Security QRadar SOAR Platform and the IBM Security QRa
 The SOAR platform supports two app deployment mechanisms, Edge Gateway (also known as App Host) and integration server.
 
 If deploying to a SOAR platform with an App Host, the requirements are:
-* SOAR platform >= `51.0.9.0.20851`.
+* SOAR platform >= `51.0.0.0.9339`.
 * The app is in a container-based format (available from the AppExchange as a `zip` file).
 
 If deploying to a SOAR platform with an integration server, the requirements are:
-* SOAR platform >= `51.0.9.0.20851`.
+* SOAR platform >= `51.0.0.0.9339`.
 * The app is in the older integration format (available from the AppExchange as a `zip` file which contains a `tar.gz` file).
 * Integration server is running `resilient_circuits>=51.0.0`.
 * If using an API key account, make sure the account provides the following minimum permissions:
@@ -244,7 +243,7 @@ Microsoft only supports a secure HTTPS proxy and we recommend only using the `ht
 The `http_proxy` parameter should be omitted.
 
 ### Python Environment
-Python 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
+Python 3.9, 3.11, and 3.12 are officially supported. When deployed as an app, the app runs on Python 3.11.
 Additional package dependencies may exist for each of these packages:
 * pytz>=2019.3
 * resilient_circuits>=51.0.0

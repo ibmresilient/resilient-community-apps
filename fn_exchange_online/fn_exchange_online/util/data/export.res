@@ -4,10 +4,8 @@
   "apps": [],
   "automatic_tasks": [],
   "case_matching_profiles": [],
-  "connectors": null,
-  "export_date": 1790861444641,
+  "export_date": 1751380898574,
   "export_format_version": 2,
-  "export_notes": null,
   "export_type": null,
   "fields": [
     {
@@ -18,14 +16,42 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/incident_id",
+      "hide_notification": false,
+      "id": 913,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "incident_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "required": "always",
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "incident_id",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "811e99d7-d194-4ce8-86cc-aff5e01ab85c",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/exo_email_address_sender",
       "hide_notification": false,
-      "id": 1042,
+      "id": 958,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_email_address_sender",
       "operation_perms": {},
       "operations": [],
@@ -51,12 +77,10 @@
       "deprecated": false,
       "export_key": "__function/exo_meeting_email_address",
       "hide_notification": false,
-      "id": 1043,
+      "id": 959,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_meeting_email_address",
       "operation_perms": {},
       "operations": [],
@@ -83,12 +107,10 @@
       "deprecated": false,
       "export_key": "__function/exo_query_output_format",
       "hide_notification": false,
-      "id": 1044,
+      "id": 960,
       "input_type": "multiselect",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_query_output_format",
       "operation_perms": {},
       "operations": [],
@@ -111,7 +133,7 @@
           "label": "Exchange Online data table",
           "properties": null,
           "uuid": "68133b08-816e-4c03-a50d-c68af1b6b205",
-          "value": 46651
+          "value": 152
         },
         {
           "default": false,
@@ -120,7 +142,7 @@
           "label": "Incident attachment",
           "properties": null,
           "uuid": "29fa8b3f-4fe5-419c-bda7-223af2c259cb",
-          "value": 46701
+          "value": 153
         },
         {
           "default": true,
@@ -129,7 +151,7 @@
           "label": "Incident note",
           "properties": null,
           "uuid": "172c46ba-f424-42eb-b44d-9f66fb7190cd",
-          "value": 46751
+          "value": 154
         }
       ]
     },
@@ -143,12 +165,10 @@
       "deprecated": false,
       "export_key": "__function/exo_meeting_start_time",
       "hide_notification": false,
-      "id": 1045,
+      "id": 961,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_meeting_start_time",
       "operation_perms": {},
       "operations": [],
@@ -173,45 +193,12 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "__function/task_id",
-      "hide_notification": false,
-      "id": 1048,
-      "input_type": "number",
-      "internal": false,
-      "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
-      "name": "task_id",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "",
-      "prefix": null,
-      "read_only": false,
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "task_id",
-      "tooltip": "",
-      "type_id": 11,
-      "uuid": "ad388bab-f5e9-4283-b369-ddb6a4a4781a",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
       "export_key": "__function/exo_custom_folder_name",
       "hide_notification": false,
-      "id": 1046,
+      "id": 1023,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_custom_folder_name",
       "operation_perms": {},
       "operations": [],
@@ -237,12 +224,10 @@
       "deprecated": false,
       "export_key": "__function/exo_destination_mailfolder_id",
       "hide_notification": false,
-      "id": 1047,
+      "id": 962,
       "input_type": "select",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_destination_mailfolder_id",
       "operation_perms": {},
       "operations": [],
@@ -264,7 +249,7 @@
           "label": "archive",
           "properties": null,
           "uuid": "f95a7ba4-7026-47fe-ad12-fbcc7ae0bb48",
-          "value": 46801
+          "value": 155
         },
         {
           "default": false,
@@ -273,7 +258,7 @@
           "label": "clutter",
           "properties": null,
           "uuid": "50d01161-eeb1-4ecf-8461-2071ba2e91d9",
-          "value": 46851
+          "value": 156
         },
         {
           "default": false,
@@ -282,7 +267,7 @@
           "label": "conflicts",
           "properties": null,
           "uuid": "85acaa9c-c0c2-4905-bc97-dab8d16f5ff0",
-          "value": 46901
+          "value": 157
         },
         {
           "default": false,
@@ -291,7 +276,7 @@
           "label": "conversationhistory",
           "properties": null,
           "uuid": "d0bfcaa3-c096-4a18-86a2-3c72f53b830f",
-          "value": 46951
+          "value": 158
         },
         {
           "default": false,
@@ -300,7 +285,7 @@
           "label": "deleteditems",
           "properties": null,
           "uuid": "67303ab0-25b2-4f22-ac3b-c7527b01cec9",
-          "value": 47001
+          "value": 159
         },
         {
           "default": false,
@@ -309,7 +294,7 @@
           "label": "drafts",
           "properties": null,
           "uuid": "3b2eb160-f417-4de4-aca2-247e2f2649ac",
-          "value": 47051
+          "value": 160
         },
         {
           "default": false,
@@ -318,7 +303,7 @@
           "label": "inbox",
           "properties": null,
           "uuid": "90830c93-6889-47b4-a57b-c03c942f0064",
-          "value": 47101
+          "value": 161
         },
         {
           "default": true,
@@ -327,7 +312,7 @@
           "label": "junkemail",
           "properties": null,
           "uuid": "9c20f34a-363a-4e70-8d68-2f0a3cadfc44",
-          "value": 47151
+          "value": 162
         },
         {
           "default": false,
@@ -336,7 +321,7 @@
           "label": "localfailures",
           "properties": null,
           "uuid": "4518d80f-fe86-463f-b64f-7e52de04938b",
-          "value": 47201
+          "value": 163
         },
         {
           "default": false,
@@ -345,7 +330,7 @@
           "label": "msgfolderroot",
           "properties": null,
           "uuid": "3ca0f058-855d-49ef-b3c6-9d8f279ae0c2",
-          "value": 47251
+          "value": 164
         },
         {
           "default": false,
@@ -354,7 +339,7 @@
           "label": "outbox",
           "properties": null,
           "uuid": "eb14de74-882f-429b-bb28-bd21a476a1ad",
-          "value": 47301
+          "value": 165
         },
         {
           "default": false,
@@ -363,7 +348,7 @@
           "label": "recoverableitemsdeletions",
           "properties": null,
           "uuid": "20dee080-43d5-423c-85ea-8b2f7b73768a",
-          "value": 47351
+          "value": 166
         },
         {
           "default": false,
@@ -372,7 +357,7 @@
           "label": "scheduled",
           "properties": null,
           "uuid": "7382a392-4576-41b5-a09e-54f8c6d0fa4b",
-          "value": 47401
+          "value": 167
         },
         {
           "default": false,
@@ -381,7 +366,7 @@
           "label": "searchfolders",
           "properties": null,
           "uuid": "5a356a79-f091-4ca0-8b5b-e3084db013b4",
-          "value": 47451
+          "value": 168
         },
         {
           "default": false,
@@ -390,7 +375,7 @@
           "label": "sentitems",
           "properties": null,
           "uuid": "0d797e5c-03a2-4c63-91b7-d6d538171b68",
-          "value": 47501
+          "value": 169
         }
       ]
     },
@@ -402,14 +387,41 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
+      "export_key": "__function/task_id",
+      "hide_notification": false,
+      "id": 917,
+      "input_type": "number",
+      "internal": false,
+      "is_tracked": false,
+      "name": "task_id",
+      "operation_perms": {},
+      "operations": [],
+      "placeholder": "",
+      "prefix": null,
+      "read_only": false,
+      "rich_text": false,
+      "tags": [],
+      "templates": [],
+      "text": "task_id",
+      "tooltip": "",
+      "type_id": 11,
+      "uuid": "ba318261-ed6a-4a38-a187-9e0b68d1604f",
+      "values": []
+    },
+    {
+      "allow_default_value": false,
+      "blank_option": false,
+      "calculated": false,
+      "changeable": true,
+      "chosen": false,
+      "default_chosen_by_server": false,
+      "deprecated": false,
       "export_key": "__function/exo_meeting_optional_attendees",
       "hide_notification": false,
-      "id": 1049,
+      "id": 963,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_meeting_optional_attendees",
       "operation_perms": {},
       "operations": [],
@@ -435,12 +447,10 @@
       "deprecated": false,
       "export_key": "__function/exo_query_messages_results",
       "hide_notification": false,
-      "id": 1050,
+      "id": 964,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_query_messages_results",
       "operation_perms": {},
       "operations": [],
@@ -467,12 +477,10 @@
       "deprecated": false,
       "export_key": "__function/exo_has_attachments",
       "hide_notification": false,
-      "id": 1051,
+      "id": 965,
       "input_type": "boolean",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_has_attachments",
       "operation_perms": {},
       "operations": [],
@@ -498,12 +506,10 @@
       "deprecated": false,
       "export_key": "__function/exo_meeting_body",
       "hide_notification": false,
-      "id": 1052,
+      "id": 966,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_meeting_body",
       "operation_perms": {},
       "operations": [],
@@ -530,12 +536,10 @@
       "deprecated": false,
       "export_key": "__function/exo_messages_id",
       "hide_notification": false,
-      "id": 1053,
+      "id": 967,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_messages_id",
       "operation_perms": {},
       "operations": [],
@@ -562,12 +566,10 @@
       "deprecated": false,
       "export_key": "__function/exo_message_body",
       "hide_notification": false,
-      "id": 1054,
+      "id": 968,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_message_body",
       "operation_perms": {},
       "operations": [],
@@ -593,12 +595,10 @@
       "deprecated": false,
       "export_key": "__function/exo_email_address",
       "hide_notification": false,
-      "id": 1055,
+      "id": 969,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_email_address",
       "operation_perms": {},
       "operations": [],
@@ -625,12 +625,10 @@
       "deprecated": false,
       "export_key": "__function/exo_start_date",
       "hide_notification": false,
-      "id": 1056,
+      "id": 970,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_start_date",
       "operation_perms": {},
       "operations": [],
@@ -656,12 +654,10 @@
       "deprecated": false,
       "export_key": "__function/exo_attachment_name",
       "hide_notification": false,
-      "id": 1057,
+      "id": 971,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_attachment_name",
       "operation_perms": {},
       "operations": [],
@@ -687,12 +683,10 @@
       "deprecated": false,
       "export_key": "__function/exo_recipients",
       "hide_notification": false,
-      "id": 1058,
+      "id": 972,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_recipients",
       "operation_perms": {},
       "operations": [],
@@ -719,12 +713,10 @@
       "deprecated": false,
       "export_key": "__function/exo_meeting_required_attendees",
       "hide_notification": false,
-      "id": 1059,
+      "id": 973,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_meeting_required_attendees",
       "operation_perms": {},
       "operations": [],
@@ -750,12 +742,10 @@
       "deprecated": false,
       "export_key": "__function/exo_meeting_end_time",
       "hide_notification": false,
-      "id": 1060,
+      "id": 974,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_meeting_end_time",
       "operation_perms": {},
       "operations": [],
@@ -782,12 +772,10 @@
       "deprecated": false,
       "export_key": "__function/exo_mail_folders",
       "hide_notification": false,
-      "id": 1061,
+      "id": 975,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_mail_folders",
       "operation_perms": {},
       "operations": [],
@@ -813,12 +801,10 @@
       "deprecated": false,
       "export_key": "__function/exo_message_subject",
       "hide_notification": false,
-      "id": 1062,
+      "id": 976,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_message_subject",
       "operation_perms": {},
       "operations": [],
@@ -844,12 +830,10 @@
       "deprecated": false,
       "export_key": "__function/exo_attachment_names",
       "hide_notification": false,
-      "id": 1063,
+      "id": 977,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_attachment_names",
       "operation_perms": {},
       "operations": [],
@@ -875,12 +859,10 @@
       "deprecated": false,
       "export_key": "__function/exo_meeting_subject",
       "hide_notification": false,
-      "id": 1064,
+      "id": 978,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_meeting_subject",
       "operation_perms": {},
       "operations": [],
@@ -907,12 +889,10 @@
       "deprecated": false,
       "export_key": "__function/exo_mailfolders_id",
       "hide_notification": false,
-      "id": 1065,
+      "id": 979,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_mailfolders_id",
       "operation_perms": {},
       "operations": [],
@@ -938,12 +918,10 @@
       "deprecated": false,
       "export_key": "__function/exo_meeting_location",
       "hide_notification": false,
-      "id": 1066,
+      "id": 980,
       "input_type": "text",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_meeting_location",
       "operation_perms": {},
       "operations": [],
@@ -967,45 +945,12 @@
       "chosen": false,
       "default_chosen_by_server": false,
       "deprecated": false,
-      "export_key": "__function/incident_id",
-      "hide_notification": false,
-      "id": 706,
-      "input_type": "number",
-      "internal": false,
-      "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
-      "name": "incident_id",
-      "operation_perms": {},
-      "operations": [],
-      "placeholder": "2095",
-      "prefix": null,
-      "read_only": false,
-      "rich_text": false,
-      "tags": [],
-      "templates": [],
-      "text": "incident_id",
-      "tooltip": "Incident id from which artifacts are to be fetched",
-      "type_id": 11,
-      "uuid": "68e6aeb2-30a3-4103-b8ef-aef67489a5b0",
-      "values": []
-    },
-    {
-      "allow_default_value": false,
-      "blank_option": false,
-      "calculated": false,
-      "changeable": true,
-      "chosen": false,
-      "default_chosen_by_server": false,
-      "deprecated": false,
       "export_key": "__function/exo_end_date",
       "hide_notification": false,
-      "id": 1067,
+      "id": 981,
       "input_type": "datetimepicker",
       "internal": false,
       "is_tracked": false,
-      "json_example": null,
-      "json_schema": null,
       "name": "exo_end_date",
       "operation_perms": {},
       "operations": [],
@@ -1035,7 +980,7 @@
   ],
   "functions": [
     {
-      "created_date": 1790849420255,
+      "created_date": 1749566481358,
       "description": {
         "content": "This function creates a meeting event in the organizer\u0027s Outlook calendar and sends a calendar event mail message to the meeting participants inviting them to the meeting.",
         "format": "text"
@@ -1043,14 +988,14 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Create Meeting",
       "export_key": "exchange_online_create_meeting",
-      "id": 46,
+      "id": 53,
       "last_modified_by": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790849420255,
+      "last_modified_time": 1749566481358,
       "name": "exchange_online_create_meeting",
       "output_description": {
         "content": null,
@@ -1130,7 +1075,7 @@
       "workflows": []
     },
     {
-      "created_date": 1790849420318,
+      "created_date": 1749566481493,
       "description": {
         "content": "Delete a message in the specified user\u0027s email address mailbox.  The email address of the mailbox and the message id are required input parameters.  The mail folder is an optional parameter.",
         "format": "text"
@@ -1138,14 +1083,14 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Delete Message",
       "export_key": "exchange_online_delete_email",
-      "id": 47,
+      "id": 54,
       "last_modified_by": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790849420318,
+      "last_modified_time": 1749566481493,
       "name": "exchange_online_delete_email",
       "output_description": {
         "content": null,
@@ -1185,7 +1130,7 @@
       "workflows": []
     },
     {
-      "created_date": 1790849420370,
+      "created_date": 1749566481600,
       "description": {
         "content": "This Exchange Online function deletes a list of messages returned from the Query Message function.  The input to the function is a string containing the JSON results from the Query Messages function.",
         "format": "text"
@@ -1193,14 +1138,14 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Delete Messages From Query Results",
       "export_key": "exchange_online_delete_messages_from_query_results",
-      "id": 48,
+      "id": 55,
       "last_modified_by": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790849420370,
+      "last_modified_time": 1749566481600,
       "name": "exchange_online_delete_messages_from_query_results",
       "output_description": {
         "content": null,
@@ -1224,7 +1169,7 @@
       "workflows": []
     },
     {
-      "created_date": 1790849420423,
+      "created_date": 1749566481706,
       "description": {
         "content": "This function gets Exchange Online user profile for a given email address.",
         "format": "text"
@@ -1232,14 +1177,14 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Get User Profile",
       "export_key": "exchange_online_get_email_user_profile",
-      "id": 49,
+      "id": 56,
       "last_modified_by": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790849420423,
+      "last_modified_time": 1749566481706,
       "name": "exchange_online_get_email_user_profile",
       "output_description": {
         "content": null,
@@ -1263,7 +1208,7 @@
       "workflows": []
     },
     {
-      "created_date": 1790849420474,
+      "created_date": 1749566481809,
       "description": {
         "content": "This function returns the contents of an Exchange Online message in JSON format.",
         "format": "text"
@@ -1271,14 +1216,14 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Get Message",
       "export_key": "exchange_online_get_message",
-      "id": 50,
+      "id": 57,
       "last_modified_by": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790849420474,
+      "last_modified_time": 1749566481809,
       "name": "exchange_online_get_message",
       "output_description": {
         "content": null,
@@ -1310,7 +1255,7 @@
       "workflows": []
     },
     {
-      "created_date": 1790849420534,
+      "created_date": 1749566481921,
       "description": {
         "content": "This function moves an Exchange Online message to the specified folder in the users mailbox.",
         "format": "text"
@@ -1318,14 +1263,14 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Move Message to Folder",
       "export_key": "exchange_online_move_message_to_folder",
-      "id": 51,
+      "id": 58,
       "last_modified_by": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790849420534,
+      "last_modified_time": 1749823223020,
       "name": "exchange_online_move_message_to_folder",
       "output_description": {
         "content": null,
@@ -1335,7 +1280,7 @@
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"new_message_id\": {\"type\": \"string\"}, \"new_web_link\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"exo_mailfolders_id\": {}, \"exo_email_address\": {\"type\": \"string\"}, \"exo_messages_id\": {\"type\": \"string\"}, \"exo_destination_mailfolder_id\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}}}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "ec89e514-34f6-4fe3-98ea-85398bb04dd9",
-      "version": 0,
+      "version": 3,
       "view_items": [
         {
           "content": "092a752f-1297-46a4-bae6-e75d1a9b4804",
@@ -1381,7 +1326,7 @@
       "workflows": []
     },
     {
-      "created_date": 1790849420586,
+      "created_date": 1749566482033,
       "description": {
         "content": "This function queries Exchange Online to find messages matching the specified input parameters.  A list of messages is returned from the function.",
         "format": "text"
@@ -1389,14 +1334,14 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Query Messages",
       "export_key": "exchange_online_query_emails",
-      "id": 52,
+      "id": 59,
       "last_modified_by": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790857821849,
+      "last_modified_time": 1750845283795,
       "name": "exchange_online_query_emails",
       "output_description": {
         "content": null,
@@ -1406,10 +1351,10 @@
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"incident_id\": {\"type\": \"integer\"}, \"exo_query_output_format\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}}, \"email_results\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"email_address\": {\"type\": \"string\"}, \"status_code\": {\"type\": \"integer\"}, \"email_list\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"@odata.etag\": {\"type\": \"string\"}, \"id\": {\"type\": \"string\"}, \"receivedDateTime\": {\"type\": \"string\"}, \"hasAttachments\": {\"type\": \"boolean\"}, \"subject\": {\"type\": [\"null\", \"string\"]}, \"webLink\": {\"type\": \"string\"}, \"sender\": {\"type\": \"object\", \"properties\": {\"emailAddress\": {\"type\": \"object\", \"properties\": {\"name\": {\"type\": \"string\"}, \"address\": {\"type\": \"string\"}}}}}}}}}}}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"incident_id\": {\"type\": \"integer\"}, \"exo_has_attachments\": {}, \"exo_message_subject\": {}, \"exo_email_address\": {\"type\": \"string\"}, \"exo_start_date\": {}, \"exo_query_output_format\": {\"type\": \"array\", \"items\": {\"type\": \"object\", \"properties\": {\"id\": {\"type\": \"integer\"}, \"name\": {\"type\": \"string\"}}}}, \"exo_email_address_sender\": {\"type\": \"string\"}, \"exo_end_date\": {}, \"exo_message_body\": {}, \"exo_mail_folders\": {}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "6f09fab2-2176-4c27-ab39-cc19568e08e5",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
-          "content": "68e6aeb2-30a3-4103-b8ef-aef67489a5b0",
+          "content": "811e99d7-d194-4ce8-86cc-aff5e01ab85c",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1492,7 +1437,7 @@
       "workflows": []
     },
     {
-      "created_date": 1790849420641,
+      "created_date": 1749566482179,
       "description": {
         "content": "This function creates a message and sends it to the specified recipients.",
         "format": "text"
@@ -1500,14 +1445,14 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Send Message",
       "export_key": "exchange_online_send_message",
-      "id": 53,
+      "id": 60,
       "last_modified_by": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790857821849,
+      "last_modified_time": 1750845283795,
       "name": "exchange_online_send_message",
       "output_description": {
         "content": null,
@@ -1517,7 +1462,7 @@
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"value\": {\"type\": \"boolean\"}, \"failed_attachments\": {}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"exo_recipients\": {\"type\": \"string\"}, \"incident_id\": {\"type\": \"integer\"}, \"exo_message_subject\": {\"type\": \"string\"}, \"exo_email_address\": {\"type\": \"string\"}, \"exo_attachment_names\": {}, \"exo_message_body\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "6256b03b-03ae-4972-bba2-63fe629fbb65",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
           "content": "092a752f-1297-46a4-bae6-e75d1a9b4804",
@@ -1560,7 +1505,7 @@
           "step_label": null
         },
         {
-          "content": "68e6aeb2-30a3-4103-b8ef-aef67489a5b0",
+          "content": "811e99d7-d194-4ce8-86cc-aff5e01ab85c",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1571,7 +1516,7 @@
       "workflows": []
     },
     {
-      "created_date": 1790849420695,
+      "created_date": 1749566482284,
       "description": {
         "content": "This function gets the mime content of an Exchange Online message and writes it as an incident attachment.",
         "format": "text"
@@ -1579,14 +1524,14 @@
       "destination_handle": "fn_exchange_online",
       "display_name": "Exchange Online: Write Message as Attachment",
       "export_key": "exchange_online_write_message_as_attachment",
-      "id": 54,
+      "id": 61,
       "last_modified_by": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790857821849,
+      "last_modified_time": 1750845283795,
       "name": "exchange_online_write_message_as_attachment",
       "output_description": {
         "content": null,
@@ -1596,10 +1541,10 @@
       "output_json_schema": "{\"$schema\": \"http://json-schema.org/draft-06/schema\", \"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"success\": {\"type\": \"boolean\"}, \"reason\": {}, \"content\": {\"type\": \"object\", \"properties\": {\"attachment_name\": {\"type\": \"string\"}}}, \"raw\": {\"type\": \"string\"}, \"inputs\": {\"type\": \"object\", \"properties\": {\"incident_id\": {\"type\": \"integer\"}, \"exo_attachment_name\": {\"type\": \"string\"}, \"exo_email_address\": {\"type\": \"string\"}, \"exo_messages_id\": {\"type\": \"string\"}}}, \"metrics\": {\"type\": \"object\", \"properties\": {\"version\": {\"type\": \"string\"}, \"package\": {\"type\": \"string\"}, \"package_version\": {\"type\": \"string\"}, \"host\": {\"type\": \"string\"}, \"execution_time_ms\": {\"type\": \"integer\"}, \"timestamp\": {\"type\": \"string\"}}}}}",
       "tags": [],
       "uuid": "dbb5e3de-0f43-4c7e-b09f-5d50f0ce426c",
-      "version": 1,
+      "version": 2,
       "view_items": [
         {
-          "content": "68e6aeb2-30a3-4103-b8ef-aef67489a5b0",
+          "content": "811e99d7-d194-4ce8-86cc-aff5e01ab85c",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1607,7 +1552,7 @@
           "step_label": null
         },
         {
-          "content": "ad388bab-f5e9-4283-b369-ddb6a4a4781a",
+          "content": "ba318261-ed6a-4a38-a187-9e0b68d1604f",
           "element": "field_uuid",
           "field_type": "__function",
           "show_if": null,
@@ -1644,13 +1589,13 @@
   ],
   "geos": null,
   "groups": null,
-  "id": 5,
+  "id": 88,
   "inbound_destinations": [],
   "inbound_mailboxes": null,
   "incident_artifact_types": [],
   "incident_types": [
     {
-      "create_date": 1790861437850,
+      "create_date": 1751380896797,
       "description": "Customization Packages (internal)",
       "enabled": false,
       "export_key": "Customization Packages (internal)",
@@ -1659,7 +1604,7 @@
       "name": "Customization Packages (internal)",
       "parent_id": null,
       "system": false,
-      "update_date": 1790861437850,
+      "update_date": 1751380896797,
       "uuid": "bfeec2d4-3770-11e8-ad39-4a0004044aa0"
     }
   ],
@@ -1668,7 +1613,7 @@
   "message_destinations": [
     {
       "api_keys": [
-        "fd2a75a9-3791-43ae-a748-560782b86819"
+        "b8864461-3648-43df-95c9-fcf644e6147f"
       ],
       "destination_type": 0,
       "expect_ack": true,
@@ -1689,13 +1634,13 @@
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_45f7d606_5f20_4a3b_8bdb_1b9dc501650f\" isExecutable=\"true\" name=\"playbook_45f7d606_5f20_4a3b_8bdb_1b9dc501650f\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1dkenar\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0t7gnch\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1dkenar\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"Exchange Online Create Artifacts from Message\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3fc6e3c9-fc1e-4561-9b7f-279f9cea06e4\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1dkenar\u003c/incoming\u003e\u003coutgoing\u003eFlow_0t7gnch\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0t7gnch\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_45f7d606_5f20_4a3b_8bdb_1b9dc501650f\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0t7gnch\" id=\"Flow_0t7gnch_di\"\u003e\u003comgdi:waypoint x=\"580\" y=\"112\"/\u003e\u003comgdi:waypoint x=\"580\" y=\"194\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1dkenar\" id=\"Flow_1dkenar_di\"\u003e\u003comgdi:waypoint x=\"580\" y=\"-84\"/\u003e\u003comgdi:waypoint x=\"580\" y=\"28\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"480\" y=\"-136\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"513.9839999999999\" y=\"193.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"481.566\" y=\"28\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1790849421034,
+      "create_date": 1749566483203,
       "creator_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -1732,27 +1677,27 @@
         "uuid": "bf76644b-3596-4ce3-ad42-49b4ceba6d0b"
       },
       "has_logical_errors": false,
-      "id": 50,
+      "id": 32,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790849421461,
+      "last_modified_time": 1750683631725,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1790849421107,
+          "created_date": 1749566483361,
           "description": "",
           "enabled": false,
           "export_key": "Exchange Online Create Artifacts from Message",
-          "id": 17,
+          "id": 34,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1790849421107,
+          "last_modified_time": 1749566483361,
           "name": "Exchange Online Create Artifacts from Message",
           "object_type": "exo_message_query_results_dt",
           "playbook_handle": "example_exchange_online_create_artifacts",
@@ -1771,23 +1716,10 @@
       },
       "name": "example_exchange_online_create_artifacts",
       "object_type": "exo_message_query_results_dt",
-      "playbook_change_log_info": {
-        "change_log_id": 67,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "3ec4a0fb-96ba-4e54-aede-0006ce5e070f",
-        "create_date": 1790849421336,
-        "modified_principal": {
-          "display_name": "admin example",
-          "id": 4,
-          "name": "admin@example.com",
-          "type": "user"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_45f7d606-5f20-4a3b-8bdb-1b9dc501650f",
-        "id": 56,
+        "id": 35,
         "name": "playbook_45f7d606_5f20_4a3b_8bdb_1b9dc501650f",
         "type": "playbook",
         "uuid": "e71db3a8-c729-4e0e-8108-f4743680918e"
@@ -1795,18 +1727,18 @@
       "tags": [],
       "type": "default",
       "uuid": "45f7d606-5f20-4a3b-8bdb-1b9dc501650f",
-      "version": 4
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be\" isExecutable=\"true\" name=\"playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0j3j0st\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Create Meeting\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"40e56303-027d-4e27-9865-10ca18d267b3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exo_meeting_email_address = playbook.inputs.exchange_online_meeting_organizer_email_address  \\ninputs.exo_meeting_start_time = playbook.inputs.exchange_online_meeting_start_time\\ninputs.exo_meeting_end_time = playbook.inputs.exchange_online_meeting_end_time\\ninputs.exo_meeting_subject = playbook.inputs.exchange_online_meeting_subject\\ninputs.exo_meeting_body = playbook.inputs.exchange_online_meeting_body.content\\ninputs.exo_meeting_required_attendees = playbook.inputs.exchange_online_required_attendees\\ninputs.exo_meeting_optional_attendees = playbook.inputs.exchange_online_meeting_optional_attendees\\ninputs.exo_meeting_location = playbook.inputs.exchange_online_meeting_location\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_onlne_creating_meeting_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0j3j0st\u003c/incoming\u003e\u003coutgoing\u003eFlow_0x66ova\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0snbvqy\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"exchange_online_create_meeting_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"c095e48f-c02b-4120-a29d-db6e3e221d78\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0x66ova\u003c/incoming\u003e\u003coutgoing\u003eFlow_0snbvqy\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0j3j0st\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0x66ova\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0snbvqy\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0snbvqy\" id=\"Flow_0snbvqy_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"442\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"504\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0x66ova\" id=\"Flow_0x66ova_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"358\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0j3j0st\" id=\"Flow_0j3j0st_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"504\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"358\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1790849421441,
+      "create_date": 1749566483984,
       "creator_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -1833,12 +1765,10 @@
             "deprecated": false,
             "export_key": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be/exchange_online_meeting_body",
             "hide_notification": false,
-            "id": 1068,
+            "id": 982,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_meeting_body",
             "operation_perms": {},
             "operations": [],
@@ -1851,7 +1781,7 @@
             "templates": [],
             "text": "Meeting Body",
             "tooltip": "",
-            "type_id": 1056,
+            "type_id": 1037,
             "uuid": "f68171ec-6528-44bd-a0eb-5c8915ab713d",
             "values": []
           },
@@ -1865,12 +1795,10 @@
             "deprecated": false,
             "export_key": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be/exchange_online_meeting_end_time",
             "hide_notification": false,
-            "id": 1069,
+            "id": 983,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_meeting_end_time",
             "operation_perms": {},
             "operations": [],
@@ -1883,7 +1811,7 @@
             "templates": [],
             "text": "Meeting End Time",
             "tooltip": "",
-            "type_id": 1056,
+            "type_id": 1037,
             "uuid": "7ea76d16-d685-4a53-8d06-fd7414a0c1d5",
             "values": []
           },
@@ -1897,12 +1825,10 @@
             "deprecated": false,
             "export_key": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be/exchange_online_meeting_location",
             "hide_notification": false,
-            "id": 1070,
+            "id": 984,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_meeting_location",
             "operation_perms": {},
             "operations": [],
@@ -1914,7 +1840,7 @@
             "templates": [],
             "text": "Meeting Location",
             "tooltip": "",
-            "type_id": 1056,
+            "type_id": 1037,
             "uuid": "ec6fc2d6-e320-4996-93b1-337a1fd371df",
             "values": []
           },
@@ -1928,12 +1854,10 @@
             "deprecated": false,
             "export_key": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be/exchange_online_meeting_optional_attendees",
             "hide_notification": false,
-            "id": 1071,
+            "id": 985,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_meeting_optional_attendees",
             "operation_perms": {},
             "operations": [],
@@ -1945,7 +1869,7 @@
             "templates": [],
             "text": "Optional Attendees",
             "tooltip": "",
-            "type_id": 1056,
+            "type_id": 1037,
             "uuid": "abf4608b-bf46-4aa4-864a-c03121dada72",
             "values": []
           },
@@ -1959,12 +1883,10 @@
             "deprecated": false,
             "export_key": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be/exchange_online_meeting_organizer_email_address",
             "hide_notification": false,
-            "id": 1072,
+            "id": 986,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_meeting_organizer_email_address",
             "operation_perms": {},
             "operations": [],
@@ -1977,7 +1899,7 @@
             "templates": [],
             "text": "Meeting Organizer Email Address",
             "tooltip": "",
-            "type_id": 1056,
+            "type_id": 1037,
             "uuid": "35f9f3b8-7553-4e7b-b588-cb757bc93ea7",
             "values": []
           },
@@ -1991,12 +1913,10 @@
             "deprecated": false,
             "export_key": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be/exchange_online_meeting_start_time",
             "hide_notification": false,
-            "id": 1073,
+            "id": 987,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_meeting_start_time",
             "operation_perms": {},
             "operations": [],
@@ -2009,7 +1929,7 @@
             "templates": [],
             "text": "Meeting Start Time",
             "tooltip": "",
-            "type_id": 1056,
+            "type_id": 1037,
             "uuid": "98be31fa-a2b3-412c-9a4f-ed810d88f4d6",
             "values": []
           },
@@ -2023,12 +1943,10 @@
             "deprecated": false,
             "export_key": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be/exchange_online_meeting_subject",
             "hide_notification": false,
-            "id": 1074,
+            "id": 988,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_meeting_subject",
             "operation_perms": {},
             "operations": [],
@@ -2041,7 +1959,7 @@
             "templates": [],
             "text": "Meeting Subject",
             "tooltip": "",
-            "type_id": 1056,
+            "type_id": 1037,
             "uuid": "eec63000-98b1-4d47-90d2-3be19d560bdd",
             "values": []
           },
@@ -2055,12 +1973,10 @@
             "deprecated": false,
             "export_key": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be/exchange_online_required_attendees",
             "hide_notification": false,
-            "id": 1075,
+            "id": 989,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_required_attendees",
             "operation_perms": {},
             "operations": [],
@@ -2072,7 +1988,7 @@
             "templates": [],
             "text": "Required Attendees",
             "tooltip": "",
-            "type_id": 1056,
+            "type_id": 1037,
             "uuid": "ef31795e-6a56-4bd3-a444-3bab8108de77",
             "values": []
           }
@@ -2097,27 +2013,27 @@
         "uuid": "9d00917c-096e-43a9-9bc3-b48cdd51d789"
       },
       "has_logical_errors": false,
-      "id": 51,
+      "id": 33,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790849422019,
+      "last_modified_time": 1750407914380,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1790849421680,
+          "created_date": 1749566484523,
           "description": "",
           "enabled": false,
           "export_key": "exchange_online_create_meeting_post_process",
-          "id": 18,
+          "id": 35,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1790849421680,
+          "last_modified_time": 1749566484523,
           "name": "exchange_online_create_meeting_post_process",
           "object_type": "incident",
           "playbook_handle": "example_exchange_online_create_meeting",
@@ -2201,23 +2117,10 @@
       },
       "name": "example_exchange_online_create_meeting",
       "object_type": "incident",
-      "playbook_change_log_info": {
-        "change_log_id": 68,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "3ec4a0fb-96ba-4e54-aede-0006ce5e070f",
-        "create_date": 1790849421895,
-        "modified_principal": {
-          "display_name": "admin example",
-          "id": 4,
-          "name": "admin@example.com",
-          "type": "user"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_eefd2b32-40c0-4dfa-a9a7-6954d45a83be",
-        "id": 57,
+        "id": 36,
         "name": "playbook_eefd2b32_40c0_4dfa_a9a7_6954d45a83be",
         "type": "playbook",
         "uuid": "01e22809-24f7-48c3-9420-0f3deb659fe1"
@@ -2225,18 +2128,18 @@
       "tags": [],
       "type": "default",
       "uuid": "eefd2b32-40c0-4dfa-a9a7-6954d45a83be",
-      "version": 4
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2dca7324_8232_49aa_8029_3cf955c689b0\" isExecutable=\"true\" name=\"playbook_2dca7324_8232_49aa_8029_3cf955c689b0\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0y4m5em\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Delete Message\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"e4a2073e-46cf-48a6-b3be-f0f99b05c472\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exo_email_address = row.exo_dt_email_address\\ninputs.exo_messages_id = row.exo_dt_message_id\\ninputs.exo_mailfolders_id = None\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_delete_message_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0y4m5em\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ridshg\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0fv3op6\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0y4m5em\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1ridshg\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"exchange_online_delete_message_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"c79c7a1c-eb02-4737-bde1-0a2b9d07a152\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ridshg\u003c/incoming\u003e\u003coutgoing\u003eFlow_0fv3op6\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0fv3op6\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2dca7324_8232_49aa_8029_3cf955c689b0\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fv3op6\" id=\"Flow_0fv3op6_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"482\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"544\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ridshg\" id=\"Flow_1ridshg_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"292\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"398\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0y4m5em\" id=\"Flow_0y4m5em_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"208\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"208\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"544\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.25\" y=\"398\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1790849422001,
+      "create_date": 1749566485301,
       "creator_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -2273,27 +2176,27 @@
         "uuid": "ef23d709-cb17-4035-b009-bc1844129e9a"
       },
       "has_logical_errors": false,
-      "id": 52,
+      "id": 34,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790849422434,
+      "last_modified_time": 1750407915335,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1790849422070,
+          "created_date": 1749566485523,
           "description": "",
           "enabled": false,
           "export_key": "exchange_online_delete_message_post_process",
-          "id": 19,
+          "id": 36,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1790849422070,
+          "last_modified_time": 1749566485523,
           "name": "exchange_online_delete_message_post_process",
           "object_type": "exo_message_query_results_dt",
           "playbook_handle": "example_exchange_online_delete_message",
@@ -2320,23 +2223,10 @@
       },
       "name": "example_exchange_online_delete_message",
       "object_type": "exo_message_query_results_dt",
-      "playbook_change_log_info": {
-        "change_log_id": 69,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "3ec4a0fb-96ba-4e54-aede-0006ce5e070f",
-        "create_date": 1790849422286,
-        "modified_principal": {
-          "display_name": "admin example",
-          "id": 4,
-          "name": "admin@example.com",
-          "type": "user"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_2dca7324-8232-49aa-8029-3cf955c689b0",
-        "id": 58,
+        "id": 37,
         "name": "playbook_2dca7324_8232_49aa_8029_3cf955c689b0",
         "type": "playbook",
         "uuid": "447c02a7-a2a4-4dd1-9bb0-dd49584294c3"
@@ -2344,18 +2234,18 @@
       "tags": [],
       "type": "default",
       "uuid": "2dca7324-8232-49aa-8029-3cf955c689b0",
-      "version": 4
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89\" isExecutable=\"true\" name=\"playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0r6camt\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Query Messages\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6f09fab2-2176-4c27-ab39-cc19568e08e5\"\u003e{\"inputs\":{\"092a752f-1297-46a4-bae6-e75d1a9b4804\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9e58d3a3-c54b-4a9b-9164-e6cc0832f644\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"68133b08-816e-4c03-a50d-c68af1b6b205\"]}},\"4ff86946-a8cf-4ae1-804b-87cab7d9dac1\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"8dd46926-b1dc-4d1e-ab6a-4239510b199d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"1c9b3b95-ca24-484c-ad72-f5d64be87402\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"7354f758-b9ea-4029-835d-66d293a22b5d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"51a9c433-07bc-4f04-9932-99211726b9b7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"06391a1a-0c2c-4bcd-832a-1f39a3ba77b8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ec20a9f0-1e29-490b-871b-57b05ffbac2e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"\\n\\ninputs.incident_id = incident.id\\n\\n# Get the email address of the user whose mailbox will be queried.\\ninputs.exo_email_address = playbook.inputs.exchange_online_email_address_list\\n\\n# Get the search criteria from the activity rules if available. \\n\\n\\ninputs.exo_mail_folders         = playbook.inputs.exchange_online_mail_folder_id\\ninputs.exo_email_address_sender = playbook.inputs.exchange_online_sender_email_address\\ninputs.exo_message_subject      = playbook.inputs.exchange_online_message_subject\\ninputs.exo_message_body         = playbook.inputs.exchange_online_message_body\\ninputs.exo_start_date           = playbook.inputs.exchange_online_start_datetime\\ninputs.exo_end_date             = playbook.inputs.exchange_online_end_datetime\\ninputs.exo_has_attachments      = playbook.inputs.exchange_online_has_attachments\\n\\n    \\nif hasattr(playbook.inputs, \\\"exchange_online_query_results_output\\\"):\\n    inputs.exo_query_output_format = [d for d in playbook.inputs.exchange_online_query_results_output]\\n\\n\\n\\n\\n\\n\\n\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_query_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0r6camt\u003c/incoming\u003e\u003coutgoing\u003eFlow_1vnwyn3\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cserviceTask id=\"ServiceTask_2\" name=\"Exchange Online: Delete Messages From Query Results\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"af142c3a-3c38-4352-9bca-fa82d53c61af\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exo_query_messages_results = playbook.functions.results.exchange_online_query_results[\u0027raw\u0027]\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_delete_messages_from_query_results\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1vnwyn3\u003c/incoming\u003e\u003coutgoing\u003eFlow_1turkjv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0t7a98f\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0r6camt\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1vnwyn3\" sourceRef=\"ServiceTask_1\" targetRef=\"ServiceTask_2\"/\u003e\u003csequenceFlow id=\"Flow_1turkjv\" sourceRef=\"ServiceTask_2\" targetRef=\"ScriptTask_4\"/\u003e\u003cscriptTask id=\"ScriptTask_4\" name=\"exchange_online_delete_messages_from_query_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"af90b5de-2584-4359-b13f-fd9c5cfc2b85\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1turkjv\u003c/incoming\u003e\u003coutgoing\u003eFlow_0t7a98f\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_0t7a98f\" sourceRef=\"ScriptTask_4\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0t7a98f\" id=\"Flow_0t7a98f_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"682\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"744\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1turkjv\" id=\"Flow_1turkjv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"522\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"598\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1vnwyn3\" id=\"Flow_1vnwyn3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"332\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"438\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0r6camt\" id=\"Flow_0r6camt_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"248\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"248\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_2\" id=\"ServiceTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"438\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654.5\" y=\"743.75\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_4\" id=\"ScriptTask_4_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623.25\" y=\"598.25\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1790849422413,
+      "create_date": 1749566486443,
       "creator_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -2382,12 +2272,10 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_email_address_list",
             "hide_notification": false,
-            "id": 1076,
+            "id": 990,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_email_address_list",
             "operation_perms": {},
             "operations": [],
@@ -2400,7 +2288,7 @@
             "templates": [],
             "text": "Monitored Email Address",
             "tooltip": "Email addresses to search: a single email address, a comma separated list of email addresses, or \"ALL\" to search all users",
-            "type_id": 1058,
+            "type_id": 1039,
             "uuid": "8a722d51-a347-4868-af95-e386d5b1bf52",
             "values": []
           },
@@ -2414,12 +2302,10 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_end_datetime",
             "hide_notification": false,
-            "id": 1077,
+            "id": 991,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_end_datetime",
             "operation_perms": {},
             "operations": [],
@@ -2431,7 +2317,7 @@
             "templates": [],
             "text": "End date/time",
             "tooltip": "Query messages received ending at this date/time.",
-            "type_id": 1058,
+            "type_id": 1039,
             "uuid": "457787e1-29d1-44bd-bf56-1645a6bc77bd",
             "values": []
           },
@@ -2445,12 +2331,10 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_has_attachments",
             "hide_notification": false,
-            "id": 1078,
+            "id": 992,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_has_attachments",
             "operation_perms": {},
             "operations": [],
@@ -2462,7 +2346,7 @@
             "templates": [],
             "text": "Has attachments",
             "tooltip": "Return messages which have attachments (Yes) or do not have attachments (No)",
-            "type_id": 1058,
+            "type_id": 1039,
             "uuid": "7e5423cd-e7f8-4f99-973f-081eb3a293e0",
             "values": []
           },
@@ -2476,12 +2360,10 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_mail_folder_id",
             "hide_notification": false,
-            "id": 1079,
+            "id": 993,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_mail_folder_id",
             "operation_perms": {},
             "operations": [],
@@ -2493,7 +2375,7 @@
             "templates": [],
             "text": "Mail Folder",
             "tooltip": "The mailfolder to search. If none is selected, all mail folders are searched.",
-            "type_id": 1058,
+            "type_id": 1039,
             "uuid": "58bdadf6-00f9-46c6-a862-04f76509dfba",
             "values": [
               {
@@ -2503,7 +2385,7 @@
                 "label": "archive",
                 "properties": null,
                 "uuid": "ec02e1dd-8a43-48cc-94fe-7bee4ba9ba17",
-                "value": 47551
+                "value": 170
               },
               {
                 "default": false,
@@ -2512,7 +2394,7 @@
                 "label": "clutter",
                 "properties": null,
                 "uuid": "af082915-de65-48e5-8b1c-59cc515c376d",
-                "value": 47601
+                "value": 171
               },
               {
                 "default": false,
@@ -2521,7 +2403,7 @@
                 "label": "conflicts",
                 "properties": null,
                 "uuid": "302225ac-1225-4471-b4c7-70e2ec49687d",
-                "value": 47651
+                "value": 172
               },
               {
                 "default": false,
@@ -2530,7 +2412,7 @@
                 "label": "conversationhistory",
                 "properties": null,
                 "uuid": "f73606bb-aed0-4e72-afbe-00c14b1841aa",
-                "value": 47701
+                "value": 173
               },
               {
                 "default": false,
@@ -2539,7 +2421,7 @@
                 "label": "deleteditems",
                 "properties": null,
                 "uuid": "3ca37e3a-88d1-4139-ac12-d2441678dd29",
-                "value": 47751
+                "value": 174
               },
               {
                 "default": false,
@@ -2548,7 +2430,7 @@
                 "label": "drafts",
                 "properties": null,
                 "uuid": "715516c0-93f5-4bc4-bb91-0216adf6d2fb",
-                "value": 47801
+                "value": 175
               },
               {
                 "default": false,
@@ -2557,7 +2439,7 @@
                 "label": "inbox",
                 "properties": null,
                 "uuid": "ce6b8a26-7b2b-4753-83c4-7b5d76350f3f",
-                "value": 47851
+                "value": 176
               },
               {
                 "default": false,
@@ -2566,7 +2448,7 @@
                 "label": "junkemail",
                 "properties": null,
                 "uuid": "6be92169-1591-4b5d-b6e3-d8cd4a6e45ef",
-                "value": 47901
+                "value": 177
               },
               {
                 "default": false,
@@ -2575,7 +2457,7 @@
                 "label": "localfailures",
                 "properties": null,
                 "uuid": "4203298d-93fe-4128-9d5c-f667f86dc8e6",
-                "value": 47951
+                "value": 178
               },
               {
                 "default": false,
@@ -2584,7 +2466,7 @@
                 "label": "msgfolderroot",
                 "properties": null,
                 "uuid": "7f711031-84fe-4554-8d2a-9061e9e58401",
-                "value": 48001
+                "value": 179
               },
               {
                 "default": false,
@@ -2593,7 +2475,7 @@
                 "label": "outbox",
                 "properties": null,
                 "uuid": "0b877eaa-9307-4e13-9f0c-270723a0451a",
-                "value": 48051
+                "value": 180
               },
               {
                 "default": false,
@@ -2602,7 +2484,7 @@
                 "label": "recoverableitemsdeletions",
                 "properties": null,
                 "uuid": "1d0652a3-bd30-4330-8f7a-a5f71f2739a1",
-                "value": 48101
+                "value": 181
               },
               {
                 "default": false,
@@ -2611,7 +2493,7 @@
                 "label": "scheduled",
                 "properties": null,
                 "uuid": "3a87685a-60ba-49b1-a3d7-1d0b732120b1",
-                "value": 48151
+                "value": 182
               },
               {
                 "default": false,
@@ -2620,7 +2502,7 @@
                 "label": "searchfolders",
                 "properties": null,
                 "uuid": "d8a58b2b-3c74-4907-8942-2667f4d8e1cb",
-                "value": 48201
+                "value": 183
               },
               {
                 "default": false,
@@ -2629,7 +2511,7 @@
                 "label": "sentitems",
                 "properties": null,
                 "uuid": "22f2efab-5035-436d-9131-2610c95fcb11",
-                "value": 48251
+                "value": 184
               }
             ]
           },
@@ -2643,12 +2525,10 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_message_body",
             "hide_notification": false,
-            "id": 1080,
+            "id": 994,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_message_body",
             "operation_perms": {},
             "operations": [],
@@ -2660,7 +2540,7 @@
             "templates": [],
             "text": "Message Body",
             "tooltip": "",
-            "type_id": 1058,
+            "type_id": 1039,
             "uuid": "828cef69-7e78-42c3-a277-c654ba55fc49",
             "values": []
           },
@@ -2674,12 +2554,10 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_message_subject",
             "hide_notification": false,
-            "id": 1081,
+            "id": 995,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_message_subject",
             "operation_perms": {},
             "operations": [],
@@ -2691,7 +2569,7 @@
             "templates": [],
             "text": "Message Subject",
             "tooltip": "Text for the message subject to query",
-            "type_id": 1058,
+            "type_id": 1039,
             "uuid": "72a4f565-eba2-400d-aad7-5ba137d438c7",
             "values": []
           },
@@ -2705,12 +2583,10 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_query_results_output",
             "hide_notification": false,
-            "id": 1082,
+            "id": 996,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_query_results_output",
             "operation_perms": {},
             "operations": [],
@@ -2723,7 +2599,7 @@
             "templates": [],
             "text": "Query results output",
             "tooltip": "",
-            "type_id": 1058,
+            "type_id": 1039,
             "uuid": "b9043432-0a06-44fc-9948-6c8b3d879bea",
             "values": [
               {
@@ -2733,7 +2609,7 @@
                 "label": "Exchange Online data table",
                 "properties": null,
                 "uuid": "b5773230-8a84-4105-93f0-3f654da156b7",
-                "value": 48301
+                "value": 185
               },
               {
                 "default": false,
@@ -2742,7 +2618,7 @@
                 "label": "Incident attachment",
                 "properties": null,
                 "uuid": "5b521459-c937-4c7e-9b1a-52b9799c42a3",
-                "value": 48351
+                "value": 186
               },
               {
                 "default": false,
@@ -2751,7 +2627,7 @@
                 "label": "Incident note",
                 "properties": null,
                 "uuid": "c860d303-4436-4f93-8ebb-18a726c2b40a",
-                "value": 48401
+                "value": 187
               }
             ]
           },
@@ -2765,12 +2641,10 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_sender_email_address",
             "hide_notification": false,
-            "id": 1083,
+            "id": 997,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_sender_email_address",
             "operation_perms": {},
             "operations": [],
@@ -2782,7 +2656,7 @@
             "templates": [],
             "text": "Sender Email Address",
             "tooltip": "Enter the email address of the sender",
-            "type_id": 1058,
+            "type_id": 1039,
             "uuid": "26132344-1763-4923-8aa6-d880240f57db",
             "values": []
           },
@@ -2796,12 +2670,10 @@
             "deprecated": false,
             "export_key": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89/exchange_online_start_datetime",
             "hide_notification": false,
-            "id": 1084,
+            "id": 998,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_start_datetime",
             "operation_perms": {},
             "operations": [],
@@ -2813,7 +2685,7 @@
             "templates": [],
             "text": "Start date/time",
             "tooltip": "Query messages received starting at this date/time.",
-            "type_id": 1058,
+            "type_id": 1039,
             "uuid": "424fcb0e-406e-475e-8271-b69ef21e30b1",
             "values": []
           }
@@ -2838,27 +2710,27 @@
         "uuid": "f73307cb-6e24-4ef1-a60f-ea0226d45b21"
       },
       "has_logical_errors": false,
-      "id": 53,
+      "id": 35,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790849423045,
+      "last_modified_time": 1750683312472,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1790849422697,
+          "created_date": 1749566487244,
           "description": "",
           "enabled": false,
           "export_key": "exchange_online_delete_messages_from_query_post_process",
-          "id": 20,
+          "id": 37,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1790849422697,
+          "last_modified_time": 1749566487244,
           "name": "exchange_online_delete_messages_from_query_post_process",
           "object_type": "incident",
           "playbook_handle": "example_exchange_online_delete_messages_from_query_results",
@@ -2966,23 +2838,10 @@
       },
       "name": "example_exchange_online_delete_messages_from_query_results",
       "object_type": "incident",
-      "playbook_change_log_info": {
-        "change_log_id": 70,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "3ec4a0fb-96ba-4e54-aede-0006ce5e070f",
-        "create_date": 1790849422907,
-        "modified_principal": {
-          "display_name": "admin example",
-          "id": 4,
-          "name": "admin@example.com",
-          "type": "user"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_85dc2249-0372-458b-87bd-8ac9efdf3c89",
-        "id": 59,
+        "id": 38,
         "name": "playbook_85dc2249_0372_458b_87bd_8ac9efdf3c89",
         "type": "playbook",
         "uuid": "1a428b1b-4b15-4825-8e77-b1241587987c"
@@ -2990,18 +2849,18 @@
       "tags": [],
       "type": "default",
       "uuid": "85dc2249-0372-458b-87bd-8ac9efdf3c89",
-      "version": 4
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_e7448d95_4104_4ff2_9d78_a3923a20b30b\" isExecutable=\"true\" name=\"playbook_e7448d95_4104_4ff2_9d78_a3923a20b30b\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1qjnvue\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Get User Profile\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"f7af9277-dea6-4825-9279-09594d8e0770\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exo_email_address = artifact.value\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_get_user_profile_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1qjnvue\u003c/incoming\u003e\u003coutgoing\u003eFlow_0epbqgv\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"exchange_online_get_user_profile_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"dc993933-d7b7-47df-be45-e0b42f06fefc\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0epbqgv\u003c/incoming\u003e\u003coutgoing\u003eFlow_131kgf8\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_131kgf8\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_1qjnvue\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_0epbqgv\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_131kgf8\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_e7448d95_4104_4ff2_9d78_a3923a20b30b\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_131kgf8\" id=\"Flow_131kgf8_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"512\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"594\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0epbqgv\" id=\"Flow_0epbqgv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"322\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"428\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1qjnvue\" id=\"Flow_1qjnvue_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"238\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"238\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"428\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"594\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1790849423025,
+      "create_date": 1749566488148,
       "creator_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -3038,27 +2897,27 @@
         "uuid": "8cfb1717-086a-4230-bccd-1d88ec64eb0d"
       },
       "has_logical_errors": false,
-      "id": 54,
+      "id": 36,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790849423588,
+      "last_modified_time": 1750407918059,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1790849423101,
+          "created_date": 1749566488398,
           "description": "",
           "enabled": false,
           "export_key": "exchange_online_get_user_profile_post_process",
-          "id": 21,
+          "id": 38,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1790849423101,
+          "last_modified_time": 1749566488398,
           "name": "exchange_online_get_user_profile_post_process",
           "object_type": "artifact",
           "playbook_handle": "example_exchange_online_get_user_profile",
@@ -3106,23 +2965,10 @@
       },
       "name": "example_exchange_online_get_user_profile",
       "object_type": "artifact",
-      "playbook_change_log_info": {
-        "change_log_id": 71,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "3ec4a0fb-96ba-4e54-aede-0006ce5e070f",
-        "create_date": 1790849423308,
-        "modified_principal": {
-          "display_name": "admin example",
-          "id": 4,
-          "name": "admin@example.com",
-          "type": "user"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_e7448d95-4104-4ff2-9d78-a3923a20b30b",
-        "id": 60,
+        "id": 39,
         "name": "playbook_e7448d95_4104_4ff2_9d78_a3923a20b30b",
         "type": "playbook",
         "uuid": "06721b34-a504-4ff6-8f80-09ff6eebe616"
@@ -3130,18 +2976,18 @@
       "tags": [],
       "type": "default",
       "uuid": "e7448d95-4104-4ff2-9d78-a3923a20b30b",
-      "version": 4
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 27,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_8685fa14_9e7f_4140_a974_886711daf91d\" isExecutable=\"true\" name=\"playbook_8685fa14_9e7f_4140_a974_886711daf91d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_156z2cs\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Move Message to Folder\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"ec89e514-34f6-4fe3-98ea-85398bb04dd9\"\u003e{\"inputs\":{\"092a752f-1297-46a4-bae6-e75d1a9b4804\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"00ca7e22-f9fa-4477-a056-602139d0dbd0\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"b9765902-10bb-4a92-819e-25d3e346c3b3\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"select_value\":\"9c20f34a-363a-4e70-8d68-2f0a3cadfc44\"}},\"669df159-68fd-419f-8678-ad3b93514f8c\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}}},\"pre_processing_script\":\"inputs.exo_email_address = row.exo_dt_email_address\\ninputs.exo_mailfolders_id = None\\ninputs.exo_messages_id = row.exo_dt_message_id\\ninputs.exo_destination_mailfolder_id = playbook.inputs.exchange_online_wellknown_folders\\ninputs.exo_custom_folder_name = playbook.inputs.exchange_online_custom_folder\\nif not inputs.exo_custom_folder_name and not inputs.exo_destination_mailfolder_id:\\n  helper.fail(\\\"Destination folder or custom folder is required.\\\")\\nelif inputs.exo_custom_folder_name and inputs.exo_destination_mailfolder_id:\\n  helper.fail(\\\"Need to enter either destination folder or custom folder\\\")\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_move_nessage_to_folder_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_156z2cs\u003c/incoming\u003e\u003coutgoing\u003eFlow_1v6kpfe\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_1qo3lfe\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"exchange_online_move_message_to_folder_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"618f493c-5a10-471d-bc8a-877086ff6ddb\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1v6kpfe\u003c/incoming\u003e\u003coutgoing\u003eFlow_1qo3lfe\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_156z2cs\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1v6kpfe\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_1qo3lfe\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_8685fa14_9e7f_4140_a974_886711daf91d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1qo3lfe\" id=\"Flow_1qo3lfe_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"482\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"554\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1v6kpfe\" id=\"Flow_1v6kpfe_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"322\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"398\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_156z2cs\" id=\"Flow_156z2cs_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"238\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"238\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"554\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.75\" y=\"398\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1790849423568,
+      "create_date": 1749566489515,
       "creator_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -3168,12 +3014,10 @@
             "deprecated": false,
             "export_key": "playbook_8685fa14_9e7f_4140_a974_886711daf91d/exchange_online_custom_folder",
             "hide_notification": false,
-            "id": 1085,
+            "id": 1036,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_custom_folder",
             "operation_perms": {},
             "operations": [],
@@ -3185,7 +3029,7 @@
             "templates": [],
             "text": "Custom Folder Name",
             "tooltip": "If the folder isn\u0027t listed, enter the custom folder name or folder path to move the message.",
-            "type_id": 1060,
+            "type_id": 1041,
             "uuid": "22a42d97-fde2-4983-a4ff-ba8d5d305384",
             "values": []
           },
@@ -3199,12 +3043,10 @@
             "deprecated": false,
             "export_key": "playbook_8685fa14_9e7f_4140_a974_886711daf91d/exchange_online_wellknown_folders",
             "hide_notification": false,
-            "id": 1086,
+            "id": 999,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_wellknown_folders",
             "operation_perms": {},
             "operations": [],
@@ -3216,7 +3058,7 @@
             "templates": [],
             "text": "Well-known Folders",
             "tooltip": "Choose a folder from the list or enter a custom name below.",
-            "type_id": 1060,
+            "type_id": 1041,
             "uuid": "426f07bf-96b9-4c22-99db-aa4c65ff2029",
             "values": [
               {
@@ -3226,7 +3068,7 @@
                 "label": "archive",
                 "properties": null,
                 "uuid": "4f32f289-e2b9-4f7c-9e1d-69c9a648d1f1",
-                "value": 48451
+                "value": 188
               },
               {
                 "default": false,
@@ -3235,7 +3077,7 @@
                 "label": "clutter",
                 "properties": null,
                 "uuid": "6a7663c7-aeac-45f2-8336-31488bf4e67f",
-                "value": 48501
+                "value": 189
               },
               {
                 "default": false,
@@ -3244,7 +3086,7 @@
                 "label": "conflicts",
                 "properties": null,
                 "uuid": "54bbac25-ff78-4874-bc6a-759522203839",
-                "value": 48551
+                "value": 190
               },
               {
                 "default": false,
@@ -3253,7 +3095,7 @@
                 "label": "conversationhistory",
                 "properties": null,
                 "uuid": "6ee6ba9b-0ede-4a83-86b8-67b61aefe0ed",
-                "value": 48601
+                "value": 191
               },
               {
                 "default": false,
@@ -3262,7 +3104,7 @@
                 "label": "deleteditems",
                 "properties": null,
                 "uuid": "164f4c4f-30e4-44eb-8899-167a36486ea4",
-                "value": 48651
+                "value": 192
               },
               {
                 "default": false,
@@ -3271,7 +3113,7 @@
                 "label": "drafts",
                 "properties": null,
                 "uuid": "86d8ef29-18cc-4cdd-b77f-8d9ea985d06c",
-                "value": 48701
+                "value": 193
               },
               {
                 "default": false,
@@ -3280,7 +3122,7 @@
                 "label": "inbox",
                 "properties": null,
                 "uuid": "d36bd394-4d27-4e9e-88e3-3d6bcfd81628",
-                "value": 48751
+                "value": 194
               },
               {
                 "default": false,
@@ -3289,7 +3131,7 @@
                 "label": "junkemail",
                 "properties": null,
                 "uuid": "7a7d8efd-60f4-4d18-b038-195b2edfd0fd",
-                "value": 48801
+                "value": 195
               },
               {
                 "default": false,
@@ -3298,7 +3140,7 @@
                 "label": "localfailures",
                 "properties": null,
                 "uuid": "500d076c-81ff-477f-99f0-143d3164a6a4",
-                "value": 48851
+                "value": 196
               },
               {
                 "default": false,
@@ -3307,7 +3149,7 @@
                 "label": "msgfolderroot",
                 "properties": null,
                 "uuid": "44c2e7b1-d92d-46b2-bba9-ae42e65e744b",
-                "value": 48901
+                "value": 197
               },
               {
                 "default": false,
@@ -3316,7 +3158,7 @@
                 "label": "outbox",
                 "properties": null,
                 "uuid": "0f934b2c-8f26-4b02-8593-f828a7387d53",
-                "value": 48951
+                "value": 198
               },
               {
                 "default": false,
@@ -3325,7 +3167,7 @@
                 "label": "recoverableitemsdeletions",
                 "properties": null,
                 "uuid": "fa424872-588e-434b-8db6-93b43439ab05",
-                "value": 49001
+                "value": 199
               },
               {
                 "default": false,
@@ -3334,7 +3176,7 @@
                 "label": "scheduled",
                 "properties": null,
                 "uuid": "b4b691bb-f78d-4204-be98-a12d798622f1",
-                "value": 49051
+                "value": 200
               },
               {
                 "default": false,
@@ -3343,7 +3185,7 @@
                 "label": "searchfolders",
                 "properties": null,
                 "uuid": "91c02ed2-349e-40c1-9073-0dbb32e8f06f",
-                "value": 49101
+                "value": 201
               },
               {
                 "default": false,
@@ -3352,7 +3194,7 @@
                 "label": "sentitems",
                 "properties": null,
                 "uuid": "969f6e7d-6e52-4091-a249-6054f123900a",
-                "value": 49151
+                "value": 202
               }
             ]
           }
@@ -3377,27 +3219,27 @@
         "uuid": "83df778a-4633-4dde-93e6-8112b1299818"
       },
       "has_logical_errors": false,
-      "id": 55,
+      "id": 37,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790849424058,
+      "last_modified_time": 1751374096054,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1790849423717,
+          "created_date": 1749566489785,
           "description": "Write results of move message function to a note and update the data table.",
           "enabled": false,
           "export_key": "exchange_online_move_message_to_folder_post_process",
-          "id": 22,
+          "id": 39,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1790849423717,
+          "last_modified_time": 1751373248855,
           "name": "exchange_online_move_message_to_folder_post_process",
           "object_type": "exo_message_query_results_dt",
           "playbook_handle": "example_exchange_online_move_message_to_folder",
@@ -3449,23 +3291,10 @@
       },
       "name": "example_exchange_online_move_message_to_folder",
       "object_type": "exo_message_query_results_dt",
-      "playbook_change_log_info": {
-        "change_log_id": 72,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "3ec4a0fb-96ba-4e54-aede-0006ce5e070f",
-        "create_date": 1790849423914,
-        "modified_principal": {
-          "display_name": "admin example",
-          "id": 4,
-          "name": "admin@example.com",
-          "type": "user"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_8685fa14-9e7f-4140-a974-886711daf91d",
-        "id": 61,
+        "id": 40,
         "name": "playbook_8685fa14_9e7f_4140_a974_886711daf91d",
         "type": "playbook",
         "uuid": "f99853d6-2cf3-456a-8436-93c1bf4c1419"
@@ -3473,18 +3302,18 @@
       "tags": [],
       "type": "default",
       "uuid": "8685fa14-9e7f-4140-a974-886711daf91d",
-      "version": 4
+      "version": 31
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 6,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a\" isExecutable=\"true\" name=\"playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0tw5igv\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Query Messages\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6f09fab2-2176-4c27-ab39-cc19568e08e5\"\u003e{\"inputs\":{\"092a752f-1297-46a4-bae6-e75d1a9b4804\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9e58d3a3-c54b-4a9b-9164-e6cc0832f644\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"68133b08-816e-4c03-a50d-c68af1b6b205\"]}},\"4ff86946-a8cf-4ae1-804b-87cab7d9dac1\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"8dd46926-b1dc-4d1e-ab6a-4239510b199d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"1c9b3b95-ca24-484c-ad72-f5d64be87402\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"7354f758-b9ea-4029-835d-66d293a22b5d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"51a9c433-07bc-4f04-9932-99211726b9b7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"06391a1a-0c2c-4bcd-832a-1f39a3ba77b8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ec20a9f0-1e29-490b-871b-57b05ffbac2e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"\\n\\ninputs.incident_id = incident.id\\n\\n# Get the email address of the user whose mailbox will be queried.\\ninputs.exo_email_address = playbook.inputs.exchange_online_email_address_list\\n\\n# Get the search criteria from the activity rules if available. \\n\\n\\ninputs.exo_mail_folders         = playbook.inputs.exchange_online_mail_folder_id\\ninputs.exo_email_address_sender = playbook.inputs.exchange_online_sender_email_address\\ninputs.exo_message_subject      = playbook.inputs.exchange_online_message_subject\\ninputs.exo_message_body         = playbook.inputs.exchange_online_message_body\\ninputs.exo_start_date           = playbook.inputs.exchange_online_start_datetime\\ninputs.exo_end_date             = playbook.inputs.exchange_online_end_datetime\\ninputs.exo_has_attachments      = playbook.inputs.exchange_online_has_attachments\\n\\n    \\nif hasattr(playbook.inputs, \\\"exchange_online_query_results_output_format\\\"):\\n    inputs.exo_query_output_format = [d for d in playbook.inputs.exchange_online_query_results_output_format]\\n\\n\\n\\n\\n\\n\\n\\n\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_query_messages_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0tw5igv\u003c/incoming\u003e\u003coutgoing\u003eFlow_1qox18v\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_037maog\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0tw5igv\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"exchange_online_query_message_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"3c970c09-2637-46b8-af5b-24ecb129c984\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1qox18v\u003c/incoming\u003e\u003coutgoing\u003eFlow_037maog\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1qox18v\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_037maog\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_037maog\" id=\"Flow_037maog_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"492\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"584\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1qox18v\" id=\"Flow_1qox18v_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"322\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"408\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0tw5igv\" id=\"Flow_0tw5igv_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"238\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"238\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"584\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.5\" y=\"408\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1790849424038,
+      "create_date": 1749566490728,
       "creator_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -3511,12 +3340,10 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_email_address_list",
             "hide_notification": false,
-            "id": 1087,
+            "id": 1000,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_email_address_list",
             "operation_perms": {},
             "operations": [],
@@ -3529,7 +3356,7 @@
             "templates": [],
             "text": "Monitored Email Address",
             "tooltip": "Email addresses to search: a single email address, a comma separated list of email addresses, or \"ALL\" to search all users",
-            "type_id": 1061,
+            "type_id": 1042,
             "uuid": "9c6a335f-8b3b-4d90-809a-f7379b684cc1",
             "values": []
           },
@@ -3543,12 +3370,10 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_end_datetime",
             "hide_notification": false,
-            "id": 1088,
+            "id": 1001,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_end_datetime",
             "operation_perms": {},
             "operations": [],
@@ -3560,7 +3385,7 @@
             "templates": [],
             "text": "End date/time",
             "tooltip": "Query messages received ending at this date/time.",
-            "type_id": 1061,
+            "type_id": 1042,
             "uuid": "d50b37e2-6112-4375-8026-92111c33f73a",
             "values": []
           },
@@ -3574,12 +3399,10 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_has_attachments",
             "hide_notification": false,
-            "id": 1089,
+            "id": 1002,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_has_attachments",
             "operation_perms": {},
             "operations": [],
@@ -3591,7 +3414,7 @@
             "templates": [],
             "text": "Has attachments",
             "tooltip": "Return messages which have attachments (Yes) or do not have attachments (No)",
-            "type_id": 1061,
+            "type_id": 1042,
             "uuid": "6074334c-b1fd-456f-9720-8f773f21f533",
             "values": []
           },
@@ -3605,12 +3428,10 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_mail_folder_id",
             "hide_notification": false,
-            "id": 1090,
+            "id": 1003,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_mail_folder_id",
             "operation_perms": {},
             "operations": [],
@@ -3622,7 +3443,7 @@
             "templates": [],
             "text": "Mail Folder",
             "tooltip": "The mailfolder to search. If none is selected, all mail folders are searched.",
-            "type_id": 1061,
+            "type_id": 1042,
             "uuid": "5d59d485-0829-4162-a6df-9447d125c363",
             "values": [
               {
@@ -3632,7 +3453,7 @@
                 "label": "archive",
                 "properties": null,
                 "uuid": "fbafa1dd-4c40-46e7-8687-2018d764affb",
-                "value": 49201
+                "value": 203
               },
               {
                 "default": false,
@@ -3641,7 +3462,7 @@
                 "label": "clutter",
                 "properties": null,
                 "uuid": "066437f9-b6ab-4b30-b190-801e7ccd5101",
-                "value": 49251
+                "value": 204
               },
               {
                 "default": false,
@@ -3650,7 +3471,7 @@
                 "label": "conflicts",
                 "properties": null,
                 "uuid": "c0c91bf1-4eb4-4de8-adae-25ee4c623c25",
-                "value": 49301
+                "value": 205
               },
               {
                 "default": false,
@@ -3659,7 +3480,7 @@
                 "label": "conversationhistory",
                 "properties": null,
                 "uuid": "735205bf-6766-420d-b9e4-2f07e802463c",
-                "value": 49351
+                "value": 206
               },
               {
                 "default": false,
@@ -3668,7 +3489,7 @@
                 "label": "deleteditems",
                 "properties": null,
                 "uuid": "f3b829a7-93b5-462a-a9f4-45ae91aa1743",
-                "value": 49401
+                "value": 207
               },
               {
                 "default": false,
@@ -3677,7 +3498,7 @@
                 "label": "drafts",
                 "properties": null,
                 "uuid": "424403b9-b7dd-415f-a62e-70a10d3ea05d",
-                "value": 49451
+                "value": 208
               },
               {
                 "default": false,
@@ -3686,7 +3507,7 @@
                 "label": "inbox",
                 "properties": null,
                 "uuid": "506c0766-bf70-4cc1-a45f-677c0d7d19a6",
-                "value": 49501
+                "value": 209
               },
               {
                 "default": false,
@@ -3695,7 +3516,7 @@
                 "label": "junkemail",
                 "properties": null,
                 "uuid": "2950c03f-a5e0-4b8c-be56-1b57cb7c86e8",
-                "value": 49551
+                "value": 210
               },
               {
                 "default": false,
@@ -3704,7 +3525,7 @@
                 "label": "localfailures",
                 "properties": null,
                 "uuid": "b5273a5c-3747-474b-bd4d-ef7e3dd68a7c",
-                "value": 49601
+                "value": 211
               },
               {
                 "default": false,
@@ -3713,7 +3534,7 @@
                 "label": "msgfolderroot",
                 "properties": null,
                 "uuid": "6c9a64a4-da2d-46aa-8d32-b9e792f5b10b",
-                "value": 49651
+                "value": 212
               },
               {
                 "default": false,
@@ -3722,7 +3543,7 @@
                 "label": "outbox",
                 "properties": null,
                 "uuid": "0452e428-6ada-4488-98c0-c6cd269a83cc",
-                "value": 49701
+                "value": 213
               },
               {
                 "default": false,
@@ -3731,7 +3552,7 @@
                 "label": "recoverableitemsdeletions",
                 "properties": null,
                 "uuid": "b286394f-e97c-41b2-9527-a79279c7e792",
-                "value": 49751
+                "value": 214
               },
               {
                 "default": false,
@@ -3740,7 +3561,7 @@
                 "label": "scheduled",
                 "properties": null,
                 "uuid": "be769b82-0aae-4270-93d2-39763625e1e0",
-                "value": 49801
+                "value": 215
               },
               {
                 "default": false,
@@ -3749,7 +3570,7 @@
                 "label": "searchfolders",
                 "properties": null,
                 "uuid": "3fe1f743-027a-4dfd-98f2-2981d4fdb04e",
-                "value": 49851
+                "value": 216
               },
               {
                 "default": false,
@@ -3758,7 +3579,7 @@
                 "label": "sentitems",
                 "properties": null,
                 "uuid": "07103b14-0a35-4f18-9c63-ff2898cae8f8",
-                "value": 49901
+                "value": 217
               }
             ]
           },
@@ -3772,12 +3593,10 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_message_body",
             "hide_notification": false,
-            "id": 1091,
+            "id": 1004,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_message_body",
             "operation_perms": {},
             "operations": [],
@@ -3789,7 +3608,7 @@
             "templates": [],
             "text": "Message Body",
             "tooltip": "",
-            "type_id": 1061,
+            "type_id": 1042,
             "uuid": "336bc4b7-d24f-440a-a8d7-dfbd6a9a27af",
             "values": []
           },
@@ -3803,12 +3622,10 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_message_subject",
             "hide_notification": false,
-            "id": 1092,
+            "id": 1005,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_message_subject",
             "operation_perms": {},
             "operations": [],
@@ -3820,7 +3637,7 @@
             "templates": [],
             "text": "Message Subject",
             "tooltip": "Text for the message subject to query",
-            "type_id": 1061,
+            "type_id": 1042,
             "uuid": "07f1c611-e5aa-4915-9702-2e72b4ffc2db",
             "values": []
           },
@@ -3834,12 +3651,10 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_query_results_output_format",
             "hide_notification": false,
-            "id": 1093,
+            "id": 1006,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_query_results_output_format",
             "operation_perms": {},
             "operations": [],
@@ -3852,7 +3667,7 @@
             "templates": [],
             "text": "Query results output",
             "tooltip": "",
-            "type_id": 1061,
+            "type_id": 1042,
             "uuid": "01b728d7-79c7-4549-a151-6810249c887f",
             "values": [
               {
@@ -3862,7 +3677,7 @@
                 "label": "Exchange Online data table",
                 "properties": null,
                 "uuid": "7807827f-e0cd-45e3-8252-b663525c3a9a",
-                "value": 49951
+                "value": 218
               },
               {
                 "default": false,
@@ -3871,7 +3686,7 @@
                 "label": "Incident attachment",
                 "properties": null,
                 "uuid": "476ac302-0ce4-428a-b8e6-ae84624bd14e",
-                "value": 50001
+                "value": 219
               },
               {
                 "default": false,
@@ -3880,7 +3695,7 @@
                 "label": "Incident note",
                 "properties": null,
                 "uuid": "bdc69783-df32-4541-9d9a-d375ed781449",
-                "value": 50051
+                "value": 220
               }
             ]
           },
@@ -3894,12 +3709,10 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_sender_email_address",
             "hide_notification": false,
-            "id": 1094,
+            "id": 1007,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_sender_email_address",
             "operation_perms": {},
             "operations": [],
@@ -3911,7 +3724,7 @@
             "templates": [],
             "text": "Sender Email Address",
             "tooltip": "Enter the email address of the sender",
-            "type_id": 1061,
+            "type_id": 1042,
             "uuid": "8741e0d1-6079-4230-963c-2d7b827021b1",
             "values": []
           },
@@ -3925,12 +3738,10 @@
             "deprecated": false,
             "export_key": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a/exchange_online_start_datetime",
             "hide_notification": false,
-            "id": 1095,
+            "id": 1008,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_start_datetime",
             "operation_perms": {},
             "operations": [],
@@ -3942,7 +3753,7 @@
             "templates": [],
             "text": "Start date/time",
             "tooltip": "Query messages received starting at this date/time.",
-            "type_id": 1061,
+            "type_id": 1042,
             "uuid": "4014d6e1-2506-4511-ba7a-2d53cefd6635",
             "values": []
           }
@@ -3967,27 +3778,27 @@
         "uuid": "9e0a0906-d9c2-454e-9dd8-3e183d817509"
       },
       "has_logical_errors": false,
-      "id": 56,
+      "id": 38,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790849424662,
+      "last_modified_time": 1750683601259,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1790849424316,
+          "created_date": 1749566491435,
           "description": "",
           "enabled": false,
           "export_key": "exchange_online_query_message_post_process",
-          "id": 23,
+          "id": 40,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1790849424316,
+          "last_modified_time": 1750683598725,
           "name": "exchange_online_query_message_post_process",
           "object_type": "incident",
           "playbook_handle": "example_exchange_online_query_messages",
@@ -4095,23 +3906,10 @@
       },
       "name": "example_exchange_online_query_messages",
       "object_type": "incident",
-      "playbook_change_log_info": {
-        "change_log_id": 73,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "3ec4a0fb-96ba-4e54-aede-0006ce5e070f",
-        "create_date": 1790849424525,
-        "modified_principal": {
-          "display_name": "admin example",
-          "id": 4,
-          "name": "admin@example.com",
-          "type": "user"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_2cb0995b-534b-4bb3-a669-0e60e2db870a",
-        "id": 62,
+        "id": 41,
         "name": "playbook_2cb0995b_534b_4bb3_a669_0e60e2db870a",
         "type": "playbook",
         "uuid": "ba94581f-7485-4f6e-9c21-3dbe38dfdb76"
@@ -4119,18 +3917,18 @@
       "tags": [],
       "type": "default",
       "uuid": "2cb0995b-534b-4bb3-a669-0e60e2db870a",
-      "version": 4
+      "version": 9
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 4,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_07e7c993_f998_4f42_a365_c76422425b61\" isExecutable=\"true\" name=\"playbook_07e7c993_f998_4f42_a365_c76422425b61\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0m3tyxe\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Query Messages\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6f09fab2-2176-4c27-ab39-cc19568e08e5\"\u003e{\"inputs\":{\"092a752f-1297-46a4-bae6-e75d1a9b4804\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"9e58d3a3-c54b-4a9b-9164-e6cc0832f644\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[\"68133b08-816e-4c03-a50d-c68af1b6b205\"]}},\"4ff86946-a8cf-4ae1-804b-87cab7d9dac1\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"8dd46926-b1dc-4d1e-ab6a-4239510b199d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"1c9b3b95-ca24-484c-ad72-f5d64be87402\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"7354f758-b9ea-4029-835d-66d293a22b5d\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}},\"51a9c433-07bc-4f04-9932-99211726b9b7\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"06391a1a-0c2c-4bcd-832a-1f39a3ba77b8\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[],\"text_value\":\"\"}},\"ec20a9f0-1e29-490b-871b-57b05ffbac2e\":{\"input_type\":\"static\",\"static_input\":{\"multiselect_value\":[]}}},\"pre_processing_script\":\"inputs.incident_id = incident.id\\n\\n# Get the email address of the user whose mailbox will be queried.\\ninputs.exo_email_address = artifact.value\\n\\n# Get the search criteria from the activity rules if available. \\ninputs.exo_email_address_sender = playbook.inputs.exchange_online_sender_email_address\\ninputs.exo_mail_folders         = playbook.inputs.exchange_online_mail_folder_id\\ninputs.exo_message_subject      = playbook.inputs.exchange_online_message_subject\\ninputs.exo_message_body         = playbook.inputs.exchange_online_message_body\\ninputs.exo_start_date           = playbook.inputs.exchange_online_start_datetime\\ninputs.exo_end_date             = playbook.inputs.exchange_online_end_datetime\\ninputs.exo_has_attachments      = playbook.inputs.exchange_online_has_attachments\\n\\nif hasattr(playbook.inputs, \\\"exchange_online_query_results_output_format\\\"):\\n    inputs.exo_query_output_format = [d for d in playbook.inputs.exchange_online_query_results_output_format]\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_query_message_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0m3tyxe\u003c/incoming\u003e\u003coutgoing\u003eFlow_1ndpwum\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"exchange_online_query_message_on_artifact_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"2f4c3d79-5d9b-4ba7-9f2b-f17559bef84f\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1ndpwum\u003c/incoming\u003e\u003coutgoing\u003eFlow_0m9equj\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0m9equj\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0m3tyxe\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1ndpwum\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_0m9equj\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_07e7c993_f998_4f42_a365_c76422425b61\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0m9equj\" id=\"Flow_0m9equj_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"462\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"564\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1ndpwum\" id=\"Flow_1ndpwum_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"282\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"378\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0m3tyxe\" id=\"Flow_0m3tyxe_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"198\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"181.4\" x=\"630\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"198\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"622.75\" y=\"378\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654.75\" y=\"564\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1790849424639,
+      "create_date": 1749566492179,
       "creator_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -4157,12 +3955,10 @@
             "deprecated": false,
             "export_key": "playbook_07e7c993_f998_4f42_a365_c76422425b61/exchange_online_end_datetime",
             "hide_notification": false,
-            "id": 1096,
+            "id": 1009,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_end_datetime",
             "operation_perms": {},
             "operations": [],
@@ -4174,7 +3970,7 @@
             "templates": [],
             "text": "End date/time",
             "tooltip": "Query messages received ending at this date/time.",
-            "type_id": 1062,
+            "type_id": 1043,
             "uuid": "c5f5e092-c171-4d3a-b6ff-d19fbaedff92",
             "values": []
           },
@@ -4188,12 +3984,10 @@
             "deprecated": false,
             "export_key": "playbook_07e7c993_f998_4f42_a365_c76422425b61/exchange_online_has_attachments",
             "hide_notification": false,
-            "id": 1097,
+            "id": 1010,
             "input_type": "boolean",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_has_attachments",
             "operation_perms": {},
             "operations": [],
@@ -4205,7 +3999,7 @@
             "templates": [],
             "text": "Has attachments",
             "tooltip": "Return messages which have attachments (Yes) or do not have attachments (No)",
-            "type_id": 1062,
+            "type_id": 1043,
             "uuid": "fa426a48-d9ea-44cd-bdbe-cda05a850c45",
             "values": []
           },
@@ -4219,12 +4013,10 @@
             "deprecated": false,
             "export_key": "playbook_07e7c993_f998_4f42_a365_c76422425b61/exchange_online_mail_folder_id",
             "hide_notification": false,
-            "id": 1098,
+            "id": 1011,
             "input_type": "select",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_mail_folder_id",
             "operation_perms": {},
             "operations": [],
@@ -4236,7 +4028,7 @@
             "templates": [],
             "text": "Mail Folder",
             "tooltip": "The mailfolder to search. If none is selected, all mail folders are searched.",
-            "type_id": 1062,
+            "type_id": 1043,
             "uuid": "b47e90e5-8da7-40b1-b342-1a8fa09e7ff7",
             "values": [
               {
@@ -4246,7 +4038,7 @@
                 "label": "archive",
                 "properties": null,
                 "uuid": "f3577867-3c42-44c8-8e8d-ff993bee15c2",
-                "value": 50101
+                "value": 221
               },
               {
                 "default": false,
@@ -4255,7 +4047,7 @@
                 "label": "clutter",
                 "properties": null,
                 "uuid": "8be3a42d-a253-41e9-b6f6-0988dac28370",
-                "value": 50151
+                "value": 222
               },
               {
                 "default": false,
@@ -4264,7 +4056,7 @@
                 "label": "conflicts",
                 "properties": null,
                 "uuid": "62c68053-6dc5-4740-896d-3c1132262b3e",
-                "value": 50201
+                "value": 223
               },
               {
                 "default": false,
@@ -4273,7 +4065,7 @@
                 "label": "conversationhistory",
                 "properties": null,
                 "uuid": "9e0b0029-cdae-40c7-9bf4-0b3804a73aa0",
-                "value": 50251
+                "value": 224
               },
               {
                 "default": false,
@@ -4282,7 +4074,7 @@
                 "label": "deleteditems",
                 "properties": null,
                 "uuid": "68c9609a-d9ea-4778-915d-1cdcbb8d8aba",
-                "value": 50301
+                "value": 225
               },
               {
                 "default": false,
@@ -4291,7 +4083,7 @@
                 "label": "drafts",
                 "properties": null,
                 "uuid": "98823fdb-91d7-4759-bb52-f6c3e24f060b",
-                "value": 50351
+                "value": 226
               },
               {
                 "default": false,
@@ -4300,7 +4092,7 @@
                 "label": "inbox",
                 "properties": null,
                 "uuid": "2e55dcc0-0306-47c0-9609-43ad8eb571b2",
-                "value": 50401
+                "value": 227
               },
               {
                 "default": false,
@@ -4309,7 +4101,7 @@
                 "label": "junkemail",
                 "properties": null,
                 "uuid": "989b33c5-8dff-456c-9ea3-d7c15e210f31",
-                "value": 50451
+                "value": 228
               },
               {
                 "default": false,
@@ -4318,7 +4110,7 @@
                 "label": "localfailures",
                 "properties": null,
                 "uuid": "771477f4-6b64-4ce3-867f-7f5583453e00",
-                "value": 50501
+                "value": 229
               },
               {
                 "default": false,
@@ -4327,7 +4119,7 @@
                 "label": "msgfolderroot",
                 "properties": null,
                 "uuid": "ee54514a-e1b0-426a-8f67-47d5483dc11f",
-                "value": 50551
+                "value": 230
               },
               {
                 "default": false,
@@ -4336,7 +4128,7 @@
                 "label": "outbox",
                 "properties": null,
                 "uuid": "25a45751-b3b7-41d1-a926-c851383badda",
-                "value": 50601
+                "value": 231
               },
               {
                 "default": false,
@@ -4345,7 +4137,7 @@
                 "label": "recoverableitemsdeletions",
                 "properties": null,
                 "uuid": "0463bf79-fe76-4d55-a7c2-79856bd960b2",
-                "value": 50651
+                "value": 232
               },
               {
                 "default": false,
@@ -4354,7 +4146,7 @@
                 "label": "scheduled",
                 "properties": null,
                 "uuid": "9c105a25-a333-43cb-8c7a-1eb185cc79b4",
-                "value": 50701
+                "value": 233
               },
               {
                 "default": false,
@@ -4363,7 +4155,7 @@
                 "label": "searchfolders",
                 "properties": null,
                 "uuid": "b2f12045-6673-436d-b4b0-1e772cd541dc",
-                "value": 50751
+                "value": 234
               },
               {
                 "default": false,
@@ -4372,7 +4164,7 @@
                 "label": "sentitems",
                 "properties": null,
                 "uuid": "09202160-066e-4301-a519-2a47e7a736e4",
-                "value": 50801
+                "value": 235
               }
             ]
           },
@@ -4386,12 +4178,10 @@
             "deprecated": false,
             "export_key": "playbook_07e7c993_f998_4f42_a365_c76422425b61/exchange_online_message_body",
             "hide_notification": false,
-            "id": 1099,
+            "id": 1012,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_message_body",
             "operation_perms": {},
             "operations": [],
@@ -4403,7 +4193,7 @@
             "templates": [],
             "text": "Message Body",
             "tooltip": "",
-            "type_id": 1062,
+            "type_id": 1043,
             "uuid": "6d82f344-d460-4c6a-9e42-8f5e6dd389a7",
             "values": []
           },
@@ -4417,12 +4207,10 @@
             "deprecated": false,
             "export_key": "playbook_07e7c993_f998_4f42_a365_c76422425b61/exchange_online_message_subject",
             "hide_notification": false,
-            "id": 1100,
+            "id": 1013,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_message_subject",
             "operation_perms": {},
             "operations": [],
@@ -4434,7 +4222,7 @@
             "templates": [],
             "text": "Message Subject",
             "tooltip": "Text for the message subject to query",
-            "type_id": 1062,
+            "type_id": 1043,
             "uuid": "ff84b50a-5713-486a-829f-a9cbf45ef876",
             "values": []
           },
@@ -4448,12 +4236,10 @@
             "deprecated": false,
             "export_key": "playbook_07e7c993_f998_4f42_a365_c76422425b61/exchange_online_query_results_output_format",
             "hide_notification": false,
-            "id": 1101,
+            "id": 1014,
             "input_type": "multiselect",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_query_results_output_format",
             "operation_perms": {},
             "operations": [],
@@ -4466,7 +4252,7 @@
             "templates": [],
             "text": "Query results output",
             "tooltip": "",
-            "type_id": 1062,
+            "type_id": 1043,
             "uuid": "8fa48a8c-cd32-4d78-a73d-f3bb857e63c4",
             "values": [
               {
@@ -4476,7 +4262,7 @@
                 "label": "Exchange Online data table",
                 "properties": null,
                 "uuid": "a89e391b-2cc0-4058-88b3-282394b65a98",
-                "value": 50851
+                "value": 236
               },
               {
                 "default": false,
@@ -4485,7 +4271,7 @@
                 "label": "Incident attachment",
                 "properties": null,
                 "uuid": "72773670-9236-46ff-ac41-b5aa81bb3c56",
-                "value": 50901
+                "value": 237
               },
               {
                 "default": false,
@@ -4494,7 +4280,7 @@
                 "label": "Incident note",
                 "properties": null,
                 "uuid": "0e697ac5-1788-49ea-bfa7-03547914f8b8",
-                "value": 50951
+                "value": 238
               }
             ]
           },
@@ -4508,12 +4294,10 @@
             "deprecated": false,
             "export_key": "playbook_07e7c993_f998_4f42_a365_c76422425b61/exchange_online_sender_email_address",
             "hide_notification": false,
-            "id": 1102,
+            "id": 1015,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_sender_email_address",
             "operation_perms": {},
             "operations": [],
@@ -4525,7 +4309,7 @@
             "templates": [],
             "text": "Sender Email Address",
             "tooltip": "Enter the email address of the sender",
-            "type_id": 1062,
+            "type_id": 1043,
             "uuid": "4a532220-5bed-4cdb-b9e0-5866ef139fb4",
             "values": []
           },
@@ -4539,12 +4323,10 @@
             "deprecated": false,
             "export_key": "playbook_07e7c993_f998_4f42_a365_c76422425b61/exchange_online_start_datetime",
             "hide_notification": false,
-            "id": 1103,
+            "id": 1016,
             "input_type": "datetimepicker",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_start_datetime",
             "operation_perms": {},
             "operations": [],
@@ -4556,7 +4338,7 @@
             "templates": [],
             "text": "Start date/time",
             "tooltip": "Query messages received starting at this date/time.",
-            "type_id": 1062,
+            "type_id": 1043,
             "uuid": "fcee825c-dc59-4838-9f31-58e48dba6a66",
             "values": []
           }
@@ -4581,27 +4363,27 @@
         "uuid": "650b9df6-98d5-4eae-bec6-aa66a2a0c2b7"
       },
       "has_logical_errors": false,
-      "id": 57,
+      "id": 39,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790849425400,
+      "last_modified_time": 1750408118461,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1790849424930,
+          "created_date": 1749566492915,
           "description": "",
           "enabled": false,
           "export_key": "exchange_online_query_message_on_artifact_post_process",
-          "id": 24,
+          "id": 41,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1790849424930,
+          "last_modified_time": 1749566492915,
           "name": "exchange_online_query_message_on_artifact_post_process",
           "object_type": "artifact",
           "playbook_handle": "example_exchange_online_query_messages_on_artifact",
@@ -4716,23 +4498,10 @@
       },
       "name": "example_exchange_online_query_messages_on_artifact",
       "object_type": "artifact",
-      "playbook_change_log_info": {
-        "change_log_id": 74,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "3ec4a0fb-96ba-4e54-aede-0006ce5e070f",
-        "create_date": 1790849425150,
-        "modified_principal": {
-          "display_name": "admin example",
-          "id": 4,
-          "name": "admin@example.com",
-          "type": "user"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_07e7c993-f998-4f42-a365-c76422425b61",
-        "id": 63,
+        "id": 42,
         "name": "playbook_07e7c993_f998_4f42_a365_c76422425b61",
         "type": "playbook",
         "uuid": "9355d5b2-caee-4699-97fc-208833051ea1"
@@ -4740,18 +4509,18 @@
       "tags": [],
       "type": "default",
       "uuid": "07e7c993-f998-4f42-a365-c76422425b61",
-      "version": 4
+      "version": 7
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_a6e61054_fd2e_4ade_86fc_693442bd6688\" isExecutable=\"true\" name=\"playbook_a6e61054_fd2e_4ade_86fc_693442bd6688\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_1px5lbw\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Send Message\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"6256b03b-03ae-4972-bba2-63fe629fbb65\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exo_email_address   = playbook.inputs.exchange_online_sender_address\\ninputs.exo_recipients      = playbook.inputs.exchange_online_recipient_addresses\\ninputs.exo_message_subject = playbook.inputs.exchange_online_message_subject\\ninputs.exo_message_body    = playbook.inputs.exchange_online_message_body.get(\\\"content\\\")\\ninputs.exo_attachment_names = playbook.inputs.exchange_online_attachment_names\\ninputs.incident_id = incident.id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_send_message_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1px5lbw\u003c/incoming\u003e\u003coutgoing\u003eFlow_05drtat\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0fbhro3\u003c/incoming\u003e\u003c/endEvent\u003e\u003cscriptTask id=\"ScriptTask_3\" name=\"exchange_online_send_message_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"508b968d-cfd5-4a7c-9182-1220f7538dae\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_05drtat\u003c/incoming\u003e\u003coutgoing\u003eFlow_0fbhro3\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003csequenceFlow id=\"Flow_1px5lbw\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_05drtat\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_3\"/\u003e\u003csequenceFlow id=\"Flow_0fbhro3\" sourceRef=\"ScriptTask_3\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_a6e61054_fd2e_4ade_86fc_693442bd6688\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0fbhro3\" id=\"Flow_0fbhro3_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"512\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"624\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_05drtat\" id=\"Flow_05drtat_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"332\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"428\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1px5lbw\" id=\"Flow_1px5lbw_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"248\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"187.083\" x=\"627\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"248\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"624\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_3\" id=\"ScriptTask_3_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"428\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1790849425379,
+      "create_date": 1749566493810,
       "creator_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -4778,12 +4547,10 @@
             "deprecated": false,
             "export_key": "playbook_a6e61054_fd2e_4ade_86fc_693442bd6688/exchange_online_attachment_names",
             "hide_notification": false,
-            "id": 1104,
+            "id": 1017,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_attachment_names",
             "operation_perms": {},
             "operations": [],
@@ -4795,7 +4562,7 @@
             "templates": [],
             "text": "Attachment Names",
             "tooltip": "comma separated attachment names to attach to the message",
-            "type_id": 1063,
+            "type_id": 1044,
             "uuid": "7bfa0bca-f886-4140-ab02-84d85b0fbfcb",
             "values": []
           },
@@ -4809,12 +4576,10 @@
             "deprecated": false,
             "export_key": "playbook_a6e61054_fd2e_4ade_86fc_693442bd6688/exchange_online_message_body",
             "hide_notification": false,
-            "id": 1105,
+            "id": 1018,
             "input_type": "textarea",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_message_body",
             "operation_perms": {},
             "operations": [],
@@ -4827,7 +4592,7 @@
             "templates": [],
             "text": "Message Body",
             "tooltip": "",
-            "type_id": 1063,
+            "type_id": 1044,
             "uuid": "6c1707eb-8cd2-4030-ae75-5e2963ad5a5c",
             "values": []
           },
@@ -4841,12 +4606,10 @@
             "deprecated": false,
             "export_key": "playbook_a6e61054_fd2e_4ade_86fc_693442bd6688/exchange_online_message_subject",
             "hide_notification": false,
-            "id": 1106,
+            "id": 1019,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_message_subject",
             "operation_perms": {},
             "operations": [],
@@ -4858,7 +4621,7 @@
             "templates": [],
             "text": "Message Subject",
             "tooltip": "Text for the message subject to query",
-            "type_id": 1063,
+            "type_id": 1044,
             "uuid": "a752b520-1380-42b0-8851-6fee284dc442",
             "values": []
           },
@@ -4872,12 +4635,10 @@
             "deprecated": false,
             "export_key": "playbook_a6e61054_fd2e_4ade_86fc_693442bd6688/exchange_online_recipient_addresses",
             "hide_notification": false,
-            "id": 1107,
+            "id": 1020,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_recipient_addresses",
             "operation_perms": {},
             "operations": [],
@@ -4890,7 +4651,7 @@
             "templates": [],
             "text": "Recipient Addresses",
             "tooltip": "Comma separated list of message recipients",
-            "type_id": 1063,
+            "type_id": 1044,
             "uuid": "b9b4a3be-cb80-40e4-8fa2-5f91a8b6e9d5",
             "values": []
           },
@@ -4904,12 +4665,10 @@
             "deprecated": false,
             "export_key": "playbook_a6e61054_fd2e_4ade_86fc_693442bd6688/exchange_online_sender_address",
             "hide_notification": false,
-            "id": 1108,
+            "id": 1021,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_sender_address",
             "operation_perms": {},
             "operations": [],
@@ -4922,7 +4681,7 @@
             "templates": [],
             "text": "Sender Email Address",
             "tooltip": "",
-            "type_id": 1063,
+            "type_id": 1044,
             "uuid": "c3847b8d-a57a-4050-b5c8-004f6e595172",
             "values": []
           }
@@ -4947,27 +4706,27 @@
         "uuid": "4356c59c-ed36-42b9-9862-21bf8c6f65dd"
       },
       "has_logical_errors": false,
-      "id": 58,
+      "id": 40,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790849425962,
+      "last_modified_time": 1750407998395,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1790849425582,
+          "created_date": 1749566494242,
           "description": "",
           "enabled": false,
           "export_key": "exchange_online_send_message_post_process",
-          "id": 25,
+          "id": 42,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1790849425582,
+          "last_modified_time": 1749566494242,
           "name": "exchange_online_send_message_post_process",
           "object_type": "incident",
           "playbook_handle": "example_exchange_online_send_message",
@@ -5027,23 +4786,10 @@
       },
       "name": "example_exchange_online_send_message",
       "object_type": "incident",
-      "playbook_change_log_info": {
-        "change_log_id": 75,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "3ec4a0fb-96ba-4e54-aede-0006ce5e070f",
-        "create_date": 1790849425807,
-        "modified_principal": {
-          "display_name": "admin example",
-          "id": 4,
-          "name": "admin@example.com",
-          "type": "user"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_a6e61054-fd2e-4ade-86fc-693442bd6688",
-        "id": 64,
+        "id": 43,
         "name": "playbook_a6e61054_fd2e_4ade_86fc_693442bd6688",
         "type": "playbook",
         "uuid": "c1324529-22fd-49c3-b462-22860541f042"
@@ -5051,18 +4797,18 @@
       "tags": [],
       "type": "default",
       "uuid": "a6e61054-fd2e-4ade-86fc-693442bd6688",
-      "version": 4
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_79bda643_c6bb_4d10_82a6_f894fd982d2d\" isExecutable=\"true\" name=\"playbook_79bda643_c6bb_4d10_82a6_f894fd982d2d\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0qamyww\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Write Message as Attachment\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"dbb5e3de-0f43-4c7e-b09f-5d50f0ce426c\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.incident_id = incident.id\\ninputs.exo_attachment_name = playbook.inputs.exchange_online_attachment_name\\ninputs.exo_email_address = row.exo_dt_email_address\\ninputs.exo_messages_id = row.exo_dt_message_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_write_message_as_attachment_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0qamyww\u003c/incoming\u003e\u003coutgoing\u003eFlow_0sua2p7\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003csequenceFlow id=\"Flow_0qamyww\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003cendEvent id=\"EndPoint_2\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_0sua2p7\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0sua2p7\" sourceRef=\"ServiceTask_1\" targetRef=\"EndPoint_2\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_79bda643_c6bb_4d10_82a6_f894fd982d2d\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0sua2p7\" id=\"Flow_0sua2p7_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"332\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"484\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0qamyww\" id=\"Flow_0qamyww_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"248\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"248\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_2\" id=\"EndPoint_2_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"654.5\" y=\"483.5\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1790849425933,
+      "create_date": 1749566494919,
       "creator_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -5089,12 +4835,10 @@
             "deprecated": false,
             "export_key": "playbook_79bda643_c6bb_4d10_82a6_f894fd982d2d/exchange_online_attachment_name",
             "hide_notification": false,
-            "id": 1109,
+            "id": 1022,
             "input_type": "text",
             "internal": false,
             "is_tracked": false,
-            "json_example": null,
-            "json_schema": null,
             "name": "exchange_online_attachment_name",
             "operation_perms": {},
             "operations": [],
@@ -5106,7 +4850,7 @@
             "templates": [],
             "text": "Attachment Name",
             "tooltip": "",
-            "type_id": 1064,
+            "type_id": 1045,
             "uuid": "8d7bc3e3-8e54-4273-ac25-999908c80763",
             "values": []
           }
@@ -5131,16 +4875,16 @@
         "uuid": "d4e81545-a39c-43f3-ad96-79f339527b50"
       },
       "has_logical_errors": false,
-      "id": 59,
+      "id": 41,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790849426376,
+      "last_modified_time": 1750407999338,
       "local_scripts": [],
       "manual_settings": {
         "activation_conditions": {
@@ -5168,23 +4912,10 @@
       },
       "name": "example_exchange_online_write_message_eml_as_attachment",
       "object_type": "exo_message_query_results_dt",
-      "playbook_change_log_info": {
-        "change_log_id": 76,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "3ec4a0fb-96ba-4e54-aede-0006ce5e070f",
-        "create_date": 1790849426242,
-        "modified_principal": {
-          "display_name": "admin example",
-          "id": 4,
-          "name": "admin@example.com",
-          "type": "user"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_79bda643-c6bb-4d10-82a6-f894fd982d2d",
-        "id": 65,
+        "id": 44,
         "name": "playbook_79bda643_c6bb_4d10_82a6_f894fd982d2d",
         "type": "playbook",
         "uuid": "34dca8cc-a9a4-419a-b34f-b17a8421493c"
@@ -5192,18 +4923,18 @@
       "tags": [],
       "type": "default",
       "uuid": "79bda643-c6bb-4d10-82a6-f894fd982d2d",
-      "version": 4
+      "version": 6
     },
     {
       "activation_type": "manual",
       "content": {
-        "content_version": 1,
+        "content_version": 3,
         "xml": "\u003c?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?\u003e\u003cdefinitions xmlns=\"http://www.omg.org/spec/BPMN/20100524/MODEL\" xmlns:bpmndi=\"http://www.omg.org/spec/BPMN/20100524/DI\" xmlns:omgdc=\"http://www.omg.org/spec/DD/20100524/DC\" xmlns:omgdi=\"http://www.omg.org/spec/DD/20100524/DI\" xmlns:resilient=\"http://resilient.ibm.com/bpmn\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" targetNamespace=\"http://www.camunda.org/test\"\u003e\u003cprocess id=\"playbook_ac12d839_f46a_4252_901f_77862961e1f6\" isExecutable=\"true\" name=\"playbook_ac12d839_f46a_4252_901f_77862961e1f6\"\u003e\u003cdocumentation/\u003e\u003cstartEvent id=\"StartEvent_155asxm\"\u003e\u003coutgoing\u003eFlow_0238nai\u003c/outgoing\u003e\u003c/startEvent\u003e\u003cserviceTask id=\"ServiceTask_1\" name=\"Exchange Online: Get Message\" resilient:type=\"function\"\u003e\u003cextensionElements\u003e\u003cresilient:function uuid=\"c4748898-439e-496a-bbba-93fbc51582c3\"\u003e{\"inputs\":{},\"pre_processing_script\":\"inputs.exo_email_address = row.exo_dt_email_address\\ninputs.exo_messages_id = row.exo_dt_message_id\",\"pre_processing_script_language\":\"python3\",\"result_name\":\"exchange_online_get_message_result\"}\u003c/resilient:function\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_0238nai\u003c/incoming\u003e\u003coutgoing\u003eFlow_1tlyv8k\u003c/outgoing\u003e\u003c/serviceTask\u003e\u003cscriptTask id=\"ScriptTask_2\" name=\"exchange_online_write_message_json_as_note_post_process\"\u003e\u003cextensionElements\u003e\u003cresilient:script uuid=\"a5f0e298-85e6-491b-af57-08b07ca70365\"/\u003e\u003c/extensionElements\u003e\u003cincoming\u003eFlow_1tlyv8k\u003c/incoming\u003e\u003coutgoing\u003eFlow_160psfo\u003c/outgoing\u003e\u003cscript\u003escript\u003c/script\u003e\u003c/scriptTask\u003e\u003cendEvent id=\"EndPoint_3\" resilient:documentation=\"End point\"\u003e\u003cincoming\u003eFlow_160psfo\u003c/incoming\u003e\u003c/endEvent\u003e\u003csequenceFlow id=\"Flow_0238nai\" sourceRef=\"StartEvent_155asxm\" targetRef=\"ServiceTask_1\"/\u003e\u003csequenceFlow id=\"Flow_1tlyv8k\" sourceRef=\"ServiceTask_1\" targetRef=\"ScriptTask_2\"/\u003e\u003csequenceFlow id=\"Flow_160psfo\" sourceRef=\"ScriptTask_2\" targetRef=\"EndPoint_3\"/\u003e\u003c/process\u003e\u003cbpmndi:BPMNDiagram id=\"BPMNDiagram_1\"\u003e\u003cbpmndi:BPMNPlane bpmnElement=\"playbook_ac12d839_f46a_4252_901f_77862961e1f6\" id=\"BPMNPlane_1\"\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_160psfo\" id=\"Flow_160psfo_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"502\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"594\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_1tlyv8k\" id=\"Flow_1tlyv8k_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"302\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"418\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNEdge bpmnElement=\"Flow_0238nai\" id=\"Flow_0238nai_di\"\u003e\u003comgdi:waypoint x=\"721\" y=\"117\"/\u003e\u003comgdi:waypoint x=\"721\" y=\"218\"/\u003e\u003c/bpmndi:BPMNEdge\u003e\u003cbpmndi:BPMNShape bpmnElement=\"StartEvent_155asxm\" id=\"StartEvent_155asxm_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"199.65\" x=\"621\" y=\"65\"/\u003e\u003cbpmndi:BPMNLabel\u003e\u003comgdc:Bounds height=\"0\" width=\"90\" x=\"616\" y=\"100\"/\u003e\u003c/bpmndi:BPMNLabel\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ServiceTask_1\" id=\"ServiceTask_1_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"218\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"ScriptTask_2\" id=\"ScriptTask_2_di\"\u003e\u003comgdc:Bounds height=\"84\" width=\"196\" x=\"623\" y=\"418\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003cbpmndi:BPMNShape bpmnElement=\"EndPoint_3\" id=\"EndPoint_3_di\"\u003e\u003comgdc:Bounds height=\"52\" width=\"132.15\" x=\"655\" y=\"594\"/\u003e\u003c/bpmndi:BPMNShape\u003e\u003c/bpmndi:BPMNPlane\u003e\u003c/bpmndi:BPMNDiagram\u003e\u003c/definitions\u003e"
       },
-      "create_date": 1790849426354,
+      "create_date": 1749566495737,
       "creator_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
@@ -5240,27 +4971,27 @@
         "uuid": "d4682b24-9f47-42c5-9886-504d6800a752"
       },
       "has_logical_errors": false,
-      "id": 60,
+      "id": 42,
       "is_deleted": false,
       "is_locked": false,
       "last_modified_principal": {
         "display_name": "admin example",
-        "id": 4,
+        "id": 5,
         "name": "admin@example.com",
         "type": "user"
       },
-      "last_modified_time": 1790849426909,
+      "last_modified_time": 1750408077637,
       "local_scripts": [
         {
           "actions": [],
-          "created_date": 1790849426431,
+          "created_date": 1749566495954,
           "description": "",
           "enabled": false,
           "export_key": "exchange_online_write_message_json_as_note_post_process",
-          "id": 26,
+          "id": 43,
           "language": "python3",
           "last_modified_by": "admin@example.com",
-          "last_modified_time": 1790849426431,
+          "last_modified_time": 1749566495954,
           "name": "exchange_online_write_message_json_as_note_post_process",
           "object_type": "exo_message_query_results_dt",
           "playbook_handle": "example_exchange_online_write_message_json_as_note",
@@ -5287,23 +5018,10 @@
       },
       "name": "example_exchange_online_write_message_json_as_note",
       "object_type": "exo_message_query_results_dt",
-      "playbook_change_log_info": {
-        "change_log_id": 77,
-        "change_log_items": [],
-        "change_number": 1,
-        "change_number_prefix": "3ec4a0fb-96ba-4e54-aede-0006ce5e070f",
-        "create_date": 1790849426743,
-        "modified_principal": {
-          "display_name": "admin example",
-          "id": 4,
-          "name": "admin@example.com",
-          "type": "user"
-        }
-      },
       "status": "enabled",
       "tag": {
         "display_name": "Playbook_ac12d839-f46a-4252-901f-77862961e1f6",
-        "id": 66,
+        "id": 45,
         "name": "playbook_ac12d839_f46a_4252_901f_77862961e1f6",
         "type": "playbook",
         "uuid": "9ce43e3c-6fff-415e-aeb9-7a06fbb682d2"
@@ -5311,21 +5029,21 @@
       "tags": [],
       "type": "default",
       "uuid": "ac12d839-f46a-4252-901f-77862961e1f6",
-      "version": 4
+      "version": 6
     }
   ],
   "regulators": null,
   "roles": [],
   "scripts": [],
   "server_version": {
-    "build_number": 20851,
+    "build_number": 9339,
     "f": 0,
-    "m": 9,
+    "m": 0,
     "major": 0,
     "minor": 0,
     "r": 0,
     "v": 51,
-    "version": "51.0.9.0.20851"
+    "version": "51.0.0.0.9339"
   },
   "tags": [],
   "task_order": [],
@@ -5346,12 +5064,10 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_email_address",
           "hide_notification": false,
-          "id": 1032,
+          "id": 948,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
-          "json_example": null,
-          "json_schema": null,
           "name": "exo_dt_email_address",
           "operation_perms": {},
           "operations": [],
@@ -5366,7 +5082,7 @@
           "templates": [],
           "text": "Queried Email Address",
           "tooltip": "",
-          "type_id": 1054,
+          "type_id": 1035,
           "uuid": "1430b4c0-c77e-429d-b698-62cb9a6c336b",
           "values": [],
           "width": 62
@@ -5381,12 +5097,10 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_has_attachments",
           "hide_notification": false,
-          "id": 1033,
+          "id": 949,
           "input_type": "boolean",
           "internal": false,
           "is_tracked": false,
-          "json_example": null,
-          "json_schema": null,
           "name": "exo_dt_has_attachments",
           "operation_perms": {},
           "operations": [],
@@ -5400,7 +5114,7 @@
           "templates": [],
           "text": "Has Attachments",
           "tooltip": "",
-          "type_id": 1054,
+          "type_id": 1035,
           "uuid": "1818d9f2-ef0f-4981-821a-8b0e6b9f95a8",
           "values": [],
           "width": 98
@@ -5415,12 +5129,10 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_message_folder",
           "hide_notification": false,
-          "id": 1034,
+          "id": 950,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
-          "json_example": null,
-          "json_schema": null,
           "name": "exo_dt_message_folder",
           "operation_perms": {},
           "operations": [],
@@ -5434,7 +5146,7 @@
           "templates": [],
           "text": "Folder",
           "tooltip": "Only has value when user inputs a folder ID",
-          "type_id": 1054,
+          "type_id": 1035,
           "uuid": "11dad6f2-6f90-47b9-8c5e-af24619471e4",
           "values": [],
           "width": 48
@@ -5449,12 +5161,10 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_message_id",
           "hide_notification": false,
-          "id": 1035,
+          "id": 951,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
-          "json_example": null,
-          "json_schema": null,
           "name": "exo_dt_message_id",
           "operation_perms": {},
           "operations": [],
@@ -5469,7 +5179,7 @@
           "templates": [],
           "text": "Message ID",
           "tooltip": "",
-          "type_id": 1054,
+          "type_id": 1035,
           "uuid": "89c605ce-2aaf-4b13-acd6-db150f977a87",
           "values": [],
           "width": 66
@@ -5484,12 +5194,10 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_message_subject",
           "hide_notification": false,
-          "id": 1036,
+          "id": 952,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
-          "json_example": null,
-          "json_schema": null,
           "name": "exo_dt_message_subject",
           "operation_perms": {},
           "operations": [],
@@ -5503,7 +5211,7 @@
           "templates": [],
           "text": "Message Subject",
           "tooltip": "",
-          "type_id": 1054,
+          "type_id": 1035,
           "uuid": "c67414a0-30bd-43bb-9b86-2cbdbee79bfa",
           "values": [],
           "width": 154
@@ -5518,12 +5226,10 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_query_date",
           "hide_notification": false,
-          "id": 1037,
+          "id": 953,
           "input_type": "datetimepicker",
           "internal": false,
           "is_tracked": false,
-          "json_example": null,
-          "json_schema": null,
           "name": "exo_dt_query_date",
           "operation_perms": {},
           "operations": [],
@@ -5538,7 +5244,7 @@
           "templates": [],
           "text": "Query Date",
           "tooltip": "",
-          "type_id": 1054,
+          "type_id": 1035,
           "uuid": "90d213d4-6efe-4d31-85d2-dc668afb86be",
           "values": [],
           "width": 45
@@ -5553,12 +5259,10 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_received_date",
           "hide_notification": false,
-          "id": 1038,
+          "id": 954,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
-          "json_example": null,
-          "json_schema": null,
           "name": "exo_dt_received_date",
           "operation_perms": {},
           "operations": [],
@@ -5572,7 +5276,7 @@
           "templates": [],
           "text": "Received Date",
           "tooltip": "",
-          "type_id": 1054,
+          "type_id": 1035,
           "uuid": "6d199c33-e39c-4377-9a35-32343470d380",
           "values": [],
           "width": 69
@@ -5587,12 +5291,10 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_sender_email",
           "hide_notification": false,
-          "id": 1039,
+          "id": 955,
           "input_type": "text",
           "internal": false,
           "is_tracked": false,
-          "json_example": null,
-          "json_schema": null,
           "name": "exo_dt_sender_email",
           "operation_perms": {},
           "operations": [],
@@ -5606,7 +5308,7 @@
           "templates": [],
           "text": "Sender Email",
           "tooltip": "",
-          "type_id": 1054,
+          "type_id": 1035,
           "uuid": "0244ca3e-a694-41a8-9ce3-569cad2d5be5",
           "values": [],
           "width": 147
@@ -5621,12 +5323,10 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_status",
           "hide_notification": false,
-          "id": 1040,
+          "id": 956,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
-          "json_example": null,
-          "json_schema": null,
           "name": "exo_dt_status",
           "operation_perms": {},
           "operations": [],
@@ -5641,7 +5341,7 @@
           "templates": [],
           "text": "Status",
           "tooltip": "",
-          "type_id": 1054,
+          "type_id": 1035,
           "uuid": "ee39ace4-a7de-434b-be20-37f8d1c89667",
           "values": [],
           "width": 49
@@ -5656,12 +5356,10 @@
           "deprecated": false,
           "export_key": "exo_message_query_results_dt/exo_dt_web_link",
           "hide_notification": false,
-          "id": 1041,
+          "id": 957,
           "input_type": "textarea",
           "internal": false,
           "is_tracked": false,
-          "json_example": null,
-          "json_schema": null,
           "name": "exo_dt_web_link",
           "operation_perms": {},
           "operations": [],
@@ -5675,7 +5373,7 @@
           "templates": [],
           "text": "Web Link",
           "tooltip": "",
-          "type_id": 1054,
+          "type_id": 1035,
           "uuid": "e6975596-3553-4f9b-abc9-d8e18bf6f249",
           "values": [],
           "width": 88
