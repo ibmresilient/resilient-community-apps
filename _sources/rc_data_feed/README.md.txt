@@ -36,6 +36,7 @@ Newly added fields and data tables are created in the destination database (for 
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
+| 3.3.3   | 08/2026 | Updated to AppFunctionComponent. Added mock unit tests. Updated base Docker image for Python 3.11/3.12 support. Refreshed export.res to v51.0.8.0. |
 | 3.3.2   | 06/2025 | Fix for incident fields with mixed-case API names |
 | 3.3.1   | 12/2024 | Fix for race condition with PluginPool |
 | 3.3.0   | 9/2024 | Support for incident time series data |
