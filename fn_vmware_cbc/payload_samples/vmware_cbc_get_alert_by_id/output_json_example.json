@@ -1,0 +1,105 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "alert": {
+      "org_key": "7M9FP6WE",
+      "alert_url": "my-ccb.net/alerts?s[c][query_string]=id:0730b7bc-7d51-9d64-68b1-d3e01d28a716&orgKey=XXXXYYYY",
+      "id": "0730b7bc-7d51-9d64-68b1-d3e01d28a716",
+      "type": "CB_ANALYTICS",
+      "backend_timestamp": "2024-04-18T17:16:50.606Z",
+      "user_update_timestamp": null,
+      "backend_update_timestamp": "2024-04-18T17:17:48.151Z",
+      "detection_timestamp": "2024-04-18T17:15:47.419Z",
+      "first_event_timestamp": "2024-04-18T17:15:45.021Z",
+      "last_event_timestamp": "2024-04-18T17:15:45.398Z",
+      "severity": 3,
+      "reason": "A file (340s.exe) with a reputation of known malware was found on disk.",
+      "reason_code": "T_DETECT_MALWARE",
+      "threat_id": "32120969*******82fd587417e23e1c",
+      "primary_event_id": "6f09730*******0bd491bae9facb0",
+      "policy_applied": "APPLIED",
+      "run_state": "RAN",
+      "sensor_action": "ALLOW",
+      "workflow": {
+        "change_timestamp": "2024-04-18T17:16:50.606Z",
+        "changed_by_type": "SYSTEM",
+        "changed_by": "ALERT_CREATION",
+        "closure_reason": "NO_REASON",
+        "status": "OPEN"
+      },
+      "determination": {
+        "change_timestamp": "2024-04-18T17:16:50.606Z",
+        "value": "NONE",
+        "changed_by_type": "SYSTEM",
+        "changed_by": "ALERT_CREATION"
+      },
+      "tags": null,
+      "alert_notes_present": false,
+      "threat_notes_present": false,
+      "is_updated": true,
+      "device_id": 206046519,
+      "device_name": "winserver221",
+      "device_uem_id": "",
+      "device_target_value": "MEDIUM",
+      "device_policy": "Standard",
+      "device_policy_id": 493371,
+      "device_os": "WINDOWS",
+      "device_os_version": "Windows Server 2022 x64",
+      "device_username": "Administrator",
+      "device_location": "OFFSITE",
+      "device_external_ip": "170.225.223.20",
+      "device_internal_ip": "9.30.87.128",
+      "asset_group": [],
+      "mdr_alert": false,
+      "mdr_alert_notes_present": false,
+      "mdr_threat_notes_present": false,
+      "ttps": [
+        "DETECTED_MALWARE_APP",
+        "UNKNOWN_APP",
+        "POLICY_DENY"
+      ],
+      "attack_tactic": "TA0001",
+      "process_guid": "7M9FP6WE-0c480537-000008e8-00000000-1da8f6c9a23e47a",
+      "process_pid": 2280,
+      "process_name": "c:\\program files\\confer\\repmgr.exe",
+      "process_sha256": "f6ec44f025c*******70da47c1c610a94a9c84741f3cdfceb20cee565579868a",
+      "process_md5": "8a87acebc2*******eeb24af602b32b30",
+      "process_effective_reputation": "IGNORE",
+      "process_reputation": "TRUSTED_WHITE_LIST",
+      "process_cmdline": "\"C:\\Program Files\\Confer\\RepMgr.exe\"",
+      "process_username": "NT AUTHORITY\\SYSTEM",
+      "process_issuer": [
+        "Sectigo RSA Code Signing CA 2"
+      ],
+      "process_publisher": [
+        "Carbon Black, Inc."
+      ],
+      "parent_guid": "7M9FP6WE-0c480537-00000344-00000000-1da8f6c97aa305d",
+      "parent_pid": 836,
+      "parent_name": "c:\\windows\\system32\\services.exe",
+      "parent_sha256": "854780*******f5a46704f1e75c5075881e4e914c7b44bea45fac1677781096",
+      "parent_md5": "",
+      "parent_effective_reputation": "TRUSTED_WHITE_LIST",
+      "parent_reputation": "TRUSTED_WHITE_LIST",
+      "parent_cmdline": "",
+      "parent_username": "NT AUTHORITY\\SYSTEM",
+      "childproc_guid": "",
+      "childproc_username": "",
+      "childproc_cmdline": ""
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "vmware_cbc_alert_id": "0730b7bc-7d51-9d64-68b1-d3e01d28a716"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-vmware-cbc",
+    "package_version": "1.0.0",
+    "host": "myhost",
+    "execution_time_ms": 213,
+    "timestamp": "2024-04-19 10:53:10"
+  }
+}

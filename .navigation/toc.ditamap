@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map PUBLIC "-//IBM//DTD DITA IBM Map//EN" "ibm-map.dtd">
+<map xml:lang="en-us">
+<title>SOAR apps navigation</title>
+<navref mapref="../communityapps/SUMMARY.ditamap"/>
+<navref mapref="../soarapps/SUMMARY.ditamap"/>
+</map>

@@ -1,0 +1,95 @@
+{
+  "version": "1.0",
+  "success": true,
+  "reason": null,
+  "content": {
+    "task_id": 302,
+    "task": {
+      "name": "Sample_task",
+      "inc_id": 2117,
+      "inc_owner_id": 5,
+      "due_date": null,
+      "required": false,
+      "owner_id": null,
+      "user_notes": null,
+      "status": "O",
+      "frozen": false,
+      "owner_fname": null,
+      "owner_lname": null,
+      "init_date": 1751637144637,
+      "active": true,
+      "src_name": null,
+      "inc_name": "Test_task_utils",
+      "instr_text": "Close out this required Task",
+      "instructions": "Close out this required Task",
+      "form": null,
+      "members": null,
+      "perms": {
+        "read": true,
+        "write": true,
+        "comment": true,
+        "assign": true,
+        "close": true,
+        "change_members": true,
+        "attach_file": true,
+        "read_attachments": true,
+        "delete_attachments": true,
+        "change_header": false
+      },
+      "notes": [],
+      "closed_date": null,
+      "actions": [
+        {
+          "id": 121,
+          "name": "Example: Task Utils - Make this Task Optional",
+          "enabled": true
+        }
+      ],
+      "playbooks": [
+        {
+          "playbook_handle": 53,
+          "display_name": "Task Utils: Mark Task as Optional - Example (PB)"
+        }
+      ],
+      "phase_id": 1009,
+      "category_id": null,
+      "notes_count": 1,
+      "attachments_count": 0,
+      "task_layout": [],
+      "auto_deactivate": true,
+      "creator_principal": {
+        "id": 5,
+        "type": "user",
+        "name": "admin@example.com",
+        "display_name": "admin example"
+      },
+      "timeframe_name": null,
+      "regs": {},
+      "custom": true,
+      "id": 302,
+      "inc_training": false,
+      "cat_name": "Initial",
+      "description": null,
+      "at_id": null,
+      "private": null
+    }
+  },
+  "raw": "",
+  "inputs": {
+    "task_name": "Sample_task",
+    "task_utils_payload": {
+      "format": "text",
+      "content": "{\"required\": false}"
+    },
+    "incident_id": 2117,
+    "task_id": 302
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "unknown",
+    "package_version": "unknown",
+    "host": "my.app.host",
+    "execution_time_ms": 2105,
+    "timestamp": "2025-07-04 14:53:51"
+  }
+}

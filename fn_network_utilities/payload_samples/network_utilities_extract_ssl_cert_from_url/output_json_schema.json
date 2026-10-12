@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "certificate": {
+      "type": "string"
+    },
+    "successful": {
+      "type": "boolean"
+    }
+  }
+}

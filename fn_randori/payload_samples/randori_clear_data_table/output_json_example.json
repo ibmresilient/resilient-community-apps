@@ -1,0 +1,24 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "success": true,
+    "title": null,
+    "message": null,
+    "hints": []
+  },
+  "raw": null,
+  "inputs": {
+    "incident_id": 2640,
+    "randori_data_table_name": "randori_detections_dt"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-randori",
+    "package_version": "1.0.0",
+    "host": "MacBook-Pro.local",
+    "execution_time_ms": 10072,
+    "timestamp": "2022-11-07 08:18:51"
+  }
+}

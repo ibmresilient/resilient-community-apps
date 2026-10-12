@@ -1,0 +1,11 @@
+{
+  "inputs": {
+    "incident_id": 2862,
+    "campaign_id": null,
+    "threat_id": "7cbbf08ebb723e7986f2369fc6b7e6fec773ff511484da8b643141e8b1aa221c",
+    "aggregate_flag": null,
+    "malicious_flag": true
+  },
+  "success": true,
+  "num_reports": 1
+}

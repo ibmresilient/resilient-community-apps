@@ -1,0 +1,28 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "response": {
+      "id": "dec4dad8-abcdefg",
+      "note": "",
+      "status": "REJECTED",
+      "dueAt": null,
+      "resolutionReason": "WONT_FIX"
+    },
+    "message": "Successfully updated issue."
+  },
+  "raw": null,
+  "inputs": {
+    "wiz_issue_id": "dec4dad8-abcdefg",
+    "wiz_resolution_reason": "Not an Issue"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-wiz",
+    "package_version": "1.0.1982",
+    "host": "e35c5a28-4eabcdefg",
+    "execution_time_ms": 1383,
+    "timestamp": "2024-04-15 11:58:34"
+  }
+}

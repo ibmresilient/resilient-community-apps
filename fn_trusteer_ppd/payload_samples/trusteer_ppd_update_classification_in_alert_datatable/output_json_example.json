@@ -1,0 +1,22 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "num_rows_updated": 5
+  },
+  "raw": null,
+  "inputs": {
+    "trusteer_ppd_session_id": "xxx3aef168e8aeadfb606bf2637cxxx",
+    "incident_id": 3326,
+    "trusteer_ppd_classification": "Confirmed fraud (Stolen device)"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-trusteer-ppd",
+    "package_version": "1.0.0",
+    "host": "laptop.local",
+    "execution_time_ms": 5647,
+    "timestamp": "2023-03-01 10:23:36"
+  }
+}

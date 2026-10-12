@@ -1,0 +1,201 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "boolean"
+    },
+    "reason": {},
+    "content": {
+      "type": "object",
+      "properties": {
+        "response": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "sourceRule": {
+              "type": "object",
+              "properties": {
+                "__typename": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "controlDescription": {
+                  "type": "string"
+                },
+                "resolutionRecommendation": {
+                  "type": "string"
+                },
+                "securitySubCategories": {}
+              }
+            },
+            "createdAt": {
+              "type": "string"
+            },
+            "updatedAt": {
+              "type": "string"
+            },
+            "dueAt": {},
+            "type": {
+              "type": "string"
+            },
+            "resolvedAt": {},
+            "statusChangedAt": {
+              "type": "string"
+            },
+            "projects": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "slug": {
+                    "type": "string"
+                  },
+                  "businessUnit": {
+                    "type": "string"
+                  },
+                  "riskProfile": {
+                    "type": "object",
+                    "properties": {
+                      "businessImpact": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "status": {
+              "type": "string"
+            },
+            "severity": {
+              "type": "string"
+            },
+            "entitySnapshot": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "nativeType": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "status": {},
+                "cloudPlatform": {},
+                "cloudProviderURL": {
+                  "type": "string"
+                },
+                "providerId": {
+                  "type": "string"
+                },
+                "region": {
+                  "type": "string"
+                },
+                "resourceGroupExternalId": {
+                  "type": "string"
+                },
+                "subscriptionExternalId": {
+                  "type": "string"
+                },
+                "subscriptionName": {
+                  "type": "string"
+                },
+                "subscriptionTags": {},
+                "tags": {
+                  "type": "object"
+                },
+                "createdAt": {},
+                "externalId": {
+                  "type": "string"
+                }
+              }
+            },
+            "serviceTickets": {
+              "type": "array"
+            },
+            "notes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "createdAt": {
+                    "type": "string"
+                  },
+                  "updatedAt": {
+                    "type": "string"
+                  },
+                  "text": {
+                    "type": "string"
+                  },
+                  "user": {},
+                  "serviceAccount": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "raw": {},
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "wiz_issue_id": {
+          "type": "string"
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "integer"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

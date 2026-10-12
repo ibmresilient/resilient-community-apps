@@ -1,0 +1,4 @@
+include README.md
+recursive-include fn_twitter_most_popular/util *
+include fn_twitter_most_popular/LICENSE
+include fn_twitter_most_popular/doc/*

@@ -1,0 +1,12 @@
+{
+    "version": 2.0,
+    "success": true,
+    "reason": null,
+    "content": {
+        "ip_address": "104.27.163.228",
+        "query_execution_time": "2018-05-02 16:22:14",
+        "latest_malicious_domains": [
+            "textspeier.de"
+        ]
+    }
+}

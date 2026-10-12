@@ -1,0 +1,16 @@
+{
+  {# JINJA template for updating a new SOAR incident from an endpoint #}
+  {% set severity_mapping = '''{
+    "INFORMATIONAL": "Low", 
+    "LOW": "Low", 
+    "MEDIUM": "Medium", 
+    "HIGH": "High",
+    "CRITICAL": "High"
+  }'''
+  %}
+  "severity_code": "{{ severity | soar_substitute(severity_mapping) }}",
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+      "wiz_issue_status": "{{ status }}"
+  }
+}

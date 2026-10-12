@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema",
+  "type": "object",
+  "properties": {
+    "dkim_verify": {
+      "type": "boolean"
+    },
+    "arc_verify": {
+      "type": "boolean"
+    },
+    "dkim_message": {
+      "type": "string"
+    },
+    "arc_message": {
+      "type": "string"
+    }
+  }
+}

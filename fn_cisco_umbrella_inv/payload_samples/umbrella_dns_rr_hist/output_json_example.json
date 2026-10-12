@@ -1,0 +1,31 @@
+{
+    "version": 2.0,
+    "success": true,
+    "reason": null,
+    "content": {
+        "resource_name": "cosmos.furnipict.com",
+        "query_execution_time": "2018-05-02 16:03:15",
+        "dns_rr_history": {
+            "rrs": [
+                {
+                    "rr": "www.example.com.",
+                    "ttl": 86400,
+                    "class": "IN",
+                    "type": "A",
+                    "name": "93.184.216.119"
+                }
+            ],
+            "features": {
+                "rr_count": 19,
+                "ld2_count": 10,
+                "ld3_count": 14,
+                "ld2_1_count": 7,
+                "ld2_2_count": 11,
+                "div_ld2": 0.5263157894736842,
+                "div_ld3": 0.7368421052631579,
+                "div_ld2_1": 0.3684210526315789,
+                "div_ld2_2": 0.5789473684210527
+            }
+        }
+    }
+}

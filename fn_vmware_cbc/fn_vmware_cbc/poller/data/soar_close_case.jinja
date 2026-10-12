@@ -1,0 +1,20 @@
+{
+  {# JINJA template for closing a SOAR incident using endpoint data #}
+  {% set closure_reason_mapping = '''{
+    "NO_REASON": "Resolved", 
+    "RESOLVED": "Resolved",
+    "RESOLVED_BENIGN_KNOWN_GOOD": "Resolved", 
+    "DUPLICATE_CLEANUP": "Duplicate",
+    "OTHER": "Not an Issue"
+  }'''
+  %}
+  "plan_status": "C",
+  "resolution_id": "{{ workflow.closure_reason | soar_substitute(closure_reason_mapping) }}",
+  "resolution_summary": "Closed by VMware Carbon Black Cloud, Alert Determination: {{ determination.value.replace('_', ' ')|title }}"
+  {# add additional fields based on your 'on close' field requirements #}
+  ,"properties": {
+    "vmware_cbc_workflow_status": "{{ workflow.status.replace('_', ' ')|title }}",
+    "vmware_cbc_workflow_closure_reason": "{{ workflow.closure_reason.replace('_', ' ')|title }}",
+    "vmware_cbc_determination_value": "{{ determination.value.replace('_', ' ')|title }}"
+  }
+}

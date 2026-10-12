@@ -1,0 +1,62 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "content": [
+      {
+        "beginTime": null,
+        "lastUpdateTime": null,
+        "computerName": "WIN-N5KGH4CP3N3",
+        "computerIp": "9.37.29.102",
+        "domainName": "Default",
+        "currentLoginUserName": "Administrator",
+        "stateId": 0,
+        "subStateId": 0,
+        "subStateDesc": null,
+        "binaryFileId": null,
+        "resultInXML": null,
+        "computerId": "01ECF4E8*******4D52E45C3ABE4D",
+        "hardwareKey": "8DACE2559*******9CC0BF71D973BB7"
+      }
+    ],
+    "size": 20,
+    "sort": [
+      {
+        "direction": "ASC",
+        "property": "Begintime",
+        "ascending": true
+      }
+    ],
+    "totalElements": 1,
+    "firstPage": true,
+    "totalPages": 1,
+    "lastPage": true,
+    "numberOfElements": 1,
+    "number": 0,
+    "total_match_count": 0,
+    "total_match_ep_count": 0,
+    "total_remediation_count": 0,
+    "total_fail_remediation_count": 0,
+    "total_remediation_ep_count": 0,
+    "total_not_completed": 1,
+    "total_ep_count": 1,
+    "scan_artifact_value": "",
+    "remediate_artifact_value": "",
+    "overall_command_state": "In progress"
+  },
+  "raw": null,
+  "inputs": {
+    "sep_status_type": "quarantine",
+    "sep_commandid": "1CA9D4F37*******9D93D09402E3D3",
+    "sep_incident_id": 2133
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.2.0",
+    "host": "my.app.host",
+    "execution_time_ms": 765,
+    "timestamp": "2024-08-21 08:40:33"
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "@status": "success",
+    "result": {
+      "job": {
+        "tenq": "2025/01/28 06:54:04",
+        "tdeq": "06:54:04",
+        "id": "576",
+        "user": "admin",
+        "type": "CommitAll",
+        "status": "FIN",
+        "queued": "NO",
+        "stoppable": "no",
+        "result": "FAIL",
+        "tfin": "2025/01/28 06:54:04",
+        "description": null,
+        "positionInQ": "0",
+        "progress": "100",
+        "push_type": "shared-policy",
+        "dgname": "group1",
+        "sched": "None",
+        "warnings": null,
+        "devices": {
+          "entry": {
+            "serial-no": "00000000000",
+            "devicename": null,
+            "multi-vsys": "no",
+            "vsys": null,
+            "status": "not connected",
+            "result": "FAIL",
+            "tstart": "06:54:04",
+            "tfin": "2025/01/28 06:54:04",
+            "details": {
+              "msg": "device 00000000000 not connected"
+            }
+          }
+        }
+      }
+    }
+  },
+  "raw": null,
+  "inputs": {
+    "panorama_job_id": 576,
+    "panorama_label": "panorama"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-pa-panorama",
+    "package_version": "1.6.0",
+    "host": "local",
+    "execution_time_ms": 530,
+    "timestamp": "2025-01-28 10:40:31"
+  }
+}

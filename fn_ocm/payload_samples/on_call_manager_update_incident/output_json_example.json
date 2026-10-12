@@ -1,0 +1,72 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "state": "assignedToTeam",
+    "summary": "Cluster: SAMPLE - Pipeline Project",
+    "description": "Cluster: SAMPLE - Pipeline Project",
+    "owner": "-",
+    "team": "test_1",
+    "closedOwner": "-",
+    "closedTeam": "-",
+    "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "displayId": "0000-20m1",
+    "createdTime": "2025-05-23T14:29:03.698Z",
+    "lastChanged": "2025-05-23T15:27:13.602Z",
+    "firstInProgressTime": "-",
+    "resolvedTime": "-",
+    "eventTypeCounts": [
+      {
+        "eventType": "Build Status",
+        "count": 3
+      }
+    ],
+    "resourcePropertyCounts": [
+      {
+        "propertyName": "cluster",
+        "propertyValue": "SAMPLE - Pipeline Project",
+        "count": 3
+      },
+      {
+        "propertyName": "hostname",
+        "propertyValue": "buildbox",
+        "count": 3
+      },
+      {
+        "propertyName": "name",
+        "propertyValue": "SAMPLE - Pipeline Project",
+        "count": 3
+      },
+      {
+        "propertyName": "type",
+        "propertyValue": "Pipeline",
+        "count": 3
+      }
+    ],
+    "priority": 2,
+    "escalated": false,
+    "wasEscalated": false,
+    "correlationDetails": {
+      "cluster": "SAMPLE - Pipeline Project"
+    },
+    "accessScopes": [],
+    "assignedBy": "MANUAL"
+  },
+  "raw": null,
+  "inputs": {
+    "ocm_incident_state": "assignedToTeam",
+    "ocm_incident_team": "test_1",
+    "ocm_includecounts": true,
+    "ocm_eventsummary": true,
+    "ocm_incident_id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-ocm",
+    "package_version": "1.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 4373,
+    "timestamp": "2025-05-23 11:27:17"
+  }
+}

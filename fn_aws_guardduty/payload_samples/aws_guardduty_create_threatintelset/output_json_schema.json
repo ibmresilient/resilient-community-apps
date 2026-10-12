@@ -1,0 +1,185 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Generated schema for Root",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number"
+    },
+    "success": {
+      "type": "string"
+    },
+    "reason": {
+      "type": "string"
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "ResponseMetadata": {
+          "type": "object",
+          "properties": {
+            "RequestId": {
+              "type": "string"
+            },
+            "HTTPStatusCode": {
+              "type": "number"
+            },
+            "HTTPHeaders": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string"
+                },
+                "content-type": {
+                  "type": "string"
+                },
+                "content-length": {
+                  "type": "string"
+                },
+                "connection": {
+                  "type": "string"
+                },
+                "x-amzn-requestid": {
+                  "type": "string"
+                },
+                "access-control-allow-origin": {
+                  "type": "string"
+                },
+                "access-control-allow-headers": {
+                  "type": "string"
+                },
+                "x-amz-apigw-id": {
+                  "type": "string"
+                },
+                "access-control-expose-headers": {
+                  "type": "string"
+                },
+                "x-amzn-trace-id": {
+                  "type": "string"
+                },
+                "access-control-max-age": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "date",
+                "content-type",
+                "content-length",
+                "connection",
+                "x-amzn-requestid",
+                "access-control-allow-origin",
+                "access-control-allow-headers",
+                "x-amz-apigw-id",
+                "access-control-expose-headers",
+                "x-amzn-trace-id",
+                "access-control-max-age"
+              ]
+            },
+            "RetryAttempts": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "RequestId",
+            "HTTPStatusCode",
+            "HTTPHeaders",
+            "RetryAttempts"
+          ]
+        },
+        "ThreatIntelSetId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ResponseMetadata",
+        "ThreatIntelSetId",
+        "status"
+      ]
+    },
+    "raw": {
+      "type": "string"
+    },
+    "inputs": {
+      "type": "object",
+      "properties": {
+        "aws_gd_format": {
+          "type": "string"
+        },
+        "aws_gd_name": {
+          "type": "string"
+        },
+        "aws_gd_region": {
+          "type": "string"
+        },
+        "aws_gd_location": {
+          "type": "string"
+        },
+        "aws_gd_client_token": {
+          "type": "string"
+        },
+        "aws_gd_tags": {
+          "type": "string"
+        },
+        "aws_gd_activate": {
+          "type": "string"
+        },
+        "aws_gd_detector_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "aws_gd_format",
+        "aws_gd_name",
+        "aws_gd_region",
+        "aws_gd_location",
+        "aws_gd_client_token",
+        "aws_gd_tags",
+        "aws_gd_activate",
+        "aws_gd_detector_id"
+      ]
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "package": {
+          "type": "string"
+        },
+        "package_version": {
+          "type": "string"
+        },
+        "localhost": {
+          "type": "string"
+        },
+        "execution_time_ms": {
+          "type": "number"
+        },
+        "timestamp": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "version",
+        "package",
+        "package_version",
+        "localhost",
+        "execution_time_ms",
+        "timestamp"
+      ]
+    }
+  },
+  "required": [
+    "version",
+    "success",
+    "reason",
+    "content",
+    "raw",
+    "inputs",
+    "metrics"
+  ]
+}

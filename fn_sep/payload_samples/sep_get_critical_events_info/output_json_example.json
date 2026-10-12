@@ -1,0 +1,329 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "lastUpdated": 1720622406545,
+    "totalUnacknowledgedMessages": 44,
+    "criticalEventsInfoList": [
+      {
+        "eventId": "C73763EF*******62D7353C645BC2C",
+        "eventDateTime": "2024-06-26 14:02:38.0",
+        "subject": "Some Symantec Endpoint Protection groups have not been assigned a password.",
+        "message": "To enhance security, Symantec recommends that you should require the users in this client group to use passwords in the following situations: opening, stopping, or uninstalling the client, or importing the Sylink file. You should assign a password to the following client groups.<br/><br/>Default: My Company<br/><br/><br/>For information on how to enable password protection on the client, see: <a href=\"https://techdocs.broadcom.com/bin/gethidpage.html?ux-context-string=sesm_computersnusers_policies_password_setting&appid=SEP&language=en&format=rendered\" class=\"bluelink\" target=\"_blank\" rel=\"noopener\">Password-protecting the Symantec Endpoint Protection client</a>",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "388DC550*******B9462D7353CF5066D4",
+        "eventDateTime": "2024-06-26 14:02:50.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jun 26, 2024 7:02:34 AM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "A091BB*******BB9462D735340E9132C",
+        "eventDateTime": "2024-06-26 14:03:03.0",
+        "subject": "New software package available",
+        "message": "Date: Jun 26, 2024 6:46:43 AM PDT\tServer: c95648v1\nDownload: Successfully downloaded the Symantec Agent for Linux 14.3 RU8 package from LiveUpdate. This package is now available for deployment.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "8EC702*******B9462D73539D642D01",
+        "eventDateTime": "2024-06-26 14:03:03.0",
+        "subject": "New software package available",
+        "message": "Date: Jun 26, 2024 6:50:27 AM PDT\tServer: c95648v1\nDownload: Successfully downloaded the Symantec Agent for Linux 14.3 RU5 package from LiveUpdate. This package is now available for deployment.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "CCF7032*******B9462D7353600B23F8",
+        "eventDateTime": "2024-06-26 14:03:03.0",
+        "subject": "New software package available",
+        "message": "Date: Jun 26, 2024 6:51:35 AM PDT\tServer: c95648v1\nDownload: Successfully downloaded the Symantec Endpoint Protection Mac 14.3 RU3 package from LiveUpdate. This package is now available for deployment.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "8F3BB*******B9462D7353B2402856",
+        "eventDateTime": "2024-06-26 14:03:03.0",
+        "subject": "New software package available",
+        "message": "Date: Jun 26, 2024 6:52:23 AM PDT\tServer: c95648v1\nDownload: Successfully downloaded the Symantec Endpoint Protection Mac 14.3 RU6 package from LiveUpdate. This package is now available for deployment.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "B93573*******462D73537BBD9220",
+        "eventDateTime": "2024-06-26 14:03:03.0",
+        "subject": "New software package available",
+        "message": "Date: Jun 26, 2024 6:54:04 AM PDT\tServer: c95648v1\nDownload: Successfully downloaded the Symantec Endpoint Protection Mac 14.3 RU5 package from LiveUpdate. This package is now available for deployment.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "2CAEEDB5*******462D7353ADD2908C",
+        "eventDateTime": "2024-06-26 14:03:03.0",
+        "subject": "New software package available",
+        "message": "Date: Jun 26, 2024 6:54:10 AM PDT\tServer: c95648v1\nDownload: Successfully downloaded the Symantec Agent for Linux 14.3 RU4 package from LiveUpdate. This package is now available for deployment.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "D34404C*******2D73534707F282",
+        "eventDateTime": "2024-06-26 14:03:03.0",
+        "subject": "New software package available",
+        "message": "Date: Jun 26, 2024 6:54:28 AM PDT\tServer: c95648v1\nDownload: Successfully downloaded the Symantec Endpoint Protection Mac 14.3 RU8 package from LiveUpdate. This package is now available for deployment.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "D130C96*******462D73538F0E81DE",
+        "eventDateTime": "2024-06-26 14:03:03.0",
+        "subject": "New software package available",
+        "message": "Date: Jun 26, 2024 6:54:46 AM PDT\tServer: c95648v1\nDownload: Successfully downloaded the Symantec Agent for Linux 14.3 RU6 package from LiveUpdate. This package is now available for deployment.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "00AEA0F*******462D7353169FDC4E",
+        "eventDateTime": "2024-06-26 14:29:46.0",
+        "subject": "Informational: Symantec Endpoint Protection Computer List Changed",
+        "message": "Number of clients changed: 1.  Changes could be that a client was added, renamed, or deleted, Unmanaged Detector status changed, client mode changed, or the hardware changed.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "6443D9C*******36229E5074834588",
+        "eventDateTime": "2024-06-27 07:03:15.0",
+        "subject": "Information: Symantec Trial license Expires In 60 Days",
+        "message": "Your Symantec Endpoint Protection Trial license expires in 60 days. To continue to receive virus definitions and product updates, contact your &lt;a class=&quot;bluelink&quot; onclick=&quot;createWindowFromURL(&#039;../util/universal-redirect.php?WhereWeWant=https://ced.broadcom.com/sep/14/partnerlocator&#039;, &#039;_blank&#039;, &#039;scrollbars=yes,width=800, height=650, resizable=yes, screenX=100, screenY=100&#039;);&quot; href=&quot;#&quot; &gt;preferred reseller&lt;/a&gt;.&lt;br&gt;",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "5ED2B2D*******6229E5022E27035",
+        "eventDateTime": "2024-06-28 12:29:23.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jun 28, 2024 5:29:04 AM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "D23F6954*******6229E50AA2CB93F",
+        "eventDateTime": "2024-06-28 22:29:23.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jun 28, 2024 3:29:06 PM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "10E1F0A9*******97E3F195BF1A05A94",
+        "eventDateTime": "2024-06-29 08:30:38.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jun 29, 2024 1:30:17 AM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "EC7CF59*******B954B29F87D815C7AC",
+        "eventDateTime": "2024-07-08 17:58:05.0",
+        "subject": "New software package available",
+        "message": "Date: Jul 8, 2024 10:54:58 AM PDT\tServer: c95648v1\nDownload: Successfully downloaded the null package from LiveUpdate. This package is now available for deployment.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "1C4CB36B*******36229E50775A9E56",
+        "eventDateTime": "2024-06-28 02:28:23.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jun 27, 2024 7:28:02 PM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "C07CE910*******7E3F195B25EC92BF",
+        "eventDateTime": "2024-06-29 18:30:40.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jun 29, 2024 11:30:18 AM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "6E7A6527*******97E3F195B1BCE841D",
+        "eventDateTime": "2024-06-30 04:30:45.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jun 29, 2024 9:30:30 PM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "43E800460*******B97E3F195BC2F4AD74",
+        "eventDateTime": "2024-06-30 14:30:49.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jun 30, 2024 7:30:32 AM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "1C8161D*******97E3F195BAFB5DBB1",
+        "eventDateTime": "2024-07-01 00:30:54.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jun 30, 2024 5:30:36 PM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "573028FB0*******7E3F195B639B9F4D",
+        "eventDateTime": "2024-07-01 10:31:04.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 1, 2024 3:30:50 AM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "A4D7D5C9*******7E3F195BAEEF6330",
+        "eventDateTime": "2024-07-01 20:31:09.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 1, 2024 1:30:55 PM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "0C680D8A*******E3F195B276EBAE8",
+        "eventDateTime": "2024-07-03 22:31:36.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 3, 2024 3:31:18 PM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "9C5ED05*******B97E3F195B9B610D17",
+        "eventDateTime": "2024-07-04 18:31:45.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 4, 2024 11:31:30 AM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "62646CAA*******7E3F195BA0C158E8",
+        "eventDateTime": "2024-07-06 10:32:12.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 6, 2024 3:31:51 AM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "A51FCF0*******7E3F195B11557294",
+        "eventDateTime": "2024-07-07 06:32:24.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 6, 2024 11:32:02 PM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "58E6279*******B954B29F87B6A521C4",
+        "eventDateTime": "2024-07-08 13:18:11.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 8, 2024 6:17:51 AM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "3A23B513*******954B29F8789D7CF43",
+        "eventDateTime": "2024-07-08 23:18:04.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 8, 2024 4:17:42 PM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "6F4FCE570*******97E3F195B0E91B958",
+        "eventDateTime": "2024-07-02 06:31:13.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 1, 2024 11:30:59 PM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "816E4D4F*******97E3F195B3A42774E",
+        "eventDateTime": "2024-07-02 16:31:18.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 2, 2024 9:31:00 AM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "520DD58*******97E3F195B7C029BFE",
+        "eventDateTime": "2024-07-03 02:31:28.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 2, 2024 7:31:10 PM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "CDFCA80*******BB97E3F195B7F1A8637",
+        "eventDateTime": "2024-07-04 08:31:40.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 4, 2024 1:31:18 AM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "E9FEB9C7*******97E3F195BF7613F08",
+        "eventDateTime": "2024-07-05 04:31:52.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 4, 2024 9:31:32 PM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "AC5F04*******97E3F195B3897DEFB",
+        "eventDateTime": "2024-07-05 14:32:02.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 5, 2024 7:31:44 AM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "DB847B2*******B97E3F195B18644C0E",
+        "eventDateTime": "2024-07-06 00:32:07.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 5, 2024 5:31:44 PM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "8DA48D1*******7E3F195BD8691A78",
+        "eventDateTime": "2024-07-07 16:32:33.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 7, 2024 9:32:14 AM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "76530F3*******97E3F195B364CA62E",
+        "eventDateTime": "2024-07-08 02:32:38.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 7, 2024 7:32:16 PM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "3F45D82*******954B29F875AE1D576",
+        "eventDateTime": "2024-07-08 13:21:05.0",
+        "subject": "System Event Notification",
+        "message": "Number of system events detected: 1 \r\nSystem events included: Server and Errors.\r\n\r\n",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "8C42875*******54B29F87BC51C1D2",
+        "eventDateTime": "2024-07-09 19:19:05.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 9, 2024 12:18:46 PM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "48C3782D0*******7E3F195BD2035D87",
+        "eventDateTime": "2024-07-03 12:31:32.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 3, 2024 5:31:08 AM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "06269CC10*******97E3F195BB9232A9B",
+        "eventDateTime": "2024-07-06 20:32:17.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 6, 2024 1:32:01 PM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "7A42801F*******B954B29F87CA0AE4E7",
+        "eventDateTime": "2024-07-09 09:19:05.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 9, 2024 2:18:44 AM.",
+        "acknowledged": 0
+      },
+      {
+        "eventId": "C6C9F77*******954B29F871CA45A10",
+        "eventDateTime": "2024-07-10 05:19:14.0",
+        "subject": "Server Health Alert",
+        "message": "Server c95648v1 health status: poor. \nReason: The Symantec Endpoint Protection Manager server does not have Symantec Endpoint Protection installed. \nStatus reported on Jul 9, 2024 10:18:56 PM.",
+        "acknowledged": 0
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {},
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-sep",
+    "package_version": "1.2.0",
+    "host": "local",
+    "execution_time_ms": 1078,
+    "timestamp": "2024-07-10 10:40:06"
+  }
+}

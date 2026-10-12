@@ -1,0 +1,14 @@
+{
+    "custom_params": {
+        "secureContext": "true"
+    },
+    "method": "GET",
+    "response_content_type": "application/json",
+    "security": {
+        "api_key": "myuser1",
+        "api_key_secret": "mypassword1",
+        "generate_bearer_token": false,
+        "scheme": "BASIC"
+    },
+    "server_url": "https://www.virustotal.com/vtapi/v2/url/report"
+}

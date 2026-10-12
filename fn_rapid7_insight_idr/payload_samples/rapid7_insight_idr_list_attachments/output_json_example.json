@@ -1,0 +1,34 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "data": [
+      {
+        "rrn": "rrn:collaboration:us2:e4463fba-cd64-427c-8fc9-f9e1983f24e1:attachment:9JF5ST900Y1H",
+        "creator": {
+          "type": "USER",
+          "name": "AdminUser"
+        },
+        "created_time": "2023-12-12T15:36:10.258Z",
+        "file_name": "test.txt",
+        "mime_type": "text/plain",
+        "size": 40,
+        "scan_status": "CLEAN"
+      }
+    ]
+  },
+  "raw": null,
+  "inputs": {
+    "rapid7_insight_idr_incident_id": 2228,
+    "rapid7_insight_idr_rrn": "rrn:investigation:us2:e4463fba-cd64-427c-8fc9-f9e1983f24e1:investigation:JSPDKLRG7UWY"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-rapid7-insight-idr",
+    "package_version": "1.0.0",
+    "host": "mylaptop",
+    "execution_time_ms": 6807,
+    "timestamp": "2023-12-12 11:34:29"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  {# JINJA template for updating a new SOAR incident from an endpoint #}
+  {% if severity < 3 %}
+    "severity_code": "Low",
+  {% elif severity < 6%}
+    "severity_code": "Medium",
+  {% else %}
+    "severity_code": "High",
+  {% endif %}
+  {# specify your custom fields for your endpoint solution #}
+  "properties": {
+    "vmware_cbc_alert_id": "{{ id }}",
+    "vmware_cbc_alert_type": "{{ type }}",
+    "vmware_cbc_alert_reason_code" : "{{ reason_code }}",
+    "vmware_cbc_alert_link": "<a target='_blank' href='https://{{ alert_url.replace("[", "%5B").replace("]", "%5D") }}'>Link</a>",
+    "vmware_cbc_attack_tactic": "{{ attack_tactic }}",
+    "vmware_cbc_threat_id": "{{ threat_id }}",
+    "vmware_cbc_workflow_status": "{{ workflow.status.replace('_', ' ') |lower|title }}",
+    "vmware_cbc_workflow_closure_reason": "{{ workflow.closure_reason.replace('_', ' ') |lower|title }}",
+    "vmware_cbc_determination_value": "{{ determination.value.replace('_', ' ') |lower|title}}"
+    {% if tags %}
+    ,"vmware_cbc_tags": "{{ tags | join(', ') }}"
+    {% endif %}
+  }
+}

@@ -1,0 +1,100 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "version": {
+        "type": "integer"
+      },
+      "success": {
+        "type": "boolean"
+      },
+      "reason": {
+        "type": "null"
+      },
+      "content": {
+        "type": "object",
+        "properties": {
+          "note_text": {
+            "type": "string"
+          },
+          "create_time": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "integer"
+          },
+          "username": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "note_text",
+          "create_time",
+          "id",
+          "username"
+        ]
+      },
+      "raw": {
+        "type": "null"
+      },
+      "inputs": {
+        "type": "object",
+        "properties": {
+          "qradar_siem_note": {
+            "type": "string"
+          },
+          "qradar_id": {
+            "type": "integer"
+          },
+          "qradar_label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "qradar_siem_note",
+          "qradar_id",
+          "qradar_label"
+        ]
+      },
+      "metrics": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "package": {
+            "type": "string"
+          },
+          "package_version": {
+            "type": "string"
+          },
+          "host": {
+            "type": "string"
+          },
+          "execution_time_ms": {
+            "type": "integer"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "version",
+          "package",
+          "package_version",
+          "host",
+          "execution_time_ms",
+          "timestamp"
+        ]
+      }
+    },
+    "required": [
+      "version",
+      "success",
+      "reason",
+      "content",
+      "raw",
+      "inputs",
+      "metrics"
+    ]
+  }  

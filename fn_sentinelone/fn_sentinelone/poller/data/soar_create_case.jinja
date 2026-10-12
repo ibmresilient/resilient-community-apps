@@ -1,0 +1,22 @@
+{
+  {# JINJA template for creating a new SOAR incident from a SentinelOne threat. #}
+  "name": "SentinelOne Alert - {{ agentRealtimeInfo.agentComputerName }} - {{ threatInfo.threatName }}",
+  "start_date": {{ threatInfo.identifiedAt|soar_datetimeformat(split_at='.') }},
+  "discovered_date": {{ threatInfo.createdAt|soar_datetimeformat(split_at='.') }},
+  "description": {
+    "format": "text",
+    "content": "{{ threatInfo.threatName }}"
+  },
+  {# if SentinelOne users are different than SOAR users, consider using a mapping table using soar_substitute: #}
+  "plan_status": "{{ threatInfo.incidentStatus|soar_substitute('{"resolved": "C", "unresolved": "A", "In_progress": "A", "in_progress": "A"}') }}",
+  {% if threatInfo.incidentStatus == "resolved" %}
+    "resolution_id": "Resolved",
+    "resolution_summary": "Closed by SentinelOne",
+  {% endif %}
+  "severity_code": "{{ threatInfo.confidenceLevel|soar_substitute('{"malicious": "High", "suspicious": "Medium"}') }}",
+  "properties": {
+    "sentinelone_agent_id": "{{ agentRealtimeInfo.agentId }}",
+    "sentinelone_threat_id": "{{ threatInfo.threatId }}",
+    "sentinelone_threat_name": "{{ threatInfo.threatName }}"
+  }
+}

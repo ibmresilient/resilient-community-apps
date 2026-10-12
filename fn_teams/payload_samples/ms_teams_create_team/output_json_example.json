@@ -1,0 +1,74 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#groups/$entity",
+    "id": "54da6ae1-05bb-4fa4-9823-5ad73078552f",
+    "deletedDateTime": null,
+    "classification": null,
+    "createdDateTime": "2024-08-14T15:26:32Z",
+    "creationOptions": [
+      "Team",
+      "ExchangeProvisioningFlags:3552"
+    ],
+    "description": "new team for archival",
+    "displayName": "testTeamForArchival",
+    "expirationDateTime": null,
+    "groupTypes": [
+      "Unified"
+    ],
+    "isAssignableToRole": null,
+    "mail": "testTeamForArchival@example.com",
+    "mailEnabled": true,
+    "mailNickname": "testTeamForArchival",
+    "membershipRule": null,
+    "membershipRuleProcessingState": null,
+    "onPremisesDomainName": null,
+    "onPremisesLastSyncDateTime": null,
+    "onPremisesNetBiosName": null,
+    "onPremisesSamAccountName": null,
+    "onPremisesSecurityIdentifier": null,
+    "onPremisesSyncEnabled": null,
+    "preferredDataLocation": null,
+    "preferredLanguage": null,
+    "proxyAddresses": [
+      "SMTP:testTeamForArchival@example.com"
+    ],
+    "renewedDateTime": "2024-08-14T15:26:32Z",
+    "resourceBehaviorOptions": [
+      "HideGroupInOutlook",
+      "SubscribeMembersToCalendarEventsDisabled",
+      "WelcomeEmailDisabled"
+    ],
+    "resourceProvisioningOptions": [
+      "Team"
+    ],
+    "securityEnabled": false,
+    "securityIdentifier": "S-1-12-1-1423600353-1336149435-3613008792-794130480",
+    "theme": null,
+    "uniqueName": null,
+    "visibility": "Private",
+    "onPremisesProvisioningErrors": [],
+    "serviceProvisioningErrors": [],
+    "status_code": 200,
+    "teamsEnabled": true,
+    "unfoundUsers": null
+  },
+  "raw": null,
+  "inputs": {
+    "ms_team_name": "testTeamForArchival",
+    "incident_id": 2710,
+    "ms_owners_list": "MarkScherfling@example.com",
+    "add_members_from": "None",
+    "ms_description": "new team for archival"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-teams",
+    "package_version": "3.0.0",
+    "host": "my.app.host",
+    "execution_time_ms": 5804,
+    "timestamp": "2024-08-14 11:26:35"
+  }
+}

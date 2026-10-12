@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "success": "True",
+  "reason": "None",
+  "content": {
+    "ResponseMetadata": {
+      "RequestId": "df0f48de-de02-4d20-b88b-5234c715a14a",
+      "HTTPStatusCode": 200,
+      "HTTPHeaders": {
+        "date": "Fri, 18 Jul 2025 13:27:40 GMT",
+        "content-type": "application/json",
+        "content-length": "55",
+        "connection": "***",
+        "x-amzn-requestid": "df0f48de-de02-4d20-b88b-5234c715a14a",
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-Content-Sha256,X-Amz-User-Agent,*,Date,X-Amz-Target,x-amzn-platform-id,x-amzn-trace-id",
+        "x-amz-apigw-id": "N6DIBG_7IAMEogw=",
+        "access-control-expose-headers": "x-amzn-ErrorType,x-amzn-requestid,x-amzn-errormessage,x-amzn-trace-id,x-amz-apigw-id,Date",
+        "x-amzn-trace-id": "Root=1-687a4bcc-149a260c62ef8c641a7c8df5;Parent=3a406d782efd26b9;Sampled=0;Lineage=1:045398e1:0",
+        "access-control-max-age": "86400"
+      },
+      "RetryAttempts": 0
+    },
+    "ThreatIntelSetId": "114da827a1d0442b96f7039275b321e8",
+    "status": "ok"
+  },
+  "raw": "None",
+  "inputs": {
+    "aws_gd_format": "TXT",
+    "aws_gd_name": "Test 18",
+    "aws_gd_region": "us-east-1",
+    "aws_gd_location": "s3://test-threat-intel-set/malicious_ip.txt",
+    "aws_gd_client_token": "***",
+    "aws_gd_tags": "Severity:LOW, Mitigation:Possible",
+    "aws_gd_activate": "False",
+    "aws_gd_detector_id": "48bb********************b7ccbc82"
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-aws-guardduty",
+    "package_version": "2.0.0",
+    "host": "localhost",
+    "execution_time_ms": 1303,
+    "timestamp": "2025-07-18 14:27:41"
+  }
+}

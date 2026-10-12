@@ -1,0 +1,22 @@
+{
+  "version": 2.0,
+  "success": true,
+  "reason": null,
+  "content": {
+    "parent_incident": 2096,
+    "child_incident": 2100
+  },
+  "raw": null,
+  "inputs": {
+    "relations_child_incident_id": 2100,
+    "relations_remove_notes": false
+  },
+  "metrics": {
+    "version": "1.0",
+    "package": "fn-relations",
+    "package_version": "3.1.0",
+    "host": "localhost",
+    "execution_time_ms": 3181,
+    "timestamp": "2024-01-17 11:32:10"
+  }
+}
