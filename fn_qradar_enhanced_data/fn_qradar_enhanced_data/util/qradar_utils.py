@@ -6,6 +6,7 @@
 from base64 import b64encode
 from json import dumps
 from logging import getLogger
+import re
 from urllib.parse import quote as quote_func
 from requests import get, post
 from resilient_lib import IntegrationError, RequestsCommon
@@ -260,18 +261,91 @@ class QRadarClient(object):
         auth_info = AuthInfo.get_authInfo()
         return auth_info.make_call("GET", f"{auth_info.api_url}help/versions")
 
+    def _get_events_catalog(self):
+        """
+        Retrieve the set of all field names registered in this QRadar instance by
+        calling GET /api/ariel/databases/events.
+
+        This is used to pre-validate the Stage 2 AQL query and strip any quoted
+        extension/DSM fields that are absent from the catalog, preventing a
+        422 FieldNotExist error at query time.
+
+        Returns an empty set on any failure so the caller proceeds with the
+        original unmodified query (safe fallback).
+
+        :return: set of field name strings, e.g. {"EC File Hash", "sourceip", ...}
+        :rtype: set
+        """
+        auth_info = AuthInfo.get_authInfo()
+        try:
+            response = auth_info.make_call("GET", f"{auth_info.api_url}ariel/databases/events")
+            if response.status_code == 200:
+                return {col["name"] for col in response.json().get("columns", [])}
+            LOG.warning("Unexpected status %s fetching Ariel events catalog", response.status_code)
+        except Exception as e:
+            LOG.warning("Could not fetch Ariel events catalog, query will run unmodified: %s", e)
+        return set()
+
+    def _filter_query_by_catalog(self, search_query, catalog):
+        """
+        Remove quoted field names from an AQL SELECT clause that are not present
+        in the given catalog set. Only fields wrapped in double-quotes are
+        considered for removal — standard AQL functions such as QIDNAME(),
+        categoryname(), etc. are never modified.
+
+        Example:
+            catalog = {"sourceip", "magnitude"}
+            input  = 'SELECT sourceip, "EC File Hash", magnitude FROM ...'
+            output = 'SELECT sourceip, magnitude FROM ...'
+
+        :param search_query: AQL query string to filter
+        :type search_query: str
+        :param catalog: set of valid field names from _get_events_catalog()
+        :type catalog: set
+        :return: filtered AQL query string with unknown quoted fields removed
+        :rtype: str
+        """
+        def _keep_if_known(match):
+            field_name = match.group(1)
+            if field_name in catalog:
+                return match.group(0)
+            LOG.info("Removing field not present in QRadar events catalog: \"%s\"", field_name)
+            return ""
+
+        filtered = re.sub(r',\s*"([^"]+)"', _keep_if_known, search_query)
+        return " ".join(filtered.split())  # normalise any resulting whitespace
+
     def ariel_graphql_search(self, temp_query, search_query, query_all=False, range_start=None,
                              range_end=None, timeout=None):
         """
-        Perform an Ariel search
-        :param query_all: Bool used to decide if Range header is included in query
-        :param query: Query string
-        :param range_start: Range start for ariel search
-        :param range_end: Range end for ariel search
-        :param timeout: Timeout for search
-        :return: Dict with events
+        Execute a two-stage Ariel search against QRadar.
+
+        Stage 1 runs temp_query to cache the offense events into a temporary
+        table. Stage 2 runs search_query against that table to project the
+        desired columns.
+
+        Before Stage 2, the events catalog is fetched and any quoted field names
+        absent from the catalog are stripped from search_query. This prevents
+        422 FieldNotExist errors when DSM/extension fields (e.g. EC File Hash)
+        are present in the query but not registered in the QRadar instance.
+
+        :param temp_query: Stage 1 AQL query — caches offense events into a temp table
+        :type temp_query: str
+        :param search_query: Stage 2 AQL query — projects columns from the temp table
+        :type search_query: str
+        :param query_all: If True, omit the Range header and return all results
+        :type query_all: bool
+        :param range_start: Start index for result range
+        :type range_start: int
+        :param range_end: End index for result range
+        :type range_end: int
+        :param timeout: Search timeout in seconds
+        :type timeout: int
+        :return: Dict with events list, or None if no records in temp table
+        :rtype: dict or None
         """
         ariel_search = ArielSearch(graphql=True)
+
         if range_start:
             ariel_search.set_range_start(range_start)
 
@@ -283,12 +357,16 @@ class QRadarClient(object):
 
         ariel_search.set_query_all(query_all)
 
-        _, result_set = ariel_search.perform_search(temp_query, False) # Execute the query on a temp table
-        if result_set.get("record_count"):
-            response, _ = ariel_search.perform_search(search_query, True) # Get the actual query results from temp table
-            return response
-        else:
+        _, result_set = ariel_search.perform_search(temp_query, False)
+        if not result_set.get("record_count"):
             return None
+
+        catalog = self._get_events_catalog()
+        if catalog:
+            search_query = self._filter_query_by_catalog(search_query, catalog)
+
+        response, _ = ariel_search.perform_search(search_query, True)
+        return response
 
     def verify_connect(self):
         """

@@ -45,7 +45,7 @@ Use the qradar_id field of the incident to searchQRadar events, and update the d
 ### Function-Input Script
 ```python
 inputs.qradar_query = "SELECT %param1% FROM events %param2% %param4% %param5% %param6% TIMES OFFENSE_TIME(%param3%) PARAMETERS PROGRESSDETAILSRESOLUTION=60"
-inputs.qradar_search_param1 = 'QIDNAME(qid) as event_name,categoryname(category) as category_name,logsourcename(logsourceid) as logsourcename,username,magnitude,destinationip,sourceip,eventcount,starttime as event_time, "EC File Hash", "EC File Path", "EC Filename", "EC IMP Hash", "EC MD5 Hash", "EC ParentCommandLine", "EC Process CommandLine", "EC SHA1 Hash", "EC SHA256 Hash", "File Hash", "MD5 Hash", "SHA1 Hash", "SHA256 Hash"'
+inputs.qradar_search_param1 = 'QIDNAME(qid) as event_name,categoryname(category) as category_name,logsourcename(logsourceid) as logsourcename,username,magnitude,destinationip,sourceip,eventcount,starttime as event_time'
 inputs.qradar_search_param2 = "WHERE INOFFENSE(%param3%)"
 inputs.qradar_search_param5 = "ORDER BY starttime"
 inputs.qradar_search_param6 = "LIMIT 10"

@@ -20,5 +20,26 @@
     "repositories": [
       "https://github.ibm.com/Resilient/resilient-community-apps"
     ]
+  },
+  {
+    "cve_name": [
+      "CVE-2026-97689"
+    ],
+    "cve_url": [
+      "https://www.mend.io/vulnerability-database/CVE-2026-97689|https://www.mend.io/vulnerability-database/CVE-2026-97689]"
+    ],
+    "jira_ticket": [
+      "https://ibm-qrs.atlassian.net/browse/CP4SSEC-1263795"
+    ],
+    "package": "urllib3-2.6.3-py3-none-any.whl",
+    "planned_for_remediation": [
+      "Wil be fixed in resilient-python-api v51.0.9.0 release"
+    ],
+    "reason_for_not_exploitable": [
+      "N/A"
+    ],
+    "repositories": [
+      "https://github.ibm.com/Resilient/resilient-community-apps"
+    ]
   }
 ]

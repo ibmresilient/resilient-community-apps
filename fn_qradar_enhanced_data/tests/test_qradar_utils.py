@@ -300,3 +300,145 @@ def get_offense_asset_data(mocked_make_call, mocked_qr_call):
     assert ret["content"]["users"][0]["username"] == asset_data["data"]["getAsset"]["users"][0]["username"]
 
     mocked_make_call.side_effect = Exception("Error!")
+
+# ---------------------------------------------------------------------------
+# Tests for QRadarClient._get_events_catalog and _filter_query_by_catalog
+# ---------------------------------------------------------------------------
+
+@patch("fn_qradar_enhanced_data.util.qradar_utils.QRadarClient.get_qr_sessionid")
+@patch("fn_qradar_enhanced_data.util.qradar_utils.AuthInfo.make_call")
+def test_get_events_catalog_success(mocked_make_call, mocked_qr_call):
+    """Catalog returned when API responds 200 with a columns list."""
+    mocked_qr_call.return_value = ""
+    qradar_client = qradar_utils.QRadarClient(host, username=username, password=password,
+                                              token=None, cafile=cafile)
+    mocked_make_call.return_value = _generateResponse(
+        {"columns": [{"name": "sourceip"}, {"name": "magnitude"}, {"name": "EC File Hash"}]}, 200
+    )
+    catalog = qradar_client._get_events_catalog()
+    assert catalog == {"sourceip", "magnitude", "EC File Hash"}
+
+
+@patch("fn_qradar_enhanced_data.util.qradar_utils.QRadarClient.get_qr_sessionid")
+@patch("fn_qradar_enhanced_data.util.qradar_utils.AuthInfo.make_call")
+def test_get_events_catalog_non_200_returns_empty_set(mocked_make_call, mocked_qr_call):
+    """Catalog returns empty set when API responds with a non-200 status."""
+    mocked_qr_call.return_value = ""
+    qradar_client = qradar_utils.QRadarClient(host, username=username, password=password,
+                                              token=None, cafile=cafile)
+    mocked_make_call.return_value = _generateResponse({}, 500)
+    catalog = qradar_client._get_events_catalog()
+    assert catalog == set()
+
+
+@patch("fn_qradar_enhanced_data.util.qradar_utils.QRadarClient.get_qr_sessionid")
+@patch("fn_qradar_enhanced_data.util.qradar_utils.AuthInfo.make_call")
+def test_get_events_catalog_exception_returns_empty_set(mocked_make_call, mocked_qr_call):
+    """Catalog returns empty set (safe fallback) when the network call raises."""
+    mocked_qr_call.return_value = ""
+    qradar_client = qradar_utils.QRadarClient(host, username=username, password=password,
+                                              token=None, cafile=cafile)
+    mocked_make_call.side_effect = Exception("connection refused")
+    catalog = qradar_client._get_events_catalog()
+    assert catalog == set()
+
+
+@patch("fn_qradar_enhanced_data.util.qradar_utils.QRadarClient.get_qr_sessionid")
+@patch("fn_qradar_enhanced_data.util.qradar_utils.AuthInfo.make_call")
+def test_get_events_catalog_empty_columns(mocked_make_call, mocked_qr_call):
+    """Catalog returns empty set when API returns an empty columns list."""
+    mocked_qr_call.return_value = ""
+    qradar_client = qradar_utils.QRadarClient(host, username=username, password=password,
+                                              token=None, cafile=cafile)
+    mocked_make_call.return_value = _generateResponse({"columns": []}, 200)
+    catalog = qradar_client._get_events_catalog()
+    assert catalog == set()
+
+
+@patch("fn_qradar_enhanced_data.util.qradar_utils.QRadarClient.get_qr_sessionid")
+@patch("fn_qradar_enhanced_data.util.qradar_utils.AuthInfo.make_call")
+def test_filter_query_by_catalog_removes_unknown_quoted_fields(mocked_make_call, mocked_qr_call):
+    """Unknown quoted fields are stripped from the SELECT clause."""
+    mocked_qr_call.return_value = ""
+    qradar_client = qradar_utils.QRadarClient(host, username=username, password=password,
+                                              token=None, cafile=cafile)
+    catalog = {"sourceip", "magnitude"}
+    query = 'SELECT sourceip, "EC File Hash", magnitude FROM events'
+    result = qradar_client._filter_query_by_catalog(query, catalog)
+    assert '"EC File Hash"' not in result
+    assert "sourceip" in result
+    assert "magnitude" in result
+
+
+@patch("fn_qradar_enhanced_data.util.qradar_utils.QRadarClient.get_qr_sessionid")
+@patch("fn_qradar_enhanced_data.util.qradar_utils.AuthInfo.make_call")
+def test_filter_query_by_catalog_keeps_known_quoted_fields(mocked_make_call, mocked_qr_call):
+    """Quoted fields present in the catalog are kept unchanged."""
+    mocked_qr_call.return_value = ""
+    qradar_client = qradar_utils.QRadarClient(host, username=username, password=password,
+                                              token=None, cafile=cafile)
+    catalog = {"sourceip", "EC File Hash", "magnitude"}
+    query = 'SELECT sourceip, "EC File Hash", magnitude FROM events'
+    result = qradar_client._filter_query_by_catalog(query, catalog)
+    assert '"EC File Hash"' in result
+    assert "sourceip" in result
+    assert "magnitude" in result
+
+
+@patch("fn_qradar_enhanced_data.util.qradar_utils.QRadarClient.get_qr_sessionid")
+@patch("fn_qradar_enhanced_data.util.qradar_utils.AuthInfo.make_call")
+def test_filter_query_by_catalog_no_quoted_fields(mocked_make_call, mocked_qr_call):
+    """Query with no quoted fields is returned unchanged."""
+    mocked_qr_call.return_value = ""
+    qradar_client = qradar_utils.QRadarClient(host, username=username, password=password,
+                                              token=None, cafile=cafile)
+    catalog = {"sourceip", "magnitude"}
+    query = "SELECT sourceip, magnitude FROM events"
+    result = qradar_client._filter_query_by_catalog(query, catalog)
+    assert result == query
+
+
+@patch("fn_qradar_enhanced_data.util.qradar_utils.QRadarClient.get_qr_sessionid")
+@patch("fn_qradar_enhanced_data.util.qradar_utils.AuthInfo.make_call")
+def test_filter_query_by_catalog_empty_catalog(mocked_make_call, mocked_qr_call):
+    """When catalog is empty all quoted fields are stripped."""
+    mocked_qr_call.return_value = ""
+    qradar_client = qradar_utils.QRadarClient(host, username=username, password=password,
+                                              token=None, cafile=cafile)
+    query = 'SELECT sourceip, "EC File Hash", "Custom Field" FROM events'
+    result = qradar_client._filter_query_by_catalog(query, set())
+    assert '"EC File Hash"' not in result
+    assert '"Custom Field"' not in result
+    assert "sourceip" in result
+
+
+@patch("fn_qradar_enhanced_data.util.qradar_utils.QRadarClient.get_qr_sessionid")
+@patch("fn_qradar_enhanced_data.util.qradar_utils.AuthInfo.make_call")
+def test_filter_query_by_catalog_multiple_unknown_fields(mocked_make_call, mocked_qr_call):
+    """Multiple unknown quoted fields are all stripped in one pass."""
+    mocked_qr_call.return_value = ""
+    qradar_client = qradar_utils.QRadarClient(host, username=username, password=password,
+                                              token=None, cafile=cafile)
+    catalog = {"sourceip"}
+    query = 'SELECT sourceip, "EC File Hash", "Custom Field", "Another Unknown" FROM events'
+    result = qradar_client._filter_query_by_catalog(query, catalog)
+    assert '"EC File Hash"' not in result
+    assert '"Custom Field"' not in result
+    assert '"Another Unknown"' not in result
+    assert "sourceip" in result
+
+
+@patch("fn_qradar_enhanced_data.util.qradar_utils.QRadarClient.get_qr_sessionid")
+@patch("fn_qradar_enhanced_data.util.qradar_utils.AuthInfo.make_call")
+def test_filter_query_by_catalog_normalises_whitespace(mocked_make_call, mocked_qr_call):
+    """Removing a field does not leave double spaces in the output."""
+    mocked_qr_call.return_value = ""
+    qradar_client = qradar_utils.QRadarClient(host, username=username, password=password,
+                                              token=None, cafile=cafile)
+    catalog = {"sourceip", "magnitude"}
+    query = 'SELECT sourceip,   "EC File Hash",   magnitude   FROM events'
+    result = qradar_client._filter_query_by_catalog(query, catalog)
+    # No consecutive whitespace should remain
+    assert "  " not in result
+    assert "sourceip" in result
+    assert "magnitude" in result

@@ -10,7 +10,7 @@ from typing import Final
 from typing import TypeVar
 from typing import overload
 
-__all__ = ["IniConfig", "ParseError", "COMMENTCHARS", "iscommentline"]
+__all__ = ["COMMENTCHARS", "IniConfig", "ParseError", "iscommentline"]
 
 from . import _parse
 from ._parse import COMMENTCHARS

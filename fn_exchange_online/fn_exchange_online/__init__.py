@@ -1,5 +1,5 @@
-import pkg_resources
+from importlib.metadata import distribution, PackageNotFoundError
 try:
-    __version__ = pkg_resources.get_distribution(__name__).version
-except pkg_resources.DistributionNotFound:
-    pass
+    __version__ = distribution(__name__).version
+except PackageNotFoundError:
+    __version__ = None
