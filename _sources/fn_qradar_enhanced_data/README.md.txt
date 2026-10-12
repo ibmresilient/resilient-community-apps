@@ -45,7 +45,7 @@
 ## Release Notes
 | Version | Date | Notes |
 | ------- | ---- | ----- |
-| 2.5.5 | 07/2026 | Respin docker image to Python 3.12 base image to resolve CVEs. |
+| 2.5.5 | 10/2026 | Removed EC/hash extension fields from the default topevents subplaybook AQL to prevent 422 FieldNotExist errors on non-Windows offenses. Customers can add these fields back if their SIEM has the relevant DSM installed. Respin docker image to Python 3.12 base image to resolve CVEs. |
 | 2.5.4 | 06/2026 | Updated app.config documentation to clarify that clear_datatables setting applies to functions, not the poller directly. |
 | 2.5.3 | 06/2026 | Updated SOAR platform version to 51.0.8.0.20726. Removed support for Python 3.9. |
 | 2.5.2 | 08/2025 | Fixed bug in QRadar Enhanced Data Poller and QRadar Enhanced Data Refresh playbook|
